@@ -162,13 +162,13 @@ export class AppComponent implements OnInit {
   barChart: any[] = barChart;
   lineChartSeries: any[] = lineChartSeries;
   lineChartScheme = {
-      name: 'coolthree',
-      selectable: true,
-      group: 'Ordinal',
-      domain: [
-        '#01579b', '#7aa3e5', '#a8385d', '#00bfa5'
-      ]
-    };
+    name: 'coolthree',
+    selectable: true,
+    group: 'Ordinal',
+    domain: [
+      '#01579b', '#7aa3e5', '#a8385d', '#00bfa5'
+    ]
+  };
 
   comboBarScheme = {
     name: 'singleLightBlue',
@@ -620,9 +620,9 @@ export class AppComponent implements OnInit {
   **
   Combo Chart
   **
-  [yLeftAxisScaleFactor]="yLeftAxisScale" and [yRightAxisScaleFactor]="yRightAxisScale" 
+  [yLeftAxisScaleFactor]="yLeftAxisScale" and [yRightAxisScaleFactor]="yRightAxisScale"
   exposes the left and right min and max axis values for custom scaling, it is probably best to
-  scale one axis in relation to the other axis but for flexibility to scale either the left or 
+  scale one axis in relation to the other axis but for flexibility to scale either the left or
   right axis bowth were exposed.
   **
   */

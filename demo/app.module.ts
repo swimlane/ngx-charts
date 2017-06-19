@@ -24,7 +24,8 @@ import { ComboChartComponent, ComboSeriesVerticalComponent } from './combo-chart
     FormsModule,
     NgxUIModule
   ],
-  declarations: [AppComponent,
+  declarations: [
+    AppComponent,
     SparklineComponent,
     TimelineFilterBarChartComponent,
     ComboChartComponent,

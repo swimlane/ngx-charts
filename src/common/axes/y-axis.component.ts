@@ -1,4 +1,4 @@
- import {
+import {
   Component,
   Input,
   Output,
@@ -52,6 +52,7 @@ export class YAxisComponent implements OnChanges {
   @Input() yAxisTickInterval;
   @Input() yAxisTickCount: any;
   @Input() yOrient: string = 'left';
+  
   @Output() dimensionsChanged = new EventEmitter();
 
   yAxisClassName: string = 'y axis';
@@ -64,7 +65,7 @@ export class YAxisComponent implements OnChanges {
   stroke: string = '#CCC';
   tickStroke: string = '#CCC';
   strokeWidth: number = 1;
-  
+
   @ViewChild(YAxisTicksComponent) ticksComponent: YAxisTicksComponent;
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -92,7 +93,7 @@ export class YAxisComponent implements OnChanges {
         this.dimensionsChanged.emit({width});
       }, 0);
     } else if (width !== this.labelOffset) {
-      this.labelOffset = width; 
+      this.labelOffset = width;
       setTimeout(() => {
         this.dimensionsChanged.emit({width});
       }, 0);
