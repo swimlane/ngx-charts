@@ -394,6 +394,33 @@
         [curve]="curve"
         (select)="select($event)">
       </ngx-charts-area-chart-normalized>
+      <combo-chart-component
+            *ngIf="chartType === 'combo-chart'"
+            class="chart-container"
+            [view]="view"
+            [scheme]="comboBarScheme"
+            [colorSchemeLine]="lineChartScheme"
+            [results]="barChart"
+            [lineChart]="lineChartSeries"
+            [tooltipDisabled]="tooltipDisabled"
+            [yAxisTickFormatting]="yLeftTickFormat"
+            [yLeftAxisScaleFactor]="yLeftAxisScale"
+            [yRightAxisScaleFactor]="yRightAxisScale"
+            [yRightAxisTickFormatting]="yRightTickFormat"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [legend]="showLegend"
+            [legendTitle]="legendTitle"
+            [showGridLines]="showGridLines"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [showRightYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
+            [yAxisLabelRight]="yAxisLabelRight"
+            (select)="onSelect($event)">
+      </combo-chart-component>
       <ngx-charts-heat-map
         *ngIf="chartType === 'heat-map'"
         class="chart-container"
@@ -709,6 +736,8 @@
       <pre *ngIf="chart.inputFormat === 'multiSeries' && linearScale && (!range)">{{dateData | json}}</pre>
       <pre *ngIf="chart.inputFormat === 'multiSeries' && linearScale && range">{{dateDataWithRange | json}}</pre>
       <pre *ngIf="chart.inputFormat === 'bubble'">{{bubble | json}}</pre>
+      <pre *ngIf="chart.inputFormat === 'comboChart'">{{barChart | json}}</pre>
+      <pre *ngIf="chart.inputFormat === 'comboChart'">{{lineChartSeries | json}}</pre>
       <div>
         <label>
           <input type="checkbox" [checked]="realTimeData" (change)="realTimeData = $event.target.checked">

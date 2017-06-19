@@ -10,6 +10,7 @@ import { formatLabel } from '../src/common/label.helper';
 import { single, multi, bubble, generateData, generateGraph, treemap, timelineFilterBarData } from './data';
 import { data as countries } from 'emoji-flags';
 import chartGroups from './chartTypes';
+import { barChart, lineChartSeries } from './combo-chart-data';
 
 const monthName = new Intl.DateTimeFormat('en-us', { month: 'short' });
 const weekdayName = new Intl.DateTimeFormat('en-us', { weekday: 'short' });
@@ -156,6 +157,30 @@ export class AppComponent implements OnInit {
   gaugeShowAxis: boolean = true;
   gaugeValue: number = 50; // linear gauge value
   gaugePreviousValue: number = 70;
+
+  // Combo Chart
+  barChart: any[] = barChart;
+  lineChartSeries: any[] = lineChartSeries;
+  lineChartScheme = {
+      name: 'coolthree',
+      selectable: true,
+      group: 'Ordinal',
+      domain: [
+        '#01579b', '#7aa3e5', '#a8385d', '#00bfa5'
+      ]
+    };
+
+  comboBarScheme = {
+    name: 'singleLightBlue',
+    selectable: true,
+    group: 'Ordinal',
+    domain: [
+      '#01579b'
+    ]
+  };
+
+  showRightYAxisLabel: boolean = true;
+  yAxisLabelRight: string = 'Utilization';
 
   // demos
   totalSales = 0;
@@ -590,4 +615,41 @@ export class AppComponent implements OnInit {
   onFilter(event) {
     console.log('timeline filter', event);
   }
+
+  /*
+  **
+  Combo Chart
+  **
+  [yLeftAxisScaleFactor]="yLeftAxisScale" and [yRightAxisScaleFactor]="yRightAxisScale" 
+  exposes the left and right min and max axis values for custom scaling, it is probably best to
+  scale one axis in relation to the other axis but for flexibility to scale either the left or 
+  right axis bowth were exposed.
+  **
+  */
+
+  yLeftAxisScale(min, max) {
+    return {min: `${min}`, max: `${max}`};
+  }
+
+  yRightAxisScale(min, max) {
+    return {min: `${min}`, max: `${max}`};
+  }
+
+  yLeftTickFormat(data) {
+    return `${data.toLocaleString()}`;
+  }
+
+  yRightTickFormat(data) {
+    return `${data}%`;
+  }
+  /*
+  **
+  End of Combo Chart
+  **
+  */
+
+  onSelect(event) {
+    console.log(event);
+  }
+
 }

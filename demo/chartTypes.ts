@@ -285,6 +285,16 @@ const chartGroups = [
     name: 'Demos',
     charts: [
       {
+        name: 'Combo Chart',
+        selector: 'combo-chart',
+        inputFormat: 'comboChart',
+        options: [
+          'showXAxis', 'showYAxis', 'gradient',
+          'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
+          'showGridLines', 'roundDomains', 'tooltipDisabled'
+        ]
+      },
+      {
         name: 'Heat Map - Calendar',
         selector: 'calendar',
         inputFormat: 'calendarData',
