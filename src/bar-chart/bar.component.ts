@@ -12,7 +12,6 @@ import {
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { select } from 'd3-selection';
 import { roundedRect } from '../common/shape.helper';
-import { pathTween } from '../utils/path-tween';
 import { id } from '../utils/id';
 
 @Component({
@@ -105,7 +104,7 @@ export class BarComponent implements OnChanges {
     const path = this.getPath();
 
     node.transition().duration(500)
-      .attrTween('d', pathTween(path, 2));
+      .attr('d', path);
   }
 
   getGradient() {
@@ -134,16 +133,16 @@ export class BarComponent implements OnChanges {
     if (this.roundEdges) {
       if (this.orientation === 'vertical') {
         radius = Math.min(this.height, radius);
-        path = roundedRect(this.x, this.y + this.height, this.width, 0, radius, edges);
+        path = roundedRect(this.x, this.y + this.height, this.width, 1, 0, this.edges);
       } else if (this.orientation === 'horizontal') {
         radius = Math.min(this.width, radius);
-        path = roundedRect(this.x, this.y, 0, this.height, radius, edges);
+        path = roundedRect(this.x, this.y, 1, this.height, 0, this.edges);
       }
     } else {
       if (this.orientation === 'vertical') {
-        path = roundedRect(this.x, this.y + this.height, this.width, 0, radius, edges);
+        path = roundedRect(this.x, this.y + this.height, this.width, 1, 0, this.edges);
       } else if (this.orientation === 'horizontal') {
-        path = roundedRect(this.x, this.y, 0, this.height, radius, edges);
+        path = roundedRect(this.x, this.y, 1, this.height, 0, this.edges);
       }
     }
 

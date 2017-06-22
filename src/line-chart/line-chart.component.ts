@@ -178,7 +178,7 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() showSeriesOnHover: boolean = true;
   @Input() showRefLines: boolean = false;
   @Input() referenceLines: any;
-  @Input() showRefLabels: boolean;
+  @Input() showRefLabels: boolean = true;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
