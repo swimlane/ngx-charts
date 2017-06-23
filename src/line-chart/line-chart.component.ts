@@ -313,7 +313,6 @@ export class LineChartComponent extends BaseChartComponent {
   }
 
   getYDomain(): any[] {
-    // this.yScaleType = this.getYScaleType();
     const domain = [];
 
     for (const results of this.results) {
@@ -391,7 +390,6 @@ export class LineChartComponent extends BaseChartComponent {
         .range([height, 0])
         .domain(domain);
     }
-
     return this.roundDomains ? scale.nice() : scale;
   }
 

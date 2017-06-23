@@ -246,6 +246,7 @@
         [gradient]="gradient"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
+        [yAxisScale]="yAxisScale"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
         [xAxisLabel]="xAxisLabel"
@@ -979,6 +980,16 @@
           (ngModelChange)="closedCurve = getInterpolationType($event)">
           <option *ngFor="let interpolationType of closedInterpolationTypes" [value]="interpolationType">
             {{interpolationType}}
+          </option>
+        </select>
+      </div>
+      <div *ngIf="chart.options.includes('yAxisScale')">
+        <label>Y Axis Scale</label>
+        <select
+          [ngModel]="yAxisScale"
+          (ngModelChange)="setYAxisScale($event)">
+          <option *ngFor="let scaleType of scaleTypes" [value]="scaleType">
+            {{scaleType}}
           </option>
         </select>
       </div>

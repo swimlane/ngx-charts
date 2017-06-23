@@ -138,7 +138,7 @@ const chartGroups = [
         selector: 'line-chart',
         inputFormat: 'multiSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'yAxisScale', 'gradient',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
           'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve',
           'rangeFillOpacity', 'roundDomains', 'tooltipDisabled', 'showRefLines',
