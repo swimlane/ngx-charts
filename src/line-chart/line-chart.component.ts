@@ -94,21 +94,23 @@ import { id } from '../utils/id';
             [tooltipTemplate]="seriesTooltipTemplate"
             (hover)="updateHoveredVertical($event)"
           />
-          <svg:g *ngFor="let series of results">
-            <svg:g ngx-charts-circle-series
-              [xScale]="xScale"
-              [yScale]="yScale"
-              [colors]="colors"
-              [data]="series"
-              [scaleType]="scaleType"
-              [visibleValue]="hoveredVertical"
-              [activeEntries]="activeEntries"
-              [tooltipDisabled]="tooltipDisabled"
-              [tooltipTemplate]="tooltipTemplate"
-              (select)="onClick($event, series)"
-              (activate)="onActivate($event)"
-              (deactivate)="onDeactivate($event)"
-            />
+          <svg:g *ngIf="!tooltipDisabled">
+            <svg:g *ngFor="let series of results">
+              <svg:g ngx-charts-circle-series
+                [xScale]="xScale"
+                [yScale]="yScale"
+                [colors]="colors"
+                [data]="series"
+                [scaleType]="scaleType"
+                [visibleValue]="hoveredVertical"
+                [activeEntries]="activeEntries"
+                [tooltipDisabled]="tooltipDisabled"
+                [tooltipTemplate]="tooltipTemplate"
+                (select)="onClick($event, series)"
+                (activate)="onActivate($event)"
+                (deactivate)="onDeactivate($event)"
+              />
+            </svg:g>
           </svg:g>
         </svg:g>
       </svg:g>
