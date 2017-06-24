@@ -7,9 +7,9 @@ const chartGroups = [
         selector: 'bar-vertical',
         inputFormat: 'singleSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'yAxisScale', 'gradient', 'barPadding',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains', 'tooltipDisabled', 'roundEdges'
+          'showGridLines', 'roundDomains', 'tooltipDisabled', 'roundEdges', 'yDomainMin', 'yDomainMax'
         ]
       },
       {
@@ -142,7 +142,7 @@ const chartGroups = [
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
           'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve',
           'rangeFillOpacity', 'roundDomains', 'tooltipDisabled', 'showRefLines',
-          'referenceLines', 'showRefLabels'
+          'referenceLines', 'showRefLabels', 'yDomainMin', 'yDomainMax'
         ],
         defaults: {
           yAxisLabel: 'GDP Per Capita',

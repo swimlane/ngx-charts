@@ -119,9 +119,13 @@ export class SeriesVerticalComponent implements OnChanges {
       };
 
       if (this.type === 'standard') {
-        bar.height = Math.abs(this.yScale(value) - this.yScale(0));
+        console.log('here');
+        console.log(this.yScale(value));
+        console.log(this.yScale(0));
+        bar.height = Math.abs(this.yScale(value) - this.yScale(this.yScale.domain()[0]));
         bar.x = this.xScale(label);
 
+        console.log(value);
         if (value < 0) {
           bar.y = this.yScale(0);
         } else {

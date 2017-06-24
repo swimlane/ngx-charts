@@ -165,7 +165,6 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() yDomainMax;
   @Input() xAxisLabel;
   @Input() yAxisLabel;
-  @Input() xAxisScale;
   @Input() yAxisScale;
   @Input() autoScale;
   @Input() timeline;

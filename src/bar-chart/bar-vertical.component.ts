@@ -8,7 +8,7 @@ import {
   ContentChild,
   TemplateRef
 } from '@angular/core';
-import { scaleBand, scaleLinear } from 'd3-scale';
+import { scaleBand, scaleLinear, scaleLog } from 'd3-scale';
 
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
@@ -75,8 +75,11 @@ export class BarVerticalComponent extends BaseChartComponent {
   @Input() yAxis;
   @Input() showXAxisLabel;
   @Input() showYAxisLabel;
+  @Input() yDomainMin;
+  @Input() yDomainMax;
   @Input() xAxisLabel;
   @Input() yAxisLabel;
+  @Input() yAxisScale;
   @Input() tooltipDisabled: boolean = false;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
@@ -142,9 +145,26 @@ export class BarVerticalComponent extends BaseChartComponent {
 
   getYScale(): any {
     this.yDomain = this.getYDomain();
-    const scale = scaleLinear()
-      .range([this.dims.height, 0])
-      .domain(this.yDomain);
+
+    let scale;
+
+    if (typeof(this.yAxisScale) === 'undefined' || this.yAxisScale === 'linear') {
+      scale = scaleLinear()
+        .range([this.dims.height, 0])
+        .domain(this.yDomain);
+    } else if (this.yAxisScale === 'log') {
+      let min = 0;
+      if (this.yDomainMin) {
+        min = this.yDomainMin;
+      }
+
+      scale = scaleLog()
+        .range([this.dims.height, min])
+        .domain(this.yDomain);
+
+      scale.clamp(true);
+    }
+
     return this.roundDomains ? scale.nice() : scale;
   }
 
@@ -154,8 +174,21 @@ export class BarVerticalComponent extends BaseChartComponent {
 
   getYDomain() {
     const values = this.results.map(d => d.value);
-    const min = Math.min(0, ...values);
-    const max = Math.max(...values);
+    let min = Math.min(0, ...values);
+    let max = Math.max(...values);
+
+    if ( typeof(this.yDomainMin) !== 'undefined') {
+      min = this.yDomainMin;
+    }
+    if ( typeof(this.yDomainMax) !== 'undefined') {
+      max = this.yDomainMax;
+    }
+
+    if (this.yAxisScale === 'log' && typeof(this.yDomainMin) === 'undefined') {
+      // Protect against bad path for log transformed data
+      min = Math.max(1e-6, min);
+    }
+
     return [min, max];
   }
 
