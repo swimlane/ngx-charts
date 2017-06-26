@@ -159,7 +159,7 @@ export class BarVerticalComponent extends BaseChartComponent {
       }
 
       scale = scaleLog()
-        .range([this.dims.height, min])
+        .range([this.dims.height, 0])
         .domain(this.yDomain);
 
       scale.clamp(true);

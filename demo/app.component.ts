@@ -435,8 +435,6 @@ export class AppComponent implements OnInit {
   }
 
   setYAxisScale(transformType) {
-    console.log(transformType);
-
     if (transformType === 'linear') {
       this.yAxisScale = 'linear';
     }
