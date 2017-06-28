@@ -1,11 +1,14 @@
 import { Component, Input, Output, ViewChild, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
+import { roundedRect } from '../../common/shape.helper';
 var YAxisTicksComponent = (function () {
     function YAxisTicksComponent() {
         this.tickArguments = [5];
         this.tickStroke = '#ccc';
         this.showGridLines = false;
+        this.showRefLabels = false;
+        this.showRefLines = false;
         this.dimensionsChanged = new EventEmitter();
         this.innerTickSize = 6;
         this.tickPadding = 3;
@@ -14,6 +17,7 @@ var YAxisTicksComponent = (function () {
         this.width = 0;
         this.outerTickSize = 6;
         this.rotateLabels = false;
+        this.referenceLineLength = 0;
         this.trimLabel = trimLabel;
     }
     YAxisTicksComponent.prototype.ngOnChanges = function (changes) {
@@ -56,6 +60,9 @@ var YAxisTicksComponent = (function () {
         this.adjustedScale = scale.bandwidth ? function (d) {
             return scale(d) + scale.bandwidth() * 0.5;
         } : scale;
+        if (this.showRefLines && this.referenceLines) {
+            this.setReferencelines();
+        }
         switch (this.orient) {
             case 'top':
                 this.transform = function (tick) {
@@ -97,16 +104,27 @@ var YAxisTicksComponent = (function () {
         }
         setTimeout(function () { return _this.updateDims(); });
     };
+    YAxisTicksComponent.prototype.setReferencelines = function () {
+        this.refMin = this.adjustedScale(Math.min.apply(null, this.referenceLines.map(function (item) { return item.value; })));
+        this.refMax = this.adjustedScale(Math.max.apply(null, this.referenceLines.map(function (item) { return item.value; })));
+        this.referenceLineLength = this.referenceLines.length;
+        this.referenceAreaPath = roundedRect(0, this.refMax, this.gridLineWidth, this.refMin - this.refMax, 0, [false, false, false, false]);
+    };
     YAxisTicksComponent.prototype.getTicks = function () {
+        var ticks;
         var maxTicks = this.getMaxTicks(20);
         var maxScaleTicks = this.getMaxTicks(50);
         if (this.tickValues) {
-            return this.tickValues;
+            ticks = this.tickValues;
         }
-        if (this.scale.ticks) {
-            return this.scale.ticks.call(this.scale, maxScaleTicks);
+        else if (this.scale.ticks) {
+            ticks = this.scale.ticks.apply(this.scale, [maxScaleTicks]);
         }
-        return reduceTicks(this.scale.domain(), maxTicks);
+        else {
+            ticks = this.scale.domain();
+            ticks = reduceTicks(ticks, maxTicks);
+        }
+        return ticks;
     };
     YAxisTicksComponent.prototype.getMaxTicks = function (tickHeight) {
         return Math.floor(this.height / tickHeight);
@@ -123,7 +141,7 @@ export { YAxisTicksComponent };
 YAxisTicksComponent.decorators = [
     { type: Component, args: [{
                 selector: 'g[ngx-charts-y-axis-ticks]',
-                template: "\n    <svg:g #ticksel>\n      <svg:g *ngFor=\"let tick of ticks\" class=\"tick\"\n        [attr.transform]=\"transform(tick)\" >\n        <title>{{tickFormat(tick)}}</title>\n        <svg:text\n          stroke-width=\"0.01\"\n          [attr.dy]=\"dy\"\n          [attr.x]=\"x1\"\n          [attr.y]=\"y1\"\n          [attr.text-anchor]=\"textAnchor\"\n          [style.font-size]=\"'12px'\">\n          {{trimLabel(tickFormat(tick))}}\n        </svg:text>\n      </svg:g>\n    </svg:g>\n    <svg:g *ngFor=\"let tick of ticks\"\n      [attr.transform]=\"transform(tick)\">\n      <svg:g\n        *ngIf=\"showGridLines\"\n        [attr.transform]=\"gridLineTransform()\">\n        <svg:line\n          class=\"gridline-path gridline-path-horizontal\"\n          x1=\"0\"\n          [attr.x2]=\"gridLineWidth\" />\n      </svg:g>\n    </svg:g>\n  ",
+                template: "\n    <svg:g #ticksel>\n      <svg:g *ngFor=\"let tick of ticks\" class=\"tick\"\n        [attr.transform]=\"transform(tick)\" >\n        <title>{{tickFormat(tick)}}</title>\n        <svg:text\n          stroke-width=\"0.01\"\n          [attr.dy]=\"dy\"\n          [attr.x]=\"x1\"\n          [attr.y]=\"y1\"\n          [attr.text-anchor]=\"textAnchor\"\n          [style.font-size]=\"'12px'\">\n          {{trimLabel(tickFormat(tick))}}\n        </svg:text>\n      </svg:g>\n    </svg:g>\n\n    <svg:path *ngIf=\"referenceLineLength > 1 && refMax && refMin && showRefLines\"\n      class=\"reference-area\"\n      [attr.d]=\"referenceAreaPath\"\n      [attr.transform]=\"gridLineTransform()\"\n    />\n    <svg:g *ngFor=\"let tick of ticks\"\n      [attr.transform]=\"transform(tick)\">\n      <svg:g\n        *ngIf=\"showGridLines\"\n        [attr.transform]=\"gridLineTransform()\">\n        <svg:line *ngIf=\"orient === 'left'\"\n          class=\"gridline-path gridline-path-horizontal\"\n          x1=\"0\"\n          [attr.x2]=\"gridLineWidth\" />\n        <svg:line *ngIf=\"orient === 'right'\"\n          class=\"gridline-path gridline-path-horizontal\"\n          x1=\"0\"\n          [attr.x2]=\"-gridLineWidth\" />\n      </svg:g>\n    </svg:g>\n\n    <svg:g *ngFor=\"let refLine of referenceLines\">\n      <svg:g *ngIf=\"showRefLines\" [attr.transform]=\"transform(refLine.value)\">\n        <svg:line class=\"refline-path gridline-path-horizontal\"\n          x1=\"0\"\n          [attr.x2]=\"gridLineWidth\"\n          [attr.transform]=\"gridLineTransform()\"/>\n        <svg:g *ngIf=\"showRefLabels\">\n          <title>{{trimLabel(tickFormat(refLine.value))}}</title>\n          <svg:text\n            class=\"refline-label\"\n            [attr.dy]=\"dy\"\n            [attr.y]=\"-6\"\n            [attr.x]=\"gridLineWidth\"\n            [attr.text-anchor]=\"textAnchor\" >\n            {{refLine.name}}\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </svg:g>\n  ",
                 changeDetection: ChangeDetectionStrategy.OnPush
             },] },
 ];
@@ -139,6 +157,9 @@ YAxisTicksComponent.propDecorators = {
     'showGridLines': [{ type: Input },],
     'gridLineWidth': [{ type: Input },],
     'height': [{ type: Input },],
+    'referenceLines': [{ type: Input },],
+    'showRefLabels': [{ type: Input },],
+    'showRefLines': [{ type: Input },],
     'dimensionsChanged': [{ type: Output },],
     'ticksElement': [{ type: ViewChild, args: ['ticksel',] },],
 };

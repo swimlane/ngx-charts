@@ -14,11 +14,15 @@ export declare class SeriesHorizontal implements OnChanges {
     activeEntries: any[];
     seriesName: string;
     tooltipTemplate: TemplateRef<any>;
+    roundEdges: boolean;
     select: EventEmitter<{}>;
     activate: EventEmitter<{}>;
     deactivate: EventEmitter<{}>;
+    tooltipPlacement: string;
+    tooltipType: string;
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
+    updateTooltipSettings(): void;
     isActive(entry: any): boolean;
     trackBy(index: any, bar: any): any;
     click(data: any): void;

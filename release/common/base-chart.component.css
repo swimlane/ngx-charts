@@ -45,6 +45,16 @@
     stroke: #ddd;
     stroke-width: 1;
     fill: none; }
+  .ngx-charts .refline-path {
+    stroke: #a8b2c7;
+    stroke-width: 1;
+    stroke-dasharray: 5;
+    stroke-dashoffset: 5; }
+  .ngx-charts .refline-label {
+    font-size: 9px; }
+  .ngx-charts .reference-area {
+    fill-opacity: 0.05;
+    fill: #000; }
   .ngx-charts .gridline-path-dotted {
     stroke: #ddd;
     stroke-width: 1;
