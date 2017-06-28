@@ -1,7 +1,6 @@
 import { Component, Input, Output, EventEmitter, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { select } from 'd3-selection';
-import { pathTween } from '../utils/path-tween';
 var LineComponent = (function () {
     function LineComponent(element) {
         this.element = element;
@@ -22,7 +21,7 @@ var LineComponent = (function () {
         var node = select(this.element.nativeElement).select('.line');
         node
             .transition().duration(750)
-            .attrTween('d', pathTween(this.path, 1));
+            .attr('d', this.path);
     };
     return LineComponent;
 }());
