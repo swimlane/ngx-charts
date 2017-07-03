@@ -104,8 +104,8 @@ import { calculateViewDimensions, ViewDimensions, ColorHelper } from '../../src'
           <svg:g ngx-charts-tooltip-area
             *ngIf="!tooltipDisabled"
             [dims]="dims"
-            [xSet]="xScaleLine"
-            [xScale]="xScale"
+            [xSet]="xSet"
+            [xScale]="xScaleLine"
             [yScale]="yScaleLine"
             [results]="combinedSeries"
             [colors]="colorsLine"

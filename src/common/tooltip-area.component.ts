@@ -17,6 +17,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
+import { scaleQuantize } from 'd3-scale';
 
 @Component({
   selector: 'g[ngx-charts-tooltip-area]',
@@ -151,10 +152,9 @@ export class TooltipArea {
   }
 
   mouseMove(event) {
-    const x = event.offsetX - this.dims.xOffset;
-    const value = this.xScale.invert(x);
+    const xPos = event.offsetX - this.dims.xOffset;
 
-    const closestIndex = this.findClosestPointIndex(value);
+    const closestIndex = this.findClosestPointIndex(xPos);
     const closestPoint = this.xSet[closestIndex];
     this.anchorPos = this.xScale(closestPoint);
     this.anchorPos = Math.max(0, this.anchorPos);
@@ -174,7 +174,7 @@ export class TooltipArea {
     }
   }
 
-  findClosestPointIndex(val) {
+  findClosestPointIndex(xPos) {
     let minIndex = 0;
     let maxIndex = this.xSet.length - 1;
     let minDiff = Number.MAX_VALUE;
@@ -182,16 +182,18 @@ export class TooltipArea {
 
     while (minIndex <= maxIndex) {
       const currentIndex = (minIndex + maxIndex) / 2 | 0;
-      const currentElement = this.xSet[currentIndex];
-      const curDiff = Math.abs(currentElement - val);
+      const currentElement = this.xScale(this.xSet[currentIndex]);
+
+      const curDiff = Math.abs(currentElement - xPos);
+
       if (curDiff < minDiff) {
         minDiff = curDiff;
         closestIndex = currentIndex;
       }
 
-      if (currentElement < val) {
+      if (currentElement < xPos) {
         minIndex = currentIndex + 1;
-      } else if (currentElement > val) {
+      } else if (currentElement > xPos) {
         maxIndex = currentIndex - 1;
       } else {
         minDiff = 0;
