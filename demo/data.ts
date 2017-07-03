@@ -231,17 +231,17 @@ export function timelineFilterBarData() {
   return results;
 }
 
-export function generateData(seriesLength: number, includeMinMaxRange: boolean, dataPoints: number = 5): any[] {
+export function generateData(seriesLength: number, includeMinMaxRange: boolean, dataPoints: number = 1): any[] {
   const results = [];
 
   const domain: Date[] = []; // array of time stamps in milliseconds
 
-  for (let j = 0; j < dataPoints; j++) {
+  for (let j = 0; j < 5; j++) {
     // random dates between Sep 12, 2016 and Sep 24, 2016
     domain.push(new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)));
   }
 
-  for (let i = 0; i < seriesLength; i++) {
+  for (let i = 0; i < dataPoints; i++) {
     const country = countries[Math.floor(Math.random() * countries.length)];
     const series = {
       name: country.name,
