@@ -265,7 +265,7 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
     if (this.brush) return;
 
     const height = this.height;
-    const width = this.view[0];
+    const width = this.width;
 
     this.brush = brushX()
       .extent([[0, 0], [width, height]])
