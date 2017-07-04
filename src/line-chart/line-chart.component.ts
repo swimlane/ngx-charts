@@ -296,17 +296,25 @@ export class LineChartComponent extends BaseChartComponent {
     if (this.scaleType === 'time') {
       const min = Math.min(...values);
       const max = Math.max(...values);
-      domain = [min, max];
+      domain = [new Date(min), new Date(max)];
+      this.xSet = [...values].sort((a, b) => {
+        const aDate = a.getTime();
+        const bDate = b.getTime();
+        if (aDate > bDate) return 1;
+        if (bDate > aDate) return -1;
+        return 0;
+      });
     } else if (this.scaleType === 'linear') {
       values = values.map(v => Number(v));
       const min = Math.min(...values);
       const max = Math.max(...values);
       domain = [min, max];
+      this.xSet = [...values].sort();
     } else {
       domain = values;
+      this.xSet = values;
     }
 
-    this.xSet = values;
     return domain;
   }
 
