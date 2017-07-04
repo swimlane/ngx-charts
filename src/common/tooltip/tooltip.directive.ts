@@ -30,6 +30,7 @@ export class TooltipDirective implements OnDestroy {
   @Input() tooltipTemplate: any;
   @Input() tooltipShowEvent: ShowTypes = ShowTypes.all;
   @Input() tooltipContext: any;
+  @Input() tooltipImmediateExit: boolean = false;
 
   @Output() show = new EventEmitter();
   @Output() hide = new EventEmitter();
@@ -94,7 +95,7 @@ export class TooltipDirective implements OnDestroy {
         if(contains) return;
       }
 
-      this.hideTooltip();
+      this.hideTooltip(this.tooltipImmediateExit);
     }
   }
 
@@ -137,7 +138,7 @@ export class TooltipDirective implements OnDestroy {
     // content mouse leave listener
     if(this.tooltipCloseOnMouseLeave) {
       this.mouseLeaveContentEvent = this.renderer.listen(tooltip, 'mouseleave', () => {
-        this.hideTooltip();
+        this.hideTooltip(this.tooltipImmediateExit);
       });
     }
 
@@ -150,7 +151,7 @@ export class TooltipDirective implements OnDestroy {
     }
   }
 
-  hideTooltip(immediate?: boolean): void {
+  hideTooltip(immediate: boolean = false): void {
     if(!this.component) return;
 
     const destroyFn = () => {
