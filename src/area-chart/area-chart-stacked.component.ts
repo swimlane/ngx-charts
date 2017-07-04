@@ -73,9 +73,8 @@ import { id } from '../utils/id';
             />
           </svg:g>
 
-          <svg:g *ngIf="!tooltipDisabled">
+          <svg:g *ngIf="!tooltipDisabled" (mouseleave)="hideCircles()">
             <svg:g ngx-charts-tooltip-area
-              *ngIf="!tooltipDisabled"
               [dims]="dims"
               [xSet]="xSet"
               [xScale]="xScale"

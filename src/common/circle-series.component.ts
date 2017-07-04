@@ -247,14 +247,6 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
     return item !== undefined;
   }
 
-  isVisible(circle): boolean {
-    if (this.activeEntries.length > 0) {
-      return this.isActive({name: circle.seriesName});
-    }
-
-    return circle.opacity !== 0;
-  }
-
   activateCircle(): void {
     this.barVisible = true;
     this.activate.emit({name: this.data.name});
@@ -262,6 +254,7 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
 
   deactivateCircle(): void {
     this.barVisible = false;
+    this.circle.opacity = 0;
     this.deactivate.emit({name: this.data.name});
   }
 
