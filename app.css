@@ -13,7 +13,6 @@
   .ngx-charts .card.active,
   .ngx-charts .card:hover {
     opacity: 0.8;
-    -webkit-transition: opacity 100ms ease-in-out;
     transition: opacity 100ms ease-in-out; }
   .ngx-charts .bar:focus,
   .ngx-charts .cell:focus,
@@ -24,10 +23,7 @@
     outline: none; }
   .ngx-charts .line-series.inactive,
   .ngx-charts .line-series-range.inactive,
-  .ngx-charts .polar-series-path.inactive,
-  .ngx-charts .polar-series-area.inactive,
   .ngx-charts .area-series.inactive {
-    -webkit-transition: opacity 100ms ease-in-out;
     transition: opacity 100ms ease-in-out;
     opacity: .2; }
   .ngx-charts .line-highlight {
@@ -47,12 +43,6 @@
     stroke: #ddd;
     stroke-width: 1;
     fill: none; }
-  .ngx-charts .gridline-path-dotted {
-    stroke: #ddd;
-    stroke-width: 1;
-    fill: none;
-    stroke-dasharray: 1, 20;
-    stroke-dashoffset: 3; }
   .ngx-charts .grid-panel rect {
     fill: none; }
   .ngx-charts .grid-panel.odd rect {
