@@ -82,19 +82,20 @@ import { id } from '../utils/id';
               [hasRange]="hasRange"
             />
           </svg:g>
-          <svg:g ngx-charts-area-tooltip
-            *ngIf="!tooltipDisabled"
-            [xSet]="xSet"
-            [xScale]="xScale"
-            [yScale]="yScale"
-            [results]="results"
-            [height]="dims.height"
-            [colors]="colors"
-            [tooltipDisabled]="tooltipDisabled"
-            [tooltipTemplate]="seriesTooltipTemplate"
-            (hover)="updateHoveredVertical($event)"
-          />
-          <svg:g *ngIf="!tooltipDisabled">
+
+          <svg:g *ngIf="!tooltipDisabled" (mouseleave)="hideCircles()">
+            <svg:g ngx-charts-tooltip-area
+              [dims]="dims"
+              [xSet]="xSet"
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [results]="results"
+              [colors]="colors"
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="seriesTooltipTemplate"
+              (hover)="updateHoveredVertical($event)"
+            />
+
             <svg:g *ngFor="let series of results">
               <svg:g ngx-charts-circle-series
                 [xScale]="xScale"
@@ -177,7 +178,6 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() yAxisTickFormatting: any;
   @Input() roundDomains: boolean = false;
   @Input() tooltipDisabled: boolean = false;
-  @Input() showSeriesOnHover: boolean = true;
   @Input() showRefLines: boolean = false;
   @Input() referenceLines: any;
   @Input() showRefLabels: boolean = true;
@@ -474,13 +474,16 @@ export class LineChartComponent extends BaseChartComponent {
   }
 
   onActivate(item) {
+    this.deactivateAll();
+
     const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value;
     });
     if (idx > -1) {
       return;
     }
-    this.activeEntries = this.showSeriesOnHover ? [ item, ...this.activeEntries ] : this.activeEntries;
+
+    this.activeEntries = [item];
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 

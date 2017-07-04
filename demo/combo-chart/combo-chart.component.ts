@@ -37,7 +37,7 @@ import { calculateViewDimensions, ViewDimensions, ColorHelper } from '../../src'
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)">
-      
+
       <svg:g [attr.transform]="transform" class="bar-chart chart">
           <svg:g ngx-charts-x-axis
           *ngIf="xAxis"
@@ -100,16 +100,19 @@ import { calculateViewDimensions, ViewDimensions, ColorHelper } from '../../src'
               [rangeFillOpacity]="rangeFillOpacity"
             />
           </svg:g>
-          <svg:g ngx-charts-area-tooltip
+
+          <svg:g ngx-charts-tooltip-area
+            *ngIf="!tooltipDisabled"
+            [dims]="dims"
             [xSet]="xSet"
             [xScale]="xScaleLine"
             [yScale]="yScaleLine"
             [results]="combinedSeries"
-            [height]="dims.height"
             [colors]="colorsLine"
             [tooltipDisabled]="tooltipDisabled"
             (hover)="updateHoveredVertical($event)"
           />
+
           <svg:g *ngFor="let series of lineChart">
             <svg:g ngx-charts-circle-series
               [xScale]="xScaleLine"
@@ -135,7 +138,7 @@ import { calculateViewDimensions, ViewDimensions, ColorHelper } from '../../src'
 export class ComboChartComponent extends BaseChartComponent  {
 
   @ViewChild(LineSeriesComponent) lineSeriesComponent: LineSeriesComponent;
-  
+
   @Input() curve: any = curveLinear;
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
@@ -197,7 +200,7 @@ export class ComboChartComponent extends BaseChartComponent  {
   legendSpacing = 0;
   bandwidth;
   barPadding = 8;
-  
+
   trackBy(index, item): string {
     return item.name;
   }
@@ -307,7 +310,7 @@ export class ComboChartComponent extends BaseChartComponent  {
     if (date) return 'time';
     if (num) return 'linear';
     return 'ordinal';
-  } 
+  }
 
   getXDomainLine(): any[] {
     let values = [];

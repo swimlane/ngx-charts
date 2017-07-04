@@ -71,19 +71,20 @@ import { id } from '../utils/id';
               [curve]="curve"
             />
           </svg:g>
-          <svg:g ngx-charts-area-tooltip
-            *ngIf="!tooltipDisabled"
-            [xSet]="xSet"
-            [xScale]="xScale"
-            [yScale]="yScale"
-            [results]="results"
-            [height]="dims.height"
-            [colors]="colors"
-            [tooltipDisabled]="tooltipDisabled"
-            [tooltipTemplate]="seriesTooltipTemplate"
-            (hover)="updateHoveredVertical($event)"
-          />
-          <svg:g *ngIf="!tooltipDisabled">
+
+          <svg:g *ngIf="!tooltipDisabled" (mouseleave)="hideCircles()">
+            <svg:g ngx-charts-tooltip-area
+              [dims]="dims"
+              [xSet]="xSet"
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [results]="results"
+              [colors]="colors"
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="seriesTooltipTemplate"
+              (hover)="updateHoveredVertical($event)"
+            />
+
             <svg:g *ngFor="let series of results">
               <svg:g ngx-charts-circle-series
                 [xScale]="xScale"
