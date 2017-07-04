@@ -22,6 +22,7 @@ export declare class BarVertical2DComponent extends BaseChartComponent {
     groupPadding: number;
     barPadding: number;
     roundDomains: boolean;
+    roundEdges: boolean;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     tooltipTemplate: TemplateRef<any>;

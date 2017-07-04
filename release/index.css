@@ -1,5 +1,5 @@
 /**
- * ngx-charts v"5.3.1" (https://github.com/swimlane/ngx-charts)
+ * ngx-charts v"6.0.0" (https://github.com/swimlane/ngx-charts)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -50,6 +50,16 @@
     stroke: #ddd;
     stroke-width: 1;
     fill: none; }
+  .ngx-charts .refline-path {
+    stroke: #a8b2c7;
+    stroke-width: 1;
+    stroke-dasharray: 5;
+    stroke-dashoffset: 5; }
+  .ngx-charts .refline-label {
+    font-size: 9px; }
+  .ngx-charts .reference-area {
+    fill-opacity: 0.05;
+    fill: #000; }
   .ngx-charts .gridline-path-dotted {
     stroke: #ddd;
     stroke-width: 1;

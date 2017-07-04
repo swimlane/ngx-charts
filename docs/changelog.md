@@ -1,5 +1,17 @@
 # Changelog
 
+## 6.0.0
+- Breaking: Removed `showSeriesOnHover` option of line-chart
+- Refactor: Improved performance of line and area chart tooltips (#463)
+- Enhancement: Added `roundEdges` input property to bar charts (#408)
+- Enhancement: Tooltip elements are not created if tooltips are disabled (#415)
+- Enhancement: Added the option to define reference lines in line charts (#422)
+- Enhancement: Improved animations
+- Bug: Fixed timeline select issue (#425)
+- Chore: Upgraded angular to 4.2.5
+- Demo: Added timeline filter bar chart demo
+- Demo: Added Combo chart (bar and line) demo (#432)
+
 ## 5.3.1
 - Bug: Fix bug where the axis component would not emit a dimensionsChanged event in some cases
 

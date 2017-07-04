@@ -26,6 +26,7 @@ export declare class TooltipDirective implements OnDestroy {
     tooltipTemplate: any;
     tooltipShowEvent: ShowTypes;
     tooltipContext: any;
+    tooltipImmediateExit: boolean;
     show: EventEmitter<{}>;
     hide: EventEmitter<{}>;
     private readonly listensForFocus;

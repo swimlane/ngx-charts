@@ -14,13 +14,13 @@ import { SvgRadialGradientComponent } from './svg-radial-gradient.component';
 import { Timeline } from './timeline';
 import { CommonModule } from '@angular/common';
 import { AreaComponent } from './area.component';
-import { AreaTooltip } from './area-tooltip.component';
+import { TooltipArea } from './tooltip-area.component';
 import { CountUpDirective } from './count';
 var COMPONENTS = [
     AreaComponent,
     BaseChartComponent,
     CountUpDirective,
-    AreaTooltip,
+    TooltipArea,
     ChartComponent,
     LegendComponent,
     LegendEntryComponent,

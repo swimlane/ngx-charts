@@ -2,7 +2,6 @@ import { Component, Input, Output, EventEmitter, HostListener, ElementRef, Chang
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { select } from 'd3-selection';
 import { roundedRect } from '../common/shape.helper';
-import { pathTween } from '../utils/path-tween';
 import { id } from '../utils/id';
 var BarComponent = (function () {
     function BarComponent(element, location) {
@@ -50,7 +49,7 @@ var BarComponent = (function () {
         var node = select(this.element).select('.bar');
         var path = this.getPath();
         node.transition().duration(500)
-            .attrTween('d', pathTween(path, 1));
+            .attr('d', path);
     };
     BarComponent.prototype.getGradient = function () {
         if (this.stops) {
@@ -76,19 +75,19 @@ var BarComponent = (function () {
         if (this.roundEdges) {
             if (this.orientation === 'vertical') {
                 radius = Math.min(this.height, radius);
-                path = roundedRect(this.x, this.y + this.height, this.width, 0, radius, edges);
+                path = roundedRect(this.x, this.y + this.height, this.width, 1, 0, this.edges);
             }
             else if (this.orientation === 'horizontal') {
                 radius = Math.min(this.width, radius);
-                path = roundedRect(this.x, this.y, 0, this.height, radius, edges);
+                path = roundedRect(this.x, this.y, 1, this.height, 0, this.edges);
             }
         }
         else {
             if (this.orientation === 'vertical') {
-                path = roundedRect(this.x, this.y + this.height, this.width, 0, radius, edges);
+                path = roundedRect(this.x, this.y + this.height, this.width, 1, 0, this.edges);
             }
             else if (this.orientation === 'horizontal') {
-                path = roundedRect(this.x, this.y, 0, this.height, radius, edges);
+                path = roundedRect(this.x, this.y, 1, this.height, 0, this.edges);
             }
         }
         return path;
