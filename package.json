@@ -74,10 +74,10 @@
   },
   "homepage": "https://github.com/swimlane/ngx-charts#readme",
   "peerDependencies": {
-    "@angular/common": "^4.2.5",
-    "@angular/core": "^4.2.5",
-    "d3": "^4.9.1",
-    "rxjs": "^5.0.3"
+    "@angular/common": "^4.2.x",
+    "@angular/core": "^4.2.x",
+    "d3": "^4.9.x",
+    "rxjs": "^5.0.x"
   },
   "devDependencies": {
     "@angular/animations": "^4.2.5",
