@@ -11510,9 +11510,6 @@ var TooltipArea = (function () {
             }
             if (item) {
                 var label = item.name;
-                if (label instanceof Date) {
-                    label = label.toLocaleDateString();
-                }
                 var val = item.value;
                 if (this.showPercentage) {
                     val = (item.d1 - item.d0).toFixed(2) + '%';
