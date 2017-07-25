@@ -266,12 +266,7 @@ export class LineChartComponent extends BaseChartComponent {
 
   updateTimeline(): void {
     if (this.timeline) {
-      this.timelineWidth = this.width;
-
-      if (this.legend) {
-        this.timelineWidth = this.dims.width;
-      }
-
+      this.timelineWidth = this.dims.width;
       this.timelineXDomain = this.getXDomain();
       this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
       this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);

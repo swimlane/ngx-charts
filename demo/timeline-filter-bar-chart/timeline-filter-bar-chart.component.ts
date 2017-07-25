@@ -102,7 +102,7 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
   colors: ColorHelper;
   scaleType: string;
   transform: string;
-  margin: any[] = [10, 20, 10, 20];
+  margin: any[] = [10, 20, 10, 0];
   initialized: boolean = false;
   filterId: any;
   filter: any;
