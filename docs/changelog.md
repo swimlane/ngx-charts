@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.0.1
+- Bug: Fixed line chart stroke color
+- Bug: Fixed timeline width and alignment
+- Bug: Fixed truncation of legend text (#487)
+- Chore: Removed patch numbers from peerDependencies (#478)
+
 ## 6.0.0
 - Breaking: Removed `showSeriesOnHover` option of line-chart
 - Refactor: Improved performance of line and area chart tooltips (#463)

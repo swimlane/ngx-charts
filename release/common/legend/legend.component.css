@@ -14,7 +14,7 @@
     margin: 0;
     list-style: none; }
   .chart-legend .legend-wrap {
-    width: 90%; }
+    width: calc(100% - 10px); }
   .chart-legend .legend-labels {
     line-height: 85%;
     list-style: none;
@@ -50,11 +50,10 @@
     vertical-align: top;
     line-height: 15px;
     font-size: 12px;
-    width: 100%;
+    width: calc(100% - 20px);
     text-overflow: ellipsis;
     white-space: nowrap;
-    overflow: hidden;
-    padding-right: 20px; }
+    overflow: hidden; }
   .chart-legend .legend-title-text {
     vertical-align: bottom;
     display: inline-block;
