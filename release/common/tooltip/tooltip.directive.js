@@ -25,6 +25,7 @@ var TooltipDirective = (function () {
         this.tooltipHideTimeout = 300;
         this.tooltipShowTimeout = 100;
         this.tooltipShowEvent = ShowTypes.all;
+        this.tooltipImmediateExit = false;
         this.show = new EventEmitter();
         this.hide = new EventEmitter();
     }
@@ -71,7 +72,7 @@ var TooltipDirective = (function () {
                 if (contains)
                     return;
             }
-            this.hideTooltip();
+            this.hideTooltip(this.tooltipImmediateExit);
         }
     };
     TooltipDirective.prototype.onMouseClick = function () {
@@ -107,7 +108,7 @@ var TooltipDirective = (function () {
         // content mouse leave listener
         if (this.tooltipCloseOnMouseLeave) {
             this.mouseLeaveContentEvent = this.renderer.listen(tooltip, 'mouseleave', function () {
-                _this.hideTooltip();
+                _this.hideTooltip(_this.tooltipImmediateExit);
             });
         }
         // content close on click outside
@@ -121,6 +122,7 @@ var TooltipDirective = (function () {
     };
     TooltipDirective.prototype.hideTooltip = function (immediate) {
         var _this = this;
+        if (immediate === void 0) { immediate = false; }
         if (!this.component)
             return;
         var destroyFn = function () {
@@ -190,6 +192,7 @@ TooltipDirective.propDecorators = {
     'tooltipTemplate': [{ type: Input },],
     'tooltipShowEvent': [{ type: Input },],
     'tooltipContext': [{ type: Input },],
+    'tooltipImmediateExit': [{ type: Input },],
     'show': [{ type: Output },],
     'hide': [{ type: Output },],
     'onFocus': [{ type: HostListener, args: ['focusin',] },],

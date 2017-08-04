@@ -102,7 +102,7 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
   colors: ColorHelper;
   scaleType: string;
   transform: string;
-  margin: any[] = [10, 20, 10, 20];
+  margin: any[] = [10, 20, 10, 0];
   initialized: boolean = false;
   filterId: any;
   filter: any;
@@ -265,7 +265,7 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
     if (this.brush) return;
 
     const height = this.height;
-    const width = this.view[0];
+    const width = this.width;
 
     this.brush = brushX()
       .extent([[0, 0], [width, height]])

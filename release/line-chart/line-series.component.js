@@ -21,12 +21,17 @@ var LineSeriesComponent = (function () {
             var range = this.getRangeGenerator();
             this.outerPath = range(data) || '';
         }
-        this.stroke = this.hasGradient ? this.gradientUrl : this.colors.getColor(this.data.name);
-        var values = this.data.series.map(function (d) { return d.value; });
-        var max = Math.max.apply(Math, values);
-        var min = Math.min.apply(Math, values);
-        if (max === min) {
-            this.stroke = this.colors.getColor(max);
+        if (this.hasGradient) {
+            this.stroke = this.gradientUrl;
+            var values = this.data.series.map(function (d) { return d.value; });
+            var max = Math.max.apply(Math, values);
+            var min = Math.min.apply(Math, values);
+            if (max === min) {
+                this.stroke = this.colors.getColor(max);
+            }
+        }
+        else {
+            this.stroke = this.colors.getColor(this.data.name);
         }
     };
     LineSeriesComponent.prototype.getLineGenerator = function () {

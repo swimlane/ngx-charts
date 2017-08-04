@@ -11,19 +11,27 @@ var CircleSeriesComponent = (function () {
         this.select = new EventEmitter();
         this.activate = new EventEmitter();
         this.deactivate = new EventEmitter();
+        this.barVisible = false;
     }
+    CircleSeriesComponent.prototype.ngOnInit = function () {
+        var pageUrl = this.location instanceof PathLocationStrategy
+            ? this.location.path()
+            : '';
+        this.gradientId = 'grad' + id().toString();
+        this.gradientFill = "url(" + pageUrl + "#" + this.gradientId + ")";
+    };
     CircleSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     CircleSeriesComponent.prototype.update = function () {
         this.circles = this.getCircles();
+        this.circle = this.circles.find(function (c) {
+            return c.opacity !== 0;
+        });
     };
     CircleSeriesComponent.prototype.getCircles = function () {
         var _this = this;
         var seriesName = this.data.name;
-        var pageUrl = this.location instanceof PathLocationStrategy
-            ? this.location.path()
-            : '';
         return this.data.series.map(function (d, i) {
             var value = d.value;
             var label = d.name;
@@ -46,8 +54,6 @@ var CircleSeriesComponent = (function () {
                 if (label && _this.visibleValue && label.toString() === _this.visibleValue.toString()) {
                     opacity = 1;
                 }
-                var gradientId = 'grad' + id().toString();
-                var gradientFill = "url(" + pageUrl + "#" + gradientId + ")";
                 var color = void 0;
                 if (_this.colors.scaleType === 'linear') {
                     if (_this.type === 'standard') {
@@ -78,9 +84,6 @@ var CircleSeriesComponent = (function () {
                     color: color,
                     opacity: opacity,
                     seriesName: seriesName,
-                    barVisible: false,
-                    gradientId: gradientId,
-                    gradientFill: gradientFill,
                     gradientStops: _this.getGradientStops(color),
                     min: d.min,
                     max: d.max
@@ -145,18 +148,13 @@ var CircleSeriesComponent = (function () {
         });
         return item !== undefined;
     };
-    CircleSeriesComponent.prototype.isVisible = function (circle) {
-        if (this.activeEntries.length > 0) {
-            return this.isActive({ name: circle.seriesName });
-        }
-        return circle.opacity !== 0;
-    };
-    CircleSeriesComponent.prototype.activateCircle = function (circle) {
-        circle.barVisible = true;
+    CircleSeriesComponent.prototype.activateCircle = function () {
+        this.barVisible = true;
         this.activate.emit({ name: this.data.name });
     };
-    CircleSeriesComponent.prototype.deactivateCircle = function (circle) {
-        circle.barVisible = false;
+    CircleSeriesComponent.prototype.deactivateCircle = function () {
+        this.barVisible = false;
+        this.circle.opacity = 0;
         this.deactivate.emit({ name: this.data.name });
     };
     return CircleSeriesComponent;
@@ -165,7 +163,7 @@ export { CircleSeriesComponent };
 CircleSeriesComponent.decorators = [
     { type: Component, args: [{
                 selector: 'g[ngx-charts-circle-series]',
-                template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <defs>\n        <svg:g ngx-charts-svg-linear-gradient\n          orientation=\"vertical\"\n          [name]=\"circle.gradientId\"\n          [stops]=\"circle.gradientStops\"\n        />\n      </defs>\n      <svg:rect\n        *ngIf=\"circle.barVisible && type === 'standard'\"\n        [@animationState]=\"'active'\"\n        [attr.x]=\"circle.cx - circle.radius\"\n        [attr.y]=\"circle.cy\"\n        [attr.width]=\"circle.radius * 2\"\n        [attr.height]=\"circle.height\"\n        [attr.fill]=\"circle.gradientFill\"\n        class=\"tooltip-bar\"\n      />\n      <svg:g ngx-charts-circle\n        *ngIf=\"isVisible(circle)\"\n        class=\"circle\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"circle.color\"\n        [class.active]=\"isActive({name: circle.seriesName})\"\n        [pointerEvents]=\"circle.value === 0 ? 'none': 'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (select)=\"onClick($event, circle.label)\"\n        (activate)=\"activateCircle(circle)\"\n        (deactivate)=\"deactivateCircle(circle)\"\n        ngx-tooltip\n        [tooltipDisabled]=\"tooltipDisabled\"\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"tooltipTemplate ? undefined : getTooltipText(circle)\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n        [tooltipContext]=\"circle.data\"\n      />\n    </svg:g>\n  ",
+                template: "\n    <svg:g *ngIf=\"circle\">\n      <defs>\n        <svg:g ngx-charts-svg-linear-gradient\n          orientation=\"vertical\"\n          [name]=\"gradientId\"\n          [stops]=\"circle.gradientStops\"\n        />\n      </defs>\n      <svg:rect\n        *ngIf=\"barVisible && type === 'standard'\"\n        [@animationState]=\"'active'\"\n        [attr.x]=\"circle.cx - circle.radius\"\n        [attr.y]=\"circle.cy\"\n        [attr.width]=\"circle.radius * 2\"\n        [attr.height]=\"circle.height\"\n        [attr.fill]=\"gradientFill\"\n        class=\"tooltip-bar\"\n      />\n      <svg:g ngx-charts-circle\n        class=\"circle\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"circle.color\"\n        [class.active]=\"isActive({name: circle.seriesName})\"\n        [pointerEvents]=\"circle.value === 0 ? 'none': 'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (select)=\"onClick($event, circle.label)\"\n        (activate)=\"activateCircle()\"\n        (deactivate)=\"deactivateCircle()\"\n        ngx-tooltip\n        [tooltipDisabled]=\"tooltipDisabled\"\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"tooltipTemplate ? undefined : getTooltipText(circle)\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n        [tooltipContext]=\"circle.data\"\n      />\n    </svg:g>\n  ",
                 changeDetection: ChangeDetectionStrategy.OnPush,
                 animations: [
                     trigger('animationState', [

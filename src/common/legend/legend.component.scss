@@ -19,7 +19,7 @@
   }
 
   .legend-wrap {
-    width: 90%;
+    width: calc(100% - 10px);
   }
 
   .legend-labels {
@@ -69,11 +69,10 @@
     vertical-align: top;
     line-height: 15px;
     font-size: 12px;
-    width: 100%;
+    width: calc(100% - 20px);
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    padding-right: 20px;
   }
 
   .legend-title-text {

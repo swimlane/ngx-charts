@@ -101,13 +101,16 @@ export class LineSeriesComponent implements OnChanges {
       this.outerPath = range(data) || '';
     }
 
-    this.stroke = this.hasGradient ? this.gradientUrl : this.colors.getColor(this.data.name);
-
-    const values = this.data.series.map(d => d.value);
-    const max = Math.max(...values);
-    const min = Math.min(...values);
-    if (max === min) {
-      this.stroke = this.colors.getColor(max);
+    if (this.hasGradient) {
+      this.stroke = this.gradientUrl;
+      const values = this.data.series.map(d => d.value);
+      const max = Math.max(...values);
+      const min = Math.min(...values);
+      if (max === min) {
+        this.stroke = this.colors.getColor(max);
+      }
+    } else {
+      this.stroke = this.colors.getColor(this.data.name);
     }
   }
 

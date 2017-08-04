@@ -14,6 +14,7 @@ var SeriesVerticalComponent = (function () {
     };
     SeriesVerticalComponent.prototype.update = function () {
         var _this = this;
+        this.updateTooltipSettings();
         var width;
         if (this.series.length) {
             width = this.xScale.bandwidth();
@@ -27,7 +28,7 @@ var SeriesVerticalComponent = (function () {
             var value = d.value;
             var label = d.name;
             var formattedLabel = formatLabel(label);
-            var roundEdges = _this.type === 'standard';
+            var roundEdges = _this.roundEdges;
             var bar = {
                 value: value,
                 label: label,
@@ -96,9 +97,13 @@ var SeriesVerticalComponent = (function () {
                 tooltipLabel = _this.seriesName + " \u2022 " + formattedLabel;
                 bar.data.series = _this.seriesName;
             }
-            bar.tooltipText = "\n        <span class=\"tooltip-label\">" + tooltipLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
+            bar.tooltipText = _this.tooltipDisabled ? undefined : "\n        <span class=\"tooltip-label\">" + tooltipLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
             return bar;
         });
+    };
+    SeriesVerticalComponent.prototype.updateTooltipSettings = function () {
+        this.tooltipPlacement = this.tooltipDisabled ? undefined : 'top';
+        this.tooltipType = this.tooltipDisabled ? undefined : 'tooltip';
     };
     SeriesVerticalComponent.prototype.isActive = function (entry) {
         if (!this.activeEntries)
@@ -120,7 +125,7 @@ export { SeriesVerticalComponent };
 SeriesVerticalComponent.decorators = [
     { type: Component, args: [{
                 selector: 'g[ngx-charts-series-vertical]',
-                template: "\n    <svg:g ngx-charts-bar\n      *ngFor=\"let bar of bars; trackBy: trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [stops]=\"bar.gradientStops\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.data)\"\n      (select)=\"onClick($event)\"\n      (activate)=\"activate.emit($event)\"\n      (deactivate)=\"deactivate.emit($event)\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"tooltipTemplate ? undefined : bar.tooltipText\"\n      [tooltipTemplate]=\"tooltipTemplate\"\n      [tooltipContext]=\"bar.data\">\n    </svg:g>\n  ",
+                template: "\n    <svg:g ngx-charts-bar\n      *ngFor=\"let bar of bars; trackBy: trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [stops]=\"bar.gradientStops\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.data)\"\n      (select)=\"onClick($event)\"\n      (activate)=\"activate.emit($event)\"\n      (deactivate)=\"deactivate.emit($event)\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"tooltipPlacement\"\n      [tooltipType]=\"tooltipType\"\n      [tooltipTitle]=\"tooltipTemplate ? undefined : bar.tooltipText\"\n      [tooltipTemplate]=\"tooltipTemplate\"\n      [tooltipContext]=\"bar.data\">\n    </svg:g>\n  ",
                 changeDetection: ChangeDetectionStrategy.OnPush,
                 animations: [
                     trigger('animationState', [
@@ -148,6 +153,7 @@ SeriesVerticalComponent.propDecorators = {
     'seriesName': [{ type: Input },],
     'tooltipDisabled': [{ type: Input },],
     'tooltipTemplate': [{ type: Input },],
+    'roundEdges': [{ type: Input },],
     'select': [{ type: Output },],
     'activate': [{ type: Output },],
     'deactivate': [{ type: Output },],

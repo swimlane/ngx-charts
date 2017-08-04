@@ -72,34 +72,38 @@ import { id } from '../utils/id';
               [curve]="curve"
             />
           </svg:g>
-          <svg:g ngx-charts-area-tooltip
-            [xSet]="xSet"
-            [xScale]="xScale"
-            [yScale]="yScale"
-            [results]="results"
-            [height]="dims.height"
-            [colors]="colors"
-            [showPercentage]="true"
-            [tooltipDisabled]="tooltipDisabled"
-            [tooltipTemplate]="seriesTooltipTemplate"
-            (hover)="updateHoveredVertical($event)"
-          />
-          <svg:g *ngFor="let series of results">
-            <svg:g ngx-charts-circle-series
-              type="stacked"
+
+          <svg:g *ngIf="!tooltipDisabled" (mouseleave)="hideCircles()">
+            <svg:g ngx-charts-tooltip-area
+              [dims]="dims"
+              [xSet]="xSet"
               [xScale]="xScale"
               [yScale]="yScale"
+              [results]="results"
               [colors]="colors"
-              [activeEntries]="activeEntries"
-              [data]="series"
-              [scaleType]="scaleType"
-              [visibleValue]="hoveredVertical"
+              [showPercentage]="true"
               [tooltipDisabled]="tooltipDisabled"
-              [tooltipTemplate]="tooltipTemplate"
-              (select)="onClick($event, series)"
-              (activate)="onActivate($event)"
-              (deactivate)="onDeactivate($event)"
+              [tooltipTemplate]="seriesTooltipTemplate"
+              (hover)="updateHoveredVertical($event)"
             />
+
+            <svg:g *ngFor="let series of results">
+              <svg:g ngx-charts-circle-series
+                type="stacked"
+                [xScale]="xScale"
+                [yScale]="yScale"
+                [colors]="colors"
+                [activeEntries]="activeEntries"
+                [data]="series"
+                [scaleType]="scaleType"
+                [visibleValue]="hoveredVertical"
+                [tooltipDisabled]="tooltipDisabled"
+                [tooltipTemplate]="tooltipTemplate"
+                (select)="onClick($event, series)"
+                (activate)="onActivate($event)"
+                (deactivate)="onDeactivate($event)"
+              />
+            </svg:g>
           </svg:g>
         </svg:g>
       </svg:g>
@@ -292,12 +296,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
 
   updateTimeline(): void {
     if (this.timeline) {
-      this.timelineWidth = this.width;
-
-      if (this.legend) {
-        this.timelineWidth = this.dims.width;
-      }
-
+      this.timelineWidth = this.dims.width;
       this.timelineXDomain = this.getXDomain();
       this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
       this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
@@ -323,16 +322,23 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
       const min = Math.min(...values);
       const max = Math.max(...values);
       domain = [new Date(min), new Date(max)];
+      this.xSet = [...values].sort((a, b) => {
+        const aDate = a.getTime();
+        const bDate = b.getTime();
+        if (aDate > bDate) return 1;
+        if (bDate > aDate) return -1;
+        return 0;
+      });
     } else if (this.scaleType === 'linear') {
       values = values.map(v => Number(v));
       const min = Math.min(...values);
       const max = Math.max(...values);
       domain = [min, max];
+      this.xSet = [...values].sort();
     } else {
       domain = values;
+      this.xSet = values;
     }
-
-    this.xSet = values;
 
     return domain;
   }
