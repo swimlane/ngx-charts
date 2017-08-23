@@ -17,7 +17,7 @@ var TooltipContentComponent = (function () {
     }
     Object.defineProperty(TooltipContentComponent.prototype, "cssClasses", {
         get: function () {
-            var clz = 'ngx-tooltip-content';
+            var clz = 'ngx-charts-tooltip-content';
             clz += " position-" + this.placement;
             clz += " type-" + this.type;
             clz += " " + this.cssClass;

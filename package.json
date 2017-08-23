@@ -1,6 +1,6 @@
 {
   "name": "@swimlane/ngx-charts",
-  "version": "6.0.1",
+  "version": "6.0.2",
   "description": "Declarative Charting Framework for Angular2 and beyond!",
   "main": "release/index.js",
   "typings": "release/index.d.ts",
