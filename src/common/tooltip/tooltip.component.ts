@@ -50,7 +50,7 @@ export class TooltipContentComponent implements AfterViewInit {
 
   @HostBinding('class')
   get cssClasses(): string {
-    let clz = 'ngx-tooltip-content';
+    let clz = 'ngx-charts-tooltip-content';
     clz += ` position-${this.placement}`;
     clz += ` type-${this.type}`;
     clz += ` ${this.cssClass}`;

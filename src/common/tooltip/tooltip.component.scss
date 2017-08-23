@@ -19,7 +19,7 @@ $shadow:
   0 2px 1px -1px rgba(0, 0, 0, $shadow-ambient-shadow-opacity);
 
 
-.ngx-tooltip-content {
+.ngx-charts-tooltip-content {
   position: fixed;
   border-radius: 3px;
   z-index: 5000;
@@ -154,8 +154,7 @@ $shadow:
   pointer-events: none;
 }
 
-
-.tooltip-item{
+.tooltip-item {
   text-align: left;
   line-height: 1.2em;
   padding: 5px 0;
