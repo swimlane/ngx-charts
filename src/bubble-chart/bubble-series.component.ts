@@ -119,6 +119,7 @@ export class BubbleSeriesComponent implements OnChanges {
           series: seriesName,
           name: d.name,
           value: d.y,
+          x: d.x,
           radius: d.r
         };
 
