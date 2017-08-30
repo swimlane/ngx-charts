@@ -40,7 +40,7 @@ import { ColorHelper } from '../common/color.helper';
           <svg:g *ngFor="let link of links; trackBy:trackLinkBy">
             <ng-template *ngIf="linkTemplate"
               [ngTemplateOutlet]="linkTemplate"
-              [ngOutletContext]="{ $implicit: link }">
+              [ngTemplateOutletContext]="{ $implicit: link }">
             </ng-template>
             <svg:line *ngIf="!linkTemplate"
               strokeWidth="1" class="edge"
@@ -67,7 +67,7 @@ import { ColorHelper } from '../common/color.helper';
             [tooltipContext]="node">
             <ng-template *ngIf="nodeTemplate"
               [ngTemplateOutlet]="nodeTemplate"
-              [ngOutletContext]="{ $implicit: node }">
+              [ngTemplateOutletContext]="{ $implicit: node }">
             </ng-template>
             <svg:circle *ngIf="!nodeTemplate" r="5" />
           </svg:g>
