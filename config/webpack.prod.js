@@ -25,7 +25,12 @@ module.exports = function(env) {
         {
           test: /\.ts$/,
           loaders: [
-            'awesome-typescript-loader',
+            {
+              loader: 'awesome-typescript-loader',
+              options: {
+                configFileName: './demo/tsconfig-build.json'
+              }
+            },
             'angular2-template-loader'
           ],
           exclude: [/\.(spec|e2e|d)\.ts$/]

@@ -7,7 +7,7 @@ const fs = require('fs-extra')
 replace({
   regex: '.scss',
   replacement: '.css',
-  paths: ['./build'],
+  paths: ['./release'],
   recursive: true,
   silent: false
 });
