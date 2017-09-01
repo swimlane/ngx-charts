@@ -17,9 +17,6 @@ require('core-js/es6');
 require('core-js/es7/reflect');
 require('core-js/es7/array');
 
-// Typescript emit helpers polyfill
-require('ts-helpers');
-
 require('zone.js/dist/zone');
 require('zone.js/dist/long-stack-trace-zone');
 require('zone.js/dist/proxy'); // since zone.js 0.6.15
