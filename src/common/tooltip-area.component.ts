@@ -118,10 +118,7 @@ export class TooltipArea {
       }
 
       if (item) {
-        let label = item.name;
-        if (label instanceof Date) {
-          label = label.toLocaleDateString();
-        }
+        const label = item.name;
         let val = item.value;
         if (this.showPercentage) {
           val = (item.d1 - item.d0).toFixed(2) + '%';
