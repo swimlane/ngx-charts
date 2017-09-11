@@ -1,3 +1,5 @@
+import './polyfills';
+
 import { NgModule } from '@angular/core';
 import { ChartCommonModule } from './common/chart-common.module';
 import { AreaChartModule } from './area-chart/area-chart.module';
