@@ -13,6 +13,7 @@
   .ngx-charts .card.active,
   .ngx-charts .card:hover {
     opacity: 0.8;
+    -webkit-transition: opacity 100ms ease-in-out;
     transition: opacity 100ms ease-in-out; }
   .ngx-charts .bar:focus,
   .ngx-charts .cell:focus,
@@ -24,6 +25,7 @@
   .ngx-charts .line-series.inactive,
   .ngx-charts .line-series-range.inactive,
   .ngx-charts .area-series.inactive {
+    -webkit-transition: opacity 100ms ease-in-out;
     transition: opacity 100ms ease-in-out;
     opacity: .2; }
   .ngx-charts .line-highlight {
