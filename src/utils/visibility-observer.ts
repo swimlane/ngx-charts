@@ -41,12 +41,14 @@ export class VisibilityObserver {
       } else {
         clearTimeout(this.timeout);
         this.zone.runOutsideAngular(() => {
-          this.timeout = setTimeout(() => check(), 50);
+          this.timeout = setTimeout(() => check(), 100);
         });
       }
     };
 
-    setTimeout(() => check());
+    this.zone.runOutsideAngular(() => {
+      this.timeout = setTimeout(() => check());
+    });
   }
 
 }
