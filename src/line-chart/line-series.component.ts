@@ -90,11 +90,11 @@ export class LineSeriesComponent implements OnChanges {
 
     const data = this.sortData(this.data.series);
 
-    const line = this.getLineGenerator();
-    this.path = line(data) || '';
+    const lineGen = this.getLineGenerator();
+    this.path = lineGen(data) || '';
 
-    const area = this.getAreaGenerator();
-    this.areaPath = area(data) || '';
+    const areaGen = this.getAreaGenerator();
+    this.areaPath = areaGen(data) || '';
 
     if (this.hasRange) {
       const range = this.getRangeGenerator();

@@ -139,24 +139,24 @@ export class PieSeriesComponent implements OnChanges {
     return labelPositions;
   }
 
-  labelVisible(arc): boolean {
-    return this.showLabels && (arc.endAngle - arc.startAngle > Math.PI / 30);
+  labelVisible(myArc): boolean {
+    return this.showLabels && (myArc.endAngle - myArc.startAngle > Math.PI / 30);
   }
 
-  labelText(arc): string {
+  labelText(myArc): string {
     if (this.labelFormatting) {
-      return this.labelFormatting(arc.data.name);
+      return this.labelFormatting(myArc.data.name);
     }
-    return this.label(arc);
+    return this.label(myArc);
   }
 
-  label(arc): string {
-    return formatLabel(arc.data.name);
+  label(myArc): string {
+    return formatLabel(myArc.data.name);
   }
 
-  defaultTooltipText(arc) {
-    const label = this.label(arc);
-    const val = formatLabel(arc.data.value);
+  defaultTooltipText(myArc): string {
+    const label = this.label(myArc);
+    const val = formatLabel(myArc.data.value);
 
     return `
       <span class="tooltip-label">${label}</span>
@@ -164,8 +164,8 @@ export class PieSeriesComponent implements OnChanges {
     `;
   }
 
-  color(arc): any {
-    return this.colors.getColor(this.label(arc));
+  color(myArc): any {
+    return this.colors.getColor(this.label(myArc));
   }
 
   trackBy(index, item): string {

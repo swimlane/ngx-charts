@@ -5,7 +5,12 @@ import { AreaChartStackedComponent } from './area-chart-stacked.component';
 import { AreaSeriesComponent } from './area-series.component';
 import { ChartCommonModule } from '../common/chart-common.module';
 
-export { AreaChartComponent, AreaChartNormalizedComponent, AreaChartStackedComponent, AreaSeriesComponent }
+export { 
+  AreaChartComponent, 
+  AreaChartNormalizedComponent, 
+  AreaChartStackedComponent, 
+  AreaSeriesComponent 
+};
 
 @NgModule({
   imports: [ChartCommonModule],

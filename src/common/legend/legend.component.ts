@@ -2,7 +2,7 @@ import {
   Component, Input, ChangeDetectionStrategy, Output, EventEmitter,
   SimpleChanges, OnChanges, ChangeDetectorRef, NgZone, ViewEncapsulation
  } from '@angular/core';
- import { formatLabel } from '../label.helper';
+import { formatLabel } from '../label.helper';
 
 @Component({
   selector: 'ngx-charts-legend',

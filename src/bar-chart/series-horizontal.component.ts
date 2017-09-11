@@ -15,7 +15,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
- import { formatLabel } from '../common/label.helper';
+import { formatLabel } from '../common/label.helper';
 
 @Component({
   selector: 'g[ngx-charts-series-horizontal]',

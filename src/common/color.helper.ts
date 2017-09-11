@@ -121,7 +121,7 @@ export class ColorHelper {
         continue;
       }
 
-      if (offset.toFixed(4) >= (endVal - colorValueScale.bandwidth()).toFixed(4) ) {
+      if (offset.toFixed(4) >= (endVal - colorValueScale.bandwidth()).toFixed(4)) {
         break;
       }
 

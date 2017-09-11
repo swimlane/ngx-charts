@@ -92,7 +92,7 @@ export class YAxisComponent implements OnChanges {
   }
 
   emitTicksWidth({ width }): void {
-    if (width !== this.labelOffset && this.yOrient === 'right' ) {
+    if (width !== this.labelOffset && this.yOrient === 'right') {
       this.labelOffset = width + this.labelOffset;
       setTimeout(() => {
         this.dimensionsChanged.emit({width});

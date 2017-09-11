@@ -21,10 +21,12 @@ import {
   transition
 } from '@angular/animations';
 
-import { NgxChartsModule, BaseChartComponent, LineComponent, LineSeriesComponent } from '../../src';
+import { 
+  NgxChartsModule, BaseChartComponent, LineComponent, LineSeriesComponent,
+  calculateViewDimensions, ViewDimensions, ColorHelper
+ } from '../../src';
 import { area, line, curveLinear } from 'd3-shape';
 import { scaleBand, scaleLinear, scalePoint, scaleTime } from 'd3-scale';
-import { calculateViewDimensions, ViewDimensions, ColorHelper } from '../../src';
 
 @Component({
   selector: 'combo-chart-component',
@@ -249,9 +251,7 @@ export class ComboChartComponent extends BaseChartComponent  {
     this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
   }
 
-  // line scale
-
-    deactivateAll() {
+  deactivateAll() {
     this.activeEntries = [...this.activeEntries];
     for (const entry of this.activeEntries) {
       this.deactivate.emit({ value: entry, entries: [] });
@@ -265,7 +265,7 @@ export class ComboChartComponent extends BaseChartComponent  {
     this.deactivateAll();
   }
 
-    updateHoveredVertical(item): void {
+  updateHoveredVertical(item): void {
     this.hoveredVertical = item.value;
     this.deactivateAll();
   }
@@ -278,14 +278,14 @@ export class ComboChartComponent extends BaseChartComponent  {
 
   getSeriesDomain(): any[] {
     this.combinedSeries = this.lineChart.slice(0);
-    this.combinedSeries.push(
-      {name: this.yAxisLabel,
+    this.combinedSeries.push({
+      name: this.yAxisLabel,
       series: this.results
     });
     return this.combinedSeries.map(d => d.name);
   }
 
-    isDate(value): boolean {
+  isDate(value): boolean {
     if (value instanceof Date) {
       return true;
     }
@@ -293,7 +293,7 @@ export class ComboChartComponent extends BaseChartComponent  {
     return false;
   }
 
-    getScaleType(values): string {
+  getScaleType(values): string {
     let date = true;
     let num = true;
 
@@ -400,17 +400,15 @@ export class ComboChartComponent extends BaseChartComponent  {
     }
 
     return scale;
-}
+  }
 
-    getYScaleLine(domain, height): any {
+  getYScaleLine(domain, height): any {
     const scale = scaleLinear()
       .range([height, 0])
       .domain(domain);
 
     return this.roundDomains ? scale.nice() : scale;
   }
-
-  // bar scales
 
   getXScale(): any {
     this.xDomain = this.getXDomain();

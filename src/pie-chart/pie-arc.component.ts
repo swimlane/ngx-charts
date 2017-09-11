@@ -79,8 +79,8 @@ export class PieArcComponent implements OnChanges {
   }
 
   update(): void {
-    const arc = this.calculateArc();
-    this.path = arc.startAngle(this.startAngle).endAngle(this.endAngle)();
+    const calc = this.calculateArc();
+    this.path = calc.startAngle(this.startAngle).endAngle(this.endAngle)();
     this.startOpacity = 0.5;
 
     const pageUrl = this.location instanceof PathLocationStrategy
@@ -118,7 +118,7 @@ export class PieArcComponent implements OnChanges {
       .selectAll('.arc')
       .data([{startAngle: this.startAngle, endAngle: this.endAngle}]);
 
-    const arc = this.calculateArc();
+    const calc = this.calculateArc();
 
     node
       .transition()
@@ -129,7 +129,7 @@ export class PieArcComponent implements OnChanges {
         const interpolater = interpolate(copyOfD, copyOfD);
         (<any>this)._current = interpolater(0);
         return function(t) {
-          return arc(interpolater(t));
+          return calc(interpolater(t));
         };
       })
       .transition().duration(750)
@@ -138,7 +138,7 @@ export class PieArcComponent implements OnChanges {
         const interpolater = interpolate((<any>this)._current, d);
         (<any>this)._current = interpolater(0);
         return function(t) {
-          return arc(interpolater(t));
+          return calc(interpolater(t));
         };
       });
   }
@@ -148,7 +148,7 @@ export class PieArcComponent implements OnChanges {
       .selectAll('.arc')
       .data([{startAngle: this.startAngle, endAngle: this.endAngle}]);
 
-    const arc = this.calculateArc();
+    const calc = this.calculateArc();
 
     node
       .transition().duration(750)
@@ -157,7 +157,7 @@ export class PieArcComponent implements OnChanges {
         const interpolater = interpolate((<any>this)._current, d);
         (<any>this)._current = interpolater(0);
         return function(t) {
-          return arc(interpolater(t));
+          return calc(interpolater(t));
         };
       });
   }

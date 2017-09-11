@@ -6,13 +6,13 @@ import {
   OnChanges,
   ChangeDetectionStrategy
  } from '@angular/core';
- import {
-   trigger,
-   state,
-   style,
-   animate,
-   transition
- } from '@angular/animations';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 import { formatLabel } from '../../src/common/label.helper';
 
 @Component({
