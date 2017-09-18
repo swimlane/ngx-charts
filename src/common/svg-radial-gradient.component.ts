@@ -22,27 +22,43 @@ import {
 })
 export class SvgRadialGradientComponent implements OnChanges {
 
-  @Input() color;
-  @Input() name;
-  @Input() startOpacity;
+  @Input() color: string;
+  @Input() name: string;
+  @Input() startOpacity: number;
   @Input() endOpacity = 1;
   @Input() cx: number = 0;
   @Input() cy: number = 0;
-  @Input() stops: any[];
+
+  @Input()
+  get stops(): any[] {
+    return this.stopsInput || this.stopsDefault;
+  }
+
+  set stops(value: any[]) {
+    this.stopsInput = value;
+  }
 
   r: string;
 
+  private stopsInput: any[];
+  private stopsDefault: any[];
+
   ngOnChanges(changes: SimpleChanges): void {
     this.r = '30%';
-    this.stops = this.stops || [{
-      offset: 0,
-      color: this.color,
-      opacity: this.startOpacity
-    }, {
-      offset: 100,
-      color: this.color,
-      opacity: this.endOpacity
-    }];
+    if (
+      ('color' in changes) ||
+      ('startOpacity' in changes) ||
+      ('endOpacity' in changes)) {
+        this.stopsDefault = [{
+          offset: 0,
+          color: this.color,
+          opacity: this.startOpacity
+        }, {
+          offset: 100,
+          color: this.color,
+          opacity: this.endOpacity
+        }];
+    }
   }
 
 }
