@@ -13,6 +13,8 @@
 | customColors    | object      |               | custom colors for the chart. Used to override a color for a specific value                                      |
 | tooltipDisabled | boolean     | false         | show or hide the tooltip                                                                                        |
 | tooltipTemplate | TemplateRef |               | a custom ng-template to be displayed inside the tooltip                                                         |
+| designatedTotal | number      |               | total number that the value of each object in the results array will be compared to. If left undefined, the     |
+|                 |             |               | value of each object will automatically be compared to the total of all the values in the results array.        |
 
 # Outputs
 
