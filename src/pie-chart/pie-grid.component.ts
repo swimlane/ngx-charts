@@ -106,7 +106,7 @@ export class PieGridComponent extends BaseChartComponent {
 
     this.domain = this.getDomain();
 
-    this.data = gridLayout(this.dims, this.results, 150);
+    this.data = gridLayout(this.dims, this.results, 150, this.designatedTotal);
     this.transform = `translate(${this.margin[3]} , ${this.margin[0]})`;
 
     this.series = this.getSeries();
