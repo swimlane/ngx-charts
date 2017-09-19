@@ -161,7 +161,7 @@ export class PolarChartComponent extends BaseChartComponent {
   seriesDomain: any;
   yScale: any;  // -> rScale
   xScale: any;  // -> tScale
-  yAxisScale; any; // -> yScale
+  yAxisScale: any; // -> yScale
   colors: ColorHelper;
   scaleType: string;
   transform: string;
