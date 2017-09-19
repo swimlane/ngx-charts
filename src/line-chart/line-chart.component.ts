@@ -17,7 +17,7 @@ import {
   transition
 } from '@angular/animations';
 import { PathLocationStrategy } from '@angular/common';
-import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
+import { scaleLinear, scaleLog, scaleTime, scalePoint } from 'd3-scale';
 import { curveLinear } from 'd3-shape';
 
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
@@ -46,43 +46,42 @@ import { id } from '../utils/id';
       </svg:defs>
       <svg:g [attr.transform]="transform" class="line-chart chart">
         <svg:g ngx-charts-x-axis
-          *ngIf="xAxis"
-          [xScale]="xScale"
-          [dims]="dims"
-          [showGridLines]="showGridLines"
-          [showLabel]="showXAxisLabel"
-          [labelText]="xAxisLabel"
-          [tickFormatting]="xAxisTickFormatting"
-          (dimensionsChanged)="updateXAxisHeight($event)">
+               *ngIf="xAxis"
+               [xScale]="xScale"
+               [dims]="dims"
+               [showGridLines]="showGridLines"
+               [showLabel]="showXAxisLabel"
+               [labelText]="xAxisLabel"
+               [tickFormatting]="xAxisTickFormatting"
+               (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
         <svg:g ngx-charts-y-axis
-          *ngIf="yAxis"
-          [yScale]="yScale"
-          [dims]="dims"
-          [showGridLines]="showGridLines"
-          [showLabel]="showYAxisLabel"
-          [labelText]="yAxisLabel"
-          [tickFormatting]="yAxisTickFormatting"
-          [referenceLines]="referenceLines"
-          [showRefLines]="showRefLines"
-          [showRefLabels]="showRefLabels"
-          (dimensionsChanged)="updateYAxisWidth($event)">
+               *ngIf="yAxis"
+               [yScale]="yScale"
+               [dims]="dims"
+               [showGridLines]="showGridLines"
+               [showLabel]="showYAxisLabel"
+               [labelText]="yAxisLabel"
+               [tickFormatting]="yAxisTickFormatting"
+               [referenceLines]="referenceLines"
+               [showRefLines]="showRefLines"
+               [showRefLabels]="showRefLabels"
+               (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
         <svg:g [attr.clip-path]="clipPath">
           <svg:g *ngFor="let series of results; trackBy:trackBy" [@animationState]="'active'">
             <svg:g ngx-charts-line-series
-              [xScale]="xScale"
-              [yScale]="yScale"
-              [colors]="colors"
-              [data]="series"
-              [activeEntries]="activeEntries"
-              [scaleType]="scaleType"
-              [curve]="curve"
-              [rangeFillOpacity]="rangeFillOpacity"
-              [hasRange]="hasRange"
+                   [xScale]="xScale"
+                   [yScale]="yScale"
+                   [colors]="colors"
+                   [data]="series"
+                   [activeEntries]="activeEntries"
+                   [scaleType]="xScaleType"
+                   [curve]="curve"
+                   [rangeFillOpacity]="rangeFillOpacity"
+                   [hasRange]="hasRange"
             />
           </svg:g>
-
           <svg:g *ngIf="!tooltipDisabled" (mouseleave)="hideCircles()">
             <svg:g ngx-charts-tooltip-area
               [dims]="dims"
@@ -101,8 +100,8 @@ import { id } from '../utils/id';
                 [xScale]="xScale"
                 [yScale]="yScale"
                 [colors]="colors"
-                [data]="series"
-                [scaleType]="scaleType"
+                [data]="series" 
+                [scaleType]="xScaleType"
                 [visibleValue]="hoveredVertical"
                 [activeEntries]="activeEntries"
                 [tooltipDisabled]="tooltipDisabled"
@@ -116,25 +115,25 @@ import { id } from '../utils/id';
         </svg:g>
       </svg:g>
       <svg:g ngx-charts-timeline
-        *ngIf="timeline && scaleType === 'time'"
-        [attr.transform]="timelineTransform"
-        [results]="results"
-        [view]="[timelineWidth, height]"
-        [height]="timelineHeight"
-        [scheme]="scheme"
-        [customColors]="customColors"
-        [scaleType]="scaleType"
-        [legend]="legend"
-        (onDomainChange)="updateDomain($event)">
+             *ngIf="timeline && xScaleType === 'time'"
+             [attr.transform]="timelineTransform"
+             [results]="results"
+             [view]="[timelineWidth, height]"
+             [height]="timelineHeight"
+             [scheme]="scheme"
+             [customColors]="customColors"
+             [scaleType]="xScaleType"
+             [legend]="legend"
+             (onDomainChange)="updateDomain($event)">
         <svg:g *ngFor="let series of results; trackBy:trackBy">
           <svg:g ngx-charts-line-series
-            [xScale]="timelineXScale"
-            [yScale]="timelineYScale"
-            [colors]="colors"
-            [data]="series"
-            [scaleType]="scaleType"
-            [curve]="curve"
-            [hasRange]="hasRange"
+                 [xScale]="timelineXScale"
+                 [yScale]="timelineYScale"
+                 [colors]="colors"
+                 [data]="series"
+                 [scaleType]="xScaleType"
+                 [curve]="curve"
+                 [hasRange]="hasRange"
           />
         </svg:g>
       </svg:g>
@@ -164,8 +163,11 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() yAxis;
   @Input() showXAxisLabel;
   @Input() showYAxisLabel;
+  @Input() yDomainMin;
+  @Input() yDomainMax;
   @Input() xAxisLabel;
   @Input() yAxisLabel;
+  @Input() yAxisScale;
   @Input() autoScale;
   @Input() timeline;
   @Input() gradient: boolean;
@@ -196,7 +198,7 @@ export class LineChartComponent extends BaseChartComponent {
   yScale: any;
   xScale: any;
   colors: ColorHelper;
-  scaleType: string;
+  xScaleType: string;
   transform: string;
   clipPath: string;
   clipPathId: string;
@@ -285,10 +287,10 @@ export class LineChartComponent extends BaseChartComponent {
       }
     }
 
-    this.scaleType = this.getScaleType(values);
+    this.xScaleType = this.getXScaleType(values);
     let domain = [];
 
-    if (this.scaleType === 'time') {
+    if (this.xScaleType === 'time') {
       const min = Math.min(...values);
       const max = Math.max(...values);
       domain = [new Date(min), new Date(max)];
@@ -299,7 +301,7 @@ export class LineChartComponent extends BaseChartComponent {
         if (bDate > aDate) return -1;
         return 0;
       });
-    } else if (this.scaleType === 'linear') {
+    } else if (this.xScaleType === 'linear') {
       values = values.map(v => Number(v));
       const min = Math.min(...values);
       const max = Math.max(...values);
@@ -315,19 +317,18 @@ export class LineChartComponent extends BaseChartComponent {
 
   getYDomain(): any[] {
     const domain = [];
+
     for (const results of this.results) {
       for (const d of results.series){
         if (domain.indexOf(d.value) < 0) {
           domain.push(d.value);
         }
         if (d.min !== undefined) {
-          this.hasRange = true;
           if (domain.indexOf(d.min) < 0) {
             domain.push(d.min);
           }
         }
         if (d.max !== undefined) {
-          this.hasRange = true;
           if (domain.indexOf(d.max) < 0) {
             domain.push(d.max);
           }
@@ -336,9 +337,16 @@ export class LineChartComponent extends BaseChartComponent {
     }
 
     let min = Math.min(...domain);
-    const max = Math.max(...domain);
+    let max = Math.max(...domain);
     if (!this.autoScale) {
       min = Math.min(0, min);
+    }
+
+    if ( typeof(this.yDomainMin) !== 'undefined') {
+      min = this.yDomainMin;
+    }
+    if ( typeof(this.yDomainMax) !== 'undefined') {
+      max = this.yDomainMax;
     }
 
     return [min, max];
@@ -351,11 +359,11 @@ export class LineChartComponent extends BaseChartComponent {
   getXScale(domain, width): any {
     let scale;
 
-    if (this.scaleType === 'time') {
+    if (this.xScaleType === 'time') {
       scale = scaleTime()
         .range([0, width])
         .domain(domain);
-    } else if (this.scaleType === 'linear') {
+    } else if (this.xScaleType === 'linear') {
       scale = scaleLinear()
         .range([0, width])
         .domain(domain);
@@ -363,7 +371,7 @@ export class LineChartComponent extends BaseChartComponent {
       if (this.roundDomains) {
         scale = scale.nice();
       }
-    } else if (this.scaleType === 'ordinal') {
+    } else if (this.xScaleType === 'ordinal') {
       scale = scalePoint()
         .range([0, width])
         .padding(0.1)
@@ -374,14 +382,21 @@ export class LineChartComponent extends BaseChartComponent {
   }
 
   getYScale(domain, height): any {
-    const scale = scaleLinear()
-      .range([height, 0])
-      .domain(domain);
+    let scale;
 
+    if (typeof(this.yAxisScale) === 'undefined' || this.yAxisScale === 'linear') {
+      scale = scaleLinear()
+        .range([height, 0])
+        .domain(domain);
+    } else if (this.yAxisScale === 'log') {
+      scale = scaleLog()
+        .range([height, 0])
+        .domain(domain);
+    }
     return this.roundDomains ? scale.nice() : scale;
   }
 
-  getScaleType(values): string {
+  getXScaleType(values): string {
     let date = true;
     let num = true;
 
@@ -398,6 +413,13 @@ export class LineChartComponent extends BaseChartComponent {
     if (date) return 'time';
     if (num) return 'linear';
     return 'ordinal';
+  }
+
+  getYScaleType(): string {
+    if ( typeof(this.yAxisScale) !== 'undefined' && this.yAxisScale === 'log' ) {
+      return 'log';
+    }
+    return 'linear';
   }
 
   isDate(value): boolean {

@@ -59,6 +59,7 @@ export class AppComponent implements OnInit {
   width: number = 700;
   height: number = 300;
   fitContainer: boolean = false;
+  domainLimits: boolean = false;
 
   // options
   showXAxis = true;
@@ -99,6 +100,17 @@ export class AppComponent implements OnInit {
     'Step Before': shape.curveStepBefore,
     default: shape.curveLinear
   };
+
+  _yDomainMin = 1000;
+  _yDomainMax = 10000;
+  yDomainMin: any;
+  yDomainMax: any;
+
+  // axis scales
+  yAxisScale = 'linear';
+  scaleTypes = [
+    'linear', 'log'
+  ];
 
   // line interpolation
   curveType: string = 'Linear';
@@ -374,6 +386,23 @@ export class AppComponent implements OnInit {
     }
   }
 
+  applyDomainLimits(event) {
+    this.yDomainMin = this._yDomainMin;
+    this.yDomainMax = this._yDomainMax;
+  }
+
+  toggleDomainLimits(event) {
+    this.domainLimits = event;
+
+    if (!this.domainLimits) {
+      this.yDomainMax = undefined;
+      this.yDomainMin = undefined;
+    } else {
+      this.yDomainMax = this._yDomainMax;
+      this.yDomainMin = this._yDomainMin;
+    }
+  }
+
   selectChart(chartSelector) {
     this.chartType = chartSelector = chartSelector.replace('/', '');
     this.location.replaceState(this.chartType);
@@ -403,6 +432,15 @@ export class AppComponent implements OnInit {
 
   getInterpolationType(curveType) {
     return this.curves[curveType] || this.curves['default'];
+  }
+
+  setYAxisScale(transformType) {
+    if (transformType === 'linear') {
+      this.yAxisScale = 'linear';
+    }
+    if (transformType === 'log') {
+      this.yAxisScale = 'log';
+    }
   }
 
   setColorScheme(name) {
