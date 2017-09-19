@@ -23,6 +23,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   @Output() select = new EventEmitter();
 
+  designatedTotal: number;
   width: number;
   height: number;
   resizeSubscription: any;
