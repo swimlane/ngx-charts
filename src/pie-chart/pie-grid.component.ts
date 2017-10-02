@@ -81,6 +81,7 @@ import { formatLabel } from '../common/label.helper';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PieGridComponent extends BaseChartComponent {
+  @Input() designatedTotal: number;
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipText: (o: any) => any;
   
@@ -105,7 +106,7 @@ export class PieGridComponent extends BaseChartComponent {
 
     this.domain = this.getDomain();
 
-    this.data = gridLayout(this.dims, this.results, 150);
+    this.data = gridLayout(this.dims, this.results, 150, this.designatedTotal);
     this.transform = `translate(${this.margin[3]} , ${this.margin[0]})`;
 
     this.series = this.getSeries();
@@ -128,7 +129,7 @@ export class PieGridComponent extends BaseChartComponent {
   }
 
   getSeries(): any[] {
-    const total = this.getTotal();
+    const total = this.designatedTotal ? this.designatedTotal : this.getTotal();
 
     return this.data.map((d) => {
       const baselineLabelHeight = 20;

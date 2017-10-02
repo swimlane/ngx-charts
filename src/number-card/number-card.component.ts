@@ -47,6 +47,7 @@ export class NumberCardComponent extends BaseChartComponent {
   @Input() textColor: string;
   @Input() valueFormatting: any;
   @Input() labelFormatting: any;
+  @Input() designatedTotal: number;
 
   dims: ViewDimensions;
   data: any[];
@@ -85,7 +86,7 @@ export class NumberCardComponent extends BaseChartComponent {
       data.push({value: null});
     }
 
-    this.data = gridLayout(this.dims, data, 150);
+    this.data = gridLayout(this.dims, data, 150, this.designatedTotal);
   }
 
   getDomain(): any[] {
