@@ -36,6 +36,8 @@
 | referenceLines        | object[]    |               | an array of reference lines to be shown behind the chart. Every reference line should be of format {name, value}                                                                                                                         |
 | showRefLines          | boolean     | false         | show or hide the reference lines                                                                                                                                                                                                         |
 | showRefLabels         | boolean     | true          | show or hide the reference line labels                                                                                                                                                                                                   |
+| xAxisMinScale         | object      |               | force x axis scaling to the provided value (ignored if chart data contains a higher value)                                                                                                                                               |
+| yAxisMinScale         | number      |               | force y axis scaling to the provided value (ignored if chart data contains a higher value)                                                                                                                                               |
 
 # Outputs
 

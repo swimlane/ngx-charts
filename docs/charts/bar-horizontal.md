@@ -29,6 +29,7 @@
 | barPadding          | number      | 8             | padding between bars in px                                                                                      |
 | tooltipDisabled     | boolean     | false         | show or hide the tooltip                                                                                        |
 | tooltipTemplate     | TemplateRef |               | a custom ng-template to be displayed inside the tooltip                                                         |
+| xAxisMinScale       | number      |               | force x axis scaling to the provided value (ignored if chart data contains a higher value)                      |
 
 # Outputs
 

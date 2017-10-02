@@ -147,6 +147,7 @@ export class PolarChartComponent extends BaseChartComponent {
   @Input() tooltipDisabled: boolean = false;
   @Input() showSeriesOnHover: boolean = true;
   @Input() gradient: boolean = false;
+  @Input() yAxisMinScale: number = 0;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -348,7 +349,7 @@ export class PolarChartComponent extends BaseChartComponent {
 
   getYDomain(domain = this.getYValues()): any[] {
     let min = Math.min(...domain);
-    const max = Math.max(...domain);
+    const max = Math.max(this.yAxisMinScale, ...domain);
 
     min = Math.max(0, min);
     if (!this.autoScale) {
