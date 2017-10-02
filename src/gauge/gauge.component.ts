@@ -29,7 +29,7 @@ import { ColorHelper } from '../common/color.helper';
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)">
       <svg:g [attr.transform]="transform" class="gauge chart">
-        <svg:g *ngFor="let arc of arcs" [attr.transform]="rotation">
+        <svg:g *ngFor="let arc of arcs; trackBy:trackBy" [attr.transform]="rotation">
           <svg:g ngx-charts-gauge-arc
             [backgroundArc]="arc.backgroundArc"
             [valueArc]="arc.valueArc"
@@ -333,5 +333,9 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
       return entry.name === d.name && entry.series === d.series;
     });
     return item !== undefined;
+  }
+
+  trackBy(index, item): string {
+    return item.valueArc.data.name;
   }
 }
