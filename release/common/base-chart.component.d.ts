@@ -14,7 +14,6 @@ export declare class BaseChartComponent implements OnChanges, AfterViewInit, OnD
     schemeType: string;
     customColors: any;
     select: EventEmitter<{}>;
-    designatedTotal: number;
     width: number;
     height: number;
     resizeSubscription: any;

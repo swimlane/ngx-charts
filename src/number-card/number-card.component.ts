@@ -48,6 +48,7 @@ export class NumberCardComponent extends BaseChartComponent {
   @Input() valueFormatting: any;
   @Input() labelFormatting: any;
 
+  designatedTotal: number;
   dims: ViewDimensions;
   data: any[];
   slots: any[];
