@@ -334,7 +334,8 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
       const min = Math.min(...values);
       const max = Math.max(...values);
       domain = [min, max];
-      this.xSet = [...values].sort();
+      // Use compare function to sort numbers numerically
+      this.xSet = [...values].sort((a, b) => (a - b));
     } else {
       domain = values;
       this.xSet = values;
