@@ -9,6 +9,7 @@ to build charts. Outside of the following chart types:
 - Pie (Explodable, Grid, Custom legends)
 - Donut
 - Gauge
+- Linear Gauge
 - Force Directed Graph
 - Heatmap
 - Treemap
@@ -27,15 +28,14 @@ to build charts. Outside of the following chart types:
 - Responsive Layout
 - Data point Event Handlers
 - Works with ngUpgrade
+- Enabling/Disabling animations
 
 If you have an idea for a new feature, create a Github issue or even better a PR ;).
 Make sure to include the use case, an example image of the chart (if applicable) and
 data formats.
 
 ## Alternatives
-Chart frameworks are a dime a dozen nowadays. Not many of them existed 2+
-years ago when we started this project internally and many of them still don't really work well with Angular. Here's a recent list
-we compiled during our effort to open-source this:
+Chart frameworks are a dime a dozen nowadays. Not many of them existed a few years ago when we started this project internally and many of them still don't really work well with Angular. Here's a recent list we compiled during our effort to open-source this:
 
 - [ng2-nvd3](https://github.com/krispo/ng2-nvd3) - Open-source wrapper for nvd3 using Angular2 Components
 - [ng2-charts](http://valor-software.com/ng2-charts/) - Open-source Angular2 wrapper directives for Chart.js
