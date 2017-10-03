@@ -22,6 +22,7 @@ import { formatLabel } from '../common/label.helper';
     <svg:g ngx-charts-bar
       *ngFor="let bar of bars; trackBy: trackBy"
       [@animationState]="'active'"
+      [@.disabled]="!animations"
       [width]="bar.width"
       [height]="bar.height"
       [x]="bar.x"

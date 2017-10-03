@@ -10,6 +10,7 @@
 | view            | number[] |               | the dimensions of the chart [width, height]. If left undefined, the chart will fit to the parent container size              |
 | scheme          | object   |               | the color scheme of the chart                                                                                                |
 | customColors    | object   |               | custom colors for the chart. Used to override a color for a specific value                                                   |
+| animations      | boolean  | true          | enable animations                                                                                                            |
 | min             | number   | 0             | starting point of the scale                                                                                                  |
 | max             | number   | 100           | ending point of the scale                                                                                                    |
 | value           | number   | 0             | the value represented on the gauge                                                                                           |
