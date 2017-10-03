@@ -50,6 +50,7 @@ export class LineComponent implements OnChanges {
   @Input() stroke;
   @Input() data;
   @Input() fill: string = 'none';
+  @Input() animations: boolean = true;
 
   @Output() select = new EventEmitter();
 
@@ -64,15 +65,19 @@ export class LineComponent implements OnChanges {
       this.initialized = true;
       this.initialPath = this.path;
     } else {
-      this.animateToCurrentForm();
+      this.updatePathEl();
     }
   }
 
-  animateToCurrentForm(): void {
+  updatePathEl(): void {
     const node = select(this.element.nativeElement).select('.line');
 
-    node
-      .transition().duration(750)
-      .attr('d', this.path);
+    if (this.animations) {
+      node
+        .transition().duration(750)
+        .attr('d', this.path);
+    } else {
+      node.attr('d', this.path);
+    }
   }
 }

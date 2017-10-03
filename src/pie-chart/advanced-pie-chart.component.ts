@@ -24,7 +24,8 @@ import { BaseChartComponent } from '../common/base-chart.component';
         [style.height.px]="dims.height">
         <ngx-charts-chart
           [view]="[width, height]"
-          [showLegend]="false">
+          [showLegend]="false"
+          [animations]="animations">
           <svg:g
             [attr.transform]="transform"
             class="pie chart">
@@ -38,7 +39,8 @@ import { BaseChartComponent } from '../common/base-chart.component';
               [tooltipDisabled]="tooltipDisabled"
               [tooltipTemplate]="tooltipTemplate"
               [tooltipText]="tooltipText"
-              (select)="onClick($event)">
+              (select)="onClick($event)"
+              [animations]="animations">
             </svg:g>
           </svg:g>
         </ngx-charts-chart>
@@ -52,6 +54,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [colors]="colors"
           [width]="width - dims.width - margin[1]"
           [label]="label"
+          [animations]="animations"
           (select)="onClick($event)"
           (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)">

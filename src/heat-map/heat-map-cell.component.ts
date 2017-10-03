@@ -47,6 +47,7 @@ export class HeatMapCellComponent implements OnChanges {
   @Input() data;
   @Input() label;
   @Input() gradient: boolean = false;
+  @Input() animations: boolean = true;
 
   @Output() select = new EventEmitter();
 
@@ -74,7 +75,9 @@ export class HeatMapCellComponent implements OnChanges {
     this.gradientUrl = `url(${pageUrl}#${this.gradientId})`;
     this.gradientStops = this.getGradientStops();
 
-    this.loadAnimation();
+    if (this.animations) {
+      this.loadAnimation();
+    }
   }
 
   getGradientStops() {
@@ -99,7 +102,7 @@ export class HeatMapCellComponent implements OnChanges {
 
   animateToCurrentForm(): void {
     const node = select(this.element).select('.cell');
-
+    
     node.transition().duration(750)
       .attr('opacity', 1);
   }

@@ -42,7 +42,8 @@ import { formatLabel } from '../common/label.helper';
       [tooltipType]="tooltipType"
       [tooltipTitle]="tooltipTemplate ? undefined : bar.tooltipText"
       [tooltipTemplate]="tooltipTemplate"
-      [tooltipContext]="bar.data">
+      [tooltipContext]="bar.data"
+      [animations]="animations">
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -71,6 +72,7 @@ export class SeriesVerticalComponent implements OnChanges {
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipTemplate: TemplateRef<any>;
   @Input() roundEdges: boolean;
+  @Input() animations: boolean = true;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();

@@ -80,6 +80,7 @@ export class AppComponent implements OnInit {
   minRadius = 3;
   showSeriesOnHover = true;
   roundEdges: boolean = true;
+  animations: boolean = true;
 
   curves = {
     Basis: shape.curveBasis,

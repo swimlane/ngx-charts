@@ -23,6 +23,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
       [startingPath]="startingPath"
       [opacity]="opacity"
       [gradient]="gradient || hasGradient"
+      [animations]="animations"
       [class.active]="isActive(data)"
       [class.inactive]="isInactive(data)"
     />
@@ -41,6 +42,7 @@ export class AreaSeriesComponent implements OnChanges {
   @Input() gradient;
   @Input() curve;
   @Input() activeEntries: any[];
+  @Input() animations: boolean = true;
 
   @Output() select = new EventEmitter();
 

@@ -26,6 +26,7 @@ import { id } from '../utils/id';
       [showLegend]="legend"
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"
+      [animations]="animations"
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)">
@@ -70,6 +71,7 @@ import { id } from '../utils/id';
               [gradient]="gradient"
               normalized="true"
               [curve]="curve"
+              [animations]="animations"
             />
           </svg:g>
 
@@ -128,6 +130,7 @@ import { id } from '../utils/id';
             [gradient]="gradient"
             normalized="true"
             [curve]="curve"
+            [animations]="animations"
           />
         </svg:g>
       </svg:g>

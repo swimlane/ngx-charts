@@ -14,7 +14,8 @@ import { gridLayout, gridSize } from '../common/grid-layout.helper';
   template: `
     <ngx-charts-chart
       [view]="[width, height]"
-      [showLegend]="false">
+      [showLegend]="false"
+      [animations]="animations">
       <svg:g [attr.transform]="transform" class="number-card chart" [class.clickable]="clickable">
         <svg:g ngx-charts-card-series
           [colors]="colors"
@@ -27,6 +28,7 @@ import { gridLayout, gridSize } from '../common/grid-layout.helper';
           [innerPadding]="innerPadding"
           [valueFormatting]="valueFormatting"
           [labelFormatting]="labelFormatting"
+          [animations]="animations"
           (select)="onClick($event)"
         />
       </svg:g>

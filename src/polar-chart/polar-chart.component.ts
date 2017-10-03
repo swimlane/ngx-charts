@@ -39,6 +39,7 @@ const twoPI = 2 * Math.PI;
       [showLegend]="legend"
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"
+      [animations]="animations"
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)">
@@ -63,7 +64,8 @@ const twoPI = 2 * Math.PI;
               [label]="tick.label"
               [max]="outerRadius"
               [value]="showGridLines ? 1 : outerRadius"
-              [explodeSlices]="true">
+              [explodeSlices]="true"
+              [animations]="animations">
             </svg:g>
           </svg:g>
         </svg:g>
@@ -98,6 +100,7 @@ const twoPI = 2 * Math.PI;
               [scaleType]="scaleType"
               [curve]="curve"
               [rangeFillOpacity]="rangeFillOpacity"
+              [animations]="animations"
               [tooltipDisabled]="tooltipDisabled"
               [tooltipTemplate]="tooltipTemplate"
             />

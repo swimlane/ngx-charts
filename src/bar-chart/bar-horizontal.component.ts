@@ -22,6 +22,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
       [showLegend]="legend"
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"
+      [animations]="animations"
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)">
@@ -56,6 +57,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [tooltipTemplate]="tooltipTemplate"
           [activeEntries]="activeEntries"
           [roundEdges]="roundEdges"
+          [animations]="animations"
           (select)="onClick($event)"
           (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)"

@@ -9,6 +9,7 @@
         [schemeType]="schemeType"
         [customColors]="customColors"
         [results]="single"
+        [animations]="animations"
         [gradient]="gradient"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
@@ -33,6 +34,7 @@
         [scheme]="colorScheme"
         [schemeType]="schemeType"
         [results]="single"
+        [animations]="animations"
         [gradient]="gradient"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
@@ -57,6 +59,7 @@
         [scheme]="colorScheme"
         [schemeType]="schemeType"
         [results]="multi"
+        [animations]="animations"
         [gradient]="gradient"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
@@ -82,6 +85,7 @@
         [scheme]="colorScheme"
         [schemeType]="schemeType"
         [results]="multi"
+        [animations]="animations"
         [gradient]="gradient"
         [tooltipDisabled]="tooltipDisabled"
         [xAxis]="showXAxis"
@@ -107,6 +111,7 @@
         [scheme]="colorScheme"
         [schemeType]="schemeType"
         [results]="multi"
+        [animations]="animations"
         [gradient]="gradient"
         [tooltipDisabled]="tooltipDisabled"
         [xAxis]="showXAxis"
@@ -130,6 +135,7 @@
         [scheme]="colorScheme"
         [schemeType]="schemeType"
         [results]="multi"
+        [animations]="animations"
         [gradient]="gradient"
         [tooltipDisabled]="tooltipDisabled"
         [xAxis]="showXAxis"
@@ -153,6 +159,7 @@
         [scheme]="colorScheme"
         [schemeType]="schemeType"
         [results]="multi"
+        [animations]="animations"
         [gradient]="gradient"
         [tooltipDisabled]="tooltipDisabled"
         [xAxis]="showXAxis"
@@ -176,6 +183,7 @@
         [scheme]="colorScheme"
         [schemeType]="schemeType"
         [results]="multi"
+        [animations]="animations"
         [gradient]="gradient"
         [tooltipDisabled]="tooltipDisabled"
         [xAxis]="showXAxis"
@@ -198,6 +206,7 @@
         [view]="view"
         [scheme]="colorScheme"
         [results]="single"
+        [animations]="animations"
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [explodeSlices]="explodeSlices"
@@ -216,6 +225,7 @@
         [view]="view"
         [scheme]="colorScheme"
         [results]="single"
+        [animations]="animations"
         (legendLabelClick)="onLegendLabelClick($event)"
         [gradient]="gradient"
         [tooltipDisabled]="tooltipDisabled"
@@ -229,6 +239,7 @@
         [scheme]="colorScheme"
         (legendLabelClick)="onLegendLabelClick($event)"
         [results]="single"
+        [animations]="animations"
         [tooltipDisabled]="tooltipDisabled"
         [tooltipText]="pieTooltipText"
         (select)="select($event)">
@@ -240,6 +251,7 @@
         [scheme]="colorScheme"
         [schemeType]="schemeType"
         [results]="dateDataWithOrWithoutRange"
+        [animations]="animations"
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         (legendLabelClick)="onLegendLabelClick($event)"
@@ -266,6 +278,7 @@
         [scheme]="colorScheme"
         [schemeType]="schemeType"
         [results]="multi"
+        [animations]="animations"
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         (legendLabelClick)="onLegendLabelClick($event)"
@@ -290,6 +303,7 @@
         [view]="view"
         class="chart-container"
         [results]="bubble"
+        [animations]="animations"
         [showGridLines]="showGridLines"
         [legend]="showLegend"
         [legendTitle]="legendTitle"
@@ -313,6 +327,7 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [links]="graph.links"
+        [animations]="animations"
         (legendLabelClick)="onLegendLabelClick($event)"
         [nodes]="graph.nodes"
         [scheme]="colorScheme"
@@ -327,6 +342,7 @@
         [scheme]="colorScheme"
         [schemeType]="schemeType"
         [results]="dateData"
+        [animations]="animations"
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         (legendLabelClick)="onLegendLabelClick($event)"
@@ -352,6 +368,7 @@
         [scheme]="colorScheme"
         [schemeType]="schemeType"
         [results]="dateData"
+        [animations]="animations"
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [gradient]="gradient"
@@ -376,6 +393,7 @@
         [scheme]="colorScheme"
         [schemeType]="schemeType"
         [results]="dateData"
+        [animations]="animations"
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [gradient]="gradient"
@@ -400,6 +418,7 @@
         [scheme]="comboBarScheme"
         [colorSchemeLine]="lineChartScheme"
         [results]="barChart"
+        [animations]="animations"
         [lineChart]="lineChartSeries"
         [tooltipDisabled]="tooltipDisabled"
         [yAxisTickFormatting]="yLeftTickFormat"
@@ -426,6 +445,7 @@
         [view]="view"
         [scheme]="colorScheme"
         [results]="multi"
+        [animations]="animations"
         [legend]="showLegend"
         [gradient]="gradient"
         (legendLabelClick)="onLegendLabelClick($event)"
@@ -445,6 +465,7 @@
         [view]="view"
         [scheme]="colorScheme"
         [results]="calendarData"
+        [animations]="animations"
         [legend]="showLegend"
         [gradient]="gradient"
         (legendLabelClick)="onLegendLabelClick($event)"
@@ -465,6 +486,7 @@
         (legendLabelClick)="onLegendLabelClick($event)"
         [scheme]="colorScheme"
         [results]="single"
+        [animations]="animations"
         [tooltipDisabled]="tooltipDisabled"
         [labelFormatting]="gdpLabelFormatting"
         [valueFormatting]="currencyFormatting"
@@ -480,6 +502,7 @@
         cardColor="#232837"
         emptyColor="#1e222e"
         [results]="single"
+        [animations]="animations"
         (select)="select($event)">
       </ngx-charts-number-card>
       <div *ngIf="chartType === 'status-demo'">
@@ -510,6 +533,7 @@
           cardColor="#232837"
           emptyColor="#1e222e"
           [results]="statusData"
+          [animations]="animations"
           [valueFormatting]="statusValueFormat"
           [labelFormatting]="statusLabelFormat">
         </ngx-charts-number-card>
@@ -521,6 +545,7 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [results]="single"
+        [animations]="animations"
         [textValue]="gaugeTextValue"
         [scheme]="colorScheme"
         [min]="gaugeMin"
@@ -541,6 +566,7 @@
         class="chart-container"
         [view]="view"
         [scheme]="colorScheme"
+        [animations]="animations"
         [min]="gaugeMin"
         [max]="gaugeMax"
         [value]="gaugeValue"
@@ -562,6 +588,7 @@
           [scheme]="colorScheme"
           [schemeType]="schemeType"
           [results]="plotData"
+          [animations]="animations"
           [legend]="false"
           [legendTitle]="legendTitle"
           (legendLabelClick)="onLegendLabelClick($event)"
@@ -589,6 +616,7 @@
           [scheme]="colorScheme"
           [schemeType]="schemeType"
           [results]="plotData"
+          [animations]="animations"
           [legend]="false"
           [legendTitle]="legendTitle"
           (legendLabelClick)="onLegendLabelClick($event)"
@@ -632,6 +660,7 @@
           (legendLabelClick)="onLegendLabelClick($event)"
           [scheme]="colorScheme"
           [results]="treemap"
+          [animations]="animations"
           [tooltipDisabled]="tooltipDisabled"
           [gradient]="gradient"
           (select)="treemapSelect($event)">
@@ -644,6 +673,7 @@
         [scheme]="colorScheme"
         [schemeType]="schemeType"
         [results]="multi"
+        [animations]="animations"
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         (legendLabelClick)="onLegendLabelClick($event)"
@@ -674,6 +704,7 @@
         [schemeType]="schemeType"
         [customColors]="customColors"
         [results]="single"
+        [animations]="animations"
         [gradient]="gradient"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
@@ -702,6 +733,7 @@
         class="chart-container"
         [scheme]="'flame'"
         [results]="sparklineData"
+        [animations]="animations"
         [curve]="curve">
       </ngx-charts-sparkline>
       <ngx-charts-timeline-filter-bar-chart
@@ -711,6 +743,7 @@
         [scheme]="colorScheme"
         [schemeType]="schemeType"
         [results]="timelineFilterBarData"
+        [animations]="animations"
         [gradient]="gradient"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
@@ -840,6 +873,13 @@
       <strong>Options</strong>
     </h3>
     <div [hidden]="!optsVisible" style="margin-left: 10px;">
+      <div *ngIf="chart.options.includes('animations')">
+        <label>
+          <input type="checkbox" [checked]="animations" (change)="animations = $event.target.checked">
+          Animations
+        </label> <br />
+      </div>
+      
       <div *ngIf="chart.options.includes('showXAxis')">
         <label>
           <input type="checkbox" [checked]="showXAxis" (change)="showXAxis = $event.target.checked">

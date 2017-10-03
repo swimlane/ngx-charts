@@ -19,6 +19,7 @@ import { ColorHelper } from '../common/color.helper';
     <ngx-charts-chart
       [view]="[width, height]"
       [showLegend]="false"
+      [animations]="animations"
       (click)="onClick()">
       <svg:g class="linear-gauge chart">
         <svg:g ngx-charts-bar
@@ -39,7 +40,8 @@ import { ColorHelper } from '../common/color.helper';
           [fill]="colors.getColor(units)"
           [data]="{}"
           [orientation]="'horizontal'"
-          [roundEdges]="true">
+          [roundEdges]="true"
+          [animations]="animations">
         </svg:g>
 
         <svg:line
