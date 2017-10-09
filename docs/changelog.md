@@ -1,5 +1,11 @@
 # Changelog
 
+## pending
+- Enhancement: Don't transform text to uppercase in legends and labels
+- Enhancement: Changed legends and label colors
+- Enhancement: Increased font size in advanced legend and number cards subtext
+- Enhancement: Hide legend title when title is missing
+
 ## 6.0.1
 - Bug: Fixed line chart stroke color
 - Bug: Fixed timeline width and alignment

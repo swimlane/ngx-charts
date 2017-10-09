@@ -42,6 +42,7 @@ import { count, decimalChecker } from '../common/count';
         <xhtml:p
           [style.color]="textColor"
           [style.fontSize.px]="labelFontSize"
+          [style.lineHeight.px]="labelFontSize"
           [innerHTML]="formattedLabel">
         </xhtml:p>
       </svg:foreignObject>
@@ -93,8 +94,8 @@ export class CardComponent implements OnChanges, OnDestroy {
 
   bandHeight: number = 10;
   transformBand: string;
-  textPadding = [10, 20, 10, 20];
-  labelFontSize = 12;
+  textPadding = [10, 20, 5, 20];
+  labelFontSize = 15;
 
   bandPath: string;
 
@@ -194,7 +195,7 @@ export class CardComponent implements OnChanges, OnDestroy {
 
       const resizeScale = Math.min(availableWidth / width, availableHeight / height);
       this.textFontSize = Math.floor(this.textFontSize * resizeScale);
-      this.labelFontSize = Math.min(this.textFontSize, 12);
+      this.labelFontSize = Math.min(this.textFontSize, 15);
 
       this.setPadding();
       this.cd.markForCheck();

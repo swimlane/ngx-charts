@@ -8,7 +8,7 @@ import { formatLabel } from '../label.helper';
   selector: 'ngx-charts-legend',
   template: `
     <div [style.width.px]="width">
-      <header class="legend-title">
+      <header class="legend-title" *ngIf="title?.length > 0">
         <span class="legend-title-text">{{title}}</span>
       </header>
       <div class="legend-wrap">
