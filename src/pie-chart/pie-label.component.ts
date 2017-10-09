@@ -21,8 +21,7 @@ import { trimLabel } from '../common/trim-label.helper';
         class="pie-label"
         dy=".35em"
         [style.textAnchor]="textAnchor()"
-        [style.shapeRendering]="'crispEdges'"
-        [style.textTransform]="'uppercase'">
+        [style.shapeRendering]="'crispEdges'">
         {{trimLabel(label, 10)}}
       </svg:text>
     </svg:g>
