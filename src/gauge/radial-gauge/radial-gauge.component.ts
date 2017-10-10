@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewEncapsulation, 
+  ChangeDetectionStrategy } from '@angular/core';
+
+import { BaseChartComponent } from './../../common/base-chart.component';
 
 @Component({
-  selector: 'app-radial-gauge',
+  selector: 'ngx-charts-radial-gauge',
   templateUrl: './radial-gauge.component.html',
-  styleUrls: ['./radial-gauge.component.css']
+  styleUrls: ['./radial-gauge.component.css'],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RadialGaugeComponent implements OnInit {
+export class RadialGaugeComponent extends BaseChartComponent implements AfterViewInit {
 
-  constructor() { }
-
-  ngOnInit() {
+  ngAfterViewInit(): void {
+    super.ngAfterViewInit();
+    setTimeout(() => {
+      console.log('afterViewInit');
+    });
   }
-
 }
