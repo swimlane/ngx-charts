@@ -548,6 +548,9 @@
         [units]="gaugeUnits"
         (select)="select($event)">
       </ngx-charts-linear-gauge>
+      <ngx-charts-radial-gauge
+      *ngIf="chartType === 'radial-gauge'">
+      </ngx-charts-radial-gauge>
       <div *ngIf="chartType === 'plot-demo'">
         <ngx-input
           type="text"
