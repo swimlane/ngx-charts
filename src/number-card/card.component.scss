@@ -19,6 +19,7 @@ ngx-charts-number-card {
 
     .value-text {
       pointer-events: none;
+      dominant-baseline: hanging;
     }
   }
 
