@@ -34,6 +34,9 @@ import { formatLabel } from '../common/label.helper';
       [roundEdges]="bar.roundEdges"
       (select)="click($event)"
       [gradient]="gradient"
+      [shadow]="shadow"
+      [shadowDepth]="shadowDepth"
+      [shadowColor]="shadowColor"
       [isActive]="isActive(bar.data)"
       (activate)="activate.emit($event)"
       (deactivate)="deactivate.emit($event)"
@@ -71,6 +74,10 @@ export class SeriesHorizontal implements OnChanges {
   @Input() colors;
   @Input() tooltipDisabled: boolean = false;
   @Input() gradient: boolean;
+  @Input() shadow: boolean;
+  @Input() shadowDepth: any[];
+  @Input() shadowColor: string;
+  @Input() barFilterRef: any;
   @Input() activeEntries: any[];
   @Input() seriesName: string;
   @Input() tooltipTemplate: TemplateRef<any>;

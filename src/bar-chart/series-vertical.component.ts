@@ -32,6 +32,9 @@ import { formatLabel } from '../common/label.helper';
       [orientation]="'vertical'"
       [roundEdges]="bar.roundEdges"
       [gradient]="gradient"
+      [shadow]="shadow"
+      [shadowDepth]="shadowDepth"
+      [shadowColor]="shadowColor"
       [isActive]="isActive(bar.data)"
       (select)="onClick($event)"
       (activate)="activate.emit($event)"
@@ -66,6 +69,10 @@ export class SeriesVerticalComponent implements OnChanges {
   @Input() yScale;
   @Input() colors;
   @Input() gradient: boolean;
+  @Input() shadow: boolean;
+  @Input() shadowDepth: any[];
+  @Input() shadowColor: string;
+  @Input() barFilterRef: any;
   @Input() activeEntries: any[];
   @Input() seriesName: string;
   @Input() tooltipDisabled: boolean = false;

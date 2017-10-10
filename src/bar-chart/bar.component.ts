@@ -24,6 +24,14 @@ import { id } from '../utils/id';
         [stops]="gradientStops"
       />
     </svg:defs>
+    <svg:g ngx-charts-svg-shadow
+          #myShadowFilter
+          *ngIf="shadow"
+          [name]="shadowId"
+          [shadowDepth]="hasShadowDepth ? shadowDepth : defaultShadowDepth"
+          [shadowColor]="hasShadowColor ? shadowColor : defaultShadowColor"
+          >
+        </svg:g>
     <svg:path
       class="bar"
       stroke="none"
@@ -31,6 +39,7 @@ import { id } from '../utils/id';
       [attr.d]="path"
       [attr.fill]="hasGradient ? gradientFill : fill"
       (click)="select.emit(data)"
+      [style.filter]="hasShadow ? shadowStyle: ''"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -46,9 +55,13 @@ export class BarComponent implements OnChanges {
   @Input() orientation;
   @Input() roundEdges: boolean = true;
   @Input() gradient: boolean = false;
+  @Input() shadow: boolean = false;
+  @Input() shadowDepth: any[];
+  @Input() shadowColor: string;
   @Input() offset = 0;
   @Input() isActive: boolean = false;
   @Input() stops: any[];
+  @Input() shadowStyle: string;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
@@ -62,6 +75,13 @@ export class BarComponent implements OnChanges {
   initialized: boolean = false;
   gradientStops: any[];
   hasGradient: boolean = false;
+
+  shadowId: string;
+  hasShadow: boolean = false;
+  hasShadowDepth: boolean = false;
+  hasShadowColor: boolean = false;
+  defaultShadowDepth: any[] = ['120%', 2, 2, 2];
+  defaultShadowColor: string = '#000000';
 
   constructor(element: ElementRef, private location: LocationStrategy) {
     this.element = element.nativeElement;
@@ -81,14 +101,35 @@ export class BarComponent implements OnChanges {
       ? this.location.path()
       : '';
 
+    const defsStr: string = Math.random().toString().slice(2);
+    this.shadowId = 'drop-shadow-' + defsStr;
     this.gradientId = 'grad' + id().toString();
     this.gradientFill = `url(${pageUrl}#${this.gradientId})`;
-
+    this.shadowStyle = `url(${pageUrl}#${this.shadowId})`;
+    
     if (this.gradient || this.stops) {
       this.gradientStops = this.getGradient();
       this.hasGradient = true;
     } else {
       this.hasGradient = false;
+    }
+
+    if (this.shadow) {
+      this.hasShadow = true;
+    } else {
+      this.hasShadow = false;
+    }
+
+    if(this.shadowDepth) {
+      this.hasShadowDepth = true;
+    } else {
+      this.hasShadowDepth = false;
+    }
+
+    if(this.shadowColor) {
+      this.hasShadowColor = true;
+    } else {
+      this.hasShadowColor = false;
     }
 
     this.animateToCurrentForm();

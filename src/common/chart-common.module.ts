@@ -14,6 +14,7 @@ import { GridPanelComponent } from './grid-panel.component';
 import { GridPanelSeriesComponent } from './grid-panel-series.component';
 import { SvgLinearGradientComponent } from './svg-linear-gradient.component';
 import { SvgRadialGradientComponent } from './svg-radial-gradient.component';
+import { SvgShadowComponent } from './svg-shadow.component';
 import { Timeline } from './timeline';
 import { AreaComponent } from './area.component';
 import { TooltipArea } from './tooltip-area.component';
@@ -35,7 +36,8 @@ const COMPONENTS = [
   SvgLinearGradientComponent,
   SvgRadialGradientComponent,
   Timeline,
-  AdvancedLegendComponent
+  AdvancedLegendComponent,
+  SvgShadowComponent
 ];
 
 @NgModule({

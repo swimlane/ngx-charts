@@ -72,6 +72,9 @@ import { BaseChartComponent } from '../common/base-chart.component';
             [series]="group.series"
             [dims]="dims"
             [gradient]="gradient"
+            [shadow]="shadow"
+            [shadowDepth]="shadowDepth"
+            [shadowColor]="shadowColor"
             [tooltipDisabled]="tooltipDisabled"
             [tooltipTemplate]="tooltipTemplate"
             [seriesName]="group.name"
@@ -111,6 +114,10 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   @Input() yAxisLabel;
   @Input() tooltipDisabled: boolean = false;
   @Input() gradient: boolean;
+  @Input() barFilterRef: any;
+  @Input() shadow: boolean;
+  @Input() shadowDepth: any[];
+  @Input() shadowColor: string;
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
   @Input() schemeType: string;
@@ -126,6 +133,7 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
+  @ContentChild('myShadowFilter') myShadowFilter: TemplateRef<any>;
 
   dims: ViewDimensions;
   groupDomain: any[];
