@@ -28,14 +28,39 @@
     <path fill="#719e17" d="M105.17220926874317,-76.4120827980215A130,130 0 0,1 130,0L70,0A70,70 0 0,0 56.63118960624632,-41.14496766047312Z">
     </path>
   </g> -->
-  <svg:g class="label" transform="translate(150,150)">
-    <text transform="rotate(-90) translate(0,-140)">0</text>
-    <text transform="rotate(-54) translate(0,-140)">2</text>
-    <text transform="rotate(-18) translate(0,-140)">4</text>
-    <text transform="rotate(18.000000000000014) translate(0,-140)">6</text>
-    <text transform="rotate(54) translate(0,-140)">8</text>
-    <text transform="rotate(90) translate(0,-140)">10</text>
-  </g>
+
+  <!-- <svg:g ngx-charts-gauge-axis
+  *ngIf="showAxis"
+  [bigSegments]="bigSegments"
+  [smallSegments]="smallSegments"
+  [min]="min"
+  [max]="max"
+  [radius]="outerRadius"
+  [angleSpan]="angleSpan"
+  [valueScale]="valueScale"
+  [startAngle]="startAngle"
+  [tickFormatting]="axisTickFormatting">
+</svg:g>  -->
+
+<!-- [attr.transform]="textTransform" -->
+
+<svg:text #textEl
+    [style.textAnchor]="'middle'"
+    [attr.transform]="textTransform"
+    alignment-baseline="central">
+  <tspan x="0" dy="0">{{ displayValue }}</tspan>
+  <tspan x="0" dy="1.2em">{{ unit }}</tspan>
+</svg:text>
+
+<svg:g class="label" transform="translate(150,150)">
+  <text transform="rotate(-90) translate(0,-140)">0</text>
+  <text transform="rotate(-54) translate(0,-140)">2</text>
+  <text transform="rotate(-18) translate(0,-140)">4</text>
+  <text transform="rotate(18.000000000000014) translate(0,-140)">6</text>
+  <text transform="rotate(54) translate(0,-140)">8</text>
+  <text transform="rotate(90) translate(0,-140)">10</text>
+</g>
+
   <svg:g class="pointer" transform="translate(150,150)">
     <path d="M5,0C4.998858447488584,-0.030821917808219176,1.6666666666666667,-135,0,-135S-5,0,-5,0S-1.6666666666666667,5,0,5S4.583333333333333,0.4166666666666667,5,0" transform="rotate(73.12315063424927)skewX(-7.776830011765666e-16)scale(1.000000009874762,1.000000009874762)">
     </path>

@@ -16,7 +16,10 @@ import { BaseChartComponent } from './../../common/base-chart.component';
 export class RadialGaugeComponent extends BaseChartComponent implements OnInit, AfterViewInit {
 
   public arcs = [];
-  public translate: string;
+  public translate: string = 'translate(150,150)';
+  public textTransform: string = 'scale(1, 1)';
+  public displayValue: string = '50'; // delete later
+  public unit: string = 'percent'; // delete later
 
   private majorTicks = 5;
   private minValue = 0;
@@ -25,6 +28,7 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
   private maxAngle = 90;
   private innerArcRadius: number;
   private outerArcRadius: number; 
+
   private segments = [
     {
       minValue: 0,
@@ -63,7 +67,6 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
     : this.outerArcRadius;
 
     this.arcs = this.getArcs();
-    this.translate = 'translate(150,150)';
   }
 
   ngAfterViewInit(): void {
