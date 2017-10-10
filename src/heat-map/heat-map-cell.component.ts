@@ -66,13 +66,9 @@ export class HeatMapCellComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     this.transform = `translate(${this.x} , ${this.y})`;
 
-    const pageUrl = this.location instanceof PathLocationStrategy
-      ? this.location.path()
-      : '';
-
     this.startOpacity = 0.3;
     this.gradientId = 'grad' + id().toString();
-    this.gradientUrl = `url(${pageUrl}#${this.gradientId})`;
+    this.gradientUrl = `url(#${this.gradientId})`;
     this.gradientStops = this.getGradientStops();
 
     if (this.animations) {

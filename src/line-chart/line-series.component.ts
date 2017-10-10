@@ -182,13 +182,8 @@ export class LineSeriesComponent implements OnChanges {
   updateGradients() {
     if (this.colors.scaleType === 'linear') {
       this.hasGradient = true;
-
-      const pageUrl = this.location instanceof PathLocationStrategy
-        ? this.location.path()
-        : '';
-
       this.gradientId = 'grad' + id().toString();
-      this.gradientUrl = `url(${pageUrl}#${this.gradientId})`;
+      this.gradientUrl = `url(#${this.gradientId})`;
       const values = this.data.series.map(d => d.value);
       const max = Math.max(...values);
       const min = Math.min(...values);

@@ -198,12 +198,8 @@ export class PolarSeriesComponent implements OnChanges {
       return;
     }
 
-    const pageUrl = this.location instanceof PathLocationStrategy
-      ? this.location.path()
-      : '';
-
     this.gradientId = 'grad' + id().toString();
-    this.gradientUrl = `url(${pageUrl}#${this.gradientId})`;
+    this.gradientUrl = `url(#${this.gradientId})`;
 
     if (this.colors.scaleType === 'linear') {
       const values = this.data.series.map(d => d.value);

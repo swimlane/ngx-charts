@@ -141,12 +141,8 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
       this.updateBrush();
     }
 
-    const pageUrl = this.location instanceof PathLocationStrategy
-      ? this.location.path()
-      : '';
-
     this.filterId = 'filter' + id().toString();
-    this.filter = `url(${pageUrl}#${this.filterId})`;
+    this.filter = `url(#${this.filterId})`;
 
     if (!this.initialized) {
       this.addBrush();

@@ -94,12 +94,8 @@ export class Timeline implements OnChanges {
 
     this.transform = `translate(0 , ${ offsetY })`;
 
-    const pageUrl = this.location instanceof PathLocationStrategy
-      ? this.location.path()
-      : '';
-
     this.filterId = 'filter' + id().toString();
-    this.filter = `url(${pageUrl}#${this.filterId})`;
+    this.filter = `url(#${this.filterId})`;
 
     this.cd.markForCheck();
   }

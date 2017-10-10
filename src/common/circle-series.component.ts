@@ -104,11 +104,8 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
-    const pageUrl = this.location instanceof PathLocationStrategy
-      ? this.location.path()
-      : '';
     this.gradientId = 'grad' + id().toString();
-    this.gradientFill = `url(${pageUrl}#${this.gradientId})`;
+    this.gradientFill = `url(#${this.gradientId})`;
   }
 
   ngOnChanges(changes: SimpleChanges): void {

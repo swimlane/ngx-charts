@@ -108,13 +108,9 @@ export class TreeMapCellComponent implements OnChanges {
 
     this.formattedValue = this.valueFormatting(cellData);
     this.formattedLabel = labelFormatting(cellData);
-
-    const pageUrl = this.location instanceof PathLocationStrategy
-      ? this.location.path()
-      : '';
   
     this.gradientId = 'grad' + id().toString();
-    this.gradientUrl = `url(${pageUrl}#${this.gradientId})`;
+    this.gradientUrl = `url(#${this.gradientId})`;
     this.gradientStops = this.getGradientStops();
   }
 
