@@ -8,7 +8,8 @@ import { PieChartModule } from '../pie-chart/pie-chart.module';
 import { BarChartModule } from '../bar-chart/bar-chart.module';
 import { RadialGaugeComponent } from './radial-gauge/radial-gauge.component';
 
-export { GaugeComponent, GaugeArcComponent, GaugeAxisComponent, LinearGaugeComponent };
+export { GaugeComponent, GaugeArcComponent, GaugeAxisComponent, 
+  RadialGaugeComponent, LinearGaugeComponent };
 
 @NgModule({
   imports: [ChartCommonModule, PieChartModule, BarChartModule],
@@ -16,14 +17,15 @@ export { GaugeComponent, GaugeArcComponent, GaugeAxisComponent, LinearGaugeCompo
     LinearGaugeComponent,
     GaugeComponent,
     GaugeArcComponent,
-    GaugeAxisComponent,
+    GaugeAxisComponent,
     RadialGaugeComponent
 ],
   exports: [
     LinearGaugeComponent,
     GaugeComponent,
     GaugeArcComponent,
-    GaugeAxisComponent
+    GaugeAxisComponent,
+    RadialGaugeComponent
   ]
 })
 export class GaugeModule {}
