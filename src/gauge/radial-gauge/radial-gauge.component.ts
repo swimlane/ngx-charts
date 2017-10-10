@@ -1,8 +1,8 @@
-import { range } from 'd3-array';
 import { Component, OnInit, AfterViewInit, ViewEncapsulation, 
   ChangeDetectionStrategy } from '@angular/core';
 
 import { ScaleLinear, scaleLinear } from 'd3-scale';
+import { range } from 'd3-array';
 
 import { BaseChartComponent } from './../../common/base-chart.component';
 
@@ -23,22 +23,24 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
   private maxValue = 100;
   private minAngle = -90;
   private maxAngle = 90;
+  private innerArcRadius: number;
+  private outerArcRadius: number; 
   private segments = [
-    // {
-    //   minValue: 0,
-    //   maxValue: 30,
-    //   color: 'red'
-    // },
-    // {
-    //   minValue: 30,
-    //   maxValue: 60,
-    //   color: 'yellow'
-    // },
-    // {
-    //   minValue: 60,
-    //   maxValue: 100,
-    //   color: 'green'
-    // }
+    {
+      minValue: 0,
+      maxValue: 30,
+      color: 'red'
+    },
+    {
+      minValue: 30,
+      maxValue: 60,
+      color: 'yellow'
+    },
+    {
+      minValue: 60,
+      maxValue: 100,
+      color: 'green'
+    }
   ];
 
   private scale: ScaleLinear<number, number>;
@@ -51,21 +53,32 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
     this.ticks = this.scale.ticks(this.majorTicks);
     this.tickData = range(this.majorTicks).map(() => { return 1 / this.majorTicks; });
     this.degreeRange = this.getDegreeRange();
-    this.arcs = this.getArcs();
 
+    this.innerArcRadius = this.innerArcRadius == null 
+    ? this.calculateInnerRadius() 
+    : this.innerArcRadius;
+
+    this.outerArcRadius = this.outerArcRadius == null 
+    ? this.calculateOuterRadius() 
+    : this.outerArcRadius;
+
+    this.arcs = this.getArcs();
     this.translate = 'translate(150,150)';
   }
 
   ngAfterViewInit(): void {
     super.ngAfterViewInit();
+
     setTimeout(() => {
+
       console.log('afterViewInit');
 
       console.log('ticks', this.ticks);
       console.log('ticksData', this.tickData);
       console.log('degreeRange', this.degreeRange);
       console.log('arcs', this.arcs);
-      console.log('newangle', this.newAngle(0));
+      console.log('innerRadius', this.innerArcRadius);
+      console.log('outerRadius', this.outerArcRadius);
     });
   }
 
@@ -88,8 +101,8 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
         const arc = {
           startAngle: this.getSegmentAngle(this.segments[i].minValue),
           endAngle: this.getSegmentAngle(this.segments[i].maxValue),
-          innerRadius: 60,
-          outerRadius: 80
+          innerRadius: this.innerArcRadius,
+          outerRadius: this.outerArcRadius
         };
         result.push(arc);
       }
@@ -98,8 +111,8 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
         const arc = {
           startAngle: this.getTickAngle(i),
           endAngle: this.getTickAngle(i + 1),
-          innerRadius: 60,
-          outerRadius: 80
+          innerRadius: this.innerArcRadius,
+          outerRadius: this.outerArcRadius
         };
         result.push(arc);
       }
@@ -139,5 +152,21 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
 
   private getScale(): ScaleLinear<number, number> {
     return scaleLinear().range([0, 1]).domain([this.minValue, this.maxValue]);
+  }
+
+  private calculateInnerRadius(): number {
+    if(this.width > this.height) {
+      return this.height * 0.2;
+    } else {
+      return this.width * 0.2;
+    }
+  }
+
+  private calculateOuterRadius(): number {
+    if(this.width > this.height) {
+      return this.height * 0.4;
+    } else {
+      return this.width * 0.4;
+    }
   }
 }
