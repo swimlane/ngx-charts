@@ -39,7 +39,7 @@ import { count, decimalChecker } from '../common/count';
         [attr.width]="textWidth"
         [attr.height]="labelFontSize + textPadding[2]"
         alignment-baseline="hanging"
-        [style.color]="textColor"
+        [style.fill]="textColor"
         [style.fontSize.px]="labelFontSize"
         [style.lineHeight.px]="labelFontSize">
         {{formattedLabel}}
