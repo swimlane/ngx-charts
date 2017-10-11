@@ -3,7 +3,7 @@ import { Component, OnInit, AfterViewInit, ViewEncapsulation,
 
 import { ScaleLinear, scaleLinear } from 'd3-scale';
 import { range } from 'd3-array';
-import { line, curveLinear } from 'd3-shape';
+import { line, curveLinear, Line } from 'd3-shape';
 
 import { BaseChartComponent } from './../../common/base-chart.component';
 
@@ -17,7 +17,7 @@ import { BaseChartComponent } from './../../common/base-chart.component';
 export class RadialGaugeComponent extends BaseChartComponent implements OnInit, AfterViewInit {
 
   public arcs = [];
-  public textTransform: string = 'scale(0.7, 0.7)';
+  public textTransform: string = 'scale(1.1, 1.1)';
   
   public displayValue: string;
   public unit: string = 'percent'; // delete later
@@ -35,9 +35,6 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
   public outerArcRadius: number;
   public axisRadius: number;
   public pointerWidth: number = 10;
-
-  public scale: ScaleLinear<number, number>;
-  public d: any;
 
   private segments = [
     {
@@ -58,13 +55,10 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
   ];
 
   private ticks: number[];
-  private tickData: number[];
   private degreeRange: number;
 
   ngOnInit(): void {
-    this.scale = this.getScale();
-    this.ticks = this.scale.ticks(this.majorTicks);
-    this.tickData = range(this.majorTicks).map(() => { return 1 / this.majorTicks; });
+    this.ticks = this.getScale().ticks(this.majorTicks);
     this.degreeRange = this.getDegreeRange();
 
     this.displayValue = this.getValueOr(this.displayValue, this.value.toString());
@@ -73,8 +67,6 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
     this.axisRadius = this.getValueOrFactor(this.axisRadius, 0.55);
 
     this.arcs = this.getArcs();
-
-    this.d = this.getPointer();
   }
 
   ngAfterViewInit(): void {
@@ -85,7 +77,6 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
       console.log('afterViewInit');
 
       console.log('ticks', this.ticks);
-      console.log('ticksData', this.tickData);
       console.log('degreeRange', this.degreeRange);
       console.log('arcs', this.arcs);
       console.log('innerRadius', this.innerArcRadius);
@@ -103,6 +94,18 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
 
   public movePointer(): string {
     return `rotate(${this.getPointerLocation()})`;
+  }
+
+  public getPointer(): string {
+    const pointerLine: Line<[number, number]> = line().curve(curveLinear);
+    return pointerLine(this.getPointerData());
+  }
+
+  public getScale(): ScaleLinear<number, number> {
+    return scaleLinear()
+    .range([0, this.getDegreeRange()])
+    .nice()
+    .domain([this.minValue, this.maxValue]);
   }
 
   public getArcs(): any {
@@ -185,25 +188,6 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
 
   private getValueRange(): number {
     return this.maxValue - this.minValue;
-  }
-
-  private newAngle(angle: number): number {
-    const ratio = this.scale(angle);
-    console.log(ratio);
-    const newAngle = this.minAngle + (ratio * this.getDegreeRange());
-    return newAngle;
-  }
-
-  private getScale(): ScaleLinear<number, number> {
-    return scaleLinear()
-    .range([0, this.getDegreeRange()])
-    .nice()
-    .domain([this.minValue, this.maxValue]);
-  }
-
-  private getPointer(): any {
-    const pointerLine = line().curve(curveLinear);
-    return pointerLine(this.getPointerData());
   }
 
   private getPointerData(): any {

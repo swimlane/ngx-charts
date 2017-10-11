@@ -28,7 +28,7 @@
             [startAngle]="minAngle"
             [radius]="axisRadius"
             [angleSpan]="getDegreeRange()"
-            [valueScale]="scale"
+            [valueScale]="getScale()"
           >
           </svg:g> 
       </svg:g>
@@ -50,7 +50,7 @@
       <svg:g class="pointer">
           <path 
             [attr.transform]="movePointer()"
-            [attr.d]="d" >
+            [attr.d]="getPointer()" >
           </path>
       </g>
   </svg:g>
