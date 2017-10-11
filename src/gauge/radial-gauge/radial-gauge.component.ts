@@ -24,7 +24,7 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
 
   public showValue: boolean = true;
   public showUnit: boolean = true;
-  public value: number = 30;
+  public value: number = 20;
   public majorTicks = 5;
   public minorTicks = 10;
   public minValue = 0;
@@ -34,7 +34,9 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
   public innerArcRadius: number;
   public outerArcRadius: number;
   public axisRadius: number;
-  public pointerWidth: number = 10;
+  public pointerWidth: number;
+  public pointerHeadLength: number;
+  public pointerTailLength: number;
 
   private segments = [
     {
@@ -66,6 +68,10 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
     this.outerArcRadius = this.getValueOrFactor(this.outerArcRadius, 0.6);
     this.axisRadius = this.getValueOrFactor(this.axisRadius, 0.55);
 
+    this.pointerWidth = this.getValueOrFactor(this.pointerWidth, 0.05);
+    this.pointerHeadLength = this.getValueOrFactor(this.pointerHeadLength, 0.63);
+    this.pointerTailLength = this.getValueOrFactor(this.pointerTailLength, 0.02);
+
     this.arcs = this.getArcs();
   }
 
@@ -82,7 +88,9 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
       console.log('innerRadius', this.innerArcRadius);
       console.log('outerRadius', this.outerArcRadius);
       console.log('axisRadius', this.axisRadius);
-      console.log('pointerLine', this.getPointer());
+      console.log('pointerWidth', this.pointerWidth);
+      console.log('pointerHeadLength', this.pointerHeadLength);
+      console.log('pointerTailLength', this.pointerTailLength);
     });
   }
 
@@ -191,13 +199,11 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
   }
 
   private getPointerData(): any {
-    const pointerHeadLength = 140;
-    const pointerTailLength = 5;
     return [
       [this.pointerWidth / 2, 0],
-      [0, - (pointerHeadLength)],
-      [- (this.pointerWidth / 2), 0],
-      [0, pointerTailLength],
+      [0, - this.pointerHeadLength],
+      [- this.pointerWidth / 2, 0],
+      [0, this.pointerTailLength],
       [this.pointerWidth / 2, 0]
     ];
   }
