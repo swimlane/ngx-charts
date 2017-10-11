@@ -1,11 +1,12 @@
 import { Component, OnInit, AfterViewInit, ViewEncapsulation, 
-  ChangeDetectionStrategy } from '@angular/core';
+  ChangeDetectionStrategy, Input } from '@angular/core';
 
 import { ScaleLinear, scaleLinear } from 'd3-scale';
-import { range } from 'd3-array';
+import { range, max, min } from 'd3-array';
 import { line, curveLinear, Line } from 'd3-shape';
 
 import { BaseChartComponent } from './../../common/base-chart.component';
+import { ColorHelper } from '../../common/color.helper';
 
 @Component({
   selector: 'ngx-charts-radial-gauge',
@@ -17,43 +18,48 @@ import { BaseChartComponent } from './../../common/base-chart.component';
 export class RadialGaugeComponent extends BaseChartComponent implements OnInit, AfterViewInit {
 
   public arcs = [];
-  public textTransform: string = 'scale(1.1, 1.1)';
+  public textTransform: string = 'scale(1.5, 1.5)';
   
   public displayValue: string;
   public unit: string = 'percent'; // delete later
 
-  public showValue: boolean = true;
-  public showUnit: boolean = true;
-  public value: number = 20;
-  public majorTicks = 5;
-  public minorTicks = 10;
-  public minValue = 0;
-  public maxValue = 100;
-  public minAngle = -90;
-  public maxAngle = 90;
-  public innerArcRadius: number;
-  public outerArcRadius: number;
-  public axisRadius: number;
-  public pointerWidth: number;
-  public pointerHeadLength: number;
-  public pointerTailLength: number;
+  @Input() public showValue: boolean = true;
+  @Input() public showUnit: boolean = true;
+  @Input() public value: number = 20;
+  @Input() public majorTicks = 5;
+  @Input() public minorTicks = 10;
+  @Input() public minValue = 0;
+  @Input() public maxValue = 100;
+  @Input() public minAngle = -90;
+  @Input() public maxAngle = 90;
+  @Input() public innerArcRadius: number;
+  @Input() public outerArcRadius: number;
+  @Input() public axisRadius: number;
+  @Input() public pointerWidth: number;
+  @Input() public pointerHeadLength: number;
+  @Input() public pointerTailLength: number;
+  public pointerColor: string;
+  public arcColor: string;
+  public colors: ColorHelper;
+
+  // private domain: any;
 
   private segments = [
-    {
-      minValue: 0,
-      maxValue: 30,
-      color: 'red'
-    },
-    {
-      minValue: 30,
-      maxValue: 60,
-      color: 'yellow'
-    },
-    {
-      minValue: 60,
-      maxValue: 100,
-      color: 'green'
-    }
+    // {
+    //   minValue: 0,
+    //   maxValue: 30,
+    //   color: 'red'
+    // },
+    // {
+    //   minValue: 30,
+    //   maxValue: 60,
+    //   color: 'yellow'
+    // },
+    // {
+    //   minValue: 60,
+    //   maxValue: 100,
+    //   color: 'green'
+    // }
   ];
 
   private ticks: number[];
@@ -73,6 +79,8 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
     this.pointerTailLength = this.getValueOrFactor(this.pointerTailLength, 0.02);
 
     this.arcs = this.getArcs();
+    this.colors = new ColorHelper(this.scheme, this.schemeType, 
+      [this.minValue, this.maxValue], this.customColors);
   }
 
   ngAfterViewInit(): void {
@@ -81,6 +89,12 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
     setTimeout(() => {
 
       console.log('afterViewInit');
+
+      console.log('minValue', this.minValue);
+      console.log('maxValue', this.maxValue);
+      console.log('value', this.value);
+      console.log('minAngle', this.minAngle);
+      console.log('maxAngle', this.maxAngle);
 
       console.log('ticks', this.ticks);
       console.log('degreeRange', this.degreeRange);
@@ -91,6 +105,7 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
       console.log('pointerWidth', this.pointerWidth);
       console.log('pointerHeadLength', this.pointerHeadLength);
       console.log('pointerTailLength', this.pointerTailLength);
+      console.log('colors', this.colors);
     });
   }
 
