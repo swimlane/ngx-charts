@@ -26,15 +26,17 @@
 | xAxisTickFormatting   | function    |               | the x axis tick formatting                                                                                                       |
 | yAxisTickFormatting   | function    |               | the y axis tick formatting                                                                                                       |
 | timeline              | boolean     | false         | display a timeline control under the chart. Only available if x scale is date                                                    |
-| autoScale             | boolean     | false         | set the minimum value of the y axis to the minimum value in the data, instead of 0                                               |
+| autoScale             | boolean     | false         | set the minimum value of the y axis to the minimum value in the data, instead of 0 (ignored if yScaleMin is defined)             |
 | curve                 | function    |               | the interpolation function used to generate the curve. It accepts any [d3.curve](https://github.com/d3/d3-shape#curves) function |
 | gradient              | boolean     | false         | fill elements with a gradient instead of a solid color                                                                           |
 | activeEntries         | object[]    | []            | elements to highlight                                                                                                            |
 | tooltipDisabled       | boolean     | false         | show or hide the tooltip                                                                                                         |
 | tooltipTemplate       | TemplateRef |               | a custom ng-template to be displayed inside the tooltip when hovering a single point                                             |
 | seriesTooltipTemplate | TemplateRef |               | a custom ng-template to be displayed inside the tooltip when hovering series                                                     |
-| xAxisMinScale         | object      |               | force x axis scaling to the provided value (ignored if chart data contains a higher value)                                       |
-| yAxisMinScale         | number      |               | force y axis scaling to the provided value (ignored if chart data contains a higher value)                                       |
+| xScaleMin             | number      |               | the minimum value of the x axis (ignored if chart data contains a higher value)                                                  |
+| xScaleMax             | number      |               | the maximum value of the x axis (ignored if chart data contains a higher value)                                                  |
+| yScaleMin             | number      |               | the minimum value of the y axis (ignored if chart data contains a higher value)                                                  |
+| yScaleMax             | number      |               | the maximum value of the y axis (ignored if chart data contains a higher value)                                                  |
 
 # Outputs
 
