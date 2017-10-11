@@ -19,7 +19,6 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
   public arcs = [];
   public translate: string = 'translate(150,150)';
   public textTransform: string = 'scale(0.7, 0.7)';
-  public pointerTransform: string = '';
   
   public displayValue: string;
   public unit: string = 'percent'; // delete later
@@ -105,7 +104,13 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
       console.log('outerRadius', this.outerArcRadius);
       console.log('axisRadius', this.axisRadius);
       console.log('pointerLine', this.getPointer());
+
+      this.movePointer();
     });
+  }
+
+  public movePointer(): string {
+    return `rotate(${this.getPointerLocation()})`;
   }
 
   // public startAngle(value: number, index: number) {
@@ -147,6 +152,10 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
     return result;
   }
 
+  private getPointerLocation(): number {
+    return this.rad2deg(this.getSegmentAngle(this.value));
+  }
+
   private getSegmentAngle(value: number): number {
     const degree =  this.minAngle + (value * this.getDegreeRange() / this.getValueRange());
     return this.deg2rad(degree);
@@ -159,6 +168,10 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
 
   private deg2rad(degree: number): number {
     return degree * Math.PI / 180;
+  }
+
+  private rad2deg(rad: number) {
+    return rad * 180 / Math.PI;
   }
 
   private getDegreeRange(): number {

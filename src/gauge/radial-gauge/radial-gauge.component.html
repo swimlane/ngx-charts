@@ -1,48 +1,59 @@
 <ngx-charts-chart
   [view]="[width, height]">
 
-  <svg:g *ngFor="let arc of arcs" class="arc" [attr.transform]="translate">
-      <svg:g ngx-charts-pie-arc
-        class="background-arc"
-        [startAngle]="arc.startAngle"
-        [endAngle]="arc.endAngle"
-        [innerRadius]="arc.innerRadius"
-        [outerRadius]="arc.outerRadius"
-        [fill]="'#aaca2a'"
-      >
-    </svg:g>
-  </svg:g>
+  <svg:g [attr.transform]="translate">
 
-  <svg:g class="axis" [attr.transform]="translate">
-    <svg:g ngx-charts-gauge-axis
-      [bigSegments]="majorTicks"
-      [smallSegments]="minorTicks"
-      [min]="minValue"
-      [max]="maxValue"
-      [startAngle]="minAngle"
-      [radius]="axisRadius"
-      [angleSpan]="getDegreeRange()"
-      [valueScale]="scale"
-    >
-    </svg:g> 
-  </svg:g>
+      <!-- arcs -->
 
-  <svg:g class="label" [attr.transform]="translate">
-    <svg:text #textEl
-      [style.textAnchor]="'middle'"
-      [attr.transform]="textTransform"
-      alignment-baseline="central">
-      <tspan *ngIf="showValue" x="0" dy="0">{{ displayValue }}</tspan>
-      <tspan *ngIf="showUnit" x="0" dy="1.2em">{{ unit }}</tspan>
-    </svg:text>
-  </svg:g>
+      <svg:g *ngFor="let arc of arcs" class="arc">
+          <svg:g ngx-charts-pie-arc
+            class="background-arc"
+            [startAngle]="arc.startAngle"
+            [endAngle]="arc.endAngle"
+            [innerRadius]="arc.innerRadius"
+            [outerRadius]="arc.outerRadius"
+            [fill]="'#aaca2a'"
+          >
+        </svg:g>
+      </svg:g>
 
-  <svg:g class="pointer" transform="translate(150,150)">
-    <path 
-      [attr.transform]="pointerTransform"
-      [attr.d]="d" >
-    </path>
-  </g>
+      <!-- axis -->
+
+      <svg:g class="axis">
+          <svg:g ngx-charts-gauge-axis
+            [bigSegments]="majorTicks"
+            [smallSegments]="minorTicks"
+            [min]="minValue"
+            [max]="maxValue"
+            [startAngle]="minAngle"
+            [radius]="axisRadius"
+            [angleSpan]="getDegreeRange()"
+            [valueScale]="scale"
+          >
+          </svg:g> 
+      </svg:g>
+
+      <!-- label -->
+
+      <svg:g class="label">
+          <svg:text #textEl
+            [style.textAnchor]="'middle'"
+            [attr.transform]="textTransform"
+            alignment-baseline="central">
+            <tspan *ngIf="showValue" x="0" dy="0">{{ displayValue }}</tspan>
+            <tspan *ngIf="showUnit" x="0" dy="1.2em">{{ unit }}</tspan>
+          </svg:text>
+      </svg:g>
+
+      <!-- pointer -->
+
+      <svg:g class="pointer">
+          <path 
+            [attr.transform]="movePointer()"
+            [attr.d]="d" >
+          </path>
+      </g>
+  </svg:g>
 
   <!-- <svg:g class="pointer" transform="translate(150,150)">
     <path d="M5,0C4.998858447488584,-0.030821917808219176,1.6666666666666667,-135,0,-135S-5,0,-5,0S-1.6666666666666667,5,0,5S4.583333333333333,0.4166666666666667,5,0" 
