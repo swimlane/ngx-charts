@@ -550,7 +550,12 @@
       </ngx-charts-linear-gauge>
       <ngx-charts-radial-gauge
       *ngIf="chartType === 'radial-gauge'"
-        [view]="view">
+        [view]="view"
+        [scheme]="colorScheme"
+        [minValue]="gaugeMin"
+        [maxValue]="gaugeMax"
+        [value]="gaugeValue"
+        >
       </ngx-charts-radial-gauge>
       <div *ngIf="chartType === 'plot-demo'">
         <ngx-input
