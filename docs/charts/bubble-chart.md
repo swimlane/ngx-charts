@@ -29,8 +29,10 @@
 | maxRadius           | number      | 10            | maximum bubble radius in px                                                                                     |
 | tooltipDisabled     | boolean     | false         | show or hide the tooltip                                                                                        |
 | tooltipTemplate     | TemplateRef |               | a custom ng-template to be displayed inside the tooltip                                                         |
-| xAxisMinScale       | object      |               | force x axis scaling to the provided value (ignored if chart data contains a higher value)                      |
-| yAxisMinScale       | object      |               | force y axis scaling to the provided value (ignored if chart data contains a higher value)                      |
+| xScaleMin           | any         |               | the minimum value of the x axis                                                                                 |
+| xScaleMax           | any         |               | the maximum value of the x axis                                                                                 |
+| yScaleMin           | any         |               | the minimum value of the y axis                                                                                 |
+| yScaleMax           | any         |               | the maximum value of the y axis                                                                                 |
 
 # Outputs
 

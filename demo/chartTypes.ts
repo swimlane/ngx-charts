@@ -229,7 +229,8 @@ const chartGroups = [
         options: [
           'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'showLegend', 'legendTitle',
           'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines',
-          'roundDomains', 'autoScale', 'minRadius', 'maxRadius', 'tooltipDisabled'
+          'roundDomains', 'autoScale', 'minRadius', 'maxRadius', 'tooltipDisabled',
+          'xScaleMin', 'xScaleMax', 'yScaleMin', 'yScaleMax'
         ],
         defaults: {
           xAxisLabel: 'Census Date',

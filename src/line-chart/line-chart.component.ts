@@ -303,11 +303,11 @@ export class LineChartComponent extends BaseChartComponent {
     let max;
     if (this.scaleType === 'time' || this.scaleType === 'linear') {
       min = this.xScaleMin
-        ? Math.min(this.xScaleMin, ...values)
+        ? this.xScaleMin
         : Math.min(...values);
 
       max = this.xScaleMax
-        ? Math.max(this.xScaleMax, ...values)
+        ? this.xScaleMax
         : Math.max(...values);
     }
 
@@ -360,11 +360,11 @@ export class LineChartComponent extends BaseChartComponent {
     }
 
     const min = this.yScaleMin
-      ? Math.min(this.yScaleMin, ...values)
+      ? this.yScaleMin
       : Math.min(...values);
 
     const max = this.yScaleMax
-      ? Math.max(this.yScaleMax, ...values)
+      ? this.yScaleMax
       : Math.max(...values);
 
     return [min, max];

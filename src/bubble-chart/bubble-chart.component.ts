@@ -22,6 +22,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { getScaleType, getDomain, getScale } from './bubble-chart.utils';
+import { id } from '../utils/id';
 
 @Component({
   selector: 'ngx-charts-bubble-chart',
@@ -36,7 +37,7 @@ import { getScaleType, getDomain, getScale } from './bubble-chart.utils';
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)">
       <svg:defs>
-        <svg:clipPath>
+        <svg:clipPath [attr.id]="clipPathId">
           <svg:rect
             [attr.width]="dims.width + 10"
             [attr.height]="dims.height + 10"
@@ -71,23 +72,25 @@ import { getScaleType, getDomain, getScale } from './bubble-chart.utils';
           style="fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';"
           (mouseenter)="deactivateAll()"
         />
-        <svg:g *ngFor="let series of data; trackBy:trackBy" [@animationState]="'active'">
-          <svg:g ngx-charts-bubble-series
-            [xScale]="xScale"
-            [yScale]="yScale"
-            [rScale]="rScale"
-            [xScaleType]="xScaleType"
-            [yScaleType]="yScaleType"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            [colors]="colors"
-            [data]="series"
-            [activeEntries]="activeEntries"
-            [tooltipDisabled]="tooltipDisabled"
-            [tooltipTemplate]="tooltipTemplate"
-            (select)="onClick($event, series)"
-            (activate)="onActivate($event)"
-            (deactivate)="onDeactivate($event)" />
+        <svg:g [attr.clip-path]="clipPath">
+          <svg:g *ngFor="let series of data; trackBy:trackBy" [@animationState]="'active'">
+            <svg:g ngx-charts-bubble-series
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [rScale]="rScale"
+              [xScaleType]="xScaleType"
+              [yScaleType]="yScaleType"
+              [xAxisLabel]="xAxisLabel"
+              [yAxisLabel]="yAxisLabel"
+              [colors]="colors"
+              [data]="series"
+              [activeEntries]="activeEntries"
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="tooltipTemplate"
+              (select)="onClick($event, series)"
+              (activate)="onActivate($event)"
+              (deactivate)="onDeactivate($event)" />
+          </svg:g>
         </svg:g>
       </svg:g>
     </ngx-charts-chart>
@@ -127,8 +130,10 @@ export class BubbleChartComponent extends BaseChartComponent {
   @Input() schemeType = 'ordinal';
   @Input() legendPosition: string = 'right';
   @Input() tooltipDisabled: boolean = false;
-  @Input() xAxisMinScale: any;
-  @Input() yAxisMinScale: any;
+  @Input() xScaleMin: any;
+  @Input() xScaleMax: any;
+  @Input() yScaleMin: any;
+  @Input() yScaleMax: any;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -144,6 +149,9 @@ export class BubbleChartComponent extends BaseChartComponent {
 
   legendOptions: any;
   transform: string;
+
+  clipPath: string;
+  clipPathId: string;
 
   seriesDomain: any[];
   xDomain: any[];
@@ -203,6 +211,9 @@ export class BubbleChartComponent extends BaseChartComponent {
     this.setScales();
 
     this.legendOptions = this.getLegendOptions();
+
+    this.clipPathId = 'clip' + id().toString();
+    this.clipPath = `url(#${this.clipPathId})`;
   }
 
   @HostListener('mouseleave')
@@ -243,8 +254,16 @@ export class BubbleChartComponent extends BaseChartComponent {
   }
 
   setScales() {
-    this.xScale = this.getXScale(this.xDomain, this.dims.width - this.bubblePadding[1]);
-    this.yScale = this.getYScale(this.yDomain, this.dims.height - this.bubblePadding[2]);
+    let width = this.dims.width;
+    if (this.xScaleMin === undefined && this.xScaleMax === undefined) {
+      width = width - this.bubblePadding[1];
+    }
+    let height = this.dims.height;
+    if (this.yScaleMin === undefined && this.yScaleMax === undefined) {
+      height = height - this.bubblePadding[2];
+    }
+    this.xScale = this.getXScale(this.xDomain, width);
+    this.yScale = this.getYScale(this.yDomain, height);
   }
 
   getYScale(domain, height): any {
@@ -296,7 +315,7 @@ export class BubbleChartComponent extends BaseChartComponent {
     }
 
     this.xScaleType = getScaleType(values);
-    return getDomain(values, this.xScaleType, this.autoScale, this.xAxisMinScale);
+    return getDomain(values, this.xScaleType, this.autoScale, this.xScaleMin, this.xScaleMax);
   }
 
   getYDomain(): any[] {
@@ -311,7 +330,7 @@ export class BubbleChartComponent extends BaseChartComponent {
     }
 
     this.yScaleType = getScaleType(values);
-    return getDomain(values, this.yScaleType, this.autoScale, this.yAxisMinScale);
+    return getDomain(values, this.yScaleType, this.autoScale, this.yScaleMin, this.yScaleMax);
   }
 
   getRDomain(): number[] {
