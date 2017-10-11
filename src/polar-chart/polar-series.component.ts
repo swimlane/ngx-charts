@@ -6,7 +6,6 @@ import {
   ChangeDetectionStrategy,
   TemplateRef
 } from '@angular/core';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { area, radialLine } from 'd3-shape';
 
 import { id } from '../utils/id';
@@ -88,9 +87,6 @@ export class PolarSeriesComponent implements OnChanges {
 
   active: boolean;
   inactive: boolean;
-
-  constructor(private location: LocationStrategy) {
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();

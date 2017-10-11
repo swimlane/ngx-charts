@@ -8,7 +8,6 @@ import {
   OnChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { select } from 'd3-selection';
 
 import { id } from '../utils/id';
@@ -59,7 +58,7 @@ export class HeatMapCellComponent implements OnChanges {
   gradientUrl: string;
   gradientStops: any[];
 
-  constructor(element: ElementRef, private location: LocationStrategy) {
+  constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 

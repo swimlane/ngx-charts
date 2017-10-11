@@ -2,7 +2,6 @@ import {
   Component, Input, Output, EventEmitter, ElementRef,
   OnChanges, SimpleChanges, ChangeDetectionStrategy
 } from '@angular/core';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { select } from 'd3-selection';
 
 import { invertColor } from '../utils/color-utils';
@@ -89,11 +88,11 @@ export class TreeMapCellComponent implements OnChanges {
   formattedValue: string;
   initialized: boolean = false;
 
-  constructor(element: ElementRef, private location: LocationStrategy) {
+  constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 
-  ngOnChanges(/* changes: SimpleChanges */): void {
+  ngOnChanges(): void {
     this.update();
 
     const hasValue = this.data && typeof this.data.value !== 'undefined';

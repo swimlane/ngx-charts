@@ -16,7 +16,6 @@ import {
   animate,
   transition
 } from '@angular/animations';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { formatLabel } from '../common/label.helper';
 import { id } from '../utils/id';
 
@@ -99,9 +98,6 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
   barVisible: boolean = false;
   gradientId: string;
   gradientFill: string;
-
-  constructor(private location: LocationStrategy) {
-  }
 
   ngOnInit() {
     this.gradientId = 'grad' + id().toString();

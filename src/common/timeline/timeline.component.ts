@@ -3,7 +3,6 @@ import {
   OnChanges, ChangeDetectionStrategy, NgZone,
   ChangeDetectorRef, SimpleChanges, ViewEncapsulation
 } from '@angular/core';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { brushX } from 'd3-brush';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
 import { select, event as d3event } from 'd3-selection';
@@ -66,8 +65,7 @@ export class Timeline implements OnChanges {
   constructor(
     element: ElementRef,
     private zone: NgZone,
-    private cd: ChangeDetectorRef,
-    private location: LocationStrategy) {
+    private cd: ChangeDetectorRef) {
       this.element = element.nativeElement;
   }
 

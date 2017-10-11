@@ -5,7 +5,6 @@ import {
   SimpleChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { area, line } from 'd3-shape';
 
 import { id } from '../utils/id';
@@ -80,9 +79,6 @@ export class LineSeriesComponent implements OnChanges {
   gradientStops: any[];
   areaGradientStops: any[];
   stroke: any;
-
-  constructor(private location: LocationStrategy) {
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();

@@ -9,7 +9,6 @@ import {
   OnChanges,
   ChangeDetectionStrategy
  } from '@angular/core';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { select } from 'd3-selection';
 import { roundedRect } from '../common/shape.helper';
 import { id } from '../utils/id';
@@ -64,7 +63,7 @@ export class BarComponent implements OnChanges {
   gradientStops: any[];
   hasGradient: boolean = false;
 
-  constructor(element: ElementRef, private location: LocationStrategy) {
+  constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 

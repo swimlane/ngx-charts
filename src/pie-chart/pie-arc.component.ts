@@ -8,7 +8,6 @@ import {
   OnChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { interpolate } from 'd3-interpolate';
 import { select } from 'd3-selection';
 import { arc } from 'd3-shape';
@@ -70,7 +69,7 @@ export class PieArcComponent implements OnChanges {
   gradientFill: string;
   initialized: boolean = false;
 
-  constructor(element: ElementRef, private location: LocationStrategy) {
+  constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 
