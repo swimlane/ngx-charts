@@ -28,7 +28,7 @@
     "copy:styles": "cpx \"build/**/*.css\" release",
     "watch": "webpack --display-error-details --watch",
     "start": "webpack-dev-server",
-    "start:host": "webpack-dev-server --host 0.0.0.0",
+    "start:host": "webpack-dev-server --host 0.0.0.0 --disable-host-check",
     "start:hmr": "webpack-dev-server --env.HMR",
     "release": "npm-run-all build:release",
     "package": "npm-run-all -s clean copy:build build:sass package:replace-scss package:aot build:package package:minify copy:styles clean:build",
