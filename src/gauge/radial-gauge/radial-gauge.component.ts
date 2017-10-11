@@ -17,10 +17,12 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
 
   public arcs = [];
   public translate: string = 'translate(150,150)';
-  public textTransform: string = 'scale(1, 1)';
-  public displayValue: string = '50'; // delete later
+  public textTransform: string = 'scale(0.7, 0.7)';
+  
+  public displayValue: string;
   public unit: string = 'percent'; // delete later
 
+  private value: number = 30;
   private majorTicks = 5;
   private minValue = 0;
   private maxValue = 100;
@@ -57,6 +59,10 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
     this.ticks = this.scale.ticks(this.majorTicks);
     this.tickData = range(this.majorTicks).map(() => { return 1 / this.majorTicks; });
     this.degreeRange = this.getDegreeRange();
+
+    this.displayValue = this.displayValue == null 
+    ? this.value.toString()
+    : this.displayValue;
 
     this.innerArcRadius = this.innerArcRadius == null 
     ? this.calculateInnerRadius() 

@@ -44,13 +44,15 @@
 
 <!-- [attr.transform]="textTransform" -->
 
-<svg:text #textEl
-    [style.textAnchor]="'middle'"
-    [attr.transform]="textTransform"
-    alignment-baseline="central">
-  <tspan x="0" dy="0">{{ displayValue }}</tspan>
-  <tspan x="0" dy="1.2em">{{ unit }}</tspan>
-</svg:text>
+  <svg:g [attr.transform]="translate">
+    <svg:text #textEl
+      [style.textAnchor]="'middle'"
+      [attr.transform]="textTransform"
+      alignment-baseline="central">
+      <tspan x="0" dy="0">{{ displayValue }}</tspan>
+      <tspan x="0" dy="1.2em">{{ unit }}</tspan>
+    </svg:text>
+  </svg:g>
 
 <svg:g class="label" transform="translate(150,150)">
   <text transform="rotate(-90) translate(0,-140)">0</text>
