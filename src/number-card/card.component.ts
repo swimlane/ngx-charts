@@ -31,21 +31,19 @@ import { count, decimalChecker } from '../common/count';
         [attr.d]="bandPath"
       />
       <title>{{label}}</title>
-      <svg:foreignObject
+      <svg:text
         class="trimmed-label"
         x="5"
         [attr.x]="textPadding[3]"
         [attr.y]="cardHeight - textPadding[2]"
         [attr.width]="textWidth"
         [attr.height]="labelFontSize + textPadding[2]"
-        alignment-baseline="hanging">
-        <xhtml:p
-          [style.color]="textColor"
-          [style.fontSize.px]="labelFontSize"
-          [style.lineHeight.px]="labelFontSize"
-          [innerHTML]="formattedLabel">
-        </xhtml:p>
-      </svg:foreignObject>
+        alignment-baseline="hanging"
+        [style.color]="textColor"
+        [style.fontSize.px]="labelFontSize"
+        [style.lineHeight.px]="labelFontSize">
+        {{formattedLabel}}
+      </svg:text>
       <svg:text #textEl
         class="value-text"
         [attr.x]="textPadding[3]"
