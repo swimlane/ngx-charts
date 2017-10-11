@@ -17,7 +17,6 @@ import { BaseChartComponent } from './../../common/base-chart.component';
 export class RadialGaugeComponent extends BaseChartComponent implements OnInit, AfterViewInit {
 
   public arcs = [];
-  public translate: string = 'translate(150,150)';
   public textTransform: string = 'scale(0.7, 0.7)';
   
   public displayValue: string;
@@ -41,21 +40,21 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
   public d: any;
 
   private segments = [
-    // {
-    //   minValue: 0,
-    //   maxValue: 30,
-    //   color: 'red'
-    // },
-    // {
-    //   minValue: 30,
-    //   maxValue: 60,
-    //   color: 'yellow'
-    // },
-    // {
-    //   minValue: 60,
-    //   maxValue: 100,
-    //   color: 'green'
-    // }
+    {
+      minValue: 0,
+      maxValue: 30,
+      color: 'red'
+    },
+    {
+      minValue: 30,
+      maxValue: 60,
+      color: 'yellow'
+    },
+    {
+      minValue: 60,
+      maxValue: 100,
+      color: 'green'
+    }
   ];
 
   private ticks: number[];
@@ -68,21 +67,10 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
     this.tickData = range(this.majorTicks).map(() => { return 1 / this.majorTicks; });
     this.degreeRange = this.getDegreeRange();
 
-    this.displayValue = this.displayValue == null 
-    ? this.value.toString()
-    : this.displayValue;
-
-    this.innerArcRadius = this.innerArcRadius == null 
-    ? this.calculateInnerRadius() 
-    : this.innerArcRadius;
-
-    this.outerArcRadius = this.outerArcRadius == null 
-    ? this.calculateOuterRadius() 
-    : this.outerArcRadius;
-
-    this.axisRadius = this.axisRadius == null
-    ? this.calculateAxisRadius()
-    : this.axisRadius;
+    this.displayValue = this.getValueOr(this.displayValue, this.value.toString());
+    this.innerArcRadius = this.getValueOrFactor(this.innerArcRadius, 0.3);
+    this.outerArcRadius = this.getValueOrFactor(this.outerArcRadius, 0.6);
+    this.axisRadius = this.getValueOrFactor(this.axisRadius, 0.55);
 
     this.arcs = this.getArcs();
 
@@ -104,27 +92,20 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
       console.log('outerRadius', this.outerArcRadius);
       console.log('axisRadius', this.axisRadius);
       console.log('pointerLine', this.getPointer());
-
-      this.movePointer();
     });
+  }
+
+  public getTranslate(): string {
+    const twidth = this.width / 2;
+    const theight = this.height * 0.8;
+    return `translate(${twidth}, ${theight})`;
   }
 
   public movePointer(): string {
     return `rotate(${this.getPointerLocation()})`;
   }
 
-  // public startAngle(value: number, index: number) {
-
-  //   // const ratio = d * i;
-  //   // return this.deg2rad(this.minAngle + (ratio * this.getRange()));
-  // }
-
-  // public endAngle(d, i) {
-  //    const ratio = d * (i + 1);
-  //    return this.deg2rad(this.minAngle + (ratio * this.getRange()));
-  // }
-
-  private getArcs(): any {
+  public getArcs(): any {
     const result = [];
 
     if (this.segments != null && this.segments.length > 0) {
@@ -150,6 +131,30 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
     }
 
     return result;
+  }
+
+  private getValueOr(value: any, or: any) {
+    console.log('value', value);
+    console.log('or', or);
+    console.log('result', value == null 
+    ? or
+    : value);
+
+    return value == null 
+    ? or
+    : value;
+  }
+
+  private getValueOrFactor(value: number, factor: number) {
+    return this.getValueOr(value, this.getElementScale(factor));
+  }
+
+  private getElementScale(factor: number): number {
+    if(this.width > this.height) {
+      return this.height * factor;
+    } else {
+      return this.width * factor;
+    }
   }
 
   private getPointerLocation(): number {
@@ -190,35 +195,10 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
   }
 
   private getScale(): ScaleLinear<number, number> {
-    // return scaleLinear().range([0, 1]).domain([this.minValue, this.maxValue]);
     return scaleLinear()
     .range([0, this.getDegreeRange()])
     .nice()
     .domain([this.minValue, this.maxValue]);
-  }
-
-  private calculateInnerRadius(): number {
-    if(this.width > this.height) {
-      return this.height * 0.2;
-    } else {
-      return this.width * 0.2;
-    }
-  }
-
-  private calculateOuterRadius(): number {
-    if(this.width > this.height) {
-      return this.height * 0.4;
-    } else {
-      return this.width * 0.4;
-    }
-  }
-
-  private calculateAxisRadius(): number {
-    if(this.width > this.height) {
-      return this.height * 0.35;
-    } else {
-      return this.width * 0.35;
-    }
   }
 
   private getPointer(): any {
