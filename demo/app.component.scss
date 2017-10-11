@@ -27,45 +27,6 @@ app {
   height: 100%;
 }
 
-button {
-  display: inline-block;
-  font-weight: 500;
-  font-size: 0.9vw;
-  background: #479eff;
-  color: #fff;
-  height: 30px;
-  text-align: center;
-  line-height: 30px;
-  text-transform: uppercase;
-  padding: 0 15px;
-  border-radius: 1px;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  border: none;
-  outline: none;
-
-  &:hover {
-    outline: none;
-    background: #1483ff;
-  }
-
-  &:focus,
-  &:active {
-    outline: none;
-    background: #097dff;
-  }
-
-  &.btn.btn-link {
-    padding: 0;
-
-    &.active {
-      font-weight: 800;
-      color: #097dff;
-    }
-  }
-}
-
 .arrow-down {
   width: 0;
   height: 0;

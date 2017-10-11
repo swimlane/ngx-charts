@@ -31,7 +31,7 @@
 | groupPadding        | number      | 16            | padding between groups in px                                                                                    |
 | tooltipDisabled     | boolean     | false         | show or hide the tooltip                                                                                        |
 | tooltipTemplate     | TemplateRef |               | a custom ng-template to be displayed inside the tooltip                                                         |
-| yAxisMinScale       | number      |               | force y axis scaling to the provided value (ignored if chart data contains a higher value)                      |
+| yScaleMax           | number      |               | the maximum value of the y axis (ignored if chart data contains a higher value)                                 |
 
 # Outputs
 

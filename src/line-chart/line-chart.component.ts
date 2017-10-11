@@ -184,8 +184,10 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() showRefLines: boolean = false;
   @Input() referenceLines: any;
   @Input() showRefLabels: boolean = true;
-  @Input() xAxisMinScale: any;
-  @Input() yAxisMinScale: number = 0;
+  @Input() xScaleMin: any;
+  @Input() xScaleMax: any;
+  @Input() yScaleMin: number;
+  @Input() yScaleMax: number;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -293,13 +295,23 @@ export class LineChartComponent extends BaseChartComponent {
     this.scaleType = this.getScaleType(values);
     let domain = [];
 
-    if (this.scaleType === 'time') {
-      const min = Math.min(...values);
+    if (this.scaleType === 'linear') {
+      values = values.map(v => Number(v));
+    }
 
-      const max = this.xAxisMinScale
-        ? Math.max(this.xAxisMinScale, ...values)
+    let min;
+    let max;
+    if (this.scaleType === 'time' || this.scaleType === 'linear') {
+      min = this.xScaleMin
+        ? this.xScaleMin
+        : Math.min(...values);
+
+      max = this.xScaleMax
+        ? this.xScaleMax
         : Math.max(...values);
+    }
 
+    if (this.scaleType === 'time') {
       domain = [new Date(min), new Date(max)];
       this.xSet = [...values].sort((a, b) => {
         const aDate = a.getTime();
@@ -309,13 +321,6 @@ export class LineChartComponent extends BaseChartComponent {
         return 0;
       });
     } else if (this.scaleType === 'linear') {
-      values = values.map(v => Number(v));
-      const min = Math.min(...values);
-
-      const max = this.xAxisMinScale
-        ? Math.max(this.xAxisMinScale, ...values)
-        : Math.max(...values);
-
       domain = [min, max];
       // Use compare function to sort numbers numerically
       this.xSet = [...values].sort((a, b) => (a - b));
@@ -349,12 +354,18 @@ export class LineChartComponent extends BaseChartComponent {
       }
     }
 
-    let min = Math.min(...domain);
-    const max = Math.max(this.yAxisMinScale, ...domain);
-
+    const values = [...domain];
     if (!this.autoScale) {
-      min = Math.min(0, min);
+      values.push(0);
     }
+
+    const min = this.yScaleMin
+      ? this.yScaleMin
+      : Math.min(...values);
+
+    const max = this.yScaleMax
+      ? this.yScaleMax
+      : Math.max(...values);
 
     return [min, max];
   }
