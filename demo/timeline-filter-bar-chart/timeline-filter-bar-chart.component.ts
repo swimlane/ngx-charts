@@ -20,6 +20,7 @@ import { id } from '../../src/utils';
     <ngx-charts-chart
       [view]="[width, height]"
       [showLegend]="false"
+      [animations]="animations"
       class="timeline-filter-bar-chart">
       <svg:g [attr.transform]="transform" class="chart">
         <svg:g ngx-charts-x-axis
@@ -48,6 +49,7 @@ import { id } from '../../src/utils';
           [series]="results"
           [dims]="dims"
           [gradient]="gradient"
+          [animations]="animations"
           tooltipDisabled="true">
         </svg:g>
       </svg:g>
@@ -86,6 +88,7 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
   @Input() yAxisLabel;
   @Input() gradient;
   @Input() showGridLines: boolean = true;
+  @Input() animations: boolean = true;
 
   @Output() onFilter = new EventEmitter();
 

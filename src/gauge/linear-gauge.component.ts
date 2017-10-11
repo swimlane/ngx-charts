@@ -30,7 +30,8 @@ import { ColorHelper } from '../common/color.helper';
           [y]="dims.height / 2 + margin[0] - 2"
           [data]="{}"
           [orientation]="'horizontal'"
-          [roundEdges]="true">
+          [roundEdges]="true"
+          [animations]="animations">
         </svg:g>
         <svg:g ngx-charts-bar
           [width]="valueScale(value)"
