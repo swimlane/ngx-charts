@@ -3,6 +3,7 @@ import { Component, OnInit, AfterViewInit, ViewEncapsulation,
 
 import { ScaleLinear, scaleLinear } from 'd3-scale';
 import { range } from 'd3-array';
+import { line, curveLinear } from 'd3-shape';
 
 import { BaseChartComponent } from './../../common/base-chart.component';
 
@@ -18,10 +19,13 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
   public arcs = [];
   public translate: string = 'translate(150,150)';
   public textTransform: string = 'scale(0.7, 0.7)';
+  public pointerTransform: string = '';
   
   public displayValue: string;
   public unit: string = 'percent'; // delete later
 
+  public showValue: boolean = true;
+  public showUnit: boolean = true;
   public value: number = 30;
   public majorTicks = 5;
   public minorTicks = 10;
@@ -32,8 +36,10 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
   public innerArcRadius: number;
   public outerArcRadius: number;
   public axisRadius: number;
+  public pointerWidth: number = 10;
 
   public scale: ScaleLinear<number, number>;
+  public d: any;
 
   private segments = [
     // {
@@ -80,6 +86,8 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
     : this.axisRadius;
 
     this.arcs = this.getArcs();
+
+    this.d = this.getPointer();
   }
 
   ngAfterViewInit(): void {
@@ -96,6 +104,7 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
       console.log('innerRadius', this.innerArcRadius);
       console.log('outerRadius', this.outerArcRadius);
       console.log('axisRadius', this.axisRadius);
+      console.log('pointerLine', this.getPointer());
     });
   }
 
@@ -197,5 +206,22 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
     } else {
       return this.width * 0.35;
     }
+  }
+
+  private getPointer(): any {
+    const pointerLine = line().curve(curveLinear);
+    return pointerLine(this.getPointerData());
+  }
+
+  private getPointerData(): any {
+    const pointerHeadLength = 140;
+    const pointerTailLength = 5;
+    return [
+      [this.pointerWidth / 2, 0],
+      [0, - (pointerHeadLength)],
+      [- (this.pointerWidth / 2), 0],
+      [0, pointerTailLength],
+      [this.pointerWidth / 2, 0]
+    ];
   }
 }
