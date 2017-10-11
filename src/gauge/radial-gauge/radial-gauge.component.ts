@@ -22,34 +22,37 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
   public displayValue: string;
   public unit: string = 'percent'; // delete later
 
-  private value: number = 30;
-  private majorTicks = 5;
-  private minValue = 0;
-  private maxValue = 100;
-  private minAngle = -90;
-  private maxAngle = 90;
-  private innerArcRadius: number;
-  private outerArcRadius: number; 
+  public value: number = 30;
+  public majorTicks = 5;
+  public minorTicks = 10;
+  public minValue = 0;
+  public maxValue = 100;
+  public minAngle = -90;
+  public maxAngle = 90;
+  public innerArcRadius: number;
+  public outerArcRadius: number;
+  public axisRadius: number;
+
+  public scale: ScaleLinear<number, number>;
 
   private segments = [
-    {
-      minValue: 0,
-      maxValue: 30,
-      color: 'red'
-    },
-    {
-      minValue: 30,
-      maxValue: 60,
-      color: 'yellow'
-    },
-    {
-      minValue: 60,
-      maxValue: 100,
-      color: 'green'
-    }
+    // {
+    //   minValue: 0,
+    //   maxValue: 30,
+    //   color: 'red'
+    // },
+    // {
+    //   minValue: 30,
+    //   maxValue: 60,
+    //   color: 'yellow'
+    // },
+    // {
+    //   minValue: 60,
+    //   maxValue: 100,
+    //   color: 'green'
+    // }
   ];
 
-  private scale: ScaleLinear<number, number>;
   private ticks: number[];
   private tickData: number[];
   private degreeRange: number;
@@ -72,6 +75,10 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
     ? this.calculateOuterRadius() 
     : this.outerArcRadius;
 
+    this.axisRadius = this.axisRadius == null
+    ? this.calculateAxisRadius()
+    : this.axisRadius;
+
     this.arcs = this.getArcs();
   }
 
@@ -88,6 +95,7 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
       console.log('arcs', this.arcs);
       console.log('innerRadius', this.innerArcRadius);
       console.log('outerRadius', this.outerArcRadius);
+      console.log('axisRadius', this.axisRadius);
     });
   }
 
@@ -160,7 +168,11 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
   }
 
   private getScale(): ScaleLinear<number, number> {
-    return scaleLinear().range([0, 1]).domain([this.minValue, this.maxValue]);
+    // return scaleLinear().range([0, 1]).domain([this.minValue, this.maxValue]);
+    return scaleLinear()
+    .range([0, this.getDegreeRange()])
+    .nice()
+    .domain([this.minValue, this.maxValue]);
   }
 
   private calculateInnerRadius(): number {
@@ -176,6 +188,14 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
       return this.height * 0.4;
     } else {
       return this.width * 0.4;
+    }
+  }
+
+  private calculateAxisRadius(): number {
+    if(this.width > this.height) {
+      return this.height * 0.35;
+    } else {
+      return this.width * 0.35;
     }
   }
 }

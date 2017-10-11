@@ -29,20 +29,19 @@
     </path>
   </g> -->
 
-  <!-- <svg:g ngx-charts-gauge-axis
-  *ngIf="showAxis"
-  [bigSegments]="bigSegments"
-  [smallSegments]="smallSegments"
-  [min]="min"
-  [max]="max"
-  [radius]="outerRadius"
-  [angleSpan]="angleSpan"
-  [valueScale]="valueScale"
-  [startAngle]="startAngle"
-  [tickFormatting]="axisTickFormatting">
-</svg:g>  -->
-
-<!-- [attr.transform]="textTransform" -->
+  <svg:g [attr.transform]="translate">
+    <svg:g ngx-charts-gauge-axis
+      [bigSegments]="majorTicks"
+      [smallSegments]="minorTicks"
+      [min]="minValue"
+      [max]="maxValue"
+      [startAngle]="minAngle"
+      [radius]="axisRadius"
+      [angleSpan]="getDegreeRange()"
+      [valueScale]="scale"
+    >
+    </svg:g> 
+  </svg:g>
 
   <svg:g [attr.transform]="translate">
     <svg:text #textEl
@@ -54,14 +53,14 @@
     </svg:text>
   </svg:g>
 
-<svg:g class="label" transform="translate(150,150)">
-  <text transform="rotate(-90) translate(0,-140)">0</text>
-  <text transform="rotate(-54) translate(0,-140)">2</text>
-  <text transform="rotate(-18) translate(0,-140)">4</text>
-  <text transform="rotate(18.000000000000014) translate(0,-140)">6</text>
-  <text transform="rotate(54) translate(0,-140)">8</text>
-  <text transform="rotate(90) translate(0,-140)">10</text>
-</g>
+  <!-- <svg:g class="label" transform="translate(150,150)">
+    <text transform="rotate(-90) translate(0,-140)">0</text>
+    <text transform="rotate(-54) translate(0,-140)">2</text>
+    <text transform="rotate(-18) translate(0,-140)">4</text>
+    <text transform="rotate(18.000000000000014) translate(0,-140)">6</text>
+    <text transform="rotate(54) translate(0,-140)">8</text>
+    <text transform="rotate(90) translate(0,-140)">10</text>
+  </g> -->
 
   <svg:g class="pointer" transform="translate(150,150)">
     <path d="M5,0C4.998858447488584,-0.030821917808219176,1.6666666666666667,-135,0,-135S-5,0,-5,0S-1.6666666666666667,5,0,5S4.583333333333333,0.4166666666666667,5,0" transform="rotate(73.12315063424927)skewX(-7.776830011765666e-16)scale(1.000000009874762,1.000000009874762)">
