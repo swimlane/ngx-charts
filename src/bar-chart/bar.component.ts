@@ -49,6 +49,7 @@ export class BarComponent implements OnChanges {
   @Input() offset = 0;
   @Input() isActive: boolean = false;
   @Input() stops: any[];
+  @Input() animations: boolean = true;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
@@ -90,8 +91,8 @@ export class BarComponent implements OnChanges {
     } else {
       this.hasGradient = false;
     }
-
-    this.animateToCurrentForm();
+    
+    this.updatePathEl();
   }
 
   loadAnimation(): void {
@@ -99,12 +100,15 @@ export class BarComponent implements OnChanges {
     setTimeout(this.update.bind(this), 100);
   }
 
-  animateToCurrentForm(): void {
+  updatePathEl(): void {
     const node = select(this.element).select('.bar');
     const path = this.getPath();
-
-    node.transition().duration(500)
-      .attr('d', path);
+    if (this.animations) {
+     node.transition().duration(500)
+         .attr('d', path);
+    } else {
+      node.attr('d', path);
+    }    
   }
 
   getGradient() {
@@ -126,6 +130,10 @@ export class BarComponent implements OnChanges {
   }
 
   getStartingPath() {
+    if (!this.animations) {
+      return this.getPath();
+    }
+
     let radius = this.getRadius();
     let path;
 

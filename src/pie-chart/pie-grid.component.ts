@@ -21,7 +21,8 @@ import { formatLabel } from '../common/label.helper';
   template: `
     <ngx-charts-chart
       [view]="[width, height]"
-      [showLegend]="false">
+      [showLegend]="false"
+      [animations]="animations">
       <svg:g [attr.transform]="transform" class="pie-grid chart">
         <svg:g
           *ngFor="let series of series"
@@ -32,6 +33,7 @@ import { formatLabel } from '../common/label.helper';
             [data]="series.data"
             [innerRadius]="series.innerRadius"
             [outerRadius]="series.outerRadius"
+            [animations]="animations"
             (select)="onClick($event)"
             ngx-tooltip
             [tooltipDisabled]="tooltipDisabled"
@@ -41,7 +43,7 @@ import { formatLabel } from '../common/label.helper';
             [tooltipTemplate]="tooltipTemplate"
             [tooltipContext]="series.data[0].data"
           />
-          <svg:text
+          <svg:text *ngIf="animations"
             class="label percent-label"
             dy="-0.5em"
             x="0"
@@ -51,6 +53,14 @@ import { formatLabel } from '../common/label.helper';
             [countSuffix]="'%'"
             text-anchor="middle">
           </svg:text>
+          <svg:text *ngIf="!animations"
+            class="label percent-label"
+            dy="-0.5em"
+            x="0"
+            y="5"
+            text-anchor="middle">
+            {{series.percent.toLocaleString()}}%
+          </svg:text>
           <svg:text
             class="label"
             dy="0.5em"
@@ -59,7 +69,7 @@ import { formatLabel } from '../common/label.helper';
             text-anchor="middle">
             {{series.label}}
           </svg:text>
-          <svg:text
+          <svg:text *ngIf="animations"
             class="label"
             dy="1.23em"
             x="0"
@@ -68,6 +78,14 @@ import { formatLabel } from '../common/label.helper';
             ngx-charts-count-up
             [countTo]="series.total"
             [countPrefix]="'Total: '">
+          </svg:text>
+          <svg:text *ngIf="!animations"
+            class="label"
+            dy="1.23em"
+            x="0"
+            [attr.y]="series.outerRadius"
+            text-anchor="middle">
+            Total: {{series.total.toLocaleString()}}
           </svg:text>
         </svg:g>
       </svg:g>

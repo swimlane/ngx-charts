@@ -48,6 +48,7 @@ export interface CardModel {
       [medianSize]="medianSize"
       [valueFormatting]="valueFormatting"
       [labelFormatting]="labelFormatting"
+      [animations]="animations"
       (select)="onClick($event)"
     />
   `,
@@ -67,6 +68,7 @@ export class CardSeriesComponent implements OnChanges {
   @Input() textColor;
   @Input() valueFormatting: any;
   @Input() labelFormatting: any;
+  @Input() animations: boolean = true;
 
   @Output() select = new EventEmitter();
 

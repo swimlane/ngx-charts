@@ -11,6 +11,7 @@
 | results            | object[]    |               | the chart data                                                                                                  |
 | scheme             | object      |               | the color scheme of the chart                                                                                   |
 | customColors       | object      |               | custom colors for the chart. Used to override a color for a specific value                                      |
+| animations         | boolean     | true          | enable animations                                                                                               |
 | legend             | boolean     | false         | show or hide the legend                                                                                         |
 | legendTitle        | string      | 'Legend'      | the legend title                                                                                                |
 | min                | number      | 0             | starting point of the scale                                                                                     |

@@ -40,6 +40,7 @@ export class PieGridSeriesComponent implements OnChanges {
   @Input() data;
   @Input() innerRadius = 70;
   @Input() outerRadius = 80;
+  @Input() animations: boolean = true;
 
   @Output() select = new EventEmitter();
 
@@ -78,7 +79,7 @@ export class PieGridSeriesComponent implements OnChanges {
         fill: color,
         startAngle: other ? 0 : arc.startAngle,
         endAngle: arc.endAngle,
-        animate: !other,
+        animate: this.animations && !other,
         pointerEvents: !other
       };
     });

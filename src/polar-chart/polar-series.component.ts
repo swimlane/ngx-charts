@@ -34,6 +34,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
         [class.inactive]="inactive"
         [attr.fill-opacity]="rangeFillOpacity"
         [fill]="hasGradient ? gradientUrl : seriesColor"
+        [animations]="animations"
       />
       <svg:g ngx-charts-circle
         *ngFor="let circle of circles"
@@ -70,6 +71,7 @@ export class PolarSeriesComponent implements OnChanges {
   @Input() tooltipText: (o: any) => string;
   @Input() gradient: boolean = false;
   @Input() tooltipTemplate: TemplateRef<any>;
+  @Input() animations: boolean = true;
 
   path: string;
   circles: any[];

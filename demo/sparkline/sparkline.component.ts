@@ -14,7 +14,8 @@ import { calculateViewDimensions, ViewDimensions, BaseChartComponent, ColorHelpe
   template: `
     <ngx-charts-chart
       [view]="[width, height]"
-      [showLegend]="false">
+      [showLegend]="false"
+      [animations]="animations">
       <svg:g [attr.transform]="transform" class="line-chart chart">
         <svg:g>
           <svg:g *ngFor="let series of results; trackBy:trackBy">
@@ -27,6 +28,7 @@ import { calculateViewDimensions, ViewDimensions, BaseChartComponent, ColorHelpe
               [scaleType]="scaleType"
               [curve]="curve"
               [rangeFillOpacity]="rangeFillOpacity"
+              [animations]="animations"
             />
           </svg:g>
         </svg:g>
@@ -43,6 +45,7 @@ export class SparklineComponent extends BaseChartComponent {
   @Input() curve: any = curveLinear;
   @Input() schemeType: string = 'linear';
   @Input() valueDomain: number[];
+  @Input() animations: boolean = true;
 
   dims: ViewDimensions;
   xSet: any;

@@ -33,6 +33,7 @@ import { id } from '../utils/id';
       [showLegend]="legend"
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"
+      [animations]="animations"
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)">
@@ -80,6 +81,7 @@ import { id } from '../utils/id';
               [curve]="curve"
               [rangeFillOpacity]="rangeFillOpacity"
               [hasRange]="hasRange"
+              [animations]="animations"
             />
           </svg:g>
 
@@ -135,6 +137,7 @@ import { id } from '../utils/id';
             [scaleType]="scaleType"
             [curve]="curve"
             [hasRange]="hasRange"
+            [animations]="animations"
           />
         </svg:g>
       </svg:g>

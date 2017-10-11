@@ -19,7 +19,8 @@ import { ColorHelper } from '../common/color.helper';
   template: `
     <ngx-charts-chart
       [view]="[width, height]"
-      [showLegend]="false">
+      [showLegend]="false"
+      [animations]="animations">
       <svg:g [attr.transform]="transform" class="tree-map chart">
         <svg:g ngx-charts-tree-map-cell-series
           [colors]="colors"
@@ -30,6 +31,7 @@ import { ColorHelper } from '../common/color.helper';
           [valueFormatting]="valueFormatting"
           [labelFormatting]="labelFormatting"
           [gradient]="gradient"
+          [animations]="animations"
           (select)="onClick($event)"
         />
       </svg:g>

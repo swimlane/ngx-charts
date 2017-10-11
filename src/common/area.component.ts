@@ -44,6 +44,7 @@ export class AreaComponent implements OnChanges {
   @Input() activeLabel;
   @Input() gradient: boolean = false;
   @Input() stops: any[];
+  @Input() animations: boolean = true;
 
   @Output() select = new EventEmitter();
 
@@ -83,7 +84,7 @@ export class AreaComponent implements OnChanges {
       this.hasGradient = false;
     }
 
-    this.animateToCurrentForm();
+    this.updatePathEl();
   }
 
   loadAnimation(): void {
@@ -91,11 +92,15 @@ export class AreaComponent implements OnChanges {
     setTimeout(this.update.bind(this), 100);
   }
 
-  animateToCurrentForm(): void {
+  updatePathEl(): void {
     const node = select(this.element).select('.area');
 
-    node.transition().duration(750)
-      .attr('d', this.path);
+    if (this.animations) {
+      node.transition().duration(750)
+        .attr('d', this.path);
+    } else {
+      node.attr('d', this.path);
+    }
   }
 
   getGradient() {

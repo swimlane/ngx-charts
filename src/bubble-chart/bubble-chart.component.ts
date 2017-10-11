@@ -31,6 +31,7 @@ import { getScaleType, getDomain, getScale } from './bubble-chart.utils';
       [showLegend]="legend"
       [activeEntries]="activeEntries"
       [legendOptions]="legendOptions"
+      [animations]="animations"
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)">
