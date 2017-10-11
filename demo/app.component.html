@@ -24,6 +24,7 @@
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
         [roundEdges]="roundEdges"
+        [yScaleMax]="yScaleMax"
         (select)="select($event)"
         (legendLabelClick)="onLegendLabelClick($event)">
       </ngx-charts-bar-vertical>
@@ -49,6 +50,7 @@
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
         [roundEdges]="roundEdges"
+        [xScaleMax]="xScaleMax"
         (legendLabelClick)="onLegendLabelClick($event)"
         (select)="select($event)">
       </ngx-charts-bar-horizontal>
@@ -76,6 +78,7 @@
         [groupPadding]="groupPadding"
         [roundDomains]="roundDomains"
         [roundEdges]="roundEdges"
+        [yScaleMax]="yScaleMax"
         (select)="select($event)">
       </ngx-charts-bar-vertical-2d>
       <ngx-charts-bar-horizontal-2d
@@ -102,6 +105,7 @@
         [groupPadding]="groupPadding"
         [roundDomains]="roundDomains"
         [roundEdges]="roundEdges"
+        [xScaleMax]="xScaleMax"
         (select)="select($event)">
       </ngx-charts-bar-horizontal-2d>
       <ngx-charts-bar-vertical-stacked
@@ -126,6 +130,7 @@
         [showGridLines]="showGridLines"
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
+        [yScaleMax]="yScaleMax"
         (select)="select($event)">
       </ngx-charts-bar-vertical-stacked>
       <ngx-charts-bar-horizontal-stacked
@@ -150,6 +155,7 @@
         [showGridLines]="showGridLines"
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
+        [xScaleMax]="xScaleMax"
         (select)="select($event)">
       </ngx-charts-bar-horizontal-stacked>
       <ngx-charts-bar-vertical-normalized
@@ -263,6 +269,10 @@
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [autoScale]="autoScale"
+        [xScaleMin]="xScaleMin"
+        [xScaleMax]="xScaleMax"
+        [yScaleMin]="yScaleMin"
+        [yScaleMax]="yScaleMax"
         [timeline]="timeline"
         [showGridLines]="showGridLines"
         [curve]="curve"
@@ -354,6 +364,10 @@
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [autoScale]="autoScale"
+        [xScaleMin]="xScaleMin"
+        [xScaleMax]="xScaleMax"
+        [yScaleMin]="yScaleMin"
+        [yScaleMax]="yScaleMax"
         [timeline]="timeline"
         [showGridLines]="showGridLines"
         [roundDomains]="roundDomains"
@@ -380,6 +394,10 @@
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [timeline]="timeline"
+        [xScaleMin]="xScaleMin"
+        [xScaleMax]="xScaleMax"
+        [yScaleMin]="yScaleMin"
+        [yScaleMax]="yScaleMax"
         [showGridLines]="showGridLines"
         [roundDomains]="roundDomains"
         [tooltipDisabled]="tooltipDisabled"
@@ -828,8 +846,8 @@
           <label>Width:</label><br />
           <input type="number" [(ngModel)]="width"><br />
           <label>Height:</label><br />
-          <input type="number" [(ngModel)]="height"><br />
-          <button (click)="applyDimensions()">Apply dimensions</button>
+          <input type="number" [(ngModel)]="height"><br /><br />
+          <button class="btn btn-primary" (click)="applyDimensions()">Apply dimensions</button>
         </div>
       </div>
     </div>
@@ -1093,6 +1111,33 @@
 
       <div *ngIf="chart.options.includes('maxRadius')">
         <label>Maximum Radius:</label><input type="number" [(ngModel)]="maxRadius">
+      </div>
+
+      <div *ngIf="chart.options.includes('xScaleMin')">
+        <label></label><br />
+        <ngx-date-time
+          [inputType]="'datetime'"
+          label="Minimum X-Scale value"
+          [(ngModel)]="xScaleMin">
+        </ngx-date-time>        
+      </div>
+      <div *ngIf="chart.options.includes('xScaleMax')">
+        <ngx-date-time *ngIf="!chartType.startsWith('bar-horizontal')"
+          [inputType]="'datetime'"
+          label="Maximum X-Scale value"
+          [(ngModel)]="xScaleMax">
+        </ngx-date-time>    
+        <input *ngIf="chartType.startsWith('bar-horizontal')"
+          type="number" [(ngModel)]="xScaleMax"><br />    
+      </div>
+
+      <div *ngIf="chart.options.includes('yScaleMin')">
+        <label>Minimum Y-Scale value</label><br />
+        <input type="number" [(ngModel)]="yScaleMin"><br />
+      </div>
+      <div *ngIf="chart.options.includes('yScaleMax')">
+        <label>Maximum Y-Scale value</label><br />
+        <input type="number" [(ngModel)]="yScaleMax"><br />
       </div>
 
     </div>

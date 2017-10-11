@@ -120,7 +120,7 @@ export class BarVertical2DComponent extends BaseChartComponent {
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
   @Input() roundEdges: boolean = true;
-  @Input() yAxisMinScale: number = 0;
+  @Input() yScaleMax: number;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -235,7 +235,10 @@ export class BarVertical2DComponent extends BaseChartComponent {
     }
 
     const min = Math.min(0, ...domain);
-    const max = Math.max(this.yAxisMinScale, ...domain);
+    const max = this.yScaleMax
+      ? Math.max(this.yScaleMax, ...domain)
+      : Math.max(...domain);
+      
     return [min, max];
   }
 

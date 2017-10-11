@@ -90,7 +90,7 @@
     "@angular/platform-browser": "^4.3.6",
     "@angular/platform-browser-dynamic": "^4.3.6",
     "@angular/platform-server": "^4.3.6",
-    "@swimlane/ngx-ui": "^18.0.6",
+    "@swimlane/ngx-ui": "^18.1.0",
     "@types/d3-array": "^1.2.1",
     "@types/d3-brush": "1.0.7",
     "@types/d3-color": "^1.0.5",
