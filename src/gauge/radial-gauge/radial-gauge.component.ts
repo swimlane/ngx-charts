@@ -117,7 +117,7 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
   }
 
   public getTextTransform(): string {
-    const scale: number = this.getElementScale(0.005);
+    const scale: number = this.getElementScale(0.004);
     return `scale(${scale}, ${scale})`;
   }
 
@@ -143,8 +143,8 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
           endAngle: this.getSegmentAngle(this.segments[i].maxValue),
           innerRadius: this.dimensions.innerArcRadius,
           outerRadius: this.dimensions.outerArcRadius,
-          // color: this.getValueOr(this.segments[i].color, 
-          //   this.colors.getColor(this.segments[i].minValue))
+          color: this.getValueOr(this.segments[i].color, 
+            this.colors.getColor(this.segments[i].minValue))
         };
         result.push(arc);
       }
@@ -155,7 +155,7 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
           endAngle: this.getTickAngle(i + 1),
           innerRadius: this.dimensions.innerArcRadius,
           outerRadius: this.dimensions.outerArcRadius,
-          // color: this.colors.getColor(this.ticks[i])
+          color: this.colors.getColor(this.ticks[i])
         };
         result.push(arc);
       }
@@ -194,7 +194,7 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
   }
 
   private getPointerLocation(): number {
-    return this.rad2deg(this.getSegmentAngle(this.value));
+    return this.minAngle + this.getScale()(this.value);
   }
 
   private getSegmentAngle(value: number): number {
