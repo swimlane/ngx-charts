@@ -159,11 +159,10 @@ export class AppComponent implements OnInit {
   gaugePreviousValue: number = 70;
 
   // radial gauge
-  radialGaugeUnit: string = '[%]';
+  radialGaugeDisplayValue: string = '50 [%]';
   radialGaugeShowValue: boolean = true;
-  radialGaugeShowUnit: boolean = true;
-  radialGaugeMaxAngle: number = 90;
-  radialGaugeMinAngle: number = -90;
+  radialGaugeMaxAngle: number = 120;
+  radialGaugeMinAngle: number = -120;
 
   // Combo Chart
   barChart: any[] = barChart;

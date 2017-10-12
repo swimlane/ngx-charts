@@ -284,8 +284,8 @@ const chartGroups = [
         name: 'Radial Gauge',
         selector: 'radial-gauge',
         inputFormat: '',
-        options: ['colorScheme', 'value', 'min', 'max', 'unit', 'showValue', 'showUnit',
-          'minAngle', 'maxAngle', 'largeSegments', 'smallSegments']
+        options: ['colorScheme', 'value', 'min', 'max', 'displayValue', 'showValue',
+          'minAngle', 'maxAngle', 'largeSegments']
       }
     ]
   },

@@ -19,9 +19,9 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
 
   public arcs = [];
   public dimensions: any = {};
+  public displayingValue: string;
   
   @Input() public displayValue: string;
-  @Input() public unit: string;
   @Input() public showValue: boolean = true;
   @Input() public showUnit: boolean = true;
   @Input() public value: number = 20;
@@ -34,7 +34,6 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
   @Input() public outerArcRadius: number;
 
   @Input() public majorTicks = 5;
-  @Input() public minorTicks = 10;
   @Input() public axisRadius: number;
 
   @Input() public pointerWidth: number;
@@ -86,7 +85,7 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
 
     console.log(this.dimensions);
 
-    this.displayValue = this.getValueOr(this.displayValue, this.value.toString());
+    this.displayingValue = this.getValueOr(this.displayValue, this.value.toString());
 
     this.colors = new ColorHelper(this.scheme, this.schemeType, 
       [this.minValue, this.maxValue], this.customColors);
@@ -96,7 +95,7 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
 
   public getTranslate(): string {
     const twidth = this.width / 2;
-    const theight = this.height * 0.8;
+    const theight = this.height / 2;
     return `translate(${twidth}, ${theight})`;
   }
 
@@ -153,13 +152,13 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
 
   private getDimensions(): any {
     return {
-      innerArcRadius: this.getValueOrFactor(this.innerArcRadius, 0.3),
-      outerArcRadius: this.getValueOrFactor(this.outerArcRadius, 0.53),
-      axisRadius: this.getValueOrFactor(this.axisRadius, 0.5),
-      pointerWidth: this.getValueOrFactor(this.pointerWidth, 0.05),
-      pointerHeadLength: this.getValueOrFactor(this.pointerHeadLength, 0.63),
-      pointerTailLength: this.getValueOrFactor(this.pointerTailLength, 0.02),
-      axisTextScale: this.getElementScale(0.003)
+      innerArcRadius: this.getValueOrFactor(this.innerArcRadius, 0.1),
+      outerArcRadius: this.getValueOrFactor(this.outerArcRadius, 0.28),
+      axisRadius: this.getValueOrFactor(this.axisRadius, 0.27),
+      pointerWidth: this.getValueOrFactor(this.pointerWidth, 0.03),
+      pointerHeadLength: this.getValueOrFactor(this.pointerHeadLength, 0.3),
+      pointerTailLength: this.getValueOrFactor(this.pointerTailLength, 0.01),
+      axisTextScale: this.getElementScale(0.002)
     };
   }
 
@@ -174,12 +173,10 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
   }
 
   private getElementScale(factor: number): number {
-    const rwidth = this.width / 2;
-    const rheight = this.height;
-    if(rwidth > rheight) {
-      return rheight * factor;
+    if(this.width > this.height) {
+      return this.height * factor;
     } else {
-      return rwidth * factor;
+      return this.width * factor;
     }
   }
 

@@ -555,13 +555,12 @@
         [minValue]="gaugeMin"
         [maxValue]="gaugeMax"
         [value]="gaugeValue"
-        [unit]="radialGaugeUnit"
+        [displayValue]="radialGaugeDisplayValue"
         [showValue]="radialGaugeShowValue"
         [showUnit]="radialGaugeShowUnit"
         [minAngle]="radialGaugeMinAngle"
         [maxAngle]="radialGaugeMaxAngle"
         [majorTicks]="gaugeLargeSegments"
-        [majorTicks]="gaugeSmallSegments"
         >
       </ngx-charts-radial-gauge>
       <div *ngIf="chartType === 'plot-demo'">
@@ -1049,17 +1048,13 @@
         <label>Units:</label><br />
         <input type="text" [(ngModel)]="gaugeUnits"><br />
       </div>
-      <div *ngIf="chart.options.includes('unit')">
-          <label>Units: </label><br />
-          <input type="text" [(ngModel)]="radialGaugeUnit"><br />
+      <div *ngIf="chart.options.includes('displayValue')">
+          <label>Display value: </label><br />
+          <input type="text" [(ngModel)]="radialGaugeDisplayValue"><br />
       </div>
       <div *ngIf="chart.options.includes('showValue')">
-          <label>Units: </label><br />
+          <label>Show value: </label><br />
           <input type="checkbox" [(ngModel)]="radialGaugeShowValue"><br />
-      </div>
-      <div *ngIf="chart.options.includes('showUnit')">
-          <label>Units: </label><br />
-          <input type="checkbox" [(ngModel)]="radialGaugeShowUnit"><br />
       </div>
       <div *ngIf="chart.options.includes('minAngle')">
           <label>Minimal angle: </label><br />

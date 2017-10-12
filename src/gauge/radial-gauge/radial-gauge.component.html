@@ -22,7 +22,6 @@
       <svg:g class="axis">
           <svg:g ngx-charts-gauge-axis
             [bigSegments]="majorTicks"
-            [smallSegments]="minorTicks"
             [min]="minValue"
             [max]="maxValue"
             [startAngle]="minAngle"
@@ -41,8 +40,7 @@
             [style.textAnchor]="'middle'"
             [attr.transform]="getTextTransform()"
             alignment-baseline="central">
-            <tspan *ngIf="showValue" x="0" dy="1.5em">{{ displayValue }}</tspan>
-            <tspan *ngIf="showUnit" x="0" dy="1.7em">{{ unit }}</tspan>
+            <tspan *ngIf="showValue" x="0" dy="1.5em">{{ displayingValue }}</tspan>
           </svg:text>
       </svg:g>
 
