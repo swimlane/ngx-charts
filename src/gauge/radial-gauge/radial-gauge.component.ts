@@ -21,7 +21,7 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
   public dimensions: any = {};
   
   @Input() public displayValue: string;
-  @Input() public unit: string = 'percent'; // delete later
+  @Input() public unit: string;
   @Input() public showValue: boolean = true;
   @Input() public showUnit: boolean = true;
   @Input() public value: number = 20;
