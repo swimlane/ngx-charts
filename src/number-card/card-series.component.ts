@@ -5,10 +5,8 @@ import {
   EventEmitter,
   OnChanges,
   SimpleChanges,
-  ChangeDetectionStrategy,
-  NgZone
+  ChangeDetectionStrategy
 } from '@angular/core';
-import { gridSize, gridLayout } from '../common/grid-layout.helper';
 import { invertColor } from '../utils/color-utils';
 
 export interface CardModel {
@@ -75,8 +73,6 @@ export class CardSeriesComponent implements OnChanges {
   cards: CardModel[];
   emptySlots: any[];
   medianSize: number;
-
-  constructor(private zone: NgZone) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();

@@ -9,7 +9,6 @@ import {
  } from '@angular/core';
 import {
   trigger,
-  state,
   style,
   animate,
   transition

@@ -9,7 +9,6 @@ import {
   ContentChild,
   TemplateRef
 } from '@angular/core';
-import { PathLocationStrategy } from '@angular/common';
 import { scaleLinear, scalePoint, scaleTime } from 'd3-scale';
 import { curveLinear } from 'd3-shape';
 

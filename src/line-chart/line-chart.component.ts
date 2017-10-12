@@ -11,12 +11,10 @@ import {
 } from '@angular/core';
 import {
   trigger,
-  state,
   style,
   animate,
   transition
 } from '@angular/animations';
-import { PathLocationStrategy } from '@angular/common';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
 import { curveLinear } from 'd3-shape';
 

@@ -6,7 +6,7 @@ import {
   ChangeDetectionStrategy,
   TemplateRef
 } from '@angular/core';
-import { area, radialLine } from 'd3-shape';
+import { radialLine } from 'd3-shape';
 
 import { id } from '../utils/id';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';

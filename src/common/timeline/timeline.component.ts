@@ -1,6 +1,6 @@
 import {
   Component, Input, Output, EventEmitter, ElementRef,
-  OnChanges, ChangeDetectionStrategy, NgZone,
+  OnChanges, ChangeDetectionStrategy,
   ChangeDetectorRef, SimpleChanges, ViewEncapsulation
 } from '@angular/core';
 import { brushX } from 'd3-brush';
@@ -64,7 +64,6 @@ export class Timeline implements OnChanges {
 
   constructor(
     element: ElementRef,
-    private zone: NgZone,
     private cd: ChangeDetectorRef) {
       this.element = element.nativeElement;
   }

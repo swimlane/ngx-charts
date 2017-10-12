@@ -132,7 +132,6 @@ export class BarComponent implements OnChanges {
     let radius = this.getRadius();
     let path;
 
-    const edges: boolean[] = [false, false, false, false];
     if (this.roundEdges) {
       if (this.orientation === 'vertical') {
         radius = Math.min(this.height, radius);

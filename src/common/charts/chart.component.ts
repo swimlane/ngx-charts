@@ -4,7 +4,6 @@ import {
 } from '@angular/core';
 import {
   trigger,
-  state,
   style,
   animate,
   transition
@@ -84,7 +83,7 @@ export class ChartComponent implements OnChanges {
   constructor(
     private vcr: ViewContainerRef,
     private tooltipService: TooltipService) {
-    this.tooltipService.injectionService.setRootViewContainer(vcr);
+    this.tooltipService.injectionService.setRootViewContainer(this.vcr);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

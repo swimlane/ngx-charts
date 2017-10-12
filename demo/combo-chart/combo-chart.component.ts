@@ -12,7 +12,6 @@ import {
   ContentChild,
   TemplateRef
 } from '@angular/core';
-import { PathLocationStrategy } from '@angular/common';
 import {
   trigger,
   state,

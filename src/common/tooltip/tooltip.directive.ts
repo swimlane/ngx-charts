@@ -1,7 +1,7 @@
 import {
   Directive, Input, Output, EventEmitter, HostListener,
   ViewContainerRef,
-  ElementRef, Renderer, OnDestroy, NgZone
+  Renderer, OnDestroy
 } from '@angular/core';
 
 import { PlacementTypes } from './position';
@@ -54,9 +54,7 @@ export class TooltipDirective implements OnDestroy {
   constructor(
     private tooltipService: TooltipService,
     private viewContainerRef: ViewContainerRef,
-    private renderer: Renderer,
-    private element: ElementRef,
-    private zone: NgZone) {
+    private renderer: Renderer) {
   }
 
   ngOnDestroy(): void {

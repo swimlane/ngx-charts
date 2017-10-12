@@ -6,7 +6,6 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy
 } from '@angular/core';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { scaleLinear, scaleTime, scaleBand } from 'd3-scale';
 import { brushX } from 'd3-brush';
 import { select, event as d3event } from 'd3-selection';

@@ -1,7 +1,7 @@
 import {
   Component, Input, Output, EventEmitter, ElementRef,
   SimpleChanges, OnChanges, ViewChild, ChangeDetectionStrategy,
-  ChangeDetectorRef, NgZone, OnDestroy, ViewEncapsulation
+  ChangeDetectorRef, NgZone, OnDestroy
 } from '@angular/core';
 import { trimLabel } from '../common/trim-label.helper';
 import { roundedRect } from '../common/shape.helper';

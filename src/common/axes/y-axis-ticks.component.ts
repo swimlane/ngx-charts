@@ -13,7 +13,6 @@ import {
 import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
 import { roundedRect } from '../../common/shape.helper';
-import { scaleBand } from 'd3-scale';
 
 @Component({
   selector: 'g[ngx-charts-y-axis-ticks]',
