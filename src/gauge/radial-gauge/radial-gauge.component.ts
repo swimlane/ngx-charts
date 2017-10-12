@@ -75,15 +75,16 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
   public update(): void {
     super.update();
 
-    console.log('width', this.width);
-    console.log('height', this.height);
+    // console.log('width', this.width);
+    // console.log('height', this.height);
 
-    this.ticks = this.getScale().ticks(this.majorTicks);
+    // this.ticks = this.getScale().ticks(this.majorTicks);
+    this.ticks = this.getTicks();
     this.degreeRange = this.getDegreeRange();
 
     this.dimensions = this.getDimensions();
 
-    console.log(this.dimensions);
+    // console.log(this.dimensions);
 
     this.displayingValue = this.getValueOr(this.displayValue, this.value.toString());
 
@@ -91,6 +92,18 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
       [this.minValue, this.maxValue], this.customColors);
 
     this.arcs = this.getArcs();
+
+    // console.log('bigSegments', this.majorTicks);
+    // console.log('min', this.minValue);
+    // console.log('max', this.maxValue);
+    // console.log('minAngle', this.minAngle);
+    // console.log('span', this.getDegreeRange());
+    // console.log('valueScale', this.getScale());
+    // console.log('textScale', this.dimensions.axisTextScale);
+    console.log('majorTicks', this.majorTicks);
+    console.log('scale', this.getScale()(100));
+    console.log('ticks', this.ticks);
+    console.log('arcs', this.arcs);
   }
 
   public getTranslate(): string {
@@ -130,8 +143,8 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
           endAngle: this.getSegmentAngle(this.segments[i].maxValue),
           innerRadius: this.dimensions.innerArcRadius,
           outerRadius: this.dimensions.outerArcRadius,
-          color: this.getValueOr(this.segments[i].color, 
-            this.colors.getColor(this.segments[i].minValue))
+          // color: this.getValueOr(this.segments[i].color, 
+          //   this.colors.getColor(this.segments[i].minValue))
         };
         result.push(arc);
       }
@@ -142,7 +155,7 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
           endAngle: this.getTickAngle(i + 1),
           innerRadius: this.dimensions.innerArcRadius,
           outerRadius: this.dimensions.outerArcRadius,
-          color: this.colors.getColor(this.ticks[i])
+          // color: this.colors.getColor(this.ticks[i])
         };
         result.push(arc);
       }
@@ -190,7 +203,8 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
   }
 
   private getTickAngle(index: number): number {
-    const degree = this.minAngle + (this.ticks[index] * this.getDegreeRange() / this.getValueRange());
+    const degree = this.minAngle + 
+      (this.ticks[index] * this.getDegreeRange() / this.getValueRange());
     return this.deg2rad(degree);
   }
 
@@ -210,6 +224,15 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
     return this.maxValue - this.minValue;
   }
 
+  private getTicks(): any {
+    const result = [];
+    for(let i = 0; i <= this.majorTicks; i++) {
+      const tick = i * (this.getValueRange() / this.majorTicks);
+      result.push(tick);
+    }
+    return result;
+  }
+
   private getPointerData(): any {
     return [
       [this.dimensions.pointerWidth / 2, 0],
@@ -218,5 +241,12 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
       [0, this.dimensions.pointerTailLength],
       [this.dimensions.pointerWidth / 2, 0]
     ];
+    // return [
+    //   [this.getValueOr(this.dimensions.pointerWidth / 2, 0), 0],
+    //   [0, this.getValueOr(- this.dimensions.pointerHeadLength, 0)],
+    //   [this.getValueOr(- this.dimensions.pointerWidth / 2, 0), 0],
+    //   [0, this.getValueOr(this.dimensions.pointerTailLength, 0)],
+    //   [this.getValueOr(this.dimensions.pointerWidth / 2, 0), 0]
+    // ];
   }
 }
