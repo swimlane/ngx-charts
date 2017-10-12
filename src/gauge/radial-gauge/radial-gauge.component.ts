@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewEncapsulation, 
+import { Component, AfterViewInit, ViewEncapsulation, 
   ChangeDetectionStrategy, Input } from '@angular/core';
 
 import { ScaleLinear, scaleLinear } from 'd3-scale';
@@ -15,10 +15,10 @@ import { ColorHelper } from '../../common/color.helper';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RadialGaugeComponent extends BaseChartComponent implements OnInit, AfterViewInit {
+export class RadialGaugeComponent extends BaseChartComponent implements AfterViewInit {
 
   public arcs = [];
-  public textTransform: string = 'scale(1.5, 1.5)';
+  public dimensions: any = {};
   
   @Input() public displayValue: string;
   @Input() public unit: string = 'percent'; // delete later
@@ -45,70 +45,53 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
   private colors: ColorHelper;
 
   private segments = [
-    {
-      minValue: 0,
-      maxValue: 30,
-      color: 'red'
-    },
-    {
-      minValue: 30,
-      maxValue: 60,
-      color: 'yellow'
-    },
-    {
-      minValue: 60,
-      maxValue: 100,
-      color: 'green'
-    }
+    // {
+    //   minValue: 0,
+    //   maxValue: 30,
+    //   color: 'red'
+    // },
+    // {
+    //   minValue: 30,
+    //   maxValue: 60,
+    //   color: 'yellow'
+    // },
+    // {
+    //   minValue: 60,
+    //   maxValue: 100,
+    //   color: 'green'
+    // }
   ];
 
   private ticks: number[];
   private degreeRange: number;
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
+    super.ngAfterViewInit();
+
+    setTimeout(() => {
+      console.log('afterViewInit');
+    });
+  }
+
+  public update(): void {
+    super.update();
+
+    console.log('width', this.width);
+    console.log('height', this.height);
+
     this.ticks = this.getScale().ticks(this.majorTicks);
     this.degreeRange = this.getDegreeRange();
 
-    this.displayValue = this.getValueOr(this.displayValue, this.value.toString());
-    this.innerArcRadius = this.getValueOrFactor(this.innerArcRadius, 0.3);
-    this.outerArcRadius = this.getValueOrFactor(this.outerArcRadius, 0.6);
-    this.axisRadius = this.getValueOrFactor(this.axisRadius, 0.55);
+    this.dimensions = this.getDimensions();
 
-    this.pointerWidth = this.getValueOrFactor(this.pointerWidth, 0.05);
-    this.pointerHeadLength = this.getValueOrFactor(this.pointerHeadLength, 0.63);
-    this.pointerTailLength = this.getValueOrFactor(this.pointerTailLength, 0.02);
+    console.log(this.dimensions);
+
+    this.displayValue = this.getValueOr(this.displayValue, this.value.toString());
 
     this.colors = new ColorHelper(this.scheme, this.schemeType, 
       [this.minValue, this.maxValue], this.customColors);
 
     this.arcs = this.getArcs();
-
-  }
-
-  ngAfterViewInit(): void {
-    super.ngAfterViewInit();
-
-    setTimeout(() => {
-
-      console.log('afterViewInit');
-
-      console.log('minValue', this.minValue);
-      console.log('maxValue', this.maxValue);
-      console.log('value', this.value);
-      console.log('minAngle', this.minAngle);
-      console.log('maxAngle', this.maxAngle);
-
-      console.log('ticks', this.ticks);
-      console.log('degreeRange', this.degreeRange);
-      console.log('arcs', this.arcs);
-      console.log('innerRadius', this.innerArcRadius);
-      console.log('outerRadius', this.outerArcRadius);
-      console.log('axisRadius', this.axisRadius);
-      console.log('pointerWidth', this.pointerWidth);
-      console.log('pointerHeadLength', this.pointerHeadLength);
-      console.log('pointerTailLength', this.pointerTailLength);
-      console.log('colors', this.colors);
-    });
   }
 
   public getTranslate(): string {
@@ -119,6 +102,11 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
 
   public movePointer(): string {
     return `rotate(${this.getPointerLocation()})`;
+  }
+
+  public getTextTransform(): string {
+    const scale: number = this.getElementScale(0.005);
+    return `scale(${scale}, ${scale})`;
   }
 
   public getPointer(): string {
@@ -141,9 +129,10 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
         const arc = {
           startAngle: this.getSegmentAngle(this.segments[i].minValue),
           endAngle: this.getSegmentAngle(this.segments[i].maxValue),
-          innerRadius: this.innerArcRadius,
-          outerRadius: this.outerArcRadius,
-          color: this.getValueOr(this.segments[i].color, this.colors.getColor(this.segments[i].minValue))
+          innerRadius: this.dimensions.innerArcRadius,
+          outerRadius: this.dimensions.outerArcRadius,
+          color: this.getValueOr(this.segments[i].color, 
+            this.colors.getColor(this.segments[i].minValue))
         };
         result.push(arc);
       }
@@ -152,14 +141,26 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
         const arc = {
           startAngle: this.getTickAngle(i),
           endAngle: this.getTickAngle(i + 1),
-          innerRadius: this.innerArcRadius,
-          outerRadius: this.outerArcRadius,
+          innerRadius: this.dimensions.innerArcRadius,
+          outerRadius: this.dimensions.outerArcRadius,
           color: this.colors.getColor(this.ticks[i])
         };
         result.push(arc);
       }
     }
     return result;
+  }
+
+  private getDimensions(): any {
+    return {
+      innerArcRadius: this.getValueOrFactor(this.innerArcRadius, 0.3),
+      outerArcRadius: this.getValueOrFactor(this.outerArcRadius, 0.53),
+      axisRadius: this.getValueOrFactor(this.axisRadius, 0.5),
+      pointerWidth: this.getValueOrFactor(this.pointerWidth, 0.05),
+      pointerHeadLength: this.getValueOrFactor(this.pointerHeadLength, 0.63),
+      pointerTailLength: this.getValueOrFactor(this.pointerTailLength, 0.02),
+      axisTextScale: this.getElementScale(0.003)
+    };
   }
 
   private getValueOr(value: any, or: any) {
@@ -173,10 +174,12 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
   }
 
   private getElementScale(factor: number): number {
-    if(this.width > this.height) {
-      return this.height * factor;
+    const rwidth = this.width / 2;
+    const rheight = this.height;
+    if(rwidth > rheight) {
+      return rheight * factor;
     } else {
-      return this.width * factor;
+      return rwidth * factor;
     }
   }
 
@@ -212,11 +215,11 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
 
   private getPointerData(): any {
     return [
-      [this.pointerWidth / 2, 0],
-      [0, - this.pointerHeadLength],
-      [- this.pointerWidth / 2, 0],
-      [0, this.pointerTailLength],
-      [this.pointerWidth / 2, 0]
+      [this.dimensions.pointerWidth / 2, 0],
+      [0, - this.dimensions.pointerHeadLength],
+      [- this.dimensions.pointerWidth / 2, 0],
+      [0, this.dimensions.pointerTailLength],
+      [this.dimensions.pointerWidth / 2, 0]
     ];
   }
 }

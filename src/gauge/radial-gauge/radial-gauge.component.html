@@ -26,9 +26,10 @@
             [min]="minValue"
             [max]="maxValue"
             [startAngle]="minAngle"
-            [radius]="axisRadius"
+            [radius]="dimensions.axisRadius"
             [angleSpan]="getDegreeRange()"
             [valueScale]="getScale()"
+            [textScale]="dimensions.axisTextScale"
           >
           </svg:g> 
       </svg:g>
@@ -36,12 +37,12 @@
       <!-- label -->
 
       <svg:g class="label">
-          <svg:text #textEl
+          <svg:text
             [style.textAnchor]="'middle'"
-            [attr.transform]="textTransform"
+            [attr.transform]="getTextTransform()"
             alignment-baseline="central">
-            <tspan *ngIf="showValue" x="0" dy="0">{{ displayValue }}</tspan>
-            <tspan *ngIf="showUnit" x="0" dy="1.2em">{{ unit }}</tspan>
+            <tspan *ngIf="showValue" x="0" dy="1.5em">{{ displayValue }}</tspan>
+            <tspan *ngIf="showUnit" x="0" dy="1.7em">{{ unit }}</tspan>
           </svg:text>
       </svg:g>
 
