@@ -20,46 +20,46 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
   public arcs = [];
   public textTransform: string = 'scale(1.5, 1.5)';
   
-  public displayValue: string;
-  public unit: string = 'percent'; // delete later
-
+  @Input() public displayValue: string;
+  @Input() public unit: string = 'percent'; // delete later
   @Input() public showValue: boolean = true;
   @Input() public showUnit: boolean = true;
   @Input() public value: number = 20;
-  @Input() public majorTicks = 5;
-  @Input() public minorTicks = 10;
   @Input() public minValue = 0;
   @Input() public maxValue = 100;
+
   @Input() public minAngle = -90;
   @Input() public maxAngle = 90;
   @Input() public innerArcRadius: number;
   @Input() public outerArcRadius: number;
+
+  @Input() public majorTicks = 5;
+  @Input() public minorTicks = 10;
   @Input() public axisRadius: number;
+
   @Input() public pointerWidth: number;
   @Input() public pointerHeadLength: number;
   @Input() public pointerTailLength: number;
-  public pointerColor: string;
-  public arcColor: string;
-  public colors: ColorHelper;
+  @Input() public pointerColor: string;
 
-  // private domain: any;
+  private colors: ColorHelper;
 
   private segments = [
-    // {
-    //   minValue: 0,
-    //   maxValue: 30,
-    //   color: 'red'
-    // },
-    // {
-    //   minValue: 30,
-    //   maxValue: 60,
-    //   color: 'yellow'
-    // },
-    // {
-    //   minValue: 60,
-    //   maxValue: 100,
-    //   color: 'green'
-    // }
+    {
+      minValue: 0,
+      maxValue: 30,
+      color: 'red'
+    },
+    {
+      minValue: 30,
+      maxValue: 60,
+      color: 'yellow'
+    },
+    {
+      minValue: 60,
+      maxValue: 100,
+      color: 'green'
+    }
   ];
 
   private ticks: number[];
@@ -78,9 +78,11 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
     this.pointerHeadLength = this.getValueOrFactor(this.pointerHeadLength, 0.63);
     this.pointerTailLength = this.getValueOrFactor(this.pointerTailLength, 0.02);
 
-    this.arcs = this.getArcs();
     this.colors = new ColorHelper(this.scheme, this.schemeType, 
       [this.minValue, this.maxValue], this.customColors);
+
+    this.arcs = this.getArcs();
+
   }
 
   ngAfterViewInit(): void {
@@ -140,7 +142,8 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
           startAngle: this.getSegmentAngle(this.segments[i].minValue),
           endAngle: this.getSegmentAngle(this.segments[i].maxValue),
           innerRadius: this.innerArcRadius,
-          outerRadius: this.outerArcRadius
+          outerRadius: this.outerArcRadius,
+          color: this.getValueOr(this.segments[i].color, this.colors.getColor(this.segments[i].minValue))
         };
         result.push(arc);
       }
@@ -150,22 +153,16 @@ export class RadialGaugeComponent extends BaseChartComponent implements OnInit, 
           startAngle: this.getTickAngle(i),
           endAngle: this.getTickAngle(i + 1),
           innerRadius: this.innerArcRadius,
-          outerRadius: this.outerArcRadius
+          outerRadius: this.outerArcRadius,
+          color: this.colors.getColor(this.ticks[i])
         };
         result.push(arc);
       }
     }
-
     return result;
   }
 
   private getValueOr(value: any, or: any) {
-    console.log('value', value);
-    console.log('or', or);
-    console.log('result', value == null 
-    ? or
-    : value);
-
     return value == null 
     ? or
     : value;

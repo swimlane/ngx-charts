@@ -12,7 +12,7 @@
             [endAngle]="arc.endAngle"
             [innerRadius]="arc.innerRadius"
             [outerRadius]="arc.outerRadius"
-            [fill]="'#aaca2a'"
+            [fill]="arc.color"
           >
         </svg:g>
       </svg:g>
@@ -50,7 +50,8 @@
       <svg:g class="pointer">
           <path 
             [attr.transform]="movePointer()"
-            [attr.d]="getPointer()" >
+            [attr.d]="getPointer()"
+            [attr.fill]="pointerColor" >
           </path>
       </g>
   </svg:g>
