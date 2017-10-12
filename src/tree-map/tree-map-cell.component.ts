@@ -1,8 +1,7 @@
 import {
   Component, Input, Output, EventEmitter, ElementRef,
-  OnChanges, SimpleChanges, ChangeDetectionStrategy
+  OnChanges, ChangeDetectionStrategy
 } from '@angular/core';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { select } from 'd3-selection';
 
 import { invertColor } from '../utils/color-utils';
@@ -89,14 +88,13 @@ export class TreeMapCellComponent implements OnChanges {
   formattedValue: string;
   initialized: boolean = false;
 
-  constructor(element: ElementRef, private location: LocationStrategy) {
+  constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 
-  ngOnChanges(/* changes: SimpleChanges */): void {
+  ngOnChanges(): void {
     this.update();
 
-    const hasValue = this.data && typeof this.data.value !== 'undefined';
     this.valueFormatting = this.valueFormatting || (cell => cell.value.toLocaleString());
     const labelFormatting = this.labelFormatting || (cell => trimLabel(cell.label, 55));
 
@@ -108,13 +106,9 @@ export class TreeMapCellComponent implements OnChanges {
 
     this.formattedValue = this.valueFormatting(cellData);
     this.formattedLabel = labelFormatting(cellData);
-
-    const pageUrl = this.location instanceof PathLocationStrategy
-      ? this.location.path()
-      : '';
   
     this.gradientId = 'grad' + id().toString();
-    this.gradientUrl = `url(${pageUrl}#${this.gradientId})`;
+    this.gradientUrl = `url(#${this.gradientId})`;
     this.gradientStops = this.getGradientStops();
   }
 

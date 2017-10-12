@@ -61,11 +61,6 @@ export class PieLabelComponent implements OnChanges {
   }
 
   update(): void {
-    const factor = 1.5;
-    const outerArc = arc()
-      .innerRadius(this.radius * factor)
-      .outerRadius(this.radius * factor);
-
     let startRadius = this.radius;
     if (this.explodeSlices) {
       startRadius = this.radius * this.value / this.max;

@@ -9,7 +9,6 @@ import {
   ContentChild,
   TemplateRef
 } from '@angular/core';
-import { PathLocationStrategy } from '@angular/common';
 import { scaleLinear, scalePoint, scaleTime } from 'd3-scale';
 import { curveLinear } from 'd3-shape';
 
@@ -236,12 +235,8 @@ export class AreaChartComponent extends BaseChartComponent {
 
     this.transform = `translate(${ this.dims.xOffset }, ${ this.margin[0] })`;
 
-    const pageUrl = this.location instanceof PathLocationStrategy
-      ? this.location.path()
-      : '';
-
     this.clipPathId = 'clip' + id().toString();
-    this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
+    this.clipPath = `url(#${this.clipPathId})`;
   }
 
   updateTimeline(): void {

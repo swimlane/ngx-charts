@@ -12,7 +12,6 @@ import {
 import { scaleLinear, scalePoint, scaleTime } from 'd3-scale';
 import { curveLinear } from 'd3-shape';
 
-import { PathLocationStrategy } from '@angular/common';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
@@ -289,12 +288,8 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
 
     this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
 
-    const pageUrl = this.location instanceof PathLocationStrategy
-      ? this.location.path()
-      : '';
-
     this.clipPathId = 'clip' + id().toString();
-    this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
+    this.clipPath = `url(#${this.clipPathId})`;
   }
 
   updateTimeline(): void {

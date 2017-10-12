@@ -4,30 +4,24 @@ import {
   Output,
   EventEmitter,
   ViewEncapsulation,
-  HostListener,
   ChangeDetectionStrategy,
   ContentChild,
   TemplateRef
 } from '@angular/core';
 import {
   trigger,
-  state,
   style,
   animate,
   transition
 } from '@angular/animations';
-import { PathLocationStrategy } from '@angular/common';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
-import { curveLinear, curveLinearClosed, curveCardinalClosed } from 'd3-shape';
+import { curveCardinalClosed } from 'd3-shape';
 
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
-import { PieLabelComponent } from '../pie-chart/pie-label.component';
 
-import { id } from '../utils/id';
 import { isDate, isNumber } from '../utils/types';
-import { reduceTicks } from '../common/axes/ticks.helper';
 
 const twoPI = 2 * Math.PI;
 

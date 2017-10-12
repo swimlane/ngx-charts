@@ -4,7 +4,6 @@ export function gridSize(dims, len, minWidth) {
   let rows = 1;
   let cols = len;
   const width = dims.width;
-  const height = dims.height;
 
   if (width > minWidth) {
     while (width / cols < minWidth) {

@@ -1,6 +1,6 @@
 import {
   Component, Input, Output, EventEmitter,
-  ChangeDetectorRef, NgZone, OnDestroy, ElementRef
+  ChangeDetectorRef, OnDestroy, ElementRef
 } from '@angular/core';
 import { count, decimalChecker } from './count.helper';
 
@@ -69,7 +69,7 @@ export class CountUpDirective implements OnDestroy {
   private _countTo: number = 0;
   private _countFrom: number = 0;
 
-  constructor(private cd: ChangeDetectorRef, private zone: NgZone, element: ElementRef) {
+  constructor(private cd: ChangeDetectorRef, element: ElementRef) {
     this.nativeElement = element.nativeElement;
   }
 

@@ -11,12 +11,10 @@ import {
 } from '@angular/core';
 import {
   trigger,
-  state,
   style,
   animate,
   transition
 } from '@angular/animations';
-import { PathLocationStrategy } from '@angular/common';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
 import { curveLinear } from 'd3-shape';
 
@@ -263,12 +261,8 @@ export class LineChartComponent extends BaseChartComponent {
 
     this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
 
-    const pageUrl = this.location instanceof PathLocationStrategy
-      ? this.location.path()
-      : '';
-
     this.clipPathId = 'clip' + id().toString();
-    this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
+    this.clipPath = `url(#${this.clipPathId})`;
   }
 
   updateTimeline(): void {

@@ -6,7 +6,6 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy
 } from '@angular/core';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { scaleLinear, scaleTime, scaleBand } from 'd3-scale';
 import { brushX } from 'd3-brush';
 import { select, event as d3event } from 'd3-selection';
@@ -141,12 +140,8 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
       this.updateBrush();
     }
 
-    const pageUrl = this.location instanceof PathLocationStrategy
-      ? this.location.path()
-      : '';
-
     this.filterId = 'filter' + id().toString();
-    this.filter = `url(${pageUrl}#${this.filterId})`;
+    this.filter = `url(#${this.filterId})`;
 
     if (!this.initialized) {
       this.addBrush();

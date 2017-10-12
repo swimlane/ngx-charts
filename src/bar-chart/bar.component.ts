@@ -9,7 +9,6 @@ import {
   OnChanges,
   ChangeDetectionStrategy
  } from '@angular/core';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { select } from 'd3-selection';
 import { roundedRect } from '../common/shape.helper';
 import { id } from '../utils/id';
@@ -64,7 +63,7 @@ export class BarComponent implements OnChanges {
   gradientStops: any[];
   hasGradient: boolean = false;
 
-  constructor(element: ElementRef, private location: LocationStrategy) {
+  constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 
@@ -78,12 +77,8 @@ export class BarComponent implements OnChanges {
   }
 
   update(): void {
-    const pageUrl = this.location instanceof PathLocationStrategy
-      ? this.location.path()
-      : '';
-
     this.gradientId = 'grad' + id().toString();
-    this.gradientFill = `url(${pageUrl}#${this.gradientId})`;
+    this.gradientFill = `url(#${this.gradientId})`;
 
     if (this.gradient || this.stops) {
       this.gradientStops = this.getGradient();
@@ -137,7 +132,6 @@ export class BarComponent implements OnChanges {
     let radius = this.getRadius();
     let path;
 
-    const edges: boolean[] = [false, false, false, false];
     if (this.roundEdges) {
       if (this.orientation === 'vertical') {
         radius = Math.min(this.height, radius);

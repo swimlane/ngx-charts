@@ -9,8 +9,6 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 import { select } from 'd3-selection';
-
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { id } from '../utils/id';
 
 @Component({
@@ -56,7 +54,7 @@ export class AreaComponent implements OnChanges {
   gradientStops: any[];
   hasGradient: boolean = false;
 
-  constructor(element: ElementRef, private location: LocationStrategy) {
+  constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 
@@ -70,12 +68,8 @@ export class AreaComponent implements OnChanges {
   }
 
   update(): void {
-    const pageUrl = this.location instanceof PathLocationStrategy
-      ? this.location.path()
-      : '';
-
     this.gradientId = 'grad' + id().toString();
-    this.gradientFill = `url(${pageUrl}#${this.gradientId})`;
+    this.gradientFill = `url(#${this.gradientId})`;
 
     if (this.gradient || this.stops) {
       this.gradientStops = this.getGradient();
