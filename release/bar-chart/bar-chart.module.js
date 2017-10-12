@@ -12,43 +12,43 @@ import { BarVerticalStackedComponent } from './bar-vertical-stacked.component';
 import { SeriesHorizontal } from './series-horizontal.component';
 import { SeriesVerticalComponent } from './series-vertical.component';
 export { BarComponent, BarHorizontalComponent, BarHorizontal2DComponent, BarHorizontalNormalizedComponent, BarHorizontalStackedComponent, BarVerticalComponent, BarVertical2DComponent, BarVerticalNormalizedComponent, BarVerticalStackedComponent, SeriesHorizontal, SeriesVerticalComponent };
-var BarChartModule = (function () {
+var BarChartModule = /** @class */ (function () {
     function BarChartModule() {
     }
+    BarChartModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [ChartCommonModule],
+                    declarations: [
+                        BarComponent,
+                        BarHorizontalComponent,
+                        BarHorizontal2DComponent,
+                        BarHorizontalNormalizedComponent,
+                        BarHorizontalStackedComponent,
+                        BarVerticalComponent,
+                        BarVertical2DComponent,
+                        BarVerticalNormalizedComponent,
+                        BarVerticalStackedComponent,
+                        SeriesHorizontal,
+                        SeriesVerticalComponent
+                    ],
+                    exports: [
+                        BarComponent,
+                        BarHorizontalComponent,
+                        BarHorizontal2DComponent,
+                        BarHorizontalNormalizedComponent,
+                        BarHorizontalStackedComponent,
+                        BarVerticalComponent,
+                        BarVertical2DComponent,
+                        BarVerticalNormalizedComponent,
+                        BarVerticalStackedComponent,
+                        SeriesHorizontal,
+                        SeriesVerticalComponent
+                    ]
+                },] },
+    ];
+    /** @nocollapse */
+    BarChartModule.ctorParameters = function () { return []; };
     return BarChartModule;
 }());
 export { BarChartModule };
-BarChartModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [ChartCommonModule],
-                declarations: [
-                    BarComponent,
-                    BarHorizontalComponent,
-                    BarHorizontal2DComponent,
-                    BarHorizontalNormalizedComponent,
-                    BarHorizontalStackedComponent,
-                    BarVerticalComponent,
-                    BarVertical2DComponent,
-                    BarVerticalNormalizedComponent,
-                    BarVerticalStackedComponent,
-                    SeriesHorizontal,
-                    SeriesVerticalComponent
-                ],
-                exports: [
-                    BarComponent,
-                    BarHorizontalComponent,
-                    BarHorizontal2DComponent,
-                    BarHorizontalNormalizedComponent,
-                    BarHorizontalStackedComponent,
-                    BarVerticalComponent,
-                    BarVertical2DComponent,
-                    BarVerticalNormalizedComponent,
-                    BarVerticalStackedComponent,
-                    SeriesHorizontal,
-                    SeriesVerticalComponent
-                ]
-            },] },
-];
-/** @nocollapse */
-BarChartModule.ctorParameters = function () { return []; };
 //# sourceMappingURL=bar-chart.module.js.map

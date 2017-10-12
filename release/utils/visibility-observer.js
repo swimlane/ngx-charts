@@ -2,7 +2,7 @@ import { Output, EventEmitter } from '@angular/core';
 /**
  * Visibility Observer
  */
-var VisibilityObserver = (function () {
+var VisibilityObserver = /** @class */ (function () {
     function VisibilityObserver(element, zone) {
         this.element = element;
         this.zone = zone;
@@ -36,16 +36,18 @@ var VisibilityObserver = (function () {
             else {
                 clearTimeout(_this.timeout);
                 _this.zone.runOutsideAngular(function () {
-                    _this.timeout = setTimeout(function () { return check(); }, 50);
+                    _this.timeout = setTimeout(function () { return check(); }, 100);
                 });
             }
         };
-        setTimeout(function () { return check(); });
+        this.zone.runOutsideAngular(function () {
+            _this.timeout = setTimeout(function () { return check(); });
+        });
+    };
+    VisibilityObserver.propDecorators = {
+        'visible': [{ type: Output },],
     };
     return VisibilityObserver;
 }());
 export { VisibilityObserver };
-VisibilityObserver.propDecorators = {
-    'visible': [{ type: Output },],
-};
 //# sourceMappingURL=visibility-observer.js.map

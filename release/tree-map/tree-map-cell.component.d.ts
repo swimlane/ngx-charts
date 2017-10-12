@@ -1,7 +1,5 @@
 import { EventEmitter, ElementRef, OnChanges } from '@angular/core';
-import { LocationStrategy } from '@angular/common';
 export declare class TreeMapCellComponent implements OnChanges {
-    private location;
     data: any;
     fill: any;
     x: any;
@@ -14,6 +12,7 @@ export declare class TreeMapCellComponent implements OnChanges {
     valueFormatting: any;
     labelFormatting: any;
     gradient: boolean;
+    animations: boolean;
     select: EventEmitter<{}>;
     gradientStops: any[];
     gradientId: string;
@@ -21,8 +20,9 @@ export declare class TreeMapCellComponent implements OnChanges {
     element: HTMLElement;
     transform: string;
     formattedLabel: string;
+    formattedValue: string;
     initialized: boolean;
-    constructor(element: ElementRef, location: LocationStrategy);
+    constructor(element: ElementRef);
     ngOnChanges(): void;
     update(): void;
     loadAnimation(): void;

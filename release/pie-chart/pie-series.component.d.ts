@@ -13,6 +13,7 @@ export declare class PieSeriesComponent implements OnChanges {
     tooltipText: (o: any) => any;
     tooltipDisabled: boolean;
     tooltipTemplate: TemplateRef<any>;
+    animations: boolean;
     select: EventEmitter<{}>;
     activate: EventEmitter<{}>;
     deactivate: EventEmitter<{}>;
@@ -23,11 +24,11 @@ export declare class PieSeriesComponent implements OnChanges {
     midAngle(d: any): number;
     outerArc(): any;
     calculateLabelPositions(pieData: any): any;
-    labelVisible(arc: any): boolean;
-    labelText(arc: any): string;
-    label(arc: any): string;
-    defaultTooltipText(arc: any): string;
-    color(arc: any): any;
+    labelVisible(myArc: any): boolean;
+    labelText(myArc: any): string;
+    label(myArc: any): string;
+    defaultTooltipText(myArc: any): string;
+    color(myArc: any): any;
     trackBy(index: any, item: any): string;
     onClick(data: any): void;
     isActive(entry: any): boolean;

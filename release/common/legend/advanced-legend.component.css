@@ -29,7 +29,7 @@
           margin-top: -6px;
           margin-left: 11px; }
         .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-label {
-          font-size: 12px;
+          font-size: 14px;
           opacity: 0.7;
           margin-left: 11px;
           margin-top: -6px; }
@@ -39,6 +39,6 @@
           margin-left: 11px; }
         .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-color {
           width: 4px;
-          height: 32px;
+          height: 42px;
           float: left;
           margin-right: 7px; }

@@ -5,25 +5,25 @@ import { PolarSeriesComponent } from './polar-series.component';
 import { PieChartModule } from '../pie-chart/';
 import { LineChartModule } from '../line-chart/';
 export { PolarChartComponent, PolarSeriesComponent };
-var PolarChartModule = (function () {
+var PolarChartModule = /** @class */ (function () {
     function PolarChartModule() {
     }
+    PolarChartModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [ChartCommonModule, PieChartModule, LineChartModule],
+                    declarations: [
+                        PolarChartComponent,
+                        PolarSeriesComponent
+                    ],
+                    exports: [
+                        PolarChartComponent,
+                        PolarSeriesComponent
+                    ]
+                },] },
+    ];
+    /** @nocollapse */
+    PolarChartModule.ctorParameters = function () { return []; };
     return PolarChartModule;
 }());
 export { PolarChartModule };
-PolarChartModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [ChartCommonModule, PieChartModule, LineChartModule],
-                declarations: [
-                    PolarChartComponent,
-                    PolarSeriesComponent
-                ],
-                exports: [
-                    PolarChartComponent,
-                    PolarSeriesComponent
-                ]
-            },] },
-];
-/** @nocollapse */
-PolarChartModule.ctorParameters = function () { return []; };
 //# sourceMappingURL=polar-chart.module.js.map

@@ -1,7 +1,6 @@
 ngx-charts-number-card .cell .trimmed-label {
   font-size: 12px;
   pointer-events: none;
-  text-transform: uppercase;
   overflow: hidden;
   text-align: left;
   line-height: 1em; }

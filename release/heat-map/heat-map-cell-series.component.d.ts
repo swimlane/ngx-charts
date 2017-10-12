@@ -8,6 +8,7 @@ export declare class HeatCellSeriesComponent implements OnChanges, OnInit {
     tooltipDisabled: boolean;
     tooltipText: any;
     tooltipTemplate: TemplateRef<any>;
+    animations: boolean;
     select: EventEmitter<{}>;
     cells: any[];
     ngOnInit(): void;

@@ -1,7 +1,5 @@
 import { OnChanges, SimpleChanges, TemplateRef } from '@angular/core';
-import { LocationStrategy } from '@angular/common';
 export declare class PolarSeriesComponent implements OnChanges {
-    private location;
     name: any;
     data: any;
     xScale: any;
@@ -15,6 +13,7 @@ export declare class PolarSeriesComponent implements OnChanges {
     tooltipText: (o: any) => string;
     gradient: boolean;
     tooltipTemplate: TemplateRef<any>;
+    animations: boolean;
     path: string;
     circles: any[];
     circleRadius: number;
@@ -28,7 +27,6 @@ export declare class PolarSeriesComponent implements OnChanges {
     seriesColor: string;
     active: boolean;
     inactive: boolean;
-    constructor(location: LocationStrategy);
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     getAngle(d: any): any;

@@ -5,29 +5,29 @@ import { AreaChartStackedComponent } from './area-chart-stacked.component';
 import { AreaSeriesComponent } from './area-series.component';
 import { ChartCommonModule } from '../common/chart-common.module';
 export { AreaChartComponent, AreaChartNormalizedComponent, AreaChartStackedComponent, AreaSeriesComponent };
-var AreaChartModule = (function () {
+var AreaChartModule = /** @class */ (function () {
     function AreaChartModule() {
     }
+    AreaChartModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [ChartCommonModule],
+                    declarations: [
+                        AreaChartComponent,
+                        AreaChartNormalizedComponent,
+                        AreaChartStackedComponent,
+                        AreaSeriesComponent
+                    ],
+                    exports: [
+                        AreaChartComponent,
+                        AreaChartNormalizedComponent,
+                        AreaChartStackedComponent,
+                        AreaSeriesComponent
+                    ]
+                },] },
+    ];
+    /** @nocollapse */
+    AreaChartModule.ctorParameters = function () { return []; };
     return AreaChartModule;
 }());
 export { AreaChartModule };
-AreaChartModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [ChartCommonModule],
-                declarations: [
-                    AreaChartComponent,
-                    AreaChartNormalizedComponent,
-                    AreaChartStackedComponent,
-                    AreaSeriesComponent
-                ],
-                exports: [
-                    AreaChartComponent,
-                    AreaChartNormalizedComponent,
-                    AreaChartStackedComponent,
-                    AreaSeriesComponent
-                ]
-            },] },
-];
-/** @nocollapse */
-AreaChartModule.ctorParameters = function () { return []; };
 //# sourceMappingURL=area-chart.module.js.map

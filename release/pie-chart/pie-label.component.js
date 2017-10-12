@@ -1,8 +1,9 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { arc } from 'd3-shape';
 import { trimLabel } from '../common/trim-label.helper';
-var PieLabelComponent = (function () {
+var PieLabelComponent = /** @class */ (function () {
     function PieLabelComponent() {
+        this.animations = true;
         this.isIE = /(edge|msie|trident)/i.test(navigator.userAgent);
         this.trimLabel = trimLabel;
     }
@@ -10,10 +11,6 @@ var PieLabelComponent = (function () {
         this.update();
     };
     PieLabelComponent.prototype.update = function () {
-        var factor = 1.5;
-        var outerArc = arc()
-            .innerRadius(this.radius * factor)
-            .outerRadius(this.radius * factor);
         var startRadius = this.radius;
         if (this.explodeSlices) {
             startRadius = this.radius * this.value / this.max;
@@ -60,7 +57,7 @@ var PieLabelComponent = (function () {
     });
     Object.defineProperty(PieLabelComponent.prototype, "textTransition", {
         get: function () {
-            return this.isIE ? null : 'transform 0.75s';
+            return (this.isIE || !this.animations) ? null : 'transform 0.75s';
         },
         enumerable: true,
         configurable: true
@@ -71,25 +68,26 @@ var PieLabelComponent = (function () {
     PieLabelComponent.prototype.midAngle = function (d) {
         return d.startAngle + (d.endAngle - d.startAngle) / 2;
     };
+    PieLabelComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'g[ngx-charts-pie-label]',
+                    template: "\n    <title>{{label}}</title>\n    <svg:g\n      [attr.transform]=\"attrTransform\"\n      [style.transform]=\"styleTransform\"\n      [style.transition]=\"textTransition\">\n      <svg:text\n        class=\"pie-label\"\n        [class.animation]=\"animations\"\n        dy=\".35em\"\n        [style.textAnchor]=\"textAnchor()\"\n        [style.shapeRendering]=\"'crispEdges'\">\n        {{trimLabel(label, 10)}}\n      </svg:text>\n    </svg:g>\n    <svg:path\n      [attr.d]=\"line\"\n      [attr.stroke]=\"color\"\n      fill=\"none\"\n      class=\"pie-label-line line\"\n      [class.animation]=\"animations\">\n    </svg:path>\n  ",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                },] },
+    ];
+    /** @nocollapse */
+    PieLabelComponent.ctorParameters = function () { return []; };
+    PieLabelComponent.propDecorators = {
+        'data': [{ type: Input },],
+        'radius': [{ type: Input },],
+        'label': [{ type: Input },],
+        'color': [{ type: Input },],
+        'max': [{ type: Input },],
+        'value': [{ type: Input },],
+        'explodeSlices': [{ type: Input },],
+        'animations': [{ type: Input },],
+    };
     return PieLabelComponent;
 }());
 export { PieLabelComponent };
-PieLabelComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'g[ngx-charts-pie-label]',
-                template: "\n    <title>{{label}}</title>\n    <svg:g\n      [attr.transform]=\"attrTransform\"\n      [style.transform]=\"styleTransform\"\n      [style.transition]=\"textTransition\">\n      <svg:text\n        class=\"pie-label\"\n        dy=\".35em\"\n        [style.textAnchor]=\"textAnchor()\"\n        [style.shapeRendering]=\"'crispEdges'\"\n        [style.textTransform]=\"'uppercase'\">\n        {{trimLabel(label, 10)}}\n      </svg:text>\n    </svg:g>\n    <svg:path\n      [attr.d]=\"line\"\n      [attr.stroke]=\"color\"\n      fill=\"none\"\n      class=\"pie-label-line line\">\n    </svg:path>\n  ",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            },] },
-];
-/** @nocollapse */
-PieLabelComponent.ctorParameters = function () { return []; };
-PieLabelComponent.propDecorators = {
-    'data': [{ type: Input },],
-    'radius': [{ type: Input },],
-    'label': [{ type: Input },],
-    'color': [{ type: Input },],
-    'max': [{ type: Input },],
-    'value': [{ type: Input },],
-    'explodeSlices': [{ type: Input },],
-};
 //# sourceMappingURL=pie-label.component.js.map

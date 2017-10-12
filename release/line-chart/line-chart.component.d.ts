@@ -26,6 +26,10 @@ export declare class LineChartComponent extends BaseChartComponent {
     showRefLines: boolean;
     referenceLines: any;
     showRefLabels: boolean;
+    xScaleMin: any;
+    xScaleMax: any;
+    yScaleMin: number;
+    yScaleMax: number;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     tooltipTemplate: TemplateRef<any>;

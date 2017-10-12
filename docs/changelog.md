@@ -1,10 +1,23 @@
 # Changelog
 
-## pending
-- Enhancement: Don't transform text to uppercase in legends and labels
-- Enhancement: Changed legends and label colors
-- Enhancement: Increased font size in advanced legend and number cards subtext
-- Enhancement: Hide legend title when title is missing
+## 6.1.0
+- Feature: Added inputs to control minimum and maximum values on the axes (#582, #359)
+- Feature: Added input to enable/disable animations (#565)
+- Feature: Added designatedTotal Input for Pie Grid (#554)
+- Enhancement: Don't transform text to uppercase in legends and labels (#578)
+- Enhancement: Changed legends and label colors (#578)
+- Enhancement: Increased font size in advanced legend and number cards subtext (#578)
+- Enhancement: Hide legend title when title is missing (#578)
+- Enhancement: Added x-axis value to the context of a bubble chart tooltip (#530)
+- Bug: Removed path from SVG refs to fix gradients not working when URL has queryString (#584) 
+- Bug: Fixed bug where value arc animation on gauge chart would start from 0 on update (#563)
+- Bug: Removed date conversion for name-value at series-tooltip (#544)
+- Bug: Added null check for rootComponents in injection servoce (#574)
+- Bug: Fixed issue where the tooltip would not appear for certain points (#501)
+- Bug: Fixed issue where pie chart colors would not update on color changes (#551)
+- Bug: Added polyfill for SVGElement.prototype.contains (#386)
+- Bug: Renamed ngOutletContext (deprecated) to ngTemplateOutletContext (#535)
+- Docs: Added custom chart page
 
 ## 6.0.1
 - Bug: Fixed line chart stroke color

@@ -1,15 +1,20 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 import { Component, Input, ViewEncapsulation, Output, EventEmitter, ChangeDetectionStrategy, ContentChild } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { scaleBand, scaleLinear } from 'd3-scale';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
-var BarHorizontal2DComponent = (function (_super) {
+var BarHorizontal2DComponent = /** @class */ (function (_super) {
     __extends(BarHorizontal2DComponent, _super);
     function BarHorizontal2DComponent() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -112,7 +117,8 @@ var BarHorizontal2DComponent = (function (_super) {
             }
         }
         var min = Math.min.apply(Math, [0].concat(domain));
-        var max = Math.max.apply(Math, domain);
+        var max = this.xScaleMax
+            ? Math.max.apply(Math, [this.xScaleMax].concat(domain)) : Math.max.apply(Math, domain);
         return [min, max];
     };
     BarHorizontal2DComponent.prototype.groupTransform = function (group) {
@@ -191,53 +197,54 @@ var BarHorizontal2DComponent = (function (_super) {
         this.activeEntries = this.activeEntries.slice();
         this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
+    BarHorizontal2DComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'ngx-charts-bar-horizontal-2d',
+                    template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      [animations]=\"animations\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-grid-panel-series\n          [xScale]=\"valueScale\"\n          [yScale]=\"groupScale\"\n          [data]=\"results\"\n          [dims]=\"dims\"\n          orient=\"horizontal\">\n        </svg:g>\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"valueScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"groupScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g ngx-charts-series-horizontal\n            [xScale]=\"valueScale\"\n            [activeEntries]=\"activeEntries\"\n            [yScale]=\"innerScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            [tooltipDisabled]=\"tooltipDisabled\"\n            [tooltipTemplate]=\"tooltipTemplate\"\n            [seriesName]=\"group.name\"\n            [roundEdges]=\"roundEdges\"\n            [animations]=\"animations\"\n            (select)=\"onClick($event, group)\"\n            (activate)=\"onActivate($event, group)\"\n            (deactivate)=\"onDeactivate($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    styleUrls: ['../common/base-chart.component.css'],
+                    encapsulation: ViewEncapsulation.None,
+                    animations: [
+                        trigger('animationState', [
+                            transition(':leave', [
+                                style({
+                                    opacity: 1,
+                                    transform: '*',
+                                }),
+                                animate(500, style({ opacity: 0, transform: 'scale(0)' }))
+                            ])
+                        ])
+                    ]
+                },] },
+    ];
+    /** @nocollapse */
+    BarHorizontal2DComponent.ctorParameters = function () { return []; };
+    BarHorizontal2DComponent.propDecorators = {
+        'legend': [{ type: Input },],
+        'legendTitle': [{ type: Input },],
+        'xAxis': [{ type: Input },],
+        'yAxis': [{ type: Input },],
+        'showXAxisLabel': [{ type: Input },],
+        'showYAxisLabel': [{ type: Input },],
+        'xAxisLabel': [{ type: Input },],
+        'yAxisLabel': [{ type: Input },],
+        'tooltipDisabled': [{ type: Input },],
+        'gradient': [{ type: Input },],
+        'showGridLines': [{ type: Input },],
+        'activeEntries': [{ type: Input },],
+        'schemeType': [{ type: Input },],
+        'xAxisTickFormatting': [{ type: Input },],
+        'yAxisTickFormatting': [{ type: Input },],
+        'groupPadding': [{ type: Input },],
+        'barPadding': [{ type: Input },],
+        'roundDomains': [{ type: Input },],
+        'roundEdges': [{ type: Input },],
+        'xScaleMax': [{ type: Input },],
+        'activate': [{ type: Output },],
+        'deactivate': [{ type: Output },],
+        'tooltipTemplate': [{ type: ContentChild, args: ['tooltipTemplate',] },],
+    };
     return BarHorizontal2DComponent;
 }(BaseChartComponent));
 export { BarHorizontal2DComponent };
-BarHorizontal2DComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'ngx-charts-bar-horizontal-2d',
-                template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-grid-panel-series\n          [xScale]=\"valueScale\"\n          [yScale]=\"groupScale\"\n          [data]=\"results\"\n          [dims]=\"dims\"\n          orient=\"horizontal\">\n        </svg:g>\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"valueScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"groupScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g ngx-charts-series-horizontal\n            [xScale]=\"valueScale\"\n            [activeEntries]=\"activeEntries\"\n            [yScale]=\"innerScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            [tooltipDisabled]=\"tooltipDisabled\"\n            [tooltipTemplate]=\"tooltipTemplate\"\n            [seriesName]=\"group.name\"\n            [roundEdges]=\"roundEdges\"\n            (select)=\"onClick($event, group)\"\n            (activate)=\"onActivate($event, group)\"\n            (deactivate)=\"onDeactivate($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                styleUrls: ['../common/base-chart.component.css'],
-                encapsulation: ViewEncapsulation.None,
-                animations: [
-                    trigger('animationState', [
-                        transition(':leave', [
-                            style({
-                                opacity: 1,
-                                transform: '*',
-                            }),
-                            animate(500, style({ opacity: 0, transform: 'scale(0)' }))
-                        ])
-                    ])
-                ]
-            },] },
-];
-/** @nocollapse */
-BarHorizontal2DComponent.ctorParameters = function () { return []; };
-BarHorizontal2DComponent.propDecorators = {
-    'legend': [{ type: Input },],
-    'legendTitle': [{ type: Input },],
-    'xAxis': [{ type: Input },],
-    'yAxis': [{ type: Input },],
-    'showXAxisLabel': [{ type: Input },],
-    'showYAxisLabel': [{ type: Input },],
-    'xAxisLabel': [{ type: Input },],
-    'yAxisLabel': [{ type: Input },],
-    'tooltipDisabled': [{ type: Input },],
-    'gradient': [{ type: Input },],
-    'showGridLines': [{ type: Input },],
-    'activeEntries': [{ type: Input },],
-    'schemeType': [{ type: Input },],
-    'xAxisTickFormatting': [{ type: Input },],
-    'yAxisTickFormatting': [{ type: Input },],
-    'groupPadding': [{ type: Input },],
-    'barPadding': [{ type: Input },],
-    'roundDomains': [{ type: Input },],
-    'roundEdges': [{ type: Input },],
-    'activate': [{ type: Output },],
-    'deactivate': [{ type: Output },],
-    'tooltipTemplate': [{ type: ContentChild, args: ['tooltipTemplate',] },],
-};
 //# sourceMappingURL=bar-horizontal-2d.component.js.map

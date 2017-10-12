@@ -3,6 +3,7 @@ import { ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 export declare class PieGridComponent extends BaseChartComponent {
+    designatedTotal: number;
     tooltipDisabled: boolean;
     tooltipText: (o: any) => any;
     dims: ViewDimensions;

@@ -1,4 +1,4 @@
-import { EventEmitter, OnChanges, SimpleChanges, NgZone } from '@angular/core';
+import { EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 export interface CardModel {
     x: any;
     y: any;
@@ -10,7 +10,6 @@ export interface CardModel {
     tooltipText: string;
 }
 export declare class CardSeriesComponent implements OnChanges {
-    private zone;
     data: any[];
     slots: any[];
     dims: any;
@@ -22,11 +21,11 @@ export declare class CardSeriesComponent implements OnChanges {
     textColor: any;
     valueFormatting: any;
     labelFormatting: any;
+    animations: boolean;
     select: EventEmitter<{}>;
     cards: CardModel[];
     emptySlots: any[];
     medianSize: number;
-    constructor(zone: NgZone);
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     getCards(): any[];

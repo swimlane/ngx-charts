@@ -14,6 +14,7 @@ export declare class CardComponent implements OnChanges, OnDestroy {
     medianSize: number;
     valueFormatting: any;
     labelFormatting: any;
+    animations: boolean;
     select: EventEmitter<{}>;
     textEl: ElementRef;
     element: HTMLElement;

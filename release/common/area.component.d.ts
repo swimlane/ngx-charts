@@ -1,7 +1,5 @@
 import { SimpleChanges, EventEmitter, ElementRef, OnChanges } from '@angular/core';
-import { LocationStrategy } from '@angular/common';
 export declare class AreaComponent implements OnChanges {
-    private location;
     data: any;
     path: any;
     startingPath: any;
@@ -12,6 +10,7 @@ export declare class AreaComponent implements OnChanges {
     activeLabel: any;
     gradient: boolean;
     stops: any[];
+    animations: boolean;
     select: EventEmitter<{}>;
     element: HTMLElement;
     gradientId: string;
@@ -20,10 +19,10 @@ export declare class AreaComponent implements OnChanges {
     initialized: boolean;
     gradientStops: any[];
     hasGradient: boolean;
-    constructor(element: ElementRef, location: LocationStrategy);
+    constructor(element: ElementRef);
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     loadAnimation(): void;
-    animateToCurrentForm(): void;
+    updatePathEl(): void;
     getGradient(): any[];
 }
