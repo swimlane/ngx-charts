@@ -13,6 +13,9 @@
             [innerRadius]="arc.innerRadius"
             [outerRadius]="arc.outerRadius"
             [fill]="arc.color"
+            (select)="onArcClick($event)"
+            (activate)="onArcActivate($event)"
+            (deactivate)="onArcDeactivate($event)">
           >
         </svg:g>
       </svg:g>

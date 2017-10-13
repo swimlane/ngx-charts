@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, ViewEncapsulation, 
-  ChangeDetectionStrategy, Input } from '@angular/core';
+  ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 import { ScaleLinear, scaleLinear } from 'd3-scale';
 import { range, max, min } from 'd3-array';
@@ -41,6 +41,10 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
   @Input() public pointerColor: string;
   @Input() public segments = [];
 
+  @Output() public arcClick: EventEmitter<any> = new EventEmitter();
+  @Output() public arcActivate: EventEmitter<any> = new EventEmitter();
+  @Output() public arcDeactivate: EventEmitter<any> = new EventEmitter();
+
   private colors: ColorHelper;
   private ticks: number[];
   private degreeRange: number;
@@ -49,7 +53,7 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
     super.ngAfterViewInit();
 
     setTimeout(() => {
-      console.log('afterViewInit');
+
     });
   }
 
@@ -129,6 +133,21 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
       }
     }
     return result;
+  }
+
+  public onArcClick(event: any): void {
+    this.arcClick.emit(event);
+    console.log('arc click');
+  }
+
+  public onArcActivate(event: any): void {
+    this.arcActivate.emit(event);
+    console.log('arc activate');
+  }
+
+  public onArcDeactivate(event: any): void {
+    this.arcDeactivate.emit(event);
+    console.log('arc deactivate');
   }
 
   private getDimensions(): any {
