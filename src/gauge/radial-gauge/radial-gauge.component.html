@@ -42,14 +42,20 @@
           <svg:text
             [style.textAnchor]="'middle'"
             [attr.transform]="getTextTransform()"
-            alignment-baseline="central">
+            alignment-baseline="central"
+            (click)="onLabelClick($event)"
+            (mouseenter)="onLabelMouseEnter($event)"
+            (mouseleave)="onLabelMouseLeave($event)">
             <tspan *ngIf="showValue" x="0" dy="1.5em">{{ displayingValue }}</tspan>
           </svg:text>
       </svg:g>
 
       <!-- pointer -->
 
-      <svg:g class="pointer">
+      <svg:g class="pointer"
+        (click)="onPointerClick($event)"
+        (mouseenter)="onPointerMouseEnter($event)"
+        (mouseleave)="onPointerMouseLeave($event)">
           <path 
             [attr.transform]="movePointer()"
             [attr.d]="getPointer()"

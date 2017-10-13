@@ -42,8 +42,16 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
   @Input() public segments = [];
 
   @Output() public arcClick: EventEmitter<any> = new EventEmitter();
-  @Output() public arcActivate: EventEmitter<any> = new EventEmitter();
-  @Output() public arcDeactivate: EventEmitter<any> = new EventEmitter();
+  @Output() public arcMouseEnter: EventEmitter<any> = new EventEmitter();
+  @Output() public arcMouseLeave: EventEmitter<any> = new EventEmitter();
+
+  @Output() public labelClick: EventEmitter<any> = new EventEmitter();
+  @Output() public labelMouseEnter: EventEmitter<any> = new EventEmitter();
+  @Output() public labelMouseLeave: EventEmitter<any> = new EventEmitter();
+
+  @Output() public pointerClick: EventEmitter<any> = new EventEmitter();
+  @Output() public pointerMouseEnter: EventEmitter<any> = new EventEmitter();
+  @Output() public pointerMouseLeave: EventEmitter<any> = new EventEmitter();
 
   private colors: ColorHelper;
   private ticks: number[];
@@ -141,13 +149,43 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
   }
 
   public onArcActivate(event: any): void {
-    this.arcActivate.emit(event);
+    this.arcMouseEnter.emit(event);
     console.log('arc activate');
   }
 
   public onArcDeactivate(event: any): void {
-    this.arcDeactivate.emit(event);
+    this.arcMouseLeave.emit(event);
     console.log('arc deactivate');
+  }
+
+  public onLabelClick(event: any): void {
+    this.labelClick.emit(event);
+    console.log('label click');
+  }
+
+  public onLabelMouseEnter(event: any): void {
+    this.labelMouseEnter.emit(event);
+    console.log('label mouseEnter');
+  }
+
+  public onLabelMouseLeave(event: any): void {
+    this.labelMouseLeave.emit(event);
+    console.log('label mouseLeave');
+  }
+
+  public onPointerClick(event: any): void {
+    this.pointerClick.emit(event);
+    console.log('pointer click');
+  }
+
+  public onPointerMouseEnter(event: any): void {
+    this.pointerMouseEnter.emit(event);
+    console.log('pointer mouseEnter');
+  }
+
+  public onPointerMouseLeave(event: any): void {
+    this.pointerMouseLeave.emit(event);
+    console.log('pointer mouseLeave');
   }
 
   private getDimensions(): any {
