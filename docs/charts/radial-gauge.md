@@ -21,7 +21,7 @@
 | pointerHeadLength          | number        |           | length of the pointer's head part                                                                                              |
 | pointerTailLength          | number        |           | length of the pointer's tail part                                                                                              |
 | pointerColor    | string   |               | color of the pointer                                                                                              |
-| segments        | number   |               | custom settings of segments                                                                                             |
+| segments        | []       |               | custom settings of segments                                                                                             |
 
 # Outputs
 

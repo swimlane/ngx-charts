@@ -23,7 +23,6 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
   
   @Input() public displayValue: string;
   @Input() public showValue: boolean = true;
-  @Input() public showUnit: boolean = true;
   @Input() public value: number = 20;
   @Input() public minValue = 0;
   @Input() public maxValue = 100;
@@ -40,27 +39,9 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
   @Input() public pointerHeadLength: number;
   @Input() public pointerTailLength: number;
   @Input() public pointerColor: string;
+  @Input() public segments = [];
 
   private colors: ColorHelper;
-
-  private segments = [
-    // {
-    //   minValue: 0,
-    //   maxValue: 30,
-    //   color: 'red'
-    // },
-    // {
-    //   minValue: 30,
-    //   maxValue: 60,
-    //   color: 'yellow'
-    // },
-    // {
-    //   minValue: 60,
-    //   maxValue: 100,
-    //   color: 'green'
-    // }
-  ];
-
   private ticks: number[];
   private degreeRange: number;
 
@@ -75,16 +56,10 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
   public update(): void {
     super.update();
 
-    // console.log('width', this.width);
-    // console.log('height', this.height);
-
-    // this.ticks = this.getScale().ticks(this.majorTicks);
     this.ticks = this.getTicks();
     this.degreeRange = this.getDegreeRange();
 
     this.dimensions = this.getDimensions();
-
-    // console.log(this.dimensions);
 
     this.displayingValue = this.getValueOr(this.displayValue, this.value.toString());
 
@@ -93,13 +68,6 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
 
     this.arcs = this.getArcs();
 
-    // console.log('bigSegments', this.majorTicks);
-    // console.log('min', this.minValue);
-    // console.log('max', this.maxValue);
-    // console.log('minAngle', this.minAngle);
-    // console.log('span', this.getDegreeRange());
-    // console.log('valueScale', this.getScale());
-    // console.log('textScale', this.dimensions.axisTextScale);
     console.log('majorTicks', this.majorTicks);
     console.log('scale', this.getScale()(100));
     console.log('ticks', this.ticks);
@@ -241,12 +209,5 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
       [0, this.dimensions.pointerTailLength],
       [this.dimensions.pointerWidth / 2, 0]
     ];
-    // return [
-    //   [this.getValueOr(this.dimensions.pointerWidth / 2, 0), 0],
-    //   [0, this.getValueOr(- this.dimensions.pointerHeadLength, 0)],
-    //   [this.getValueOr(- this.dimensions.pointerWidth / 2, 0), 0],
-    //   [0, this.getValueOr(this.dimensions.pointerTailLength, 0)],
-    //   [this.getValueOr(this.dimensions.pointerWidth / 2, 0), 0]
-    // ];
   }
 }
