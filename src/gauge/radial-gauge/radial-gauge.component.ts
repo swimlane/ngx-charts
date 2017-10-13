@@ -73,7 +73,9 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
 
     this.dimensions = this.getDimensions();
 
-    this.displayingValue = this.getValueOr(this.displayValue, this.value.toString());
+    this.displayingValue = !this.checkStringEmpty(this.displayValue) 
+    ? this.displayValue 
+    : this.value.toString();
 
     this.colors = new ColorHelper(this.scheme, this.schemeType, 
       [this.minValue, this.maxValue], this.customColors);
@@ -257,5 +259,9 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
       [0, this.dimensions.pointerTailLength],
       [this.dimensions.pointerWidth / 2, 0]
     ];
+  }
+
+  private checkStringEmpty(value: string): boolean {
+    return (!value || 0 === value.length);
   }
 }
