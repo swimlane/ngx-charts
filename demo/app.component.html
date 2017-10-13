@@ -560,6 +560,7 @@
         [minAngle]="radialGaugeMinAngle"
         [maxAngle]="radialGaugeMaxAngle"
         [majorTicks]="gaugeLargeSegments"
+        [pointerColor]="radialGaugePointerColor"
         >
       </ngx-charts-radial-gauge>
       <div *ngIf="chartType === 'plot-demo'">
@@ -1054,6 +1055,10 @@
       <div *ngIf="chart.options.includes('maxAngle')">
           <label>Maximal angle: </label><br />
           <input type="number" [(ngModel)]="radialGaugeMaxAngle"><br />
+      </div>
+      <div *ngIf="chart.options.includes('pointerColor')">
+          <label>Pointer color: </label><br />
+          <input type="text" [(ngModel)]="radialGaugePointerColor"><br />
       </div>
       <div *ngIf="chart.options.includes('margin')">
         <label>

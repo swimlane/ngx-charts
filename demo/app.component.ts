@@ -163,6 +163,7 @@ export class AppComponent implements OnInit {
   radialGaugeShowValue: boolean = true;
   radialGaugeMaxAngle: number = 120;
   radialGaugeMinAngle: number = -120;
+  radialGaugePointerColor: string = 'black';
 
   // Combo Chart
   barChart: any[] = barChart;
