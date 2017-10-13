@@ -25,6 +25,17 @@
 
 # Outputs
 
-| Property | Description |
-|:---------|:------------|
-| select   | click event |
+| Property   | Description                              |
+|:--------------------|:---------------------------------------------------|
+| click               | click event                                        |
+| mouseEnter          | mouse enter over the element (mouse enter)         |
+| mouseLeave          | mouse leave over the element (mouse leave)         |
+| arcClick            | arc segment click event                            |
+| arcMouseEnter       | mouse enter over the arc segment (mouse enter)     |
+| arcMouseLeave       | mouse leave over the arc segment (mouse leave)     |
+| labelClick          | value label click event                            |
+| labelMouseEnter     | mouse enter over the value label (mouse enter)     |
+| labelMouseLeave     | mouse leave over the value label (mouse leave)     |
+| pointerClick        | pointer element click event                        |
+| pointerMouseEnter   | mouse enter over the pointer element (mouse enter) |
+| pointerMouseLeave   | mouse leave over the pointer element (mouse leave) |
