@@ -41,6 +41,10 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
   @Input() public pointerColor: string;
   @Input() public segments = [];
 
+  @Output() public click: EventEmitter<any> = new EventEmitter();
+  @Output() public mouseEnter: EventEmitter<any> = new EventEmitter();
+  @Output() public mouseLeave: EventEmitter<any> = new EventEmitter();
+
   @Output() public arcClick: EventEmitter<any> = new EventEmitter();
   @Output() public arcMouseEnter: EventEmitter<any> = new EventEmitter();
   @Output() public arcMouseLeave: EventEmitter<any> = new EventEmitter();
@@ -145,46 +149,55 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
 
   public onArcClick(event: any): void {
     this.arcClick.emit(event);
+    this.click.emit(event);
     console.log('arc click');
   }
 
   public onArcActivate(event: any): void {
     this.arcMouseEnter.emit(event);
+    this.mouseEnter.emit(event);
     console.log('arc activate');
   }
 
   public onArcDeactivate(event: any): void {
     this.arcMouseLeave.emit(event);
+    this.mouseLeave.emit(event);
     console.log('arc deactivate');
   }
 
   public onLabelClick(event: any): void {
     this.labelClick.emit(event);
+    this.click.emit(event);
     console.log('label click');
   }
 
   public onLabelMouseEnter(event: any): void {
     this.labelMouseEnter.emit(event);
+    this.mouseEnter.emit(event);
     console.log('label mouseEnter');
   }
 
   public onLabelMouseLeave(event: any): void {
     this.labelMouseLeave.emit(event);
+    this.mouseLeave.emit(event);
     console.log('label mouseLeave');
   }
 
   public onPointerClick(event: any): void {
     this.pointerClick.emit(event);
+    this.click.emit(event);
     console.log('pointer click');
   }
 
   public onPointerMouseEnter(event: any): void {
     this.pointerMouseEnter.emit(event);
+    this.mouseEnter.emit(event);
     console.log('pointer mouseEnter');
   }
 
   public onPointerMouseLeave(event: any): void {
     this.pointerMouseLeave.emit(event);
+    this.mouseLeave.emit(event);
     console.log('pointer mouseLeave');
   }
 
