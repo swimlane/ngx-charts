@@ -63,10 +63,6 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
 
   ngAfterViewInit(): void {
     super.ngAfterViewInit();
-
-    setTimeout(() => {
-
-    });
   }
 
   public update(): void {
@@ -83,11 +79,6 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
       [this.minValue, this.maxValue], this.customColors);
 
     this.arcs = this.getArcs();
-
-    console.log('majorTicks', this.majorTicks);
-    console.log('scale', this.getScale()(100));
-    console.log('ticks', this.ticks);
-    console.log('arcs', this.arcs);
   }
 
   public getTranslate(): string {
@@ -148,57 +139,48 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
   }
 
   public onArcClick(event: any): void {
-    this.arcClick.emit(event);
     this.click.emit(event);
-    console.log('arc click');
+    this.arcClick.emit(event);
   }
 
   public onArcActivate(event: any): void {
-    this.arcMouseEnter.emit(event);
     this.mouseEnter.emit(event);
-    console.log('arc activate');
+    this.arcMouseEnter.emit(event);
   }
 
   public onArcDeactivate(event: any): void {
-    this.arcMouseLeave.emit(event);
     this.mouseLeave.emit(event);
-    console.log('arc deactivate');
+    this.arcMouseLeave.emit(event);
   }
 
   public onLabelClick(event: any): void {
-    this.labelClick.emit(event);
     this.click.emit(event);
-    console.log('label click');
+    this.labelClick.emit(event);
   }
 
   public onLabelMouseEnter(event: any): void {
-    this.labelMouseEnter.emit(event);
     this.mouseEnter.emit(event);
-    console.log('label mouseEnter');
+    this.labelMouseEnter.emit(event);
   }
 
   public onLabelMouseLeave(event: any): void {
-    this.labelMouseLeave.emit(event);
     this.mouseLeave.emit(event);
-    console.log('label mouseLeave');
+    this.labelMouseLeave.emit(event);
   }
 
   public onPointerClick(event: any): void {
-    this.pointerClick.emit(event);
     this.click.emit(event);
-    console.log('pointer click');
+    this.pointerClick.emit(event);
   }
 
   public onPointerMouseEnter(event: any): void {
     this.pointerMouseEnter.emit(event);
     this.mouseEnter.emit(event);
-    console.log('pointer mouseEnter');
   }
 
   public onPointerMouseLeave(event: any): void {
-    this.pointerMouseLeave.emit(event);
     this.mouseLeave.emit(event);
-    console.log('pointer mouseLeave');
+    this.pointerMouseLeave.emit(event);
   }
 
   private getDimensions(): any {
@@ -248,10 +230,6 @@ export class RadialGaugeComponent extends BaseChartComponent implements AfterVie
 
   private deg2rad(degree: number): number {
     return degree * Math.PI / 180;
-  }
-
-  private rad2deg(rad: number) {
-    return rad * 180 / Math.PI;
   }
 
   private getDegreeRange(): number {
