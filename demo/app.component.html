@@ -1040,6 +1040,9 @@
         <label>Number of large segments:</label><br />
         <input type="number" [(ngModel)]="gaugeLargeSegments"><br />
       </div>
+      <div *ngIf="chart.options.includes('smallSegments')">
+          <label>Number of small segments:</label><br />
+          <input type="number" [(ngModel)]="gaugeSmallSegments"><br />
       <div *ngIf="chart.options.includes('displayValue')">
           <label>Display value: </label><br />
           <input type="text" [(ngModel)]="radialGaugeDisplayValue"><br />
@@ -1055,6 +1058,10 @@
       <div *ngIf="chart.options.includes('maxAngle')">
           <label>Maximal angle: </label><br />
           <input type="number" [(ngModel)]="radialGaugeMaxAngle"><br />
+      </div>
+      <div *ngIf="chart.options.includes('units')">
+          <label>Units:</label><br />
+          <input type="text" [(ngModel)]="gaugeUnits"><br />
       </div>
       <div *ngIf="chart.options.includes('pointerColor')">
           <label>Pointer color: </label><br />
