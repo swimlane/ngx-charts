@@ -39,3 +39,27 @@
 | pointerClick        | pointer element click event                        |
 | pointerMouseEnter   | mouse enter over the pointer element (mouse enter) |
 | pointerMouseLeave   | mouse leave over the pointer element (mouse leave) |
+
+# Custom Segments
+
+The format for creating custom segments:
+
+```
+[
+  {
+      minValue: 0,
+      maxValue: 30,
+      color: 'red'
+  },
+  {
+      minValue: 30,
+      maxValue: 60,
+      color: 'yellow'
+  },
+  {
+      minValue: 60,
+      maxValue: 100,
+      color: 'green'
+  }
+]
+```
