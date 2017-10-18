@@ -106,7 +106,7 @@ export class AdvancedLegendComponent implements OnChanges  {
     return this.data.map((d, index) => {
       const label = formatLabel(d.name);
       const value = d.value;
-      const percentage = value / this.total * 100;
+      const percentage = (this.total > 0) ? value / this.total * 100 : 0;
       const color = this.colors.getColor(label);
 
       return {
