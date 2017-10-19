@@ -98,6 +98,61 @@ export const multi = [
   }
 ];
 
+export const fiscalYearReport = [
+  {
+    name: 'Q1',
+    series: [
+      {
+        name: '1001',
+        value: -10632
+      },
+      {
+        name: '2001',
+        value: 36953
+      },
+    ]
+  },
+  {
+    name: 'Q2',
+    series: [
+      {
+        name: '1001',
+        value: -19737
+      },
+      {
+        name: '2001',
+        value: 45986
+      },
+    ]
+  },
+  {
+    name: 'Q3',
+    series: [
+      {
+        name: '1001',
+        value: -16745
+      },
+      {
+        name: '2001',
+        value: 34774
+      },
+    ]
+  },
+  {
+    name: 'Q4',
+    series: [
+      {
+        name: '1001',
+        value: -16240
+      },
+      {
+        name: '2001',
+        value: 32543
+      },
+    ]
+  }
+];
+
 export const bubble = [
   {
     name: 'Germany',
