@@ -15,11 +15,7 @@ import {
   transition
 } from '@angular/animations';
 import { formatLabel } from '../common/label.helper';
-
-export enum D0Types {
-  positive = 'positive',
-  negative = 'negative'
-}
+import { D0Types } from './series-vertical.component';
 
 @Component({
   selector: 'g[ngx-charts-series-horizontal]',
