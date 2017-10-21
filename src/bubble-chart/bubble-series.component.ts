@@ -33,7 +33,7 @@ import { formatLabel } from '../common/label.helper';
           [pointerEvents]="'all'"
           [data]="circle.value"
           [classNames]="circle.classNames"
-          (select)="onClick($event, circle.label)"
+          (select)="onClick($event, circle.label, circle.data)"
           (activate)="activateCircle(circle)"
           (deactivate)="deactivateCircle(circle)"
           ngx-tooltip
@@ -118,7 +118,8 @@ export class BubbleSeriesComponent implements OnChanges {
           name: d.name,
           value: d.y,
           x: d.x,
-          radius: d.r
+          radius: d.r,
+          extra: d.extra
         };
 
         return {
@@ -172,10 +173,11 @@ export class BubbleSeriesComponent implements OnChanges {
     `;
   }
 
-  onClick(value, label): void {
+  onClick(value, label, data): void {
     this.select.emit({
       name: label,
-      value
+      value,
+      extra: data.extra
     });
   }
 
