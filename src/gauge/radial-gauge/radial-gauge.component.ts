@@ -2,7 +2,6 @@ import { Component, AfterViewInit, ViewEncapsulation,
   ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 import { ScaleLinear, scaleLinear } from 'd3-scale';
-import { range, max, min } from 'd3-array';
 import { line, curveLinear, Line } from 'd3-shape';
 
 import { BaseChartComponent } from './../../common/base-chart.component';
