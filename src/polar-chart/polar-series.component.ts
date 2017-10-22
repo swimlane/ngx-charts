@@ -6,8 +6,7 @@ import {
   ChangeDetectionStrategy,
   TemplateRef
 } from '@angular/core';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
-import { area, radialLine } from 'd3-shape';
+import { radialLine } from 'd3-shape';
 
 import { id } from '../utils/id';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
@@ -34,6 +33,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
         [class.inactive]="inactive"
         [attr.fill-opacity]="rangeFillOpacity"
         [fill]="hasGradient ? gradientUrl : seriesColor"
+        [animations]="animations"
       />
       <svg:g ngx-charts-circle
         *ngFor="let circle of circles"
@@ -70,6 +70,7 @@ export class PolarSeriesComponent implements OnChanges {
   @Input() tooltipText: (o: any) => string;
   @Input() gradient: boolean = false;
   @Input() tooltipTemplate: TemplateRef<any>;
+  @Input() animations: boolean = true;
 
   path: string;
   circles: any[];
@@ -86,9 +87,6 @@ export class PolarSeriesComponent implements OnChanges {
 
   active: boolean;
   inactive: boolean;
-
-  constructor(private location: LocationStrategy) {
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -196,12 +194,8 @@ export class PolarSeriesComponent implements OnChanges {
       return;
     }
 
-    const pageUrl = this.location instanceof PathLocationStrategy
-      ? this.location.path()
-      : '';
-
     this.gradientId = 'grad' + id().toString();
-    this.gradientUrl = `url(${pageUrl}#${this.gradientId})`;
+    this.gradientUrl = `url(#${this.gradientId})`;
 
     if (this.colors.scaleType === 'linear') {
       const values = this.data.series.map(d => d.value);

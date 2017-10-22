@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel } from '../common/label.helper';
-var BubbleSeriesComponent = (function () {
+var BubbleSeriesComponent = /** @class */ (function () {
     function BubbleSeriesComponent() {
         this.tooltipDisabled = false;
         this.select = new EventEmitter();
@@ -35,6 +35,7 @@ var BubbleSeriesComponent = (function () {
                     series: seriesName,
                     name: d.name,
                     value: d.y,
+                    x: d.x,
                     radius: d.r
                 };
                 return {
@@ -106,45 +107,45 @@ var BubbleSeriesComponent = (function () {
     BubbleSeriesComponent.prototype.trackBy = function (index, circle) {
         return circle.data.series + " " + circle.data.name;
     };
+    BubbleSeriesComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'g[ngx-charts-bubble-series]',
+                    template: "\n    <svg:g *ngFor=\"let circle of circles; trackBy: trackBy\">\n      <svg:g [attr.transform]=\"circle.transform\">\n        <svg:g ngx-charts-circle\n          [@animationState]=\"'active'\"\n          class=\"circle\"\n          [cx]=\"0\"\n          [cy]=\"0\"\n          [r]=\"circle.radius\"\n          [fill]=\"circle.color\"\n          [style.opacity]=\"circle.opacity\"\n          [class.active]=\"circle.isActive\"\n          [pointerEvents]=\"'all'\"\n          [data]=\"circle.value\"\n          [classNames]=\"circle.classNames\"\n          (select)=\"onClick($event, circle.label)\"\n          (activate)=\"activateCircle(circle)\"\n          (deactivate)=\"deactivateCircle(circle)\"\n          ngx-tooltip\n          [tooltipDisabled]=\"tooltipDisabled\"\n          [tooltipPlacement]=\"'top'\"\n          [tooltipType]=\"'tooltip'\"\n          [tooltipTitle]=\"tooltipTemplate ? undefined : getTooltipText(circle)\"\n          [tooltipTemplate]=\"tooltipTemplate\"\n          [tooltipContext]=\"circle.data\"\n        />\n      </svg:g>\n    </svg:g>\n  ",
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    animations: [
+                        trigger('animationState', [
+                            transition(':enter', [
+                                style({
+                                    opacity: 0,
+                                    transform: 'scale(0)'
+                                }),
+                                animate(250, style({ opacity: 1, transform: 'scale(1)' }))
+                            ])
+                        ])
+                    ]
+                },] },
+    ];
+    /** @nocollapse */
+    BubbleSeriesComponent.ctorParameters = function () { return []; };
+    BubbleSeriesComponent.propDecorators = {
+        'data': [{ type: Input },],
+        'xScale': [{ type: Input },],
+        'yScale': [{ type: Input },],
+        'rScale': [{ type: Input },],
+        'xScaleType': [{ type: Input },],
+        'yScaleType': [{ type: Input },],
+        'colors': [{ type: Input },],
+        'visibleValue': [{ type: Input },],
+        'activeEntries': [{ type: Input },],
+        'xAxisLabel': [{ type: Input },],
+        'yAxisLabel': [{ type: Input },],
+        'tooltipDisabled': [{ type: Input },],
+        'tooltipTemplate': [{ type: Input },],
+        'select': [{ type: Output },],
+        'activate': [{ type: Output },],
+        'deactivate': [{ type: Output },],
+    };
     return BubbleSeriesComponent;
 }());
 export { BubbleSeriesComponent };
-BubbleSeriesComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'g[ngx-charts-bubble-series]',
-                template: "\n    <svg:g *ngFor=\"let circle of circles; trackBy: trackBy\">\n      <svg:g [attr.transform]=\"circle.transform\">\n        <svg:g ngx-charts-circle\n          [@animationState]=\"'active'\"\n          class=\"circle\"\n          [cx]=\"0\"\n          [cy]=\"0\"\n          [r]=\"circle.radius\"\n          [fill]=\"circle.color\"\n          [style.opacity]=\"circle.opacity\"\n          [class.active]=\"circle.isActive\"\n          [pointerEvents]=\"'all'\"\n          [data]=\"circle.value\"\n          [classNames]=\"circle.classNames\"\n          (select)=\"onClick($event, circle.label)\"\n          (activate)=\"activateCircle(circle)\"\n          (deactivate)=\"deactivateCircle(circle)\"\n          ngx-tooltip\n          [tooltipDisabled]=\"tooltipDisabled\"\n          [tooltipPlacement]=\"'top'\"\n          [tooltipType]=\"'tooltip'\"\n          [tooltipTitle]=\"tooltipTemplate ? undefined : getTooltipText(circle)\"\n          [tooltipTemplate]=\"tooltipTemplate\"\n          [tooltipContext]=\"circle.data\"\n        />\n      </svg:g>\n    </svg:g>\n  ",
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                animations: [
-                    trigger('animationState', [
-                        transition(':enter', [
-                            style({
-                                opacity: 0,
-                                transform: 'scale(0)'
-                            }),
-                            animate(250, style({ opacity: 1, transform: 'scale(1)' }))
-                        ])
-                    ])
-                ]
-            },] },
-];
-/** @nocollapse */
-BubbleSeriesComponent.ctorParameters = function () { return []; };
-BubbleSeriesComponent.propDecorators = {
-    'data': [{ type: Input },],
-    'xScale': [{ type: Input },],
-    'yScale': [{ type: Input },],
-    'rScale': [{ type: Input },],
-    'xScaleType': [{ type: Input },],
-    'yScaleType': [{ type: Input },],
-    'colors': [{ type: Input },],
-    'visibleValue': [{ type: Input },],
-    'activeEntries': [{ type: Input },],
-    'xAxisLabel': [{ type: Input },],
-    'yAxisLabel': [{ type: Input },],
-    'tooltipDisabled': [{ type: Input },],
-    'tooltipTemplate': [{ type: Input },],
-    'select': [{ type: Output },],
-    'activate': [{ type: Output },],
-    'deactivate': [{ type: Output },],
-};
 //# sourceMappingURL=bubble-series.component.js.map

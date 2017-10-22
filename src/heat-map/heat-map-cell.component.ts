@@ -8,7 +8,6 @@ import {
   OnChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { select } from 'd3-selection';
 
 import { id } from '../utils/id';
@@ -47,6 +46,7 @@ export class HeatMapCellComponent implements OnChanges {
   @Input() data;
   @Input() label;
   @Input() gradient: boolean = false;
+  @Input() animations: boolean = true;
 
   @Output() select = new EventEmitter();
 
@@ -58,23 +58,21 @@ export class HeatMapCellComponent implements OnChanges {
   gradientUrl: string;
   gradientStops: any[];
 
-  constructor(element: ElementRef, private location: LocationStrategy) {
+  constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.transform = `translate(${this.x} , ${this.y})`;
 
-    const pageUrl = this.location instanceof PathLocationStrategy
-      ? this.location.path()
-      : '';
-
     this.startOpacity = 0.3;
     this.gradientId = 'grad' + id().toString();
-    this.gradientUrl = `url(${pageUrl}#${this.gradientId})`;
+    this.gradientUrl = `url(#${this.gradientId})`;
     this.gradientStops = this.getGradientStops();
 
-    this.loadAnimation();
+    if (this.animations) {
+      this.loadAnimation();
+    }
   }
 
   getGradientStops() {
@@ -99,7 +97,7 @@ export class HeatMapCellComponent implements OnChanges {
 
   animateToCurrentForm(): void {
     const node = select(this.element).select('.cell');
-
+    
     node.transition().duration(750)
       .attr('opacity', 1);
   }

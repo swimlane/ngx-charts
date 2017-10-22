@@ -1,9 +1,8 @@
-import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter, ChangeDetectorRef, NgZone, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
 import { formatLabel } from '../label.helper';
-var LegendComponent = (function () {
-    function LegendComponent(cd, zone) {
+var LegendComponent = /** @class */ (function () {
+    function LegendComponent(cd) {
         this.cd = cd;
-        this.zone = zone;
         this.labelClick = new EventEmitter();
         this.labelActivate = new EventEmitter();
         this.labelDeactivate = new EventEmitter();
@@ -55,32 +54,31 @@ var LegendComponent = (function () {
     LegendComponent.prototype.trackBy = function (index, item) {
         return item.label;
     };
+    LegendComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'ngx-charts-legend',
+                    template: "\n    <div [style.width.px]=\"width\">\n      <header class=\"legend-title\" *ngIf=\"title?.length > 0\">\n        <span class=\"legend-title-text\">{{title}}</span>\n      </header>\n      <div class=\"legend-wrap\">\n        <ul class=\"legend-labels\"\n          [style.max-height.px]=\"height - 45\">\n          <li\n            *ngFor=\"let entry of legendEntries; trackBy: trackBy\"\n            class=\"legend-label\">\n            <ngx-charts-legend-entry\n              [label]=\"entry.label\"\n              [formattedLabel]=\"entry.formattedLabel\"\n              [color]=\"entry.color\"\n              [isActive]=\"isActive(entry)\"\n              (select)=\"labelClick.emit($event)\"\n              (activate)=\"activate($event)\"\n              (deactivate)=\"deactivate($event)\">\n            </ngx-charts-legend-entry>\n          </li>\n        </ul>\n      </div>\n    </div>\n  ",
+                    styleUrls: ['./legend.component.css'],
+                    encapsulation: ViewEncapsulation.None,
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                },] },
+    ];
+    /** @nocollapse */
+    LegendComponent.ctorParameters = function () { return [
+        { type: ChangeDetectorRef, },
+    ]; };
+    LegendComponent.propDecorators = {
+        'data': [{ type: Input },],
+        'title': [{ type: Input },],
+        'colors': [{ type: Input },],
+        'height': [{ type: Input },],
+        'width': [{ type: Input },],
+        'activeEntries': [{ type: Input },],
+        'labelClick': [{ type: Output },],
+        'labelActivate': [{ type: Output },],
+        'labelDeactivate': [{ type: Output },],
+    };
     return LegendComponent;
 }());
 export { LegendComponent };
-LegendComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'ngx-charts-legend',
-                template: "\n    <div [style.width.px]=\"width\">\n      <header class=\"legend-title\">\n        <span class=\"legend-title-text\">{{title}}</span>\n      </header>\n      <div class=\"legend-wrap\">\n        <ul class=\"legend-labels\"\n          [style.max-height.px]=\"height - 45\">\n          <li\n            *ngFor=\"let entry of legendEntries; trackBy: trackBy\"\n            class=\"legend-label\">\n            <ngx-charts-legend-entry\n              [label]=\"entry.label\"\n              [formattedLabel]=\"entry.formattedLabel\"\n              [color]=\"entry.color\"\n              [isActive]=\"isActive(entry)\"\n              (select)=\"labelClick.emit($event)\"\n              (activate)=\"activate($event)\"\n              (deactivate)=\"deactivate($event)\">\n            </ngx-charts-legend-entry>\n          </li>\n        </ul>\n      </div>\n    </div>\n  ",
-                styleUrls: ['./legend.component.css'],
-                encapsulation: ViewEncapsulation.None,
-                changeDetection: ChangeDetectionStrategy.OnPush
-            },] },
-];
-/** @nocollapse */
-LegendComponent.ctorParameters = function () { return [
-    { type: ChangeDetectorRef, },
-    { type: NgZone, },
-]; };
-LegendComponent.propDecorators = {
-    'data': [{ type: Input },],
-    'title': [{ type: Input },],
-    'colors': [{ type: Input },],
-    'height': [{ type: Input },],
-    'width': [{ type: Input },],
-    'activeEntries': [{ type: Input },],
-    'labelClick': [{ type: Output },],
-    'labelActivate': [{ type: Output },],
-    'labelDeactivate': [{ type: Output },],
-};
 //# sourceMappingURL=legend.component.js.map

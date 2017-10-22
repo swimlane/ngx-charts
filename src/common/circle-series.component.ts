@@ -11,12 +11,10 @@ import {
 } from '@angular/core';
 import {
   trigger,
-  state,
   style,
   animate,
   transition
 } from '@angular/animations';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { formatLabel } from '../common/label.helper';
 import { id } from '../utils/id';
 
@@ -100,15 +98,9 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
   gradientId: string;
   gradientFill: string;
 
-  constructor(private location: LocationStrategy) {
-  }
-
   ngOnInit() {
-    const pageUrl = this.location instanceof PathLocationStrategy
-      ? this.location.path()
-      : '';
     this.gradientId = 'grad' + id().toString();
-    this.gradientFill = `url(${pageUrl}#${this.gradientId})`;
+    this.gradientFill = `url(#${this.gradientId})`;
   }
 
   ngOnChanges(changes: SimpleChanges): void {

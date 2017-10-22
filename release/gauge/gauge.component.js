@@ -1,14 +1,19 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 import { Component, Input, ViewChild, ChangeDetectionStrategy, Output, EventEmitter, ViewEncapsulation, ContentChild } from '@angular/core';
 import { scaleLinear } from 'd3-scale';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
-var GaugeComponent = (function (_super) {
+var GaugeComponent = /** @class */ (function (_super) {
     __extends(GaugeComponent, _super);
     function GaugeComponent() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -210,44 +215,47 @@ var GaugeComponent = (function (_super) {
         });
         return item !== undefined;
     };
+    GaugeComponent.prototype.trackBy = function (index, item) {
+        return item.valueArc.data.name;
+    };
+    GaugeComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'ngx-charts-gauge',
+                    template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      [animations]=\"animations\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"gauge chart\">\n        <svg:g *ngFor=\"let arc of arcs; trackBy:trackBy\" [attr.transform]=\"rotation\">\n          <svg:g ngx-charts-gauge-arc\n            [backgroundArc]=\"arc.backgroundArc\"\n            [valueArc]=\"arc.valueArc\"\n            [cornerRadius]=\"cornerRadius\"\n            [colors]=\"colors\"\n            [isActive]=\"isActive(arc.valueArc.data)\"\n            [tooltipDisabled]=\"tooltipDisabled\"\n            [tooltipTemplate]=\"tooltipTemplate\"\n            [valueFormatting]=\"valueFormatting\"\n            [animations]=\"animations\"\n            (select)=\"onClick($event)\"\n            (activate)=\"onActivate($event)\"\n            (deactivate)=\"onDeactivate($event)\">\n          </svg:g>\n        </svg:g>\n\n        <svg:g ngx-charts-gauge-axis\n          *ngIf=\"showAxis\"\n          [bigSegments]=\"bigSegments\"\n          [smallSegments]=\"smallSegments\"\n          [min]=\"min\"\n          [max]=\"max\"\n          [radius]=\"outerRadius\"\n          [angleSpan]=\"angleSpan\"\n          [valueScale]=\"valueScale\"\n          [startAngle]=\"startAngle\"\n          [tickFormatting]=\"axisTickFormatting\">\n        </svg:g>\n\n        <svg:text #textEl\n            [style.textAnchor]=\"'middle'\"\n            [attr.transform]=\"textTransform\"\n            alignment-baseline=\"central\">\n          <tspan x=\"0\" dy=\"0\">{{displayValue}}</tspan>\n          <tspan x=\"0\" dy=\"1.2em\">{{units}}</tspan>\n        </svg:text>\n\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+                    styleUrls: [
+                        '../common/base-chart.component.css',
+                        './gauge.component.css'
+                    ],
+                    encapsulation: ViewEncapsulation.None,
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                },] },
+    ];
+    /** @nocollapse */
+    GaugeComponent.ctorParameters = function () { return []; };
+    GaugeComponent.propDecorators = {
+        'legend': [{ type: Input },],
+        'legendTitle': [{ type: Input },],
+        'min': [{ type: Input },],
+        'max': [{ type: Input },],
+        'textValue': [{ type: Input },],
+        'units': [{ type: Input },],
+        'bigSegments': [{ type: Input },],
+        'smallSegments': [{ type: Input },],
+        'results': [{ type: Input },],
+        'showAxis': [{ type: Input },],
+        'startAngle': [{ type: Input },],
+        'angleSpan': [{ type: Input },],
+        'activeEntries': [{ type: Input },],
+        'axisTickFormatting': [{ type: Input },],
+        'tooltipDisabled': [{ type: Input },],
+        'valueFormatting': [{ type: Input },],
+        'margin': [{ type: Input },],
+        'activate': [{ type: Output },],
+        'deactivate': [{ type: Output },],
+        'tooltipTemplate': [{ type: ContentChild, args: ['tooltipTemplate',] },],
+        'textEl': [{ type: ViewChild, args: ['textEl',] },],
+    };
     return GaugeComponent;
 }(BaseChartComponent));
 export { GaugeComponent };
-GaugeComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'ngx-charts-gauge',
-                template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"gauge chart\">\n        <svg:g *ngFor=\"let arc of arcs\" [attr.transform]=\"rotation\">\n          <svg:g ngx-charts-gauge-arc\n            [backgroundArc]=\"arc.backgroundArc\"\n            [valueArc]=\"arc.valueArc\"\n            [cornerRadius]=\"cornerRadius\"\n            [colors]=\"colors\"\n            [isActive]=\"isActive(arc.valueArc.data)\"\n            [tooltipDisabled]=\"tooltipDisabled\"\n            [tooltipTemplate]=\"tooltipTemplate\"\n            [valueFormatting]=\"valueFormatting\"\n            (select)=\"onClick($event)\"\n            (activate)=\"onActivate($event)\"\n            (deactivate)=\"onDeactivate($event)\">\n          </svg:g>\n        </svg:g>\n\n        <svg:g ngx-charts-gauge-axis\n          *ngIf=\"showAxis\"\n          [bigSegments]=\"bigSegments\"\n          [smallSegments]=\"smallSegments\"\n          [min]=\"min\"\n          [max]=\"max\"\n          [radius]=\"outerRadius\"\n          [angleSpan]=\"angleSpan\"\n          [valueScale]=\"valueScale\"\n          [startAngle]=\"startAngle\"\n          [tickFormatting]=\"axisTickFormatting\">\n        </svg:g>\n\n        <svg:text #textEl\n            [style.textAnchor]=\"'middle'\"\n            [attr.transform]=\"textTransform\"\n            alignment-baseline=\"central\">\n          <tspan x=\"0\" dy=\"0\">{{displayValue}}</tspan>\n          <tspan x=\"0\" dy=\"1.2em\">{{units}}</tspan>\n        </svg:text>\n\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-                styleUrls: [
-                    '../common/base-chart.component.css',
-                    './gauge.component.css'
-                ],
-                encapsulation: ViewEncapsulation.None,
-                changeDetection: ChangeDetectionStrategy.OnPush,
-            },] },
-];
-/** @nocollapse */
-GaugeComponent.ctorParameters = function () { return []; };
-GaugeComponent.propDecorators = {
-    'legend': [{ type: Input },],
-    'legendTitle': [{ type: Input },],
-    'min': [{ type: Input },],
-    'max': [{ type: Input },],
-    'textValue': [{ type: Input },],
-    'units': [{ type: Input },],
-    'bigSegments': [{ type: Input },],
-    'smallSegments': [{ type: Input },],
-    'results': [{ type: Input },],
-    'showAxis': [{ type: Input },],
-    'startAngle': [{ type: Input },],
-    'angleSpan': [{ type: Input },],
-    'activeEntries': [{ type: Input },],
-    'axisTickFormatting': [{ type: Input },],
-    'tooltipDisabled': [{ type: Input },],
-    'valueFormatting': [{ type: Input },],
-    'margin': [{ type: Input },],
-    'activate': [{ type: Output },],
-    'deactivate': [{ type: Output },],
-    'tooltipTemplate': [{ type: ContentChild, args: ['tooltipTemplate',] },],
-    'textEl': [{ type: ViewChild, args: ['textEl',] },],
-};
 //# sourceMappingURL=gauge.component.js.map

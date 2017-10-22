@@ -5,10 +5,11 @@ export declare class LineComponent implements OnChanges {
     stroke: any;
     data: any;
     fill: string;
+    animations: boolean;
     select: EventEmitter<{}>;
     initialized: boolean;
     initialPath: string;
     constructor(element: ElementRef);
     ngOnChanges(changes: SimpleChanges): void;
-    animateToCurrentForm(): void;
+    updatePathEl(): void;
 }

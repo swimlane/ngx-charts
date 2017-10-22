@@ -1,6 +1,7 @@
 .pie-label {
-  font-size: 11px;
-  animation: 750ms ease-in fadeIn; }
+  font-size: 11px; }
+  .pie-label.animation {
+    animation: 750ms ease-in fadeIn; }
 
 @keyframes fadeIn {
   from {
@@ -9,9 +10,10 @@
     opacity: 1; } }
 
 .pie-label-line {
-  animation: 3s linear drawOut;
-  stroke-dasharray: 100%;
-  transition: d 750ms; }
+  stroke-dasharray: 100%; }
+  .pie-label-line.animation {
+    animation: 3s linear drawOut;
+    transition: d 750ms; }
 
 @keyframes drawOut {
   from {

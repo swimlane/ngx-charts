@@ -4,30 +4,24 @@ import {
   Output,
   EventEmitter,
   ViewEncapsulation,
-  HostListener,
   ChangeDetectionStrategy,
   ContentChild,
   TemplateRef
 } from '@angular/core';
 import {
   trigger,
-  state,
   style,
   animate,
   transition
 } from '@angular/animations';
-import { PathLocationStrategy } from '@angular/common';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
-import { curveLinear, curveLinearClosed, curveCardinalClosed } from 'd3-shape';
+import { curveCardinalClosed } from 'd3-shape';
 
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
-import { PieLabelComponent } from '../pie-chart/pie-label.component';
 
-import { id } from '../utils/id';
 import { isDate, isNumber } from '../utils/types';
-import { reduceTicks } from '../common/axes/ticks.helper';
 
 const twoPI = 2 * Math.PI;
 
@@ -39,6 +33,7 @@ const twoPI = 2 * Math.PI;
       [showLegend]="legend"
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"
+      [animations]="animations"
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)">
@@ -63,7 +58,8 @@ const twoPI = 2 * Math.PI;
               [label]="tick.label"
               [max]="outerRadius"
               [value]="showGridLines ? 1 : outerRadius"
-              [explodeSlices]="true">
+              [explodeSlices]="true"
+              [animations]="animations">
             </svg:g>
           </svg:g>
         </svg:g>
@@ -98,6 +94,7 @@ const twoPI = 2 * Math.PI;
               [scaleType]="scaleType"
               [curve]="curve"
               [rangeFillOpacity]="rangeFillOpacity"
+              [animations]="animations"
               [tooltipDisabled]="tooltipDisabled"
               [tooltipTemplate]="tooltipTemplate"
             />

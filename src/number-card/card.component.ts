@@ -1,7 +1,7 @@
 import {
   Component, Input, Output, EventEmitter, ElementRef,
   SimpleChanges, OnChanges, ViewChild, ChangeDetectionStrategy,
-  ChangeDetectorRef, NgZone, OnDestroy, ViewEncapsulation
+  ChangeDetectorRef, NgZone, OnDestroy
 } from '@angular/core';
 import { trimLabel } from '../common/trim-label.helper';
 import { roundedRect } from '../common/shape.helper';
@@ -75,6 +75,7 @@ export class CardComponent implements OnChanges, OnDestroy {
   @Input() medianSize: number;
   @Input() valueFormatting: any;
   @Input() labelFormatting: any;
+  @Input() animations: boolean = true;
 
   @Output() select = new EventEmitter();
 
@@ -159,7 +160,7 @@ export class CardComponent implements OnChanges, OnDestroy {
   }
 
   startCount(): void {
-    if (!this.initialized) {
+    if (!this.initialized && this.animations) {
       cancelAnimationFrame(this.animationReq);
 
       const val = this.data.value;

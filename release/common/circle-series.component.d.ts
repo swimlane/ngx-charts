@@ -1,7 +1,5 @@
 import { SimpleChanges, EventEmitter, OnChanges, OnInit, TemplateRef } from '@angular/core';
-import { LocationStrategy } from '@angular/common';
 export declare class CircleSeriesComponent implements OnChanges, OnInit {
-    private location;
     data: any;
     type: string;
     xScale: any;
@@ -21,7 +19,6 @@ export declare class CircleSeriesComponent implements OnChanges, OnInit {
     barVisible: boolean;
     gradientId: string;
     gradientFill: string;
-    constructor(location: LocationStrategy);
     ngOnInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;

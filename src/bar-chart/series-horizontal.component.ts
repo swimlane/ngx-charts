@@ -10,7 +10,6 @@ import {
 } from '@angular/core';
 import {
   trigger,
-  state,
   style,
   animate,
   transition
@@ -22,7 +21,7 @@ import { formatLabel } from '../common/label.helper';
   template: `
     <svg:g ngx-charts-bar
       *ngFor="let bar of bars; trackBy:trackBy"
-      [@animationState]="'active'"
+      [@animationState]="'active'"     
       [width]="bar.width"
       [height]="bar.height"
       [x]="bar.x"
@@ -35,6 +34,7 @@ import { formatLabel } from '../common/label.helper';
       (select)="click($event)"
       [gradient]="gradient"
       [isActive]="isActive(bar.data)"
+      [animations]="animations"
       (activate)="activate.emit($event)"
       (deactivate)="deactivate.emit($event)"
       ngx-tooltip
@@ -75,6 +75,7 @@ export class SeriesHorizontal implements OnChanges {
   @Input() seriesName: string;
   @Input() tooltipTemplate: TemplateRef<any>;
   @Input() roundEdges: boolean;
+  @Input() animations: boolean = true;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();

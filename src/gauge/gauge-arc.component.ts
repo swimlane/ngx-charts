@@ -31,7 +31,7 @@ import { ColorHelper } from '../common/color.helper';
       [cornerRadius]="cornerRadius"
       [fill]="colors.getColor(valueArc.data.name)"
       [data]="valueArc.data"
-      [animate]="true"
+      [animate]="animations"
       [isActive]="isActive"
       (select)="select.emit($event)"
       (activate)="activate.emit($event)"
@@ -57,6 +57,7 @@ export class GaugeArcComponent {
   @Input() tooltipDisabled: boolean = false;
   @Input() valueFormatting: (value: any) => string;
   @Input() tooltipTemplate: TemplateRef<any>;
+  @Input() animations: boolean = true;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();

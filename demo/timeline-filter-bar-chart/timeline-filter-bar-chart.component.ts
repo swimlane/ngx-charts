@@ -6,7 +6,6 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy
 } from '@angular/core';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { scaleLinear, scaleTime, scaleBand } from 'd3-scale';
 import { brushX } from 'd3-brush';
 import { select, event as d3event } from 'd3-selection';
@@ -20,6 +19,7 @@ import { id } from '../../src/utils';
     <ngx-charts-chart
       [view]="[width, height]"
       [showLegend]="false"
+      [animations]="animations"
       class="timeline-filter-bar-chart">
       <svg:g [attr.transform]="transform" class="chart">
         <svg:g ngx-charts-x-axis
@@ -48,6 +48,7 @@ import { id } from '../../src/utils';
           [series]="results"
           [dims]="dims"
           [gradient]="gradient"
+          [animations]="animations"
           tooltipDisabled="true">
         </svg:g>
       </svg:g>
@@ -86,6 +87,7 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
   @Input() yAxisLabel;
   @Input() gradient;
   @Input() showGridLines: boolean = true;
+  @Input() animations: boolean = true;
 
   @Output() onFilter = new EventEmitter();
 
@@ -138,12 +140,8 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
       this.updateBrush();
     }
 
-    const pageUrl = this.location instanceof PathLocationStrategy
-      ? this.location.path()
-      : '';
-
     this.filterId = 'filter' + id().toString();
-    this.filter = `url(${pageUrl}#${this.filterId})`;
+    this.filter = `url(#${this.filterId})`;
 
     if (!this.initialized) {
       this.addBrush();

@@ -18,6 +18,7 @@ import { ColorHelper } from '../common/color.helper';
     <ngx-charts-chart
       [view]="[width, height]"
       [showLegend]="legend"
+      [animations]="animations"
       [legendOptions]="legendOptions"
       (legendLabelClick)="onClick($event)">
       <svg:g [attr.transform]="transform" class="heat-map chart">
@@ -53,6 +54,7 @@ import { ColorHelper } from '../common/color.helper';
           [colors]="colors"
           [data]="results"
           [gradient]="gradient"
+          [animations]="animations"
           [tooltipDisabled]="tooltipDisabled"
           [tooltipTemplate]="tooltipTemplate"
           [tooltipText]="tooltipText"

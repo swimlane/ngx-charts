@@ -1,15 +1,16 @@
 import { Component, Input, ViewContainerRef, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { TooltipService } from '../tooltip';
-var ChartComponent = (function () {
+var ChartComponent = /** @class */ (function () {
     function ChartComponent(vcr, tooltipService) {
         this.vcr = vcr;
         this.tooltipService = tooltipService;
         this.showLegend = false;
+        this.animations = true;
         this.legendLabelClick = new EventEmitter();
         this.legendLabelActivate = new EventEmitter();
         this.legendLabelDeactivate = new EventEmitter();
-        this.tooltipService.injectionService.setRootViewContainer(vcr);
+        this.tooltipService.injectionService.setRootViewContainer(this.vcr);
     }
     ChartComponent.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -37,41 +38,42 @@ var ChartComponent = (function () {
             return 'legend';
         }
     };
+    ChartComponent.decorators = [
+        { type: Component, args: [{
+                    providers: [TooltipService],
+                    selector: 'ngx-charts-chart',
+                    template: "\n    <div\n      class=\"ngx-charts-outer\"\n      [style.width.px]=\"view[0]\"\n      [@animationState]=\"'active'\"\n      [@.disabled]=\"!animations\">\n      <svg\n        class=\"ngx-charts\"\n        [attr.width]=\"chartWidth\"\n        [attr.height]=\"view[1]\">\n        <ng-content></ng-content>\n      </svg>\n      <ngx-charts-scale-legend\n        *ngIf=\"showLegend && legendType === 'scaleLegend'\"\n        class=\"chart-legend\"\n        [valueRange]=\"legendOptions.domain\"\n        [colors]=\"legendOptions.colors\"\n        [height]=\"view[1]\"\n        [width]=\"legendWidth\">\n      </ngx-charts-scale-legend>\n      <ngx-charts-legend\n        *ngIf=\"showLegend && legendType === 'legend'\"\n        class=\"chart-legend\"\n        [data]=\"legendOptions.domain\"\n        [title]=\"legendOptions.title\"\n        [colors]=\"legendOptions.colors\"\n        [height]=\"view[1]\"\n        [width]=\"legendWidth\"\n        [activeEntries]=\"activeEntries\"\n        (labelClick)=\"legendLabelClick.emit($event)\"\n        (labelActivate)=\"legendLabelActivate.emit($event)\"\n        (labelDeactivate)=\"legendLabelDeactivate.emit($event)\">\n      </ngx-charts-legend>\n    </div>\n  ",
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    animations: [
+                        trigger('animationState', [
+                            transition(':enter', [
+                                style({ opacity: 0 }),
+                                animate('500ms 100ms', style({ opacity: 1 }))
+                            ])
+                        ])
+                    ]
+                },] },
+    ];
+    /** @nocollapse */
+    ChartComponent.ctorParameters = function () { return [
+        { type: ViewContainerRef, },
+        { type: TooltipService, },
+    ]; };
+    ChartComponent.propDecorators = {
+        'view': [{ type: Input },],
+        'showLegend': [{ type: Input },],
+        'legendOptions': [{ type: Input },],
+        'data': [{ type: Input },],
+        'legendData': [{ type: Input },],
+        'legendType': [{ type: Input },],
+        'colors': [{ type: Input },],
+        'activeEntries': [{ type: Input },],
+        'animations': [{ type: Input },],
+        'legendLabelClick': [{ type: Output },],
+        'legendLabelActivate': [{ type: Output },],
+        'legendLabelDeactivate': [{ type: Output },],
+    };
     return ChartComponent;
 }());
 export { ChartComponent };
-ChartComponent.decorators = [
-    { type: Component, args: [{
-                providers: [TooltipService],
-                selector: 'ngx-charts-chart',
-                template: "\n    <div\n      class=\"ngx-charts-outer\"\n      [style.width.px]=\"view[0]\"\n      [@animationState]=\"'active'\">\n      <svg\n        class=\"ngx-charts\"\n        [attr.width]=\"chartWidth\"\n        [attr.height]=\"view[1]\">\n        <ng-content></ng-content>\n      </svg>\n      <ngx-charts-scale-legend\n        *ngIf=\"showLegend && legendType === 'scaleLegend'\"\n        class=\"chart-legend\"\n        [valueRange]=\"legendOptions.domain\"\n        [colors]=\"legendOptions.colors\"\n        [height]=\"view[1]\"\n        [width]=\"legendWidth\">\n      </ngx-charts-scale-legend>\n      <ngx-charts-legend\n        *ngIf=\"showLegend && legendType === 'legend'\"\n        class=\"chart-legend\"\n        [data]=\"legendOptions.domain\"\n        [title]=\"legendOptions.title\"\n        [colors]=\"legendOptions.colors\"\n        [height]=\"view[1]\"\n        [width]=\"legendWidth\"\n        [activeEntries]=\"activeEntries\"\n        (labelClick)=\"legendLabelClick.emit($event)\"\n        (labelActivate)=\"legendLabelActivate.emit($event)\"\n        (labelDeactivate)=\"legendLabelDeactivate.emit($event)\">\n      </ngx-charts-legend>\n    </div>\n  ",
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                animations: [
-                    trigger('animationState', [
-                        transition(':enter', [
-                            style({ opacity: 0 }),
-                            animate('500ms 100ms', style({ opacity: 1 }))
-                        ])
-                    ])
-                ]
-            },] },
-];
-/** @nocollapse */
-ChartComponent.ctorParameters = function () { return [
-    { type: ViewContainerRef, },
-    { type: TooltipService, },
-]; };
-ChartComponent.propDecorators = {
-    'view': [{ type: Input },],
-    'showLegend': [{ type: Input },],
-    'legendOptions': [{ type: Input },],
-    'data': [{ type: Input },],
-    'legendData': [{ type: Input },],
-    'legendType': [{ type: Input },],
-    'colors': [{ type: Input },],
-    'activeEntries': [{ type: Input },],
-    'legendLabelClick': [{ type: Output },],
-    'legendLabelActivate': [{ type: Output },],
-    'legendLabelDeactivate': [{ type: Output },],
-};
 //# sourceMappingURL=chart.component.js.map

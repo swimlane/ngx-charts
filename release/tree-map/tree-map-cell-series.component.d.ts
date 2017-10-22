@@ -8,6 +8,7 @@ export declare class TreeMapCellSeriesComponent implements OnChanges {
     gradient: boolean;
     tooltipDisabled: boolean;
     tooltipTemplate: TemplateRef<any>;
+    animations: boolean;
     select: EventEmitter<{}>;
     cells: any[];
     ngOnChanges(changes: SimpleChanges): void;

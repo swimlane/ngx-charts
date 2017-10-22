@@ -15,6 +15,7 @@ export declare class SeriesHorizontal implements OnChanges {
     seriesName: string;
     tooltipTemplate: TemplateRef<any>;
     roundEdges: boolean;
+    animations: boolean;
     select: EventEmitter<{}>;
     activate: EventEmitter<{}>;
     deactivate: EventEmitter<{}>;

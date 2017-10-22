@@ -12,7 +12,6 @@ import {
   ContentChild,
   TemplateRef
 } from '@angular/core';
-import { PathLocationStrategy } from '@angular/common';
 import {
   trigger,
   state,
@@ -36,6 +35,7 @@ import { scaleBand, scaleLinear, scalePoint, scaleTime } from 'd3-scale';
       [showLegend]="legend"
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"
+      [animations]="animations"
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)">
@@ -82,6 +82,7 @@ import { scaleBand, scaleLinear, scalePoint, scaleTime } from 'd3-scale';
           [gradient]="gradient"
           tooltipDisabled="true"
           [activeEntries]="activeEntries"
+          [animations]="animations"
           (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)"
           (bandwidth)="updateLineWidth($event)"
@@ -100,6 +101,7 @@ import { scaleBand, scaleLinear, scalePoint, scaleTime } from 'd3-scale';
               [scaleType]="scaleType"
               [curve]="curve"
               [rangeFillOpacity]="rangeFillOpacity"
+              [animations]="animations"
             />
           </svg:g>
 
@@ -167,6 +169,7 @@ export class ComboChartComponent extends BaseChartComponent  {
   @Input() yLeftAxisScaleFactor: any;
   @Input() yRightAxisScaleFactor: any;
   @Input() rangeFillOpacity: number;
+  @Input() animations: boolean = true;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

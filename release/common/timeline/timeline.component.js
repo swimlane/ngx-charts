@@ -1,14 +1,11 @@
-import { Component, Input, Output, EventEmitter, ElementRef, ChangeDetectionStrategy, NgZone, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { Component, Input, Output, EventEmitter, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
 import { brushX } from 'd3-brush';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
 import { select, event as d3event } from 'd3-selection';
 import { id } from '../../utils';
-var Timeline = (function () {
-    function Timeline(element, zone, cd, location) {
-        this.zone = zone;
+var Timeline = /** @class */ (function () {
+    function Timeline(element, cd) {
         this.cd = cd;
-        this.location = location;
         this.height = 50;
         this.select = new EventEmitter();
         this.onDomainChange = new EventEmitter();
@@ -32,11 +29,8 @@ var Timeline = (function () {
             this.updateBrush();
         }
         this.transform = "translate(0 , " + offsetY + ")";
-        var pageUrl = this.location instanceof PathLocationStrategy
-            ? this.location.path()
-            : '';
         this.filterId = 'filter' + id().toString();
-        this.filter = "url(" + pageUrl + "#" + this.filterId + ")";
+        this.filter = "url(#" + this.filterId + ")";
         this.cd.markForCheck();
     };
     Timeline.prototype.getXDomain = function () {
@@ -129,37 +123,35 @@ var Timeline = (function () {
         };
         return dims;
     };
+    Timeline.decorators = [
+        { type: Component, args: [{
+                    selector: 'g[ngx-charts-timeline]',
+                    template: "\n    <svg:g\n      class=\"timeline\"\n      [attr.transform]=\"transform\">\n      <svg:filter [attr.id]=\"filterId\">\n        <svg:feColorMatrix in=\"SourceGraphic\"\n            type=\"matrix\"\n            values=\"0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\" />\n      </svg:filter>\n      <svg:g class=\"embedded-chart\">\n        <ng-content></ng-content>\n      </svg:g>\n      <svg:rect x=\"0\"\n        [attr.width]=\"view[0]\"\n        y=\"0\"\n        [attr.height]=\"height\"\n        class=\"brush-background\"\n      />\n      <svg:g class=\"brush\"></svg:g>\n    </svg:g>\n  ",
+                    styleUrls: ['./timeline.component.css'],
+                    encapsulation: ViewEncapsulation.None,
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                },] },
+    ];
+    /** @nocollapse */
+    Timeline.ctorParameters = function () { return [
+        { type: ElementRef, },
+        { type: ChangeDetectorRef, },
+    ]; };
+    Timeline.propDecorators = {
+        'view': [{ type: Input },],
+        'state': [{ type: Input },],
+        'results': [{ type: Input },],
+        'scheme': [{ type: Input },],
+        'customColors': [{ type: Input },],
+        'legend': [{ type: Input },],
+        'miniChart': [{ type: Input },],
+        'autoScale': [{ type: Input },],
+        'scaleType': [{ type: Input },],
+        'height': [{ type: Input },],
+        'select': [{ type: Output },],
+        'onDomainChange': [{ type: Output },],
+    };
     return Timeline;
 }());
 export { Timeline };
-Timeline.decorators = [
-    { type: Component, args: [{
-                selector: 'g[ngx-charts-timeline]',
-                template: "\n    <svg:g\n      class=\"timeline\"\n      [attr.transform]=\"transform\">\n      <svg:filter [attr.id]=\"filterId\">\n        <svg:feColorMatrix in=\"SourceGraphic\"\n            type=\"matrix\"\n            values=\"0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\" />\n      </svg:filter>\n      <svg:g class=\"embedded-chart\">\n        <ng-content></ng-content>\n      </svg:g>\n      <svg:rect x=\"0\"\n        [attr.width]=\"view[0]\"\n        y=\"0\"\n        [attr.height]=\"height\"\n        class=\"brush-background\"\n      />\n      <svg:g class=\"brush\"></svg:g>\n    </svg:g>\n  ",
-                styleUrls: ['./timeline.component.css'],
-                encapsulation: ViewEncapsulation.None,
-                changeDetection: ChangeDetectionStrategy.OnPush
-            },] },
-];
-/** @nocollapse */
-Timeline.ctorParameters = function () { return [
-    { type: ElementRef, },
-    { type: NgZone, },
-    { type: ChangeDetectorRef, },
-    { type: LocationStrategy, },
-]; };
-Timeline.propDecorators = {
-    'view': [{ type: Input },],
-    'state': [{ type: Input },],
-    'results': [{ type: Input },],
-    'scheme': [{ type: Input },],
-    'customColors': [{ type: Input },],
-    'legend': [{ type: Input },],
-    'miniChart': [{ type: Input },],
-    'autoScale': [{ type: Input },],
-    'scaleType': [{ type: Input },],
-    'height': [{ type: Input },],
-    'select': [{ type: Output },],
-    'onDomainChange': [{ type: Output },],
-};
 //# sourceMappingURL=timeline.component.js.map

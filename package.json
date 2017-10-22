@@ -1,6 +1,6 @@
 {
   "name": "@swimlane/ngx-charts",
-  "version": "6.0.2",
+  "version": "6.1.0",
   "description": "Declarative Charting Framework for Angular2 and beyond!",
   "main": "release/index.js",
   "typings": "release/index.d.ts",
@@ -9,7 +9,7 @@
     "test": "npm run lint && karma start",
     "test:watch": "npm run test -- --auto-watch --no-single-run",
     "watch:test": "npm run test -- --auto-watch --no-single-run",
-    "lint": "tslint \"./src/{,**/}*.ts\" \"./demo/{,**/}*.ts\"",
+    "lint": "tslint --project tsconfig.json --config tslint.json",
     "version": "npm run release",
     "preversion": "npm test",
     "postversion": "git push && git push --tags",

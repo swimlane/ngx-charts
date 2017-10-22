@@ -53,4 +53,5 @@ export declare class GaugeComponent extends BaseChartComponent implements AfterV
     onActivate(item: any): void;
     onDeactivate(item: any): void;
     isActive(entry: any): boolean;
+    trackBy(index: any, item: any): string;
 }

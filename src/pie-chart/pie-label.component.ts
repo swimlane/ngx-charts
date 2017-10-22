@@ -19,6 +19,7 @@ import { trimLabel } from '../common/trim-label.helper';
       [style.transition]="textTransition">
       <svg:text
         class="pie-label"
+        [class.animation]="animations"
         dy=".35em"
         [style.textAnchor]="textAnchor()"
         [style.shapeRendering]="'crispEdges'">
@@ -29,7 +30,8 @@ import { trimLabel } from '../common/trim-label.helper';
       [attr.d]="line"
       [attr.stroke]="color"
       fill="none"
-      class="pie-label-line line">
+      class="pie-label-line line"
+      [class.animation]="animations">
     </svg:path>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -43,6 +45,7 @@ export class PieLabelComponent implements OnChanges {
   @Input() max;
   @Input() value;
   @Input() explodeSlices;
+  @Input() animations: boolean = true;
 
   trimLabel: (label: string, max?: number) => string;
   line: string;
@@ -58,11 +61,6 @@ export class PieLabelComponent implements OnChanges {
   }
 
   update(): void {
-    const factor = 1.5;
-    const outerArc = arc()
-      .innerRadius(this.radius * factor)
-      .outerRadius(this.radius * factor);
-
     let startRadius = this.radius;
     if (this.explodeSlices) {
       startRadius = this.radius * this.value / this.max;
@@ -101,7 +99,7 @@ export class PieLabelComponent implements OnChanges {
   }
 
   get textTransition(): string {
-    return this.isIE ? null : 'transform 0.75s';
+    return (this.isIE || !this.animations) ? null : 'transform 0.75s';
   }
 
   textAnchor(): any {

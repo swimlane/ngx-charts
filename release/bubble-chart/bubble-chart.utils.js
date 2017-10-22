@@ -23,20 +23,17 @@ function isDate(value) {
     }
     return false;
 }
-export function getDomain(values, scaleType, autoScale) {
+export function getDomain(values, scaleType, autoScale, minVal, maxVal) {
     var domain = [];
-    if (scaleType === 'time') {
-        var min = Math.min.apply(Math, values);
-        var max = Math.max.apply(Math, values);
-        domain = [min, max];
-    }
-    else if (scaleType === 'linear') {
+    if (scaleType === 'linear') {
         values = values.map(function (v) { return Number(v); });
-        var min = Math.min.apply(Math, values);
-        var max = Math.max.apply(Math, values);
         if (!autoScale) {
-            min = Math.min(0, min);
+            values.push(0);
         }
+    }
+    if (scaleType === 'time' || scaleType === 'linear') {
+        var min = minVal ? minVal : Math.min.apply(Math, values);
+        var max = maxVal ? maxVal : Math.max.apply(Math, values);
         domain = [min, max];
     }
     else {

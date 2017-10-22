@@ -11,6 +11,7 @@
 | results         | object[]    |               | the chart data                                                                                                  |
 | scheme          | object      |               | the color scheme of the chart                                                                                   |
 | customColors    | object      |               | custom colors for the chart. Used to override a color for a specific value                                      |
+| animations      | boolean     | true          | enable animations                                                                                               |
 | tooltipDisabled | boolean     | false         | show or hide the tooltip                                                                                        |
 | tooltipTemplate | TemplateRef |               | a custom ng-template to be displayed inside the tooltip                                                         |
 | designatedTotal | number      |               | total number that the value of each object in the results array will be compared to. If left undefined, the     |

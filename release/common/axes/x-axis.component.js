@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { XAxisTicksComponent } from './x-axis-ticks.component';
-var XAxisComponent = (function () {
+var XAxisComponent = /** @class */ (function () {
     function XAxisComponent() {
         this.showGridLines = false;
         this.xOrient = 'bottom';
@@ -33,29 +33,29 @@ var XAxisComponent = (function () {
             }, 0);
         }
     };
+    XAxisComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'g[ngx-charts-x-axis]',
+                    template: "\n    <svg:g\n      [attr.class]=\"xAxisClassName\"\n      [attr.transform]=\"transform\">\n      <svg:g ngx-charts-x-axis-ticks\n        *ngIf=\"xScale\"\n        [tickFormatting]=\"tickFormatting\"\n        [tickArguments]=\"tickArguments\"\n        [tickStroke]=\"tickStroke\"\n        [scale]=\"xScale\"\n        [orient]=\"xOrient\"\n        [showGridLines]=\"showGridLines\"\n        [gridLineHeight]=\"dims.height\"\n        [width]=\"dims.width\"\n        (dimensionsChanged)=\"emitTicksHeight($event)\"\n      />\n      <svg:g ngx-charts-axis-label\n        *ngIf=\"showLabel\"\n        [label]=\"labelText\"\n        [offset]=\"labelOffset\"\n        [orient]=\"'bottom'\"\n        [height]=\"dims.height\"\n        [width]=\"dims.width\">\n      </svg:g>\n    </svg:g>\n  ",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                },] },
+    ];
+    /** @nocollapse */
+    XAxisComponent.ctorParameters = function () { return []; };
+    XAxisComponent.propDecorators = {
+        'xScale': [{ type: Input },],
+        'dims': [{ type: Input },],
+        'tickFormatting': [{ type: Input },],
+        'showGridLines': [{ type: Input },],
+        'showLabel': [{ type: Input },],
+        'labelText': [{ type: Input },],
+        'xAxisTickInterval': [{ type: Input },],
+        'xAxisTickCount': [{ type: Input },],
+        'xOrient': [{ type: Input },],
+        'dimensionsChanged': [{ type: Output },],
+        'ticksComponent': [{ type: ViewChild, args: [XAxisTicksComponent,] },],
+    };
     return XAxisComponent;
 }());
 export { XAxisComponent };
-XAxisComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'g[ngx-charts-x-axis]',
-                template: "\n    <svg:g\n      [attr.class]=\"xAxisClassName\"\n      [attr.transform]=\"transform\">\n      <svg:g ngx-charts-x-axis-ticks\n        *ngIf=\"xScale\"\n        [tickFormatting]=\"tickFormatting\"\n        [tickArguments]=\"tickArguments\"\n        [tickStroke]=\"tickStroke\"\n        [scale]=\"xScale\"\n        [orient]=\"xOrient\"\n        [showGridLines]=\"showGridLines\"\n        [gridLineHeight]=\"dims.height\"\n        [width]=\"dims.width\"\n        (dimensionsChanged)=\"emitTicksHeight($event)\"\n      />\n      <svg:g ngx-charts-axis-label\n        *ngIf=\"showLabel\"\n        [label]=\"labelText\"\n        [offset]=\"labelOffset\"\n        [orient]=\"'bottom'\"\n        [height]=\"dims.height\"\n        [width]=\"dims.width\">\n      </svg:g>\n    </svg:g>\n  ",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            },] },
-];
-/** @nocollapse */
-XAxisComponent.ctorParameters = function () { return []; };
-XAxisComponent.propDecorators = {
-    'xScale': [{ type: Input },],
-    'dims': [{ type: Input },],
-    'tickFormatting': [{ type: Input },],
-    'showGridLines': [{ type: Input },],
-    'showLabel': [{ type: Input },],
-    'labelText': [{ type: Input },],
-    'xAxisTickInterval': [{ type: Input },],
-    'xAxisTickCount': [{ type: Input },],
-    'xOrient': [{ type: Input },],
-    'dimensionsChanged': [{ type: Output },],
-    'ticksComponent': [{ type: ViewChild, args: [XAxisTicksComponent,] },],
-};
 //# sourceMappingURL=x-axis.component.js.map

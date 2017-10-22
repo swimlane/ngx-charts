@@ -1,6 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { line } from 'd3-shape';
-var GaugeAxisComponent = (function () {
+var GaugeAxisComponent = /** @class */ (function () {
     function GaugeAxisComponent() {
         this.rotate = '';
     }
@@ -79,27 +79,27 @@ var GaugeAxisComponent = (function () {
         var lineGenerator = line().x(function (d) { return d.x; }).y(function (d) { return d.y; });
         return lineGenerator(points);
     };
+    GaugeAxisComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'g[ngx-charts-gauge-axis]',
+                    template: "\n    <svg:g [attr.transform]=\"rotate\">\n        <svg:g *ngFor=\"let tick of ticks.big\"\n            class=\"gauge-tick gauge-tick-large\">\n            <svg:path [attr.d]=\"tick.line\" />\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.big\"\n            class=\"gauge-tick gauge-tick-large\">\n            <svg:text\n                [style.textAnchor]=\"tick.textAnchor\"\n                [attr.transform]=\"tick.textTransform\"\n                alignment-baseline=\"central\">\n                {{tick.text}}\n            </svg:text>\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.small\"\n            class=\"gauge-tick gauge-tick-small\">\n            <svg:path [attr.d]=\"tick.line\" />\n        </svg:g>\n    </svg:g>\n  ",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                },] },
+    ];
+    /** @nocollapse */
+    GaugeAxisComponent.ctorParameters = function () { return []; };
+    GaugeAxisComponent.propDecorators = {
+        'bigSegments': [{ type: Input },],
+        'smallSegments': [{ type: Input },],
+        'min': [{ type: Input },],
+        'max': [{ type: Input },],
+        'angleSpan': [{ type: Input },],
+        'startAngle': [{ type: Input },],
+        'radius': [{ type: Input },],
+        'valueScale': [{ type: Input },],
+        'tickFormatting': [{ type: Input },],
+    };
     return GaugeAxisComponent;
 }());
 export { GaugeAxisComponent };
-GaugeAxisComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'g[ngx-charts-gauge-axis]',
-                template: "\n    <svg:g [attr.transform]=\"rotate\">\n        <svg:g *ngFor=\"let tick of ticks.big\"\n            class=\"gauge-tick gauge-tick-large\">\n            <svg:path [attr.d]=\"tick.line\" />\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.big\"\n            class=\"gauge-tick gauge-tick-large\">\n            <svg:text\n                [style.textAnchor]=\"tick.textAnchor\"\n                [attr.transform]=\"tick.textTransform\"\n                alignment-baseline=\"central\">\n                {{tick.text}}\n            </svg:text>\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.small\"\n            class=\"gauge-tick gauge-tick-small\">\n            <svg:path [attr.d]=\"tick.line\" />\n        </svg:g>\n    </svg:g>\n  ",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            },] },
-];
-/** @nocollapse */
-GaugeAxisComponent.ctorParameters = function () { return []; };
-GaugeAxisComponent.propDecorators = {
-    'bigSegments': [{ type: Input },],
-    'smallSegments': [{ type: Input },],
-    'min': [{ type: Input },],
-    'max': [{ type: Input },],
-    'angleSpan': [{ type: Input },],
-    'startAngle': [{ type: Input },],
-    'radius': [{ type: Input },],
-    'valueScale': [{ type: Input },],
-    'tickFormatting': [{ type: Input },],
-};
 //# sourceMappingURL=gauge-axis.component.js.map

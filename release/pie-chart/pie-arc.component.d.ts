@@ -1,7 +1,5 @@
 import { EventEmitter, ElementRef, SimpleChanges, OnChanges } from '@angular/core';
-import { LocationStrategy } from '@angular/common';
 export declare class PieArcComponent implements OnChanges {
-    private location;
     fill: any;
     startAngle: number;
     endAngle: number;
@@ -26,7 +24,7 @@ export declare class PieArcComponent implements OnChanges {
     linearGradientId: string;
     gradientFill: string;
     initialized: boolean;
-    constructor(element: ElementRef, location: LocationStrategy);
+    constructor(element: ElementRef);
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     calculateArc(): any;

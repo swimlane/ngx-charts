@@ -3,7 +3,6 @@ import {
   Output, EventEmitter, AfterViewInit, OnDestroy, OnChanges, SimpleChanges
 } from '@angular/core';
 
-import { LocationStrategy } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/debounceTime';
@@ -20,6 +19,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() scheme: any = 'cool';
   @Input() schemeType: string = 'ordinal';
   @Input() customColors: any;
+  @Input() animations: boolean = true;
 
   @Output() select = new EventEmitter();
 
@@ -31,8 +31,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   constructor(
     protected chartElement: ElementRef,
     protected zone: NgZone,
-    protected cd: ChangeDetectorRef,
-    protected location: LocationStrategy) {
+    protected cd: ChangeDetectorRef) {
   }
 
   ngAfterViewInit(): void {

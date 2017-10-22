@@ -1,4 +1,4 @@
-var InjectionRegistery = (function () {
+var InjectionRegistery = /** @class */ (function () {
     function InjectionRegistery(injectionService) {
         this.injectionService = injectionService;
         this.defaults = {};

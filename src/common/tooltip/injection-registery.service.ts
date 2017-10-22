@@ -1,4 +1,4 @@
-import { Injectable, ComponentRef } from '@angular/core';
+import { ComponentRef } from '@angular/core';
 import { InjectionService } from './injection.service';
 
 export abstract class InjectionRegistery {

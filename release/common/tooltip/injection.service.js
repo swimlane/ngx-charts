@@ -7,7 +7,7 @@ import { ApplicationRef, ComponentFactoryResolver, Injectable, Injector } from '
  * @export
  * @class InjectionService
  */
-var InjectionService = (function () {
+var InjectionService = /** @class */ (function () {
     function InjectionService(applicationRef, componentFactoryResolver, injector) {
         this.applicationRef = applicationRef;
         this.componentFactoryResolver = componentFactoryResolver;
@@ -22,8 +22,11 @@ var InjectionService = (function () {
      */
     InjectionService.prototype.getRootViewContainer = function () {
         var rootComponents = this.applicationRef['_rootComponents'];
-        if (rootComponents.length)
-            return rootComponents[0];
+        // fix cannot read length of undefined
+        if (rootComponents) {
+            if (rootComponents.length)
+                return rootComponents[0];
+        }
         if (this._container)
             return this._container;
         throw new Error('View Container not found! ngUpgrade needs to manually set this via setRootViewContainer.');
@@ -120,16 +123,16 @@ var InjectionService = (function () {
         renderer.projectNodes(location, [componentRootNode]);
         return componentRef;
     };
+    InjectionService.decorators = [
+        { type: Injectable },
+    ];
+    /** @nocollapse */
+    InjectionService.ctorParameters = function () { return [
+        { type: ApplicationRef, },
+        { type: ComponentFactoryResolver, },
+        { type: Injector, },
+    ]; };
     return InjectionService;
 }());
 export { InjectionService };
-InjectionService.decorators = [
-    { type: Injectable },
-];
-/** @nocollapse */
-InjectionService.ctorParameters = function () { return [
-    { type: ApplicationRef, },
-    { type: ComponentFactoryResolver, },
-    { type: Injector, },
-]; };
 //# sourceMappingURL=injection.service.js.map

@@ -30,7 +30,7 @@ function horizontalPosition(elDimensions, popoverDimensions, alignment) {
  * @export
  * @class PositionHelper
  */
-var PositionHelper = (function () {
+var PositionHelper = /** @class */ (function () {
     function PositionHelper() {
     }
     /**

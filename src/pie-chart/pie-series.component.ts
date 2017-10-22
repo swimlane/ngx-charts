@@ -25,7 +25,8 @@ import { formatLabel } from '../common/label.helper';
         [label]="labelText(arc)"
         [max]="max"
         [value]="arc.value"
-        [explodeSlices]="explodeSlices">
+        [explodeSlices]="explodeSlices"
+        [animations]="animations">
       </svg:g>
       <svg:g
         ngx-charts-pie-arc
@@ -40,6 +41,7 @@ import { formatLabel } from '../common/label.helper';
         [max]="max"
         [explodeSlices]="explodeSlices"
         [isActive]="isActive(arc.data)"
+        [animate]="animations"
         (select)="onClick($event)"
         (activate)="activate.emit($event)"
         (deactivate)="deactivate.emit($event)"
@@ -70,6 +72,7 @@ export class PieSeriesComponent implements OnChanges {
   @Input() tooltipText: (o: any) => any;
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipTemplate: TemplateRef<any>;
+  @Input() animations: boolean = true;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();

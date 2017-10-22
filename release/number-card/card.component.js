@@ -2,18 +2,19 @@ import { Component, Input, Output, EventEmitter, ElementRef, ViewChild, ChangeDe
 import { trimLabel } from '../common/trim-label.helper';
 import { roundedRect } from '../common/shape.helper';
 import { count, decimalChecker } from '../common/count';
-var CardComponent = (function () {
+var CardComponent = /** @class */ (function () {
     function CardComponent(element, cd, zone) {
         this.cd = cd;
         this.zone = zone;
+        this.animations = true;
         this.select = new EventEmitter();
         this.value = '';
         this.textFontSize = 12;
         this.textTransform = '';
         this.initialized = false;
         this.bandHeight = 10;
-        this.textPadding = [10, 20, 10, 20];
-        this.labelFontSize = 12;
+        this.textPadding = [10, 20, 5, 20];
+        this.labelFontSize = 15;
         this.element = element.nativeElement;
     }
     CardComponent.prototype.ngOnChanges = function (changes) {
@@ -61,7 +62,7 @@ var CardComponent = (function () {
     };
     CardComponent.prototype.startCount = function () {
         var _this = this;
-        if (!this.initialized) {
+        if (!this.initialized && this.animations) {
             cancelAnimationFrame(this.animationReq);
             var val_1 = this.data.value;
             var decs = decimalChecker(val_1);
@@ -93,7 +94,7 @@ var CardComponent = (function () {
             var availableHeight = _this.cardHeight / 3;
             var resizeScale = Math.min(availableWidth / width, availableHeight / height);
             _this.textFontSize = Math.floor(_this.textFontSize * resizeScale);
-            _this.labelFontSize = Math.min(_this.textFontSize, 12);
+            _this.labelFontSize = Math.min(_this.textFontSize, 15);
             _this.setPadding();
             _this.cd.markForCheck();
         });
@@ -110,36 +111,37 @@ var CardComponent = (function () {
             value: this.data.value
         });
     };
+    CardComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'g[ngx-charts-card]',
+                    template: "\n    <svg:g\n      [attr.transform]=\"transform\"\n      class=\"cell\"\n      (click)=\"onClick()\">\n      <svg:rect\n        class=\"card\"\n        [style.fill]=\"color\"\n        [attr.width]=\"cardWidth\"\n        [attr.height]=\"cardHeight\"\n        rx=\"3\"\n        ry=\"3\"\n      />\n      <svg:path\n        *ngIf=\"bandColor && bandColor !== color\"\n        class=\"card-band\"\n        [attr.fill]=\"bandColor\"\n        [attr.transform]=\"transformBand\"\n        stroke=\"none\"\n        [attr.d]=\"bandPath\"\n      />\n      <title>{{label}}</title>\n      <svg:foreignObject\n        class=\"trimmed-label\"\n        x=\"5\"\n        [attr.x]=\"textPadding[3]\"\n        [attr.y]=\"cardHeight - textPadding[2]\"\n        [attr.width]=\"textWidth\"\n        [attr.height]=\"labelFontSize + textPadding[2]\"\n        alignment-baseline=\"hanging\">\n        <xhtml:p\n          [style.color]=\"textColor\"\n          [style.fontSize.px]=\"labelFontSize\"\n          [style.lineHeight.px]=\"labelFontSize\"\n          [innerHTML]=\"formattedLabel\">\n        </xhtml:p>\n      </svg:foreignObject>\n      <svg:text #textEl\n        class=\"value-text\"\n        [attr.x]=\"textPadding[3]\"\n        [attr.y]=\"textPadding[0]\"\n        [style.fill]=\"textColor\"\n        text-anchor=\"start\"\n        alignment-baseline=\"hanging\"\n        [style.font-size.pt]=\"textFontSize\">\n        {{value}}\n      </svg:text>\n    </svg:g>\n  ",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                },] },
+    ];
+    /** @nocollapse */
+    CardComponent.ctorParameters = function () { return [
+        { type: ElementRef, },
+        { type: ChangeDetectorRef, },
+        { type: NgZone, },
+    ]; };
+    CardComponent.propDecorators = {
+        'color': [{ type: Input },],
+        'bandColor': [{ type: Input },],
+        'textColor': [{ type: Input },],
+        'x': [{ type: Input },],
+        'y': [{ type: Input },],
+        'width': [{ type: Input },],
+        'height': [{ type: Input },],
+        'label': [{ type: Input },],
+        'data': [{ type: Input },],
+        'medianSize': [{ type: Input },],
+        'valueFormatting': [{ type: Input },],
+        'labelFormatting': [{ type: Input },],
+        'animations': [{ type: Input },],
+        'select': [{ type: Output },],
+        'textEl': [{ type: ViewChild, args: ['textEl',] },],
+    };
     return CardComponent;
 }());
 export { CardComponent };
-CardComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'g[ngx-charts-card]',
-                template: "\n    <svg:g\n      [attr.transform]=\"transform\"\n      class=\"cell\"\n      (click)=\"onClick()\">\n      <svg:rect\n        class=\"card\"\n        [style.fill]=\"color\"\n        [attr.width]=\"cardWidth\"\n        [attr.height]=\"cardHeight\"\n        rx=\"3\"\n        ry=\"3\"\n      />\n      <svg:path\n        *ngIf=\"bandColor && bandColor !== color\"\n        class=\"card-band\"\n        [attr.fill]=\"bandColor\"\n        [attr.transform]=\"transformBand\"\n        stroke=\"none\"\n        [attr.d]=\"bandPath\"\n      />\n      <title>{{label}}</title>\n      <svg:foreignObject\n        class=\"trimmed-label\"\n        x=\"5\"\n        [attr.x]=\"textPadding[3]\"\n        [attr.y]=\"cardHeight - textPadding[2]\"\n        [attr.width]=\"textWidth\"\n        [attr.height]=\"labelFontSize + textPadding[2]\"\n        alignment-baseline=\"hanging\">\n        <xhtml:p\n          [style.color]=\"textColor\"\n          [style.fontSize.px]=\"labelFontSize\"\n          [innerHTML]=\"formattedLabel\">\n        </xhtml:p>\n      </svg:foreignObject>\n      <svg:text #textEl\n        class=\"value-text\"\n        [attr.x]=\"textPadding[3]\"\n        [attr.y]=\"textPadding[0]\"\n        [style.fill]=\"textColor\"\n        text-anchor=\"start\"\n        alignment-baseline=\"hanging\"\n        [style.font-size.pt]=\"textFontSize\">\n        {{value}}\n      </svg:text>\n    </svg:g>\n  ",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            },] },
-];
-/** @nocollapse */
-CardComponent.ctorParameters = function () { return [
-    { type: ElementRef, },
-    { type: ChangeDetectorRef, },
-    { type: NgZone, },
-]; };
-CardComponent.propDecorators = {
-    'color': [{ type: Input },],
-    'bandColor': [{ type: Input },],
-    'textColor': [{ type: Input },],
-    'x': [{ type: Input },],
-    'y': [{ type: Input },],
-    'width': [{ type: Input },],
-    'height': [{ type: Input },],
-    'label': [{ type: Input },],
-    'data': [{ type: Input },],
-    'medianSize': [{ type: Input },],
-    'valueFormatting': [{ type: Input },],
-    'labelFormatting': [{ type: Input },],
-    'select': [{ type: Output },],
-    'textEl': [{ type: ViewChild, args: ['textEl',] },],
-};
 //# sourceMappingURL=card.component.js.map

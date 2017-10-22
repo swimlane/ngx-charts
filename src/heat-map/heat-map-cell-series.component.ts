@@ -25,6 +25,7 @@ import { formatLabel } from '../common/label.helper';
       [data]="c.data"
       (select)="onClick($event, c.label, c.series)"
       [gradient]="gradient"
+      [animations]="animations"
       ngx-tooltip
       [tooltipDisabled]="tooltipDisabled"
       [tooltipPlacement]="'top'"
@@ -46,7 +47,8 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipText: any;
   @Input() tooltipTemplate: TemplateRef<any>;
-
+  @Input() animations: boolean = true;
+  
   @Output() select = new EventEmitter();
 
   cells: any[];

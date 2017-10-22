@@ -12,6 +12,7 @@
 | scheme              | object      |               | the color scheme of the chart                                                                                   |
 | schemeType          | string      | 'ordinal'     | the color scale type. Can be either 'ordinal' or 'linear'                                                       |
 | customColors        | object      |               | custom colors for the chart. Used to override a color for a specific value                                      |
+| animations          | boolean     | true          | enable animations                                                                                               |
 | legend              | boolean     | false         | show or hide the legend                                                                                         |
 | legendTitle         | string      | 'Legend'      | the legend title                                                                                                |
 | xAxis               | boolean     | false         | show or hide the x axis                                                                                         |
@@ -29,7 +30,7 @@
 | barPadding          | number      | 8             | padding between bars in px                                                                                      |
 | tooltipDisabled     | boolean     | false         | show or hide the tooltip                                                                                        |
 | tooltipTemplate     | TemplateRef |               | a custom ng-template to be displayed inside the tooltip                                                         |
-| yAxisMinScale       | number      |               | force y axis scaling to the provided value (ignored if chart data contains a higher value)                      |
+| yScaleMax           | number      |               | the maximum value of the y axis (ignored if chart data contains a higher value)                                 |
 
 # Outputs
 
