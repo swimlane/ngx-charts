@@ -42,6 +42,7 @@ export class GaugeAxisComponent implements OnChanges {
   @Input() radius: any;
   @Input() valueScale: any;
   @Input() tickFormatting: any;
+  @Input() textScale: number = 1;
 
   ticks: any;
   rotationAngle: number;
@@ -90,7 +91,8 @@ export class GaugeAxisComponent implements OnChanges {
           textAnchor,
           text,
           textTransform: `
-            translate(${textDist * Math.cos(angle)}, ${textDist * Math.sin(angle)}) rotate(${ -this.rotationAngle })
+            translate(${textDist * Math.cos(angle)}, ${textDist * Math.sin(angle)}) rotate(${ -this.rotationAngle }) 
+scale(${this.textScale}, ${this.textScale})
           `
         });
       }

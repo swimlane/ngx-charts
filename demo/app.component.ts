@@ -163,6 +163,13 @@ export class AppComponent implements OnInit {
   gaugeValue: number = 50; // linear gauge value
   gaugePreviousValue: number = 70;
 
+  // radial gauge
+  radialGaugeDisplayValue: string = '50 [%]';
+  radialGaugeShowValue: boolean = true;
+  radialGaugeMaxAngle: number = 120;
+  radialGaugeMinAngle: number = -120;
+  radialGaugePointerColor: string = 'black';
+
   // Combo Chart
   barChart: any[] = barChart;
   lineChartSeries: any[] = lineChartSeries;

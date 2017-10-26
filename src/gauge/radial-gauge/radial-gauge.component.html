@@ -1,0 +1,68 @@
+<ngx-charts-chart
+  [view]="[width, height]">
+
+  <svg:g [attr.transform]="getTranslate()">
+
+      <!-- arcs -->
+
+      <svg:g *ngFor="let arc of arcs" class="arc">
+          <svg:g ngx-charts-pie-arc
+            class="background-arc"
+            [startAngle]="arc.startAngle"
+            [endAngle]="arc.endAngle"
+            [innerRadius]="arc.innerRadius"
+            [outerRadius]="arc.outerRadius"
+            [fill]="arc.color"
+            (select)="onArcClick($event)"
+            (activate)="onArcActivate($event)"
+            (deactivate)="onArcDeactivate($event)">
+          >
+        </svg:g>
+      </svg:g>
+
+      <!-- axis -->
+
+      <svg:g class="axis">
+          <svg:g ngx-charts-gauge-axis
+            [bigSegments]="majorTicks"
+            [min]="minValue"
+            [max]="maxValue"
+            [startAngle]="minAngle"
+            [radius]="dimensions.axisRadius"
+            [angleSpan]="getDegreeRange()"
+            [valueScale]="getScale()"
+            [textScale]="dimensions.axisTextScale"
+          >
+          </svg:g> 
+      </svg:g>
+
+      <!-- label -->
+
+      <svg:g class="label">
+          <svg:text
+            [style.textAnchor]="'middle'"
+            [attr.transform]="getTextTransform()"
+            alignment-baseline="central"
+            (click)="onLabelClick($event)"
+            (mouseenter)="onLabelMouseEnter($event)"
+            (mouseleave)="onLabelMouseLeave($event)">
+            <tspan *ngIf="showValue" x="0" dy="1.5em">{{ displayingValue }}</tspan>
+          </svg:text>
+      </svg:g>
+
+      <!-- pointer -->
+
+      <svg:g class="pointer"
+        (click)="onPointerClick($event)"
+        (mouseenter)="onPointerMouseEnter($event)"
+        (mouseleave)="onPointerMouseLeave($event)">
+          <path 
+            [attr.transform]="movePointer()"
+            [attr.d]="getPointer()"
+            [attr.fill]="pointerColor" >
+          </path>
+      </g>
+
+  </svg:g>
+
+</ngx-charts-chart>

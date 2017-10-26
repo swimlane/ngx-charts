@@ -283,6 +283,13 @@ const chartGroups = [
         selector: 'linear-gauge',
         inputFormat: 'single',
         options: ['animations', 'colorScheme', 'value', 'previousValue', 'min', 'max', 'units']
+      },
+      {
+        name: 'Radial Gauge',
+        selector: 'radial-gauge',
+        inputFormat: '',
+        options: ['colorScheme', 'value', 'min', 'max', 'displayValue', 'showValue',
+          'minAngle', 'maxAngle', 'largeSegments', 'pointerColor']
       }
     ]
   },
