@@ -306,7 +306,7 @@ export class BubbleChartComponent extends BaseChartComponent {
     const values = [];
 
     for (const results of this.results) {
-      for (const d of results.series){
+      for (const d of results.series) {
         if (!values.includes(d.x)) {
           values.push(d.x);
         }
@@ -321,7 +321,7 @@ export class BubbleChartComponent extends BaseChartComponent {
     const values = [];
 
     for (const results of this.results) {
-      for (const d of results.series){
+      for (const d of results.series) {
         if (!values.includes(d.y)) {
           values.push(d.y);
         }
@@ -337,7 +337,7 @@ export class BubbleChartComponent extends BaseChartComponent {
     let max = -Infinity;
 
     for (const results of this.results) {
-      for (const d of results.series){
+      for (const d of results.series) {
         const value = Number(d.r) || 1;
         min = Math.min(min, value);
         max = Math.max(max, value);
