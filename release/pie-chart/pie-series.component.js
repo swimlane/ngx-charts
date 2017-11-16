@@ -1,4 +1,13 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
 import { max } from 'd3-array';
 import { arc, pie } from 'd3-shape';
 import { formatLabel } from '../common/label.helper';
@@ -96,34 +105,81 @@ var PieSeriesComponent = /** @class */ (function () {
         });
         return item !== undefined;
     };
-    PieSeriesComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'g[ngx-charts-pie-series]',
-                    template: "\n    <svg:g *ngFor=\"let arc of data; trackBy:trackBy\">\n      <svg:g ngx-charts-pie-label\n        *ngIf=\"labelVisible(arc)\"\n        [data]=\"arc\"\n        [radius]=\"outerRadius\"\n        [color]=\"color(arc)\"\n        [label]=\"labelText(arc)\"\n        [max]=\"max\"\n        [value]=\"arc.value\"\n        [explodeSlices]=\"explodeSlices\"\n        [animations]=\"animations\">\n      </svg:g>\n      <svg:g\n        ngx-charts-pie-arc\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [value]=\"arc.data.value\"\n        [gradient]=\"gradient\"\n        [data]=\"arc.data\"\n        [max]=\"max\"\n        [explodeSlices]=\"explodeSlices\"\n        [isActive]=\"isActive(arc.data)\"\n        [animate]=\"animations\"\n        (select)=\"onClick($event)\"\n        (activate)=\"activate.emit($event)\"\n        (deactivate)=\"deactivate.emit($event)\"\n        ngx-tooltip\n        [tooltipDisabled]=\"tooltipDisabled\"\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"tooltipTemplate ? undefined : tooltipText(arc)\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n        [tooltipContext]=\"arc.data\">\n      </svg:g>\n    </svg:g>\n  ",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                },] },
-    ];
-    /** @nocollapse */
-    PieSeriesComponent.ctorParameters = function () { return []; };
-    PieSeriesComponent.propDecorators = {
-        'colors': [{ type: Input },],
-        'series': [{ type: Input },],
-        'dims': [{ type: Input },],
-        'innerRadius': [{ type: Input },],
-        'outerRadius': [{ type: Input },],
-        'explodeSlices': [{ type: Input },],
-        'showLabels': [{ type: Input },],
-        'gradient': [{ type: Input },],
-        'activeEntries': [{ type: Input },],
-        'labelFormatting': [{ type: Input },],
-        'tooltipText': [{ type: Input },],
-        'tooltipDisabled': [{ type: Input },],
-        'tooltipTemplate': [{ type: Input },],
-        'animations': [{ type: Input },],
-        'select': [{ type: Output },],
-        'activate': [{ type: Output },],
-        'deactivate': [{ type: Output },],
-    };
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], PieSeriesComponent.prototype, "colors", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], PieSeriesComponent.prototype, "series", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], PieSeriesComponent.prototype, "dims", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], PieSeriesComponent.prototype, "innerRadius", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], PieSeriesComponent.prototype, "outerRadius", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], PieSeriesComponent.prototype, "explodeSlices", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], PieSeriesComponent.prototype, "showLabels", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], PieSeriesComponent.prototype, "gradient", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Array)
+    ], PieSeriesComponent.prototype, "activeEntries", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], PieSeriesComponent.prototype, "labelFormatting", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Function)
+    ], PieSeriesComponent.prototype, "tooltipText", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], PieSeriesComponent.prototype, "tooltipDisabled", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", TemplateRef)
+    ], PieSeriesComponent.prototype, "tooltipTemplate", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], PieSeriesComponent.prototype, "animations", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], PieSeriesComponent.prototype, "select", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], PieSeriesComponent.prototype, "activate", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], PieSeriesComponent.prototype, "deactivate", void 0);
+    PieSeriesComponent = __decorate([
+        Component({
+            selector: 'g[ngx-charts-pie-series]',
+            template: "\n    <svg:g *ngFor=\"let arc of data; trackBy:trackBy\">\n      <svg:g ngx-charts-pie-label\n        *ngIf=\"labelVisible(arc)\"\n        [data]=\"arc\"\n        [radius]=\"outerRadius\"\n        [color]=\"color(arc)\"\n        [label]=\"labelText(arc)\"\n        [max]=\"max\"\n        [value]=\"arc.value\"\n        [explodeSlices]=\"explodeSlices\"\n        [animations]=\"animations\">\n      </svg:g>\n      <svg:g\n        ngx-charts-pie-arc\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [value]=\"arc.data.value\"\n        [gradient]=\"gradient\"\n        [data]=\"arc.data\"\n        [max]=\"max\"\n        [explodeSlices]=\"explodeSlices\"\n        [isActive]=\"isActive(arc.data)\"\n        [animate]=\"animations\"\n        (select)=\"onClick($event)\"\n        (activate)=\"activate.emit($event)\"\n        (deactivate)=\"deactivate.emit($event)\"\n        ngx-tooltip\n        [tooltipDisabled]=\"tooltipDisabled\"\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"tooltipTemplate ? undefined : tooltipText(arc)\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n        [tooltipContext]=\"arc.data\">\n      </svg:g>\n    </svg:g>\n  ",
+            changeDetection: ChangeDetectionStrategy.OnPush,
+        })
+    ], PieSeriesComponent);
     return PieSeriesComponent;
 }());
 export { PieSeriesComponent };

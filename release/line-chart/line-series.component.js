@@ -1,3 +1,12 @@
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { area, line } from 'd3-shape';
 import { id } from '../utils/id';
@@ -131,27 +140,53 @@ var LineSeriesComponent = /** @class */ (function () {
         });
         return item === undefined;
     };
-    LineSeriesComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'g[ngx-charts-line-series]',
-                    template: "\n    <svg:g>\n      <defs>\n        <svg:g ngx-charts-svg-linear-gradient *ngIf=\"hasGradient\"\n          orientation=\"vertical\"\n          [name]=\"gradientId\"\n          [stops]=\"gradientStops\"\n        />\n      </defs>\n      <svg:g ngx-charts-area\n        class=\"line-highlight\"\n        [data]=\"data\"\n        [path]=\"areaPath\"\n        [fill]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [opacity]=\"0.25\"\n        [startOpacity]=\"0\"\n        [gradient]=\"true\"\n        [stops]=\"areaGradientStops\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n      />\n      <svg:g ngx-charts-line\n        class=\"line-series\"\n        [data]=\"data\"\n        [path]=\"path\"\n        [stroke]=\"stroke\"\n        [animations]=\"animations\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n      />\n     <svg:g ngx-charts-area\n        *ngIf=\"hasRange\"\n        class=\"line-series-range\"\n        [data]=\"data\"\n        [path]=\"outerPath\"\n        [fill]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n        [opacity]=\"rangeFillOpacity\"\n        [animations]=\"animations\"\n      />\n    </svg:g>\n  ",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    LineSeriesComponent.ctorParameters = function () { return []; };
-    LineSeriesComponent.propDecorators = {
-        'data': [{ type: Input },],
-        'xScale': [{ type: Input },],
-        'yScale': [{ type: Input },],
-        'colors': [{ type: Input },],
-        'scaleType': [{ type: Input },],
-        'curve': [{ type: Input },],
-        'activeEntries': [{ type: Input },],
-        'rangeFillOpacity': [{ type: Input },],
-        'hasRange': [{ type: Input },],
-        'animations': [{ type: Input },],
-    };
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], LineSeriesComponent.prototype, "data", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], LineSeriesComponent.prototype, "xScale", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], LineSeriesComponent.prototype, "yScale", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], LineSeriesComponent.prototype, "colors", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], LineSeriesComponent.prototype, "scaleType", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], LineSeriesComponent.prototype, "curve", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Array)
+    ], LineSeriesComponent.prototype, "activeEntries", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Number)
+    ], LineSeriesComponent.prototype, "rangeFillOpacity", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], LineSeriesComponent.prototype, "hasRange", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], LineSeriesComponent.prototype, "animations", void 0);
+    LineSeriesComponent = __decorate([
+        Component({
+            selector: 'g[ngx-charts-line-series]',
+            template: "\n    <svg:g>\n      <defs>\n        <svg:g ngx-charts-svg-linear-gradient *ngIf=\"hasGradient\"\n          orientation=\"vertical\"\n          [name]=\"gradientId\"\n          [stops]=\"gradientStops\"\n        />\n      </defs>\n      <svg:g ngx-charts-area\n        class=\"line-highlight\"\n        [data]=\"data\"\n        [path]=\"areaPath\"\n        [fill]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [opacity]=\"0.25\"\n        [startOpacity]=\"0\"\n        [gradient]=\"true\"\n        [stops]=\"areaGradientStops\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n      />\n      <svg:g ngx-charts-line\n        class=\"line-series\"\n        [data]=\"data\"\n        [path]=\"path\"\n        [stroke]=\"stroke\"\n        [animations]=\"animations\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n      />\n     <svg:g ngx-charts-area\n        *ngIf=\"hasRange\"\n        class=\"line-series-range\"\n        [data]=\"data\"\n        [path]=\"outerPath\"\n        [fill]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n        [opacity]=\"rangeFillOpacity\"\n        [animations]=\"animations\"\n      />\n    </svg:g>\n  ",
+            changeDetection: ChangeDetectionStrategy.OnPush
+        })
+    ], LineSeriesComponent);
     return LineSeriesComponent;
 }());
 export { LineSeriesComponent };

@@ -8,7 +8,16 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import { Component, ContentChild, ElementRef, HostListener, Input, ViewChild, Output, ViewEncapsulation, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Component, ContentChild, ElementRef, HostListener, Input, TemplateRef, ViewChild, Output, ViewEncapsulation, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { forceCollide, forceLink, forceManyBody, forceSimulation, forceX, forceY } from 'd3-force';
 import { ChartComponent } from '../common/charts/chart.component';
 import { BaseChartComponent } from '../common/base-chart.component';
@@ -115,39 +124,90 @@ var ForceDirectedGraphComponent = /** @class */ (function (_super) {
         this.draggingNode.fy = undefined;
         this.draggingNode = undefined;
     };
-    ForceDirectedGraphComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'ngx-charts-force-directed-graph',
-                    template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [animations]=\"animations\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"force-directed-graph chart\">\n        <svg:g class=\"links\">\n          <svg:g *ngFor=\"let link of links; trackBy:trackLinkBy\">\n            <ng-template *ngIf=\"linkTemplate\"\n              [ngTemplateOutlet]=\"linkTemplate\"\n              [ngTemplateOutletContext]=\"{ $implicit: link }\">\n            </ng-template>\n            <svg:line *ngIf=\"!linkTemplate\"\n              strokeWidth=\"1\" class=\"edge\"\n              [attr.x1]=\"link.source.x\"\n              [attr.y1]=\"link.source.y\"\n              [attr.x2]=\"link.target.x\"\n              [attr.y2]=\"link.target.y\"\n            />\n          </svg:g>\n        </svg:g>\n        <svg:g class=\"nodes\">\n          <svg:g *ngFor=\"let node of nodes; trackBy:trackNodeBy\"\n            [attr.transform]=\"'translate(' + node.x + ',' + node.y + ')'\"\n            [attr.fill]=\"colors.getColor(groupResultsBy(node))\"\n            [attr.stroke]=\"colors.getColor(groupResultsBy(node))\"\n            (mousedown)=\"onDragStart(node, $event)\"\n            (click)=\"onClick({name: node.value})\"\n            ngx-tooltip\n            [tooltipDisabled]=\"tooltipDisabled\"\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"tooltipTemplate ? undefined : node.value\"\n            [tooltipTemplate]=\"tooltipTemplate\"\n            [tooltipContext]=\"node\">\n            <ng-template *ngIf=\"nodeTemplate\"\n              [ngTemplateOutlet]=\"nodeTemplate\"\n              [ngTemplateOutletContext]=\"{ $implicit: node }\">\n            </ng-template>\n            <svg:circle *ngIf=\"!nodeTemplate\" r=\"5\" />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-                    styleUrls: [
-                        '../common/base-chart.component.css',
-                        './force-directed-graph.component.css'
-                    ],
-                    encapsulation: ViewEncapsulation.None,
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                },] },
-    ];
-    /** @nocollapse */
-    ForceDirectedGraphComponent.ctorParameters = function () { return []; };
-    ForceDirectedGraphComponent.propDecorators = {
-        'force': [{ type: Input },],
-        'forceLink': [{ type: Input },],
-        'legend': [{ type: Input },],
-        'legendTitle': [{ type: Input },],
-        'nodes': [{ type: Input },],
-        'links': [{ type: Input },],
-        'activeEntries': [{ type: Input },],
-        'tooltipDisabled': [{ type: Input },],
-        'activate': [{ type: Output },],
-        'deactivate': [{ type: Output },],
-        'linkTemplate': [{ type: ContentChild, args: ['linkTemplate',] },],
-        'nodeTemplate': [{ type: ContentChild, args: ['nodeTemplate',] },],
-        'tooltipTemplate': [{ type: ContentChild, args: ['tooltipTemplate',] },],
-        'chart': [{ type: ViewChild, args: [ChartComponent, { read: ElementRef },] },],
-        'groupResultsBy': [{ type: Input },],
-        'onDrag': [{ type: HostListener, args: ['document:mousemove', ['$event'],] },],
-        'onDragEnd': [{ type: HostListener, args: ['document:mouseup', ['$event'],] },],
-    };
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], ForceDirectedGraphComponent.prototype, "force", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], ForceDirectedGraphComponent.prototype, "forceLink", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], ForceDirectedGraphComponent.prototype, "legend", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", String)
+    ], ForceDirectedGraphComponent.prototype, "legendTitle", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Array)
+    ], ForceDirectedGraphComponent.prototype, "nodes", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Array)
+    ], ForceDirectedGraphComponent.prototype, "links", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Array)
+    ], ForceDirectedGraphComponent.prototype, "activeEntries", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], ForceDirectedGraphComponent.prototype, "tooltipDisabled", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", EventEmitter)
+    ], ForceDirectedGraphComponent.prototype, "activate", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", EventEmitter)
+    ], ForceDirectedGraphComponent.prototype, "deactivate", void 0);
+    __decorate([
+        ContentChild('linkTemplate'),
+        __metadata("design:type", TemplateRef)
+    ], ForceDirectedGraphComponent.prototype, "linkTemplate", void 0);
+    __decorate([
+        ContentChild('nodeTemplate'),
+        __metadata("design:type", TemplateRef)
+    ], ForceDirectedGraphComponent.prototype, "nodeTemplate", void 0);
+    __decorate([
+        ContentChild('tooltipTemplate'),
+        __metadata("design:type", TemplateRef)
+    ], ForceDirectedGraphComponent.prototype, "tooltipTemplate", void 0);
+    __decorate([
+        ViewChild(ChartComponent, { read: ElementRef }),
+        __metadata("design:type", ElementRef)
+    ], ForceDirectedGraphComponent.prototype, "chart", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Function)
+    ], ForceDirectedGraphComponent.prototype, "groupResultsBy", void 0);
+    __decorate([
+        HostListener('document:mousemove', ['$event']),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [MouseEvent]),
+        __metadata("design:returntype", void 0)
+    ], ForceDirectedGraphComponent.prototype, "onDrag", null);
+    __decorate([
+        HostListener('document:mouseup', ['$event']),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [MouseEvent]),
+        __metadata("design:returntype", void 0)
+    ], ForceDirectedGraphComponent.prototype, "onDragEnd", null);
+    ForceDirectedGraphComponent = __decorate([
+        Component({
+            selector: 'ngx-charts-force-directed-graph',
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [animations]=\"animations\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"force-directed-graph chart\">\n        <svg:g class=\"links\">\n          <svg:g *ngFor=\"let link of links; trackBy:trackLinkBy\">\n            <ng-template *ngIf=\"linkTemplate\"\n              [ngTemplateOutlet]=\"linkTemplate\"\n              [ngTemplateOutletContext]=\"{ $implicit: link }\">\n            </ng-template>\n            <svg:line *ngIf=\"!linkTemplate\"\n              strokeWidth=\"1\" class=\"edge\"\n              [attr.x1]=\"link.source.x\"\n              [attr.y1]=\"link.source.y\"\n              [attr.x2]=\"link.target.x\"\n              [attr.y2]=\"link.target.y\"\n            />\n          </svg:g>\n        </svg:g>\n        <svg:g class=\"nodes\">\n          <svg:g *ngFor=\"let node of nodes; trackBy:trackNodeBy\"\n            [attr.transform]=\"'translate(' + node.x + ',' + node.y + ')'\"\n            [attr.fill]=\"colors.getColor(groupResultsBy(node))\"\n            [attr.stroke]=\"colors.getColor(groupResultsBy(node))\"\n            (mousedown)=\"onDragStart(node, $event)\"\n            (click)=\"onClick({name: node.value})\"\n            ngx-tooltip\n            [tooltipDisabled]=\"tooltipDisabled\"\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"tooltipTemplate ? undefined : node.value\"\n            [tooltipTemplate]=\"tooltipTemplate\"\n            [tooltipContext]=\"node\">\n            <ng-template *ngIf=\"nodeTemplate\"\n              [ngTemplateOutlet]=\"nodeTemplate\"\n              [ngTemplateOutletContext]=\"{ $implicit: node }\">\n            </ng-template>\n            <svg:circle *ngIf=\"!nodeTemplate\" r=\"5\" />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            styleUrls: [
+                '../common/base-chart.component.css',
+                './force-directed-graph.component.css'
+            ],
+            encapsulation: ViewEncapsulation.None,
+            changeDetection: ChangeDetectionStrategy.OnPush,
+        })
+    ], ForceDirectedGraphComponent);
     return ForceDirectedGraphComponent;
 }(BaseChartComponent));
 export { ForceDirectedGraphComponent };

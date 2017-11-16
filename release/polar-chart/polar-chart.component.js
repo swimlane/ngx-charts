@@ -16,7 +16,16 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     }
     return t;
 };
-import { Component, Input, Output, EventEmitter, ViewEncapsulation, ChangeDetectionStrategy, ContentChild } from '@angular/core';
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Component, Input, Output, EventEmitter, ViewEncapsulation, ChangeDetectionStrategy, ContentChild, TemplateRef } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
 import { curveCardinalClosed } from 'd3-shape';
@@ -318,59 +327,127 @@ var PolarChartComponent = /** @class */ (function (_super) {
     PolarChartComponent.prototype.trackBy = function (index, item) {
         return item.name;
     };
-    PolarChartComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'ngx-charts-polar-chart',
-                    template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      [animations]=\"animations\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:g class=\"polar-chart chart\" [attr.transform]=\"transform\">\n        <svg:g [attr.transform]=\"transformPlot\">\n          <svg:circle\n            class=\"polar-chart-background\"\n            cx=\"0\" cy=\"0\"\n            [attr.r]=\"this.outerRadius\" />\n          <svg:g *ngIf=\"showGridLines\">\n            <svg:circle\n              *ngFor=\"let r of radiusTicks\"\n              class=\"gridline-path radial-gridline-path\"\n              cx=\"0\" cy=\"0\"\n              [attr.r]=\"r\" />\n          </svg:g>\n          <svg:g *ngIf=\"xAxis\">\n            <svg:g ngx-charts-pie-label\n              *ngFor=\"let tick of thetaTicks\"\n              [data]=\"tick\"\n              [radius]=\"outerRadius\"\n              [label]=\"tick.label\"\n              [max]=\"outerRadius\"\n              [value]=\"showGridLines ? 1 : outerRadius\"\n              [explodeSlices]=\"true\"\n              [animations]=\"animations\">\n            </svg:g>\n          </svg:g>\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          [attr.transform]=\"transformYAxis\"\n          *ngIf=\"yAxis\"\n          [yScale]=\"yAxisScale\"\n          [dims]=\"yAxisDims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g ngx-charts-axis-label\n          *ngIf=\"xAxis && showXAxisLabel\"\n          [label]=\"xAxisLabel\"\n          [offset]=\"labelOffset\"\n          [orient]=\"'bottom'\"\n          [height]=\"dims.height\"\n          [width]=\"dims.width\">\n        </svg:g>\n        <svg:g [attr.transform]=\"transformPlot\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\" [@animationState]=\"'active'\">\n            <svg:g ngx-charts-polar-series\n              [gradient]=\"gradient\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [activeEntries]=\"activeEntries\"\n              [scaleType]=\"scaleType\"\n              [curve]=\"curve\"\n              [rangeFillOpacity]=\"rangeFillOpacity\"\n              [animations]=\"animations\"\n              [tooltipDisabled]=\"tooltipDisabled\"\n              [tooltipTemplate]=\"tooltipTemplate\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-                    styleUrls: [
-                        '../common/base-chart.component.css',
-                        '../pie-chart/pie-chart.component.css',
-                        './polar-chart.component.css'
-                    ],
-                    encapsulation: ViewEncapsulation.None,
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    animations: [
-                        trigger('animationState', [
-                            transition(':leave', [
-                                style({
-                                    opacity: 1,
-                                }),
-                                animate(500, style({
-                                    opacity: 0
-                                }))
-                            ])
-                        ])
-                    ]
-                },] },
-    ];
-    /** @nocollapse */
-    PolarChartComponent.ctorParameters = function () { return []; };
-    PolarChartComponent.propDecorators = {
-        'legend': [{ type: Input },],
-        'legendTitle': [{ type: Input },],
-        'xAxis': [{ type: Input },],
-        'yAxis': [{ type: Input },],
-        'showXAxisLabel': [{ type: Input },],
-        'showYAxisLabel': [{ type: Input },],
-        'xAxisLabel': [{ type: Input },],
-        'yAxisLabel': [{ type: Input },],
-        'autoScale': [{ type: Input },],
-        'showGridLines': [{ type: Input },],
-        'curve': [{ type: Input },],
-        'activeEntries': [{ type: Input },],
-        'schemeType': [{ type: Input },],
-        'rangeFillOpacity': [{ type: Input },],
-        'xAxisTickFormatting': [{ type: Input },],
-        'yAxisTickFormatting': [{ type: Input },],
-        'roundDomains': [{ type: Input },],
-        'tooltipDisabled': [{ type: Input },],
-        'showSeriesOnHover': [{ type: Input },],
-        'gradient': [{ type: Input },],
-        'yAxisMinScale': [{ type: Input },],
-        'activate': [{ type: Output },],
-        'deactivate': [{ type: Output },],
-        'tooltipTemplate': [{ type: ContentChild, args: ['tooltipTemplate',] },],
-    };
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], PolarChartComponent.prototype, "legend", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", String)
+    ], PolarChartComponent.prototype, "legendTitle", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], PolarChartComponent.prototype, "xAxis", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], PolarChartComponent.prototype, "yAxis", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], PolarChartComponent.prototype, "showXAxisLabel", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], PolarChartComponent.prototype, "showYAxisLabel", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", String)
+    ], PolarChartComponent.prototype, "xAxisLabel", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", String)
+    ], PolarChartComponent.prototype, "yAxisLabel", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], PolarChartComponent.prototype, "autoScale", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], PolarChartComponent.prototype, "showGridLines", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], PolarChartComponent.prototype, "curve", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Array)
+    ], PolarChartComponent.prototype, "activeEntries", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", String)
+    ], PolarChartComponent.prototype, "schemeType", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Number)
+    ], PolarChartComponent.prototype, "rangeFillOpacity", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Function)
+    ], PolarChartComponent.prototype, "xAxisTickFormatting", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Function)
+    ], PolarChartComponent.prototype, "yAxisTickFormatting", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], PolarChartComponent.prototype, "roundDomains", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], PolarChartComponent.prototype, "tooltipDisabled", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], PolarChartComponent.prototype, "showSeriesOnHover", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], PolarChartComponent.prototype, "gradient", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Number)
+    ], PolarChartComponent.prototype, "yAxisMinScale", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", EventEmitter)
+    ], PolarChartComponent.prototype, "activate", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", EventEmitter)
+    ], PolarChartComponent.prototype, "deactivate", void 0);
+    __decorate([
+        ContentChild('tooltipTemplate'),
+        __metadata("design:type", TemplateRef)
+    ], PolarChartComponent.prototype, "tooltipTemplate", void 0);
+    PolarChartComponent = __decorate([
+        Component({
+            selector: 'ngx-charts-polar-chart',
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      [animations]=\"animations\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:g class=\"polar-chart chart\" [attr.transform]=\"transform\">\n        <svg:g [attr.transform]=\"transformPlot\">\n          <svg:circle\n            class=\"polar-chart-background\"\n            cx=\"0\" cy=\"0\"\n            [attr.r]=\"this.outerRadius\" />\n          <svg:g *ngIf=\"showGridLines\">\n            <svg:circle\n              *ngFor=\"let r of radiusTicks\"\n              class=\"gridline-path radial-gridline-path\"\n              cx=\"0\" cy=\"0\"\n              [attr.r]=\"r\" />\n          </svg:g>\n          <svg:g *ngIf=\"xAxis\">\n            <svg:g ngx-charts-pie-label\n              *ngFor=\"let tick of thetaTicks\"\n              [data]=\"tick\"\n              [radius]=\"outerRadius\"\n              [label]=\"tick.label\"\n              [max]=\"outerRadius\"\n              [value]=\"showGridLines ? 1 : outerRadius\"\n              [explodeSlices]=\"true\"\n              [animations]=\"animations\">\n            </svg:g>\n          </svg:g>\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          [attr.transform]=\"transformYAxis\"\n          *ngIf=\"yAxis\"\n          [yScale]=\"yAxisScale\"\n          [dims]=\"yAxisDims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g ngx-charts-axis-label\n          *ngIf=\"xAxis && showXAxisLabel\"\n          [label]=\"xAxisLabel\"\n          [offset]=\"labelOffset\"\n          [orient]=\"'bottom'\"\n          [height]=\"dims.height\"\n          [width]=\"dims.width\">\n        </svg:g>\n        <svg:g [attr.transform]=\"transformPlot\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\" [@animationState]=\"'active'\">\n            <svg:g ngx-charts-polar-series\n              [gradient]=\"gradient\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [activeEntries]=\"activeEntries\"\n              [scaleType]=\"scaleType\"\n              [curve]=\"curve\"\n              [rangeFillOpacity]=\"rangeFillOpacity\"\n              [animations]=\"animations\"\n              [tooltipDisabled]=\"tooltipDisabled\"\n              [tooltipTemplate]=\"tooltipTemplate\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            styleUrls: [
+                '../common/base-chart.component.css',
+                '../pie-chart/pie-chart.component.css',
+                './polar-chart.component.css'
+            ],
+            encapsulation: ViewEncapsulation.None,
+            changeDetection: ChangeDetectionStrategy.OnPush,
+            animations: [
+                trigger('animationState', [
+                    transition(':leave', [
+                        style({
+                            opacity: 1,
+                        }),
+                        animate(500, style({
+                            opacity: 0
+                        }))
+                    ])
+                ])
+            ]
+        })
+    ], PolarChartComponent);
     return PolarChartComponent;
 }(BaseChartComponent));
 export { PolarChartComponent };

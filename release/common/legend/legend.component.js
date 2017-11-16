@@ -1,3 +1,12 @@
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
 import { formatLabel } from '../label.helper';
 var LegendComponent = /** @class */ (function () {
@@ -54,30 +63,52 @@ var LegendComponent = /** @class */ (function () {
     LegendComponent.prototype.trackBy = function (index, item) {
         return item.label;
     };
-    LegendComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'ngx-charts-legend',
-                    template: "\n    <div [style.width.px]=\"width\">\n      <header class=\"legend-title\" *ngIf=\"title?.length > 0\">\n        <span class=\"legend-title-text\">{{title}}</span>\n      </header>\n      <div class=\"legend-wrap\">\n        <ul class=\"legend-labels\"\n          [style.max-height.px]=\"height - 45\">\n          <li\n            *ngFor=\"let entry of legendEntries; trackBy: trackBy\"\n            class=\"legend-label\">\n            <ngx-charts-legend-entry\n              [label]=\"entry.label\"\n              [formattedLabel]=\"entry.formattedLabel\"\n              [color]=\"entry.color\"\n              [isActive]=\"isActive(entry)\"\n              (select)=\"labelClick.emit($event)\"\n              (activate)=\"activate($event)\"\n              (deactivate)=\"deactivate($event)\">\n            </ngx-charts-legend-entry>\n          </li>\n        </ul>\n      </div>\n    </div>\n  ",
-                    styleUrls: ['./legend.component.css'],
-                    encapsulation: ViewEncapsulation.None,
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    LegendComponent.ctorParameters = function () { return [
-        { type: ChangeDetectorRef, },
-    ]; };
-    LegendComponent.propDecorators = {
-        'data': [{ type: Input },],
-        'title': [{ type: Input },],
-        'colors': [{ type: Input },],
-        'height': [{ type: Input },],
-        'width': [{ type: Input },],
-        'activeEntries': [{ type: Input },],
-        'labelClick': [{ type: Output },],
-        'labelActivate': [{ type: Output },],
-        'labelDeactivate': [{ type: Output },],
-    };
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], LegendComponent.prototype, "data", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], LegendComponent.prototype, "title", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], LegendComponent.prototype, "colors", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], LegendComponent.prototype, "height", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], LegendComponent.prototype, "width", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], LegendComponent.prototype, "activeEntries", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", EventEmitter)
+    ], LegendComponent.prototype, "labelClick", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", EventEmitter)
+    ], LegendComponent.prototype, "labelActivate", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", EventEmitter)
+    ], LegendComponent.prototype, "labelDeactivate", void 0);
+    LegendComponent = __decorate([
+        Component({
+            selector: 'ngx-charts-legend',
+            template: "\n    <div [style.width.px]=\"width\">\n      <header class=\"legend-title\" *ngIf=\"title?.length > 0\">\n        <span class=\"legend-title-text\">{{title}}</span>\n      </header>\n      <div class=\"legend-wrap\">\n        <ul class=\"legend-labels\"\n          [style.max-height.px]=\"height - 45\">\n          <li\n            *ngFor=\"let entry of legendEntries; trackBy: trackBy\"\n            class=\"legend-label\">\n            <ngx-charts-legend-entry\n              [label]=\"entry.label\"\n              [formattedLabel]=\"entry.formattedLabel\"\n              [color]=\"entry.color\"\n              [isActive]=\"isActive(entry)\"\n              (select)=\"labelClick.emit($event)\"\n              (activate)=\"activate($event)\"\n              (deactivate)=\"deactivate($event)\">\n            </ngx-charts-legend-entry>\n          </li>\n        </ul>\n      </div>\n    </div>\n  ",
+            styleUrls: ['./legend.component.css'],
+            encapsulation: ViewEncapsulation.None,
+            changeDetection: ChangeDetectionStrategy.OnPush
+        }),
+        __metadata("design:paramtypes", [ChangeDetectorRef])
+    ], LegendComponent);
     return LegendComponent;
 }());
 export { LegendComponent };
