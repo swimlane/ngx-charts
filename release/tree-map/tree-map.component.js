@@ -8,7 +8,16 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import { Component, Input, Output, EventEmitter, ViewEncapsulation, ChangeDetectionStrategy, ContentChild } from '@angular/core';
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Component, Input, Output, EventEmitter, ViewEncapsulation, ChangeDetectionStrategy, ContentChild, TemplateRef } from '@angular/core';
 import { treemap, stratify } from 'd3-hierarchy';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
@@ -64,26 +73,43 @@ var TreeMapComponent = /** @class */ (function (_super) {
     TreeMapComponent.prototype.setColors = function () {
         this.colors = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
-    TreeMapComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'ngx-charts-tree-map',
-                    template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\"\n      [animations]=\"animations\">\n      <svg:g [attr.transform]=\"transform\" class=\"tree-map chart\">\n        <svg:g ngx-charts-tree-map-cell-series\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          [tooltipDisabled]=\"tooltipDisabled\"\n          [tooltipTemplate]=\"tooltipTemplate\"\n          [valueFormatting]=\"valueFormatting\"\n          [labelFormatting]=\"labelFormatting\"\n          [gradient]=\"gradient\"\n          [animations]=\"animations\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-                    styleUrls: ['./tree-map.component.css'],
-                    encapsulation: ViewEncapsulation.None,
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    TreeMapComponent.ctorParameters = function () { return []; };
-    TreeMapComponent.propDecorators = {
-        'results': [{ type: Input },],
-        'tooltipDisabled': [{ type: Input },],
-        'valueFormatting': [{ type: Input },],
-        'labelFormatting': [{ type: Input },],
-        'gradient': [{ type: Input },],
-        'select': [{ type: Output },],
-        'tooltipTemplate': [{ type: ContentChild, args: ['tooltipTemplate',] },],
-    };
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], TreeMapComponent.prototype, "results", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], TreeMapComponent.prototype, "tooltipDisabled", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], TreeMapComponent.prototype, "valueFormatting", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], TreeMapComponent.prototype, "labelFormatting", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], TreeMapComponent.prototype, "gradient", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], TreeMapComponent.prototype, "select", void 0);
+    __decorate([
+        ContentChild('tooltipTemplate'),
+        __metadata("design:type", TemplateRef)
+    ], TreeMapComponent.prototype, "tooltipTemplate", void 0);
+    TreeMapComponent = __decorate([
+        Component({
+            selector: 'ngx-charts-tree-map',
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\"\n      [animations]=\"animations\">\n      <svg:g [attr.transform]=\"transform\" class=\"tree-map chart\">\n        <svg:g ngx-charts-tree-map-cell-series\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          [tooltipDisabled]=\"tooltipDisabled\"\n          [tooltipTemplate]=\"tooltipTemplate\"\n          [valueFormatting]=\"valueFormatting\"\n          [labelFormatting]=\"labelFormatting\"\n          [gradient]=\"gradient\"\n          [animations]=\"animations\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            styleUrls: ['./tree-map.component.css'],
+            encapsulation: ViewEncapsulation.None,
+            changeDetection: ChangeDetectionStrategy.OnPush
+        })
+    ], TreeMapComponent);
     return TreeMapComponent;
 }(BaseChartComponent));
 export { TreeMapComponent };

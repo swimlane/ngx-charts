@@ -1,4 +1,13 @@
-import { Component, Input, Output, ViewChild, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Component, Input, Output, ElementRef, ViewChild, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
 import { roundedRect } from '../../common/shape.helper';
@@ -135,31 +144,70 @@ var YAxisTicksComponent = /** @class */ (function () {
     YAxisTicksComponent.prototype.gridLineTransform = function () {
         return "translate(5,0)";
     };
-    YAxisTicksComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'g[ngx-charts-y-axis-ticks]',
-                    template: "\n    <svg:g #ticksel>\n      <svg:g *ngFor=\"let tick of ticks\" class=\"tick\"\n        [attr.transform]=\"transform(tick)\" >\n        <title>{{tickFormat(tick)}}</title>\n        <svg:text\n          stroke-width=\"0.01\"\n          [attr.dy]=\"dy\"\n          [attr.x]=\"x1\"\n          [attr.y]=\"y1\"\n          [attr.text-anchor]=\"textAnchor\"\n          [style.font-size]=\"'12px'\">\n          {{trimLabel(tickFormat(tick))}}\n        </svg:text>\n      </svg:g>\n    </svg:g>\n\n    <svg:path *ngIf=\"referenceLineLength > 1 && refMax && refMin && showRefLines\"\n      class=\"reference-area\"\n      [attr.d]=\"referenceAreaPath\"\n      [attr.transform]=\"gridLineTransform()\"\n    />\n    <svg:g *ngFor=\"let tick of ticks\"\n      [attr.transform]=\"transform(tick)\">\n      <svg:g\n        *ngIf=\"showGridLines\"\n        [attr.transform]=\"gridLineTransform()\">\n        <svg:line *ngIf=\"orient === 'left'\"\n          class=\"gridline-path gridline-path-horizontal\"\n          x1=\"0\"\n          [attr.x2]=\"gridLineWidth\" />\n        <svg:line *ngIf=\"orient === 'right'\"\n          class=\"gridline-path gridline-path-horizontal\"\n          x1=\"0\"\n          [attr.x2]=\"-gridLineWidth\" />\n      </svg:g>\n    </svg:g>\n\n    <svg:g *ngFor=\"let refLine of referenceLines\">\n      <svg:g *ngIf=\"showRefLines\" [attr.transform]=\"transform(refLine.value)\">\n        <svg:line class=\"refline-path gridline-path-horizontal\"\n          x1=\"0\"\n          [attr.x2]=\"gridLineWidth\"\n          [attr.transform]=\"gridLineTransform()\"/>\n        <svg:g *ngIf=\"showRefLabels\">\n          <title>{{trimLabel(tickFormat(refLine.value))}}</title>\n          <svg:text\n            class=\"refline-label\"\n            [attr.dy]=\"dy\"\n            [attr.y]=\"-6\"\n            [attr.x]=\"gridLineWidth\"\n            [attr.text-anchor]=\"textAnchor\" >\n            {{refLine.name}}\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </svg:g>\n  ",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    YAxisTicksComponent.ctorParameters = function () { return []; };
-    YAxisTicksComponent.propDecorators = {
-        'scale': [{ type: Input },],
-        'orient': [{ type: Input },],
-        'tickArguments': [{ type: Input },],
-        'tickValues': [{ type: Input },],
-        'tickStroke': [{ type: Input },],
-        'tickFormatting': [{ type: Input },],
-        'showGridLines': [{ type: Input },],
-        'gridLineWidth': [{ type: Input },],
-        'height': [{ type: Input },],
-        'referenceLines': [{ type: Input },],
-        'showRefLabels': [{ type: Input },],
-        'showRefLines': [{ type: Input },],
-        'dimensionsChanged': [{ type: Output },],
-        'ticksElement': [{ type: ViewChild, args: ['ticksel',] },],
-    };
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], YAxisTicksComponent.prototype, "scale", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], YAxisTicksComponent.prototype, "orient", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], YAxisTicksComponent.prototype, "tickArguments", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], YAxisTicksComponent.prototype, "tickValues", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], YAxisTicksComponent.prototype, "tickStroke", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], YAxisTicksComponent.prototype, "tickFormatting", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], YAxisTicksComponent.prototype, "showGridLines", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], YAxisTicksComponent.prototype, "gridLineWidth", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], YAxisTicksComponent.prototype, "height", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], YAxisTicksComponent.prototype, "referenceLines", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], YAxisTicksComponent.prototype, "showRefLabels", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], YAxisTicksComponent.prototype, "showRefLines", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], YAxisTicksComponent.prototype, "dimensionsChanged", void 0);
+    __decorate([
+        ViewChild('ticksel'),
+        __metadata("design:type", ElementRef)
+    ], YAxisTicksComponent.prototype, "ticksElement", void 0);
+    YAxisTicksComponent = __decorate([
+        Component({
+            selector: 'g[ngx-charts-y-axis-ticks]',
+            template: "\n    <svg:g #ticksel>\n      <svg:g *ngFor=\"let tick of ticks\" class=\"tick\"\n        [attr.transform]=\"transform(tick)\" >\n        <title>{{tickFormat(tick)}}</title>\n        <svg:text\n          stroke-width=\"0.01\"\n          [attr.dy]=\"dy\"\n          [attr.x]=\"x1\"\n          [attr.y]=\"y1\"\n          [attr.text-anchor]=\"textAnchor\"\n          [style.font-size]=\"'12px'\">\n          {{trimLabel(tickFormat(tick))}}\n        </svg:text>\n      </svg:g>\n    </svg:g>\n\n    <svg:path *ngIf=\"referenceLineLength > 1 && refMax && refMin && showRefLines\"\n      class=\"reference-area\"\n      [attr.d]=\"referenceAreaPath\"\n      [attr.transform]=\"gridLineTransform()\"\n    />\n    <svg:g *ngFor=\"let tick of ticks\"\n      [attr.transform]=\"transform(tick)\">\n      <svg:g\n        *ngIf=\"showGridLines\"\n        [attr.transform]=\"gridLineTransform()\">\n        <svg:line *ngIf=\"orient === 'left'\"\n          class=\"gridline-path gridline-path-horizontal\"\n          x1=\"0\"\n          [attr.x2]=\"gridLineWidth\" />\n        <svg:line *ngIf=\"orient === 'right'\"\n          class=\"gridline-path gridline-path-horizontal\"\n          x1=\"0\"\n          [attr.x2]=\"-gridLineWidth\" />\n      </svg:g>\n    </svg:g>\n\n    <svg:g *ngFor=\"let refLine of referenceLines\">\n      <svg:g *ngIf=\"showRefLines\" [attr.transform]=\"transform(refLine.value)\">\n        <svg:line class=\"refline-path gridline-path-horizontal\"\n          x1=\"0\"\n          [attr.x2]=\"gridLineWidth\"\n          [attr.transform]=\"gridLineTransform()\"/>\n        <svg:g *ngIf=\"showRefLabels\">\n          <title>{{trimLabel(tickFormat(refLine.value))}}</title>\n          <svg:text\n            class=\"refline-label\"\n            [attr.dy]=\"dy\"\n            [attr.y]=\"-6\"\n            [attr.x]=\"gridLineWidth\"\n            [attr.text-anchor]=\"textAnchor\" >\n            {{refLine.name}}\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </svg:g>\n  ",
+            changeDetection: ChangeDetectionStrategy.OnPush
+        }),
+        __metadata("design:paramtypes", [])
+    ], YAxisTicksComponent);
     return YAxisTicksComponent;
 }());
 export { YAxisTicksComponent };

@@ -1,3 +1,12 @@
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { arc } from 'd3-shape';
 import { trimLabel } from '../common/trim-label.helper';
@@ -68,25 +77,46 @@ var PieLabelComponent = /** @class */ (function () {
     PieLabelComponent.prototype.midAngle = function (d) {
         return d.startAngle + (d.endAngle - d.startAngle) / 2;
     };
-    PieLabelComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'g[ngx-charts-pie-label]',
-                    template: "\n    <title>{{label}}</title>\n    <svg:g\n      [attr.transform]=\"attrTransform\"\n      [style.transform]=\"styleTransform\"\n      [style.transition]=\"textTransition\">\n      <svg:text\n        class=\"pie-label\"\n        [class.animation]=\"animations\"\n        dy=\".35em\"\n        [style.textAnchor]=\"textAnchor()\"\n        [style.shapeRendering]=\"'crispEdges'\">\n        {{trimLabel(label, 10)}}\n      </svg:text>\n    </svg:g>\n    <svg:path\n      [attr.d]=\"line\"\n      [attr.stroke]=\"color\"\n      fill=\"none\"\n      class=\"pie-label-line line\"\n      [class.animation]=\"animations\">\n    </svg:path>\n  ",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    PieLabelComponent.ctorParameters = function () { return []; };
-    PieLabelComponent.propDecorators = {
-        'data': [{ type: Input },],
-        'radius': [{ type: Input },],
-        'label': [{ type: Input },],
-        'color': [{ type: Input },],
-        'max': [{ type: Input },],
-        'value': [{ type: Input },],
-        'explodeSlices': [{ type: Input },],
-        'animations': [{ type: Input },],
-    };
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], PieLabelComponent.prototype, "data", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], PieLabelComponent.prototype, "radius", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], PieLabelComponent.prototype, "label", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], PieLabelComponent.prototype, "color", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], PieLabelComponent.prototype, "max", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], PieLabelComponent.prototype, "value", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], PieLabelComponent.prototype, "explodeSlices", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], PieLabelComponent.prototype, "animations", void 0);
+    PieLabelComponent = __decorate([
+        Component({
+            selector: 'g[ngx-charts-pie-label]',
+            template: "\n    <title>{{label}}</title>\n    <svg:g\n      [attr.transform]=\"attrTransform\"\n      [style.transform]=\"styleTransform\"\n      [style.transition]=\"textTransition\">\n      <svg:text\n        class=\"pie-label\"\n        [class.animation]=\"animations\"\n        dy=\".35em\"\n        [style.textAnchor]=\"textAnchor()\"\n        [style.shapeRendering]=\"'crispEdges'\">\n        {{trimLabel(label, 10)}}\n      </svg:text>\n    </svg:g>\n    <svg:path\n      [attr.d]=\"line\"\n      [attr.stroke]=\"color\"\n      fill=\"none\"\n      class=\"pie-label-line line\"\n      [class.animation]=\"animations\">\n    </svg:path>\n  ",
+            changeDetection: ChangeDetectionStrategy.OnPush
+        }),
+        __metadata("design:paramtypes", [])
+    ], PieLabelComponent);
     return PieLabelComponent;
 }());
 export { PieLabelComponent };

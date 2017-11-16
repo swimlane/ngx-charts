@@ -1,3 +1,12 @@
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 import { Directive, Input, Output, EventEmitter, HostListener, ViewContainerRef, Renderer } from '@angular/core';
 import { PlacementTypes } from './position';
 import { StyleTypes } from './style.type';
@@ -159,41 +168,118 @@ var TooltipDirective = /** @class */ (function () {
             context: this.tooltipContext
         };
     };
-    TooltipDirective.decorators = [
-        { type: Directive, args: [{ selector: '[ngx-tooltip]' },] },
-    ];
-    /** @nocollapse */
-    TooltipDirective.ctorParameters = function () { return [
-        { type: TooltipService, },
-        { type: ViewContainerRef, },
-        { type: Renderer, },
-    ]; };
-    TooltipDirective.propDecorators = {
-        'tooltipCssClass': [{ type: Input },],
-        'tooltipTitle': [{ type: Input },],
-        'tooltipAppendToBody': [{ type: Input },],
-        'tooltipSpacing': [{ type: Input },],
-        'tooltipDisabled': [{ type: Input },],
-        'tooltipShowCaret': [{ type: Input },],
-        'tooltipPlacement': [{ type: Input },],
-        'tooltipAlignment': [{ type: Input },],
-        'tooltipType': [{ type: Input },],
-        'tooltipCloseOnClickOutside': [{ type: Input },],
-        'tooltipCloseOnMouseLeave': [{ type: Input },],
-        'tooltipHideTimeout': [{ type: Input },],
-        'tooltipShowTimeout': [{ type: Input },],
-        'tooltipTemplate': [{ type: Input },],
-        'tooltipShowEvent': [{ type: Input },],
-        'tooltipContext': [{ type: Input },],
-        'tooltipImmediateExit': [{ type: Input },],
-        'show': [{ type: Output },],
-        'hide': [{ type: Output },],
-        'onFocus': [{ type: HostListener, args: ['focusin',] },],
-        'onBlur': [{ type: HostListener, args: ['blur',] },],
-        'onMouseEnter': [{ type: HostListener, args: ['mouseenter',] },],
-        'onMouseLeave': [{ type: HostListener, args: ['mouseleave', ['$event.target'],] },],
-        'onMouseClick': [{ type: HostListener, args: ['click',] },],
-    };
+    __decorate([
+        Input(),
+        __metadata("design:type", String)
+    ], TooltipDirective.prototype, "tooltipCssClass", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", String)
+    ], TooltipDirective.prototype, "tooltipTitle", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], TooltipDirective.prototype, "tooltipAppendToBody", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Number)
+    ], TooltipDirective.prototype, "tooltipSpacing", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], TooltipDirective.prototype, "tooltipDisabled", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], TooltipDirective.prototype, "tooltipShowCaret", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Number)
+    ], TooltipDirective.prototype, "tooltipPlacement", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Number)
+    ], TooltipDirective.prototype, "tooltipAlignment", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Number)
+    ], TooltipDirective.prototype, "tooltipType", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], TooltipDirective.prototype, "tooltipCloseOnClickOutside", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], TooltipDirective.prototype, "tooltipCloseOnMouseLeave", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Number)
+    ], TooltipDirective.prototype, "tooltipHideTimeout", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Number)
+    ], TooltipDirective.prototype, "tooltipShowTimeout", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], TooltipDirective.prototype, "tooltipTemplate", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Number)
+    ], TooltipDirective.prototype, "tooltipShowEvent", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], TooltipDirective.prototype, "tooltipContext", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], TooltipDirective.prototype, "tooltipImmediateExit", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], TooltipDirective.prototype, "show", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], TooltipDirective.prototype, "hide", void 0);
+    __decorate([
+        HostListener('focusin'),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], TooltipDirective.prototype, "onFocus", null);
+    __decorate([
+        HostListener('blur'),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], TooltipDirective.prototype, "onBlur", null);
+    __decorate([
+        HostListener('mouseenter'),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], TooltipDirective.prototype, "onMouseEnter", null);
+    __decorate([
+        HostListener('mouseleave', ['$event.target']),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object]),
+        __metadata("design:returntype", void 0)
+    ], TooltipDirective.prototype, "onMouseLeave", null);
+    __decorate([
+        HostListener('click'),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], TooltipDirective.prototype, "onMouseClick", null);
+    TooltipDirective = __decorate([
+        Directive({ selector: '[ngx-tooltip]' }),
+        __metadata("design:paramtypes", [TooltipService,
+            ViewContainerRef,
+            Renderer])
+    ], TooltipDirective);
     return TooltipDirective;
 }());
 export { TooltipDirective };

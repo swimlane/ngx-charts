@@ -1,3 +1,12 @@
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 import { Component, Input, Output, EventEmitter, HostListener, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { select } from 'd3-selection';
 import { roundedRect } from '../common/shape.helper';
@@ -160,37 +169,90 @@ var BarComponent = /** @class */ (function () {
     BarComponent.prototype.onMouseLeave = function () {
         this.deactivate.emit(this.data);
     };
-    BarComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'g[ngx-charts-bar]',
-                    template: "\n    <svg:defs *ngIf=\"hasGradient\">\n      <svg:g ngx-charts-svg-linear-gradient\n        [orientation]=\"orientation\"\n        [name]=\"gradientId\"\n        [stops]=\"gradientStops\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"bar\"\n      stroke=\"none\"\n      [class.active]=\"isActive\"\n      [attr.d]=\"path\"\n      [attr.fill]=\"hasGradient ? gradientFill : fill\"\n      (click)=\"select.emit(data)\"\n    />\n  ",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    BarComponent.ctorParameters = function () { return [
-        { type: ElementRef, },
-    ]; };
-    BarComponent.propDecorators = {
-        'fill': [{ type: Input },],
-        'data': [{ type: Input },],
-        'width': [{ type: Input },],
-        'height': [{ type: Input },],
-        'x': [{ type: Input },],
-        'y': [{ type: Input },],
-        'orientation': [{ type: Input },],
-        'roundEdges': [{ type: Input },],
-        'gradient': [{ type: Input },],
-        'offset': [{ type: Input },],
-        'isActive': [{ type: Input },],
-        'stops': [{ type: Input },],
-        'animations': [{ type: Input },],
-        'select': [{ type: Output },],
-        'activate': [{ type: Output },],
-        'deactivate': [{ type: Output },],
-        'onMouseEnter': [{ type: HostListener, args: ['mouseenter',] },],
-        'onMouseLeave': [{ type: HostListener, args: ['mouseleave',] },],
-    };
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], BarComponent.prototype, "fill", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], BarComponent.prototype, "data", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], BarComponent.prototype, "width", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], BarComponent.prototype, "height", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], BarComponent.prototype, "x", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], BarComponent.prototype, "y", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], BarComponent.prototype, "orientation", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], BarComponent.prototype, "roundEdges", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], BarComponent.prototype, "gradient", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], BarComponent.prototype, "offset", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], BarComponent.prototype, "isActive", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Array)
+    ], BarComponent.prototype, "stops", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], BarComponent.prototype, "animations", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], BarComponent.prototype, "select", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], BarComponent.prototype, "activate", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], BarComponent.prototype, "deactivate", void 0);
+    __decorate([
+        HostListener('mouseenter'),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], BarComponent.prototype, "onMouseEnter", null);
+    __decorate([
+        HostListener('mouseleave'),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], BarComponent.prototype, "onMouseLeave", null);
+    BarComponent = __decorate([
+        Component({
+            selector: 'g[ngx-charts-bar]',
+            template: "\n    <svg:defs *ngIf=\"hasGradient\">\n      <svg:g ngx-charts-svg-linear-gradient\n        [orientation]=\"orientation\"\n        [name]=\"gradientId\"\n        [stops]=\"gradientStops\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"bar\"\n      stroke=\"none\"\n      [class.active]=\"isActive\"\n      [attr.d]=\"path\"\n      [attr.fill]=\"hasGradient ? gradientFill : fill\"\n      (click)=\"select.emit(data)\"\n    />\n  ",
+            changeDetection: ChangeDetectionStrategy.OnPush
+        }),
+        __metadata("design:paramtypes", [ElementRef])
+    ], BarComponent);
     return BarComponent;
 }());
 export { BarComponent };

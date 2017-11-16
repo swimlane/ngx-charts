@@ -1,3 +1,12 @@
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 import { Component, Input, Output, EventEmitter, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { pie } from 'd3-shape';
 var PieGridSeriesComponent = /** @class */ (function () {
@@ -51,25 +60,38 @@ var PieGridSeriesComponent = /** @class */ (function () {
     PieGridSeriesComponent.prototype.color = function (arc) {
         return this.colors(this.label(arc));
     };
-    PieGridSeriesComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'g[ngx-charts-pie-grid-series]',
-                    template: "\n    <svg:g class=\"pie-grid-arcs\">\n      <svg:g ngx-charts-pie-arc *ngFor=\"let arc of arcs; trackBy:trackBy\"\n        [attr.class]=\"arc.class\"\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [value]=\"arc.data.value\"\n        [data]=\"arc.data\"\n        [max]=\"max\"\n        [gradient]=\"false\"\n        [pointerEvents]=\"arc.pointerEvents\"\n        [animate]=\"arc.animate\"\n        (select)=\"onClick($event)\">\n      </svg:g>\n    </svg:g>\n  ",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                },] },
-    ];
-    /** @nocollapse */
-    PieGridSeriesComponent.ctorParameters = function () { return [
-        { type: ElementRef, },
-    ]; };
-    PieGridSeriesComponent.propDecorators = {
-        'colors': [{ type: Input },],
-        'data': [{ type: Input },],
-        'innerRadius': [{ type: Input },],
-        'outerRadius': [{ type: Input },],
-        'animations': [{ type: Input },],
-        'select': [{ type: Output },],
-    };
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], PieGridSeriesComponent.prototype, "colors", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], PieGridSeriesComponent.prototype, "data", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], PieGridSeriesComponent.prototype, "innerRadius", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], PieGridSeriesComponent.prototype, "outerRadius", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], PieGridSeriesComponent.prototype, "animations", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], PieGridSeriesComponent.prototype, "select", void 0);
+    PieGridSeriesComponent = __decorate([
+        Component({
+            selector: 'g[ngx-charts-pie-grid-series]',
+            template: "\n    <svg:g class=\"pie-grid-arcs\">\n      <svg:g ngx-charts-pie-arc *ngFor=\"let arc of arcs; trackBy:trackBy\"\n        [attr.class]=\"arc.class\"\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [value]=\"arc.data.value\"\n        [data]=\"arc.data\"\n        [max]=\"max\"\n        [gradient]=\"false\"\n        [pointerEvents]=\"arc.pointerEvents\"\n        [animate]=\"arc.animate\"\n        (select)=\"onClick($event)\">\n      </svg:g>\n    </svg:g>\n  ",
+            changeDetection: ChangeDetectionStrategy.OnPush,
+        }),
+        __metadata("design:paramtypes", [ElementRef])
+    ], PieGridSeriesComponent);
     return PieGridSeriesComponent;
 }());
 export { PieGridSeriesComponent };

@@ -1,5 +1,5 @@
 /**
- * ngx-charts v"6.1.0" (https://github.com/swimlane/ngx-charts)
+ * ngx-charts v"7.0.0" (https://github.com/swimlane/ngx-charts)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -8702,7 +8702,7 @@ var AdvancedLegendComponent = /** @class */ (function () {
         return this.data.map(function (d, index) {
             var label = Object(__WEBPACK_IMPORTED_MODULE_2__label_helper__["a" /* formatLabel */])(d.name);
             var value = d.value;
-            var percentage = value / _this.total * 100;
+            var percentage = (_this.total > 0) ? value / _this.total * 100 : 0;
             var color = _this.colors.getColor(label);
             return {
                 value: value,
@@ -9970,7 +9970,7 @@ var InjectionService = /** @class */ (function () {
      * @memberOf InjectionService
      */
     InjectionService.prototype.getRootViewContainer = function () {
-        var rootComponents = this.applicationRef['_rootComponents'];
+        var rootComponents = this.applicationRef.components;
         // fix cannot read length of undefined
         if (rootComponents) {
             if (rootComponents.length)
@@ -11856,7 +11856,7 @@ var GaugeComponent = /** @class */ (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     GaugeComponent.prototype.isActive = function (entry) {
         if (!this.activeEntries)
@@ -14698,7 +14698,7 @@ var AdvancedPieChartComponent = /** @class */ (function (_super) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pie_grid_component__ = __webpack_require__("./src/pie-chart/pie-grid.component.ts");
 /* unused harmony namespace reexport */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pie_series_component__ = __webpack_require__("./src/pie-chart/pie-series.component.ts");
-/* inactive harmony reexport namespace */
+/* unused harmony namespace reexport */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pie_label_component__ = __webpack_require__("./src/pie-chart/pie-label.component.ts");
 /* unused harmony namespace reexport */
 /* unused harmony namespace reexport */
@@ -16607,7 +16607,7 @@ var PolarSeriesComponent = /** @class */ (function () {
 
 // IE11 fix
 // Ref: https://github.com/swimlane/ngx-charts/issues/386
-if (typeof SVGElement.prototype.contains === 'undefined') {
+if (typeof (SVGElement) !== 'undefined' && typeof SVGElement.prototype.contains === 'undefined') {
     SVGElement.prototype.contains = HTMLDivElement.prototype.contains;
 }
 

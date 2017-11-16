@@ -1,3 +1,12 @@
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 import { Component, Input, Output, EventEmitter, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { count, decimalChecker } from './count.helper';
 /**
@@ -77,28 +86,52 @@ var CountUpDirective = /** @class */ (function () {
         };
         this.animationReq = count(this.countFrom, this.countTo, this.countDecimals, this.countDuration, callback);
     };
-    CountUpDirective.decorators = [
-        { type: Component, args: [{
-                    selector: '[ngx-charts-count-up]',
-                    template: "{{value}}"
-                },] },
-    ];
-    /** @nocollapse */
-    CountUpDirective.ctorParameters = function () { return [
-        { type: ChangeDetectorRef, },
-        { type: ElementRef, },
-    ]; };
-    CountUpDirective.propDecorators = {
-        'countDuration': [{ type: Input },],
-        'countPrefix': [{ type: Input },],
-        'countSuffix': [{ type: Input },],
-        'valueFormatting': [{ type: Input },],
-        'countDecimals': [{ type: Input },],
-        'countTo': [{ type: Input },],
-        'countFrom': [{ type: Input },],
-        'countChange': [{ type: Output },],
-        'countFinish': [{ type: Output },],
-    };
+    __decorate([
+        Input(),
+        __metadata("design:type", Number)
+    ], CountUpDirective.prototype, "countDuration", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", String)
+    ], CountUpDirective.prototype, "countPrefix", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", String)
+    ], CountUpDirective.prototype, "countSuffix", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], CountUpDirective.prototype, "valueFormatting", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Number),
+        __metadata("design:paramtypes", [Number])
+    ], CountUpDirective.prototype, "countDecimals", null);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], CountUpDirective.prototype, "countTo", null);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], CountUpDirective.prototype, "countFrom", null);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], CountUpDirective.prototype, "countChange", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], CountUpDirective.prototype, "countFinish", void 0);
+    CountUpDirective = __decorate([
+        Component({
+            selector: '[ngx-charts-count-up]',
+            template: "{{value}}"
+        }),
+        __metadata("design:paramtypes", [ChangeDetectorRef, ElementRef])
+    ], CountUpDirective);
     return CountUpDirective;
 }());
 export { CountUpDirective };

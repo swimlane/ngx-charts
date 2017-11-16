@@ -1,4 +1,13 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
 import { formatLabel } from '../common/label.helper';
 var HeatCellSeriesComponent = /** @class */ (function () {
     function HeatCellSeriesComponent() {
@@ -53,27 +62,53 @@ var HeatCellSeriesComponent = /** @class */ (function () {
             series: series
         });
     };
-    HeatCellSeriesComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'g[ngx-charts-heat-map-cell-series]',
-                    template: "\n    <svg:g\n      ngx-charts-heat-map-cell\n      *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [data]=\"c.data\"\n      (select)=\"onClick($event, c.label, c.series)\"\n      [gradient]=\"gradient\"\n      [animations]=\"animations\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"tooltipTemplate ? undefined : tooltipText(c)\"\n      [tooltipTemplate]=\"tooltipTemplate\"\n      [tooltipContext]=\"{series: c.series, name: c.label, value: c.data}\">\n    </svg:g>\n  ",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                },] },
-    ];
-    /** @nocollapse */
-    HeatCellSeriesComponent.ctorParameters = function () { return []; };
-    HeatCellSeriesComponent.propDecorators = {
-        'data': [{ type: Input },],
-        'colors': [{ type: Input },],
-        'xScale': [{ type: Input },],
-        'yScale': [{ type: Input },],
-        'gradient': [{ type: Input },],
-        'tooltipDisabled': [{ type: Input },],
-        'tooltipText': [{ type: Input },],
-        'tooltipTemplate': [{ type: Input },],
-        'animations': [{ type: Input },],
-        'select': [{ type: Output },],
-    };
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], HeatCellSeriesComponent.prototype, "data", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], HeatCellSeriesComponent.prototype, "colors", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], HeatCellSeriesComponent.prototype, "xScale", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], HeatCellSeriesComponent.prototype, "yScale", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], HeatCellSeriesComponent.prototype, "gradient", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], HeatCellSeriesComponent.prototype, "tooltipDisabled", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], HeatCellSeriesComponent.prototype, "tooltipText", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", TemplateRef)
+    ], HeatCellSeriesComponent.prototype, "tooltipTemplate", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], HeatCellSeriesComponent.prototype, "animations", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], HeatCellSeriesComponent.prototype, "select", void 0);
+    HeatCellSeriesComponent = __decorate([
+        Component({
+            selector: 'g[ngx-charts-heat-map-cell-series]',
+            template: "\n    <svg:g\n      ngx-charts-heat-map-cell\n      *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [data]=\"c.data\"\n      (select)=\"onClick($event, c.label, c.series)\"\n      [gradient]=\"gradient\"\n      [animations]=\"animations\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"tooltipTemplate ? undefined : tooltipText(c)\"\n      [tooltipTemplate]=\"tooltipTemplate\"\n      [tooltipContext]=\"{series: c.series, name: c.label, value: c.data}\">\n    </svg:g>\n  ",
+            changeDetection: ChangeDetectionStrategy.OnPush,
+        })
+    ], HeatCellSeriesComponent);
     return HeatCellSeriesComponent;
 }());
 export { HeatCellSeriesComponent };

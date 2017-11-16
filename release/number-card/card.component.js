@@ -1,3 +1,12 @@
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 import { Component, Input, Output, EventEmitter, ElementRef, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, NgZone } from '@angular/core';
 import { trimLabel } from '../common/trim-label.helper';
 import { roundedRect } from '../common/shape.helper';
@@ -111,36 +120,74 @@ var CardComponent = /** @class */ (function () {
             value: this.data.value
         });
     };
-    CardComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'g[ngx-charts-card]',
-                    template: "\n    <svg:g\n      [attr.transform]=\"transform\"\n      class=\"cell\"\n      (click)=\"onClick()\">\n      <svg:rect\n        class=\"card\"\n        [style.fill]=\"color\"\n        [attr.width]=\"cardWidth\"\n        [attr.height]=\"cardHeight\"\n        rx=\"3\"\n        ry=\"3\"\n      />\n      <svg:path\n        *ngIf=\"bandColor && bandColor !== color\"\n        class=\"card-band\"\n        [attr.fill]=\"bandColor\"\n        [attr.transform]=\"transformBand\"\n        stroke=\"none\"\n        [attr.d]=\"bandPath\"\n      />\n      <title>{{label}}</title>\n      <svg:foreignObject\n        class=\"trimmed-label\"\n        x=\"5\"\n        [attr.x]=\"textPadding[3]\"\n        [attr.y]=\"cardHeight - textPadding[2]\"\n        [attr.width]=\"textWidth\"\n        [attr.height]=\"labelFontSize + textPadding[2]\"\n        alignment-baseline=\"hanging\">\n        <xhtml:p\n          [style.color]=\"textColor\"\n          [style.fontSize.px]=\"labelFontSize\"\n          [style.lineHeight.px]=\"labelFontSize\"\n          [innerHTML]=\"formattedLabel\">\n        </xhtml:p>\n      </svg:foreignObject>\n      <svg:text #textEl\n        class=\"value-text\"\n        [attr.x]=\"textPadding[3]\"\n        [attr.y]=\"textPadding[0]\"\n        [style.fill]=\"textColor\"\n        text-anchor=\"start\"\n        alignment-baseline=\"hanging\"\n        [style.font-size.pt]=\"textFontSize\">\n        {{value}}\n      </svg:text>\n    </svg:g>\n  ",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    CardComponent.ctorParameters = function () { return [
-        { type: ElementRef, },
-        { type: ChangeDetectorRef, },
-        { type: NgZone, },
-    ]; };
-    CardComponent.propDecorators = {
-        'color': [{ type: Input },],
-        'bandColor': [{ type: Input },],
-        'textColor': [{ type: Input },],
-        'x': [{ type: Input },],
-        'y': [{ type: Input },],
-        'width': [{ type: Input },],
-        'height': [{ type: Input },],
-        'label': [{ type: Input },],
-        'data': [{ type: Input },],
-        'medianSize': [{ type: Input },],
-        'valueFormatting': [{ type: Input },],
-        'labelFormatting': [{ type: Input },],
-        'animations': [{ type: Input },],
-        'select': [{ type: Output },],
-        'textEl': [{ type: ViewChild, args: ['textEl',] },],
-    };
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], CardComponent.prototype, "color", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], CardComponent.prototype, "bandColor", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], CardComponent.prototype, "textColor", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], CardComponent.prototype, "x", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], CardComponent.prototype, "y", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], CardComponent.prototype, "width", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], CardComponent.prototype, "height", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], CardComponent.prototype, "label", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], CardComponent.prototype, "data", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Number)
+    ], CardComponent.prototype, "medianSize", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], CardComponent.prototype, "valueFormatting", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], CardComponent.prototype, "labelFormatting", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], CardComponent.prototype, "animations", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], CardComponent.prototype, "select", void 0);
+    __decorate([
+        ViewChild('textEl'),
+        __metadata("design:type", ElementRef)
+    ], CardComponent.prototype, "textEl", void 0);
+    CardComponent = __decorate([
+        Component({
+            selector: 'g[ngx-charts-card]',
+            template: "\n    <svg:g\n      [attr.transform]=\"transform\"\n      class=\"cell\"\n      (click)=\"onClick()\">\n      <svg:rect\n        class=\"card\"\n        [style.fill]=\"color\"\n        [attr.width]=\"cardWidth\"\n        [attr.height]=\"cardHeight\"\n        rx=\"3\"\n        ry=\"3\"\n      />\n      <svg:path\n        *ngIf=\"bandColor && bandColor !== color\"\n        class=\"card-band\"\n        [attr.fill]=\"bandColor\"\n        [attr.transform]=\"transformBand\"\n        stroke=\"none\"\n        [attr.d]=\"bandPath\"\n      />\n      <title>{{label}}</title>\n      <svg:foreignObject\n        class=\"trimmed-label\"\n        x=\"5\"\n        [attr.x]=\"textPadding[3]\"\n        [attr.y]=\"cardHeight - textPadding[2]\"\n        [attr.width]=\"textWidth\"\n        [attr.height]=\"labelFontSize + textPadding[2]\"\n        alignment-baseline=\"hanging\">\n        <xhtml:p\n          [style.color]=\"textColor\"\n          [style.fontSize.px]=\"labelFontSize\"\n          [style.lineHeight.px]=\"labelFontSize\"\n          [innerHTML]=\"formattedLabel\">\n        </xhtml:p>\n      </svg:foreignObject>\n      <svg:text #textEl\n        class=\"value-text\"\n        [attr.x]=\"textPadding[3]\"\n        [attr.y]=\"textPadding[0]\"\n        [style.fill]=\"textColor\"\n        text-anchor=\"start\"\n        alignment-baseline=\"hanging\"\n        [style.font-size.pt]=\"textFontSize\">\n        {{value}}\n      </svg:text>\n    </svg:g>\n  ",
+            changeDetection: ChangeDetectionStrategy.OnPush
+        }),
+        __metadata("design:paramtypes", [ElementRef, ChangeDetectorRef, NgZone])
+    ], CardComponent);
     return CardComponent;
 }());
 export { CardComponent };

@@ -8,7 +8,16 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import { Component, Input, Output, EventEmitter, HostListener, ViewEncapsulation, ChangeDetectionStrategy, ContentChild } from '@angular/core';
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Component, Input, Output, EventEmitter, HostListener, ViewEncapsulation, ChangeDetectionStrategy, ContentChild, TemplateRef } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { scaleLinear } from 'd3-scale';
 import { BaseChartComponent } from '../common/base-chart.component';
@@ -230,57 +239,133 @@ var BubbleChartComponent = /** @class */ (function (_super) {
     BubbleChartComponent.prototype.trackBy = function (index, item) {
         return item.name;
     };
-    BubbleChartComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'ngx-charts-bubble-chart',
-                    template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [activeEntries]=\"activeEntries\"\n      [legendOptions]=\"legendOptions\"\n      [animations]=\"animations\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"bubble-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [showGridLines]=\"showGridLines\"\n          [dims]=\"dims\"\n          [xScale]=\"xScale\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\"/>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [showGridLines]=\"showGridLines\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\"/>\n        <svg:rect\n          class=\"bubble-chart-area\"\n          x=\"0\"\n          y=\"0\"\n          [attr.width]=\"dims.width\"\n          [attr.height]=\"dims.height\"\n          style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n          (mouseenter)=\"deactivateAll()\"\n        />\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of data; trackBy:trackBy\" [@animationState]=\"'active'\">\n            <svg:g ngx-charts-bubble-series\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [rScale]=\"rScale\"\n              [xScaleType]=\"xScaleType\"\n              [yScaleType]=\"yScaleType\"\n              [xAxisLabel]=\"xAxisLabel\"\n              [yAxisLabel]=\"yAxisLabel\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [activeEntries]=\"activeEntries\"\n              [tooltipDisabled]=\"tooltipDisabled\"\n              [tooltipTemplate]=\"tooltipTemplate\"\n              (select)=\"onClick($event, series)\"\n              (activate)=\"onActivate($event)\"\n              (deactivate)=\"onDeactivate($event)\" />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-                    styleUrls: ['../common/base-chart.component.css'],
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    encapsulation: ViewEncapsulation.None,
-                    animations: [
-                        trigger('animationState', [
-                            transition(':leave', [
-                                style({
-                                    opacity: 1,
-                                }),
-                                animate(500, style({
-                                    opacity: 0
-                                }))
-                            ])
-                        ])
-                    ]
-                },] },
-    ];
-    /** @nocollapse */
-    BubbleChartComponent.ctorParameters = function () { return []; };
-    BubbleChartComponent.propDecorators = {
-        'showGridLines': [{ type: Input },],
-        'legend': [{ type: Input },],
-        'legendTitle': [{ type: Input },],
-        'xAxis': [{ type: Input },],
-        'yAxis': [{ type: Input },],
-        'showXAxisLabel': [{ type: Input },],
-        'showYAxisLabel': [{ type: Input },],
-        'xAxisLabel': [{ type: Input },],
-        'yAxisLabel': [{ type: Input },],
-        'xAxisTickFormatting': [{ type: Input },],
-        'yAxisTickFormatting': [{ type: Input },],
-        'roundDomains': [{ type: Input },],
-        'maxRadius': [{ type: Input },],
-        'minRadius': [{ type: Input },],
-        'autoScale': [{ type: Input },],
-        'schemeType': [{ type: Input },],
-        'legendPosition': [{ type: Input },],
-        'tooltipDisabled': [{ type: Input },],
-        'xScaleMin': [{ type: Input },],
-        'xScaleMax': [{ type: Input },],
-        'yScaleMin': [{ type: Input },],
-        'yScaleMax': [{ type: Input },],
-        'activate': [{ type: Output },],
-        'deactivate': [{ type: Output },],
-        'tooltipTemplate': [{ type: ContentChild, args: ['tooltipTemplate',] },],
-        'hideCircles': [{ type: HostListener, args: ['mouseleave',] },],
-    };
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], BubbleChartComponent.prototype, "showGridLines", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], BubbleChartComponent.prototype, "legend", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", String)
+    ], BubbleChartComponent.prototype, "legendTitle", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], BubbleChartComponent.prototype, "xAxis", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], BubbleChartComponent.prototype, "yAxis", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], BubbleChartComponent.prototype, "showXAxisLabel", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], BubbleChartComponent.prototype, "showYAxisLabel", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", String)
+    ], BubbleChartComponent.prototype, "xAxisLabel", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", String)
+    ], BubbleChartComponent.prototype, "yAxisLabel", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], BubbleChartComponent.prototype, "xAxisTickFormatting", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], BubbleChartComponent.prototype, "yAxisTickFormatting", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], BubbleChartComponent.prototype, "roundDomains", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], BubbleChartComponent.prototype, "maxRadius", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], BubbleChartComponent.prototype, "minRadius", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], BubbleChartComponent.prototype, "autoScale", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], BubbleChartComponent.prototype, "schemeType", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", String)
+    ], BubbleChartComponent.prototype, "legendPosition", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], BubbleChartComponent.prototype, "tooltipDisabled", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], BubbleChartComponent.prototype, "xScaleMin", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], BubbleChartComponent.prototype, "xScaleMax", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], BubbleChartComponent.prototype, "yScaleMin", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], BubbleChartComponent.prototype, "yScaleMax", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", EventEmitter)
+    ], BubbleChartComponent.prototype, "activate", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", EventEmitter)
+    ], BubbleChartComponent.prototype, "deactivate", void 0);
+    __decorate([
+        ContentChild('tooltipTemplate'),
+        __metadata("design:type", TemplateRef)
+    ], BubbleChartComponent.prototype, "tooltipTemplate", void 0);
+    __decorate([
+        HostListener('mouseleave'),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], BubbleChartComponent.prototype, "hideCircles", null);
+    BubbleChartComponent = __decorate([
+        Component({
+            selector: 'ngx-charts-bubble-chart',
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [activeEntries]=\"activeEntries\"\n      [legendOptions]=\"legendOptions\"\n      [animations]=\"animations\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"bubble-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [showGridLines]=\"showGridLines\"\n          [dims]=\"dims\"\n          [xScale]=\"xScale\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\"/>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [showGridLines]=\"showGridLines\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\"/>\n        <svg:rect\n          class=\"bubble-chart-area\"\n          x=\"0\"\n          y=\"0\"\n          [attr.width]=\"dims.width\"\n          [attr.height]=\"dims.height\"\n          style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n          (mouseenter)=\"deactivateAll()\"\n        />\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of data; trackBy:trackBy\" [@animationState]=\"'active'\">\n            <svg:g ngx-charts-bubble-series\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [rScale]=\"rScale\"\n              [xScaleType]=\"xScaleType\"\n              [yScaleType]=\"yScaleType\"\n              [xAxisLabel]=\"xAxisLabel\"\n              [yAxisLabel]=\"yAxisLabel\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [activeEntries]=\"activeEntries\"\n              [tooltipDisabled]=\"tooltipDisabled\"\n              [tooltipTemplate]=\"tooltipTemplate\"\n              (select)=\"onClick($event, series)\"\n              (activate)=\"onActivate($event)\"\n              (deactivate)=\"onDeactivate($event)\" />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            styleUrls: ['../common/base-chart.component.css'],
+            changeDetection: ChangeDetectionStrategy.OnPush,
+            encapsulation: ViewEncapsulation.None,
+            animations: [
+                trigger('animationState', [
+                    transition(':leave', [
+                        style({
+                            opacity: 1,
+                        }),
+                        animate(500, style({
+                            opacity: 0
+                        }))
+                    ])
+                ])
+            ]
+        })
+    ], BubbleChartComponent);
     return BubbleChartComponent;
 }(BaseChartComponent));
 export { BubbleChartComponent };
