@@ -1,5 +1,11 @@
 # Changelog
 
+## 7.0.0
+- Breaking: Added support for angular 5 (#633)
+- Bug: Fixed 'ReferenceError: SVGElement is not defined' exception when using with angular universal (#587)
+- Bug: Fixed NaN issue on Advanced Pie Chart (#597)
+- Bug: Changed onDeactivate in the gauge component to emit the correct value instead of the event value from the global scope (#613)
+
 ## 6.1.0
 - Feature: Added inputs to control minimum and maximum values on the axes (#582, #359)
 - Feature: Added input to enable/disable animations (#565)
