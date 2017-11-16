@@ -78,7 +78,6 @@
     "@angular/core": "5.x",
     "@angular/animations": "5.x",
     "@angular/platform-browser": "5.x",
-    "d3": ">= 4.9.x",
     "rxjs": "5.x"
   },
   "devDependencies": {
