@@ -40,6 +40,7 @@
   },
   "angularCompilerOptions": {
     "genDir": "release/",
-    "skipTemplateCodegen": true
+    "skipTemplateCodegen": true,
+    "annotationsAs": "decorators"
   }
 }
