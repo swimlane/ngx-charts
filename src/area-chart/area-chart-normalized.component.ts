@@ -231,7 +231,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
       let d0 = 0;
 
       let total = 0;
-      for (const group of this.results){
+      for (const group of this.results) {
         const d = group.series.find(item => {
           let a = item.name;
           let b = val;
@@ -246,7 +246,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
         }
       }
 
-      for (const group of this.results){
+      for (const group of this.results) {
         let d = group.series.find(item => {
           let a = item.name;
           let b = val;

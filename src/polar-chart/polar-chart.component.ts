@@ -298,7 +298,7 @@ export class PolarChartComponent extends BaseChartComponent {
   getXValues(): any[] {
     const values = [];
     for (const results of this.results) {
-      for (const d of results.series){
+      for (const d of results.series) {
         if (!values.includes(d.name)) {
           values.push(d.name);
         }
@@ -325,7 +325,7 @@ export class PolarChartComponent extends BaseChartComponent {
     const domain = [];
 
     for (const results of this.results) {
-      for (const d of results.series){
+      for (const d of results.series) {
         if (domain.indexOf(d.value) < 0) {
           domain.push(d.value);
         }
