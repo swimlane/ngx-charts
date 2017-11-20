@@ -1,5 +1,5 @@
 /**
- * ngx-charts v"7.0.0" (https://github.com/swimlane/ngx-charts)
+ * ngx-charts v"7.0.1" (https://github.com/swimlane/ngx-charts)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -13886,7 +13886,6 @@ var LineComponent = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NgxChartsModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__polyfills__ = __webpack_require__("./src/polyfills.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__polyfills___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__polyfills__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("@angular/core");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__angular_core__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_chart_common_module__ = __webpack_require__("./src/common/chart-common.module.ts");
@@ -16603,13 +16602,19 @@ var PolarSeriesComponent = /** @class */ (function () {
 /***/ }),
 
 /***/ "./src/polyfills.ts":
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-// IE11 fix
-// Ref: https://github.com/swimlane/ngx-charts/issues/386
-if (typeof (SVGElement) !== 'undefined' && typeof SVGElement.prototype.contains === 'undefined') {
-    SVGElement.prototype.contains = HTMLDivElement.prototype.contains;
+"use strict";
+/* unused harmony export ngxChartsPolyfills */
+// The export is needed here to generate a valid polyfills.metadata.json file
+function ngxChartsPolyfills() {
+    // IE11 fix
+    // Ref: https://github.com/swimlane/ngx-charts/issues/386
+    if (typeof (SVGElement) !== 'undefined' && typeof SVGElement.prototype.contains === 'undefined') {
+        SVGElement.prototype.contains = HTMLDivElement.prototype.contains;
+    }
 }
+ngxChartsPolyfills();
 
 
 /***/ }),
