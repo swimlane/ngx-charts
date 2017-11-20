@@ -1,5 +1,8 @@
 # Changelog
 
+## 7.0.1
+- Fix: Export polyfills to fix AoT build issue with Angular 5 (#644)
+
 ## 7.0.0
 - Breaking: Added support for angular 5 (#633)
 - Bug: Fixed 'ReferenceError: SVGElement is not defined' exception when using with angular universal (#587)
