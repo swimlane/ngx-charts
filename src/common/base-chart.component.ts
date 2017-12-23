@@ -3,7 +3,6 @@ import {
   Output, EventEmitter, AfterViewInit, OnDestroy, OnChanges, SimpleChanges
 } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
 import { fromEvent as observableFromEvent } from 'rxjs/observable/fromEvent';
 import { debounceTime } from 'rxjs/operators/debounceTime';
 
