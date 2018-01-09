@@ -25,7 +25,7 @@ import { id } from '../utils/id';
     </svg:defs>
     <svg:path
       class="bar"
-      stroke="none"
+      stroke="white"
       [class.active]="isActive"
       [attr.d]="path"
       [attr.fill]="hasGradient ? gradientFill : fill"
