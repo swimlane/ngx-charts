@@ -25,7 +25,7 @@ import { id } from '../utils/id';
     </svg:defs>
     <svg:path
       class="bar"
-      stroke="none"
+      [attr.stroke]="strokeColor"
       [class.active]="isActive"
       [attr.d]="path"
       [attr.fill]="hasGradient ? gradientFill : fill"
@@ -49,6 +49,7 @@ export class BarComponent implements OnChanges {
   @Input() isActive: boolean = false;
   @Input() stops: any[];
   @Input() animations: boolean = true;
+  @Input() strokeColor: string = 'none';
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();

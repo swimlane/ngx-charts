@@ -27,6 +27,7 @@ import { formatLabel } from '../common/label.helper';
       [x]="bar.x"
       [y]="bar.y"
       [fill]="bar.color"
+      [strokeColor]="strokeColor"
       [stops]="bar.gradientStops"
       [data]="bar.data"
       [orientation]="'horizontal'"
@@ -76,6 +77,7 @@ export class SeriesHorizontal implements OnChanges {
   @Input() tooltipTemplate: TemplateRef<any>;
   @Input() roundEdges: boolean;
   @Input() animations: boolean = true;
+  @Input() strokeColor: string = 'none';
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
