@@ -48,8 +48,5 @@ To use ngx-charts in your project install it via [npm](https://www.npmjs.com/pac
 npm i @swimlane/ngx-charts --save
 ```
 
-**Note: ngx-charts 5.0.0 works only with Angular 4.x. 
-To use ngx-charts with Angular 2.x, use ngx-charts 4.x.**
-
 ## Credits
 `ngx-charts` is a [Swimlane](http://swimlane.com) open-source project; we believe in giving back to the open-source community by sharing some of the projects we build for our application. Swimlane is an automated cyber security operations and incident response platform that enables cyber security teams to leverage threat intelligence, speed up incident response and automate security operations.
