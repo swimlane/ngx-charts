@@ -62,6 +62,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
             [yScale]="yScale"
             [activeEntries]="activeEntries"
             [colors]="colors"
+            [strokeColor]="strokeColor"
             [series]="group.series"
             [dims]="dims"
             [gradient]="gradient"
@@ -111,6 +112,7 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
   @Input() yAxisTickFormatting: any;
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
+  @Input() strokeColor: string = 'none';
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

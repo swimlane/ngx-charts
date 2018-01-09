@@ -22,6 +22,7 @@ export declare class BarHorizontalComponent extends BaseChartComponent {
     roundDomains: boolean;
     roundEdges: boolean;
     xScaleMax: number;
+    strokeColor: string;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     tooltipTemplate: TemplateRef<any>;

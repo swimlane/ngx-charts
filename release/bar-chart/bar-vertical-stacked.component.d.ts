@@ -21,6 +21,7 @@ export declare class BarVerticalStackedComponent extends BaseChartComponent {
     barPadding: number;
     roundDomains: boolean;
     yScaleMax: number;
+    strokeColor: string;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     tooltipTemplate: TemplateRef<any>;

@@ -67,6 +67,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [xScale]="innerScale"
           [yScale]="valueScale"
           [colors]="colors"
+          [strokeColor]="strokeColor"
           [series]="group.series"
           [dims]="dims"
           [gradient]="gradient"
@@ -120,6 +121,7 @@ export class BarVertical2DComponent extends BaseChartComponent {
   @Input() roundDomains: boolean = false;
   @Input() roundEdges: boolean = true;
   @Input() yScaleMax: number;
+  @Input() strokeColor: string = 'none';
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

@@ -13,6 +13,7 @@ export declare class SeriesVerticalComponent implements OnChanges {
     tooltipTemplate: TemplateRef<any>;
     roundEdges: boolean;
     animations: boolean;
+    strokeColor: string;
     select: EventEmitter<{}>;
     activate: EventEmitter<{}>;
     deactivate: EventEmitter<{}>;

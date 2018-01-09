@@ -62,6 +62,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
             [xScale]="xScale"
             [yScale]="yScale"
             [colors]="colors"
+            [strokeColor]="strokeColor"
             [series]="group.series"
             [activeEntries]="activeEntries"
             [dims]="dims"
@@ -113,6 +114,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
   @Input() xScaleMax: number;
+  @Input() strokeColor: string = 'none';
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
