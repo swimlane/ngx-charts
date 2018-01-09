@@ -1,5 +1,5 @@
 {
-  "name": "@swimlane/ngx-charts",
+  "name": "@menzie2/ngx-charts",
   "version": "7.0.1",
   "description": "Declarative Charting Framework for Angular2 and beyond!",
   "main": "release/index.js",
@@ -41,7 +41,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/swimlane/ngx-charts.git"
+    "url": "git+https://github.com/menzie2/ngx-charts.git"
   },
   "keywords": [
     "angular",
@@ -70,9 +70,9 @@
     "release"
   ],
   "bugs": {
-    "url": "https://github.com/swimlane/ngx-charts/issues"
+    "url": "https://github.com/menzie2/ngx-charts/issues"
   },
-  "homepage": "https://github.com/swimlane/ngx-charts#readme",
+  "homepage": "https://github.com/menzie2/ngx-charts#readme",
   "peerDependencies": {
     "@angular/common": "5.x",
     "@angular/core": "5.x",
