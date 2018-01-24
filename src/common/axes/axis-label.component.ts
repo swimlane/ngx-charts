@@ -12,7 +12,6 @@ import {
   template: `
     <svg:text
       [attr.stroke-width]="strokeWidth"
-      [attr.text-anchor]="textAnchor"
       [attr.x]="x"
       [attr.y]="y"
       [attr.text-anchor]="textAnchor"
