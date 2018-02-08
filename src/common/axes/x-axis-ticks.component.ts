@@ -98,7 +98,9 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
 
   update(): void {
     const scale = this.scale;
-    this.tickValues = this.xAxisTicks;
+    if (this.xAxisTicks !== undefined) {
+      this.tickValues = this.xAxisTicks;
+    }
     this.ticks = this.getTicks();
 
     if (this.tickFormatting) {
