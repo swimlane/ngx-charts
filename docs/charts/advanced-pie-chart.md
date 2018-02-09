@@ -17,6 +17,9 @@
 | label           | string      | 'Total'       | the text to show under the total value                                                                          |
 | tooltipDisabled | boolean     | false         | show or hide the tooltip                                                                                        |
 | tooltipTemplate | TemplateRef |               | a custom ng-template to be displayed inside the tooltip                                                         |
+| valueFormatting | function    |               | function that formats the numerical value in the chart legend                                                   |
+| nameFormatting  | function    |               | function that formats name in the chart legend                                                                  |
+| percentageFormatting | function |             | function that formats the percentage number in the chart legend                                                 |
 
 # Outputs
 

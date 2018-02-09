@@ -1,12 +1,12 @@
 import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
   ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
   SimpleChanges,
-  ViewEncapsulation,
-  OnChanges
+  ViewEncapsulation
 } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
 import { formatLabel } from '../label.helper';
@@ -85,6 +85,10 @@ export class AdvancedLegendComponent implements OnChanges  {
   total: number;
   roundedTotal: number;
 
+  @Input() valueFormatting: (value: number) => any = value => value;
+  @Input() labelFormatting: (value: string) => any = label => label;
+  @Input() percentageFormatting: (value: number) => any = percentage => percentage;
+
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
@@ -106,15 +110,15 @@ export class AdvancedLegendComponent implements OnChanges  {
     return this.data.map((d, index) => {
       const label = formatLabel(d.name);
       const value = d.value;
-      const percentage = (this.total > 0) ? value / this.total * 100 : 0;
       const color = this.colors.getColor(label);
+      const percentage = (this.total > 0) ? value / this.total * 100 : 0;
 
       return {
-        value,
+        value: this.valueFormatting(value),
         color,
-        label: trimLabel(label, 20),
+        label: trimLabel(this.labelFormatting(label), 20),
         originalLabel: d.name,
-        percentage
+        percentage: this.percentageFormatting(percentage)
       };
     });
   }

@@ -1,12 +1,12 @@
 import {
+  ChangeDetectionStrategy,
   Component,
+  ContentChild,
+  EventEmitter,
   Input,
   Output,
-  EventEmitter,
-  ChangeDetectionStrategy,
-  ViewEncapsulation,
-  ContentChild,
-  TemplateRef
+  TemplateRef,
+  ViewEncapsulation
 } from '@angular/core';
 
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
@@ -55,6 +55,9 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [width]="width - dims.width - margin[1]"
           [label]="label"
           [animations]="animations"
+          [valueFormatting]="valueFormatting"
+          [labelFormatting]="nameFormatting"
+          [percentageFormatting]="percentageFormatting"
           (select)="onClick($event)"
           (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)">
@@ -91,6 +94,10 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
   colors: ColorHelper;
   legendWidth: number;
   margin = [20, 20, 20, 20];
+
+  @Input() valueFormatting: (value: number) => any = value => value;
+  @Input() nameFormatting: (value: string) => any = label => label;
+  @Input() percentageFormatting: (value: number) => any = percentage => percentage;
 
   update(): void {
     super.update();
