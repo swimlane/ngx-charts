@@ -80,7 +80,7 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
   @Input() type = 'standard';
   @Input() xScale;
   @Input() yScale;
-  @Input() colors;
+  @Input() colors: ColorHelper;
   @Input() scaleType;
   @Input() visibleValue;
   @Input() activeEntries: any[];
