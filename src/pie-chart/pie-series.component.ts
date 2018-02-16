@@ -23,6 +23,8 @@ import { formatLabel } from '../common/label.helper';
         [radius]="outerRadius"
         [color]="color(arc)"
         [label]="labelText(arc)"
+        [labelTrim]="trimLabels"
+        [labelTrimSize]="maxLabelLength"
         [max]="max"
         [value]="arc.value"
         [explodeSlices]="explodeSlices"
@@ -69,6 +71,8 @@ export class PieSeriesComponent implements OnChanges {
   @Input() gradient: boolean;
   @Input() activeEntries: any[];
   @Input() labelFormatting: any;
+  @Input() trimLabels: boolean = true;
+  @Input() maxLabelLength: number = 10;
   @Input() tooltipText: (o: any) => any;
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipTemplate: TemplateRef<any>;
