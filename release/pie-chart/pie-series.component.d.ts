@@ -10,6 +10,8 @@ export declare class PieSeriesComponent implements OnChanges {
     gradient: boolean;
     activeEntries: any[];
     labelFormatting: any;
+    trimLabels: boolean;
+    maxLabelLength: number;
     tooltipText: (o: any) => any;
     tooltipDisabled: boolean;
     tooltipTemplate: TemplateRef<any>;

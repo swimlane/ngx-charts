@@ -58,7 +58,7 @@ var TooltipArea = /** @class */ (function () {
         return results;
     };
     TooltipArea.prototype.mouseMove = function (event) {
-        var xPos = event.offsetX - this.dims.xOffset;
+        var xPos = event.pageX - event.target.getBoundingClientRect().left;
         var closestIndex = this.findClosestPointIndex(xPos);
         var closestPoint = this.xSet[closestIndex];
         this.anchorPos = this.xScale(closestPoint);

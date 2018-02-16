@@ -1,10 +1,11 @@
 import { SimpleChanges, EventEmitter, OnChanges, OnInit, TemplateRef } from '@angular/core';
+import { ColorHelper } from '.';
 export declare class CircleSeriesComponent implements OnChanges, OnInit {
     data: any;
     type: string;
     xScale: any;
     yScale: any;
-    colors: any;
+    colors: ColorHelper;
     scaleType: any;
     visibleValue: any;
     activeEntries: any[];

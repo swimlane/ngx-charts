@@ -1,5 +1,16 @@
 # Changelog
 
+## 7.1.0
+- Feature: Added support for passing a function to the `customColors` input to all charts. (#676, #713)
+- Feature: Added `trimLabels` and `maxLabelLength` inputs to pie chart (#716)
+- Feature: Added inputs for formatting the name, value, and percentage in advanced pie chart (#719)
+- Enhancement: Switched to using lettable rxjs operators (#683)
+- Enhancement: Allow using the timeline for linear x scales (#624)
+- Bug: Fixed line/area tooltip positioning in firefox (#671)
+- Bug: Removed duplicate input declaration (#708)
+- Bug: Fixed duplicate % sign in pie grid charts when animations are disabled (#685)
+
+
 ## 7.0.1
 - Fix: Export polyfills to fix AoT build issue with Angular 5 (#644)
 

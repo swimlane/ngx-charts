@@ -1,4 +1,4 @@
-import { EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
+import { EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 export declare class AdvancedLegendComponent implements OnChanges {
     width: number;
     data: any;
@@ -11,6 +11,9 @@ export declare class AdvancedLegendComponent implements OnChanges {
     legendItems: any[];
     total: number;
     roundedTotal: number;
+    valueFormatting: (value: number) => any;
+    labelFormatting: (value: string) => any;
+    percentageFormatting: (value: number) => any;
     ngOnChanges(changes: SimpleChanges): void;
     getTotal(): number;
     update(): void;
