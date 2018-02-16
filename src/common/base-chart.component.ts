@@ -3,9 +3,9 @@ import {
   Output, EventEmitter, AfterViewInit, OnDestroy, OnChanges, SimpleChanges
 } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/operator/debounceTime';
+import { fromEvent as observableFromEvent } from 'rxjs/observable/fromEvent';
+import { debounceTime } from 'rxjs/operators/debounceTime';
+
 import { VisibilityObserver } from '../utils';
 
 @Component({
@@ -136,8 +136,8 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   private bindWindowResizeEvent(): void {
-    const source = Observable.fromEvent(window, 'resize', null, null);
-    const subscription = source.debounceTime(200).subscribe(e => {
+    const source = observableFromEvent(window, 'resize', null, null);
+    const subscription = source.pipe(debounceTime(200)).subscribe(e => {
       this.update();
       if (this.cd) {
         this.cd.markForCheck();

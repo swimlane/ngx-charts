@@ -1,6 +1,6 @@
 # Vertical Bar Chart
 
-<iframe width="100%" height="550" frameborder="0" src="https://embed.plnkr.co/IPhMUjOHEhzncDzxRgRm?show=preview">
+<iframe width="100%" height="550" frameborder="0" src="https://stackblitz.com/edit/vertical-bar-chart?embed=1&file=app/app.component.ts">
 </iframe>
 
 # Inputs

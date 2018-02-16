@@ -20,7 +20,7 @@ import {
   transition
 } from '@angular/animations';
 
-import { 
+import {
   NgxChartsModule, BaseChartComponent, LineComponent, LineSeriesComponent,
   calculateViewDimensions, ViewDimensions, ColorHelper
  } from '../../src';
@@ -319,7 +319,7 @@ export class ComboChartComponent extends BaseChartComponent  {
     let values = [];
 
     for (const results of this.lineChart) {
-      for (const d of results.series){
+      for (const d of results.series) {
         if (!values.includes(d.name)) {
           values.push(d.name);
         }
@@ -350,7 +350,7 @@ export class ComboChartComponent extends BaseChartComponent  {
     const domain = [];
 
     for (const results of this.lineChart) {
-      for (const d of results.series){
+      for (const d of results.series) {
         if (domain.indexOf(d.value) < 0) {
           domain.push(d.value);
         }

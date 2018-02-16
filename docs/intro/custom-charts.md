@@ -7,3 +7,10 @@ You can find an example of how to use these components to build a custom chart h
 The demo of the above combo-chart can be seen here: https://swimlane.github.io/ngx-charts/#/ngx-charts/combo-chart
 
 The charts under the 'Demos' group in our demo page are not distributed with the library. However, their code is available and can be copied directly into your project. We encourage you to submit a pull request for your custom charts to be listed in our 'Demos' section, because they may help other people that have the same use case as you.
+
+## Custom Chart Index
+* [Bar/Line Combo Chart](https://github.com/swimlane/ngx-charts/tree/master/demo/combo-chart)
+* [Sparkline](https://github.com/swimlane/ngx-charts/tree/master/demo/sparkline)
+* [Timeline filter bar chart](https://github.com/swimlane/ngx-charts/tree/master/demo/timeline-filter-bar-chart)
+
+*If you want to have your custom chart featured above, please submit a pull request to [this file](https://github.com/swimlane/ngx-charts/blob/master/docs/intro/custom-charts.md).*

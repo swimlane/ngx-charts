@@ -17,6 +17,7 @@ import {
 } from '@angular/animations';
 import { formatLabel } from '../common/label.helper';
 import { id } from '../utils/id';
+import { ColorHelper } from '.';
 
 @Component({
   selector: 'g[ngx-charts-circle-series]',
@@ -80,7 +81,7 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
   @Input() type = 'standard';
   @Input() xScale;
   @Input() yScale;
-  @Input() colors;
+  @Input() colors: ColorHelper;
   @Input() scaleType;
   @Input() visibleValue;
   @Input() activeEntries: any[];

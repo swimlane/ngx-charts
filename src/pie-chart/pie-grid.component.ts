@@ -59,7 +59,7 @@ import { formatLabel } from '../common/label.helper';
             x="0"
             y="5"
             text-anchor="middle">
-            {{series.percent.toLocaleString()}}%
+            {{series.percent.toLocaleString()}}
           </svg:text>
           <svg:text
             class="label"
