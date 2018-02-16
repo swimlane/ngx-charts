@@ -19,6 +19,7 @@ import { formatLabel } from '../label.helper';
       <div
         *ngIf="animations"
         class="total-value"
+        [valueFormatting]="valueFormatting" 
         ngx-charts-count-up
         [countTo]="roundedTotal">
       </div>
@@ -41,9 +42,10 @@ import { formatLabel } from '../label.helper';
               class="item-color"
               [style.background]="legendItem.color">
             </div>
-            <div *ngIf="animations"
-              class="item-value"
-              ngx-charts-count-up
+            <div *ngIf="animations" 
+              class="item-value" 
+              [valueFormatting]="valueFormatting" 
+              ngx-charts-count-up 
               [countTo]="legendItem.value">
             </div>
             <div *ngIf="!animations" class="item-value">
@@ -76,6 +78,7 @@ export class AdvancedLegendComponent implements OnChanges  {
   @Input() colors;
   @Input() label: string = 'Total';
   @Input() animations: boolean = true;
+  @Input() valueFormatting: any;
 
   @Output() select: EventEmitter<any> = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();
