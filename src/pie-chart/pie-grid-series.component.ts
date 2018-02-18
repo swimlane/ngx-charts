@@ -23,7 +23,6 @@ import { pie } from 'd3-shape';
         [fill]="color(arc)"
         [value]="arc.data.value"
         [data]="arc.data"
-        [max]="max"
         [gradient]="false"
         [pointerEvents]="arc.pointerEvents"
         [animate]="arc.animate"
