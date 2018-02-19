@@ -77,7 +77,7 @@ import { formatLabel } from '../common/label.helper';
             text-anchor="middle"
             ngx-charts-count-up
             [countTo]="series.total"
-            [countPrefix]="'Total: '">
+            [countPrefix]="label + ': '">
           </svg:text>
           <svg:text *ngIf="!animations"
             class="label"
@@ -102,6 +102,7 @@ export class PieGridComponent extends BaseChartComponent {
   @Input() designatedTotal: number;
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipText: (o: any) => any;
+  @Input() label: string = 'Total';
   
   dims: ViewDimensions;
   data: any[];
