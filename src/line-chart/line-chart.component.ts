@@ -46,7 +46,6 @@ import { id } from '../utils/id';
       <svg:g [attr.transform]="transform" class="line-chart chart">
         <svg:g ngx-charts-x-axis
           *ngIf="xAxis"
-          [xAxisTicks]="xAxisTicks"
           [xScale]="xScale"
           [dims]="dims"
           [showGridLines]="showGridLines"
@@ -177,7 +176,6 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() schemeType: string;
   @Input() rangeFillOpacity: number;
   @Input() xAxisTickFormatting: any;
-  @Input() xAxisTicks: any[];
   @Input() yAxisTickFormatting: any;
   @Input() roundDomains: boolean = false;
   @Input() tooltipDisabled: boolean = false;
