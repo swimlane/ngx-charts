@@ -98,6 +98,14 @@ var TooltipContentComponent = /** @class */ (function () {
         __metadata("design:type", String)
     ], TooltipContentComponent.prototype, "title", void 0);
     __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], TooltipContentComponent.prototype, "template", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], TooltipContentComponent.prototype, "context", void 0);
+    __decorate([
         ViewChild('caretElm'),
         __metadata("design:type", Object)
     ], TooltipContentComponent.prototype, "caretElm", void 0);

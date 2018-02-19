@@ -1,5 +1,8 @@
 # Changelog
 
+## 7.1.1
+- Bug: Fixed template compile errors with fullTemplateTypeCheck (#730)
+
 ## 7.1.0
 - Feature: Added support for passing a function to the `customColors` input to all charts. (#676, #713)
 - Feature: Added `trimLabels` and `maxLabelLength` inputs to pie chart (#716)

@@ -13,6 +13,8 @@ export declare class TooltipContentComponent implements AfterViewInit {
     spacing: number;
     cssClass: string;
     title: string;
+    template: any;
+    context: any;
     caretElm: any;
     readonly cssClasses: string;
     constructor(element: ElementRef, renderer: Renderer);
