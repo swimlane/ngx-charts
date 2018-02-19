@@ -92,7 +92,7 @@ export class SparklineComponent extends BaseChartComponent {
     let values = [];
 
     for (const results of this.results) {
-      for (const d of results.series){
+      for (const d of results.series) {
         if (!values.includes(d.name)) {
           values.push(d.name);
         }
@@ -127,7 +127,7 @@ export class SparklineComponent extends BaseChartComponent {
     const domain = [];
 
     for (const results of this.results) {
-      for (const d of results.series){
+      for (const d of results.series) {
         if (domain.indexOf(d.value) < 0) {
           domain.push(d.value);
         }

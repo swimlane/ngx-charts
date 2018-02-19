@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
 import { formatLabel } from '../label.helper';
 var AdvancedLegendComponent = /** @class */ (function () {
@@ -18,6 +18,9 @@ var AdvancedLegendComponent = /** @class */ (function () {
         this.activate = new EventEmitter();
         this.deactivate = new EventEmitter();
         this.legendItems = [];
+        this.valueFormatting = function (value) { return value; };
+        this.labelFormatting = function (label) { return label; };
+        this.percentageFormatting = function (percentage) { return percentage; };
     }
     AdvancedLegendComponent.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -37,14 +40,14 @@ var AdvancedLegendComponent = /** @class */ (function () {
         return this.data.map(function (d, index) {
             var label = formatLabel(d.name);
             var value = d.value;
-            var percentage = (_this.total > 0) ? value / _this.total * 100 : 0;
             var color = _this.colors.getColor(label);
+            var percentage = (_this.total > 0) ? value / _this.total * 100 : 0;
             return {
-                value: value,
+                value: _this.valueFormatting(value),
                 color: color,
-                label: trimLabel(label, 20),
+                label: trimLabel(_this.labelFormatting(label), 20),
                 originalLabel: d.name,
-                percentage: percentage
+                percentage: _this.percentageFormatting(percentage)
             };
         });
     };
@@ -83,6 +86,18 @@ var AdvancedLegendComponent = /** @class */ (function () {
         Output(),
         __metadata("design:type", EventEmitter)
     ], AdvancedLegendComponent.prototype, "deactivate", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Function)
+    ], AdvancedLegendComponent.prototype, "valueFormatting", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Function)
+    ], AdvancedLegendComponent.prototype, "labelFormatting", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Function)
+    ], AdvancedLegendComponent.prototype, "percentageFormatting", void 0);
     AdvancedLegendComponent = __decorate([
         Component({
             selector: 'ngx-charts-advanced-legend',

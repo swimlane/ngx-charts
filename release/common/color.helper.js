@@ -53,6 +53,9 @@ var ColorHelper = /** @class */ (function () {
             return (this.scale(valueScale(value)));
         }
         else {
+            if (typeof this.customColors === 'function') {
+                return this.customColors(value);
+            }
             var formattedValue_1 = value.toString();
             var found = void 0; // todo type customColors
             if (this.customColors && this.customColors.length > 0) {

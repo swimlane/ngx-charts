@@ -6,7 +6,7 @@
 # Inputs
 
 | Property        | Type        | Default Value | Description                                                                                                     |
-|:----------------|:------------|:--------------|:----------------------------------------------------------------------------------------------------------------|
+|-----------------|-------------|---------------|-----------------------------------------------------------------------------------------------------------------|
 | view            | number[]    |               | the dimensions of the chart [width, height]. If left undefined, the chart will fit to the parent container size |
 | results         | object[]    |               | the chart data                                                                                                  |
 | scheme          | object      |               | the color scheme of the chart                                                                                   |
@@ -14,6 +14,8 @@
 | animations      | boolean     | true          | enable animations                                                                                               |
 | labels          | boolean     | false         | show or hide the labels                                                                                         |
 | labelFormatting | function    |               | function that formats the label text                                                                            |
+| trimLabels      | boolean     | true          | trim the labels beyond a certain maximum length                                                                 |
+| maxLabelLength  | number      | 10            | maximum length of the labels. If `trimLabels` is `true`, labels over this length will be trimmed                |
 | legend          | boolean     | false         | show or hide the legend                                                                                         |
 | legendTitle     | string      | 'Legend'      | the legend title                                                                                                |
 | explodeSlices   | boolean     | false         | make the radius of each slice proportional to it's value                                                        |
@@ -28,7 +30,7 @@
 # Outputs
 
 | Property   | Description                              |
-|:-----------|:-----------------------------------------|
+|------------|------------------------------------------|
 | select     | click event                              |
 | activate   | element activation event (mouse enter)   |
 | deactivate | element deactivation event (mouse leave) |

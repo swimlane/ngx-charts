@@ -23,7 +23,7 @@ import { trimLabel } from '../common/trim-label.helper';
         dy=".35em"
         [style.textAnchor]="textAnchor()"
         [style.shapeRendering]="'crispEdges'">
-        {{trimLabel(label, 10)}}
+        {{labelTrim ? trimLabel(label, labelTrimSize) : label}}
       </svg:text>
     </svg:g>
     <svg:path
@@ -46,6 +46,8 @@ export class PieLabelComponent implements OnChanges {
   @Input() value;
   @Input() explodeSlices;
   @Input() animations: boolean = true;
+  @Input() labelTrim: boolean = true;
+  @Input() labelTrimSize: number = 10;
 
   trimLabel: (label: string, max?: number) => string;
   line: string;

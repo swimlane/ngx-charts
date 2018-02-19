@@ -11,6 +11,7 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, Templa
 import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel } from '../common/label.helper';
 import { id } from '../utils/id';
+import { ColorHelper } from '.';
 var CircleSeriesComponent = /** @class */ (function () {
     function CircleSeriesComponent() {
         this.type = 'standard';
@@ -179,7 +180,7 @@ var CircleSeriesComponent = /** @class */ (function () {
     ], CircleSeriesComponent.prototype, "yScale", void 0);
     __decorate([
         Input(),
-        __metadata("design:type", Object)
+        __metadata("design:type", ColorHelper)
     ], CircleSeriesComponent.prototype, "colors", void 0);
     __decorate([
         Input(),
