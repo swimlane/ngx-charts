@@ -294,13 +294,19 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   }
 
   updateYAxisWidth({ width }): void {
-    this.yAxisWidth = width;
-    this.update();
+    width = width | 0;
+    if (Math.abs(this.yAxisWidth - width) > 2) {
+      this.yAxisWidth = width;
+      this.update();
+    }
   }
 
   updateXAxisHeight({ height }): void {
-    this.xAxisHeight = height;
-    this.update();
+    height = height | 0;
+    if (Math.abs(this.xAxisHeight - height) > 2) {
+      this.xAxisHeight = height;
+      this.update();
+    }
   }
 
   onActivate(event, group?) {
