@@ -171,7 +171,6 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
         domain.push(group.name);
       }
     }
-
     return domain;
   }
 
@@ -184,20 +183,30 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
         }
       }
     }
-
     return domain;
   }
 
   getValueDomain() {
     const domain = [];
+    let smallest = 0;
+    let biggest = 0;
     for (const group of this.results) {
-      let sum = 0;
+      let smallestSum = 0;
+      let biggestSum = 0;
       for (const d of group.series) {
-        sum += d.value;
+        if (d.value < 0) {
+          smallestSum += d.value;
+        } else {
+          biggestSum += d.value;
+        }
+        smallest = d.value < smallest ? d.value : smallest;
+        biggest = d.value > biggest ? d.value : biggest;
       }
-
-      domain.push(sum);
+      domain.push(smallestSum);
+      domain.push(biggestSum);
     }
+    domain.push(smallest);
+    domain.push(biggest);
 
     const min = Math.min(0, ...domain);
     const max = this.yScaleMax

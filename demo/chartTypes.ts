@@ -377,7 +377,17 @@ const chartGroups = [
           'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showGridLines',
           'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel'
         ]
-      }
+      },
+      {
+        name: 'Stacked Vertical Bar Chart Negative',
+        selector: 'bar-vertical-stacked-negative',
+        inputFormat: 'multiSeriesNegative',
+        options: [
+          'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
+          'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
+          'showGridLines', 'roundDomains', 'tooltipDisabled', 'yScaleMax'
+        ]
+      },
     ]
   }
 ];
