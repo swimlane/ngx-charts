@@ -7,14 +7,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
-import { trigger, style, animate, transition } from '@angular/animations';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, TemplateRef, } from '@angular/core';
+import { trigger, style, animate, transition, } from '@angular/animations';
 import { formatLabel } from '../common/label.helper';
+export var D0Types;
+(function (D0Types) {
+    D0Types["positive"] = "positive";
+    D0Types["negative"] = "negative";
+})(D0Types || (D0Types = {}));
 var SeriesVerticalComponent = /** @class */ (function () {
     function SeriesVerticalComponent() {
         this.type = 'standard';
         this.tooltipDisabled = false;
         this.animations = true;
+        this.showDataLabel = false;
         this.select = new EventEmitter();
         this.activate = new EventEmitter();
         this.deactivate = new EventEmitter();
@@ -29,7 +35,11 @@ var SeriesVerticalComponent = /** @class */ (function () {
         if (this.series.length) {
             width = this.xScale.bandwidth();
         }
-        var d0 = 0;
+        var d0 = (_a = {},
+            _a[D0Types.positive] = 0,
+            _a[D0Types.negative] = 0,
+            _a);
+        var d0Type = D0Types.positive;
         var total;
         if (this.type === 'normalized') {
             total = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return sum + d; }, 0);
@@ -39,6 +49,7 @@ var SeriesVerticalComponent = /** @class */ (function () {
             var label = d.name;
             var formattedLabel = formatLabel(label);
             var roundEdges = _this.roundEdges;
+            d0Type = value > 0 ? D0Types.positive : D0Types.negative;
             var bar = {
                 value: value,
                 label: label,
@@ -48,7 +59,7 @@ var SeriesVerticalComponent = /** @class */ (function () {
                 formattedLabel: formattedLabel,
                 height: 0,
                 x: 0,
-                y: 0
+                y: 0,
             };
             if (_this.type === 'standard') {
                 bar.height = Math.abs(_this.yScale(value) - _this.yScale(0));
@@ -61,9 +72,9 @@ var SeriesVerticalComponent = /** @class */ (function () {
                 }
             }
             else if (_this.type === 'stacked') {
-                var offset0 = d0;
+                var offset0 = d0[d0Type];
                 var offset1 = offset0 + value;
-                d0 += value;
+                d0[d0Type] += value;
                 bar.height = _this.yScale(offset0) - _this.yScale(offset1);
                 bar.x = 0;
                 bar.y = _this.yScale(offset1);
@@ -71,9 +82,9 @@ var SeriesVerticalComponent = /** @class */ (function () {
                 bar.offset1 = offset1;
             }
             else if (_this.type === 'normalized') {
-                var offset0 = d0;
+                var offset0 = d0[d0Type];
                 var offset1 = offset0 + value;
-                d0 += value;
+                d0[d0Type] += value;
                 if (total > 0) {
                     offset0 = (offset0 * 100) / total;
                     offset1 = (offset1 * 100) / total;
@@ -99,7 +110,8 @@ var SeriesVerticalComponent = /** @class */ (function () {
                 }
                 else {
                     bar.color = _this.colors.getColor(bar.offset1);
-                    bar.gradientStops = _this.colors.getLinearGradientStops(bar.offset1, bar.offset0);
+                    bar.gradientStops =
+                        _this.colors.getLinearGradientStops(bar.offset1, bar.offset0);
                 }
             }
             var tooltipLabel = formattedLabel;
@@ -110,6 +122,28 @@ var SeriesVerticalComponent = /** @class */ (function () {
             bar.tooltipText = _this.tooltipDisabled ? undefined : "\n        <span class=\"tooltip-label\">" + tooltipLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
             return bar;
         });
+        if (this.type === 'stacked') {
+            this.barsForDataLabels = [];
+            var section = {};
+            section.total = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return sum + d; }, 0);
+            section.x = 0;
+            section.y = 0;
+            section.height = this.yScale(section.total);
+            section.width = this.xScale.bandwidth();
+            this.barsForDataLabels.push(section);
+        }
+        else {
+            this.barsForDataLabels = this.series.map(function (d) {
+                var section = {};
+                section.total = d.value;
+                section.x = _this.xScale(d.name);
+                section.y = 0;
+                section.height = Math.abs(_this.yScale(section.total));
+                section.width = _this.xScale.bandwidth();
+                return section;
+            });
+        }
+        var _a;
     };
     SeriesVerticalComponent.prototype.updateTooltipSettings = function () {
         this.tooltipPlacement = this.tooltipDisabled ? undefined : 'top';
@@ -182,6 +216,10 @@ var SeriesVerticalComponent = /** @class */ (function () {
         __metadata("design:type", Boolean)
     ], SeriesVerticalComponent.prototype, "animations", void 0);
     __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], SeriesVerticalComponent.prototype, "showDataLabel", void 0);
+    __decorate([
         Output(),
         __metadata("design:type", Object)
     ], SeriesVerticalComponent.prototype, "select", void 0);
@@ -196,7 +234,7 @@ var SeriesVerticalComponent = /** @class */ (function () {
     SeriesVerticalComponent = __decorate([
         Component({
             selector: 'g[ngx-charts-series-vertical]',
-            template: "\n    <svg:g ngx-charts-bar\n      *ngFor=\"let bar of bars; trackBy: trackBy\"\n      [@animationState]=\"'active'\"\n      [@.disabled]=\"!animations\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [stops]=\"bar.gradientStops\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.data)\"\n      (select)=\"onClick($event)\"\n      (activate)=\"activate.emit($event)\"\n      (deactivate)=\"deactivate.emit($event)\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"tooltipPlacement\"\n      [tooltipType]=\"tooltipType\"\n      [tooltipTitle]=\"tooltipTemplate ? undefined : bar.tooltipText\"\n      [tooltipTemplate]=\"tooltipTemplate\"\n      [tooltipContext]=\"bar.data\"\n      [animations]=\"animations\">\n    </svg:g>\n  ",
+            template: "\n    <svg:g ngx-charts-bar\n      *ngFor=\"let bar of bars; trackBy: trackBy\"\n      [@animationState]=\"'active'\"\n      [@.disabled]=\"!animations\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [stops]=\"bar.gradientStops\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.data)\"\n      (select)=\"onClick($event)\"\n      (activate)=\"activate.emit($event)\"\n      (deactivate)=\"deactivate.emit($event)\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"tooltipPlacement\"\n      [tooltipType]=\"tooltipType\"\n      [tooltipTitle]=\"tooltipTemplate ? undefined : bar.tooltipText\"\n      [tooltipTemplate]=\"tooltipTemplate\"\n      [tooltipContext]=\"bar.data\"\n      [animations]=\"animations\">\n    </svg:g>\n    <svg:g *ngIf=\"showDataLabel\">\n      <svg:g ngx-charts-bar-label *ngFor=\"let b of barsForDataLabels;\"         \n        [barX]=\"b.x\"\n        [barY]=\"b.y\"\n        [barWidth]=\"b.width\"\n        [barHeight]=\"b.height\"\n        [value]=\"b.total\"\n        [orientation]=\"'vertical'\"\n      />\n    </svg:g> \n  ",
             changeDetection: ChangeDetectionStrategy.OnPush,
             animations: [
                 trigger('animationState', [
