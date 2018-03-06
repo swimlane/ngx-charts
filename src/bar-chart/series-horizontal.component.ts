@@ -210,7 +210,7 @@ export class SeriesHorizontal implements OnChanges {
         this.barsForDataLabels = this.series.map(d => {
         const section: any = {};                  
         section.total = d.value;          
-        section.x = 0;
+        section.x = d.value < 0 ? this.xScale(section.total) : this.xScale(0);
         section.y = this.yScale(d.name);
         section.width = Math.abs(this.xScale(section.total) - this.xScale(0));
         section.height = this.yScale.bandwidth();  
