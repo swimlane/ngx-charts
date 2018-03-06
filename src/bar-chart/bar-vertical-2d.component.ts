@@ -72,6 +72,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [gradient]="gradient"
           [tooltipDisabled]="tooltipDisabled"
           [tooltipTemplate]="tooltipTemplate"
+          [showDataLabel]="showDataLabel"
           [seriesName]="group.name"
           [roundEdges]="roundEdges"
           [animations]="animations"
@@ -120,6 +121,7 @@ export class BarVertical2DComponent extends BaseChartComponent {
   @Input() roundDomains: boolean = false;
   @Input() roundEdges: boolean = true;
   @Input() yScaleMax: number;
+  @Input() showDataLabel:boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

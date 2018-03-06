@@ -77,6 +77,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
             [seriesName]="group.name"
             [roundEdges]="roundEdges"
             [animations]="animations"
+            [showDataLabel]="showDataLabel"
             (select)="onClick($event, group)"
             (activate)="onActivate($event, group)"
             (deactivate)="onDeactivate($event, group)"
@@ -122,6 +123,7 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   @Input() roundDomains: boolean = false;
   @Input() roundEdges: boolean = true;
   @Input() xScaleMax: number;
+  @Input() showDataLabel:boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -156,7 +158,8 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
       showXLabel: this.showXAxisLabel,
       showYLabel: this.showYAxisLabel,
       showLegend: this.legend,
-      legendType: this.schemeType
+      legendType: this.schemeType,
+      showDataLabel:this.showDataLabel
     });
 
     this.formatDates();
