@@ -213,7 +213,7 @@ export class SeriesVerticalComponent implements OnChanges {
 
     if (this.type==='stacked') {        
       this.barsForDataLabels =[];          
-      const section: any = {};
+      let section: any = {};
       section.total=this.series.map(d => d.value).reduce((sum, d) => sum + d, 0);  
       section.x=0;
       section.y=0;        
@@ -222,7 +222,7 @@ export class SeriesVerticalComponent implements OnChanges {
       this.barsForDataLabels.push(section);          
   } else {
      this.barsForDataLabels = this.series.map(d =>{
-      const section: any = {};          
+      let section: any = {};          
       section.total=d.value;
       section.x=this.xScale(d.name);
       section.y=0;

@@ -205,7 +205,7 @@ export class SeriesHorizontal implements OnChanges {
    
       if (this.type==='stacked') {        
           this.barsForDataLabels =[];          
-          const section: any = {};      
+          let section: any = {};      
           section.total= this.series.map(d => d.value).reduce((sum, d) => sum + d, 0);  
           section.x=0;
           section.y=0;        
@@ -214,8 +214,8 @@ export class SeriesHorizontal implements OnChanges {
           this.barsForDataLabels.push(section);          
       } else {
          this.barsForDataLabels = this.series.map(d =>{
-          const section: any = {};          
-          section.total= d.value;
+          let section: any = {};                  
+          section.total= d.value;          
           section.x=0;
           section.y=this.yScale(d.name);
           section.width = Math.abs(this.xScale(section.total) - this.xScale(0));

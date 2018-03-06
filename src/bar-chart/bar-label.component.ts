@@ -6,6 +6,7 @@ import {
     ChangeDetectionStrategy
   } from '@angular/core';
   import { trimLabel } from '../common/trim-label.helper';
+import { formatLabel } from '..';
   
   @Component({
     selector: 'g[ngx-charts-bar-label]',
@@ -15,7 +16,7 @@ import {
         alignment-baseline="middle"      
         [attr.x]="x" 
         [attr.y]="y">
-        {{value}}     
+        {{formatedValue}}     
       </svg:text>          
   
     `,
@@ -24,7 +25,7 @@ import {
 
   export class BarLabelComponent implements OnChanges {
   
-    @Input() value;
+    @Input() value;    
     @Input() barX;
     @Input() barY; 
     @Input() barWidth;
@@ -35,6 +36,7 @@ import {
     y:number;
     leftPadding:number=2;
     topPadding:number=5;
+    formatedValue:string;
     constructor() {
       
     }
@@ -43,7 +45,8 @@ import {
       this.update();
     }
   
-    update(): void {    
+    update(): void {  
+      this.formatedValue = formatLabel(this.value);  
       if (this.orientation==="horizontal"){
           this.x=this.barX+this.barWidth+this.leftPadding;    
           this.y=this.barY+this.barHeight/2;    
