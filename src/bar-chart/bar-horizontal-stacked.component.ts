@@ -114,7 +114,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
   @Input() xScaleMax: number;
-  @Input() showDataLabel:boolean = false;
+  @Input() showDataLabel: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -149,7 +149,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
       showYLabel: this.showYAxisLabel,
       showLegend: this.legend,
       legendType: this.schemeType,
-      showDataLabel:this.showDataLabel
+      showDataLabel: this.showDataLabel
     });
 
     this.formatDates();
