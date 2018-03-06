@@ -3,6 +3,7 @@ export declare class SeriesHorizontal implements OnChanges {
     bars: any;
     x: any;
     y: any;
+    barsForDataLabels: any;
     dims: any;
     type: string;
     series: any;
@@ -16,6 +17,7 @@ export declare class SeriesHorizontal implements OnChanges {
     tooltipTemplate: TemplateRef<any>;
     roundEdges: boolean;
     animations: boolean;
+    showDataLabel: boolean;
     select: EventEmitter<{}>;
     activate: EventEmitter<{}>;
     deactivate: EventEmitter<{}>;

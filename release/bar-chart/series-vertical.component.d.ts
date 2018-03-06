@@ -1,4 +1,8 @@
 import { EventEmitter, OnChanges, TemplateRef } from '@angular/core';
+export declare enum D0Types {
+    positive = "positive",
+    negative = "negative",
+}
 export declare class SeriesVerticalComponent implements OnChanges {
     dims: any;
     type: string;
@@ -13,6 +17,7 @@ export declare class SeriesVerticalComponent implements OnChanges {
     tooltipTemplate: TemplateRef<any>;
     roundEdges: boolean;
     animations: boolean;
+    showDataLabel: boolean;
     select: EventEmitter<{}>;
     activate: EventEmitter<{}>;
     deactivate: EventEmitter<{}>;
@@ -21,6 +26,7 @@ export declare class SeriesVerticalComponent implements OnChanges {
     bars: any;
     x: any;
     y: any;
+    barsForDataLabels: any;
     ngOnChanges(changes: any): void;
     update(): void;
     updateTooltipSettings(): void;
