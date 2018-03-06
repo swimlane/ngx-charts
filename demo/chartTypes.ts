@@ -9,7 +9,7 @@ const chartGroups = [
         options: [
           'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains', 'tooltipDisabled', 'roundEdges', 'yScaleMax'
+          'showGridLines', 'roundDomains', 'tooltipDisabled', 'roundEdges', 'yScaleMax','showDataLabel'
         ]
       },
       {
@@ -19,7 +19,7 @@ const chartGroups = [
         options: [
           'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains', 'tooltipDisabled', 'roundEdges', 'xScaleMax'
+          'showGridLines', 'roundDomains', 'tooltipDisabled', 'roundEdges', 'xScaleMax','showDataLabel'
         ],
         defaults: {
           yAxisLabel: 'Country',
@@ -33,7 +33,7 @@ const chartGroups = [
         options: [
           'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding', 'groupPadding',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains', 'tooltipDisabled', 'roundEdges', 'yScaleMax'
+          'showGridLines', 'roundDomains', 'tooltipDisabled', 'roundEdges', 'yScaleMax','showDataLabel'
         ]
       },
       {
@@ -43,7 +43,7 @@ const chartGroups = [
         options: [
           'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding', 'groupPadding',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains', 'tooltipDisabled', 'roundEdges', 'xScaleMax'
+          'showGridLines', 'roundDomains', 'tooltipDisabled', 'roundEdges', 'xScaleMax', 'showDataLabel'
         ],
         defaults: {
           yAxisLabel: 'Country',
@@ -57,7 +57,7 @@ const chartGroups = [
         options: [
           'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains', 'tooltipDisabled', 'yScaleMax'
+          'showGridLines', 'roundDomains', 'tooltipDisabled', 'yScaleMax','showDataLabel'
         ]
       },
       {
@@ -67,7 +67,7 @@ const chartGroups = [
         options: [
           'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains', 'tooltipDisabled', 'xScaleMax'
+          'showGridLines', 'roundDomains', 'tooltipDisabled', 'xScaleMax','showDataLabel'
         ],
         defaults: {
           yAxisLabel: 'Country',

@@ -6,7 +6,8 @@ export interface ViewDimensions {
 
 export function calculateViewDimensions({
   width, height, margins, showXAxis = false, showYAxis = false, xAxisHeight = 0,
-  yAxisWidth = 0, showXLabel = false, showYLabel = false, showLegend = false, legendType = 'ordinal', columns = 12
+  yAxisWidth = 0, showXLabel = false, showYLabel = false, showLegend = false, 
+  legendType = 'ordinal', columns = 12, showDataLabel=false
 }): ViewDimensions {
   let xOffset = margins[3];
   let chartWidth = width;
@@ -18,6 +19,10 @@ export function calculateViewDimensions({
     } else {
       columns -= 1;
     }
+  }
+
+  if (showDataLabel) {
+    columns -= 1;
   }
 
   chartWidth = chartWidth * columns / 12;

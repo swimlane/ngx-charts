@@ -67,6 +67,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
             [gradient]="gradient"
             [tooltipDisabled]="tooltipDisabled"
             [tooltipTemplate]="tooltipTemplate"
+            [showDataLabel]="showDataLabel"
             [seriesName]="group.name"
             [animations]="animations"
             (select)="onClick($event, group)"
@@ -112,6 +113,7 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
   @Input() yScaleMax: number;
+  @Input() showDataLabel:boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

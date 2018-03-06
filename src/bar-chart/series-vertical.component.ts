@@ -50,6 +50,16 @@ export enum D0Types {
       [tooltipContext]="bar.data"
       [animations]="animations">
     </svg:g>
+    <svg:g *ngIf="showDataLabel">
+      <svg:g ngx-charts-bar-label *ngFor="let b of barsForDataLabels;"         
+        [barX]="b.x"
+        [barY]="b.y"
+        [barWidth]="b.width"
+        [barHeight]="b.height"
+        [value]="b.total"
+        [orientation]="'vertical'"
+      />
+    </svg:g> 
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
@@ -78,6 +88,7 @@ export class SeriesVerticalComponent implements OnChanges {
   @Input() tooltipTemplate: TemplateRef<any>;
   @Input() roundEdges: boolean;
   @Input() animations: boolean = true;
+  @Input() showDataLabel:boolean = false;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
@@ -89,6 +100,8 @@ export class SeriesVerticalComponent implements OnChanges {
   bars: any;
   x: any;
   y: any;
+
+  barsForDataLabels:any;
 
   ngOnChanges(changes): void {
     this.update();
@@ -197,6 +210,27 @@ export class SeriesVerticalComponent implements OnChanges {
 
       return bar;
     });
+
+    if (this.type==='stacked') {        
+      this.barsForDataLabels =[];          
+      const section: any = {};
+      section.total=this.series.map(d => d.value).reduce((sum, d) => sum + d, 0);  
+      section.x=0;
+      section.y=0;        
+      section.height = this.yScale(section.total);
+      section.width = this.xScale.bandwidth();
+      this.barsForDataLabels.push(section);          
+  } else {
+     this.barsForDataLabels = this.series.map(d =>{
+      const section: any = {};          
+      section.total=d.value;
+      section.x=this.xScale(d.name);
+      section.y=0;
+      section.height = Math.abs(this.yScale(section.total));
+      section.width = this.xScale.bandwidth();  
+      return section; 
+     })
+  }
   }
 
   updateTooltipSettings() {
