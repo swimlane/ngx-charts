@@ -91,7 +91,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
   @Input() roundDomains: boolean = false;
   @Input() roundEdges: boolean = true;
   @Input() xScaleMax: number;
-  @Input() showDataLabel:boolean = false;
+  @Input() showDataLabel: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -125,7 +125,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
       showYLabel: this.showYAxisLabel,
       showLegend: this.legend,
       legendType: this.schemeType,
-      showDataLabel:this.showDataLabel
+      showDataLabel: this.showDataLabel
     });
 
     this.xScale = this.getXScale();

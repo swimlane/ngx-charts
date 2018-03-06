@@ -17,7 +17,6 @@ import {
 import { formatLabel } from '../common/label.helper';
 import { D0Types } from './series-vertical.component';
 
-
 @Component({
   selector: 'g[ngx-charts-series-horizontal]',
   template: `
@@ -74,10 +73,8 @@ export class SeriesHorizontal implements OnChanges {
   bars: any;
   x: any;
   y: any;
-
-  barsForDataLabels:any;
+  barsForDataLabels: any;
   
-
   @Input() dims;
   @Input() type = 'standard';
   @Input() series;
@@ -91,7 +88,7 @@ export class SeriesHorizontal implements OnChanges {
   @Input() tooltipTemplate: TemplateRef<any>;
   @Input() roundEdges: boolean;
   @Input() animations: boolean = true;
-  @Input() showDataLabel:boolean = false;
+  @Input() showDataLabel: boolean = false;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
@@ -117,8 +114,6 @@ export class SeriesHorizontal implements OnChanges {
     if (this.type === 'normalized') {
       total = this.series.map(d => d.value).reduce((sum, d) => sum + d, 0);
     }
-
-    
 
     this.bars = this.series.map((d, index) => {
       let value = d.value;
@@ -202,29 +197,26 @@ export class SeriesHorizontal implements OnChanges {
       return bar;
     });
 
-   
-      if (this.type==='stacked') {        
-          this.barsForDataLabels =[];          
-          let section: any = {};      
-          section.total= this.series.map(d => d.value).reduce((sum, d) => sum + d, 0);  
-          section.x=0;
-          section.y=0;        
-          section.width = this.xScale(section.total);
-          section.height = this.yScale.bandwidth();
-          this.barsForDataLabels.push(section);          
-      } else {
-         this.barsForDataLabels = this.series.map(d =>{
-          let section: any = {};                  
-          section.total= d.value;          
-          section.x=0;
-          section.y=this.yScale(d.name);
-          section.width = Math.abs(this.xScale(section.total) - this.xScale(0));
-          section.height = this.yScale.bandwidth();  
-          return section; 
-         })
-      }
-
-      
+    if (this.type === 'stacked') {        
+        this.barsForDataLabels = [];          
+        const section: any = {};      
+        section.total = this.series.map(d => d.value).reduce((sum, d) => sum + d, 0);  
+        section.x = 0;
+        section.y = 0;        
+        section.width = this.xScale(section.total);
+        section.height = this.yScale.bandwidth();
+        this.barsForDataLabels.push(section);          
+    } else {
+        this.barsForDataLabels = this.series.map(d => {
+        const section: any = {};                  
+        section.total = d.value;          
+        section.x = 0;
+        section.y = this.yScale(d.name);
+        section.width = Math.abs(this.xScale(section.total) - this.xScale(0));
+        section.height = this.yScale.bandwidth();  
+        return section; 
+        });
+    }      
   }
 
   updateTooltipSettings() {

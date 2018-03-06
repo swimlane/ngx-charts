@@ -92,7 +92,7 @@ export class BarVerticalComponent extends BaseChartComponent {
   @Input() roundEdges: boolean = true;
   @Input() yScaleMax: number;
   @Input() yScaleMin: number;
-  @Input() showDataLabel:boolean = false;
+  @Input() showDataLabel: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
