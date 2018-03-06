@@ -13,7 +13,8 @@ import { formatLabel } from '..';
     template: `  
       <svg:text   
         font-size="12px" 
-        alignment-baseline="middle"      
+        alignment-baseline="middle"     
+        [attr.transform]="transform"
         [attr.x]="x" 
         [attr.y]="y">
         {{formatedValue}}     
@@ -37,6 +38,7 @@ import { formatLabel } from '..';
     leftPadding:number=2;
     topPadding:number=5;
     formatedValue:string;
+    transform:string;
     constructor() {
       
     }
@@ -51,11 +53,10 @@ import { formatLabel } from '..';
           this.x=this.barX+this.barWidth+this.leftPadding;    
           this.y=this.barY+this.barHeight/2;    
       } else {
-        //orientation must be "vertical"
-        /*this.x=this.barX+this.barWidth/4;    
-        this.y=this.barY+this.barHeight-this.topPadding;    */
+        //orientation must be "vertical"      
         this.x=this.barX+this.barWidth/4;    
         this.y=this.barY+this.barHeight-this.topPadding;    
+        this.transform=`rotate(-45, ${ this.x } , ${ this.y })`;
       }
     }  
   }
