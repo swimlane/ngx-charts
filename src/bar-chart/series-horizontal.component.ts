@@ -204,18 +204,16 @@ export class SeriesHorizontal implements OnChanges {
         section.x = 0;
         section.y = 0;        
         section.width = this.xScale(section.total);
-        section.height = this.yScale.bandwidth();
-        console.log("!!! value:"+section.total+" x:"+section.x+" y:"+section.y+" width:"+section.width+" height:"+section.height);
+        section.height = this.yScale.bandwidth();       
         this.barsForDataLabels.push(section);          
     } else {
         this.barsForDataLabels = this.series.map(d => {
         const section: any = {};                  
         section.total = d.value;          
-        section.x = this.xScale(0);//d.value < 0 ? this.xScale(section.total) : this.xScale(0);
+        section.x = this.xScale(0);
         section.y = this.yScale(d.name);
         section.width = this.xScale(section.total) - this.xScale(0);
-        section.height = this.yScale.bandwidth();  
-        console.log("!!! value:"+section.total+" x:"+section.x+" y:"+section.y+" width:"+section.width+" height:"+section.height);
+        section.height = this.yScale.bandwidth();         
         return section; 
         });
     }      
