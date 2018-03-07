@@ -21,6 +21,11 @@ var BarLabelComponent = /** @class */ (function () {
         this.formatedValue = formatLabel(this.value);
         if (this.orientation === 'horizontal') {
             this.x = this.barX + this.barWidth + this.leftPadding;
+            // if the width is negative then it's on the left of the x0. 
+            // we need to put the data label in front of the bar
+            if (this.barWidth < 0) {
+                this.x = this.x - 45;
+            }
             this.y = this.barY + this.barHeight / 2;
         }
         else {
@@ -57,7 +62,7 @@ var BarLabelComponent = /** @class */ (function () {
     BarLabelComponent = __decorate([
         Component({
             selector: 'g[ngx-charts-bar-label]',
-            template: "  \n    <svg:text   \n      font-size=\"12px\" \n      alignment-baseline=\"middle\"     \n      [attr.transform]=\"transform\"\n      [attr.x]=\"x\" \n      [attr.y]=\"y\">\n      {{formatedValue}}     \n    </svg:text>          \n\n  ",
+            template: "  \n    <svg:text   \n      font-size=\"11px\" \n      alignment-baseline=\"middle\"     \n      [attr.transform]=\"transform\"\n      [attr.x]=\"x\" \n      [attr.y]=\"y\">\n      {{formatedValue}}     \n    </svg:text>          \n\n  ",
             changeDetection: ChangeDetectionStrategy.OnPush
         })
     ], BarLabelComponent);
