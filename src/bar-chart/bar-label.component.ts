@@ -11,7 +11,7 @@ import { formatLabel } from '..';
   selector: 'g[ngx-charts-bar-label]',
   template: `  
     <svg:text   
-      font-size="12px" 
+      font-size="11px" 
       alignment-baseline="middle"     
       [attr.transform]="transform"
       [attr.x]="x" 
