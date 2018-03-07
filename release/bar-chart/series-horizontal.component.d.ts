@@ -25,6 +25,7 @@ export declare class SeriesHorizontal implements OnChanges {
     tooltipType: string;
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
+    updateDataLabels(): void;
     updateTooltipSettings(): void;
     isActive(entry: any): boolean;
     trackBy(index: any, bar: any): any;

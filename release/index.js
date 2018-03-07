@@ -6998,13 +6998,21 @@ var SeriesHorizontal = /** @class */ (function () {
             bar.tooltipText = _this.tooltipDisabled ? undefined : "\n        <span class=\"tooltip-label\">" + tooltipLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
             return bar;
         });
+        this.updateDataLabels();
+        var _a;
+    };
+    SeriesHorizontal.prototype.updateDataLabels = function () {
+        var _this = this;
         if (this.type === 'stacked') {
             this.barsForDataLabels = [];
             var section = {};
-            section.total = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return sum + d; }, 0);
+            var totalPositive = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return d > 0 ? sum + d : sum; }, 0);
+            var totalNegative = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return d < 0 ? sum + d : sum; }, 0);
+            section.total = totalPositive + totalNegative; //this.series.map(d => d.value).reduce((sum, d) => sum + d, 0);  
             section.x = 0;
             section.y = 0;
-            section.width = this.xScale(section.total);
+            if (totalPositive > 0)
+                section.width = totalPositive > 0 ? this.xScale(totalPositive) : this.xScale(section.total);
             section.height = this.yScale.bandwidth();
             this.barsForDataLabels.push(section);
         }
@@ -7019,7 +7027,6 @@ var SeriesHorizontal = /** @class */ (function () {
                 return section;
             });
         }
-        var _a;
     };
     SeriesHorizontal.prototype.updateTooltipSettings = function () {
         this.tooltipPlacement = this.tooltipDisabled ? undefined : 'top';
