@@ -125,9 +125,9 @@ var SeriesHorizontal = /** @class */ (function () {
             this.barsForDataLabels = this.series.map(function (d) {
                 var section = {};
                 section.total = d.value;
-                section.x = _this.xScale(0);
+                section.x = d.value < 0 ? _this.xScale(section.total) : _this.xScale(0);
                 section.y = _this.yScale(d.name);
-                section.width = _this.xScale(section.total) - _this.xScale(0);
+                section.width = Math.abs(_this.xScale(section.total) - _this.xScale(0));
                 section.height = _this.yScale.bandwidth();
                 return section;
             });
