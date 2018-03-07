@@ -210,26 +210,38 @@ export class SeriesVerticalComponent implements OnChanges {
       return bar;
     });
 
-    if (this.type === 'stacked') {        
-      this.barsForDataLabels = [];          
-      const section: any = {};
-      section.total = this.series.map(d => d.value).reduce((sum, d) => sum + d, 0);  
-      section.x = 0;
-      section.y = 0;        
-      section.height = this.yScale(section.total);
-      section.width = this.xScale.bandwidth();
-      this.barsForDataLabels.push(section);          
-  } else {
-     this.barsForDataLabels = this.series.map(d => {
-      const section: any = {};          
-      section.total = d.value;
-      section.x = this.xScale(d.name);
-      section.y = 0;
-      section.height = Math.abs(this.yScale(section.total));
-      section.width = this.xScale.bandwidth();  
-      return section; 
-     });
+    this.updateDataLabels();
+    
   }
+
+  updateDataLabels() {
+    if (this.type === 'stacked') {        
+        this.barsForDataLabels = [];          
+        const section: any = {};
+        const totalPositive = this.series.map(d => d.value).reduce((sum, d) => d >0 ? sum + d : sum, 0);
+        const totalNegative = this.series.map(d => d.value).reduce((sum, d) => d <0 ? sum + d : sum, 0);
+        section.total = totalPositive+totalNegative;
+        section.x = 0;
+        section.y = 0;    
+        if (section.total>0)   {
+          section.height = this.yScale(totalPositive);
+        } else{
+          section.height = this.yScale(totalNegative);
+        }    
+        section.width = this.xScale.bandwidth();
+        this.barsForDataLabels.push(section);          
+    } else {
+      this.barsForDataLabels = this.series.map(d => {
+        const section: any = {};          
+        section.total = d.value;
+        section.x = this.xScale(d.name);
+        section.y = this.yScale(0);
+        section.height = this.yScale(section.total) - this.yScale(0);
+        section.width = this.xScale.bandwidth();  
+        return section; 
+      });
+    }
+    
   }
 
   updateTooltipSettings() {

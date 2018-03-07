@@ -206,9 +206,9 @@ export class SeriesHorizontal implements OnChanges {
     if (this.type === 'stacked') {        
       this.barsForDataLabels = [];          
       const section: any = {};      
-      const totalPositive = this.series.map(d => d.value).reduce((sum, d) => d >0 ? sum + d : sum, 0)
-      const totalNegative = this.series.map(d => d.value).reduce((sum, d) => d <0 ? sum + d : sum, 0)
-      section.total = totalPositive+totalNegative;//this.series.map(d => d.value).reduce((sum, d) => sum + d, 0);  
+      const totalPositive = this.series.map(d => d.value).reduce((sum, d) => d >0 ? sum + d : sum, 0);
+      const totalNegative = this.series.map(d => d.value).reduce((sum, d) => d <0 ? sum + d : sum, 0);
+      section.total = totalPositive+totalNegative;
       section.x = 0;
       section.y = 0;        
       // if total is positive then we show it on the right, otherwise on the left
