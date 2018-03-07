@@ -47,10 +47,10 @@ import { formatLabel } from '..';
       this.formatedValue = formatLabel(this.value);  
       if (this.orientation === 'horizontal') {
           this.x = this.barX + this.barWidth + this.leftPadding;    
-          // if the width is negative then it's on the left of the x0. 
+          // if the value is negative then it's on the left of the x0. 
           // we need to put the data label in front of the bar
-          if (this.barWidth < 0) {
-            this.x = this.x - 45;
+          if (this.value < 0) {
+            this.x = this.x - 50;
           }
           this.y = this.barY + this.barHeight / 2;    
 
