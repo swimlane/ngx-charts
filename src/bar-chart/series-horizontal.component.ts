@@ -197,15 +197,24 @@ export class SeriesHorizontal implements OnChanges {
       return bar;
     });
 
+    this.updateDataLabels();
+
+  }
+
+  updateDataLabels(){
+
     if (this.type === 'stacked') {        
-        this.barsForDataLabels = [];          
-        const section: any = {};      
-        section.total = this.series.map(d => d.value).reduce((sum, d) => sum + d, 0);  
-        section.x = 0;
-        section.y = 0;        
-        section.width = this.xScale(section.total);
-        section.height = this.yScale.bandwidth();       
-        this.barsForDataLabels.push(section);          
+      this.barsForDataLabels = [];          
+      const section: any = {};      
+      const totalPositive = this.series.map(d => d.value).reduce((sum, d) => d >0 ? sum + d : sum, 0)
+      const totalNegative = this.series.map(d => d.value).reduce((sum, d) => d <0 ? sum + d : sum, 0)
+      section.total = totalPositive+totalNegative;//this.series.map(d => d.value).reduce((sum, d) => sum + d, 0);  
+      section.x = 0;
+      section.y = 0;        
+      if (totalPositive > 0)
+      section.width = totalPositive > 0 ? this.xScale(totalPositive): this.xScale(section.total);
+      section.height = this.yScale.bandwidth();       
+      this.barsForDataLabels.push(section);          
     } else {
         this.barsForDataLabels = this.series.map(d => {
         const section: any = {};                  
@@ -216,9 +225,9 @@ export class SeriesHorizontal implements OnChanges {
         section.height = this.yScale.bandwidth();         
         return section; 
         });
-    }      
+      }     
   }
-
+  
   updateTooltipSettings() {
     this.tooltipPlacement = this.tooltipDisabled ? undefined : 'top';
     this.tooltipType =  this.tooltipDisabled ? undefined : 'tooltip';
