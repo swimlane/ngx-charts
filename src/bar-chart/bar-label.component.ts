@@ -53,10 +53,10 @@ import { formatLabel } from '..';
           // we need to put the data label in front of the bar
           if (this.value < 0) {
             this.x = this.x - this.horizontalPadding;
-            this.textAnchor = "end";
+            this.textAnchor = 'end';
           } else {
             this.x = this.x + this.horizontalPadding;
-            this.textAnchor = "start"; 
+            this.textAnchor = 'start'; 
           }
           this.y = this.barY + this.barHeight / 2;    
 
@@ -67,10 +67,10 @@ import { formatLabel } from '..';
          
         if (this.value < 0) {
           this.y = this.y + this.verticalPadding;          
-          this.textAnchor = "end";
+          this.textAnchor = 'end';
         } else {
           this.y = this.y - this.verticalPadding;   
-          this.textAnchor = "start"; 
+          this.textAnchor = 'start'; 
         }
         this.transform = `rotate(-45, ${ this.x } , ${ this.y })`;
       }

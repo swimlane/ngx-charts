@@ -218,14 +218,14 @@ export class SeriesVerticalComponent implements OnChanges {
     if (this.type === 'stacked') {        
         this.barsForDataLabels = [];          
         const section: any = {};
-        const totalPositive = this.series.map(d => d.value).reduce((sum, d) => d >0 ? sum + d : sum, 0);
-        const totalNegative = this.series.map(d => d.value).reduce((sum, d) => d <0 ? sum + d : sum, 0);
-        section.total = totalPositive+totalNegative;
+        const totalPositive = this.series.map(d => d.value).reduce((sum, d) => d > 0 ? sum + d : sum, 0);
+        const totalNegative = this.series.map(d => d.value).reduce((sum, d) => d < 0 ? sum + d : sum, 0);
+        section.total = totalPositive + totalNegative;
         section.x = 0;
         section.y = 0;    
-        if (section.total>0)   {
+        if (section.total > 0)   {
           section.height = this.yScale(totalPositive);
-        } else{
+        } else {
           section.height = this.yScale(totalNegative);
         }    
         section.width = this.xScale.bandwidth();
