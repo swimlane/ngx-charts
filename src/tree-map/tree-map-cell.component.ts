@@ -29,8 +29,8 @@ import { id } from '../utils/id';
         class="cell"
         (click)="onClick()"
       />
-      <svg:foreignObject *ngIf="!isIe"
-        *ngIf="width >= 70 && height >= 35"
+      <svg:foreignObject 
+        *ngIf="!isIe && width >= 70 && height >= 35"
         [attr.x]="x"
         [attr.y]="y"
         [attr.width]="width"
