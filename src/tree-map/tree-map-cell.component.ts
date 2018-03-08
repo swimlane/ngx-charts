@@ -56,32 +56,34 @@ import { id } from '../utils/id';
           </xhtml:span>
         </xhtml:p>
       </svg:foreignObject>
+
       <svg:text *ngIf="isIe"
-      [attr.x]="x"
-      [attr.y]="y"
-      [attr.width]="width"
-      [attr.height]="height"
-      class="label"
-      [style.pointer-events]="'none'">
-      <xhtml:p
-      [style.color]="getTextColor()"
-      [style.height]="height + 'px'"
-      [style.width]="width + 'px'">
-      <xhtml:span class="treemap-label" [innerHTML]="formattedLabel">
-      </xhtml:span>
-      <xhtml:br />
-      <xhtml:span *ngIf="animations"
-        class="treemap-val" 
-        ngx-charts-count-up 
-        [countTo]="value"
-        [valueFormatting]="valueFormatting">
-      </xhtml:span>
-      <xhtml:span *ngIf="!animations"
-        class="treemap-val">
-        {{formattedValue}}
-      </xhtml:span>
-    </xhtml:p>
-    </svg:text>
+        [attr.x]="x"
+        [attr.y]="y"
+        [attr.width]="width"
+        [attr.height]="height"
+        class="label"
+        [style.pointer-events]="'none'">
+        <xhtml:p
+        [style.color]="getTextColor()"
+        [style.height]="height + 'px'"
+        [style.width]="width + 'px'">
+        <xhtml:span class="treemap-label" [innerHTML]="formattedLabel">
+        </xhtml:span>
+        <xhtml:br />
+        <xhtml:span *ngIf="animations"
+          class="treemap-val" 
+          ngx-charts-count-up 
+          [countTo]="value"
+          [valueFormatting]="valueFormatting">
+        </xhtml:span>
+        <xhtml:span *ngIf="!animations"
+          class="treemap-val">
+          {{formattedValue}}
+        </xhtml:span>
+      </xhtml:p>
+     </svg:text>
+
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -103,10 +105,10 @@ export class TreeMapCellComponent implements OnChanges {
   @Input() animations: boolean = true;
 
   @Output() select = new EventEmitter();
-  isIe = navigator.userAgent.indexOf("Trident")>-1;
+  isIe = navigator.userAgent.indexOf('Trident') > -1;
   gradientStops: any[];
   gradientId: string;
-  gradientUrl: string;  
+  gradientUrl: string;
 
   element: HTMLElement;
   transform: string;
@@ -132,7 +134,7 @@ export class TreeMapCellComponent implements OnChanges {
 
     this.formattedValue = this.valueFormatting(cellData);
     this.formattedLabel = labelFormatting(cellData);
-  
+
     this.gradientId = 'grad' + id().toString();
     this.gradientUrl = `url(#${this.gradientId})`;
     this.gradientStops = this.getGradientStops();
@@ -202,7 +204,7 @@ export class TreeMapCellComponent implements OnChanges {
         offset: 100,
         color: this.fill,
         opacity: 1
-    }];
+      }];
   }
 
 }

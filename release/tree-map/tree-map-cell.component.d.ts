@@ -14,6 +14,7 @@ export declare class TreeMapCellComponent implements OnChanges {
     gradient: boolean;
     animations: boolean;
     select: EventEmitter<{}>;
+    isIe: boolean;
     gradientStops: any[];
     gradientId: string;
     gradientUrl: string;
