@@ -57,6 +57,15 @@ import { id } from '../utils/id';
         </xhtml:span>
       </xhtml:p>
     </svg:foreignObject>
+
+    <svg
+      [attr.x]="x" [attr.y]="y" [attr.width]="width" [attr.height]="height" 
+      class="label" [style.pointer-events]="'none'">
+        <text [style.fill]="getTextColor()" x="0" y="50%" dy="0" text-anchor="middle">
+          <tspan x="50%" dy=".6em"> {{isIe}} </tspan>
+          <tspan x="50%" dy="1.2em"> {{test}} </tspan>
+        </text>
+      </svg>
      
     <svg *ngIf="isIe && width >= 70 && height >= 35"
       [attr.x]="x" [attr.y]="y" [attr.width]="width" [attr.height]="height" 
@@ -89,6 +98,7 @@ export class TreeMapCellComponent implements OnChanges {
 
   @Output() select = new EventEmitter();
   isIe = navigator.userAgent.indexOf('Trident') > -1;
+  test = navigator.userAgent;
 
   gradientStops: any[];
   gradientId: string;
