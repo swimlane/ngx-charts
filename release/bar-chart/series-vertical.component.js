@@ -122,13 +122,25 @@ var SeriesVerticalComponent = /** @class */ (function () {
             bar.tooltipText = _this.tooltipDisabled ? undefined : "\n        <span class=\"tooltip-label\">" + tooltipLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
             return bar;
         });
+        this.updateDataLabels();
+        var _a;
+    };
+    SeriesVerticalComponent.prototype.updateDataLabels = function () {
+        var _this = this;
         if (this.type === 'stacked') {
             this.barsForDataLabels = [];
             var section = {};
-            section.total = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return sum + d; }, 0);
+            var totalPositive = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return d > 0 ? sum + d : sum; }, 0);
+            var totalNegative = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return d < 0 ? sum + d : sum; }, 0);
+            section.total = totalPositive + totalNegative;
             section.x = 0;
             section.y = 0;
-            section.height = this.yScale(section.total);
+            if (section.total > 0) {
+                section.height = this.yScale(totalPositive);
+            }
+            else {
+                section.height = this.yScale(totalNegative);
+            }
             section.width = this.xScale.bandwidth();
             this.barsForDataLabels.push(section);
         }
@@ -137,13 +149,12 @@ var SeriesVerticalComponent = /** @class */ (function () {
                 var section = {};
                 section.total = d.value;
                 section.x = _this.xScale(d.name);
-                section.y = 0;
-                section.height = Math.abs(_this.yScale(section.total));
+                section.y = _this.yScale(0);
+                section.height = _this.yScale(section.total) - _this.yScale(0);
                 section.width = _this.xScale.bandwidth();
                 return section;
             });
         }
-        var _a;
     };
     SeriesVerticalComponent.prototype.updateTooltipSettings = function () {
         this.tooltipPlacement = this.tooltipDisabled ? undefined : 'top';

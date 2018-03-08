@@ -11,8 +11,8 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { formatLabel } from '..';
 var BarLabelComponent = /** @class */ (function () {
     function BarLabelComponent() {
-        this.leftPadding = 2;
-        this.topPadding = 5;
+        this.horizontalPadding = 2;
+        this.verticalPadding = 5;
     }
     BarLabelComponent.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -20,18 +20,31 @@ var BarLabelComponent = /** @class */ (function () {
     BarLabelComponent.prototype.update = function () {
         this.formatedValue = formatLabel(this.value);
         if (this.orientation === 'horizontal') {
-            this.x = this.barX + this.barWidth + this.leftPadding;
-            // if the width is negative then it's on the left of the x0. 
+            this.x = this.barX + this.barWidth;
+            // if the value is negative then it's on the left of the x0. 
             // we need to put the data label in front of the bar
-            if (this.barWidth < 0) {
-                this.x = this.x - 45;
+            if (this.value < 0) {
+                this.x = this.x - this.horizontalPadding;
+                this.textAnchor = 'end';
+            }
+            else {
+                this.x = this.x + this.horizontalPadding;
+                this.textAnchor = 'start';
             }
             this.y = this.barY + this.barHeight / 2;
         }
         else {
             // orientation must be "vertical"      
-            this.x = this.barX + this.barWidth / 4;
-            this.y = this.barY + this.barHeight - this.topPadding;
+            this.x = this.barX + this.barWidth / 2;
+            this.y = this.barY + this.barHeight;
+            if (this.value < 0) {
+                this.y = this.y + this.verticalPadding;
+                this.textAnchor = 'end';
+            }
+            else {
+                this.y = this.y - this.verticalPadding;
+                this.textAnchor = 'start';
+            }
             this.transform = "rotate(-45, " + this.x + " , " + this.y + ")";
         }
     };
@@ -62,7 +75,7 @@ var BarLabelComponent = /** @class */ (function () {
     BarLabelComponent = __decorate([
         Component({
             selector: 'g[ngx-charts-bar-label]',
-            template: "  \n    <svg:text   \n      font-size=\"11px\" \n      alignment-baseline=\"middle\"     \n      [attr.transform]=\"transform\"\n      [attr.x]=\"x\" \n      [attr.y]=\"y\">\n      {{formatedValue}}     \n    </svg:text>          \n\n  ",
+            template: "  \n    <svg:text   \n      font-size=\"11px\" \n      alignment-baseline=\"middle\"     \n      [attr.text-anchor]=\"textAnchor\"\n      [attr.transform]=\"transform\"\n      [attr.x]=\"x\" \n      [attr.y]=\"y\">\n      {{formatedValue}}     \n    </svg:text>          \n\n  ",
             changeDetection: ChangeDetectionStrategy.OnPush
         })
     ], BarLabelComponent);

@@ -121,11 +121,16 @@ var SeriesHorizontal = /** @class */ (function () {
             var section = {};
             var totalPositive = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return d > 0 ? sum + d : sum; }, 0);
             var totalNegative = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return d < 0 ? sum + d : sum; }, 0);
-            section.total = totalPositive + totalNegative; //this.series.map(d => d.value).reduce((sum, d) => sum + d, 0);  
+            section.total = totalPositive + totalNegative;
             section.x = 0;
             section.y = 0;
-            if (totalPositive > 0)
-                section.width = totalPositive > 0 ? this.xScale(totalPositive) : this.xScale(section.total);
+            // if total is positive then we show it on the right, otherwise on the left
+            if (section.total > 0) {
+                section.width = this.xScale(totalPositive);
+            }
+            else {
+                section.width = this.xScale(totalNegative);
+            }
             section.height = this.yScale.bandwidth();
             this.barsForDataLabels.push(section);
         }

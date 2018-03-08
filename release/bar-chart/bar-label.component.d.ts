@@ -8,10 +8,11 @@ export declare class BarLabelComponent implements OnChanges {
     orientation: any;
     x: number;
     y: number;
-    leftPadding: number;
-    topPadding: number;
+    horizontalPadding: number;
+    verticalPadding: number;
     formatedValue: string;
     transform: string;
+    textAnchor: string;
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
 }

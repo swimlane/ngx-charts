@@ -5215,8 +5215,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var BarLabelComponent = /** @class */ (function () {
     function BarLabelComponent() {
-        this.leftPadding = 2;
-        this.topPadding = 5;
+        this.horizontalPadding = 2;
+        this.verticalPadding = 5;
     }
     BarLabelComponent.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -5224,18 +5224,31 @@ var BarLabelComponent = /** @class */ (function () {
     BarLabelComponent.prototype.update = function () {
         this.formatedValue = Object(__WEBPACK_IMPORTED_MODULE_1____["formatLabel"])(this.value);
         if (this.orientation === 'horizontal') {
-            this.x = this.barX + this.barWidth + this.leftPadding;
-            // if the width is negative then it's on the left of the x0. 
+            this.x = this.barX + this.barWidth;
+            // if the value is negative then it's on the left of the x0. 
             // we need to put the data label in front of the bar
-            if (this.barWidth < 0) {
-                this.x = this.x - 45;
+            if (this.value < 0) {
+                this.x = this.x - this.horizontalPadding;
+                this.textAnchor = 'end';
+            }
+            else {
+                this.x = this.x + this.horizontalPadding;
+                this.textAnchor = 'start';
             }
             this.y = this.barY + this.barHeight / 2;
         }
         else {
             // orientation must be "vertical"      
-            this.x = this.barX + this.barWidth / 4;
-            this.y = this.barY + this.barHeight - this.topPadding;
+            this.x = this.barX + this.barWidth / 2;
+            this.y = this.barY + this.barHeight;
+            if (this.value < 0) {
+                this.y = this.y + this.verticalPadding;
+                this.textAnchor = 'end';
+            }
+            else {
+                this.y = this.y - this.verticalPadding;
+                this.textAnchor = 'start';
+            }
             this.transform = "rotate(-45, " + this.x + " , " + this.y + ")";
         }
     };
@@ -5266,7 +5279,7 @@ var BarLabelComponent = /** @class */ (function () {
     BarLabelComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'g[ngx-charts-bar-label]',
-            template: "  \n    <svg:text   \n      font-size=\"11px\" \n      alignment-baseline=\"middle\"     \n      [attr.transform]=\"transform\"\n      [attr.x]=\"x\" \n      [attr.y]=\"y\">\n      {{formatedValue}}     \n    </svg:text>          \n\n  ",
+            template: "  \n    <svg:text   \n      font-size=\"11px\" \n      alignment-baseline=\"middle\"     \n      [attr.text-anchor]=\"textAnchor\"\n      [attr.transform]=\"transform\"\n      [attr.x]=\"x\" \n      [attr.y]=\"y\">\n      {{formatedValue}}     \n    </svg:text>          \n\n  ",
             changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush
         })
     ], BarLabelComponent);
@@ -7008,11 +7021,16 @@ var SeriesHorizontal = /** @class */ (function () {
             var section = {};
             var totalPositive = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return d > 0 ? sum + d : sum; }, 0);
             var totalNegative = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return d < 0 ? sum + d : sum; }, 0);
-            section.total = totalPositive + totalNegative; //this.series.map(d => d.value).reduce((sum, d) => sum + d, 0);  
+            section.total = totalPositive + totalNegative;
             section.x = 0;
             section.y = 0;
-            if (totalPositive > 0)
-                section.width = totalPositive > 0 ? this.xScale(totalPositive) : this.xScale(section.total);
+            // if total is positive then we show it on the right, otherwise on the left
+            if (section.total > 0) {
+                section.width = this.xScale(totalPositive);
+            }
+            else {
+                section.width = this.xScale(totalNegative);
+            }
             section.height = this.yScale.bandwidth();
             this.barsForDataLabels.push(section);
         }
@@ -7273,13 +7291,25 @@ var SeriesVerticalComponent = /** @class */ (function () {
             bar.tooltipText = _this.tooltipDisabled ? undefined : "\n        <span class=\"tooltip-label\">" + tooltipLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
             return bar;
         });
+        this.updateDataLabels();
+        var _a;
+    };
+    SeriesVerticalComponent.prototype.updateDataLabels = function () {
+        var _this = this;
         if (this.type === 'stacked') {
             this.barsForDataLabels = [];
             var section = {};
-            section.total = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return sum + d; }, 0);
+            var totalPositive = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return d > 0 ? sum + d : sum; }, 0);
+            var totalNegative = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return d < 0 ? sum + d : sum; }, 0);
+            section.total = totalPositive + totalNegative;
             section.x = 0;
             section.y = 0;
-            section.height = this.yScale(section.total);
+            if (section.total > 0) {
+                section.height = this.yScale(totalPositive);
+            }
+            else {
+                section.height = this.yScale(totalNegative);
+            }
             section.width = this.xScale.bandwidth();
             this.barsForDataLabels.push(section);
         }
@@ -7288,13 +7318,12 @@ var SeriesVerticalComponent = /** @class */ (function () {
                 var section = {};
                 section.total = d.value;
                 section.x = _this.xScale(d.name);
-                section.y = 0;
-                section.height = Math.abs(_this.yScale(section.total));
+                section.y = _this.yScale(0);
+                section.height = _this.yScale(section.total) - _this.yScale(0);
                 section.width = _this.xScale.bandwidth();
                 return section;
             });
         }
-        var _a;
     };
     SeriesVerticalComponent.prototype.updateTooltipSettings = function () {
         this.tooltipPlacement = this.tooltipDisabled ? undefined : 'top';

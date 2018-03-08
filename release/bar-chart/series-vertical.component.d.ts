@@ -29,6 +29,7 @@ export declare class SeriesVerticalComponent implements OnChanges {
     barsForDataLabels: any;
     ngOnChanges(changes: any): void;
     update(): void;
+    updateDataLabels(): void;
     updateTooltipSettings(): void;
     isActive(entry: any): boolean;
     onClick(data: any): void;
