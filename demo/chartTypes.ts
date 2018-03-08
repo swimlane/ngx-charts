@@ -385,7 +385,17 @@ const chartGroups = [
         options: [
           'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains', 'tooltipDisabled', 'yScaleMax'
+          'showGridLines', 'roundDomains', 'tooltipDisabled', 'yScaleMax', 'showDataLabel'
+        ]
+      },
+      {
+        name: 'Stacked Horizontal Bar Chart Negative',
+        selector: 'bar-horizontal-stacked-negative',
+        inputFormat: 'multiSeriesNegative',
+        options: [
+          'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
+          'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
+          'showGridLines', 'roundDomains', 'tooltipDisabled', 'yScaleMax', 'showDataLabel'
         ]
       },
     ]

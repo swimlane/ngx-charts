@@ -806,9 +806,35 @@
       [barPadding]="barPadding"
       [roundDomains]="roundDomains"
       [yScaleMax]="yScaleMax"
+      [showDataLabel]="showDataLabel"
       (select)="select($event)">
     </ngx-charts-bar-vertical-stacked>
-  </div>
+    <ngx-charts-bar-horizontal-stacked
+      *ngIf="chartType === 'bar-horizontal-stacked-negative'"
+      class="chart-container"
+      [view]="view"
+      [scheme]="colorScheme"
+      [schemeType]="schemeType"
+      [results]="fiscalYearReport"
+      [animations]="animations"
+      [gradient]="gradient"
+      [tooltipDisabled]="tooltipDisabled"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [legend]="showLegend"
+      [legendTitle]="legendTitle"
+      (legendLabelClick)="onLegendLabelClick($event)"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="'Fiscal Year Report'"
+      [showGridLines]="showGridLines"
+      [barPadding]="barPadding"
+      [roundDomains]="roundDomains"     
+      [showDataLabel]="showDataLabel"
+      (select)="select($event)">
+    </ngx-charts-bar-horizontal-stacked>
+ </div>
   <div class="sidebar">
     <h1>
       Ngx-<strong>Charts</strong>

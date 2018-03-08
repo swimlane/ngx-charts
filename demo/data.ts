@@ -33,11 +33,11 @@ export const multi = [
     series: [
       {
         name: '2010',
-        value: 40632
+        value: -40632
       },
       {
         name: '2000',
-        value: 36953
+        value: -36953
       },
       {
         name: '1990',
@@ -108,7 +108,7 @@ export const fiscalYearReport = [
       },
       {
         name: '2001',
-        value: 36953
+        value: -36953
       },
     ]
   },
