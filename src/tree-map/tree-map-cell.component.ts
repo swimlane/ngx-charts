@@ -63,8 +63,8 @@ import { id } from '../utils/id';
   [attr.x]="x" [attr.y]="y" [attr.width]="width" [attr.height]="height" 
   class="label" [style.pointer-events]="'none'">
     <text [style.fill]="getTextColor()" x="0" [attr.y]="y + height/2" dy="0" text-anchor="middle">
-      <tspan [attr.x]="x + width/2" dy=".6em"> {{formattedLabel}} </tspan>
-      <tspan [attr.x]="x + width/2" dy="1.2em"> {{formattedValue}} </tspan>
+      <tspan [attr.x]="width/2" dy=".6em"> {{formattedLabel}} </tspan>
+      <tspan [attr.x]="width/2" dy="1.2em"> {{formattedValue}} </tspan>
     </text>
   </svg>
 
