@@ -12,51 +12,63 @@ import { id } from '../utils/id';
   selector: 'g[ngx-charts-tree-map-cell]',
   template: `
   
-    <svg:g>
-      <defs *ngIf="gradient">
-        <svg:g ngx-charts-svg-linear-gradient
-          orientation="vertical"
-          [name]="gradientId"
-          [stops]="gradientStops"
-        />
-      </defs>
-      <svg:rect
-        [attr.fill]="gradient ? gradientUrl : fill"
-        [attr.width]="width"
-        [attr.height]="height"
-        [attr.x]="x"
-        [attr.y]="y"
-        [style.cursor]="'pointer'"
-        class="cell"
-        (click)="onClick()"
-      />
+  <svg:g>
+  <defs *ngIf="gradient">
+    <svg:g ngx-charts-svg-linear-gradient
+      orientation="vertical"
+      [name]="gradientId"
+      [stops]="gradientStops"
+    />
+  </defs>
+  <svg:rect
+    [attr.fill]="gradient ? gradientUrl : fill"
+    [attr.width]="width"
+    [attr.height]="height"
+    [attr.x]="x"
+    [attr.y]="y"
+    [style.cursor]="'pointer'"
+    class="cell"
+    (click)="onClick()"
+  />
 
-      <svg:text 
-      *ngIf="width >= 70 && height >= 35"
-      class="treemap-val"
-      [attr.x]="x + width/2"
-      [attr.y]="y + height/2"
-      [attr.width]="width"
-      [attr.height]="height"
-      class="label"
-      [style.pointer-events]="'none'"
-      [style.fill]="getTextColor()">
-      {{formattedLabel}}
-      </svg:text>
-
-      <svg:text 
-      *ngIf="width >= 70 && height >= 35"
-      class="treemap-val"
-      [attr.x]="x + width/2"
-      [attr.y]="y + height/2 + 15"
-      [attr.width]="width"
-      [attr.height]="height"
-      class="label"
-      [style.pointer-events]="'none'"
-      [style.fill]="getTextColor()">
+<svg:foreignObject 
+  *ngIf="!isIe && width >= 70 && height >= 35"
+  [attr.x]="x"
+  [attr.y]="y"
+  [attr.width]="width"
+  [attr.height]="height"
+  class="label"
+  [style.pointer-events]="'none'">
+  <xhtml:p
+    [style.color]="getTextColor()"
+    [style.height]="height + 'px'"
+    [style.width]="width + 'px'">
+    <xhtml:span class="treemap-label" [innerHTML]="formattedLabel">
+    </xhtml:span>
+    <xhtml:br />
+    <xhtml:span *ngIf="animations"
+      class="treemap-val" 
+      ngx-charts-count-up 
+      [countTo]="value"
+      [valueFormatting]="valueFormatting">
+    </xhtml:span>
+    <xhtml:span *ngIf="!animations"
+      class="treemap-val">
       {{formattedValue}}
-      </svg:text>
-    </svg:g>
+    </xhtml:span>
+  </xhtml:p>
+</svg:foreignObject>
+
+<svg *ngIf="isIe && width >= 70 && height >= 35"
+  [attr.x]="x" [attr.y]="y" [attr.width]="width" [attr.height]="height" 
+  class="label" [style.pointer-events]="'none'">
+    <text [style.fill]="getTextColor()" x="0" [attr.y]="y + height/2" dy="0" text-anchor="middle">
+      <tspan [attr.x]="x + width/2" dy=".6em"> {{formattedLabel}} </tspan>
+      <tspan [attr.x]="x + width/2" dy="1.2em"> {{formattedValue}} </tspan>
+    </text>
+  </svg>
+
+</svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -78,7 +90,6 @@ export class TreeMapCellComponent implements OnChanges {
 
   @Output() select = new EventEmitter();
   isIe = navigator.userAgent.indexOf('Trident') > -1;
-  test = navigator.userAgent;
 
   gradientStops: any[];
   gradientId: string;
