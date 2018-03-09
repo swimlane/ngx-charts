@@ -3866,7 +3866,7 @@ var AreaSeriesComponent = /** @class */ (function () {
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return __WEBPACK_IMPORTED_MODULE_9__bar_vertical_normalized_component__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return __WEBPACK_IMPORTED_MODULE_10__bar_vertical_stacked_component__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return __WEBPACK_IMPORTED_MODULE_11__series_horizontal_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return __WEBPACK_IMPORTED_MODULE_12__series_vertical_component__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return __WEBPACK_IMPORTED_MODULE_12__series_vertical_component__["b"]; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3904,7 +3904,7 @@ var BarChartModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_9__bar_vertical_normalized_component__["a" /* BarVerticalNormalizedComponent */],
                 __WEBPACK_IMPORTED_MODULE_10__bar_vertical_stacked_component__["a" /* BarVerticalStackedComponent */],
                 __WEBPACK_IMPORTED_MODULE_11__series_horizontal_component__["a" /* SeriesHorizontal */],
-                __WEBPACK_IMPORTED_MODULE_12__series_vertical_component__["a" /* SeriesVerticalComponent */]
+                __WEBPACK_IMPORTED_MODULE_12__series_vertical_component__["b" /* SeriesVerticalComponent */]
             ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_2__bar_component__["a" /* BarComponent */],
@@ -3917,7 +3917,7 @@ var BarChartModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_9__bar_vertical_normalized_component__["a" /* BarVerticalNormalizedComponent */],
                 __WEBPACK_IMPORTED_MODULE_10__bar_vertical_stacked_component__["a" /* BarVerticalStackedComponent */],
                 __WEBPACK_IMPORTED_MODULE_11__series_horizontal_component__["a" /* SeriesHorizontal */],
-                __WEBPACK_IMPORTED_MODULE_12__series_vertical_component__["a" /* SeriesVerticalComponent */]
+                __WEBPACK_IMPORTED_MODULE_12__series_vertical_component__["b" /* SeriesVerticalComponent */]
             ]
         })
     ], BarChartModule);
@@ -4680,15 +4680,28 @@ var BarHorizontalStackedComponent = /** @class */ (function (_super) {
     };
     BarHorizontalStackedComponent.prototype.getValueDomain = function () {
         var domain = [];
+        var smallest = 0;
+        var biggest = 0;
         for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
             var group = _a[_i];
-            var sum = 0;
+            var smallestSum = 0;
+            var biggestSum = 0;
             for (var _b = 0, _c = group.series; _b < _c.length; _b++) {
                 var d = _c[_b];
-                sum += d.value;
+                if (d.value < 0) {
+                    smallestSum += d.value;
+                }
+                else {
+                    biggestSum += d.value;
+                }
+                smallest = d.value < smallest ? d.value : smallest;
+                biggest = d.value > biggest ? d.value : biggest;
             }
-            domain.push(sum);
+            domain.push(smallestSum);
+            domain.push(biggestSum);
         }
+        domain.push(smallest);
+        domain.push(biggest);
         var min = Math.min.apply(Math, [0].concat(domain));
         var max = this.xScaleMax
             ? Math.max.apply(Math, [this.xScaleMax].concat(domain)) : Math.max.apply(Math, domain);
@@ -5915,15 +5928,28 @@ var BarVerticalStackedComponent = /** @class */ (function (_super) {
     };
     BarVerticalStackedComponent.prototype.getValueDomain = function () {
         var domain = [];
+        var smallest = 0;
+        var biggest = 0;
         for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
             var group = _a[_i];
-            var sum = 0;
+            var smallestSum = 0;
+            var biggestSum = 0;
             for (var _b = 0, _c = group.series; _b < _c.length; _b++) {
                 var d = _c[_b];
-                sum += d.value;
+                if (d.value < 0) {
+                    smallestSum += d.value;
+                }
+                else {
+                    biggestSum += d.value;
+                }
+                smallest = d.value < smallest ? d.value : smallest;
+                biggest = d.value > biggest ? d.value : biggest;
             }
-            domain.push(sum);
+            domain.push(smallestSum);
+            domain.push(biggestSum);
         }
+        domain.push(smallest);
+        domain.push(biggest);
         var min = Math.min.apply(Math, [0].concat(domain));
         var max = this.yScaleMax
             ? Math.max.apply(Math, [this.yScaleMax].concat(domain)) : Math.max.apply(Math, domain);
@@ -6225,7 +6251,8 @@ var BarVerticalComponent = /** @class */ (function (_super) {
     };
     BarVerticalComponent.prototype.getYDomain = function () {
         var values = this.results.map(function (d) { return d.value; });
-        var min = Math.min.apply(Math, [0].concat(values));
+        var min = this.yScaleMin
+            ? Math.min.apply(Math, [this.yScaleMin].concat(values)) : Math.min.apply(Math, values);
         var max = this.yScaleMax
             ? Math.max.apply(Math, [this.yScaleMax].concat(values)) : Math.max.apply(Math, values);
         return [min, max];
@@ -6365,6 +6392,10 @@ var BarVerticalComponent = /** @class */ (function (_super) {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
         __metadata("design:type", Number)
     ], BarVerticalComponent.prototype, "yScaleMax", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Number)
+    ], BarVerticalComponent.prototype, "yScaleMin", void 0);
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
@@ -6681,8 +6712,8 @@ var BarComponent = /** @class */ (function () {
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "h", function() { return __WEBPACK_IMPORTED_MODULE_0__bar_chart_module__["h"]; });
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "i", function() { return __WEBPACK_IMPORTED_MODULE_0__bar_chart_module__["i"]; });
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "j", function() { return __WEBPACK_IMPORTED_MODULE_0__bar_chart_module__["j"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "k", function() { return __WEBPACK_IMPORTED_MODULE_0__bar_chart_module__["k"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "l", function() { return __WEBPACK_IMPORTED_MODULE_0__bar_chart_module__["l"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "l", function() { return __WEBPACK_IMPORTED_MODULE_0__bar_chart_module__["k"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "m", function() { return __WEBPACK_IMPORTED_MODULE_0__bar_chart_module__["l"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__bar_component__ = __webpack_require__("./src/bar-chart/bar.component.ts");
 /* unused harmony namespace reexport */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bar_horizontal_component__ = __webpack_require__("./src/bar-chart/bar-horizontal.component.ts");
@@ -6704,7 +6735,7 @@ var BarComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__bar_vertical_stacked_component__ = __webpack_require__("./src/bar-chart/bar-vertical-stacked.component.ts");
 /* unused harmony namespace reexport */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__series_vertical_component__ = __webpack_require__("./src/bar-chart/series-vertical.component.ts");
-/* unused harmony namespace reexport */
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "k", function() { return __WEBPACK_IMPORTED_MODULE_11__series_vertical_component__["a"]; });
 
 
 
@@ -6731,6 +6762,7 @@ var BarComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_animations__ = __webpack_require__("@angular/animations");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_animations___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__angular_animations__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_label_helper__ = __webpack_require__("./src/common/label.helper.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__series_vertical_component__ = __webpack_require__("./src/bar-chart/series-vertical.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6740,6 +6772,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -6758,7 +6791,12 @@ var SeriesHorizontal = /** @class */ (function () {
     SeriesHorizontal.prototype.update = function () {
         var _this = this;
         this.updateTooltipSettings();
-        var d0 = 0;
+        var d0 = (_a = {},
+            _a[__WEBPACK_IMPORTED_MODULE_3__series_vertical_component__["a" /* D0Types */].positive] = 0,
+            _a[__WEBPACK_IMPORTED_MODULE_3__series_vertical_component__["a" /* D0Types */].negative] = 0,
+            _a);
+        var d0Type;
+        d0Type = __WEBPACK_IMPORTED_MODULE_3__series_vertical_component__["a" /* D0Types */].positive;
         var total;
         if (this.type === 'normalized') {
             total = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return sum + d; }, 0);
@@ -6768,6 +6806,7 @@ var SeriesHorizontal = /** @class */ (function () {
             var label = d.name;
             var formattedLabel = Object(__WEBPACK_IMPORTED_MODULE_2__common_label_helper__["a" /* formatLabel */])(label);
             var roundEdges = _this.roundEdges;
+            d0Type = value > 0 ? __WEBPACK_IMPORTED_MODULE_3__series_vertical_component__["a" /* D0Types */].positive : __WEBPACK_IMPORTED_MODULE_3__series_vertical_component__["a" /* D0Types */].negative;
             var bar = {
                 value: value,
                 label: label,
@@ -6787,9 +6826,9 @@ var SeriesHorizontal = /** @class */ (function () {
                 bar.y = _this.yScale(label);
             }
             else if (_this.type === 'stacked') {
-                var offset0 = d0;
+                var offset0 = d0[d0Type];
                 var offset1 = offset0 + value;
-                d0 += value;
+                d0[d0Type] += value;
                 bar.width = _this.xScale(offset1) - _this.xScale(offset0);
                 bar.x = _this.xScale(offset0);
                 bar.y = 0;
@@ -6797,9 +6836,9 @@ var SeriesHorizontal = /** @class */ (function () {
                 bar.offset1 = offset1;
             }
             else if (_this.type === 'normalized') {
-                var offset0 = d0;
+                var offset0 = d0[d0Type];
                 var offset1 = offset0 + value;
-                d0 += value;
+                d0[d0Type] += value;
                 if (total > 0) {
                     offset0 = (offset0 * 100) / total;
                     offset1 = (offset1 * 100) / total;
@@ -6836,6 +6875,7 @@ var SeriesHorizontal = /** @class */ (function () {
             bar.tooltipText = _this.tooltipDisabled ? undefined : "\n        <span class=\"tooltip-label\">" + tooltipLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
             return bar;
         });
+        var _a;
     };
     SeriesHorizontal.prototype.updateTooltipSettings = function () {
         this.tooltipPlacement = this.tooltipDisabled ? undefined : 'top';
@@ -6947,7 +6987,8 @@ var SeriesHorizontal = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SeriesVerticalComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return D0Types; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SeriesVerticalComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("@angular/core");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_animations__ = __webpack_require__("@angular/animations");
@@ -6965,6 +7006,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+var D0Types;
+(function (D0Types) {
+    D0Types["positive"] = "positive";
+    D0Types["negative"] = "negative";
+})(D0Types || (D0Types = {}));
 var SeriesVerticalComponent = /** @class */ (function () {
     function SeriesVerticalComponent() {
         this.type = 'standard';
@@ -6984,7 +7030,11 @@ var SeriesVerticalComponent = /** @class */ (function () {
         if (this.series.length) {
             width = this.xScale.bandwidth();
         }
-        var d0 = 0;
+        var d0 = (_a = {},
+            _a[D0Types.positive] = 0,
+            _a[D0Types.negative] = 0,
+            _a);
+        var d0Type = D0Types.positive;
         var total;
         if (this.type === 'normalized') {
             total = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return sum + d; }, 0);
@@ -6994,6 +7044,7 @@ var SeriesVerticalComponent = /** @class */ (function () {
             var label = d.name;
             var formattedLabel = Object(__WEBPACK_IMPORTED_MODULE_2__common_label_helper__["a" /* formatLabel */])(label);
             var roundEdges = _this.roundEdges;
+            d0Type = value > 0 ? D0Types.positive : D0Types.negative;
             var bar = {
                 value: value,
                 label: label,
@@ -7003,7 +7054,7 @@ var SeriesVerticalComponent = /** @class */ (function () {
                 formattedLabel: formattedLabel,
                 height: 0,
                 x: 0,
-                y: 0
+                y: 0,
             };
             if (_this.type === 'standard') {
                 bar.height = Math.abs(_this.yScale(value) - _this.yScale(0));
@@ -7016,9 +7067,9 @@ var SeriesVerticalComponent = /** @class */ (function () {
                 }
             }
             else if (_this.type === 'stacked') {
-                var offset0 = d0;
+                var offset0 = d0[d0Type];
                 var offset1 = offset0 + value;
-                d0 += value;
+                d0[d0Type] += value;
                 bar.height = _this.yScale(offset0) - _this.yScale(offset1);
                 bar.x = 0;
                 bar.y = _this.yScale(offset1);
@@ -7026,9 +7077,9 @@ var SeriesVerticalComponent = /** @class */ (function () {
                 bar.offset1 = offset1;
             }
             else if (_this.type === 'normalized') {
-                var offset0 = d0;
+                var offset0 = d0[d0Type];
                 var offset1 = offset0 + value;
-                d0 += value;
+                d0[d0Type] += value;
                 if (total > 0) {
                     offset0 = (offset0 * 100) / total;
                     offset1 = (offset1 * 100) / total;
@@ -7054,7 +7105,8 @@ var SeriesVerticalComponent = /** @class */ (function () {
                 }
                 else {
                     bar.color = _this.colors.getColor(bar.offset1);
-                    bar.gradientStops = _this.colors.getLinearGradientStops(bar.offset1, bar.offset0);
+                    bar.gradientStops =
+                        _this.colors.getLinearGradientStops(bar.offset1, bar.offset0);
                 }
             }
             var tooltipLabel = formattedLabel;
@@ -7065,6 +7117,7 @@ var SeriesVerticalComponent = /** @class */ (function () {
             bar.tooltipText = _this.tooltipDisabled ? undefined : "\n        <span class=\"tooltip-label\">" + tooltipLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
             return bar;
         });
+        var _a;
     };
     SeriesVerticalComponent.prototype.updateTooltipSettings = function () {
         this.tooltipPlacement = this.tooltipDisabled ? undefined : 'top';
@@ -10949,6 +11002,10 @@ var ScaleLegendComponent = /** @class */ (function () {
 function roundedRect(x, y, w, h, r, _a) {
     var tl = _a[0], tr = _a[1], bl = _a[2], br = _a[3];
     var retval = '';
+    w = w | 0;
+    h = h | 0;
+    w = w < 1 ? 1 : w;
+    h = h < 1 ? 1 : h;
     retval = "M" + [x + r, y];
     retval += "h" + (w - 2 * r);
     if (tr) {
@@ -14768,9 +14825,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "BarVertical2DComponent", function() { return __WEBPACK_IMPORTED_MODULE_3__bar_chart__["g"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "BarVerticalNormalizedComponent", function() { return __WEBPACK_IMPORTED_MODULE_3__bar_chart__["i"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "BarVerticalStackedComponent", function() { return __WEBPACK_IMPORTED_MODULE_3__bar_chart__["j"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "SeriesHorizontal", function() { return __WEBPACK_IMPORTED_MODULE_3__bar_chart__["k"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "SeriesVerticalComponent", function() { return __WEBPACK_IMPORTED_MODULE_3__bar_chart__["l"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "SeriesHorizontal", function() { return __WEBPACK_IMPORTED_MODULE_3__bar_chart__["l"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "SeriesVerticalComponent", function() { return __WEBPACK_IMPORTED_MODULE_3__bar_chart__["m"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "BarChartModule", function() { return __WEBPACK_IMPORTED_MODULE_3__bar_chart__["a"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "D0Types", function() { return __WEBPACK_IMPORTED_MODULE_3__bar_chart__["k"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__bubble_chart__ = __webpack_require__("./src/bubble-chart/index.ts");
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "BubbleChartComponent", function() { return __WEBPACK_IMPORTED_MODULE_4__bubble_chart__["a"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "BubbleSeriesComponent", function() { return __WEBPACK_IMPORTED_MODULE_4__bubble_chart__["c"]; });
@@ -17243,6 +17301,7 @@ var PieGridComponent = /** @class */ (function (_super) {
     function PieGridComponent() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.tooltipDisabled = false;
+        _this.label = 'Total';
         _this.margin = [20, 20, 20, 20];
         return _this;
     }
@@ -17336,13 +17395,17 @@ var PieGridComponent = /** @class */ (function (_super) {
         __metadata("design:type", Function)
     ], PieGridComponent.prototype, "tooltipText", void 0);
     __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", String)
+    ], PieGridComponent.prototype, "label", void 0);
+    __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ContentChild"])('tooltipTemplate'),
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["TemplateRef"])
     ], PieGridComponent.prototype, "tooltipTemplate", void 0);
     PieGridComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'ngx-charts-pie-grid',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\"\n      [animations]=\"animations\">\n      <svg:g [attr.transform]=\"transform\" class=\"pie-grid chart\">\n        <svg:g\n          *ngFor=\"let series of series\"\n          class=\"pie-grid-item\"\n          [attr.transform]=\"series.transform\">\n          <svg:g ngx-charts-pie-grid-series\n            [colors]=\"series.colors\"\n            [data]=\"series.data\"\n            [innerRadius]=\"series.innerRadius\"\n            [outerRadius]=\"series.outerRadius\"\n            [animations]=\"animations\"\n            (select)=\"onClick($event)\"\n            ngx-tooltip\n            [tooltipDisabled]=\"tooltipDisabled\"\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"tooltipTemplate ? undefined : tooltipText({data: series})\"\n            [tooltipTemplate]=\"tooltipTemplate\"\n            [tooltipContext]=\"series.data[0].data\"\n          />\n          <svg:text *ngIf=\"animations\"\n            class=\"label percent-label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            ngx-charts-count-up\n            [countTo]=\"series.percent\"\n            [countSuffix]=\"'%'\"\n            text-anchor=\"middle\">\n          </svg:text>\n          <svg:text *ngIf=\"!animations\"\n            class=\"label percent-label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.percent.toLocaleString()}}\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.label}}\n          </svg:text>\n          <svg:text *ngIf=\"animations\"\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\"\n            ngx-charts-count-up\n            [countTo]=\"series.total\"\n            [countPrefix]=\"'Total: '\">\n          </svg:text>\n          <svg:text *ngIf=\"!animations\"\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\">\n            Total: {{series.total.toLocaleString()}}\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\"\n      [animations]=\"animations\">\n      <svg:g [attr.transform]=\"transform\" class=\"pie-grid chart\">\n        <svg:g\n          *ngFor=\"let series of series\"\n          class=\"pie-grid-item\"\n          [attr.transform]=\"series.transform\">\n          <svg:g ngx-charts-pie-grid-series\n            [colors]=\"series.colors\"\n            [data]=\"series.data\"\n            [innerRadius]=\"series.innerRadius\"\n            [outerRadius]=\"series.outerRadius\"\n            [animations]=\"animations\"\n            (select)=\"onClick($event)\"\n            ngx-tooltip\n            [tooltipDisabled]=\"tooltipDisabled\"\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"tooltipTemplate ? undefined : tooltipText({data: series})\"\n            [tooltipTemplate]=\"tooltipTemplate\"\n            [tooltipContext]=\"series.data[0].data\"\n          />\n          <svg:text *ngIf=\"animations\"\n            class=\"label percent-label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            ngx-charts-count-up\n            [countTo]=\"series.percent\"\n            [countSuffix]=\"'%'\"\n            text-anchor=\"middle\">\n          </svg:text>\n          <svg:text *ngIf=\"!animations\"\n            class=\"label percent-label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.percent.toLocaleString()}}\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.label}}\n          </svg:text>\n          <svg:text *ngIf=\"animations\"\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\"\n            ngx-charts-count-up\n            [countTo]=\"series.total\"\n            [countPrefix]=\"label + ': '\">\n          </svg:text>\n          <svg:text *ngIf=\"!animations\"\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\">\n            Total: {{series.total.toLocaleString()}}\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             styles: [
                 __webpack_require__("./src/common/base-chart.component.scss"),
                 __webpack_require__("./src/pie-chart/pie-grid.component.scss")
@@ -18664,6 +18727,8 @@ var TreeMapCellComponent = /** @class */ (function () {
         this.gradient = false;
         this.animations = true;
         this.select = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this.isIe = navigator.userAgent.indexOf('Trident') > -1;
+        this.test = navigator.userAgent;
         this.initialized = false;
         this.element = element.nativeElement;
     }
@@ -18802,7 +18867,7 @@ var TreeMapCellComponent = /** @class */ (function () {
     TreeMapCellComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'g[ngx-charts-tree-map-cell]',
-            template: "\n    <svg:g>\n      <defs *ngIf=\"gradient\">\n        <svg:g ngx-charts-svg-linear-gradient\n          orientation=\"vertical\"\n          [name]=\"gradientId\"\n          [stops]=\"gradientStops\"\n        />\n      </defs>\n      <svg:rect\n        [attr.fill]=\"gradient ? gradientUrl : fill\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        [attr.x]=\"x\"\n        [attr.y]=\"y\"\n        [style.cursor]=\"'pointer'\"\n        class=\"cell\"\n        (click)=\"onClick()\"\n      />\n      <svg:foreignObject\n        *ngIf=\"width >= 70 && height >= 35\"\n        [attr.x]=\"x\"\n        [attr.y]=\"y\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        class=\"label\"\n        [style.pointer-events]=\"'none'\">\n        <xhtml:p\n          [style.color]=\"getTextColor()\"\n          [style.height]=\"height + 'px'\"\n          [style.width]=\"width + 'px'\">\n          <xhtml:span class=\"treemap-label\" [innerHTML]=\"formattedLabel\">\n          </xhtml:span>\n          <xhtml:br />\n          <xhtml:span *ngIf=\"animations\"\n            class=\"treemap-val\" \n            ngx-charts-count-up \n            [countTo]=\"value\"\n            [valueFormatting]=\"valueFormatting\">\n          </xhtml:span>\n          <xhtml:span *ngIf=\"!animations\"\n            class=\"treemap-val\">\n            {{formattedValue}}\n          </xhtml:span>\n        </xhtml:p>\n      </svg:foreignObject>\n    </svg:g>\n  ",
+            template: "\n  \n    <svg:g>\n      <defs *ngIf=\"gradient\">\n        <svg:g ngx-charts-svg-linear-gradient\n          orientation=\"vertical\"\n          [name]=\"gradientId\"\n          [stops]=\"gradientStops\"\n        />\n      </defs>\n      <svg:rect\n        [attr.fill]=\"gradient ? gradientUrl : fill\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        [attr.x]=\"x\"\n        [attr.y]=\"y\"\n        [style.cursor]=\"'pointer'\"\n        class=\"cell\"\n        (click)=\"onClick()\"\n      />\n\n      <svg:text \n      *ngIf=\"width >= 70 && height >= 35\"\n      class=\"treemap-val\"\n      [attr.x]=\"x + width/2\"\n      [attr.y]=\"y + height/2\"\n      [attr.width]=\"width\"\n      [attr.height]=\"height\"\n      class=\"label\"\n      [style.pointer-events]=\"'none'\"\n      [style.fill]=\"getTextColor()\">\n      {{formattedLabel}}\n      </svg:text>\n\n      <svg:text \n      *ngIf=\"width >= 70 && height >= 35\"\n      class=\"treemap-val\"\n      [attr.x]=\"x + width/2\"\n      [attr.y]=\"y + height/2 + 15\"\n      [attr.width]=\"width\"\n      [attr.height]=\"height\"\n      class=\"label\"\n      [style.pointer-events]=\"'none'\"\n      [style.fill]=\"getTextColor()\">\n      {{formattedValue}}\n      </svg:text>\n    </svg:g>\n  ",
             changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]])
