@@ -30,52 +30,32 @@ import { id } from '../utils/id';
         class="cell"
         (click)="onClick()"
       />
-     <svg:foreignObject 
-      *ngIf="!isIe && width >= 70 && height >= 35"
-      [attr.x]="x"
-      [attr.y]="y"
+
+      <svg:text 
+      *ngIf="width >= 70 && height >= 35"
+      class="treemap-val"
+      [attr.x]="x + width/2"
+      [attr.y]="y + height/2"
       [attr.width]="width"
       [attr.height]="height"
       class="label"
-      [style.pointer-events]="'none'">
-      <xhtml:p
-        [style.color]="getTextColor()"
-        [style.height]="height + 'px'"
-        [style.width]="width + 'px'">
-        <xhtml:span class="treemap-label" [innerHTML]="formattedLabel">
-        </xhtml:span>
-        <xhtml:br />
-        <xhtml:span *ngIf="animations"
-          class="treemap-val" 
-          ngx-charts-count-up 
-          [countTo]="value"
-          [valueFormatting]="valueFormatting">
-        </xhtml:span>
-        <xhtml:span *ngIf="!animations"
-          class="treemap-val">
-          {{formattedValue}}
-        </xhtml:span>
-      </xhtml:p>
-    </svg:foreignObject>
+      [style.pointer-events]="'none'"
+      [style.fill]="getTextColor()">
+      {{formattedLabel}}
+      </svg:text>
 
-    <svg
-      [attr.x]="x" [attr.y]="y" [attr.width]="width" [attr.height]="height" 
-      class="label" [style.pointer-events]="'none'">
-        <text [style.fill]="getTextColor()" x="0" y="50%" dy="0" text-anchor="middle">
-          <tspan x="50%" dy=".6em"> {{isIe}} </tspan>
-          <tspan x="50%" dy="1.2em"> {{test}} </tspan>
-        </text>
-      </svg>
-     
-    <svg *ngIf="isIe && width >= 70 && height >= 35"
-      [attr.x]="x" [attr.y]="y" [attr.width]="width" [attr.height]="height" 
-      class="label" [style.pointer-events]="'none'">
-        <text [style.fill]="getTextColor()" x="0" y="50%" dy="0" text-anchor="middle">
-          <tspan x="50%" dy=".6em"> {{formattedLabel}} </tspan>
-          <tspan x="50%" dy="1.2em"> {{formattedValue}} </tspan>
-        </text>
-      </svg>
-
+      <svg:text 
+      *ngIf="width >= 70 && height >= 35"
+      class="treemap-val"
+      [attr.x]="x + width/2"
+      [attr.y]="y + height/2 + 15"
+      [attr.width]="width"
+      [attr.height]="height"
+      class="label"
+      [style.pointer-events]="'none'"
+      [style.fill]="getTextColor()">
+      {{formattedValue}}
+      </svg:text>
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
