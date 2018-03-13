@@ -15,9 +15,9 @@
 | label           | string             | 'Total'       | the text to show under the total value                                                                          |
 | tooltipDisabled | boolean            | false         | show or hide the tooltip                                                                                                                                                                                             |
 | tooltipTemplate | TemplateRef        |               | a custom ng-template to be displayed inside the tooltip                                                                                                                                                              |
+| minWidth        | number             | 150           | minimum width of each graph in grid                                                                                                                                                                                   |
 | designatedTotal | number             |               | total number that the value of each object in the results array will be compared to. If left undefined, the value of each object will automatically be compared to the total of all the values in the results array. |
-
-| minWidth        | number             | 150           | minimum width of each graph in grid                                                                                                                                                                                  |              
+        
 
 # Outputs
 
