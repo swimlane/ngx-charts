@@ -8,6 +8,12 @@
 export function roundedRect(x, y, w, h, r, [tl, tr, bl, br]: boolean[]) {
   let retval = '';
 
+  w = Math.floor(w);
+  h = Math.floor(h);
+
+  w = w === 0 ? 1 : w;
+  h = h === 0 ? 1 : h;
+
   retval = `M${[x + r, y]}`;
   retval += `h${w - 2 * r}`;
 

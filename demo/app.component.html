@@ -777,6 +777,31 @@
         (onFilter)="onFilter($event)">
       </ngx-charts-timeline-filter-bar-chart>
     </div>
+    <ngx-charts-bar-vertical-stacked
+      *ngIf="chartType === 'bar-vertical-stacked-negative'"
+      class="chart-container"
+      [view]="view"
+      [scheme]="colorScheme"
+      [schemeType]="schemeType"
+      [results]="fiscalYearReport"
+      [animations]="animations"
+      [gradient]="gradient"
+      [tooltipDisabled]="tooltipDisabled"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [legend]="showLegend"
+      [legendTitle]="legendTitle"
+      (legendLabelClick)="onLegendLabelClick($event)"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="'Fiscal Year Report'"
+      [showGridLines]="showGridLines"
+      [barPadding]="barPadding"
+      [roundDomains]="roundDomains"
+      [yScaleMax]="yScaleMax"
+      (select)="select($event)">
+    </ngx-charts-bar-vertical-stacked>
   </div>
   <div class="sidebar">
     <h1>
@@ -815,6 +840,7 @@
     <div [hidden]="!dataVisable" style="margin-left: 10px;">
       <pre *ngIf="chart.inputFormat === 'singleSeries'">{{single | json}}</pre>
       <pre *ngIf="chart.inputFormat === 'multiSeries' && !linearScale">{{multi | json}}</pre>
+      <pre *ngIf="chart.inputFormat === 'multiSeriesNegative' && !linearScale">{{fiscalYearReport | json}}</pre>
       <pre *ngIf="chart.inputFormat === 'multiSeries' && linearScale && (!range)">{{dateData | json}}</pre>
       <pre *ngIf="chart.inputFormat === 'multiSeries' && linearScale && range">{{dateDataWithRange | json}}</pre>
       <pre *ngIf="chart.inputFormat === 'bubble'">{{bubble | json}}</pre>
