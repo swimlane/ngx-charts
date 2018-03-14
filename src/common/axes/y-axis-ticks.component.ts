@@ -90,6 +90,8 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() referenceLines;
   @Input() showRefLabels: boolean = false;
   @Input() showRefLines: boolean = false;
+  @Input() maxTickHeight = 20;
+  @Input() maxScaleTickHeight = 50;
 
   @Output() dimensionsChanged = new EventEmitter();
 
@@ -221,8 +223,8 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
 
   getTicks(): any {
     let ticks;
-    const maxTicks = this.getMaxTicks(20);
-    const maxScaleTicks = this.getMaxTicks(50);
+    const maxTicks = this.getMaxTicks(this.maxTickHeight);
+    const maxScaleTicks = this.getMaxTicks(this.maxScaleTickHeight);
 
     if (this.tickValues) {
       ticks = this.tickValues;
