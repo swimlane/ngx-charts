@@ -135,6 +135,16 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
     }
   }
 
+  protected getUniqueXDomainValues(): any[] {
+    const valueSet = new Set();
+    for (const results of this.results) {
+      for (const d of results.series) {
+        valueSet.add(d.name);
+      }
+    }
+    return Array.from(valueSet);
+  }
+
   private bindWindowResizeEvent(): void {
     const source = observableFromEvent(window, 'resize', null, null);
     const subscription = source.pipe(debounceTime(200)).subscribe(e => {

@@ -276,15 +276,7 @@ export class LineChartComponent extends BaseChartComponent {
   }
 
   getXDomain(): any[] {
-    let values = [];
-
-    for (const results of this.results) {
-      for (const d of results.series) {
-        if (!values.includes(d.name)) {
-          values.push(d.name);
-        }
-      }
-    }
+    let values = super.getUniqueXDomainValues();
 
     this.scaleType = this.getScaleType(values);
     let domain = [];
