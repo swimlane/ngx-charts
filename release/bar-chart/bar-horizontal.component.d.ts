@@ -17,7 +17,11 @@ export declare class BarHorizontalComponent extends BaseChartComponent {
     activeEntries: any[];
     schemeType: string;
     xAxisTickFormatting: any;
+    xAxisTooltip: boolean;
+    xAxisTooltipFormatting: any;
     yAxisTickFormatting: any;
+    yAxisTooltip: boolean;
+    yAxisTooltipFormatting: any;
     barPadding: number;
     roundDomains: boolean;
     roundEdges: boolean;

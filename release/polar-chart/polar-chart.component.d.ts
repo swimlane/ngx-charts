@@ -19,6 +19,8 @@ export declare class PolarChartComponent extends BaseChartComponent {
     rangeFillOpacity: number;
     xAxisTickFormatting: (o: any) => any;
     yAxisTickFormatting: (o: any) => any;
+    yAxisTooltip: boolean;
+    yAxisTooltipFormatting: any;
     roundDomains: boolean;
     tooltipDisabled: boolean;
     showSeriesOnHover: boolean;

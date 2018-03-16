@@ -49,6 +49,8 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [tickFormatting]="xAxisTickFormatting"
+          [xAxisTooltip]="xAxisTooltip"
+          [xAxisTooltipFormatting]="xAxisTooltipFormatting"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
         <svg:g ngx-charts-y-axis
@@ -58,6 +60,8 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
           [tickFormatting]="yAxisTickFormatting"
+          [yAxisTooltip]="yAxisTooltip"
+          [yAxisTooltipFormatting]="yAxisTooltipFormatting"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
         <svg:g
@@ -117,6 +121,10 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   @Input() schemeType: string;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
+  @Input() xAxisTooltip: boolean = false;
+  @Input() xAxisTooltipFormatting: any;
+  @Input() yAxisTooltip: boolean = false;
+  @Input() yAxisTooltipFormatting: any;
   @Input() groupPadding = 16;
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;

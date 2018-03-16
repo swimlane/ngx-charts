@@ -6,6 +6,7 @@ export declare class PieGridComponent extends BaseChartComponent {
     designatedTotal: number;
     tooltipDisabled: boolean;
     tooltipText: (o: any) => any;
+    label: string;
     dims: ViewDimensions;
     data: any[];
     transform: string;

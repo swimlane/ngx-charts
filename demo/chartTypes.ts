@@ -9,7 +9,7 @@ const chartGroups = [
         options: [
           'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains', 'tooltipDisabled', 'roundEdges', 'yScaleMax'
+          'showGridLines', 'roundDomains', 'tooltipDisabled', 'roundEdges', 'yScaleMax', 'xAxisTooltip', 'yAxisTooltip'
         ]
       },
       {
@@ -19,7 +19,7 @@ const chartGroups = [
         options: [
           'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains', 'tooltipDisabled', 'roundEdges', 'xScaleMax'
+          'showGridLines', 'roundDomains', 'tooltipDisabled', 'roundEdges', 'xScaleMax', 'xAxisTooltip', 'yAxisTooltip'
         ],
         defaults: {
           yAxisLabel: 'Country',
@@ -33,7 +33,7 @@ const chartGroups = [
         options: [
           'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding', 'groupPadding',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains', 'tooltipDisabled', 'roundEdges', 'yScaleMax'
+          'showGridLines', 'roundDomains', 'tooltipDisabled', 'roundEdges', 'yScaleMax', 'xAxisTooltip', 'yAxisTooltip'
         ]
       },
       {
@@ -43,7 +43,7 @@ const chartGroups = [
         options: [
           'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding', 'groupPadding',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains', 'tooltipDisabled', 'roundEdges', 'xScaleMax'
+          'showGridLines', 'roundDomains', 'tooltipDisabled', 'roundEdges', 'xScaleMax', 'xAxisTooltip', 'yAxisTooltip'
         ],
         defaults: {
           yAxisLabel: 'Country',
@@ -57,7 +57,7 @@ const chartGroups = [
         options: [
           'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains', 'tooltipDisabled', 'yScaleMax'
+          'showGridLines', 'roundDomains', 'tooltipDisabled', 'yScaleMax', 'xAxisTooltip', 'yAxisTooltip'
         ]
       },
       {
@@ -67,7 +67,7 @@ const chartGroups = [
         options: [
           'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains', 'tooltipDisabled', 'xScaleMax'
+          'showGridLines', 'roundDomains', 'tooltipDisabled', 'xScaleMax', 'xAxisTooltip', 'yAxisTooltip'
         ],
         defaults: {
           yAxisLabel: 'Country',
@@ -81,7 +81,7 @@ const chartGroups = [
         options: [
           'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains', 'tooltipDisabled'
+          'showGridLines', 'roundDomains', 'tooltipDisabled', 'xAxisTooltip', 'yAxisTooltip'
         ],
         defaults: {
           yAxisLabel: 'Normalized GDP Per Capita',
@@ -95,7 +95,7 @@ const chartGroups = [
         options: [
           'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains', 'tooltipDisabled'
+          'showGridLines', 'roundDomains', 'tooltipDisabled', 'xAxisTooltip', 'yAxisTooltip'
         ],
         defaults: {
           yAxisLabel: 'Country',
@@ -143,7 +143,7 @@ const chartGroups = [
           'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve',
           'rangeFillOpacity', 'roundDomains', 'tooltipDisabled', 'showRefLines',
           'referenceLines', 'showRefLabels',
-          'xScaleMin', 'xScaleMax', 'yScaleMin', 'yScaleMax'
+          'xScaleMin', 'xScaleMax', 'yScaleMin', 'yScaleMax', 'xAxisTooltip', 'yAxisTooltip'
         ],
         defaults: {
           yAxisLabel: 'GDP Per Capita',
@@ -159,7 +159,7 @@ const chartGroups = [
           'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
           'yAxisLabel', 'autoScale', 'showGridLines', 'curveClosed',
-          'roundDomains', 'tooltipDisabled'
+          'roundDomains', 'tooltipDisabled', 'yAxisTooltip'
         ],
         defaults: {
           yAxisLabel: 'GDP Per Capita',
@@ -176,7 +176,7 @@ const chartGroups = [
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
           'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve',
           'roundDomains', 'tooltipDisabled',
-          'xScaleMin', 'xScaleMax', 'yScaleMin', 'yScaleMax'
+          'xScaleMin', 'xScaleMax', 'yScaleMin', 'yScaleMax', 'xAxisTooltip', 'yAxisTooltip'
         ],
         defaults: {
           yAxisLabel: 'GDP Per Capita',
@@ -193,7 +193,7 @@ const chartGroups = [
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
           'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve',
           'roundDomains', 'tooltipDisabled',
-          'xScaleMin', 'xScaleMax', 'yScaleMin', 'yScaleMax'
+          'xScaleMin', 'xScaleMax', 'yScaleMin', 'yScaleMax', 'xAxisTooltip', 'yAxisTooltip'
         ],
         defaults: {
           yAxisLabel: 'GDP Per Capita',
@@ -209,7 +209,7 @@ const chartGroups = [
           'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
           'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve',
-          'roundDomains', 'tooltipDisabled'
+          'roundDomains', 'tooltipDisabled', 'xAxisTooltip', 'yAxisTooltip'
         ],
         defaults: {
           yAxisLabel: 'Normalized GDP Per Capita',
@@ -230,7 +230,7 @@ const chartGroups = [
           'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'showLegend', 'legendTitle',
           'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines',
           'roundDomains', 'autoScale', 'minRadius', 'maxRadius', 'tooltipDisabled',
-          'xScaleMin', 'xScaleMax', 'yScaleMin', 'yScaleMax'
+          'xScaleMin', 'xScaleMax', 'yScaleMin', 'yScaleMax', 'xAxisTooltip', 'yAxisTooltip'
         ],
         defaults: {
           xAxisLabel: 'Census Date',
@@ -250,7 +250,7 @@ const chartGroups = [
         options: [
           'animations', 'colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend',
           'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'innerPadding', 'tooltipDisabled'
+          'innerPadding', 'tooltipDisabled', 'xAxisTooltip', 'yAxisTooltip'
         ],
         defaults: {
           yAxisLabel: 'Census Date',

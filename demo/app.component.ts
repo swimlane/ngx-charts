@@ -81,6 +81,8 @@ export class AppComponent implements OnInit {
   xAxisLabel = 'Country';
   showYAxisLabel = true;
   yAxisLabel = 'GDP Per Capita';
+  xAxisTooltip = false;
+  yAxisTooltip = false;
   showGridLines = true;
   innerPadding = '10%';
   barPadding = 8;
@@ -428,6 +430,10 @@ export class AppComponent implements OnInit {
 
   onLegendLabelClick(entry) {
     console.log('Legend clicked', entry);
+  }
+
+  formatAxisTip(tipText) {
+    return 'Formatted axis tip: ' + tipText;
   }
 
   getCalendarData(): any[] {

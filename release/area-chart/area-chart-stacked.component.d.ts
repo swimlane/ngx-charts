@@ -19,6 +19,10 @@ export declare class AreaChartStackedComponent extends BaseChartComponent {
     schemeType: string;
     xAxisTickFormatting: any;
     yAxisTickFormatting: any;
+    xAxisTooltip: boolean;
+    xAxisTooltipFormatting: any;
+    yAxisTooltip: boolean;
+    yAxisTooltipFormatting: any;
     roundDomains: boolean;
     tooltipDisabled: boolean;
     xScaleMin: any;

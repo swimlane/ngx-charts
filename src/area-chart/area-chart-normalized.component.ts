@@ -46,6 +46,8 @@ import { id } from '../utils/id';
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [tickFormatting]="xAxisTickFormatting"
+          [xAxisTooltip]="xAxisTooltip"
+          [xAxisTooltipFormatting]="xAxisTooltipFormatting"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
         <svg:g ngx-charts-y-axis
@@ -56,6 +58,8 @@ import { id } from '../utils/id';
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
           [tickFormatting]="yAxisTickFormatting"
+          [yAxisTooltip]="yAxisTooltip"
+          [yAxisTooltipFormatting]="yAxisTooltipFormatting"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
         <svg:g [attr.clip-path]="clipPath">
@@ -157,6 +161,10 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
   @Input() schemeType: string;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
+  @Input() xAxisTooltip: boolean = false;
+  @Input() xAxisTooltipFormatting: any;
+  @Input() yAxisTooltip: boolean = false;
+  @Input() yAxisTooltipFormatting: any;
   @Input() roundDomains: boolean = false;
   @Input() tooltipDisabled: boolean = false;
 

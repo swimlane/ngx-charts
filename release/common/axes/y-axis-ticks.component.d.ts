@@ -12,6 +12,8 @@ export declare class YAxisTicksComponent implements OnChanges, AfterViewInit {
     referenceLines: any;
     showRefLabels: boolean;
     showRefLines: boolean;
+    tooltip: boolean;
+    tooltipFormatting: any;
     dimensionsChanged: EventEmitter<{}>;
     innerTickSize: any;
     tickPadding: any;
@@ -26,6 +28,7 @@ export declare class YAxisTicksComponent implements OnChanges, AfterViewInit {
     adjustedScale: any;
     transform: (o: any) => string;
     tickFormat: (o: any) => string;
+    tickTipFormat: (o: any) => string;
     ticks: any;
     width: number;
     outerTickSize: number;

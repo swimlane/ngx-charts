@@ -29,6 +29,8 @@ import { ColorHelper } from '../common/color.helper';
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [tickFormatting]="xAxisTickFormatting"
+          [xAxisTooltip]="xAxisTooltip"
+          [xAxisTooltipFormatting]="xAxisTooltipFormatting"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
         <svg:g ngx-charts-y-axis
@@ -38,6 +40,8 @@ import { ColorHelper } from '../common/color.helper';
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
           [tickFormatting]="yAxisTickFormatting"
+          [yAxisTooltip]="yAxisTooltip"
+          [yAxisTooltipFormatting]="yAxisTooltipFormatting"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
         <svg:rect *ngFor="let rect of rects"
@@ -81,6 +85,10 @@ export class HeatMapComponent extends BaseChartComponent {
   @Input() innerPadding: number | number[] = 8;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
+  @Input() xAxisTooltip: boolean = false;
+  @Input() xAxisTooltipFormatting: any;
+  @Input() yAxisTooltip: boolean = false;
+  @Input() yAxisTooltipFormatting: any;
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipText: any;
 

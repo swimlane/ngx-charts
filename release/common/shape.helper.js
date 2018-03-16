@@ -8,6 +8,10 @@
 export function roundedRect(x, y, w, h, r, _a) {
     var tl = _a[0], tr = _a[1], bl = _a[2], br = _a[3];
     var retval = '';
+    w = Math.floor(w);
+    h = Math.floor(h);
+    w = w === 0 ? 1 : w;
+    h = h === 0 ? 1 : h;
     retval = "M" + [x + r, y];
     retval += "h" + (w - 2 * r);
     if (tr) {

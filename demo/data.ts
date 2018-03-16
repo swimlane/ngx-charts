@@ -2,7 +2,7 @@ import { data as countries } from 'emoji-flags';
 
 export const single = [
   {
-    name: 'Germany',
+    name: 'Germany (after the war)',
     value: 40632
   },
   {

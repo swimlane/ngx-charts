@@ -21,6 +21,10 @@ export declare class LineChartComponent extends BaseChartComponent {
     rangeFillOpacity: number;
     xAxisTickFormatting: any;
     yAxisTickFormatting: any;
+    xAxisTooltip: boolean;
+    xAxisTooltipFormatting: any;
+    yAxisTooltip: boolean;
+    yAxisTooltipFormatting: any;
     roundDomains: boolean;
     tooltipDisabled: boolean;
     showRefLines: boolean;

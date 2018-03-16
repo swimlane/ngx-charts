@@ -20,14 +20,20 @@ import { roundedRect } from '../../common/shape.helper';
     <svg:g #ticksel>
       <svg:g *ngFor="let tick of ticks" class="tick"
         [attr.transform]="transform(tick)" >
-        <title>{{tickFormat(tick)}}</title>
+        <title *ngIf="!tooltip">{{tickTipFormat(tickFormat(tick))}}</title>
         <svg:text
           stroke-width="0.01"
           [attr.dy]="dy"
           [attr.x]="x1"
           [attr.y]="y1"
           [attr.text-anchor]="textAnchor"
-          [style.font-size]="'12px'">
+          [style.font-size]="'12px'"
+          ngx-tooltip
+          [tooltipDisabled]="!tooltip"
+          [tooltipPlacement]="'top'"
+          [tooltipType]="'tooltip'"
+          [tooltipTitle]="tickTipFormat(tickFormat(tick))"
+        >
           {{trimLabel(tickFormat(tick))}}
         </svg:text>
       </svg:g>
@@ -90,6 +96,8 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() referenceLines;
   @Input() showRefLabels: boolean = false;
   @Input() showRefLines: boolean = false;
+  @Input() tooltip: boolean = false;
+  @Input() tooltipFormatting;
 
   @Output() dimensionsChanged = new EventEmitter();
 
@@ -106,6 +114,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   adjustedScale: any;
   transform: (o: any) => string;
   tickFormat: (o: any) => string;
+  tickTipFormat: (o: any) => string;
   ticks: any;
   width: number = 0;
   outerTickSize: number = 6;
@@ -158,6 +167,12 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
         }
         return d.toLocaleString();
       };
+    }
+
+    if (this.tooltipFormatting) {
+      this.tickTipFormat = this.tooltipFormatting;
+    } else {
+      this.tickTipFormat = function(d) { return d; };
     }
 
     this.adjustedScale = scale.bandwidth ? function(d) {

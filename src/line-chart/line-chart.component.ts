@@ -52,6 +52,8 @@ import { id } from '../utils/id';
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [tickFormatting]="xAxisTickFormatting"
+          [xAxisTooltip]="xAxisTooltip"
+          [xAxisTooltipFormatting]="xAxisTooltipFormatting"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
         <svg:g ngx-charts-y-axis
@@ -65,6 +67,8 @@ import { id } from '../utils/id';
           [referenceLines]="referenceLines"
           [showRefLines]="showRefLines"
           [showRefLabels]="showRefLabels"
+          [yAxisTooltip]="yAxisTooltip"
+          [yAxisTooltipFormatting]="yAxisTooltipFormatting"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
         <svg:g [attr.clip-path]="clipPath">
@@ -177,6 +181,10 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() rangeFillOpacity: number;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
+  @Input() xAxisTooltip: boolean = false;
+  @Input() xAxisTooltipFormatting: any;
+  @Input() yAxisTooltip: boolean = false;
+  @Input() yAxisTooltipFormatting: any;
   @Input() roundDomains: boolean = false;
   @Input() tooltipDisabled: boolean = false;
   @Input() showRefLines: boolean = false;
