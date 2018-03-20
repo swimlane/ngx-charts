@@ -11,7 +11,7 @@ import { formatLabel } from '..';
   selector: 'g[ngx-charts-bar-label]',
   template: `  
     <svg:text   
-      font-size="11px" 
+      class="textDataLabel" 
       alignment-baseline="middle"     
       [attr.text-anchor]="textAnchor"
       [attr.transform]="transform"
@@ -21,18 +21,20 @@ import { formatLabel } from '..';
     </svg:text>          
 
   `,
+  styleUrls: ['./bar-label.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
   export class BarLabelComponent implements OnChanges {
   
-    @Input() value;    
+    @Input() value;      
+    @Input() valueFormatting: any;
     @Input() barX;
     @Input() barY; 
     @Input() barWidth;
     @Input() barHeight; 
     @Input() orientation;
-
+     
     x: number;
     y: number;
     horizontalPadding: number = 2;
@@ -46,7 +48,12 @@ import { formatLabel } from '..';
     }
   
     update(): void {  
-      this.formatedValue = formatLabel(this.value);  
+      if (this.valueFormatting) {
+        this.formatedValue = this.valueFormatting(this.value);
+      } else {
+        this.formatedValue = formatLabel(this.value);  
+      }
+      
       if (this.orientation === 'horizontal') {
           this.x = this.barX + this.barWidth;    
           // if the value is negative then it's on the left of the x0. 

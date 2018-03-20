@@ -21,10 +21,6 @@ export function calculateViewDimensions({
     }
   }
 
-  if (showDataLabel) {
-    columns -= 1;
-  }
-
   chartWidth = chartWidth * columns / 12;
 
   chartWidth = chartWidth - margins[1] - margins[3];

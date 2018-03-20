@@ -44,6 +44,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
           [tickFormatting]="yAxisTickFormatting"
+          [yAxisOffset]="dataLabelWidth"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
         <svg:g ngx-charts-series-horizontal
@@ -59,6 +60,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [roundEdges]="roundEdges"
           [animations]="animations"
           [showDataLabel]="showDataLabel"
+          [dataLabelFormatting]="dataLabelFormatting"
           (select)="onClick($event)"
           (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)"
@@ -92,6 +94,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
   @Input() roundEdges: boolean = true;
   @Input() xScaleMax: number;
   @Input() showDataLabel: boolean = false;
+  @Input() dataLabelFormatting: any;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -109,9 +112,17 @@ export class BarHorizontalComponent extends BaseChartComponent {
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
   legendOptions: any;
+  dataLabelWidth: number = 0;
 
   update(): void {
     super.update();
+
+    if (this.showDataLabel) {
+      this.dataLabelWidth = 40;    
+    } else {
+      this.dataLabelWidth = 0;   
+    }
+    this.margin = [10, 20 + this.dataLabelWidth, 10, 20 + this.dataLabelWidth]; 
 
     this.dims = calculateViewDimensions({
       width: this.width,
@@ -127,14 +138,14 @@ export class BarHorizontalComponent extends BaseChartComponent {
       legendType: this.schemeType,
       showDataLabel: this.showDataLabel
     });
-
+   
     this.xScale = this.getXScale();
     this.yScale = this.getYScale();
 
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0]})`;
   }
 
   getXScale(): any {

@@ -1,6 +1,7 @@
 import { OnChanges, SimpleChanges } from '@angular/core';
 export declare class BarLabelComponent implements OnChanges {
     value: any;
+    valueFormatting: any;
     barX: any;
     barY: any;
     barWidth: any;

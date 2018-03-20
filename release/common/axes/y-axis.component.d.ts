@@ -13,12 +13,12 @@ export declare class YAxisComponent implements OnChanges {
     referenceLines: any;
     showRefLines: any;
     showRefLabels: any;
+    yAxisOffset: number;
     dimensionsChanged: EventEmitter<{}>;
     yAxisClassName: string;
     tickArguments: any;
     offset: any;
     transform: any;
-    yAxisOffset: number;
     labelOffset: number;
     fill: string;
     stroke: string;

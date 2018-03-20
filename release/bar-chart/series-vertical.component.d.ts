@@ -18,6 +18,7 @@ export declare class SeriesVerticalComponent implements OnChanges {
     roundEdges: boolean;
     animations: boolean;
     showDataLabel: boolean;
+    dataLabelFormatting: any;
     select: EventEmitter<{}>;
     activate: EventEmitter<{}>;
     deactivate: EventEmitter<{}>;

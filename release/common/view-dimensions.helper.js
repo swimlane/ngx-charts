@@ -11,9 +11,6 @@ export function calculateViewDimensions(_a) {
             columns -= 1;
         }
     }
-    if (showDataLabel) {
-        columns -= 1;
-    }
     chartWidth = chartWidth * columns / 12;
     chartWidth = chartWidth - margins[1] - margins[3];
     if (showXAxis) {

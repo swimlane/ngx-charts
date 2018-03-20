@@ -23,6 +23,7 @@ export declare class BarHorizontalComponent extends BaseChartComponent {
     roundEdges: boolean;
     xScaleMax: number;
     showDataLabel: boolean;
+    dataLabelFormatting: any;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     tooltipTemplate: TemplateRef<any>;
@@ -37,6 +38,7 @@ export declare class BarHorizontalComponent extends BaseChartComponent {
     xAxisHeight: number;
     yAxisWidth: number;
     legendOptions: any;
+    dataLabelWidth: number;
     update(): void;
     getXScale(): any;
     getYScale(): any;

@@ -51,6 +51,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
           [tickFormatting]="yAxisTickFormatting"
+          [yAxisOffset]="dataLabelWidth"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
         <svg:g
@@ -71,6 +72,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
             [seriesName]="group.name"
             [animations]="animations"
             [showDataLabel]="showDataLabel"
+            [dataLabelFormatting]="dataLabelFormatting"
             (select)="onClick($event, group)"
             (activate)="onActivate($event, group)"
             (deactivate)="onDeactivate($event, group)"
@@ -115,6 +117,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   @Input() roundDomains: boolean = false;
   @Input() xScaleMax: number;
   @Input() showDataLabel: boolean = false;
+  @Input() dataLabelFormatting: any;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -133,9 +136,17 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
   legendOptions: any;
+  dataLabelWidth: number = 0;
 
   update(): void {
     super.update();
+
+    if (this.showDataLabel) {
+      this.dataLabelWidth = 40;    
+    } else {
+      this.dataLabelWidth = 0;   
+    }
+    this.margin = [10, 20 + this.dataLabelWidth, 10, 20 + this.dataLabelWidth]; 
 
     this.dims = calculateViewDimensions({
       width: this.width,

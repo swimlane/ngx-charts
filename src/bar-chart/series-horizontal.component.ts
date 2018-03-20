@@ -53,6 +53,7 @@ import { D0Types } from './series-vertical.component';
         [barWidth]="b.width"
         [barHeight]="b.height"
         [value]="b.total"
+        [valueFormatting]="dataLabelFormatting"
         [orientation]="'horizontal'"
       />
     </svg:g> 
@@ -89,6 +90,7 @@ export class SeriesHorizontal implements OnChanges {
   @Input() roundEdges: boolean;
   @Input() animations: boolean = true;
   @Input() showDataLabel: boolean = false;
+  @Input() dataLabelFormatting: any;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();

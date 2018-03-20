@@ -13,6 +13,7 @@ var XAxisComponent = /** @class */ (function () {
     function XAxisComponent() {
         this.showGridLines = false;
         this.xOrient = 'bottom';
+        this.xAxisOffset = 5;
         this.dimensionsChanged = new EventEmitter();
         this.xAxisClassName = 'x axis';
         this.labelOffset = 0;
@@ -20,7 +21,6 @@ var XAxisComponent = /** @class */ (function () {
         this.stroke = 'stroke';
         this.tickStroke = '#ccc';
         this.strokeWidth = 'none';
-        this.xAxisOffset = 5;
     }
     XAxisComponent.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -78,6 +78,10 @@ var XAxisComponent = /** @class */ (function () {
         Input(),
         __metadata("design:type", String)
     ], XAxisComponent.prototype, "xOrient", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Number)
+    ], XAxisComponent.prototype, "xAxisOffset", void 0);
     __decorate([
         Output(),
         __metadata("design:type", Object)

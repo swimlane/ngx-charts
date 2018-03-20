@@ -24,6 +24,7 @@ export declare class BarVerticalComponent extends BaseChartComponent {
     yScaleMax: number;
     yScaleMin: number;
     showDataLabel: boolean;
+    dataLabelFormatting: any;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     tooltipTemplate: TemplateRef<any>;
@@ -38,6 +39,7 @@ export declare class BarVerticalComponent extends BaseChartComponent {
     xAxisHeight: number;
     yAxisWidth: number;
     legendOptions: any;
+    dataLabelHeight: number;
     update(): void;
     getXScale(): any;
     getYScale(): any;

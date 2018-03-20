@@ -52,6 +52,7 @@ export class XAxisComponent implements OnChanges {
   @Input() xAxisTickInterval;
   @Input() xAxisTickCount: any;
   @Input() xOrient: string = 'bottom';
+  @Input() xAxisOffset: number = 5;
 
   @Output() dimensionsChanged = new EventEmitter();
 
@@ -64,7 +65,6 @@ export class XAxisComponent implements OnChanges {
   stroke: string = 'stroke';
   tickStroke: string = '#ccc';
   strokeWidth: string = 'none';
-  xAxisOffset: number = 5;
 
   @ViewChild(XAxisTicksComponent) ticksComponent: XAxisTicksComponent;
 
@@ -84,7 +84,7 @@ export class XAxisComponent implements OnChanges {
     const newLabelOffset = height + 25 + 5;
     if (newLabelOffset !== this.labelOffset) {
       this.labelOffset = newLabelOffset;
-      setTimeout(() => {
+      setTimeout(() => {        
         this.dimensionsChanged.emit({height});
       }, 0);
     }

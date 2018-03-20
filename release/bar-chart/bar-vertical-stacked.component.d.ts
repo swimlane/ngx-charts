@@ -22,6 +22,7 @@ export declare class BarVerticalStackedComponent extends BaseChartComponent {
     roundDomains: boolean;
     yScaleMax: number;
     showDataLabel: boolean;
+    dataLabelFormatting: any;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     tooltipTemplate: TemplateRef<any>;
@@ -38,6 +39,7 @@ export declare class BarVerticalStackedComponent extends BaseChartComponent {
     xAxisHeight: number;
     yAxisWidth: number;
     legendOptions: any;
+    dataLabelHeight: number;
     update(): void;
     getGroupDomain(): any[];
     getInnerDomain(): any[];

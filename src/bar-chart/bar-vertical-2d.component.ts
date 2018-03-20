@@ -47,6 +47,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [tickFormatting]="xAxisTickFormatting"
+          [xAxisOffset]="dataLabelHeight"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
         <svg:g ngx-charts-y-axis
@@ -73,6 +74,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [tooltipDisabled]="tooltipDisabled"
           [tooltipTemplate]="tooltipTemplate"
           [showDataLabel]="showDataLabel"
+          [dataLabelFormatting]="dataLabelFormatting"
           [seriesName]="group.name"
           [roundEdges]="roundEdges"
           [animations]="animations"
@@ -122,6 +124,7 @@ export class BarVertical2DComponent extends BaseChartComponent {
   @Input() roundEdges: boolean = true;
   @Input() yScaleMax: number;
   @Input() showDataLabel: boolean = false;
+  @Input() dataLabelFormatting: any;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -141,9 +144,17 @@ export class BarVertical2DComponent extends BaseChartComponent {
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
   legendOptions: any;
+  dataLabelHeight: number = 0;
 
   update(): void {
     super.update();
+
+    if (this.showDataLabel) {
+      this.dataLabelHeight = 30;    
+    } else {
+      this.dataLabelHeight = 0;   
+    }
+    this.margin = [10 + this.dataLabelHeight, 20, 10 + this.dataLabelHeight, 20]; 
 
     this.dims = calculateViewDimensions({
       width: this.width,
@@ -159,6 +170,10 @@ export class BarVertical2DComponent extends BaseChartComponent {
       legendType: this.schemeType
     });
 
+    if (this.showDataLabel) {
+      this.dims.height -= this.dataLabelHeight;    
+    }
+
     this.formatDates();
 
     this.groupDomain = this.getGroupDomain();
@@ -172,7 +187,7 @@ export class BarVertical2DComponent extends BaseChartComponent {
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] + this.dataLabelHeight})`;
   }
 
   getGroupScale(): any {

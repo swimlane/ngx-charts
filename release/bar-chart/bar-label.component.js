@@ -18,7 +18,12 @@ var BarLabelComponent = /** @class */ (function () {
         this.update();
     };
     BarLabelComponent.prototype.update = function () {
-        this.formatedValue = formatLabel(this.value);
+        if (this.valueFormatting) {
+            this.formatedValue = this.valueFormatting(this.value);
+        }
+        else {
+            this.formatedValue = formatLabel(this.value);
+        }
         if (this.orientation === 'horizontal') {
             this.x = this.barX + this.barWidth;
             // if the value is negative then it's on the left of the x0. 
@@ -55,6 +60,10 @@ var BarLabelComponent = /** @class */ (function () {
     __decorate([
         Input(),
         __metadata("design:type", Object)
+    ], BarLabelComponent.prototype, "valueFormatting", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
     ], BarLabelComponent.prototype, "barX", void 0);
     __decorate([
         Input(),
@@ -75,7 +84,8 @@ var BarLabelComponent = /** @class */ (function () {
     BarLabelComponent = __decorate([
         Component({
             selector: 'g[ngx-charts-bar-label]',
-            template: "  \n    <svg:text   \n      font-size=\"11px\" \n      alignment-baseline=\"middle\"     \n      [attr.text-anchor]=\"textAnchor\"\n      [attr.transform]=\"transform\"\n      [attr.x]=\"x\" \n      [attr.y]=\"y\">\n      {{formatedValue}}     \n    </svg:text>          \n\n  ",
+            template: "  \n    <svg:text   \n      class=\"textDataLabel\" \n      alignment-baseline=\"middle\"     \n      [attr.text-anchor]=\"textAnchor\"\n      [attr.transform]=\"transform\"\n      [attr.x]=\"x\" \n      [attr.y]=\"y\">\n      {{formatedValue}}     \n    </svg:text>          \n\n  ",
+            styleUrls: ['./bar-label.component.css'],
             changeDetection: ChangeDetectionStrategy.OnPush
         })
     ], BarLabelComponent);

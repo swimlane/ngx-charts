@@ -57,6 +57,7 @@ export enum D0Types {
         [barWidth]="b.width"
         [barHeight]="b.height"
         [value]="b.total"
+        [valueFormatting]="dataLabelFormatting"
         [orientation]="'vertical'"
       />
     </svg:g> 
@@ -89,6 +90,7 @@ export class SeriesVerticalComponent implements OnChanges {
   @Input() roundEdges: boolean;
   @Input() animations: boolean = true;
   @Input() showDataLabel: boolean = false;
+  @Input() dataLabelFormatting: any;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
