@@ -169,8 +169,7 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
       showXLabel: this.showXAxisLabel,
       showYLabel: this.showYAxisLabel,
       showLegend: this.legend,
-      legendType: this.schemeType,
-      showDataLabel: this.showDataLabel
+      legendType: this.schemeType
     });
 
     this.formatDates();

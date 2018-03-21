@@ -63,8 +63,7 @@ var BarHorizontalStackedComponent = /** @class */ (function (_super) {
             showXLabel: this.showXAxisLabel,
             showYLabel: this.showYAxisLabel,
             showLegend: this.legend,
-            legendType: this.schemeType,
-            showDataLabel: this.showDataLabel
+            legendType: this.schemeType
         });
         this.formatDates();
         this.groupDomain = this.getGroupDomain();
