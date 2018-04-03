@@ -82,7 +82,8 @@ var BarVerticalComponent = /** @class */ (function (_super) {
     };
     BarVerticalComponent.prototype.getYDomain = function () {
         var values = this.results.map(function (d) { return d.value; });
-        var min = Math.min.apply(Math, [0].concat(values));
+        var min = this.yScaleMin
+            ? Math.min.apply(Math, [this.yScaleMin].concat(values)) : Math.min.apply(Math, [0].concat(values));
         var max = this.yScaleMax
             ? Math.max.apply(Math, [this.yScaleMax].concat(values)) : Math.max.apply(Math, values);
         return [min, max];
@@ -222,6 +223,10 @@ var BarVerticalComponent = /** @class */ (function (_super) {
         Input(),
         __metadata("design:type", Number)
     ], BarVerticalComponent.prototype, "yScaleMax", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Number)
+    ], BarVerticalComponent.prototype, "yScaleMin", void 0);
     __decorate([
         Output(),
         __metadata("design:type", EventEmitter)
