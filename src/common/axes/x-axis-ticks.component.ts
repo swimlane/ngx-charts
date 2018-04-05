@@ -53,7 +53,8 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() showGridLines = false;
   @Input() gridLineHeight;
   @Input() width;
-
+  @Input() maxTickWidth;
+  @Input() maxScaleTickWidth;
   @Output() dimensionsChanged = new EventEmitter();
 
   verticalSpacing: number = 20;
@@ -147,7 +148,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     const maxBaseWidth = Math.floor(this.width / ticks.length);
 
     // calculate optimal angle
-    while(baseWidth > maxBaseWidth && angle > -90) {
+    while (baseWidth > maxBaseWidth && angle > -90) {
       angle -= 30;
       baseWidth = Math.cos(angle * (Math.PI / 180)) * wordWidth;
     }
@@ -157,8 +158,8 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
 
   getTicks() {
     let ticks;
-    const maxTicks = this.getMaxTicks(20);
-    const maxScaleTicks = this.getMaxTicks(100);
+    const maxTicks = this.getMaxTicks(this.maxTickWidth || 20);
+    const maxScaleTicks = this.getMaxTicks(this.maxScaleTickWidth || 100);
 
     if (this.tickValues) {
       ticks = this.tickValues;

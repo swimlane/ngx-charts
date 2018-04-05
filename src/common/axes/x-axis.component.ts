@@ -27,6 +27,8 @@ import { XAxisTicksComponent } from './x-axis-ticks.component';
         [showGridLines]="showGridLines"
         [gridLineHeight]="dims.height"
         [width]="dims.width"
+        [maxTickWidth]="maxTickWidth"
+        [maxScaleTickWidth]="maxScaleTickWidth"
         (dimensionsChanged)="emitTicksHeight($event)"
       />
       <svg:g ngx-charts-axis-label
@@ -52,6 +54,8 @@ export class XAxisComponent implements OnChanges {
   @Input() xAxisTickInterval;
   @Input() xAxisTickCount: any;
   @Input() xOrient: string = 'bottom';
+  @Input() maxTickWidth: number;
+  @Input() maxScaleTickWidth: number;
 
   @Output() dimensionsChanged = new EventEmitter();
 
