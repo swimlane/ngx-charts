@@ -46,6 +46,8 @@ import { id } from '../utils/id';
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [tickFormatting]="xAxisTickFormatting"
+          [maxTickWidth]="maxTickWidth"
+          [maxScaleTickWidth]="maxScaleTickWidth"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
         <svg:g ngx-charts-y-axis
@@ -56,6 +58,8 @@ import { id } from '../utils/id';
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
           [tickFormatting]="yAxisTickFormatting"
+          [maxTickHeight]="maxTickHeight"
+          [maxScaleTickHeight]="maxScaleTickHeight"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
         <svg:g [attr.clip-path]="clipPath">
@@ -161,6 +165,10 @@ export class AreaChartComponent extends BaseChartComponent {
   @Input() xScaleMax: any;
   @Input() yScaleMin: number;
   @Input() yScaleMax: number;
+  @Input() maxTickWidth: number;
+  @Input() maxScaleTickWidth: number;
+  @Input() maxTickHeight: number;
+  @Input() maxScaleTickHeight: number;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -233,7 +241,7 @@ export class AreaChartComponent extends BaseChartComponent {
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
-    this.transform = `translate(${ this.dims.xOffset }, ${ this.margin[0] })`;
+    this.transform = `translate(${this.dims.xOffset}, ${this.margin[0]})`;
 
     this.clipPathId = 'clip' + id().toString();
     this.clipPath = `url(#${this.clipPathId})`;
@@ -245,7 +253,7 @@ export class AreaChartComponent extends BaseChartComponent {
       this.timelineXDomain = this.getXDomain();
       this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
       this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
-      this.timelineTransform = `translate(${ this.dims.xOffset }, ${ -this.margin[2] })`;
+      this.timelineTransform = `translate(${this.dims.xOffset}, ${-this.margin[2]})`;
     }
   }
 
@@ -344,7 +352,7 @@ export class AreaChartComponent extends BaseChartComponent {
     }
 
     scale.range([0, width])
-        .domain(domain);
+      .domain(domain);
 
     return this.roundDomains ? scale.nice() : scale;
   }
@@ -463,7 +471,7 @@ export class AreaChartComponent extends BaseChartComponent {
       return;
     }
 
-    this.activeEntries = [ item, ...this.activeEntries ];
+    this.activeEntries = [item, ...this.activeEntries];
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
