@@ -1081,11 +1081,11 @@
       </div>
       <div *ngIf="chart.options.includes('barPadding')">
         <label>Padding between bars:</label><br />
-        <input type="number" [(ngModel)]="barPadding" min="0" step="1"><br />
+        <input type="text" [(ngModel)]="barPadding"><br />
       </div>
       <div *ngIf="chart.options.includes('groupPadding')">
         <label>Padding between groups:</label><br />
-        <input type="number" [(ngModel)]="groupPadding" min="0" step="1"><br />
+        <input type="text" [(ngModel)]="groupPadding"><br />
       </div>
       <div *ngIf="chart.options.includes('value')">
         <label>Value:</label><br />

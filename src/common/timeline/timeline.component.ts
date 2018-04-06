@@ -6,7 +6,6 @@ import {
 import { brushX } from 'd3-brush';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
 import { select, event as d3event } from 'd3-selection';
-
 import { id } from '../../utils';
 
 @Component({
