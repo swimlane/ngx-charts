@@ -27,7 +27,7 @@ import { XAxisTicksComponent } from './x-axis-ticks.component';
         [showGridLines]="showGridLines"
         [gridLineHeight]="dims.height"
         [width]="dims.width"
-        [xAxisTicks]="xAxisTicks"
+        [tickValues]="ticks"
         (dimensionsChanged)="emitTicksHeight($event)"
       />
       <svg:g ngx-charts-axis-label
@@ -50,7 +50,7 @@ export class XAxisComponent implements OnChanges {
   @Input() showGridLines = false;
   @Input() showLabel;
   @Input() labelText;
-  @Input() xAxisTicks;
+  @Input() ticks: any[];
   @Input() xAxisTickInterval;
   @Input() xAxisTickCount: any;
   @Input() xOrient: string = 'bottom';

@@ -46,13 +46,13 @@ import { id } from '../utils/id';
       <svg:g [attr.transform]="transform" class="line-chart chart">
         <svg:g ngx-charts-x-axis
           *ngIf="xAxis"
-          [xAxisTicks]="xAxisTicks"
           [xScale]="xScale"
           [dims]="dims"
           [showGridLines]="showGridLines"
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [tickFormatting]="xAxisTickFormatting"
+          [ticks]="xAxisTicks"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
         <svg:g ngx-charts-y-axis
@@ -63,6 +63,7 @@ import { id } from '../utils/id';
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
           [tickFormatting]="yAxisTickFormatting"
+          [ticks]="yAxisTicks"
           [referenceLines]="referenceLines"
           [showRefLines]="showRefLines"
           [showRefLabels]="showRefLabels"
@@ -177,8 +178,9 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() schemeType: string;
   @Input() rangeFillOpacity: number;
   @Input() xAxisTickFormatting: any;
-  @Input() xAxisTicks: any[];
   @Input() yAxisTickFormatting: any;
+  @Input() xAxisTicks: any[];
+  @Input() yAxisTicks: any[];
   @Input() roundDomains: boolean = false;
   @Input() tooltipDisabled: boolean = false;
   @Input() showRefLines: boolean = false;

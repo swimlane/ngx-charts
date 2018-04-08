@@ -81,7 +81,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() scale;
   @Input() orient;
   @Input() tickArguments = [5];
-  @Input() tickValues;
+  @Input() tickValues: any[];
   @Input() tickStroke = '#ccc';
   @Input() tickFormatting;
   @Input() showGridLines = false;

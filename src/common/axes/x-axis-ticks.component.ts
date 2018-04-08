@@ -48,12 +48,12 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() scale;
   @Input() orient;
   @Input() tickArguments = [5];
+  @Input() tickValues: any[];
   @Input() tickStroke = '#ccc';
   @Input() tickFormatting;
   @Input() showGridLines = false;
   @Input() gridLineHeight;
   @Input() width;
-  @Input() xAxisTicks;
 
   @Output() dimensionsChanged = new EventEmitter();
 
@@ -67,7 +67,6 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   maxAllowedLength: number = 16;
   trimLabel: (o: any) => any;
   adjustedScale: any;
-  tickValues: any;
   textTransform: any;
   ticks: any;
   tickFormat: (o: any) => any;
@@ -98,9 +97,6 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
 
   update(): void {
     const scale = this.scale;
-    if (this.xAxisTicks !== undefined) {
-      this.tickValues = this.xAxisTicks;
-    }
     this.ticks = this.getTicks();
 
     if (this.tickFormatting) {

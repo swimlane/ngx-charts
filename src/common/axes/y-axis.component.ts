@@ -20,6 +20,7 @@ import { YAxisTicksComponent } from './y-axis-ticks.component';
         *ngIf="yScale"
         [tickFormatting]="tickFormatting"
         [tickArguments]="tickArguments"
+        [tickValues]="ticks"
         [tickStroke]="tickStroke"
         [scale]="yScale"
         [orient]="yOrient"
@@ -49,6 +50,7 @@ export class YAxisComponent implements OnChanges {
   @Input() yScale;
   @Input() dims;
   @Input() tickFormatting;
+  @Input() ticks: any[];
   @Input() showGridLines = false;
   @Input() showLabel;
   @Input() labelText;

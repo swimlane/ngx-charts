@@ -52,6 +52,7 @@ import { id } from '../utils/id';
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [tickFormatting]="xAxisTickFormatting"
+          [ticks]="xAxisTicks"
           (dimensionsChanged)="updateXAxisHeight($event)"/>
         <svg:g ngx-charts-y-axis
           *ngIf="yAxis"
@@ -61,6 +62,7 @@ import { id } from '../utils/id';
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
           [tickFormatting]="yAxisTickFormatting"
+          [ticks]="yAxisTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"/>
         <svg:rect
           class="bubble-chart-area"
@@ -122,6 +124,8 @@ export class BubbleChartComponent extends BaseChartComponent {
   @Input() yAxisLabel: string;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
+  @Input() xAxisTicks: any[];
+  @Input() yAxisTicks: any[];
   @Input() roundDomains: boolean = false;
   @Input() maxRadius = 10;
   @Input() minRadius = 3;
