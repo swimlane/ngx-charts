@@ -94,6 +94,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
   @Input() roundDomains: boolean = false;
   @Input() roundEdges: boolean = true;
   @Input() xScaleMax: number;
+  @Input() xScaleMin: number;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -160,7 +161,10 @@ export class BarHorizontalComponent extends BaseChartComponent {
 
   getXDomain(): any[] {
     const values = this.results.map(d => d.value);
-    const min = Math.min(0, ...values);
+    const min = this.xScaleMin
+      ? Math.min(this.xScaleMin, ...values)
+      : Math.min(0, ...values);
+
     const max = this.xScaleMax
       ? Math.max(this.xScaleMax, ...values)
       : Math.max(...values);

@@ -33,6 +33,7 @@
 | tooltipDisabled     | boolean            | false         | show or hide the tooltip                                                                                        |
 | tooltipTemplate     | TemplateRef        |               | a custom ng-template to be displayed inside the tooltip                                                         |
 | yScaleMax           | number             |               | the maximum value of the y axis (ignored if chart data contains a higher value)                                 |
+| yScaleMin           | number             |               | the minimum value of the y axis (ignored if chart data contains a lower value)                                  |
 
 # Outputs
 
