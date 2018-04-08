@@ -46,6 +46,8 @@ import { id } from '../utils/id';
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [tickFormatting]="xAxisTickFormatting"
+          [maxTickWidth]="maxTickWidth"
+          [maxScaleTickWidth]="maxScaleTickWidth"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
         <svg:g ngx-charts-y-axis
@@ -161,6 +163,10 @@ export class AreaChartComponent extends BaseChartComponent {
   @Input() xScaleMax: any;
   @Input() yScaleMin: number;
   @Input() yScaleMax: number;
+  @Input() maxTickWidth: number;
+  @Input() maxScaleTickWidth: number;
+  @Input() maxTickHeight: number;
+  @Input() maxScaleTickHeight: number;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
