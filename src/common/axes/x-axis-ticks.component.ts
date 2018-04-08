@@ -53,6 +53,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() showGridLines = false;
   @Input() gridLineHeight;
   @Input() width;
+  @Input() xAxisTicks;
 
   @Output() dimensionsChanged = new EventEmitter();
 
@@ -97,6 +98,9 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
 
   update(): void {
     const scale = this.scale;
+    if (this.xAxisTicks !== undefined) {
+      this.tickValues = this.xAxisTicks;
+    }
     this.ticks = this.getTicks();
 
     if (this.tickFormatting) {
