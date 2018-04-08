@@ -44,7 +44,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
           [tickFormatting]="yAxisTickFormatting"
-          [yAxisOffset]="dataLabelWidth"
+          [yAxisOffset]="dataLabelMaxWidth.negative"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
         <svg:g ngx-charts-series-horizontal
@@ -64,7 +64,9 @@ import { BaseChartComponent } from '../common/base-chart.component';
           (select)="onClick($event)"
           (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)"
-        />
+          (dataLabelWidthChanged)="onDataLabelMaxWidthChanged($event)"
+          >
+        </svg:g>
       </svg:g>
     </ngx-charts-chart>
   `,
@@ -111,18 +113,17 @@ export class BarHorizontalComponent extends BaseChartComponent {
   margin = [10, 20, 10, 20];
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
-  legendOptions: any;
-  dataLabelWidth: number = 0;
-
+  legendOptions: any;  
+  dataLabelMaxWidth: any = {negative: 0, positive: 0};
+  
   update(): void {
     super.update();
 
-    if (this.showDataLabel) {
-      this.dataLabelWidth = 40;    
-    } else {
-      this.dataLabelWidth = 0;   
+    if (!this.showDataLabel) {
+      this.dataLabelMaxWidth = {negative: 0, positive: 0};          
     }
-    this.margin = [10, 20 + this.dataLabelWidth, 10, 20 + this.dataLabelWidth]; 
+
+    this.margin = [10, 20 + this.dataLabelMaxWidth.positive, 10, 20 + this.dataLabelMaxWidth.negative]; 
 
     this.dims = calculateViewDimensions({
       width: this.width,
@@ -222,6 +223,15 @@ export class BarHorizontalComponent extends BaseChartComponent {
   updateXAxisHeight({ height }): void {
     this.xAxisHeight = height;
     this.update();
+  }
+
+  onDataLabelMaxWidthChanged(size) {    
+    if (size.negative)  {
+      this.dataLabelMaxWidth.negative = Math.max(this.dataLabelMaxWidth.negative, size.width);
+    } else {
+      this.dataLabelMaxWidth.positive = Math.max(this.dataLabelMaxWidth.positive, size.width);
+    }      
+    setTimeout(() => this.update());
   }
 
   onActivate(item) {

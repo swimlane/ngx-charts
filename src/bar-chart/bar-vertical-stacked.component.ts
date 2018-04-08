@@ -40,7 +40,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [tickFormatting]="xAxisTickFormatting"
-          [xAxisOffset]="dataLabelHeight"
+          [xAxisOffset]="dataLabelMaxHeight.negative"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
         <svg:g ngx-charts-y-axis
@@ -75,6 +75,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
             (select)="onClick($event, group)"
             (activate)="onActivate($event, group)"
             (deactivate)="onDeactivate($event, group)"
+            (dataLabelHeightChanged)="onDataLabelMaxHeightChanged($event)"
           />
         </svg:g>
       </svg:g>
@@ -136,17 +137,15 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
   legendOptions: any;
-  dataLabelHeight: number = 0;
+  dataLabelMaxHeight: any = {negative: 0, positive: 0};
 
   update(): void {
     super.update();
 
-    if (this.showDataLabel) {
-      this.dataLabelHeight = 30;    
-    } else {
-      this.dataLabelHeight = 0;   
+    if (!this.showDataLabel) {
+      this.dataLabelMaxHeight = {negative: 0, positive: 0};          
     }
-    this.margin = [10 + this.dataLabelHeight, 20, 10 + this.dataLabelHeight, 20]; 
+    this.margin = [10 + this.dataLabelMaxHeight.positive, 20, 10 + this.dataLabelMaxHeight.negative, 20]; 
 
     this.dims = calculateViewDimensions({
       width: this.width,
@@ -163,7 +162,7 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
     });
 
     if (this.showDataLabel) {
-      this.dims.height -= this.dataLabelHeight;    
+      this.dims.height -= this.dataLabelMaxHeight.negative;    
     }
 
     this.formatDates();
@@ -178,7 +177,7 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] + this.dataLabelHeight})`;
+    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] + this.dataLabelMaxHeight.negative})`;
   }
 
   getGroupDomain() {
@@ -245,6 +244,15 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
       .range([this.dims.height, 0])
       .domain(this.valueDomain);
     return this.roundDomains ? scale.nice() : scale;
+  }
+
+  onDataLabelMaxHeightChanged(size) {    
+    if (size.negative)  {
+      this.dataLabelMaxHeight.negative = Math.max(this.dataLabelMaxHeight.negative, size.width);
+    } else {
+      this.dataLabelMaxHeight.positive = Math.max(this.dataLabelMaxHeight.positive, size.width);
+    }      
+    setTimeout(() => this.update());
   }
 
   groupTransform(group) {

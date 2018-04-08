@@ -34,7 +34,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [tickFormatting]="xAxisTickFormatting"
-          [xAxisOffset]="dataLabelHeight"
+          [xAxisOffset]="dataLabelMaxHeight.negative"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
         <svg:g ngx-charts-y-axis
@@ -63,7 +63,9 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [animations]="animations"
           (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)"
-          (select)="onClick($event)">
+          (select)="onClick($event)"
+          (dataLabelHeightChanged)="onDataLabelMaxHeightChanged($event)"
+          >          
         </svg:g>
       </svg:g>
     </ngx-charts-chart>
@@ -113,16 +115,15 @@ export class BarVerticalComponent extends BaseChartComponent {
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
   legendOptions: any;
-  dataLabelHeight: number = 0;
+  dataLabelMaxHeight: any = {negative: 0, positive: 0};
 
   update(): void {
     super.update();
-    if (this.showDataLabel) {
-      this.dataLabelHeight = 30;    
-    } else {
-      this.dataLabelHeight = 0;   
+   
+    if (!this.showDataLabel) {
+      this.dataLabelMaxHeight = {negative: 0, positive: 0};          
     }
-    this.margin = [10 + this.dataLabelHeight, 20, 10 + this.dataLabelHeight, 20]; 
+    this.margin = [10 + this.dataLabelMaxHeight.positive, 20, 10 + this.dataLabelMaxHeight.negative, 20]; 
 
     this.dims = calculateViewDimensions({
       width: this.width,
@@ -139,7 +140,7 @@ export class BarVerticalComponent extends BaseChartComponent {
     });
 
     if (this.showDataLabel) {
-      this.dims.height -= this.dataLabelHeight;    
+      this.dims.height -= this.dataLabelMaxHeight.negative;    
     }
     this.xScale = this.getXScale();
     this.yScale = this.getYScale();
@@ -147,7 +148,7 @@ export class BarVerticalComponent extends BaseChartComponent {
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] + this.dataLabelHeight })`;
+    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] + this.dataLabelMaxHeight.negative })`;
   }
 
   getXScale(): any {
@@ -226,6 +227,15 @@ export class BarVerticalComponent extends BaseChartComponent {
   updateXAxisHeight({ height }): void {
     this.xAxisHeight = height;
     this.update();
+  }
+
+  onDataLabelMaxHeightChanged(size) {    
+    if (size.negative)  {
+      this.dataLabelMaxHeight.negative = Math.max(this.dataLabelMaxHeight.negative, size.width);
+    } else {
+      this.dataLabelMaxHeight.positive = Math.max(this.dataLabelMaxHeight.positive, size.width);
+    }      
+    setTimeout(() => this.update());
   }
 
   onActivate(item) {

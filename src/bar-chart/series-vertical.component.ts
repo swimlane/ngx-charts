@@ -51,7 +51,7 @@ export enum D0Types {
       [animations]="animations">
     </svg:g>
     <svg:g *ngIf="showDataLabel">
-      <svg:g ngx-charts-bar-label *ngFor="let b of barsForDataLabels;"         
+      <svg:g ngx-charts-bar-label *ngFor="let b of barsForDataLabels; trackBy:trackBy"         
         [barX]="b.x"
         [barY]="b.y"
         [barWidth]="b.width"
@@ -59,6 +59,7 @@ export enum D0Types {
         [value]="b.total"
         [valueFormatting]="dataLabelFormatting"
         [orientation]="'vertical'"
+        (dimensionsChanged)="dataLabelHeightChanged.emit($event)"
       />
     </svg:g> 
   `,
@@ -95,6 +96,7 @@ export class SeriesVerticalComponent implements OnChanges {
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
+  @Output() dataLabelHeightChanged = new EventEmitter();
 
   tooltipPlacement: string;
   tooltipType: string;

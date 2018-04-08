@@ -3,7 +3,10 @@ import {
     Input,
     OnChanges,
     SimpleChanges,
-    ChangeDetectionStrategy
+    ChangeDetectionStrategy,
+    ElementRef,
+    Output,    
+    EventEmitter
   } from '@angular/core';
 import { formatLabel } from '..';
   
@@ -27,14 +30,17 @@ import { formatLabel } from '..';
 
   export class BarLabelComponent implements OnChanges {
   
-    @Input() value;      
+    @Input() value;
     @Input() valueFormatting: any;
     @Input() barX;
     @Input() barY; 
     @Input() barWidth;
     @Input() barHeight; 
     @Input() orientation;
+    
+    @Output() dimensionsChanged: EventEmitter<any> = new EventEmitter();    
      
+    element: any;
     x: number;
     y: number;
     horizontalPadding: number = 2;
@@ -43,10 +49,24 @@ import { formatLabel } from '..';
     transform: string;
     textAnchor: string;    
     
-    ngOnChanges(changes: SimpleChanges): void {
+    constructor(element: ElementRef) {
+      this.element = element.nativeElement;
+    }
+    
+    ngOnChanges(changes: SimpleChanges): void {      
       this.update();
     }
-  
+
+    getSize(): any {
+      const h = this.element.getBoundingClientRect().height;
+      const w = this.element.getBoundingClientRect().width;
+      return { height: h, width: w, negative: this.value < 0 };            
+    }
+    
+    ngAfterViewInit() {                         
+      this.dimensionsChanged.emit(this.getSize());        
+    }
+    
     update(): void {  
       if (this.valueFormatting) {
         this.formatedValue = this.valueFormatting(this.value);
@@ -81,5 +101,6 @@ import { formatLabel } from '..';
         }
         this.transform = `rotate(-45, ${ this.x } , ${ this.y })`;
       }
+      
     }  
   }

@@ -6,7 +6,7 @@ import {
   OnChanges,
   SimpleChanges,
   ChangeDetectionStrategy,
-  TemplateRef
+  TemplateRef  
 } from '@angular/core';
 import {
   trigger,
@@ -47,7 +47,7 @@ import { D0Types } from './series-vertical.component';
       [tooltipContext]="bar.data">
     </svg:g>
     <svg:g *ngIf="showDataLabel">
-      <svg:g ngx-charts-bar-label *ngFor="let b of barsForDataLabels; "         
+      <svg:g ngx-charts-bar-label *ngFor="let b of barsForDataLabels; trackBy:trackBy"         
         [barX]="b.x"
         [barY]="b.y"
         [barWidth]="b.width"
@@ -55,6 +55,7 @@ import { D0Types } from './series-vertical.component';
         [value]="b.total"
         [valueFormatting]="dataLabelFormatting"
         [orientation]="'horizontal'"
+        (dimensionsChanged)="dataLabelWidthChanged.emit($event)"
       />
     </svg:g> 
   `,
@@ -95,10 +96,11 @@ export class SeriesHorizontal implements OnChanges {
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
+  @Output() dataLabelWidthChanged = new EventEmitter();
 
   tooltipPlacement: string;
   tooltipType: string;
-
+ 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
@@ -198,7 +200,7 @@ export class SeriesHorizontal implements OnChanges {
 
       return bar;
     });
-
+    
     this.updateDataLabels();
 
   }
@@ -231,7 +233,7 @@ export class SeriesHorizontal implements OnChanges {
         section.height = this.yScale.bandwidth();         
         return section; 
         });
-      }     
+      }            
   }
   
   updateTooltipSettings() {
