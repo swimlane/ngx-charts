@@ -20,7 +20,6 @@ var SeriesVerticalComponent = /** @class */ (function () {
         this.type = 'standard';
         this.tooltipDisabled = false;
         this.animations = true;
-        this.showDataLabel = false;
         this.select = new EventEmitter();
         this.activate = new EventEmitter();
         this.deactivate = new EventEmitter();
@@ -122,39 +121,7 @@ var SeriesVerticalComponent = /** @class */ (function () {
             bar.tooltipText = _this.tooltipDisabled ? undefined : "\n        <span class=\"tooltip-label\">" + tooltipLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
             return bar;
         });
-        this.updateDataLabels();
         var _a;
-    };
-    SeriesVerticalComponent.prototype.updateDataLabels = function () {
-        var _this = this;
-        if (this.type === 'stacked') {
-            this.barsForDataLabels = [];
-            var section = {};
-            var totalPositive = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return d > 0 ? sum + d : sum; }, 0);
-            var totalNegative = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return d < 0 ? sum + d : sum; }, 0);
-            section.total = totalPositive + totalNegative;
-            section.x = 0;
-            section.y = 0;
-            if (section.total > 0) {
-                section.height = this.yScale(totalPositive);
-            }
-            else {
-                section.height = this.yScale(totalNegative);
-            }
-            section.width = this.xScale.bandwidth();
-            this.barsForDataLabels.push(section);
-        }
-        else {
-            this.barsForDataLabels = this.series.map(function (d) {
-                var section = {};
-                section.total = d.value;
-                section.x = _this.xScale(d.name);
-                section.y = _this.yScale(0);
-                section.height = _this.yScale(section.total) - _this.yScale(0);
-                section.width = _this.xScale.bandwidth();
-                return section;
-            });
-        }
     };
     SeriesVerticalComponent.prototype.updateTooltipSettings = function () {
         this.tooltipPlacement = this.tooltipDisabled ? undefined : 'top';
@@ -227,14 +194,6 @@ var SeriesVerticalComponent = /** @class */ (function () {
         __metadata("design:type", Boolean)
     ], SeriesVerticalComponent.prototype, "animations", void 0);
     __decorate([
-        Input(),
-        __metadata("design:type", Boolean)
-    ], SeriesVerticalComponent.prototype, "showDataLabel", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", Object)
-    ], SeriesVerticalComponent.prototype, "dataLabelFormatting", void 0);
-    __decorate([
         Output(),
         __metadata("design:type", Object)
     ], SeriesVerticalComponent.prototype, "select", void 0);
@@ -249,7 +208,7 @@ var SeriesVerticalComponent = /** @class */ (function () {
     SeriesVerticalComponent = __decorate([
         Component({
             selector: 'g[ngx-charts-series-vertical]',
-            template: "\n    <svg:g ngx-charts-bar\n      *ngFor=\"let bar of bars; trackBy: trackBy\"\n      [@animationState]=\"'active'\"\n      [@.disabled]=\"!animations\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [stops]=\"bar.gradientStops\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.data)\"\n      (select)=\"onClick($event)\"\n      (activate)=\"activate.emit($event)\"\n      (deactivate)=\"deactivate.emit($event)\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"tooltipPlacement\"\n      [tooltipType]=\"tooltipType\"\n      [tooltipTitle]=\"tooltipTemplate ? undefined : bar.tooltipText\"\n      [tooltipTemplate]=\"tooltipTemplate\"\n      [tooltipContext]=\"bar.data\"\n      [animations]=\"animations\">\n    </svg:g>\n    <svg:g *ngIf=\"showDataLabel\">\n      <svg:g ngx-charts-bar-label *ngFor=\"let b of barsForDataLabels;\"         \n        [barX]=\"b.x\"\n        [barY]=\"b.y\"\n        [barWidth]=\"b.width\"\n        [barHeight]=\"b.height\"\n        [value]=\"b.total\"\n        [valueFormatting]=\"dataLabelFormatting\"\n        [orientation]=\"'vertical'\"\n      />\n    </svg:g> \n  ",
+            template: "\n    <svg:g ngx-charts-bar\n      *ngFor=\"let bar of bars; trackBy: trackBy\"\n      [@animationState]=\"'active'\"\n      [@.disabled]=\"!animations\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [stops]=\"bar.gradientStops\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.data)\"\n      (select)=\"onClick($event)\"\n      (activate)=\"activate.emit($event)\"\n      (deactivate)=\"deactivate.emit($event)\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"tooltipPlacement\"\n      [tooltipType]=\"tooltipType\"\n      [tooltipTitle]=\"tooltipTemplate ? undefined : bar.tooltipText\"\n      [tooltipTemplate]=\"tooltipTemplate\"\n      [tooltipContext]=\"bar.data\"\n      [animations]=\"animations\">\n    </svg:g>\n  ",
             changeDetection: ChangeDetectionStrategy.OnPush,
             animations: [
                 trigger('animationState', [

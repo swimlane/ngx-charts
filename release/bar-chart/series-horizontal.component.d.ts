@@ -3,7 +3,6 @@ export declare class SeriesHorizontal implements OnChanges {
     bars: any;
     x: any;
     y: any;
-    barsForDataLabels: any;
     dims: any;
     type: string;
     series: any;
@@ -17,8 +16,6 @@ export declare class SeriesHorizontal implements OnChanges {
     tooltipTemplate: TemplateRef<any>;
     roundEdges: boolean;
     animations: boolean;
-    showDataLabel: boolean;
-    dataLabelFormatting: any;
     select: EventEmitter<{}>;
     activate: EventEmitter<{}>;
     deactivate: EventEmitter<{}>;
@@ -26,7 +23,6 @@ export declare class SeriesHorizontal implements OnChanges {
     tooltipType: string;
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
-    updateDataLabels(): void;
     updateTooltipSettings(): void;
     isActive(entry: any): boolean;
     trackBy(index: any, bar: any): any;

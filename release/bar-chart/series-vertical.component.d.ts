@@ -17,8 +17,6 @@ export declare class SeriesVerticalComponent implements OnChanges {
     tooltipTemplate: TemplateRef<any>;
     roundEdges: boolean;
     animations: boolean;
-    showDataLabel: boolean;
-    dataLabelFormatting: any;
     select: EventEmitter<{}>;
     activate: EventEmitter<{}>;
     deactivate: EventEmitter<{}>;
@@ -27,10 +25,8 @@ export declare class SeriesVerticalComponent implements OnChanges {
     bars: any;
     x: any;
     y: any;
-    barsForDataLabels: any;
     ngOnChanges(changes: any): void;
     update(): void;
-    updateDataLabels(): void;
     updateTooltipSettings(): void;
     isActive(entry: any): boolean;
     onClick(data: any): void;
