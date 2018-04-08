@@ -65,6 +65,7 @@ import { id } from '../utils/id';
             <svg:g ngx-charts-area-series
               [xScale]="xScale"
               [yScale]="yScale"
+              [baseValue]="baseValue"
               [colors]="colors"
               [data]="series"
               [activeEntries]="activeEntries"
@@ -122,6 +123,7 @@ import { id } from '../utils/id';
           <svg:g ngx-charts-area-series
             [xScale]="timelineXScale"
             [yScale]="timelineYScale"
+            [baseValue]="baseValue"
             [colors]="colors"
             [data]="series"
             [scaleType]="scaleType"
@@ -144,6 +146,7 @@ export class AreaChartComponent extends BaseChartComponent {
   @Input() state;
   @Input() xAxis;
   @Input() yAxis;
+  @Input() baseValue: any = 'auto';
   @Input() autoScale;
   @Input() showXAxisLabel;
   @Input() showYAxisLabel;
@@ -318,6 +321,9 @@ export class AreaChartComponent extends BaseChartComponent {
     const values = [...domain];
     if (!this.autoScale) {
       values.push(0);
+    }
+    if (this.baseValue !== 'auto') {
+      values.push(this.baseValue);
     }
 
     const min = this.yScaleMin
