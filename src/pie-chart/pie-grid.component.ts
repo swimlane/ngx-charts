@@ -103,6 +103,7 @@ export class PieGridComponent extends BaseChartComponent {
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipText: (o: any) => any;
   @Input() label: string = 'Total';
+  @Input() minWidth: number = 150;
   
   dims: ViewDimensions;
   data: any[];
@@ -125,7 +126,7 @@ export class PieGridComponent extends BaseChartComponent {
 
     this.domain = this.getDomain();
 
-    this.data = gridLayout(this.dims, this.results, 150, this.designatedTotal);
+    this.data = gridLayout(this.dims, this.results, this.minWidth, this.designatedTotal);
     this.transform = `translate(${this.margin[3]} , ${this.margin[0]})`;
 
     this.series = this.getSeries();
