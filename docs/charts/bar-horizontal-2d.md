@@ -26,6 +26,8 @@
 | gradient            | boolean            | false         | fill elements with a gradient instead of a solid color                                                          |
 | xAxisTickFormatting | function           |               | the x axis tick formatting                                                                                      |
 | yAxisTickFormatting | function           |               | the y axis tick formatting                                                                                      |
+| xAxisTicks          | any[]              |               | predefined list of x axis tick values                                                                           |
+| yAxisTicks          | any[]              |               | predefined list of y axis tick values                                                                           |
 | activeEntries       | object[]           | []            | elements to highlight                                                                                           |
 | barPadding          | number             | 8             | padding between bars in px                                                                                      |
 | groupPadding        | number             | 16            | padding between groups in px                                                                                    |

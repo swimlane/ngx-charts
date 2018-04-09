@@ -93,7 +93,6 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
   @Output() deactivate = new EventEmitter();
 
   areaPath: any;
-  circles: any[];
   circle: any; // active circle
   barVisible: boolean = false;
   gradientId: string;
@@ -109,75 +108,78 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
   }
 
   update(): void {
-    this.circles = this.getCircles();
-    this.circle = this.circles.find(c => {
-      return c.opacity !== 0;
-    });
+    this.circle = this.getActiveCircle();
   }
 
-  getCircles(): any[] {
+  getActiveCircle(): {} {
+    const indexActiveDataPoint = this.data.series.findIndex((d) => {
+      const label = d.name;
+      return label && this.visibleValue && label.toString() === this.visibleValue.toString() && d.value !== undefined;
+    });
+
+    if (indexActiveDataPoint === -1) {
+      // No valid point is 'active/hovered over' at this moment.
+      return undefined;
+    }
+
+    return this.mapDataPointToCircle(this.data.series[indexActiveDataPoint], indexActiveDataPoint);
+  }
+
+  mapDataPointToCircle(d: any, i: number): any {
     const seriesName = this.data.name;
 
-    return this.data.series.map((d, i) => {
-      const value = d.value;
-      const label = d.name;
-      const tooltipLabel = formatLabel(label);
+    const value = d.value;
+    const label = d.name;
+    const tooltipLabel = formatLabel(label);
 
-      if (value) {
-        let cx;
-        if (this.scaleType === 'time') {
-          cx = this.xScale(label);
-        } else if (this.scaleType === 'linear') {
-          cx = this.xScale(Number(label));
-        } else {
-          cx = this.xScale(label);
-        }
+    let cx;
+    if (this.scaleType === 'time') {
+      cx = this.xScale(label);
+    } else if (this.scaleType === 'linear') {
+      cx = this.xScale(Number(label));
+    } else {
+      cx = this.xScale(label);
+    }
 
-        const cy = this.yScale(this.type === 'standard' ? value : d.d1);
-        const radius = 5;
-        const height = this.yScale.range()[0] - cy;
+    const cy = this.yScale(this.type === 'standard' ? value : d.d1);
+    const radius = 5;
+    const height = this.yScale.range()[0] - cy;
+    const opacity = 1;
 
-        let opacity = 0;
-        if (label && this.visibleValue && label.toString() === this.visibleValue.toString()) {
-          opacity = 1;
-        }
-
-        let color;
-        if (this.colors.scaleType === 'linear') {
-          if (this.type === 'standard') {
-            color = this.colors.getColor(value);
-          } else {
-            color = this.colors.getColor(d.d1);
-          }
-        } else {
-          color = this.colors.getColor(seriesName);
-        }
-
-        const data = {
-          series: seriesName,
-          value,
-          name: label
-        };
-
-        return {
-          classNames: [`circle-data-${i}`],
-          value,
-          label,
-          data,
-          cx,
-          cy,
-          radius,
-          height,
-          tooltipLabel,
-          color,
-          opacity,
-          seriesName,
-          gradientStops: this.getGradientStops(color),
-          min: d.min,
-          max: d.max
-        };
+    let color;
+    if (this.colors.scaleType === 'linear') {
+      if (this.type === 'standard') {
+        color = this.colors.getColor(value);
+      } else {
+        color = this.colors.getColor(d.d1);
       }
-    }).filter((circle) => circle !== undefined);
+    } else {
+      color = this.colors.getColor(seriesName);
+    }
+
+    const data = {
+      series: seriesName,
+      value,
+      name: label
+    };
+
+    return {
+      classNames: [`circle-data-${i}`],
+      value,
+      label,
+      data,
+      cx,
+      cy,
+      radius,
+      height,
+      tooltipLabel,
+      color,
+      opacity,
+      seriesName,
+      gradientStops: this.getGradientStops(color),
+      min: d.min,
+      max: d.max
+    };
   }
 
   getTooltipText({ tooltipLabel, value, seriesName, min, max}): string {

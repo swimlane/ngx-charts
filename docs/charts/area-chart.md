@@ -25,6 +25,8 @@
 | yAxisLabel            | string             |               | the y axis label text                                                                                                            |
 | xAxisTickFormatting   | function           |               | the x axis tick formatting                                                                                                       |
 | yAxisTickFormatting   | function           |               | the y axis tick formatting                                                                                                       |
+| xAxisTicks            | any[]              |               | predefined list of x axis tick values                                                                                            |
+| yAxisTicks            | any[]              |               | predefined list of y axis tick values                                                                                            |
 | timeline              | boolean            | false         | display a timeline control under the chart. Only available if x scale is date                                                    |
 | autoScale             | boolean            | false         | set the minimum value of the y axis to the minimum value in the data, instead of 0 (ignored if yScaleMin is defined)             |
 | curve                 | function           |               | the interpolation function used to generate the curve. It accepts any [d3.curve](https://github.com/d3/d3-shape#curves) function |

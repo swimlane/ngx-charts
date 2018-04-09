@@ -34,6 +34,8 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [showGridLines]="showGridLines"
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
+          [tickFormatting]="xAxisTickFormatting"
+          [ticks]="xAxisTicks"
           [tickFormatting]="xAxisTickFormatting" 
           [xAxisTooltip]="xAxisTooltip" 
           [xAxisTooltipFormatting]="xAxisTooltipFormatting"
@@ -46,6 +48,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
           [tickFormatting]="yAxisTickFormatting"
+          [ticks]="yAxisTicks"
           [yAxisTooltip]="yAxisTooltip"
           [yAxisTooltipFormatting]="yAxisTooltipFormatting"
           (dimensionsChanged)="updateYAxisWidth($event)">
@@ -92,12 +95,15 @@ export class BarHorizontalComponent extends BaseChartComponent {
   @Input() xAxisTooltip: boolean = false;
   @Input() xAxisTooltipFormatting: any;
   @Input() yAxisTickFormatting: any;
+  @Input() xAxisTicks: any[];
+  @Input() yAxisTicks: any[];
   @Input() yAxisTooltip: boolean = false;
   @Input() yAxisTooltipFormatting: any;
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
   @Input() roundEdges: boolean = true;
   @Input() xScaleMax: number;
+  @Input() xScaleMin: number;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -164,7 +170,10 @@ export class BarHorizontalComponent extends BaseChartComponent {
 
   getXDomain(): any[] {
     const values = this.results.map(d => d.value);
-    const min = Math.min(0, ...values);
+    const min = this.xScaleMin
+      ? Math.min(this.xScaleMin, ...values)
+      : Math.min(0, ...values);
+
     const max = this.xScaleMax
       ? Math.max(this.xScaleMax, ...values)
       : Math.max(...values);

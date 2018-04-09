@@ -120,7 +120,7 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
   valueResizeScale: number = 1;
   unitsResizeScale: number = 1;
   valueTextTransform: string = '';
-  valueTranslate: string= '';
+  valueTranslate: string = '';
   unitsTextTransform: string = '';
   unitsTranslate: string = '';
   displayValue: string;

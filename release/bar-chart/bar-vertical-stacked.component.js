@@ -91,15 +91,28 @@ var BarVerticalStackedComponent = /** @class */ (function (_super) {
     };
     BarVerticalStackedComponent.prototype.getValueDomain = function () {
         var domain = [];
+        var smallest = 0;
+        var biggest = 0;
         for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
             var group = _a[_i];
-            var sum = 0;
+            var smallestSum = 0;
+            var biggestSum = 0;
             for (var _b = 0, _c = group.series; _b < _c.length; _b++) {
                 var d = _c[_b];
-                sum += d.value;
+                if (d.value < 0) {
+                    smallestSum += d.value;
+                }
+                else {
+                    biggestSum += d.value;
+                }
+                smallest = d.value < smallest ? d.value : smallest;
+                biggest = d.value > biggest ? d.value : biggest;
             }
-            domain.push(sum);
+            domain.push(smallestSum);
+            domain.push(biggestSum);
         }
+        domain.push(smallest);
+        domain.push(biggest);
         var min = Math.min.apply(Math, [0].concat(domain));
         var max = this.yScaleMax
             ? Math.max.apply(Math, [this.yScaleMax].concat(domain)) : Math.max.apply(Math, domain);

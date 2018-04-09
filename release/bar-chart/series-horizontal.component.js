@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel } from '../common/label.helper';
+import { D0Types } from './series-vertical.component';
 var SeriesHorizontal = /** @class */ (function () {
     function SeriesHorizontal() {
         this.type = 'standard';
@@ -25,7 +26,12 @@ var SeriesHorizontal = /** @class */ (function () {
     SeriesHorizontal.prototype.update = function () {
         var _this = this;
         this.updateTooltipSettings();
-        var d0 = 0;
+        var d0 = (_a = {},
+            _a[D0Types.positive] = 0,
+            _a[D0Types.negative] = 0,
+            _a);
+        var d0Type;
+        d0Type = D0Types.positive;
         var total;
         if (this.type === 'normalized') {
             total = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return sum + d; }, 0);
@@ -35,6 +41,7 @@ var SeriesHorizontal = /** @class */ (function () {
             var label = d.name;
             var formattedLabel = formatLabel(label);
             var roundEdges = _this.roundEdges;
+            d0Type = value > 0 ? D0Types.positive : D0Types.negative;
             var bar = {
                 value: value,
                 label: label,
@@ -54,9 +61,9 @@ var SeriesHorizontal = /** @class */ (function () {
                 bar.y = _this.yScale(label);
             }
             else if (_this.type === 'stacked') {
-                var offset0 = d0;
+                var offset0 = d0[d0Type];
                 var offset1 = offset0 + value;
-                d0 += value;
+                d0[d0Type] += value;
                 bar.width = _this.xScale(offset1) - _this.xScale(offset0);
                 bar.x = _this.xScale(offset0);
                 bar.y = 0;
@@ -64,9 +71,9 @@ var SeriesHorizontal = /** @class */ (function () {
                 bar.offset1 = offset1;
             }
             else if (_this.type === 'normalized') {
-                var offset0 = d0;
+                var offset0 = d0[d0Type];
                 var offset1 = offset0 + value;
-                d0 += value;
+                d0[d0Type] += value;
                 if (total > 0) {
                     offset0 = (offset0 * 100) / total;
                     offset1 = (offset1 * 100) / total;
@@ -103,6 +110,7 @@ var SeriesHorizontal = /** @class */ (function () {
             bar.tooltipText = _this.tooltipDisabled ? undefined : "\n        <span class=\"tooltip-label\">" + tooltipLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
             return bar;
         });
+        var _a;
     };
     SeriesHorizontal.prototype.updateTooltipSettings = function () {
         this.tooltipPlacement = this.tooltipDisabled ? undefined : 'top';

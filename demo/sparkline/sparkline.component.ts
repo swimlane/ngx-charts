@@ -8,6 +8,7 @@ import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
 import { curveLinear } from 'd3-shape';
 
 import { calculateViewDimensions, ViewDimensions, BaseChartComponent, ColorHelper } from '../../src';
+import { getUniqueXDomainValues } from '../../src/common/domain.helper';
 
 @Component({
   selector: 'ngx-charts-sparkline',
@@ -89,15 +90,7 @@ export class SparklineComponent extends BaseChartComponent {
   }
 
   getXDomain(): any[] {
-    let values = [];
-
-    for (const results of this.results) {
-      for (const d of results.series) {
-        if (!values.includes(d.name)) {
-          values.push(d.name);
-        }
-      }
-    }
+    let values = getUniqueXDomainValues(this.results);
 
     this.scaleType = this.getScaleType(values);
     let domain = [];

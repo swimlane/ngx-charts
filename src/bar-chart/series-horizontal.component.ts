@@ -22,7 +22,7 @@ import { D0Types } from './series-vertical.component';
   template: `
     <svg:g ngx-charts-bar
       *ngFor="let bar of bars; trackBy:trackBy"
-      [@animationState]="'active'"     
+      [@animationState]="'active'"
       [width]="bar.width"
       [height]="bar.height"
       [x]="bar.x"
@@ -54,7 +54,7 @@ import { D0Types } from './series-vertical.component';
         style({
           opacity: 1
         }),
-        animate(500, style({opacity: 0}))
+        animate(500, style({ opacity: 0 }))
       ])
     ])
   ]
@@ -101,6 +101,7 @@ export class SeriesHorizontal implements OnChanges {
     if (this.type === 'normalized') {
       total = this.series.map(d => d.value).reduce((sum, d) => sum + d, 0);
     }
+    const xScaleMin = Math.max(this.xScale.domain()[0], 0);
 
     this.bars = this.series.map((d, index) => {
       let value = d.value;
@@ -120,11 +121,11 @@ export class SeriesHorizontal implements OnChanges {
       bar.height = this.yScale.bandwidth();
 
       if (this.type === 'standard') {
-        bar.width = Math.abs(this.xScale(value) - this.xScale(0));
+        bar.width = Math.abs(this.xScale(value) - this.xScale(xScaleMin));
         if (value < 0) {
           bar.x = this.xScale(value);
         } else {
-          bar.x = this.xScale(0);
+          bar.x = this.xScale(xScaleMin);
         }
         bar.y = this.yScale(label);
       } else if (this.type === 'stacked') {
@@ -187,11 +188,11 @@ export class SeriesHorizontal implements OnChanges {
 
   updateTooltipSettings() {
     this.tooltipPlacement = this.tooltipDisabled ? undefined : 'top';
-    this.tooltipType =  this.tooltipDisabled ? undefined : 'tooltip';
+    this.tooltipType = this.tooltipDisabled ? undefined : 'tooltip';
   }
 
   isActive(entry): boolean {
-    if(!this.activeEntries) return false;
+    if (!this.activeEntries) return false;
     const item = this.activeEntries.find(d => {
       return entry.name === d.name && entry.series === d.series;
     });

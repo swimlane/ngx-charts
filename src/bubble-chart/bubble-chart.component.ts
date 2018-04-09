@@ -52,6 +52,7 @@ import { id } from '../utils/id';
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [tickFormatting]="xAxisTickFormatting"
+          [ticks]="xAxisTicks"
           [xAxisTooltip]="xAxisTooltip"
           [xAxisTooltipFormatting]="xAxisTooltipFormatting"
           (dimensionsChanged)="updateXAxisHeight($event)"/>
@@ -63,6 +64,7 @@ import { id } from '../utils/id';
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
           [tickFormatting]="yAxisTickFormatting"
+          [ticks]="yAxisTicks"
           [yAxisTooltip]="yAxisTooltip"
           [yAxisTooltipFormatting]="yAxisTooltipFormatting"
           (dimensionsChanged)="updateYAxisWidth($event)"/>
@@ -130,6 +132,8 @@ export class BubbleChartComponent extends BaseChartComponent {
   @Input() xAxisTooltipFormatting: any;
   @Input() yAxisTooltip: boolean = false;
   @Input() yAxisTooltipFormatting: any;
+  @Input() xAxisTicks: any[];
+  @Input() yAxisTicks: any[];
   @Input() roundDomains: boolean = false;
   @Input() maxRadius = 10;
   @Input() minRadius = 3;
