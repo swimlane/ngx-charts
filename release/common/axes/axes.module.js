@@ -11,13 +11,12 @@ import { XAxisTicksComponent } from './x-axis-ticks.component';
 import { YAxisComponent } from './y-axis.component';
 import { YAxisTicksComponent } from './y-axis-ticks.component';
 import { CommonModule } from '@angular/common';
-import { TooltipModule } from '@swimlane/ngx-ui';
 var AxesModule = /** @class */ (function () {
     function AxesModule() {
     }
     AxesModule = __decorate([
         NgModule({
-            imports: [CommonModule, TooltipModule],
+            imports: [CommonModule],
             declarations: [AxisLabelComponent, XAxisComponent, XAxisTicksComponent, YAxisComponent, YAxisTicksComponent],
             exports: [AxisLabelComponent, XAxisComponent, XAxisTicksComponent, YAxisComponent, YAxisTicksComponent]
         })
