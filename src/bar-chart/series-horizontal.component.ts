@@ -47,7 +47,7 @@ import { D0Types } from './series-vertical.component';
       [tooltipContext]="bar.data">
     </svg:g>
     <svg:g *ngIf="showDataLabel">
-      <svg:g ngx-charts-bar-label *ngFor="let b of barsForDataLabels; trackBy:trackBy"         
+      <svg:g ngx-charts-bar-label *ngFor="let b of barsForDataLabels; trackBy:trackDataLabelBy"         
         [barX]="b.x"
         [barY]="b.y"
         [barWidth]="b.width"
@@ -74,8 +74,8 @@ import { D0Types } from './series-vertical.component';
 export class SeriesHorizontal implements OnChanges {
   bars: any;
   x: any;
-  y: any;
-  barsForDataLabels: any;
+  y: any;       
+  barsForDataLabels: Array<{ x: number, y: number, width: number, height: number, total: number }> = [];
   
   @Input() dims;
   @Input() type = 'standard';
@@ -251,6 +251,10 @@ export class SeriesHorizontal implements OnChanges {
 
   trackBy(index, bar) {
     return bar.label;
+  }
+
+  trackDataLabelBy(index, barLabel) {
+    return index + '/' + barLabel.total;
   }
 
   click(data): void {

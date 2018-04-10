@@ -51,7 +51,7 @@ export enum D0Types {
       [animations]="animations">
     </svg:g>
     <svg:g *ngIf="showDataLabel">
-      <svg:g ngx-charts-bar-label *ngFor="let b of barsForDataLabels; trackBy:trackBy"         
+      <svg:g ngx-charts-bar-label *ngFor="let b of barsForDataLabels; trackBy:trackDataLabelBy"         
         [barX]="b.x"
         [barY]="b.y"
         [barWidth]="b.width"
@@ -104,7 +104,7 @@ export class SeriesVerticalComponent implements OnChanges {
   bars: any;
   x: any;
   y: any;
-  barsForDataLabels: any;
+  barsForDataLabels: Array<{ x: number, y: number, width: number, height: number, total: number }> = [];
 
   ngOnChanges(changes): void {
     this.update();
@@ -267,6 +267,10 @@ export class SeriesVerticalComponent implements OnChanges {
 
   trackBy(index, bar): string {
     return bar.label;
+  }
+
+  trackDataLabelBy(index, barLabel) {
+    return index + '/' + barLabel.total;
   }
 
 }
