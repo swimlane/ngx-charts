@@ -5,15 +5,18 @@ import {
   ChangeDetectionStrategy,
   ContentChild,
   TemplateRef
-} from '@angular/core';
-import { scaleBand } from 'd3-scale';
+} from "@angular/core";
+import { scaleBand } from "d3-scale";
 
-import { BaseChartComponent } from '../common/base-chart.component';
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
-import { ColorHelper } from '../common/color.helper';
+import { BaseChartComponent } from "../common/base-chart.component";
+import {
+  calculateViewDimensions,
+  ViewDimensions
+} from "../common/view-dimensions.helper";
+import { ColorHelper } from "../common/color.helper";
 
 @Component({
-  selector: 'ngx-charts-heat-map',
+  selector: "ngx-charts-heat-map",
   template: `
     <ngx-charts-chart
       [view]="[width, height]"
@@ -50,6 +53,16 @@ import { ColorHelper } from '../common/color.helper';
           [attr.height]="rect.height"
           [attr.fill]="rect.fill"
         />
+        <!--<svg:foreignObject *ngFor="let rect of rects"
+          [attr.x]="rect.x"
+          [attr.y]="rect.y"
+          [attr.rx]="rect.rx"
+          [attr.width]="rect.width"
+          [attr.height]="rect.height"
+          [attr.fill]="rect.fill"
+        >
+        <xhtml:div>\${{rect.value}}</xhtml:div>
+        </svg:foreignObject>!-->
         <svg:g ngx-charts-heat-map-cell-series
           [xScale]="xScale"
           [yScale]="yScale"
@@ -61,18 +74,19 @@ import { ColorHelper } from '../common/color.helper';
           [tooltipTemplate]="tooltipTemplate"
           [tooltipText]="tooltipText"
           (select)="onClick($event)"
+          [showValueLabel]="showValueLabel"
+          [valueFormatting]="valueFormatting"
         />
       </svg:g>
     </ngx-charts-chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['../common/base-chart.component.scss'],
+  styleUrls: ["../common/base-chart.component.scss"],
   encapsulation: ViewEncapsulation.None
 })
 export class HeatMapComponent extends BaseChartComponent {
-
   @Input() legend;
-  @Input() legendTitle: string = 'Legend';
+  @Input() legendTitle: string = "Legend";
   @Input() xAxis;
   @Input() yAxis;
   @Input() showXAxisLabel;
@@ -87,8 +101,13 @@ export class HeatMapComponent extends BaseChartComponent {
   @Input() yAxisTicks: any[];
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipText: any;
+  @Input() xAxisLabelSortOrder: string = "desc";
+  @Input() yAxisLabelSortOrder: string = "asc";
+  @Input() showValueLabel: boolean = false;
+  @Input() valueFormatting: any;
+  
 
-  @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
+  @ContentChild("tooltipTemplate") tooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
   xDomain: any[];
@@ -105,7 +124,7 @@ export class HeatMapComponent extends BaseChartComponent {
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
   legendOptions: any;
-  scaleType: string = 'linear';
+  scaleType: string = "linear";
 
   update(): void {
     super.update();
@@ -132,7 +151,7 @@ export class HeatMapComponent extends BaseChartComponent {
       legendType: this.scaleType
     });
 
-    if (this.scaleType === 'linear') {
+    if (this.scaleType === "linear") {
       const min = Math.min(0, ...this.valueDomain);
       const max = Math.max(...this.valueDomain);
       this.valueDomain = [min, max];
@@ -144,7 +163,7 @@ export class HeatMapComponent extends BaseChartComponent {
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
     this.rects = this.getRects();
   }
 
@@ -155,10 +174,36 @@ export class HeatMapComponent extends BaseChartComponent {
         domain.push(group.name);
       }
     }
-
+    if(this.xAxisLabelSortOrder==="asc"){
+      return domain.sort(this.sortAscFn);
+    }
+    if(this.xAxisLabelSortOrder==="desc"){
+      return domain.sort(this.sortDescFn);
+    }
     return domain;
   }
+  sortDescFn(a:any,b:any):number {
+    if (a > b) {
+      return 1;
+    }
 
+    if (a < b) {
+      return -1;
+    }
+
+    return 0;
+  }
+  sortAscFn(a:any,b:any):number {
+    if (a > b) {
+      return -1;
+    }
+
+    if (a < b) {
+      return 1;
+    }
+
+    return 0;
+  }
   getYDomain(): any[] {
     const domain = [];
 
@@ -169,7 +214,12 @@ export class HeatMapComponent extends BaseChartComponent {
         }
       }
     }
-
+if(this.yAxisLabelSortOrder==="asc"){
+  return domain.sort(this.sortAscFn);
+}
+if(this.yAxisLabelSortOrder==="desc"){
+  return domain.sort(this.sortDescFn);
+}
     return domain;
   }
 
@@ -203,29 +253,39 @@ export class HeatMapComponent extends BaseChartComponent {
    *
    * @memberOf HeatMapComponent
    */
-  getDimension(value: string | number | Array<string | number>, index = 0, N: number, L: number): number {
-    if (typeof value === 'string') {
+  getDimension(
+    value: string | number | Array<string | number>,
+    index = 0,
+    N: number,
+    L: number
+  ): number {
+    if (typeof value === "string") {
       value = value
-        .replace('[', '')
-        .replace(']', '')
-        .replace('px', '')
-        .replace('\'', '');
+        .replace("[", "")
+        .replace("]", "")
+        .replace("px", "")
+        .replace("'", "");
 
-      if (value.includes(',')) {
-        value = value.split(',');
+      if (value.includes(",")) {
+        value = value.split(",");
       }
     }
-    if (Array.isArray(value) && typeof index === 'number') {
+    if (Array.isArray(value) && typeof index === "number") {
       return this.getDimension(value[index], null, N, L);
     }
-    if (typeof value === 'string' && value.includes('%')) {
-      return +value.replace('%', '') / 100;
+    if (typeof value === "string" && value.includes("%")) {
+      return +value.replace("%", "") / 100;
     }
     return N / (L / +value + 1);
   }
 
   getXScale(): any {
-    const f = this.getDimension(this.innerPadding, 0, this.xDomain.length, this.dims.width);
+    const f = this.getDimension(
+      this.innerPadding,
+      0,
+      this.xDomain.length,
+      this.dims.width
+    );
     return scaleBand()
       .rangeRound([0, this.dims.width])
       .domain(this.xDomain)
@@ -233,25 +293,43 @@ export class HeatMapComponent extends BaseChartComponent {
   }
 
   getYScale(): any {
-    const f = this.getDimension(this.innerPadding, 1, this.yDomain.length, this.dims.height);
+    const f = this.getDimension(
+      this.innerPadding,
+      1,
+      this.yDomain.length,
+      this.dims.height
+    );
     return scaleBand()
       .rangeRound([this.dims.height, 0])
       .domain(this.yDomain)
       .paddingInner(f);
   }
 
+  getValue(xValue:any,yValue:any):any{
+    for (const group of this.results) {
+      for (const d of group.series) {
+        if (group.name==xValue && d.name==yValue) {
+          return d.value;
+        }
+      }
+    }
+  }
+
   getRects(): any[] {
     const rects = [];
 
-    this.xDomain.map((xVal) => {
-      this.yDomain.map((yVal) => {
+    
+
+    this.xDomain.map(xVal => {
+      this.yDomain.map(yVal => {
         rects.push({
           x: this.xScale(xVal),
           y: this.yScale(yVal),
           rx: 3,
           width: this.xScale.bandwidth(),
           height: this.yScale.bandwidth(),
-          fill: 'rgba(200,200,200,0.03)'
+          fill: "rgba(200,200,200,0.03)",
+          value: this.getValue(xVal,yVal)
         });
       });
     });
@@ -267,25 +345,29 @@ export class HeatMapComponent extends BaseChartComponent {
     let num = true;
 
     for (const value of values) {
-      if (typeof value !== 'number') {
+      if (typeof value !== "number") {
         num = false;
       }
     }
 
-    if (num) return 'linear';
-    return 'ordinal';
+    if (num) return "linear";
+    return "ordinal";
   }
 
   setColors(): void {
-    this.colors = new ColorHelper(this.scheme, this.scaleType, this.valueDomain);
+    this.colors = new ColorHelper(
+      this.scheme,
+      this.scaleType,
+      this.valueDomain
+    );
   }
 
   getLegendOptions() {
     return {
       scaleType: this.scaleType,
       domain: this.valueDomain,
-      colors: this.scaleType === 'ordinal' ? this.colors : this.colors.scale,
-      title: this.scaleType === 'ordinal' ? this.legendTitle : undefined
+      colors: this.scaleType === "ordinal" ? this.colors : this.colors.scale,
+      title: this.scaleType === "ordinal" ? this.legendTitle : undefined
     };
   }
 
@@ -298,5 +380,4 @@ export class HeatMapComponent extends BaseChartComponent {
     this.xAxisHeight = height;
     this.update();
   }
-
 }

@@ -8,11 +8,11 @@ import {
   OnInit,
   ChangeDetectionStrategy,
   TemplateRef
-} from '@angular/core';
-import { formatLabel } from '../common/label.helper';
+} from "@angular/core";
+import { formatLabel } from "../common/label.helper";
 
 @Component({
-  selector: 'g[ngx-charts-heat-map-cell-series]',
+  selector: "g[ngx-charts-heat-map-cell-series]",
   template: `
     <svg:g
       ngx-charts-heat-map-cell
@@ -32,13 +32,14 @@ import { formatLabel } from '../common/label.helper';
       [tooltipType]="'tooltip'"
       [tooltipTitle]="tooltipTemplate ? undefined : tooltipText(c)"
       [tooltipTemplate]="tooltipTemplate"
-      [tooltipContext]="{series: c.series, name: c.label, value: c.data}">
+      [tooltipContext]="{series: c.series, name: c.label, value: c.data}"
+      [showValueLabel]="showValueLabel"
+      >
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeatCellSeriesComponent implements OnChanges, OnInit {
-
   @Input() data;
   @Input() colors;
   @Input() xScale;
@@ -48,7 +49,9 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
   @Input() tooltipText: any;
   @Input() tooltipTemplate: TemplateRef<any>;
   @Input() animations: boolean = true;
-  
+  @Input() showValueLabel: boolean = false;
+  @Input() valueFormatting: any;
+
   @Output() select = new EventEmitter();
 
   cells: any[];
@@ -70,8 +73,8 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
   getCells() {
     const cells = [];
 
-    this.data.map((row) => {
-      row.series.map((cell) => {
+    this.data.map(row => {
+      row.series.map(cell => {
         const value = cell.value;
 
         cells.push({
@@ -82,7 +85,7 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
           width: this.xScale.bandwidth(),
           height: this.yScale.bandwidth(),
           fill: this.colors.getColor(value),
-          data: value,
+          data: this.valueFormatting ? this.valueFormatting(value) : value,
           label: formatLabel(cell.name),
           series: row.name
         });
@@ -110,5 +113,4 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
       series
     });
   }
-
 }

@@ -7,13 +7,13 @@ import {
   ElementRef,
   OnChanges,
   ChangeDetectionStrategy
-} from '@angular/core';
-import { select } from 'd3-selection';
+} from "@angular/core";
+import { select } from "d3-selection";
 
-import { id } from '../utils/id';
+import { id } from "../utils/id";
 
 @Component({
-  selector: 'g[ngx-charts-heat-map-cell]',
+  selector: "g[ngx-charts-heat-map-cell]",
   template: `
     <svg:g [attr.transform]="transform" class="cell">
       <defs *ngIf="gradient">
@@ -32,12 +32,14 @@ import { id } from '../utils/id';
         style="cursor: pointer"
         (click)="onClick()"
       />
+      <svg:foreignObject *ngIf="showValueLabel">
+        <xhtml:div>{{data}}</xhtml:div>
+        </svg:foreignObject>
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeatMapCellComponent implements OnChanges {
-
   @Input() fill;
   @Input() x;
   @Input() y;
@@ -47,6 +49,7 @@ export class HeatMapCellComponent implements OnChanges {
   @Input() label;
   @Input() gradient: boolean = false;
   @Input() animations: boolean = true;
+  @Input() showValueLabel: boolean = false;
 
   @Output() select = new EventEmitter();
 
@@ -66,7 +69,7 @@ export class HeatMapCellComponent implements OnChanges {
     this.transform = `translate(${this.x} , ${this.y})`;
 
     this.startOpacity = 0.3;
-    this.gradientId = 'grad' + id().toString();
+    this.gradientId = "grad" + id().toString();
     this.gradientUrl = `url(#${this.gradientId})`;
     this.gradientStops = this.getGradientStops();
 
@@ -86,24 +89,26 @@ export class HeatMapCellComponent implements OnChanges {
         offset: 100,
         color: this.fill,
         opacity: 1
-    }];
+      }
+    ];
   }
 
   loadAnimation(): void {
-    const node = select(this.element).select('.cell');
-    node.attr('opacity', 0);
+    const node = select(this.element).select(".cell");
+    node.attr("opacity", 0);
     this.animateToCurrentForm();
   }
 
   animateToCurrentForm(): void {
-    const node = select(this.element).select('.cell');
-    
-    node.transition().duration(750)
-      .attr('opacity', 1);
+    const node = select(this.element).select(".cell");
+
+    node
+      .transition()
+      .duration(750)
+      .attr("opacity", 1);
   }
 
   onClick() {
     this.select.emit(this.data);
   }
-
 }
