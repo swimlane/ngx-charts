@@ -1,4 +1,4 @@
-import { EventEmitter, ChangeDetectorRef, NgZone, OnDestroy, ElementRef } from '@angular/core';
+import { EventEmitter, ChangeDetectorRef, OnDestroy, ElementRef } from '@angular/core';
 /**
  * Count up component
  *
@@ -11,7 +11,6 @@ import { EventEmitter, ChangeDetectorRef, NgZone, OnDestroy, ElementRef } from '
  */
 export declare class CountUpDirective implements OnDestroy {
     private cd;
-    private zone;
     countDuration: number;
     countPrefix: string;
     countSuffix: string;
@@ -28,7 +27,7 @@ export declare class CountUpDirective implements OnDestroy {
     private _countDecimals;
     private _countTo;
     private _countFrom;
-    constructor(cd: ChangeDetectorRef, zone: NgZone, element: ElementRef);
+    constructor(cd: ChangeDetectorRef, element: ElementRef);
     ngOnDestroy(): void;
     start(): void;
 }

@@ -3,10 +3,9 @@ import {
   Output, EventEmitter, AfterViewInit, OnDestroy, OnChanges, SimpleChanges
 } from '@angular/core';
 
-import { LocationStrategy } from '@angular/common';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/operator/debounceTime';
+import { fromEvent as observableFromEvent } from 'rxjs/observable/fromEvent';
+import { debounceTime } from 'rxjs/operators/debounceTime';
+
 import { VisibilityObserver } from '../utils';
 
 @Component({
@@ -20,6 +19,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() scheme: any = 'cool';
   @Input() schemeType: string = 'ordinal';
   @Input() customColors: any;
+  @Input() animations: boolean = true;
 
   @Output() select = new EventEmitter();
 
@@ -31,8 +31,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   constructor(
     protected chartElement: ElementRef,
     protected zone: NgZone,
-    protected cd: ChangeDetectorRef,
-    protected location: LocationStrategy) {
+    protected cd: ChangeDetectorRef) {
   }
 
   ngAfterViewInit(): void {
@@ -58,6 +57,8 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   update(): void {
     if (this.results) {
       this.results = this.cloneData(this.results);
+    } else {
+      this.results =  [];
     }
 
     if (this.view) {
@@ -137,8 +138,8 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   private bindWindowResizeEvent(): void {
-    const source = Observable.fromEvent(window, 'resize', null, null);
-    const subscription = source.debounceTime(200).subscribe(e => {
+    const source = observableFromEvent(window, 'resize', null, null);
+    const subscription = source.pipe(debounceTime(200)).subscribe(e => {
       this.update();
       if (this.cd) {
         this.cd.markForCheck();

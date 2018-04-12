@@ -12,7 +12,6 @@ import {
   ContentChild,
   TemplateRef
 } from '@angular/core';
-import { PathLocationStrategy } from '@angular/common';
 import {
   trigger,
   state,
@@ -21,7 +20,7 @@ import {
   transition
 } from '@angular/animations';
 
-import { 
+import {
   NgxChartsModule, BaseChartComponent, LineComponent, LineSeriesComponent,
   calculateViewDimensions, ViewDimensions, ColorHelper
  } from '../../src';
@@ -36,6 +35,7 @@ import { scaleBand, scaleLinear, scalePoint, scaleTime } from 'd3-scale';
       [showLegend]="legend"
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"
+      [animations]="animations"
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)">
@@ -82,6 +82,7 @@ import { scaleBand, scaleLinear, scalePoint, scaleTime } from 'd3-scale';
           [gradient]="gradient"
           tooltipDisabled="true"
           [activeEntries]="activeEntries"
+          [animations]="animations"
           (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)"
           (bandwidth)="updateLineWidth($event)"
@@ -100,6 +101,7 @@ import { scaleBand, scaleLinear, scalePoint, scaleTime } from 'd3-scale';
               [scaleType]="scaleType"
               [curve]="curve"
               [rangeFillOpacity]="rangeFillOpacity"
+              [animations]="animations"
             />
           </svg:g>
 
@@ -167,6 +169,7 @@ export class ComboChartComponent extends BaseChartComponent  {
   @Input() yLeftAxisScaleFactor: any;
   @Input() yRightAxisScaleFactor: any;
   @Input() rangeFillOpacity: number;
+  @Input() animations: boolean = true;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -316,7 +319,7 @@ export class ComboChartComponent extends BaseChartComponent  {
     let values = [];
 
     for (const results of this.lineChart) {
-      for (const d of results.series){
+      for (const d of results.series) {
         if (!values.includes(d.name)) {
           values.push(d.name);
         }
@@ -347,7 +350,7 @@ export class ComboChartComponent extends BaseChartComponent  {
     const domain = [];
 
     for (const results of this.lineChart) {
-      for (const d of results.series){
+      for (const d of results.series) {
         if (domain.indexOf(d.value) < 0) {
           domain.push(d.value);
         }

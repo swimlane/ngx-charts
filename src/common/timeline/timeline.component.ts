@@ -1,9 +1,8 @@
 import {
   Component, Input, Output, EventEmitter, ElementRef,
-  OnChanges, ChangeDetectionStrategy, NgZone,
+  OnChanges, ChangeDetectionStrategy,
   ChangeDetectorRef, SimpleChanges, ViewEncapsulation
 } from '@angular/core';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { brushX } from 'd3-brush';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
 import { select, event as d3event } from 'd3-selection';
@@ -65,9 +64,7 @@ export class Timeline implements OnChanges {
 
   constructor(
     element: ElementRef,
-    private zone: NgZone,
-    private cd: ChangeDetectorRef,
-    private location: LocationStrategy) {
+    private cd: ChangeDetectorRef) {
       this.element = element.nativeElement;
   }
 
@@ -94,12 +91,8 @@ export class Timeline implements OnChanges {
 
     this.transform = `translate(0 , ${ offsetY })`;
 
-    const pageUrl = this.location instanceof PathLocationStrategy
-      ? this.location.path()
-      : '';
-
     this.filterId = 'filter' + id().toString();
-    this.filter = `url(${pageUrl}#${this.filterId})`;
+    this.filter = `url(#${this.filterId})`;
 
     this.cd.markForCheck();
   }
@@ -108,7 +101,7 @@ export class Timeline implements OnChanges {
     let values = [];
 
     for (const results of this.results) {
-      for (const d of results.series){
+      for (const d of results.series) {
         if (!values.includes(d.name)) {
           values.push(d.name);
         }

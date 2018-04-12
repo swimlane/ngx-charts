@@ -13,7 +13,6 @@ import {
 import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
 import { roundedRect } from '../../common/shape.helper';
-import { scaleBand } from 'd3-scale';
 
 @Component({
   selector: 'g[ngx-charts-y-axis-ticks]',
@@ -82,7 +81,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() scale;
   @Input() orient;
   @Input() tickArguments = [5];
-  @Input() tickValues;
+  @Input() tickValues: any[];
   @Input() tickStroke = '#ccc';
   @Input() tickFormatting;
   @Input() showGridLines = false;

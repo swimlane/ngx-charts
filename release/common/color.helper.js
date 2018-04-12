@@ -1,7 +1,7 @@
 import { range } from 'd3-array';
 import { scaleBand, scaleLinear, scaleOrdinal, scaleQuantile } from 'd3-scale';
 import { colorSets } from '../utils/color-sets';
-var ColorHelper = (function () {
+var ColorHelper = /** @class */ (function () {
     function ColorHelper(scheme, type, domain, customColors) {
         if (typeof (scheme) === 'string') {
             scheme = colorSets.find(function (cs) {
@@ -53,6 +53,9 @@ var ColorHelper = (function () {
             return (this.scale(valueScale(value)));
         }
         else {
+            if (typeof this.customColors === 'function') {
+                return this.customColors(value);
+            }
             var formattedValue_1 = value.toString();
             var found = void 0; // todo type customColors
             if (this.customColors && this.customColors.length > 0) {

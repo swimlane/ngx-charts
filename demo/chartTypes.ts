@@ -7,9 +7,9 @@ const chartGroups = [
         selector: 'bar-vertical',
         inputFormat: 'singleSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
+          'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains', 'tooltipDisabled', 'roundEdges'
+          'showGridLines', 'roundDomains', 'tooltipDisabled', 'roundEdges', 'yScaleMax'
         ]
       },
       {
@@ -17,9 +17,9 @@ const chartGroups = [
         selector: 'bar-horizontal',
         inputFormat: 'singleSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
+          'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains', 'tooltipDisabled', 'roundEdges'
+          'showGridLines', 'roundDomains', 'tooltipDisabled', 'roundEdges', 'xScaleMax'
         ],
         defaults: {
           yAxisLabel: 'Country',
@@ -31,9 +31,9 @@ const chartGroups = [
         selector: 'bar-vertical-2d',
         inputFormat: 'multiSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding', 'groupPadding',
+          'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding', 'groupPadding',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains', 'tooltipDisabled', 'roundEdges'
+          'showGridLines', 'roundDomains', 'tooltipDisabled', 'roundEdges', 'yScaleMax'
         ]
       },
       {
@@ -41,9 +41,9 @@ const chartGroups = [
         selector: 'bar-horizontal-2d',
         inputFormat: 'multiSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding', 'groupPadding',
+          'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding', 'groupPadding',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains', 'tooltipDisabled', 'roundEdges'
+          'showGridLines', 'roundDomains', 'tooltipDisabled', 'roundEdges', 'xScaleMax'
         ],
         defaults: {
           yAxisLabel: 'Country',
@@ -55,9 +55,9 @@ const chartGroups = [
         selector: 'bar-vertical-stacked',
         inputFormat: 'multiSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
+          'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains', 'tooltipDisabled'
+          'showGridLines', 'roundDomains', 'tooltipDisabled', 'yScaleMax'
         ]
       },
       {
@@ -65,9 +65,9 @@ const chartGroups = [
         selector: 'bar-horizontal-stacked',
         inputFormat: 'multiSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
+          'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains', 'tooltipDisabled'
+          'showGridLines', 'roundDomains', 'tooltipDisabled', 'xScaleMax'
         ],
         defaults: {
           yAxisLabel: 'Country',
@@ -79,7 +79,7 @@ const chartGroups = [
         selector: 'bar-vertical-normalized',
         inputFormat: 'multiSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
+          'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
           'showGridLines', 'roundDomains', 'tooltipDisabled'
         ],
@@ -93,7 +93,7 @@ const chartGroups = [
         selector: 'bar-horizontal-normalized',
         inputFormat: 'multiSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
+          'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
           'showGridLines', 'roundDomains', 'tooltipDisabled'
         ],
@@ -112,7 +112,7 @@ const chartGroups = [
         selector: 'pie-chart',
         inputFormat: 'singleSeries',
         options: [
-          'colorScheme', 'gradient', 'showLegend', 'legendTitle', 'doughnut', 'arcWidth',
+          'animations', 'colorScheme', 'gradient', 'showLegend', 'legendTitle', 'doughnut', 'arcWidth',
           'explodeSlices', 'showLabels', 'tooltipDisabled'
         ]
       },
@@ -120,13 +120,13 @@ const chartGroups = [
         name: 'Advanced Pie Chart',
         selector: 'advanced-pie-chart',
         inputFormat: 'singleSeries',
-        options: ['colorScheme', 'gradient', 'tooltipDisabled']
+        options: ['animations', 'colorScheme', 'gradient', 'tooltipDisabled']
       },
       {
         name: 'Pie Grid',
         selector: 'pie-grid',
         inputFormat: 'singleSeries',
-        options: ['colorScheme', 'tooltipDisabled']
+        options: ['animations', 'colorScheme', 'tooltipDisabled']
       }
     ]
   },
@@ -138,11 +138,12 @@ const chartGroups = [
         selector: 'line-chart',
         inputFormat: 'multiSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+          'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
           'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve',
           'rangeFillOpacity', 'roundDomains', 'tooltipDisabled', 'showRefLines',
-          'referenceLines', 'showRefLabels'
+          'referenceLines', 'showRefLabels',
+          'xScaleMin', 'xScaleMax', 'yScaleMin', 'yScaleMax'
         ],
         defaults: {
           yAxisLabel: 'GDP Per Capita',
@@ -155,7 +156,7 @@ const chartGroups = [
         selector: 'polar-chart',
         inputFormat: 'multiSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+          'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
           'yAxisLabel', 'autoScale', 'showGridLines', 'curveClosed',
           'roundDomains', 'tooltipDisabled'
@@ -171,10 +172,11 @@ const chartGroups = [
         selector: 'area-chart',
         inputFormat: 'multiSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+          'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
           'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve',
-          'roundDomains', 'tooltipDisabled'
+          'roundDomains', 'tooltipDisabled',
+          'xScaleMin', 'xScaleMax', 'yScaleMin', 'yScaleMax'
         ],
         defaults: {
           yAxisLabel: 'GDP Per Capita',
@@ -187,10 +189,11 @@ const chartGroups = [
         selector: 'area-chart-stacked',
         inputFormat: 'multiSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+          'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
           'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve',
-          'roundDomains', 'tooltipDisabled'
+          'roundDomains', 'tooltipDisabled',
+          'xScaleMin', 'xScaleMax', 'yScaleMin', 'yScaleMax'
         ],
         defaults: {
           yAxisLabel: 'GDP Per Capita',
@@ -203,7 +206,7 @@ const chartGroups = [
         selector: 'area-chart-normalized',
         inputFormat: 'multiSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+          'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
           'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve',
           'roundDomains', 'tooltipDisabled'
@@ -224,9 +227,10 @@ const chartGroups = [
         selector: 'bubble-chart',
         inputFormat: 'bubble',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'showLegend', 'legendTitle',
+          'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'showLegend', 'legendTitle',
           'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines',
-          'roundDomains', 'autoScale', 'minRadius', 'maxRadius', 'tooltipDisabled'
+          'roundDomains', 'autoScale', 'minRadius', 'maxRadius', 'tooltipDisabled',
+          'xScaleMin', 'xScaleMax', 'yScaleMin', 'yScaleMax'
         ],
         defaults: {
           xAxisLabel: 'Census Date',
@@ -237,14 +241,14 @@ const chartGroups = [
         name: 'Force Directed Graph',
         selector: 'force-directed-graph',
         inputFormat: 'graph',
-        options: ['colorScheme', 'showLegend', 'legendTitle', 'tooltipDisabled']
+        options: ['animations', 'colorScheme', 'showLegend', 'legendTitle', 'tooltipDisabled']
       },
       {
         name: 'Heat Map',
         selector: 'heat-map',
         inputFormat: 'multiSeries',
         options: [
-          'colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend',
+          'animations', 'colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend',
           'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
           'innerPadding', 'tooltipDisabled'
         ],
@@ -257,13 +261,13 @@ const chartGroups = [
         name: 'Tree Map',
         selector: 'tree-map',
         inputFormat: 'singleSeries',
-        options: ['colorScheme', 'tooltipDisabled', 'gradient']
+        options: ['animations', 'colorScheme', 'tooltipDisabled', 'gradient']
       },
       {
         name: 'Number Cards',
         selector: 'number-card',
         inputFormat: 'singleSeries',
-        options: ['colorScheme']
+        options: ['animations', 'colorScheme']
       },
       {
         name: 'Gauge',
@@ -271,14 +275,14 @@ const chartGroups = [
         inputFormat: 'singleSeries',
         options: [
           'showLegend', 'legendTitle', 'colorScheme', 'min', 'max', 'largeSegments', 'smallSegments', 'units',
-          'angleSpan', 'startAngle', 'showAxis', 'margin', 'tooltipDisabled'
+          'angleSpan', 'startAngle', 'showAxis', 'margin', 'tooltipDisabled', 'animations', 
         ]
       },
       {
         name: 'Linear Gauge',
         selector: 'linear-gauge',
         inputFormat: 'single',
-        options: ['colorScheme', 'value', 'previousValue', 'min', 'max', 'units']
+        options: ['animations', 'colorScheme', 'value', 'previousValue', 'min', 'max', 'units']
       }
     ]
   },
@@ -290,7 +294,7 @@ const chartGroups = [
         selector: 'combo-chart',
         inputFormat: 'comboChart',
         options: [
-          'showXAxis', 'showYAxis', 'gradient',
+          'animations', 'showXAxis', 'showYAxis', 'gradient',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
           'showGridLines', 'roundDomains', 'tooltipDisabled'
         ]
@@ -300,7 +304,7 @@ const chartGroups = [
         selector: 'calendar',
         inputFormat: 'calendarData',
         options: [
-          'colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend',
+          'animations', 'colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend',
           'innerPadding', 'tooltipDisabled'
         ],
         defaults: {
@@ -312,20 +316,20 @@ const chartGroups = [
         name: 'Number Cards - Status',
         selector: 'status-demo',
         inputFormat: 'statusData',
-        options: ['colorScheme']
+        options: ['animations', 'colorScheme']
       },
       {
         name: 'TreeMap - Interactive',
         selector: 'tree-map-demo',
         inputFormat: 'treemap',
-        options: ['colorScheme']
+        options: ['animations', 'colorScheme']
       },
       {
         name: 'Equation Plots',
         selector: 'plot-demo',
         inputFormat: 'statusData',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis',
+          'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis',
           'autoScale', 'showGridLines', 'gradient',
           'roundDomains', 'tooltipDisabled'
         ]
@@ -335,7 +339,7 @@ const chartGroups = [
         selector: 'tooltip-templates',
         inputFormat: 'singleSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
+          'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
           'showGridLines', 'roundDomains', 'tooltipDisabled'
         ]
@@ -345,7 +349,7 @@ const chartGroups = [
         selector: 'sparkline',
         inputFormat: 'multiSeries',
         options: [
-          'curve'
+          'animations', 'curve'
         ]
       },
       {
@@ -353,7 +357,7 @@ const chartGroups = [
         selector: 'line-reference-lines',
         inputFormat: 'multiSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+          'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
           'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve',
           'rangeFillOpacity', 'roundDomains', 'tooltipDisabled', 'showRefLines',
@@ -370,10 +374,20 @@ const chartGroups = [
         selector: 'timeline-filter-bar-chart-demo',
         inputFormat: 'singleSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showGridLines',
+          'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showGridLines',
           'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel'
         ]
-      }
+      },
+      {
+        name: 'Stacked Vertical Bar Chart Negative',
+        selector: 'bar-vertical-stacked-negative',
+        inputFormat: 'multiSeriesNegative',
+        options: [
+          'animations', 'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
+          'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
+          'showGridLines', 'roundDomains', 'tooltipDisabled', 'yScaleMax'
+        ]
+      },
     ]
   }
 ];

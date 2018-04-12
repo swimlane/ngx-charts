@@ -4,7 +4,6 @@ import {
 } from '@angular/core';
 import {
   trigger,
-  state,
   style,
   animate,
   transition
@@ -18,7 +17,8 @@ import { TooltipService } from '../tooltip';
     <div
       class="ngx-charts-outer"
       [style.width.px]="view[0]"
-      [@animationState]="'active'">
+      [@animationState]="'active'"
+      [@.disabled]="!animations">
       <svg
         class="ngx-charts"
         [attr.width]="chartWidth"
@@ -70,6 +70,7 @@ export class ChartComponent implements OnChanges {
   @Input() legendType: any;
   @Input() colors: any;
   @Input() activeEntries: any[];
+  @Input() animations: boolean = true;
 
   @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
   @Output() legendLabelActivate: EventEmitter<any> = new EventEmitter();
@@ -82,7 +83,7 @@ export class ChartComponent implements OnChanges {
   constructor(
     private vcr: ViewContainerRef,
     private tooltipService: TooltipService) {
-    this.tooltipService.injectionService.setRootViewContainer(vcr);
+    this.tooltipService.injectionService.setRootViewContainer(this.vcr);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

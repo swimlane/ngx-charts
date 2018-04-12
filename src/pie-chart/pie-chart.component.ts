@@ -20,20 +20,24 @@ import { BaseChartComponent } from '../common/base-chart.component';
       [showLegend]="legend"
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"
+      [animations]="animations"
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)"
       (legendLabelClick)="onClick($event)">
       <svg:g [attr.transform]="translation" class="pie-chart chart">
         <svg:g ngx-charts-pie-series
           [colors]="colors"
+          [series]="data"
           [showLabels]="labels"
           [labelFormatting]="labelFormatting"
-          [series]="data"
+          [trimLabels]="trimLabels"
+          [maxLabelLength]="maxLabelLength"
           [activeEntries]="activeEntries"
           [innerRadius]="innerRadius"
           [outerRadius]="outerRadius"
           [explodeSlices]="explodeSlices"
           [gradient]="gradient"
+          [animations]="animations"
           [tooltipDisabled]="tooltipDisabled"
           [tooltipTemplate]="tooltipTemplate"
           [tooltipText]="tooltipText"
@@ -63,6 +67,8 @@ export class PieChartComponent extends BaseChartComponent {
   @Input() activeEntries: any[] = [];
   @Input() tooltipDisabled: boolean = false;
   @Input() labelFormatting: any;
+  @Input() trimLabels: boolean = true;
+  @Input() maxLabelLength: number = 10;
   @Input() tooltipText: any;
 
   @Output() select = new EventEmitter();

@@ -3,7 +3,6 @@ export function gridSize(dims, len, minWidth) {
     var rows = 1;
     var cols = len;
     var width = dims.width;
-    var height = dims.height;
     if (width > minWidth) {
         while (width / cols < minWidth) {
             rows += 1;
@@ -12,7 +11,7 @@ export function gridSize(dims, len, minWidth) {
     }
     return [cols, rows];
 }
-export function gridLayout(dims, data, minWidth) {
+export function gridLayout(dims, data, minWidth, designatedTotal) {
     var xScale = scaleBand();
     var yScale = scaleBand();
     var width = dims.width;
@@ -31,7 +30,7 @@ export function gridLayout(dims, data, minWidth) {
     xScale.rangeRound([0, width], 0.1);
     yScale.rangeRound([0, height], 0.1);
     var res = [];
-    var total = getTotal(data);
+    var total = designatedTotal ? designatedTotal : getTotal(data);
     var cardWidth = xScale.bandwidth();
     var cardHeight = yScale.bandwidth();
     for (var i = 0; i < data.length; i++) {

@@ -3,21 +3,17 @@ import {
   Input,
   Output,
   EventEmitter,
-  OnChanges,
   ViewChild,
-  SimpleChanges,
   Renderer,
   ChangeDetectionStrategy,
   TemplateRef,
 } from '@angular/core';
 import {
   trigger,
-  state,
   style,
   animate,
   transition
 } from '@angular/animations';
-import { scaleQuantize } from 'd3-scale';
 
 @Component({
   selector: 'g[ngx-charts-tooltip-area]',
@@ -118,10 +114,7 @@ export class TooltipArea {
       }
 
       if (item) {
-        let label = item.name;
-        if (label instanceof Date) {
-          label = label.toLocaleDateString();
-        }
+        const label = item.name;
         let val = item.value;
         if (this.showPercentage) {
           val = (item.d1 - item.d0).toFixed(2) + '%';
@@ -152,7 +145,7 @@ export class TooltipArea {
   }
 
   mouseMove(event) {
-    const xPos = event.offsetX - this.dims.xOffset;
+    const xPos = event.pageX - event.target.getBoundingClientRect().left;
 
     const closestIndex = this.findClosestPointIndex(xPos);
     const closestPoint = this.xSet[closestIndex];

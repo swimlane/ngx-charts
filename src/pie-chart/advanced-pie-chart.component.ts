@@ -1,12 +1,12 @@
 import {
+  ChangeDetectionStrategy,
   Component,
+  ContentChild,
+  EventEmitter,
   Input,
   Output,
-  EventEmitter,
-  ChangeDetectionStrategy,
-  ViewEncapsulation,
-  ContentChild,
-  TemplateRef
+  TemplateRef,
+  ViewEncapsulation
 } from '@angular/core';
 
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
@@ -24,7 +24,8 @@ import { BaseChartComponent } from '../common/base-chart.component';
         [style.height.px]="dims.height">
         <ngx-charts-chart
           [view]="[width, height]"
-          [showLegend]="false">
+          [showLegend]="false"
+          [animations]="animations">
           <svg:g
             [attr.transform]="transform"
             class="pie chart">
@@ -38,7 +39,8 @@ import { BaseChartComponent } from '../common/base-chart.component';
               [tooltipDisabled]="tooltipDisabled"
               [tooltipTemplate]="tooltipTemplate"
               [tooltipText]="tooltipText"
-              (select)="onClick($event)">
+              (select)="onClick($event)"
+              [animations]="animations">
             </svg:g>
           </svg:g>
         </ngx-charts-chart>
@@ -52,6 +54,10 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [colors]="colors"
           [width]="width - dims.width - margin[1]"
           [label]="label"
+          [animations]="animations"
+          [valueFormatting]="valueFormatting"
+          [labelFormatting]="nameFormatting"
+          [percentageFormatting]="percentageFormatting"
           (select)="onClick($event)"
           (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)">
@@ -88,6 +94,10 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
   colors: ColorHelper;
   legendWidth: number;
   margin = [20, 20, 20, 20];
+
+  @Input() valueFormatting: (value: number) => any = value => value;
+  @Input() nameFormatting: (value: string) => any = label => label;
+  @Input() percentageFormatting: (value: number) => any = percentage => percentage;
 
   update(): void {
     super.update();

@@ -12,11 +12,11 @@ import {
 import { scaleLinear, scalePoint, scaleTime } from 'd3-scale';
 import { curveLinear } from 'd3-shape';
 
-import { PathLocationStrategy } from '@angular/common';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
+import { getUniqueXDomainValues } from '../common/domain.helper';
 
 @Component({
   selector: 'ngx-charts-area-chart-normalized',
@@ -26,6 +26,7 @@ import { id } from '../utils/id';
       [showLegend]="legend"
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"
+      [animations]="animations"
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)">
@@ -46,6 +47,7 @@ import { id } from '../utils/id';
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [tickFormatting]="xAxisTickFormatting"
+          [ticks]="xAxisTicks"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
         <svg:g ngx-charts-y-axis
@@ -56,6 +58,7 @@ import { id } from '../utils/id';
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
           [tickFormatting]="yAxisTickFormatting"
+          [ticks]="yAxisTicks"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
         <svg:g [attr.clip-path]="clipPath">
@@ -70,6 +73,7 @@ import { id } from '../utils/id';
               [gradient]="gradient"
               normalized="true"
               [curve]="curve"
+              [animations]="animations"
             />
           </svg:g>
 
@@ -108,7 +112,7 @@ import { id } from '../utils/id';
         </svg:g>
       </svg:g>
       <svg:g ngx-charts-timeline
-        *ngIf="timeline && scaleType === 'time'"
+        *ngIf="timeline && scaleType != 'ordinal'"
         [attr.transform]="timelineTransform"
         [results]="results"
         [view]="[timelineWidth, height]"
@@ -128,6 +132,7 @@ import { id } from '../utils/id';
             [gradient]="gradient"
             normalized="true"
             [curve]="curve"
+            [animations]="animations"
           />
         </svg:g>
       </svg:g>
@@ -155,6 +160,8 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
   @Input() schemeType: string;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
+  @Input() xAxisTicks: any[];
+  @Input() yAxisTicks: any[];
   @Input() roundDomains: boolean = false;
   @Input() tooltipDisabled: boolean = false;
 
@@ -229,7 +236,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
       let d0 = 0;
 
       let total = 0;
-      for (const group of this.results){
+      for (const group of this.results) {
         const d = group.series.find(item => {
           let a = item.name;
           let b = val;
@@ -244,7 +251,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
         }
       }
 
-      for (const group of this.results){
+      for (const group of this.results) {
         let d = group.series.find(item => {
           let a = item.name;
           let b = val;
@@ -286,12 +293,8 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
 
     this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
 
-    const pageUrl = this.location instanceof PathLocationStrategy
-      ? this.location.path()
-      : '';
-
     this.clipPathId = 'clip' + id().toString();
-    this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
+    this.clipPath = `url(#${this.clipPathId})`;
   }
 
   updateTimeline(): void {
@@ -305,15 +308,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
   }
 
   getXDomain(): any[] {
-    let values = [];
-
-    for (const results of this.results) {
-      for (const d of results.series) {
-        if (!values.includes(d.name)) {
-          values.push(d.name);
-        }
-      }
-    }
+    let values = getUniqueXDomainValues(this.results);
 
     this.scaleType = this.getScaleType(values);
     let domain = [];
@@ -334,7 +329,8 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
       const min = Math.min(...values);
       const max = Math.max(...values);
       domain = [min, max];
-      this.xSet = [...values].sort();
+      // Use compare function to sort numbers numerically
+      this.xSet = [...values].sort((a, b) => (a - b));
     } else {
       domain = values;
       this.xSet = values;

@@ -23,6 +23,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
       [startingPath]="startingPath"
       [opacity]="opacity"
       [gradient]="gradient || hasGradient"
+      [animations]="animations"
       [class.active]="isActive(data)"
       [class.inactive]="isInactive(data)"
     />
@@ -34,6 +35,7 @@ export class AreaSeriesComponent implements OnChanges {
   @Input() data;
   @Input() xScale;
   @Input() yScale;
+  @Input() baseValue: any = 'auto';
   @Input() colors;
   @Input() scaleType;
   @Input() stacked: boolean = false;
@@ -41,6 +43,7 @@ export class AreaSeriesComponent implements OnChanges {
   @Input() gradient;
   @Input() curve;
   @Input() activeEntries: any[];
+  @Input() animations: boolean = true;
 
   @Output() select = new EventEmitter();
 
@@ -79,13 +82,13 @@ export class AreaSeriesComponent implements OnChanges {
     } else {
       currentArea = area<any>()
         .x(xProperty)
-        .y0(() => this.yScale.range()[0])
+        .y0(() => this.baseValue === 'auto' ? this.yScale.range()[0] : this.yScale(this.baseValue))
         .y1(d => this.yScale(d.value));
 
       startingArea = area<any>()
         .x(xProperty)
-        .y0(d => this.yScale.range()[0])
-        .y1(d => this.yScale.range()[0]);
+        .y0(d => this.baseValue === 'auto' ? this.yScale.range()[0] : this.yScale(this.baseValue))
+        .y1(d => this.baseValue === 'auto' ? this.yScale.range()[0] : this.yScale(this.baseValue));
     }
 
     currentArea.curve(this.curve);

@@ -1,6 +1,15 @@
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { line } from 'd3-shape';
-var GaugeAxisComponent = (function () {
+var GaugeAxisComponent = /** @class */ (function () {
     function GaugeAxisComponent() {
         this.rotate = '';
     }
@@ -79,27 +88,50 @@ var GaugeAxisComponent = (function () {
         var lineGenerator = line().x(function (d) { return d.x; }).y(function (d) { return d.y; });
         return lineGenerator(points);
     };
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], GaugeAxisComponent.prototype, "bigSegments", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], GaugeAxisComponent.prototype, "smallSegments", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], GaugeAxisComponent.prototype, "min", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], GaugeAxisComponent.prototype, "max", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Number)
+    ], GaugeAxisComponent.prototype, "angleSpan", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Number)
+    ], GaugeAxisComponent.prototype, "startAngle", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], GaugeAxisComponent.prototype, "radius", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], GaugeAxisComponent.prototype, "valueScale", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], GaugeAxisComponent.prototype, "tickFormatting", void 0);
+    GaugeAxisComponent = __decorate([
+        Component({
+            selector: 'g[ngx-charts-gauge-axis]',
+            template: "\n    <svg:g [attr.transform]=\"rotate\">\n        <svg:g *ngFor=\"let tick of ticks.big\"\n            class=\"gauge-tick gauge-tick-large\">\n            <svg:path [attr.d]=\"tick.line\" />\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.big\"\n            class=\"gauge-tick gauge-tick-large\">\n            <svg:text\n                [style.textAnchor]=\"tick.textAnchor\"\n                [attr.transform]=\"tick.textTransform\"\n                alignment-baseline=\"central\">\n                {{tick.text}}\n            </svg:text>\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.small\"\n            class=\"gauge-tick gauge-tick-small\">\n            <svg:path [attr.d]=\"tick.line\" />\n        </svg:g>\n    </svg:g>\n  ",
+            changeDetection: ChangeDetectionStrategy.OnPush
+        })
+    ], GaugeAxisComponent);
     return GaugeAxisComponent;
 }());
 export { GaugeAxisComponent };
-GaugeAxisComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'g[ngx-charts-gauge-axis]',
-                template: "\n    <svg:g [attr.transform]=\"rotate\">\n        <svg:g *ngFor=\"let tick of ticks.big\"\n            class=\"gauge-tick gauge-tick-large\">\n            <svg:path [attr.d]=\"tick.line\" />\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.big\"\n            class=\"gauge-tick gauge-tick-large\">\n            <svg:text\n                [style.textAnchor]=\"tick.textAnchor\"\n                [attr.transform]=\"tick.textTransform\"\n                alignment-baseline=\"central\">\n                {{tick.text}}\n            </svg:text>\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.small\"\n            class=\"gauge-tick gauge-tick-small\">\n            <svg:path [attr.d]=\"tick.line\" />\n        </svg:g>\n    </svg:g>\n  ",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            },] },
-];
-/** @nocollapse */
-GaugeAxisComponent.ctorParameters = function () { return []; };
-GaugeAxisComponent.propDecorators = {
-    'bigSegments': [{ type: Input },],
-    'smallSegments': [{ type: Input },],
-    'min': [{ type: Input },],
-    'max': [{ type: Input },],
-    'angleSpan': [{ type: Input },],
-    'startAngle': [{ type: Input },],
-    'radius': [{ type: Input },],
-    'valueScale': [{ type: Input },],
-    'tickFormatting': [{ type: Input },],
-};
 //# sourceMappingURL=gauge-axis.component.js.map

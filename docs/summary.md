@@ -4,6 +4,7 @@
   * [Motivation](intro/motivation.md)
   * [Features](intro/features.md)
   * [Installing](intro/installing.md)
+  * [Custom Charts](intro/custom-charts.md)
 * Examples
    * Bar Charts
       * [Vertical Bar Chart](charts/bar-vertical.md)

@@ -11,12 +11,10 @@ import {
 } from '@angular/core';
 import {
   trigger,
-  state,
   style,
   animate,
   transition
 } from '@angular/animations';
-import { PathLocationStrategy } from '@angular/common';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
 import { curveLinear } from 'd3-shape';
 
@@ -24,6 +22,7 @@ import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensio
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
+import { getUniqueXDomainValues } from '../common/domain.helper';
 
 @Component({
   selector: 'ngx-charts-line-chart',
@@ -33,6 +32,7 @@ import { id } from '../utils/id';
       [showLegend]="legend"
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"
+      [animations]="animations"
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)">
@@ -53,6 +53,7 @@ import { id } from '../utils/id';
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [tickFormatting]="xAxisTickFormatting"
+          [ticks]="xAxisTicks"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
         <svg:g ngx-charts-y-axis
@@ -63,6 +64,7 @@ import { id } from '../utils/id';
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
           [tickFormatting]="yAxisTickFormatting"
+          [ticks]="yAxisTicks"
           [referenceLines]="referenceLines"
           [showRefLines]="showRefLines"
           [showRefLabels]="showRefLabels"
@@ -80,6 +82,7 @@ import { id } from '../utils/id';
               [curve]="curve"
               [rangeFillOpacity]="rangeFillOpacity"
               [hasRange]="hasRange"
+              [animations]="animations"
             />
           </svg:g>
 
@@ -116,7 +119,7 @@ import { id } from '../utils/id';
         </svg:g>
       </svg:g>
       <svg:g ngx-charts-timeline
-        *ngIf="timeline && scaleType === 'time'"
+        *ngIf="timeline && scaleType != 'ordinal'"
         [attr.transform]="timelineTransform"
         [results]="results"
         [view]="[timelineWidth, height]"
@@ -135,6 +138,7 @@ import { id } from '../utils/id';
             [scaleType]="scaleType"
             [curve]="curve"
             [hasRange]="hasRange"
+            [animations]="animations"
           />
         </svg:g>
       </svg:g>
@@ -176,11 +180,17 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() rangeFillOpacity: number;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
+  @Input() xAxisTicks: any[];
+  @Input() yAxisTicks: any[];
   @Input() roundDomains: boolean = false;
   @Input() tooltipDisabled: boolean = false;
   @Input() showRefLines: boolean = false;
   @Input() referenceLines: any;
   @Input() showRefLabels: boolean = true;
+  @Input() xScaleMin: any;
+  @Input() xScaleMax: any;
+  @Input() yScaleMin: number;
+  @Input() yScaleMax: number;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -256,12 +266,8 @@ export class LineChartComponent extends BaseChartComponent {
 
     this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
 
-    const pageUrl = this.location instanceof PathLocationStrategy
-      ? this.location.path()
-      : '';
-
     this.clipPathId = 'clip' + id().toString();
-    this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
+    this.clipPath = `url(#${this.clipPathId})`;
   }
 
   updateTimeline(): void {
@@ -275,22 +281,28 @@ export class LineChartComponent extends BaseChartComponent {
   }
 
   getXDomain(): any[] {
-    let values = [];
-
-    for (const results of this.results) {
-      for (const d of results.series){
-        if (!values.includes(d.name)) {
-          values.push(d.name);
-        }
-      }
-    }
+    let values = getUniqueXDomainValues(this.results);
 
     this.scaleType = this.getScaleType(values);
     let domain = [];
 
+    if (this.scaleType === 'linear') {
+      values = values.map(v => Number(v));
+    }
+
+    let min;
+    let max;
+    if (this.scaleType === 'time' || this.scaleType === 'linear') {
+      min = this.xScaleMin
+        ? this.xScaleMin
+        : Math.min(...values);
+
+      max = this.xScaleMax
+        ? this.xScaleMax
+        : Math.max(...values);
+    }
+
     if (this.scaleType === 'time') {
-      const min = Math.min(...values);
-      const max = Math.max(...values);
       domain = [new Date(min), new Date(max)];
       this.xSet = [...values].sort((a, b) => {
         const aDate = a.getTime();
@@ -300,11 +312,9 @@ export class LineChartComponent extends BaseChartComponent {
         return 0;
       });
     } else if (this.scaleType === 'linear') {
-      values = values.map(v => Number(v));
-      const min = Math.min(...values);
-      const max = Math.max(...values);
       domain = [min, max];
-      this.xSet = [...values].sort();
+      // Use compare function to sort numbers numerically
+      this.xSet = [...values].sort((a, b) => (a - b));
     } else {
       domain = values;
       this.xSet = values;
@@ -316,7 +326,7 @@ export class LineChartComponent extends BaseChartComponent {
   getYDomain(): any[] {
     const domain = [];
     for (const results of this.results) {
-      for (const d of results.series){
+      for (const d of results.series) {
         if (domain.indexOf(d.value) < 0) {
           domain.push(d.value);
         }
@@ -335,11 +345,18 @@ export class LineChartComponent extends BaseChartComponent {
       }
     }
 
-    let min = Math.min(...domain);
-    const max = Math.max(...domain);
+    const values = [...domain];
     if (!this.autoScale) {
-      min = Math.min(0, min);
+      values.push(0);
     }
+
+    const min = this.yScaleMin
+      ? this.yScaleMin
+      : Math.min(...values);
+
+    const max = this.yScaleMax
+      ? this.yScaleMax
+      : Math.max(...values);
 
     return [min, max];
   }

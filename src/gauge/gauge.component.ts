@@ -25,11 +25,12 @@ import { ColorHelper } from '../common/color.helper';
       [showLegend]="legend"
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"
+      [animations]="animations"
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)">
       <svg:g [attr.transform]="transform" class="gauge chart">
-        <svg:g *ngFor="let arc of arcs" [attr.transform]="rotation">
+        <svg:g *ngFor="let arc of arcs; trackBy:trackBy" [attr.transform]="rotation">
           <svg:g ngx-charts-gauge-arc
             [backgroundArc]="arc.backgroundArc"
             [valueArc]="arc.valueArc"
@@ -39,6 +40,7 @@ import { ColorHelper } from '../common/color.helper';
             [tooltipDisabled]="tooltipDisabled"
             [tooltipTemplate]="tooltipTemplate"
             [valueFormatting]="valueFormatting"
+            [animations]="animations"
             (select)="onClick($event)"
             (activate)="onActivate($event)"
             (deactivate)="onDeactivate($event)">
@@ -324,7 +326,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
     this.activeEntries.splice(idx, 1);
     this.activeEntries = [...this.activeEntries];
 
-    this.deactivate.emit({ value: event, entries: this.activeEntries });
+    this.deactivate.emit({ value: item, entries: this.activeEntries });
   }
 
   isActive(entry): boolean {
@@ -333,5 +335,9 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
       return entry.name === d.name && entry.series === d.series;
     });
     return item !== undefined;
+  }
+
+  trackBy(index, item): string {
+    return item.valueArc.data.name;
   }
 }

@@ -4,7 +4,6 @@ export function gridSize(dims, len, minWidth) {
   let rows = 1;
   let cols = len;
   const width = dims.width;
-  const height = dims.height;
 
   if (width > minWidth) {
     while (width / cols < minWidth) {
@@ -16,7 +15,7 @@ export function gridSize(dims, len, minWidth) {
   return [cols, rows];
 }
 
-export function gridLayout(dims, data, minWidth) {
+export function gridLayout(dims, data, minWidth, designatedTotal) {
   const xScale: any = scaleBand<number>();
   const yScale: any = scaleBand<number>();
   const width = dims.width;
@@ -39,7 +38,7 @@ export function gridLayout(dims, data, minWidth) {
   yScale.rangeRound([0, height], 0.1);
 
   const res = [];
-  const total = getTotal(data);
+  const total = designatedTotal ? designatedTotal : getTotal(data);
   const cardWidth = xScale.bandwidth();
   const cardHeight = yScale.bandwidth();
 

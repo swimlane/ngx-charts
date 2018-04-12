@@ -1,17 +1,24 @@
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 import { ElementRef, NgZone, ChangeDetectorRef, Component, Input, Output, EventEmitter } from '@angular/core';
-import { LocationStrategy } from '@angular/common';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/operator/debounceTime';
+import { fromEvent as observableFromEvent } from 'rxjs/observable/fromEvent';
+import { debounceTime } from 'rxjs/operators/debounceTime';
 import { VisibilityObserver } from '../utils';
-var BaseChartComponent = (function () {
-    function BaseChartComponent(chartElement, zone, cd, location) {
+var BaseChartComponent = /** @class */ (function () {
+    function BaseChartComponent(chartElement, zone, cd) {
         this.chartElement = chartElement;
         this.zone = zone;
         this.cd = cd;
-        this.location = location;
         this.scheme = 'cool';
         this.schemeType = 'ordinal';
+        this.animations = true;
         this.select = new EventEmitter();
     }
     BaseChartComponent.prototype.ngAfterViewInit = function () {
@@ -100,8 +107,8 @@ var BaseChartComponent = (function () {
     };
     BaseChartComponent.prototype.bindWindowResizeEvent = function () {
         var _this = this;
-        var source = Observable.fromEvent(window, 'resize', null, null);
-        var subscription = source.debounceTime(200).subscribe(function (e) {
+        var source = observableFromEvent(window, 'resize', null, null);
+        var subscription = source.pipe(debounceTime(200)).subscribe(function (e) {
             _this.update();
             if (_this.cd) {
                 _this.cd.markForCheck();
@@ -143,28 +150,44 @@ var BaseChartComponent = (function () {
         }
         return results;
     };
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], BaseChartComponent.prototype, "results", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Array)
+    ], BaseChartComponent.prototype, "view", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], BaseChartComponent.prototype, "scheme", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", String)
+    ], BaseChartComponent.prototype, "schemeType", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], BaseChartComponent.prototype, "customColors", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], BaseChartComponent.prototype, "animations", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], BaseChartComponent.prototype, "select", void 0);
+    BaseChartComponent = __decorate([
+        Component({
+            selector: 'base-chart',
+            template: "<div></div>"
+        }),
+        __metadata("design:paramtypes", [ElementRef,
+            NgZone,
+            ChangeDetectorRef])
+    ], BaseChartComponent);
     return BaseChartComponent;
 }());
 export { BaseChartComponent };
-BaseChartComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'base-chart',
-                template: "<div></div>"
-            },] },
-];
-/** @nocollapse */
-BaseChartComponent.ctorParameters = function () { return [
-    { type: ElementRef, },
-    { type: NgZone, },
-    { type: ChangeDetectorRef, },
-    { type: LocationStrategy, },
-]; };
-BaseChartComponent.propDecorators = {
-    'results': [{ type: Input },],
-    'view': [{ type: Input },],
-    'scheme': [{ type: Input },],
-    'schemeType': [{ type: Input },],
-    'customColors': [{ type: Input },],
-    'select': [{ type: Output },],
-};
 //# sourceMappingURL=base-chart.component.js.map

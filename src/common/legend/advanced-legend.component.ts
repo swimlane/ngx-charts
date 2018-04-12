@@ -1,12 +1,12 @@
 import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
   ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
   SimpleChanges,
-  ViewEncapsulation,
-  OnChanges
+  ViewEncapsulation
 } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
 import { formatLabel } from '../label.helper';
@@ -17,9 +17,13 @@ import { formatLabel } from '../label.helper';
     <div class="advanced-pie-legend"
       [style.width.px]="width">
       <div
+        *ngIf="animations"
         class="total-value"
         ngx-charts-count-up
         [countTo]="roundedTotal">
+      </div>
+      <div *ngIf="!animations">
+        {{roundedTotal}}
       </div>
       <div class="total-label">
         {{label}}
@@ -37,17 +41,24 @@ import { formatLabel } from '../label.helper';
               class="item-color"
               [style.background]="legendItem.color">
             </div>
-            <div
+            <div *ngIf="animations"
               class="item-value"
               ngx-charts-count-up
               [countTo]="legendItem.value">
             </div>
+            <div *ngIf="!animations" class="item-value">
+              {{legendItem.value}}
+            </div>
             <div class="item-label">{{legendItem.label}}</div>
-            <div
+            <div *ngIf="animations"
               class="item-percent"
               ngx-charts-count-up
               [countTo]="legendItem.percentage"
               [countSuffix]="'%'">
+            </div>
+            <div *ngIf="!animations"
+              class="item-percent">
+              {{legendItem.percentage.toLocaleString()}}%
             </div>
           </div>
         </div>
@@ -64,6 +75,7 @@ export class AdvancedLegendComponent implements OnChanges  {
   @Input() data;
   @Input() colors;
   @Input() label: string = 'Total';
+  @Input() animations: boolean = true;
 
   @Output() select: EventEmitter<any> = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();
@@ -72,6 +84,10 @@ export class AdvancedLegendComponent implements OnChanges  {
   legendItems: any[] = [];
   total: number;
   roundedTotal: number;
+
+  @Input() valueFormatting: (value: number) => any = value => value;
+  @Input() labelFormatting: (value: string) => any = label => label;
+  @Input() percentageFormatting: (value: number) => any = percentage => percentage;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -94,15 +110,15 @@ export class AdvancedLegendComponent implements OnChanges  {
     return this.data.map((d, index) => {
       const label = formatLabel(d.name);
       const value = d.value;
-      const percentage = value / this.total * 100;
       const color = this.colors.getColor(label);
+      const percentage = (this.total > 0) ? value / this.total * 100 : 0;
 
       return {
-        value,
+        value: this.valueFormatting(value),
         color,
-        label: trimLabel(label, 20),
+        label: trimLabel(this.labelFormatting(label), 20),
         originalLabel: d.name,
-        percentage
+        percentage: this.percentageFormatting(percentage)
       };
     });
   }

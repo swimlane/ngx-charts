@@ -8,13 +8,15 @@ import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
 import { curveLinear } from 'd3-shape';
 
 import { calculateViewDimensions, ViewDimensions, BaseChartComponent, ColorHelper } from '../../src';
+import { getUniqueXDomainValues } from '../../src/common/domain.helper';
 
 @Component({
   selector: 'ngx-charts-sparkline',
   template: `
     <ngx-charts-chart
       [view]="[width, height]"
-      [showLegend]="false">
+      [showLegend]="false"
+      [animations]="animations">
       <svg:g [attr.transform]="transform" class="line-chart chart">
         <svg:g>
           <svg:g *ngFor="let series of results; trackBy:trackBy">
@@ -27,6 +29,7 @@ import { calculateViewDimensions, ViewDimensions, BaseChartComponent, ColorHelpe
               [scaleType]="scaleType"
               [curve]="curve"
               [rangeFillOpacity]="rangeFillOpacity"
+              [animations]="animations"
             />
           </svg:g>
         </svg:g>
@@ -43,6 +46,7 @@ export class SparklineComponent extends BaseChartComponent {
   @Input() curve: any = curveLinear;
   @Input() schemeType: string = 'linear';
   @Input() valueDomain: number[];
+  @Input() animations: boolean = true;
 
   dims: ViewDimensions;
   xSet: any;
@@ -86,15 +90,7 @@ export class SparklineComponent extends BaseChartComponent {
   }
 
   getXDomain(): any[] {
-    let values = [];
-
-    for (const results of this.results) {
-      for (const d of results.series){
-        if (!values.includes(d.name)) {
-          values.push(d.name);
-        }
-      }
-    }
+    let values = getUniqueXDomainValues(this.results);
 
     this.scaleType = this.getScaleType(values);
     let domain = [];
@@ -124,7 +120,7 @@ export class SparklineComponent extends BaseChartComponent {
     const domain = [];
 
     for (const results of this.results) {
-      for (const d of results.series){
+      for (const d of results.series) {
         if (domain.indexOf(d.value) < 0) {
           domain.push(d.value);
         }

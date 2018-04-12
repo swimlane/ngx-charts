@@ -9,6 +9,7 @@ export declare class GaugeArcComponent {
     tooltipDisabled: boolean;
     valueFormatting: (value: any) => string;
     tooltipTemplate: TemplateRef<any>;
+    animations: boolean;
     select: EventEmitter<{}>;
     activate: EventEmitter<{}>;
     deactivate: EventEmitter<{}>;

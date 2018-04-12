@@ -1,10 +1,20 @@
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { area } from 'd3-shape';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
-var AreaSeriesComponent = (function () {
+var AreaSeriesComponent = /** @class */ (function () {
     function AreaSeriesComponent() {
         this.stacked = false;
         this.normalized = false;
+        this.animations = true;
         this.select = new EventEmitter();
     }
     AreaSeriesComponent.prototype.ngOnChanges = function (changes) {
@@ -92,29 +102,62 @@ var AreaSeriesComponent = (function () {
         });
         return item === undefined;
     };
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], AreaSeriesComponent.prototype, "data", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], AreaSeriesComponent.prototype, "xScale", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], AreaSeriesComponent.prototype, "yScale", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], AreaSeriesComponent.prototype, "colors", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], AreaSeriesComponent.prototype, "scaleType", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], AreaSeriesComponent.prototype, "stacked", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], AreaSeriesComponent.prototype, "normalized", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], AreaSeriesComponent.prototype, "gradient", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], AreaSeriesComponent.prototype, "curve", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Array)
+    ], AreaSeriesComponent.prototype, "activeEntries", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], AreaSeriesComponent.prototype, "animations", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], AreaSeriesComponent.prototype, "select", void 0);
+    AreaSeriesComponent = __decorate([
+        Component({
+            selector: 'g[ngx-charts-area-series]',
+            template: "\n    <svg:g ngx-charts-area\n      class=\"area-series\"\n      [data]=\"data\"\n      [path]=\"path\"\n      [fill]=\"colors.getColor(data.name)\"\n      [stops]=\"gradientStops\"\n      [startingPath]=\"startingPath\"\n      [opacity]=\"opacity\"\n      [gradient]=\"gradient || hasGradient\"\n      [animations]=\"animations\"\n      [class.active]=\"isActive(data)\"\n      [class.inactive]=\"isInactive(data)\"\n    />\n  ",
+            changeDetection: ChangeDetectionStrategy.OnPush
+        })
+    ], AreaSeriesComponent);
     return AreaSeriesComponent;
 }());
 export { AreaSeriesComponent };
-AreaSeriesComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'g[ngx-charts-area-series]',
-                template: "\n    <svg:g ngx-charts-area\n      class=\"area-series\"\n      [data]=\"data\"\n      [path]=\"path\"\n      [fill]=\"colors.getColor(data.name)\"\n      [stops]=\"gradientStops\"\n      [startingPath]=\"startingPath\"\n      [opacity]=\"opacity\"\n      [gradient]=\"gradient || hasGradient\"\n      [class.active]=\"isActive(data)\"\n      [class.inactive]=\"isInactive(data)\"\n    />\n  ",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            },] },
-];
-/** @nocollapse */
-AreaSeriesComponent.ctorParameters = function () { return []; };
-AreaSeriesComponent.propDecorators = {
-    'data': [{ type: Input },],
-    'xScale': [{ type: Input },],
-    'yScale': [{ type: Input },],
-    'colors': [{ type: Input },],
-    'scaleType': [{ type: Input },],
-    'stacked': [{ type: Input },],
-    'normalized': [{ type: Input },],
-    'gradient': [{ type: Input },],
-    'curve': [{ type: Input },],
-    'activeEntries': [{ type: Input },],
-    'select': [{ type: Output },],
-};
 //# sourceMappingURL=area-series.component.js.map

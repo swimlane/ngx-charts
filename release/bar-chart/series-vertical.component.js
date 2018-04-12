@@ -1,10 +1,25 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { trigger, style, animate, transition } from '@angular/animations';
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, TemplateRef, } from '@angular/core';
+import { trigger, style, animate, transition, } from '@angular/animations';
 import { formatLabel } from '../common/label.helper';
-var SeriesVerticalComponent = (function () {
+export var D0Types;
+(function (D0Types) {
+    D0Types["positive"] = "positive";
+    D0Types["negative"] = "negative";
+})(D0Types || (D0Types = {}));
+var SeriesVerticalComponent = /** @class */ (function () {
     function SeriesVerticalComponent() {
         this.type = 'standard';
         this.tooltipDisabled = false;
+        this.animations = true;
         this.select = new EventEmitter();
         this.activate = new EventEmitter();
         this.deactivate = new EventEmitter();
@@ -19,7 +34,11 @@ var SeriesVerticalComponent = (function () {
         if (this.series.length) {
             width = this.xScale.bandwidth();
         }
-        var d0 = 0;
+        var d0 = (_a = {},
+            _a[D0Types.positive] = 0,
+            _a[D0Types.negative] = 0,
+            _a);
+        var d0Type = D0Types.positive;
         var total;
         if (this.type === 'normalized') {
             total = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return sum + d; }, 0);
@@ -29,6 +48,7 @@ var SeriesVerticalComponent = (function () {
             var label = d.name;
             var formattedLabel = formatLabel(label);
             var roundEdges = _this.roundEdges;
+            d0Type = value > 0 ? D0Types.positive : D0Types.negative;
             var bar = {
                 value: value,
                 label: label,
@@ -38,7 +58,7 @@ var SeriesVerticalComponent = (function () {
                 formattedLabel: formattedLabel,
                 height: 0,
                 x: 0,
-                y: 0
+                y: 0,
             };
             if (_this.type === 'standard') {
                 bar.height = Math.abs(_this.yScale(value) - _this.yScale(0));
@@ -51,9 +71,9 @@ var SeriesVerticalComponent = (function () {
                 }
             }
             else if (_this.type === 'stacked') {
-                var offset0 = d0;
+                var offset0 = d0[d0Type];
                 var offset1 = offset0 + value;
-                d0 += value;
+                d0[d0Type] += value;
                 bar.height = _this.yScale(offset0) - _this.yScale(offset1);
                 bar.x = 0;
                 bar.y = _this.yScale(offset1);
@@ -61,9 +81,9 @@ var SeriesVerticalComponent = (function () {
                 bar.offset1 = offset1;
             }
             else if (_this.type === 'normalized') {
-                var offset0 = d0;
+                var offset0 = d0[d0Type];
                 var offset1 = offset0 + value;
-                d0 += value;
+                d0[d0Type] += value;
                 if (total > 0) {
                     offset0 = (offset0 * 100) / total;
                     offset1 = (offset1 * 100) / total;
@@ -89,7 +109,8 @@ var SeriesVerticalComponent = (function () {
                 }
                 else {
                     bar.color = _this.colors.getColor(bar.offset1);
-                    bar.gradientStops = _this.colors.getLinearGradientStops(bar.offset1, bar.offset0);
+                    bar.gradientStops =
+                        _this.colors.getLinearGradientStops(bar.offset1, bar.offset0);
                 }
             }
             var tooltipLabel = formattedLabel;
@@ -100,6 +121,7 @@ var SeriesVerticalComponent = (function () {
             bar.tooltipText = _this.tooltipDisabled ? undefined : "\n        <span class=\"tooltip-label\">" + tooltipLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
             return bar;
         });
+        var _a;
     };
     SeriesVerticalComponent.prototype.updateTooltipSettings = function () {
         this.tooltipPlacement = this.tooltipDisabled ? undefined : 'top';
@@ -119,43 +141,88 @@ var SeriesVerticalComponent = (function () {
     SeriesVerticalComponent.prototype.trackBy = function (index, bar) {
         return bar.label;
     };
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], SeriesVerticalComponent.prototype, "dims", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], SeriesVerticalComponent.prototype, "type", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], SeriesVerticalComponent.prototype, "series", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], SeriesVerticalComponent.prototype, "xScale", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], SeriesVerticalComponent.prototype, "yScale", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], SeriesVerticalComponent.prototype, "colors", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], SeriesVerticalComponent.prototype, "gradient", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Array)
+    ], SeriesVerticalComponent.prototype, "activeEntries", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", String)
+    ], SeriesVerticalComponent.prototype, "seriesName", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], SeriesVerticalComponent.prototype, "tooltipDisabled", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", TemplateRef)
+    ], SeriesVerticalComponent.prototype, "tooltipTemplate", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], SeriesVerticalComponent.prototype, "roundEdges", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], SeriesVerticalComponent.prototype, "animations", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], SeriesVerticalComponent.prototype, "select", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], SeriesVerticalComponent.prototype, "activate", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], SeriesVerticalComponent.prototype, "deactivate", void 0);
+    SeriesVerticalComponent = __decorate([
+        Component({
+            selector: 'g[ngx-charts-series-vertical]',
+            template: "\n    <svg:g ngx-charts-bar\n      *ngFor=\"let bar of bars; trackBy: trackBy\"\n      [@animationState]=\"'active'\"\n      [@.disabled]=\"!animations\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [stops]=\"bar.gradientStops\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.data)\"\n      (select)=\"onClick($event)\"\n      (activate)=\"activate.emit($event)\"\n      (deactivate)=\"deactivate.emit($event)\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"tooltipPlacement\"\n      [tooltipType]=\"tooltipType\"\n      [tooltipTitle]=\"tooltipTemplate ? undefined : bar.tooltipText\"\n      [tooltipTemplate]=\"tooltipTemplate\"\n      [tooltipContext]=\"bar.data\"\n      [animations]=\"animations\">\n    </svg:g>\n  ",
+            changeDetection: ChangeDetectionStrategy.OnPush,
+            animations: [
+                trigger('animationState', [
+                    transition(':leave', [
+                        style({
+                            opacity: 1
+                        }),
+                        animate(500, style({ opacity: 0 }))
+                    ])
+                ])
+            ]
+        })
+    ], SeriesVerticalComponent);
     return SeriesVerticalComponent;
 }());
 export { SeriesVerticalComponent };
-SeriesVerticalComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'g[ngx-charts-series-vertical]',
-                template: "\n    <svg:g ngx-charts-bar\n      *ngFor=\"let bar of bars; trackBy: trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [stops]=\"bar.gradientStops\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.data)\"\n      (select)=\"onClick($event)\"\n      (activate)=\"activate.emit($event)\"\n      (deactivate)=\"deactivate.emit($event)\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"tooltipPlacement\"\n      [tooltipType]=\"tooltipType\"\n      [tooltipTitle]=\"tooltipTemplate ? undefined : bar.tooltipText\"\n      [tooltipTemplate]=\"tooltipTemplate\"\n      [tooltipContext]=\"bar.data\">\n    </svg:g>\n  ",
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                animations: [
-                    trigger('animationState', [
-                        transition(':leave', [
-                            style({
-                                opacity: 1
-                            }),
-                            animate(500, style({ opacity: 0 }))
-                        ])
-                    ])
-                ]
-            },] },
-];
-/** @nocollapse */
-SeriesVerticalComponent.ctorParameters = function () { return []; };
-SeriesVerticalComponent.propDecorators = {
-    'dims': [{ type: Input },],
-    'type': [{ type: Input },],
-    'series': [{ type: Input },],
-    'xScale': [{ type: Input },],
-    'yScale': [{ type: Input },],
-    'colors': [{ type: Input },],
-    'gradient': [{ type: Input },],
-    'activeEntries': [{ type: Input },],
-    'seriesName': [{ type: Input },],
-    'tooltipDisabled': [{ type: Input },],
-    'tooltipTemplate': [{ type: Input },],
-    'roundEdges': [{ type: Input },],
-    'select': [{ type: Output },],
-    'activate': [{ type: Output },],
-    'deactivate': [{ type: Output },],
-};
 //# sourceMappingURL=series-vertical.component.js.map

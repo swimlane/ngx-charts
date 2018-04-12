@@ -2,5 +2,9 @@
   "rulesDirectory": [
     "node_modules/codelyzer"
   ],
-  "extends": "tslint-config-swimlane/base"
+  "extends": "tslint-config-swimlane/base",
+  "rules": {
+    "no-unused-variable": true
+  },
+  "import-blacklist": [true, "rxjs", "rxjs/operators"]
 }

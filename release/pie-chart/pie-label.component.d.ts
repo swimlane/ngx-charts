@@ -7,6 +7,9 @@ export declare class PieLabelComponent implements OnChanges {
     max: any;
     value: any;
     explodeSlices: any;
+    animations: boolean;
+    labelTrim: boolean;
+    labelTrimSize: number;
     trimLabel: (label: string, max?: number) => string;
     line: string;
     private readonly isIE;

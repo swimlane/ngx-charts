@@ -5,19 +5,23 @@
 
 # Inputs
 
-| Property        | Type        | Default Value | Description                                                                                                     |
-|:----------------|:------------|:--------------|:----------------------------------------------------------------------------------------------------------------|
-| view            | number[]    |               | the dimensions of the chart [width, height]. If left undefined, the chart will fit to the parent container size |
-| results         | object[]    |               | the chart data                                                                                                  |
-| scheme          | object      |               | the color scheme of the chart                                                                                   |
-| customColors    | object      |               | custom colors for the chart. Used to override a color for a specific value                                      |
-| tooltipDisabled | boolean     | false         | show or hide the tooltip                                                                                        |
-| tooltipTemplate | TemplateRef |               | a custom ng-template to be displayed inside the tooltip                                                         |
+| Property        | Type               | Default Value | Description                                                                                                                                                                                                          |
+|-----------------|--------------------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| view            | number[]           |               | the dimensions of the chart [width, height]. If left undefined, the chart will fit to the parent container size                                                                                                      |
+| results         | object[]           |               | the chart data                                                                                                                                                                                                       |
+| scheme          | object             |               | the color scheme of the chart                                                                                                                                                                                        |
+| customColors    | function or object |               | custom colors for the chart. Used to override a color for a specific value                                                                                                                                           |
+| animations      | boolean            | true          | enable animations                                                                                                                                                                                                    |
+| label           | string             | 'Total'       | the text to show under the total value                                                                          |
+| tooltipDisabled | boolean            | false         | show or hide the tooltip                                                                                                                                                                                             |
+| tooltipTemplate | TemplateRef        |               | a custom ng-template to be displayed inside the tooltip                                                                                                                                                              |
+| designatedTotal | number             |               | total number that the value of each object in the results array will be compared to. If left undefined, the value of each object will automatically be compared to the total of all the values in the results array. |
+| minWidth        | number             | 150           | minimum width of each graph in grid                                                                                                                                                                                   |
 
 # Outputs
 
 | Property | Description |
-|:---------|:------------|
+|----------|-------------|
 | select   | click event |
 
 # Data Format
