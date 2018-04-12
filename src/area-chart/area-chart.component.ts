@@ -16,6 +16,7 @@ import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensio
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
+import { getUniqueXDomainValues } from '../common/domain.helper';
 
 @Component({
   selector: 'ngx-charts-area-chart',
@@ -46,6 +47,7 @@ import { id } from '../utils/id';
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [tickFormatting]="xAxisTickFormatting"
+          [ticks]="xAxisTicks"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
         <svg:g ngx-charts-y-axis
@@ -56,6 +58,7 @@ import { id } from '../utils/id';
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
           [tickFormatting]="yAxisTickFormatting"
+          [ticks]="yAxisTicks"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
         <svg:g [attr.clip-path]="clipPath">
@@ -63,6 +66,7 @@ import { id } from '../utils/id';
             <svg:g ngx-charts-area-series
               [xScale]="xScale"
               [yScale]="yScale"
+              [baseValue]="baseValue"
               [colors]="colors"
               [data]="series"
               [activeEntries]="activeEntries"
@@ -120,6 +124,7 @@ import { id } from '../utils/id';
           <svg:g ngx-charts-area-series
             [xScale]="timelineXScale"
             [yScale]="timelineYScale"
+            [baseValue]="baseValue"
             [colors]="colors"
             [data]="series"
             [scaleType]="scaleType"
@@ -142,6 +147,7 @@ export class AreaChartComponent extends BaseChartComponent {
   @Input() state;
   @Input() xAxis;
   @Input() yAxis;
+  @Input() baseValue: any = 'auto';
   @Input() autoScale;
   @Input() showXAxisLabel;
   @Input() showYAxisLabel;
@@ -155,6 +161,8 @@ export class AreaChartComponent extends BaseChartComponent {
   @Input() schemeType: string;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
+  @Input() xAxisTicks: any[];
+  @Input() yAxisTicks: any[];
   @Input() roundDomains: boolean = false;
   @Input() tooltipDisabled: boolean = false;
   @Input() xScaleMin: any;
@@ -250,15 +258,7 @@ export class AreaChartComponent extends BaseChartComponent {
   }
 
   getXDomain(): any[] {
-    let values = [];
-
-    for (const results of this.results) {
-      for (const d of results.series) {
-        if (!values.includes(d.name)) {
-          values.push(d.name);
-        }
-      }
-    }
+    let values = getUniqueXDomainValues(this.results);
 
     this.scaleType = this.getScaleType(values);
     let domain = [];
@@ -314,6 +314,9 @@ export class AreaChartComponent extends BaseChartComponent {
     const values = [...domain];
     if (!this.autoScale) {
       values.push(0);
+    }
+    if (this.baseValue !== 'auto') {
+      values.push(this.baseValue);
     }
 
     const min = this.yScaleMin

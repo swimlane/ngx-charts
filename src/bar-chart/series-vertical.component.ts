@@ -70,7 +70,7 @@ export enum D0Types {
         style({
           opacity: 1
         }),
-        animate(500, style({opacity: 0}))
+        animate(500, style({ opacity: 0 }))
       ])
     ])
   ]
@@ -116,6 +116,7 @@ export class SeriesVerticalComponent implements OnChanges {
     if (this.series.length) {
       width = this.xScale.bandwidth();
     }
+    const yScaleMin = Math.max(this.yScale.domain()[0], 0);
 
     const d0 = {
       [D0Types.positive]: 0,
@@ -148,7 +149,7 @@ export class SeriesVerticalComponent implements OnChanges {
       };
 
       if (this.type === 'standard') {
-        bar.height = Math.abs(this.yScale(value) - this.yScale(0));
+        bar.height = Math.abs(this.yScale(value) - this.yScale(yScaleMin));
         bar.x = this.xScale(label);
 
         if (value < 0) {

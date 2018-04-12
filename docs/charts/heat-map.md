@@ -6,7 +6,7 @@
 # Inputs
 
 | Property            | Type               | Default Value | Description                                                                                                     |
-|:--------------------|:-------------------|:--------------|:----------------------------------------------------------------------------------------------------------------|
+|---------------------|--------------------|---------------|-----------------------------------------------------------------------------------------------------------------|
 | view                | number[]           |               | the dimensions of the chart [width, height]. If left undefined, the chart will fit to the parent container size |
 | results             | object[]           |               | the chart data                                                                                                  |
 | scheme              | object             |               | the color scheme of the chart                                                                                   |
@@ -21,6 +21,8 @@
 | yAxisLabel          | string             |               | the y axis label text                                                                                           |
 | xAxisTickFormatting | function           |               | the x axis tick formatting                                                                                      |
 | yAxisTickFormatting | function           |               | the y axis tick formatting                                                                                      |
+| xAxisTicks          | any[]              |               | predefined list of x axis tick values                                                                           |
+| yAxisTicks          | any[]              |               | predefined list of y axis tick values                                                                           |
 | gradient            | boolean            | false         | fill elements with a gradient instead of a solid color                                                          |
 | innerPadding        | number or number[] | 8             | the inner padding in px                                                                                         |
 | tooltipDisabled     | boolean            | false         | show or hide the tooltip                                                                                        |
@@ -30,7 +32,7 @@
 # Outputs
 
 | Property | Description |
-|:---------|:------------|
+|----------|-------------|
 | select   | click event |
 
 # Data Format

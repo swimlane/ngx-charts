@@ -25,12 +25,15 @@
 | yAxisLabel          | string             |               | the y axis label text                                                                                           |
 | xAxisTickFormatting | function           |               | the x axis tick formatting                                                                                      |
 | yAxisTickFormatting | function           |               | the y axis tick formatting                                                                                      |
+| xAxisTicks          | any[]              |               | predefined list of x axis tick values                                                                           |
+| yAxisTicks          | any[]              |               | predefined list of y axis tick values                                                                           |
 | gradient            | boolean            | false         | fill elements with a gradient instead of a solid color                                                          |
 | activeEntries       | object[]           | []            | elements to highlight                                                                                           |
 | barPadding          | number             | 8             | padding between bars in px                                                                                      |
 | tooltipDisabled     | boolean            | false         | show or hide the tooltip                                                                                        |
 | tooltipTemplate     | TemplateRef        |               | a custom ng-template to be displayed inside the tooltip                                                         |
 | yScaleMax           | number             |               | the maximum value of the y axis (ignored if chart data contains a higher value)                                 |
+| yScaleMin           | number             |               | the minimum value of the y axis (ignored if chart data contains a lower value)                                  |
 
 # Outputs
 

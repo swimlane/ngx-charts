@@ -24,6 +24,8 @@
 | yAxisLabel          | string             |               | the y axis label text                                                                                           |
 | xAxisTickFormatting | function           |               | the x axis tick formatting                                                                                      |
 | yAxisTickFormatting | function           |               | the y axis tick formatting                                                                                      |
+| xAxisTicks          | any[]              |               | predefined list of x axis tick values                                                                           |
+| yAxisTicks          | any[]              |               | predefined list of y axis tick values                                                                           |
 | activeEntries       | object[]           | []            | elements to highlight                                                                                           |
 | minRadius           | number             | 3             | minimum bubble radius in px                                                                                     |
 | maxRadius           | number             | 10            | maximum bubble radius in px                                                                                     |

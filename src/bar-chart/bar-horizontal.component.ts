@@ -35,6 +35,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [tickFormatting]="xAxisTickFormatting"
+          [ticks]="xAxisTicks"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
         <svg:g ngx-charts-y-axis
@@ -44,6 +45,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
           [tickFormatting]="yAxisTickFormatting"
+          [ticks]="yAxisTicks"
           [yAxisOffset]="dataLabelMaxWidth.negative"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
@@ -91,10 +93,13 @@ export class BarHorizontalComponent extends BaseChartComponent {
   @Input() schemeType: string;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
+  @Input() xAxisTicks: any[];
+  @Input() yAxisTicks: any[];
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
   @Input() roundEdges: boolean = true;
   @Input() xScaleMax: number;
+  @Input() xScaleMin: number;
   @Input() showDataLabel: boolean = false;
   @Input() dataLabelFormatting: any;
 
@@ -170,7 +175,10 @@ export class BarHorizontalComponent extends BaseChartComponent {
 
   getXDomain(): any[] {
     const values = this.results.map(d => d.value);
-    const min = Math.min(0, ...values);
+    const min = this.xScaleMin
+      ? Math.min(this.xScaleMin, ...values)
+      : Math.min(0, ...values);
+
     const max = this.xScaleMax
       ? Math.max(this.xScaleMax, ...values)
       : Math.max(...values);

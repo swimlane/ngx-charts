@@ -48,6 +48,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() scale;
   @Input() orient;
   @Input() tickArguments = [5];
+  @Input() tickValues: any[];
   @Input() tickStroke = '#ccc';
   @Input() tickFormatting;
   @Input() showGridLines = false;
@@ -66,7 +67,6 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   maxAllowedLength: number = 16;
   trimLabel: (o: any) => any;
   adjustedScale: any;
-  tickValues: any;
   textTransform: any;
   ticks: any;
   tickFormat: (o: any) => any;

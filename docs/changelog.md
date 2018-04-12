@@ -1,5 +1,12 @@
 # Changelog
 
+## 7.2.0
+- Feature: Added bar-vertical yScaleMin (#732)
+- Feature: Added support for label input in pie grid chart (#731)
+- Bug: Avoid invalid paths when rect shape has 0 width or height (#742)
+- Bug: Fix stacked bar chart negative values issue (#605)
+- Chore: Added basic test of area-chart (#737)
+
 ## 7.1.1
 - Bug: Fixed template compile errors with fullTemplateTypeCheck (#730)
 
