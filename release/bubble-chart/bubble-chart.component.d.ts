@@ -14,6 +14,8 @@ export declare class BubbleChartComponent extends BaseChartComponent {
     yAxisLabel: string;
     xAxisTickFormatting: any;
     yAxisTickFormatting: any;
+    xAxisTicks: any[];
+    yAxisTicks: any[];
     roundDomains: boolean;
     maxRadius: number;
     minRadius: number;

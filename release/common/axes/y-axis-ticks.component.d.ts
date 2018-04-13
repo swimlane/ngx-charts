@@ -3,7 +3,7 @@ export declare class YAxisTicksComponent implements OnChanges, AfterViewInit {
     scale: any;
     orient: any;
     tickArguments: number[];
-    tickValues: any;
+    tickValues: any[];
     tickStroke: string;
     tickFormatting: any;
     showGridLines: boolean;

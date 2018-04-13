@@ -3,6 +3,7 @@ export declare class AreaSeriesComponent implements OnChanges {
     data: any;
     xScale: any;
     yScale: any;
+    baseValue: any;
     colors: any;
     scaleType: any;
     stacked: boolean;

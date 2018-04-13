@@ -19,6 +19,8 @@ export declare class AreaChartNormalizedComponent extends BaseChartComponent {
     schemeType: string;
     xAxisTickFormatting: any;
     yAxisTickFormatting: any;
+    xAxisTicks: any[];
+    yAxisTicks: any[];
     roundDomains: boolean;
     tooltipDisabled: boolean;
     activate: EventEmitter<any>;

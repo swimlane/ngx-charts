@@ -29,72 +29,73 @@ var CircleSeriesComponent = /** @class */ (function () {
         this.update();
     };
     CircleSeriesComponent.prototype.update = function () {
-        this.circles = this.getCircles();
-        this.circle = this.circles.find(function (c) {
-            return c.opacity !== 0;
-        });
+        this.circle = this.getActiveCircle();
     };
-    CircleSeriesComponent.prototype.getCircles = function () {
+    CircleSeriesComponent.prototype.getActiveCircle = function () {
         var _this = this;
-        var seriesName = this.data.name;
-        return this.data.series.map(function (d, i) {
-            var value = d.value;
+        var indexActiveDataPoint = this.data.series.findIndex(function (d) {
             var label = d.name;
-            var tooltipLabel = formatLabel(label);
-            if (value) {
-                var cx = void 0;
-                if (_this.scaleType === 'time') {
-                    cx = _this.xScale(label);
-                }
-                else if (_this.scaleType === 'linear') {
-                    cx = _this.xScale(Number(label));
-                }
-                else {
-                    cx = _this.xScale(label);
-                }
-                var cy = _this.yScale(_this.type === 'standard' ? value : d.d1);
-                var radius = 5;
-                var height = _this.yScale.range()[0] - cy;
-                var opacity = 0;
-                if (label && _this.visibleValue && label.toString() === _this.visibleValue.toString()) {
-                    opacity = 1;
-                }
-                var color = void 0;
-                if (_this.colors.scaleType === 'linear') {
-                    if (_this.type === 'standard') {
-                        color = _this.colors.getColor(value);
-                    }
-                    else {
-                        color = _this.colors.getColor(d.d1);
-                    }
-                }
-                else {
-                    color = _this.colors.getColor(seriesName);
-                }
-                var data = {
-                    series: seriesName,
-                    value: value,
-                    name: label
-                };
-                return {
-                    classNames: ["circle-data-" + i],
-                    value: value,
-                    label: label,
-                    data: data,
-                    cx: cx,
-                    cy: cy,
-                    radius: radius,
-                    height: height,
-                    tooltipLabel: tooltipLabel,
-                    color: color,
-                    opacity: opacity,
-                    seriesName: seriesName,
-                    gradientStops: _this.getGradientStops(color),
-                    min: d.min,
-                    max: d.max
-                };
+            return label && _this.visibleValue && label.toString() === _this.visibleValue.toString() && d.value !== undefined;
+        });
+        if (indexActiveDataPoint === -1) {
+            // No valid point is 'active/hovered over' at this moment.
+            return undefined;
+        }
+        return this.mapDataPointToCircle(this.data.series[indexActiveDataPoint], indexActiveDataPoint);
+    };
+    CircleSeriesComponent.prototype.mapDataPointToCircle = function (d, i) {
+        var seriesName = this.data.name;
+        var value = d.value;
+        var label = d.name;
+        var tooltipLabel = formatLabel(label);
+        var cx;
+        if (this.scaleType === 'time') {
+            cx = this.xScale(label);
+        }
+        else if (this.scaleType === 'linear') {
+            cx = this.xScale(Number(label));
+        }
+        else {
+            cx = this.xScale(label);
+        }
+        var cy = this.yScale(this.type === 'standard' ? value : d.d1);
+        var radius = 5;
+        var height = this.yScale.range()[0] - cy;
+        var opacity = 1;
+        var color;
+        if (this.colors.scaleType === 'linear') {
+            if (this.type === 'standard') {
+                color = this.colors.getColor(value);
             }
-        }).filter(function (circle) { return circle !== undefined; });
+            else {
+                color = this.colors.getColor(d.d1);
+            }
+        }
+        else {
+            color = this.colors.getColor(seriesName);
+        }
+        var data = {
+            series: seriesName,
+            value: value,
+            name: label
+        };
+        return {
+            classNames: ["circle-data-" + i],
+            value: value,
+            label: label,
+            data: data,
+            cx: cx,
+            cy: cy,
+            radius: radius,
+            height: height,
+            tooltipLabel: tooltipLabel,
+            color: color,
+            opacity: opacity,
+            seriesName: seriesName,
+            gradientStops: this.getGradientStops(color),
+            min: d.min,
+            max: d.max
+        };
     };
     CircleSeriesComponent.prototype.getTooltipText = function (_a) {
         var tooltipLabel = _a.tooltipLabel, value = _a.value, seriesName = _a.seriesName, min = _a.min, max = _a.max;

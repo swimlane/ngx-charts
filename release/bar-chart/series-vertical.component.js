@@ -34,6 +34,7 @@ var SeriesVerticalComponent = /** @class */ (function () {
         if (this.series.length) {
             width = this.xScale.bandwidth();
         }
+        var yScaleMin = Math.max(this.yScale.domain()[0], 0);
         var d0 = (_a = {},
             _a[D0Types.positive] = 0,
             _a[D0Types.negative] = 0,
@@ -61,7 +62,7 @@ var SeriesVerticalComponent = /** @class */ (function () {
                 y: 0,
             };
             if (_this.type === 'standard') {
-                bar.height = Math.abs(_this.yScale(value) - _this.yScale(0));
+                bar.height = Math.abs(_this.yScale(value) - _this.yScale(yScaleMin));
                 bar.x = _this.xScale(label);
                 if (value < 0) {
                     bar.y = _this.yScale(0);

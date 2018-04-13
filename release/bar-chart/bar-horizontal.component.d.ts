@@ -18,10 +18,13 @@ export declare class BarHorizontalComponent extends BaseChartComponent {
     schemeType: string;
     xAxisTickFormatting: any;
     yAxisTickFormatting: any;
+    xAxisTicks: any[];
+    yAxisTicks: any[];
     barPadding: number;
     roundDomains: boolean;
     roundEdges: boolean;
     xScaleMax: number;
+    xScaleMin: number;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     tooltipTemplate: TemplateRef<any>;
