@@ -60,7 +60,7 @@ export class YAxisComponent implements OnChanges {
   @Input() referenceLines;
   @Input() showRefLines;
   @Input() showRefLabels;
-  @Input() yAxisOffset: number = -5;
+  @Input() yAxisOffset: number = 0;
   @Output() dimensionsChanged = new EventEmitter();
 
   yAxisClassName: string = 'y axis';
@@ -72,6 +72,7 @@ export class YAxisComponent implements OnChanges {
   stroke: string = '#CCC';
   tickStroke: string = '#CCC';
   strokeWidth: number = 1;
+  padding: number = 5;
 
   @ViewChild(YAxisTicksComponent) ticksComponent: YAxisTicksComponent;
 
@@ -80,7 +81,7 @@ export class YAxisComponent implements OnChanges {
   }
 
   update(): void {
-    this.offset = -this.yAxisOffset;
+    this.offset = -(this.yAxisOffset + this.padding);
     if (this.yOrient === 'right') {
       this.labelOffset = 65;
       this.transform = `translate(${this.offset + this.dims.width} , 0)`;

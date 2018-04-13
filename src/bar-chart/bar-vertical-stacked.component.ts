@@ -41,6 +41,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [labelText]="xAxisLabel"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
+          [xAxisOffset]="dataLabelMaxHeight.negative"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
         <svg:g ngx-charts-y-axis
