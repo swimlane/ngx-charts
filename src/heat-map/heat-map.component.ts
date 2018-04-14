@@ -5,18 +5,18 @@ import {
   ChangeDetectionStrategy,
   ContentChild,
   TemplateRef
-} from "@angular/core";
-import { scaleBand } from "d3-scale";
+} from '@angular/core';
+import { scaleBand } from 'd3-scale';
 
-import { BaseChartComponent } from "../common/base-chart.component";
+import { BaseChartComponent } from '../common/base-chart.component';
 import {
   calculateViewDimensions,
   ViewDimensions
-} from "../common/view-dimensions.helper";
-import { ColorHelper } from "../common/color.helper";
+} from '../common/view-dimensions.helper';
+import { ColorHelper } from '../common/color.helper';
 
 @Component({
-  selector: "ngx-charts-heat-map",
+  selector: 'ngx-charts-heat-map',
   template: `
     <ngx-charts-chart
       [view]="[width, height]"
@@ -81,12 +81,12 @@ import { ColorHelper } from "../common/color.helper";
     </ngx-charts-chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ["../common/base-chart.component.scss"],
+  styleUrls: ['../common/base-chart.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class HeatMapComponent extends BaseChartComponent {
   @Input() legend;
-  @Input() legendTitle: string = "Legend";
+  @Input() legendTitle: string = 'Legend';
   @Input() xAxis;
   @Input() yAxis;
   @Input() showXAxisLabel;
@@ -101,13 +101,12 @@ export class HeatMapComponent extends BaseChartComponent {
   @Input() yAxisTicks: any[];
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipText: any;
-  @Input() xAxisLabelSortOrder: string = "desc";
-  @Input() yAxisLabelSortOrder: string = "asc";
+  @Input() xAxisLabelSortOrder: string = 'desc';
+  @Input() yAxisLabelSortOrder: string = 'asc';
   @Input() showValueLabel: boolean = false;
   @Input() valueFormatting: any;
-  
 
-  @ContentChild("tooltipTemplate") tooltipTemplate: TemplateRef<any>;
+  @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
   xDomain: any[];
@@ -124,7 +123,7 @@ export class HeatMapComponent extends BaseChartComponent {
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
   legendOptions: any;
-  scaleType: string = "linear";
+  scaleType: string = 'linear';
 
   update(): void {
     super.update();
@@ -151,7 +150,7 @@ export class HeatMapComponent extends BaseChartComponent {
       legendType: this.scaleType
     });
 
-    if (this.scaleType === "linear") {
+    if (this.scaleType === 'linear') {
       const min = Math.min(0, ...this.valueDomain);
       const max = Math.max(...this.valueDomain);
       this.valueDomain = [min, max];
@@ -174,15 +173,15 @@ export class HeatMapComponent extends BaseChartComponent {
         domain.push(group.name);
       }
     }
-    if(this.xAxisLabelSortOrder==="asc"){
+    if (this.xAxisLabelSortOrder === 'asc') {
       return domain.sort(this.sortAscFn);
     }
-    if(this.xAxisLabelSortOrder==="desc"){
+    if (this.xAxisLabelSortOrder === 'desc') {
       return domain.sort(this.sortDescFn);
     }
     return domain;
   }
-  sortDescFn(a:any,b:any):number {
+  sortDescFn(a: any, b: any): number {
     if (a > b) {
       return 1;
     }
@@ -193,7 +192,7 @@ export class HeatMapComponent extends BaseChartComponent {
 
     return 0;
   }
-  sortAscFn(a:any,b:any):number {
+  sortAscFn(a: any, b: any): number {
     if (a > b) {
       return -1;
     }
@@ -214,12 +213,12 @@ export class HeatMapComponent extends BaseChartComponent {
         }
       }
     }
-if(this.yAxisLabelSortOrder==="asc"){
-  return domain.sort(this.sortAscFn);
-}
-if(this.yAxisLabelSortOrder==="desc"){
-  return domain.sort(this.sortDescFn);
-}
+    if (this.yAxisLabelSortOrder === 'asc') {
+      return domain.sort(this.sortAscFn);
+    }
+    if (this.yAxisLabelSortOrder === 'desc') {
+      return domain.sort(this.sortDescFn);
+    }
     return domain;
   }
 
@@ -259,22 +258,22 @@ if(this.yAxisLabelSortOrder==="desc"){
     N: number,
     L: number
   ): number {
-    if (typeof value === "string") {
+    if (typeof value === 'string') {
       value = value
-        .replace("[", "")
-        .replace("]", "")
-        .replace("px", "")
-        .replace("'", "");
+        .replace('[', '')
+        .replace(']', '')
+        .replace('px', '')
+        .replace('\'', '');
 
-      if (value.includes(",")) {
-        value = value.split(",");
+      if (value.includes(',')) {
+        value = value.split(',');
       }
     }
-    if (Array.isArray(value) && typeof index === "number") {
+    if (Array.isArray(value) && typeof index === 'number') {
       return this.getDimension(value[index], null, N, L);
     }
-    if (typeof value === "string" && value.includes("%")) {
-      return +value.replace("%", "") / 100;
+    if (typeof value === 'string' && value.includes('%')) {
+      return +value.replace('%', '') / 100;
     }
     return N / (L / +value + 1);
   }
@@ -305,10 +304,10 @@ if(this.yAxisLabelSortOrder==="desc"){
       .paddingInner(f);
   }
 
-  getValue(xValue:any,yValue:any):any{
+  getValue(xValue: any, yValue: any): any {
     for (const group of this.results) {
       for (const d of group.series) {
-        if (group.name==xValue && d.name==yValue) {
+        if (group.name === xValue && d.name === yValue) {
           return d.value;
         }
       }
@@ -318,8 +317,6 @@ if(this.yAxisLabelSortOrder==="desc"){
   getRects(): any[] {
     const rects = [];
 
-    
-
     this.xDomain.map(xVal => {
       this.yDomain.map(yVal => {
         rects.push({
@@ -328,8 +325,8 @@ if(this.yAxisLabelSortOrder==="desc"){
           rx: 3,
           width: this.xScale.bandwidth(),
           height: this.yScale.bandwidth(),
-          fill: "rgba(200,200,200,0.03)",
-          value: this.getValue(xVal,yVal)
+          fill: 'rgba(200,200,200,0.03)',
+          value: this.getValue(xVal, yVal)
         });
       });
     });
@@ -345,13 +342,13 @@ if(this.yAxisLabelSortOrder==="desc"){
     let num = true;
 
     for (const value of values) {
-      if (typeof value !== "number") {
+      if (typeof value !== 'number') {
         num = false;
       }
     }
 
-    if (num) return "linear";
-    return "ordinal";
+    if (num) return 'linear';
+    return 'ordinal';
   }
 
   setColors(): void {
@@ -366,8 +363,8 @@ if(this.yAxisLabelSortOrder==="desc"){
     return {
       scaleType: this.scaleType,
       domain: this.valueDomain,
-      colors: this.scaleType === "ordinal" ? this.colors : this.colors.scale,
-      title: this.scaleType === "ordinal" ? this.legendTitle : undefined
+      colors: this.scaleType === 'ordinal' ? this.colors : this.colors.scale,
+      title: this.scaleType === 'ordinal' ? this.legendTitle : undefined
     };
   }
 
