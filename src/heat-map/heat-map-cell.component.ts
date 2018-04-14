@@ -7,13 +7,13 @@ import {
   ElementRef,
   OnChanges,
   ChangeDetectionStrategy
-} from "@angular/core";
-import { select } from "d3-selection";
+} from '@angular/core';
+import { select } from 'd3-selection';
 
-import { id } from "../utils/id";
+import { id } from '../utils/id';
 
 @Component({
-  selector: "g[ngx-charts-heat-map-cell]",
+  selector: 'g[ngx-charts-heat-map-cell]',
   template: `
     <svg:g [attr.transform]="transform" class="cell">
       <defs *ngIf="gradient">
@@ -69,7 +69,7 @@ export class HeatMapCellComponent implements OnChanges {
     this.transform = `translate(${this.x} , ${this.y})`;
 
     this.startOpacity = 0.3;
-    this.gradientId = "grad" + id().toString();
+    this.gradientId = 'grad' + id().toString();
     this.gradientUrl = `url(#${this.gradientId})`;
     this.gradientStops = this.getGradientStops();
 
@@ -94,18 +94,18 @@ export class HeatMapCellComponent implements OnChanges {
   }
 
   loadAnimation(): void {
-    const node = select(this.element).select(".cell");
-    node.attr("opacity", 0);
+    const node = select(this.element).select('.cell');
+    node.attr('opacity', 0);
     this.animateToCurrentForm();
   }
 
   animateToCurrentForm(): void {
-    const node = select(this.element).select(".cell");
+    const node = select(this.element).select('.cell');
 
     node
       .transition()
       .duration(750)
-      .attr("opacity", 1);
+      .attr('opacity', 1);
   }
 
   onClick() {

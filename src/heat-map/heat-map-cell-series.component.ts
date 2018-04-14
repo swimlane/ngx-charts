@@ -8,11 +8,11 @@ import {
   OnInit,
   ChangeDetectionStrategy,
   TemplateRef
-} from "@angular/core";
-import { formatLabel } from "../common/label.helper";
+} from '@angular/core';
+import { formatLabel } from '../common/label.helper';
 
 @Component({
-  selector: "g[ngx-charts-heat-map-cell-series]",
+  selector: 'g[ngx-charts-heat-map-cell-series]',
   template: `
     <svg:g
       ngx-charts-heat-map-cell
