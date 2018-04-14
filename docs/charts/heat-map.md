@@ -6,7 +6,7 @@
 # Inputs
 
 | Property            | Type               | Default Value | Description                                                                                                     |
-|---------------------|--------------------|---------------|-----------------------------------------------------------------------------------------------------------------|
+| ------------------- | ------------------ | ------------- | --------------------------------------------------------------------------------------------------------------- |
 | view                | number[]           |               | the dimensions of the chart [width, height]. If left undefined, the chart will fit to the parent container size |
 | results             | object[]           |               | the chart data                                                                                                  |
 | scheme              | object             |               | the color scheme of the chart                                                                                   |
@@ -28,11 +28,15 @@
 | tooltipDisabled     | boolean            | false         | show or hide the tooltip                                                                                        |
 | tooltipText         | function           | (see source)  | the HTML text to display in the tooltip                                                                         |
 | tooltipTemplate     | TemplateRef        |               | a custom ng-template to be displayed inside the tooltip                                                         |
+| xAxisLabelSortOrder | string             | "desc"        | the x axis labels sort order.can be "","asc" or "desc"                                                          |
+| yAxisLabelSortOrder | string             | "asc"         | the axis labels sort order.can be "","asc" or "desc"                                                            |
+| showValueLabel      | boolean            | false         | show value labels in cell elements                                                                              |
+| valueFormatting     | function           |               | the value formatting                                                                                            |
 
 # Outputs
 
 | Property | Description |
-|----------|-------------|
+| -------- | ----------- |
 | select   | click event |
 
 # Data Format
