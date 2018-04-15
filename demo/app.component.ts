@@ -477,8 +477,9 @@ export class AppComponent implements OnInit {
 
     return calendarData;
   }
-  moneyFormatting(val:number){
-return '$'+ val.toFixed(0);
+
+  moneyFormatting(val: number) {
+    return '$' + val.toFixed(0);
   }
   calendarAxisTickFormatting(mondayString: string) {
     const monday = new Date(mondayString);

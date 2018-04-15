@@ -40,6 +40,7 @@ import { formatLabel } from '../common/label.helper';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeatCellSeriesComponent implements OnChanges, OnInit {
+
   @Input() data;
   @Input() colors;
   @Input() xScale;
@@ -49,6 +50,7 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
   @Input() tooltipText: any;
   @Input() tooltipTemplate: TemplateRef<any>;
   @Input() animations: boolean = true;
+
   @Input() showValueLabel: boolean = false;
   @Input() valueFormatting: any;
 
@@ -73,8 +75,8 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
   getCells() {
     const cells = [];
 
-    this.data.map(row => {
-      row.series.map(cell => {
+    this.data.map((row) => {
+      row.series.map((cell) => {
         const value = cell.value;
 
         cells.push({
