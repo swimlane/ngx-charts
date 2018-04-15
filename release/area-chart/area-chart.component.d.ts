@@ -8,6 +8,7 @@ export declare class AreaChartComponent extends BaseChartComponent {
     state: any;
     xAxis: any;
     yAxis: any;
+    baseValue: any;
     autoScale: any;
     showXAxisLabel: any;
     showYAxisLabel: any;
@@ -21,6 +22,8 @@ export declare class AreaChartComponent extends BaseChartComponent {
     schemeType: string;
     xAxisTickFormatting: any;
     yAxisTickFormatting: any;
+    xAxisTicks: any[];
+    yAxisTicks: any[];
     roundDomains: boolean;
     tooltipDisabled: boolean;
     xScaleMin: any;

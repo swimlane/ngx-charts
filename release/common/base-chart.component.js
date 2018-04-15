@@ -41,6 +41,9 @@ var BaseChartComponent = /** @class */ (function () {
         if (this.results) {
             this.results = this.cloneData(this.results);
         }
+        else {
+            this.results = [];
+        }
         if (this.view) {
             this.width = this.view[0];
             this.height = this.view[1];

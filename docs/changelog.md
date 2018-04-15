@@ -1,5 +1,14 @@
 # Changelog
 
+## 7.3.0
+- Feature: Added support for overriding x and y axis ticks (#723)
+- Feature: Added support for area chart floor value (#684)
+- Feature: Implemented min value scales for vertical and horizontal bar charts
+- Enhancement: Performance improvements across multiple charts (#765, #758)
+- Enhancement: Added support for overriding the min width of pie grid items (#762)
+- Bug: Fixed error being thrown when results is undefined (#217)
+- Bug: Fixed label input in pie-grid (#773)
+
 ## 7.2.0
 - Feature: Added bar-vertical yScaleMin (#732)
 - Feature: Added support for label input in pie grid chart (#731)
@@ -39,7 +48,7 @@
 - Enhancement: Increased font size in advanced legend and number cards subtext (#578)
 - Enhancement: Hide legend title when title is missing (#578)
 - Enhancement: Added x-axis value to the context of a bubble chart tooltip (#530)
-- Bug: Removed path from SVG refs to fix gradients not working when URL has queryString (#584) 
+- Bug: Removed path from SVG refs to fix gradients not working when URL has queryString (#584)
 - Bug: Fixed bug where value arc animation on gauge chart would start from 0 on update (#563)
 - Bug: Removed date conversion for name-value at series-tooltip (#544)
 - Bug: Added null check for rootComponents in injection servoce (#574)

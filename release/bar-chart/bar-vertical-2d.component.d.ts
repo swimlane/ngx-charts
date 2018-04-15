@@ -19,6 +19,8 @@ export declare class BarVertical2DComponent extends BaseChartComponent {
     schemeType: string;
     xAxisTickFormatting: any;
     yAxisTickFormatting: any;
+    xAxisTicks: any[];
+    yAxisTicks: any[];
     groupPadding: number;
     barPadding: number;
     roundDomains: boolean;

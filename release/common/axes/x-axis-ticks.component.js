@@ -135,6 +135,10 @@ var XAxisTicksComponent = /** @class */ (function () {
     ], XAxisTicksComponent.prototype, "tickArguments", void 0);
     __decorate([
         Input(),
+        __metadata("design:type", Array)
+    ], XAxisTicksComponent.prototype, "tickValues", void 0);
+    __decorate([
+        Input(),
         __metadata("design:type", Object)
     ], XAxisTicksComponent.prototype, "tickStroke", void 0);
     __decorate([

@@ -7,6 +7,7 @@ export declare class XAxisComponent implements OnChanges {
     showGridLines: boolean;
     showLabel: any;
     labelText: any;
+    ticks: any[];
     xAxisTickInterval: any;
     xAxisTickCount: any;
     xOrient: string;

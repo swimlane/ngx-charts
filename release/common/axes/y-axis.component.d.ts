@@ -4,6 +4,7 @@ export declare class YAxisComponent implements OnChanges {
     yScale: any;
     dims: any;
     tickFormatting: any;
+    ticks: any[];
     showGridLines: boolean;
     showLabel: any;
     labelText: any;

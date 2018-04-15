@@ -15,6 +15,8 @@ export declare class HeatMapComponent extends BaseChartComponent {
     innerPadding: number | number[];
     xAxisTickFormatting: any;
     yAxisTickFormatting: any;
+    xAxisTicks: any[];
+    yAxisTicks: any[];
     tooltipDisabled: boolean;
     tooltipText: any;
     tooltipTemplate: TemplateRef<any>;
