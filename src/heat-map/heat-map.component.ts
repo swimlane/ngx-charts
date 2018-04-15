@@ -201,6 +201,7 @@ export class HeatMapComponent extends BaseChartComponent {
         }
       }
     }
+
     if (this.yAxisLabelSortOrder === 'asc') {
       return domain.sort(this.sortAscFn);
     }
@@ -335,7 +336,6 @@ export class HeatMapComponent extends BaseChartComponent {
       colors: this.scaleType === 'ordinal' ? this.colors : this.colors.scale,
       title: this.scaleType === 'ordinal' ? this.legendTitle : undefined
     };
-
   }
 
   updateYAxisWidth({ width }): void {
@@ -347,4 +347,5 @@ export class HeatMapComponent extends BaseChartComponent {
     this.xAxisHeight = height;
     this.update();
   }
+
 }
