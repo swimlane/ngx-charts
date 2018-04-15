@@ -53,16 +53,6 @@ import { ColorHelper } from '../common/color.helper';
           [attr.height]="rect.height"
           [attr.fill]="rect.fill"
         />
-        <!--<svg:foreignObject *ngFor="let rect of rects"
-          [attr.x]="rect.x"
-          [attr.y]="rect.y"
-          [attr.rx]="rect.rx"
-          [attr.width]="rect.width"
-          [attr.height]="rect.height"
-          [attr.fill]="rect.fill"
-        >
-        <xhtml:div>\${{rect.value}}</xhtml:div>
-        </svg:foreignObject>!-->
         <svg:g ngx-charts-heat-map-cell-series
           [xScale]="xScale"
           [yScale]="yScale"
