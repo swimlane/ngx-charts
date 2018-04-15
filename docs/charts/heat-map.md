@@ -6,7 +6,7 @@
 # Inputs
 
 | Property            | Type               | Default Value | Description                                                                                                     |
-| --------------------|--------------------|---------------|-----------------------------------------------------------------------------------------------------------------|
+|---------------------|--------------------|---------------|-----------------------------------------------------------------------------------------------------------------|
 | view                | number[]           |               | the dimensions of the chart [width, height]. If left undefined, the chart will fit to the parent container size |
 | results             | object[]           |               | the chart data                                                                                                  |
 | scheme              | object             |               | the color scheme of the chart                                                                                   |
