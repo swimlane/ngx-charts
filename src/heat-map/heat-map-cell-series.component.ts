@@ -37,7 +37,7 @@ import { formatLabel } from '../common/label.helper';
       >
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeatCellSeriesComponent implements OnChanges, OnInit {
 
@@ -115,4 +115,5 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
       series
     });
   }
+
 }
