@@ -233,13 +233,15 @@ export class BarHorizontalComponent extends BaseChartComponent {
     this.update();
   }
 
-  onDataLabelMaxWidthChanged(size) {    
-    if (size.negative)  {
-      this.dataLabelMaxWidth.negative = Math.max(this.dataLabelMaxWidth.negative, size.width);
+  onDataLabelMaxWidthChanged(event) {           
+    if (event.size.negative)  {
+      this.dataLabelMaxWidth.negative = Math.max(this.dataLabelMaxWidth.negative, event.size.width);
     } else {
-      this.dataLabelMaxWidth.positive = Math.max(this.dataLabelMaxWidth.positive, size.width);
-    }      
-    setTimeout(() => this.update());
+      this.dataLabelMaxWidth.positive = Math.max(this.dataLabelMaxWidth.positive, event.size.width);
+    }  
+    if (event.index === (this.results.length - 1)) {
+      setTimeout(() => this.update());
+    }        
   }
 
   onActivate(item) {

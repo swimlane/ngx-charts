@@ -51,7 +51,7 @@ export enum D0Types {
       [animations]="animations">
     </svg:g>
     <svg:g *ngIf="showDataLabel">
-      <svg:g ngx-charts-bar-label *ngFor="let b of barsForDataLabels; trackBy:trackDataLabelBy"         
+      <svg:g ngx-charts-bar-label *ngFor="let b of barsForDataLabels; let i = index; trackBy:trackDataLabelBy"         
         [barX]="b.x"
         [barY]="b.y"
         [barWidth]="b.width"
@@ -59,7 +59,7 @@ export enum D0Types {
         [value]="b.total"
         [valueFormatting]="dataLabelFormatting"
         [orientation]="'vertical'"
-        (dimensionsChanged)="dataLabelHeightChanged.emit($event)"
+        (dimensionsChanged)="dataLabelHeightChanged.emit({size:$event, index:i})"
       />
     </svg:g> 
   `,
@@ -104,7 +104,8 @@ export class SeriesVerticalComponent implements OnChanges {
   bars: any;
   x: any;
   y: any;
-  barsForDataLabels: Array<{ x: number, y: number, width: number, height: number, total: number }> = [];
+  barsForDataLabels: Array<{x: number, y: number, width: number, height: number, 
+                            total: number, series: string}> = [];
 
   ngOnChanges(changes): void {
     this.update();
@@ -223,6 +224,7 @@ export class SeriesVerticalComponent implements OnChanges {
     if (this.type === 'stacked') {        
         this.barsForDataLabels = [];          
         const section: any = {};
+        section.series =  this.seriesName;
         const totalPositive = this.series.map(d => d.value).reduce((sum, d) => d > 0 ? sum + d : sum, 0);
         const totalNegative = this.series.map(d => d.value).reduce((sum, d) => d < 0 ? sum + d : sum, 0);
         section.total = totalPositive + totalNegative;
@@ -237,7 +239,8 @@ export class SeriesVerticalComponent implements OnChanges {
         this.barsForDataLabels.push(section);          
     } else {
       this.barsForDataLabels = this.series.map(d => {
-        const section: any = {};          
+        const section: any = {};      
+        section.series =  this.seriesName ? this.seriesName : d.name;               
         section.total = d.value;
         section.x = this.xScale(d.name);
         section.y = this.yScale(0);
@@ -270,8 +273,8 @@ export class SeriesVerticalComponent implements OnChanges {
     return bar.label;
   }
 
-  trackDataLabelBy(index, barLabel) {
-    return index + '/' + barLabel.total;
+  trackDataLabelBy(index, barLabel) {       
+    return index + '#' + barLabel.series + '#' + barLabel.total;
   }
 
 }

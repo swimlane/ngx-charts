@@ -232,14 +232,16 @@ export class BarVerticalComponent extends BaseChartComponent {
     this.xAxisHeight = height;
     this.update();
   }
-
-  onDataLabelMaxHeightChanged(size) {    
-    if (size.negative)  {
-      this.dataLabelMaxHeight.negative = Math.max(this.dataLabelMaxHeight.negative, size.width);
+  
+  onDataLabelMaxHeightChanged(event) {      
+    if (event.size.negative)  {
+      this.dataLabelMaxHeight.negative = Math.max(this.dataLabelMaxHeight.negative, event.size.height);
     } else {
-      this.dataLabelMaxHeight.positive = Math.max(this.dataLabelMaxHeight.positive, size.width);
+      this.dataLabelMaxHeight.positive = Math.max(this.dataLabelMaxHeight.positive, event.size.height);
     }      
-    setTimeout(() => this.update());
+    if (event.index === (this.results.length - 1)) {
+      setTimeout(() => this.update());
+    }      
   }
 
   onActivate(item) {

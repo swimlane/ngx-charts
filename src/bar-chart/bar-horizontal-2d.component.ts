@@ -64,7 +64,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
         <svg:g
-          *ngFor="let group of results; trackBy:trackBy"
+          *ngFor="let group of results; let index = index; trackBy:trackBy"
           [@animationState]="'active'"
           [attr.transform]="groupTransform(group)">
           <svg:g ngx-charts-series-horizontal
@@ -85,7 +85,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
             (select)="onClick($event, group)"
             (activate)="onActivate($event, group)"
             (deactivate)="onDeactivate($event, group)"
-            (dataLabelWidthChanged)="onDataLabelMaxWidthChanged($event)"
+            (dataLabelWidthChanged)="onDataLabelMaxWidthChanged($event, index)"
           />
         </svg:g>
       </svg:g>
@@ -320,15 +320,16 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
     this.update();
   }
 
-  onDataLabelMaxWidthChanged(size) {    
-    if (size.negative)  {
-      this.dataLabelMaxWidth.negative = Math.max(this.dataLabelMaxWidth.negative, size.width);
+  onDataLabelMaxWidthChanged(event, groupIndex) {         
+    if (event.size.negative)  {
+      this.dataLabelMaxWidth.negative = Math.max(this.dataLabelMaxWidth.negative, event.size.width);
     } else {
-      this.dataLabelMaxWidth.positive = Math.max(this.dataLabelMaxWidth.positive, size.width);
-    }    
-    setTimeout(() => this.update());
-  }
-
+      this.dataLabelMaxWidth.positive = Math.max(this.dataLabelMaxWidth.positive, event.size.width);
+    }  
+    if (groupIndex === (this.results.length - 1)) {      
+      setTimeout(() => this.update());
+    }        
+  } 
   onActivate(event, group?) {
     const item = Object.assign({}, event);
     if (group) {

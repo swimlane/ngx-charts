@@ -63,7 +63,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
         <svg:g ngx-charts-series-vertical
-          *ngFor="let group of results; trackBy:trackBy"
+          *ngFor="let group of results; let index = index; trackBy:trackBy"
           [@animationState]="'active'"
           [attr.transform]="groupTransform(group)"
           [activeEntries]="activeEntries"
@@ -83,7 +83,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           (select)="onClick($event, group)"
           (activate)="onActivate($event, group)"
           (deactivate)="onDeactivate($event, group)"
-          (dataLabelHeightChanged)="onDataLabelMaxHeightChanged($event)"
+          (dataLabelHeightChanged)="onDataLabelMaxHeightChanged($event, index)"
         />
         </svg:g>
     </ngx-charts-chart>
@@ -193,13 +193,15 @@ export class BarVertical2DComponent extends BaseChartComponent {
     this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] + this.dataLabelMaxHeight.negative})`;
   }
 
-  onDataLabelMaxHeightChanged(size) {    
-    if (size.negative)  {
-      this.dataLabelMaxHeight.negative = Math.max(this.dataLabelMaxHeight.negative, size.width);
+  onDataLabelMaxHeightChanged(event, groupIndex) {               
+    if (event.size.negative)  {
+      this.dataLabelMaxHeight.negative = Math.max(this.dataLabelMaxHeight.negative, event.size.height);
     } else {
-      this.dataLabelMaxHeight.positive = Math.max(this.dataLabelMaxHeight.positive, size.width);
-    }      
-    setTimeout(() => this.update());
+      this.dataLabelMaxHeight.positive = Math.max(this.dataLabelMaxHeight.positive, event.size.height);              
+    }  
+    if (groupIndex === (this.results.length - 1)) {
+      setTimeout(() => this.update());
+    }   
   }
 
   getGroupScale(): any {
