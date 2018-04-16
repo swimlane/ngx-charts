@@ -33,14 +33,15 @@ import { id } from '../utils/id';
         (click)="onClick()"
       />
       <svg:foreignObject *ngIf="showValueLabel">
-        <xhtml:div>{{data}}</xhtml:div>
+        <xhtml:div
+        style="padding-left:3px"
+        >{{data}}</xhtml:div>
         </svg:foreignObject>
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeatMapCellComponent implements OnChanges {
-
   @Input() fill;
   @Input() x;
   @Input() y;
@@ -90,7 +91,8 @@ export class HeatMapCellComponent implements OnChanges {
         offset: 100,
         color: this.fill,
         opacity: 1
-      }];
+      }
+    ];
   }
 
   loadAnimation(): void {
@@ -102,12 +104,13 @@ export class HeatMapCellComponent implements OnChanges {
   animateToCurrentForm(): void {
     const node = select(this.element).select('.cell');
 
-    node.transition().duration(750)
+    node
+      .transition()
+      .duration(750)
       .attr('opacity', 1);
   }
 
   onClick() {
     this.select.emit(this.data);
   }
-
 }

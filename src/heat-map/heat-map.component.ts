@@ -170,25 +170,13 @@ export class HeatMapComponent extends BaseChartComponent {
     return domain;
   }
   sortDescFn(a: any, b: any): number {
-    if (a > b) {
-      return 1;
-    }
-
-    if (a < b) {
-      return -1;
-    }
-
+    if (a > b) return 1;
+    if (a < b) return -1;
     return 0;
   }
   sortAscFn(a: any, b: any): number {
-    if (a > b) {
-      return -1;
-    }
-
-    if (a < b) {
-      return 1;
-    }
-
+    if (a > b) return -1;
+    if (a < b) return 1;
     return 0;
   }
   getYDomain(): any[] {
