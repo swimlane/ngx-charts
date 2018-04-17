@@ -1,8 +1,8 @@
 **I'm submitting a ...**  (check one with "x")
 ```
-[ ] bug report => search github for a similar issue or PR before submitting
-[ ] feature request
-[ ] support request => please use StackOverflow (add the `ngx-charts` tag) or the gitter chat for support questions
+- [ ] bug report => search github for a similar issue or PR before submitting
+- [ ] feature request
+- [ ] support request => please use StackOverflow (add the `ngx-charts` tag) or the gitter chat for support questions
 ```
 
 **Current behavior**
