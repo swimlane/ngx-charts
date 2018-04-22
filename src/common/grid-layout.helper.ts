@@ -43,6 +43,8 @@ export function gridLayout(dims, data, minWidth, designatedTotal) {
   const cardHeight = yScale.bandwidth();
 
   for (let i = 0; i < data.length; i++) {
+    const elementTotal = data[i].designatedTotal ? data[i].designatedTotal : total;
+
     res[i] = {};
     res[i].data = {
       name: data[i] ? data[i].name : '',
@@ -53,8 +55,8 @@ export function gridLayout(dims, data, minWidth, designatedTotal) {
     res[i].y = yScale(Math.floor(i / columns));
     res[i].width = cardWidth;
     res[i].height = cardHeight;
-    res[i].data.percent = (total > 0) ? res[i].data.value / total : 0;
-    res[i].data.total = total;
+    res[i].data.percent = (elementTotal > 0) ? res[i].data.value / elementTotal : 0;
+    res[i].data.total = elementTotal;
   }
 
   return res;

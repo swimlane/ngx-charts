@@ -3,11 +3,13 @@ import { data as countries } from 'emoji-flags';
 export const single = [
   {
     name: 'Germany',
-    value: 40632
+    value: 40632,
+    designatedTotal: 100000
   },
   {
     name: 'United States',
-    value: 49737
+    value: 49737,
+    designatedTotal: 100000
   },
   {
     name: 'France',
