@@ -4,7 +4,7 @@ export const single = [
   {
     name: 'Germany',
     value: 40632,
-    designatedTotal: 100000
+    designatedTotal: 50000
   },
   {
     name: 'United States',

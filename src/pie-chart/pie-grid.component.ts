@@ -152,6 +152,7 @@ export class PieGridComponent extends BaseChartComponent {
     const total = this.designatedTotal ? this.designatedTotal : this.getTotal();
 
     return this.data.map((d) => {
+      const elementTotal = d.data.total ? d.data.total : total;
       const baselineLabelHeight = 20;
       const padding = 10;
       const name = d.data.name;
@@ -186,7 +187,7 @@ export class PieGridComponent extends BaseChartComponent {
         data: [d, {
           data: {
             other: true,
-            value: total - value,
+            value: elementTotal - value,
             name: d.data.name
           }
         }]
