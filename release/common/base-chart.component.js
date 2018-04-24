@@ -149,6 +149,9 @@ var BaseChartComponent = /** @class */ (function () {
             if (item['extra'] !== undefined) {
                 copy['extra'] = JSON.parse(JSON.stringify(item['extra']));
             }
+            if (item['designatedTotal'] !== undefined) {
+                copy['designatedTotal'] = item['designatedTotal'];
+            }
             results.push(copy);
         }
         return results;

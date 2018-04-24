@@ -63,6 +63,7 @@ var PieGridComponent = /** @class */ (function (_super) {
         var _this = this;
         var total = this.designatedTotal ? this.designatedTotal : this.getTotal();
         return this.data.map(function (d) {
+            var elementTotal = d.data.total ? d.data.total : total;
             var baselineLabelHeight = 20;
             var padding = 10;
             var name = d.data.name;
@@ -95,7 +96,7 @@ var PieGridComponent = /** @class */ (function (_super) {
                 data: [d, {
                         data: {
                             other: true,
-                            value: total - value,
+                            value: elementTotal - value,
                             name: d.data.name
                         }
                     }]

@@ -9227,6 +9227,9 @@ var BaseChartComponent = /** @class */ (function () {
             if (item['extra'] !== undefined) {
                 copy['extra'] = JSON.parse(JSON.stringify(item['extra']));
             }
+            if (item['designatedTotal'] !== undefined) {
+                copy['designatedTotal'] = item['designatedTotal'];
+            }
             results.push(copy);
         }
         return results;
@@ -10354,6 +10357,7 @@ function gridLayout(dims, data, minWidth, designatedTotal) {
     var cardWidth = xScale.bandwidth();
     var cardHeight = yScale.bandwidth();
     for (var i = 0; i < data.length; i++) {
+        var elementTotal = data[i].designatedTotal ? data[i].designatedTotal : total;
         res[i] = {};
         res[i].data = {
             name: data[i] ? data[i].name : '',
@@ -10364,8 +10368,8 @@ function gridLayout(dims, data, minWidth, designatedTotal) {
         res[i].y = yScale(Math.floor(i / columns));
         res[i].width = cardWidth;
         res[i].height = cardHeight;
-        res[i].data.percent = (total > 0) ? res[i].data.value / total : 0;
-        res[i].data.total = total;
+        res[i].data.percent = (elementTotal > 0) ? res[i].data.value / elementTotal : 0;
+        res[i].data.total = elementTotal;
     }
     return res;
 }
@@ -17486,6 +17490,7 @@ var PieGridComponent = /** @class */ (function (_super) {
         var _this = this;
         var total = this.designatedTotal ? this.designatedTotal : this.getTotal();
         return this.data.map(function (d) {
+            var elementTotal = d.data.total ? d.data.total : total;
             var baselineLabelHeight = 20;
             var padding = 10;
             var name = d.data.name;
@@ -17518,7 +17523,7 @@ var PieGridComponent = /** @class */ (function (_super) {
                 data: [d, {
                         data: {
                             other: true,
-                            value: total - value,
+                            value: elementTotal - value,
                             name: d.data.name
                         }
                     }]
