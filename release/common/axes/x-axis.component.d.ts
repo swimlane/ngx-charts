@@ -11,6 +11,7 @@ export declare class XAxisComponent implements OnChanges {
     xAxisTickInterval: any;
     xAxisTickCount: any;
     xOrient: string;
+    xAxisOffset: number;
     dimensionsChanged: EventEmitter<{}>;
     xAxisClassName: string;
     tickArguments: any;
@@ -20,7 +21,7 @@ export declare class XAxisComponent implements OnChanges {
     stroke: string;
     tickStroke: string;
     strokeWidth: string;
-    xAxisOffset: number;
+    padding: number;
     ticksComponent: XAxisTicksComponent;
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;

@@ -23,6 +23,8 @@ export declare class BarHorizontalStackedComponent extends BaseChartComponent {
     barPadding: number;
     roundDomains: boolean;
     xScaleMax: number;
+    showDataLabel: boolean;
+    dataLabelFormatting: any;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     tooltipTemplate: TemplateRef<any>;
@@ -38,6 +40,7 @@ export declare class BarHorizontalStackedComponent extends BaseChartComponent {
     xAxisHeight: number;
     yAxisWidth: number;
     legendOptions: any;
+    dataLabelMaxWidth: any;
     update(): void;
     getGroupDomain(): any[];
     getInnerDomain(): any[];
@@ -60,6 +63,7 @@ export declare class BarHorizontalStackedComponent extends BaseChartComponent {
     updateXAxisHeight({height}: {
         height: any;
     }): void;
+    onDataLabelMaxWidthChanged(event: any, groupIndex: any): void;
     onActivate(event: any, group?: any): void;
     onDeactivate(event: any, group?: any): void;
 }
