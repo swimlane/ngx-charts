@@ -62,10 +62,7 @@ module.exports = function(env) {
       'd3-time': 'd3-time',
       'd3-time-format': 'd3-time-format',
       'rxjs': 'rxjs',
-      'rxjs/Rx': 'rxjs/Rx',
-      'rxjs/Observable': 'rxjs/Observable',
-      'rxjs/add/observable/fromEvent': 'rxjs/add/observable/fromEvent',
-      'rxjs/add/operator/debounceTime': 'rxjs/add/operator/debounceTime',
+      'rxjs/operators': 'rxjs/operators',
       'zone.js/dist/zone': 'zone.js/dist/zone'
     },
     plugins: [
