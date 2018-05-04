@@ -27,6 +27,7 @@
 | yAxisTickFormatting | function           |               | the y axis tick formatting                                                                                      |
 | xAxisTicks          | any[]              |               | predefined list of x axis tick values                                                                           |
 | yAxisTicks          | any[]              |               | predefined list of y axis tick values                                                                           |
+| showDataLabel       | boolean            | false         | displays the value number next to the bar                                                                       |
 | gradient            | boolean            | false         | fill elements with a gradient instead of a solid color                                                          |
 | activeEntries       | object[]           | []            | elements to highlight                                                                                           |
 | barPadding          | number             | 8             | padding between bars in px                                                                                      |
