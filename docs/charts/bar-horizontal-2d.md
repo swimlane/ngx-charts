@@ -23,6 +23,7 @@
 | showYAxisLabel      | boolean            | false         | show or hide the y axis label                                                                                   |
 | xAxisLabel          | string             |               | the x axis label text                                                                                           |
 | yAxisLabel          | string             |               | the y axis label text                                                                                           |
+| showDataLabel       | boolean            | false         | displays the value number next to the bar                                                                       |
 | gradient            | boolean            | false         | fill elements with a gradient instead of a solid color                                                          |
 | xAxisTickFormatting | function           |               | the x axis tick formatting                                                                                      |
 | yAxisTickFormatting | function           |               | the y axis tick formatting                                                                                      |

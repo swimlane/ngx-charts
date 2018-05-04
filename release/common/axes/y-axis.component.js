@@ -13,25 +13,27 @@ var YAxisComponent = /** @class */ (function () {
     function YAxisComponent() {
         this.showGridLines = false;
         this.yOrient = 'left';
+        this.yAxisOffset = 0;
         this.dimensionsChanged = new EventEmitter();
         this.yAxisClassName = 'y axis';
-        this.yAxisOffset = -5;
         this.labelOffset = 15;
         this.fill = 'none';
         this.stroke = '#CCC';
         this.tickStroke = '#CCC';
         this.strokeWidth = 1;
+        this.padding = 5;
     }
     YAxisComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     YAxisComponent.prototype.update = function () {
-        this.offset = this.yAxisOffset;
+        this.offset = -(this.yAxisOffset + this.padding);
         if (this.yOrient === 'right') {
             this.labelOffset = 65;
             this.transform = "translate(" + (this.offset + this.dims.width) + " , 0)";
         }
         else {
+            this.offset = this.offset;
             this.transform = "translate(" + this.offset + " , 0)";
         }
         if (this.yAxisTickCount !== undefined) {
@@ -106,6 +108,10 @@ var YAxisComponent = /** @class */ (function () {
         Input(),
         __metadata("design:type", Object)
     ], YAxisComponent.prototype, "showRefLabels", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Number)
+    ], YAxisComponent.prototype, "yAxisOffset", void 0);
     __decorate([
         Output(),
         __metadata("design:type", Object)
