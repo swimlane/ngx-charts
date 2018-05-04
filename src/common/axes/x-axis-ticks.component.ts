@@ -133,7 +133,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   getRotationAngle(ticks): number {
     let angle = 0;
     for (let i = 0; i < ticks.length; i++) {
-      const tick = ticks[i].toString();
+      const tick = this.tickFormat(ticks[i]).toString();
       if (tick.length > this.maxTicksLength) {
         this.maxTicksLength = tick.length;
       }
