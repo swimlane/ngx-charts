@@ -25,6 +25,7 @@
         [roundDomains]="roundDomains"
         [roundEdges]="roundEdges"
         [yScaleMax]="yScaleMax"
+        [showDataLabel]="showDataLabel"
         (select)="select($event)"
         (legendLabelClick)="onLegendLabelClick($event)">
       </ngx-charts-bar-vertical>
@@ -51,6 +52,7 @@
         [roundDomains]="roundDomains"
         [roundEdges]="roundEdges"
         [xScaleMax]="xScaleMax"
+        [showDataLabel]="showDataLabel"
         (legendLabelClick)="onLegendLabelClick($event)"
         (select)="select($event)">
       </ngx-charts-bar-horizontal>
@@ -79,6 +81,7 @@
         [roundDomains]="roundDomains"
         [roundEdges]="roundEdges"
         [yScaleMax]="yScaleMax"
+        [showDataLabel]="showDataLabel"
         (select)="select($event)">
       </ngx-charts-bar-vertical-2d>
       <ngx-charts-bar-horizontal-2d
@@ -106,6 +109,7 @@
         [roundDomains]="roundDomains"
         [roundEdges]="roundEdges"
         [xScaleMax]="xScaleMax"
+        [showDataLabel]="showDataLabel"
         (select)="select($event)">
       </ngx-charts-bar-horizontal-2d>
       <ngx-charts-bar-vertical-stacked
@@ -131,6 +135,7 @@
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
         [yScaleMax]="yScaleMax"
+        [showDataLabel]="showDataLabel"
         (select)="select($event)">
       </ngx-charts-bar-vertical-stacked>
       <ngx-charts-bar-horizontal-stacked
@@ -155,6 +160,7 @@
         [showGridLines]="showGridLines"
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
+        [showDataLabel]="showDataLabel"
         [xScaleMax]="xScaleMax"
         (select)="select($event)">
       </ngx-charts-bar-horizontal-stacked>
@@ -800,9 +806,35 @@
       [barPadding]="barPadding"
       [roundDomains]="roundDomains"
       [yScaleMax]="yScaleMax"
+      [showDataLabel]="showDataLabel"
       (select)="select($event)">
     </ngx-charts-bar-vertical-stacked>
-  </div>
+    <ngx-charts-bar-horizontal-stacked
+      *ngIf="chartType === 'bar-horizontal-stacked-negative'"
+      class="chart-container"
+      [view]="view"
+      [scheme]="colorScheme"
+      [schemeType]="schemeType"
+      [results]="fiscalYearReport"
+      [animations]="animations"
+      [gradient]="gradient"
+      [tooltipDisabled]="tooltipDisabled"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [legend]="showLegend"
+      [legendTitle]="legendTitle"
+      (legendLabelClick)="onLegendLabelClick($event)"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="'Fiscal Year Report'"
+      [showGridLines]="showGridLines"
+      [barPadding]="barPadding"
+      [roundDomains]="roundDomains"     
+      [showDataLabel]="showDataLabel"
+      (select)="select($event)">
+    </ngx-charts-bar-horizontal-stacked>
+ </div>
   <div class="sidebar">
     <h1>
       Ngx-<strong>Charts</strong>
@@ -974,6 +1006,12 @@
         <label>
           <input type="checkbox" [checked]="showLegend" (change)="showLegend = $event.target.checked">
           Show Legend
+        </label> <br />
+      </div>
+      <div *ngIf="chart.options.includes('showDataLabel')">
+        <label>
+          <input type="checkbox" [checked]="showDataLabel" (change)="showDataLabel = $event.target.checked">
+          Show Data Label
         </label> <br />
       </div>
       <div *ngIf="chart.options.includes('roundEdges')">

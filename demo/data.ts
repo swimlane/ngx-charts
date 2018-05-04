@@ -108,7 +108,7 @@ export const fiscalYearReport = [
       },
       {
         name: '2001',
-        value: 36953
+        value: -36953
       },
     ]
   },
