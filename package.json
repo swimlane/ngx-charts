@@ -31,13 +31,11 @@
     "start:host": "webpack-dev-server --host 0.0.0.0",
     "start:hmr": "webpack-dev-server --env.HMR",
     "release": "npm-run-all build:release",
-    "package":
-      "npm-run-all -s clean copy:build build:sass package:replace-scss package:aot build:package package:minify copy:styles clean:build",
+    "package": "npm-run-all -s clean copy:build build:sass package:replace-scss package:aot build:package package:minify copy:styles clean:build",
     "package:ts": "tsc --outDir release",
     "package:aot": "ngc -p tsconfig-aot.json",
     "package:replace-scss": "node ./config/replace-scss.js",
-    "package:minify":
-      "uglifyjs release/index.js --source-map --compress --mangle --screw-ie8 --output release/index.min.js",
+    "package:minify": "uglifyjs release/index.js --source-map --compress --mangle --screw-ie8 --output release/index.min.js",
     "deploy": "node ./config/deploy.js",
     "profile": "NODE_ENV=production webpack --profile --json > dist/stats.json"
   },
@@ -63,9 +61,15 @@
     "graph"
   ],
   "author": "Swimlane",
-  "contributors": ["Marjan Georgiev", "Jayson Harshbarger", "Austin McDaniel"],
+  "contributors": [
+    "Marjan Georgiev",
+    "Jayson Harshbarger",
+    "Austin McDaniel"
+  ],
   "license": "MIT",
-  "files": ["release"],
+  "files": [
+    "release"
+  ],
   "bugs": {
     "url": "https://github.com/swimlane/ngx-charts/issues"
   },
@@ -78,17 +82,17 @@
     "rxjs": "6.x"
   },
   "devDependencies": {
-    "@angular/animations": "^6.0.0-rc.5",
-    "@angular/common": "^6.0.0-rc.5",
-    "@angular/compiler": "^6.0.0-rc.5",
-    "@angular/compiler-cli": "^6.0.0-rc.5",
-    "@angular/core": "^6.0.0-rc.5",
-    "@angular/forms": "^6.0.0-rc.5",
-    "@angular/http": "^6.0.0-rc.5",
-    "@angular/platform-browser": "^6.0.0-rc.5",
-    "@angular/platform-browser-dynamic": "^6.0.0-rc.5",
-    "@angular/platform-server": "^6.0.0-rc.5",
-    "@swimlane/ngx-ui": "^20.1.0",
+    "@angular/animations": "^6.0.0",
+    "@angular/common": "^6.0.0",
+    "@angular/compiler": "^6.0.0",
+    "@angular/compiler-cli": "^6.0.0",
+    "@angular/core": "^6.0.0",
+    "@angular/forms": "^6.0.0",
+    "@angular/http": "^6.0.0",
+    "@angular/platform-browser": "^6.0.0",
+    "@angular/platform-browser-dynamic": "^6.0.0",
+    "@angular/platform-server": "^6.0.0",
+    "@swimlane/ngx-ui": "^20.2.1",
     "@swimlane/prettier-config-swimlane": "^0.1.1",
     "@types/d3-array": "^1.2.1",
     "@types/d3-brush": "1.0.7",
@@ -109,7 +113,7 @@
     "autoprefixer": "^7.1.4",
     "awesome-typescript-loader": "^3.2.3",
     "clean-webpack-plugin": "^0.1.15",
-    "codelyzer": "^3.0.0-beta.4",
+    "codelyzer": "^4.3.0",
     "copy-webpack-plugin": "^4.5.1",
     "core-js": "^2.5.1",
     "cpx": "^1.5.0",
@@ -141,7 +145,8 @@
     "raw-loader": "^0.5.1",
     "replace": "^0.3.0",
     "rimraf": "^2.5.2",
-    "rxjs": "^6.0.0-uncanny-rc.7",
+    "rxjs": "^6.1.0",
+    "rxjs-compat": "^6.1.0",
     "sass-loader": "^6.0.3",
     "source-map-loader": "^0.2.0",
     "style-loader": "^0.18.2",
@@ -151,7 +156,7 @@
     "tslint-config-prettier": "^1.12.0",
     "tslint-config-swimlane": "^3.0.3",
     "tslint-loader": "^3.3.0",
-    "typescript": "2.5.2",
+    "typescript": "~2.7.2",
     "uglify-js": "^3.1.0",
     "url-loader": "^0.5.7",
     "web-animations-js": "^2.2.2",
