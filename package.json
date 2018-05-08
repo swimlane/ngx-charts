@@ -92,7 +92,7 @@
     "@angular/platform-browser": "^6.0.0",
     "@angular/platform-browser-dynamic": "^6.0.0",
     "@angular/platform-server": "^6.0.0",
-    "@swimlane/ngx-ui": "^20.2.1",
+    "@swimlane/ngx-ui": "^21.0.0",
     "@swimlane/prettier-config-swimlane": "^0.1.1",
     "@types/d3-array": "^1.2.1",
     "@types/d3-brush": "1.0.7",
