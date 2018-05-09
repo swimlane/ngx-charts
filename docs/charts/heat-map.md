@@ -28,6 +28,10 @@
 | tooltipDisabled     | boolean            | false         | show or hide the tooltip                                                                                        |
 | tooltipText         | function           | (see source)  | the HTML text to display in the tooltip                                                                         |
 | tooltipTemplate     | TemplateRef        |               | a custom ng-template to be displayed inside the tooltip                                                         |
+| xAxisLabelSortOrder | string             | "desc"        | the x axis labels sort order.can be "","asc" or "desc"                                                          |
+| yAxisLabelSortOrder | string             | "asc"         | the axis labels sort order.can be "","asc" or "desc"                                                            |
+| showValueLabel      | boolean            | false         | show value labels in cell elements                                                                              |
+| valueFormatting     | function           |               | the value formatting                                                                                            |
 
 # Outputs
 

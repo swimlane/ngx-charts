@@ -61,6 +61,8 @@ import { ColorHelper } from '../common/color.helper';
           [tooltipTemplate]="tooltipTemplate"
           [tooltipText]="tooltipText"
           (select)="onClick($event)"
+          [showValueLabel]="showValueLabel"
+          [valueFormatting]="valueFormatting"
         />
       </svg:g>
     </ngx-charts-chart>
@@ -87,6 +89,10 @@ export class HeatMapComponent extends BaseChartComponent {
   @Input() yAxisTicks: any[];
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipText: any;
+  @Input() xAxisLabelSortOrder: string = 'desc';
+  @Input() yAxisLabelSortOrder: string = 'asc';
+  @Input() showValueLabel: boolean = false;
+  @Input() valueFormatting: any;
 
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
@@ -144,7 +150,7 @@ export class HeatMapComponent extends BaseChartComponent {
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
     this.rects = this.getRects();
   }
 
@@ -155,10 +161,24 @@ export class HeatMapComponent extends BaseChartComponent {
         domain.push(group.name);
       }
     }
-
+    if (this.xAxisLabelSortOrder === 'asc') {
+      return domain.sort(this.sortAscFn);
+    }
+    if (this.xAxisLabelSortOrder === 'desc') {
+      return domain.sort(this.sortDescFn);
+    }
     return domain;
   }
-
+  sortDescFn(a: any, b: any): number {
+    if (a > b) return 1;
+    if (a < b) return -1;
+    return 0;
+  }
+  sortAscFn(a: any, b: any): number {
+    if (a > b) return -1;
+    if (a < b) return 1;
+    return 0;
+  }
   getYDomain(): any[] {
     const domain = [];
 
@@ -170,6 +190,12 @@ export class HeatMapComponent extends BaseChartComponent {
       }
     }
 
+    if (this.yAxisLabelSortOrder === 'asc') {
+      return domain.sort(this.sortAscFn);
+    }
+    if (this.yAxisLabelSortOrder === 'desc') {
+      return domain.sort(this.sortDescFn);
+    }
     return domain;
   }
 
@@ -240,6 +266,16 @@ export class HeatMapComponent extends BaseChartComponent {
       .paddingInner(f);
   }
 
+  getValue(xValue: any, yValue: any): any {
+    for (const group of this.results) {
+      for (const d of group.series) {
+        if (group.name === xValue && d.name === yValue) {
+          return d.value;
+        }
+      }
+    }
+  }
+
   getRects(): any[] {
     const rects = [];
 
@@ -251,7 +287,8 @@ export class HeatMapComponent extends BaseChartComponent {
           rx: 3,
           width: this.xScale.bandwidth(),
           height: this.yScale.bandwidth(),
-          fill: 'rgba(200,200,200,0.03)'
+          fill: 'rgba(200,200,200,0.03)',
+          value: this.getValue(xVal, yVal)
         });
       });
     });
