@@ -281,6 +281,7 @@ const chartGroups = [
           'showYAxisLabel',
           'yAxisLabel',
           'autoScale',
+          'autoZoom',
           'timeline',
           'showGridLines',
           'curve',

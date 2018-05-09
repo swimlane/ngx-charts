@@ -275,6 +275,7 @@
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [autoScale]="autoScale"
+        [autoZoom]="autoZoom"
         [xScaleMin]="xScaleMin"
         [xScaleMax]="xScaleMax"
         [yScaleMin]="yScaleMin"
@@ -628,6 +629,7 @@
           [xAxisLabel]="'angle'"
           [yAxisLabel]="'radius'"
           [autoScale]="autoScale"
+          [autoZoom]="autoZoom"
           [timeline]="timeline"
           [showGridLines]="showGridLines"
           [curve]="curves['Cardinal']"
@@ -713,6 +715,7 @@
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [autoScale]="autoScale"
+        [autoZoom]="autoZoom"
         [timeline]="timeline"
         [showGridLines]="showGridLines"
         [curve]="curve"
@@ -1077,6 +1080,12 @@
         <label>
           <input type="checkbox" [checked]="autoScale" (change)="autoScale = $event.target.checked">
           Auto Scale
+        </label> <br />
+      </div>
+      <div *ngIf="chart.options.includes('autoZoom')">
+        <label>
+          <input type="checkbox" [checked]="autoZoom" (change)="autoZoom = $event.target.checked">
+          Auto Zoom
         </label> <br />
       </div>
       <div *ngIf="chart.options.includes('timeline')">

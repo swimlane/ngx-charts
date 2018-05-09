@@ -152,6 +152,7 @@ export class AppComponent implements OnInit {
 
   // line, area
   autoScale = true;
+  autoZoom = false;
   timeline = false;
 
   // margin
