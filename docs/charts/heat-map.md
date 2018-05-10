@@ -19,6 +19,7 @@
 | showYAxisLabel      | boolean            | false         | show or hide the y axis label                                                                                   |
 | xAxisLabel          | string             |               | the x axis label text                                                                                           |
 | yAxisLabel          | string             |               | the y axis label text                                                                                           |
+| cellFormatting      | function           |               | cell color formatting                                                                                           |
 | xAxisTickFormatting | function           |               | the x axis tick formatting                                                                                      |
 | yAxisTickFormatting | function           |               | the y axis tick formatting                                                                                      |
 | xAxisTicks          | any[]              |               | predefined list of x axis tick values                                                                           |

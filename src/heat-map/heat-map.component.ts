@@ -60,6 +60,7 @@ import { ColorHelper } from '../common/color.helper';
           [tooltipDisabled]="tooltipDisabled"
           [tooltipTemplate]="tooltipTemplate"
           [tooltipText]="tooltipText"
+          [cellFormatting]="cellFormatting"
           (select)="onClick($event)"
         />
       </svg:g>
@@ -87,6 +88,7 @@ export class HeatMapComponent extends BaseChartComponent {
   @Input() yAxisTicks: any[];
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipText: any;
+  @Input() cellFormatting: any;
 
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
