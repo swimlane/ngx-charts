@@ -62,6 +62,7 @@ export class YAxisComponent implements OnChanges {
   @Input() referenceLines;
   @Input() showRefLines;
   @Input() showRefLabels;
+  @Input() yAxisOffset: number = 0;
   @Input() yAxisTooltip: boolean = false;
   @Input() yAxisTooltipFormatting;
 
@@ -71,12 +72,12 @@ export class YAxisComponent implements OnChanges {
   tickArguments: any;
   offset: any;
   transform: any;
-  yAxisOffset: number = -5;
   labelOffset: number = 15;
   fill: string = 'none';
   stroke: string = '#CCC';
   tickStroke: string = '#CCC';
   strokeWidth: number = 1;
+  padding: number = 5;
 
   @ViewChild(YAxisTicksComponent) ticksComponent: YAxisTicksComponent;
 
@@ -85,12 +86,13 @@ export class YAxisComponent implements OnChanges {
   }
 
   update(): void {
-    this.offset = this.yAxisOffset;
+    this.offset = -(this.yAxisOffset + this.padding);
     if (this.yOrient === 'right') {
       this.labelOffset = 65;
       this.transform = `translate(${this.offset + this.dims.width} , 0)`;
     } else {
-      this.transform = `translate(${this.offset} , 0)`;
+      this.offset = this.offset;
+      this.transform = `translate(${this.offset } , 0)`;
     }
 
     if (this.yAxisTickCount !== undefined) {

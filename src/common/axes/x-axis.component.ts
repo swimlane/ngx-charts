@@ -56,6 +56,7 @@ export class XAxisComponent implements OnChanges {
   @Input() xAxisTickInterval;
   @Input() xAxisTickCount: any;
   @Input() xOrient: string = 'bottom';
+  @Input() xAxisOffset: number = 0;
   @Input() xAxisTooltip: boolean = false;
   @Input() xAxisTooltipFormatting;
 
@@ -70,7 +71,7 @@ export class XAxisComponent implements OnChanges {
   stroke: string = 'stroke';
   tickStroke: string = '#ccc';
   strokeWidth: string = 'none';
-  xAxisOffset: number = 5;
+  padding: number = 5;
 
   @ViewChild(XAxisTicksComponent) ticksComponent: XAxisTicksComponent;
 
@@ -79,7 +80,7 @@ export class XAxisComponent implements OnChanges {
   }
 
   update(): void {
-    this.transform = `translate(0,${this.xAxisOffset + this.dims.height})`;
+    this.transform = `translate(0,${this.xAxisOffset + this.padding + this.dims.height})`;
 
     if (typeof this.xAxisTickCount !== 'undefined') {
       this.tickArguments = [this.xAxisTickCount];
@@ -90,7 +91,7 @@ export class XAxisComponent implements OnChanges {
     const newLabelOffset = height + 25 + 5;
     if (newLabelOffset !== this.labelOffset) {
       this.labelOffset = newLabelOffset;
-      setTimeout(() => {
+      setTimeout(() => {        
         this.dimensionsChanged.emit({height});
       }, 0);
     }

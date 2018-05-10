@@ -49,6 +49,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [labelText]="yAxisLabel"
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
+          [yAxisOffset]="dataLabelMaxWidth.negative"
           [yAxisTooltip]="yAxisTooltip"
           [yAxisTooltipFormatting]="yAxisTooltipFormatting"
           (dimensionsChanged)="updateYAxisWidth($event)">
@@ -65,10 +66,14 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [activeEntries]="activeEntries"
           [roundEdges]="roundEdges"
           [animations]="animations"
+          [showDataLabel]="showDataLabel"
+          [dataLabelFormatting]="dataLabelFormatting"
           (select)="onClick($event)"
           (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)"
-        />
+          (dataLabelWidthChanged)="onDataLabelMaxWidthChanged($event)"
+          >
+        </svg:g>
       </svg:g>
     </ngx-charts-chart>
   `,
@@ -104,6 +109,8 @@ export class BarHorizontalComponent extends BaseChartComponent {
   @Input() roundEdges: boolean = true;
   @Input() xScaleMax: number;
   @Input() xScaleMin: number;
+  @Input() showDataLabel: boolean = false;
+  @Input() dataLabelFormatting: any;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -120,10 +127,17 @@ export class BarHorizontalComponent extends BaseChartComponent {
   margin = [10, 20, 10, 20];
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
-  legendOptions: any;
-
+  legendOptions: any;  
+  dataLabelMaxWidth: any = {negative: 0, positive: 0};
+  
   update(): void {
     super.update();
+
+    if (!this.showDataLabel) {
+      this.dataLabelMaxWidth = {negative: 0, positive: 0};          
+    }
+
+    this.margin = [10, 20 + this.dataLabelMaxWidth.positive, 10, 20 + this.dataLabelMaxWidth.negative]; 
 
     this.dims = calculateViewDimensions({
       width: this.width,
@@ -136,16 +150,16 @@ export class BarHorizontalComponent extends BaseChartComponent {
       showXLabel: this.showXAxisLabel,
       showYLabel: this.showYAxisLabel,
       showLegend: this.legend,
-      legendType: this.schemeType
+      legendType: this.schemeType      
     });
-
+   
     this.xScale = this.getXScale();
     this.yScale = this.getYScale();
 
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0]})`;
   }
 
   getXScale(): any {
@@ -226,6 +240,17 @@ export class BarHorizontalComponent extends BaseChartComponent {
   updateXAxisHeight({ height }): void {
     this.xAxisHeight = height;
     this.update();
+  }
+
+  onDataLabelMaxWidthChanged(event) {           
+    if (event.size.negative)  {
+      this.dataLabelMaxWidth.negative = Math.max(this.dataLabelMaxWidth.negative, event.size.width);
+    } else {
+      this.dataLabelMaxWidth.positive = Math.max(this.dataLabelMaxWidth.positive, event.size.width);
+    }  
+    if (event.index === (this.results.length - 1)) {
+      setTimeout(() => this.update());
+    }        
   }
 
   onActivate(item) {

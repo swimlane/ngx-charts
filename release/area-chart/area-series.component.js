@@ -12,6 +12,7 @@ import { area } from 'd3-shape';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
 var AreaSeriesComponent = /** @class */ (function () {
     function AreaSeriesComponent() {
+        this.baseValue = 'auto';
         this.stacked = false;
         this.normalized = false;
         this.animations = true;
@@ -42,12 +43,12 @@ var AreaSeriesComponent = /** @class */ (function () {
         else {
             currentArea = area()
                 .x(xProperty)
-                .y0(function () { return _this.yScale.range()[0]; })
+                .y0(function () { return _this.baseValue === 'auto' ? _this.yScale.range()[0] : _this.yScale(_this.baseValue); })
                 .y1(function (d) { return _this.yScale(d.value); });
             startingArea = area()
                 .x(xProperty)
-                .y0(function (d) { return _this.yScale.range()[0]; })
-                .y1(function (d) { return _this.yScale.range()[0]; });
+                .y0(function (d) { return _this.baseValue === 'auto' ? _this.yScale.range()[0] : _this.yScale(_this.baseValue); })
+                .y1(function (d) { return _this.baseValue === 'auto' ? _this.yScale.range()[0] : _this.yScale(_this.baseValue); });
         }
         currentArea.curve(this.curve);
         startingArea.curve(this.curve);
@@ -114,6 +115,10 @@ var AreaSeriesComponent = /** @class */ (function () {
         Input(),
         __metadata("design:type", Object)
     ], AreaSeriesComponent.prototype, "yScale", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], AreaSeriesComponent.prototype, "baseValue", void 0);
     __decorate([
         Input(),
         __metadata("design:type", Object)
