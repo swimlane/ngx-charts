@@ -2,6 +2,8 @@
 
 ## Polar/radar Chart
 
+\(Example TBD\)
+
 ## Inputs
 
 | Property | Type | Default Value | Description |

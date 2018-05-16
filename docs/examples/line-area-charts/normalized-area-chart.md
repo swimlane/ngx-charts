@@ -2,6 +2,10 @@
 
 ## Normalized Area Chart
 
+{% embed data="{\"url\":\"https://embed.plnkr.co/ULbzY7ZmdugBRrb8SgdQ?show=preview\",\"type\":\"rich\",\"title\":\"Normalized Area Chart\",\"description\":\"Created on Plnkr: Helping developers build the web.\",\"icon\":{\"type\":\"icon\",\"url\":\"https://embed.plnkr.co/favicon.ico\",\"aspectRatio\":0},\"thumbnail\":{\"type\":\"thumbnail\",\"url\":\"https://shot.plnkr.co/ULbzY7ZmdugBRrb8SgdQ.png?d=2017-03-31T15:21:32.474Z\",\"width\":400,\"height\":300,\"aspectRatio\":0.75},\"embed\":{\"type\":\"reader\",\"url\":\"https://embed.plnkr.co/plunk/ULbzY7ZmdugBRrb8SgdQ?autoCloseSidebar&deferRun&show=preview\",\"html\":\"<div style=\\"left: 0; width: 100%; height: 0; position: relative; padding-bottom: 66.6667%;\\"><iframe src=\\"https://embed.plnkr.co/plunk/ULbzY7ZmdugBRrb8SgdQ?autoCloseSidebar&amp;deferRun&amp;show=preview\\" style=\\"border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;\\" allowfullscreen scrolling=\\"no\\"></iframe></div>\",\"aspectRatio\":1.5}}" %}
+
+
+
 ## Inputs
 
 | Property | Type | Default Value | Description |
