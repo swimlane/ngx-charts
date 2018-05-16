@@ -6,92 +6,92 @@
 
 ## 7.4.0
 
-* Feature: Data labels for bar charts (#752)
-* Bug: Fix computation of X axis ticks angle (#820)
+* Feature: Data labels for bar charts \(\#752\)
+* Bug: Fix computation of X axis ticks angle \(\#820\)
 
 ## 7.3.0
 
-* Feature: Added support for overriding x and y axis ticks (#723)
-* Feature: Added support for area chart floor value (#684)
+* Feature: Added support for overriding x and y axis ticks \(\#723\)
+* Feature: Added support for area chart floor value \(\#684\)
 * Feature: Implemented min value scales for vertical and horizontal bar charts
-* Enhancement: Performance improvements across multiple charts (#765, #758)
-* Enhancement: Added support for overriding the min width of pie grid items (#762)
-* Bug: Fixed error being thrown when results is undefined (#217)
-* Bug: Fixed label input in pie-grid (#773)
+* Enhancement: Performance improvements across multiple charts \(\#765, \#758\)
+* Enhancement: Added support for overriding the min width of pie grid items \(\#762\)
+* Bug: Fixed error being thrown when results is undefined \(\#217\)
+* Bug: Fixed label input in pie-grid \(\#773\)
 
 ## 7.2.0
 
-* Feature: Added bar-vertical yScaleMin (#732)
-* Feature: Added support for label input in pie grid chart (#731)
-* Bug: Avoid invalid paths when rect shape has 0 width or height (#742)
-* Bug: Fix stacked bar chart negative values issue (#605)
-* Chore: Added basic test of area-chart (#737)
+* Feature: Added bar-vertical yScaleMin \(\#732\)
+* Feature: Added support for label input in pie grid chart \(\#731\)
+* Bug: Avoid invalid paths when rect shape has 0 width or height \(\#742\)
+* Bug: Fix stacked bar chart negative values issue \(\#605\)
+* Chore: Added basic test of area-chart \(\#737\)
 
 ## 7.1.1
 
-* Bug: Fixed template compile errors with fullTemplateTypeCheck (#730)
+* Bug: Fixed template compile errors with fullTemplateTypeCheck \(\#730\)
 
 ## 7.1.0
 
-* Feature: Added support for passing a function to the `customColors` input to all charts. (#676, #713)
-* Feature: Added `trimLabels` and `maxLabelLength` inputs to pie chart (#716)
-* Feature: Added inputs for formatting the name, value, and percentage in advanced pie chart (#719)
-* Enhancement: Switched to using lettable rxjs operators (#683)
-* Enhancement: Allow using the timeline for linear x scales (#624)
-* Bug: Fixed line/area tooltip positioning in firefox (#671)
-* Bug: Removed duplicate input declaration (#708)
-* Bug: Fixed duplicate % sign in pie grid charts when animations are disabled (#685)
+* Feature: Added support for passing a function to the `customColors` input to all charts. \(\#676, \#713\)
+* Feature: Added `trimLabels` and `maxLabelLength` inputs to pie chart \(\#716\)
+* Feature: Added inputs for formatting the name, value, and percentage in advanced pie chart \(\#719\)
+* Enhancement: Switched to using lettable rxjs operators \(\#683\)
+* Enhancement: Allow using the timeline for linear x scales \(\#624\)
+* Bug: Fixed line/area tooltip positioning in firefox \(\#671\)
+* Bug: Removed duplicate input declaration \(\#708\)
+* Bug: Fixed duplicate % sign in pie grid charts when animations are disabled \(\#685\)
 
 ## 7.0.1
 
-* Fix: Export polyfills to fix AoT build issue with Angular 5 (#644)
+* Fix: Export polyfills to fix AoT build issue with Angular 5 \(\#644\)
 
 ## 7.0.0
 
-* Breaking: Added support for angular 5 (#633)
-* Bug: Fixed 'ReferenceError: SVGElement is not defined' exception when using with angular universal (#587)
-* Bug: Fixed NaN issue on Advanced Pie Chart (#597)
-* Bug: Changed onDeactivate in the gauge component to emit the correct value instead of the event value from the global scope (#613)
+* Breaking: Added support for angular 5 \(\#633\)
+* Bug: Fixed 'ReferenceError: SVGElement is not defined' exception when using with angular universal \(\#587\)
+* Bug: Fixed NaN issue on Advanced Pie Chart \(\#597\)
+* Bug: Changed onDeactivate in the gauge component to emit the correct value instead of the event value from the global scope \(\#613\)
 
 ## 6.1.0
 
-* Feature: Added inputs to control minimum and maximum values on the axes (#582, #359)
-* Feature: Added input to enable/disable animations (#565)
-* Feature: Added designatedTotal Input for Pie Grid (#554)
-* Enhancement: Don't transform text to uppercase in legends and labels (#578)
-* Enhancement: Changed legends and label colors (#578)
-* Enhancement: Increased font size in advanced legend and number cards subtext (#578)
-* Enhancement: Hide legend title when title is missing (#578)
-* Enhancement: Added x-axis value to the context of a bubble chart tooltip (#530)
-* Bug: Removed path from SVG refs to fix gradients not working when URL has queryString (#584)
-* Bug: Fixed bug where value arc animation on gauge chart would start from 0 on update (#563)
-* Bug: Removed date conversion for name-value at series-tooltip (#544)
-* Bug: Added null check for rootComponents in injection servoce (#574)
-* Bug: Fixed issue where the tooltip would not appear for certain points (#501)
-* Bug: Fixed issue where pie chart colors would not update on color changes (#551)
-* Bug: Added polyfill for SVGElement.prototype.contains (#386)
-* Bug: Renamed ngOutletContext (deprecated) to ngTemplateOutletContext (#535)
+* Feature: Added inputs to control minimum and maximum values on the axes \(\#582, \#359\)
+* Feature: Added input to enable/disable animations \(\#565\)
+* Feature: Added designatedTotal Input for Pie Grid \(\#554\)
+* Enhancement: Don't transform text to uppercase in legends and labels \(\#578\)
+* Enhancement: Changed legends and label colors \(\#578\)
+* Enhancement: Increased font size in advanced legend and number cards subtext \(\#578\)
+* Enhancement: Hide legend title when title is missing \(\#578\)
+* Enhancement: Added x-axis value to the context of a bubble chart tooltip \(\#530\)
+* Bug: Removed path from SVG refs to fix gradients not working when URL has queryString \(\#584\)
+* Bug: Fixed bug where value arc animation on gauge chart would start from 0 on update \(\#563\)
+* Bug: Removed date conversion for name-value at series-tooltip \(\#544\)
+* Bug: Added null check for rootComponents in injection servoce \(\#574\)
+* Bug: Fixed issue where the tooltip would not appear for certain points \(\#501\)
+* Bug: Fixed issue where pie chart colors would not update on color changes \(\#551\)
+* Bug: Added polyfill for SVGElement.prototype.contains \(\#386\)
+* Bug: Renamed ngOutletContext \(deprecated\) to ngTemplateOutletContext \(\#535\)
 * Docs: Added custom chart page
 
 ## 6.0.1
 
 * Bug: Fixed line chart stroke color
 * Bug: Fixed timeline width and alignment
-* Bug: Fixed truncation of legend text (#487)
-* Chore: Removed patch numbers from peerDependencies (#478)
+* Bug: Fixed truncation of legend text \(\#487\)
+* Chore: Removed patch numbers from peerDependencies \(\#478\)
 
 ## 6.0.0
 
 * Breaking: Removed `showSeriesOnHover` option of line-chart
-* Refactor: Improved performance of line and area chart tooltips (#463)
-* Enhancement: Added `roundEdges` input property to bar charts (#408)
-* Enhancement: Tooltip elements are not created if tooltips are disabled (#415)
-* Enhancement: Added the option to define reference lines in line charts (#422)
+* Refactor: Improved performance of line and area chart tooltips \(\#463\)
+* Enhancement: Added `roundEdges` input property to bar charts \(\#408\)
+* Enhancement: Tooltip elements are not created if tooltips are disabled \(\#415\)
+* Enhancement: Added the option to define reference lines in line charts \(\#422\)
 * Enhancement: Improved animations
-* Bug: Fixed timeline select issue (#425)
+* Bug: Fixed timeline select issue \(\#425\)
 * Chore: Upgraded angular to 4.2.5
 * Demo: Added timeline filter bar chart demo
-* Demo: Added Combo chart (bar and line) demo (#432)
+* Demo: Added Combo chart \(bar and line\) demo \(\#432\)
 
 ## 5.3.1
 
@@ -112,41 +112,41 @@
 
 ## 5.2.1
 
-* Bug: Remove RGBColor type from color-util file (#394)
+* Bug: Remove RGBColor type from color-util file \(\#394\)
 
 ## 5.2.0
 
-* Feature: Added Polar/Radar chart type (#380)
-* Enhancement: Disable pointer if no click events are attached to number cards (#378)
-* Enhancement: Added gradiant to tree map chart (#382)
-* Enhancement: Added support for inverted colors from rgba values in number cards (#366)
-* Enhancement: Added value and label formatting to tree map (#383)
-* Refactor: loremess restrictive angular dependency versioning (#358)
-* Bug: Fixed types in gauge chart (#364)
-* Bug: Fixed axis and tooltips on bubble chart (#352)
+* Feature: Added Polar/Radar chart type \(\#380\)
+* Enhancement: Disable pointer if no click events are attached to number cards \(\#378\)
+* Enhancement: Added gradiant to tree map chart \(\#382\)
+* Enhancement: Added support for inverted colors from rgba values in number cards \(\#366\)
+* Enhancement: Added value and label formatting to tree map \(\#383\)
+* Refactor: loremess restrictive angular dependency versioning \(\#358\)
+* Bug: Fixed types in gauge chart \(\#364\)
+* Bug: Fixed axis and tooltips on bubble chart \(\#352\)
 * Bug: Added styleUrls and changeDetection to bubble chart
 * Bug: Truncate dimension values
-* Bug: Fixed number card count animation (#387)
-* Bug: Added type to gauge chart valueFormatting parameter (#388)
+* Bug: Fixed number card count animation \(\#387\)
+* Bug: Added type to gauge chart valueFormatting parameter \(\#388\)
 
 ## 5.1.2
 
-* Bug: Fix number card scaling in hybrid apps using ngUpgrade (#338)
-* Bug: Fix label trimming and clipped SVGs (#340)
+* Bug: Fix number card scaling in hybrid apps using ngUpgrade \(\#338\)
+* Bug: Fix label trimming and clipped SVGs \(\#340\)
 
 ## 5.1.1
 
-* Bug: Add default value for label format (#334)
+* Bug: Add default value for label format \(\#334\)
 
 ## 5.1.0
 
-* Enhancement: Added valueFormatting input to number card chart (#325)
-* Enhancement: Added label formatting input to number card chart (#332)
-* Enhancement: Added tooltipText to pie charts (#331)
-* Enhancement: Added option in line-chart for disabling series on hover (#323)
-* Enhancement: Added an input for custom legend title (#317)
-* Bug: Fixed number card text scaling when values change (#330)
-* Bug: Inverted y-axis on horizontal bar charts (#328)
+* Enhancement: Added valueFormatting input to number card chart \(\#325\)
+* Enhancement: Added label formatting input to number card chart \(\#332\)
+* Enhancement: Added tooltipText to pie charts \(\#331\)
+* Enhancement: Added option in line-chart for disabling series on hover \(\#323\)
+* Enhancement: Added an input for custom legend title \(\#317\)
+* Bug: Fixed number card text scaling when values change \(\#330\)
+* Bug: Inverted y-axis on horizontal bar charts \(\#328\)
 * Bug: Fix division by zero in pie label component
 
 ## 5.0.1
@@ -159,34 +159,34 @@
 
 ## 4.4.0
 
-* Feature: Added ability to set card text color in number card (#284)
-* Enhancement: Added more heatmap options and support for various inputs for innerPadding (#297, #301)
+* Feature: Added ability to set card text color in number card \(\#284\)
+* Enhancement: Added more heatmap options and support for various inputs for innerPadding \(\#297, \#301\)
 * Enhancement: Added valueFormatting input to linear gauge chart
 * Enhancement: Added valueFormatting input to gauge chart
 * Enhancement: Added labelFormatting input to pie chart
-* Enhancement: Updated pie chart label animations (#291)
+* Enhancement: Updated pie chart label animations \(\#291\)
 * Bug: Fixed pie chart positioning
-* Bug: Fixed ticks calculation on resize (#295)
-* Bug: Fixed percentage value in pie grid when the total is 0 (#288)
-* Bug: Fixed date formatting in bubble chart tooltips (#285)
-* Bug: Fixed Scale.round error in line chart ()#287)
+* Bug: Fixed ticks calculation on resize \(\#295\)
+* Bug: Fixed percentage value in pie grid when the total is 0 \(\#288\)
+* Bug: Fixed date formatting in bubble chart tooltips \(\#285\)
+* Bug: Fixed Scale.round error in line chart \(\)\#287\)
 * Chore: AOT error fixes
 
 ## 4.3.0
 
-* Enhancement: Improved pie chart label positioning (#273)
-* Enhancement: Improved number card design and scaling (#272)
-* Chore: Refactored charts to use d3 modules directly in library components (#270)
+* Enhancement: Improved pie chart label positioning \(\#273\)
+* Enhancement: Improved number card design and scaling \(\#272\)
+* Chore: Refactored charts to use d3 modules directly in library components \(\#270\)
 
 ## 4.2.1
 
 * Bug: Fixed customColors mapping
-* Chore: Various AoT compilation and build improvements (#255, #257, #258, #259, #256, #263, #260, #266)
+* Chore: Various AoT compilation and build improvements \(\#255, \#257, \#258, \#259, \#256, \#263, \#260, \#266\)
 
 ## 4.2.0
 
-* Chore: AoT compilation compatibility improvements (#253, #252, #251)
-* Enhancement: Added option to disable tooltips (#223)
+* Chore: AoT compilation compatibility improvements \(\#253, \#252, \#251\)
+* Enhancement: Added option to disable tooltips \(\#223\)
 
 ## 4.1.3
 
@@ -199,7 +199,7 @@
 
 * Bug: Fix tooltip when axis labels are not shown in bubble chart
 * Bug: Do not round scales when they are not linear
-* Enhancement: Show Axis labels in bubble chart tooltip (#210)
+* Enhancement: Show Axis labels in bubble chart tooltip \(\#210\)
 
 ## 4.1.1
 
@@ -209,9 +209,9 @@
 
 ## 4.1.0
 
-* Feature: Added scatter/bubble chart (#197)
+* Feature: Added scatter/bubble chart \(\#197\)
 * Bug: Made line-area-tooltip anchor visible on light theme
-* Bug: Fixed precision on pie grid percentage values (#202)
+* Bug: Fixed precision on pie grid percentage values \(\#202\)
 
 ## 4.0.3
 
@@ -231,19 +231,19 @@
 
 ## 4.0.0
 
-* Enhancement: Added `barPadding` and `groupPadding` properties to bar-charts (#185)
-* Enhancement: Added `innerPadding` property for heatmap, to control padding between cells (#165)
-* Enhancement: Added `axisTickformatting` property to bar, area, line, gauge and heatmap charts, for custom axis tick formatting (#167)
-* Enhancement: Added `innerRadius` property to pie charts, Fixes #104 (#162)
-* Enhancement: Added `roundDomain` property to all charts with axis, allowing it to round the domains to nice values (#183)
-* Enhancement: Added animation to areaTooltip anchors (#183)
-* Bug: Charts not rendering if container is hidden by default (#170)
+* Enhancement: Added `barPadding` and `groupPadding` properties to bar-charts \(\#185\)
+* Enhancement: Added `innerPadding` property for heatmap, to control padding between cells \(\#165\)
+* Enhancement: Added `axisTickformatting` property to bar, area, line, gauge and heatmap charts, for custom axis tick formatting \(\#167\)
+* Enhancement: Added `innerRadius` property to pie charts, Fixes \#104 \(\#162\)
+* Enhancement: Added `roundDomain` property to all charts with axis, allowing it to round the domains to nice values \(\#183\)
+* Enhancement: Added animation to areaTooltip anchors \(\#183\)
+* Bug: Charts not rendering if container is hidden by default \(\#170\)
 * Bug: Use old parent dimensions if new dimensions are undefined or 0
-* Bug: Fixed axis number formatting (#171)
+* Bug: Fixed axis number formatting \(\#171\)
 * Chore: Updated dependencies
-* Chore: Replaced moment with d3 timeFormat. Moment.js is no longer a dependency (#173)
-* Chore: Only include used Rxjs operators to decrease file size (#169)
-* Chore: Refactored CSS and embedded it into the chart components. No need to import the css file separately any longer. [Breaking change]
+* Chore: Replaced moment with d3 timeFormat. Moment.js is no longer a dependency \(\#173\)
+* Chore: Only include used Rxjs operators to decrease file size \(\#169\)
+* Chore: Refactored CSS and embedded it into the chart components. No need to import the css file separately any longer. \[Breaking change\]
 
 ## 3.1.2
 
@@ -257,12 +257,12 @@
 
 ## 3.1.0
 
-* Added min and max ranges option to line charts (#160)
-* Added margin support for Gauge charts (#159)
+* Added min and max ranges option to line charts \(\#160\)
+* Added margin support for Gauge charts \(\#159\)
 * Added animation to pie chart label
 * Replaced window.location with angular's Location provider
 * Fixed axis tick overlap in gauge chart when the angle span is 360
-* Replaced .children with .getElementsByTagName in area tooltip to fix error in IE11 (#157)
+* Replaced .children with .getElementsByTagName in area tooltip to fix error in IE11 \(\#157\)
 
 ## 3.0.7
 
@@ -270,7 +270,7 @@
 
 ## 3.0.6
 
-* Fixed typo in circle series (#149)
+* Fixed typo in circle series \(\#149\)
 * Fixed gradient bug in heatmap
 * Updated Axis components to allow tick count to be an input
 * Changed scaleText methods on gauge charts to not be recoursive
@@ -313,25 +313,25 @@
 
 ## 2.0.0
 
-* BREAKING: Renamed `clickHandler` to `select` (#120)
+* BREAKING: Renamed `clickHandler` to `select` \(\#120\)
 * Bug: Tooltips show up in top left corner sometimes
 * Polish: Tooltips have animation entry now
 * Polish: Add highight gradient and column when hovering a circle
-* Polish: Remove outline on focus (#106)
-* Polish: Make pie grid less ugly (#90)
+* Polish: Remove outline on focus \(\#106\)
+* Polish: Make pie grid less ugly \(\#90\)
 * Polish: Highlighting a line/area chart in legend, defocuses others
 * Polish: Radial gradients on pie charts vs linear
 * Polish: Better sizing for heatmap legends
-* Chore: Refactor Advanced Legend (#125)
+* Chore: Refactor Advanced Legend \(\#125\)
 * Chore: Webpack html templates for Google Analytics
 
 ## 1.9.0
 
-* Enhancement: Hover of legend doesn't highlight bar (#73)
+* Enhancement: Hover of legend doesn't highlight bar \(\#73\)
 * API: Added `activate` and `deactivate` events to chart for hovers
 * Bug: Fix number card positioning due to count up
 * Bug: Fix decimal places on advanced pie legend
-* Chore: Fix rx mapping (#123)
+* Chore: Fix rx mapping \(\#123\)
 * Polish: Tweak label color bg
 * Polish: Tweak circle / heat map tooltip titles
 * Perf: Improve perf of circles using ngIf
@@ -339,7 +339,7 @@
 ## 1.8.2
 
 * Bug: Fix for number cards not updating to last value
-* Bug: Revert RxJS Import Optimized (#62) due to (#119)
+* Bug: Revert RxJS Import Optimized \(\#62\) due to \(\#119\)
 * Polish: Added animation on treemap
 * Polish: Better formatting for treemap values
 * Polish: Added animation on advanced pie
@@ -349,12 +349,12 @@
 
 * Polish: Treemap/Number card label color improvements
 * Polish: Tooltip formatting improvements
-* Backlog: RxJS Import Optimized (#62)
+* Backlog: RxJS Import Optimized \(\#62\)
 * Backlog: AoT fixes
 
 ## 1.8.0
 
-* Renamed CommonModule to ChartCommonModule to fix name conflicts with other frameworks #109
+* Renamed CommonModule to ChartCommonModule to fix name conflicts with other frameworks \#109
 * Converted date objets to formatted strings in some charts
 * Removed rounded corners on thin bars
 * Improved on destroy hooks in tooltips
@@ -406,12 +406,12 @@
 
 * Bug: Don't do rounded edges on bars smaller than their radius
 * Bug: Scale number cards by height
-* Bug: Set text inside number cards to prevent overflow (#89)
+* Bug: Set text inside number cards to prevent overflow \(\#89\)
 * Bug: Format numbers and dates according to locale
 * Bug: Fix timeline width when no legend is present
 * Bug: Embed charts into timeline; Restyle timeline
-* Bug: Show percentages in tooltips for normalized bar charts (#79)
-* Chore: Change legend class name to prevent style conflicts (#98)
+* Bug: Show percentages in tooltips for normalized bar charts \(\#79\)
+* Chore: Change legend class name to prevent style conflicts \(\#98\)
 * Chore: Upgrade to Angular 2.2.1
 * Chore: Fix tooltips in hybrid apps
 
@@ -441,10 +441,10 @@
 
 ## 1.5.0
 
-* Added force directed graph chart (#64)
+* Added force directed graph chart \(\#64\)
 * Fixed bug where tooltip would not work when library is used in an angular 1 application using ngUpgrade
 * Fixed tooltip positioning
-* Added line interpolation option for line and area charts (#52)
+* Added line interpolation option for line and area charts \(\#52\)
 * Updated view dimension calculation to properly take into account the width and height of the axis tick labels.
 * Various bug fixes and code style fixes
 
@@ -455,14 +455,14 @@
 
 ## 1.3.0
 
-* Added option to resize charts to fit containers if `view` property is not set (#44)
-* Fixed legend size and positioning (#47)
+* Added option to resize charts to fit containers if `view` property is not set \(\#44\)
+* Fixed legend size and positioning \(\#47\)
 * Added scale legend to heat map chart
-* Added option to show/hide the grid lines on the chart (#53)
-* Added support for negative values in bar charts (#17)
-* Fixed bug with reduce call (#56)
-* Changed the tooltip to be hidden initially in order to avoid overflow and scrollbars. (#57)
-* Fixed AOT bugs (#46)
+* Added option to show/hide the grid lines on the chart \(\#53\)
+* Added support for negative values in bar charts \(\#17\)
+* Fixed bug with reduce call \(\#56\)
+* Changed the tooltip to be hidden initially in order to avoid overflow and scrollbars. \(\#57\)
+* Fixed AOT bugs \(\#46\)
 
 ## 1.2.2
 
@@ -494,9 +494,10 @@
 
 ## 1.0.1
 
-* Implemented smart axis labels (#32)
-* Upgraded D3 to 4.0 (#6)
+* Implemented smart axis labels \(\#32\)
+* Upgraded D3 to 4.0 \(\#6\)
 
 ## 1.0.0
 
 * Initial release
+
