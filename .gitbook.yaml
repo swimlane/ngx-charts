@@ -1,0 +1,9 @@
+# Root directory to locate the content
+# Default is the root directory of the repository.
+root: ./docs/
+
+# Files to use as SUMMARY/README.
+# (Relative to <root> directory)
+structure:
+  readme: README.md
+  summary: SUMMARY.md
