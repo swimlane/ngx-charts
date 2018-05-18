@@ -94,6 +94,7 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
   @Input() forceLink: any = forceLink<any, any>().id(node => node.value);
   @Input() legend: boolean;
   @Input() legendTitle: string = 'Legend';
+  @Input() legendPosition: string = 'right';
   @Input() nodes: any[] = [];
   @Input() links: Array<{ source: any, target: any }> = [];
   @Input() activeEntries: any[] = [];
@@ -128,6 +129,7 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
       height: this.height,
       margins: this.margin,
       showLegend: this.legend,
+      legendPosition: this.legendPosition
     });
 
     this.seriesDomain = this.getSeriesDomain();
@@ -186,7 +188,8 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
       scaleType: 'ordinal',
       domain: this.seriesDomain,
       colors: this.colors,
-      title: this.legendTitle
+      title: this.legendTitle,
+      position: this.legendPosition
     };
   }
 
