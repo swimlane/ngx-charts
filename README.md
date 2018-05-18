@@ -13,7 +13,7 @@ Data visualization is a science but that doesn't mean it has to be ugly. One of 
 
 Also, constructing custom charts is possible by leveraging the various ngx-charts components that are exposed through the ngx-charts module.
 
-For more info, check out the [documentation](https://swimlane.gitbooks.io/ngx-charts/content/) and the [demos](https://swimlane.github.io/ngx-charts/).
+For more info, check out the [documentation](https://swimlane.gitbook.io/ngx-charts/v/docs-test) and the [demos](https://swimlane.github.io/ngx-charts/).
 
 ## Features
 ### Chart Types
