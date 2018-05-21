@@ -47,11 +47,12 @@ import { formatLabel } from '../common/label.helper';
         (select)="onClick($event)"
         (activate)="activate.emit($event)"
         (deactivate)="deactivate.emit($event)"
+        (dblclick)="dblclick.emit($event)"
         ngx-tooltip
         [tooltipDisabled]="tooltipDisabled"
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
-        [tooltipTitle]="tooltipTemplate ? undefined : tooltipText(arc)"
+        [tooltipTitle]="getTooltipTitle(arc)"
         [tooltipTemplate]="tooltipTemplate"
         [tooltipContext]="arc.data">
       </svg:g>
@@ -81,6 +82,7 @@ export class PieSeriesComponent implements OnChanges {
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
+  @Output() dblclick = new EventEmitter();
 
   max: number;
   data: any;
@@ -148,6 +150,10 @@ export class PieSeriesComponent implements OnChanges {
 
   labelVisible(myArc): boolean {
     return this.showLabels && (myArc.endAngle - myArc.startAngle > Math.PI / 30);
+  }
+
+  getTooltipTitle(a) {
+    return this.tooltipTemplate ? undefined : this.tooltipText(a);
   }
 
   labelText(myArc): string {

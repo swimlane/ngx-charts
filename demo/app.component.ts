@@ -680,4 +680,8 @@ export class AppComponent implements OnInit {
     console.log(event);
   }
 
+  dblclick(event) {
+    console.log('Doube click', event);
+  }
+
 }

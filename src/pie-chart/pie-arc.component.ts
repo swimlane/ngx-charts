@@ -30,11 +30,12 @@ import { id } from '../utils/id';
         [attr.d]="path"
         class="arc"
         [class.active]="isActive"
-        [attr.fill]="gradient ? gradientFill : fill"
+        [attr.fill]="getGradient()"
         (click)="onClick()"
+        (dblclick)="onDblClick($event)"
         (mouseenter)="activate.emit(data)"
         (mouseleave)="deactivate.emit(data)"
-        [style.pointer-events]="pointerEvents ? 'auto' : 'none'"
+        [style.pointer-events]="getPointerEvents()"
       />
     </svg:g>
   `,
@@ -60,6 +61,7 @@ export class PieArcComponent implements OnChanges {
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
+  @Output() dblclick = new EventEmitter();
 
   element: HTMLElement;
   path: any;
@@ -68,6 +70,7 @@ export class PieArcComponent implements OnChanges {
   linearGradientId: string;
   gradientFill: string;
   initialized: boolean = false;
+  private _timeout;
 
   constructor(element: ElementRef) {
     this.element = element.nativeElement;
@@ -75,6 +78,14 @@ export class PieArcComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
+  }
+
+  getGradient() {
+    return this.gradient ? this.gradientFill : this.fill;
+  }
+
+  getPointerEvents() {
+    return this.pointerEvents ? 'auto' : 'none';
   }
 
   update(): void {
@@ -157,7 +168,19 @@ export class PieArcComponent implements OnChanges {
   }
 
   onClick(): void {
-    this.select.emit(this.data);
+    clearTimeout(this._timeout);
+    this._timeout = setTimeout(() => this.select.emit(this.data), 200);
+  }
+
+  onDblClick(event: MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    clearTimeout(this._timeout);
+    
+    this.dblclick.emit({
+      data: this.data,
+      nativeEvent: event
+    });
   }
 
 }

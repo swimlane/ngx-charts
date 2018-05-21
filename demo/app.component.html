@@ -229,6 +229,7 @@
         [gradient]="gradient"
         [tooltipDisabled]="tooltipDisabled"
         [tooltipText]="pieTooltipText"
+        (dblclick)="dblclick($event)"
         (select)="select($event)">
       </ngx-charts-pie-chart>
       <ngx-charts-advanced-pie-chart
