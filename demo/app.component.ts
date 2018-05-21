@@ -17,6 +17,8 @@ import {
   timelineFilterBarData,
   fiscalYearReport
 } from './data';
+import { bubbleDemoData } from './bubble-chart-interactive/data';
+import { BubbleChartInteractiveServerDataModel } from './bubble-chart-interactive/models';
 import { data as countries } from 'emoji-flags';
 import chartGroups from './chartTypes';
 import { barChart, lineChartSeries } from './combo-chart-data';
@@ -36,7 +38,7 @@ function multiFormat(value) {
 
 @Component({
   selector: 'app',
-  providers: [Location, {provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [Location, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['../node_modules/@swimlane/ngx-ui/release/index.css', './app.component.scss'],
   templateUrl: './app.component.html'
@@ -210,6 +212,10 @@ export class AppComponent implements OnInit {
   treemapPath: any[] = [];
   sumBy: string = 'Size';
 
+  // bubble chart interactive demo
+  bubbleDemoTempData: any[] = [];
+  bubbleDemoChart: BubbleChartInteractiveServerDataModel;
+
   // Reference lines
   showRefLines: boolean = true;
   showRefLabels: boolean = true;
@@ -234,10 +240,14 @@ export class AppComponent implements OnInit {
       bubble,
       plotData: this.generatePlotData(),
       treemap,
+      bubbleDemoData,
       fiscalYearReport
     });
 
+    // interactive drilldown demos
     this.treemapProcess();
+    this.bubbleDemoChart = new BubbleChartInteractiveServerDataModel();
+    this.bubbleDemoProcess(bubbleDemoData[0]);
 
     this.dateData = generateData(5, false);
     this.dateDataWithRange = generateData(2, true);
@@ -301,7 +311,7 @@ export class AppComponent implements OnInit {
         const index = Math.floor(Math.random() * this.graph.nodes.length);
         const value = this.graph.nodes[index].value;
         this.graph.nodes.splice(index, 1);
-        const nodes = [ ...this.graph.nodes ];
+        const nodes = [...this.graph.nodes];
 
         const links = this.graph.links.filter(link => {
           return link.source !== value && link.source.value !== value &&
@@ -338,12 +348,12 @@ export class AppComponent implements OnInit {
 
       // graph
       const node = { value: country.name };
-      const nodes = [ ...this.graph.nodes, node];
+      const nodes = [...this.graph.nodes, node];
       const link = {
         source: country.name,
         target: nodes[Math.floor(Math.random() * (nodes.length - 1))].value,
       };
-      const links = [ ...this.graph.links, link];
+      const links = [...this.graph.links, link];
       this.graph = { links, nodes };
 
       // bubble
@@ -360,10 +370,16 @@ export class AppComponent implements OnInit {
 
       this.bubble = [...this.bubble, bubbleEntry];
 
+      // bubble interactive demo
+      const getRandomInt = (min, max) => {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      };
+      this.bubbleDemoProcess(bubbleDemoData[getRandomInt(0, bubbleDemoData.length - 1)]);
+
       this.statusData = this.getStatusData();
     }
 
-    const date = new Date(Math.floor(1473700105009 +  Math.random() * 1000000000));
+    const date = new Date(Math.floor(1473700105009 + Math.random() * 1000000000));
     for (const series of this.dateData) {
       series.series.push({
         name: date,
@@ -496,7 +512,7 @@ export class AppComponent implements OnInit {
     `;
   }
 
-  pieTooltipText({data}) {
+  pieTooltipText({ data }) {
     const label = formatLabel(data.name);
     const val = formatLabel(data.value);
 
@@ -549,7 +565,7 @@ export class AppComponent implements OnInit {
   }
 
   statusValueFormat(c): string {
-    switch(c.data.extra ? c.data.extra.format : '') {
+    switch (c.data.extra ? c.data.extra.format : '') {
       case 'currency':
         return `\$${Math.round(c.value).toLocaleString()}`;
       case 'time':
@@ -600,7 +616,7 @@ export class AppComponent implements OnInit {
       text = `with (Math) { return ${this.mathText} }`;
       const fn = new Function('x', text).bind(Math);
       return (typeof fn(1) === 'number') ? fn : null;
-    } catch(err) {
+    } catch (err) {
       return null;
     }
   }
@@ -610,7 +626,7 @@ export class AppComponent implements OnInit {
     const children = treemap[0];
     const value = (sumBy === 'Size') ? sumChildren(children) : countChildren(children);
     this.treemap = [children];
-    this.treemapPath = [{name: 'Top', children: [children], value }];
+    this.treemapPath = [{ name: 'Top', children: [children], value }];
 
     function sumChildren(node) {
       return node.value = node.size || d3.sum(node.children, sumChildren);
@@ -656,11 +672,11 @@ export class AppComponent implements OnInit {
   */
 
   yLeftAxisScale(min, max) {
-    return {min: `${min}`, max: `${max}`};
+    return { min: `${min}`, max: `${max}` };
   }
 
   yRightAxisScale(min, max) {
-    return {min: `${min}`, max: `${max}`};
+    return { min: `${min}`, max: `${max}` };
   }
 
   yLeftTickFormat(data) {
@@ -678,6 +694,35 @@ export class AppComponent implements OnInit {
 
   onSelect(event) {
     console.log(event);
+  }
+
+  /*
+  **
+  Bubble Chart Interactive Demo
+  **
+  */
+
+  bubbleDemoProcess(dataFromServer) {
+    this.bubbleDemoChart.setDataFromServer(dataFromServer);
+    this.bubbleDemoTempData = this.bubbleDemoChart.toChart();
+  }
+
+  getBubbleInteractiveTitle() {
+    return this.bubbleDemoChart.getChartTitle();
+  }
+
+  bubbleShowDrilldownResetLink() {
+    return this.bubbleDemoChart.getDrilldownDepth() > 0;
+  }
+
+  onClickResetBubbleInteractiveDrill() {
+    this.bubbleDemoChart.resetDrilldown();
+    this.bubbleDemoTempData = this.bubbleDemoChart.toChart();
+  }
+
+  onSelectBubbleInteractivePoint(event) {
+    this.bubbleDemoChart.drilldown(event);
+    this.bubbleDemoTempData = this.bubbleDemoChart.toChart();
   }
 
 }

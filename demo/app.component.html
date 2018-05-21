@@ -694,6 +694,40 @@
           (select)="treemapSelect($event)">
         </ngx-charts-tree-map>
       </div>
+      <div class="chart-container"
+        *ngIf="chartType === 'bubble-chart-interactive-demo'"
+        style="padding: 10px; border: 1px solid white;">
+        <div>
+            <span class="active">{{ getBubbleInteractiveTitle() }}</span>
+            <button
+              *ngIf="bubbleShowDrilldownResetLink()"
+              class="btn btn-link" style="float: right;"
+              (click)="onClickResetBubbleInteractiveDrill()"><span>Go Back</span>
+            </button>
+        </div>
+        <ngx-charts-bubble-chart-interactive
+          [view]="view"
+          [results]="bubbleDemoTempData"
+          [animations]="animations"
+          [showGridLines]="showGridLines"
+          [legend]="showLegend"
+          [legendTitle]="legendTitle"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          [autoScale]="autoScale"
+          [scheme]="colorScheme"
+          [schemeType]="schemeType"
+          [roundDomains]="roundDomains"
+          [tooltipDisabled]="tooltipDisabled"
+          [minRadius]="minRadius"
+          [maxRadius]="maxRadius"
+          (select)="onSelectBubbleInteractivePoint($event)">
+        </ngx-charts-bubble-chart-interactive>
+      </div>
       <ngx-charts-line-chart
         *ngIf="chartType === 'line-reference-lines'"
         [view]="view"
@@ -876,6 +910,7 @@
       <pre *ngIf="chart.inputFormat === 'multiSeries' && linearScale && (!range)">{{dateData | json}}</pre>
       <pre *ngIf="chart.inputFormat === 'multiSeries' && linearScale && range">{{dateDataWithRange | json}}</pre>
       <pre *ngIf="chart.inputFormat === 'bubble'">{{bubble | json}}</pre>
+      <pre *ngIf="chart.inputFormat === 'bubbleInteractive'">{{bubbleDemoTempData | json}}</pre>
       <pre *ngIf="chart.inputFormat === 'comboChart'">{{barChart | json}}</pre>
       <pre *ngIf="chart.inputFormat === 'comboChart'">{{lineChartSeries | json}}</pre>
       <div>
