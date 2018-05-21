@@ -1,5 +1,5 @@
 /**
- * ngx-charts v"8.0.0" (https://github.com/swimlane/ngx-charts)
+ * ngx-charts v"8.0.1" (https://github.com/swimlane/ngx-charts)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -15437,11 +15437,18 @@ var PieArcComponent = /** @class */ (function () {
         this.select = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
         this.activate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
         this.deactivate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this.dblclick = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
         this.initialized = false;
         this.element = element.nativeElement;
     }
     PieArcComponent.prototype.ngOnChanges = function (changes) {
         this.update();
+    };
+    PieArcComponent.prototype.getGradient = function () {
+        return this.gradient ? this.gradientFill : this.fill;
+    };
+    PieArcComponent.prototype.getPointerEvents = function () {
+        return this.pointerEvents ? 'auto' : 'none';
     };
     PieArcComponent.prototype.update = function () {
         var calc = this.calculateArc();
@@ -15513,7 +15520,18 @@ var PieArcComponent = /** @class */ (function () {
         });
     };
     PieArcComponent.prototype.onClick = function () {
-        this.select.emit(this.data);
+        var _this = this;
+        clearTimeout(this._timeout);
+        this._timeout = setTimeout(function () { return _this.select.emit(_this.data); }, 200);
+    };
+    PieArcComponent.prototype.onDblClick = function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        clearTimeout(this._timeout);
+        this.dblclick.emit({
+            data: this.data,
+            nativeEvent: event
+        });
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
@@ -15583,10 +15601,14 @@ var PieArcComponent = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
         __metadata("design:type", Object)
     ], PieArcComponent.prototype, "deactivate", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+        __metadata("design:type", Object)
+    ], PieArcComponent.prototype, "dblclick", void 0);
     PieArcComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'g[ngx-charts-pie-arc]',
-            template: "\n    <svg:g class=\"arc-group\">\n      <svg:defs *ngIf=\"gradient\">\n        <svg:g ngx-charts-svg-radial-gradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"radialGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n      </svg:defs>\n      <svg:path\n        [attr.d]=\"path\"\n        class=\"arc\"\n        [class.active]=\"isActive\"\n        [attr.fill]=\"gradient ? gradientFill : fill\"\n        (click)=\"onClick()\"\n        (mouseenter)=\"activate.emit(data)\"\n        (mouseleave)=\"deactivate.emit(data)\"\n        [style.pointer-events]=\"pointerEvents ? 'auto' : 'none'\"\n      />\n    </svg:g>\n  ",
+            template: "\n    <svg:g class=\"arc-group\">\n      <svg:defs *ngIf=\"gradient\">\n        <svg:g ngx-charts-svg-radial-gradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"radialGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n      </svg:defs>\n      <svg:path\n        [attr.d]=\"path\"\n        class=\"arc\"\n        [class.active]=\"isActive\"\n        [attr.fill]=\"getGradient()\"\n        (click)=\"onClick()\"\n        (dblclick)=\"onDblClick($event)\"\n        (mouseenter)=\"activate.emit(data)\"\n        (mouseleave)=\"deactivate.emit(data)\"\n        [style.pointer-events]=\"getPointerEvents()\"\n      />\n    </svg:g>\n  ",
             changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]])
@@ -15660,6 +15682,7 @@ var PieChartComponent = /** @class */ (function (_super) {
         _this.tooltipDisabled = false;
         _this.trimLabels = true;
         _this.maxLabelLength = 10;
+        _this.dblclick = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
         _this.select = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
         _this.activate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
         _this.deactivate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
@@ -15804,6 +15827,10 @@ var PieChartComponent = /** @class */ (function (_super) {
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
         __metadata("design:type", Object)
+    ], PieChartComponent.prototype, "dblclick", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+        __metadata("design:type", Object)
     ], PieChartComponent.prototype, "select", void 0);
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
@@ -15820,7 +15847,7 @@ var PieChartComponent = /** @class */ (function (_super) {
     PieChartComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'ngx-charts-pie-chart',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      [animations]=\"animations\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"translation\" class=\"pie-chart chart\">\n        <svg:g ngx-charts-pie-series\n          [colors]=\"colors\"\n          [series]=\"data\"\n          [showLabels]=\"labels\"\n          [labelFormatting]=\"labelFormatting\"\n          [trimLabels]=\"trimLabels\"\n          [maxLabelLength]=\"maxLabelLength\"\n          [activeEntries]=\"activeEntries\"\n          [innerRadius]=\"innerRadius\"\n          [outerRadius]=\"outerRadius\"\n          [explodeSlices]=\"explodeSlices\"\n          [gradient]=\"gradient\"\n          [animations]=\"animations\"\n          [tooltipDisabled]=\"tooltipDisabled\"\n          [tooltipTemplate]=\"tooltipTemplate\"\n          [tooltipText]=\"tooltipText\"\n          (select)=\"onClick($event)\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      [animations]=\"animations\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"translation\" class=\"pie-chart chart\">\n        <svg:g ngx-charts-pie-series\n          [colors]=\"colors\"\n          [series]=\"data\"\n          [showLabels]=\"labels\"\n          [labelFormatting]=\"labelFormatting\"\n          [trimLabels]=\"trimLabels\"\n          [maxLabelLength]=\"maxLabelLength\"\n          [activeEntries]=\"activeEntries\"\n          [innerRadius]=\"innerRadius\"\n          [outerRadius]=\"outerRadius\"\n          [explodeSlices]=\"explodeSlices\"\n          [gradient]=\"gradient\"\n          [animations]=\"animations\"\n          [tooltipDisabled]=\"tooltipDisabled\"\n          [tooltipTemplate]=\"tooltipTemplate\"\n          [tooltipText]=\"tooltipText\"\n          (dblclick)=\"dblclick.emit($event)\"\n          (select)=\"onClick($event)\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             styles: [
                 __webpack_require__("./src/common/base-chart.component.scss"),
                 __webpack_require__("./src/pie-chart/pie-chart.component.scss")
@@ -16390,6 +16417,7 @@ var PieSeriesComponent = /** @class */ (function () {
         this.select = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
         this.activate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
         this.deactivate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this.dblclick = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
     }
     PieSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -16442,6 +16470,9 @@ var PieSeriesComponent = /** @class */ (function () {
     };
     PieSeriesComponent.prototype.labelVisible = function (myArc) {
         return this.showLabels && (myArc.endAngle - myArc.startAngle > Math.PI / 30);
+    };
+    PieSeriesComponent.prototype.getTooltipTitle = function (a) {
+        return this.tooltipTemplate ? undefined : this.tooltipText(a);
     };
     PieSeriesComponent.prototype.labelText = function (myArc) {
         if (this.labelFormatting) {
@@ -16550,10 +16581,14 @@ var PieSeriesComponent = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
         __metadata("design:type", Object)
     ], PieSeriesComponent.prototype, "deactivate", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+        __metadata("design:type", Object)
+    ], PieSeriesComponent.prototype, "dblclick", void 0);
     PieSeriesComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'g[ngx-charts-pie-series]',
-            template: "\n    <svg:g *ngFor=\"let arc of data; trackBy:trackBy\">\n      <svg:g ngx-charts-pie-label\n        *ngIf=\"labelVisible(arc)\"\n        [data]=\"arc\"\n        [radius]=\"outerRadius\"\n        [color]=\"color(arc)\"\n        [label]=\"labelText(arc)\"\n        [labelTrim]=\"trimLabels\"\n        [labelTrimSize]=\"maxLabelLength\"\n        [max]=\"max\"\n        [value]=\"arc.value\"\n        [explodeSlices]=\"explodeSlices\"\n        [animations]=\"animations\">\n      </svg:g>\n      <svg:g\n        ngx-charts-pie-arc\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [value]=\"arc.data.value\"\n        [gradient]=\"gradient\"\n        [data]=\"arc.data\"\n        [max]=\"max\"\n        [explodeSlices]=\"explodeSlices\"\n        [isActive]=\"isActive(arc.data)\"\n        [animate]=\"animations\"\n        (select)=\"onClick($event)\"\n        (activate)=\"activate.emit($event)\"\n        (deactivate)=\"deactivate.emit($event)\"\n        ngx-tooltip\n        [tooltipDisabled]=\"tooltipDisabled\"\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"tooltipTemplate ? undefined : tooltipText(arc)\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n        [tooltipContext]=\"arc.data\">\n      </svg:g>\n    </svg:g>\n  ",
+            template: "\n    <svg:g *ngFor=\"let arc of data; trackBy:trackBy\">\n      <svg:g ngx-charts-pie-label\n        *ngIf=\"labelVisible(arc)\"\n        [data]=\"arc\"\n        [radius]=\"outerRadius\"\n        [color]=\"color(arc)\"\n        [label]=\"labelText(arc)\"\n        [labelTrim]=\"trimLabels\"\n        [labelTrimSize]=\"maxLabelLength\"\n        [max]=\"max\"\n        [value]=\"arc.value\"\n        [explodeSlices]=\"explodeSlices\"\n        [animations]=\"animations\">\n      </svg:g>\n      <svg:g\n        ngx-charts-pie-arc\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [value]=\"arc.data.value\"\n        [gradient]=\"gradient\"\n        [data]=\"arc.data\"\n        [max]=\"max\"\n        [explodeSlices]=\"explodeSlices\"\n        [isActive]=\"isActive(arc.data)\"\n        [animate]=\"animations\"\n        (select)=\"onClick($event)\"\n        (activate)=\"activate.emit($event)\"\n        (deactivate)=\"deactivate.emit($event)\"\n        (dblclick)=\"dblclick.emit($event)\"\n        ngx-tooltip\n        [tooltipDisabled]=\"tooltipDisabled\"\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"getTooltipTitle(arc)\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n        [tooltipContext]=\"arc.data\">\n      </svg:g>\n    </svg:g>\n  ",
             changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush,
         })
     ], PieSeriesComponent);

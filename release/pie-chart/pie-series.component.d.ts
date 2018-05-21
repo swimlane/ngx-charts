@@ -19,6 +19,7 @@ export declare class PieSeriesComponent implements OnChanges {
     select: EventEmitter<{}>;
     activate: EventEmitter<{}>;
     deactivate: EventEmitter<{}>;
+    dblclick: EventEmitter<{}>;
     max: number;
     data: any;
     ngOnChanges(changes: SimpleChanges): void;
@@ -27,6 +28,7 @@ export declare class PieSeriesComponent implements OnChanges {
     outerArc(): any;
     calculateLabelPositions(pieData: any): any;
     labelVisible(myArc: any): boolean;
+    getTooltipTitle(a: any): any;
     labelText(myArc: any): string;
     label(myArc: any): string;
     defaultTooltipText(myArc: any): string;
