@@ -1,5 +1,9 @@
 # Changelog
 
+## 8.0.1
+
+* Feature: Add dblclick to pie chart
+
 ## 8.0.0
 
 * Breaking: Upgrade to Angular 6
