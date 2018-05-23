@@ -1,5 +1,9 @@
 # Changelog
 
+## 8.0.2
+
+* Bug: Fix pie chart label collision detection
+
 ## 8.0.1
 
 * Feature: Add dblclick to pie chart
@@ -504,4 +508,3 @@
 ## 1.0.0
 
 * Initial release
-

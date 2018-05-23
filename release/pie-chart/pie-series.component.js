@@ -59,8 +59,14 @@ var PieSeriesComponent = /** @class */ (function () {
         });
         for (var i = 0; i < labelPositions.length - 1; i++) {
             var a = labelPositions[i];
+            if (!this.labelVisible(a)) {
+                continue;
+            }
             for (var j = i + 1; j < labelPositions.length; j++) {
                 var b = labelPositions[j];
+                if (!this.labelVisible(b)) {
+                    continue;
+                }
                 // if they're on the same side
                 if (b.pos[0] * a.pos[0] > 0) {
                     // if they're overlapping
@@ -75,7 +81,7 @@ var PieSeriesComponent = /** @class */ (function () {
         return labelPositions;
     };
     PieSeriesComponent.prototype.labelVisible = function (myArc) {
-        return this.showLabels && (myArc.endAngle - myArc.startAngle > Math.PI / 30);
+        return this.showLabels && myArc.endAngle - myArc.startAngle > Math.PI / 30;
     };
     PieSeriesComponent.prototype.getTooltipTitle = function (a) {
         return this.tooltipTemplate ? undefined : this.tooltipText(a);
@@ -195,7 +201,7 @@ var PieSeriesComponent = /** @class */ (function () {
         Component({
             selector: 'g[ngx-charts-pie-series]',
             template: "\n    <svg:g *ngFor=\"let arc of data; trackBy:trackBy\">\n      <svg:g ngx-charts-pie-label\n        *ngIf=\"labelVisible(arc)\"\n        [data]=\"arc\"\n        [radius]=\"outerRadius\"\n        [color]=\"color(arc)\"\n        [label]=\"labelText(arc)\"\n        [labelTrim]=\"trimLabels\"\n        [labelTrimSize]=\"maxLabelLength\"\n        [max]=\"max\"\n        [value]=\"arc.value\"\n        [explodeSlices]=\"explodeSlices\"\n        [animations]=\"animations\">\n      </svg:g>\n      <svg:g\n        ngx-charts-pie-arc\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [value]=\"arc.data.value\"\n        [gradient]=\"gradient\"\n        [data]=\"arc.data\"\n        [max]=\"max\"\n        [explodeSlices]=\"explodeSlices\"\n        [isActive]=\"isActive(arc.data)\"\n        [animate]=\"animations\"\n        (select)=\"onClick($event)\"\n        (activate)=\"activate.emit($event)\"\n        (deactivate)=\"deactivate.emit($event)\"\n        (dblclick)=\"dblclick.emit($event)\"\n        ngx-tooltip\n        [tooltipDisabled]=\"tooltipDisabled\"\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"getTooltipTitle(arc)\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n        [tooltipContext]=\"arc.data\">\n      </svg:g>\n    </svg:g>\n  ",
-            changeDetection: ChangeDetectionStrategy.OnPush,
+            changeDetection: ChangeDetectionStrategy.OnPush
         })
     ], PieSeriesComponent);
     return PieSeriesComponent;

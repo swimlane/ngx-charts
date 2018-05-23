@@ -68,7 +68,7 @@ var PieLabelComponent = /** @class */ (function () {
     });
     Object.defineProperty(PieLabelComponent.prototype, "textTransition", {
         get: function () {
-            return (this.isIE || !this.animations) ? null : 'transform 0.75s';
+            return this.isIE || !this.animations ? null : 'transform 0.75s';
         },
         enumerable: true,
         configurable: true
