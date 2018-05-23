@@ -1,10 +1,4 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  SimpleChanges,
-  ChangeDetectionStrategy
-} from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { arc } from 'd3-shape';
 
 import { trimLabel } from '../common/trim-label.helper';
@@ -37,7 +31,6 @@ import { trimLabel } from '../common/trim-label.helper';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PieLabelComponent implements OnChanges {
-
   @Input() data;
   @Input() radius;
   @Input() label;
@@ -101,7 +94,7 @@ export class PieLabelComponent implements OnChanges {
   }
 
   get textTransition(): string {
-    return (this.isIE || !this.animations) ? null : 'transform 0.75s';
+    return this.isIE || !this.animations ? null : 'transform 0.75s';
   }
 
   textAnchor(): any {
@@ -111,5 +104,4 @@ export class PieLabelComponent implements OnChanges {
   midAngle(d): number {
     return d.startAngle + (d.endAngle - d.startAngle) / 2;
   }
-
 }
