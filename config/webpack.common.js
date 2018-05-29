@@ -29,39 +29,39 @@ module.exports = function(options = {}) {
       rules: [
         {
           test: /\.(png|woff|woff2|eot|ttf|svg|jpeg|jpg|gif)$/,
-          loader: 'url-loader',
+          use: 'url-loader',
           query: {
             limit: '100000'
           }
         },
         {
           test: /\.html$/,
-          loader: 'raw-loader'
+          use: 'raw-loader'
         },
         {
           test: /\.css/,
           use: [
             ExtractTextPlugin.extract({
-              fallbackLoader: 'style-loader',
-              loader: 'css-loader'
+              fallback: 'style-loader',
+              use: 'css-loader'
             }),
-            { loader: 'to-string-loader' }, 
-            { loader: 'css-loader' },
-            { loader: 'postcss-loader' }
+            { use: 'to-string-loader' }, 
+            { use: 'css-loader' },
+            { use: 'postcss-loader' }
           ]
         },
         {
           test: /\.scss$/,
           use: [
             ExtractTextPlugin.extract({
-              fallbackLoader: 'style-loader',
-              loader: 'css-loader'
+              fallback: 'style-loader',
+              use: 'css-loader'
             }),
-            { loader: 'to-string-loader' }, 
-            { loader: 'css-loader' },
-            { loader: 'postcss-loader' },
+            { use: 'to-string-loader' }, 
+            { use: 'css-loader' },
+            { use: 'postcss-loader' },
             { 
-              loader: 'sass-loader',
+              use: 'sass-loader',
               options: {
                 sourceMap: true
               }
