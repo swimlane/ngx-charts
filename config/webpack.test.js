@@ -23,7 +23,7 @@ module.exports = function(env) {
         },
         {
           test: /\.ts$/,
-          loader: combineLoaders([
+          use: combineLoaders([
             {
               loader: 'awesome-typescript-loader',
               query: {
