@@ -40,7 +40,7 @@ module.exports = function(options = {}) {
         },
         {
           test: /\.css/,
-          loader: [
+          use: [
             ExtractTextPlugin.extract({
               fallback: 'style-loader',
               use: 'css-loader'
@@ -52,7 +52,7 @@ module.exports = function(options = {}) {
         },
         {
           test: /\.scss$/,
-          loader: [
+          use: [
             ExtractTextPlugin.extract({
               fallback: 'style-loader',
               use: 'css-loader'
