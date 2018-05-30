@@ -29,7 +29,7 @@ module.exports = function(options = {}) {
       rules: [
         {
           test: /\.(png|woff|woff2|eot|ttf|svg|jpeg|jpg|gif)$/,
-          use: 'url-loader',
+          loader: 'url-loader',
           query: {
             limit: '100000'
           }
