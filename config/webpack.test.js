@@ -18,14 +18,14 @@ module.exports = function(env) {
         {
           enforce: 'pre',
           test: /\.js$/,
-          loader: 'source-map-loader',
+          use: 'source-map-loader',
           exclude: /(node_modules)/
         },
         {
           test: /\.ts$/,
-          loader: combineLoaders([
+          use: combineLoaders([
             {
-              loader: 'awesome-typescript-loader',
+              use: 'awesome-typescript-loader',
               query: {
                 configFileName: 'tsconfig.spec.json',
                 sourceMap: false,
@@ -36,7 +36,7 @@ module.exports = function(env) {
               }
             },
             {
-              loader: 'angular2-template-loader',
+              use: 'angular2-template-loader',
               query: {
                 sourceMap: false,
                 inlineSourceMap: true,
@@ -51,7 +51,7 @@ module.exports = function(env) {
         {
           enforce: 'post',
           test: /\.(js|ts)$/,
-          loader: 'istanbul-instrumenter-loader',
+          use: 'istanbul-instrumenter-loader',
           include: dir('src'),
           exclude: [
             /\.(e2e|spec)\.ts$/,
