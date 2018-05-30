@@ -25,7 +25,7 @@ module.exports = function(env) {
           test: /\.ts$/,
           use: combineLoaders([
             {
-              use: 'awesome-typescript-loader',
+              loader: 'awesome-typescript-loader',
               query: {
                 configFileName: 'tsconfig.spec.json',
                 sourceMap: false,
@@ -36,7 +36,7 @@ module.exports = function(env) {
               }
             },
             {
-              use: 'angular2-template-loader',
+              loader: 'angular2-template-loader',
               query: {
                 sourceMap: false,
                 inlineSourceMap: true,
