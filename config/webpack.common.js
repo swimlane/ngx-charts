@@ -40,26 +40,26 @@ module.exports = function(options = {}) {
         },
         {
           test: /\.css/,
-          use: [
+          loader: [
             ExtractTextPlugin.extract({
               fallback: 'style-loader',
               use: 'css-loader'
             }),
-            { use: 'to-string-loader' }, 
-            { use: 'css-loader' },
-            { use: 'postcss-loader' }
+            { loader: 'to-string-loader' }, 
+            { loader: 'css-loader' },
+            { loader: 'postcss-loader' }
           ]
         },
         {
           test: /\.scss$/,
-          use: [
+          loader: [
             ExtractTextPlugin.extract({
               fallback: 'style-loader',
               use: 'css-loader'
             }),
-            { use: 'to-string-loader' }, 
-            { use: 'css-loader' },
-            { use: 'postcss-loader' },
+            { loader: 'to-string-loader' }, 
+            { loader: 'css-loader' },
+            { loader: 'postcss-loader' },
             { 
               loader: 'sass-loader',
               options: {
