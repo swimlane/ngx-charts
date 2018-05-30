@@ -45,7 +45,7 @@ module.exports = function(options = {}) {
               fallback: 'style-loader',
               use: 'css-loader'
             }),
-            { loader: 'to-string-loader' }, 
+            { use: 'to-string-loader' }, 
             { loader: 'css-loader' },
             { loader: 'postcss-loader' }
           ]
