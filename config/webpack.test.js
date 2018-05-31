@@ -18,12 +18,12 @@ module.exports = function(env) {
         {
           enforce: 'pre',
           test: /\.js$/,
-          use: 'source-map-loader',
+          loader: 'source-map-loader',
           exclude: /(node_modules)/
         },
         {
           test: /\.ts$/,
-          use: combineLoaders([
+          loader: combineLoaders([
             {
               loader: 'awesome-typescript-loader',
               query: {
