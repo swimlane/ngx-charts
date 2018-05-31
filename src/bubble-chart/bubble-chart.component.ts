@@ -137,6 +137,7 @@ export class BubbleChartComponent extends BaseChartComponent {
   @Input() xScaleMax: any;
   @Input() yScaleMin: any;
   @Input() yScaleMax: any;
+  @Input() errorBarColor = '#000000'
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -149,6 +150,13 @@ export class BubbleChartComponent extends BaseChartComponent {
   margin = [10, 20, 10, 20];
   bubblePadding = [0, 0, 0, 0];
   data: any;
+
+  customColors = [
+    {
+      name: 'error',
+      value: this.errorBarColor
+    }
+  ]
 
   legendOptions: any;
   transform: string;
