@@ -36,14 +36,14 @@ module.exports = function(options = {}) {
         },
         {
           test: /\.html$/,
-          use: 'raw-loader'
+          loader: 'raw-loader'
         },
         {
           test: /\.css/,
           use: [
             ExtractTextPlugin.extract({
               fallback: 'style-loader',
-              use: 'css-loader'
+              loader: 'css-loader'
             }),
             { loader: 'to-string-loader' }, 
             { loader: 'css-loader' },
@@ -55,7 +55,7 @@ module.exports = function(options = {}) {
           use: [
             ExtractTextPlugin.extract({
               fallback: 'style-loader',
-              use: 'css-loader'
+              loader: 'css-loader'
             }),
             { loader: 'to-string-loader' }, 
             { loader: 'css-loader' },
