@@ -32,6 +32,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
         [stops]="areaGradientStops"
         [class.active]="isActive(data)"
         [class.inactive]="isInactive(data)"
+        [animations]="animations"
       />
       <svg:g ngx-charts-line
         class="line-series"
