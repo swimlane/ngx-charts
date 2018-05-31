@@ -59,7 +59,9 @@ const twoPI = 2 * Math.PI;
               [max]="outerRadius"
               [value]="showGridLines ? 1 : outerRadius"
               [explodeSlices]="true"
-              [animations]="animations">
+              [animations]="animations"
+              [labelTrim]="labelTrim"
+              [labelTrimSize]="labelTrimSize">
             </svg:g>
           </svg:g>
         </svg:g>
@@ -145,6 +147,8 @@ export class PolarChartComponent extends BaseChartComponent {
   @Input() showSeriesOnHover: boolean = true;
   @Input() gradient: boolean = false;
   @Input() yAxisMinScale: number = 0;
+  @Input() labelTrim: boolean = true;
+  @Input() labelTrimSize: number = 10;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

@@ -25,6 +25,8 @@
 | showYAxisLabel | boolean | false | show or hide the y axis label |
 | xAxisLabel | string |  | the x axis label text |
 | yAxisLabel | string |  | the y axis label text |
+| labelTrim | boolean | true | trim the labels beyond a certain maximum length |
+| labelTrimSize | number | 10 | maximum length of the labels. If `labelTrim` is `true`, labels over this length will be trimmed |
 | xAxisTickFormatting | function |  | the x axis tick formatting |
 | yAxisTickFormatting | function |  | the y axis tick formatting |
 | autoScale | boolean | false | set the minimum value of the y axis to the minimum value in the data, instead of 0 |
