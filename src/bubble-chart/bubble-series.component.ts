@@ -16,10 +16,91 @@ import {
 } from '@angular/animations';
 import { formatLabel } from '../common/label.helper';
 
+import { curveLinear } from 'd3-shape';
+
 @Component({
   selector: 'g[ngx-charts-bubble-series]',
   template: `
     <svg:g *ngFor="let circle of circles; trackBy: trackBy">
+      <!-- Add Error bars -->
+      <ng-container *ngIf="circle.max && circle.min">
+        <svg:g ngx-charts-line-series
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [colors]="colors"
+              [strokeWidth]="'.5px'"
+              [data]="{
+                name: 'error',
+                series: [
+                  {
+                    name: circle.x,
+                    value: circle.min
+                  },
+                  {
+                    name: circle.x,
+                    value: circle.max
+                  }
+                ]
+              }"
+              [activeEntries]="activeEntries"
+              [scaleType]="'linear'"
+              [curve]="curve"
+              [rangeFillOpacity]="1"
+              [hasRange]="false"
+              [animations]="false"
+            />
+        <svg:g ngx-charts-line-series
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [colors]="colors"
+              [strokeWidth]="'.5px'"
+              [data]="{
+                name: 'error',
+                series: [
+                  {
+                    name: circle.x - .5,
+                    value: circle.max
+                  },
+                  {
+                    name: circle.x + .5,
+                    value: circle.max
+                  }
+                ]
+              }"
+              [activeEntries]="activeEntries"
+              [scaleType]="'linear'"
+              [curve]="curve"
+              [rangeFillOpacity]="1"
+              [hasRange]="false"
+              [animations]="false"
+            />
+
+        <svg:g ngx-charts-line-series
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [colors]="colors"
+              [strokeWidth]="'.5px'"
+              [data]="{
+                name: 'error',
+                series: [
+                  {
+                    name: circle.x - .5,
+                    value: circle.min
+                  },
+                  {
+                    name: circle.x + .5,
+                    value: circle.min
+                  }
+                ]
+              }"
+              [activeEntries]="activeEntries"
+              [scaleType]="'linear'"
+              [curve]="curve"
+              [rangeFillOpacity]="1"
+              [hasRange]="false"
+              [animations]="false"
+            />
+      </ng-container>
       <svg:g [attr.transform]="circle.transform">
         <svg:g ngx-charts-circle
           [@animationState]="'active'"
@@ -82,12 +163,15 @@ export class BubbleSeriesComponent implements OnChanges {
 
   areaPath: any;
   circles: any[];
+  public curve = curveLinear;
+
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 
   update(): void {
+    console.log(this.data);
     this.circles = this.getCircles();
   }
 
@@ -99,6 +183,8 @@ export class BubbleSeriesComponent implements OnChanges {
         const y = d.y;
         const x = d.x;
         const r = d.r;
+        const max = d.max;
+        const min = d.min;
 
         const radius = this.rScale(r || 1);
         const tooltipLabel = formatLabel(d.name);
@@ -125,6 +211,8 @@ export class BubbleSeriesComponent implements OnChanges {
           data,
           x,
           y,
+          max,
+          min,
           r,
           classNames: [`circle-data-${i}`],
           value: y,
