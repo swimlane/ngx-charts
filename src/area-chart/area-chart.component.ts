@@ -48,6 +48,8 @@ import { getUniqueXDomainValues } from '../common/domain.helper';
           [labelText]="xAxisLabel"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
+          [xAxisTooltip]="xAxisTooltip"
+          [xAxisTooltipFormatting]="xAxisTooltipFormatting"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
         <svg:g ngx-charts-y-axis
@@ -59,6 +61,8 @@ import { getUniqueXDomainValues } from '../common/domain.helper';
           [labelText]="yAxisLabel"
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
+          [yAxisTooltip]="yAxisTooltip"
+          [yAxisTooltipFormatting]="yAxisTooltipFormatting"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
         <svg:g [attr.clip-path]="clipPath">
@@ -163,6 +167,10 @@ export class AreaChartComponent extends BaseChartComponent {
   @Input() yAxisTickFormatting: any;
   @Input() xAxisTicks: any[];
   @Input() yAxisTicks: any[];
+  @Input() xAxisTooltip: boolean = false;
+  @Input() xAxisTooltipFormatting: any;
+  @Input() yAxisTooltip: boolean = false;
+  @Input() yAxisTooltipFormatting: any;
   @Input() roundDomains: boolean = false;
   @Input() tooltipDisabled: boolean = false;
   @Input() xScaleMin: any;

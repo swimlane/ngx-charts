@@ -74,6 +74,8 @@ const twoPI = 2 * Math.PI;
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
           [tickFormatting]="yAxisTickFormatting"
+          [yAxisTooltip]="yAxisTooltip"
+          [yAxisTooltipFormatting]="yAxisTooltipFormatting"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
         <svg:g ngx-charts-axis-label
@@ -142,6 +144,8 @@ export class PolarChartComponent extends BaseChartComponent {
   @Input() rangeFillOpacity: number = 0.15;
   @Input() xAxisTickFormatting: (o: any) => any;
   @Input() yAxisTickFormatting: (o: any) => any;
+  @Input() yAxisTooltip: boolean = false;
+  @Input() yAxisTooltipFormatting: any;
   @Input() roundDomains: boolean = false;
   @Input() tooltipDisabled: boolean = false;
   @Input() showSeriesOnHover: boolean = true;

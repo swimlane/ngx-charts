@@ -36,6 +36,9 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [labelText]="xAxisLabel"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
+          [tickFormatting]="xAxisTickFormatting" 
+          [xAxisTooltip]="xAxisTooltip" 
+          [xAxisTooltipFormatting]="xAxisTooltipFormatting"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
         <svg:g ngx-charts-y-axis
@@ -47,6 +50,8 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
           [yAxisOffset]="dataLabelMaxWidth.negative"
+          [yAxisTooltip]="yAxisTooltip"
+          [yAxisTooltipFormatting]="yAxisTooltipFormatting"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
         <svg:g ngx-charts-series-horizontal
@@ -92,9 +97,13 @@ export class BarHorizontalComponent extends BaseChartComponent {
   @Input() activeEntries: any[] = [];
   @Input() schemeType: string;
   @Input() xAxisTickFormatting: any;
+  @Input() xAxisTooltip: boolean = false;
+  @Input() xAxisTooltipFormatting: any;
   @Input() yAxisTickFormatting: any;
   @Input() xAxisTicks: any[];
   @Input() yAxisTicks: any[];
+  @Input() yAxisTooltip: boolean = false;
+  @Input() yAxisTooltipFormatting: any;
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
   @Input() roundEdges: boolean = true;

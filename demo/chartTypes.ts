@@ -26,6 +26,8 @@ const chartGroups = [
           'roundEdges',
           'yScaleMax',
           'showDataLabel'
+          'xAxisTooltip',
+          'yAxisTooltip'
         ]
       },
       {
@@ -51,7 +53,9 @@ const chartGroups = [
           'tooltipDisabled',
           'roundEdges',
           'xScaleMax',
-          'showDataLabel'
+          'showDataLabel',
+          'xAxisTooltip',
+          'yAxisTooltip'
         ],
         defaults: {
           yAxisLabel: 'Country',
@@ -82,7 +86,9 @@ const chartGroups = [
           'tooltipDisabled',
           'roundEdges',
           'yScaleMax',
-          'showDataLabel'
+          'showDataLabel',
+          'xAxisTooltip',
+          'yAxisTooltip'
         ]
       },
       {
@@ -109,7 +115,9 @@ const chartGroups = [
           'tooltipDisabled',
           'roundEdges',
           'xScaleMax',
-          'showDataLabel'
+          'showDataLabel',
+          'xAxisTooltip',
+          'yAxisTooltip'
         ],
         defaults: {
           yAxisLabel: 'Country',
@@ -138,7 +146,9 @@ const chartGroups = [
           'roundDomains',
           'tooltipDisabled',
           'yScaleMax',
-          'showDataLabel'
+          'showDataLabel',
+          'xAxisTooltip',
+          'yAxisTooltip'
         ]
       },
       {
@@ -163,7 +173,9 @@ const chartGroups = [
           'roundDomains',
           'tooltipDisabled',
           'xScaleMax',
-          'showDataLabel'
+          'showDataLabel',
+          'xAxisTooltip',
+          'yAxisTooltip'
         ],
         defaults: {
           yAxisLabel: 'Country',
@@ -190,7 +202,9 @@ const chartGroups = [
           'yAxisLabel',
           'showGridLines',
           'roundDomains',
-          'tooltipDisabled'
+          'tooltipDisabled',
+          'xAxisTooltip',
+          'yAxisTooltip'
         ],
         defaults: {
           yAxisLabel: 'Normalized GDP Per Capita',
@@ -217,7 +231,9 @@ const chartGroups = [
           'yAxisLabel',
           'showGridLines',
           'roundDomains',
-          'tooltipDisabled'
+          'tooltipDisabled',
+          'xAxisTooltip',
+          'yAxisTooltip'
         ],
         defaults: {
           yAxisLabel: 'Country',
@@ -293,7 +309,9 @@ const chartGroups = [
           'xScaleMin',
           'xScaleMax',
           'yScaleMin',
-          'yScaleMax'
+          'yScaleMax',
+          'xAxisTooltip',
+          'yAxisTooltip'
         ],
         defaults: {
           yAxisLabel: 'GDP Per Capita',
@@ -322,7 +340,8 @@ const chartGroups = [
           'showGridLines',
           'curveClosed',
           'roundDomains',
-          'tooltipDisabled'
+          'tooltipDisabled',
+          'yAxisTooltip'
         ],
         defaults: {
           yAxisLabel: 'GDP Per Capita',
@@ -356,7 +375,9 @@ const chartGroups = [
           'xScaleMin',
           'xScaleMax',
           'yScaleMin',
-          'yScaleMax'
+          'yScaleMax',
+          'xAxisTooltip',
+          'yAxisTooltip'
         ],
         defaults: {
           yAxisLabel: 'GDP Per Capita',
@@ -390,7 +411,9 @@ const chartGroups = [
           'xScaleMin',
           'xScaleMax',
           'yScaleMin',
-          'yScaleMax'
+          'yScaleMax',
+          'xAxisTooltip',
+          'yAxisTooltip'
         ],
         defaults: {
           yAxisLabel: 'GDP Per Capita',
@@ -420,7 +443,9 @@ const chartGroups = [
           'showGridLines',
           'curve',
           'roundDomains',
-          'tooltipDisabled'
+          'tooltipDisabled',
+          'xAxisTooltip',
+          'yAxisTooltip'
         ],
         defaults: {
           yAxisLabel: 'Normalized GDP Per Capita',
@@ -458,7 +483,9 @@ const chartGroups = [
           'xScaleMin',
           'xScaleMax',
           'yScaleMin',
-          'yScaleMax'
+          'yScaleMax',
+          'xAxisTooltip',
+          'yAxisTooltip'
         ],
         defaults: {
           xAxisLabel: 'Census Date',
@@ -487,7 +514,9 @@ const chartGroups = [
           'showYAxisLabel',
           'yAxisLabel',
           'innerPadding',
-          'tooltipDisabled'
+          'tooltipDisabled',
+          'xAxisTooltip',
+          'yAxisTooltip'
         ],
         defaults: {
           yAxisLabel: 'Census Date',

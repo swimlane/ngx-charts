@@ -43,6 +43,8 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [labelText]="xAxisLabel"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
+          [xAxisTooltip]="xAxisTooltip"
+          [xAxisTooltipFormatting]="xAxisTooltipFormatting"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
         <svg:g ngx-charts-y-axis
@@ -53,6 +55,8 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [labelText]="yAxisLabel"
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
+          [yAxisTooltip]="yAxisTooltip"
+          [yAxisTooltipFormatting]="yAxisTooltipFormatting"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
         <svg:g
@@ -114,6 +118,10 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
   @Input() yAxisTickFormatting: any;
   @Input() xAxisTicks: any[];
   @Input() yAxisTicks: any[];
+  @Input() xAxisTooltip: boolean = false;
+  @Input() xAxisTooltipFormatting: any;
+  @Input() yAxisTooltip: boolean = false;
+  @Input() yAxisTooltipFormatting: any;
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
 

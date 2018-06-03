@@ -17,6 +17,8 @@
         [legendTitle]="legendTitle"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
+        [yAxisTooltip]="yAxisTooltip"
+        [xAxisTooltip]="xAxisTooltip"
         [tooltipDisabled]="tooltipDisabled"
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
@@ -47,6 +49,9 @@
         [tooltipDisabled]="tooltipDisabled"
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
+        [yAxisTooltipFormatting]="formatAxisTip"
+        [yAxisTooltip]="yAxisTooltip"
+        [xAxisTooltip]="xAxisTooltip"
         [showGridLines]="showGridLines"
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
@@ -71,6 +76,8 @@
         [legendTitle]="legendTitle"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
+        [yAxisTooltip]="yAxisTooltip"
+        [xAxisTooltip]="xAxisTooltip"
         [tooltipDisabled]="tooltipDisabled"
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
@@ -101,6 +108,8 @@
         (legendLabelClick)="onLegendLabelClick($event)"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
+        [yAxisTooltip]="yAxisTooltip"
+        [xAxisTooltip]="xAxisTooltip"
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [showGridLines]="showGridLines"
@@ -129,6 +138,8 @@
         (legendLabelClick)="onLegendLabelClick($event)"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
+        [yAxisTooltip]="yAxisTooltip"
+        [xAxisTooltip]="xAxisTooltip"
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [showGridLines]="showGridLines"
@@ -155,6 +166,8 @@
         [showXAxisLabel]="showXAxisLabel"
         (legendLabelClick)="onLegendLabelClick($event)"
         [showYAxisLabel]="showYAxisLabel"
+        [yAxisTooltip]="yAxisTooltip"
+        [xAxisTooltip]="xAxisTooltip"
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [showGridLines]="showGridLines"
@@ -179,6 +192,8 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [showXAxisLabel]="showXAxisLabel"
+        [yAxisTooltip]="yAxisTooltip"
+        [xAxisTooltip]="xAxisTooltip"
         (legendLabelClick)="onLegendLabelClick($event)"
         [showYAxisLabel]="showYAxisLabel"
         [xAxisLabel]="xAxisLabel"
@@ -204,6 +219,8 @@
         [legendTitle]="legendTitle"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
+        [yAxisTooltip]="yAxisTooltip"
+        [xAxisTooltip]="xAxisTooltip"
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         (legendLabelClick)="onLegendLabelClick($event)"
@@ -273,6 +290,8 @@
         [yAxis]="showYAxis"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
+        [yAxisTooltip]="yAxisTooltip"
+        [xAxisTooltip]="xAxisTooltip"
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [autoScale]="autoScale"
@@ -304,6 +323,7 @@
         [yAxis]="showYAxis"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
+        [yAxisTooltip]="yAxisTooltip"
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [autoScale]="autoScale"
@@ -328,6 +348,8 @@
         [yAxis]="showYAxis"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
+        [yAxisTooltip]="yAxisTooltip"
+        [xAxisTooltip]="xAxisTooltip"
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [autoScale]="autoScale"
@@ -372,6 +394,8 @@
         [yAxis]="showYAxis"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
+        [yAxisTooltip]="yAxisTooltip"
+        [xAxisTooltip]="xAxisTooltip"
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [autoScale]="autoScale"
@@ -402,6 +426,8 @@
         (legendLabelClick)="onLegendLabelClick($event)"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
+        [yAxisTooltip]="yAxisTooltip"
+        [xAxisTooltip]="xAxisTooltip"
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [timeline]="timeline"
@@ -431,6 +457,8 @@
         [yAxis]="showYAxis"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
+        [yAxisTooltip]="yAxisTooltip"
+        [xAxisTooltip]="xAxisTooltip"
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [timeline]="timeline"
@@ -482,6 +510,8 @@
         [yAxis]="showYAxis"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
+        [yAxisTooltip]="yAxisTooltip"
+        [xAxisTooltip]="xAxisTooltip"
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [innerPadding]="innerPadding"
@@ -1050,6 +1080,18 @@
       <div *ngIf="chart.options.includes('yAxisLabel')">
         <label>Y Axis Label:</label><br />
         <input type="text" [(ngModel)]="yAxisLabel"><br />
+      </div>
+      <div *ngIf="chart.options.includes('xAxisTooltip')">
+        <label>
+          <input type="checkbox" [checked]="xAxisTooltip" (change)="xAxisTooltip = $event.target.checked">
+          Show X Axis Ticks in Tooltip
+        </label> <br />
+      </div>
+      <div *ngIf="chart.options.includes('yAxisTooltip')">
+        <label>
+          <input type="checkbox" [checked]="yAxisTooltip" (change)="yAxisTooltip = $event.target.checked">
+          Show Y Axis Ticks in Tooltip
+        </label> <br />
       </div>
       <div *ngIf="chart.options.includes('showLabels')">
         <label>

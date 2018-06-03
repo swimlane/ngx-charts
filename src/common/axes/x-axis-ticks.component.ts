@@ -19,12 +19,18 @@ import { reduceTicks } from './ticks.helper';
     <svg:g #ticksel>
       <svg:g *ngFor="let tick of ticks" class="tick"
         [attr.transform]="tickTransform(tick)">
-        <title>{{tickFormat(tick)}}</title>
+        <title *ngIf="!tooltip">{{tickTipFormat(tickFormat(tick))}}</title>
         <svg:text
           stroke-width="0.01"
           [attr.text-anchor]="textAnchor"
           [attr.transform]="textTransform"
-          [style.font-size]="'12px'">
+          [style.font-size]="'12px'"
+          ngx-tooltip
+          [tooltipDisabled]="!tooltip"
+          [tooltipPlacement]="'top'"
+          [tooltipType]="'tooltip'"
+          [tooltipTitle]="tickTipFormat(tickFormat(tick))"
+        >
           {{trimLabel(tickFormat(tick))}}
         </svg:text>
       </svg:g>
@@ -54,6 +60,8 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() showGridLines = false;
   @Input() gridLineHeight;
   @Input() width;
+  @Input() tooltip: boolean = false;
+  @Input() tooltipFormatting;
 
   @Output() dimensionsChanged = new EventEmitter();
 
@@ -70,6 +78,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   textTransform: any;
   ticks: any;
   tickFormat: (o: any) => any;
+  tickTipFormat: (o: any) => string;
   height: number = 0;
 
   @ViewChild('ticksel') ticksElement: ElementRef;
@@ -110,6 +119,12 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
         }
         return d.toLocaleString();
       };
+    }
+
+    if (this.tooltipFormatting) {
+      this.tickTipFormat = this.tooltipFormatting;
+    } else {
+      this.tickTipFormat = function(d) { return d; };
     }
 
     const angle = this.getRotationAngle(this.ticks);
