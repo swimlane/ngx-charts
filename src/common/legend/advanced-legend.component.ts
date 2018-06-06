@@ -44,7 +44,7 @@ import { formatLabel } from '../label.helper';
             <div *ngIf="animations"
               class="item-value"
               ngx-charts-count-up
-              [countTo]="legendItem.value">
+              [countTo]="legendItem._value">
             </div>
             <div *ngIf="!animations" class="item-value">
               {{legendItem.value}}
@@ -114,6 +114,7 @@ export class AdvancedLegendComponent implements OnChanges  {
       const percentage = (this.total > 0) ? value / this.total * 100 : 0;
 
       return {
+        _value: value,
         value: this.valueFormatting(value),
         color,
         label: trimLabel(this.labelFormatting(label), 20),
