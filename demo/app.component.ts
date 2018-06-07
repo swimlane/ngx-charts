@@ -96,6 +96,10 @@ export class AppComponent implements OnInit {
   yScaleMin: number;
   yScaleMax: number;
   showDataLabel = false;
+  trimXAxisTicks = true;
+  trimYAxisTicks = true;
+  maxXAxisTickLength = 16;
+  maxYAxisTickLength = 16;
 
   curves = {
     Basis: shape.curveBasis,

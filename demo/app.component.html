@@ -26,6 +26,10 @@
         [roundEdges]="roundEdges"
         [yScaleMax]="yScaleMax"
         [showDataLabel]="showDataLabel"
+        [trimXAxisTicks]="trimXAxisTicks"
+        [trimYAxisTicks]="trimYAxisTicks"
+        [maxXAxisTickLength]="maxXAxisTickLength"
+        [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)"
         (legendLabelClick)="onLegendLabelClick($event)">
       </ngx-charts-bar-vertical>
@@ -53,6 +57,10 @@
         [roundEdges]="roundEdges"
         [xScaleMax]="xScaleMax"
         [showDataLabel]="showDataLabel"
+        [trimXAxisTicks]="trimXAxisTicks"
+        [trimYAxisTicks]="trimYAxisTicks"
+        [maxXAxisTickLength]="maxXAxisTickLength"
+        [maxYAxisTickLength]="maxYAxisTickLength"
         (legendLabelClick)="onLegendLabelClick($event)"
         (select)="select($event)">
       </ngx-charts-bar-horizontal>
@@ -82,6 +90,10 @@
         [roundEdges]="roundEdges"
         [yScaleMax]="yScaleMax"
         [showDataLabel]="showDataLabel"
+        [trimXAxisTicks]="trimXAxisTicks"
+        [trimYAxisTicks]="trimYAxisTicks"
+        [maxXAxisTickLength]="maxXAxisTickLength"
+        [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)">
       </ngx-charts-bar-vertical-2d>
       <ngx-charts-bar-horizontal-2d
@@ -110,6 +122,10 @@
         [roundEdges]="roundEdges"
         [xScaleMax]="xScaleMax"
         [showDataLabel]="showDataLabel"
+        [trimXAxisTicks]="trimXAxisTicks"
+        [trimYAxisTicks]="trimYAxisTicks"
+        [maxXAxisTickLength]="maxXAxisTickLength"
+        [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)">
       </ngx-charts-bar-horizontal-2d>
       <ngx-charts-bar-vertical-stacked
@@ -136,6 +152,10 @@
         [roundDomains]="roundDomains"
         [yScaleMax]="yScaleMax"
         [showDataLabel]="showDataLabel"
+        [trimXAxisTicks]="trimXAxisTicks"
+        [trimYAxisTicks]="trimYAxisTicks"
+        [maxXAxisTickLength]="maxXAxisTickLength"
+        [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)">
       </ngx-charts-bar-vertical-stacked>
       <ngx-charts-bar-horizontal-stacked
@@ -162,6 +182,10 @@
         [roundDomains]="roundDomains"
         [showDataLabel]="showDataLabel"
         [xScaleMax]="xScaleMax"
+        [trimXAxisTicks]="trimXAxisTicks"
+        [trimYAxisTicks]="trimYAxisTicks"
+        [maxXAxisTickLength]="maxXAxisTickLength"
+        [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)">
       </ngx-charts-bar-horizontal-stacked>
       <ngx-charts-bar-vertical-normalized
@@ -186,6 +210,10 @@
         [showGridLines]="showGridLines"
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
+        [trimXAxisTicks]="trimXAxisTicks"
+        [trimYAxisTicks]="trimYAxisTicks"
+        [maxXAxisTickLength]="maxXAxisTickLength"
+        [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)">
       </ngx-charts-bar-vertical-normalized>
       <ngx-charts-bar-horizontal-normalized
@@ -210,6 +238,10 @@
         [showGridLines]="showGridLines"
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
+        [trimXAxisTicks]="trimXAxisTicks"
+        [trimYAxisTicks]="trimYAxisTicks"
+        [maxXAxisTickLength]="maxXAxisTickLength"
+        [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)">
       </ngx-charts-bar-horizontal-normalized>
       <ngx-charts-pie-chart
@@ -286,6 +318,10 @@
         [rangeFillOpacity]="rangeFillOpacity"
         [roundDomains]="roundDomains"
         [tooltipDisabled]="tooltipDisabled"
+        [trimXAxisTicks]="trimXAxisTicks"
+        [trimYAxisTicks]="trimYAxisTicks"
+        [maxXAxisTickLength]="maxXAxisTickLength"
+        [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)">
       </ngx-charts-line-chart>
       <ngx-charts-polar-chart
@@ -312,6 +348,8 @@
         [roundDomains]="roundDomains"
         [tooltipDisabled]="tooltipDisabled"
         [showSeriesOnHover]="showSeriesOnHover"
+        [trimYAxisTicks]="trimYAxisTicks"
+        [maxYAxisTickLength]="maxYAxisTickLength"
         [curve]="closedCurve"
         (select)="select($event)">
       </ngx-charts-polar-chart>
@@ -340,7 +378,11 @@
         [roundDomains]="roundDomains"
         [tooltipDisabled]="tooltipDisabled"
         [minRadius]="minRadius"
-        [maxRadius]="maxRadius">
+        [maxRadius]="maxRadius"
+        [trimXAxisTicks]="trimXAxisTicks"
+        [trimYAxisTicks]="trimYAxisTicks"
+        [maxXAxisTickLength]="maxXAxisTickLength"
+        [maxYAxisTickLength]="maxYAxisTickLength">
       </ngx-charts-bubble-chart>
       <ngx-charts-force-directed-graph
         *ngIf="chartType === 'force-directed-graph'"
@@ -384,6 +426,10 @@
         [roundDomains]="roundDomains"
         [curve]="curve"
         [tooltipDisabled]="tooltipDisabled"
+        [trimXAxisTicks]="trimXAxisTicks"
+        [trimYAxisTicks]="trimYAxisTicks"
+        [maxXAxisTickLength]="maxXAxisTickLength"
+        [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)">
       </ngx-charts-area-chart>
       <ngx-charts-area-chart-stacked
@@ -413,6 +459,10 @@
         [roundDomains]="roundDomains"
         [tooltipDisabled]="tooltipDisabled"
         [curve]="curve"
+        [trimXAxisTicks]="trimXAxisTicks"
+        [trimYAxisTicks]="trimYAxisTicks"
+        [maxXAxisTickLength]="maxXAxisTickLength"
+        [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)">
       </ngx-charts-area-chart-stacked>
       <ngx-charts-area-chart-normalized
@@ -438,6 +488,10 @@
         [roundDomains]="roundDomains"
         [tooltipDisabled]="tooltipDisabled"
         [curve]="curve"
+        [trimXAxisTicks]="trimXAxisTicks"
+        [trimYAxisTicks]="trimYAxisTicks"
+        [maxXAxisTickLength]="maxXAxisTickLength"
+        [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)">
       </ngx-charts-area-chart-normalized>
       <combo-chart-component
@@ -486,6 +540,10 @@
         [yAxisLabel]="yAxisLabel"
         [innerPadding]="innerPadding"
         [tooltipDisabled]="tooltipDisabled"
+        [trimXAxisTicks]="trimXAxisTicks"
+        [trimYAxisTicks]="trimYAxisTicks"
+        [maxXAxisTickLength]="maxXAxisTickLength"
+        [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)">
       </ngx-charts-heat-map>
       <ngx-charts-heat-map
@@ -506,6 +564,10 @@
         [tooltipText]="calendarTooltipText"
         [innerPadding]="innerPadding"
         [tooltipDisabled]="tooltipDisabled"
+        [trimXAxisTicks]="trimXAxisTicks"
+        [trimYAxisTicks]="trimYAxisTicks"
+        [maxXAxisTickLength]="maxXAxisTickLength"
+        [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)">
       </ngx-charts-heat-map>
       <ngx-charts-tree-map
@@ -635,6 +697,10 @@
           [rangeFillOpacity]="rangeFillOpacity"
           [roundDomains]="roundDomains"
           [tooltipDisabled]="tooltipDisabled"
+          [trimXAxisTicks]="trimXAxisTicks"
+          [trimYAxisTicks]="trimYAxisTicks"
+          [maxXAxisTickLength]="maxXAxisTickLength"
+          [maxYAxisTickLength]="maxYAxisTickLength"
           (select)="select($event)">
         </ngx-charts-line-chart>
         <p></p>
@@ -663,6 +729,8 @@
           [tooltipDisabled]="tooltipDisabled"
           [showSeriesOnHover]="showSeriesOnHover"
           [curve]="curves['Cardinal Closed']"
+          [trimYAxisTicks]="trimYAxisTicks"
+          [maxYAxisTickLength]="maxYAxisTickLength"
           (select)="select($event)">
         </ngx-charts-polar-chart>
       </div>
@@ -723,6 +791,10 @@
         [showRefLines]="showRefLines"
         [showRefLabels]="showRefLabels"
         [referenceLines]="refLines"
+        [trimXAxisTicks]="trimXAxisTicks"
+        [trimYAxisTicks]="trimYAxisTicks"
+        [maxXAxisTickLength]="maxXAxisTickLength"
+        [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)">
       </ngx-charts-line-chart>
       <ngx-charts-bar-vertical
@@ -747,6 +819,10 @@
         [showGridLines]="showGridLines"
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
+        [trimXAxisTicks]="trimXAxisTicks"
+        [trimYAxisTicks]="trimYAxisTicks"
+        [maxXAxisTickLength]="maxXAxisTickLength"
+        [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)"
         (legendLabelClick)="onLegendLabelClick($event)">
         <ng-template #tooltipTemplate let-model="model">
@@ -808,6 +884,10 @@
       [roundDomains]="roundDomains"
       [yScaleMax]="yScaleMax"
       [showDataLabel]="showDataLabel"
+      [trimXAxisTicks]="trimXAxisTicks"
+      [trimYAxisTicks]="trimYAxisTicks"
+      [maxXAxisTickLength]="maxXAxisTickLength"
+      [maxYAxisTickLength]="maxYAxisTickLength"
       (select)="select($event)">
     </ngx-charts-bar-vertical-stacked>
     <ngx-charts-bar-horizontal-stacked
@@ -833,6 +913,10 @@
       [barPadding]="barPadding"
       [roundDomains]="roundDomains"     
       [showDataLabel]="showDataLabel"
+      [trimXAxisTicks]="trimXAxisTicks"
+      [trimYAxisTicks]="trimYAxisTicks"
+      [maxXAxisTickLength]="maxXAxisTickLength"
+      [maxYAxisTickLength]="maxYAxisTickLength"
       (select)="select($event)">
     </ngx-charts-bar-horizontal-stacked>
  </div>
@@ -1056,6 +1140,26 @@
           <input type="checkbox" [checked]="showLabels" (change)="showLabels = $event.target.checked">
           Show Labels
         </label> <br />
+      </div>
+      <div *ngIf="chart.options.includes('trimXAxisTicks')">
+        <label>
+          <input type="checkbox" [checked]="trimXAxisTicks" (change)="trimXAxisTicks = $event.target.checked">
+          Trim X Axis Ticks
+        </label> <br />
+      </div>
+      <div *ngIf="chart.options.includes('maxXAxisTickLength')">
+        <label>Max X Axis Tick Length:</label><br />
+        <input type="text" [(ngModel)]="maxXAxisTickLength"><br />
+      </div>
+      <div *ngIf="chart.options.includes('trimYAxisTicks')">
+        <label>
+          <input type="checkbox" [checked]="trimYAxisTicks" (change)="trimYAxisTicks = $event.target.checked">
+          Trim Y Axis Ticks
+        </label> <br />
+      </div>
+      <div *ngIf="chart.options.includes('maxYAxisTickLength')">
+        <label>Max Y Axis Tick Length:</label><br />
+        <input type="text" [(ngModel)]="maxYAxisTickLength"><br />
       </div>
       <div *ngIf="chart.options.includes('doughnut')">
         <label>
