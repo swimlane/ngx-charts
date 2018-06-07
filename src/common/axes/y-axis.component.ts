@@ -18,6 +18,8 @@ import { YAxisTicksComponent } from './y-axis-ticks.component';
       [attr.transform]="transform">
       <svg:g ngx-charts-y-axis-ticks
         *ngIf="yScale"
+        [trimTicks]="trimTicks"
+        [maxTickLength]="maxTickLength"
         [tickFormatting]="tickFormatting"
         [tickArguments]="tickArguments"
         [tickValues]="ticks"
@@ -49,6 +51,8 @@ export class YAxisComponent implements OnChanges {
 
   @Input() yScale;
   @Input() dims;
+  @Input() trimTicks: boolean;
+  @Input() maxTickLength: number;
   @Input() tickFormatting;
   @Input() ticks: any[];
   @Input() showGridLines = false;
