@@ -68,7 +68,8 @@ var LinearGaugeComponent = /** @class */ (function (_super) {
         var xOffset = this.margin[3] + this.dims.width / 2;
         var yOffset = this.margin[0] + this.dims.height / 2;
         this.transform = "translate(" + xOffset + ", " + yOffset + ")";
-        this.transformLine = "translate(" + (this.margin[3] + this.valueScale(this.previousValue)) + ", " + yOffset + ")";
+        this.transformLine = "translate(" + (this.margin[3] +
+            this.valueScale(this.previousValue)) + ", " + yOffset + ")";
         this.valueTranslate = "translate(0, -15)";
         this.unitsTranslate = "translate(0, 15)";
         setTimeout(function () { return _this.scaleText('value'); }, 50);
@@ -121,7 +122,9 @@ var LinearGaugeComponent = /** @class */ (function (_super) {
             }
             this.cd.markForCheck();
             if (repeat) {
-                setTimeout(function () { _this.scaleText(element, false); }, 50);
+                setTimeout(function () {
+                    _this.scaleText(element, false);
+                }, 50);
             }
         }
     };
@@ -175,7 +178,7 @@ var LinearGaugeComponent = /** @class */ (function (_super) {
                 './linear-gauge.component.css'
             ],
             encapsulation: ViewEncapsulation.None,
-            changeDetection: ChangeDetectionStrategy.OnPush,
+            changeDetection: ChangeDetectionStrategy.OnPush
         })
     ], LinearGaugeComponent);
     return LinearGaugeComponent;

@@ -1,5 +1,5 @@
 /**
- * ngx-charts v"7.0.1" (https://github.com/swimlane/ngx-charts)
+ * ngx-charts v"7.0.2" (https://github.com/swimlane/ngx-charts)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -12147,7 +12147,8 @@ var LinearGaugeComponent = /** @class */ (function (_super) {
         var xOffset = this.margin[3] + this.dims.width / 2;
         var yOffset = this.margin[0] + this.dims.height / 2;
         this.transform = "translate(" + xOffset + ", " + yOffset + ")";
-        this.transformLine = "translate(" + (this.margin[3] + this.valueScale(this.previousValue)) + ", " + yOffset + ")";
+        this.transformLine = "translate(" + (this.margin[3] +
+            this.valueScale(this.previousValue)) + ", " + yOffset + ")";
         this.valueTranslate = "translate(0, -15)";
         this.unitsTranslate = "translate(0, 15)";
         setTimeout(function () { return _this.scaleText('value'); }, 50);
@@ -12200,7 +12201,9 @@ var LinearGaugeComponent = /** @class */ (function (_super) {
             }
             this.cd.markForCheck();
             if (repeat) {
-                setTimeout(function () { _this.scaleText(element, false); }, 50);
+                setTimeout(function () {
+                    _this.scaleText(element, false);
+                }, 50);
             }
         }
     };
@@ -12254,7 +12257,7 @@ var LinearGaugeComponent = /** @class */ (function (_super) {
                 __webpack_require__("./src/gauge/linear-gauge.component.scss")
             ],
             encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None,
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush,
+            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush
         })
     ], LinearGaugeComponent);
     return LinearGaugeComponent;
@@ -12581,8 +12584,14 @@ var HeatMapComponent = /** @class */ (function (_super) {
             legendType: this.scaleType
         });
         if (this.scaleType === 'linear') {
-            var min = Math.min.apply(Math, [0].concat(this.valueDomain));
-            var max = Math.max.apply(Math, this.valueDomain);
+            var min = this.min;
+            var max = this.max;
+            if (!this.min) {
+                min = Math.min.apply(Math, [0].concat(this.valueDomain));
+            }
+            if (!this.max) {
+                max = Math.max.apply(Math, this.valueDomain);
+            }
             this.valueDomain = [min, max];
         }
         this.xScale = this.getXScale();
@@ -12787,6 +12796,14 @@ var HeatMapComponent = /** @class */ (function (_super) {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
         __metadata("design:type", Object)
     ], HeatMapComponent.prototype, "tooltipText", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Object)
+    ], HeatMapComponent.prototype, "min", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Object)
+    ], HeatMapComponent.prototype, "max", void 0);
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ContentChild"])('tooltipTemplate'),
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["TemplateRef"])
