@@ -11,7 +11,6 @@ import { scaleBand } from 'd3-scale';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
-import { DeprecatedI18NPipesModule } from '@angular/common';
 
 @Component({
   selector: 'ngx-charts-heat-map',
