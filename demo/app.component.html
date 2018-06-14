@@ -471,6 +471,8 @@
       <ngx-charts-heat-map
         *ngIf="chartType === 'heat-map'"
         class="chart-container"
+        [min]="heatmapMin"
+        [max]="heatmapMax"
         [view]="view"
         [scheme]="colorScheme"
         [results]="multi"
@@ -1106,13 +1108,21 @@
           </option>
         </select>
       </div>
-      <div *ngIf="chart.options.includes('min')">
+      <div *ngIf="chart.options.includes('min') && chart.name!='Heat Map'">
         <label>Min value:</label><br />
         <input type="number" [(ngModel)]="gaugeMin"><br />
       </div>
-      <div *ngIf="chart.options.includes('max')">
+      <div *ngIf="chart.options.includes('max')  && chart.name!='Heat Map'">
         <label>Max value:</label><br />
         <input type="number" [(ngModel)]="gaugeMax"><br />
+      </div>
+      <div *ngIf="chart.options.includes('min') && chart.name=='Heat Map'">
+        <label>Min value:</label><br />
+        <input type="number" [(ngModel)]="heatmapMin"><br />
+      </div>
+      <div *ngIf="chart.options.includes('max')  && chart.name=='Heat Map'">
+        <label>Max value:</label><br />
+        <input type="number" [(ngModel)]="heatmapMax"><br />
       </div>
       <div *ngIf="chart.options.includes('innerPadding')">
         <label>Inner padding value:</label><br />
