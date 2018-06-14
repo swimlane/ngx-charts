@@ -1,6 +1,6 @@
 {
   "name": "@swimlane/ngx-charts",
-  "version": "8.0.2",
+  "version": "8.1.0",
   "description": "Declarative Charting Framework for Angular2 and beyond!",
   "main": "release/index.js",
   "typings": "release/index.d.ts",
@@ -31,13 +31,11 @@
     "start:host": "webpack-dev-server --host 0.0.0.0",
     "start:hmr": "webpack-dev-server --env.HMR",
     "release": "npm-run-all build:release",
-    "package":
-      "npm-run-all -s clean copy:build build:sass package:replace-scss package:aot build:package package:minify copy:styles clean:build",
+    "package": "npm-run-all -s clean copy:build build:sass package:replace-scss package:aot build:package package:minify copy:styles clean:build",
     "package:ts": "tsc --outDir release",
     "package:aot": "ngc -p tsconfig-aot.json",
     "package:replace-scss": "node ./config/replace-scss.js",
-    "package:minify":
-      "uglifyjs release/index.js --source-map --compress --mangle --screw-ie8 --output release/index.min.js",
+    "package:minify": "uglifyjs release/index.js --source-map --compress --mangle --screw-ie8 --output release/index.min.js",
     "deploy": "node ./config/deploy.js",
     "profile": "NODE_ENV=production webpack --profile --json > dist/stats.json"
   },
@@ -63,9 +61,15 @@
     "graph"
   ],
   "author": "Swimlane",
-  "contributors": ["Marjan Georgiev", "Jayson Harshbarger", "Austin McDaniel"],
+  "contributors": [
+    "Marjan Georgiev",
+    "Jayson Harshbarger",
+    "Austin McDaniel"
+  ],
   "license": "MIT",
-  "files": ["release"],
+  "files": [
+    "release"
+  ],
   "bugs": {
     "url": "https://github.com/swimlane/ngx-charts/issues"
   },
@@ -127,7 +131,7 @@
     "html-webpack-plugin": "^2.26.0",
     "istanbul-instrumenter-loader": "^3.0.0",
     "jasmine-core": "^2.8.0",
-    "karma": "^1.7.1",
+    "karma": "^2.0.2",
     "karma-chrome-launcher": "^2.0.0",
     "karma-coverage": "^1.1.1",
     "karma-jasmine": "^1.1.0",
@@ -141,7 +145,7 @@
     "postcss-loader": "^1.2.2",
     "prettier": "^1.12.1",
     "raw-loader": "^0.5.1",
-    "replace": "^0.3.0",
+    "replace": "^1.0.0",
     "rimraf": "^2.5.2",
     "rxjs": "^6.1.0",
     "rxjs-compat": "^6.1.0",
@@ -156,7 +160,7 @@
     "tslint-loader": "^3.3.0",
     "typescript": "~2.7.2",
     "uglify-js": "^3.1.0",
-    "url-loader": "^0.5.7",
+    "url-loader": "^1.0.1",
     "web-animations-js": "^2.2.2",
     "webpack": "^3.5.6",
     "webpack-combine-loaders": "^2.0.3",
