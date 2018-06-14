@@ -468,6 +468,8 @@
         [scheme]="colorScheme"
         [results]="multi"
         [animations]="animations"
+        [min]="heatmapMin"
+        [max]="heatmapMax"
         [legend]="showLegend"
         [gradient]="gradient"
         (legendLabelClick)="onLegendLabelClick($event)"
@@ -1041,13 +1043,21 @@
           </option>
         </select>
       </div>
-      <div *ngIf="chart.options.includes('min')">
+      <div *ngIf="chart.options.includes('min') && chart.selector!='heat-map'">
         <label>Min value:</label><br />
         <input type="number" [(ngModel)]="gaugeMin"><br />
       </div>
-      <div *ngIf="chart.options.includes('max')">
+      <div *ngIf="chart.options.includes('max')  && chart.selector!='heat-map'">
         <label>Max value:</label><br />
         <input type="number" [(ngModel)]="gaugeMax"><br />
+      </div>
+      <div *ngIf="chart.options.includes('min')  && chart.selector=='heat-map'">
+        <label>Min value:</label><br />
+        <input type="number" [(ngModel)]="heatmapMin"><br />
+      </div>
+      <div *ngIf="chart.options.includes('max') && chart.selector=='heat-map'">
+        <label>Max value:</label><br />
+        <input type="number" [(ngModel)]="heatmapMax"><br />
       </div>
       <div *ngIf="chart.options.includes('innerPadding')">
         <label>Inner padding value:</label><br />
