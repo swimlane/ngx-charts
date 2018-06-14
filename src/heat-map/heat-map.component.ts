@@ -9,9 +9,11 @@ import {
 import { scaleBand } from 'd3-scale';
 
 import { BaseChartComponent } from '../common/base-chart.component';
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import {
+  calculateViewDimensions,
+  ViewDimensions
+} from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
-import { DeprecatedI18NPipesModule } from '@angular/common';
 
 @Component({
   selector: 'ngx-charts-heat-map',
@@ -69,7 +71,6 @@ import { DeprecatedI18NPipesModule } from '@angular/common';
   encapsulation: ViewEncapsulation.None
 })
 export class HeatMapComponent extends BaseChartComponent {
-
   @Input() legend;
   @Input() legendTitle: string = 'Legend';
   @Input() xAxis;
@@ -208,7 +209,12 @@ export class HeatMapComponent extends BaseChartComponent {
    *
    * @memberOf HeatMapComponent
    */
-  getDimension(value: string | number | Array<string | number>, index = 0, N: number, L: number): number {
+  getDimension(
+    value: string | number | Array<string | number>,
+    index = 0,
+    N: number,
+    L: number
+  ): number {
     if (typeof value === 'string') {
       value = value
         .replace('[', '')
@@ -230,7 +236,12 @@ export class HeatMapComponent extends BaseChartComponent {
   }
 
   getXScale(): any {
-    const f = this.getDimension(this.innerPadding, 0, this.xDomain.length, this.dims.width);
+    const f = this.getDimension(
+      this.innerPadding,
+      0,
+      this.xDomain.length,
+      this.dims.width
+    );
     return scaleBand()
       .rangeRound([0, this.dims.width])
       .domain(this.xDomain)
@@ -238,7 +249,12 @@ export class HeatMapComponent extends BaseChartComponent {
   }
 
   getYScale(): any {
-    const f = this.getDimension(this.innerPadding, 1, this.yDomain.length, this.dims.height);
+    const f = this.getDimension(
+      this.innerPadding,
+      1,
+      this.yDomain.length,
+      this.dims.height
+    );
     return scaleBand()
       .rangeRound([this.dims.height, 0])
       .domain(this.yDomain)
@@ -248,8 +264,8 @@ export class HeatMapComponent extends BaseChartComponent {
   getRects(): any[] {
     const rects = [];
 
-    this.xDomain.map((xVal) => {
-      this.yDomain.map((yVal) => {
+    this.xDomain.map(xVal => {
+      this.yDomain.map(yVal => {
         rects.push({
           x: this.xScale(xVal),
           y: this.yScale(yVal),
@@ -282,7 +298,11 @@ export class HeatMapComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    this.colors = new ColorHelper(this.scheme, this.scaleType, this.valueDomain);
+    this.colors = new ColorHelper(
+      this.scheme,
+      this.scaleType,
+      this.valueDomain
+    );
   }
 
   getLegendOptions() {
@@ -303,5 +323,4 @@ export class HeatMapComponent extends BaseChartComponent {
     this.xAxisHeight = height;
     this.update();
   }
-
 }
