@@ -250,7 +250,7 @@ const chartGroups = [
         options: [
           'animations', 'colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend',
           'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'innerPadding', 'tooltipDisabled'
+          'innerPadding', 'tooltipDisabled', 'min', 'max'
         ],
         defaults: {
           yAxisLabel: 'Census Date',
@@ -275,7 +275,7 @@ const chartGroups = [
         inputFormat: 'singleSeries',
         options: [
           'showLegend', 'legendTitle', 'colorScheme', 'min', 'max', 'largeSegments', 'smallSegments', 'units',
-          'angleSpan', 'startAngle', 'showAxis', 'margin', 'tooltipDisabled', 'animations', 
+          'angleSpan', 'startAngle', 'showAxis', 'margin', 'tooltipDisabled', 'animations',
         ]
       },
       {
@@ -305,7 +305,7 @@ const chartGroups = [
         inputFormat: 'calendarData',
         options: [
           'animations', 'colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend',
-          'innerPadding', 'tooltipDisabled'
+          'innerPadding', 'tooltipDisabled', 'min', 'max'
         ],
         defaults: {
           width: 1100,
