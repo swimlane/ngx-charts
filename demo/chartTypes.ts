@@ -476,6 +476,7 @@ const chartGroups = [
         selector: 'heat-map',
         inputFormat: 'multiSeries',
         options: [
+<<<<<<< HEAD
           'animations',
           'colorScheme',
           'showXAxis',
@@ -488,6 +489,11 @@ const chartGroups = [
           'yAxisLabel',
           'innerPadding',
           'tooltipDisabled'
+=======
+          'animations', 'colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend',
+          'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
+          'innerPadding', 'tooltipDisabled', 'min', 'max'
+>>>>>>> a9faaaa4... added feature to set min and max in heatmaps (#877)
         ],
         defaults: {
           yAxisLabel: 'Census Date',
@@ -511,6 +517,7 @@ const chartGroups = [
         selector: 'gauge',
         inputFormat: 'singleSeries',
         options: [
+<<<<<<< HEAD
           'showLegend',
           'legendTitle',
           'colorScheme',
@@ -525,6 +532,10 @@ const chartGroups = [
           'margin',
           'tooltipDisabled',
           'animations'
+=======
+          'showLegend', 'legendTitle', 'colorScheme', 'min', 'max', 'largeSegments', 'smallSegments', 'units',
+          'angleSpan', 'startAngle', 'showAxis', 'margin', 'tooltipDisabled', 'animations',
+>>>>>>> a9faaaa4... added feature to set min and max in heatmaps (#877)
         ]
       },
       {
@@ -563,6 +574,7 @@ const chartGroups = [
         selector: 'calendar',
         inputFormat: 'calendarData',
         options: [
+<<<<<<< HEAD
           'animations',
           'colorScheme',
           'showXAxis',
@@ -571,6 +583,10 @@ const chartGroups = [
           'showLegend',
           'innerPadding',
           'tooltipDisabled'
+=======
+          'animations', 'colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend',
+          'innerPadding', 'tooltipDisabled', 'min', 'max'
+>>>>>>> a9faaaa4... added feature to set min and max in heatmaps (#877)
         ],
         defaults: {
           width: 1100,
