@@ -48,7 +48,7 @@ module.exports = function(options) {
         },
         {
           test: /\.ts$/,
-          loaders: [
+          use: [
             'awesome-typescript-loader',
             'angular2-template-loader'
           ],
