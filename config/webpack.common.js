@@ -39,28 +39,32 @@ module.exports = function(options = {}) {
           loader: 'raw-loader'
         },
         {
-          test: /\.css/,
-          use: [
-            ExtractTextPlugin.extract({
-              fallback: 'style-loader',
-              use: 'css-loader'
-            }),
-            { loader: 'to-string-loader' }, 
+          test: /\.css$/,
+          oneOf: [
+            {
+              use: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: ['css-loader']
+              })
+            },
+            { loader: 'to-string-loader' },
             { loader: 'css-loader' },
             { loader: 'postcss-loader' }
           ]
         },
         {
-          test: /\.scss$/,
-          use: [
-            ExtractTextPlugin.extract({
-              fallback: 'style-loader',
-              use: 'css-loader'
-            }),
-            { loader: 'to-string-loader' }, 
+          test: /\.(scss)$/,
+          oneOf: [
+            {
+              use: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: ['css-loader']
+              })
+            },
+            { loader: 'to-string-loader' },
             { loader: 'css-loader' },
             { loader: 'postcss-loader' },
-            { 
+            {
               loader: 'sass-loader',
               options: {
                 sourceMap: true
