@@ -56,8 +56,14 @@ var HeatMapComponent = /** @class */ (function (_super) {
             legendType: this.scaleType
         });
         if (this.scaleType === 'linear') {
-            var min = Math.min.apply(Math, [0].concat(this.valueDomain));
-            var max = Math.max.apply(Math, this.valueDomain);
+            var min = this.min;
+            var max = this.max;
+            if (!this.min) {
+                min = Math.min.apply(Math, [0].concat(this.valueDomain));
+            }
+            if (!this.max) {
+                max = Math.max.apply(Math, this.valueDomain);
+            }
             this.valueDomain = [min, max];
         }
         this.xScale = this.getXScale();
@@ -270,6 +276,14 @@ var HeatMapComponent = /** @class */ (function (_super) {
         Input(),
         __metadata("design:type", Object)
     ], HeatMapComponent.prototype, "tooltipText", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], HeatMapComponent.prototype, "min", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], HeatMapComponent.prototype, "max", void 0);
     __decorate([
         ContentChild('tooltipTemplate'),
         __metadata("design:type", TemplateRef)

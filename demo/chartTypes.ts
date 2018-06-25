@@ -546,6 +546,8 @@ const chartGroups = [
           'trimYAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength'
+          'min',
+          'max'
         ],
         defaults: {
           yAxisLabel: 'Census Date',
