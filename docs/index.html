@@ -22,7 +22,11 @@
     window.$docsify = {
       name: '@swimlane/ngx-charts',
       repo: 'https://github.com/swimlane/ngx-charts',
-      loadSidebar: true
+      loadSidebar: true,
+      alias: {
+        '/_sidebar.md': '/summary.md',
+        '/.*/_sidebar.md': '/summary.md'
+      }
     }
   </script>
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
