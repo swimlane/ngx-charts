@@ -24,6 +24,8 @@ export declare class PolarChartComponent extends BaseChartComponent {
     showSeriesOnHover: boolean;
     gradient: boolean;
     yAxisMinScale: number;
+    labelTrim: boolean;
+    labelTrimSize: number;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     tooltipTemplate: TemplateRef<any>;

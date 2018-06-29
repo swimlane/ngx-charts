@@ -41,6 +41,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [tooltipDisabled]="tooltipDisabled"
           [tooltipTemplate]="tooltipTemplate"
           [tooltipText]="tooltipText"
+          (dblclick)="dblclick.emit($event)"
           (select)="onClick($event)"
           (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)"
@@ -71,6 +72,7 @@ export class PieChartComponent extends BaseChartComponent {
   @Input() maxLabelLength: number = 10;
   @Input() tooltipText: any;
 
+  @Output() dblclick = new EventEmitter();
   @Output() select = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

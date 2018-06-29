@@ -174,6 +174,10 @@ export class AppComponent implements OnInit {
   gaugeValue: number = 50; // linear gauge value
   gaugePreviousValue: number = 70;
 
+  // heatmap
+  heatmapMin: number = 0;
+  heatmapMax: number = 50000;
+
   // Combo Chart
   barChart: any[] = barChart;
   lineChartSeries: any[] = lineChartSeries;
@@ -678,6 +682,10 @@ export class AppComponent implements OnInit {
 
   onSelect(event) {
     console.log(event);
+  }
+
+  dblclick(event) {
+    console.log('Doube click', event);
   }
 
 }

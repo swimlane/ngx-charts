@@ -1,6 +1,6 @@
 # Area Chart
 
-https://embed.plnkr.co/6HkONlHQ7pGHTgapt6vx?show=preview"
+https://embed.plnkr.co/6HkONlHQ7pGHTgapt6vx?show=preview
 
 # Inputs
 

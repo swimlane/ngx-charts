@@ -47,20 +47,20 @@ import { formatLabel } from '../common/label.helper';
         (select)="onClick($event)"
         (activate)="activate.emit($event)"
         (deactivate)="deactivate.emit($event)"
+        (dblclick)="dblclick.emit($event)"
         ngx-tooltip
         [tooltipDisabled]="tooltipDisabled"
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
-        [tooltipTitle]="tooltipTemplate ? undefined : tooltipText(arc)"
+        [tooltipTitle]="getTooltipTitle(arc)"
         [tooltipTemplate]="tooltipTemplate"
         [tooltipContext]="arc.data">
       </svg:g>
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PieSeriesComponent implements OnChanges {
-
   @Input() colors;
   @Input() series: any = [];
   @Input() dims;
@@ -81,6 +81,7 @@ export class PieSeriesComponent implements OnChanges {
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
+  @Output() dblclick = new EventEmitter();
 
   max: number;
   data: any;
@@ -91,12 +92,12 @@ export class PieSeriesComponent implements OnChanges {
 
   update(): void {
     const pieGenerator = pie<any, any>()
-      .value((d) => d.value)
+      .value(d => d.value)
       .sort(null);
 
     const arcData = pieGenerator(this.series);
 
-    this.max = max(arcData, (d) => {
+    this.max = max(arcData, d => {
       return d.value;
     });
 
@@ -121,16 +122,22 @@ export class PieSeriesComponent implements OnChanges {
     const minDistance = 10;
     const labelPositions = pieData;
 
-    labelPositions.forEach((d) => {
+    labelPositions.forEach(d => {
       d.pos = this.outerArc().centroid(d);
       d.pos[0] = factor * this.outerRadius * (this.midAngle(d) < Math.PI ? 1 : -1);
     });
 
     for (let i = 0; i < labelPositions.length - 1; i++) {
       const a = labelPositions[i];
+      if (!this.labelVisible(a)) {
+        continue;
+      }
 
       for (let j = i + 1; j < labelPositions.length; j++) {
         const b = labelPositions[j];
+        if (!this.labelVisible(b)) {
+          continue;
+        }
         // if they're on the same side
         if (b.pos[0] * a.pos[0] > 0) {
           // if they're overlapping
@@ -147,7 +154,11 @@ export class PieSeriesComponent implements OnChanges {
   }
 
   labelVisible(myArc): boolean {
-    return this.showLabels && (myArc.endAngle - myArc.startAngle > Math.PI / 30);
+    return this.showLabels && myArc.endAngle - myArc.startAngle > Math.PI / 30;
+  }
+
+  getTooltipTitle(a) {
+    return this.tooltipTemplate ? undefined : this.tooltipText(a);
   }
 
   labelText(myArc): string {
@@ -184,11 +195,10 @@ export class PieSeriesComponent implements OnChanges {
   }
 
   isActive(entry): boolean {
-    if(!this.activeEntries) return false;
+    if (!this.activeEntries) return false;
     const item = this.activeEntries.find(d => {
       return entry.name === d.name && entry.series === d.series;
     });
     return item !== undefined;
   }
-
 }

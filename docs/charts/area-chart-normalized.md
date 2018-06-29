@@ -1,6 +1,6 @@
 # Normalized Area Chart
 
-https://embed.plnkr.co/ULbzY7ZmdugBRrb8SgdQ?show=preview"
+https://embed.plnkr.co/ULbzY7ZmdugBRrb8SgdQ?show=preview
 
 # Inputs
 

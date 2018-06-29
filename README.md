@@ -1,4 +1,4 @@
-# ngx-charts (f.k.a. ng2d3)
+# ngx-charts
 [![Join the chat at https://gitter.im/swimlane/ngx-charts](https://badges.gitter.im/swimlane/ngx-charts.svg)](https://gitter.im/swimlane/ngx-charts?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
 [![Build Status](https://travis-ci.org/swimlane/ngx-charts.svg?branch=master)](https://travis-ci.org/swimlane/ngx-charts) 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b097196f7f544412a79a99080a41bbc1)](https://www.codacy.com/app/Swimlane/ngx-charts?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=swimlane/ngx-charts&amp;utm_campaign=Badge_Grade)
@@ -13,7 +13,7 @@ Data visualization is a science but that doesn't mean it has to be ugly. One of 
 
 Also, constructing custom charts is possible by leveraging the various ngx-charts components that are exposed through the ngx-charts module.
 
-For more info, check out the [documentation](https://swimlane.gitbooks.io/ngx-charts/content/) and the [demos](https://swimlane.github.io/ngx-charts/).
+For more info, check out the [documentation](https://swimlane.gitbook.io/ngx-charts/v/docs-test) and the [demos](https://swimlane.github.io/ngx-charts/).
 
 ## Features
 ### Chart Types
@@ -53,3 +53,5 @@ To learn how to use the ngx-charts components to build custom charts and find ex
 
 ## Credits
 `ngx-charts` is a [Swimlane](http://swimlane.com) open-source project; we believe in giving back to the open-source community by sharing some of the projects we build for our application. Swimlane is an automated cyber security operations and incident response platform that enables cyber security teams to leverage threat intelligence, speed up incident response and automate security operations.
+
+[SecOps Hub](http://secopshub.com) is an open, product-agnostic, online community for security professionals to share ideas, use cases, best practices, and incident response strategies.
