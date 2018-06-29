@@ -1,7 +1,6 @@
 # Line Chart
 
-<iframe width="100%" height="550" frameborder="0" src="https://embed.plnkr.co/7SqwjBi1hGcN2q6Ox1GU?show=preview">
-</iframe>
+https://embed.plnkr.co/7SqwjBi1hGcN2q6Ox1GU?show=preview
 
 # Inputs
 
@@ -58,7 +57,7 @@
 
 The data format is multi series:
 
-```
+```json
 [
   {
     "name": "Germany",
@@ -94,7 +93,7 @@ The data format is multi series:
 
 The data format is multi series. Plus, the minimum and the maximum value of each data point are provided. For instance, you can use these values to show the error margin of your data. Another use case are cumulated data. The central line show the average values. The range shows indicates the distribution of the data.
 
-```
+```json
 [
   {
     "name": "Germany",

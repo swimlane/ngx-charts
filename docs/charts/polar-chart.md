@@ -45,7 +45,7 @@
 
 The data format is multi series:
 
-```
+```json
 [
   {
     "name": "Germany",

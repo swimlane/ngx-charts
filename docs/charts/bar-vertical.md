@@ -1,7 +1,6 @@
 # Vertical Bar Chart
 
-<iframe width="100%" height="550" frameborder="0" src="https://stackblitz.com/edit/vertical-bar-chart?embed=1&file=app/app.component.ts">
-</iframe>
+https://stackblitz.com/edit/vertical-bar-chart?embed=1&file=app/app.component.ts
 
 # Inputs
 
@@ -48,7 +47,7 @@
 
 The data format is single series:
 
-```
+```json
 [
   {
     "name": "Germany",

@@ -1,7 +1,6 @@
 # Grouped Horizontal Bar Chart
 
-<iframe width="100%" height="550" frameborder="0" src="https://embed.plnkr.co/2eQ9jheOTm8i74vp2EmP?show=preview">
-</iframe>
+https://embed.plnkr.co/2eQ9jheOTm8i74vp2EmP?show=preview
 
 # Inputs
 
@@ -48,7 +47,7 @@
 
 The data format is multi series:
 
-```
+```json
 [
   {
     "name": "Germany",

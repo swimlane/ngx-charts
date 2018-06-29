@@ -1,7 +1,6 @@
 # Advanced Pie Chart
 
-<iframe width="100%" height="550" frameborder="0" src="https://embed.plnkr.co/732px9P6WMqDeirILWox?show=preview">
-</iframe>
+https://embed.plnkr.co/732px9P6WMqDeirILWox?show=preview
 
 # Inputs
 
@@ -33,7 +32,7 @@
 
 The data format is single series:
 
-```
+```json
 [
   {
     "name": "Germany",
