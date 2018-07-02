@@ -159,7 +159,7 @@ export class BarVerticalComponent extends BaseChartComponent {
   getXScale(): any {
     this.xDomain = this.getXDomain();
     const spacing = this.xDomain.length / (this.dims.width / this.barPadding + 1);
-    const maxWidth = Math.min( this.barMaxWidth *  this.xDomain.length,  this.dims.width);
+    const maxWidth = Math.min(this.barMaxWidth * this.xDomain.length,  this.dims.width);
 
     return scaleBand()
       .rangeRound([0, this.barMaxWidth ? maxWidth :  this.dims.width])
