@@ -40,30 +40,34 @@ module.exports = function(options = {}) {
         },
         {
           test: /\.css$/,
-          oneOf: [
-            {
-              use: ExtractTextPlugin.extract({
-                fallback: 'style-loader',
-                use: ['css-loader']
-              })
-            },
-            { loader: 'to-string-loader' },
-            { loader: 'css-loader' },
-            { loader: 'postcss-loader' }
+          use:
+            ExtractTextPlugin.extract({
+              fallback: 'style-loader',
+              use: ['css-loader']
+            })
+
+        },
+        {
+          test: /\.css$/,
+          use: [
+            'to-string-loader' ,
+            'css-loader' ,
+            'postcss-loader'
           ]
         },
         {
           test: /\.(scss)$/,
-          oneOf: [
-            {
-              use: ExtractTextPlugin.extract({
-                fallback: 'style-loader',
-                use: ['css-loader']
-              })
-            },
-            { loader: 'to-string-loader' },
-            { loader: 'css-loader' },
-            { loader: 'postcss-loader' },
+          use: ExtractTextPlugin.extract({
+                 fallback: 'style-loader',
+                 use: ['css-loader']
+               })
+        },
+        {
+          test: /\.(scss)$/,
+          use: [
+            'to-string-loader',
+            'css-loader',
+            'postcss-loader',
             {
               loader: 'sass-loader',
               options: {
