@@ -25,7 +25,8 @@ const chartGroups = [
           'tooltipDisabled',
           'roundEdges',
           'yScaleMax',
-          'showDataLabel'
+          'showDataLabel',
+          'barMaxWidth'
         ]
       },
       {
