@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const { ENV, IS_PRODUCTION, IS_DEV, APP_VERSION, TRAVIS, dir } = require('./helpers');
 
 module.exports = function(options = {}) {
@@ -39,32 +38,8 @@ module.exports = function(options = {}) {
           loader: 'raw-loader'
         },
         {
-          test: /\.css$/,
-          use:
-            ExtractTextPlugin.extract({
-              use: [
-                'to-string-loader',
-                'css-loader',
-                'postcss-loader'
-              ]
-            })
-
-        },
-        {
-           test: /\.(scss)$/,
-           use: ExtractTextPlugin.extract({
-             use: [
-               'to-string-loader',
-               'css-loader',
-               'postcss-loader',
-               {
-                 loader: 'sass-loader',
-                 options: {
-                   sourceMap: true
-                 }
-               }
-             ]
-           })
+          test: /\.(css|scss)$/,
+          loaders: ['to-string-loader', 'css-loader', 'sass-loader']
         }
       ]
     },
@@ -90,10 +65,6 @@ module.exports = function(options = {}) {
             return [ autoprefixer ];
           }
         }
-      }),
-      new ExtractTextPlugin({
-        filename: '[name].css',
-        allChunks: true
       })
     ]
   };
