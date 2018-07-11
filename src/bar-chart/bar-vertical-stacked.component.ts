@@ -119,6 +119,7 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   @Input() yAxisTicks: any[];
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
+  @Input() yScaleMin: number;
   @Input() yScaleMax: number;
   @Input() showDataLabel: boolean = false;
   @Input() dataLabelFormatting: any;
@@ -228,7 +229,9 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
     domain.push(smallest);
     domain.push(biggest);
 
-    const min = Math.min(0, ...domain);
+    const min = this.yScaleMin
+      ? Math.min(this.yScaleMin, ...domain)
+      : Math.min(0, ...domain);
     const max = this.yScaleMax
       ? Math.max(this.yScaleMax, ...domain)
       : Math.max(...domain);
