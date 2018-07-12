@@ -19,8 +19,8 @@ import { count, decimalChecker } from '../common/count';
         [style.fill]="color"
         [attr.width]="cardWidth"
         [attr.height]="cardHeight"
-        rx="3"
-        ry="3"
+        [attr.rx]="rx"
+        [attr.ry]="ry"
       />
       <svg:path
         *ngIf="bandColor && bandColor !== color"
@@ -48,14 +48,26 @@ import { count, decimalChecker } from '../common/count';
       </svg:foreignObject>
       <svg:text #textEl
         class="value-text"
-        [attr.x]="textPadding[3]"
+        [attr.x]="this.cardWidth / 2"
         [attr.y]="textPadding[0]"
         [style.fill]="textColor"
         text-anchor="start"
         alignment-baseline="hanging"
-        [style.font-size.pt]="textFontSize">
+        text-anchor="middle"
+        [style.font-size.px]="textFontSize">
         {{value}}
       </svg:text>
+      <svg:circle class="dot"
+        style="filter: url(#shadow);"
+        [style.fill]="bandColor"
+        [attr.cx]="textPadding[3] + valueSpaceLeft - textFontSize / 6 - textFontSize / 4"
+        [attr.cy]="textPadding[0] + textFontSize / 2"
+        [attr.r]="textFontSize / 6"/>
+      <defs>
+        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="1.1 1.1" result="shadow"/>
+        </filter>
+      </defs>
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -68,6 +80,8 @@ export class CardComponent implements OnChanges, OnDestroy {
 
   @Input() x;
   @Input() y;
+  @Input() rx;
+  @Input() ry;
   @Input() width;
   @Input() height;
   @Input() label;
@@ -88,6 +102,9 @@ export class CardComponent implements OnChanges, OnDestroy {
   cardWidth: number;
   cardHeight: number;
   textWidth: number;
+  textHeight: number;
+  valueWidth: number;
+  valueSpaceLeft: number;
   textFontSize: number = 12;
   textTransform: string = '';
   initialized: boolean = false;
@@ -140,7 +157,8 @@ export class CardComponent implements OnChanges, OnDestroy {
       this.value = this.paddedValue(value);
       this.setPadding();
 
-      this.bandPath = roundedRect(0, 0, this.cardWidth, this.bandHeight, 3, [false, false, true, true]);
+      const r = Math.min((this.rx + this.ry) / 2, this.bandHeight);
+      this.bandPath = roundedRect(0, 0, this.cardWidth, this.bandHeight, r, [false, false, true, true]);
 
       setTimeout(() => {
         this.scaleText();
@@ -186,6 +204,10 @@ export class CardComponent implements OnChanges, OnDestroy {
   scaleText(): void {
     this.zone.run(() => {
       const { width, height } = this.textEl.nativeElement.getBoundingClientRect();
+
+      this.textHeight = height;
+      this.valueWidth = width;
+
       if (width === 0 || height === 0) {
         return;
       }
@@ -193,6 +215,8 @@ export class CardComponent implements OnChanges, OnDestroy {
       const textPadding = this.textPadding[1] = this.textPadding[3] = this.cardWidth / 8;
       const availableWidth = this.cardWidth - 2 * textPadding;
       const availableHeight = this.cardHeight / 3;
+
+      this.valueSpaceLeft = Math.max(0, (availableWidth - width) / 2);
 
       const resizeScale = Math.min(availableWidth / width, availableHeight / height);
       this.textFontSize = Math.floor(this.textFontSize * resizeScale);

@@ -18,6 +18,9 @@ export interface CardModel {
   label: string;
   data;
   tooltipText: string;
+
+  bandColor: string;
+  textColor: string;
 }
 
 @Component({
@@ -31,12 +34,14 @@ export interface CardModel {
       [style.fill]="emptyColor"
       [attr.width]="c.width"
       [attr.height]="c.height"
-      rx="3"
-      ry="3"
+      [attr.rx]="rx"
+      [attr.ry]="ry"
     />
     <svg:g ngx-charts-card *ngFor="let c of cards; trackBy:trackBy"
       [x]="c.x"
       [y]="c.y"
+      [rx]="rx"
+      [ry]="ry"
       [width]="c.width"
       [height]="c.height"
       [color]="c.color"
@@ -57,8 +62,10 @@ export class CardSeriesComponent implements OnChanges {
   @Input() data: any[];
   @Input() slots: any[];
   @Input() dims;
+  @Input() size;
   @Input() colors;
   @Input() innerPadding = 15;
+  @Input() borderRadius = 3;
 
   @Input() cardColor;
   @Input() bandColor;
@@ -73,6 +80,8 @@ export class CardSeriesComponent implements OnChanges {
   cards: CardModel[];
   emptySlots: any[];
   medianSize: number;
+  rx = 3;
+  ry = 3;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -101,13 +110,14 @@ export class CardSeriesComponent implements OnChanges {
     this.emptySlots = cards.filter(d => d.data.value === null);
   }
 
-  getCards(): any[] {
-    const yPadding = typeof this.innerPadding === 'number' ?
-      this.innerPadding :
-      this.innerPadding[0] + this.innerPadding[2];
-    const xPadding = typeof this.innerPadding === 'number' ?
-      this.innerPadding :
-      this.innerPadding[1] + this.innerPadding[3];
+  getCards(): CardModel[] {
+    const xPadding = (this.getDimension(this.innerPadding, 1, this.size[0], this.dims.width) +
+      this.getDimension(this.innerPadding, 3, this.size[0], this.dims.width)) / 2;
+    const yPadding = (this.getDimension(this.innerPadding, 0, this.size[1], this.dims.height) +
+      this.getDimension(this.innerPadding, 2, this.size[1], this.dims.height)) / 2;
+
+    this.rx = this.getDimension(this.borderRadius, 0, this.size[0], this.dims.width);
+    this.ry = this.getDimension(this.borderRadius, 1, this.size[1], this.dims.height);
 
     return this.data
       .map((d, index) => {
@@ -145,4 +155,39 @@ export class CardSeriesComponent implements OnChanges {
     this.select.emit(data);
   }
 
+  /**
+   * Converts the input to gap paddingInner in fraction
+   * Supports the following inputs:
+   *    Numbers: 8
+   *    Strings: "8", "8px", "8%"
+   *    Arrays: [8,2], "8,2", "[8,2]"
+   *    Mixed: [8,"2%"], ["8px","2%"], "8,2%", "[8,2%]"
+   *
+   * @param {(string | number | Array<string | number>)} value
+   * @param {number} [index=0]
+   * @param {number} N
+   * @param {number} L
+   * @returns {number}
+   */
+  getDimension(value: string | number | Array<string | number>, index = 0, N: number, L: number): number {
+    if (typeof value === 'string') {
+      value = value
+        .replace('[', '')
+        .replace(']', '')
+        .replace('px', '')
+        .replace('\'', '');
+
+      if (value.includes(',')) {
+        value = value.split(',');
+      }
+    }
+    if (Array.isArray(value) && typeof index === 'number') {
+      return this.getDimension(value[index], null, N, L);
+    }
+    if (typeof value === 'string' && value.includes('%')) {
+      const p = +value.replace('%', '') / 100;
+      return  L / (N / p + N - 1);
+    }
+    return +value || 0;
+  }
 }
