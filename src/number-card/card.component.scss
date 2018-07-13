@@ -21,6 +21,10 @@ ngx-charts-number-card {
     .value-text {
       pointer-events: none;
     }
+
+    .padded-value-text {
+      fill: none;
+    }
   }
 
   .number-card.clickable .cell {

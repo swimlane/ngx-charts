@@ -22,6 +22,7 @@ import { gridLayout, gridSize } from '../common/grid-layout.helper';
           [cardColor]="cardColor"
           [bandColor]="bandColor"
           [textColor]="textColor"
+          [dividerColor]="dividerColor"
           [emptyColor]="emptyColor"
           [data]="data"
           [dims]="dims"
@@ -53,6 +54,7 @@ export class NumberCardComponent extends BaseChartComponent {
   @Input() labelFormatting: any;
   @Input() designatedTotal: number;
   @Input() borderRadius = 3;
+  @Input() dividerColor = 'rgba(255, 255, 255, 0.14)';
 
   dims: ViewDimensions;
   data: any[];

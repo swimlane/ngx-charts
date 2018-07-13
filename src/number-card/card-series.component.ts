@@ -47,7 +47,10 @@ export interface CardModel {
       [color]="c.color"
       [bandColor]="c.bandColor"
       [textColor]="c.textColor"
+      [dividerColor]="dividerColor"
       [data]="c.data"
+      [divider]="c.divider"
+      [xPadding]="xPadding"
       [medianSize]="medianSize"
       [valueFormatting]="valueFormatting"
       [labelFormatting]="labelFormatting"
@@ -71,6 +74,7 @@ export class CardSeriesComponent implements OnChanges {
   @Input() bandColor;
   @Input() emptyColor = 'rgba(0, 0, 0, 0)';
   @Input() textColor;
+  @Input() dividerColor;
   @Input() valueFormatting: any;
   @Input() labelFormatting: any;
   @Input() animations: boolean = true;
@@ -82,6 +86,10 @@ export class CardSeriesComponent implements OnChanges {
   medianSize: number;
   rx = 3;
   ry = 3;
+  xPadding = 0;
+  yPadding = 0;
+  strokeArray = '';
+  lines: any[];
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -111,13 +119,18 @@ export class CardSeriesComponent implements OnChanges {
   }
 
   getCards(): CardModel[] {
-    const xPadding = (this.getDimension(this.innerPadding, 1, this.size[0], this.dims.width) +
+    this.xPadding = (this.getDimension(this.innerPadding, 1, this.size[0], this.dims.width) +
       this.getDimension(this.innerPadding, 3, this.size[0], this.dims.width)) / 2;
-    const yPadding = (this.getDimension(this.innerPadding, 0, this.size[1], this.dims.height) +
+    this.yPadding = (this.getDimension(this.innerPadding, 0, this.size[1], this.dims.height) +
       this.getDimension(this.innerPadding, 2, this.size[1], this.dims.height)) / 2;
 
     this.rx = this.getDimension(this.borderRadius, 0, this.size[0], this.dims.width);
     this.ry = this.getDimension(this.borderRadius, 1, this.size[1], this.dims.height);
+
+    const height = this.data[0] ? this.data[0].height : 0;
+    this.strokeArray = [0, this.yPadding, height - 3 * this.yPadding, 2 * this.yPadding].join(' ');
+
+    this.lines = [];
 
     return this.data
       .map((d, index) => {
@@ -135,14 +148,15 @@ export class CardSeriesComponent implements OnChanges {
         return {
           x: d.x,
           y: d.y,
-          width: d.width - xPadding,
-          height: d.height - yPadding,
+          width: d.width - this.xPadding,
+          height: d.height - this.yPadding,
           color,
           bandColor: this.bandColor || valueColor,
           textColor: this.textColor || invertColor(color),
           label,
           data: d.data,
-          tooltipText: `${label}: ${value}`
+          tooltipText: `${label}: ${value}`,
+          divider: index % this.size[0] !== 0
         };
       });
   }

@@ -1,6 +1,6 @@
 import {
   Component, Input, Output, EventEmitter, ElementRef,
-  SimpleChanges, OnChanges, ViewChild, ChangeDetectionStrategy,
+  SimpleChanges, OnChanges, OnInit, ViewChild, ChangeDetectionStrategy,
   ChangeDetectorRef, NgZone, OnDestroy
 } from '@angular/core';
 import { trimLabel } from '../common/trim-label.helper';
@@ -35,7 +35,7 @@ import { count, decimalChecker } from '../common/count';
         class="trimmed-label"
         x="5"
         [attr.x]="textPadding[3]"
-        [attr.y]="cardHeight - textPadding[2]"
+        [attr.y]="textPadding[0] + textHeight"
         [attr.width]="textWidth"
         [attr.height]="labelFontSize + textPadding[2]"
         alignment-baseline="hanging">
@@ -57,54 +57,80 @@ import { count, decimalChecker } from '../common/count';
         [style.font-size.px]="textFontSize">
         {{value}}
       </svg:text>
-      <svg:circle class="dot"
-        style="filter: url(#shadow);"
-        [style.fill]="bandColor"
-        [attr.cx]="textPadding[3] + valueSpaceLeft - textFontSize / 6 - textFontSize / 4"
-        [attr.cy]="textPadding[0] + textFontSize / 2"
-        [attr.r]="textFontSize / 6"/>
+      <svg:text #paddedTextEl
+        class="padded-value-text"
+        text-anchor="start"
+        alignment-baseline="hanging"
+        text-anchor="middle"
+        [style.font-size.px]="textFontSize">
+        {{paddedValue}}
+      </svg:text>
+      <svg:g *ngIf="dotX"
+        [style.fill]="bandColor">
+        <svg:circle class="dot"
+          style="filter: url(#shadow);"
+          [attr.cx]="dotX"
+          [attr.cy]="textPadding[0] + textFontSize / 2"
+          [attr.r]="dotRadius"/>
+        <svg:circle class="dot"
+          [attr.cx]="dotX"
+          [attr.cy]="textPadding[0] + textFontSize / 2"
+          [attr.r]="dotRadius"/>
+      </svg:g>
+      <svg:line 
+        *ngIf="divider"
+        [attr.x1]="dividerX"
+        [attr.y1]="15"
+        [attr.x2]="dividerX"
+        [attr.y2]="cardHeight - bandHeight - 15"
+        [attr.stroke]="dividerColor"
+        [attr.stroke-width]="dividerWidth" />
       <defs>
-        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="1.1 1.1" result="shadow"/>
+        <filter id="shadow" x="-100%" y="-100%" width="300%" height="300%">
+          <feGaussianBlur stdDeviation="1.5" result="shadow"/>
         </filter>
       </defs>
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardComponent implements OnChanges, OnDestroy {
+export class CardComponent implements OnInit, OnChanges, OnDestroy {
 
-  @Input() color;
-  @Input() bandColor;
-  @Input() textColor;
+  @Input() color: string;
+  @Input() bandColor: string;
+  @Input() textColor: string;
+  @Input() dividerColor: string;
 
-  @Input() x;
-  @Input() y;
-  @Input() rx;
-  @Input() ry;
-  @Input() width;
-  @Input() height;
-  @Input() label;
-  @Input() data;
+  @Input() x: number;
+  @Input() y: number;
+  @Input() rx: number;
+  @Input() ry: number;
+  @Input() width: number;
+  @Input() height: number;
+  @Input() label: string;
+  @Input() data: any;
   @Input() medianSize: number;
   @Input() valueFormatting: any;
   @Input() labelFormatting: any;
   @Input() animations: boolean = true;
-
+  @Input() divider = false;
+  @Input() dividerWidth = 1;
+  @Input() xPadding = 15;
+  
   @Output() select = new EventEmitter();
 
   @ViewChild('textEl') textEl: ElementRef;
+  @ViewChild('paddedTextEl') paddedTextEl: ElementRef;
 
   element: HTMLElement;
   value: string = '';
+  paddedValue: string = '';
   transform: string;
   formattedLabel: string;
   cardWidth: number;
   cardHeight: number;
   textWidth: number;
   textHeight: number;
-  valueWidth: number;
-  valueSpaceLeft: number;
   textFontSize: number = 12;
   textTransform: string = '';
   initialized: boolean = false;
@@ -114,11 +140,19 @@ export class CardComponent implements OnChanges, OnDestroy {
   transformBand: string;
   textPadding = [10, 20, 5, 20];
   labelFontSize = 15;
+  dotRadius: number = 2;
+  dotX: number;
+  dividerX = -this.xPadding / 2;
+  dividerHeight = this.textPadding[0] + this.height - this.textPadding[2];
 
   bandPath: string;
 
   constructor(element: ElementRef, private cd: ChangeDetectorRef, private zone: NgZone) {
     this.element = element.nativeElement;
+  }
+
+  ngOnInit() {
+    this.update();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -129,7 +163,14 @@ export class CardComponent implements OnChanges, OnDestroy {
     cancelAnimationFrame(this.animationReq);
   }
 
-  update(): void {
+  onClick(): void {
+    this.select.emit({
+      name: this.data.name,
+      value: this.data.value
+    });
+  }
+
+  private update(): void {
     this.zone.run(() => {
       const hasValue = this.data && typeof this.data.value !== 'undefined';
       const valueFormatting = this.valueFormatting || (card => card.value.toLocaleString());
@@ -152,17 +193,17 @@ export class CardComponent implements OnChanges, OnDestroy {
       this.formattedLabel = labelFormatting(cardData);
       this.transformBand = `translate(0 , ${this.cardHeight - this.bandHeight})`;
 
-      const value = hasValue ? valueFormatting(cardData) : '';
-
-      this.value = this.paddedValue(value);
-      this.setPadding();
+      this.value = hasValue ? valueFormatting(cardData) : '';
+      this.paddedValue = this.getPaddedValue(this.value);
 
       const r = Math.min((this.rx + this.ry) / 2, this.bandHeight);
       this.bandPath = roundedRect(0, 0, this.cardWidth, this.bandHeight, r, [false, false, true, true]);
+      this.scaleText();
+      this.setPadding();
 
       setTimeout(() => {
         this.scaleText();
-        this.value = value;
+        this.setPadding();
         if (hasValue && !this.initialized) {
           setTimeout(() => this.startCount(), 20);
         }
@@ -170,14 +211,14 @@ export class CardComponent implements OnChanges, OnDestroy {
     });
   }
 
-  paddedValue(value: string) {
+  private getPaddedValue(value: string) {
     if (this.medianSize && this.medianSize > value.length) {
       value += '\u2007'.repeat(this.medianSize - value.length);
     }
     return value;
   }
 
-  startCount(): void {
+  private startCount(): void {
     if (!this.initialized && this.animations) {
       cancelAnimationFrame(this.animationReq);
 
@@ -189,10 +230,7 @@ export class CardComponent implements OnChanges, OnDestroy {
         this.zone.run(() => {
           value = finished ? val : value;
           this.value = valueFormatting({label: this.label, data: this.data, value});
-          if (!finished) {
-            this.value = this.paddedValue(this.value);
-          }
-          this.cd.markForCheck();
+          this.setPadding();
         });
       };
 
@@ -201,43 +239,47 @@ export class CardComponent implements OnChanges, OnDestroy {
     }
   }
 
-  scaleText(): void {
-    this.zone.run(() => {
-      const { width, height } = this.textEl.nativeElement.getBoundingClientRect();
+  /* Uses the final value to scale the font size */
+  private scaleText(): void {
+    const { width, height } = this.paddedTextEl.nativeElement.getBoundingClientRect();
 
-      this.textHeight = height;
-      this.valueWidth = width;
+    this.textHeight = height;
 
-      if (width === 0 || height === 0) {
-        return;
-      }
+    if (width === 0 || height === 0) return;
 
-      const textPadding = this.textPadding[1] = this.textPadding[3] = this.cardWidth / 8;
-      const availableWidth = this.cardWidth - 2 * textPadding;
-      const availableHeight = this.cardHeight / 3;
+    const textPadding = this.textPadding[1] = this.textPadding[3] = this.cardWidth / 8;
+    const availableWidth = this.cardWidth - 2 * textPadding;
+    const availableHeight = this.cardHeight / 3;
 
-      this.valueSpaceLeft = Math.max(0, (availableWidth - width) / 2);
+    const resizeScale = Math.min(availableWidth / width, availableHeight / height);
+    this.textFontSize = Math.floor(this.textFontSize * resizeScale);
+    this.labelFontSize = Math.min(this.textFontSize, 15);
 
-      const resizeScale = Math.min(availableWidth / width, availableHeight / height);
-      this.textFontSize = Math.floor(this.textFontSize * resizeScale);
-      this.labelFontSize = Math.min(this.textFontSize, 15);
-
-      this.setPadding();
-      this.cd.markForCheck();
-    });
+    this.cd.markForCheck();
   }
 
-  setPadding() {
+  /* Uses the intermediate value to set padding and accessaary elements */
+  private setPadding(): void {
+    const { width, height } = this.textEl.nativeElement.getBoundingClientRect();
+
+    const availableWidth = this.cardWidth - this.textPadding[1] - this.textPadding[3];
+    const valueSpaceLeft = Math.max(0, (availableWidth - width) / 2);
+
     this.textPadding[1] = this.textPadding[3] = this.cardWidth / 8;
     const padding = this.cardHeight / 2;
     this.textPadding[0] = padding - this.textFontSize - this.labelFontSize / 2;
     this.textPadding[2] = padding - this.labelFontSize;
-  }
 
-  onClick(): void {
-    this.select.emit({
-      name: this.data.name,
-      value: this.data.value
-    });
+    this.dotRadius = this.textFontSize / 6;
+    this.dotX = Math.max(
+      this.textPadding[3] / 2,
+      this.textPadding[3] + valueSpaceLeft - this.dotRadius - this.textFontSize / 4
+    );
+    this.dotRadius = Math.min(this.textFontSize / 4, this.dotX, 4);
+
+    this.dividerX = -this.xPadding / 2;
+    this.dividerHeight = this.cardHeight - this.textPadding[0];
+    
+    this.cd.markForCheck();
   }
 }
