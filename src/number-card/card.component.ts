@@ -260,7 +260,7 @@ export class CardComponent implements OnInit, OnChanges, OnDestroy {
 
   /* Uses the intermediate value to set padding and accessaary elements */
   private setPadding(): void {
-    const { width, height } = this.textEl.nativeElement.getBoundingClientRect();
+    const { width } = this.textEl.nativeElement.getBoundingClientRect();
 
     const availableWidth = this.cardWidth - this.textPadding[1] - this.textPadding[3];
     const valueSpaceLeft = Math.max(0, (availableWidth - width) / 2);
