@@ -40,7 +40,7 @@ import { formatLabel } from '../label.helper';
             (click)="select.emit({ name: legendItem.label, value: legendItem.value })">
             <div
               class="item-color"
-              [style.background]="legendItem.color">
+              [style.border-left-color]="legendItem.color">
             </div>
             <div *ngIf="animations"
               class="item-value"
