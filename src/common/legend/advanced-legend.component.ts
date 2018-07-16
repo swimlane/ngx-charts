@@ -20,10 +20,11 @@ import { formatLabel } from '../label.helper';
         *ngIf="animations"
         class="total-value"
         ngx-charts-count-up
-        [countTo]="roundedTotal">
+        [countTo]="roundedTotal" 
+        [valueFormatting]="valueFormatting">
       </div>
-      <div *ngIf="!animations">
-        {{roundedTotal}}
+      <div class="total-value" *ngIf="!animations">
+        {{valueFormatting(roundedTotal)}}
       </div>
       <div class="total-label">
         {{label}}
@@ -44,10 +45,11 @@ import { formatLabel } from '../label.helper';
             <div *ngIf="animations"
               class="item-value"
               ngx-charts-count-up
-              [countTo]="legendItem._value">
+              [countTo]="legendItem._value"
+              [valueFormatting]="valueFormatting">
             </div>
             <div *ngIf="!animations" class="item-value">
-              {{legendItem.value}}
+              {{valueFormatting(legendItem.value)}}
             </div>
             <div class="item-label">{{legendItem.label}}</div>
             <div *ngIf="animations"

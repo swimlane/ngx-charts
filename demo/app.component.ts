@@ -565,6 +565,10 @@ export class AppComponent implements OnInit {
     }
   }
 
+  valueFormatting(v: number): string {
+    return `${Math.round(v).toLocaleString()} €`;
+  }
+
   currencyFormatting(c) {
     return `\$${Math.round(c.value).toLocaleString()}`;
   }
