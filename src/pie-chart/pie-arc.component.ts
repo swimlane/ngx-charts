@@ -13,6 +13,7 @@ import { select } from 'd3-selection';
 import { arc } from 'd3-shape';
 
 import { id } from '../utils/id';
+/* tslint:disable */
 import { MouseEvent } from '../events';
 
 @Component({
@@ -40,10 +41,9 @@ import { MouseEvent } from '../events';
       />
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PieArcComponent implements OnChanges {
-
   @Input() fill;
   @Input() startAngle: number = 0;
   @Input() endAngle: number = Math.PI * 2;
@@ -104,13 +104,12 @@ export class PieArcComponent implements OnChanges {
         this.initialized = true;
       }
     }
-
   }
 
   calculateArc(): any {
     let outerRadius = this.outerRadius;
     if (this.explodeSlices && this.innerRadius === 0) {
-      outerRadius = this.outerRadius * this.value / this.max;
+      outerRadius = (this.outerRadius * this.value) / this.max;
     }
 
     return arc()
@@ -122,7 +121,7 @@ export class PieArcComponent implements OnChanges {
   loadAnimation(): void {
     const node = select(this.element)
       .selectAll('.arc')
-      .data([{startAngle: this.startAngle, endAngle: this.endAngle}]);
+      .data([{ startAngle: this.startAngle, endAngle: this.endAngle }]);
 
     const calc = this.calculateArc();
 
@@ -138,7 +137,8 @@ export class PieArcComponent implements OnChanges {
           return calc(interpolater(t));
         };
       })
-      .transition().duration(750)
+      .transition()
+      .duration(750)
       .attrTween('d', function(d) {
         (<any>this)._current = (<any>this)._current || d;
         const interpolater = interpolate((<any>this)._current, d);
@@ -152,12 +152,13 @@ export class PieArcComponent implements OnChanges {
   updateAnimation(): void {
     const node = select(this.element)
       .selectAll('.arc')
-      .data([{startAngle: this.startAngle, endAngle: this.endAngle}]);
+      .data([{ startAngle: this.startAngle, endAngle: this.endAngle }]);
 
     const calc = this.calculateArc();
 
     node
-      .transition().duration(750)
+      .transition()
+      .duration(750)
       .attrTween('d', function(d) {
         (<any>this)._current = (<any>this)._current || d;
         const interpolater = interpolate((<any>this)._current, d);
@@ -177,11 +178,10 @@ export class PieArcComponent implements OnChanges {
     event.preventDefault();
     event.stopPropagation();
     clearTimeout(this._timeout);
-    
+
     this.dblclick.emit({
       data: this.data,
       nativeEvent: event
     });
   }
-
 }
