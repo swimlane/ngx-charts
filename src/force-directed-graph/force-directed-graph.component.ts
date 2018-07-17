@@ -24,6 +24,7 @@ import { ChartComponent } from '../common/charts/chart.component';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
+import { MouseEvent } from '../events';
 
 @Component({
   selector: 'ngx-charts-force-directed-graph',
