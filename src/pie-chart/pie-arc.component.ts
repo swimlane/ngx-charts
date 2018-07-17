@@ -13,6 +13,7 @@ import { select } from 'd3-selection';
 import { arc } from 'd3-shape';
 
 import { id } from '../utils/id';
+import { MouseEvent } from '../events';
 
 @Component({
   selector: 'g[ngx-charts-pie-arc]',
