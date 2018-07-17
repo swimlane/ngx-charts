@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component, Input, Output, EventEmitter, ViewChild, Renderer, ChangeDetectionStrategy, TemplateRef, } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
+import { MouseEvent } from '../events';
 var TooltipArea = /** @class */ (function () {
     function TooltipArea(renderer) {
         this.renderer = renderer;
