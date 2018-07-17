@@ -574,8 +574,8 @@ export class AppComponent implements OnInit {
     return `${Math.round(value).toLocaleString()} €`;
   }
 
-  currencyFormatting(c) {
-    return `\$${Math.round(c.value).toLocaleString()}`;
+  currencyFormatting(value: number) {
+    return `\$${Math.round(value).toLocaleString()}`;
   }
 
   gdpLabelFormatting(c) {
