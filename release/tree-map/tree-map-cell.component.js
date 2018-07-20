@@ -22,14 +22,14 @@ var TreeMapCellComponent = /** @class */ (function () {
     }
     TreeMapCellComponent.prototype.ngOnChanges = function () {
         this.update();
-        this.valueFormatting = this.valueFormatting || (function (cell) { return cell.value.toLocaleString(); });
+        this.valueFormatting = this.valueFormatting || (function (value) { return value.toLocaleString(); });
         var labelFormatting = this.labelFormatting || (function (cell) { return trimLabel(cell.label, 55); });
         var cellData = {
             data: this.data,
             label: this.label,
             value: this.value
         };
-        this.formattedValue = this.valueFormatting(cellData);
+        this.formattedValue = this.valueFormatting(cellData.value);
         this.formattedLabel = labelFormatting(cellData);
         this.gradientId = 'grad' + id().toString();
         this.gradientUrl = "url(#" + this.gradientId + ")";
@@ -60,7 +60,9 @@ var TreeMapCellComponent = /** @class */ (function () {
     TreeMapCellComponent.prototype.animateToCurrentForm = function () {
         var node = select(this.element).select('.cell');
         if (this.animations) {
-            node.transition().duration(750)
+            node
+                .transition()
+                .duration(750)
                 .attr('opacity', 1)
                 .attr('x', this.x)
                 .attr('y', this.y)

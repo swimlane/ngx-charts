@@ -11,7 +11,7 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, Templa
 import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel } from '../common/label.helper';
 import { id } from '../utils/id';
-import { ColorHelper } from '.';
+import { ColorHelper } from '../common/color.helper';
 var CircleSeriesComponent = /** @class */ (function () {
     function CircleSeriesComponent() {
         this.type = 'standard';

@@ -10,7 +10,6 @@ import { PolarChartComponent } from './polar-chart.component';
 import { PolarSeriesComponent } from './polar-series.component';
 import { PieChartModule } from '../pie-chart/';
 import { LineChartModule } from '../line-chart/';
-export { PolarChartComponent, PolarSeriesComponent };
 var PolarChartModule = /** @class */ (function () {
     function PolarChartModule() {
     }

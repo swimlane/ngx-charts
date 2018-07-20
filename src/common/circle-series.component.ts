@@ -17,7 +17,7 @@ import {
 } from '@angular/animations';
 import { formatLabel } from '../common/label.helper';
 import { id } from '../utils/id';
-import { ColorHelper } from '.';
+import { ColorHelper } from '../common/color.helper';
 
 @Component({
   selector: 'g[ngx-charts-circle-series]',

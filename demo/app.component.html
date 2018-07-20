@@ -238,6 +238,7 @@
         [view]="view"
         [scheme]="colorScheme"
         [results]="single"
+        [valueFormatting]="valueFormatting"
         [animations]="animations"
         (legendLabelClick)="onLegendLabelClick($event)"
         [gradient]="gradient"
@@ -837,7 +838,7 @@
       [yAxisLabel]="'Fiscal Year Report'"
       [showGridLines]="showGridLines"
       [barPadding]="barPadding"
-      [roundDomains]="roundDomains"     
+      [roundDomains]="roundDomains"
       [showDataLabel]="showDataLabel"
       (select)="select($event)">
     </ngx-charts-bar-horizontal-stacked>
@@ -966,7 +967,7 @@
           Animations
         </label> <br />
       </div>
-      
+
       <div *ngIf="chart.options.includes('showXAxis')">
         <label>
           <input type="checkbox" [checked]="showXAxis" (change)="showXAxis = $event.target.checked">
@@ -1207,11 +1208,11 @@
             [inputType]="'datetime'"
             label="Minimum X-Scale value"
             [(ngModel)]="xScaleMin">
-          </ngx-date-time>        
+          </ngx-date-time>
         </div>
         <div *ngIf="chartType === 'bubble-chart'">
           <label>Minimum X-Scale value</label><br />
-          <input type="number" [(ngModel)]="xScaleMin"><br />    
+          <input type="number" [(ngModel)]="xScaleMin"><br />
         </div>
       </div>
 
@@ -1221,11 +1222,11 @@
             [inputType]="'datetime'"
             label="Maximum X-Scale value"
             [(ngModel)]="xScaleMax">
-          </ngx-date-time>    
+          </ngx-date-time>
         </div>
         <div *ngIf="chartType.startsWith('bar-horizontal') || chartType === 'bubble-chart'">
           <label>Maximum X-Scale value</label><br />
-          <input type="number" [(ngModel)]="xScaleMax"><br />    
+          <input type="number" [(ngModel)]="xScaleMax"><br />
         </div>
       </div>
 

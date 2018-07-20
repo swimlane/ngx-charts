@@ -65,15 +65,11 @@ import { BaseChartComponent } from '../common/base-chart.component';
       </div>
     </div>
   `,
-  styleUrls: [
-    '../common/base-chart.component.scss',
-    './advanced-pie-chart.component.scss'
-  ],
+  styleUrls: ['../common/base-chart.component.scss', './advanced-pie-chart.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdvancedPieChartComponent extends BaseChartComponent {
-
   @Input() gradient: boolean;
   @Input() activeEntries: any[] = [];
   @Input() tooltipDisabled: boolean = false;
@@ -95,15 +91,15 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
   legendWidth: number;
   margin = [20, 20, 20, 20];
 
-  @Input() valueFormatting: (value: number) => any = value => value;
-  @Input() nameFormatting: (value: string) => any = label => label;
-  @Input() percentageFormatting: (value: number) => any = percentage => percentage;
+  @Input() valueFormatting: (value: number) => any;
+  @Input() nameFormatting: (value: string) => any;
+  @Input() percentageFormatting: (value: number) => any;
 
   update(): void {
     super.update();
 
     this.dims = calculateViewDimensions({
-      width: this.width * 4 / 12.0,
+      width: (this.width * 4) / 12.0,
       height: this.height,
       margins: this.margin
     });
@@ -134,8 +130,8 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
   }
 
   onActivate(event): void {
-    if(this.activeEntries.indexOf(event) > -1) return;
-    this.activeEntries = [ event, ...this.activeEntries ];
+    if (this.activeEntries.indexOf(event) > -1) return;
+    this.activeEntries = [event, ...this.activeEntries];
     this.activate.emit({ value: event, entries: this.activeEntries });
   }
 
@@ -147,5 +143,4 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
 
     this.deactivate.emit({ value: event, entries: this.activeEntries });
   }
-
 }
