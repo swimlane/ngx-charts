@@ -252,8 +252,8 @@ export class CardComponent implements OnInit, OnChanges, OnDestroy {
     const availableHeight = this.cardHeight / 3;
 
     const resizeScale = Math.min(availableWidth / width, availableHeight / height);
-    this.textFontSize = Math.floor(this.textFontSize * resizeScale);
-    this.labelFontSize = Math.min(this.textFontSize, 15);
+    this.textFontSize = Math.max(Math.floor(this.textFontSize * resizeScale), 1);
+    this.labelFontSize = Math.max(Math.min(this.textFontSize, 15), 1);
 
     this.cd.markForCheck();
   }

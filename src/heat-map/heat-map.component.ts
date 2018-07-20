@@ -227,7 +227,8 @@ export class HeatMapComponent extends BaseChartComponent {
       return this.getDimension(value[index], null, N, L);
     }
     if (typeof value === 'string' && value.includes('%')) {
-      return +value.replace('%', '') / 100;
+      const v = +value.replace('%', '');
+      return isNaN(v) ? 0 : v / 100;
     }
     return N / (L / +value + 1);
   }

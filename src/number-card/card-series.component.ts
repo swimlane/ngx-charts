@@ -124,6 +124,8 @@ export class CardSeriesComponent implements OnChanges {
     this.yPadding = (this.getDimension(this.innerPadding, 0, this.size[1], this.dims.height) +
       this.getDimension(this.innerPadding, 2, this.size[1], this.dims.height)) / 2;
 
+    console.log(this.xPadding, this.yPadding);
+
     this.rx = this.getDimension(this.borderRadius, 0, this.size[0], this.dims.width);
     this.ry = this.getDimension(this.borderRadius, 1, this.size[1], this.dims.height);
 
@@ -199,7 +201,8 @@ export class CardSeriesComponent implements OnChanges {
       return this.getDimension(value[index], null, N, L);
     }
     if (typeof value === 'string' && value.includes('%')) {
-      const p = +value.replace('%', '') / 100;
+      const v = +value.replace('%', '');
+      const p = isNaN(v) ? 0 : v / 100;
       return  L / (N / p + N - 1);
     }
     return +value || 0;
