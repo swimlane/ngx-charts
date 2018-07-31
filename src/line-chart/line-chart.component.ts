@@ -281,7 +281,10 @@ export class LineChartComponent extends BaseChartComponent {
   }
 
   getXDomain(): any[] {
-    let values = getUniqueXDomainValues(this.results);
+    const results = this.results || [];
+    const ticks = this.xAxisTicks || [];
+
+    let values = [...getUniqueXDomainValues(results), ...ticks];
 
     this.scaleType = this.getScaleType(values);
     let domain = [];
@@ -293,11 +296,11 @@ export class LineChartComponent extends BaseChartComponent {
     let min;
     let max;
     if (this.scaleType === 'time' || this.scaleType === 'linear') {
-      min = this.xScaleMin
+      min = !this.isNullOrUndefined(this.xScaleMin)
         ? this.xScaleMin
         : Math.min(...values);
 
-      max = this.xScaleMax
+      max = !this.isNullOrUndefined(this.xScaleMax)
         ? this.xScaleMax
         : Math.max(...values);
     }
@@ -345,16 +348,17 @@ export class LineChartComponent extends BaseChartComponent {
       }
     }
 
-    const values = [...domain];
+    const ticks = this.yAxisTicks || [];
+    const values = [...domain, ...ticks];
     if (!this.autoScale) {
       values.push(0);
     }
 
-    const min = this.yScaleMin
+    const min = !this.isNullOrUndefined(this.yScaleMin)
       ? this.yScaleMin
       : Math.min(...values);
 
-    const max = this.yScaleMax
+    const max = !this.isNullOrUndefined(this.yScaleMax)
       ? this.yScaleMax
       : Math.max(...values);
 
@@ -399,6 +403,8 @@ export class LineChartComponent extends BaseChartComponent {
   }
 
   getScaleType(values): string {
+    if (this.isEmptyOrFalsyArray(values)) return 'ordinal';
+
     let date = true;
     let num = true;
 
@@ -415,6 +421,18 @@ export class LineChartComponent extends BaseChartComponent {
     if (date) return 'time';
     if (num) return 'linear';
     return 'ordinal';
+  }
+
+  isEmptyOrFalsyArray(arr): boolean {
+    return !Array.isArray(arr) || !arr.length;
+  }
+
+  isNullOrUndefined(val) {
+    return val === null || val === undefined;
+  } 
+
+  isValidRange(min, max) {
+    return !this.isNullOrUndefined(min) && !this.isNullOrUndefined(max);
   }
 
   isDate(value): boolean {
