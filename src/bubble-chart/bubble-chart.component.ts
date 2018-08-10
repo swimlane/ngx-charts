@@ -9,12 +9,7 @@ import {
   ContentChild,
   TemplateRef
 } from '@angular/core';
-import {
-  trigger,
-  style,
-  animate,
-  transition
-} from '@angular/animations';
+import { trigger, style, animate, transition } from '@angular/animations';
 import { scaleLinear } from 'd3-scale';
 
 import { BaseChartComponent } from '../common/base-chart.component';
@@ -103,11 +98,14 @@ import { id } from '../utils/id';
     trigger('animationState', [
       transition(':leave', [
         style({
-          opacity: 1,
+          opacity: 1
         }),
-        animate(500, style({
-          opacity: 0
-        }))
+        animate(
+          500,
+          style({
+            opacity: 0
+          })
+        )
       ])
     ])
   ]
@@ -197,7 +195,7 @@ export class BubbleChartComponent extends BaseChartComponent {
     this.xDomain = this.getXDomain();
     this.yDomain = this.getYDomain();
 
-    this.transform = `translate(${ this.dims.xOffset },${ this.margin[0] })`;
+    this.transform = `translate(${this.dims.xOffset},${this.margin[0]})`;
 
     const colorDomain = this.schemeType === 'ordinal' ? this.seriesDomain : this.rDomain;
     this.colors = new ColorHelper(this.scheme, this.schemeType, colorDomain, this.customColors);
@@ -243,8 +241,8 @@ export class BubbleChartComponent extends BaseChartComponent {
     for (const s of this.data) {
       for (const d of s.series) {
         const r = this.rScale(d.r);
-        const cx = (this.xScaleType === 'linear') ? this.xScale(Number(d.x)) : this.xScale(d.x);
-        const cy = (this.yScaleType === 'linear') ? this.yScale(Number(d.y)) : this.yScale(d.y);
+        const cx = this.xScaleType === 'linear' ? this.xScale(Number(d.x)) : this.xScale(d.x);
+        const cy = this.yScaleType === 'linear' ? this.yScale(Number(d.y)) : this.yScale(d.y);
         xMin = Math.max(r - cx, xMin);
         yMin = Math.max(r - cy, yMin);
         yMax = Math.max(cy + r, yMax);
@@ -371,7 +369,7 @@ export class BubbleChartComponent extends BaseChartComponent {
       return;
     }
 
-    this.activeEntries = [ item, ...this.activeEntries ];
+    this.activeEntries = [item, ...this.activeEntries];
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 

@@ -499,7 +499,7 @@ const chartGroups = [
           'innerPadding',
           'tooltipDisabled',
           'min',
-          'max',
+          'max'
         ],
         defaults: {
           yAxisLabel: 'Census Date',

@@ -143,7 +143,6 @@ import { getUniqueXDomainValues } from '../common/domain.helper';
   encapsulation: ViewEncapsulation.None
 })
 export class AreaChartNormalizedComponent extends BaseChartComponent {
-
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
   @Input() xAxis;
@@ -219,7 +218,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
     });
 
     if (this.timeline) {
-      this.dims.height -= (this.timelineHeight + this.margin[2] + this.timelinePadding);
+      this.dims.height -= this.timelineHeight + this.margin[2] + this.timelinePadding;
     }
 
     this.xDomain = this.getXDomain();
@@ -293,7 +292,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
 
     this.clipPathId = 'clip' + id().toString();
     this.clipPath = `url(#${this.clipPathId})`;
@@ -305,7 +304,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
       this.timelineXDomain = this.getXDomain();
       this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
       this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
-      this.timelineTransform = `translate(${ this.dims.xOffset }, ${ -this.margin[2] })`;
+      this.timelineTransform = `translate(${this.dims.xOffset}, ${-this.margin[2]})`;
     }
   }
 
@@ -332,7 +331,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
       const max = Math.max(...values);
       domain = [min, max];
       // Use compare function to sort numbers numerically
-      this.xSet = [...values].sort((a, b) => (a - b));
+      this.xSet = [...values].sort((a, b) => a - b);
     } else {
       domain = values;
       this.xSet = values;
@@ -357,13 +356,10 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
     } else if (this.scaleType === 'linear') {
       scale = scaleLinear();
     } else if (this.scaleType === 'ordinal') {
-      scale = scalePoint()
-        .padding(0.1);
+      scale = scalePoint().padding(0.1);
     }
 
-    scale
-      .range([0, width])
-      .domain(domain);
+    scale.range([0, width]).domain(domain);
 
     return this.roundDomains ? scale.nice() : scale;
   }
@@ -483,7 +479,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
       return;
     }
 
-    this.activeEntries = [ item, ...this.activeEntries ];
+    this.activeEntries = [item, ...this.activeEntries];
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
@@ -505,5 +501,4 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
     }
     this.activeEntries = [];
   }
-
 }

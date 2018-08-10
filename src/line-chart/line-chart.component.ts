@@ -9,12 +9,7 @@ import {
   ContentChild,
   TemplateRef
 } from '@angular/core';
-import {
-  trigger,
-  style,
-  animate,
-  transition
-} from '@angular/animations';
+import { trigger, style, animate, transition } from '@angular/animations';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
 import { curveLinear } from 'd3-shape';
 
@@ -151,17 +146,19 @@ import { getUniqueXDomainValues } from '../common/domain.helper';
     trigger('animationState', [
       transition(':leave', [
         style({
-          opacity: 1,
+          opacity: 1
         }),
-        animate(500, style({
-          opacity: 0
-        }))
+        animate(
+          500,
+          style({
+            opacity: 0
+          })
+        )
       ])
     ])
   ]
 })
 export class LineChartComponent extends BaseChartComponent {
-
   @Input() legend;
   @Input() legendTitle: string = 'Legend';
   @Input() xAxis;
@@ -243,11 +240,11 @@ export class LineChartComponent extends BaseChartComponent {
       showXLabel: this.showXAxisLabel,
       showYLabel: this.showYAxisLabel,
       showLegend: this.legend,
-      legendType: this.schemeType,
+      legendType: this.schemeType
     });
 
     if (this.timeline) {
-      this.dims.height -= (this.timelineHeight + this.margin[2] + this.timelinePadding);
+      this.dims.height -= this.timelineHeight + this.margin[2] + this.timelinePadding;
     }
 
     this.xDomain = this.getXDomain();
@@ -266,7 +263,7 @@ export class LineChartComponent extends BaseChartComponent {
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
 
     this.clipPathId = 'clip' + id().toString();
     this.clipPath = `url(#${this.clipPathId})`;
@@ -278,7 +275,7 @@ export class LineChartComponent extends BaseChartComponent {
       this.timelineXDomain = this.getXDomain();
       this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
       this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
-      this.timelineTransform = `translate(${ this.dims.xOffset }, ${ -this.margin[2] })`;
+      this.timelineTransform = `translate(${this.dims.xOffset}, ${-this.margin[2]})`;
     }
   }
 
@@ -295,13 +292,9 @@ export class LineChartComponent extends BaseChartComponent {
     let min;
     let max;
     if (this.scaleType === 'time' || this.scaleType === 'linear') {
-      min = this.xScaleMin
-        ? this.xScaleMin
-        : Math.min(...values);
+      min = this.xScaleMin ? this.xScaleMin : Math.min(...values);
 
-      max = this.xScaleMax
-        ? this.xScaleMax
-        : Math.max(...values);
+      max = this.xScaleMax ? this.xScaleMax : Math.max(...values);
     }
 
     if (this.scaleType === 'time') {
@@ -316,7 +309,7 @@ export class LineChartComponent extends BaseChartComponent {
     } else if (this.scaleType === 'linear') {
       domain = [min, max];
       // Use compare function to sort numbers numerically
-      this.xSet = [...values].sort((a, b) => (a - b));
+      this.xSet = [...values].sort((a, b) => a - b);
     } else {
       domain = values;
       this.xSet = values;
@@ -352,13 +345,9 @@ export class LineChartComponent extends BaseChartComponent {
       values.push(0);
     }
 
-    const min = this.yScaleMin
-      ? this.yScaleMin
-      : Math.min(...values);
+    const min = this.yScaleMin ? this.yScaleMin : Math.min(...values);
 
-    const max = this.yScaleMax
-      ? this.yScaleMax
-      : Math.max(...values);
+    const max = this.yScaleMax ? this.yScaleMax : Math.max(...values);
 
     return [min, max];
   }
