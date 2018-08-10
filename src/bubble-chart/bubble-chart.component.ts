@@ -46,7 +46,7 @@ import { id } from '../utils/id';
       <svg:g [attr.transform]="transform" class="bubble-chart chart">
         <svg:g ngx-charts-x-axis
           *ngIf="xAxis"
-          [showGridLines]="showGridLines"
+          [showGridLines]="showGridLines && showXAxisGrid"
           [dims]="dims"
           [xScale]="xScale"
           [showLabel]="showXAxisLabel"
@@ -56,7 +56,7 @@ import { id } from '../utils/id';
           (dimensionsChanged)="updateXAxisHeight($event)"/>
         <svg:g ngx-charts-y-axis
           *ngIf="yAxis"
-          [showGridLines]="showGridLines"
+          [showGridLines]="showGridLines && showYAxisGrid"
           [yScale]="yScale"
           [dims]="dims"
           [showLabel]="showYAxisLabel"
@@ -114,6 +114,8 @@ import { id } from '../utils/id';
 })
 export class BubbleChartComponent extends BaseChartComponent {
   @Input() showGridLines: boolean = true;
+  @Input() showXAxisGrid: boolean = true;
+  @Input() showYAxisGrid: boolean = true;
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
   @Input() xAxis: boolean = true;

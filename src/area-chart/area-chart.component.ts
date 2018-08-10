@@ -43,7 +43,7 @@ import { getUniqueXDomainValues } from '../common/domain.helper';
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
-          [showGridLines]="showGridLines"
+          [showGridLines]="showGridLines && showXAxisGrid"
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [tickFormatting]="xAxisTickFormatting"
@@ -54,7 +54,7 @@ import { getUniqueXDomainValues } from '../common/domain.helper';
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
-          [showGridLines]="showGridLines"
+          [showGridLines]="showGridLines && showYAxisGrid"
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
           [tickFormatting]="yAxisTickFormatting"
@@ -156,6 +156,8 @@ export class AreaChartComponent extends BaseChartComponent {
   @Input() timeline;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
+  @Input() showXAxisGrid: boolean = true;
+  @Input() showYAxisGrid: boolean = true;
   @Input() curve: any = curveLinear;
   @Input() activeEntries: any[] = [];
   @Input() schemeType: string;
