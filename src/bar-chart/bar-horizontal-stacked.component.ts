@@ -17,7 +17,7 @@ import {
 
 import { scaleBand, scaleLinear } from 'd3-scale';
 
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions, CssDirection, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 
@@ -143,19 +143,26 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   legendOptions: any;
   dataLabelMaxWidth: any = {negative: 0, positive: 0};
 
+  private _margin: number[];
+
   update(): void {
     super.update();
 
     if (!this.showDataLabel) {
-      this.dataLabelMaxWidth = {negative: 0, positive: 0};          
+      this.dataLabelMaxWidth = {negative: 0, positive: 0};
     }
 
-    this.margin = [10, 20 + this.dataLabelMaxWidth.positive, 10, 20 + this.dataLabelMaxWidth.negative]; 
+    this._margin = [
+      this.margin[CssDirection.Top] + this.dataLabelMaxWidth.positive,
+      this.margin[CssDirection.Right],
+      this.margin[CssDirection.Bottom] + this.dataLabelMaxWidth.negative,
+      this.margin[CssDirection.Left],
+    ];
 
     this.dims = calculateViewDimensions({
       width: this.width,
       height: this.height,
-      margins: this.margin,
+      margins: this._margin,
       showXAxis: this.xAxis,
       showYAxis: this.yAxis,
       xAxisHeight: this.xAxisHeight,
@@ -178,7 +185,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    this.transform = `translate(${ this.dims.xOffset } , ${ this._margin[CssDirection.Top] })`;
   }
 
   getGroupDomain(): any[] {
@@ -308,15 +315,15 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
     this.update();
   }
 
-  onDataLabelMaxWidthChanged(event, groupIndex) {                
+  onDataLabelMaxWidthChanged(event, groupIndex) {
     if (event.size.negative)  {
       this.dataLabelMaxWidth.negative = Math.max(this.dataLabelMaxWidth.negative, event.size.width);
     } else {
       this.dataLabelMaxWidth.positive = Math.max(this.dataLabelMaxWidth.positive, event.size.width);
-    }  
+    }
     if (groupIndex === (this.results.length - 1)) {
       setTimeout(() => this.update());
-    }        
+    }
   }
 
   onActivate(event, group?) {

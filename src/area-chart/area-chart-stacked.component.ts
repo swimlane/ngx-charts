@@ -12,7 +12,7 @@ import {
 import { scaleLinear, scalePoint, scaleTime } from 'd3-scale';
 import { curveLinear } from 'd3-shape';
 
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions, CssDirection, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
@@ -219,7 +219,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
     });
 
     if (this.timeline) {
-      this.dims.height -= (this.timelineHeight + this.margin[2] + this.timelinePadding);
+      this.dims.height -= (this.timelineHeight + this.margin[CssDirection.Bottom] + this.timelinePadding);
     }
 
     this.xDomain = this.getXDomain();
@@ -269,7 +269,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[CssDirection.Top] })`;
 
     this.clipPathId = 'clip' + id().toString();
     this.clipPath = `url(#${this.clipPathId})`;
@@ -281,7 +281,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
       this.timelineXDomain = this.getXDomain();
       this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
       this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
-      this.timelineTransform = `translate(${ this.dims.xOffset }, ${ -this.margin[2] })`;
+      this.timelineTransform = `translate(${ this.dims.xOffset }, ${ -this.margin[CssDirection.Bottom] })`;
     }
   }
 

@@ -11,7 +11,7 @@ import {
 import { treemap, stratify } from 'd3-hierarchy';
 
 import { BaseChartComponent } from '../common/base-chart.component';
-import { calculateViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions, CssDirection } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 
 @Component({
@@ -100,7 +100,7 @@ export class TreeMapComponent extends BaseChartComponent {
 
     this.setColors();
 
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[CssDirection.Top] })`;
   }
 
   getDomain(): any[] {

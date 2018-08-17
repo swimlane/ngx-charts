@@ -9,7 +9,7 @@ import {
 import { scaleBand } from 'd3-scale';
 
 import { BaseChartComponent } from '../common/base-chart.component';
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions, CssDirection, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 
 @Component({
@@ -152,7 +152,7 @@ export class HeatMapComponent extends BaseChartComponent {
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
-    this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
+    this.transform = `translate(${this.dims.xOffset} , ${this.margin[CssDirection.Top]})`;
     this.rects = this.getRects();
   }
 

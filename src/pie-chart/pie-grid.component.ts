@@ -9,7 +9,7 @@ import {
 import { min } from 'd3-array';
 import { format } from 'd3-format';
 
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions, CssDirection, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { trimLabel } from '../common/trim-label.helper';
@@ -127,7 +127,7 @@ export class PieGridComponent extends BaseChartComponent {
     this.domain = this.getDomain();
 
     this.data = gridLayout(this.dims, this.results, this.minWidth, this.designatedTotal);
-    this.transform = `translate(${this.margin[3]} , ${this.margin[0]})`;
+    this.transform = `translate(${this.margin[CssDirection.Left]} , ${this.margin[CssDirection.Top]})`;
 
     this.series = this.getSeries();
     this.setColors();

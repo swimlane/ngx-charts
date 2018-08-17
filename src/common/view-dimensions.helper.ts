@@ -6,7 +6,7 @@ export interface ViewDimensions {
 
 export function calculateViewDimensions({
   width, height, margins, showXAxis = false, showYAxis = false, xAxisHeight = 0,
-  yAxisWidth = 0, showXLabel = false, showYLabel = false, showLegend = false, 
+  yAxisWidth = 0, showXLabel = false, showYLabel = false, showLegend = false,
   legendType = 'ordinal', columns = 12
 }): ViewDimensions {
   let xOffset = margins[3];
@@ -58,4 +58,11 @@ export function calculateViewDimensions({
     height: ~~chartHeight,
     xOffset: ~~xOffset
   };
+}
+
+export enum CssDirection {
+  Top,
+  Right,
+  Bottom,
+  Left,
 }

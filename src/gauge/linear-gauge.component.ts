@@ -10,7 +10,7 @@ import {
 import { scaleLinear } from 'd3-scale';
 
 import { BaseChartComponent } from '../common/base-chart.component';
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions, CssDirection, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 
 @Component({
@@ -26,8 +26,8 @@ import { ColorHelper } from '../common/color.helper';
           class="background-bar"
           [width]="dims.width"
           [height]="3"
-          [x]="margin[3]"
-          [y]="dims.height / 2 + margin[0] - 2"
+          [x]="marginLeft"
+          [y]="dims.height / 2 + marginTop - 2"
           [data]="{}"
           [orientation]="'horizontal'"
           [roundEdges]="true"
@@ -36,8 +36,8 @@ import { ColorHelper } from '../common/color.helper';
         <svg:g ngx-charts-bar
           [width]="valueScale(value)"
           [height]="3"
-          [x]="margin[3]"
-          [y]="dims.height / 2 + margin[0] - 2"
+          [x]="marginLeft"
+          [y]="dims.height / 2 + marginTop - 2"
           [fill]="colors.getColor(units)"
           [data]="{}"
           [orientation]="'horizontal'"
@@ -126,6 +126,14 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
   displayValue: string;
   hasPreviousValue: boolean;
 
+  get marginLeft() {
+    return this.margin[CssDirection.Left];
+  }
+
+  get marginTop() {
+    return this.margin[CssDirection.Top];
+  }
+
   ngAfterViewInit(): void {
     super.ngAfterViewInit();
     setTimeout(() => {
@@ -157,11 +165,12 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
 
     this.setColors();
 
-    const xOffset = this.margin[3] + this.dims.width / 2;
-    const yOffset = this.margin[0] + this.dims.height / 2;
+    const xOffset = this.margin[CssDirection.Left] + this.dims.width / 2;
+    const yOffset = this.margin[CssDirection.Top] + this.dims.height / 2;
 
     this.transform = `translate(${ xOffset }, ${ yOffset })`;
-    this.transformLine = `translate(${ this.margin[3] + this.valueScale(this.previousValue) }, ${ yOffset })`;
+    this.transformLine = `translate(${ this.margin[CssDirection.Left] +
+                                       this.valueScale(this.previousValue) }, ${ yOffset })`;
     this.valueTranslate = `translate(0, -15)`;
     this.unitsTranslate = `translate(0, 15)`;
     setTimeout(() => this.scaleText('value'), 50);

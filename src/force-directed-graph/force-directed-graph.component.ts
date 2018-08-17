@@ -15,7 +15,7 @@ import { forceCollide, forceLink, forceManyBody, forceSimulation, forceX, forceY
 
 import { ChartComponent } from '../common/charts/chart.component';
 import { BaseChartComponent } from '../common/base-chart.component';
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions, CssDirection, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 /* tslint:disable */
 import { MouseEvent } from '../events';
@@ -128,7 +128,7 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
     this.legendOptions = this.getLegendOptions();
 
     this.transform = `
-      translate(${this.dims.xOffset + this.dims.width / 2}, ${this.margin[0] + this.dims.height / 2})
+      translate(${this.dims.xOffset + this.dims.width / 2}, ${this.margin[CssDirection.Top] + this.dims.height / 2})
     `;
     if (this.force) {
       this.force

@@ -8,7 +8,7 @@ import {
   ContentChild,
   TemplateRef
 } from '@angular/core';
-import { calculateViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions, CssDirection } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 
@@ -103,8 +103,8 @@ export class PieChartComponent extends BaseChartComponent {
       showLegend: this.legend,
     });
 
-    const xOffset = this.margin[3] + this.dims.width / 2;
-    const yOffset = this.margin[0] + this.dims.height / 2;
+    const xOffset = this.margin[CssDirection.Left] + this.dims.width / 2;
+    const yOffset = this.margin[CssDirection.Top] + this.dims.height / 2;
     this.translation = `translate(${xOffset}, ${yOffset})`;
     this.outerRadius = Math.min(this.dims.width, this.dims.height);
     if (this.labels) {

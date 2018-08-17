@@ -9,7 +9,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions, CssDirection, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 
@@ -52,7 +52,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
         <ngx-charts-advanced-legend
           [data]="results"
           [colors]="colors"
-          [width]="width - dims.width - margin[1]"
+          [width]="width - dims.width - marginRight"
           [label]="label"
           [animations]="animations"
           [valueFormatting]="valueFormatting"
@@ -95,6 +95,10 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
   @Input() nameFormatting: (value: string) => any;
   @Input() percentageFormatting: (value: number) => any;
 
+  marginRight() {
+    return this.margin[CssDirection.Right];
+  }
+
   update(): void {
     super.update();
 
@@ -108,8 +112,8 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
     this.setColors();
 
     const xOffset = this.dims.width / 2;
-    const yOffset = this.margin[0] + this.dims.height / 2;
-    this.legendWidth = this.width - this.dims.width - this.margin[1];
+    const yOffset = this.margin[CssDirection.Top] + this.dims.height / 2;
+    this.legendWidth = this.width - this.dims.width - this.margin[CssDirection.Right];
 
     this.outerRadius = Math.min(this.dims.width, this.dims.height) / 2.5;
     this.innerRadius = this.outerRadius * 0.75;

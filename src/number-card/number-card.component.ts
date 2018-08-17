@@ -5,7 +5,7 @@ import {
   Input
 } from '@angular/core';
 import { BaseChartComponent } from '../common/base-chart.component';
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions, CssDirection, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { gridLayout, gridSize } from '../common/grid-layout.helper';
 
@@ -77,7 +77,7 @@ export class NumberCardComponent extends BaseChartComponent {
     this.domain = this.getDomain();
 
     this.setColors();
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[CssDirection.Top] })`;
 
     const size = gridSize(this.dims, this.results.length, 150);
     const N = size[0] * size[1];

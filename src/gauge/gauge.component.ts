@@ -14,7 +14,7 @@ import {
 import { scaleLinear } from 'd3-scale';
 
 import { BaseChartComponent } from '../common/base-chart.component';
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions, CssDirection, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 
 @Component({
@@ -169,8 +169,8 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
-    const xOffset = this.margin[3] + this.dims.width / 2;
-    const yOffset = this.margin[0] + this.dims.height / 2;
+    const xOffset = this.margin[CssDirection.Left] + this.dims.width / 2;
+    const yOffset = this.margin[CssDirection.Top] + this.dims.height / 2;
 
     this.transform = `translate(${ xOffset }, ${ yOffset })`;
     this.rotation = `rotate(${ this.startAngle })`;

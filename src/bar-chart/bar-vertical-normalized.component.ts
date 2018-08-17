@@ -16,7 +16,7 @@ import {
 } from '@angular/animations';
 import { scaleBand, scaleLinear } from 'd3-scale';
 
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions, CssDirection, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 
@@ -163,7 +163,7 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[CssDirection.Top] })`;
   }
 
   getGroupDomain() {
