@@ -161,4 +161,21 @@ export class ColorHelper {
 
     return stops;
   }
+
+  getBoundaryColor(color, percent) {
+    const f = parseInt(color.slice(1), 16);
+    const t = percent < 0 ? 0 : 255;
+    const p = percent < 0 ? percent * -1 : percent;
+    const R = f >> 16;
+    const G = f >> 8 & 0x00FF;
+    const B = f & 0x0000FF;
+    let partA = 0x1000000;
+    partA += (Math.round((t - R) * p) + R) * 0x10000 + (Math.round((t - G) * p) + G) * 0x100;
+    partA += (Math.round((t - B) * p) + B);
+    return '#' + partA.toString(16).slice(1);
+  }
+  /**
+   * Returns a shade of color which is lighter/darker from input color (Hex format) by a given percentage
+   * percent input ranges from -1.0 (black) to 1.0 (white)
+   */
 }

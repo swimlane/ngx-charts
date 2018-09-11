@@ -62,13 +62,15 @@ import { getUniqueXDomainValues } from '../common/domain.helper';
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
         <svg:g [attr.clip-path]="clipPath">
-          <svg:g *ngFor="let series of results; trackBy:trackBy">
+          <svg:g *ngFor="let series of results; let ind = index; trackBy:trackBy">
             <svg:g ngx-charts-area-series
+              [index]="ind"
               [xScale]="xScale"
               [yScale]="yScale"
               [colors]="colors"
               [data]="series"
               [scaleType]="scaleType"
+              [enableStroke]="enableStroke"
               [activeEntries]="activeEntries"
               [gradient]="gradient"
               normalized="true"
@@ -164,6 +166,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
   @Input() yAxisTicks: any[];
   @Input() roundDomains: boolean = false;
   @Input() tooltipDisabled: boolean = false;
+  @Input() enableStroke: boolean = true;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
