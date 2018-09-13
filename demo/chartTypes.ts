@@ -506,7 +506,7 @@ const chartGroups = [
         name: 'Number Cards',
         selector: 'number-card',
         inputFormat: 'singleSeries',
-        options: ['animations', 'colorScheme']
+        options: ['animations', 'colorScheme', 'innerPadding', 'borderRadius']
       },
       {
         name: 'Gauge',
@@ -583,7 +583,7 @@ const chartGroups = [
         name: 'Number Cards - Status',
         selector: 'status-demo',
         inputFormat: 'statusData',
-        options: ['animations', 'colorScheme']
+        options: ['animations', 'colorScheme', 'innerPadding', 'borderRadius']
       },
       {
         name: 'TreeMap - Interactive',

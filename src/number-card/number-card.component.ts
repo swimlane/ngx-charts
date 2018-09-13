@@ -22,10 +22,13 @@ import { gridLayout, gridSize } from '../common/grid-layout.helper';
           [cardColor]="cardColor"
           [bandColor]="bandColor"
           [textColor]="textColor"
+          [dividerColor]="dividerColor"
           [emptyColor]="emptyColor"
           [data]="data"
           [dims]="dims"
+          [size]="size"
           [innerPadding]="innerPadding"
+          [borderRadius]="borderRadius"
           [valueFormatting]="valueFormatting"
           [labelFormatting]="labelFormatting"
           [animations]="animations"
@@ -50,6 +53,8 @@ export class NumberCardComponent extends BaseChartComponent {
   @Input() valueFormatting: any;
   @Input() labelFormatting: any;
   @Input() designatedTotal: number;
+  @Input() borderRadius = 3;
+  @Input() dividerColor = 'rgba(255, 255, 255, 0.14)';
 
   dims: ViewDimensions;
   data: any[];
@@ -58,6 +63,7 @@ export class NumberCardComponent extends BaseChartComponent {
   transform: string;
   domain: any[];
   margin = [10, 10, 10, 10];
+  size: any[];
 
   backgroundCards: any[];
 
@@ -89,6 +95,7 @@ export class NumberCardComponent extends BaseChartComponent {
     }
 
     this.data = gridLayout(this.dims, data, 150, this.designatedTotal);
+    this.size = size;
   }
 
   getDomain(): any[] {
@@ -102,5 +109,4 @@ export class NumberCardComponent extends BaseChartComponent {
   setColors(): void {
     this.colors = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
   }
-
 }

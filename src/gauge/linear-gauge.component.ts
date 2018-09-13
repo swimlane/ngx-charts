@@ -199,12 +199,14 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
     const { width, height } = el.nativeElement.getBoundingClientRect();
     if (width === 0 || height === 0) return;
     const oldScale = resizeScale;
-    const availableWidth = this.dims.width;
-    const availableHeight = Math.max(this.dims.height / 2 - 15, 0);
+    const availableWidth = Math.max(this.dims.width, 1);
+    const availableHeight = Math.max(this.dims.height / 2 - 15, 1);
     const resizeScaleWidth = Math.floor((availableWidth / (width / resizeScale)) * 100) / 100;
     const resizeScaleHeight = Math.floor((availableHeight / (height / resizeScale)) * 100) / 100;
     resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
 
+    if (resizeScale <= 0) resizeScale !== Math.max(oldScale, 0.01);
+    
     if (resizeScale !== oldScale) {
       if (element === 'value') {
         this.valueResizeScale = resizeScale;
