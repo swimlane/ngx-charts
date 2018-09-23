@@ -26,8 +26,11 @@ import { id } from '../utils/id';
     <svg:path
       class="bar"
       stroke="none"
+      role="img"
+      tabIndex="-1"
       [class.active]="isActive"
       [attr.d]="path"
+      [attr.aria-label]="ariaLabel"
       [attr.fill]="hasGradient ? gradientFill : fill"
       (click)="select.emit(data)"
     />
@@ -49,6 +52,7 @@ export class BarComponent implements OnChanges {
   @Input() isActive: boolean = false;
   @Input() stops: any[];
   @Input() animations: boolean = true;
+  @Input() ariaLabel: string;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
