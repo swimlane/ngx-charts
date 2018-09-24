@@ -30,6 +30,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [series]="data"
           [showLabels]="labels"
           [labelFormatting]="labelFormatting"
+          [legendLabelFormatting]="legendLabelFormatting"
           [trimLabels]="trimLabels"
           [maxLabelLength]="maxLabelLength"
           [activeEntries]="activeEntries"
@@ -68,6 +69,7 @@ export class PieChartComponent extends BaseChartComponent {
   @Input() activeEntries: any[] = [];
   @Input() tooltipDisabled: boolean = false;
   @Input() labelFormatting: any;
+  @Input() legendLabelFormatting: (label: any) => any;
   @Input() trimLabels: boolean = true;
   @Input() maxLabelLength: number = 10;
   @Input() tooltipText: any;
@@ -161,7 +163,8 @@ export class PieChartComponent extends BaseChartComponent {
       scaleType: 'ordinal',
       domain: this.domain,
       colors: this.colors,
-      title: this.legendTitle
+      title: this.legendTitle,
+      legendLabelFormatting: this.legendLabelFormatting
     };
   }
 
@@ -173,7 +176,7 @@ export class PieChartComponent extends BaseChartComponent {
       return;
     }
 
-    this.activeEntries = [ item, ...this.activeEntries ];
+    this.activeEntries = [item, ...this.activeEntries];
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
