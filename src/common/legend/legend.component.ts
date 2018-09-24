@@ -1,7 +1,7 @@
 import {
   Component, Input, ChangeDetectionStrategy, Output, EventEmitter,
   SimpleChanges, OnChanges, ChangeDetectorRef, ViewEncapsulation
- } from '@angular/core';
+} from '@angular/core';
 import { formatLabel } from '../label.helper';
 
 @Component({
@@ -43,6 +43,7 @@ export class LegendComponent implements OnChanges {
   @Input() height;
   @Input() width;
   @Input() activeEntries;
+  @Input() legendLabelFormatting: (label: any) => any;
 
   @Output() labelClick: EventEmitter<any> = new EventEmitter();
   @Output() labelActivate: EventEmitter<any> = new EventEmitter();
@@ -64,8 +65,8 @@ export class LegendComponent implements OnChanges {
   getLegendEntries(): any[] {
     const items = [];
 
-    for(const label of this.data) {
-      const formattedLabel = formatLabel(label);
+    for (const label of this.data) {
+      const formattedLabel = (this.legendLabelFormatting && this.legendLabelFormatting(label)) || formatLabel(label);
 
       const idx = items.findIndex((i) => {
         return i.label === formattedLabel;
@@ -84,7 +85,7 @@ export class LegendComponent implements OnChanges {
   }
 
   isActive(entry): boolean {
-    if(!this.activeEntries) return false;
+    if (!this.activeEntries) return false;
     const item = this.activeEntries.find(d => {
       return entry.label === d.name;
     });

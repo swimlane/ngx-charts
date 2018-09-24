@@ -38,6 +38,7 @@ import { TooltipService } from '../tooltip';
         class="chart-legend"
         [data]="legendOptions.domain"
         [title]="legendOptions.title"
+        [legendLabelFormatting]="legendOptions.legendLabelFormatting"
         [colors]="legendOptions.colors"
         [height]="view[1]"
         [width]="legendWidth"
