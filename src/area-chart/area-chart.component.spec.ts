@@ -9,6 +9,8 @@ import { AreaChartModule } from './area-chart.module';
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
 
+const colors = ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'];
+
 @Component({
   selector: 'test-component',
   template: ''
@@ -16,7 +18,7 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
 class TestComponent {
   data: any = multi;
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    domain: colors
   };
 }
 
@@ -64,6 +66,17 @@ describe('<ngx-charts-area-chart>', () => {
       const compiled = fixture.debugElement.nativeElement;
 
       expect(compiled.querySelectorAll('path.area').length).toEqual(4);
+    }));
+
+    it('should match specified colors for area elements', async(() => {
+      const fixture = TestBed.createComponent(TestComponent);
+      fixture.detectChanges();
+
+      const compiled = fixture.debugElement.nativeElement;
+
+      const fills = Array.from(compiled.querySelectorAll('path.area'))
+        .map((areaElement: Element) => areaElement.getAttribute('fill'));
+      expect(colors.every((color) => fills.includes(color))).toBeTruthy();
     }));
   });
 });
