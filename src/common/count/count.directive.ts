@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectorRef, OnDestroy, ElementRef } from '@angular/core';
-import { count, decimalChecker } from './count.helper';
+import { count, getDecimalPortion } from './count.helper';
 
 /**
  * Count up component
@@ -28,7 +28,7 @@ export class CountUpDirective implements OnDestroy {
 
   get countDecimals(): number {
     if (this._countDecimals) return this._countDecimals;
-    return decimalChecker(this.countTo);
+    return getDecimalPortion(this.countTo);
   }
 
   @Input()

@@ -33,13 +33,13 @@ export function count(countFrom, countTo, countDecimals, countDuration, callback
       frameVal = easeOutExpo(progress, startVal, endVal - startVal, duration);
     }
 
+    frameVal = Math.round(frameVal * dec) / dec;
+
     if (countDown) {
       frameVal = frameVal < endVal ? endVal : frameVal;
     } else {
       frameVal = frameVal > endVal ? endVal : frameVal;
     }
-
-    frameVal = Math.round(frameVal * dec) / dec;
 
     const tick = progress < duration;
     callback({
@@ -75,4 +75,16 @@ export function decimalChecker(countTo) {
   }
 
   return 0;
+}
+
+/**
+ * Get decimal portion
+ *
+ * @export
+ * @param {any} countTo
+ * @returns {number} decimal portion of number
+ */
+export function getDecimalPortion(countTo): number {
+  const endVal = Math.abs(Number(countTo));
+  return endVal % 1;
 }
