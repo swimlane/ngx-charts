@@ -14,3 +14,23 @@ export function getUniqueXDomainValues(results: any[]): any[] {
   }
   return Array.from(valueSet);
 }
+
+/**
+ * Get the scaleType of enumerable of values.
+ * @param values
+ * @returns {string} 'time', 'linear' or 'ordinal'
+ */
+export function getScaleType(values): string {
+    const allDates = values.every(value => this.isDate(value));
+    const allNumbers = values.every(value => typeof value === 'number');
+
+    if (allDates) {
+      return 'time';
+    }
+
+    if (allNumbers) {
+      return 'linear';
+    }
+
+    return 'ordinal';
+}
