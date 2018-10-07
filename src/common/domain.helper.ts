@@ -20,17 +20,18 @@ export function getUniqueXDomainValues(results: any[]): any[] {
  * @param values
  * @returns {string} 'time', 'linear' or 'ordinal'
  */
-export function getScaleType(values): string {
-    const allDates = values.every(value => this.isDate(value));
-    const allNumbers = values.every(value => typeof value === 'number');
-
+export function getScaleType(values: any[], checkDateType = true): string {
+  if (checkDateType) {
+    const allDates = values.every(value => value instanceof Date);
     if (allDates) {
       return 'time';
     }
+  }
 
-    if (allNumbers) {
+  const allNumbers = values.every(value => typeof value === 'number');
+  if (allNumbers) {
       return 'linear';
     }
 
-    return 'ordinal';
+  return 'ordinal';
 }
