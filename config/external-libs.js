@@ -1,10 +1,10 @@
 const libs = [
   '@angular/animations',
-  '@angular/platform-browser-dynamic',
-  '@angular/platform-browser',
   '@angular/core',
   '@angular/common',
   '@angular/forms',
+  '@angular/platform-browser',
+  '@angular/platform-browser-dynamic',
   'core-js',
   'core-js/es6',
   'core-js/es7/reflect',
