@@ -1,5 +1,8 @@
 # Changelog
 
+## 9.1.0
+- Feature: Added ES Module Support (#1004) 
+
 ## 9.0.0
 
 - Breaking: Changed the input of valueFormatting for the tree map chart from an object to number
