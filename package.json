@@ -140,18 +140,6 @@
     "cpx": "^1.5.0",
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.7",
-    "d3": "^4.10.2",
-    "d3-array": "^1.2.1",
-    "d3-brush": "^1.0.4",
-    "d3-color": "^1.0.3",
-    "d3-force": "^1.1.0",
-    "d3-format": "^1.2.0",
-    "d3-hierarchy": "^1.1.5",
-    "d3-interpolate": "^1.1.5",
-    "d3-scale": "^1.0.6",
-    "d3-selection": "^1.1.0",
-    "d3-shape": "^1.2.0",
-    "d3-time-format": "^2.1.0",
     "emoji-flags": "^1.2.0",
     "extract-text-webpack-plugin": "2.0.0-beta.4",
     "file-loader": "^0.11.2",
@@ -205,5 +193,18 @@
     "webpack-notifier": "^1.5.0",
     "zone.js": "^0.8.17"
   },
-  "dependencies": {}
+  "dependencies": {
+    "d3": "^4.10.2",
+    "d3-array": "^1.2.1",
+    "d3-brush": "^1.0.4",
+    "d3-color": "^1.0.3",
+    "d3-force": "^1.1.0",
+    "d3-format": "^1.2.0",
+    "d3-hierarchy": "^1.1.5",
+    "d3-interpolate": "^1.1.5",
+    "d3-scale": "^1.0.6",
+    "d3-selection": "^1.1.0",
+    "d3-shape": "^1.2.0",
+    "d3-time-format": "^2.1.0"
+  }
 }
