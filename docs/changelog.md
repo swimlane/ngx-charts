@@ -1,5 +1,8 @@
 # Changelog
 
+## 9.1.1
+- Chore: Move d3 libraries back to dependencies (#1008)
+
 ## 9.1.0
 - Feature: Added ES Module Support (#1004) 
 
