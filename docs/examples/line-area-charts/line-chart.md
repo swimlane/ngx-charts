@@ -112,7 +112,7 @@ The data format is multi series. Plus, the minimum and the maximum value of each
         "name": "2011",
         "value": 8940000,
         "min": 8840000,
-        "max": 930000
+        "max": 9300000
       }
     ]
   },
