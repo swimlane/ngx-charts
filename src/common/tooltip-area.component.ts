@@ -14,6 +14,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
+import { MouseEvent } from '../events';
 
 @Component({
   selector: 'g[ngx-charts-tooltip-area]',

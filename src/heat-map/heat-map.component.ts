@@ -88,6 +88,8 @@ export class HeatMapComponent extends BaseChartComponent {
   @Input() yAxisTicks: any[];
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipText: any;
+  @Input() min: any;
+  @Input() max: any;
 
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
@@ -135,8 +137,14 @@ export class HeatMapComponent extends BaseChartComponent {
     });
 
     if (this.scaleType === 'linear') {
-      const min = Math.min(0, ...this.valueDomain);
-      const max = Math.max(...this.valueDomain);
+      let min = this.min;
+      let max = this.max;
+      if (!this.min) {
+        min = Math.min(0, ...this.valueDomain);
+      }
+      if (!this.max) {
+        max = Math.max(...this.valueDomain);
+      }
       this.valueDomain = [min, max];
     }
 
@@ -146,7 +154,7 @@ export class HeatMapComponent extends BaseChartComponent {
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
     this.rects = this.getRects();
   }
 

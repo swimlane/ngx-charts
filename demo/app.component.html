@@ -238,6 +238,7 @@
         [gradient]="gradient"
         [tooltipDisabled]="tooltipDisabled"
         [tooltipText]="pieTooltipText"
+        (dblclick)="dblclick($event)"
         (select)="select($event)">
       </ngx-charts-pie-chart>
       <ngx-charts-advanced-pie-chart
@@ -246,6 +247,7 @@
         [view]="view"
         [scheme]="colorScheme"
         [results]="single"
+        [valueFormatting]="valueFormatting"
         [animations]="animations"
         (legendLabelClick)="onLegendLabelClick($event)"
         [gradient]="gradient"
@@ -487,6 +489,8 @@
       <ngx-charts-heat-map
         *ngIf="chartType === 'heat-map'"
         class="chart-container"
+        [min]="heatmapMin"
+        [max]="heatmapMax"
         [view]="view"
         [scheme]="colorScheme"
         [results]="multi"
@@ -985,7 +989,6 @@
             Animations
           </label> <br/>
         </div>
-
         <div *ngIf="chart.options.includes('showXAxis')">
           <label>
             <input type="checkbox" [checked]="showXAxis" (change)="showXAxis = $event.target.checked">

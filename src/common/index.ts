@@ -1,6 +1,7 @@
 export * from './chart-common.module';
 export * from './legend';
 export * from './tooltip';
+export * from './axes';
 export * from './count';
 export * from './timeline';
 export * from './color.helper';
@@ -19,3 +20,4 @@ export * from './tick-format.helper';
 export * from './trim-label.helper';
 export * from './view-dimensions.helper';
 export * from './label.helper';
+export * from './domain.helper';

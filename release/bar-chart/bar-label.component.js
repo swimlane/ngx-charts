@@ -8,7 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component, Input, ChangeDetectionStrategy, ElementRef, Output, EventEmitter } from '@angular/core';
-import { formatLabel } from '..';
+import { formatLabel } from '../common/label.helper';
 var BarLabelComponent = /** @class */ (function () {
     function BarLabelComponent(element) {
         this.dimensionsChanged = new EventEmitter();

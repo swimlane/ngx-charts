@@ -8,7 +8,7 @@ import {
     Output,    
     EventEmitter
   } from '@angular/core';
-import { formatLabel } from '..';
+import { formatLabel } from '../common/label.helper';
   
 @Component({
   selector: 'g[ngx-charts-bar-label]',

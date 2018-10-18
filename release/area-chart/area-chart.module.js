@@ -10,7 +10,6 @@ import { AreaChartNormalizedComponent } from './area-chart-normalized.component'
 import { AreaChartStackedComponent } from './area-chart-stacked.component';
 import { AreaSeriesComponent } from './area-series.component';
 import { ChartCommonModule } from '../common/chart-common.module';
-export { AreaChartComponent, AreaChartNormalizedComponent, AreaChartStackedComponent, AreaSeriesComponent };
 var AreaChartModule = /** @class */ (function () {
     function AreaChartModule() {
     }

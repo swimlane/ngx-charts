@@ -15,6 +15,7 @@ export declare class PieChartComponent extends BaseChartComponent {
     trimLabels: boolean;
     maxLabelLength: number;
     tooltipText: any;
+    dblclick: EventEmitter<{}>;
     select: EventEmitter<{}>;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;

@@ -5,8 +5,6 @@ import { PolarSeriesComponent } from './polar-series.component';
 import { PieChartModule } from '../pie-chart/';
 import { LineChartModule } from '../line-chart/';
 
-export { PolarChartComponent, PolarSeriesComponent };
-
 @NgModule({
   imports: [ChartCommonModule, PieChartModule, LineChartModule],
   declarations: [
