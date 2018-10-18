@@ -20,4 +20,16 @@
   .scale-legend-label{
     font-size: 12px;
   }
+
+  .horizontal-legend {
+    &.scale-legend {
+      flex-direction: row;
+    }
+
+    .scale-legend-wrap {
+      width: auto;
+      height: 30px;
+      margin: 0 16px;
+    }
+  }
 }

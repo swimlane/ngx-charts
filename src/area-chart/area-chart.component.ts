@@ -144,6 +144,7 @@ export class AreaChartComponent extends BaseChartComponent {
 
   @Input() legend;
   @Input() legendTitle: string = 'Legend';
+  @Input() legendPosition: string = 'right';
   @Input() state;
   @Input() xAxis;
   @Input() yAxis;
@@ -218,7 +219,8 @@ export class AreaChartComponent extends BaseChartComponent {
       showXLabel: this.showXAxisLabel,
       showYLabel: this.showYAxisLabel,
       showLegend: this.legend,
-      legendType: this.schemeType
+      legendType: this.schemeType,
+      legendPosition: this.legendPosition
     });
 
     if (this.timeline) {
@@ -435,7 +437,8 @@ export class AreaChartComponent extends BaseChartComponent {
       scaleType: this.schemeType,
       colors: undefined,
       domain: [],
-      title: undefined
+      title: undefined,
+      position: this.legendPosition
     };
     if (opts.scaleType === 'ordinal') {
       opts.domain = this.seriesDomain;

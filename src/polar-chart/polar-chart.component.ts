@@ -128,6 +128,7 @@ export class PolarChartComponent extends BaseChartComponent {
 
   @Input() legend: boolean;
   @Input() legendTitle: string = 'Legend';
+  @Input() legendPosition: string = 'right';
   @Input() xAxis: boolean;
   @Input() yAxis: boolean;
   @Input() showXAxisLabel: boolean;
@@ -203,7 +204,8 @@ export class PolarChartComponent extends BaseChartComponent {
       showXLabel: this.showXAxisLabel,
       showYLabel: this.showYAxisLabel,
       showLegend: this.legend,
-      legendType: this.schemeType
+      legendType: this.schemeType,
+      legendPosition: this.legendPosition
     });
 
     const halfWidth = ~~(this.dims.width / 2);
@@ -431,14 +433,16 @@ export class PolarChartComponent extends BaseChartComponent {
         scaleType: this.schemeType,
         colors: this.colors,
         domain: this.seriesDomain,
-        title: this.legendTitle
+        title: this.legendTitle,
+        position: this.legendPosition
       };
     }
     return {
       scaleType: this.schemeType,
       colors: this.colors.scale,
       domain: this.yDomain,
-      title: undefined
+      title: undefined,
+      position: this.legendPosition
     };
   }
 

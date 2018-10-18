@@ -116,6 +116,7 @@ export class BubbleChartComponent extends BaseChartComponent {
   @Input() showGridLines: boolean = true;
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
+  @Input() legendPosition: string = 'right';
   @Input() xAxis: boolean = true;
   @Input() yAxis: boolean = true;
   @Input() showXAxisLabel: boolean;
@@ -131,7 +132,6 @@ export class BubbleChartComponent extends BaseChartComponent {
   @Input() minRadius = 3;
   @Input() autoScale: boolean;
   @Input() schemeType = 'ordinal';
-  @Input() legendPosition: string = 'right';
   @Input() tooltipDisabled: boolean = false;
   @Input() xScaleMin: any;
   @Input() xScaleMax: any;
@@ -187,7 +187,8 @@ export class BubbleChartComponent extends BaseChartComponent {
       showXLabel: this.showXAxisLabel,
       showYLabel: this.showYAxisLabel,
       showLegend: this.legend,
-      legendType: this.schemeType
+      legendType: this.schemeType,
+      legendPosition: this.legendPosition
     });
 
     this.seriesDomain = this.results.map(d => d.name);
