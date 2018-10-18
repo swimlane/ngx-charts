@@ -11,6 +11,7 @@ import { scaleBand } from 'd3-scale';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
+import {getScaleType} from '../common/domain.helper';
 
 @Component({
   selector: 'ngx-charts-heat-map',
@@ -119,7 +120,7 @@ export class HeatMapComponent extends BaseChartComponent {
     this.yDomain = this.getYDomain();
     this.valueDomain = this.getValueDomain();
 
-    this.scaleType = this.getScaleType(this.valueDomain);
+    this.scaleType = getScaleType(this.valueDomain, false);
 
     this.dims = calculateViewDimensions({
       width: this.width,
@@ -271,19 +272,6 @@ export class HeatMapComponent extends BaseChartComponent {
 
   onClick(data): void {
     this.select.emit(data);
-  }
-
-  getScaleType(values): string {
-    let num = true;
-
-    for (const value of values) {
-      if (typeof value !== 'number') {
-        num = false;
-      }
-    }
-
-    if (num) return 'linear';
-    return 'ordinal';
   }
 
   setColors(): void {

@@ -16,7 +16,7 @@ import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensio
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
-import { getUniqueXDomainValues } from '../common/domain.helper';
+import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
 
 @Component({
   selector: 'ngx-charts-area-chart',
@@ -262,7 +262,7 @@ export class AreaChartComponent extends BaseChartComponent {
   getXDomain(): any[] {
     let values = getUniqueXDomainValues(this.results);
 
-    this.scaleType = this.getScaleType(values);
+    this.scaleType = getScaleType(values);
     let domain = [];
 
     if (this.scaleType === 'linear') {
