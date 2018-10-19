@@ -297,7 +297,8 @@
         [rangeFillOpacity]="rangeFillOpacity"
         [roundDomains]="roundDomains"
         [tooltipDisabled]="tooltipDisabled"
-        (select)="select($event)">
+        (select)="select($event)"
+        [yInverse]="yInverse">
       </ngx-charts-line-chart>
       <ngx-charts-polar-chart
         *ngIf="chartType === 'polar-chart'"
@@ -987,145 +988,150 @@
           <label>
             <input type="checkbox" [checked]="animations" (change)="animations = $event.target.checked">
             Animations
-          </label> <br/>
+          </label> <br />
         </div>
         <div *ngIf="chart.options.includes('showXAxis')">
           <label>
             <input type="checkbox" [checked]="showXAxis" (change)="showXAxis = $event.target.checked">
             Show X Axis
-          </label> <br/>
+          </label> <br />
         </div>
         <div *ngIf="chart.options.includes('showRefLabels')">
           <label>
             <input type="checkbox" [checked]="showRefLabels" (change)="showRefLabels = $event.target.checked">
             Show Reference Labels
-          </label> <br/>
+          </label> <br />
         </div>
         <div *ngIf="chart.options.includes('showRefLines')">
           <label>
             <input type="checkbox" [checked]="showRefLines" (change)="showRefLines = $event.target.checked">
             Show Reference Lines
-          </label> <br/>
+          </label> <br />
         </div>
         <div *ngIf="chart.options.includes('showYAxis')">
           <label>
             <input type="checkbox" [checked]="showYAxis" (change)="showYAxis = $event.target.checked">
             Show Y Axis
-          </label> <br/>
+          </label> <br />
         </div>
         <div *ngIf="chart.options.includes('showGridLines')">
           <label>
             <input type="checkbox" [checked]="showGridLines" (change)="showGridLines = $event.target.checked">
             Show Grid Lines
-          </label> <br/>
+          </label> <br />
         </div>
         <div *ngIf="chart.options.includes('roundDomains')">
           <label>
             <input type="checkbox" [checked]="roundDomains" (change)="roundDomains = $event.target.checked">
             Round Domains
-          </label> <br/>
+          </label> <br />
         </div>
         <div *ngIf="chart.options.includes('gradient')">
           <label>
             <input type="checkbox" [checked]="gradient" (change)="gradient = $event.target.checked">
             Use Gradients
-          </label> <br/>
+          </label> <br />
         </div>
         <div *ngIf="chart.options.includes('showLegend')">
           <label>
             <input type="checkbox" [checked]="showLegend" (change)="showLegend = $event.target.checked">
             Show Legend
-          </label> <br/>
+          </label> <br />
+        </div>
+        <div *ngIf="chart.options.includes('yInverse')">
+          <label>
+            <input type="checkbox" [checked]="yInverse" (change)="yInverse = $event.target.checked">
+            Inverse Y
+          </label> <br />
         </div>
         <div *ngIf="chart.options.includes('showDataLabel')">
           <label>
             <input type="checkbox" [checked]="showDataLabel" (change)="showDataLabel = $event.target.checked">
             Show Data Label
-          </label> <br/>
+          </label> <br />
         </div>
         <div *ngIf="chart.options.includes('roundEdges')">
           <label>
             <input type="checkbox" [checked]="roundEdges" (change)="roundEdges = $event.target.checked">
             Round Bar Edges
-          </label> <br/>
+          </label> <br />
         </div>
         <div *ngIf="chart.options.includes('legendTitle')">
-          <label>Legend Title:</label><br/>
-          <input type="text" [(ngModel)]="legendTitle"><br/>
+          <label>Legend Title:</label><br />
+          <input type="text" [(ngModel)]="legendTitle"><br />
         </div>
         <div *ngIf="chart.options.includes('legendPosition')">
-          <label>Legend Position:</label><br/>
+          <label>Legend Position:</label><br />
           <select style="margin-left: 10px;" [(ngModel)]="legendPosition">
             <option value="right">Right</option>
             <option value="below">Below</option>
-          </select><br/>
+          </select><br />
         </div>
         <div *ngIf="chart.options.includes('tooltipDisabled')">
           <label>
             <input type="checkbox" [checked]="tooltipDisabled" (change)="tooltipDisabled = $event.target.checked">
             Disable tooltip
-          </label> <br/>
+          </label> <br />
         </div>
         <div *ngIf="chart.options.includes('showXAxisLabel')">
           <label>
             <input type="checkbox" [checked]="showXAxisLabel" (change)="showXAxisLabel = $event.target.checked">
             Show X Axis Label
-          </label> <br/>
+          </label> <br />
         </div>
         <div *ngIf="chart.options.includes('xAxisLabel')">
-          <label>X Axis Label:</label><br/>
-          <input type="text" [(ngModel)]="xAxisLabel"><br/>
+          <label>X Axis Label:</label><br />
+          <input type="text" [(ngModel)]="xAxisLabel"><br />
         </div>
         <div *ngIf="chart.options.includes('showYAxisLabel')">
           <label>
             <input type="checkbox" [checked]="showYAxisLabel" (change)="showYAxisLabel = $event.target.checked">
             Show Y Axis Label
-          </label> <br/>
+          </label> <br />
         </div>
         <div *ngIf="chart.options.includes('yAxisLabel')">
-          <label>Y Axis Label:</label><br/>
-          <input type="text" [(ngModel)]="yAxisLabel"><br/>
+          <label>Y Axis Label:</label><br />
+          <input type="text" [(ngModel)]="yAxisLabel"><br />
         </div>
         <div *ngIf="chart.options.includes('showLabels')">
           <label>
             <input type="checkbox" [checked]="showLabels" (change)="showLabels = $event.target.checked">
             Show Labels
-          </label> <br/>
+          </label> <br />
         </div>
         <div *ngIf="chart.options.includes('doughnut')">
           <label>
             <input type="checkbox" [checked]="doughnut" (change)="doughnut = $event.target.checked">
             Doughnut
-          </label> <br/>
+          </label> <br />
         </div>
         <div *ngIf="chart.options.includes('arcWidth') && doughnut">
-          <label>Arc width (fraction of radius):</label><br/>
+          <label>Arc width (fraction of radius):</label><br />
           <input type="number" [disabled]="!doughnut" [(ngModel)]="arcWidth"
-                 max="1" min="0" step="0.01"><br/>
+                 max="1" min="0" step="0.01"><br />
         </div>
         <div *ngIf="chart.options.includes('explodeSlices') && !doughnut">
           <label>
             <input type="checkbox" [checked]="explodeSlices" (change)="explodeSlices = $event.target.checked">
             Explode Slices
-          </label> <br/>
+          </label> <br />
         </div>
         <div *ngIf="chart.options.includes('autoScale')">
           <label>
             <input type="checkbox" [checked]="autoScale" (change)="autoScale = $event.target.checked">
             Auto Scale
-          </label> <br/>
+          </label> <br />
         </div>
         <div *ngIf="chart.options.includes('timeline')">
           <label>
             <input type="checkbox" [checked]="timeline" (change)="timeline = $event.target.checked">
             Timeline
-          </label> <br/>
+          </label> <br />
         </div>
         <div *ngIf="chart.options.includes('curve')">
           <label>Line Interpolation</label>
-          <select
-            [(ngModel)]="curveType"
-            (ngModelChange)="curve = getInterpolationType($event)">
+          <select [(ngModel)]="curveType"
+                  (ngModelChange)="curve = getInterpolationType($event)">
             <option *ngFor="let interpolationType of interpolationTypes" [value]="interpolationType">
               {{interpolationType}}
             </option>
@@ -1133,80 +1139,79 @@
         </div>
         <div *ngIf="chart.options.includes('curveClosed')">
           <label>Line Interpolation</label>
-          <select
-            [(ngModel)]="closedCurveType"
-            (ngModelChange)="closedCurve = getInterpolationType($event)">
+          <select [(ngModel)]="closedCurveType"
+                  (ngModelChange)="closedCurve = getInterpolationType($event)">
             <option *ngFor="let interpolationType of closedInterpolationTypes" [value]="interpolationType">
               {{interpolationType}}
             </option>
           </select>
         </div>
         <div *ngIf="chart.options.includes('min')">
-          <label>Min value:</label><br/>
-          <input type="number" [(ngModel)]="gaugeMin"><br/>
+          <label>Min value:</label><br />
+          <input type="number" [(ngModel)]="gaugeMin"><br />
         </div>
         <div *ngIf="chart.options.includes('max')">
-          <label>Max value:</label><br/>
-          <input type="number" [(ngModel)]="gaugeMax"><br/>
+          <label>Max value:</label><br />
+          <input type="number" [(ngModel)]="gaugeMax"><br />
         </div>
         <div *ngIf="chart.options.includes('innerPadding')">
-          <label>Inner padding value:</label><br/>
-          <input type="text" [(ngModel)]="innerPadding" min="0" step="1"><br/>
+          <label>Inner padding value:</label><br />
+          <input type="text" [(ngModel)]="innerPadding" min="0" step="1"><br />
         </div>
         <div *ngIf="chart.options.includes('barPadding')">
-          <label>Padding between bars:</label><br/>
-          <input type="number" [(ngModel)]="barPadding" min="0" step="1"><br/>
+          <label>Padding between bars:</label><br />
+          <input type="number" [(ngModel)]="barPadding" min="0" step="1"><br />
         </div>
         <div *ngIf="chart.options.includes('groupPadding')">
-          <label>Padding between groups:</label><br/>
-          <input type="number" [(ngModel)]="groupPadding" min="0" step="1"><br/>
+          <label>Padding between groups:</label><br />
+          <input type="number" [(ngModel)]="groupPadding" min="0" step="1"><br />
         </div>
         <div *ngIf="chart.options.includes('value')">
-          <label>Value:</label><br/>
-          <input type="number" [(ngModel)]="gaugeValue"><br/>
+          <label>Value:</label><br />
+          <input type="number" [(ngModel)]="gaugeValue"><br />
         </div>
         <div *ngIf="chart.options.includes('previousValue')">
-          <label>Previous value:</label><br/>
-          <input type="number" [(ngModel)]="gaugePreviousValue"><br/>
+          <label>Previous value:</label><br />
+          <input type="number" [(ngModel)]="gaugePreviousValue"><br />
         </div>
         <div *ngIf="chart.options.includes('angleSpan')">
-          <label>Angle span:</label><br/>
-          <input type="number" [(ngModel)]="gaugeAngleSpan"><br/>
+          <label>Angle span:</label><br />
+          <input type="number" [(ngModel)]="gaugeAngleSpan"><br />
         </div>
         <div *ngIf="chart.options.includes('startAngle')">
-          <label>Start Angle:</label><br/>
-          <input type="number" [(ngModel)]="gaugeStartAngle"><br/>
+          <label>Start Angle:</label><br />
+          <input type="number" [(ngModel)]="gaugeStartAngle"><br />
         </div>
         <div *ngIf="chart.options.includes('showAxis')">
           <label>
             <input type="checkbox" [checked]="gaugeShowAxis" (change)="gaugeShowAxis = $event.target.checked">
             Show Axis
-          </label> <br/>
+          </label> <br />
         </div>
         <div *ngIf="chart.options.includes('largeSegments')">
-          <label>Number of large segments:</label><br/>
-          <input type="number" [(ngModel)]="gaugeLargeSegments"><br/>
+          <label>Number of large segments:</label><br />
+          <input type="number" [(ngModel)]="gaugeLargeSegments"><br />
         </div>
         <div *ngIf="chart.options.includes('smallSegments')">
-          <label>Number of small segments:</label><br/>
-          <input type="number" [(ngModel)]="gaugeSmallSegments"><br/>
+          <label>Number of small segments:</label><br />
+          <input type="number" [(ngModel)]="gaugeSmallSegments"><br />
         </div>
         <div *ngIf="chart.options.includes('units')">
-          <label>Units:</label><br/>
-          <input type="text" [(ngModel)]="gaugeUnits"><br/>
+          <label>Units:</label><br />
+          <input type="text" [(ngModel)]="gaugeUnits"><br />
         </div>
         <div *ngIf="chart.options.includes('margin')">
           <label>
             <input type="checkbox" [checked]="margin" (change)="margin = $event.target.checked">
             Show Margin
-          </label> <br/>
+          </label> <br />
         </div>
 
         <div *ngIf="chart.options.includes('margin') && margin">
-          <label>Top:</label><input type="number" [(ngModel)]="marginTop"><br/>
-          <label>Right:</label><input type="number" [(ngModel)]="marginRight"><br/>
-          <label>Bottom:</label><input type="number" [(ngModel)]="marginBottom"><br/>
-          <label>Left:</label><input type="number" [(ngModel)]="marginLeft"><br/>
+          <label>Top:</label><input type="number" [(ngModel)]="marginTop"><br />
+          <label>Right:</label><input type="number" [(ngModel)]="marginRight"><br />
+          <label>Bottom:</label><input type="number" [(ngModel)]="marginBottom"><br />
+          <label>Left:</label><input type="number" [(ngModel)]="marginLeft"><br />
         </div>
 
         <div *ngIf="chart.options.includes('minRadius')">
@@ -1219,16 +1224,15 @@
 
         <div *ngIf="chart.options.includes('xScaleMin')">
           <div *ngIf="chartType !== 'bubble-chart'">
-            <label></label><br/>
-            <ngx-date-time
-              [inputType]="'datetime'"
-              label="Minimum X-Scale value"
-              [(ngModel)]="xScaleMin">
+            <label></label><br />
+            <ngx-date-time [inputType]="'datetime'"
+                           label="Minimum X-Scale value"
+                           [(ngModel)]="xScaleMin">
             </ngx-date-time>
           </div>
           <div *ngIf="chartType === 'bubble-chart'">
-            <label>Minimum X-Scale value</label><br/>
-            <input type="number" [(ngModel)]="xScaleMin"><br/>
+            <label>Minimum X-Scale value</label><br />
+            <input type="number" [(ngModel)]="xScaleMin"><br />
           </div>
         </div>
 
@@ -1241,18 +1245,18 @@
             </ngx-date-time>
           </div>
           <div *ngIf="chartType.startsWith('bar-horizontal') || chartType === 'bubble-chart'">
-            <label>Maximum X-Scale value</label><br/>
-            <input type="number" [(ngModel)]="xScaleMax"><br/>
+            <label>Maximum X-Scale value</label><br />
+            <input type="number" [(ngModel)]="xScaleMax"><br />
           </div>
         </div>
 
         <div *ngIf="chart.options.includes('yScaleMin')">
-          <label>Minimum Y-Scale value</label><br/>
-          <input type="number" [(ngModel)]="yScaleMin"><br/>
+          <label>Minimum Y-Scale value</label><br />
+          <input type="number" [(ngModel)]="yScaleMin"><br />
         </div>
         <div *ngIf="chart.options.includes('yScaleMax')">
-          <label>Maximum Y-Scale value</label><br/>
-          <input type="number" [(ngModel)]="yScaleMax"><br/>
+          <label>Maximum Y-Scale value</label><br />
+          <input type="number" [(ngModel)]="yScaleMax"><br />
         </div>
 
       </div>

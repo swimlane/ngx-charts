@@ -70,6 +70,7 @@ export class AppComponent implements OnInit {
   fitContainer: boolean = false;
 
   // options
+  yInverse = false;
   showXAxis = true;
   showYAxis = true;
   gradient = false;

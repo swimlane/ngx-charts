@@ -303,7 +303,8 @@ const chartGroups = [
           'xScaleMin',
           'xScaleMax',
           'yScaleMin',
-          'yScaleMax'
+          'yScaleMax',
+          'yInverse'
         ],
         defaults: {
           yAxisLabel: 'GDP Per Capita',
