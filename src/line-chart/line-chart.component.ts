@@ -70,7 +70,7 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
           [showRefLabels]="showRefLabels"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
-        <svg:g [attr.clip-path]="clipPath">
+        <svg:g [attr.clip-path]="clipPath" id="chartArea">
           <svg:g *ngFor="let series of results; trackBy:trackBy" [@animationState]="'active'">
             <svg:g ngx-charts-line-series
               [xScale]="xScale"
