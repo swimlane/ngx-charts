@@ -35,6 +35,7 @@ import { D0Types } from './series-vertical.component';
       (select)="click($event)"
       [gradient]="gradient"
       [isActive]="isActive(bar.data)"
+      [ariaLabel]="bar.ariaLabel"
       [animations]="animations"
       (activate)="activate.emit($event)"
       (deactivate)="deactivate.emit($event)"
@@ -190,9 +191,11 @@ export class SeriesHorizontal implements OnChanges {
       }
 
       let tooltipLabel = formattedLabel;
+      bar.ariaLabel = formattedLabel + ' ' + value.toLocaleString();
       if (this.seriesName) {
         tooltipLabel = `${this.seriesName} • ${formattedLabel}`;
         bar.data.series = this.seriesName;
+        bar.ariaLabel = this.seriesName + ' ' +  bar.ariaLabel;
       }
 
       bar.tooltipText = this.tooltipDisabled ? undefined : `

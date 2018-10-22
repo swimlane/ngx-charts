@@ -37,6 +37,7 @@ export enum D0Types {
       [orientation]="'vertical'"
       [roundEdges]="bar.roundEdges"
       [gradient]="gradient"
+      [ariaLabel]="bar.ariaLabel"
       [isActive]="isActive(bar.data)"
       (select)="onClick($event)"
       (activate)="activate.emit($event)"
@@ -203,9 +204,11 @@ export class SeriesVerticalComponent implements OnChanges {
       }
 
       let tooltipLabel = formattedLabel;
+      bar.ariaLabel = formattedLabel + ' ' + value.toLocaleString();
       if (this.seriesName) {
         tooltipLabel = `${this.seriesName} • ${formattedLabel}`;
         bar.data.series = this.seriesName;
+        bar.ariaLabel = this.seriesName + ' ' +  bar.ariaLabel;
       }
 
       bar.tooltipText = this.tooltipDisabled ? undefined : `
