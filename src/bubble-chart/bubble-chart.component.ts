@@ -20,7 +20,8 @@ import { scaleLinear } from 'd3-scale';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
-import { getScaleType, getDomain, getScale } from './bubble-chart.utils';
+import { getScaleType } from '../common/domain.helper';
+import { getDomain, getScale } from './bubble-chart.utils';
 import { id } from '../utils/id';
 
 @Component({

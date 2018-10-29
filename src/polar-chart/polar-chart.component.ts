@@ -20,8 +20,8 @@ import { curveCardinalClosed } from 'd3-shape';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
-
-import { isDate, isNumber } from '../utils/types';
+import { getScaleType } from '../common/domain.helper';
+import { isDate } from '../utils/types';
 
 const twoPI = 2 * Math.PI;
 
@@ -228,7 +228,7 @@ export class PolarChartComponent extends BaseChartComponent {
 
   setScales() {
     const xValues = this.getXValues();
-    this.scaleType = this.getScaleType(xValues);
+    this.scaleType = getScaleType(xValues);
     this.xDomain = this.filteredDomain || this.getXDomain(xValues);
 
     this.yDomain = this.getYDomain();
@@ -391,25 +391,6 @@ export class PolarChartComponent extends BaseChartComponent {
       .domain(domain);
 
     return this.roundDomains ? scale.nice() : scale;
-  }
-
-  getScaleType(values): string {
-    let date = true;
-    let num = true;
-
-    for (const value of values) {
-      if (!isDate(value)) {
-        date = false;
-      }
-
-      if (!isNumber(value)) {
-        num = false;
-      }
-    }
-
-    if (date) return 'time';
-    if (num) return 'linear';
-    return 'ordinal';
   }
 
   onClick(data, series?): void {
