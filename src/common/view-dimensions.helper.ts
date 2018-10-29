@@ -7,7 +7,7 @@ export interface ViewDimensions {
 export function calculateViewDimensions({
   width, height, margins, showXAxis = false, showYAxis = false, xAxisHeight = 0,
   yAxisWidth = 0, showXLabel = false, showYLabel = false, showLegend = false,
-  legendType = 'ordinal', legendPosition = 'aside', columns = 12
+  legendType = 'ordinal', legendPosition = 'right', columns = 12
 }): ViewDimensions {
   let xOffset = margins[3];
   let chartWidth = width;
