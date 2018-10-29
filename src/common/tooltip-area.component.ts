@@ -4,7 +4,6 @@ import {
   Output,
   EventEmitter,
   ViewChild,
-  Renderer,
   ChangeDetectionStrategy,
   TemplateRef,
 } from '@angular/core';
@@ -102,8 +101,6 @@ export class TooltipArea {
 
   @ViewChild('tooltipAnchor') tooltipAnchor;
 
-  constructor(private renderer: Renderer) { }
-
   getValues(xVal): any[] {
     const results = [];
 
@@ -157,7 +154,7 @@ export class TooltipArea {
     this.anchorValues = this.getValues(closestPoint);
     if (this.anchorPos !== this.lastAnchorPos) {
       const ev = new MouseEvent('mouseleave', {bubbles: false});
-      this.renderer.invokeElementMethod(this.tooltipAnchor.nativeElement, 'dispatchEvent', [ev]);
+      this.tooltipAnchor.nativeElement.dispatchEvent(ev);
       this.anchorOpacity = 0.7;
       this.hover.emit({
         value: closestPoint
@@ -201,12 +198,12 @@ export class TooltipArea {
 
   showTooltip(): void {
     const event = new MouseEvent('mouseenter', {bubbles: false});
-    this.renderer.invokeElementMethod(this.tooltipAnchor.nativeElement, 'dispatchEvent', [event]);
+    this.tooltipAnchor.nativeElement.dispatchEvent(event);
   }
 
   hideTooltip(): void {
     const event = new MouseEvent('mouseleave', {bubbles: false});
-    this.renderer.invokeElementMethod(this.tooltipAnchor.nativeElement, 'dispatchEvent', [event]);
+    this.tooltipAnchor.nativeElement.dispatchEvent(event);
     this.anchorOpacity = 0;
     this.lastAnchorPos = -1;
   }
