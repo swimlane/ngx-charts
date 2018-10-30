@@ -1,10 +1,21 @@
 # Changelog
 
+## 10.0.0
+
+- Breaking: Upgraded to angular 7
+- Feathre: Implemented legened positioning
+- Feature: Added accessibility attributes to bar charts (#977)
+- Chore: Migrated to Renderer2 (#1021)
+- Chore: getScaleType performance improvements (#995)
+- Docs: Fixex value typo (#974)
+
 ## 9.1.1
+
 - Chore: Move d3 libraries back to dependencies (#1008)
 
 ## 9.1.0
-- Feature: Added ES Module Support (#1004) 
+
+- Feature: Added ES Module Support (#1004)
 
 ## 9.0.0
 
