@@ -35,7 +35,7 @@ export declare class PolarSeriesComponent implements OnChanges {
     sortData(data: any): any;
     isActive(entry: any): boolean;
     isInactive(entry: any): boolean;
-    defaultTooltipText({label, value}: {
+    defaultTooltipText({ label, value }: {
         label: any;
         value: any;
     }): string;

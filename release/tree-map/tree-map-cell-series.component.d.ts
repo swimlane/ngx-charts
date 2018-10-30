@@ -13,7 +13,7 @@ export declare class TreeMapCellSeriesComponent implements OnChanges {
     cells: any[];
     ngOnChanges(changes: SimpleChanges): void;
     getCells(): any[];
-    getTooltipText({label, value}: {
+    getTooltipText({ label, value }: {
         label: any;
         value: any;
     }): string;

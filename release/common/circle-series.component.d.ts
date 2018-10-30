@@ -24,7 +24,7 @@ export declare class CircleSeriesComponent implements OnChanges, OnInit {
     update(): void;
     getActiveCircle(): {};
     mapDataPointToCircle(d: any, i: number): any;
-    getTooltipText({tooltipLabel, value, seriesName, min, max}: {
+    getTooltipText({ tooltipLabel, value, seriesName, min, max }: {
         tooltipLabel: any;
         value: any;
         seriesName: any;

@@ -13,6 +13,8 @@
     padding: 0;
     margin: 0;
     list-style: none; }
+  .chart-legend .horizontal-legend li {
+    display: inline-block; }
   .chart-legend .legend-wrap {
     width: calc(100% - 10px); }
   .chart-legend .legend-labels {

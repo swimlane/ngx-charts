@@ -141,9 +141,10 @@ var InjectionService = /** @class */ (function () {
         });
         // use the renderer to append the element for univseral support
         var renderer = componentRef.instance.renderer;
-        renderer.projectNodes(location, [componentRootNode]);
+        renderer.appendChild(location, componentRootNode);
         return componentRef;
     };
+    var InjectionService_1;
     InjectionService.globalRootViewContainer = null;
     InjectionService = InjectionService_1 = __decorate([
         Injectable(),
@@ -152,7 +153,6 @@ var InjectionService = /** @class */ (function () {
             Injector])
     ], InjectionService);
     return InjectionService;
-    var InjectionService_1;
 }());
 export { InjectionService };
 //# sourceMappingURL=injection.service.js.map

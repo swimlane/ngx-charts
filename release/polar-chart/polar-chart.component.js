@@ -1,20 +1,26 @@
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
 };
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -32,13 +38,15 @@ import { curveCardinalClosed } from 'd3-shape';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
-import { isDate, isNumber } from '../utils/types';
+import { getScaleType } from '../common/domain.helper';
+import { isDate } from '../utils/types';
 var twoPI = 2 * Math.PI;
 var PolarChartComponent = /** @class */ (function (_super) {
     __extends(PolarChartComponent, _super);
     function PolarChartComponent() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.legendTitle = 'Legend';
+        _this.legendPosition = 'right';
         _this.showGridLines = true;
         _this.curve = curveCardinalClosed;
         _this.activeEntries = [];
@@ -77,7 +85,8 @@ var PolarChartComponent = /** @class */ (function (_super) {
             showXLabel: this.showXAxisLabel,
             showYLabel: this.showYAxisLabel,
             showLegend: this.legend,
-            legendType: this.schemeType
+            legendType: this.schemeType,
+            legendPosition: this.legendPosition
         });
         var halfWidth = ~~(this.dims.width / 2);
         var halfHeight = ~~(this.dims.height / 2);
@@ -91,7 +100,7 @@ var PolarChartComponent = /** @class */ (function (_super) {
     };
     PolarChartComponent.prototype.setScales = function () {
         var xValues = this.getXValues();
-        this.scaleType = this.getScaleType(xValues);
+        this.scaleType = getScaleType(xValues);
         this.xDomain = this.filteredDomain || this.getXDomain(xValues);
         this.yDomain = this.getYDomain();
         this.seriesDomain = this.getSeriesDomain();
@@ -244,24 +253,6 @@ var PolarChartComponent = /** @class */ (function (_super) {
             .domain(domain);
         return this.roundDomains ? scale.nice() : scale;
     };
-    PolarChartComponent.prototype.getScaleType = function (values) {
-        var date = true;
-        var num = true;
-        for (var _i = 0, values_1 = values; _i < values_1.length; _i++) {
-            var value = values_1[_i];
-            if (!isDate(value)) {
-                date = false;
-            }
-            if (!isNumber(value)) {
-                num = false;
-            }
-        }
-        if (date)
-            return 'time';
-        if (num)
-            return 'linear';
-        return 'ordinal';
-    };
     PolarChartComponent.prototype.onClick = function (data, series) {
         if (series) {
             data.series = series.name;
@@ -280,14 +271,16 @@ var PolarChartComponent = /** @class */ (function (_super) {
                 scaleType: this.schemeType,
                 colors: this.colors,
                 domain: this.seriesDomain,
-                title: this.legendTitle
+                title: this.legendTitle,
+                position: this.legendPosition
             };
         }
         return {
             scaleType: this.schemeType,
             colors: this.colors.scale,
             domain: this.yDomain,
-            title: undefined
+            title: undefined,
+            position: this.legendPosition
         };
     };
     PolarChartComponent.prototype.updateYAxisWidth = function (_a) {
@@ -337,6 +330,10 @@ var PolarChartComponent = /** @class */ (function (_super) {
         Input(),
         __metadata("design:type", String)
     ], PolarChartComponent.prototype, "legendTitle", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", String)
+    ], PolarChartComponent.prototype, "legendPosition", void 0);
     __decorate([
         Input(),
         __metadata("design:type", Boolean)

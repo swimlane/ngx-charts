@@ -29,7 +29,7 @@ export declare class YAxisComponent implements OnChanges {
     ticksComponent: YAxisTicksComponent;
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
-    emitTicksWidth({width}: {
+    emitTicksWidth({ width }: {
         width: any;
     }): void;
 }

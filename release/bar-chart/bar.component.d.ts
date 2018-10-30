@@ -13,6 +13,7 @@ export declare class BarComponent implements OnChanges {
     isActive: boolean;
     stops: any[];
     animations: boolean;
+    ariaLabel: string;
     select: EventEmitter<{}>;
     activate: EventEmitter<{}>;
     deactivate: EventEmitter<{}>;
