@@ -1,7 +1,5 @@
 {
-  "rulesDirectory": [
-    "node_modules/codelyzer"
-  ],
+  "rulesDirectory": ["node_modules/codelyzer"],
   "extends": "tslint-config-swimlane/base",
   "rules": {
     "deprecation": true,

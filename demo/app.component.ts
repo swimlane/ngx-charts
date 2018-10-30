@@ -38,7 +38,7 @@ function multiFormat(value) {
   selector: 'app',
   providers: [Location, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['../node_modules/@swimlane/ngx-ui/release/index.css', './app.component.scss'],
+  styleUrls: ['../node_modules/@swimlane/ngx-ui/index.css', './app.component.scss'],
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
