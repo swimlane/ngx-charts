@@ -1,5 +1,9 @@
 {
   "rulesDirectory": ["node_modules/codelyzer"],
   "extends": "tslint-config-swimlane/base",
+  "rules": {
+    "deprecation": true,
+    "no-unused-variable": true
+  },
   "import-blacklist": [true, "rxjs", "rxjs/operators"]
 }
