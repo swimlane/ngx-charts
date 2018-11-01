@@ -47,11 +47,9 @@ export class InjectionService {
    * @memberOf InjectionService
    */
   getRootViewContainer(): ComponentRef<any> {
-    const rootComponents = this.applicationRef.components;
-
-    // fix cannot read length of undefined
-    if (rootComponents) {
-      if (rootComponents.length) return rootComponents[0];
+    const appRootComponent = this.tryGetRootApplicationComponent();
+    if (appRootComponent) {
+      return appRootComponent;
     }
 
     if (this._container) return this._container;
@@ -61,14 +59,19 @@ export class InjectionService {
   }
 
   /**
-   * Overrides the default root view container. This is useful for
-   * things like ngUpgrade that doesn't have a ApplicationRef root.
+   * Set the fallback container if application root component is not defined.
+   * This is useful for things like ngUpgrade that doesn't have a ApplicationRef root.
    *
    * @param {any} container
    *
    * @memberOf InjectionService
    */
   setRootViewContainer(container): void {
+    // Do not store reference if we have ApplicationRef root, as we are not using that value anyway.
+    if (this.tryGetRootApplicationComponent()) {
+      return;
+    }
+
     this._container = container;
   }
 
@@ -162,5 +165,15 @@ export class InjectionService {
     renderer.appendChild(location, componentRootNode);
 
     return componentRef;
+  }
+
+  private tryGetRootApplicationComponent() {
+    const rootComponents = this.applicationRef.components;
+    // rootComponents might be undefined.
+    if (rootComponents && rootComponents.length) {
+      return rootComponents[0];
+    }
+
+    return null;
   }
 }
