@@ -51,8 +51,8 @@ import { ColorHelper } from '../common/color.helper';
         [data]="circle.value"
         [classNames]="circle.classNames"
         (select)="onClick($event, circle.label)"
-        (activate)="activateCircle()"
-        (deactivate)="deactivateCircle()"
+        (activate)="activateCircle($event)"
+        (deactivate)="deactivateCircle($event)"
         ngx-tooltip
         [tooltipDisabled]="tooltipDisabled"
         [tooltipPlacement]="'top'"
@@ -242,15 +242,15 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
     return item !== undefined;
   }
 
-  activateCircle(): void {
+  activateCircle(value): void {
     this.barVisible = true;
-    this.activate.emit({name: this.data.name});
+    this.activate.emit({ name: this.data.name, value });
   }
 
-  deactivateCircle(): void {
+  deactivateCircle(value): void {
     this.barVisible = false;
     this.circle.opacity = 0;
-    this.deactivate.emit({name: this.data.name});
+    this.deactivate.emit({ name: this.data.name, value });
   }
 
 }
