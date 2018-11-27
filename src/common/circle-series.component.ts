@@ -157,8 +157,11 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
       color = this.colors.getColor(seriesName);
     }
 
-    const data = d;
-    data.series = seriesName;
+    const data = Object.assign({}, d, {
+      series: seriesName,
+      value,
+      name: label
+    });
 
     return {
       classNames: [`circle-data-${i}`],

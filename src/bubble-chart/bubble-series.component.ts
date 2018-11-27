@@ -113,10 +113,13 @@ export class BubbleSeriesComponent implements OnChanges {
         const isActive = !this.activeEntries.length ? true : this.isActive({name: seriesName});
         const opacity = isActive ? 1 : 0.3;
 
-        const data = d;
-        data.series = seriesName;
-        data.value = d.y;
-        data.radius = d.r;
+        const data = Object.assign({}, d, {
+          series: seriesName,
+          name: d.name,
+          value: d.y,
+          x: d.x,
+          radius: d.r
+        });
 
         return {
           data,
