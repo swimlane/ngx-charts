@@ -269,7 +269,7 @@ export class BarVertical2DComponent extends BaseChartComponent {
     const min = Math.min(0, ...domain);
     const max = this.yScaleMax
       ? Math.max(this.yScaleMax, ...domain)
-      : Math.max(...domain);
+      : Math.max(0, ...domain);
       
     return [min, max];
   }

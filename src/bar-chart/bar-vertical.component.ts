@@ -187,7 +187,7 @@ export class BarVerticalComponent extends BaseChartComponent {
 
     const max = this.yScaleMax
       ? Math.max(this.yScaleMax, ...values)
-      : Math.max(...values);
+      : Math.max(0, ...values);
 
     return [min, max];
   }

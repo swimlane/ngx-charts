@@ -183,7 +183,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
 
     const max = this.xScaleMax
       ? Math.max(this.xScaleMax, ...values)
-      : Math.max(...values);
+      : Math.max(0, ...values);
     return [min, max];
   }
 
