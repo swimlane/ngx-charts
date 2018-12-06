@@ -6,6 +6,7 @@ export declare class ScaleLegendComponent implements OnChanges {
     colors: any;
     height: any;
     width: any;
+    horizontal: boolean;
     gradient: any;
     constructor(sanitizer: DomSanitizer);
     ngOnChanges(changes: SimpleChanges): void;

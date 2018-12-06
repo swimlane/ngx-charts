@@ -1,11 +1,11 @@
 // Robert Penner's easeOutExpo
 function easeOutExpo(t, b, c, d) {
-  return c * (-Math.pow(2, -10 * t / d) + 1) * 1024 / 1023 + b;
+  return (c * (-Math.pow(2, (-10 * t) / d) + 1) * 1024) / 1023 + b;
 }
 
 /**
  * Counts from a number to the end incrementally.
- * 
+ *
  * @export
  * @param {any} countFrom
  * @param {any} countTo
@@ -17,7 +17,7 @@ function easeOutExpo(t, b, c, d) {
 export function count(countFrom, countTo, countDecimals, countDuration, callback) {
   const startVal = Number(countFrom);
   const endVal = Number(countTo);
-  const countDown = (startVal > endVal);
+  const countDown = startVal > endVal;
   const decimals = Math.max(0, countDecimals);
   const dec = Math.pow(10, decimals);
   const duration = Number(countDuration) * 1000;
@@ -34,9 +34,9 @@ export function count(countFrom, countTo, countDecimals, countDuration, callback
     }
 
     if (countDown) {
-      frameVal = (frameVal < endVal) ? endVal : frameVal;
+      frameVal = frameVal < endVal ? endVal : frameVal;
     } else {
-      frameVal = (frameVal > endVal) ? endVal : frameVal;
+      frameVal = frameVal > endVal ? endVal : frameVal;
     }
 
     frameVal = Math.round(frameVal * dec) / dec;
@@ -50,11 +50,11 @@ export function count(countFrom, countTo, countDecimals, countDuration, callback
     });
 
     if (tick) {
-      return requestAnimationFrame((val) => runCount(val));
+      return requestAnimationFrame(val => runCount(val));
     }
   }
 
-  return requestAnimationFrame((timestamp) => {
+  return requestAnimationFrame(timestamp => {
     startTime = timestamp;
     return runCount(timestamp);
   });
@@ -62,7 +62,7 @@ export function count(countFrom, countTo, countDecimals, countDuration, callback
 
 /**
  * Determine decimals places
- * 
+ *
  * @export
  * @param {any} countTo
  * @returns
@@ -70,7 +70,7 @@ export function count(countFrom, countTo, countDecimals, countDuration, callback
 export function decimalChecker(countTo) {
   const endVal = Number(countTo);
 
-  if(endVal % 1 !== 0 && Math.abs(endVal) <= 10) {
+  if (endVal % 1 !== 0 && Math.abs(endVal) <= 10) {
     return 2;
   }
 

@@ -1,6 +1,6 @@
 // Robert Penner's easeOutExpo
 function easeOutExpo(t, b, c, d) {
-    return c * (-Math.pow(2, -10 * t / d) + 1) * 1024 / 1023 + b;
+    return (c * (-Math.pow(2, (-10 * t) / d) + 1) * 1024) / 1023 + b;
 }
 /**
  * Counts from a number to the end incrementally.
@@ -16,7 +16,7 @@ function easeOutExpo(t, b, c, d) {
 export function count(countFrom, countTo, countDecimals, countDuration, callback) {
     var startVal = Number(countFrom);
     var endVal = Number(countTo);
-    var countDown = (startVal > endVal);
+    var countDown = startVal > endVal;
     var decimals = Math.max(0, countDecimals);
     var dec = Math.pow(10, decimals);
     var duration = Number(countDuration) * 1000;
@@ -31,10 +31,10 @@ export function count(countFrom, countTo, countDecimals, countDuration, callback
             frameVal = easeOutExpo(progress, startVal, endVal - startVal, duration);
         }
         if (countDown) {
-            frameVal = (frameVal < endVal) ? endVal : frameVal;
+            frameVal = frameVal < endVal ? endVal : frameVal;
         }
         else {
-            frameVal = (frameVal > endVal) ? endVal : frameVal;
+            frameVal = frameVal > endVal ? endVal : frameVal;
         }
         frameVal = Math.round(frameVal * dec) / dec;
         var tick = progress < duration;

@@ -1,6 +1,6 @@
 import {
   Input, Component, ElementRef, AfterViewInit, ViewEncapsulation,
-  HostListener, ViewChild, HostBinding, Renderer
+  HostListener, ViewChild, HostBinding, Renderer2
 } from '@angular/core';
 
 import { throttleable } from '../../utils/throttle';
@@ -61,7 +61,7 @@ export class TooltipContentComponent implements AfterViewInit {
 
   constructor(
     public element: ElementRef,
-    private renderer: Renderer) {
+    private renderer: Renderer2) {
   }
 
   ngAfterViewInit(): void {
@@ -84,15 +84,15 @@ export class TooltipContentComponent implements AfterViewInit {
     }
 
     // animate its entry
-    setTimeout(() => this.renderer.setElementClass(nativeElm, 'animate', true), 1);
+    setTimeout(() => this.renderer.addClass(nativeElm, 'animate'), 1);
   }
 
   positionContent(nativeElm, hostDim, elmDim): void {
     const { top, left } = PositionHelper.positionContent(
       this.placement, elmDim, hostDim, this.spacing, this.alignment);
 
-    this.renderer.setElementStyle(nativeElm, 'top', `${top}px`);
-    this.renderer.setElementStyle(nativeElm, 'left', `${left}px`);
+    this.renderer.setStyle(nativeElm, 'top', `${top}px`);
+    this.renderer.setStyle(nativeElm, 'left', `${left}px`);
   }
 
   positionCaret(hostDim, elmDim): void {
@@ -101,8 +101,8 @@ export class TooltipContentComponent implements AfterViewInit {
     const { top, left } = PositionHelper.positionCaret(
       this.placement, elmDim, hostDim, caretDimensions, this.alignment);
 
-    this.renderer.setElementStyle(caretElm, 'top', `${top}px`);
-    this.renderer.setElementStyle(caretElm, 'left', `${left}px`);
+    this.renderer.setStyle(caretElm, 'top', `${top}px`);
+    this.renderer.setStyle(caretElm, 'left', `${left}px`);
   }
 
   checkFlip(hostDim, elmDim): void {

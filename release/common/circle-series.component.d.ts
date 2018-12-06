@@ -1,5 +1,5 @@
 import { SimpleChanges, EventEmitter, OnChanges, OnInit, TemplateRef } from '@angular/core';
-import { ColorHelper } from '.';
+import { ColorHelper } from '../common/color.helper';
 export declare class CircleSeriesComponent implements OnChanges, OnInit {
     data: any;
     type: string;
@@ -24,7 +24,7 @@ export declare class CircleSeriesComponent implements OnChanges, OnInit {
     update(): void;
     getActiveCircle(): {};
     mapDataPointToCircle(d: any, i: number): any;
-    getTooltipText({tooltipLabel, value, seriesName, min, max}: {
+    getTooltipText({ tooltipLabel, value, seriesName, min, max }: {
         tooltipLabel: any;
         value: any;
         seriesName: any;

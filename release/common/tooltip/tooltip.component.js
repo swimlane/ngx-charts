@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Input, Component, ElementRef, ViewEncapsulation, HostListener, ViewChild, HostBinding, Renderer } from '@angular/core';
+import { Input, Component, ElementRef, ViewEncapsulation, HostListener, ViewChild, HostBinding, Renderer2 } from '@angular/core';
 import { throttleable } from '../../utils/throttle';
 import { PositionHelper, PlacementTypes } from './position';
 import { StyleTypes } from './style.type';
@@ -45,19 +45,19 @@ var TooltipContentComponent = /** @class */ (function () {
             this.positionCaret(hostDim, elmDim);
         }
         // animate its entry
-        setTimeout(function () { return _this.renderer.setElementClass(nativeElm, 'animate', true); }, 1);
+        setTimeout(function () { return _this.renderer.addClass(nativeElm, 'animate'); }, 1);
     };
     TooltipContentComponent.prototype.positionContent = function (nativeElm, hostDim, elmDim) {
         var _a = PositionHelper.positionContent(this.placement, elmDim, hostDim, this.spacing, this.alignment), top = _a.top, left = _a.left;
-        this.renderer.setElementStyle(nativeElm, 'top', top + "px");
-        this.renderer.setElementStyle(nativeElm, 'left', left + "px");
+        this.renderer.setStyle(nativeElm, 'top', top + "px");
+        this.renderer.setStyle(nativeElm, 'left', left + "px");
     };
     TooltipContentComponent.prototype.positionCaret = function (hostDim, elmDim) {
         var caretElm = this.caretElm.nativeElement;
         var caretDimensions = caretElm.getBoundingClientRect();
         var _a = PositionHelper.positionCaret(this.placement, elmDim, hostDim, caretDimensions, this.alignment), top = _a.top, left = _a.left;
-        this.renderer.setElementStyle(caretElm, 'top', top + "px");
-        this.renderer.setElementStyle(caretElm, 'left', left + "px");
+        this.renderer.setStyle(caretElm, 'top', top + "px");
+        this.renderer.setStyle(caretElm, 'left', left + "px");
     };
     TooltipContentComponent.prototype.checkFlip = function (hostDim, elmDim) {
         this.placement = PositionHelper.determinePlacement(this.placement, elmDim, hostDim, this.spacing, this.alignment);
@@ -129,7 +129,7 @@ var TooltipContentComponent = /** @class */ (function () {
             styleUrls: ['./tooltip.component.css']
         }),
         __metadata("design:paramtypes", [ElementRef,
-            Renderer])
+            Renderer2])
     ], TooltipContentComponent);
     return TooltipContentComponent;
 }());

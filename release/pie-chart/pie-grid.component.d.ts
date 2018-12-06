@@ -17,7 +17,7 @@ export declare class PieGridComponent extends BaseChartComponent {
     margin: number[];
     tooltipTemplate: TemplateRef<any>;
     update(): void;
-    defaultTooltipText({data}: {
+    defaultTooltipText({ data }: {
         data: any;
     }): string;
     getDomain(): any[];

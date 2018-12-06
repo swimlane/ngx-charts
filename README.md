@@ -4,6 +4,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b097196f7f544412a79a99080a41bbc1)](https://www.codacy.com/app/Swimlane/ngx-charts?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=swimlane/ngx-charts&amp;utm_campaign=Badge_Grade)
 [![Test Coverage](https://codeclimate.com/github/swimlane/ngx-charts/badges/coverage.svg)](https://codeclimate.com/github/swimlane/ngx-charts/coverage)
 [![npm version](https://badge.fury.io/js/%40swimlane%2Fngx-charts.svg)](https://badge.fury.io/js/%40swimlane%2Fngx-charts)
+[![npm downloads](https://img.shields.io/npm/dm/@swimlane/ngx-charts.svg)](https://npmjs.org/@swimlane/ngx-charts)
 
 Declarative Charting Framework for Angular2 and beyond!
 
@@ -13,7 +14,7 @@ Data visualization is a science but that doesn't mean it has to be ugly. One of 
 
 Also, constructing custom charts is possible by leveraging the various ngx-charts components that are exposed through the ngx-charts module.
 
-For more info, check out the [documentation](https://swimlane.gitbook.io/ngx-charts/v/docs-test) and the [demos](https://swimlane.github.io/ngx-charts/).
+For more info, check out the [documentation](https://swimlane.gitbook.io/ngx-charts) and the [demos](https://swimlane.github.io/ngx-charts/).
 
 ## Features
 ### Chart Types
@@ -49,7 +50,7 @@ npm i @swimlane/ngx-charts --save
 ```
 
 ## Custom Charts
-To learn how to use the ngx-charts components to build custom charts and find examples, please refer to our [Custom Charts Page](https://github.com/swimlane/ngx-charts/blob/master/docs/intro/custom-charts.md).
+To learn how to use the ngx-charts components to build custom charts and find examples, please refer to our [Custom Charts Page](https://github.com/swimlane/ngx-charts/blob/master/docs/custom-charts.md).
 
 ## Credits
 `ngx-charts` is a [Swimlane](http://swimlane.com) open-source project; we believe in giving back to the open-source community by sharing some of the projects we build for our application. Swimlane is an automated cyber security operations and incident response platform that enables cyber security teams to leverage threat intelligence, speed up incident response and automate security operations.

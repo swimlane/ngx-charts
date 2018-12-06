@@ -5,6 +5,7 @@ import { ColorHelper } from '../common/color.helper';
 export declare class GaugeComponent extends BaseChartComponent implements AfterViewInit {
     legend: boolean;
     legendTitle: string;
+    legendPosition: string;
     min: number;
     max: number;
     textValue: string;

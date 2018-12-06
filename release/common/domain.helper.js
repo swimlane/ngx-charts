@@ -16,4 +16,23 @@ export function getUniqueXDomainValues(results) {
     }
     return Array.from(valueSet);
 }
+/**
+ * Get the scaleType of enumerable of values.
+ * @param values
+ * @returns {string} 'time', 'linear' or 'ordinal'
+ */
+export function getScaleType(values, checkDateType) {
+    if (checkDateType === void 0) { checkDateType = true; }
+    if (checkDateType) {
+        var allDates = values.every(function (value) { return value instanceof Date; });
+        if (allDates) {
+            return 'time';
+        }
+    }
+    var allNumbers = values.every(function (value) { return typeof value === 'number'; });
+    if (allNumbers) {
+        return 'linear';
+    }
+    return 'ordinal';
+}
 //# sourceMappingURL=domain.helper.js.map

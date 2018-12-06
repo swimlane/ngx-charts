@@ -5,6 +5,7 @@ export declare class PieChartComponent extends BaseChartComponent {
     labels: boolean;
     legend: boolean;
     legendTitle: string;
+    legendPosition: string;
     explodeSlices: boolean;
     doughnut: boolean;
     arcWidth: number;
@@ -38,6 +39,7 @@ export declare class PieChartComponent extends BaseChartComponent {
         domain: any;
         colors: ColorHelper;
         title: string;
+        position: string;
     };
     onActivate(item: any): void;
     onDeactivate(item: any): void;

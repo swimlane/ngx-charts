@@ -1,10 +1,4 @@
-import {
-  Component,
-  SimpleChanges,
-  Input,
-  OnChanges,
-  ChangeDetectionStrategy
-} from '@angular/core';
+import { Component, SimpleChanges, Input, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'g[ngx-charts-grid-panel-series]',
@@ -24,11 +18,20 @@ import {
 export class GridPanelSeriesComponent implements OnChanges {
   gridPanels: any[];
 
-  @Input() data;
-  @Input() dims;
-  @Input() xScale;
-  @Input() yScale;
-  @Input() orient;
+  @Input()
+  data;
+
+  @Input()
+  dims;
+
+  @Input()
+  xScale;
+
+  @Input()
+  yScale;
+
+  @Input()
+  orient;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -39,7 +42,7 @@ export class GridPanelSeriesComponent implements OnChanges {
   }
 
   getGridPanels(): any[] {
-    return this.data.map((d, i) => {
+    return this.data.map((d) => {
       let offset;
       let width;
       let height;
@@ -49,7 +52,7 @@ export class GridPanelSeriesComponent implements OnChanges {
 
       if (this.orient === 'vertical') {
         const position: number = this.xScale(d.name);
-        const positionIndex = Number.parseInt((position / this.xScale.step()).toString());
+        const positionIndex = Number.parseInt((position / this.xScale.step()).toString(), 10);
 
         if (positionIndex % 2 === 1) {
           className = 'even';
@@ -61,7 +64,7 @@ export class GridPanelSeriesComponent implements OnChanges {
         y = 0;
       } else if (this.orient === 'horizontal') {
         const position = this.yScale(d.name);
-        const positionIndex = Number.parseInt((position / this.yScale.step()).toString());
+        const positionIndex = Number.parseInt((position / this.yScale.step()).toString(), 10);
 
         if (positionIndex % 2 === 1) {
           className = 'even';

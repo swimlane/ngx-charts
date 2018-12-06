@@ -20,8 +20,8 @@ import { curveCardinalClosed } from 'd3-shape';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
-
-import { isDate, isNumber } from '../utils/types';
+import { getScaleType } from '../common/domain.helper';
+import { isDate } from '../utils/types';
 
 const twoPI = 2 * Math.PI;
 
@@ -130,6 +130,7 @@ export class PolarChartComponent extends BaseChartComponent {
 
   @Input() legend: boolean;
   @Input() legendTitle: string = 'Legend';
+  @Input() legendPosition: string = 'right';
   @Input() xAxis: boolean;
   @Input() yAxis: boolean;
   @Input() showXAxisLabel: boolean;
@@ -207,7 +208,8 @@ export class PolarChartComponent extends BaseChartComponent {
       showXLabel: this.showXAxisLabel,
       showYLabel: this.showYAxisLabel,
       showLegend: this.legend,
-      legendType: this.schemeType
+      legendType: this.schemeType,
+      legendPosition: this.legendPosition
     });
 
     const halfWidth = ~~(this.dims.width / 2);
@@ -230,7 +232,7 @@ export class PolarChartComponent extends BaseChartComponent {
 
   setScales() {
     const xValues = this.getXValues();
-    this.scaleType = this.getScaleType(xValues);
+    this.scaleType = getScaleType(xValues);
     this.xDomain = this.filteredDomain || this.getXDomain(xValues);
 
     this.yDomain = this.getYDomain();
@@ -395,25 +397,6 @@ export class PolarChartComponent extends BaseChartComponent {
     return this.roundDomains ? scale.nice() : scale;
   }
 
-  getScaleType(values): string {
-    let date = true;
-    let num = true;
-
-    for (const value of values) {
-      if (!isDate(value)) {
-        date = false;
-      }
-
-      if (!isNumber(value)) {
-        num = false;
-      }
-    }
-
-    if (date) return 'time';
-    if (num) return 'linear';
-    return 'ordinal';
-  }
-
   onClick(data, series?): void {
     if (series) {
       data.series = series.name;
@@ -435,14 +418,16 @@ export class PolarChartComponent extends BaseChartComponent {
         scaleType: this.schemeType,
         colors: this.colors,
         domain: this.seriesDomain,
-        title: this.legendTitle
+        title: this.legendTitle,
+        position: this.legendPosition
       };
     }
     return {
       scaleType: this.schemeType,
       colors: this.colors.scale,
       domain: this.yDomain,
-      title: undefined
+      title: undefined,
+      position: this.legendPosition
     };
   }
 

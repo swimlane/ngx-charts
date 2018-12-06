@@ -1,7 +1,4 @@
-import {
-  Component, Input, Output, EventEmitter, ElementRef,
-  OnChanges, ChangeDetectionStrategy
-} from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import { select } from 'd3-selection';
 
 import { invertColor } from '../utils/color-utils';
@@ -61,7 +58,6 @@ import { id } from '../utils/id';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreeMapCellComponent implements OnChanges {
-
   @Input() data;
   @Input() fill;
   @Input() x;
@@ -80,7 +76,7 @@ export class TreeMapCellComponent implements OnChanges {
 
   gradientStops: any[];
   gradientId: string;
-  gradientUrl: string;  
+  gradientUrl: string;
 
   element: HTMLElement;
   transform: string;
@@ -95,7 +91,7 @@ export class TreeMapCellComponent implements OnChanges {
   ngOnChanges(): void {
     this.update();
 
-    this.valueFormatting = this.valueFormatting || (cell => cell.value.toLocaleString());
+    this.valueFormatting = this.valueFormatting || (value => value.toLocaleString());
     const labelFormatting = this.labelFormatting || (cell => trimLabel(cell.label, 55));
 
     const cellData = {
@@ -104,9 +100,9 @@ export class TreeMapCellComponent implements OnChanges {
       value: this.value
     };
 
-    this.formattedValue = this.valueFormatting(cellData);
+    this.formattedValue = this.valueFormatting(cellData.value);
     this.formattedLabel = labelFormatting(cellData);
-  
+
     this.gradientId = 'grad' + id().toString();
     this.gradientUrl = `url(#${this.gradientId})`;
     this.gradientStops = this.getGradientStops();
@@ -142,7 +138,9 @@ export class TreeMapCellComponent implements OnChanges {
     const node = select(this.element).select('.cell');
 
     if (this.animations) {
-      node.transition().duration(750)
+      node
+        .transition()
+        .duration(750)
         .attr('opacity', 1)
         .attr('x', this.x)
         .attr('y', this.y)
@@ -176,7 +174,7 @@ export class TreeMapCellComponent implements OnChanges {
         offset: 100,
         color: this.fill,
         opacity: 1
-    }];
+      }
+    ];
   }
-
 }

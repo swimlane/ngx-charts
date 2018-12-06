@@ -11,6 +11,14 @@ export declare class InjectionService {
     private applicationRef;
     private componentFactoryResolver;
     private injector;
+    static globalRootViewContainer: ComponentRef<any>;
+    /**
+     * Sets a default global root view container. This is useful for
+     * things like ngUpgrade that doesn't have a ApplicationRef root.
+     *
+     * @param container
+     */
+    static setGlobalRootViewContainer(container: ComponentRef<any>): void;
     private _container;
     constructor(applicationRef: ApplicationRef, componentFactoryResolver: ComponentFactoryResolver, injector: Injector);
     /**

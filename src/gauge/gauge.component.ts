@@ -82,6 +82,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
 
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
+  @Input() legendPosition: string = 'right';
   @Input() min: number = 0;
   @Input() max: number = 100;
   @Input() textValue: string;
@@ -154,7 +155,8 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
       width: this.width,
       height: this.height,
       margins: this.margin,
-      showLegend: this.legend
+      showLegend: this.legend,
+      legendPosition: this.legendPosition
     });
 
     this.domain = this.getDomain();
@@ -298,7 +300,8 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
       scaleType: 'ordinal',
       colors: this.colors,
       domain: this.domain,
-      title: this.legendTitle
+      title: this.legendTitle,
+      position: this.legendPosition
     };
   }
 

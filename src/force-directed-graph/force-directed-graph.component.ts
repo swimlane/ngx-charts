@@ -11,19 +11,14 @@ import {
   EventEmitter,
   ChangeDetectionStrategy
 } from '@angular/core';
-import {
-  forceCollide,
-  forceLink,
-  forceManyBody,
-  forceSimulation,
-  forceX,
-  forceY
-} from 'd3-force';
+import { forceCollide, forceLink, forceManyBody, forceSimulation, forceX, forceY } from 'd3-force';
 
 import { ChartComponent } from '../common/charts/chart.component';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
+/* tslint:disable */
+import { MouseEvent } from '../events';
 
 @Component({
   selector: 'ngx-charts-force-directed-graph',
@@ -76,16 +71,13 @@ import { ColorHelper } from '../common/color.helper';
       </svg:g>
     </ngx-charts-chart>
   `,
-  styleUrls: [
-    '../common/base-chart.component.scss',
-    './force-directed-graph.component.scss'
-  ],
+  styleUrls: ['../common/base-chart.component.scss', './force-directed-graph.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ForceDirectedGraphComponent extends BaseChartComponent {
-
-  @Input() force: any = forceSimulation<any>()
+  @Input()
+  force: any = forceSimulation<any>()
     .force('charge', forceManyBody())
     .force('collide', forceCollide(5))
     .force('x', forceX())
@@ -94,8 +86,9 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
   @Input() forceLink: any = forceLink<any, any>().id(node => node.value);
   @Input() legend: boolean;
   @Input() legendTitle: string = 'Legend';
+  @Input() legendPosition: string = 'right';
   @Input() nodes: any[] = [];
-  @Input() links: Array<{ source: any, target: any }> = [];
+  @Input() links: Array<{ source: any; target: any }> = [];
   @Input() activeEntries: any[] = [];
   @Input() tooltipDisabled: boolean = false;
 
@@ -105,12 +98,13 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
   @ContentChild('linkTemplate') linkTemplate: TemplateRef<any>;
   @ContentChild('nodeTemplate') nodeTemplate: TemplateRef<any>;
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
-  @ViewChild(ChartComponent, { read: ElementRef }) chart: ElementRef;
+  @ViewChild(ChartComponent, { read: ElementRef })
+  chart: ElementRef;
 
   colors: ColorHelper;
   dims: ViewDimensions;
   draggingNode: any;
-  draggingStart: { x: number, y: number };
+  draggingStart: { x: number; y: number };
   margin = [0, 0, 0, 0];
   results = [];
   seriesDomain: any;
@@ -128,6 +122,7 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
       height: this.height,
       margins: this.margin,
       showLegend: this.legend,
+      legendPosition: this.legendPosition
     });
 
     this.seriesDomain = this.getSeriesDomain();
@@ -135,12 +130,14 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
     this.legendOptions = this.getLegendOptions();
 
     this.transform = `
-      translate(${ this.dims.xOffset + this.dims.width / 2 }, ${ this.margin[0] + this.dims.height / 2 })
+      translate(${this.dims.xOffset + this.dims.width / 2}, ${this.margin[0] + this.dims.height / 2})
     `;
-    if(this.force) {
-      this.force.nodes(this.nodes)
+    if (this.force) {
+      this.force
+        .nodes(this.nodes)
         .force('link', this.forceLink.links(this.links))
-        .alpha(0.5).restart();
+        .alpha(0.5)
+        .restart();
     }
   }
 
@@ -149,8 +146,8 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
   }
 
   onActivate(event): void {
-    if(this.activeEntries.indexOf(event) > -1) return;
-    this.activeEntries = [ event, ...this.activeEntries ];
+    if (this.activeEntries.indexOf(event) > -1) return;
+    this.activeEntries = [event, ...this.activeEntries];
     this.activate.emit({ value: event, entries: this.activeEntries });
   }
 
@@ -164,8 +161,9 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
   }
 
   getSeriesDomain(): any[] {
-    return this.nodes.map(d => this.groupResultsBy(d))
-      .reduce((nodes: any[], node): any[] => nodes.includes(node) ? nodes : nodes.concat([node]), [])
+    return this.nodes
+      .map(d => this.groupResultsBy(d))
+      .reduce((nodes: any[], node): any[] => (nodes.includes(node) ? nodes : nodes.concat([node])), [])
       .sort();
   }
 
@@ -186,7 +184,8 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
       scaleType: 'ordinal',
       domain: this.seriesDomain,
       colors: this.colors,
-      title: this.legendTitle
+      title: this.legendTitle,
+      position: this.legendPosition
     };
   }
 

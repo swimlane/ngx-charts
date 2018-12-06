@@ -14,3 +14,9 @@
     margin: 0 auto; }
   .chart-legend .scale-legend-label {
     font-size: 12px; }
+  .chart-legend .horizontal-legend.scale-legend {
+    flex-direction: row; }
+  .chart-legend .horizontal-legend .scale-legend-wrap {
+    width: auto;
+    height: 30px;
+    margin: 0 16px; }
