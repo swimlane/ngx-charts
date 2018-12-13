@@ -3,11 +3,11 @@
 ## 10.0.0
 
 - Breaking: Upgraded to angular 7
-- Feathre: Implemented legened positioning
+- Feature: Implemented legened positioning
 - Feature: Added accessibility attributes to bar charts (#977)
 - Chore: Migrated to Renderer2 (#1021)
 - Chore: getScaleType performance improvements (#995)
-- Docs: Fixex value typo (#974)
+- Docs: Fixed value typo (#974)
 
 ## 9.1.1
 
@@ -108,7 +108,7 @@
 - Bug: Removed path from SVG refs to fix gradients not working when URL has queryString (#584)
 - Bug: Fixed bug where value arc animation on gauge chart would start from 0 on update (#563)
 - Bug: Removed date conversion for name-value at series-tooltip (#544)
-- Bug: Added null check for rootComponents in injection servoce (#574)
+- Bug: Added null check for rootComponents in injection service (#574)
 - Bug: Fixed issue where the tooltip would not appear for certain points (#501)
 - Bug: Fixed issue where pie chart colors would not update on color changes (#551)
 - Bug: Added polyfill for SVGElement.prototype.contains (#386)
@@ -160,7 +160,7 @@
 
 - Feature: Added Polar/Radar chart type (#380)
 - Enhancement: Disable pointer if no click events are attached to number cards (#378)
-- Enhancement: Added gradiant to tree map chart (#382)
+- Enhancement: Added gradient to tree map chart (#382)
 - Enhancement: Added support for inverted colors from rgba values in number cards (#366)
 - Enhancement: Added value and label formatting to tree map (#383)
 - Refactor: loremess restrictive angular dependency versioning (#358)
@@ -358,7 +358,7 @@
 - BREAKING: Renamed `clickHandler` to `select` (#120)
 - Bug: Tooltips show up in top left corner sometimes
 - Polish: Tooltips have animation entry now
-- Polish: Add highight gradient and column when hovering a circle
+- Polish: Add highlight gradient and column when hovering a circle
 - Polish: Remove outline on focus (#106)
 - Polish: Make pie grid less ugly (#90)
 - Polish: Highlighting a line/area chart in legend, defocuses others
@@ -397,7 +397,7 @@
 ## 1.8.0
 
 - Renamed CommonModule to ChartCommonModule to fix name conflicts with other frameworks #109
-- Converted date objets to formatted strings in some charts
+- Converted date objects to formatted strings in some charts
 - Removed rounded corners on thin bars
 - Improved on destroy hooks in tooltips
 - Merged `legendLabelClick` output into `select` output
