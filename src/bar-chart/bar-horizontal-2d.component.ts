@@ -262,7 +262,7 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
     const min = Math.min(0, ...domain);
     const max = this.xScaleMax
       ? Math.max(this.xScaleMax, ...domain)
-      : Math.max(...domain);
+      : Math.max(0, ...domain);
     return [min, max];
   }
 
