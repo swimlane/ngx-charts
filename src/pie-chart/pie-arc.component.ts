@@ -32,6 +32,7 @@ import { MouseEvent } from '../events';
         [attr.d]="path"
         class="arc"
         [class.active]="isActive"
+        [class.inactive]="isInactive"
         [attr.fill]="getGradient()"
         (click)="onClick()"
         (dblclick)="onDblClick($event)"
@@ -58,6 +59,7 @@ export class PieArcComponent implements OnChanges {
   @Input() animate: boolean = true;
   @Input() pointerEvents: boolean = true;
   @Input() isActive: boolean = false;
+  @Input() isInactive: boolean = false;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();

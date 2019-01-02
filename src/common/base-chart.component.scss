@@ -10,7 +10,6 @@
 
   .bar,
   .cell,
-  .arc,
   .card {
     &.active,
     &:hover {
@@ -31,6 +30,7 @@
 
   .line-series,
   .line-series-range,
+  .arc,
   .polar-series-path,
   .polar-series-area,
   .area-series {
