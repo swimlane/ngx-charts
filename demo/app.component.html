@@ -751,6 +751,37 @@
         [referenceLines]="refLines"
         (select)="select($event)">
       </ngx-charts-line-chart>
+      <ngx-charts-line-chart
+        *ngIf="chartType === 'line-grouped-reference-lines'"
+        [view]="view"
+        class="chart-container"
+        [scheme]="colorScheme"
+        [schemeType]="schemeType"
+        [results]="multi"
+        [animations]="animations"
+        [legend]="showLegend"
+        [legendTitle]="legendTitle"
+        [legendPosition]="legendPosition"
+        (legendLabelClick)="onLegendLabelClick($event)"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [autoScale]="autoScale"
+        [timeline]="timeline"
+        [showGridLines]="showGridLines"
+        [curve]="curve"
+        [rangeFillOpacity]="rangeFillOpacity"
+        [roundDomains]="roundDomains"
+        [tooltipDisabled]="tooltipDisabled"
+        [showRefLines]="showRefLines"
+        [showRefLabels]="showRefLabels"
+        [referenceLines]="refGroupedLines"
+        (select)="select($event)">
+      </ngx-charts-line-chart>
       <ngx-charts-bar-vertical
         *ngIf="chartType === 'tooltip-templates'"
         class="chart-container"

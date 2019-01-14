@@ -13,6 +13,7 @@ import {
 import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
 import { roundedRect } from '../../common/shape.helper';
+import * as d3 from 'd3';
 
 @Component({
   selector: 'g[ngx-charts-y-axis-ticks]',
@@ -33,11 +34,13 @@ import { roundedRect } from '../../common/shape.helper';
       </svg:g>
     </svg:g>
 
-    <svg:path *ngIf="referenceLineLength > 1 && refMax && refMin && showRefLines"
-      class="reference-area"
-      [attr.d]="referenceAreaPath"
-      [attr.transform]="gridLineTransform()"
-    />
+    <svg:g *ngFor="let refArea of referenceAreas">
+      <svg:path *ngIf="refArea.refLineGroupLength > 1 && refArea.refMax && refArea.refMin && showRefLines"
+        class="reference-area"
+        [attr.d]="refArea.referenceAreaPath"
+        [attr.transform]="gridLineTransform()"
+      />
+    </svg:g>
     <svg:g *ngFor="let tick of ticks"
       [attr.transform]="transform(tick)">
       <svg:g
@@ -111,10 +114,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   outerTickSize: number = 6;
   rotateLabels: boolean = false;
   trimLabel: any;
-  refMax: number;
-  refMin: number;
-  referenceLineLength: number = 0;
-  referenceAreaPath: string;
+  referenceAreas: any[] = [];
 
   @ViewChild('ticksel') ticksElement: ElementRef;
 
@@ -211,12 +211,29 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   }
 
   setReferencelines(): void {
-    this.refMin = this.adjustedScale(Math.min.apply(null, this.referenceLines.map(item => item.value)));
-    this.refMax = this.adjustedScale(Math.max.apply(null, this.referenceLines.map(item => item.value)));
-    this.referenceLineLength = this.referenceLines.length;
+    const referenceAreas = [];
+    const groupedRefLines = d3.nest()
+      .key(d => d.group)
+      .entries(this.referenceLines)
+      .map(group => group.values);
 
-    this.referenceAreaPath = roundedRect(0, this.refMax, this.gridLineWidth, this.refMin - this.refMax,
-      0, [false, false, false, false]);
+    groupedRefLines.forEach(refLineGroup => {
+      const refMin = this.adjustedScale(Math.min.apply(null, refLineGroup.map(item => item.value)));
+      const refMax = this.adjustedScale(Math.max.apply(null, refLineGroup.map(item => item.value)));
+      const refLineGroupLength = refLineGroup.length;
+
+      const referenceAreaPath = roundedRect(0, refMax, this.gridLineWidth, refMin - refMax,
+        0, [false, false, false, false]);
+
+      referenceAreas.push({
+        refMin,
+        refMax,
+        refLineGroupLength,
+        referenceAreaPath
+      });
+    });
+
+    this.referenceAreas = referenceAreas;
   }
 
   getTicks(): any {
