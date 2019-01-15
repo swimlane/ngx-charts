@@ -18236,12 +18236,18 @@ var PieSeriesComponent = /** @class */ (function () {
         });
         for (var i = 0; i < labelPositions.length - 1; i++) {
             var a = labelPositions[i];
+            if (!this.labelVisible(a)) {
+                continue;
+            }
             for (var j = i + 1; j < labelPositions.length; j++) {
                 var b = labelPositions[j];
                 // if they're on the same side
                 if (b.pos[0] * a.pos[0] > 0) {
                     // if they're overlapping
                     var o = minDistance - Math.abs(b.pos[1] - a.pos[1]);
+                    if (!this.labelVisible(b)) {
+                        continue;
+                    }
                     if (o > 0) {
                         // push the second up or down
                         b.pos[1] += Math.sign(b.pos[0]) * o;
