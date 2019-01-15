@@ -154,7 +154,7 @@ var BarVertical2DComponent = /** @class */ (function (_super) {
         }
         var min = Math.min.apply(Math, [0].concat(domain));
         var max = this.yScaleMax
-            ? Math.max.apply(Math, [this.yScaleMax].concat(domain)) : Math.max.apply(Math, domain);
+            ? Math.max.apply(Math, [this.yScaleMax].concat(domain)) : Math.max.apply(Math, [0].concat(domain));
         return [min, max];
     };
     BarVertical2DComponent.prototype.groupTransform = function (group) {

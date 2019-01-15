@@ -77,6 +77,9 @@ export class AdvancedLegendComponent implements OnChanges {
   @Input() colors;
   @Input() label: string = 'Total';
   @Input() animations: boolean = true;
+  @Input() trimLabels: boolean = true;
+  
+
 
   @Output() select: EventEmitter<any> = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();
@@ -113,12 +116,11 @@ export class AdvancedLegendComponent implements OnChanges {
       const value = d.value;
       const color = this.colors.getColor(label);
       const percentage = this.total > 0 ? (value / this.total) * 100 : 0;
-
       return {
         _value: value,
         value,
         color,
-        label: trimLabel(this.labelFormatting ? this.labelFormatting(label) : label, 20),
+        label: this.trimLabels ? trimLabel(this.labelFormatting ? this.labelFormatting(label) : label, 20) : label,
         originalLabel: d.name,
         percentage: this.percentageFormatting ? this.percentageFormatting(percentage) : percentage.toLocaleString()
       };

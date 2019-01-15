@@ -138,7 +138,7 @@ var BarHorizontal2DComponent = /** @class */ (function (_super) {
         }
         var min = Math.min.apply(Math, [0].concat(domain));
         var max = this.xScaleMax
-            ? Math.max.apply(Math, [this.xScaleMax].concat(domain)) : Math.max.apply(Math, domain);
+            ? Math.max.apply(Math, [this.xScaleMax].concat(domain)) : Math.max.apply(Math, [0].concat(domain));
         return [min, max];
     };
     BarHorizontal2DComponent.prototype.groupTransform = function (group) {

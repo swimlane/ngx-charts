@@ -14,6 +14,7 @@ var AdvancedLegendComponent = /** @class */ (function () {
     function AdvancedLegendComponent() {
         this.label = 'Total';
         this.animations = true;
+        this.trimLabels = true;
         this.select = new EventEmitter();
         this.activate = new EventEmitter();
         this.deactivate = new EventEmitter();
@@ -44,7 +45,7 @@ var AdvancedLegendComponent = /** @class */ (function () {
                 _value: value,
                 value: value,
                 color: color,
-                label: trimLabel(_this.labelFormatting ? _this.labelFormatting(label) : label, 20),
+                label: _this.trimLabels ? trimLabel(_this.labelFormatting ? _this.labelFormatting(label) : label, 20) : label,
                 originalLabel: d.name,
                 percentage: _this.percentageFormatting ? _this.percentageFormatting(percentage) : percentage.toLocaleString()
             };
@@ -73,6 +74,10 @@ var AdvancedLegendComponent = /** @class */ (function () {
         Input(),
         __metadata("design:type", Boolean)
     ], AdvancedLegendComponent.prototype, "animations", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], AdvancedLegendComponent.prototype, "trimLabels", void 0);
     __decorate([
         Output(),
         __metadata("design:type", EventEmitter)

@@ -54,6 +54,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [colors]="colors"
           [width]="width - dims.width - margin[1]"
           [label]="label"
+          [trimLabels]="trimLabels"
           [animations]="animations"
           [valueFormatting]="valueFormatting"
           [labelFormatting]="nameFormatting"
@@ -74,6 +75,7 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
   @Input() activeEntries: any[] = [];
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipText: any;
+  @Input() trimLabels: boolean = true;
   @Input() label: string = 'Total';
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
