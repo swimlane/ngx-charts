@@ -192,6 +192,7 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() xScaleMax: any;
   @Input() yScaleMin: number;
   @Input() yScaleMax: number;
+  @Input() yInverse: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -359,6 +360,10 @@ export class LineChartComponent extends BaseChartComponent {
     const max = this.yScaleMax
       ? this.yScaleMax
       : Math.max(...values);
+
+    if (this.yInverse) {
+      return [max, min];
+    }
 
     return [min, max];
   }
