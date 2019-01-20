@@ -10,6 +10,7 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy
 } from '@angular/core';
+import { cssValidName } from '../css-class.helper';
 import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
 
@@ -34,8 +35,9 @@ import { reduceTicks } from './ticks.helper';
       [attr.transform]="tickTransform(tick)">
       <svg:g *ngIf="showGridLines"
         [attr.transform]="gridLineTransform()">
-        <svg:line
+        <svg:line          
           class="gridline-path gridline-path-vertical"
+          [ngClass]="tickClass(tick)"
           [attr.y1]="-gridLineHeight"
           y2="0" />
       </svg:g>
@@ -175,6 +177,10 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   getMaxTicks(tickWidth: number): number {
     return Math.floor(this.width / tickWidth);
   }
+
+  tickClass(tick): string {    
+    return `x-tick-${cssValidName(trimLabel(this.tickFormat(tick)))}`;
+  }  
 
   tickTransform(tick): string {
     return 'translate(' + this.adjustedScale(tick) + ',' + this.verticalSpacing + ')';

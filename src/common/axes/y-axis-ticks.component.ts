@@ -10,6 +10,7 @@ import {
   ChangeDetectionStrategy,
   SimpleChanges
 } from '@angular/core';
+import { cssValidName } from '../css-class.helper';
 import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
 import { roundedRect } from '../../common/shape.helper';
@@ -43,12 +44,14 @@ import { roundedRect } from '../../common/shape.helper';
       <svg:g
         *ngIf="showGridLines"
         [attr.transform]="gridLineTransform()">
-        <svg:line *ngIf="orient === 'left'"
+        <svg:line *ngIf="orient === 'left'"          
           class="gridline-path gridline-path-horizontal"
+          [ngClass]="tickClass(tick)"
           x1="0"
           [attr.x2]="gridLineWidth" />
         <svg:line *ngIf="orient === 'right'"
           class="gridline-path gridline-path-horizontal"
+          [ngClass]="tickClass(tick)"
           x1="0"
           [attr.x2]="-gridLineWidth" />
       </svg:g>
@@ -239,6 +242,10 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   getMaxTicks(tickHeight: number): number {
     return Math.floor(this.height / tickHeight);
   }
+
+  tickClass(tick): string {    
+    return `y-tick-${cssValidName(trimLabel(this.tickFormat(tick)))}`;
+  }  
 
   tickTransform(tick): string {
     return `translate(${this.adjustedScale(tick)},${this.verticalSpacing})`;
