@@ -159,9 +159,8 @@ export class BarComponent implements OnChanges {
 
   hideBar() {
     return this.noBarWhenZero
-      && (
-        this.orientation === 'vertical' && this.height === 0
-        || this.orientation === 'horizontal' && this.width ===0);
+      && (this.orientation === 'vertical' && this.height === 0
+          || this.orientation === 'horizontal' && this.width === 0);
   }
 
   getPath() {
