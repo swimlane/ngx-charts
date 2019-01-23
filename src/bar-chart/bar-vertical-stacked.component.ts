@@ -74,6 +74,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
             [dataLabelFormatting]="dataLabelFormatting"
             [seriesName]="group.name"
             [animations]="animations"
+            [noBarWhenZero]="noBarWhenZero"
             (select)="onClick($event, group)"
             (activate)="onActivate($event, group)"
             (deactivate)="onDeactivate($event, group)"
@@ -123,6 +124,7 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   @Input() yScaleMax: number;
   @Input() showDataLabel: boolean = false;
   @Input() dataLabelFormatting: any;
+  @Input() noBarWhenZero: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

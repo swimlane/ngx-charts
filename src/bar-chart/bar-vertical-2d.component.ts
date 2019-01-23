@@ -80,6 +80,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [seriesName]="group.name"
           [roundEdges]="roundEdges"
           [animations]="animations"
+          [noBarWhenZero]="noBarWhenZero"
           (select)="onClick($event, group)"
           (activate)="onActivate($event, group)"
           (deactivate)="onDeactivate($event, group)"
@@ -131,6 +132,7 @@ export class BarVertical2DComponent extends BaseChartComponent {
   @Input() yScaleMax: number;
   @Input() showDataLabel: boolean = false;
   @Input() dataLabelFormatting: any;
+  @Input() noBarWhenZero: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

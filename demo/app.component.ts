@@ -96,6 +96,7 @@ export class AppComponent implements OnInit {
   yScaleMin: number;
   yScaleMax: number;
   showDataLabel = false;
+  noBarWhenZero = false;
 
   curves = {
     Basis: shape.curveBasis,

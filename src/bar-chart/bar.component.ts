@@ -29,6 +29,7 @@ import { id } from '../utils/id';
       role="img"
       tabIndex="-1"
       [class.active]="isActive"
+      [class.hidden]="hideBar()"
       [attr.d]="path"
       [attr.aria-label]="ariaLabel"
       [attr.fill]="hasGradient ? gradientFill : fill"
@@ -53,6 +54,7 @@ export class BarComponent implements OnChanges {
   @Input() stops: any[];
   @Input() animations: boolean = true;
   @Input() ariaLabel: string;
+  @Input() noBarWhenZero: boolean = false;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
@@ -153,6 +155,13 @@ export class BarComponent implements OnChanges {
     }
 
     return path;
+  }
+
+  hideBar() {
+    return this.noBarWhenZero
+      && (
+        this.orientation === 'vertical' && this.height === 0
+        || this.orientation === 'horizontal' && this.width ===0);
   }
 
   getPath() {

@@ -75,6 +75,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
             (select)="onClick($event, group)"
             (activate)="onActivate($event, group)"
             (deactivate)="onDeactivate($event, group)"
+            [noBarWhenZero]="noBarWhenZero"
           />
         </svg:g>
       </svg:g>
@@ -117,6 +118,7 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
   @Input() yAxisTicks: any[];
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
+  @Input() noBarWhenZero: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
