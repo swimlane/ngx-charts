@@ -538,10 +538,7 @@ const chartGroups = [
         name: 'Force Directed Graph',
         selector: 'force-directed-graph',
         inputFormat: 'graph',
-        options: [
-          'animations', 'colorScheme', 'showLegend', 'legendTitle',
-          'legendPosition', 'tooltipDisabled'
-        ]
+        options: ['animations', 'colorScheme', 'showLegend', 'legendTitle', 'legendPosition', 'tooltipDisabled']
       },
       {
         name: 'Heat Map',
@@ -563,7 +560,7 @@ const chartGroups = [
           'trimXAxisTicks',
           'trimYAxisTicks',
           'maxXAxisTickLength',
-          'maxYAxisTickLength'
+          'maxYAxisTickLength',
           'min',
           'max'
         ],
