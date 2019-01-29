@@ -563,7 +563,7 @@ const chartGroups = [
           'trimXAxisTicks',
           'trimYAxisTicks',
           'maxXAxisTickLength',
-          'maxYAxisTickLength'
+          'maxYAxisTickLength',
           'min',
           'max'
         ],

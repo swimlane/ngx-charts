@@ -3,9 +3,9 @@ declare let global: any;
 // If we don't check whether 'window' and 'global' variables are defined,
 // code will fail in browser/node with 'variable is undefined' error.
 let root: any;
-if (typeof(window) !== 'undefined') {
+if (typeof window !== 'undefined') {
   root = window;
-} else if (typeof(global) !== 'undefined') {
+} else if (typeof global !== 'undefined') {
   root = global;
 }
 

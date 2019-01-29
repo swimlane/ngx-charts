@@ -44,7 +44,6 @@ import { reduceTicks } from './ticks.helper';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class XAxisTicksComponent implements OnChanges, AfterViewInit {
-
   @Input() scale;
   @Input() orient;
   @Input() tickArguments = [5];
@@ -111,9 +110,11 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
 
     const angle = this.getRotationAngle(this.ticks);
 
-    this.adjustedScale = this.scale.bandwidth ? function(d) {
-      return this.scale(d) + this.scale.bandwidth() * 0.5;
-    } : this.scale;
+    this.adjustedScale = this.scale.bandwidth
+      ? function(d) {
+          return this.scale(d) + this.scale.bandwidth() * 0.5;
+        }
+      : this.scale;
 
     this.textTransform = '';
     if (angle !== 0) {
@@ -129,10 +130,16 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
 
   getRotationAngle(ticks): number {
     let angle = 0;
+    this.maxTicksLength = 0;
     for (let i = 0; i < ticks.length; i++) {
       const tick = this.tickFormat(ticks[i]).toString();
-      if (tick.length > this.maxTicksLength) {
-        this.maxTicksLength = tick.length;
+      let tickLength = tick.length;
+      if (this.trimTicks) {
+        tickLength = this.tickTrim(tick).length;
+      }
+
+      if (tickLength > this.maxTicksLength) {
+        this.maxTicksLength = tickLength;
       }
     }
 
@@ -144,7 +151,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     const maxBaseWidth = Math.floor(this.width / ticks.length);
 
     // calculate optimal angle
-    while(baseWidth > maxBaseWidth && angle > -90) {
+    while (baseWidth > maxBaseWidth && angle > -90) {
       angle -= 30;
       baseWidth = Math.cos(angle * (Math.PI / 180)) * wordWidth;
     }
@@ -184,5 +191,4 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   tickTrim(label: string): string {
     return this.trimTicks ? trimLabel(label, this.maxTickLength) : label;
   }
-
 }
