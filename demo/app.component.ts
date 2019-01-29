@@ -532,7 +532,7 @@ export class AppComponent implements OnInit {
 
   calcStatusData(sales = this.statusData[0].value, dur = this.statusData[2].value) {
     const ret = sales * this.salePrice;
-    const cost = ((sales * dur) / 60 / 60 / 1000) * this.personnelCost;
+    const cost = sales * dur / 60 / 60 / 1000 * this.personnelCost;
     const ROI = (ret - cost) / cost;
     return [
       {
@@ -617,6 +617,7 @@ export class AppComponent implements OnInit {
   getFunction(text = this.mathText) {
     try {
       text = `with (Math) { return ${this.mathText} }`;
+      // tslint:disable-next-line:function-constructor
       const fn = new Function('x', text).bind(Math);
       return typeof fn(1) === 'number' ? fn : null;
     } catch (err) {

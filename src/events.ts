@@ -9,7 +9,8 @@ if (typeof window !== 'undefined') {
   root = global;
 }
 
-/* tslint:disable:variable-name */
+// tslint:disable-next-line:variable-name
 export const MouseEvent = root.MouseEvent as MouseEvent & {
+  prototype?: MouseEvent;
   new (typeArg: string, eventInitDict?: MouseEventInit): MouseEvent;
 };
