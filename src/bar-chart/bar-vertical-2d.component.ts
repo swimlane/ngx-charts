@@ -46,6 +46,8 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [dims]="dims"
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
+          [trimTicks]="trimXAxisTicks"
+          [maxTickLength]="maxXAxisTickLength"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
           [xAxisOffset]="dataLabelMaxHeight.negative"
@@ -58,6 +60,8 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [showGridLines]="showGridLines"
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
+          [trimTicks]="trimYAxisTicks"
+          [maxTickLength]="maxYAxisTickLength"
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
           (dimensionsChanged)="updateYAxisWidth($event)">
@@ -120,6 +124,10 @@ export class BarVertical2DComponent extends BaseChartComponent {
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
   @Input() schemeType: string;
+  @Input() trimXAxisTicks: boolean = true;
+  @Input() trimYAxisTicks: boolean = true;
+  @Input() maxXAxisTickLength: number = 16;
+  @Input() maxYAxisTickLength: number = 16;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
   @Input() xAxisTicks: any[];

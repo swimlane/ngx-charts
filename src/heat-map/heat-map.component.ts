@@ -29,6 +29,8 @@ import {getScaleType} from '../common/domain.helper';
           [dims]="dims"
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
+          [trimTicks]="trimXAxisTicks"
+          [maxTickLength]="maxXAxisTickLength"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
           (dimensionsChanged)="updateXAxisHeight($event)">
@@ -39,6 +41,8 @@ import {getScaleType} from '../common/domain.helper';
           [dims]="dims"
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
+          [trimTicks]="trimYAxisTicks"
+          [maxTickLength]="maxYAxisTickLength"
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
           (dimensionsChanged)="updateYAxisWidth($event)">
@@ -83,6 +87,10 @@ export class HeatMapComponent extends BaseChartComponent {
   @Input() yAxisLabel;
   @Input() gradient: boolean;
   @Input() innerPadding: number | number[] = 8;
+  @Input() trimXAxisTicks: boolean = true;
+  @Input() trimYAxisTicks: boolean = true;
+  @Input() maxXAxisTickLength: number = 16;
+  @Input() maxYAxisTickLength: number = 16;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
   @Input() xAxisTicks: any[];

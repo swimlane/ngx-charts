@@ -28,7 +28,7 @@ import { roundedRect } from '../../common/shape.helper';
           [attr.y]="y1"
           [attr.text-anchor]="textAnchor"
           [style.font-size]="'12px'">
-          {{trimLabel(tickFormat(tick))}}
+          {{tickTrim(tickFormat(tick))}}
         </svg:text>
       </svg:g>
     </svg:g>
@@ -61,7 +61,7 @@ import { roundedRect } from '../../common/shape.helper';
           [attr.x2]="gridLineWidth"
           [attr.transform]="gridLineTransform()"/>
         <svg:g *ngIf="showRefLabels">
-          <title>{{trimLabel(tickFormat(refLine.value))}}</title>
+          <title>{{tickTrim(tickFormat(refLine.value))}}</title>
           <svg:text
             class="refline-label"
             [attr.dy]="dy"
@@ -83,6 +83,8 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() tickArguments = [5];
   @Input() tickValues: any[];
   @Input() tickStroke = '#ccc';
+  @Input() trimTicks: boolean = true;
+  @Input() maxTickLength: number = 16;
   @Input() tickFormatting;
   @Input() showGridLines = false;
   @Input() gridLineWidth;
@@ -110,17 +112,12 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   width: number = 0;
   outerTickSize: number = 6;
   rotateLabels: boolean = false;
-  trimLabel: any;
   refMax: number;
   refMin: number;
   referenceLineLength: number = 0;
   referenceAreaPath: string;
 
   @ViewChild('ticksel') ticksElement: ElementRef;
-
-  constructor() {
-    this.trimLabel = trimLabel;
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -248,4 +245,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
     return `translate(5,0)`;
   }
 
+  tickTrim(label: string): string {
+    return this.trimTicks ? trimLabel(label, this.maxTickLength) : label;
+  }
 }

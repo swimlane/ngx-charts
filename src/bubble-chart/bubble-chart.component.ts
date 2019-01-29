@@ -52,6 +52,8 @@ import { id } from '../utils/id';
           [xScale]="xScale"
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
+          [trimTicks]="trimXAxisTicks"
+          [maxTickLength]="maxXAxisTickLength"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
           (dimensionsChanged)="updateXAxisHeight($event)"/>
@@ -62,6 +64,8 @@ import { id } from '../utils/id';
           [dims]="dims"
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
+          [trimTicks]="trimYAxisTicks"
+          [maxTickLength]="maxYAxisTickLength"
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"/>
@@ -124,6 +128,10 @@ export class BubbleChartComponent extends BaseChartComponent {
   @Input() showYAxisLabel: boolean;
   @Input() xAxisLabel: string;
   @Input() yAxisLabel: string;
+  @Input() trimXAxisTicks: boolean = true;
+  @Input() trimYAxisTicks: boolean = true;
+  @Input() maxXAxisTickLength: number = 16;
+  @Input() maxYAxisTickLength: number = 16;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
   @Input() xAxisTicks: any[];
