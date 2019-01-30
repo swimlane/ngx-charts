@@ -1,12 +1,5 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  SimpleChanges,
-  ChangeDetectionStrategy,
-  TemplateRef
-} from '@angular/core';
-import { radialLine } from 'd3-shape';
+import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
+import { lineRadial } from 'd3-shape';
 
 import { id } from '../utils/id';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
@@ -56,11 +49,10 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PolarSeriesComponent implements OnChanges {
-
   @Input() name;
   @Input() data;
-  @Input() xScale;  // Theta
-  @Input() yScale;  // R
+  @Input() xScale; // Theta
+  @Input() yScale; // R
   @Input() colors;
   @Input() scaleType;
   @Input() curve: any;
@@ -149,7 +141,7 @@ export class PolarSeriesComponent implements OnChanges {
   }
 
   getLineGenerator(): any {
-    return radialLine<any>()
+    return lineRadial<any>()
       .angle(d => this.getAngle(d))
       .radius(d => this.getRadius(d))
       .curve(this.curve);
@@ -165,7 +157,7 @@ export class PolarSeriesComponent implements OnChanges {
   }
 
   isActive(entry): boolean {
-    if(!this.activeEntries) return false;
+    if (!this.activeEntries) return false;
     const item = this.activeEntries.find(d => {
       return entry.name === d.name;
     });
@@ -173,7 +165,7 @@ export class PolarSeriesComponent implements OnChanges {
   }
 
   isInactive(entry): boolean {
-    if(!this.activeEntries || this.activeEntries.length === 0) return false;
+    if (!this.activeEntries || this.activeEntries.length === 0) return false;
     const item = this.activeEntries.find(d => {
       return entry.name === d.name;
     });

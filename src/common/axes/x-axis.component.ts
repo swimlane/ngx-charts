@@ -19,6 +19,8 @@ import { XAxisTicksComponent } from './x-axis-ticks.component';
       [attr.transform]="transform">
       <svg:g ngx-charts-x-axis-ticks
         *ngIf="xScale"
+        [trimTicks]="trimTicks"
+        [maxTickLength]="maxTickLength"
         [tickFormatting]="tickFormatting"
         [tickArguments]="tickArguments"
         [tickStroke]="tickStroke"
@@ -46,6 +48,8 @@ export class XAxisComponent implements OnChanges {
 
   @Input() xScale;
   @Input() dims;
+  @Input() trimTicks: boolean;
+  @Input() maxTickLength: number;
   @Input() tickFormatting;
   @Input() showGridLines = false;
   @Input() showLabel;

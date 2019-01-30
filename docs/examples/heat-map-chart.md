@@ -21,6 +21,10 @@
 | showYAxisLabel      | boolean              | false          | show or hide the y axis label                                                                                     |
 | xAxisLabel          | string               |                | the x axis label text                                                                                             |
 | yAxisLabel          | string               |                | the y axis label text                                                                                             |
+| trimXAxisTicks | boolean | true | trim or not ticks on the x axis |
+| trimYAxisTicks | boolean | true | trim or not ticks on the Y axis |
+| maxXAxisTickLength | number | 16 | max length of the ticks. If `trimXAxisTicks` is `true`, ticks over this length will be trimmed |
+| maxYAxisTickLength | number | 16 | max length of the ticks. If `trimYAxisTicks` is `true`, ticks over this length will be trimmed |
 | xAxisTickFormatting | function             |                | the x axis tick formatting                                                                                        |
 | yAxisTickFormatting | function             |                | the y axis tick formatting                                                                                        |
 | xAxisTicks          | any\[\]              |                | predefined list of x axis tick values                                                                             |

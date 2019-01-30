@@ -73,6 +73,8 @@ const twoPI = 2 * Math.PI;
           [showGridLines]="showGridLines"
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
+          [trimTicks]="trimYAxisTicks"
+          [maxTickLength]="maxYAxisTickLength"
           [tickFormatting]="yAxisTickFormatting"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
@@ -141,6 +143,8 @@ export class PolarChartComponent extends BaseChartComponent {
   @Input() activeEntries: any[] = [];
   @Input() schemeType: string;
   @Input() rangeFillOpacity: number = 0.15;
+  @Input() trimYAxisTicks: boolean = true;
+  @Input() maxYAxisTickLength: number = 16;
   @Input() xAxisTickFormatting: (o: any) => any;
   @Input() yAxisTickFormatting: (o: any) => any;
   @Input() roundDomains: boolean = false;
