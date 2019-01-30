@@ -30,17 +30,19 @@ import { BaseChartComponent } from '../common/base-chart.component';
             [attr.transform]="transform"
             class="pie chart">
             <svg:g ngx-charts-pie-series
-              [colors]="colors"
-              [series]="results"
-              [innerRadius]="innerRadius"
-              [activeEntries]="activeEntries"
-              [outerRadius]="outerRadius"
-              [gradient]="gradient"
-              [tooltipDisabled]="tooltipDisabled"
-              [tooltipTemplate]="tooltipTemplate"
-              [tooltipText]="tooltipText"
-              (select)="onClick($event)"
-              [animations]="animations">
+                   [colors]="colors"
+                   [series]="results"
+                   [innerRadius]="innerRadius"
+                   [activeEntries]="activeEntries"
+                   [outerRadius]="outerRadius"
+                   [gradient]="gradient"
+                   [tooltipDisabled]="tooltipDisabled"
+                   [tooltipTemplate]="tooltipTemplate"
+                   [tooltipText]="tooltipText"
+                   (select)="onClick($event)"
+                   (activate)="onActivate($event)"
+                   (deactivate)="onDeactivate($event)"
+                   [animations]="animations">
             </svg:g>
           </svg:g>
         </ngx-charts-chart>

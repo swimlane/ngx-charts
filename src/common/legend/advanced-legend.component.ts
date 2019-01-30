@@ -35,8 +35,8 @@ import { formatLabel } from '../label.helper';
             *ngFor="let legendItem of legendItems; trackBy:trackBy"
             tabindex="-1"
             class="legend-item"
-            (mouseenter)="activate.emit(legendItem.label)"
-            (mouseleave)="deactivate.emit(legendItem.label)"
+            (mouseenter)="activate.emit({ name: legendItem.label, value: legendItem.value })"
+            (mouseleave)="deactivate.emit({ name: legendItem.label, value: legendItem.value })"
             (click)="select.emit({ name: legendItem.label, value: legendItem.value })">
             <div
               class="item-color"
