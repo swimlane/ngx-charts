@@ -61,7 +61,7 @@ export class BarComponent implements OnChanges {
   @Input() stops: any[];
   @Input() animations: boolean = true;
   @Input() ariaLabel: string;
-  @Input() value: string = "";
+  @Input() value: string = '';
   @Input() showSegmentLabels: boolean = false;
 
   @Output() select = new EventEmitter();
