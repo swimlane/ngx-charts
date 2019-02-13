@@ -192,15 +192,15 @@ export class BarVerticalComponent extends BaseChartComponent {
     let min = this.yScaleMin
       ? Math.min(this.yScaleMin, ...values)
       : Math.min(0, ...values);
-    if (!this.yAxisTicks.some(isNaN)) {
+    if (this.yAxisTicks && !this.yAxisTicks.some(isNaN)) {
       min = Math.min(min, ...this.yAxisTicks);
     }
 
     let max = this.yScaleMax
       ? Math.max(this.yScaleMax, ...values)
       : Math.max(0, ...values);
-    if (!this.yAxisTicks.some(isNaN)) {
-      max = Math.max(min, ...this.yAxisTicks);
+    if (this.yAxisTicks && !this.yAxisTicks.some(isNaN)) {
+      max = Math.max(max, ...this.yAxisTicks);
     }
     return [min, max];
   }
