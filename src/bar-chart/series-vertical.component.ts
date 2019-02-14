@@ -24,7 +24,7 @@ export enum D0Types {
   selector: 'g[ngx-charts-series-vertical]',
   template: `
     <svg:g ngx-charts-bar
-      *ngFor="let bar of bars; trackBy: trackBy; let label of barsForDataLabels;"
+      *ngFor="let bar of bars; trackBy: trackBy;"
       [@animationState]="'active'"
       [@.disabled]="!animations"
       [width]="bar.width"
@@ -51,7 +51,6 @@ export enum D0Types {
       [tooltipContext]="bar.data"
       [animations]="animations"
       [showSegmentLabels]="showSegmentLabels"
-      [value]="label.value">
     </svg:g>
     <svg:g *ngIf="showDataLabel">
       <svg:g ngx-charts-bar-label *ngFor="let b of barsForDataLabels; let i = index; trackBy:trackDataLabelBy"         

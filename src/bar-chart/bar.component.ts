@@ -40,7 +40,7 @@ import { id } from '../utils/id';
       text-anchor="middle"
       [attr.x]="x+width/2" 
       [attr.y]="y+height/2">
-      {{value}}
+      {{data.value}}
     </svg:text>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -61,7 +61,6 @@ export class BarComponent implements OnChanges {
   @Input() stops: any[];
   @Input() animations: boolean = true;
   @Input() ariaLabel: string;
-  @Input() value: string = '';
   @Input() showSegmentLabels: boolean = false;
 
   @Output() select = new EventEmitter();
