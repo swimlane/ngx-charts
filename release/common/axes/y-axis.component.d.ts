@@ -3,6 +3,8 @@ import { YAxisTicksComponent } from './y-axis-ticks.component';
 export declare class YAxisComponent implements OnChanges {
     yScale: any;
     dims: any;
+    trimTicks: boolean;
+    maxTickLength: number;
     tickFormatting: any;
     ticks: any[];
     showGridLines: boolean;

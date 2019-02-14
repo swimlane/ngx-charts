@@ -1,5 +1,9 @@
 # Changelog
 
+## 10.0.1
+- Bug: Fix click handler for advanced legend items passing a truncated value
+- Chore: Update prettier and @swimlane/prettier-config-swimlane
+
 ## 10.0.0
 
 - Breaking: Upgraded to angular 7

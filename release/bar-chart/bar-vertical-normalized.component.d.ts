@@ -17,6 +17,10 @@ export declare class BarVerticalNormalizedComponent extends BaseChartComponent {
     showGridLines: boolean;
     activeEntries: any[];
     schemeType: string;
+    trimXAxisTicks: boolean;
+    trimYAxisTicks: boolean;
+    maxXAxisTickLength: number;
+    maxYAxisTickLength: number;
     xAxisTickFormatting: any;
     yAxisTickFormatting: any;
     xAxisTicks: any[];

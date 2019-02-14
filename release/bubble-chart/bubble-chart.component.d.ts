@@ -13,6 +13,10 @@ export declare class BubbleChartComponent extends BaseChartComponent {
     showYAxisLabel: boolean;
     xAxisLabel: string;
     yAxisLabel: string;
+    trimXAxisTicks: boolean;
+    trimYAxisTicks: boolean;
+    maxXAxisTickLength: number;
+    maxYAxisTickLength: number;
     xAxisTickFormatting: any;
     yAxisTickFormatting: any;
     xAxisTicks: any[];
