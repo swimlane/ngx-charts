@@ -89,7 +89,7 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
   @Input() gradient;
   @Input() showGridLines: boolean = true;
   @Input() animations: boolean = true;
-  @Input() noBarWhenZero: boolean = false;
+  @Input() noBarWhenZero: boolean = true;
 
   @Output() onFilter = new EventEmitter();
 

@@ -95,7 +95,7 @@ export class SeriesHorizontal implements OnChanges {
   @Input() animations: boolean = true;
   @Input() showDataLabel: boolean = false;
   @Input() dataLabelFormatting: any;
-  @Input() noBarWhenZero: boolean = false;
+  @Input() noBarWhenZero: boolean = true;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();

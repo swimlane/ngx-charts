@@ -54,7 +54,7 @@ export class BarComponent implements OnChanges {
   @Input() stops: any[];
   @Input() animations: boolean = true;
   @Input() ariaLabel: string;
-  @Input() noBarWhenZero: boolean = false;
+  @Input() noBarWhenZero: boolean = true;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();

@@ -142,7 +142,7 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   @Input() xScaleMax: number;
   @Input() showDataLabel: boolean = false;
   @Input() dataLabelFormatting: any;
-  @Input() noBarWhenZero: boolean = false;
+  @Input() noBarWhenZero: boolean = true;
  
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

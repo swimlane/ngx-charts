@@ -96,7 +96,7 @@ export class AppComponent implements OnInit {
   yScaleMin: number;
   yScaleMax: number;
   showDataLabel = false;
-  noBarWhenZero = false;
+  noBarWhenZero = true;
   trimXAxisTicks = true;
   trimYAxisTicks = true;
   maxXAxisTickLength = 16;

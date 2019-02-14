@@ -125,7 +125,7 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
   @Input() yAxisTicks: any[];
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
-  @Input() noBarWhenZero: boolean = false;
+  @Input() noBarWhenZero: boolean = true;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

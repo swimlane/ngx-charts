@@ -172,7 +172,7 @@ export class ComboChartComponent extends BaseChartComponent  {
   @Input() yRightAxisScaleFactor: any;
   @Input() rangeFillOpacity: number;
   @Input() animations: boolean = true;
-  @Input() noBarWhenZero: boolean = false;
+  @Input() noBarWhenZero: boolean = true;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

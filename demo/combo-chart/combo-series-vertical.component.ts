@@ -70,7 +70,7 @@ export class ComboSeriesVerticalComponent implements OnChanges {
   @Input() activeEntries: any[];
   @Input() seriesName: string;
   @Input() animations: boolean = true;
-  @Input() noBarWhenZero: boolean = false;
+  @Input() noBarWhenZero: boolean = true;
   
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
