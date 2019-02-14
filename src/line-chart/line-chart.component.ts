@@ -7,7 +7,7 @@ import {
   HostListener,
   ChangeDetectionStrategy,
   ContentChild,
-  TemplateRef, ViewChild, ElementRef
+  TemplateRef
 } from '@angular/core';
 import {
   trigger,

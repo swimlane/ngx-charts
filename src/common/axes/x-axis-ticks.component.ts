@@ -12,8 +12,8 @@ import {
 } from '@angular/core';
 import {trimLabel} from '../trim-label.helper';
 import {reduceTicks} from './ticks.helper';
-import {scaleLinear, scaleTime} from 'd3-scale';
-import {select, selectAll} from 'd3-selection';
+import {scaleLinear} from 'd3-scale';
+import {select} from 'd3-selection';
 import {RealtimeDataConfig} from '../../models/RealtimeDataConfig';
 import {easeLinear} from 'd3-ease';
 
