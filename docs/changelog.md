@@ -1,8 +1,18 @@
 # Changelog
 
-## 10.0.1
-- Bug: Fix click handler for advanced legend items passing a truncated value
-- Chore: Update prettier and @swimlane/prettier-config-swimlane
+## 10.1.0
+
+- Feature: Allow configuration of tick trimming on charts with X and Y axis (#870)
+- Bug: Updated packages to remove event-stream vulnerability
+- Bug: Fixed issue where advanced pie legend click emits the truncated (#1106)
+- Bug: Fixed rotation to respect tick trimming
+- Bug: Fixed Pie Chart flicker on Safari (#1068)
+- Bug: Fixed issue where vertical bar chart is not showing X axis when all data values are negative (#1044)
+- Chore: Removed unused param in GridPanelSeriesComponent (#1025)
+- Chore: Added type check instead of truthy value for determining min/max in getRangeGenerator (#1042)
+- Docs: Fixed typo (#1056)
+- Docs: Fixed link in readme (#1053)
+- Docs: Fixed documentation link (#1029)
 
 ## 10.0.0
 

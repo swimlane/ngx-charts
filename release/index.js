@@ -1,5 +1,5 @@
 /**
- * ngx-charts v"10.0.0" (https://github.com/swimlane/ngx-charts)
+ * ngx-charts v"10.1.0" (https://github.com/swimlane/ngx-charts)
  * Copyright 2016
  * Licensed under MIT
  */
