@@ -139,7 +139,7 @@ import {RealtimeDataConfig} from '../models/RealtimeDataConfig';
         [scaleType]="scaleType"
         [legend]="legend"
         (onDomainChange)="updateDomain($event)">
-        <svg:g *ngFor="let series of results; trackBy:trackBy">
+        <svg:g *ngFor="let series of results; trackBy:trackBy" [attr.clip-path]="clipPath">
           <svg:g ngx-charts-line-series
             [xScale]="timelineXScale"
             [yScale]="timelineYScale"
@@ -149,6 +149,8 @@ import {RealtimeDataConfig} from '../models/RealtimeDataConfig';
             [curve]="curve"
             [hasRange]="hasRange"
             [animations]="animations"
+            [realtimeDataConfig]="realtimeDataConfig"
+            [chartWidth]="dims.width"    
           />
         </svg:g>
       </svg:g>
