@@ -6,9 +6,8 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { area, line } from 'd3-shape';
-
-import { id } from '../utils/id';
-import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
+import { id, sortLinear, sortByTime, sortByDomain } from '../utils';
+import {RealtimeDataConfig} from '../models/RealtimeDataConfig';
 
 @Component({
   selector: 'g[ngx-charts-line-series]',
@@ -33,6 +32,8 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
         [class.active]="isActive(data)"
         [class.inactive]="isInactive(data)"
         [animations]="animations"
+        [realtimeDataConfig]="realtimeDataConfig"
+        [chartWidth]="chartWidth"
       />
       <svg:g ngx-charts-line
         class="line-series"
@@ -42,6 +43,8 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
         [animations]="animations"
         [class.active]="isActive(data)"
         [class.inactive]="isInactive(data)"
+        [realtimeDataConfig]="realtimeDataConfig"     
+        [chartWidth]="chartWidth"
       />
      <svg:g ngx-charts-area
         *ngIf="hasRange"
@@ -53,6 +56,8 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
         [class.inactive]="isInactive(data)"
         [opacity]="rangeFillOpacity"
         [animations]="animations"
+        [realtimeDataConfig]="realtimeDataConfig"
+        [chartWidth]="chartWidth"    
       />
     </svg:g>
   `,
@@ -70,6 +75,8 @@ export class LineSeriesComponent implements OnChanges {
   @Input() rangeFillOpacity: number;
   @Input() hasRange: boolean;
   @Input() animations: boolean = true;
+  @Input() realtimeDataConfig: RealtimeDataConfig;
+  @Input() chartWidth: number;
 
   path: string;
   outerPath: string;

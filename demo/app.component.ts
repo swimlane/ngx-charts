@@ -1,3 +1,5 @@
+import {RealtimeDataConfig} from '../src/models/RealtimeDataConfig';
+
 declare var APP_VERSION: string;
 
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
@@ -227,10 +229,11 @@ export class AppComponent implements OnInit {
 
   // Supports any number of reference lines.
   refLines = [{ value: 42500, name: 'Maximum' }, { value: 37750, name: 'Average' }, { value: 33000, name: 'Minimum' }];
+  realtimeDataConfig: RealtimeDataConfig;
+  realtimeDataInterval;
 
   constructor(public location: Location) {
     this.mathFunction = this.getFunction();
-
     Object.assign(this, {
       single,
       multi,
@@ -264,18 +267,45 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.realtimeDataConfig = {
+      animationDuration: 600,
+      numPoints: 20
+    };
+
     const state = this.location.path(true);
     this.selectChart(state.length ? state : 'bar-vertical');
 
-    setInterval(this.updateData.bind(this), 1000);
+    this.realtimeDataInterval = setInterval(this.updateData.bind(this), this.realtimeDataConfig.animationDuration);
 
     if (!this.fitContainer) {
       this.applyDimensions();
     }
   }
 
+  updateRealtimeDataInterval() {
+    clearInterval(this.realtimeDataInterval);
+    this.realtimeDataInterval = setInterval(this.updateData.bind(this), this.realtimeDataConfig.animationDuration);
+  }
+
   updateData() {
     if (!this.realTimeData) {
+      return;
+    }
+
+    if (this.chartType === 'realtime-line-chart' && this.realtimeDataConfig) {
+      const now = new Date();
+      this.dateData.forEach((series) => {
+        series.series.push({name: now, value: Math.random() * 7000});
+      });
+
+      this.dateData = [...this.dateData];
+
+      this.dateData.forEach((series) => {
+        while (series.series.length > this.realtimeDataConfig.numPoints) {
+          series.series.shift();
+        }
+      });
+
       return;
     }
 
@@ -425,6 +455,17 @@ export class AppComponent implements OnInit {
 
     if (!this.fitContainer) {
       this.applyDimensions();
+    }
+
+    if (this.chartType === 'realtime-line-chart') {
+      this.dateData = this.dateData.map((series) => {
+        return {
+          name: series.name,
+          series: []
+        };
+      });
+    } else {
+      this.dateData = generateData(5, false);
     }
   }
 

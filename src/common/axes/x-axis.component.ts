@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 
 import { XAxisTicksComponent } from './x-axis-ticks.component';
+import {RealtimeDataConfig} from '../../models/RealtimeDataConfig';
 
 @Component({
   selector: 'g[ngx-charts-x-axis]',
@@ -31,6 +32,9 @@ import { XAxisTicksComponent } from './x-axis-ticks.component';
         [width]="dims.width"
         [tickValues]="ticks"
         (dimensionsChanged)="emitTicksHeight($event)"
+        [realtimeDataConfig]="realtimeDataConfig"     
+        [animations]="animations"     
+        [clipPath]="clipPath"     
       />
       <svg:g ngx-charts-axis-label
         *ngIf="showLabel"
@@ -45,7 +49,6 @@ import { XAxisTicksComponent } from './x-axis-ticks.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class XAxisComponent implements OnChanges {
-
   @Input() xScale;
   @Input() dims;
   @Input() trimTicks: boolean;
@@ -59,6 +62,9 @@ export class XAxisComponent implements OnChanges {
   @Input() xAxisTickCount: any;
   @Input() xOrient: string = 'bottom';
   @Input() xAxisOffset: number = 0;
+  @Input() realtimeDataConfig: RealtimeDataConfig;
+  @Input() animations: boolean;
+  @Input() clipPath: string;
 
   @Output() dimensionsChanged = new EventEmitter();
 

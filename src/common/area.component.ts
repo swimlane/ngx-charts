@@ -9,7 +9,10 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 import { select } from 'd3-selection';
-import { id } from '../utils/id';
+import { id } from '../utils';
+import {RealtimeDataConfig} from '../models/RealtimeDataConfig';
+import {easeLinear} from 'd3-ease';
+import {scaleLinear} from 'd3-scale';
 
 @Component({
   selector: 'g[ngx-charts-area]',
@@ -31,7 +34,6 @@ import { id } from '../utils/id';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AreaComponent implements OnChanges {
-
   @Input() data;
   @Input() path;
   @Input() startingPath;
@@ -43,6 +45,8 @@ export class AreaComponent implements OnChanges {
   @Input() gradient: boolean = false;
   @Input() stops: any[];
   @Input() animations: boolean = true;
+  @Input() realtimeDataConfig: RealtimeDataConfig;
+  @Input() chartWidth: number;
 
   @Output() select = new EventEmitter();
 
@@ -63,11 +67,11 @@ export class AreaComponent implements OnChanges {
       this.loadAnimation();
       this.initialized = true;
     } else {
-      this.update();
+      this.update(changes);
     }
   }
 
-  update(): void {
+  update(changes: SimpleChanges): void {
     this.gradientId = 'grad' + id().toString();
     this.gradientFill = `url(#${this.gradientId})`;
 
@@ -78,7 +82,7 @@ export class AreaComponent implements OnChanges {
       this.hasGradient = false;
     }
 
-    this.updatePathEl();
+    this.updatePathEl(changes);
   }
 
   loadAnimation(): void {
@@ -86,12 +90,25 @@ export class AreaComponent implements OnChanges {
     setTimeout(this.update.bind(this), 100);
   }
 
-  updatePathEl(): void {
+  updatePathEl(changes: SimpleChanges): void {
     const node = select(this.element).select('.area');
 
     if (this.animations) {
-      node.transition().duration(750)
-        .attr('d', this.path);
+      if (this.realtimeDataConfig && changes && changes.path) {
+        node
+          .transition()
+          .duration(this.realtimeDataConfig.animationDuration)
+          .ease(easeLinear)
+          .attr('transform', `translate(${this.x(-1)}) scale(1.05, 1)`)
+          .on('start', () => {
+            node
+              .attr('d', this.path)
+              .attr('transform', 'scale(1.05, 1)');
+          });
+      } else {
+        node.transition().duration(750)
+          .attr('d', this.path);
+      }
     } else {
       node.attr('d', this.path);
     }
@@ -113,5 +130,11 @@ export class AreaComponent implements OnChanges {
         color: this.fill,
         opacity: this.endOpacity
     }];
+  }
+
+  private x(pos: number): number {
+    return scaleLinear()
+      .domain([0, this.realtimeDataConfig.numPoints - 1])
+      .rangeRound([0, this.chartWidth])(pos);
   }
 }

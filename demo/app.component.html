@@ -335,6 +335,46 @@
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)">
       </ngx-charts-line-chart>
+      <h2 *ngIf="chartType === 'realtime-line-chart' && !realTimeData">👈Open DATA panel and check "Real-Time"</h2>
+      <ngx-charts-line-chart
+        *ngIf="chartType === 'realtime-line-chart'"
+        [view]="view"
+        class="chart-container"
+        [scheme]="colorScheme"
+        [schemeType]="schemeType"
+        [results]="dateDataWithOrWithoutRange"
+        [animations]="animations"
+        [legend]="showLegend"
+        [legendTitle]="legendTitle"
+        [legendPosition]="legendPosition"
+        (legendLabelClick)="onLegendLabelClick($event)"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [autoScale]="autoScale"
+        [xScaleMin]="xScaleMin"
+        [xScaleMax]="xScaleMax"
+        [yScaleMin]="yScaleMin"
+        [yScaleMax]="yScaleMax"
+        [timeline]="timeline"
+        [showGridLines]="showGridLines"
+        [curve]="curve"
+        [rangeFillOpacity]="rangeFillOpacity"
+        [roundDomains]="roundDomains"
+        [tooltipDisabled]="tooltipDisabled"
+        [trimXAxisTicks]="trimXAxisTicks"
+        [trimYAxisTicks]="trimYAxisTicks"
+        [maxXAxisTickLength]="maxXAxisTickLength"
+        [maxYAxisTickLength]="maxYAxisTickLength"
+        (select)="select($event)"
+        [realtimeDataConfig]="realtimeDataConfig">
+      </ngx-charts-line-chart>
+      <!--<app-realtime-data-demo *ngIf="chartType === 'realtime-line-chart'">-->
+      <!--</app-realtime-data-demo>-->
       <ngx-charts-polar-chart
         *ngIf="chartType === 'polar-chart'"
         [view]="view"
@@ -997,6 +1037,14 @@
             <input type="checkbox" [checked]="realTimeData" (change)="realTimeData = $event.target.checked">
             Real-time
           </label>
+          <div *ngIf="chartType === 'realtime-line-chart'">
+            <label>Time Between New Data:</label><br/>
+            <input type="number" [(ngModel)]="realtimeDataConfig.animationDuration"
+                   (ngModelChange)="updateRealtimeDataInterval()"/>
+
+            <label>Number of Points On Chart:</label><br/>
+            <input type="number" [(ngModel)]="realtimeDataConfig.numPoints"/>
+          </div>
 
           <label *ngIf="chartType === 'line-chart'">
             <br/>

@@ -1,1 +1,0 @@
-[{"__symbolic":"module","version":4,"metadata":{},"exports":[{"from":"./ngx-charts.module"},{"from":"./common"},{"from":"./area-chart"},{"from":"./bar-chart"},{"from":"./bubble-chart"},{"from":"./force-directed-graph"},{"from":"./heat-map"},{"from":"./line-chart"},{"from":"./polar-chart"},{"from":"./number-card"},{"from":"./pie-chart"},{"from":"./tree-map"},{"from":"./gauge"}]}]
