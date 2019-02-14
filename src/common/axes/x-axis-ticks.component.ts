@@ -1,24 +1,28 @@
 import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  OnChanges,
-  ElementRef,
-  ViewChild,
-  SimpleChanges,
   AfterViewInit,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+  ViewChild
 } from '@angular/core';
-import { trimLabel } from '../trim-label.helper';
-import { reduceTicks } from './ticks.helper';
+import {trimLabel} from '../trim-label.helper';
+import {reduceTicks} from './ticks.helper';
+import {scaleLinear} from 'd3-scale';
+import {select} from 'd3-selection';
+import {RealtimeDataConfig} from '../../models/RealtimeDataConfig';
+import {easeLinear} from 'd3-ease';
 
 @Component({
   selector: 'g[ngx-charts-x-axis-ticks]',
   template: `
-    <svg:g #ticksel>
+    <svg:g #ticksEl>
       <svg:g *ngFor="let tick of ticks" class="tick"
-        [attr.transform]="tickTransform(tick)">
+             [attr.transform]="tickTransform(tick)">
         <title>{{tickFormat(tick)}}</title>
         <svg:text
           stroke-width="0.01"
@@ -30,14 +34,16 @@ import { reduceTicks } from './ticks.helper';
       </svg:g>
     </svg:g>
 
-    <svg:g *ngFor="let tick of ticks"
-      [attr.transform]="tickTransform(tick)">
-      <svg:g *ngIf="showGridLines"
-        [attr.transform]="gridLineTransform()">
-        <svg:line
-          class="gridline-path gridline-path-vertical"
-          [attr.y1]="-gridLineHeight"
-          y2="0" />
+    <svg:g #linesEl>
+      <svg:g *ngFor="let tick of ticks"
+             [attr.transform]="tickTransform(tick)">
+        <svg:g *ngIf="showGridLines"
+               [attr.transform]="gridLineTransform()">
+          <svg:line
+            class="gridline-path gridline-path-vertical"
+            [attr.y1]="-gridLineHeight"
+            y2="0"/>
+        </svg:g>
       </svg:g>
     </svg:g>
   `,
@@ -55,6 +61,9 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() showGridLines = false;
   @Input() gridLineHeight;
   @Input() width;
+  @Input() realtimeDataConfig: RealtimeDataConfig;
+  @Input() animations: boolean;
+  @Input() clipPath: string;
 
   @Output() dimensionsChanged = new EventEmitter();
 
@@ -72,7 +81,8 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   tickFormat: (o: any) => any;
   height: number = 0;
 
-  @ViewChild('ticksel') ticksElement: ElementRef;
+  @ViewChild('ticksEl') ticksElement: ElementRef<any>;
+  @ViewChild('linesEl') linesElement: ElementRef<any>;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -86,7 +96,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     const height = parseInt(this.ticksElement.nativeElement.getBoundingClientRect().height, 10);
     if (height !== this.height) {
       this.height = height;
-      this.dimensionsChanged.emit({ height });
+      this.dimensionsChanged.emit({height});
       setTimeout(() => this.updateDims());
     }
   }
@@ -112,8 +122,8 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
 
     this.adjustedScale = this.scale.bandwidth
       ? function(d) {
-          return this.scale(d) + this.scale.bandwidth() * 0.5;
-        }
+        return this.scale(d) + this.scale.bandwidth() * 0.5;
+      }
       : this.scale;
 
     this.textTransform = '';
@@ -126,6 +136,30 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     }
 
     setTimeout(() => this.updateDims());
+
+    if (this.animations && this.realtimeDataConfig) {
+      const ticksGroup = select(this.ticksElement.nativeElement);
+      ticksGroup
+        .transition()
+        .attr('transform', 'translate(' + this.x(-1) + ') scale(1.05, 1)')
+        .duration(this.realtimeDataConfig.animationDuration)
+        .ease(easeLinear)
+        .on('start', () => {
+          ticksGroup
+            .attr('transform', 'scale(1.05, 1)');
+        });
+
+      const linesGroup = select(this.linesElement.nativeElement);
+      linesGroup
+        .transition()
+        .attr('transform', 'translate(' + this.x(-1) + ') scale(1.05, 1)')
+        .duration(this.realtimeDataConfig.animationDuration)
+        .ease(easeLinear)
+        .on('start', () => {
+          linesGroup
+            .attr('transform', 'scale(1.05, 1)');
+        });
+    }
   }
 
   getRotationAngle(ticks): number {
@@ -190,5 +224,11 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
 
   tickTrim(label: string): string {
     return this.trimTicks ? trimLabel(label, this.maxTickLength) : label;
+  }
+
+  private x(pos: number): number {
+    return scaleLinear()
+      .domain([0, this.realtimeDataConfig.numPoints - 1])
+      .rangeRound([0, this.width])(pos);
   }
 }

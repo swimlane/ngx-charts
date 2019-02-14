@@ -23,6 +23,7 @@ import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
 import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
+import {RealtimeDataConfig} from '../models/RealtimeDataConfig';
 
 @Component({
   selector: 'ngx-charts-line-chart',
@@ -56,7 +57,10 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
           [maxTickLength]="maxXAxisTickLength"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
-          (dimensionsChanged)="updateXAxisHeight($event)">
+          (dimensionsChanged)="updateXAxisHeight($event)"
+          [realtimeDataConfig]="realtimeDataConfig"
+          [animations]="animations"
+          [clipPath]="clipPath">
         </svg:g>
         <svg:g ngx-charts-y-axis
           *ngIf="yAxis"
@@ -86,7 +90,9 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
               [curve]="curve"
               [rangeFillOpacity]="rangeFillOpacity"
               [hasRange]="hasRange"
-              [animations]="animations"
+              [animations]="animations" 
+              [realtimeDataConfig]="realtimeDataConfig"
+              [chartWidth]="dims.width"
             />
           </svg:g>
 
@@ -133,7 +139,7 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
         [scaleType]="scaleType"
         [legend]="legend"
         (onDomainChange)="updateDomain($event)">
-        <svg:g *ngFor="let series of results; trackBy:trackBy">
+        <svg:g *ngFor="let series of results; trackBy:trackBy" [attr.clip-path]="clipPath">
           <svg:g ngx-charts-line-series
             [xScale]="timelineXScale"
             [yScale]="timelineYScale"
@@ -143,6 +149,8 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
             [curve]="curve"
             [hasRange]="hasRange"
             [animations]="animations"
+            [realtimeDataConfig]="realtimeDataConfig"
+            [chartWidth]="dims.width"    
           />
         </svg:g>
       </svg:g>
@@ -200,6 +208,7 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() xScaleMax: any;
   @Input() yScaleMin: number;
   @Input() yScaleMax: number;
+  @Input() realtimeDataConfig: RealtimeDataConfig;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
