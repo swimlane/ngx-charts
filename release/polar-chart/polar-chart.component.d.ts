@@ -18,6 +18,8 @@ export declare class PolarChartComponent extends BaseChartComponent {
     activeEntries: any[];
     schemeType: string;
     rangeFillOpacity: number;
+    trimYAxisTicks: boolean;
+    maxYAxisTickLength: number;
     xAxisTickFormatting: (o: any) => any;
     yAxisTickFormatting: (o: any) => any;
     roundDomains: boolean;

@@ -21,6 +21,10 @@ export declare class AreaChartComponent extends BaseChartComponent {
     curve: any;
     activeEntries: any[];
     schemeType: string;
+    trimXAxisTicks: boolean;
+    trimYAxisTicks: boolean;
+    maxXAxisTickLength: number;
+    maxYAxisTickLength: number;
     xAxisTickFormatting: any;
     yAxisTickFormatting: any;
     xAxisTicks: any[];

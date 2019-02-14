@@ -1,1 +1,4 @@
-export declare const MouseEvent: MouseEvent & (new (typeArg: string, eventInitDict?: MouseEventInit) => MouseEvent);
+export declare const MouseEvent: MouseEvent & {
+    new (typeArg: string, eventInitDict?: MouseEventInit): MouseEvent;
+    prototype?: MouseEvent;
+};
