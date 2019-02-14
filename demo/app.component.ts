@@ -298,7 +298,7 @@ export class AppComponent implements OnInit {
         series.series.push({name: now, value: Math.random() * 7000});
       });
 
-      this.dateData = [...this.dateData];
+      this.dateData = this.dateData.slice();
 
       this.dateData.forEach((series) => {
         while (series.series.length > this.realtimeDataConfig.numPoints) {

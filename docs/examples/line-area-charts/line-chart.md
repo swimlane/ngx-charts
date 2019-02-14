@@ -5,7 +5,6 @@
 {% embed data="{\"url\":\"https://embed.plnkr.co/7SqwjBi1hGcN2q6Ox1GU?show=preview\",\"type\":\"rich\",\"title\":\"Line Chart\",\"description\":\"Created on Plnkr: Helping developers build the web.\",\"icon\":{\"type\":\"icon\",\"url\":\"https://embed.plnkr.co/favicon.ico\",\"aspectRatio\":0},\"thumbnail\":{\"type\":\"thumbnail\",\"url\":\"https://shot.plnkr.co/7SqwjBi1hGcN2q6Ox1GU.png?d=2017-03-31T15:15:48.963Z\",\"width\":400,\"height\":300,\"aspectRatio\":0.75},\"embed\":{\"type\":\"reader\",\"url\":\"https://embed.plnkr.co/plunk/7SqwjBi1hGcN2q6Ox1GU?autoCloseSidebar&deferRun&show=preview\",\"html\":\"<div style=\\"left: 0; width: 100%; height: 0; position: relative; padding-bottom: 66.6667%;\\"><iframe src=\\"https://embed.plnkr.co/plunk/7SqwjBi1hGcN2q6Ox1GU?autoCloseSidebar&amp;deferRun&amp;show=preview\\" style=\\"border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;\\" allowfullscreen scrolling=\\"no\\"></iframe></div>\",\"aspectRatio\":1.5}}" %}
 
 ## Inputs
-
 | Property              | Type               | Default Value | Description                                                                                                                                                                                                                                |
 | --------------------- | ------------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | view                  | number\[\]         |               | the dimensions of the chart \[width, height\]. If left undefined, the chart will fit to the parent container size                                                                                                                          |
@@ -26,10 +25,10 @@
 | showYAxisLabel        | boolean            | false         | show or hide the y axis label                                                                                                                                                                                                              |
 | xAxisLabel            | string             |               | the x axis label text                                                                                                                                                                                                                      |
 | yAxisLabel            | string             |               | the y axis label text                                                                                                                                                                                                                      |
-| trimXAxisTicks | boolean | true | trim or not ticks on the x axis |
-| trimYAxisTicks | boolean | true | trim or not ticks on the Y axis |
-| maxXAxisTickLength | number | 16 | max length of the ticks. If `trimXAxisTicks` is `true`, ticks over this length will be trimmed |
-| maxYAxisTickLength | number | 16 | max length of the ticks. If `trimYAxisTicks` is `true`, ticks over this length will be trimmed |
+| trimXAxisTicks        | boolean            | true          | trim or not ticks on the x axis                                                                                                                                                                                                            |
+| trimYAxisTicks        | boolean            | true          | trim or not ticks on the Y axis                                                                                                                                                                                                            |
+| maxXAxisTickLength    | number             | 16            | max length of the ticks. If `trimXAxisTicks` is `true`, ticks over this length will be trimmed                                                                                                                                             |
+| maxYAxisTickLength    | number             | 16            | max length of the ticks. If `trimYAxisTicks` is `true`, ticks over this length will be trimmed                                                                                                                                             |
 | xAxisTickFormatting   | function           |               | the x axis tick formatting                                                                                                                                                                                                                 |
 | yAxisTickFormatting   | function           |               | the y axis tick formatting                                                                                                                                                                                                                 |
 | xAxisTicks            | any\[\]            |               | predefined list of x axis tick values                                                                                                                                                                                                      |
@@ -49,9 +48,9 @@
 | xScaleMax             | any                |               | the maximum value of the x axis \(if the x scale is linear or time\)                                                                                                                                                                       |
 | yScaleMin             | number             |               | the minimum value of the y axis                                                                                                                                                                                                            |
 | yScaleMax             | number             |               | the maximum value of the y axis                                                                                                                                                                                                            |
+| realtimeDataConfig    | RealtimeDataConfig |               | 
 
 ## Outputs
-
 | Property   | Description                                |
 | ---------- | ------------------------------------------ |
 | select     | click event                                |
@@ -59,12 +58,10 @@
 | deactivate | element deactivation event \(mouse leave\) |
 
 ## Data Format
-
 ### Regular line charts
-
 The data format is multi series:
 
-```text
+```json
 [
   {
     "name": "Germany",
@@ -100,7 +97,7 @@ The data format is multi series:
 
 The data format is multi series. Plus, the minimum and the maximum value of each data point are provided. For instance, you can use these values to show the error margin of your data. Another use case are cumulated data. The central line show the average values. The range shows indicates the distribution of the data.
 
-```text
+```json
 [
   {
     "name": "Germany",
@@ -139,3 +136,28 @@ The data format is multi series. Plus, the minimum and the maximum value of each
   }
 ]
 ```
+
+## Using the Chart for Realtime Data
+### RealtimeDataConfig Input
+```typescript
+interface RealtimeDataConfig {
+  animationDuration: number;
+  numPoints: number;
+}
+```
+**animationDuration** is the time that it takes to animate the line from its current position, to the next position to the left. This should be equal to the amount of time between new data points in your application.\
+**numPoints** is the number of points that you are keeping on the chart at any point in time. This is needed to calculate the distance to transition the line when new data comes in.
+
+### How to use
+```typescript
+// Code to add new data points to this.results[*]
+
+// Code that triggers an re-render of chart
+this.results = this.results.slice(); // Faster for most browsers
+// this.results = [...this.results] // ES6 Alternative
+
+// Code that uses this.results[*].series.shift() to shift data out of the array when the length is greater than 
+// realtimeDataConfig.numPoints
+``` 
+
+
