@@ -50,7 +50,7 @@ export enum D0Types {
       [tooltipTemplate]="tooltipTemplate"
       [tooltipContext]="bar.data"
       [animations]="animations"
-      [showSegmentLabels]="showSegmentLabels"
+      [showSegmentLabels]="showSegmentLabels">
     </svg:g>
     <svg:g *ngIf="showDataLabel">
       <svg:g ngx-charts-bar-label *ngFor="let b of barsForDataLabels; let i = index; trackBy:trackDataLabelBy"         
