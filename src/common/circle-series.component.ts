@@ -20,11 +20,11 @@ import { id } from '../utils/id';
 import { ColorHelper } from '../common/color.helper';
 
 @Component({
-  selector: 'g[ngx-charts-circle-series]',
+  selector: 'g[data-ngx-charts-circle-series]',
   template: `
     <svg:g *ngIf="circle">
       <defs>
-        <svg:g ngx-charts-svg-linear-gradient
+        <svg:g data-ngx-charts-svg-linear-gradient
           orientation="vertical"
           [name]="gradientId"
           [stops]="circle.gradientStops"
@@ -40,7 +40,7 @@ import { ColorHelper } from '../common/color.helper';
         [attr.fill]="gradientFill"
         class="tooltip-bar"
       />
-      <svg:g ngx-charts-circle
+      <svg:g data-ngx-charts-circle
         class="circle"
         [cx]="circle.cx"
         [cy]="circle.cy"

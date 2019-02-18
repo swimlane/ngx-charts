@@ -17,11 +17,11 @@ import {
 import { formatLabel } from '../common/label.helper';
 
 @Component({
-  selector: 'g[ngx-charts-bubble-series]',
+  selector: 'g[data-ngx-charts-bubble-series]',
   template: `
     <svg:g *ngFor="let circle of circles; trackBy: trackBy">
       <svg:g [attr.transform]="circle.transform">
-        <svg:g ngx-charts-circle
+        <svg:g data-ngx-charts-circle
           [@animationState]="'active'"
           class="circle"
           [cx]="0"

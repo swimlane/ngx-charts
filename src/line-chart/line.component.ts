@@ -17,7 +17,7 @@ import {
 import { select } from 'd3-selection';
 
 @Component({
-  selector: 'g[ngx-charts-line]',
+  selector: 'g[data-ngx-charts-line]',
   template: `
     <svg:path
       [@animationState]="'active'"

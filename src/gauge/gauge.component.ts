@@ -31,7 +31,7 @@ import { ColorHelper } from '../common/color.helper';
       (legendLabelDeactivate)="onDeactivate($event)">
       <svg:g [attr.transform]="transform" class="gauge chart">
         <svg:g *ngFor="let arc of arcs; trackBy:trackBy" [attr.transform]="rotation">
-          <svg:g ngx-charts-gauge-arc
+          <svg:g data-ngx-charts-gauge-arc
             [backgroundArc]="arc.backgroundArc"
             [valueArc]="arc.valueArc"
             [cornerRadius]="cornerRadius"
@@ -47,7 +47,7 @@ import { ColorHelper } from '../common/color.helper';
           </svg:g>
         </svg:g>
 
-        <svg:g ngx-charts-gauge-axis
+        <svg:g data-ngx-charts-gauge-axis
           *ngIf="showAxis"
           [bigSegments]="bigSegments"
           [smallSegments]="smallSegments"

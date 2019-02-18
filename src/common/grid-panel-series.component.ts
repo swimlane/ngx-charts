@@ -1,9 +1,9 @@
 import { Component, SimpleChanges, Input, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'g[ngx-charts-grid-panel-series]',
+  selector: 'g[data-ngx-charts-grid-panel-series]',
   template: `
-    <svg:g ngx-charts-grid-panel *ngFor="let gridPanel of gridPanels"
+    <svg:g data-ngx-charts-grid-panel *ngFor="let gridPanel of gridPanels"
       [height]="gridPanel.height"
       [width]="gridPanel.width"
       [x]="gridPanel.x"

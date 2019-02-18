@@ -27,7 +27,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)">
       <svg:g [attr.transform]="transform" class="bar-chart chart">
-        <svg:g ngx-charts-x-axis
+        <svg:g data-ngx-charts-x-axis
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
@@ -40,7 +40,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [ticks]="xAxisTicks"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
-        <svg:g ngx-charts-y-axis
+        <svg:g data-ngx-charts-y-axis
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
@@ -53,7 +53,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [yAxisOffset]="dataLabelMaxWidth.negative"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
-        <svg:g ngx-charts-series-horizontal
+        <svg:g data-ngx-charts-series-horizontal
           [xScale]="xScale"
           [yScale]="yScale"
           [colors]="colors"

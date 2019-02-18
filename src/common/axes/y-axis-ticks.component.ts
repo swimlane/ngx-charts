@@ -15,7 +15,7 @@ import { reduceTicks } from './ticks.helper';
 import { roundedRect } from '../../common/shape.helper';
 
 @Component({
-  selector: 'g[ngx-charts-y-axis-ticks]',
+  selector: 'g[data-ngx-charts-y-axis-ticks]',
   template: `
     <svg:g #ticksel>
       <svg:g *ngFor="let tick of ticks" class="tick"

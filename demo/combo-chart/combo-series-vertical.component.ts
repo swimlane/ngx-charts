@@ -18,7 +18,7 @@ import { formatLabel } from '../../src/common/label.helper';
 @Component({
   selector: 'g[ngx-combo-charts-series-vertical]',
   template: `
-    <svg:g ngx-charts-bar *ngFor="let bar of bars; trackBy: trackBy"
+    <svg:g data-ngx-charts-bar *ngFor="let bar of bars; trackBy: trackBy"
       [@animationState]="'active'"
       [width]="bar.width"
       [height]="bar.height"

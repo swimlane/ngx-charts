@@ -45,7 +45,7 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
         </svg:clipPath>
       </svg:defs>
       <svg:g [attr.transform]="transform" class="line-chart chart">
-        <svg:g ngx-charts-x-axis
+        <svg:g data-ngx-charts-x-axis
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
@@ -58,7 +58,7 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
           [ticks]="xAxisTicks"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
-        <svg:g ngx-charts-y-axis
+        <svg:g data-ngx-charts-y-axis
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
@@ -76,7 +76,7 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
         </svg:g>
         <svg:g [attr.clip-path]="clipPath">
           <svg:g *ngFor="let series of results; trackBy:trackBy" [@animationState]="'active'">
-            <svg:g ngx-charts-line-series
+            <svg:g data-ngx-charts-line-series
               [xScale]="xScale"
               [yScale]="yScale"
               [colors]="colors"
@@ -91,7 +91,7 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
           </svg:g>
 
           <svg:g *ngIf="!tooltipDisabled" (mouseleave)="hideCircles()">
-            <svg:g ngx-charts-tooltip-area
+            <svg:g data-ngx-charts-tooltip-area
               [dims]="dims"
               [xSet]="xSet"
               [xScale]="xScale"
@@ -104,7 +104,7 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
             />
 
             <svg:g *ngFor="let series of results">
-              <svg:g ngx-charts-circle-series
+              <svg:g data-ngx-charts-circle-series
                 [xScale]="xScale"
                 [yScale]="yScale"
                 [colors]="colors"
@@ -122,7 +122,7 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
           </svg:g>
         </svg:g>
       </svg:g>
-      <svg:g ngx-charts-timeline
+      <svg:g data-ngx-charts-timeline
         *ngIf="timeline && scaleType != 'ordinal'"
         [attr.transform]="timelineTransform"
         [results]="results"
@@ -134,7 +134,7 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
         [legend]="legend"
         (onDomainChange)="updateDomain($event)">
         <svg:g *ngFor="let series of results; trackBy:trackBy">
-          <svg:g ngx-charts-line-series
+          <svg:g data-ngx-charts-line-series
             [xScale]="timelineXScale"
             [yScale]="timelineYScale"
             [colors]="colors"

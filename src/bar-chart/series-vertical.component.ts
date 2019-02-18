@@ -21,9 +21,9 @@ export enum D0Types {
 }
 
 @Component({
-  selector: 'g[ngx-charts-series-vertical]',
+  selector: 'g[data-ngx-charts-series-vertical]',
   template: `
-    <svg:g ngx-charts-bar
+    <svg:g data-ngx-charts-bar
       *ngFor="let bar of bars; trackBy: trackBy"
       [@animationState]="'active'"
       [@.disabled]="!animations"
@@ -52,7 +52,7 @@ export enum D0Types {
       [animations]="animations">
     </svg:g>
     <svg:g *ngIf="showDataLabel">
-      <svg:g ngx-charts-bar-label *ngFor="let b of barsForDataLabels; let i = index; trackBy:trackDataLabelBy"         
+      <svg:g data-ngx-charts-bar-label *ngFor="let b of barsForDataLabels; let i = index; trackBy:trackDataLabelBy"         
         [barX]="b.x"
         [barY]="b.y"
         [barWidth]="b.width"

@@ -6,11 +6,11 @@ import { trimLabel } from '../common/trim-label.helper';
 import { id } from '../utils/id';
 
 @Component({
-  selector: 'g[ngx-charts-tree-map-cell]',
+  selector: 'g[data-ngx-charts-tree-map-cell]',
   template: `
     <svg:g>
       <defs *ngIf="gradient">
-        <svg:g ngx-charts-svg-linear-gradient
+        <svg:g data-ngx-charts-svg-linear-gradient
           orientation="vertical"
           [name]="gradientId"
           [stops]="gradientStops"

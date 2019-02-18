@@ -17,7 +17,7 @@ import { gridLayout, gridSize } from '../common/grid-layout.helper';
       [showLegend]="false"
       [animations]="animations">
       <svg:g [attr.transform]="transform" class="number-card chart" [class.clickable]="clickable">
-        <svg:g ngx-charts-card-series
+        <svg:g data-ngx-charts-card-series
           [colors]="colors"
           [cardColor]="cardColor"
           [bandColor]="bandColor"

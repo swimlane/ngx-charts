@@ -28,7 +28,7 @@ import { formatLabel } from '../common/label.helper';
           *ngFor="let series of series"
           class="pie-grid-item"
           [attr.transform]="series.transform">
-          <svg:g ngx-charts-pie-grid-series
+          <svg:g data-ngx-charts-pie-grid-series
             [colors]="series.colors"
             [data]="series.data"
             [innerRadius]="series.innerRadius"

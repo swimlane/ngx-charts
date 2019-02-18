@@ -33,14 +33,14 @@ import { BaseChartComponent } from '../common/base-chart.component';
       (legendLabelDeactivate)="onDeactivate($event)"
       (legendLabelClick)="onClick($event)">
       <svg:g [attr.transform]="transform" class="bar-chart chart">
-        <svg:g ngx-charts-grid-panel-series
+        <svg:g data-ngx-charts-grid-panel-series
           [xScale]="groupScale"
           [yScale]="valueScale"
           [data]="results"
           [dims]="dims"
           orient="vertical">
         </svg:g>
-        <svg:g ngx-charts-x-axis
+        <svg:g data-ngx-charts-x-axis
           *ngIf="xAxis"
           [xScale]="groupScale"
           [dims]="dims"
@@ -53,7 +53,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [xAxisOffset]="dataLabelMaxHeight.negative"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
-        <svg:g ngx-charts-y-axis
+        <svg:g data-ngx-charts-y-axis
           *ngIf="yAxis"
           [yScale]="valueScale"
           [dims]="dims"
@@ -66,7 +66,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [ticks]="yAxisTicks"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
-        <svg:g ngx-charts-series-vertical
+        <svg:g data-ngx-charts-series-vertical
           *ngFor="let group of results; let index = index; trackBy:trackBy"
           [@animationState]="'active'"
           [attr.transform]="groupTransform(group)"

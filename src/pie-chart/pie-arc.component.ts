@@ -17,11 +17,11 @@ import { id } from '../utils/id';
 import { MouseEvent } from '../events';
 
 @Component({
-  selector: 'g[ngx-charts-pie-arc]',
+  selector: 'g[data-ngx-charts-pie-arc]',
   template: `
     <svg:g class="arc-group">
       <svg:defs *ngIf="gradient">
-        <svg:g ngx-charts-svg-radial-gradient
+        <svg:g data-ngx-charts-svg-radial-gradient
           [color]="fill"
           orientation="vertical"
           [name]="radialGradientId"

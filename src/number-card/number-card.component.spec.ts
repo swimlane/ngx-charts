@@ -63,7 +63,7 @@ describe('<ngx-charts-number-card>', () => {
 
         const compiled = fixture.debugElement.nativeElement;
 
-        expect(compiled.querySelectorAll('g[ngx-charts-card]').length).toEqual(multi.length);
+        expect(compiled.querySelectorAll('g[data-ngx-charts-card]').length).toEqual(multi.length);
     }));
   });
 });

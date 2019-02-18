@@ -12,9 +12,9 @@ import { area } from 'd3-shape';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
 
 @Component({
-  selector: 'g[ngx-charts-area-series]',
+  selector: 'g[data-ngx-charts-area-series]',
   template: `
-    <svg:g ngx-charts-area
+    <svg:g data-ngx-charts-area
       class="area-series"
       [data]="data"
       [path]="path"

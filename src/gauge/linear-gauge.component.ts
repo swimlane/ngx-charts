@@ -22,7 +22,7 @@ import { ColorHelper } from '../common/color.helper';
       [animations]="animations"
       (click)="onClick()">
       <svg:g class="linear-gauge chart">
-        <svg:g ngx-charts-bar
+        <svg:g data-ngx-charts-bar
           class="background-bar"
           [width]="dims.width"
           [height]="3"
@@ -33,7 +33,7 @@ import { ColorHelper } from '../common/color.helper';
           [roundEdges]="true"
           [animations]="animations">
         </svg:g>
-        <svg:g ngx-charts-bar
+        <svg:g data-ngx-charts-bar
           [width]="valueScale(value)"
           [height]="3"
           [x]="margin[3]"

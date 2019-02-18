@@ -14,10 +14,10 @@ import { roundedRect } from '../common/shape.helper';
 import { id } from '../utils/id';
 
 @Component({
-  selector: 'g[ngx-charts-bar]',
+  selector: 'g[data-ngx-charts-bar]',
   template: `
     <svg:defs *ngIf="hasGradient">
-      <svg:g ngx-charts-svg-linear-gradient
+      <svg:g data-ngx-charts-svg-linear-gradient
         [orientation]="orientation"
         [name]="gradientId"
         [stops]="gradientStops"

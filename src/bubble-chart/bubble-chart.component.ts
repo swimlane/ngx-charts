@@ -45,7 +45,7 @@ import { id } from '../utils/id';
         </svg:clipPath>
       </svg:defs>
       <svg:g [attr.transform]="transform" class="bubble-chart chart">
-        <svg:g ngx-charts-x-axis
+        <svg:g data-ngx-charts-x-axis
           *ngIf="xAxis"
           [showGridLines]="showGridLines"
           [dims]="dims"
@@ -57,7 +57,7 @@ import { id } from '../utils/id';
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
           (dimensionsChanged)="updateXAxisHeight($event)"/>
-        <svg:g ngx-charts-y-axis
+        <svg:g data-ngx-charts-y-axis
           *ngIf="yAxis"
           [showGridLines]="showGridLines"
           [yScale]="yScale"
@@ -80,7 +80,7 @@ import { id } from '../utils/id';
         />
         <svg:g [attr.clip-path]="clipPath">
           <svg:g *ngFor="let series of data; trackBy:trackBy" [@animationState]="'active'">
-            <svg:g ngx-charts-bubble-series
+            <svg:g data-ngx-charts-bubble-series
               [xScale]="xScale"
               [yScale]="yScale"
               [rScale]="rScale"

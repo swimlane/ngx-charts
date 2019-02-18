@@ -16,7 +16,7 @@ import {
 import { MouseEvent } from '../events';
 
 @Component({
-  selector: 'g[ngx-charts-tooltip-area]',
+  selector: 'g[data-ngx-charts-tooltip-area]',
   template: `
     <svg:g>
       <svg:rect

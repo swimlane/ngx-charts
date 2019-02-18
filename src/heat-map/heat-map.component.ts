@@ -23,7 +23,7 @@ import {getScaleType} from '../common/domain.helper';
       [legendOptions]="legendOptions"
       (legendLabelClick)="onClick($event)">
       <svg:g [attr.transform]="transform" class="heat-map chart">
-        <svg:g ngx-charts-x-axis
+        <svg:g data-ngx-charts-x-axis
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
@@ -35,7 +35,7 @@ import {getScaleType} from '../common/domain.helper';
           [ticks]="xAxisTicks"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
-        <svg:g ngx-charts-y-axis
+        <svg:g data-ngx-charts-y-axis
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
@@ -55,7 +55,7 @@ import {getScaleType} from '../common/domain.helper';
           [attr.height]="rect.height"
           [attr.fill]="rect.fill"
         />
-        <svg:g ngx-charts-heat-map-cell-series
+        <svg:g data-ngx-charts-heat-map-cell-series
           [xScale]="xScale"
           [yScale]="yScale"
           [colors]="colors"

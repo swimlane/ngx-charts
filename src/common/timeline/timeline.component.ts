@@ -10,7 +10,7 @@ import { select, event as d3event } from 'd3-selection';
 import { id } from '../../utils';
 
 @Component({
-  selector: 'g[ngx-charts-timeline]',
+  selector: 'g[data-ngx-charts-timeline]',
   template: `
     <svg:g
       class="timeline"

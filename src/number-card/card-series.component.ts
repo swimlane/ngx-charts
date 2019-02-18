@@ -21,7 +21,7 @@ export interface CardModel {
 }
 
 @Component({
-  selector: 'g[ngx-charts-card-series]',
+  selector: 'g[data-ngx-charts-card-series]',
   template: `
     <svg:rect
       *ngFor="let c of emptySlots; trackBy:trackBy"
@@ -34,7 +34,7 @@ export interface CardModel {
       rx="3"
       ry="3"
     />
-    <svg:g ngx-charts-card *ngFor="let c of cards; trackBy:trackBy"
+    <svg:g data-ngx-charts-card *ngFor="let c of cards; trackBy:trackBy"
       [x]="c.x"
       [y]="c.y"
       [width]="c.width"

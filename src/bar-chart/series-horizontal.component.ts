@@ -18,9 +18,9 @@ import { formatLabel } from '../common/label.helper';
 import { D0Types } from './series-vertical.component';
 
 @Component({
-  selector: 'g[ngx-charts-series-horizontal]',
+  selector: 'g[data-ngx-charts-series-horizontal]',
   template: `
-    <svg:g ngx-charts-bar
+    <svg:g data-ngx-charts-bar
       *ngFor="let bar of bars; trackBy:trackBy"
       [@animationState]="'active'"
       [width]="bar.width"
@@ -48,7 +48,7 @@ import { D0Types } from './series-vertical.component';
       [tooltipContext]="bar.data">
     </svg:g>
     <svg:g *ngIf="showDataLabel">
-      <svg:g ngx-charts-bar-label *ngFor="let b of barsForDataLabels; let i = index; trackBy:trackDataLabelBy"         
+      <svg:g data-ngx-charts-bar-label *ngFor="let b of barsForDataLabels; let i = index; trackBy:trackDataLabelBy"         
         [barX]="b.x"
         [barY]="b.y"
         [barWidth]="b.width"
