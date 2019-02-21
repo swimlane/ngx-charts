@@ -32,6 +32,7 @@ export class InjectionService {
   }
 
   private _container: ComponentRef<any>;
+  private _containerElement: HTMLElement;
 
   constructor(
     private applicationRef: ApplicationRef,
@@ -73,6 +74,17 @@ export class InjectionService {
   }
 
   /**
+   * Defines the container element.
+   *
+   * @param {HTMLElement} container
+   *
+   * @memberOf InjectionService
+   */
+  setContainerElement(container: HTMLElement): void {
+    this._containerElement = container;
+  }
+
+  /**
    * Gets the html element for a component ref.
    *
    * @param {ComponentRef<any>} componentRef
@@ -96,6 +108,21 @@ export class InjectionService {
    */
   getRootViewContainerNode(): HTMLElement {
     return this.getComponentRootNode(this.getRootViewContainer());
+  }
+
+  /**
+   * Gets the container html element.
+   *
+   * @returns {HTMLElement}
+   *
+   * @memberOf InjectionService
+   */
+  getContainerElement(): HTMLElement {
+    // user defined container element
+    if (this._containerElement) return this._containerElement;
+
+    // root view container
+    return this.getRootViewContainerNode();
   }
 
   /**
@@ -133,7 +160,7 @@ export class InjectionService {
    * @template T
    * @param {Type<T>} componentClass
    * @param {*} [options={}]
-   * @param {Element} [location=this.getRootViewContainerNode()]
+   * @param {Element} [location=this.getContainerElement()]
    * @returns {ComponentRef<any>}
    *
    * @memberOf InjectionService
@@ -141,7 +168,7 @@ export class InjectionService {
   appendComponent<T>(
     componentClass: Type<T>,
     bindings: any = {},
-    location: Element = this.getRootViewContainerNode()
+    location: Element = this.getContainerElement()
   ): ComponentRef<any> {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentClass);
     const componentRef: any = componentFactory.create(this.injector);
