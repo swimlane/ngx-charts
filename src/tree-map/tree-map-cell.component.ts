@@ -32,7 +32,7 @@ import { id } from '../utils/id';
         [attr.y]="y"
         [attr.width]="width"
         [attr.height]="height"
-        class="label"
+        class="treemap-label"
         [style.pointer-events]="'none'">
         <xhtml:p
           [style.color]="getTextColor()"
