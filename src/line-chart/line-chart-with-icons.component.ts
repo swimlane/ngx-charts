@@ -91,30 +91,32 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
           </svg:g>
 
           <svg:g *ngFor="let icon of icons">
-            <text
-              *ngIf="icon.label && icon.label.length > 0"
-              #label
-              [attr.x]="xScaleIconLabel(icon.x, label.textLength)"
-              [attr.y]="yScaleIconLabel(icon.y, icon.height)"
-              class="line-chart-icon-label"
-            >{{icon.label}}</text>
-
-            <image *ngIf="icon.click"
-              [attr.x]="xScaleIcon(icon.x, icon.width)"
-              [attr.y]="yScaleIcon(icon.y, icon.height)"
-              [attr.width]="icon.width"
-              [attr.height]="icon.height"
-              [attr.href]="icon.src"
-              (click)="icon.click()"
-            />
-
-            <image *ngIf="!icon.click"
-              [attr.x]="xScaleIcon(icon.x, icon.width)"
-              [attr.y]="yScaleIcon(icon.y, icon.height)"
-              [attr.width]="icon.width"
-              [attr.height]="icon.height"
-              [attr.href]="icon.src"
-            />
+            <svg:g *ngIf="isValidIcon(icon)">
+              <text
+                *ngIf="icon.label && icon.label.length > 0"
+                #label
+                [attr.x]="xScaleIconLabel(icon.x, label.textLength)"
+                [attr.y]="yScaleIconLabel(icon.y, icon.height)"
+                class="line-chart-icon-label"
+              >{{icon.label}}</text>
+  
+              <image *ngIf="icon.click"
+                [attr.x]="xScaleIcon(icon.x, icon.width)"
+                [attr.y]="yScaleIcon(icon.y, icon.height)"
+                [attr.width]="icon.width"
+                [attr.height]="icon.height"
+                [attr.href]="icon.src"
+                (click)="icon.click()"
+              />
+  
+              <image *ngIf="!icon.click"
+                [attr.x]="xScaleIcon(icon.x, icon.width)"
+                [attr.y]="yScaleIcon(icon.y, icon.height)"
+                [attr.width]="icon.width"
+                [attr.height]="icon.height"
+                [attr.href]="icon.src"
+              />
+            </svg:g>
           </svg:g>
 
           <svg:g *ngIf="!tooltipDisabled" (mouseleave)="hideCircles()">
@@ -436,6 +438,15 @@ export class LineChartWithIconsComponent extends BaseChartComponent {
     return this.roundDomains ? scale.nice() : scale;
   }
 
+  isValidIcon(icon) {
+    if(icon.src && icon.x && icon.y && icon.width && icon.height) {
+      return true;
+    } else {
+      console.warn('Invalid icon. Required attributes are: src, x, y, width, and height.');
+      return false;
+    };
+  }
+
   xScaleIcon(x, width) {
     return this.xScale(x) - width / 2;
   }
@@ -445,11 +456,13 @@ export class LineChartWithIconsComponent extends BaseChartComponent {
   }
 
   xScaleIconLabel(x, textLength) {
+    let scale = this.xScale(x);
+
     if(textLength && textLength.baseVal && textLength.baseVal.value) {
-      return this.xScale(x) - textLength.baseVal.value / 2;
-    } else {
-      return this.xScale(x);
+      scale = this.xScale(x) - textLength.baseVal.value / 2;
     }
+
+    return scale;
   }
 
   yScaleIconLabel(y, height) {
