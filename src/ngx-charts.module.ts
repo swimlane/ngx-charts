@@ -8,7 +8,6 @@ import { BubbleChartModule } from './bubble-chart/bubble-chart.module';
 import { ForceDirectedGraphModule } from './force-directed-graph/force-directed-graph.module';
 import { HeatMapModule } from './heat-map/heat-map.module';
 import { LineChartModule } from './line-chart/line-chart.module';
-import { LineChartWithIconsModule } from './line-chart-with-icons/line-chart-with-icons.module';
 import { PolarChartModule } from './polar-chart/polar-chart.module';
 import { NumberCardModule } from './number-card/number-card.module';
 import { PieChartModule } from './pie-chart/pie-chart.module';
@@ -24,7 +23,6 @@ import { GaugeModule } from './gauge/gauge.module';
     ForceDirectedGraphModule,
     HeatMapModule,
     LineChartModule,
-    LineChartWithIconsModule,
     PolarChartModule,
     NumberCardModule,
     PieChartModule,

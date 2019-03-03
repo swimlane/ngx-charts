@@ -20,7 +20,7 @@ import { curveLinear } from 'd3-shape';
 
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
-import { LineChartComponent } from '../line-chart';
+import { BaseChartComponent } from '../common';
 import { id } from '../utils/id';
 import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
 
@@ -91,7 +91,12 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
           </svg:g>
 
           <svg:g *ngFor="let icon of icons">
-            <image [attr.x]="icon.x" [attr.y]="icon.y" [attr.width]="icon.width" [attr.height]="icon.height" [attr.href]="icon.src" />
+            <image
+              [attr.x]="icon.x"
+              [attr.y]="icon.y"
+              [attr.width]="icon.width"
+              [attr.height]="icon.height"
+              [attr.href]="icon.src" />
           </svg:g>
 
           <svg:g *ngIf="!tooltipDisabled" (mouseleave)="hideCircles()">
@@ -168,7 +173,7 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
     ])
   ]
 })
-export class LineChartWithIconsComponent extends LineChartComponent {
+export class LineChartWithIconsComponent extends BaseChartComponent {
 
   @Input() legend;
   @Input() legendTitle: string = 'Legend';
