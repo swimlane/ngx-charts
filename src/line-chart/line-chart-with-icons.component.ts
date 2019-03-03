@@ -92,8 +92,8 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
 
           <svg:g *ngFor="let icon of icons">
             <image *ngIf="icon.click"
-              [attr.x]="icon.x"
-              [attr.y]="icon.y"
+              [attr.x]="xScaleIcon(icon.x, icon.width)"
+              [attr.y]="yScaleIcon(icon.y, icon.height)"
               [attr.width]="icon.width"
               [attr.height]="icon.height"
               [attr.href]="icon.src"
@@ -101,8 +101,8 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
             />
 
             <image *ngIf="!icon.click"
-              [attr.x]="icon.x"
-              [attr.y]="icon.y"
+              [attr.x]="xScaleIcon(icon.x, icon.width)"
+              [attr.y]="yScaleIcon(icon.y, icon.height)"
               [attr.width]="icon.width"
               [attr.height]="icon.height"
               [attr.href]="icon.src"
@@ -426,6 +426,14 @@ export class LineChartWithIconsComponent extends BaseChartComponent {
       .domain(domain);
 
     return this.roundDomains ? scale.nice() : scale;
+  }
+
+  xScaleIcon(x, width) {
+    return this.xScale(x) - width / 2;
+  }
+
+  yScaleIcon(y, height) {
+    return this.yScale(y) - height / 2;
   }
 
   updateDomain(domain): void {
