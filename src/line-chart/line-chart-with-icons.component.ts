@@ -91,6 +91,14 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
           </svg:g>
 
           <svg:g *ngFor="let icon of icons">
+            <text
+              *ngIf="icon.label && icon.label.length > 0"
+              #label
+              [attr.x]="xScaleIconLabel(icon.x, label.textLength)"
+              [attr.y]="yScaleIconLabel(icon.y, icon.height)"
+              class="line-chart-icon-label"
+            >{{icon.label}}</text>
+
             <image *ngIf="icon.click"
               [attr.x]="xScaleIcon(icon.x, icon.width)"
               [attr.y]="yScaleIcon(icon.y, icon.height)"
@@ -434,6 +442,18 @@ export class LineChartWithIconsComponent extends BaseChartComponent {
 
   yScaleIcon(y, height) {
     return this.yScale(y) - height / 2;
+  }
+
+  xScaleIconLabel(x, textLength) {
+    if(textLength && textLength.baseVal && textLength.baseVal.value) {
+      return this.xScale(x) - textLength.baseVal.value / 2;
+    } else {
+      return this.xScale(x);
+    }
+  }
+
+  yScaleIconLabel(y, height) {
+    return this.yScaleIcon(y, height) - 5;
   }
 
   updateDomain(domain): void {
