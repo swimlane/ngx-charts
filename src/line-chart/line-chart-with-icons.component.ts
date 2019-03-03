@@ -91,12 +91,22 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
           </svg:g>
 
           <svg:g *ngFor="let icon of icons">
-            <image
+            <image *ngIf="icon.click"
               [attr.x]="icon.x"
               [attr.y]="icon.y"
               [attr.width]="icon.width"
               [attr.height]="icon.height"
-              [attr.href]="icon.src" />
+              [attr.href]="icon.src"
+              (click)="icon.click()"
+            />
+
+            <image *ngIf="!icon.click"
+              [attr.x]="icon.x"
+              [attr.y]="icon.y"
+              [attr.width]="icon.width"
+              [attr.height]="icon.height"
+              [attr.href]="icon.src"
+            />
           </svg:g>
 
           <svg:g *ngIf="!tooltipDisabled" (mouseleave)="hideCircles()">
