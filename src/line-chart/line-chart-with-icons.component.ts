@@ -94,8 +94,8 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
             <svg:g *ngIf="isValidIcon(icon)">
               <text
                 *ngIf="icon.label && icon.label.length > 0"
-                #label
-                [attr.x]="xScaleIconLabel(icon.x, label.textLength)"
+                #svgTextElement
+                [attr.x]="xScaleIconLabel(icon.x, svgTextElement)"
                 [attr.y]="yScaleIconLabel(icon.y, icon.height)"
                 class="line-chart-icon-label"
               >{{icon.label}}</text>
@@ -457,11 +457,12 @@ export class LineChartWithIconsComponent extends BaseChartComponent {
     return this.yScale(y) - height / 2;
   }
 
-  xScaleIconLabel(x, textLength) {
+  xScaleIconLabel(x, svgTextElement) {
     let scale = this.xScale(x);
 
-    if(textLength && textLength.baseVal && textLength.baseVal.value) {
-      scale = this.xScale(x) - textLength.baseVal.value / 2;
+    if(svgTextElement) {
+      let textLengthInPixel = svgTextElement.getComputedTextLength();
+      scale = this.xScale(x) - textLengthInPixel / 2;
     }
 
     return scale;
