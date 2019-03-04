@@ -90,7 +90,7 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
             />
           </svg:g>
 
-          <svg:g *ngFor="let icon of icons">
+          <svg:g *ngFor="let icon of icons; index as iconId">
             <svg:g *ngIf="isValidIcon(icon)">
               <text
                 *ngIf="icon.label && icon.label.length > 0"
@@ -106,8 +106,9 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
                 [attr.width]="icon.width"
                 [attr.height]="icon.height"
                 [attr.xlink:href]="icon.src"
-                [id]="iconIndex"
+                [id]="iconId"
                 (click)="icon.click()"
+                class="line-chart-icon-clickable"
               />
   
               <image *ngIf="!icon.click"
@@ -116,7 +117,8 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
                 [attr.width]="icon.width"
                 [attr.height]="icon.height"
                 [attr.xlink:href]="icon.src"
-                [id]="iconIndex"
+                [id]="iconId"
+                class="line-chart-icon"
               />
             </svg:g>
           </svg:g>
