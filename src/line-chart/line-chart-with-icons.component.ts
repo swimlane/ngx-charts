@@ -105,7 +105,8 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
                 [attr.y]="yScaleIcon(icon.y, icon.height)"
                 [attr.width]="icon.width"
                 [attr.height]="icon.height"
-                [attr.href]="icon.src"
+                [attr.xlink:href]="icon.src"
+                [id]="iconIndex"
                 (click)="icon.click()"
               />
   
@@ -114,7 +115,8 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
                 [attr.y]="yScaleIcon(icon.y, icon.height)"
                 [attr.width]="icon.width"
                 [attr.height]="icon.height"
-                [attr.href]="icon.src"
+                [attr.xlink:href]="icon.src"
+                [id]="iconIndex"
               />
             </svg:g>
           </svg:g>
