@@ -1,5 +1,9 @@
 # Changelog
 
+## 10.2.8
+
+- Feature: Added chart type line chart with icons
+
 ## 10.1.0
 
 - Feature: Allow configuration of tick trimming on charts with X and Y axis (#870)

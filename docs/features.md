@@ -6,6 +6,7 @@ Out of the box, we wanted to create a low level robust framework on which to bui
 
 * Horizontal & Vertical Bar Charts \(Standard, Grouped, Stacked, Normalized\)
 * Line 
+* Line with icons
 * Area \(Standard, Stacked, Normalized\)
 * Pie \(Explodable, Grid, Custom legends\)
 * Donut
