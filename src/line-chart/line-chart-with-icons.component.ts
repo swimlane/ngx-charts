@@ -446,9 +446,9 @@ export class LineChartWithIconsComponent extends BaseChartComponent {
     if(icon.src && icon.x && icon.y && icon.width && icon.height) {
       return true;
     } else {
-      console.warn('Invalid icon. Required attributes are: src, x, y, width, and height.');
+      console.error('Invalid icon. Required attributes are: src, x, y, width, and height.');
       return false;
-    };
+    }
   }
 
   xScaleIcon(x, width): number {
@@ -463,7 +463,7 @@ export class LineChartWithIconsComponent extends BaseChartComponent {
     let scale = this.xScale(x);
 
     if(svgTextElement) {
-      let textLengthInPixel = svgTextElement.getComputedTextLength();
+      const textLengthInPixel = svgTextElement.getComputedTextLength();
       scale = this.xScale(x) - textLengthInPixel / 2;
     }
 
