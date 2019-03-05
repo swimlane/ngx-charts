@@ -329,6 +329,78 @@ export function generateData(seriesLength: number, includeMinMaxRange: boolean, 
   return results;
 }
 
+// reference: https://www.epa.sa.gov.au/community/noise
+export function getDataForLineChartWithIconsData(): any[] {
+  return [{
+    name: 'Office',
+    series: [
+      {
+        value: 38,
+        name: '2019-01-31T07:00:00.000Z'
+      },
+      {
+        value: 40,
+        name: '2019-01-31T08:00:00.000Z'
+      },
+      {
+        value: 40,
+        name: '2019-01-31T09:00:00.000Z'
+      },
+      {
+        value: 45,
+        name: '2019-01-31T10:00:00.000Z'
+      },
+      {
+        value: 44,
+        name: '2019-01-31T11:00:00.000Z'
+      },
+      {
+        value: 48,
+        name: '2019-01-31T12:00:00.000Z'
+      },
+      {
+        value: 70,
+        name: '2019-01-31T13:00:00.000Z'
+      },
+      {
+        value: 80,
+        name: '2019-01-31T14:00:00.000Z'
+      },
+      {
+        value: 65,
+        name: '2019-01-31T15:00:00.000Z'
+      },
+      {
+        value: 50,
+        name: '2019-01-31T16:00:00.000Z'
+      },
+      {
+        value: 42,
+        name: '2019-01-31T17:00:00.000Z'
+      },
+      {
+        value: 44,
+        name: '2019-01-31T18:00:00.000Z'
+      },
+      {
+        value: 38,
+        name: '2019-01-31T19:00:00.000Z'
+      }]
+    }];
+}
+
+// https://openclipart.org/share
+// https://openclipart.org/download/166028/volume3-2.svg
+export function getDataForLineChartWithIconsIcons(): any[] {
+  return [{
+    src: 'volume3-2.svg',
+    x: '2019-01-31T14:00:00.000Z',
+    y: 95,
+    width: 20,
+    height: 20
+  }];
+}
+
 export const treemap = [
   {
     name: 'flare',

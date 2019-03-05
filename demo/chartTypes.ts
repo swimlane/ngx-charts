@@ -608,6 +608,49 @@ const chartGroups = [
         selector: 'linear-gauge',
         inputFormat: 'single',
         options: ['animations', 'colorScheme', 'value', 'previousValue', 'min', 'max', 'units']
+      },
+      {
+        name: 'Line Chart with icons',
+        selector: 'line-chart-with-icons',
+        inputFormat: 'multiSeries',
+        options: [
+          'animations',
+          'colorScheme',
+          'schemeType',
+          'showXAxis',
+          'showYAxis',
+          'gradient',
+          'showLegend',
+          'legendTitle',
+          'legendPosition',
+          'showXAxisLabel',
+          'xAxisLabel',
+          'showYAxisLabel',
+          'yAxisLabel',
+          'autoScale',
+          'timeline',
+          'showGridLines',
+          'curve',
+          'rangeFillOpacity',
+          'roundDomains',
+          'tooltipDisabled',
+          'showRefLines',
+          'referenceLines',
+          'showRefLabels',
+          'xScaleMin',
+          'xScaleMax',
+          'yScaleMin',
+          'yScaleMax',
+          'trimXAxisTicks',
+          'trimYAxisTicks',
+          'maxXAxisTickLength',
+          'maxYAxisTickLength'
+        ],
+        defaults: {
+          yAxisLabel: 'Noise in dB',
+          xAxisLabel: 'Date',
+          linearScale: true
+        }
       }
     ]
   },

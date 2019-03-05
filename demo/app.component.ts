@@ -15,7 +15,9 @@ import {
   generateGraph,
   treemap,
   timelineFilterBarData,
-  fiscalYearReport
+  fiscalYearReport,
+  getDataForLineChartWithIconsData,
+  getDataForLineChartWithIconsIcons
 } from './data';
 import { data as countries } from 'emoji-flags';
 import chartGroups from './chartTypes';
@@ -63,6 +65,8 @@ export class AppComponent implements OnInit {
   bubble: any;
   linearScale: boolean = false;
   range: boolean = false;
+  lineChartWithIconsData: any[];
+  lineChartWithIconsIcons: any[];
 
   view: any[];
   width: number = 700;
@@ -253,6 +257,8 @@ export class AppComponent implements OnInit {
     this.statusData = this.getStatusData();
     this.sparklineData = generateData(1, false, 30);
     this.timelineFilterBarData = timelineFilterBarData();
+    this.lineChartWithIconsData = getDataForLineChartWithIconsData();
+    this.lineChartWithIconsIcons = getDataForLineChartWithIconsIcons();
   }
 
   get dateDataWithOrWithoutRange() {
