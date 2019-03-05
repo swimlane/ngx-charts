@@ -442,7 +442,7 @@ export class LineChartWithIconsComponent extends BaseChartComponent {
     return this.roundDomains ? scale.nice() : scale;
   }
 
-  isValidIcon(icon) {
+  isValidIcon(icon): boolean {
     if(icon.src && icon.x && icon.y && icon.width && icon.height) {
       return true;
     } else {
@@ -451,15 +451,15 @@ export class LineChartWithIconsComponent extends BaseChartComponent {
     };
   }
 
-  xScaleIcon(x, width) {
+  xScaleIcon(x, width): number {
     return this.xScale(x) - width / 2;
   }
 
-  yScaleIcon(y, height) {
+  yScaleIcon(y, height): number {
     return this.yScale(y) - height / 2;
   }
 
-  xScaleIconLabel(x, svgTextElement) {
+  xScaleIconLabel(x, svgTextElement): number {
     let scale = this.xScale(x);
 
     if(svgTextElement) {
@@ -470,7 +470,7 @@ export class LineChartWithIconsComponent extends BaseChartComponent {
     return scale;
   }
 
-  yScaleIconLabel(y, height) {
+  yScaleIconLabel(y, height): number {
     return this.yScaleIcon(y, height) - 5;
   }
 
