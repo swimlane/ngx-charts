@@ -70,6 +70,8 @@ export declare class LineChartWithIconsComponent extends BaseChartComponent {
     timelineXDomain: any;
     timelineTransform: any;
     timelinePadding: number;
+    iconLabelVisibility: any[];
+    ngOnInit(): void;
     update(): void;
     updateTimeline(): void;
     getXDomain(): any[];
@@ -82,6 +84,8 @@ export declare class LineChartWithIconsComponent extends BaseChartComponent {
     yScaleIcon(y: any, height: any): number;
     xScaleIconLabel(x: any, svgTextElement: any): number;
     yScaleIconLabel(y: any, height: any): number;
+    iconMouseEnter(iconId: any): void;
+    iconMouseLeave(iconId: any): void;
     updateDomain(domain: any): void;
     updateHoveredVertical(item: any): void;
     hideCircles(): void;
