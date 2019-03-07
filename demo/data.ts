@@ -397,7 +397,8 @@ export function getDataForLineChartWithIconsIcons(): any[] {
     x: '2019-01-31T14:00:00.000Z',
     y: 95,
     width: 20,
-    height: 20
+    height: 20,
+    label: 'high noise level'
   }];
 }
 

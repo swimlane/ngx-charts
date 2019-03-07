@@ -649,7 +649,8 @@ const chartGroups = [
         defaults: {
           yAxisLabel: 'Noise in dB',
           xAxisLabel: 'Date',
-          linearScale: true
+          linearScale: true,
+          tooltipDisabled: true
         }
       }
     ]

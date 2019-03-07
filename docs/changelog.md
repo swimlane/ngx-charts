@@ -1,6 +1,6 @@
 # Changelog
 
-## 10.2.8
+## 10.2.9
 
 - Feature: Added chart type line chart with icons
 

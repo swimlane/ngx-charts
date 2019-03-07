@@ -95,12 +95,14 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
               <text
                 *ngIf="icon.label && icon.label.length > 0"
                 #svgTextElement
+                class="line-chart-icon-label"
+                [ngStyle]="{visibility: iconLabelVisibility[iconId]}"
                 [attr.x]="xScaleIconLabel(icon.x, svgTextElement)"
                 [attr.y]="yScaleIconLabel(icon.y, icon.height)"
-                class="line-chart-icon-label"
               >{{icon.label}}</text>
   
               <image *ngIf="icon.click"
+                class="line-chart-icon-clickable"
                 [attr.x]="xScaleIcon(icon.x, icon.width)"
                 [attr.y]="yScaleIcon(icon.y, icon.height)"
                 [attr.width]="icon.width"
@@ -108,17 +110,20 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
                 [attr.xlink:href]="icon.src"
                 [id]="iconId"
                 (click)="icon.click()"
-                class="line-chart-icon-clickable"
+                (mouseenter)="iconMouseEnter(iconId)"
+                (mouseleave)="iconMouseLeave(iconId)"
               />
   
               <image *ngIf="!icon.click"
+                class="line-chart-icon"
                 [attr.x]="xScaleIcon(icon.x, icon.width)"
                 [attr.y]="yScaleIcon(icon.y, icon.height)"
                 [attr.width]="icon.width"
                 [attr.height]="icon.height"
                 [attr.xlink:href]="icon.src"
                 [id]="iconId"
-                class="line-chart-icon"
+                (mouseenter)="iconMouseEnter(iconId)"
+                (mouseleave)="iconMouseLeave(iconId)"
               />
             </svg:g>
           </svg:g>
@@ -269,6 +274,13 @@ export class LineChartWithIconsComponent extends BaseChartComponent {
   timelineXDomain: any;
   timelineTransform: any;
   timelinePadding: number = 10;
+  iconLabelVisibility: any[] = [];
+
+  ngOnInit() {
+    for(let k = 0; k < this.icons.length; k++) {
+      this.iconLabelVisibility.push('hidden');
+    }
+  }
 
   update(): void {
     super.update();
@@ -472,6 +484,14 @@ export class LineChartWithIconsComponent extends BaseChartComponent {
 
   yScaleIconLabel(y, height): number {
     return this.yScaleIcon(y, height) - 5;
+  }
+
+  iconMouseEnter(iconId): void {
+    this.iconLabelVisibility[iconId] = 'visible';
+  }
+
+  iconMouseLeave(iconId): void {
+    this.iconLabelVisibility[iconId] = 'hidden';
   }
 
   updateDomain(domain): void {
