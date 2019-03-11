@@ -336,55 +336,55 @@ export function getDataForLineChartWithIconsData(): any[] {
     series: [
       {
         value: 38,
-        name: '2019-01-31T07:00:00.000Z'
+        name: '07:00'
       },
       {
         value: 40,
-        name: '2019-01-31T08:00:00.000Z'
+        name: '08:00'
       },
       {
         value: 40,
-        name: '2019-01-31T09:00:00.000Z'
+        name: '09:00'
       },
       {
         value: 45,
-        name: '2019-01-31T10:00:00.000Z'
+        name: '10:00'
       },
       {
         value: 44,
-        name: '2019-01-31T11:00:00.000Z'
+        name: '11:00'
       },
       {
         value: 48,
-        name: '2019-01-31T12:00:00.000Z'
+        name: '12:00'
       },
       {
         value: 70,
-        name: '2019-01-31T13:00:00.000Z'
+        name: '13:00'
       },
       {
         value: 80,
-        name: '2019-01-31T14:00:00.000Z'
+        name: '14:00'
       },
       {
         value: 65,
-        name: '2019-01-31T15:00:00.000Z'
+        name: '15:00'
       },
       {
         value: 50,
-        name: '2019-01-31T16:00:00.000Z'
+        name: '16:00'
       },
       {
         value: 42,
-        name: '2019-01-31T17:00:00.000Z'
+        name: '17:00'
       },
       {
         value: 44,
-        name: '2019-01-31T18:00:00.000Z'
+        name: '18:00'
       },
       {
         value: 38,
-        name: '2019-01-31T19:00:00.000Z'
+        name: '19:00'
       }]
     }];
 }
@@ -394,7 +394,7 @@ export function getDataForLineChartWithIconsData(): any[] {
 export function getDataForLineChartWithIconsIcons(): any[] {
   return [{
     src: 'volume3-2.svg',
-    x: '2019-01-31T14:00:00.000Z',
+    x: '14:00',
     y: 95,
     width: 20,
     height: 20,
