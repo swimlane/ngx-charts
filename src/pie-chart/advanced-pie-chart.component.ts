@@ -29,7 +29,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           <svg:g
             [attr.transform]="transform"
             class="pie chart">
-            <svg:g ngx-charts-pie-series
+            <svg:g data-ngx-charts-pie-series
               [colors]="colors"
               [series]="results"
               [innerRadius]="innerRadius"

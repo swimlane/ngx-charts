@@ -41,7 +41,7 @@ import { scaleBand, scaleLinear, scalePoint, scaleTime } from 'd3-scale';
       (legendLabelDeactivate)="onDeactivate($event)">
 
       <svg:g [attr.transform]="transform" class="bar-chart chart">
-          <svg:g ngx-charts-x-axis
+          <svg:g data-ngx-charts-x-axis
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
@@ -50,7 +50,7 @@ import { scaleBand, scaleLinear, scalePoint, scaleTime } from 'd3-scale';
           [tickFormatting]="xAxisTickFormatting"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
-        <svg:g ngx-charts-y-axis
+        <svg:g data-ngx-charts-y-axis
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
@@ -61,7 +61,7 @@ import { scaleBand, scaleLinear, scalePoint, scaleTime } from 'd3-scale';
           [tickFormatting]="yAxisTickFormatting"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
-        <svg:g ngx-charts-y-axis
+        <svg:g data-ngx-charts-y-axis
           *ngIf="yAxis"
           [yScale]="yScaleLine"
           [dims]="dims"
@@ -92,7 +92,7 @@ import { scaleBand, scaleLinear, scalePoint, scaleTime } from 'd3-scale';
       <svg:g [attr.transform]="transform" class="line-chart chart">
         <svg:g>
           <svg:g *ngFor="let series of lineChart; trackBy:trackBy">
-            <svg:g ngx-charts-line-series
+            <svg:g data-ngx-charts-line-series
               [xScale]="xScaleLine"
               [yScale]="yScaleLine"
               [colors]="colorsLine"
@@ -105,7 +105,7 @@ import { scaleBand, scaleLinear, scalePoint, scaleTime } from 'd3-scale';
             />
           </svg:g>
 
-          <svg:g ngx-charts-tooltip-area
+          <svg:g data-ngx-charts-tooltip-area
             *ngIf="!tooltipDisabled"
             [dims]="dims"
             [xSet]="xSet"
@@ -118,7 +118,7 @@ import { scaleBand, scaleLinear, scalePoint, scaleTime } from 'd3-scale';
           />
 
           <svg:g *ngFor="let series of lineChart">
-            <svg:g ngx-charts-circle-series
+            <svg:g data-ngx-charts-circle-series
               [xScale]="xScaleLine"
               [yScale]="yScaleLine"
               [colors]="colorsLine"

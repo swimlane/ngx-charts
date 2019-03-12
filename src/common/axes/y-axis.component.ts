@@ -11,12 +11,12 @@ import {
 import { YAxisTicksComponent } from './y-axis-ticks.component';
 
 @Component({
-  selector: 'g[ngx-charts-y-axis]',
+  selector: 'g[data-ngx-charts-y-axis]',
   template: `
     <svg:g
       [attr.class]="yAxisClassName"
       [attr.transform]="transform">
-      <svg:g ngx-charts-y-axis-ticks
+      <svg:g data-ngx-charts-y-axis-ticks
         *ngIf="yScale"
         [trimTicks]="trimTicks"
         [maxTickLength]="maxTickLength"
@@ -35,7 +35,7 @@ import { YAxisTicksComponent } from './y-axis-ticks.component';
         (dimensionsChanged)="emitTicksWidth($event)"
       />
 
-      <svg:g ngx-charts-axis-label
+      <svg:g data-ngx-charts-axis-label
         *ngIf="showLabel"
         [label]="labelText"
         [offset]="labelOffset"

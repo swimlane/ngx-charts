@@ -4,7 +4,7 @@ import { arc } from 'd3-shape';
 import { trimLabel } from '../common/trim-label.helper';
 
 @Component({
-  selector: 'g[ngx-charts-pie-label]',
+  selector: 'g[data-ngx-charts-pie-label]',
   template: `
     <title>{{label}}</title>
     <svg:g

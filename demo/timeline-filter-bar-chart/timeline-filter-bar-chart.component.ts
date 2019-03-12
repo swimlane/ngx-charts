@@ -22,7 +22,7 @@ import { id } from '../../src/utils';
       [animations]="animations"
       class="timeline-filter-bar-chart">
       <svg:g [attr.transform]="transform" class="chart">
-        <svg:g ngx-charts-x-axis
+        <svg:g data-ngx-charts-x-axis
           *ngIf="xAxis"
           [xScale]="timeScale"
           [dims]="dims"
@@ -31,7 +31,7 @@ import { id } from '../../src/utils';
           [tickFormatting]="xAxisTickFormatting"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
-        <svg:g ngx-charts-y-axis
+        <svg:g data-ngx-charts-y-axis
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
@@ -41,7 +41,7 @@ import { id } from '../../src/utils';
           [tickFormatting]="yAxisTickFormatting"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
-        <svg:g ngx-charts-series-vertical
+        <svg:g data-ngx-charts-series-vertical
           [xScale]="xScale"
           [yScale]="yScale"
           [colors]="colors"

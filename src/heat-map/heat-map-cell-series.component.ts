@@ -12,11 +12,11 @@ import {
 import { formatLabel } from '../common/label.helper';
 
 @Component({
-  selector: 'g[ngx-charts-heat-map-cell-series]',
+  selector: 'g[data-ngx-charts-heat-map-cell-series]',
   template: `
     <svg:g
-      ngx-charts-heat-map-cell
-      *ngFor="let c of cells; trackBy:trackBy"
+      data-ngx-charts-heat-map-cell
+      *ngFor="let c of cells; trackBy: trackBy"
       [x]="c.x"
       [y]="c.y"
       [width]="c.width"
@@ -32,13 +32,12 @@ import { formatLabel } from '../common/label.helper';
       [tooltipType]="'tooltip'"
       [tooltipTitle]="tooltipTemplate ? undefined : tooltipText(c)"
       [tooltipTemplate]="tooltipTemplate"
-      [tooltipContext]="{series: c.series, name: c.label, value: c.data}">
-    </svg:g>
+      [tooltipContext]="{ series: c.series, name: c.label, value: c.data }"
+    ></svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeatCellSeriesComponent implements OnChanges, OnInit {
-
   @Input() data;
   @Input() colors;
   @Input() xScale;
@@ -48,7 +47,7 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
   @Input() tooltipText: any;
   @Input() tooltipTemplate: TemplateRef<any>;
   @Input() animations: boolean = true;
-  
+
   @Output() select = new EventEmitter();
 
   cells: any[];
@@ -70,8 +69,8 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
   getCells() {
     const cells = [];
 
-    this.data.map((row) => {
-      row.series.map((cell) => {
+    this.data.map(row => {
+      row.series.map(cell => {
         const value = cell.value;
 
         cells.push({
@@ -110,5 +109,4 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
       series
     });
   }
-
 }

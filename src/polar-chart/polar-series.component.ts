@@ -5,11 +5,11 @@ import { id } from '../utils/id';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
 
 @Component({
-  selector: 'g[ngx-charts-polar-series]',
+  selector: 'g[data-ngx-charts-polar-series]',
   template: `
     <svg:g class="polar-charts-series">
       <defs>
-        <svg:g ngx-charts-svg-radial-gradient *ngIf="hasGradient"
+        <svg:g data-ngx-charts-svg-radial-gradient *ngIf="hasGradient"
           orientation="vertical"
           [color]="seriesColor"
           [name]="gradientId"
@@ -18,7 +18,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
           [stops]="gradientStops"
         />
       </defs>
-      <svg:g ngx-charts-line
+      <svg:g data-ngx-charts-line
         class="polar-series-path"
         [path]="path"
         [stroke]="hasGradient ? gradientUrl : seriesColor"
@@ -28,7 +28,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
         [fill]="hasGradient ? gradientUrl : seriesColor"
         [animations]="animations"
       />
-      <svg:g ngx-charts-circle
+      <svg:g data-ngx-charts-circle
         *ngFor="let circle of circles"
         class="circle"
         [cx]="circle.cx"

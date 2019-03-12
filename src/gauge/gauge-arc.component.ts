@@ -10,9 +10,9 @@ import { formatLabel } from '../common/label.helper';
 import { ColorHelper } from '../common/color.helper';
 
 @Component({
-  selector: 'g[ngx-charts-gauge-arc]',
+  selector: 'g[data-ngx-charts-gauge-arc]',
   template: `
-    <svg:g ngx-charts-pie-arc
+    <svg:g data-ngx-charts-pie-arc
       class="background-arc"
       [startAngle]="0"
       [endAngle]="backgroundArc.endAngle"
@@ -23,7 +23,7 @@ import { ColorHelper } from '../common/color.helper';
       [animate]="false"
       [pointerEvents]="false">
     </svg:g>
-    <svg:g ngx-charts-pie-arc
+    <svg:g data-ngx-charts-pie-arc
       [startAngle]="0"
       [endAngle]="valueArc.endAngle"
       [innerRadius]="valueArc.innerRadius"

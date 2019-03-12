@@ -20,7 +20,7 @@ import { getUniqueXDomainValues } from '../../src/common/domain.helper';
       <svg:g [attr.transform]="transform" class="line-chart chart">
         <svg:g>
           <svg:g *ngFor="let series of results; trackBy:trackBy">
-            <svg:g ngx-charts-line-series
+            <svg:g data-ngx-charts-line-series
               [xScale]="xScale"
               [yScale]="yScale"
               [colors]="colors"

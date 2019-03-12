@@ -8,7 +8,7 @@ import { roundedRect } from '../common/shape.helper';
 import { count, decimalChecker } from '../common/count';
 
 @Component({
-  selector: 'g[ngx-charts-card]',
+  selector: 'g[data-ngx-charts-card]',
   template: `
     <svg:g
       [attr.transform]="transform"

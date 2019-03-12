@@ -22,7 +22,7 @@ import { ColorHelper } from '../common/color.helper';
       [showLegend]="false"
       [animations]="animations">
       <svg:g [attr.transform]="transform" class="tree-map chart">
-        <svg:g ngx-charts-tree-map-cell-series
+        <svg:g data-ngx-charts-tree-map-cell-series
           [colors]="colors"
           [data]="data"
           [dims]="dims"

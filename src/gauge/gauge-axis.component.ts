@@ -8,7 +8,7 @@ import {
 import { line } from 'd3-shape';
 
 @Component({
-  selector: 'g[ngx-charts-gauge-axis]',
+  selector: 'g[data-ngx-charts-gauge-axis]',
   template: `
     <svg:g [attr.transform]="rotate">
         <svg:g *ngFor="let tick of ticks.big"

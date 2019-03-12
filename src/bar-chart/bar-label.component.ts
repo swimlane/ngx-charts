@@ -11,7 +11,7 @@ import {
 import { formatLabel } from '../common/label.helper';
   
 @Component({
-  selector: 'g[ngx-charts-bar-label]',
+  selector: 'g[data-ngx-charts-bar-label]',
   template: `  
     <svg:text   
       class="textDataLabel" 

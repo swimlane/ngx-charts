@@ -51,7 +51,7 @@ const twoPI = 2 * Math.PI;
               [attr.r]="r" />
           </svg:g>
           <svg:g *ngIf="xAxis">
-            <svg:g ngx-charts-pie-label
+            <svg:g data-ngx-charts-pie-label
               *ngFor="let tick of thetaTicks"
               [data]="tick"
               [radius]="outerRadius"
@@ -65,7 +65,7 @@ const twoPI = 2 * Math.PI;
             </svg:g>
           </svg:g>
         </svg:g>
-        <svg:g ngx-charts-y-axis
+        <svg:g data-ngx-charts-y-axis
           [attr.transform]="transformYAxis"
           *ngIf="yAxis"
           [yScale]="yAxisScale"
@@ -78,7 +78,7 @@ const twoPI = 2 * Math.PI;
           [tickFormatting]="yAxisTickFormatting"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
-        <svg:g ngx-charts-axis-label
+        <svg:g data-ngx-charts-axis-label
           *ngIf="xAxis && showXAxisLabel"
           [label]="xAxisLabel"
           [offset]="labelOffset"
@@ -88,7 +88,7 @@ const twoPI = 2 * Math.PI;
         </svg:g>
         <svg:g [attr.transform]="transformPlot">
           <svg:g *ngFor="let series of results; trackBy:trackBy" [@animationState]="'active'">
-            <svg:g ngx-charts-polar-series
+            <svg:g data-ngx-charts-polar-series
               [gradient]="gradient"
               [xScale]="xScale"
               [yScale]="yScale"
