@@ -90,7 +90,7 @@ import { scaleBand, scaleLinear, scalePoint, scaleTime } from 'd3-scale';
         </svg:g>
       </svg:g>
       <svg:g [attr.transform]="transform" class="line-chart chart">
-        <svg:g [attr.clip-path]="clipPath">
+        <svg:g>
           <svg:g *ngFor="let series of lineChart; trackBy:trackBy">
             <svg:g ngx-charts-line-series
               [xScale]="xScaleLine"
