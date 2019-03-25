@@ -21,7 +21,7 @@ describe('positioning', () => {
                     height: 50
                 };
 
-                const shouldFlip = PositionHelper.shouldFlip(elementDimensions, popoverDimensions, 'top', 'center', 0);
+                const shouldFlip = PositionHelper.shouldFlip(elementDimensions, popoverDimensions, 'top', 0);
                 expect(shouldFlip).toEqual(false);
             });
 
@@ -41,7 +41,7 @@ describe('positioning', () => {
                     height: 50
                 };
 
-                const shouldFlip = PositionHelper.shouldFlip(elementDimensions, popoverDimensions, 'top', 'center', 0);
+                const shouldFlip = PositionHelper.shouldFlip(elementDimensions, popoverDimensions, 'top', 0);
                 expect(shouldFlip).toEqual(true);
             });
         });
@@ -63,7 +63,7 @@ describe('positioning', () => {
                     height: 50
                 };
 
-                const shouldFlip = PositionHelper.shouldFlip(elementDimensions, popoverDimensions, 'bottom', 'center', 0);
+                const shouldFlip = PositionHelper.shouldFlip(elementDimensions, popoverDimensions, 'bottom', 0);
                 expect(shouldFlip).toEqual(false);
             });
 
@@ -83,7 +83,7 @@ describe('positioning', () => {
                     height: 50
                 };
 
-                const shouldFlip = PositionHelper.shouldFlip(elementDimensions, popoverDimensions, 'bottom', 'center', 0);
+                const shouldFlip = PositionHelper.shouldFlip(elementDimensions, popoverDimensions, 'bottom', 0);
                 expect(shouldFlip).toEqual(true);
             });
         });
@@ -105,7 +105,7 @@ describe('positioning', () => {
                     height: 50
                 };
 
-                const shouldFlip = PositionHelper.shouldFlip(elementDimensions, popoverDimensions, 'left', 'center', 0);
+                const shouldFlip = PositionHelper.shouldFlip(elementDimensions, popoverDimensions, 'left', 0);
                 expect(shouldFlip).toEqual(false);
             });
 
@@ -125,7 +125,7 @@ describe('positioning', () => {
                     height: 50
                 };
 
-                const shouldFlip = PositionHelper.shouldFlip(elementDimensions, popoverDimensions, 'left', 'center', 0);
+                const shouldFlip = PositionHelper.shouldFlip(elementDimensions, popoverDimensions, 'left', 0);
                 expect(shouldFlip).toEqual(true);
             });
         });
@@ -147,7 +147,7 @@ describe('positioning', () => {
                     height: 50
                 };
 
-                const shouldFlip = PositionHelper.shouldFlip(elementDimensions, popoverDimensions, 'right', 'center', 0);
+                const shouldFlip = PositionHelper.shouldFlip(elementDimensions, popoverDimensions, 'right', 0);
                 expect(shouldFlip).toEqual(false);
             });
 
@@ -167,7 +167,7 @@ describe('positioning', () => {
                     height: 50
                 };
 
-                const shouldFlip = PositionHelper.shouldFlip(elementDimensions, popoverDimensions, 'right', 'center', 0);
+                const shouldFlip = PositionHelper.shouldFlip(elementDimensions, popoverDimensions, 'right', 0);
                 expect(shouldFlip).toEqual(true);
             });
         });
