@@ -19,7 +19,7 @@ For more info, check out the [documentation](https://swimlane.gitbook.io/ngx-cha
 ## Features
 ### Chart Types
 - Horizontal & Vertical Bar Charts (Standard, Grouped, Stacked, Normalized)
-- Line 
+- Line
 - Line with icons
 - Area (Standard, Stacked, Normalized)
 - Pie (Explodable, Grid, Custom legends)
