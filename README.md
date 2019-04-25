@@ -18,30 +18,30 @@ For more info, check out the [documentation](https://swimlane.gitbook.io/ngx-cha
 
 ## Features
 ### Chart Types
-- Horizontal & Vertical Bar Charts (Standard, Grouped, Stacked, Normalized)
-- Line 
-- Line with icons
-- Area (Standard, Stacked, Normalized)
-- Pie (Explodable, Grid, Custom legends)
-- Bubble
-- Donut
-- Gauge (Linear & Radial)
-- Force Directed Graph
-- Heatmap
-- Treemap
-- Number Cards
+-  Horizontal & Vertical Bar Charts (Standard, Grouped, Stacked, Normalized)
+-  Line
+-  Line with icons
+-  Area (Standard, Stacked, Normalized)
+-  Pie (Explodable, Grid, Custom legends)
+-  Bubble
+-  Donut
+-  Gauge (Linear & Radial)
+-  Force Directed Graph
+-  Heatmap
+-  Treemap
+-  Number Cards
 
 ### Customization
-- Autoscaling
-- Timeline Filtering
-- Line Interpolation
-- Configurable Axis Labels
-- Legends (Labels & Gradient)
-- Advanced Label Positioning
-- Real-time data support
-- Advanced Tooltips
-- Data point Event Handlers
-- Works with ngUpgrade
+-  Autoscaling
+-  Timeline Filtering
+-  Line Interpolation
+-  Configurable Axis Labels
+-  Legends (Labels & Gradient)
+-  Advanced Label Positioning
+-  Real-time data support
+-  Advanced Tooltips
+-  Data point Event Handlers
+-  Works with ngUpgrade
 
 ## Install
 To use ngx-charts in your project install it via [npm](https://www.npmjs.com/package/@swimlane/ngx-charts):
