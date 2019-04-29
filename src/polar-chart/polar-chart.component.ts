@@ -212,8 +212,8 @@ export class PolarChartComponent extends BaseChartComponent {
       legendPosition: this.legendPosition
     });
 
-    const halfWidth = ~~(this.dims.width / 2);
-    const halfHeight = ~~(this.dims.height / 2);
+    const halfWidth = Math.floor((this.dims.width / 2));
+    const halfHeight = Math.floor((this.dims.height / 2));
 
     const outerRadius = this.outerRadius = Math.min(halfHeight / 1.5, halfWidth / 1.5);
 
@@ -301,7 +301,7 @@ export class PolarChartComponent extends BaseChartComponent {
     }
 
     this.radiusTicks = this.yAxisScale
-      .ticks(~~(this.dims.height / 50))
+      .ticks(Math.floor((this.dims.height / 50)))
       .map(d => this.yScale(d));
   }
 
