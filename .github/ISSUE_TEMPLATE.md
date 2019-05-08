@@ -4,6 +4,7 @@
 - [ ] feature request
 - [ ] support request - use StackOverflow (add the `ngx-charts` tag) or the gitter chat for support questions
 
+
 **Current behavior**
 <!-- Describe how the bug manifests. -->
 
@@ -27,5 +28,3 @@
 
 * **Browser:** [all | Chrome XX | Firefox XX | IE XX | Safari XX | Mobile Chrome XX | Android X.X Web Browser | iOS XX Safari | iOS XX UIWebView | iOS XX WKWebView ]
 <!-- All browsers where this could be reproduced -->
-
-* **Language:** [all | TypeScript X.X | ES6/7 | ES5]
