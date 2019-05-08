@@ -28,7 +28,7 @@ For more info, check out the [documentation](https://swimlane.gitbook.io/ngx-cha
 - Bubble
 - Donut
 - Gauge (Linear & Radial)
-- Force Directed Graph (deprecated - please use [ngx-graph](https://github.com/swimlane/ngx-graph) instead)
+- Force Directed Graph (deprecated, please use [ngx-graph](https://github.com/swimlane/ngx-graph) instead)
 - Heatmap
 - Treemap
 - Number Cards
