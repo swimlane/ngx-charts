@@ -1,6 +1,6 @@
 {
   "name": "@swimlane/ngx-charts",
-  "version": "11.0.1",
+  "version": "11.0.2",
   "description": "Declarative Charting Framework for Angular2 and beyond!",
   "main": "release/index.js",
   "module": "release/esm.js",
@@ -77,13 +77,13 @@
   },
   "homepage": "https://github.com/swimlane/ngx-charts#readme",
   "peerDependencies": {
-    "@angular/animations": "7.x | 8.x",
-    "@angular/cdk": "7.x | 8.x",
-    "@angular/core": "7.x | 8.x",
-    "@angular/common": "7.x | 8.x",
-    "@angular/forms": "7.x | 8.x",
-    "@angular/platform-browser": "7.x | 8.x",
-    "@angular/platform-browser-dynamic": "7.x | 8.x",
+    "@angular/animations": "7.x || 8.x",
+    "@angular/cdk": "7.x || 8.x",
+    "@angular/core": "7.x || 8.x",
+    "@angular/common": "7.x || 8.x",
+    "@angular/forms": "7.x || 8.x",
+    "@angular/platform-browser": "7.x || 8.x",
+    "@angular/platform-browser-dynamic": "7.x || 8.x",
     "rxjs": "6.x"
   },
   "devDependencies": {
