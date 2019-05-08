@@ -1,5 +1,36 @@
 # Changelog
 
+## 11.0.1
+
+- Bug: Fixes displaying of tooltip on IE 11 (#1157)
+
+## 11.0.0
+
+- Breaking: Remove Angular location strategy from ChartCommonModule (#915)
+  - Any Angular applications, that rely on the pre-configured location strategy provided by ngx-charts, will need to set it separately
+- Feature: Allow access to custom properties in tooltip templates (#555)
+- Bug: Update tooltip positioning to correctly flip sides when there is not enough available space (#1136)
+- Bug: Fixed combo Line and Bar chart not aligning (#1154)
+- Chore: Removed unnecessary peer dependencies (#1140)
+- Chore: Replaced bitwise operators with math.floor (#1151)
+- Chore: Changed tree-map label class to avoid conflict (#1117)
+- Chore: Remove unused property binding (#1120)
+- Docs: motivation.md Typo fix (#1123)
+
+## 10.1.0
+
+- Feature: Allow configuration of tick trimming on charts with X and Y axis (#870)
+- Bug: Updated packages to remove event-stream vulnerability
+- Bug: Fixed issue where advanced pie legend click emits the truncated (#1106)
+- Bug: Fixed rotation to respect tick trimming
+- Bug: Fixed Pie Chart flicker on Safari (#1068)
+- Bug: Fixed issue where vertical bar chart is not showing X axis when all data values are negative (#1044)
+- Chore: Removed unused param in GridPanelSeriesComponent (#1025)
+- Chore: Added type check instead of truthy value for determining min/max in getRangeGenerator (#1042)
+- Docs: Fixed typo (#1056)
+- Docs: Fixed link in readme (#1053)
+- Docs: Fixed documentation link (#1029)
+
 ## 10.0.0
 
 - Breaking: Upgraded to angular 7

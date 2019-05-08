@@ -107,7 +107,7 @@ export class TooltipContentComponent implements AfterViewInit {
 
   checkFlip(hostDim, elmDim): void {
     this.placement = PositionHelper.determinePlacement(
-      this.placement, elmDim, hostDim, this.spacing, this.alignment);
+      this.placement, elmDim, hostDim, this.spacing);
   }
 
   @HostListener('window:resize')

@@ -5,7 +5,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { NgModule } from '@angular/core';
-import { Location, LocationStrategy, PathLocationStrategy, CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { ChartComponent } from './charts/chart.component';
 import { ScaleLegendComponent, LegendComponent, LegendEntryComponent, AdvancedLegendComponent } from './legend';
 import { BaseChartComponent } from './base-chart.component';
@@ -44,13 +44,6 @@ var ChartCommonModule = /** @class */ (function () {
     }
     ChartCommonModule = __decorate([
         NgModule({
-            providers: [
-                Location,
-                {
-                    provide: LocationStrategy,
-                    useClass: PathLocationStrategy
-                }
-            ],
             imports: [
                 CommonModule,
                 AxesModule,

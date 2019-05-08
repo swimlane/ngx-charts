@@ -8,7 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component, Input, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
-import { radialLine } from 'd3-shape';
+import { lineRadial } from 'd3-shape';
 import { id } from '../utils/id';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
 var PolarSeriesComponent = /** @class */ (function () {
@@ -36,11 +36,11 @@ var PolarSeriesComponent = /** @class */ (function () {
             var r = _this.getRadius(d);
             var value = d.value;
             var color = _this.colors.getColor(linearScaleType ? Math.abs(value) : seriesName);
-            var cData = {
+            var cData = Object.assign({}, d, {
                 series: seriesName,
                 value: value,
                 name: d.name
-            };
+            });
             return {
                 data: cData,
                 cx: r * Math.sin(a),
@@ -69,7 +69,7 @@ var PolarSeriesComponent = /** @class */ (function () {
     };
     PolarSeriesComponent.prototype.getLineGenerator = function () {
         var _this = this;
-        return radialLine()
+        return lineRadial()
             .angle(function (d) { return _this.getAngle(d); })
             .radius(function (d) { return _this.getRadius(d); })
             .curve(this.curve);

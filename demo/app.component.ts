@@ -99,6 +99,7 @@ export class AppComponent implements OnInit {
   noBarWhenZero = true;
   trimXAxisTicks = true;
   trimYAxisTicks = true;
+  rotateXAxisTicks = true;
   maxXAxisTickLength = 16;
   maxYAxisTickLength = 16;
 
@@ -533,7 +534,7 @@ export class AppComponent implements OnInit {
 
   calcStatusData(sales = this.statusData[0].value, dur = this.statusData[2].value) {
     const ret = sales * this.salePrice;
-    const cost = sales * dur / 60 / 60 / 1000 * this.personnelCost;
+    const cost = ((sales * dur) / 60 / 60 / 1000) * this.personnelCost;
     const ROI = (ret - cost) / cost;
     return [
       {

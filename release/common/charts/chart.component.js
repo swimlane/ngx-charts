@@ -38,9 +38,9 @@ var ChartComponent = /** @class */ (function () {
             }
         }
         var chartColumns = 12 - legendColumns;
-        this.chartWidth = ~~(this.view[0] * chartColumns / 12.0);
+        this.chartWidth = Math.floor((this.view[0] * chartColumns / 12.0));
         this.legendWidth = (!this.legendOptions || this.legendOptions.position === 'right')
-            ? ~~(this.view[0] * legendColumns / 12.0)
+            ? Math.floor((this.view[0] * legendColumns / 12.0))
             : this.chartWidth;
     };
     ChartComponent.prototype.getLegendType = function () {

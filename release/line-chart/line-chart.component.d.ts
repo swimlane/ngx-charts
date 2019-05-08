@@ -20,6 +20,10 @@ export declare class LineChartComponent extends BaseChartComponent {
     activeEntries: any[];
     schemeType: string;
     rangeFillOpacity: number;
+    trimXAxisTicks: boolean;
+    trimYAxisTicks: boolean;
+    maxXAxisTickLength: number;
+    maxYAxisTickLength: number;
     xAxisTickFormatting: any;
     yAxisTickFormatting: any;
     xAxisTicks: any[];

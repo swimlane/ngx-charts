@@ -134,23 +134,20 @@ var PositionHelper = /** @class */ (function () {
      * @param {any} elDimensions
      * @param {any} popoverDimensions
      * @param {any} placement
-     * @param {any} alignment
      * @param {any} spacing
      * @returns {boolean}
      *
      * @memberOf PositionHelper
      */
-    PositionHelper.shouldFlip = function (elDimensions, popoverDimensions, placement, alignment, spacing) {
+    PositionHelper.shouldFlip = function (elDimensions, popoverDimensions, placement, spacing) {
         var flip = false;
         if (placement === 'right') {
-            var popoverPosition = horizontalPosition(elDimensions, popoverDimensions, alignment);
-            if (popoverPosition + popoverDimensions.width + spacing > window.innerWidth) {
+            if (elDimensions.left + elDimensions.width + popoverDimensions.width + spacing > window.innerWidth) {
                 flip = true;
             }
         }
         if (placement === 'left') {
-            var popoverPosition = horizontalPosition(elDimensions, popoverDimensions, alignment);
-            if (popoverPosition - spacing < 0) {
+            if (elDimensions.left - popoverDimensions.width - spacing < 0) {
                 flip = true;
             }
         }
@@ -160,8 +157,7 @@ var PositionHelper = /** @class */ (function () {
             }
         }
         if (placement === 'bottom') {
-            var popoverPosition = verticalPosition(elDimensions, popoverDimensions, alignment);
-            if (popoverPosition + popoverDimensions.height + spacing > window.innerHeight) {
+            if (elDimensions.top + elDimensions.height + popoverDimensions.height + spacing > window.innerHeight) {
                 flip = true;
             }
         }
@@ -243,13 +239,12 @@ var PositionHelper = /** @class */ (function () {
      * @param {any} elmDim
      * @param {any} hostDim
      * @param {any} spacing
-     * @param {any} alignment
      * @returns {*}
      *
      * @memberOf PositionHelper
      */
-    PositionHelper.determinePlacement = function (placement, elmDim, hostDim, spacing, alignment) {
-        var shouldFlip = PositionHelper.shouldFlip(hostDim, elmDim, placement, alignment, spacing);
+    PositionHelper.determinePlacement = function (placement, elmDim, hostDim, spacing) {
+        var shouldFlip = PositionHelper.shouldFlip(hostDim, elmDim, placement, spacing);
         if (shouldFlip) {
             if (placement === PlacementTypes.right) {
                 return PlacementTypes.left;
