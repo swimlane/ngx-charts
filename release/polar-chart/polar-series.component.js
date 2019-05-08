@@ -36,11 +36,11 @@ var PolarSeriesComponent = /** @class */ (function () {
             var r = _this.getRadius(d);
             var value = d.value;
             var color = _this.colors.getColor(linearScaleType ? Math.abs(value) : seriesName);
-            var cData = {
+            var cData = Object.assign({}, d, {
                 series: seriesName,
                 value: value,
                 name: d.name
-            };
+            });
             return {
                 data: cData,
                 cx: r * Math.sin(a),

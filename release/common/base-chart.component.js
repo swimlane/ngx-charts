@@ -62,8 +62,8 @@ var BaseChartComponent = /** @class */ (function () {
         if (!this.height) {
             this.height = 400;
         }
-        this.width = ~~this.width;
-        this.height = ~~this.height;
+        this.width = Math.floor(this.width);
+        this.height = Math.floor(this.height);
         if (this.cd) {
             this.cd.markForCheck();
         }

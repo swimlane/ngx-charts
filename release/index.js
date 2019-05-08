@@ -1,5 +1,5 @@
 /**
- * ngx-charts v"10.1.0" (https://github.com/swimlane/ngx-charts)
+ * ngx-charts v"11.0.0" (https://github.com/swimlane/ngx-charts)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -313,7 +313,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, ".tree-map .treemap-val {\n  font-size: 1.3em;\n  padding-top: 5px;\n  display: inline-block; }\n\n.tree-map .label p {\n  display: table-cell;\n  text-align: center;\n  line-height: 1.2em;\n  vertical-align: middle; }\n", ""]);
+exports.push([module.i, ".tree-map .treemap-val {\n  font-size: 1.3em;\n  padding-top: 5px;\n  display: inline-block; }\n\n.tree-map .treemap-label p {\n  display: table-cell;\n  text-align: center;\n  line-height: 1.2em;\n  vertical-align: middle; }\n", ""]);
 
 // exports
 
@@ -5071,7 +5071,7 @@ var BarVerticalComponent = /** @class */ (function (_super) {
         this.xDomain = this.getXDomain();
         var spacing = this.xDomain.length / (this.dims.width / this.barPadding + 1);
         return Object(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scaleBand"])()
-            .rangeRound([0, this.dims.width])
+            .range([0, this.dims.width])
             .paddingInner(spacing)
             .domain(this.xDomain);
     };
@@ -5972,6 +5972,7 @@ var SeriesVerticalComponent = /** @class */ (function () {
         if (this.series.length) {
             width = this.xScale.bandwidth();
         }
+        width = Math.round(width);
         var yScaleMin = Math.max(this.yScale.domain()[0], 0);
         var d0 = (_a = {},
             _a[D0Types.positive] = 0,
@@ -5997,7 +5998,7 @@ var SeriesVerticalComponent = /** @class */ (function () {
                 formattedLabel: formattedLabel,
                 height: 0,
                 x: 0,
-                y: 0,
+                y: 0
             };
             if (_this.type === 'standard') {
                 bar.height = Math.abs(_this.yScale(value) - _this.yScale(yScaleMin));
@@ -6048,8 +6049,7 @@ var SeriesVerticalComponent = /** @class */ (function () {
                 }
                 else {
                     bar.color = _this.colors.getColor(bar.offset1);
-                    bar.gradientStops =
-                        _this.colors.getLinearGradientStops(bar.offset1, bar.offset0);
+                    bar.gradientStops = _this.colors.getLinearGradientStops(bar.offset1, bar.offset0);
                 }
             }
             var tooltipLabel = formattedLabel;
@@ -6059,7 +6059,9 @@ var SeriesVerticalComponent = /** @class */ (function () {
                 bar.data.series = _this.seriesName;
                 bar.ariaLabel = _this.seriesName + ' ' + bar.ariaLabel;
             }
-            bar.tooltipText = _this.tooltipDisabled ? undefined : "\n        <span class=\"tooltip-label\">" + tooltipLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
+            bar.tooltipText = _this.tooltipDisabled
+                ? undefined
+                : "\n        <span class=\"tooltip-label\">" + tooltipLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
             return bar;
         });
         this.updateDataLabels();
@@ -6070,8 +6072,8 @@ var SeriesVerticalComponent = /** @class */ (function () {
             this.barsForDataLabels = [];
             var section = {};
             section.series = this.seriesName;
-            var totalPositive = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return d > 0 ? sum + d : sum; }, 0);
-            var totalNegative = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return d < 0 ? sum + d : sum; }, 0);
+            var totalPositive = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return (d > 0 ? sum + d : sum); }, 0);
+            var totalNegative = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return (d < 0 ? sum + d : sum); }, 0);
             section.total = totalPositive + totalNegative;
             section.x = 0;
             section.y = 0;
@@ -6197,7 +6199,7 @@ var SeriesVerticalComponent = /** @class */ (function () {
     SeriesVerticalComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'g[ngx-charts-series-vertical]',
-            template: "\n    <svg:g ngx-charts-bar\n      *ngFor=\"let bar of bars; trackBy: trackBy\"\n      [@animationState]=\"'active'\"\n      [@.disabled]=\"!animations\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [stops]=\"bar.gradientStops\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      [gradient]=\"gradient\"\n      [ariaLabel]=\"bar.ariaLabel\"\n      [isActive]=\"isActive(bar.data)\"\n      (select)=\"onClick($event)\"\n      (activate)=\"activate.emit($event)\"\n      (deactivate)=\"deactivate.emit($event)\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"tooltipPlacement\"\n      [tooltipType]=\"tooltipType\"\n      [tooltipTitle]=\"tooltipTemplate ? undefined : bar.tooltipText\"\n      [tooltipTemplate]=\"tooltipTemplate\"\n      [tooltipContext]=\"bar.data\"\n      [animations]=\"animations\">\n    </svg:g>\n    <svg:g *ngIf=\"showDataLabel\">\n      <svg:g ngx-charts-bar-label *ngFor=\"let b of barsForDataLabels; let i = index; trackBy:trackDataLabelBy\"         \n        [barX]=\"b.x\"\n        [barY]=\"b.y\"\n        [barWidth]=\"b.width\"\n        [barHeight]=\"b.height\"\n        [value]=\"b.total\"\n        [valueFormatting]=\"dataLabelFormatting\"\n        [orientation]=\"'vertical'\"\n        (dimensionsChanged)=\"dataLabelHeightChanged.emit({size:$event, index:i})\"\n      />\n    </svg:g> \n  ",
+            template: "\n    <svg:g\n      ngx-charts-bar\n      *ngFor=\"let bar of bars; trackBy: trackBy\"\n      [@animationState]=\"'active'\"\n      [@.disabled]=\"!animations\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [stops]=\"bar.gradientStops\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      [gradient]=\"gradient\"\n      [ariaLabel]=\"bar.ariaLabel\"\n      [isActive]=\"isActive(bar.data)\"\n      (select)=\"onClick($event)\"\n      (activate)=\"activate.emit($event)\"\n      (deactivate)=\"deactivate.emit($event)\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"tooltipPlacement\"\n      [tooltipType]=\"tooltipType\"\n      [tooltipTitle]=\"tooltipTemplate ? undefined : bar.tooltipText\"\n      [tooltipTemplate]=\"tooltipTemplate\"\n      [tooltipContext]=\"bar.data\"\n      [animations]=\"animations\"\n    ></svg:g>\n    <svg:g *ngIf=\"showDataLabel\">\n      <svg:g\n        ngx-charts-bar-label\n        *ngFor=\"let b of barsForDataLabels; let i = index; trackBy: trackDataLabelBy\"\n        [barX]=\"b.x\"\n        [barY]=\"b.y\"\n        [barWidth]=\"b.width\"\n        [barHeight]=\"b.height\"\n        [value]=\"b.total\"\n        [valueFormatting]=\"dataLabelFormatting\"\n        [orientation]=\"'vertical'\"\n        (dimensionsChanged)=\"dataLabelHeightChanged.emit({ size: $event, index: i })\"\n      />\n    </svg:g>\n  ",
             changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush,
             animations: [
                 Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["trigger"])('animationState', [
@@ -6791,13 +6793,13 @@ var BubbleSeriesComponent = /** @class */ (function () {
                     _this.colors.getColor(seriesName);
                 var isActive = !_this.activeEntries.length ? true : _this.isActive({ name: seriesName });
                 var opacity = isActive ? 1 : 0.3;
-                var data = {
+                var data = Object.assign({}, d, {
                     series: seriesName,
                     name: d.name,
                     value: d.y,
                     x: d.x,
                     radius: d.r
-                };
+                });
                 return {
                     data: data,
                     x: x,
@@ -8125,8 +8127,8 @@ var BaseChartComponent = /** @class */ (function () {
         if (!this.height) {
             this.height = 400;
         }
-        this.width = ~~this.width;
-        this.height = ~~this.height;
+        this.width = Math.floor(this.width);
+        this.height = Math.floor(this.height);
         if (this.cd) {
             this.cd.markForCheck();
         }
@@ -8330,13 +8332,6 @@ var ChartCommonModule = /** @class */ (function () {
     }
     ChartCommonModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-            providers: [
-                __WEBPACK_IMPORTED_MODULE_1__angular_common__["Location"],
-                {
-                    provide: __WEBPACK_IMPORTED_MODULE_1__angular_common__["LocationStrategy"],
-                    useClass: __WEBPACK_IMPORTED_MODULE_1__angular_common__["PathLocationStrategy"]
-                }
-            ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
                 __WEBPACK_IMPORTED_MODULE_5__axes_axes_module__["a" /* AxesModule */],
@@ -8407,9 +8402,9 @@ var ChartComponent = /** @class */ (function () {
             }
         }
         var chartColumns = 12 - legendColumns;
-        this.chartWidth = ~~(this.view[0] * chartColumns / 12.0);
+        this.chartWidth = Math.floor((this.view[0] * chartColumns / 12.0));
         this.legendWidth = (!this.legendOptions || this.legendOptions.position === 'right')
-            ? ~~(this.view[0] * legendColumns / 12.0)
+            ? Math.floor((this.view[0] * legendColumns / 12.0))
             : this.chartWidth;
     };
     ChartComponent.prototype.getLegendType = function () {
@@ -8592,11 +8587,11 @@ var CircleSeriesComponent = /** @class */ (function () {
         else {
             color = this.colors.getColor(seriesName);
         }
-        var data = {
+        var data = Object.assign({}, d, {
             series: seriesName,
             value: value,
             name: label
-        };
+        });
         return {
             classNames: ["circle-data-" + i],
             value: value,
@@ -10691,7 +10686,7 @@ var TooltipArea = /** @class */ (function () {
                 else {
                     color = this.colors.getColor(group.name);
                 }
-                results.push({
+                var data = Object.assign({}, item, {
                     value: val,
                     name: label,
                     series: groupName,
@@ -10699,6 +10694,7 @@ var TooltipArea = /** @class */ (function () {
                     max: item.max,
                     color: color
                 });
+                results.push(data);
             }
         }
         return results;
@@ -11327,23 +11323,20 @@ var PositionHelper = /** @class */ (function () {
      * @param {any} elDimensions
      * @param {any} popoverDimensions
      * @param {any} placement
-     * @param {any} alignment
      * @param {any} spacing
      * @returns {boolean}
      *
      * @memberOf PositionHelper
      */
-    PositionHelper.shouldFlip = function (elDimensions, popoverDimensions, placement, alignment, spacing) {
+    PositionHelper.shouldFlip = function (elDimensions, popoverDimensions, placement, spacing) {
         var flip = false;
         if (placement === 'right') {
-            var popoverPosition = horizontalPosition(elDimensions, popoverDimensions, alignment);
-            if (popoverPosition + popoverDimensions.width + spacing > window.innerWidth) {
+            if (elDimensions.left + elDimensions.width + popoverDimensions.width + spacing > window.innerWidth) {
                 flip = true;
             }
         }
         if (placement === 'left') {
-            var popoverPosition = horizontalPosition(elDimensions, popoverDimensions, alignment);
-            if (popoverPosition - spacing < 0) {
+            if (elDimensions.left - popoverDimensions.width - spacing < 0) {
                 flip = true;
             }
         }
@@ -11353,8 +11346,7 @@ var PositionHelper = /** @class */ (function () {
             }
         }
         if (placement === 'bottom') {
-            var popoverPosition = verticalPosition(elDimensions, popoverDimensions, alignment);
-            if (popoverPosition + popoverDimensions.height + spacing > window.innerHeight) {
+            if (elDimensions.top + elDimensions.height + popoverDimensions.height + spacing > window.innerHeight) {
                 flip = true;
             }
         }
@@ -11436,13 +11428,12 @@ var PositionHelper = /** @class */ (function () {
      * @param {any} elmDim
      * @param {any} hostDim
      * @param {any} spacing
-     * @param {any} alignment
      * @returns {*}
      *
      * @memberOf PositionHelper
      */
-    PositionHelper.determinePlacement = function (placement, elmDim, hostDim, spacing, alignment) {
-        var shouldFlip = PositionHelper.shouldFlip(hostDim, elmDim, placement, alignment, spacing);
+    PositionHelper.determinePlacement = function (placement, elmDim, hostDim, spacing) {
+        var shouldFlip = PositionHelper.shouldFlip(hostDim, elmDim, placement, spacing);
         if (shouldFlip) {
             if (placement === __WEBPACK_IMPORTED_MODULE_0__placement_type__["a" /* PlacementTypes */].right) {
                 return __WEBPACK_IMPORTED_MODULE_0__placement_type__["a" /* PlacementTypes */].left;
@@ -11583,7 +11574,7 @@ var TooltipContentComponent = /** @class */ (function () {
         this.renderer.setStyle(caretElm, 'left', left + "px");
     };
     TooltipContentComponent.prototype.checkFlip = function (hostDim, elmDim) {
-        this.placement = __WEBPACK_IMPORTED_MODULE_2__position__["b" /* PositionHelper */].determinePlacement(this.placement, elmDim, hostDim, this.spacing, this.alignment);
+        this.placement = __WEBPACK_IMPORTED_MODULE_2__position__["b" /* PositionHelper */].determinePlacement(this.placement, elmDim, hostDim, this.spacing);
     };
     TooltipContentComponent.prototype.onWindowResize = function () {
         this.position();
@@ -12132,9 +12123,9 @@ function calculateViewDimensions(_a) {
     chartWidth = Math.max(0, chartWidth);
     chartHeight = Math.max(0, chartHeight);
     return {
-        width: ~~chartWidth,
-        height: ~~chartHeight,
-        xOffset: ~~xOffset
+        width: Math.floor(chartWidth),
+        height: Math.floor(chartHeight),
+        xOffset: Math.floor(xOffset)
     };
 }
 
@@ -14056,7 +14047,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "XAxisTicksComponent", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["C"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "YAxisComponent", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["D"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "YAxisTicksComponent", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["E"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "reduceTicks", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["N"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "ColorHelper", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["k"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "ChartComponent", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["h"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "AreaComponent", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["c"]; });
@@ -14087,6 +14077,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "StyleTypes", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["s"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "AlignmentTypes", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["b"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "ShowTypes", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["r"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "reduceTicks", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["N"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "CountUpDirective", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["l"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "count", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["G"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "decimalChecker", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["H"]; });
@@ -17246,8 +17237,8 @@ var PolarChartComponent = /** @class */ (function (_super) {
             legendType: this.schemeType,
             legendPosition: this.legendPosition
         });
-        var halfWidth = ~~(this.dims.width / 2);
-        var halfHeight = ~~(this.dims.height / 2);
+        var halfWidth = Math.floor((this.dims.width / 2));
+        var halfHeight = Math.floor((this.dims.height / 2));
         var outerRadius = this.outerRadius = Math.min(halfHeight / 1.5, halfWidth / 1.5);
         var yOffset = Math.max(0, halfHeight - outerRadius);
         this.yAxisDims = __assign({}, this.dims, { width: halfWidth });
@@ -17320,7 +17311,7 @@ var PolarChartComponent = /** @class */ (function (_super) {
             }
         }
         this.radiusTicks = this.yAxisScale
-            .ticks(~~(this.dims.height / 50))
+            .ticks(Math.floor((this.dims.height / 50)))
             .map(function (d) { return _this.yScale(d); });
     };
     PolarChartComponent.prototype.getXValues = function () {
@@ -17724,11 +17715,11 @@ var PolarSeriesComponent = /** @class */ (function () {
             var r = _this.getRadius(d);
             var value = d.value;
             var color = _this.colors.getColor(linearScaleType ? Math.abs(value) : seriesName);
-            var cData = {
+            var cData = Object.assign({}, d, {
                 series: seriesName,
                 value: value,
                 name: d.name
-            };
+            });
             return {
                 data: cData,
                 cx: r * Math.sin(a),
@@ -18203,7 +18194,7 @@ var TreeMapCellComponent = /** @class */ (function () {
     TreeMapCellComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'g[ngx-charts-tree-map-cell]',
-            template: "\n    <svg:g>\n      <defs *ngIf=\"gradient\">\n        <svg:g ngx-charts-svg-linear-gradient\n          orientation=\"vertical\"\n          [name]=\"gradientId\"\n          [stops]=\"gradientStops\"\n        />\n      </defs>\n      <svg:rect\n        [attr.fill]=\"gradient ? gradientUrl : fill\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        [attr.x]=\"x\"\n        [attr.y]=\"y\"\n        [style.cursor]=\"'pointer'\"\n        class=\"cell\"\n        (click)=\"onClick()\"\n      />\n      <svg:foreignObject\n        *ngIf=\"width >= 70 && height >= 35\"\n        [attr.x]=\"x\"\n        [attr.y]=\"y\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        class=\"label\"\n        [style.pointer-events]=\"'none'\">\n        <xhtml:p\n          [style.color]=\"getTextColor()\"\n          [style.height]=\"height + 'px'\"\n          [style.width]=\"width + 'px'\">\n          <xhtml:span class=\"treemap-label\" [innerHTML]=\"formattedLabel\">\n          </xhtml:span>\n          <xhtml:br />\n          <xhtml:span *ngIf=\"animations\"\n            class=\"treemap-val\" \n            ngx-charts-count-up \n            [countTo]=\"value\"\n            [valueFormatting]=\"valueFormatting\">\n          </xhtml:span>\n          <xhtml:span *ngIf=\"!animations\"\n            class=\"treemap-val\">\n            {{formattedValue}}\n          </xhtml:span>\n        </xhtml:p>\n      </svg:foreignObject>\n    </svg:g>\n  ",
+            template: "\n    <svg:g>\n      <defs *ngIf=\"gradient\">\n        <svg:g ngx-charts-svg-linear-gradient\n          orientation=\"vertical\"\n          [name]=\"gradientId\"\n          [stops]=\"gradientStops\"\n        />\n      </defs>\n      <svg:rect\n        [attr.fill]=\"gradient ? gradientUrl : fill\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        [attr.x]=\"x\"\n        [attr.y]=\"y\"\n        [style.cursor]=\"'pointer'\"\n        class=\"cell\"\n        (click)=\"onClick()\"\n      />\n      <svg:foreignObject\n        *ngIf=\"width >= 70 && height >= 35\"\n        [attr.x]=\"x\"\n        [attr.y]=\"y\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        class=\"treemap-label\"\n        [style.pointer-events]=\"'none'\">\n        <xhtml:p\n          [style.color]=\"getTextColor()\"\n          [style.height]=\"height + 'px'\"\n          [style.width]=\"width + 'px'\">\n          <xhtml:span class=\"treemap-label\" [innerHTML]=\"formattedLabel\">\n          </xhtml:span>\n          <xhtml:br />\n          <xhtml:span *ngIf=\"animations\"\n            class=\"treemap-val\" \n            ngx-charts-count-up \n            [countTo]=\"value\"\n            [valueFormatting]=\"valueFormatting\">\n          </xhtml:span>\n          <xhtml:span *ngIf=\"!animations\"\n            class=\"treemap-val\">\n            {{formattedValue}}\n          </xhtml:span>\n        </xhtml:p>\n      </svg:foreignObject>\n    </svg:g>\n  ",
             changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]])

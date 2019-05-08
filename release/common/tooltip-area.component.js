@@ -45,7 +45,7 @@ var TooltipArea = /** @class */ (function () {
                 else {
                     color = this.colors.getColor(group.name);
                 }
-                results.push({
+                var data = Object.assign({}, item, {
                     value: val,
                     name: label,
                     series: groupName,
@@ -53,6 +53,7 @@ var TooltipArea = /** @class */ (function () {
                     max: item.max,
                     color: color
                 });
+                results.push(data);
             }
         }
         return results;

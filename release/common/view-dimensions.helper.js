@@ -37,9 +37,9 @@ export function calculateViewDimensions(_a) {
     chartWidth = Math.max(0, chartWidth);
     chartHeight = Math.max(0, chartHeight);
     return {
-        width: ~~chartWidth,
-        height: ~~chartHeight,
-        xOffset: ~~xOffset
+        width: Math.floor(chartWidth),
+        height: Math.floor(chartHeight),
+        xOffset: Math.floor(xOffset)
     };
 }
 //# sourceMappingURL=view-dimensions.helper.js.map

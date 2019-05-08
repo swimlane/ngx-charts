@@ -60,7 +60,7 @@ var TooltipContentComponent = /** @class */ (function () {
         this.renderer.setStyle(caretElm, 'left', left + "px");
     };
     TooltipContentComponent.prototype.checkFlip = function (hostDim, elmDim) {
-        this.placement = PositionHelper.determinePlacement(this.placement, elmDim, hostDim, this.spacing, this.alignment);
+        this.placement = PositionHelper.determinePlacement(this.placement, elmDim, hostDim, this.spacing);
     };
     TooltipContentComponent.prototype.onWindowResize = function () {
         this.position();
