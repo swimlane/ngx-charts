@@ -161,25 +161,22 @@ export class PositionHelper {
    * @param {any} elDimensions
    * @param {any} popoverDimensions
    * @param {any} placement
-   * @param {any} alignment
    * @param {any} spacing
    * @returns {boolean}
    * 
    * @memberOf PositionHelper
    */
-  static shouldFlip(elDimensions, popoverDimensions, placement, alignment, spacing): boolean {
+  static shouldFlip(elDimensions, popoverDimensions, placement, spacing): boolean {
     let flip = false;
 
     if (placement === 'right') {
-      const popoverPosition = horizontalPosition(elDimensions, popoverDimensions, alignment);
-      if (popoverPosition + popoverDimensions.width + spacing > window.innerWidth) {
+      if (elDimensions.left + elDimensions.width + popoverDimensions.width + spacing > window.innerWidth) {
         flip = true;
       }
     }
 
     if (placement === 'left') {
-      const popoverPosition = horizontalPosition(elDimensions, popoverDimensions, alignment);
-      if (popoverPosition - spacing < 0) {
+      if (elDimensions.left - popoverDimensions.width - spacing < 0) {
         flip = true;
       }
     }
@@ -191,8 +188,7 @@ export class PositionHelper {
     }
 
     if (placement === 'bottom') {
-      const popoverPosition = verticalPosition(elDimensions, popoverDimensions, alignment);
-      if (popoverPosition + popoverDimensions.height + spacing > window.innerHeight) {
+      if (elDimensions.top + elDimensions.height + popoverDimensions.height + spacing > window.innerHeight) {
         flip = true;
       }
     }
@@ -284,17 +280,15 @@ export class PositionHelper {
    * @param {any} elmDim
    * @param {any} hostDim
    * @param {any} spacing
-   * @param {any} alignment
    * @returns {*}
    * 
    * @memberOf PositionHelper
    */
-  static determinePlacement(placement, elmDim, hostDim, spacing, alignment): any {
+  static determinePlacement(placement, elmDim, hostDim, spacing): any {
     const shouldFlip = PositionHelper.shouldFlip(
       hostDim,
       elmDim,
       placement,
-      alignment,
       spacing);
 
     if(shouldFlip) {
