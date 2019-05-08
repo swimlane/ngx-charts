@@ -49,6 +49,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [trimTicks]="trimXAxisTicks"
+          [rotateTicks]="rotateXAxisTicks"
           [maxTickLength]="maxXAxisTickLength"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
@@ -128,6 +129,7 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   @Input() schemeType: string;
   @Input() trimXAxisTicks: boolean = true;
   @Input() trimYAxisTicks: boolean = true;
+  @Input() rotateXAxisTicks: boolean = true;
   @Input() maxXAxisTickLength: number = 16;
   @Input() maxYAxisTickLength: number = 16;
   @Input() xAxisTickFormatting: any;

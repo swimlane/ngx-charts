@@ -29,6 +29,7 @@ const chartGroups = [
           'showDataLabel',
           'trimXAxisTicks',
           'trimYAxisTicks',
+          'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength'
         ]
@@ -60,6 +61,7 @@ const chartGroups = [
           'showDataLabel',
           'trimXAxisTicks',
           'trimYAxisTicks',
+          'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength'
         ],
@@ -96,6 +98,7 @@ const chartGroups = [
           'showDataLabel',
           'trimXAxisTicks',
           'trimYAxisTicks',
+          'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength'
         ]
@@ -128,6 +131,7 @@ const chartGroups = [
           'showDataLabel',
           'trimXAxisTicks',
           'trimYAxisTicks',
+          'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength'
         ],
@@ -162,6 +166,7 @@ const chartGroups = [
           'showDataLabel',
           'trimXAxisTicks',
           'trimYAxisTicks',
+          'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength'
         ]
@@ -192,6 +197,7 @@ const chartGroups = [
           'showDataLabel',
           'trimXAxisTicks',
           'trimYAxisTicks',
+          'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength'
         ],
@@ -224,6 +230,7 @@ const chartGroups = [
           'tooltipDisabled',
           'trimXAxisTicks',
           'trimYAxisTicks',
+          'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength'
         ],
@@ -256,6 +263,7 @@ const chartGroups = [
           'tooltipDisabled',
           'trimXAxisTicks',
           'trimYAxisTicks',
+          'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength'
         ],
@@ -338,6 +346,7 @@ const chartGroups = [
           'yScaleMax',
           'trimXAxisTicks',
           'trimYAxisTicks',
+          'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength'
         ],
@@ -409,6 +418,7 @@ const chartGroups = [
           'yScaleMax',
           'trimXAxisTicks',
           'trimYAxisTicks',
+          'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength'
         ],
@@ -448,6 +458,7 @@ const chartGroups = [
           'yScaleMax',
           'trimXAxisTicks',
           'trimYAxisTicks',
+          'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength'
         ],
@@ -483,6 +494,7 @@ const chartGroups = [
           'tooltipDisabled',
           'trimXAxisTicks',
           'trimYAxisTicks',
+          'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength'
         ],
@@ -526,6 +538,7 @@ const chartGroups = [
           'yScaleMax',
           'trimXAxisTicks',
           'trimYAxisTicks',
+          'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength'
         ],
@@ -559,6 +572,7 @@ const chartGroups = [
           'tooltipDisabled',
           'trimXAxisTicks',
           'trimYAxisTicks',
+          'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength',
           'min',

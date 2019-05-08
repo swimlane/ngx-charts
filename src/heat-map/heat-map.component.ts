@@ -30,6 +30,7 @@ import {getScaleType} from '../common/domain.helper';
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [trimTicks]="trimXAxisTicks"
+          [rotateTicks]="rotateXAxisTicks"
           [maxTickLength]="maxXAxisTickLength"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
@@ -89,6 +90,7 @@ export class HeatMapComponent extends BaseChartComponent {
   @Input() innerPadding: number | number[] = 8;
   @Input() trimXAxisTicks: boolean = true;
   @Input() trimYAxisTicks: boolean = true;
+  @Input() rotateXAxisTicks: boolean = true;
   @Input() maxXAxisTickLength: number = 16;
   @Input() maxYAxisTickLength: number = 16;
   @Input() xAxisTickFormatting: any;
