@@ -34,6 +34,14 @@ import { id } from '../utils/id';
       [attr.fill]="hasGradient ? gradientFill : fill"
       (click)="select.emit(data)"
     />
+    <svg:text *ngIf="showSegmentLabels"  
+      class="textDataLabel" 
+      alignment-baseline="middle"     
+      text-anchor="middle"
+      [attr.x]="x+width/2" 
+      [attr.y]="y+height/2">
+      {{data.value}}
+    </svg:text>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -53,6 +61,7 @@ export class BarComponent implements OnChanges {
   @Input() stops: any[];
   @Input() animations: boolean = true;
   @Input() ariaLabel: string;
+  @Input() showSegmentLabels: boolean = false;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();

@@ -24,7 +24,7 @@ export enum D0Types {
   selector: 'g[ngx-charts-series-vertical]',
   template: `
     <svg:g ngx-charts-bar
-      *ngFor="let bar of bars; trackBy: trackBy"
+      *ngFor="let bar of bars; trackBy: trackBy;"
       [@animationState]="'active'"
       [@.disabled]="!animations"
       [width]="bar.width"
@@ -49,13 +49,14 @@ export enum D0Types {
       [tooltipTitle]="tooltipTemplate ? undefined : bar.tooltipText"
       [tooltipTemplate]="tooltipTemplate"
       [tooltipContext]="bar.data"
-      [animations]="animations">
+      [animations]="animations"
+      [showSegmentLabels]="showSegmentLabels">
     </svg:g>
     <svg:g *ngIf="showDataLabel">
       <svg:g ngx-charts-bar-label *ngFor="let b of barsForDataLabels; let i = index; trackBy:trackDataLabelBy"         
         [barX]="b.x"
         [barY]="b.y"
-        [barWidth]="b.width"
+        [barWidth]="b.width" 
         [barHeight]="b.height"
         [value]="b.total"
         [valueFormatting]="dataLabelFormatting"
@@ -92,6 +93,7 @@ export class SeriesVerticalComponent implements OnChanges {
   @Input() roundEdges: boolean;
   @Input() animations: boolean = true;
   @Input() showDataLabel: boolean = false;
+  @Input() showSegmentLabels: boolean = false;
   @Input() dataLabelFormatting: any;
 
   @Output() select = new EventEmitter();

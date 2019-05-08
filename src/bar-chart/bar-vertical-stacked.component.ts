@@ -75,6 +75,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
             [tooltipDisabled]="tooltipDisabled"
             [tooltipTemplate]="tooltipTemplate"
             [showDataLabel]="showDataLabel"
+            [showSegmentLabels]="showSegmentLabels"
             [dataLabelFormatting]="dataLabelFormatting"
             [seriesName]="group.name"
             [animations]="animations"
@@ -130,6 +131,7 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   @Input() roundDomains: boolean = false;
   @Input() yScaleMax: number;
   @Input() showDataLabel: boolean = false;
+  @Input() showSegmentLabels: boolean = false;
   @Input() dataLabelFormatting: any;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
