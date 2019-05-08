@@ -25,9 +25,11 @@ import { BaseChartComponent } from '../common/base-chart.component';
       [animations]="animations"
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
-      (legendLabelDeactivate)="onDeactivate($event)">
+      (legendLabelDeactivate)="onDeactivate($event)"
+    >
       <svg:g [attr.transform]="transform" class="bar-chart chart">
-        <svg:g ngx-charts-x-axis
+        <svg:g
+          ngx-charts-x-axis
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
@@ -35,12 +37,14 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [trimTicks]="trimXAxisTicks"
+          [rotateTicks]="rotateXAxisTicks"
           [maxTickLength]="maxXAxisTickLength"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
-          (dimensionsChanged)="updateXAxisHeight($event)">
-        </svg:g>
-        <svg:g ngx-charts-y-axis
+          (dimensionsChanged)="updateXAxisHeight($event)"
+        ></svg:g>
+        <svg:g
+          ngx-charts-y-axis
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
@@ -51,9 +55,10 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
           [yAxisOffset]="dataLabelMaxWidth.negative"
-          (dimensionsChanged)="updateYAxisWidth($event)">
-        </svg:g>
-        <svg:g ngx-charts-series-horizontal
+          (dimensionsChanged)="updateYAxisWidth($event)"
+        ></svg:g>
+        <svg:g
+          ngx-charts-series-horizontal
           [xScale]="xScale"
           [yScale]="yScale"
           [colors]="colors"
@@ -71,8 +76,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)"
           (dataLabelWidthChanged)="onDataLabelMaxWidthChanged($event)"
-          >
-        </svg:g>
+        ></svg:g>
       </svg:g>
     </ngx-charts-chart>
   `,
@@ -81,7 +85,6 @@ import { BaseChartComponent } from '../common/base-chart.component';
   encapsulation: ViewEncapsulation.None
 })
 export class BarHorizontalComponent extends BaseChartComponent {
-
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
   @Input() legendPosition: string = 'right';
@@ -98,6 +101,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
   @Input() schemeType: string;
   @Input() trimXAxisTicks: boolean = true;
   @Input() trimYAxisTicks: boolean = true;
+  @Input() rotateXAxisTicks: boolean = true;
   @Input() maxXAxisTickLength: number = 16;
   @Input() maxYAxisTickLength: number = 16;
   @Input() xAxisTickFormatting: any;
@@ -127,17 +131,17 @@ export class BarHorizontalComponent extends BaseChartComponent {
   margin = [10, 20, 10, 20];
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
-  legendOptions: any;  
-  dataLabelMaxWidth: any = {negative: 0, positive: 0};
-  
+  legendOptions: any;
+  dataLabelMaxWidth: any = { negative: 0, positive: 0 };
+
   update(): void {
     super.update();
 
     if (!this.showDataLabel) {
-      this.dataLabelMaxWidth = {negative: 0, positive: 0};          
+      this.dataLabelMaxWidth = { negative: 0, positive: 0 };
     }
 
-    this.margin = [10, 20 + this.dataLabelMaxWidth.positive, 10, 20 + this.dataLabelMaxWidth.negative]; 
+    this.margin = [10, 20 + this.dataLabelMaxWidth.positive, 10, 20 + this.dataLabelMaxWidth.negative];
 
     this.dims = calculateViewDimensions({
       width: this.width,
@@ -153,14 +157,14 @@ export class BarHorizontalComponent extends BaseChartComponent {
       legendType: this.schemeType,
       legendPosition: this.legendPosition
     });
-   
+
     this.xScale = this.getXScale();
     this.yScale = this.getYScale();
 
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0]})`;
+    this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
   }
 
   getXScale(): any {
@@ -185,13 +189,9 @@ export class BarHorizontalComponent extends BaseChartComponent {
 
   getXDomain(): any[] {
     const values = this.results.map(d => d.value);
-    const min = this.xScaleMin
-      ? Math.min(this.xScaleMin, ...values)
-      : Math.min(0, ...values);
+    const min = this.xScaleMin ? Math.min(this.xScaleMin, ...values) : Math.min(0, ...values);
 
-    const max = this.xScaleMax
-      ? Math.max(this.xScaleMax, ...values)
-      : Math.max(0, ...values);
+    const max = this.xScaleMax ? Math.max(this.xScaleMax, ...values) : Math.max(0, ...values);
     return [min, max];
   }
 
@@ -244,15 +244,15 @@ export class BarHorizontalComponent extends BaseChartComponent {
     this.update();
   }
 
-  onDataLabelMaxWidthChanged(event) {           
-    if (event.size.negative)  {
+  onDataLabelMaxWidthChanged(event) {
+    if (event.size.negative) {
       this.dataLabelMaxWidth.negative = Math.max(this.dataLabelMaxWidth.negative, event.size.width);
     } else {
       this.dataLabelMaxWidth.positive = Math.max(this.dataLabelMaxWidth.positive, event.size.width);
-    }  
-    if (event.index === (this.results.length - 1)) {
+    }
+    if (event.index === this.results.length - 1) {
       setTimeout(() => this.update());
-    }        
+    }
   }
 
   onActivate(item) {
@@ -263,7 +263,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
       return;
     }
 
-    this.activeEntries = [ item, ...this.activeEntries ];
+    this.activeEntries = [item, ...this.activeEntries];
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
@@ -277,5 +277,4 @@ export class BarHorizontalComponent extends BaseChartComponent {
 
     this.deactivate.emit({ value: item, entries: this.activeEntries });
   }
-
 }

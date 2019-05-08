@@ -29,6 +29,7 @@
         [showDataLabel]="showDataLabel"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
+        [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)"
@@ -61,6 +62,7 @@
         [showDataLabel]="showDataLabel"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
+        [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         (legendLabelClick)="onLegendLabelClick($event)"
@@ -95,6 +97,7 @@
         [showDataLabel]="showDataLabel"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
+        [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)">
@@ -128,6 +131,7 @@
         [showDataLabel]="showDataLabel"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
+        [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)">
@@ -159,6 +163,7 @@
         [showDataLabel]="showDataLabel"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
+        [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)">
@@ -190,6 +195,7 @@
         [xScaleMax]="xScaleMax"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
+        [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)">
@@ -219,6 +225,7 @@
         [roundDomains]="roundDomains"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
+        [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)">
@@ -248,6 +255,7 @@
         [roundDomains]="roundDomains"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
+        [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)">
@@ -331,6 +339,7 @@
         [tooltipDisabled]="tooltipDisabled"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
+        [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)">
@@ -394,6 +403,7 @@
         [maxRadius]="maxRadius"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
+        [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength">
       </ngx-charts-bubble-chart>
@@ -443,6 +453,7 @@
         [tooltipDisabled]="tooltipDisabled"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
+        [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)">
@@ -477,6 +488,7 @@
         [curve]="curve"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
+        [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)">
@@ -507,6 +519,7 @@
         [curve]="curve"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
+        [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)">
@@ -562,6 +575,7 @@
         [tooltipDisabled]="tooltipDisabled"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
+        [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)">
@@ -586,6 +600,7 @@
         [tooltipDisabled]="tooltipDisabled"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
+        [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)">
@@ -1107,6 +1122,12 @@
           <label>
             <input type="checkbox" [checked]="roundDomains" (change)="roundDomains = $event.target.checked">
             Round Domains
+          </label> <br/>
+        </div>
+        <div *ngIf="chart.options.includes('rotateXAxisTicks')">
+          <label>
+            <input type="checkbox" [checked]="rotateXAxisTicks" (change)="rotateXAxisTicks = $event.target.checked">
+            Rotate X Axis Ticks
           </label> <br/>
         </div>
         <div *ngIf="chart.options.includes('gradient')">

@@ -9,12 +9,7 @@ import {
   ContentChild,
   TemplateRef
 } from '@angular/core';
-import {
-  trigger,
-  style,
-  animate,
-  transition
-} from '@angular/animations';
+import { trigger, style, animate, transition } from '@angular/animations';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
 import { curveLinear } from 'd3-shape';
 
@@ -35,17 +30,20 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
       [animations]="animations"
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
-      (legendLabelDeactivate)="onDeactivate($event)">
+      (legendLabelDeactivate)="onDeactivate($event)"
+    >
       <svg:defs>
         <svg:clipPath [attr.id]="clipPathId">
           <svg:rect
             [attr.width]="dims.width + 10"
             [attr.height]="dims.height + 10"
-            [attr.transform]="'translate(-5, -5)'"/>
+            [attr.transform]="'translate(-5, -5)'"
+          />
         </svg:clipPath>
       </svg:defs>
       <svg:g [attr.transform]="transform" class="line-chart chart">
-        <svg:g ngx-charts-x-axis
+        <svg:g
+          ngx-charts-x-axis
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
@@ -53,12 +51,14 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [trimTicks]="trimXAxisTicks"
+          [rotateTicks]="rotateXAxisTicks"
           [maxTickLength]="maxXAxisTickLength"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
-          (dimensionsChanged)="updateXAxisHeight($event)">
-        </svg:g>
-        <svg:g ngx-charts-y-axis
+          (dimensionsChanged)="updateXAxisHeight($event)"
+        ></svg:g>
+        <svg:g
+          ngx-charts-y-axis
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
@@ -72,11 +72,12 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
           [referenceLines]="referenceLines"
           [showRefLines]="showRefLines"
           [showRefLabels]="showRefLabels"
-          (dimensionsChanged)="updateYAxisWidth($event)">
-        </svg:g>
+          (dimensionsChanged)="updateYAxisWidth($event)"
+        ></svg:g>
         <svg:g [attr.clip-path]="clipPath">
-          <svg:g *ngFor="let series of results; trackBy:trackBy" [@animationState]="'active'">
-            <svg:g ngx-charts-line-series
+          <svg:g *ngFor="let series of results; trackBy: trackBy" [@animationState]="'active'">
+            <svg:g
+              ngx-charts-line-series
               [xScale]="xScale"
               [yScale]="yScale"
               [colors]="colors"
@@ -91,7 +92,8 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
           </svg:g>
 
           <svg:g *ngIf="!tooltipDisabled" (mouseleave)="hideCircles()">
-            <svg:g ngx-charts-tooltip-area
+            <svg:g
+              ngx-charts-tooltip-area
               [dims]="dims"
               [xSet]="xSet"
               [xScale]="xScale"
@@ -104,7 +106,8 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
             />
 
             <svg:g *ngFor="let series of results">
-              <svg:g ngx-charts-circle-series
+              <svg:g
+                ngx-charts-circle-series
                 [xScale]="xScale"
                 [yScale]="yScale"
                 [colors]="colors"
@@ -122,7 +125,8 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
           </svg:g>
         </svg:g>
       </svg:g>
-      <svg:g ngx-charts-timeline
+      <svg:g
+        ngx-charts-timeline
         *ngIf="timeline && scaleType != 'ordinal'"
         [attr.transform]="timelineTransform"
         [results]="results"
@@ -132,9 +136,11 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
         [customColors]="customColors"
         [scaleType]="scaleType"
         [legend]="legend"
-        (onDomainChange)="updateDomain($event)">
-        <svg:g *ngFor="let series of results; trackBy:trackBy">
-          <svg:g ngx-charts-line-series
+        (onDomainChange)="updateDomain($event)"
+      >
+        <svg:g *ngFor="let series of results; trackBy: trackBy">
+          <svg:g
+            ngx-charts-line-series
             [xScale]="timelineXScale"
             [yScale]="timelineYScale"
             [colors]="colors"
@@ -155,17 +161,19 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
     trigger('animationState', [
       transition(':leave', [
         style({
-          opacity: 1,
+          opacity: 1
         }),
-        animate(500, style({
-          opacity: 0
-        }))
+        animate(
+          500,
+          style({
+            opacity: 0
+          })
+        )
       ])
     ])
   ]
 })
 export class LineChartComponent extends BaseChartComponent {
-
   @Input() legend;
   @Input() legendTitle: string = 'Legend';
   @Input() legendPosition: string = 'right';
@@ -185,6 +193,7 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() rangeFillOpacity: number;
   @Input() trimXAxisTicks: boolean = true;
   @Input() trimYAxisTicks: boolean = true;
+  @Input() rotateXAxisTicks: boolean = true;
   @Input() maxXAxisTickLength: number = 16;
   @Input() maxYAxisTickLength: number = 16;
   @Input() xAxisTickFormatting: any;
@@ -255,7 +264,7 @@ export class LineChartComponent extends BaseChartComponent {
     });
 
     if (this.timeline) {
-      this.dims.height -= (this.timelineHeight + this.margin[2] + this.timelinePadding);
+      this.dims.height -= this.timelineHeight + this.margin[2] + this.timelinePadding;
     }
 
     this.xDomain = this.getXDomain();
@@ -274,7 +283,7 @@ export class LineChartComponent extends BaseChartComponent {
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
 
     this.clipPathId = 'clip' + id().toString();
     this.clipPath = `url(#${this.clipPathId})`;
@@ -286,7 +295,7 @@ export class LineChartComponent extends BaseChartComponent {
       this.timelineXDomain = this.getXDomain();
       this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
       this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
-      this.timelineTransform = `translate(${ this.dims.xOffset }, ${ -this.margin[2] })`;
+      this.timelineTransform = `translate(${this.dims.xOffset}, ${-this.margin[2]})`;
     }
   }
 
@@ -303,13 +312,9 @@ export class LineChartComponent extends BaseChartComponent {
     let min;
     let max;
     if (this.scaleType === 'time' || this.scaleType === 'linear') {
-      min = this.xScaleMin
-        ? this.xScaleMin
-        : Math.min(...values);
+      min = this.xScaleMin ? this.xScaleMin : Math.min(...values);
 
-      max = this.xScaleMax
-        ? this.xScaleMax
-        : Math.max(...values);
+      max = this.xScaleMax ? this.xScaleMax : Math.max(...values);
     }
 
     if (this.scaleType === 'time') {
@@ -324,7 +329,7 @@ export class LineChartComponent extends BaseChartComponent {
     } else if (this.scaleType === 'linear') {
       domain = [min, max];
       // Use compare function to sort numbers numerically
-      this.xSet = [...values].sort((a, b) => (a - b));
+      this.xSet = [...values].sort((a, b) => a - b);
     } else {
       domain = values;
       this.xSet = values;
@@ -360,13 +365,9 @@ export class LineChartComponent extends BaseChartComponent {
       values.push(0);
     }
 
-    const min = this.yScaleMin
-      ? this.yScaleMin
-      : Math.min(...values);
+    const min = this.yScaleMin ? this.yScaleMin : Math.min(...values);
 
-    const max = this.yScaleMax
-      ? this.yScaleMax
-      : Math.max(...values);
+    const max = this.yScaleMax ? this.yScaleMax : Math.max(...values);
 
     return [min, max];
   }
