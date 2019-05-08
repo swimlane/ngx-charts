@@ -128,7 +128,7 @@ export class TooltipArea {
           color = this.colors.getColor(group.name);
         }
 
-        results.push({
+        const data = Object.assign({}, item, {
           value: val,
           name: label,
           series: groupName,
@@ -136,6 +136,8 @@ export class TooltipArea {
           max: item.max,
           color
         });
+
+        results.push(data);
       }
     }
 
