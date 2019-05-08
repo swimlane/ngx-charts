@@ -84,21 +84,7 @@
     "@angular/forms": "7.x",
     "@angular/platform-browser": "7.x",
     "@angular/platform-browser-dynamic": "7.x",
-    "core-js": "^2.5.1",
-    "d3": "^4.10.2",
-    "d3-array": "^1.2.1",
-    "d3-brush": "^1.0.4",
-    "d3-color": "^1.0.3",
-    "d3-force": "^1.1.0",
-    "d3-format": "^1.2.0",
-    "d3-hierarchy": "^1.1.5",
-    "d3-interpolate": "^1.1.5",
-    "d3-scale": "^1.0.6",
-    "d3-selection": "^1.1.0",
-    "d3-shape": "^1.2.0",
-    "d3-time-format": "^2.1.0",
-    "rxjs": "6.x",
-    "zone.js": "^0.8.26"
+    "rxjs": "6.x"
   },
   "devDependencies": {
     "@angular/animations": "^7.0.0",
