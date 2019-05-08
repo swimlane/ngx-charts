@@ -1,5 +1,9 @@
 # Changelog
 
+## 11.0.1
+
+- Bug: Fixes displaying of tooltip on IE 11 (#1157)
+
 ## 11.0.0
 
 - Breaking: Remove Angular location strategy from ChartCommonModule (#915)

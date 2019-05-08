@@ -1,5 +1,5 @@
 /**
- * ngx-charts v"11.0.0" (https://github.com/swimlane/ngx-charts)
+ * ngx-charts v"11.0.1" (https://github.com/swimlane/ngx-charts)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -10708,7 +10708,7 @@ var TooltipArea = /** @class */ (function () {
         this.anchorPos = Math.min(this.dims.width, this.anchorPos);
         this.anchorValues = this.getValues(closestPoint);
         if (this.anchorPos !== this.lastAnchorPos) {
-            var ev = new __WEBPACK_IMPORTED_MODULE_2__events__["a" /* MouseEvent */]('mouseleave', { bubbles: false });
+            var ev = Object(__WEBPACK_IMPORTED_MODULE_2__events__["a" /* createMouseEvent */])('mouseleave');
             this.tooltipAnchor.nativeElement.dispatchEvent(ev);
             this.anchorOpacity = 0.7;
             this.hover.emit({
@@ -10746,11 +10746,11 @@ var TooltipArea = /** @class */ (function () {
         return closestIndex;
     };
     TooltipArea.prototype.showTooltip = function () {
-        var event = new __WEBPACK_IMPORTED_MODULE_2__events__["a" /* MouseEvent */]('mouseenter', { bubbles: false });
+        var event = Object(__WEBPACK_IMPORTED_MODULE_2__events__["a" /* createMouseEvent */])('mouseenter');
         this.tooltipAnchor.nativeElement.dispatchEvent(event);
     };
     TooltipArea.prototype.hideTooltip = function () {
-        var event = new __WEBPACK_IMPORTED_MODULE_2__events__["a" /* MouseEvent */]('mouseleave', { bubbles: false });
+        var event = Object(__WEBPACK_IMPORTED_MODULE_2__events__["a" /* createMouseEvent */])('mouseleave');
         this.tooltipAnchor.nativeElement.dispatchEvent(event);
         this.anchorOpacity = 0;
         this.lastAnchorPos = -1;
@@ -12136,7 +12136,8 @@ function calculateViewDimensions(_a) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MouseEvent; });
+/* WEBPACK VAR INJECTION */(function(global) {/* unused harmony export MouseEvent */
+/* harmony export (immutable) */ __webpack_exports__["a"] = createMouseEvent;
 // If we don't check whether 'window' and 'global' variables are defined,
 // code will fail in browser/node with 'variable is undefined' error.
 var root;
@@ -12148,6 +12149,22 @@ else if (typeof global !== 'undefined') {
 }
 // tslint:disable-next-line:variable-name
 var MouseEvent = root.MouseEvent;
+function createMouseEvent(name, bubbles, cancelable) {
+    if (bubbles === void 0) { bubbles = false; }
+    if (cancelable === void 0) { cancelable = true; }
+    // Calling new of an event does not work correctly on IE. The following is a tested workaround
+    // See https://stackoverflow.com/questions/27176983/dispatchevent-not-working-in-ie11
+    if (typeof (MouseEvent) === 'function') {
+        // Sane browsers
+        return new MouseEvent(name, { bubbles: bubbles, cancelable: cancelable });
+    }
+    else {
+        // IE
+        var event_1 = document.createEvent('MouseEvent');
+        event_1.initEvent(name, bubbles, cancelable);
+        return event_1;
+    }
+}
 
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__("./node_modules/webpack/buildin/global.js")))
 
@@ -14047,6 +14064,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "XAxisTicksComponent", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["C"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "YAxisComponent", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["D"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "YAxisTicksComponent", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["E"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "reduceTicks", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["N"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "ColorHelper", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["k"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "ChartComponent", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["h"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "AreaComponent", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["c"]; });
@@ -14077,7 +14095,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "StyleTypes", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["s"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "AlignmentTypes", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["b"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "ShowTypes", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["r"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "reduceTicks", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["N"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "CountUpDirective", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["l"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "count", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["G"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "decimalChecker", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["H"]; });

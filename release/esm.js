@@ -3801,6 +3801,22 @@ else if (typeof global !== 'undefined') {
 }
 // tslint:disable-next-line:variable-name
 var MouseEvent = root.MouseEvent;
+function createMouseEvent(name, bubbles, cancelable) {
+    if (bubbles === void 0) { bubbles = false; }
+    if (cancelable === void 0) { cancelable = true; }
+    // Calling new of an event does not work correctly on IE. The following is a tested workaround
+    // See https://stackoverflow.com/questions/27176983/dispatchevent-not-working-in-ie11
+    if (typeof (MouseEvent) === 'function') {
+        // Sane browsers
+        return new MouseEvent(name, { bubbles: bubbles, cancelable: cancelable });
+    }
+    else {
+        // IE
+        var event$$1 = document.createEvent('MouseEvent');
+        event$$1.initEvent(name, bubbles, cancelable);
+        return event$$1;
+    }
+}
 
 var TooltipArea = /** @class */ (function () {
     function TooltipArea() {
@@ -3859,7 +3875,7 @@ var TooltipArea = /** @class */ (function () {
         this.anchorPos = Math.min(this.dims.width, this.anchorPos);
         this.anchorValues = this.getValues(closestPoint);
         if (this.anchorPos !== this.lastAnchorPos) {
-            var ev = new MouseEvent('mouseleave', { bubbles: false });
+            var ev = createMouseEvent('mouseleave');
             this.tooltipAnchor.nativeElement.dispatchEvent(ev);
             this.anchorOpacity = 0.7;
             this.hover.emit({
@@ -3897,11 +3913,11 @@ var TooltipArea = /** @class */ (function () {
         return closestIndex;
     };
     TooltipArea.prototype.showTooltip = function () {
-        var event$$1 = new MouseEvent('mouseenter', { bubbles: false });
+        var event$$1 = createMouseEvent('mouseenter');
         this.tooltipAnchor.nativeElement.dispatchEvent(event$$1);
     };
     TooltipArea.prototype.hideTooltip = function () {
-        var event$$1 = new MouseEvent('mouseleave', { bubbles: false });
+        var event$$1 = createMouseEvent('mouseleave');
         this.tooltipAnchor.nativeElement.dispatchEvent(event$$1);
         this.anchorOpacity = 0;
         this.lastAnchorPos = -1;
