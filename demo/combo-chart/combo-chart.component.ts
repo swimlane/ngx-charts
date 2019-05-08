@@ -419,7 +419,7 @@ export class ComboChartComponent extends BaseChartComponent  {
     this.xDomain = this.getXDomain();
     const spacing = this.xDomain.length / (this.dims.width / this.barPadding + 1);
     return scaleBand()
-      .rangeRound([0, this.dims.width])
+      .range([0, this.dims.width])
       .paddingInner(spacing)
       .domain(this.xDomain);
   }
