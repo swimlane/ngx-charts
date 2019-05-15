@@ -3,11 +3,12 @@ import {
   Input,
   Output,
   EventEmitter,
+  OnInit,
   OnChanges,
   SimpleChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
-import { area } from 'd3-shape';
+import { area, line } from 'd3-shape';
 
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
 
@@ -27,10 +28,17 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
       [class.active]="isActive(data)"
       [class.inactive]="isInactive(data)"
     />
+    <svg:path ngx-charts-bounding-curve *ngIf="enableStroke"
+      [attr.class]="'ngx-charts-area-boundary area-boundary-' + index"
+      [attr.d]="boundingPath"
+      [attr.stroke]="strokeColor"
+      fill="none"
+      stroke-width="1"
+    />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AreaSeriesComponent implements OnChanges {
+export class AreaSeriesComponent implements OnInit, OnChanges {
 
   @Input() data;
   @Input() xScale;
@@ -44,15 +52,23 @@ export class AreaSeriesComponent implements OnChanges {
   @Input() curve;
   @Input() activeEntries: any[];
   @Input() animations: boolean = true;
+  @Input() enableStroke: boolean = false;
+  @Input() index: number;
 
   @Output() select = new EventEmitter();
 
   opacity: number;
   path: string;
   startingPath: string;
+  boundingPath: string;
 
   hasGradient: boolean;
   gradientStops: any[];
+  strokeColor: string;
+
+  ngOnInit() {
+    this.strokeColor = this.colors.getBoundaryColor(this.colors.getColor(this.data.name), -0.4);
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -63,6 +79,7 @@ export class AreaSeriesComponent implements OnChanges {
 
     let currentArea;
     let startingArea;
+    let upperBound;
 
     const xProperty = (d) => {
       const label = d.name;
@@ -79,6 +96,10 @@ export class AreaSeriesComponent implements OnChanges {
         .x(xProperty)
         .y0(d => this.yScale.range()[0])
         .y1(d => this.yScale.range()[0]);
+
+      upperBound = line<any>()
+        .x(xProperty)
+        .y((d, i) => this.yScale(d.d1));
     } else {
       currentArea = area<any>()
         .x(xProperty)
@@ -89,10 +110,15 @@ export class AreaSeriesComponent implements OnChanges {
         .x(xProperty)
         .y0(d => this.baseValue === 'auto' ? this.yScale.range()[0] : this.yScale(this.baseValue))
         .y1(d => this.baseValue === 'auto' ? this.yScale.range()[0] : this.yScale(this.baseValue));
+
+      upperBound = line<any>()
+        .x(xProperty)
+        .y(d => this.yScale(d.value));
     }
 
     currentArea.curve(this.curve);
     startingArea.curve(this.curve);
+    upperBound.curve(this.curve);
 
     this.opacity = .8;
 
@@ -107,12 +133,13 @@ export class AreaSeriesComponent implements OnChanges {
 
     this.path = currentArea(data);
     this.startingPath = startingArea(data);
+    this.boundingPath = upperBound(data);
   }
 
   updateGradient() {
     if (this.colors.scaleType === 'linear') {
       this.hasGradient = true;
-      if (this.stacked || this.normalized) {        
+      if (this.stacked || this.normalized) {
         const d0values = this.data.series.map(d => d.d0);
         const d1values = this.data.series.map(d => d.d1);
         const max = Math.max(...d1values);
@@ -130,7 +157,7 @@ export class AreaSeriesComponent implements OnChanges {
   }
 
   isActive(entry): boolean {
-    if(!this.activeEntries) return false;
+    if (!this.activeEntries) return false;
     const item = this.activeEntries.find(d => {
       return entry.name === d.name;
     });
@@ -138,11 +165,11 @@ export class AreaSeriesComponent implements OnChanges {
   }
 
   isInactive(entry): boolean {
-    if(!this.activeEntries || this.activeEntries.length === 0) return false;
+    if (!this.activeEntries || this.activeEntries.length === 0) return false;
     const item = this.activeEntries.find(d => {
       return entry.name === d.name;
     });
     return item === undefined;
   }
-  
+
 }

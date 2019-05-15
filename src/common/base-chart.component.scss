@@ -109,4 +109,18 @@
     }
   }
 
+  .ngx-charts-area-boundary {
+    opacity: 0;
+    stroke-width: 2;
+    animation-name: animateStroke;
+    animation-duration: 0.4s;
+    animation-iteration-count: 1;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes animateStroke {
+    from {opacity:0}
+    to {opacity:1}
+  }
 }

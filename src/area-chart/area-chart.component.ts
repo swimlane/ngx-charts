@@ -67,11 +67,13 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
         <svg:g [attr.clip-path]="clipPath">
-          <svg:g *ngFor="let series of results; trackBy:trackBy">
+          <svg:g *ngFor="let series of results; let ind = index; trackBy:trackBy">
             <svg:g ngx-charts-area-series
+              [index]="ind"
               [xScale]="xScale"
               [yScale]="yScale"
               [baseValue]="baseValue"
+              [enableStroke]="enableStroke"
               [colors]="colors"
               [data]="series"
               [activeEntries]="activeEntries"
@@ -180,6 +182,7 @@ export class AreaChartComponent extends BaseChartComponent {
   @Input() xScaleMax: any;
   @Input() yScaleMin: number;
   @Input() yScaleMax: number;
+  @Input() enableStroke: boolean = true;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
