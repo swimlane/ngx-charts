@@ -59,7 +59,7 @@ export class ColorHelper {
   }
 
   getColor(value) {
-    if(!value){
+    if(!value) {
       throw new Error('Value can not be null');
       }
     if (this.scaleType === 'linear') {
