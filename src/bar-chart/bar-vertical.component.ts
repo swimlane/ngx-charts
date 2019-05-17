@@ -191,14 +191,19 @@ export class BarVerticalComponent extends BaseChartComponent {
   getYDomain() {
     const values = this.results.map(d => d.value);
 
-    const min = this.yScaleMin
+    let min = this.yScaleMin
       ? Math.min(this.yScaleMin, ...values)
       : Math.min(0, ...values);
+    if (this.yAxisTicks && !this.yAxisTicks.some(isNaN)) {
+      min = Math.min(min, ...this.yAxisTicks);
+    }
 
-    const max = this.yScaleMax
+    let max = this.yScaleMax
       ? Math.max(this.yScaleMax, ...values)
       : Math.max(0, ...values);
-
+    if (this.yAxisTicks && !this.yAxisTicks.some(isNaN)) {
+      max = Math.max(max, ...this.yAxisTicks);
+    }
     return [min, max];
   }
 
