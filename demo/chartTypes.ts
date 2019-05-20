@@ -556,7 +556,7 @@ const chartGroups = [
         }
       },
       {
-        name: 'Force Directed Graph',
+        name: 'Force Directed Graph (deprecated)',
         selector: 'force-directed-graph',
         inputFormat: 'graph',
         options: ['animations', 'colorScheme', 'showLegend', 'legendTitle', 'legendPosition', 'tooltipDisabled']

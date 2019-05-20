@@ -20,6 +20,7 @@ export declare class AreaChartStackedComponent extends BaseChartComponent {
     schemeType: string;
     trimXAxisTicks: boolean;
     trimYAxisTicks: boolean;
+    rotateXAxisTicks: boolean;
     maxXAxisTickLength: number;
     maxYAxisTickLength: number;
     xAxisTickFormatting: any;

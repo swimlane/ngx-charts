@@ -1,5 +1,10 @@
 # Changelog
 
+## 11.1.0
+
+- Feature: added option to disable x axis tick rotation (#1139)
+- Bug: Update peer dependency requirements
+
 ## 11.0.1
 
 - Bug: Fixes displaying of tooltip on IE 11 (#1157)
