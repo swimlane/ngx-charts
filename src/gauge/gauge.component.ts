@@ -28,10 +28,12 @@ import { ColorHelper } from '../common/color.helper';
       [animations]="animations"
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
-      (legendLabelDeactivate)="onDeactivate($event)">
+      (legendLabelDeactivate)="onDeactivate($event)"
+    >
       <svg:g [attr.transform]="transform" class="gauge chart">
-        <svg:g *ngFor="let arc of arcs; trackBy:trackBy" [attr.transform]="rotation">
-          <svg:g ngx-charts-gauge-arc
+        <svg:g *ngFor="let arc of arcs; trackBy: trackBy" [attr.transform]="rotation">
+          <svg:g
+            ngx-charts-gauge-arc
             [backgroundArc]="arc.backgroundArc"
             [valueArc]="arc.valueArc"
             [cornerRadius]="cornerRadius"
@@ -43,11 +45,12 @@ import { ColorHelper } from '../common/color.helper';
             [animations]="animations"
             (select)="onClick($event)"
             (activate)="onActivate($event)"
-            (deactivate)="onDeactivate($event)">
-          </svg:g>
+            (deactivate)="onDeactivate($event)"
+          ></svg:g>
         </svg:g>
 
-        <svg:g ngx-charts-gauge-axis
+        <svg:g
+          ngx-charts-gauge-axis
           *ngIf="showAxis"
           [bigSegments]="bigSegments"
           [smallSegments]="smallSegments"
@@ -57,29 +60,27 @@ import { ColorHelper } from '../common/color.helper';
           [angleSpan]="angleSpan"
           [valueScale]="valueScale"
           [startAngle]="startAngle"
-          [tickFormatting]="axisTickFormatting">
-        </svg:g>
+          [tickFormatting]="axisTickFormatting"
+        ></svg:g>
 
-        <svg:text #textEl
-            [style.textAnchor]="'middle'"
-            [attr.transform]="textTransform"
-            alignment-baseline="central">
-          <tspan x="0" dy="0">{{displayValue}}</tspan>
-          <tspan x="0" dy="1.2em">{{units}}</tspan>
+        <svg:text
+          #textEl
+          *ngIf="showText"
+          [style.textAnchor]="'middle'"
+          [attr.transform]="textTransform"
+          alignment-baseline="central"
+        >
+          <tspan x="0" dy="0">{{ displayValue }}</tspan>
+          <tspan x="0" dy="1.2em">{{ units }}</tspan>
         </svg:text>
-
       </svg:g>
     </ngx-charts-chart>
   `,
-  styleUrls: [
-    '../common/base-chart.component.scss',
-    './gauge.component.scss'
-  ],
+  styleUrls: ['../common/base-chart.component.scss', './gauge.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GaugeComponent extends BaseChartComponent implements AfterViewInit {
-
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
   @Input() legendPosition: string = 'right';
@@ -97,6 +98,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   @Input() axisTickFormatting: any;
   @Input() tooltipDisabled: boolean = false;
   @Input() valueFormatting: (value: any) => string;
+  @Input() showText: boolean = true;
 
   // Specify margins
   @Input() margin: any[];
@@ -174,8 +176,8 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
     const xOffset = this.margin[3] + this.dims.width / 2;
     const yOffset = this.margin[0] + this.dims.height / 2;
 
-    this.transform = `translate(${ xOffset }, ${ yOffset })`;
-    this.rotation = `rotate(${ this.startAngle })`;
+    this.transform = `translate(${xOffset}, ${yOffset})`;
+    this.rotation = `rotate(${this.startAngle})`;
     setTimeout(() => this.scaleText(), 50);
   }
 
@@ -191,11 +193,11 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
 
     let i = 0;
     for (const d of this.results) {
-      const outerRadius = this.outerRadius - (i * radiusPerArc);
+      const outerRadius = this.outerRadius - i * radiusPerArc;
       const innerRadius = outerRadius - arcWidth;
 
       const backgroundArc = {
-        endAngle: this.angleSpan * Math.PI / 180,
+        endAngle: (this.angleSpan * Math.PI) / 180,
         innerRadius,
         outerRadius,
         data: {
@@ -205,7 +207,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
       };
 
       const valueArc = {
-        endAngle: Math.min(this.valueScale(d.value), this.angleSpan) * Math.PI / 180,
+        endAngle: (Math.min(this.valueScale(d.value), this.angleSpan) * Math.PI) / 180,
         innerRadius,
         outerRadius,
         data: {
@@ -260,7 +262,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   getDisplayValue(): string {
     const value = this.results.map(d => d.value).reduce((a, b) => a + b, 0);
 
-    if(this.textValue && 0 !== this.textValue.length) {
+    if (this.textValue && 0 !== this.textValue.length) {
       return this.textValue.toLocaleString();
     }
 
@@ -272,6 +274,9 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   }
 
   scaleText(repeat: boolean = true): void {
+    if (!this.showText) {
+      return;
+    }
     const { width } = this.textEl.nativeElement.getBoundingClientRect();
     const oldScale = this.resizeScale;
 
@@ -317,7 +322,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
       return;
     }
 
-    this.activeEntries = [ item, ...this.activeEntries ];
+    this.activeEntries = [item, ...this.activeEntries];
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
@@ -333,7 +338,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   }
 
   isActive(entry): boolean {
-    if(!this.activeEntries) return false;
+    if (!this.activeEntries) return false;
     const item = this.activeEntries.find(d => {
       return entry.name === d.name && entry.series === d.series;
     });
