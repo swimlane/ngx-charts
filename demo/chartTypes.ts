@@ -614,7 +614,8 @@ const chartGroups = [
           'showAxis',
           'margin',
           'tooltipDisabled',
-          'animations'
+          'animations',
+          'showText'
         ]
       },
       {
@@ -716,7 +717,7 @@ const chartGroups = [
           yAxisLabel: 'Order Item Count',
           showLegend: false,
           minRadius: 5,
-          maxRadius: 20,
+          maxRadius: 20
         }
       },
       {

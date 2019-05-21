@@ -717,6 +717,7 @@
         [smallSegments]="gaugeSmallSegments"
         [margin]="margin ? [marginTop, marginRight, marginBottom, marginLeft] : null"
         [tooltipDisabled]="tooltipDisabled"
+        [showText]="showText"
         (select)="select($event)"
         (legendLabelClick)="onLegendLabelClick($event)"
       >
@@ -1254,6 +1255,13 @@
           <label>
             <input type="checkbox" [checked]="tooltipDisabled" (change)="tooltipDisabled = $event.target.checked" />
             Disable tooltip
+          </label>
+          <br />
+        </div>
+        <div *ngIf="chart.options.includes('showText')">
+          <label>
+            <input type="checkbox" [checked]="showText" (change)="showText = $event.target.checked" />
+            Show Text
           </label>
           <br />
         </div>

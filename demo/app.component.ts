@@ -80,6 +80,7 @@ export class AppComponent implements OnInit {
   legendPosition = 'right';
   showXAxisLabel = true;
   tooltipDisabled = false;
+  showText = true;
   xAxisLabel = 'Country';
   showYAxisLabel = true;
   yAxisLabel = 'GDP Per Capita';
