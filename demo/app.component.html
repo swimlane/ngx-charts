@@ -1099,6 +1099,7 @@
         <pre *ngIf="chart.inputFormat === 'bubbleInteractive'">{{ bubbleDemoTempData | json }}</pre>
         <pre *ngIf="chart.inputFormat === 'comboChart'">{{ barChart | json }}</pre>
         <pre *ngIf="chart.inputFormat === 'comboChart'">{{ lineChartSeries | json }}</pre>
+        <pre *ngIf="chart.inputFormat === 'timelineFilter'">{{timelineFilterBarData | json}}</pre>
         <div>
           <label>
             <input type="checkbox" [checked]="realTimeData" (change)="realTimeData = $event.target.checked" />
