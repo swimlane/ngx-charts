@@ -58,6 +58,8 @@ export class BarComponent implements OnChanges {
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
 
+  _edges: boolean[];
+
   element: any;
   path: any;
   gradientId: any;
@@ -193,23 +195,25 @@ export class BarComponent implements OnChanges {
   }
 
   get edges() {
-    let edges = [false, false, false, false];
+    if (this._edges === undefined) {
+      this._edges = [false, false, false, false];
+    }
     if (this.roundEdges) {
       if (this.orientation === 'vertical') {
         if (this.data.value > 0) {
-          edges =  [true, true, false, false];
-        } else {
-          edges =  [false, false, true, true];
+          this._edges =  [true, true, false, false];
+        } else if (this.data.value < 0) {
+          this._edges =  [false, false, true, true];
         }
       } else if (this.orientation === 'horizontal') {
         if (this.data.value > 0) {
-          edges =  [false, true, false, true];
-        } else {
-          edges =  [true, false, true, false];
+          this._edges =  [false, true, false, true];
+        } else if (this.data.value < 0) {
+          this._edges =  [true, false, true, false];
         }
       }
     }
-    return edges;
+    return this._edges;
   }
 
   @HostListener('mouseenter')
