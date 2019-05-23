@@ -68,6 +68,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [activeEntries]="activeEntries"
           [roundEdges]="roundEdges"
           [animations]="animations"
+          [noBarWhenZero]="noBarWhenZero"
           (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)"
           (select)="onClick($event)"
@@ -113,6 +114,7 @@ export class BarVerticalComponent extends BaseChartComponent {
   @Input() yScaleMin: number;
   @Input() showDataLabel: boolean = false;
   @Input() dataLabelFormatting: any;
+  @Input() noBarWhenZero: boolean = true;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

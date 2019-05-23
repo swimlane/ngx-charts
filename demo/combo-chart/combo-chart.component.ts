@@ -83,6 +83,7 @@ import { scaleBand, scaleLinear, scalePoint, scaleTime } from 'd3-scale';
           tooltipDisabled="true"
           [activeEntries]="activeEntries"
           [animations]="animations"
+          [noBarWhenZero]="noBarWhenZero"
           (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)"
           (bandwidth)="updateLineWidth($event)"
@@ -171,6 +172,7 @@ export class ComboChartComponent extends BaseChartComponent  {
   @Input() yRightAxisScaleFactor: any;
   @Input() rangeFillOpacity: number;
   @Input() animations: boolean = true;
+  @Input() noBarWhenZero: boolean = true;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

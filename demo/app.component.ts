@@ -99,6 +99,7 @@ export class AppComponent implements OnInit {
   yScaleMin: number;
   yScaleMax: number;
   showDataLabel = false;
+  noBarWhenZero = true;
   trimXAxisTicks = true;
   trimYAxisTicks = true;
   rotateXAxisTicks = true;
@@ -393,6 +394,8 @@ export class AppComponent implements OnInit {
       this.bubbleDemoProcess(bubbleDemoData[getRandomInt(0, bubbleDemoData.length - 1)]);
 
       this.statusData = this.getStatusData();
+
+      this.timelineFilterBarData = timelineFilterBarData();
     }
 
     const date = new Date(Math.floor(1473700105009 + Math.random() * 1000000000));

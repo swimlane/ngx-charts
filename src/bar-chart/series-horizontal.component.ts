@@ -45,7 +45,8 @@ import { D0Types } from './series-vertical.component';
       [tooltipType]="tooltipType"
       [tooltipTitle]="tooltipTemplate ? undefined : bar.tooltipText"
       [tooltipTemplate]="tooltipTemplate"
-      [tooltipContext]="bar.data">
+      [tooltipContext]="bar.data"
+      [noBarWhenZero]="noBarWhenZero">
     </svg:g>
     <svg:g *ngIf="showDataLabel">
       <svg:g ngx-charts-bar-label *ngFor="let b of barsForDataLabels; let i = index; trackBy:trackDataLabelBy"         
@@ -94,6 +95,7 @@ export class SeriesHorizontal implements OnChanges {
   @Input() animations: boolean = true;
   @Input() showDataLabel: boolean = false;
   @Input() dataLabelFormatting: any;
+  @Input() noBarWhenZero: boolean = true;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();

@@ -37,8 +37,9 @@ export enum D0Types {
       [tooltipTitle]="tooltipTemplate ? undefined : bar.tooltipText"
       [tooltipTemplate]="tooltipTemplate"
       [tooltipContext]="bar.data"
-      [animations]="animations"
-    ></svg:g>
+      [noBarWhenZero]="noBarWhenZero"
+      [animations]="animations">
+    </svg:g>
     <svg:g *ngIf="showDataLabel">
       <svg:g
         ngx-charts-bar-label
@@ -82,6 +83,7 @@ export class SeriesVerticalComponent implements OnChanges {
   @Input() animations: boolean = true;
   @Input() showDataLabel: boolean = false;
   @Input() dataLabelFormatting: any;
+  @Input() noBarWhenZero: boolean = true;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();

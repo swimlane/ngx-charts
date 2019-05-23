@@ -72,6 +72,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [animations]="animations"
           [showDataLabel]="showDataLabel"
           [dataLabelFormatting]="dataLabelFormatting"
+          [noBarWhenZero]="noBarWhenZero"
           (select)="onClick($event)"
           (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)"
@@ -115,6 +116,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
   @Input() xScaleMin: number;
   @Input() showDataLabel: boolean = false;
   @Input() dataLabelFormatting: any;
+  @Input() noBarWhenZero: boolean = true;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

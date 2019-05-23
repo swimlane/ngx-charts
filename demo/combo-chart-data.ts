@@ -117,7 +117,7 @@ export let barChart: any = [
   },
   {
     name: 'Japan',
-    value: 5000
+    value: 0
   },
   {
     name: 'China',

@@ -7,7 +7,7 @@ export const single = [
   },
   {
     name: 'United States',
-    value: 49737
+    value: 0
   },
   {
     name: 'France',
@@ -50,7 +50,7 @@ export const multi = [
     series: [
       {
         name: '2010',
-        value: 49737
+        value: 0
       },
       {
         name: '2000',
@@ -134,7 +134,7 @@ export const fiscalYearReport = [
       },
       {
         name: '2001',
-        value: 34774
+        value: 0
       }
     ]
   },
@@ -271,7 +271,6 @@ export function generateGraph(nodeCount: number) {
 export function timelineFilterBarData() {
   const results: any[] = [];
   const dataPoints = 30;
-  const domain: Date[] = []; // array of time stamps in milliseconds
   const dayLength = 24 * 60 * 60 * 1000;
   let date = 1473700105009; // Sep 12, 2016
   for (let j = 0; j < dataPoints; j++) {
@@ -281,6 +280,9 @@ export function timelineFilterBarData() {
       value: Math.floor(Math.random() * 300)
     });
     date += dayLength;
+  }
+  if (!results.some(r => r.value === 0)) {
+    results[Math.floor(Math.random() * results.length)].value = 0;
   }
 
   return results;

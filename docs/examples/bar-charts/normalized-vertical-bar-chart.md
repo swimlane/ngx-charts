@@ -23,6 +23,7 @@
 | roundDomains        | boolean            | false         | round domains for aligned gridlines                                                                               |
 | showXAxisLabel      | boolean            | false         | show or hide the x axis label                                                                                     |
 | showYAxisLabel      | boolean            | false         | show or hide the y axis label                                                                                     |
+| noBarWhenZero       | boolean            | true          | hide bar if value is 0 and setting is true                                                                        |
 | xAxisLabel          | string             |               | the x axis label text                                                                                             |
 | yAxisLabel          | string             |               | the y axis label text                                                                                             |
 | trimXAxisTicks      | boolean            | true          | trim or not ticks on the x axis                                                                                   |

@@ -26,6 +26,7 @@
         [roundDomains]="roundDomains"
         [roundEdges]="roundEdges"
         [yScaleMax]="yScaleMax"
+        [noBarWhenZero]="noBarWhenZero"
         [showDataLabel]="showDataLabel"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
@@ -60,6 +61,7 @@
         [roundDomains]="roundDomains"
         [roundEdges]="roundEdges"
         [xScaleMax]="xScaleMax"
+        [noBarWhenZero]="noBarWhenZero"
         [showDataLabel]="showDataLabel"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
@@ -96,6 +98,7 @@
         [roundDomains]="roundDomains"
         [roundEdges]="roundEdges"
         [yScaleMax]="yScaleMax"
+        [noBarWhenZero]="noBarWhenZero"
         [showDataLabel]="showDataLabel"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
@@ -131,6 +134,7 @@
         [roundDomains]="roundDomains"
         [roundEdges]="roundEdges"
         [xScaleMax]="xScaleMax"
+        [noBarWhenZero]="noBarWhenZero"
         [showDataLabel]="showDataLabel"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
@@ -164,6 +168,7 @@
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
         [yScaleMax]="yScaleMax"
+        [noBarWhenZero]="noBarWhenZero"
         [showDataLabel]="showDataLabel"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
@@ -198,6 +203,7 @@
         [roundDomains]="roundDomains"
         [showDataLabel]="showDataLabel"
         [xScaleMax]="xScaleMax"
+        [noBarWhenZero]="noBarWhenZero"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
         [rotateXAxisTicks]="rotateXAxisTicks"
@@ -229,6 +235,7 @@
         [showGridLines]="showGridLines"
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
+        [noBarWhenZero]="noBarWhenZero"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
         [rotateXAxisTicks]="rotateXAxisTicks"
@@ -260,6 +267,7 @@
         [showGridLines]="showGridLines"
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
+        [noBarWhenZero]="noBarWhenZero"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
         [rotateXAxisTicks]="rotateXAxisTicks"
@@ -575,6 +583,7 @@
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [yAxisLabelRight]="yAxisLabelRight"
+        [noBarWhenZero]="noBarWhenZero"
         (select)="onSelect($event)"
       >
       </combo-chart-component>
@@ -982,6 +991,7 @@
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="'Executions'"
         [showGridLines]="showGridLines"
+        [noBarWhenZero]="noBarWhenZero"
         (onFilter)="onFilter($event)"
       >
       </ngx-charts-timeline-filter-bar-chart>
@@ -1009,6 +1019,7 @@
       [showGridLines]="showGridLines"
       [barPadding]="barPadding"
       [roundDomains]="roundDomains"
+      [noBarWhenZero]="noBarWhenZero"
       [yScaleMax]="yScaleMax"
       [showDataLabel]="showDataLabel"
       [trimXAxisTicks]="trimXAxisTicks"
@@ -1041,6 +1052,7 @@
       [showGridLines]="showGridLines"
       [barPadding]="barPadding"
       [roundDomains]="roundDomains"
+      [noBarWhenZero]="noBarWhenZero"
       [showDataLabel]="showDataLabel"
       [trimXAxisTicks]="trimXAxisTicks"
       [trimYAxisTicks]="trimYAxisTicks"
@@ -1087,6 +1099,7 @@
         <pre *ngIf="chart.inputFormat === 'bubbleInteractive'">{{ bubbleDemoTempData | json }}</pre>
         <pre *ngIf="chart.inputFormat === 'comboChart'">{{ barChart | json }}</pre>
         <pre *ngIf="chart.inputFormat === 'comboChart'">{{ lineChartSeries | json }}</pre>
+        <pre *ngIf="chart.inputFormat === 'timelineFilter'">{{timelineFilterBarData | json}}</pre>
         <div>
           <label>
             <input type="checkbox" [checked]="realTimeData" (change)="realTimeData = $event.target.checked" />
@@ -1219,6 +1232,12 @@
           </label>
           <br />
         </div>
+        <div *ngIf="chart.options.includes('noBarWhenZero')">
+          <label>
+            <input type="checkbox" [checked]="noBarWhenZero" (change)="noBarWhenZero = $event.target.checked">
+            Hide bar if value is 0
+          </label> <br/>
+        </div>        
         <div *ngIf="chart.options.includes('showLegend')">
           <label>
             <input type="checkbox" [checked]="showLegend" (change)="showLegend = $event.target.checked" />
