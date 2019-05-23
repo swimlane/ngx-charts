@@ -13,6 +13,14 @@ The charts under the 'Demos' group in our demo page are not distributed with the
 * [Bar/Line Combo Chart](https://github.com/swimlane/ngx-charts/tree/master/demo/combo-chart)
 * [Sparkline](https://github.com/swimlane/ngx-charts/tree/master/demo/sparkline)
 * [Timeline filter bar chart](https://github.com/swimlane/ngx-charts/tree/master/demo/timeline-filter-bar-chart)
+* [Bubble Chart Interactive Drilldown](https://github.com/swimlane/ngx-charts/tree/master/demo/bubble-chart-interactive-demo)
 
 _If you want to have your custom chart featured above, please submit a pull request to_ [_this file_](https://github.com/swimlane/ngx-charts/blob/master/docs/intro/custom-charts.md)_._
 
+## Pointers when creating or adapting Custom Charts
+
+- To develop new charts, start by building the shell in the demo project first.
+- If you start by copying an existing chart from src (recommended), be sure to rename your new component(s) and their selectors, as well as the module that contains them (if applicable).
+- If you discover the tooltip does not display correctly, try exporting the new chart as a module along with ChartCommonModule and import it into the demo's app.module.ts file.
+- For an example of this, look at most any chart in the src folder
+- Always a good idea to give back. Use this link to learn how to contribute to github repos: http://kbroman.org/github_tutorial/pages/fork.html

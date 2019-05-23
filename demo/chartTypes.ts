@@ -622,7 +622,8 @@ const chartGroups = [
           'showAxis',
           'margin',
           'tooltipDisabled',
-          'animations'
+          'animations',
+          'showText'
         ]
       },
       {
@@ -692,6 +693,41 @@ const chartGroups = [
         selector: 'tree-map-demo',
         inputFormat: 'treemap',
         options: ['animations', 'colorScheme']
+      },
+      {
+        name: 'Bubble Chart - Interactive',
+        selector: 'bubble-chart-interactive-demo',
+        inputFormat: 'bubbleInteractive',
+        options: [
+          'animations',
+          'colorScheme',
+          'schemeType',
+          'showXAxis',
+          'showYAxis',
+          'showLegend',
+          'legendTitle',
+          'showXAxisLabel',
+          'xAxisLabel',
+          'showYAxisLabel',
+          'yAxisLabel',
+          'showGridLines',
+          'roundDomains',
+          'autoScale',
+          'minRadius',
+          'maxRadius',
+          'tooltipDisabled',
+          'xScaleMin',
+          'xScaleMax',
+          'yScaleMin',
+          'yScaleMax'
+        ],
+        defaults: {
+          xAxisLabel: 'Order Total',
+          yAxisLabel: 'Order Item Count',
+          showLegend: false,
+          minRadius: 5,
+          maxRadius: 20
+        }
       },
       {
         name: 'Equation Plots',

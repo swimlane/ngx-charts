@@ -9,7 +9,7 @@ before_install:
   - sh -e /etc/init.d/xvfb start
 
 install:
-  - npm install
+  - travis_wait 30 npm install
   - npm install codeclimate-test-reporter
 
 after_script:

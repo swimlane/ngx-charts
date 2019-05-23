@@ -11,7 +11,7 @@ export class ColorHelper {
   customColors: any;
 
   constructor(scheme, type, domain, customColors?) {
-    if (typeof(scheme) === 'string') {
+    if (typeof scheme === 'string') {
       scheme = colorSets.find(cs => {
         return cs.name === scheme;
       });
@@ -25,7 +25,7 @@ export class ColorHelper {
   }
 
   generateColorScheme(scheme, type, domain) {
-    if (typeof(scheme) === 'string') {
+    if (typeof scheme === 'string') {
       scheme = colorSets.find(cs => {
         return cs.name === scheme;
       });
@@ -35,12 +35,10 @@ export class ColorHelper {
       colorScale = scaleQuantile()
         .range(scheme.domain)
         .domain(domain);
-
     } else if (type === 'ordinal') {
       colorScale = scaleOrdinal()
         .range(scheme.domain)
         .domain(domain);
-
     } else if (type === 'linear') {
       // linear schemes must have at least 2 colors
       const colorDomain = [...scheme.domain];
@@ -59,25 +57,24 @@ export class ColorHelper {
   }
 
   getColor(value) {
-    if(!value) {
+    if (value === undefined || value === null) {
       throw new Error('Value can not be null');
-      }
+    }
     if (this.scaleType === 'linear') {
       const valueScale = scaleLinear()
         .domain(this.domain)
         .range([0, 1]);
 
-      return (this.scale(valueScale(value)));
+      return this.scale(valueScale(value));
     } else {
-
-      if(typeof this.customColors === 'function') {
+      if (typeof this.customColors === 'function') {
         return this.customColors(value);
       }
 
       const formattedValue = value.toString();
       let found: any; // todo type customColors
       if (this.customColors && this.customColors.length > 0) {
-        found = this.customColors.find((mapping) => {
+        found = this.customColors.find(mapping => {
           return mapping.name.toLowerCase() === formattedValue.toLowerCase();
         });
       }

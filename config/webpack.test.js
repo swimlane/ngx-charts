@@ -51,7 +51,7 @@ module.exports = function(env) {
         {
           enforce: 'post',
           test: /\.(js|ts)$/,
-          loader: 'istanbul-instrumenter-loader',
+          use: 'istanbul-instrumenter-loader',
           include: dir('src'),
           exclude: [
             /\.(e2e|spec)\.ts$/,
