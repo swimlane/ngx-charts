@@ -226,7 +226,6 @@ export class BarComponent implements OnChanges {
     this.deactivate.emit(this.data);
   }
 
-  
   private checkToHideBar() {
     this.hideBar = this.noBarWhenZero
       && (this.orientation === 'vertical' && this.height === 0
