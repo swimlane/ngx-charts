@@ -288,6 +288,7 @@
         [legendPosition]="legendPosition"
         [explodeSlices]="explodeSlices"
         [labels]="showLabels"
+        [maxLabelLength]="maxLabelLength"
         [doughnut]="doughnut"
         [arcWidth]="arcWidth"
         (legendLabelClick)="onLegendLabelClick($event)"
@@ -1311,6 +1312,11 @@
             <input type="checkbox" [checked]="showLabels" (change)="showLabels = $event.target.checked" />
             Show Labels
           </label>
+          <br />
+        </div>
+        <div *ngIf="chart.options.includes('maxLabelLength')">
+          <label>Max Label Length:</label><br />
+          <input type="number" [(ngModel)]="maxLabelLength" /><br />
           <br />
         </div>
         <div *ngIf="chart.options.includes('trimXAxisTicks')">

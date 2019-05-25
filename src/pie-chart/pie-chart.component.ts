@@ -58,13 +58,13 @@ import { BaseChartComponent } from '../common/base-chart.component';
 })
 export class PieChartComponent extends BaseChartComponent {
 
-  @Input() labels = false;
-  @Input() legend = false;
+  @Input() labels: boolean = false;
+  @Input() legend: boolean = false;
   @Input() legendTitle: string = 'Legend';
   @Input() legendPosition: string = 'right';
-  @Input() explodeSlices = false;
-  @Input() doughnut = false;
-  @Input() arcWidth = 0.25;
+  @Input() explodeSlices: boolean = false;
+  @Input() doughnut: boolean = false;
+  @Input() arcWidth: number = 0.25;
   @Input() gradient: boolean;
   @Input() activeEntries: any[] = [];
   @Input() tooltipDisabled: boolean = false;
