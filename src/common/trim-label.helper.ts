@@ -6,6 +6,7 @@ export function trimLabel(text: any, max = 16): string {
       break;
     case 'number':
       newString = text.toString();
+      break;
     default:
       newString = '';
       break;
