@@ -8,10 +8,12 @@ import {
   SimpleChanges,
   OnChanges,
   ChangeDetectionStrategy
- } from '@angular/core';
+} from '@angular/core';
 import { select } from 'd3-selection';
+import { interpolate } from 'd3-interpolate';
 import { roundedRect } from '../common/shape.helper';
 import { id } from '../utils/id';
+import * as ease from 'd3-ease';
 
 @Component({
   selector: 'g[ngx-charts-bar]',
@@ -32,7 +34,7 @@ import { id } from '../utils/id';
       [class.hidden]="hideBar"
       [attr.d]="path"
       [attr.aria-label]="ariaLabel"
-      [attr.fill]="hasGradient ? gradientFill : fill"
+      [attr.fill]="(hasGradient ? gradientFill : fill)"
       (click)="select.emit(data)"
     />
   `,
@@ -42,11 +44,11 @@ export class BarComponent implements OnChanges {
 
   @Input() fill;
   @Input() data;
-  @Input() width;
-  @Input() height;
-  @Input() x;
-  @Input() y;
-  @Input() orientation;
+  @Input() width: number;
+  @Input() height: number;
+  @Input() x: number;
+  @Input() y: number;
+  @Input() orientation: string;
   @Input() roundEdges: boolean = true;
   @Input() gradient: boolean = false;
   @Input() offset = 0;
@@ -61,6 +63,7 @@ export class BarComponent implements OnChanges {
   @Output() deactivate = new EventEmitter();
 
   element: any;
+  oldPath: any;
   path: any;
   gradientId: any;
   gradientFill: any;
@@ -100,6 +103,7 @@ export class BarComponent implements OnChanges {
 
   loadAnimation(): void {
     this.path = this.getStartingPath();
+    this.oldPath = this.path;
     setTimeout(this.update.bind(this), 100);
   }
 
@@ -107,11 +111,16 @@ export class BarComponent implements OnChanges {
     const node = select(this.element).select('.bar');
     const path = this.getPath();
     if (this.animations) {
-     node.transition().duration(500)
-         .attr('d', path);
+      // node.transition().duration(500).attr('d', path);
+      node
+        .attr('d', path)
+        .transition()
+        .ease(ease.easeSinInOut)
+        .duration(1000)
+        .attrTween('d', this.pathTween(path, 4));
     } else {
       node.attr('d', path);
-    }    
+    }
   }
 
   getGradient() {
@@ -138,7 +147,7 @@ export class BarComponent implements OnChanges {
     }
 
     let radius = this.getRadius();
-    let path;
+    let path = '';
 
     if (this.roundEdges) {
       if (this.orientation === 'vertical') {
@@ -161,7 +170,7 @@ export class BarComponent implements OnChanges {
 
   getPath() {
     let radius = this.getRadius();
-    let path;
+    let path = '';
 
     if (this.roundEdges) {
       if (this.orientation === 'vertical') {
@@ -178,6 +187,38 @@ export class BarComponent implements OnChanges {
     return path;
   }
 
+  pathTween(d1: string, precision: number) {
+    return function() {
+      // tslint:disable-next-line: no-this-assignment
+      const path0 = this;
+      const path1 = this.cloneNode();
+      const n0 = path0.getTotalLength();
+      // tslint:disable-next-line: ban-comma-operator
+      const n1 = (path1.setAttribute('d', d1), path1).getTotalLength();
+   
+      // Uniform sampling of distance based on specified precision.
+      const distances = [0];
+      let i = 0;
+      const dt = precision / Math.max(n0, n1);
+      while (i < 1) {
+        distances.push(i);
+        i += dt;
+      }
+      distances.push(1);
+   
+      // Compute point-interpolators at each distance.
+      const points = distances.map(function(t) {
+        const p0 = path0.getPointAtLength(t * n0);
+        const p1 = path1.getPointAtLength(t * n1);
+        return interpolate([p0.x, p0.y], [p1.x, p1.y]);
+      });
+   
+      return function(t) {
+        return t < 1 ? 'M' + points.map(function(p) { return p(t); }).join('L') : d1;
+      };
+    };
+  }
+  
   getRadius(): number {
     let radius = 0;
 
