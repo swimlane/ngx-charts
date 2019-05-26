@@ -44,7 +44,7 @@ import { createMouseEvent } from '../events';
       </xhtml:ng-template>
       <svg:rect
         #tooltipAnchor
-        [@animationState]="anchorOpacity !== 0 ? 'active' : 'inactive'"
+        [@animationState]="(anchorOpacity !== 0 ? 'active' : 'inactive')"
         class="tooltip-anchor"
         [attr.x]="anchorPos"
         y="0"
@@ -57,7 +57,7 @@ import { createMouseEvent } from '../events';
         [tooltipPlacement]="'right'"
         [tooltipType]="'tooltip'"
         [tooltipSpacing]="15"
-        [tooltipTemplate]="tooltipTemplate ? tooltipTemplate: defaultTooltipTemplate"
+        [tooltipTemplate]="(tooltipTemplate ? tooltipTemplate: defaultTooltipTemplate)"
         [tooltipContext]="anchorValues"
         [tooltipImmediateExit]="true"
       />

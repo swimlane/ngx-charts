@@ -47,7 +47,7 @@ import { ColorHelper } from '../common/color.helper';
         [r]="circle.radius"
         [fill]="circle.color"
         [class.active]="isActive({name: circle.seriesName})"
-        [pointerEvents]="circle.value === 0 ? 'none': 'all'"
+        [pointerEvents]="(circle.value === 0 ? 'none': 'all')"
         [data]="circle.value"
         [classNames]="circle.classNames"
         (select)="onClick($event, circle.label)"
@@ -57,7 +57,7 @@ import { ColorHelper } from '../common/color.helper';
         [tooltipDisabled]="tooltipDisabled"
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
-        [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(circle)"
+        [tooltipTitle]="(tooltipTemplate ? undefined : getTooltipText(circle))"
         [tooltipTemplate]="tooltipTemplate"
         [tooltipContext]="circle.data"
       />

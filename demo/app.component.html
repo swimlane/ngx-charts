@@ -355,6 +355,7 @@
         [curve]="curve"
         [rangeFillOpacity]="rangeFillOpacity"
         [roundDomains]="roundDomains"
+        [seriesTooltipDisabled]="seriesTooltipDisabled"
         [tooltipDisabled]="tooltipDisabled"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
@@ -1274,6 +1275,13 @@
           <label>
             <input type="checkbox" [checked]="tooltipDisabled" (change)="tooltipDisabled = $event.target.checked" />
             Disable tooltip
+          </label>
+          <br />
+        </div>
+        <div *ngIf="chart.options.includes('seriesTooltipDisabled')">
+          <label>
+            <input type="checkbox" [checked]="seriesTooltipDisabled" (change)="seriesTooltipDisabled = $event.target.checked" />
+            Disable Series tooltip
           </label>
           <br />
         </div>

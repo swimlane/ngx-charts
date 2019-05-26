@@ -345,6 +345,7 @@ const chartGroups = [
           'rangeFillOpacity',
           'roundDomains',
           'tooltipDisabled',
+          'seriesTooltipDisabled',
           'showRefLines',
           'referenceLines',
           'showRefLabels',
