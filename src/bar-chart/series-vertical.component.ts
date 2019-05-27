@@ -38,8 +38,8 @@ export enum D0Types {
       [tooltipTemplate]="tooltipTemplate"
       [tooltipContext]="bar.data"
       [noBarWhenZero]="noBarWhenZero"
-      [animations]="animations">
-    </svg:g>
+      [animations]="animations"
+    ></svg:g>
     <svg:g *ngIf="showDataLabel">
       <svg:g
         ngx-charts-bar-label
@@ -124,7 +124,7 @@ export class SeriesVerticalComponent implements OnChanges {
 
     this.bars = this.series.map((d, index) => {
       let value = d.value;
-      const label = d.name;
+      const label = d.label;
       const formattedLabel = formatLabel(label);
       const roundEdges = this.roundEdges;
       d0Type = value > 0 ? D0Types.positive : D0Types.negative;
@@ -234,9 +234,9 @@ export class SeriesVerticalComponent implements OnChanges {
     } else {
       this.barsForDataLabels = this.series.map(d => {
         const section: any = {};
-        section.series = this.seriesName ? this.seriesName : d.name;
+        section.series = this.seriesName ? this.seriesName : d.label;
         section.total = d.value;
-        section.x = this.xScale(d.name);
+        section.x = this.xScale(d.label);
         section.y = this.yScale(0);
         section.height = this.yScale(section.total) - this.yScale(0);
         section.width = this.xScale.bandwidth();

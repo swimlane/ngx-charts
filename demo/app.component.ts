@@ -453,6 +453,14 @@ export class AppComponent implements OnInit {
     console.log('Item clicked', data);
   }
 
+  activate(data) {
+    console.log('Activate', data);
+  }
+
+  deactivate(data) {
+    console.log('Deactivate', data);
+  }
+
   getInterpolationType(curveType) {
     return this.curves[curveType] || this.curves['default'];
   }
