@@ -123,7 +123,7 @@ export class SeriesHorizontal implements OnChanges {
 
     this.bars = this.series.map((d, index) => {
       let value = d.value;
-      const label = d.label;
+      const label = this.getLabel(d);
       const formattedLabel = formatLabel(label);
       const roundEdges = this.roundEdges;
       d0Type = value > 0 ? D0Types.positive : D0Types.negative;
@@ -253,6 +253,13 @@ export class SeriesHorizontal implements OnChanges {
       return entry.name === d.name && entry.series === d.series;
     });
     return item !== undefined;
+  }
+
+  getLabel(dataItem): string {
+    if (dataItem.label) {
+      return dataItem.label;
+    }
+    return dataItem.name;
   }
 
   trackBy(index, bar) {

@@ -1,11 +1,4 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ViewEncapsulation,
-  ChangeDetectionStrategy
-} from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { scaleLinear, scaleTime, scaleBand } from 'd3-scale';
 import { brushX } from 'd3-brush';
 import { select, event as d3event } from 'd3-selection';
@@ -20,18 +13,21 @@ import { id } from '../../src/utils';
       [view]="[width, height]"
       [showLegend]="false"
       [animations]="animations"
-      class="timeline-filter-bar-chart">
+      class="timeline-filter-bar-chart"
+    >
       <svg:g [attr.transform]="transform" class="chart">
-        <svg:g ngx-charts-x-axis
+        <svg:g
+          ngx-charts-x-axis
           *ngIf="xAxis"
           [xScale]="timeScale"
           [dims]="dims"
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [tickFormatting]="xAxisTickFormatting"
-          (dimensionsChanged)="updateXAxisHeight($event)">
-        </svg:g>
-        <svg:g ngx-charts-y-axis
+          (dimensionsChanged)="updateXAxisHeight($event)"
+        ></svg:g>
+        <svg:g
+          ngx-charts-y-axis
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
@@ -39,9 +35,10 @@ import { id } from '../../src/utils';
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
           [tickFormatting]="yAxisTickFormatting"
-          (dimensionsChanged)="updateYAxisWidth($event)">
-        </svg:g>
-        <svg:g ngx-charts-series-vertical
+          (dimensionsChanged)="updateYAxisWidth($event)"
+        ></svg:g>
+        <svg:g
+          ngx-charts-series-vertical
           [xScale]="xScale"
           [yScale]="yScale"
           [colors]="colors"
@@ -50,33 +47,28 @@ import { id } from '../../src/utils';
           [gradient]="gradient"
           [animations]="animations"
           [noBarWhenZero]="noBarWhenZero"
-          tooltipDisabled="true">
-        </svg:g>
+          tooltipDisabled="true"
+        ></svg:g>
       </svg:g>
 
-      <svg:g [attr.transform]="transform"
-        class="timeline">
+      <svg:g [attr.transform]="transform" class="timeline">
         <svg:filter [attr.id]="filterId">
-          <svg:feColorMatrix in="SourceGraphic"
-              type="matrix"
-              values="0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0" />
+          <svg:feColorMatrix
+            in="SourceGraphic"
+            type="matrix"
+            values="0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0"
+          />
         </svg:filter>
-        <svg:rect x="0"
-          [attr.width]="dims.width"
-          y="0"
-          [attr.height]="dims.height"
-          class="brush-background"
-        />
+        <svg:rect x="0" [attr.width]="dims.width" y="0" [attr.height]="dims.height" class="brush-background" />
         <svg:g class="brush"></svg:g>
       </svg:g>
     </ngx-charts-chart>
   `,
   styleUrls: ['../../src/common/base-chart.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TimelineFilterBarChartComponent extends BaseChartComponent {
-
   @Input() autoScale = false;
   @Input() schemeType: string = 'ordinal';
   @Input() valueDomain: number[];
@@ -136,7 +128,7 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
     this.yScale = this.getYScale(this.yDomain, this.dims.height);
 
     this.setColors();
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
 
     if (this.brush) {
       this.updateBrush();
@@ -294,7 +286,8 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
       .call(this.brush);
 
     // clear hardcoded properties so they can be defined by CSS
-    select(this.chartElement.nativeElement).select('.selection')
+    select(this.chartElement.nativeElement)
+      .select('.selection')
       .attr('fill', undefined)
       .attr('stroke', undefined)
       .attr('fill-opacity', undefined);

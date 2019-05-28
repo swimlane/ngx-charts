@@ -125,7 +125,7 @@ export class SeriesVerticalComponent implements OnChanges {
 
     this.bars = this.series.map((d, index) => {
       let value = d.value;
-      const label = d.label;
+      const label = this.getLabel(d);
       const formattedLabel = formatLabel(label);
       const roundEdges = this.roundEdges;
       d0Type = value > 0 ? D0Types.positive : D0Types.negative;
@@ -261,6 +261,13 @@ export class SeriesVerticalComponent implements OnChanges {
 
   onClick(data: DataItem): void {
     this.select.emit(data);
+  }
+
+  getLabel(dataItem): string {
+    if (dataItem.label) {
+      return dataItem.label;
+    }
+    return dataItem.name;
   }
 
   trackBy(index, bar): string {
