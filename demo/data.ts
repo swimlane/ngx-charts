@@ -1,6 +1,7 @@
 import { data as countries } from 'emoji-flags';
+import { SingleSeries, MultiSeries, BubbleChartMultiSeries, Series, TreeMapData } from '../src/models/chart-data.model';
 
-export const single = [
+export const single: SingleSeries = [
   {
     name: new Date(2010, 0, 1),
     value: 40632
@@ -27,7 +28,7 @@ export const single = [
   }
 ];
 
-export const multi = [
+export const multi: MultiSeries = [
   {
     name: 'Germany',
     series: [
@@ -98,7 +99,7 @@ export const multi = [
   }
 ];
 
-export const fiscalYearReport = [
+export const fiscalYearReport: MultiSeries = [
   {
     name: 'Q1',
     series: [
@@ -153,7 +154,7 @@ export const fiscalYearReport = [
   }
 ];
 
-export const bubble = [
+export const bubble: BubbleChartMultiSeries = [
   {
     name: 'Germany',
     series: [
@@ -268,8 +269,8 @@ export function generateGraph(nodeCount: number) {
   return { links, nodes };
 }
 
-export function timelineFilterBarData() {
-  const results: any[] = [];
+export function timelineFilterBarData(): SingleSeries {
+  const results: SingleSeries = [];
   const dataPoints = 30;
   const dayLength = 24 * 60 * 60 * 1000;
   let date = 1473700105009; // Sep 12, 2016
@@ -288,8 +289,8 @@ export function timelineFilterBarData() {
   return results;
 }
 
-export function generateData(seriesLength: number, includeMinMaxRange: boolean, dataPoints: number = 5): any[] {
-  const results = [];
+export function generateData(seriesLength: number, includeMinMaxRange: boolean, dataPoints: number = 5): MultiSeries {
+  const results: MultiSeries = [];
 
   const domain: Date[] = []; // array of time stamps in milliseconds
 
@@ -300,7 +301,7 @@ export function generateData(seriesLength: number, includeMinMaxRange: boolean, 
 
   for (let i = 0; i < seriesLength; i++) {
     const country = countries[Math.floor(Math.random() * countries.length)];
-    const series = {
+    const series: Series = {
       name: country.name,
       series: []
     };
@@ -331,7 +332,7 @@ export function generateData(seriesLength: number, includeMinMaxRange: boolean, 
   return results;
 }
 
-export const treemap = [
+export const treemap: TreeMapData = [
   {
     name: 'flare',
     children: [
