@@ -151,10 +151,7 @@ export class TreeMapCellComponent implements OnChanges {
   }
 
   onClick(): void {
-    this.select.emit({
-      name: this.data.name,
-      value: this.data.value
-    });
+    this.select.emit(this.data);
   }
 
   getGradientStops() {

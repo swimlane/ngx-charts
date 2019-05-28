@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnChanges, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel } from '../common/label.helper';
+import { DataItem } from '../models/chart-data.model';
 
 export enum D0Types {
   positive = 'positive',
@@ -258,7 +259,7 @@ export class SeriesVerticalComponent implements OnChanges {
     return item !== undefined;
   }
 
-  onClick(data): void {
+  onClick(data: DataItem): void {
     this.select.emit(data);
   }
 

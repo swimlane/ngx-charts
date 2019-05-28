@@ -25,7 +25,7 @@ import { VisibilityObserver } from '../utils';
 })
 export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() results: any;
-  @Input() view: number[];
+  @Input() view: [number, number];
   @Input() scheme: any = 'cool';
   @Input() schemeType: string = 'ordinal';
   @Input() customColors: any;

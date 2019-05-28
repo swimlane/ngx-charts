@@ -213,9 +213,6 @@ export class CardComponent implements OnChanges, OnDestroy {
   }
 
   onClick(): void {
-    this.select.emit({
-      name: this.data.name,
-      value: this.data.value
-    });
+    this.select.emit(this.data);
   }
 }

@@ -11,6 +11,7 @@ import {
 import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel } from '../common/label.helper';
 import { D0Types } from './series-vertical.component';
+import { DataItem } from '../models/chart-data.model';
 
 @Component({
   selector: 'g[ngx-charts-series-horizontal]',
@@ -262,7 +263,7 @@ export class SeriesHorizontal implements OnChanges {
     return index + '#' + barLabel.series + '#' + barLabel.total;
   }
 
-  click(data): void {
+  click(data: DataItem): void {
     this.select.emit(data);
   }
 }

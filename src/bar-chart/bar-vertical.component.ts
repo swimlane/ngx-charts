@@ -13,6 +13,7 @@ import { scaleBand, scaleLinear } from 'd3-scale';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
+import { DataItem } from '../models/chart-data.model';
 
 @Component({
   selector: 'ngx-charts-bar-vertical',
@@ -194,7 +195,7 @@ export class BarVerticalComponent extends BaseChartComponent {
     return this.results.map(d => d.label);
   }
 
-  getYDomain() {
+  getYDomain(): [number, number] {
     const values = this.results.map(d => d.value);
 
     let min = this.yScaleMin ? Math.min(this.yScaleMin, ...values) : Math.min(0, ...values);
@@ -209,7 +210,7 @@ export class BarVerticalComponent extends BaseChartComponent {
     return [min, max];
   }
 
-  onClick(data) {
+  onClick(data: DataItem) {
     this.select.emit(data);
   }
 
