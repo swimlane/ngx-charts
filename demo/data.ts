@@ -3,28 +3,46 @@ import { SingleSeries, MultiSeries, BubbleChartMultiSeries, Series, TreeMapData 
 
 export const single: SingleSeries = [
   {
-    name: new Date(2010, 0, 1),
-    value: 40632
+    name: 'Germany',
+    value: 40632,
+    extra: {
+      code: 'de'
+    }
   },
   {
-    name: new Date(2011, 0, 1),
-    value: 0
+    name: 'United States',
+    value: 50000,
+    extra: {
+      code: 'us'
+    }
   },
   {
-    name: new Date(2012, 0, 1),
-    value: 36745
+    name: 'France',
+    value: 36745,
+    extra: {
+      code: 'fr'
+    }
   },
   {
-    name: new Date(2013, 0, 1),
-    value: 36240
+    name: 'United Kingdom',
+    value: 36240,
+    extra: {
+      code: 'uk'
+    }
   },
   {
-    name: new Date(2014, 0, 1),
-    value: 33000
+    name: 'Spain',
+    value: 33000,
+    extra: {
+      code: 'es'
+    }
   },
   {
-    name: new Date(2015, 0, 1),
-    value: 35800
+    name: 'Italy',
+    value: 35800,
+    extra: {
+      code: 'it'
+    }
   }
 ];
 
@@ -33,16 +51,25 @@ export const multi: MultiSeries = [
     name: 'Germany',
     series: [
       {
-        name: new Date(2010, 0, 1),
-        value: 40632
+        name: '2010',
+        value: 40632,
+        extra: {
+          code: 'de'
+        }
       },
       {
-        name: new Date(2000, 0, 1),
-        value: 36953
+        name: '2000',
+        value: 36953,
+        extra: {
+          code: 'de'
+        }
       },
       {
-        name: new Date(1990, 0, 1),
-        value: 31476
+        name: '1990',
+        value: 31476,
+        extra: {
+          code: 'de'
+        }
       }
     ]
   },
@@ -50,16 +77,25 @@ export const multi: MultiSeries = [
     name: 'United States',
     series: [
       {
-        name: new Date(2010, 0, 1),
-        value: 0
+        name: '2010',
+        value: 0,
+        extra: {
+          code: 'us'
+        }
       },
       {
-        name: new Date(2000, 0, 1),
-        value: 45986
+        name: '2000',
+        value: 45986,
+        extra: {
+          code: 'us'
+        }
       },
       {
-        name: new Date(1990, 0, 1),
-        value: 37060
+        name: '1990',
+        value: 37060,
+        extra: {
+          code: 'us'
+        }
       }
     ]
   },
@@ -67,16 +103,25 @@ export const multi: MultiSeries = [
     name: 'France',
     series: [
       {
-        name: new Date(2010, 0, 1),
-        value: 36745
+        name: '2010',
+        value: 36745,
+        extra: {
+          code: 'fr'
+        }
       },
       {
-        name: new Date(2000, 0, 1),
-        value: 34774
+        name: '2000',
+        value: 34774,
+        extra: {
+          code: 'fr'
+        }
       },
       {
-        name: new Date(1990, 0, 1),
-        value: 29476
+        name: '1990',
+        value: 29476,
+        extra: {
+          code: 'fr'
+        }
       }
     ]
   },
@@ -84,16 +129,25 @@ export const multi: MultiSeries = [
     name: 'United Kingdom',
     series: [
       {
-        name: new Date(2010, 0, 1),
-        value: 36240
+        name: '2010',
+        value: 36240,
+        extra: {
+          code: 'uk'
+        }
       },
       {
-        name: new Date(2000, 0, 1),
-        value: 32543
+        name: '2000',
+        value: 32543,
+        extra: {
+          code: 'uk'
+        }
       },
       {
-        name: new Date(1990, 0, 1),
-        value: 26424
+        name: '1990',
+        value: 26424,
+        extra: {
+          code: 'uk'
+        }
       }
     ]
   }
@@ -159,20 +213,20 @@ export const bubble: BubbleChartMultiSeries = [
     name: 'Germany',
     series: [
       {
-        name: new Date(2010, 0, 1),
-        x: new Date(2010, 0, 1),
+        name: '2010',
+        x: '2010',
         y: 80.3,
         r: 80.4
       },
       {
-        name: new Date(2000, 0, 1),
-        x: new Date(2000, 0, 1),
+        name: '2000',
+        x: '2000',
         y: 80.3,
         r: 78
       },
       {
-        name: new Date(1990, 0, 1),
-        x: new Date(1990, 0, 1),
+        name: '1990',
+        x: '1990',
         y: 75.4,
         r: 79
       }
@@ -182,20 +236,20 @@ export const bubble: BubbleChartMultiSeries = [
     name: 'United States',
     series: [
       {
-        name: new Date(2010, 0, 1),
-        x: new Date(2010, 0, 1),
+        name: '2010',
+        x: '2010',
         y: 78.8,
         r: 310
       },
       {
-        name: new Date(2000, 0, 1),
-        x: new Date(2000, 0, 1),
+        name: '2000',
+        x: '2000',
         y: 76.9,
         r: 283
       },
       {
-        name: new Date(1990, 0, 1),
-        x: new Date(1990, 0, 1),
+        name: '1990',
+        x: '1990',
         y: 75.4,
         r: 253
       }
@@ -205,20 +259,20 @@ export const bubble: BubbleChartMultiSeries = [
     name: 'France',
     series: [
       {
-        name: new Date(2010, 0, 1),
-        x: new Date(2010, 0, 1),
+        name: '2010',
+        x: '2010',
         y: 81.4,
         r: 63
       },
       {
-        name: new Date(2000, 0, 1),
-        x: new Date(2000, 0, 1),
+        name: '2000',
+        x: '2000',
         y: 79.1,
         r: 59.4
       },
       {
-        name: new Date(1990, 0, 1),
-        x: new Date(1990, 0, 1),
+        name: '1990',
+        x: '1990',
         y: 77.2,
         r: 56.9
       }
@@ -228,20 +282,20 @@ export const bubble: BubbleChartMultiSeries = [
     name: 'United Kingdom',
     series: [
       {
-        name: new Date(2010, 0, 1),
-        x: new Date(2010, 0, 1),
+        name: '2010',
+        x: '2010',
         y: 80.2,
         r: 62.7
       },
       {
-        name: new Date(2000, 0, 1),
-        x: new Date(2000, 0, 1),
+        name: '2000',
+        x: '2000',
         y: 77.8,
         r: 58.9
       },
       {
-        name: new Date(1990, 0, 1),
-        x: new Date(1990, 0, 1),
+        name: '1990',
+        x: '1990',
         y: 75.7,
         r: 57.1
       }
