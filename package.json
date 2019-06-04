@@ -180,7 +180,7 @@
     "webpack-dev-server": "^2.2.0",
     "webpack-merge": "^4.1.0",
     "webpack-notifier": "^1.5.0",
-    "zone.js": "^0.8.26"
+    "zone.js": "^0.9.1"
   },
   "dependencies": {
     "d3": "^4.10.2",
