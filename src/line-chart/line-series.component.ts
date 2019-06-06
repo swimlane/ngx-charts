@@ -129,7 +129,10 @@ export class LineSeriesComponent implements OnChanges {
         return value;
       })
       .y(d => this.yScale(d.value))
-      .curve(this.curve);
+      .curve(this.curve)
+      .defined(function(d) {
+        return d.value !== undefined && d.value !== null;
+      });
   }
 
   getRangeGenerator(): any {
