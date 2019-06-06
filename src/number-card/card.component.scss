@@ -17,8 +17,10 @@ ngx-charts-number-card {
       }
     }
 
-    .value-text {
+    .value-text,
+    .trimmed-label {
       pointer-events: none;
+      dominant-baseline: hanging;
     }
   }
 
