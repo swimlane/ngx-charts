@@ -32,6 +32,7 @@ import { formatLabel } from '../../src/common/label.helper';
       [gradient]="gradient"
       [isActive]="isActive(bar.data)"
       [animations]="animations"
+      [noBarWhenZero]="noBarWhenZero"
       (select)="onClick($event)"
       (activate)="activate.emit($event)"
       (deactivate)="deactivate.emit($event)"
@@ -69,6 +70,7 @@ export class ComboSeriesVerticalComponent implements OnChanges {
   @Input() activeEntries: any[];
   @Input() seriesName: string;
   @Input() animations: boolean = true;
+  @Input() noBarWhenZero: boolean = true;
   
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();

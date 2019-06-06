@@ -105,11 +105,11 @@ export class PolarSeriesComponent implements OnChanges {
 
       const color = this.colors.getColor(linearScaleType ? Math.abs(value) : seriesName);
 
-      const cData = {
+      const cData = Object.assign({}, d, {
         series: seriesName,
         value,
         name: d.name
-      };
+      });
 
       return {
         data: cData,

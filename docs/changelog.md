@@ -1,5 +1,27 @@
 # Changelog
 
+## 11.1.0
+
+- Feature: added option to disable x axis tick rotation (#1139)
+- Bug: Update peer dependency requirements
+
+## 11.0.1
+
+- Bug: Fixes displaying of tooltip on IE 11 (#1157)
+
+## 11.0.0
+
+- Breaking: Remove Angular location strategy from ChartCommonModule (#915)
+  - Any Angular applications, that rely on the pre-configured location strategy provided by ngx-charts, will need to set it separately
+- Feature: Allow access to custom properties in tooltip templates (#555)
+- Bug: Update tooltip positioning to correctly flip sides when there is not enough available space (#1136)
+- Bug: Fixed combo Line and Bar chart not aligning (#1154)
+- Chore: Removed unnecessary peer dependencies (#1140)
+- Chore: Replaced bitwise operators with math.floor (#1151)
+- Chore: Changed tree-map label class to avoid conflict (#1117)
+- Chore: Remove unused property binding (#1120)
+- Docs: motivation.md Typo fix (#1123)
+
 ## 10.1.0
 
 - Feature: Allow configuration of tick trimming on charts with X and Y axis (#870)

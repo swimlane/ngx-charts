@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component, Input, Output, EventEmitter, ViewChild, ChangeDetectionStrategy, TemplateRef, } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { MouseEvent } from '../events';
+import { createMouseEvent } from '../events';
 var TooltipArea = /** @class */ (function () {
     function TooltipArea() {
         this.anchorOpacity = 0;
@@ -45,7 +45,7 @@ var TooltipArea = /** @class */ (function () {
                 else {
                     color = this.colors.getColor(group.name);
                 }
-                results.push({
+                var data = Object.assign({}, item, {
                     value: val,
                     name: label,
                     series: groupName,
@@ -53,6 +53,7 @@ var TooltipArea = /** @class */ (function () {
                     max: item.max,
                     color: color
                 });
+                results.push(data);
             }
         }
         return results;
@@ -66,7 +67,7 @@ var TooltipArea = /** @class */ (function () {
         this.anchorPos = Math.min(this.dims.width, this.anchorPos);
         this.anchorValues = this.getValues(closestPoint);
         if (this.anchorPos !== this.lastAnchorPos) {
-            var ev = new MouseEvent('mouseleave', { bubbles: false });
+            var ev = createMouseEvent('mouseleave');
             this.tooltipAnchor.nativeElement.dispatchEvent(ev);
             this.anchorOpacity = 0.7;
             this.hover.emit({
@@ -104,11 +105,11 @@ var TooltipArea = /** @class */ (function () {
         return closestIndex;
     };
     TooltipArea.prototype.showTooltip = function () {
-        var event = new MouseEvent('mouseenter', { bubbles: false });
+        var event = createMouseEvent('mouseenter');
         this.tooltipAnchor.nativeElement.dispatchEvent(event);
     };
     TooltipArea.prototype.hideTooltip = function () {
-        var event = new MouseEvent('mouseleave', { bubbles: false });
+        var event = createMouseEvent('mouseleave');
         this.tooltipAnchor.nativeElement.dispatchEvent(event);
         this.anchorOpacity = 0;
         this.lastAnchorPos = -1;

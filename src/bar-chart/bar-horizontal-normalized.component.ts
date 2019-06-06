@@ -42,6 +42,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [trimTicks]="trimXAxisTicks"
+          [rotateTicks]="rotateXAxisTicks"
           [maxTickLength]="maxXAxisTickLength"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
@@ -79,6 +80,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
             (select)="onClick($event, group)"
             (activate)="onActivate($event, group)"
             (deactivate)="onDeactivate($event, group)"
+            [noBarWhenZero]="noBarWhenZero"
           />
         </svg:g>
       </svg:g>
@@ -117,6 +119,7 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
   @Input() schemeType: string;
   @Input() trimXAxisTicks: boolean = true;
   @Input() trimYAxisTicks: boolean = true;
+  @Input() rotateXAxisTicks: boolean = true;
   @Input() maxXAxisTickLength: number = 16;
   @Input() maxYAxisTickLength: number = 16;
   @Input() xAxisTickFormatting: any;
@@ -125,6 +128,7 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
   @Input() yAxisTicks: any[];
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
+  @Input() noBarWhenZero: boolean = true;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

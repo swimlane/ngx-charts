@@ -49,6 +49,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [trimTicks]="trimXAxisTicks"
+          [rotateTicks]="rotateXAxisTicks"
           [maxTickLength]="maxXAxisTickLength"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
@@ -86,6 +87,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
             [animations]="animations"
             [showDataLabel]="showDataLabel"
             [dataLabelFormatting]="dataLabelFormatting"
+            [noBarWhenZero]="noBarWhenZero"
             (select)="onClick($event, group)"
             (activate)="onActivate($event, group)"
             (deactivate)="onDeactivate($event, group)"
@@ -128,6 +130,7 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   @Input() schemeType: string;
   @Input() trimXAxisTicks: boolean = true;
   @Input() trimYAxisTicks: boolean = true;
+  @Input() rotateXAxisTicks: boolean = true;
   @Input() maxXAxisTickLength: number = 16;
   @Input() maxYAxisTickLength: number = 16;
   @Input() xAxisTickFormatting: any;
@@ -141,6 +144,7 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   @Input() xScaleMax: number;
   @Input() showDataLabel: boolean = false;
   @Input() dataLabelFormatting: any;
+  @Input() noBarWhenZero: boolean = true;
  
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

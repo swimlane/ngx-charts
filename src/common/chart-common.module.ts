@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Location, LocationStrategy, PathLocationStrategy, CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 import { ChartComponent } from './charts/chart.component';
 import {
@@ -39,13 +39,6 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  providers: [
-    Location,
-    {
-      provide: LocationStrategy,
-      useClass: PathLocationStrategy
-    }
-  ],
   imports: [
     CommonModule,
     AxesModule,

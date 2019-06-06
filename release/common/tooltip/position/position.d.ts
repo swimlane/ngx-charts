@@ -62,13 +62,12 @@ export declare class PositionHelper {
      * @param {any} elDimensions
      * @param {any} popoverDimensions
      * @param {any} placement
-     * @param {any} alignment
      * @param {any} spacing
      * @returns {boolean}
      *
      * @memberOf PositionHelper
      */
-    static shouldFlip(elDimensions: any, popoverDimensions: any, placement: any, alignment: any, spacing: any): boolean;
+    static shouldFlip(elDimensions: any, popoverDimensions: any, placement: any, spacing: any): boolean;
     /**
      * Position caret
      *
@@ -105,10 +104,9 @@ export declare class PositionHelper {
      * @param {any} elmDim
      * @param {any} hostDim
      * @param {any} spacing
-     * @param {any} alignment
      * @returns {*}
      *
      * @memberOf PositionHelper
      */
-    static determinePlacement(placement: any, elmDim: any, hostDim: any, spacing: any, alignment: any): any;
+    static determinePlacement(placement: any, elmDim: any, hostDim: any, spacing: any): any;
 }

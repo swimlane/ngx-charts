@@ -27,6 +27,7 @@
 | yAxisLabel          | string             |               | the y axis label text                                                                                             |
 | showDataLabel       | boolean            | false         | displays the value number next to the bar                                                                         |
 | gradient            | boolean            | false         | fill elements with a gradient instead of a solid color                                                            |
+| noBarWhenZero       | boolean            | true          | hide bar if value is 0 and setting is true                                                                        |
 | trimXAxisTicks | boolean | true | trim or not ticks on the x axis |
 | trimYAxisTicks | boolean | true | trim or not ticks on the Y axis |
 | maxXAxisTickLength | number | 16 | max length of the ticks. If `trimXAxisTicks` is `true`, ticks over this length will be trimmed |

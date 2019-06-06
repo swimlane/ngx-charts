@@ -90,8 +90,8 @@ var PolarChartComponent = /** @class */ (function (_super) {
             legendType: this.schemeType,
             legendPosition: this.legendPosition
         });
-        var halfWidth = ~~(this.dims.width / 2);
-        var halfHeight = ~~(this.dims.height / 2);
+        var halfWidth = Math.floor((this.dims.width / 2));
+        var halfHeight = Math.floor((this.dims.height / 2));
         var outerRadius = this.outerRadius = Math.min(halfHeight / 1.5, halfWidth / 1.5);
         var yOffset = Math.max(0, halfHeight - outerRadius);
         this.yAxisDims = __assign({}, this.dims, { width: halfWidth });
@@ -164,7 +164,7 @@ var PolarChartComponent = /** @class */ (function (_super) {
             }
         }
         this.radiusTicks = this.yAxisScale
-            .ticks(~~(this.dims.height / 50))
+            .ticks(Math.floor((this.dims.height / 50)))
             .map(function (d) { return _this.yScale(d); });
     };
     PolarChartComponent.prototype.getXValues = function () {

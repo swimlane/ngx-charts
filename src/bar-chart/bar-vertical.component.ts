@@ -34,6 +34,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [trimTicks]="trimXAxisTicks"
+          [rotateTicks]="rotateXAxisTicks"
           [maxTickLength]="maxXAxisTickLength"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
@@ -67,6 +68,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [activeEntries]="activeEntries"
           [roundEdges]="roundEdges"
           [animations]="animations"
+          [noBarWhenZero]="noBarWhenZero"
           (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)"
           (select)="onClick($event)"
@@ -98,6 +100,7 @@ export class BarVerticalComponent extends BaseChartComponent {
   @Input() schemeType: string;
   @Input() trimXAxisTicks: boolean = true;
   @Input() trimYAxisTicks: boolean = true;
+  @Input() rotateXAxisTicks: boolean = true;
   @Input() maxXAxisTickLength: number = 16;
   @Input() maxYAxisTickLength: number = 16;
   @Input() xAxisTickFormatting: any;
@@ -111,6 +114,7 @@ export class BarVerticalComponent extends BaseChartComponent {
   @Input() yScaleMin: number;
   @Input() showDataLabel: boolean = false;
   @Input() dataLabelFormatting: any;
+  @Input() noBarWhenZero: boolean = true;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -169,7 +173,7 @@ export class BarVerticalComponent extends BaseChartComponent {
     this.xDomain = this.getXDomain();
     const spacing = this.xDomain.length / (this.dims.width / this.barPadding + 1);
     return scaleBand()
-      .rangeRound([0, this.dims.width])
+      .range([0, this.dims.width])
       .paddingInner(spacing)
       .domain(this.xDomain);
   }
@@ -189,14 +193,19 @@ export class BarVerticalComponent extends BaseChartComponent {
   getYDomain() {
     const values = this.results.map(d => d.value);
 
-    const min = this.yScaleMin
+    let min = this.yScaleMin
       ? Math.min(this.yScaleMin, ...values)
       : Math.min(0, ...values);
+    if (this.yAxisTicks && !this.yAxisTicks.some(isNaN)) {
+      min = Math.min(min, ...this.yAxisTicks);
+    }
 
-    const max = this.yScaleMax
+    let max = this.yScaleMax
       ? Math.max(this.yScaleMax, ...values)
       : Math.max(0, ...values);
-
+    if (this.yAxisTicks && !this.yAxisTicks.some(isNaN)) {
+      max = Math.max(max, ...this.yAxisTicks);
+    }
     return [min, max];
   }
 

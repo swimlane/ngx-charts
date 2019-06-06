@@ -14,6 +14,7 @@ const chartGroups = [
           'showYAxis',
           'gradient',
           'barPadding',
+          'noBarWhenZero',
           'showLegend',
           'legendTitle',
           'legendPosition',
@@ -29,6 +30,7 @@ const chartGroups = [
           'showDataLabel',
           'trimXAxisTicks',
           'trimYAxisTicks',
+          'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength'
         ]
@@ -45,6 +47,7 @@ const chartGroups = [
           'showYAxis',
           'gradient',
           'barPadding',
+          'noBarWhenZero',
           'showLegend',
           'legendTitle',
           'legendPosition',
@@ -60,6 +63,7 @@ const chartGroups = [
           'showDataLabel',
           'trimXAxisTicks',
           'trimYAxisTicks',
+          'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength'
         ],
@@ -81,6 +85,7 @@ const chartGroups = [
           'gradient',
           'barPadding',
           'groupPadding',
+          'noBarWhenZero',
           'showLegend',
           'legendTitle',
           'legendPosition',
@@ -96,6 +101,7 @@ const chartGroups = [
           'showDataLabel',
           'trimXAxisTicks',
           'trimYAxisTicks',
+          'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength'
         ]
@@ -113,6 +119,7 @@ const chartGroups = [
           'gradient',
           'barPadding',
           'groupPadding',
+          'noBarWhenZero',
           'showLegend',
           'legendTitle',
           'legendPosition',
@@ -128,6 +135,7 @@ const chartGroups = [
           'showDataLabel',
           'trimXAxisTicks',
           'trimYAxisTicks',
+          'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength'
         ],
@@ -148,6 +156,7 @@ const chartGroups = [
           'showYAxis',
           'gradient',
           'barPadding',
+          'noBarWhenZero',
           'showLegend',
           'legendTitle',
           'legendPosition',
@@ -162,6 +171,7 @@ const chartGroups = [
           'showDataLabel',
           'trimXAxisTicks',
           'trimYAxisTicks',
+          'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength'
         ]
@@ -178,6 +188,7 @@ const chartGroups = [
           'showYAxis',
           'gradient',
           'barPadding',
+          'noBarWhenZero',
           'showLegend',
           'legendTitle',
           'legendPosition',
@@ -192,6 +203,7 @@ const chartGroups = [
           'showDataLabel',
           'trimXAxisTicks',
           'trimYAxisTicks',
+          'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength'
         ],
@@ -212,6 +224,7 @@ const chartGroups = [
           'showYAxis',
           'gradient',
           'barPadding',
+          'noBarWhenZero',
           'showLegend',
           'legendTitle',
           'legendPosition',
@@ -224,6 +237,7 @@ const chartGroups = [
           'tooltipDisabled',
           'trimXAxisTicks',
           'trimYAxisTicks',
+          'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength'
         ],
@@ -244,6 +258,7 @@ const chartGroups = [
           'showYAxis',
           'gradient',
           'barPadding',
+          'noBarWhenZero',
           'showLegend',
           'legendTitle',
           'legendPosition',
@@ -256,6 +271,7 @@ const chartGroups = [
           'tooltipDisabled',
           'trimXAxisTicks',
           'trimYAxisTicks',
+          'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength'
         ],
@@ -338,6 +354,7 @@ const chartGroups = [
           'yScaleMax',
           'trimXAxisTicks',
           'trimYAxisTicks',
+          'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength'
         ],
@@ -409,6 +426,7 @@ const chartGroups = [
           'yScaleMax',
           'trimXAxisTicks',
           'trimYAxisTicks',
+          'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength'
         ],
@@ -448,6 +466,7 @@ const chartGroups = [
           'yScaleMax',
           'trimXAxisTicks',
           'trimYAxisTicks',
+          'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength'
         ],
@@ -483,6 +502,7 @@ const chartGroups = [
           'tooltipDisabled',
           'trimXAxisTicks',
           'trimYAxisTicks',
+          'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength'
         ],
@@ -526,6 +546,7 @@ const chartGroups = [
           'yScaleMax',
           'trimXAxisTicks',
           'trimYAxisTicks',
+          'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength'
         ],
@@ -535,7 +556,7 @@ const chartGroups = [
         }
       },
       {
-        name: 'Force Directed Graph',
+        name: 'Force Directed Graph (deprecated)',
         selector: 'force-directed-graph',
         inputFormat: 'graph',
         options: ['animations', 'colorScheme', 'showLegend', 'legendTitle', 'legendPosition', 'tooltipDisabled']
@@ -559,6 +580,7 @@ const chartGroups = [
           'tooltipDisabled',
           'trimXAxisTicks',
           'trimYAxisTicks',
+          'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength',
           'min',
@@ -600,7 +622,8 @@ const chartGroups = [
           'showAxis',
           'margin',
           'tooltipDisabled',
-          'animations'
+          'animations',
+          'showText'
         ]
       },
       {
@@ -624,6 +647,7 @@ const chartGroups = [
           'showYAxis',
           'gradient',
           'showLegend',
+          'noBarWhenZero',
           'legendTitle',
           'legendPosition',
           'showXAxisLabel',
@@ -669,6 +693,41 @@ const chartGroups = [
         selector: 'tree-map-demo',
         inputFormat: 'treemap',
         options: ['animations', 'colorScheme']
+      },
+      {
+        name: 'Bubble Chart - Interactive',
+        selector: 'bubble-chart-interactive-demo',
+        inputFormat: 'bubbleInteractive',
+        options: [
+          'animations',
+          'colorScheme',
+          'schemeType',
+          'showXAxis',
+          'showYAxis',
+          'showLegend',
+          'legendTitle',
+          'showXAxisLabel',
+          'xAxisLabel',
+          'showYAxisLabel',
+          'yAxisLabel',
+          'showGridLines',
+          'roundDomains',
+          'autoScale',
+          'minRadius',
+          'maxRadius',
+          'tooltipDisabled',
+          'xScaleMin',
+          'xScaleMax',
+          'yScaleMin',
+          'yScaleMax'
+        ],
+        defaults: {
+          xAxisLabel: 'Order Total',
+          yAxisLabel: 'Order Item Count',
+          showLegend: false,
+          minRadius: 5,
+          maxRadius: 20
+        }
       },
       {
         name: 'Equation Plots',
@@ -763,13 +822,14 @@ const chartGroups = [
       {
         name: 'Timeline Filter Bar Chart',
         selector: 'timeline-filter-bar-chart-demo',
-        inputFormat: 'singleSeries',
+        inputFormat: 'timelineFilter',
         options: [
           'animations',
           'colorScheme',
           'schemeType',
           'showXAxis',
           'showYAxis',
+          'noBarWhenZero',
           'gradient',
           'showGridLines',
           'showXAxisLabel',
@@ -790,6 +850,7 @@ const chartGroups = [
           'showYAxis',
           'gradient',
           'barPadding',
+          'noBarWhenZero',
           'showLegend',
           'legendTitle',
           'legendPosition',
@@ -819,6 +880,7 @@ const chartGroups = [
           'showXAxis',
           'showYAxis',
           'gradient',
+          'noBarWhenZero',
           'barPadding',
           'showLegend',
           'legendTitle',

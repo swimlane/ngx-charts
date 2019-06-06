@@ -72,8 +72,9 @@ export class PieChartComponent extends BaseChartComponent {
   @Input() trimLabels: boolean = true;
   @Input() maxLabelLength: number = 10;
   @Input() tooltipText: any;
-
   @Output() dblclick = new EventEmitter();
+  // optional margins
+  @Input() margins: number[];
   @Output() select = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -87,26 +88,28 @@ export class PieChartComponent extends BaseChartComponent {
   colors: ColorHelper;
   domain: any;
   dims: any;
-  margin = [20, 20, 20, 20];
   legendOptions: any;
 
   update(): void {
     super.update();
 
-    if (this.labels) {
-      this.margin = [30, 80, 30, 80];
+    if (this.labels && this.hasNoOptionalMarginsSet()) {
+      this.margins = [30, 80, 30, 80];
+    } else if (!this.labels && this.hasNoOptionalMarginsSet()) {
+      // default value for margins
+      this.margins = [20, 20, 20, 20];
     }
 
     this.dims = calculateViewDimensions({
       width: this.width,
       height: this.height,
-      margins: this.margin,
+      margins: this.margins,
       showLegend: this.legend,
       legendPosition: this.legendPosition
     });
 
-    const xOffset = this.margin[3] + this.dims.width / 2;
-    const yOffset = this.margin[0] + this.dims.height / 2;
+    const xOffset = this.margins[3] + this.dims.width / 2;
+    const yOffset = this.margins[0] + this.dims.height / 2;
     this.translation = `translate(${xOffset}, ${yOffset})`;
     this.outerRadius = Math.min(this.dims.width, this.dims.height);
     if (this.labels) {
@@ -191,4 +194,7 @@ export class PieChartComponent extends BaseChartComponent {
     this.deactivate.emit({ value: item, entries: this.activeEntries });
   }
 
+  private hasNoOptionalMarginsSet(): boolean {
+    return !this.margins || this.margins.length <= 0;
+  }
 }

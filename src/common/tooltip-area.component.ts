@@ -13,7 +13,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
-import { MouseEvent } from '../events';
+import { createMouseEvent } from '../events';
 
 @Component({
   selector: 'g[ngx-charts-tooltip-area]',
@@ -128,7 +128,7 @@ export class TooltipArea {
           color = this.colors.getColor(group.name);
         }
 
-        results.push({
+        const data = Object.assign({}, item, {
           value: val,
           name: label,
           series: groupName,
@@ -136,6 +136,8 @@ export class TooltipArea {
           max: item.max,
           color
         });
+
+        results.push(data);
       }
     }
 
@@ -153,7 +155,7 @@ export class TooltipArea {
 
     this.anchorValues = this.getValues(closestPoint);
     if (this.anchorPos !== this.lastAnchorPos) {
-      const ev = new MouseEvent('mouseleave', {bubbles: false});
+      const ev = createMouseEvent('mouseleave');
       this.tooltipAnchor.nativeElement.dispatchEvent(ev);
       this.anchorOpacity = 0.7;
       this.hover.emit({
@@ -197,12 +199,12 @@ export class TooltipArea {
   }
 
   showTooltip(): void {
-    const event = new MouseEvent('mouseenter', {bubbles: false});
+    const event = createMouseEvent('mouseenter');
     this.tooltipAnchor.nativeElement.dispatchEvent(event);
   }
 
   hideTooltip(): void {
-    const event = new MouseEvent('mouseleave', {bubbles: false});
+    const event = createMouseEvent('mouseleave');
     this.tooltipAnchor.nativeElement.dispatchEvent(event);
     this.anchorOpacity = 0;
     this.lastAnchorPos = -1;

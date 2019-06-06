@@ -17,6 +17,7 @@ var XAxisTicksComponent = /** @class */ (function () {
         this.trimTicks = true;
         this.maxTickLength = 16;
         this.showGridLines = false;
+        this.rotateTicks = true;
         this.dimensionsChanged = new EventEmitter();
         this.verticalSpacing = 20;
         this.rotateLabels = false;
@@ -62,14 +63,14 @@ var XAxisTicksComponent = /** @class */ (function () {
                 return d.toLocaleString();
             };
         }
-        var angle = this.getRotationAngle(this.ticks);
+        var angle = this.rotateTicks ? this.getRotationAngle(this.ticks) : null;
         this.adjustedScale = this.scale.bandwidth
             ? function (d) {
                 return this.scale(d) + this.scale.bandwidth() * 0.5;
             }
             : this.scale;
         this.textTransform = '';
-        if (angle !== 0) {
+        if (angle && angle !== 0) {
             this.textTransform = "rotate(" + angle + ")";
             this.textAnchor = 'end';
             this.verticalSpacing = 10;
@@ -176,6 +177,10 @@ var XAxisTicksComponent = /** @class */ (function () {
         Input(),
         __metadata("design:type", Object)
     ], XAxisTicksComponent.prototype, "width", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], XAxisTicksComponent.prototype, "rotateTicks", void 0);
     __decorate([
         Output(),
         __metadata("design:type", Object)

@@ -6,5 +6,5 @@ When we first started this project internally some two years ago, we did exactly
 
 Additionally, if we created a wrapper we would violate a core principle of frameworks like Angular or React, where there should only be one framework touching the DOM. If you have multiple libraries touching the DOM, things can get out of sync and create unpredictable results.
 
-By creating charts using Angular components, it lets you create very composable charts with high reuse of common elements like axis, bars, circles, etc. It makes it even easier to extend to add capabilities or \[compose advanced charts using a combination of components\(custom-charts.md\)\].
+By creating charts using Angular components, it lets you create very composable charts with high reuse of common elements like axis, bars, circles, etc. It makes it even easier to extend to add capabilities or [compose advanced charts using a combination of components](custom-charts.md).
 

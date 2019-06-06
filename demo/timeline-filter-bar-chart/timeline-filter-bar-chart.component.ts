@@ -49,6 +49,7 @@ import { id } from '../../src/utils';
           [dims]="dims"
           [gradient]="gradient"
           [animations]="animations"
+          [noBarWhenZero]="noBarWhenZero"
           tooltipDisabled="true">
         </svg:g>
       </svg:g>
@@ -88,6 +89,7 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
   @Input() gradient;
   @Input() showGridLines: boolean = true;
   @Input() animations: boolean = true;
+  @Input() noBarWhenZero: boolean = true;
 
   @Output() onFilter = new EventEmitter();
 

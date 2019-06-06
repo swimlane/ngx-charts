@@ -9,6 +9,7 @@ import { TimelineFilterBarChartComponent } from './timeline-filter-bar-chart/tim
 import { NgxChartsModule } from '../src';
 import { NgxUIModule } from '@swimlane/ngx-ui';
 import { ComboChartComponent, ComboSeriesVerticalComponent } from './combo-chart';
+import { BubbleChartInteractiveModule } from './bubble-chart-interactive';
 
 @NgModule({
   providers: [
@@ -22,14 +23,15 @@ import { ComboChartComponent, ComboSeriesVerticalComponent } from './combo-chart
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    NgxUIModule
+    NgxUIModule,
+    BubbleChartInteractiveModule
   ],
   declarations: [
     AppComponent,
     SparklineComponent,
     TimelineFilterBarChartComponent,
     ComboChartComponent,
-    ComboSeriesVerticalComponent
+    ComboSeriesVerticalComponent,
   ],
   bootstrap: [AppComponent]
 })

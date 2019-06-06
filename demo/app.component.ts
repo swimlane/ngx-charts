@@ -17,6 +17,8 @@ import {
   timelineFilterBarData,
   fiscalYearReport
 } from './data';
+import { bubbleDemoData } from './bubble-chart-interactive/data';
+import { BubbleChartInteractiveServerDataModel } from './bubble-chart-interactive/models';
 import { data as countries } from 'emoji-flags';
 import chartGroups from './chartTypes';
 import { barChart, lineChartSeries } from './combo-chart-data';
@@ -78,6 +80,7 @@ export class AppComponent implements OnInit {
   legendPosition = 'right';
   showXAxisLabel = true;
   tooltipDisabled = false;
+  showText = true;
   xAxisLabel = 'Country';
   showYAxisLabel = true;
   yAxisLabel = 'GDP Per Capita';
@@ -96,8 +99,10 @@ export class AppComponent implements OnInit {
   yScaleMin: number;
   yScaleMax: number;
   showDataLabel = false;
+  noBarWhenZero = true;
   trimXAxisTicks = true;
   trimYAxisTicks = true;
+  rotateXAxisTicks = true;
   maxXAxisTickLength = 16;
   maxYAxisTickLength = 16;
 
@@ -221,6 +226,10 @@ export class AppComponent implements OnInit {
   treemapPath: any[] = [];
   sumBy: string = 'Size';
 
+  // bubble chart interactive demo
+  bubbleDemoTempData: any[] = [];
+  bubbleDemoChart: BubbleChartInteractiveServerDataModel;
+
   // Reference lines
   showRefLines: boolean = true;
   showRefLabels: boolean = true;
@@ -241,10 +250,14 @@ export class AppComponent implements OnInit {
       bubble,
       plotData: this.generatePlotData(),
       treemap,
+      bubbleDemoData,
       fiscalYearReport
     });
 
+    // interactive drilldown demos
     this.treemapProcess();
+    this.bubbleDemoChart = new BubbleChartInteractiveServerDataModel();
+    this.bubbleDemoProcess(bubbleDemoData[0]);
 
     this.dateData = generateData(5, false);
     this.dateDataWithRange = generateData(2, true);
@@ -374,7 +387,15 @@ export class AppComponent implements OnInit {
 
       this.bubble = [...this.bubble, bubbleEntry];
 
+      // bubble interactive demo
+      const getRandomInt = (min, max) => {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      };
+      this.bubbleDemoProcess(bubbleDemoData[getRandomInt(0, bubbleDemoData.length - 1)]);
+
       this.statusData = this.getStatusData();
+
+      this.timelineFilterBarData = timelineFilterBarData();
     }
 
     const date = new Date(Math.floor(1473700105009 + Math.random() * 1000000000));
@@ -532,7 +553,7 @@ export class AppComponent implements OnInit {
 
   calcStatusData(sales = this.statusData[0].value, dur = this.statusData[2].value) {
     const ret = sales * this.salePrice;
-    const cost = sales * dur / 60 / 60 / 1000 * this.personnelCost;
+    const cost = ((sales * dur) / 60 / 60 / 1000) * this.personnelCost;
     const ROI = (ret - cost) / cost;
     return [
       {
@@ -702,5 +723,34 @@ export class AppComponent implements OnInit {
 
   dblclick(event) {
     console.log('Doube click', event);
+  }
+
+  /*
+  **
+  Bubble Chart Interactive Demo
+  **
+  */
+
+  bubbleDemoProcess(dataFromServer) {
+    this.bubbleDemoChart.setDataFromServer(dataFromServer);
+    this.bubbleDemoTempData = this.bubbleDemoChart.toChart();
+  }
+
+  getBubbleInteractiveTitle() {
+    return this.bubbleDemoChart.getChartTitle();
+  }
+
+  bubbleShowDrilldownResetLink() {
+    return this.bubbleDemoChart.getDrilldownDepth() > 0;
+  }
+
+  onClickResetBubbleInteractiveDrill() {
+    this.bubbleDemoChart.resetDrilldown();
+    this.bubbleDemoTempData = this.bubbleDemoChart.toChart();
+  }
+
+  onSelectBubbleInteractivePoint(event) {
+    this.bubbleDemoChart.drilldown(event);
+    this.bubbleDemoTempData = this.bubbleDemoChart.toChart();
   }
 }
