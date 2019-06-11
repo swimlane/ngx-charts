@@ -1,18 +1,5 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ViewChild,
-  ChangeDetectionStrategy,
-  TemplateRef,
-} from '@angular/core';
-import {
-  trigger,
-  style,
-  animate,
-  transition
-} from '@angular/animations';
+import { Component, Input, Output, EventEmitter, ViewChild, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
+import { trigger, style, animate, transition } from '@angular/animations';
 import { createMouseEvent } from '../events';
 
 @Component({
@@ -31,14 +18,9 @@ import { createMouseEvent } from '../events';
       />
       <xhtml:ng-template #defaultTooltipTemplate let-model="model">
         <xhtml:div class="area-tooltip-container">
-          <xhtml:div
-            *ngFor="let tooltipItem of model"
-            class="tooltip-item">
-            <span
-              class="tooltip-item-color"
-              [style.background-color]="tooltipItem.color">
-            </span>
-            {{getToolTipText(tooltipItem)}}
+          <xhtml:div *ngFor="let tooltipItem of model" class="tooltip-item">
+            <span class="tooltip-item-color" [style.background-color]="tooltipItem.color"> </span>
+            {{ getToolTipText(tooltipItem) }}
           </xhtml:div>
         </xhtml:div>
       </xhtml:ng-template>
@@ -57,7 +39,7 @@ import { createMouseEvent } from '../events';
         [tooltipPlacement]="'right'"
         [tooltipType]="'tooltip'"
         [tooltipSpacing]="15"
-        [tooltipTemplate]="tooltipTemplate ? tooltipTemplate: defaultTooltipTemplate"
+        [tooltipTemplate]="tooltipTemplate ? tooltipTemplate : defaultTooltipTemplate"
         [tooltipContext]="anchorValues"
         [tooltipImmediateExit]="true"
       />
@@ -68,15 +50,15 @@ import { createMouseEvent } from '../events';
     trigger('animationState', [
       transition('inactive => active', [
         style({
-          opacity: 0,
+          opacity: 0
         }),
-        animate(250, style({opacity: 0.7}))
+        animate(250, style({ opacity: 0.7 }))
       ]),
       transition('active => inactive', [
         style({
-          opacity: 0.7,
+          opacity: 0.7
         }),
-        animate(250, style({opacity: 0}))
+        animate(250, style({ opacity: 0 }))
       ])
     ])
   ]
@@ -99,7 +81,7 @@ export class TooltipArea {
 
   @Output() hover = new EventEmitter();
 
-  @ViewChild('tooltipAnchor') tooltipAnchor;
+  @ViewChild('tooltipAnchor', { static: false }) tooltipAnchor;
 
   getValues(xVal): any[] {
     const results = [];
@@ -174,7 +156,7 @@ export class TooltipArea {
     let closestIndex = 0;
 
     while (minIndex <= maxIndex) {
-      const currentIndex = (minIndex + maxIndex) / 2 | 0;
+      const currentIndex = ((minIndex + maxIndex) / 2) | 0;
       const currentElement = this.xScale(this.xSet[currentIndex]);
 
       const curDiff = Math.abs(currentElement - xPos);
@@ -241,5 +223,4 @@ export class TooltipArea {
     }
     return result;
   }
-
 }

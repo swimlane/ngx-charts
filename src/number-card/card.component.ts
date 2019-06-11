@@ -81,7 +81,7 @@ export class CardComponent implements OnChanges, OnDestroy {
 
   @Output() select = new EventEmitter();
 
-  @ViewChild('textEl') textEl: ElementRef;
+  @ViewChild('textEl', { static: false }) textEl: ElementRef;
 
   element: HTMLElement;
   value: string = '';
