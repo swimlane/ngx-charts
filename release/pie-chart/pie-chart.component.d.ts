@@ -1,6 +1,7 @@
 import { EventEmitter, TemplateRef } from '@angular/core';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
+import { DataItem } from '../models/chart-data.model';
 export declare class PieChartComponent extends BaseChartComponent {
     labels: boolean;
     legend: boolean;
@@ -32,7 +33,7 @@ export declare class PieChartComponent extends BaseChartComponent {
     legendOptions: any;
     update(): void;
     getDomain(): any[];
-    onClick(data: any): void;
+    onClick(data: DataItem): void;
     setColors(): void;
     getLegendOptions(): {
         scaleType: string;
@@ -41,7 +42,7 @@ export declare class PieChartComponent extends BaseChartComponent {
         title: string;
         position: string;
     };
-    onActivate(item: any): void;
-    onDeactivate(item: any): void;
+    onActivate(item: any, fromLegend?: boolean): void;
+    onDeactivate(item: any, fromLegend?: boolean): void;
     private hasNoOptionalMarginsSet;
 }

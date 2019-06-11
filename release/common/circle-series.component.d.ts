@@ -37,7 +37,7 @@ export declare class CircleSeriesComponent implements OnChanges, OnInit {
         color: any;
         opacity: number;
     }[];
-    onClick(value: any, label: any): void;
+    onClick(data: any): void;
     isActive(entry: any): boolean;
     activateCircle(): void;
     deactivateCircle(): void;

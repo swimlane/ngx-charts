@@ -26,18 +26,17 @@ var BubbleSeriesComponent = /** @class */ (function () {
     BubbleSeriesComponent.prototype.getCircles = function () {
         var _this = this;
         var seriesName = this.data.name;
-        return this.data.series.map(function (d, i) {
+        return this.data.series
+            .map(function (d, i) {
             if (typeof d.y !== 'undefined' && typeof d.x !== 'undefined') {
                 var y = d.y;
                 var x = d.x;
                 var r = d.r;
                 var radius = _this.rScale(r || 1);
                 var tooltipLabel = formatLabel(d.name);
-                var cx = (_this.xScaleType === 'linear') ? _this.xScale(Number(x)) : _this.xScale(x);
-                var cy = (_this.yScaleType === 'linear') ? _this.yScale(Number(y)) : _this.yScale(y);
-                var color = (_this.colors.scaleType === 'linear') ?
-                    _this.colors.getColor(r) :
-                    _this.colors.getColor(seriesName);
+                var cx = _this.xScaleType === 'linear' ? _this.xScale(Number(x)) : _this.xScale(x);
+                var cy = _this.yScaleType === 'linear' ? _this.yScale(Number(y)) : _this.yScale(y);
+                var color = _this.colors.scaleType === 'linear' ? _this.colors.getColor(r) : _this.colors.getColor(seriesName);
                 var isActive = !_this.activeEntries.length ? true : _this.isActive({ name: seriesName });
                 var opacity = isActive ? 1 : 0.3;
                 var data = Object.assign({}, d, {
@@ -66,7 +65,8 @@ var BubbleSeriesComponent = /** @class */ (function () {
                     transform: "translate(" + cx + "," + cy + ")"
                 };
             }
-        }).filter(function (circle) { return circle !== undefined; });
+        })
+            .filter(function (circle) { return circle !== undefined; });
     };
     BubbleSeriesComponent.prototype.getTooltipText = function (circle) {
         var hasRadius = typeof circle.r !== 'undefined';
@@ -77,19 +77,14 @@ var BubbleSeriesComponent = /** @class */ (function () {
         var yAxisLabel = this.yAxisLabel && this.yAxisLabel !== '' ? this.yAxisLabel + ":" : '';
         var x = formatLabel(circle.x);
         var y = formatLabel(circle.y);
-        var name = (hasSeriesName && hasTooltipLabel) ?
-            circle.seriesName + " \u2022 " + circle.tooltipLabel :
-            circle.seriesName + circle.tooltipLabel;
-        var tooltipTitle = (hasSeriesName || hasTooltipLabel) ?
-            "<span class=\"tooltip-label\">" + name + "</span>" :
-            '';
+        var name = hasSeriesName && hasTooltipLabel
+            ? circle.seriesName + " \u2022 " + circle.tooltipLabel
+            : circle.seriesName + circle.tooltipLabel;
+        var tooltipTitle = hasSeriesName || hasTooltipLabel ? "<span class=\"tooltip-label\">" + name + "</span>" : '';
         return "\n      " + tooltipTitle + "\n      <span class=\"tooltip-label\">\n        <label>" + xAxisLabel + "</label> " + x + "<br />\n        <label>" + yAxisLabel + "</label> " + y + "\n      </span>\n      <span class=\"tooltip-val\">\n        " + radiusValue + "\n      </span>\n    ";
     };
-    BubbleSeriesComponent.prototype.onClick = function (value, label) {
-        this.select.emit({
-            name: label,
-            value: value
-        });
+    BubbleSeriesComponent.prototype.onClick = function (data) {
+        this.select.emit(data);
     };
     BubbleSeriesComponent.prototype.isActive = function (entry) {
         if (!this.activeEntries)
@@ -183,7 +178,7 @@ var BubbleSeriesComponent = /** @class */ (function () {
     BubbleSeriesComponent = __decorate([
         Component({
             selector: 'g[ngx-charts-bubble-series]',
-            template: "\n    <svg:g *ngFor=\"let circle of circles; trackBy: trackBy\">\n      <svg:g [attr.transform]=\"circle.transform\">\n        <svg:g ngx-charts-circle\n          [@animationState]=\"'active'\"\n          class=\"circle\"\n          [cx]=\"0\"\n          [cy]=\"0\"\n          [r]=\"circle.radius\"\n          [fill]=\"circle.color\"\n          [style.opacity]=\"circle.opacity\"\n          [class.active]=\"circle.isActive\"\n          [pointerEvents]=\"'all'\"\n          [data]=\"circle.value\"\n          [classNames]=\"circle.classNames\"\n          (select)=\"onClick($event, circle.label)\"\n          (activate)=\"activateCircle(circle)\"\n          (deactivate)=\"deactivateCircle(circle)\"\n          ngx-tooltip\n          [tooltipDisabled]=\"tooltipDisabled\"\n          [tooltipPlacement]=\"'top'\"\n          [tooltipType]=\"'tooltip'\"\n          [tooltipTitle]=\"tooltipTemplate ? undefined : getTooltipText(circle)\"\n          [tooltipTemplate]=\"tooltipTemplate\"\n          [tooltipContext]=\"circle.data\"\n        />\n      </svg:g>\n    </svg:g>\n  ",
+            template: "\n    <svg:g *ngFor=\"let circle of circles; trackBy: trackBy\">\n      <svg:g [attr.transform]=\"circle.transform\">\n        <svg:g\n          ngx-charts-circle\n          [@animationState]=\"'active'\"\n          class=\"circle\"\n          [cx]=\"0\"\n          [cy]=\"0\"\n          [r]=\"circle.radius\"\n          [fill]=\"circle.color\"\n          [style.opacity]=\"circle.opacity\"\n          [class.active]=\"circle.isActive\"\n          [pointerEvents]=\"'all'\"\n          [data]=\"circle.value\"\n          [classNames]=\"circle.classNames\"\n          (select)=\"onClick(circle.data)\"\n          (activate)=\"activateCircle(circle)\"\n          (deactivate)=\"deactivateCircle(circle)\"\n          ngx-tooltip\n          [tooltipDisabled]=\"tooltipDisabled\"\n          [tooltipPlacement]=\"'top'\"\n          [tooltipType]=\"'tooltip'\"\n          [tooltipTitle]=\"tooltipTemplate ? undefined : getTooltipText(circle)\"\n          [tooltipTemplate]=\"tooltipTemplate\"\n          [tooltipContext]=\"circle.data\"\n        />\n      </svg:g>\n    </svg:g>\n  ",
             changeDetection: ChangeDetectionStrategy.OnPush,
             animations: [
                 trigger('animationState', [

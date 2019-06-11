@@ -70,6 +70,6 @@ export declare class BarHorizontalComponent extends BaseChartComponent {
         height: any;
     }): void;
     onDataLabelMaxWidthChanged(event: any): void;
-    onActivate(item: any): void;
-    onDeactivate(item: any): void;
+    onActivate(item: any, fromLegend?: boolean): void;
+    onDeactivate(item: any, fromLegend?: boolean): void;
 }

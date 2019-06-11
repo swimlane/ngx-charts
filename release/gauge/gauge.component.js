@@ -4,7 +4,7 @@ var __extends = (this && this.__extends) || (function () {
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
         return extendStatics(d, b);
-    }
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -322,11 +322,11 @@ var GaugeComponent = /** @class */ (function (_super) {
         __metadata("design:type", EventEmitter)
     ], GaugeComponent.prototype, "deactivate", void 0);
     __decorate([
-        ContentChild('tooltipTemplate'),
+        ContentChild('tooltipTemplate', { static: false }),
         __metadata("design:type", TemplateRef)
     ], GaugeComponent.prototype, "tooltipTemplate", void 0);
     __decorate([
-        ViewChild('textEl'),
+        ViewChild('textEl', { static: false }),
         __metadata("design:type", ElementRef)
     ], GaugeComponent.prototype, "textEl", void 0);
     GaugeComponent = __decorate([

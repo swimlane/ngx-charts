@@ -2,10 +2,10 @@ import { EventEmitter, ElementRef, SimpleChanges, OnChanges } from '@angular/cor
 export declare class BarComponent implements OnChanges {
     fill: any;
     data: any;
-    width: any;
-    height: any;
-    x: any;
-    y: any;
+    width: number;
+    height: number;
+    x: number;
+    y: number;
     orientation: any;
     roundEdges: boolean;
     gradient: boolean;

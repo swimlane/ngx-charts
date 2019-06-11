@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Component, Input, Output, EventEmitter, ElementRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, ChangeDetectionStrategy, HostListener } from '@angular/core';
 import { select } from 'd3-selection';
 import { id } from '../utils/id';
 var HeatMapCellComponent = /** @class */ (function () {
@@ -15,6 +15,8 @@ var HeatMapCellComponent = /** @class */ (function () {
         this.gradient = false;
         this.animations = true;
         this.select = new EventEmitter();
+        this.activate = new EventEmitter();
+        this.deactivate = new EventEmitter();
         this.element = element.nativeElement;
     }
     HeatMapCellComponent.prototype.ngOnChanges = function (changes) {
@@ -48,11 +50,19 @@ var HeatMapCellComponent = /** @class */ (function () {
     };
     HeatMapCellComponent.prototype.animateToCurrentForm = function () {
         var node = select(this.element).select('.cell');
-        node.transition().duration(750)
+        node
+            .transition()
+            .duration(750)
             .attr('opacity', 1);
     };
     HeatMapCellComponent.prototype.onClick = function () {
         this.select.emit(this.data);
+    };
+    HeatMapCellComponent.prototype.onMouseEnter = function () {
+        this.activate.emit(this.data);
+    };
+    HeatMapCellComponent.prototype.onMouseLeave = function () {
+        this.deactivate.emit(this.data);
     };
     __decorate([
         Input(),
@@ -94,10 +104,30 @@ var HeatMapCellComponent = /** @class */ (function () {
         Output(),
         __metadata("design:type", Object)
     ], HeatMapCellComponent.prototype, "select", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], HeatMapCellComponent.prototype, "activate", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], HeatMapCellComponent.prototype, "deactivate", void 0);
+    __decorate([
+        HostListener('mouseenter'),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], HeatMapCellComponent.prototype, "onMouseEnter", null);
+    __decorate([
+        HostListener('mouseleave'),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], HeatMapCellComponent.prototype, "onMouseLeave", null);
     HeatMapCellComponent = __decorate([
         Component({
             selector: 'g[ngx-charts-heat-map-cell]',
-            template: "\n    <svg:g [attr.transform]=\"transform\" class=\"cell\">\n      <defs *ngIf=\"gradient\">\n        <svg:g ngx-charts-svg-linear-gradient\n          orientation=\"vertical\"\n          [name]=\"gradientId\"\n          [stops]=\"gradientStops\"\n        />\n      </defs>\n      <svg:rect\n        [attr.fill]=\"gradient ? gradientUrl : fill\"\n        rx=\"3\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        class=\"cell\"\n        style=\"cursor: pointer\"\n        (click)=\"onClick()\"\n      />\n    </svg:g>\n  ",
+            template: "\n    <svg:g [attr.transform]=\"transform\" class=\"cell\">\n      <defs *ngIf=\"gradient\">\n        <svg:g ngx-charts-svg-linear-gradient orientation=\"vertical\" [name]=\"gradientId\" [stops]=\"gradientStops\" />\n      </defs>\n      <svg:rect\n        [attr.fill]=\"gradient ? gradientUrl : fill\"\n        rx=\"3\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        class=\"cell\"\n        style=\"cursor: pointer\"\n        (click)=\"onClick()\"\n      />\n    </svg:g>\n  ",
             changeDetection: ChangeDetectionStrategy.OnPush
         }),
         __metadata("design:paramtypes", [ElementRef])

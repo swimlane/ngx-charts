@@ -17,4 +17,4 @@ export declare function count(countFrom: any, countTo: any, countDecimals: any, 
  * @param {any} countTo
  * @returns
  */
-export declare function decimalChecker(countTo: any): 0 | 2;
+export declare function decimalChecker(countTo: any): 2 | 0;

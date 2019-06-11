@@ -72,6 +72,6 @@ export declare class BarHorizontalStackedComponent extends BaseChartComponent {
         height: any;
     }): void;
     onDataLabelMaxWidthChanged(event: any, groupIndex: any): void;
-    onActivate(event: any, group?: any): void;
-    onDeactivate(event: any, group?: any): void;
+    onActivate(event: any, group: any, fromLegend?: boolean): void;
+    onDeactivate(event: any, group: any, fromLegend?: boolean): void;
 }

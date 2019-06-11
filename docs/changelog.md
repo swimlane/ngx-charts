@@ -1,5 +1,11 @@
 # Changelog
 
+## 12.0.0
+
+- Breaking: Upgrade to angular 8.0.0 (#1201)
+- Breaking: Rework mouse events to make the format more consistent (#1185)
+- Feature: Allow passing extra data to the data items and include it in click and activate events (#1185)
+
 ## 11.2.0
 
 - Feature: Made margins for pie chart component optional (#759)
