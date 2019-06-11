@@ -117,7 +117,7 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
                 [activeEntries]="activeEntries"
                 [tooltipDisabled]="tooltipDisabled"
                 [tooltipTemplate]="tooltipTemplate"
-                (select)="onClick($event, series)"
+                (select)="onClick($event)"
                 (activate)="onActivate($event)"
                 (deactivate)="onDeactivate($event)"
               />
@@ -426,11 +426,7 @@ export class LineChartComponent extends BaseChartComponent {
     this.deactivateAll();
   }
 
-  onClick(data, series?): void {
-    if (series) {
-      data.series = series.name;
-    }
-
+  onClick(data): void {
     this.select.emit(data);
   }
 

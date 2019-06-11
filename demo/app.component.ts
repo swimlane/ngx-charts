@@ -450,7 +450,15 @@ export class AppComponent implements OnInit {
   }
 
   select(data) {
-    console.log('Item clicked', data);
+    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+  }
+
+  activate(data) {
+    console.log('Activate', JSON.parse(JSON.stringify(data)));
+  }
+
+  deactivate(data) {
+    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 
   getInterpolationType(curveType) {
