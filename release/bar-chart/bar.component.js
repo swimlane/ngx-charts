@@ -18,11 +18,13 @@ var BarComponent = /** @class */ (function () {
         this.offset = 0;
         this.isActive = false;
         this.animations = true;
+        this.noBarWhenZero = true;
         this.select = new EventEmitter();
         this.activate = new EventEmitter();
         this.deactivate = new EventEmitter();
         this.initialized = false;
         this.hasGradient = false;
+        this.hideBar = false;
         this.element = element.nativeElement;
     }
     BarComponent.prototype.ngOnChanges = function (changes) {
@@ -45,6 +47,7 @@ var BarComponent = /** @class */ (function () {
             this.hasGradient = false;
         }
         this.updatePathEl();
+        this.checkToHideBar();
     };
     BarComponent.prototype.loadAnimation = function () {
         this.path = this.getStartingPath();
@@ -169,6 +172,11 @@ var BarComponent = /** @class */ (function () {
     BarComponent.prototype.onMouseLeave = function () {
         this.deactivate.emit(this.data);
     };
+    BarComponent.prototype.checkToHideBar = function () {
+        this.hideBar = this.noBarWhenZero
+            && (this.orientation === 'vertical' && this.height === 0
+                || this.orientation === 'horizontal' && this.width === 0);
+    };
     __decorate([
         Input(),
         __metadata("design:type", Object)
@@ -226,6 +234,10 @@ var BarComponent = /** @class */ (function () {
         __metadata("design:type", String)
     ], BarComponent.prototype, "ariaLabel", void 0);
     __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], BarComponent.prototype, "noBarWhenZero", void 0);
+    __decorate([
         Output(),
         __metadata("design:type", Object)
     ], BarComponent.prototype, "select", void 0);
@@ -252,7 +264,7 @@ var BarComponent = /** @class */ (function () {
     BarComponent = __decorate([
         Component({
             selector: 'g[ngx-charts-bar]',
-            template: "\n    <svg:defs *ngIf=\"hasGradient\">\n      <svg:g ngx-charts-svg-linear-gradient\n        [orientation]=\"orientation\"\n        [name]=\"gradientId\"\n        [stops]=\"gradientStops\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"bar\"\n      stroke=\"none\"\n      role=\"img\"\n      tabIndex=\"-1\"\n      [class.active]=\"isActive\"\n      [attr.d]=\"path\"\n      [attr.aria-label]=\"ariaLabel\"\n      [attr.fill]=\"hasGradient ? gradientFill : fill\"\n      (click)=\"select.emit(data)\"\n    />\n  ",
+            template: "\n    <svg:defs *ngIf=\"hasGradient\">\n      <svg:g ngx-charts-svg-linear-gradient\n        [orientation]=\"orientation\"\n        [name]=\"gradientId\"\n        [stops]=\"gradientStops\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"bar\"\n      stroke=\"none\"\n      role=\"img\"\n      tabIndex=\"-1\"\n      [class.active]=\"isActive\"\n      [class.hidden]=\"hideBar\"\n      [attr.d]=\"path\"\n      [attr.aria-label]=\"ariaLabel\"\n      [attr.fill]=\"hasGradient ? gradientFill : fill\"\n      (click)=\"select.emit(data)\"\n    />\n  ",
             changeDetection: ChangeDetectionStrategy.OnPush
         }),
         __metadata("design:paramtypes", [ElementRef])

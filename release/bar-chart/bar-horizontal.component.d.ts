@@ -33,6 +33,7 @@ export declare class BarHorizontalComponent extends BaseChartComponent {
     xScaleMin: number;
     showDataLabel: boolean;
     dataLabelFormatting: any;
+    noBarWhenZero: boolean;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     tooltipTemplate: TemplateRef<any>;

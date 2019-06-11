@@ -26,6 +26,7 @@ export declare class SeriesHorizontal implements OnChanges {
     animations: boolean;
     showDataLabel: boolean;
     dataLabelFormatting: any;
+    noBarWhenZero: boolean;
     select: EventEmitter<{}>;
     activate: EventEmitter<{}>;
     deactivate: EventEmitter<{}>;

@@ -1,5 +1,19 @@
 # Changelog
 
+## 11.2.0
+
+- Feature: Made margins for pie chart component optional (#759)
+- Feature: Added option to gauge to show or hide inner text (#1175)
+- Feature: Added `noBarWhenZero` input to all bar related (#1086)
+- Bug: Updated Color.Helper.ts to handle null values (#1167)
+- Bug: Added missing export (#1193)
+- Bug: Fixed chart height with large number of yAxisTicks (#1105)
+- Chore: Bumped extract-text-plugin to version 3.0.2 (#861)
+- Chore: Updated zone.js version to 0.9.1 (#1187)
+- Docs: Deprecated force-directed graph chart (#1159)
+- Docs: Fixed link typo in motication.md (#1172)
+- Docs: Added interactive bubble chart to demo (#1174)
+
 ## 11.1.0
 
 - Feature: added option to disable x axis tick rotation (#1139)

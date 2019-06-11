@@ -17,6 +17,7 @@ export declare class PieChartComponent extends BaseChartComponent {
     maxLabelLength: number;
     tooltipText: any;
     dblclick: EventEmitter<{}>;
+    margins: number[];
     select: EventEmitter<{}>;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
@@ -28,7 +29,6 @@ export declare class PieChartComponent extends BaseChartComponent {
     colors: ColorHelper;
     domain: any;
     dims: any;
-    margin: number[];
     legendOptions: any;
     update(): void;
     getDomain(): any[];
@@ -43,4 +43,5 @@ export declare class PieChartComponent extends BaseChartComponent {
     };
     onActivate(item: any): void;
     onDeactivate(item: any): void;
+    private hasNoOptionalMarginsSet;
 }

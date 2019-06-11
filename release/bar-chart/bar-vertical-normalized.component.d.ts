@@ -28,6 +28,7 @@ export declare class BarVerticalNormalizedComponent extends BaseChartComponent {
     yAxisTicks: any[];
     barPadding: number;
     roundDomains: boolean;
+    noBarWhenZero: boolean;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     tooltipTemplate: TemplateRef<any>;
