@@ -12,7 +12,6 @@ import {
 import { select } from 'd3-selection';
 import { roundedRect } from '../common/shape.helper';
 import { id } from '../utils/id';
-import { DataItem } from '../models/chart-data.model';
 
 @Component({
   selector: 'g[ngx-charts-bar]',
@@ -37,7 +36,7 @@ import { DataItem } from '../models/chart-data.model';
 })
 export class BarComponent implements OnChanges {
   @Input() fill;
-  @Input() data: DataItem;
+  @Input() data: any;
   @Input() width: number;
   @Input() height: number;
   @Input() x: number;
