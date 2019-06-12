@@ -74,8 +74,8 @@ import { getScaleType } from '../common/domain.helper';
           [tooltipTemplate]="tooltipTemplate"
           [tooltipText]="tooltipText"
           (select)="onClick($event)"
-          (activate)="onActivate($event)"
-          (deactivate)="onDeactivate($event)"
+          (activate)="onActivate($event, undefined)"
+          (deactivate)="onDeactivate($event, undefined)"
         />
       </svg:g>
     </ngx-charts-chart>
