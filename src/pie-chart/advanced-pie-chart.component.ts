@@ -51,8 +51,8 @@ import { DataItem } from '../models/chart-data.model';
           [labelFormatting]="nameFormatting"
           [percentageFormatting]="percentageFormatting"
           (select)="onClick($event)"
-          (activate)="onActivate($event, undefined, true)"
-          (deactivate)="onDeactivate($event, undefined, true)"
+          (activate)="onActivate($event, true)"
+          (deactivate)="onDeactivate($event, true)"
         >
         </ngx-charts-advanced-legend>
       </div>
