@@ -31,6 +31,7 @@ export declare class BarVerticalStackedComponent extends BaseChartComponent {
     yScaleMax: number;
     showDataLabel: boolean;
     dataLabelFormatting: any;
+    noBarWhenZero: boolean;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     tooltipTemplate: TemplateRef<any>;
@@ -72,6 +73,6 @@ export declare class BarVerticalStackedComponent extends BaseChartComponent {
     updateXAxisHeight({ height }: {
         height: any;
     }): void;
-    onActivate(event: any, group?: any): void;
-    onDeactivate(event: any, group?: any): void;
+    onActivate(event: any, group: any, fromLegend?: boolean): void;
+    onDeactivate(event: any, group: any, fromLegend?: boolean): void;
 }

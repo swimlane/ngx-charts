@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnChanges, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel } from '../common/label.helper';
+import { DataItem } from '../models/chart-data.model';
 
 export enum D0Types {
   positive = 'positive',
@@ -38,8 +39,8 @@ export enum D0Types {
       [tooltipTemplate]="tooltipTemplate"
       [tooltipContext]="bar.data"
       [noBarWhenZero]="noBarWhenZero"
-      [animations]="animations">
-    </svg:g>
+      [animations]="animations"
+    ></svg:g>
     <svg:g *ngIf="showDataLabel">
       <svg:g
         ngx-charts-bar-label
@@ -124,7 +125,7 @@ export class SeriesVerticalComponent implements OnChanges {
 
     this.bars = this.series.map((d, index) => {
       let value = d.value;
-      const label = d.name;
+      const label = this.getLabel(d);
       const formattedLabel = formatLabel(label);
       const roundEdges = this.roundEdges;
       d0Type = value > 0 ? D0Types.positive : D0Types.negative;
@@ -234,9 +235,9 @@ export class SeriesVerticalComponent implements OnChanges {
     } else {
       this.barsForDataLabels = this.series.map(d => {
         const section: any = {};
-        section.series = this.seriesName ? this.seriesName : d.name;
+        section.series = this.seriesName ? this.seriesName : d.label;
         section.total = d.value;
-        section.x = this.xScale(d.name);
+        section.x = this.xScale(d.label);
         section.y = this.yScale(0);
         section.height = this.yScale(section.total) - this.yScale(0);
         section.width = this.xScale.bandwidth();
@@ -258,8 +259,15 @@ export class SeriesVerticalComponent implements OnChanges {
     return item !== undefined;
   }
 
-  onClick(data): void {
+  onClick(data: DataItem): void {
     this.select.emit(data);
+  }
+
+  getLabel(dataItem): string {
+    if (dataItem.label) {
+      return dataItem.label;
+    }
+    return dataItem.name;
   }
 
   trackBy(index, bar): string {

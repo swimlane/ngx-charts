@@ -25,11 +25,13 @@ var CardSeriesComponent = /** @class */ (function () {
             var sortedLengths = this.data
                 .map(function (d) {
                 var hasValue = d && d.data && typeof d.data.value !== 'undefined' && d.data.value !== null;
-                return hasValue ? valueFormatting_1({
-                    data: d.data,
-                    label: d ? d.data.name : '',
-                    value: (d && d.data) ? d.data.value : ''
-                }).length : 0;
+                return hasValue
+                    ? valueFormatting_1({
+                        data: d.data,
+                        label: d ? d.data.name : '',
+                        value: d && d.data ? d.data.value : ''
+                    }).length
+                    : 0;
             })
                 .sort(function (a, b) { return b - a; });
             var idx = Math.ceil(this.data.length / 2);
@@ -41,14 +43,9 @@ var CardSeriesComponent = /** @class */ (function () {
     };
     CardSeriesComponent.prototype.getCards = function () {
         var _this = this;
-        var yPadding = typeof this.innerPadding === 'number' ?
-            this.innerPadding :
-            this.innerPadding[0] + this.innerPadding[2];
-        var xPadding = typeof this.innerPadding === 'number' ?
-            this.innerPadding :
-            this.innerPadding[1] + this.innerPadding[3];
-        return this.data
-            .map(function (d, index) {
+        var yPadding = typeof this.innerPadding === 'number' ? this.innerPadding : this.innerPadding[0] + this.innerPadding[2];
+        var xPadding = typeof this.innerPadding === 'number' ? this.innerPadding : this.innerPadding[1] + this.innerPadding[3];
+        return this.data.map(function (d, index) {
             var label = d.data.name;
             if (label && label.constructor.name === 'Date') {
                 label = label.toLocaleDateString();
@@ -56,7 +53,6 @@ var CardSeriesComponent = /** @class */ (function () {
             else {
                 label = label ? label.toLocaleString() : label;
             }
-            d.data.name = label;
             var value = d.data.value;
             var valueColor = label ? _this.colors.getColor(label) : _this.emptyColor;
             var color = _this.cardColor || valueColor || '#000';
@@ -135,7 +131,7 @@ var CardSeriesComponent = /** @class */ (function () {
     CardSeriesComponent = __decorate([
         Component({
             selector: 'g[ngx-charts-card-series]',
-            template: "\n    <svg:rect\n      *ngFor=\"let c of emptySlots; trackBy:trackBy\"\n      class=\"card-empty\"\n      [attr.x]=\"c.x\"\n      [attr.y]=\"c.y\"\n      [style.fill]=\"emptyColor\"\n      [attr.width]=\"c.width\"\n      [attr.height]=\"c.height\"\n      rx=\"3\"\n      ry=\"3\"\n    />\n    <svg:g ngx-charts-card *ngFor=\"let c of cards; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [color]=\"c.color\"\n      [bandColor]=\"c.bandColor\"\n      [textColor]=\"c.textColor\"\n      [data]=\"c.data\"\n      [medianSize]=\"medianSize\"\n      [valueFormatting]=\"valueFormatting\"\n      [labelFormatting]=\"labelFormatting\"\n      [animations]=\"animations\"\n      (select)=\"onClick($event)\"\n    />\n  ",
+            template: "\n    <svg:rect\n      *ngFor=\"let c of emptySlots; trackBy: trackBy\"\n      class=\"card-empty\"\n      [attr.x]=\"c.x\"\n      [attr.y]=\"c.y\"\n      [style.fill]=\"emptyColor\"\n      [attr.width]=\"c.width\"\n      [attr.height]=\"c.height\"\n      rx=\"3\"\n      ry=\"3\"\n    />\n    <svg:g\n      ngx-charts-card\n      *ngFor=\"let c of cards; trackBy: trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [color]=\"c.color\"\n      [bandColor]=\"c.bandColor\"\n      [textColor]=\"c.textColor\"\n      [data]=\"c.data\"\n      [label]=\"c.label\"\n      [medianSize]=\"medianSize\"\n      [valueFormatting]=\"valueFormatting\"\n      [labelFormatting]=\"labelFormatting\"\n      [animations]=\"animations\"\n      (select)=\"onClick($event)\"\n    />\n  ",
             changeDetection: ChangeDetectionStrategy.OnPush
         })
     ], CardSeriesComponent);

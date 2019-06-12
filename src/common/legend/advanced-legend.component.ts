@@ -34,9 +34,9 @@ import { formatLabel } from '../label.helper';
             *ngFor="let legendItem of legendItems; trackBy: trackBy"
             tabindex="-1"
             class="legend-item"
-            (mouseenter)="activate.emit(legendItem.label)"
-            (mouseleave)="deactivate.emit(legendItem.label)"
-            (click)="select.emit({ name: legendItem.label, value: legendItem.value })"
+            (mouseenter)="activate.emit(legendItem.data)"
+            (mouseleave)="deactivate.emit(legendItem.data)"
+            (click)="select.emit(legendItem.data)"
           >
             <div class="item-color" [style.border-left-color]="legendItem.color"></div>
             <div
@@ -113,6 +113,7 @@ export class AdvancedLegendComponent implements OnChanges {
 
       return {
         _value: value,
+        data: d,
         value,
         color,
         label: formattedLabel,

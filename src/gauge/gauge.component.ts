@@ -106,9 +106,9 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
-  @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
+  @ContentChild('tooltipTemplate', { static: false }) tooltipTemplate: TemplateRef<any>;
 
-  @ViewChild('textEl') textEl: ElementRef;
+  @ViewChild('textEl', { static: false }) textEl: ElementRef;
 
   dims: ViewDimensions;
   domain: any[];

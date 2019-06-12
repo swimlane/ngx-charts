@@ -1,47 +1,75 @@
 import { data as countries } from 'emoji-flags';
+import { SingleSeries, MultiSeries, BubbleChartMultiSeries, Series, TreeMapData } from '../src/models/chart-data.model';
 
-export const single = [
+export const single: SingleSeries = [
   {
     name: 'Germany',
-    value: 40632
+    value: 40632,
+    extra: {
+      code: 'de'
+    }
   },
   {
     name: 'United States',
-    value: 0
+    value: 50000,
+    extra: {
+      code: 'us'
+    }
   },
   {
     name: 'France',
-    value: 36745
+    value: 36745,
+    extra: {
+      code: 'fr'
+    }
   },
   {
     name: 'United Kingdom',
-    value: 36240
+    value: 36240,
+    extra: {
+      code: 'uk'
+    }
   },
   {
     name: 'Spain',
-    value: 33000
+    value: 33000,
+    extra: {
+      code: 'es'
+    }
   },
   {
     name: 'Italy',
-    value: 35800
+    value: 35800,
+    extra: {
+      code: 'it'
+    }
   }
 ];
 
-export const multi = [
+export const multi: MultiSeries = [
   {
     name: 'Germany',
     series: [
       {
         name: '2010',
-        value: 40632
+        value: 40632,
+        extra: {
+          code: 'de'
+        }
       },
       {
         name: '2000',
-        value: 36953
+        value: 36953,
+        extra: {
+          code: 'de'
+        }
       },
       {
         name: '1990',
-        value: 31476
+        value: 31476,
+        extra: {
+          code: 'de'
+        }
       }
     ]
   },
@@ -50,15 +78,24 @@ export const multi = [
     series: [
       {
         name: '2010',
-        value: 0
+        value: 0,
+        extra: {
+          code: 'us'
+        }
       },
       {
         name: '2000',
-        value: 45986
+        value: 45986,
+        extra: {
+          code: 'us'
+        }
       },
       {
         name: '1990',
-        value: 37060
+        value: 37060,
+        extra: {
+          code: 'us'
+        }
       }
     ]
   },
@@ -67,15 +104,24 @@ export const multi = [
     series: [
       {
         name: '2010',
-        value: 36745
+        value: 36745,
+        extra: {
+          code: 'fr'
+        }
       },
       {
         name: '2000',
-        value: 34774
+        value: 34774,
+        extra: {
+          code: 'fr'
+        }
       },
       {
         name: '1990',
-        value: 29476
+        value: 29476,
+        extra: {
+          code: 'fr'
+        }
       }
     ]
   },
@@ -84,21 +130,30 @@ export const multi = [
     series: [
       {
         name: '2010',
-        value: 36240
+        value: 36240,
+        extra: {
+          code: 'uk'
+        }
       },
       {
         name: '2000',
-        value: 32543
+        value: 32543,
+        extra: {
+          code: 'uk'
+        }
       },
       {
         name: '1990',
-        value: 26424
+        value: 26424,
+        extra: {
+          code: 'uk'
+        }
       }
     ]
   }
 ];
 
-export const fiscalYearReport = [
+export const fiscalYearReport: MultiSeries = [
   {
     name: 'Q1',
     series: [
@@ -153,25 +208,25 @@ export const fiscalYearReport = [
   }
 ];
 
-export const bubble = [
+export const bubble: BubbleChartMultiSeries = [
   {
     name: 'Germany',
     series: [
       {
         name: '2010',
-        x: new Date(2010, 0, 1),
+        x: '2010',
         y: 80.3,
         r: 80.4
       },
       {
         name: '2000',
-        x: new Date(2000, 0, 1),
+        x: '2000',
         y: 80.3,
         r: 78
       },
       {
         name: '1990',
-        x: new Date(1990, 0, 1),
+        x: '1990',
         y: 75.4,
         r: 79
       }
@@ -182,19 +237,19 @@ export const bubble = [
     series: [
       {
         name: '2010',
-        x: new Date(2010, 0, 1),
+        x: '2010',
         y: 78.8,
         r: 310
       },
       {
         name: '2000',
-        x: new Date(2000, 0, 1),
+        x: '2000',
         y: 76.9,
         r: 283
       },
       {
         name: '1990',
-        x: new Date(1990, 0, 1),
+        x: '1990',
         y: 75.4,
         r: 253
       }
@@ -205,19 +260,19 @@ export const bubble = [
     series: [
       {
         name: '2010',
-        x: new Date(2010, 0, 1),
+        x: '2010',
         y: 81.4,
         r: 63
       },
       {
         name: '2000',
-        x: new Date(2000, 0, 1),
+        x: '2000',
         y: 79.1,
         r: 59.4
       },
       {
         name: '1990',
-        x: new Date(1990, 0, 1),
+        x: '1990',
         y: 77.2,
         r: 56.9
       }
@@ -228,19 +283,19 @@ export const bubble = [
     series: [
       {
         name: '2010',
-        x: new Date(2010, 0, 1),
+        x: '2010',
         y: 80.2,
         r: 62.7
       },
       {
         name: '2000',
-        x: new Date(2000, 0, 1),
+        x: '2000',
         y: 77.8,
         r: 58.9
       },
       {
         name: '1990',
-        x: new Date(1990, 0, 1),
+        x: '1990',
         y: 75.7,
         r: 57.1
       }
@@ -268,8 +323,8 @@ export function generateGraph(nodeCount: number) {
   return { links, nodes };
 }
 
-export function timelineFilterBarData() {
-  const results: any[] = [];
+export function timelineFilterBarData(): SingleSeries {
+  const results: SingleSeries = [];
   const dataPoints = 30;
   const dayLength = 24 * 60 * 60 * 1000;
   let date = 1473700105009; // Sep 12, 2016
@@ -288,8 +343,8 @@ export function timelineFilterBarData() {
   return results;
 }
 
-export function generateData(seriesLength: number, includeMinMaxRange: boolean, dataPoints: number = 5): any[] {
-  const results = [];
+export function generateData(seriesLength: number, includeMinMaxRange: boolean, dataPoints: number = 5): MultiSeries {
+  const results: MultiSeries = [];
 
   const domain: Date[] = []; // array of time stamps in milliseconds
 
@@ -300,7 +355,7 @@ export function generateData(seriesLength: number, includeMinMaxRange: boolean, 
 
   for (let i = 0; i < seriesLength; i++) {
     const country = countries[Math.floor(Math.random() * countries.length)];
-    const series = {
+    const series: Series = {
       name: country.name,
       series: []
     };
@@ -331,7 +386,7 @@ export function generateData(seriesLength: number, includeMinMaxRange: boolean, 
   return results;
 }
 
-export const treemap = [
+export const treemap: TreeMapData = [
   {
     name: 'flare',
     children: [

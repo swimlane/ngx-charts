@@ -35,6 +35,8 @@
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)"
         (legendLabelClick)="onLegendLabelClick($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
       >
       </ngx-charts-bar-vertical>
       <ngx-charts-bar-horizontal
@@ -70,6 +72,8 @@
         [maxYAxisTickLength]="maxYAxisTickLength"
         (legendLabelClick)="onLegendLabelClick($event)"
         (select)="select($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
       >
       </ngx-charts-bar-horizontal>
       <ngx-charts-bar-vertical-2d
@@ -106,6 +110,8 @@
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
       >
       </ngx-charts-bar-vertical-2d>
       <ngx-charts-bar-horizontal-2d
@@ -142,6 +148,8 @@
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
       >
       </ngx-charts-bar-horizontal-2d>
       <ngx-charts-bar-vertical-stacked
@@ -176,6 +184,8 @@
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
       >
       </ngx-charts-bar-vertical-stacked>
       <ngx-charts-bar-horizontal-stacked
@@ -210,6 +220,8 @@
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
       >
       </ngx-charts-bar-horizontal-stacked>
       <ngx-charts-bar-vertical-normalized
@@ -242,6 +254,8 @@
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
       >
       </ngx-charts-bar-vertical-normalized>
       <ngx-charts-bar-horizontal-normalized
@@ -274,6 +288,8 @@
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
       >
       </ngx-charts-bar-horizontal-normalized>
       <ngx-charts-pie-chart
@@ -297,6 +313,8 @@
         [tooltipText]="pieTooltipText"
         (dblclick)="dblclick($event)"
         (select)="select($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
       >
       </ngx-charts-pie-chart>
       <ngx-charts-advanced-pie-chart
@@ -312,6 +330,8 @@
         [tooltipDisabled]="tooltipDisabled"
         [tooltipText]="pieTooltipText"
         (select)="select($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
       >
       </ngx-charts-advanced-pie-chart>
       <ngx-charts-pie-grid
@@ -325,6 +345,8 @@
         [tooltipDisabled]="tooltipDisabled"
         [tooltipText]="pieTooltipText"
         (select)="select($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
       >
       </ngx-charts-pie-grid>
       <ngx-charts-line-chart
@@ -363,6 +385,8 @@
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
       >
       </ngx-charts-line-chart>
       <ngx-charts-polar-chart
@@ -394,6 +418,8 @@
         [maxYAxisTickLength]="maxYAxisTickLength"
         [curve]="closedCurve"
         (select)="select($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
       >
       </ngx-charts-polar-chart>
       <ngx-charts-bubble-chart
@@ -428,6 +454,9 @@
         [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
+        (select)="select($event)"
       >
       </ngx-charts-bubble-chart>
       <div style="width: 100%; height: 100%" *ngIf="chartType === 'force-directed-graph'">
@@ -487,6 +516,8 @@
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
       >
       </ngx-charts-area-chart>
       <ngx-charts-area-chart-stacked
@@ -523,6 +554,8 @@
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
       >
       </ngx-charts-area-chart-stacked>
       <ngx-charts-area-chart-normalized
@@ -555,6 +588,8 @@
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
       >
       </ngx-charts-area-chart-normalized>
       <combo-chart-component
@@ -614,6 +649,8 @@
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
       >
       </ngx-charts-heat-map>
       <ngx-charts-heat-map
@@ -640,6 +677,8 @@
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
       >
       </ngx-charts-heat-map>
       <ngx-charts-tree-map
@@ -655,6 +694,8 @@
         [valueFormatting]="currencyFormatting"
         [gradient]="gradient"
         (select)="select($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
       >
       </ngx-charts-tree-map>
       <ngx-charts-number-card
@@ -668,6 +709,8 @@
         [results]="single"
         [animations]="animations"
         (select)="select($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
       >
       </ngx-charts-number-card>
       <div *ngIf="chartType === 'status-demo'">
@@ -730,6 +773,8 @@
         [showText]="showText"
         (select)="select($event)"
         (legendLabelClick)="onLegendLabelClick($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
       >
       </ngx-charts-gauge>
       <ngx-charts-linear-gauge
@@ -817,6 +862,8 @@
           [trimYAxisTicks]="trimYAxisTicks"
           [maxYAxisTickLength]="maxYAxisTickLength"
           (select)="select($event)"
+          (activate)="activate($event)"
+          (deactivate)="deactivate($event)"
         >
         </ngx-charts-polar-chart>
       </div>
@@ -850,6 +897,8 @@
           [tooltipDisabled]="tooltipDisabled"
           [gradient]="gradient"
           (select)="treemapSelect($event)"
+          (activate)="activate($event)"
+          (deactivate)="deactivate($event)"
         >
         </ngx-charts-tree-map>
       </div>
@@ -927,6 +976,8 @@
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
       >
       </ngx-charts-line-chart>
       <ngx-charts-bar-vertical
@@ -958,6 +1009,8 @@
         [maxYAxisTickLength]="maxYAxisTickLength"
         (select)="select($event)"
         (legendLabelClick)="onLegendLabelClick($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
       >
         <ng-template #tooltipTemplate let-model="model">
           <h1>
@@ -1028,6 +1081,8 @@
       [maxXAxisTickLength]="maxXAxisTickLength"
       [maxYAxisTickLength]="maxYAxisTickLength"
       (select)="select($event)"
+      (activate)="activate($event)"
+      (deactivate)="deactivate($event)"
     >
     </ngx-charts-bar-vertical-stacked>
     <ngx-charts-bar-horizontal-stacked
@@ -1060,6 +1115,8 @@
       [maxXAxisTickLength]="maxXAxisTickLength"
       [maxYAxisTickLength]="maxYAxisTickLength"
       (select)="select($event)"
+      (activate)="activate($event)"
+      (deactivate)="deactivate($event)"
     >
     </ngx-charts-bar-horizontal-stacked>
   </div>

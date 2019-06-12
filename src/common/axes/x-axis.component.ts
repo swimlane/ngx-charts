@@ -14,10 +14,9 @@ import { XAxisTicksComponent } from './x-axis-ticks.component';
 @Component({
   selector: 'g[ngx-charts-x-axis]',
   template: `
-    <svg:g
-      [attr.class]="xAxisClassName"
-      [attr.transform]="transform">
-      <svg:g ngx-charts-x-axis-ticks
+    <svg:g [attr.class]="xAxisClassName" [attr.transform]="transform">
+      <svg:g
+        ngx-charts-x-axis-ticks
         *ngIf="xScale"
         [trimTicks]="trimTicks"
         [rotateTicks]="rotateTicks"
@@ -33,20 +32,20 @@ import { XAxisTicksComponent } from './x-axis-ticks.component';
         [tickValues]="ticks"
         (dimensionsChanged)="emitTicksHeight($event)"
       />
-      <svg:g ngx-charts-axis-label
+      <svg:g
+        ngx-charts-axis-label
         *ngIf="showLabel"
         [label]="labelText"
         [offset]="labelOffset"
         [orient]="'bottom'"
         [height]="dims.height"
-        [width]="dims.width">
-      </svg:g>
+        [width]="dims.width"
+      ></svg:g>
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class XAxisComponent implements OnChanges {
-
   @Input() xScale;
   @Input() dims;
   @Input() trimTicks: boolean;
@@ -75,7 +74,7 @@ export class XAxisComponent implements OnChanges {
   strokeWidth: string = 'none';
   padding: number = 5;
 
-  @ViewChild(XAxisTicksComponent) ticksComponent: XAxisTicksComponent;
+  @ViewChild(XAxisTicksComponent, { static: false }) ticksComponent: XAxisTicksComponent;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -93,10 +92,9 @@ export class XAxisComponent implements OnChanges {
     const newLabelOffset = height + 25 + 5;
     if (newLabelOffset !== this.labelOffset) {
       this.labelOffset = newLabelOffset;
-      setTimeout(() => {        
-        this.dimensionsChanged.emit({height});
+      setTimeout(() => {
+        this.dimensionsChanged.emit({ height });
       }, 0);
     }
   }
-
 }

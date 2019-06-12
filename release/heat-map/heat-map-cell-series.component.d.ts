@@ -10,6 +10,8 @@ export declare class HeatCellSeriesComponent implements OnChanges, OnInit {
     tooltipTemplate: TemplateRef<any>;
     animations: boolean;
     select: EventEmitter<{}>;
+    activate: EventEmitter<any>;
+    deactivate: EventEmitter<any>;
     cells: any[];
     ngOnInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
@@ -21,5 +23,5 @@ export declare class HeatCellSeriesComponent implements OnChanges, OnInit {
         series: any;
     }): string;
     trackBy(index: any, item: any): string;
-    onClick(value: any, label: any, series: any): void;
+    onClick(data: any): void;
 }

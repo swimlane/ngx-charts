@@ -1,4 +1,5 @@
 import { EventEmitter, OnChanges, TemplateRef } from '@angular/core';
+import { DataItem } from '../models/chart-data.model';
 export declare enum D0Types {
     positive = "positive",
     negative = "negative"
@@ -19,6 +20,7 @@ export declare class SeriesVerticalComponent implements OnChanges {
     animations: boolean;
     showDataLabel: boolean;
     dataLabelFormatting: any;
+    noBarWhenZero: boolean;
     select: EventEmitter<{}>;
     activate: EventEmitter<{}>;
     deactivate: EventEmitter<{}>;
@@ -41,7 +43,8 @@ export declare class SeriesVerticalComponent implements OnChanges {
     updateDataLabels(): void;
     updateTooltipSettings(): void;
     isActive(entry: any): boolean;
-    onClick(data: any): void;
+    onClick(data: DataItem): void;
+    getLabel(dataItem: any): string;
     trackBy(index: any, bar: any): string;
     trackDataLabelBy(index: any, barLabel: any): string;
 }

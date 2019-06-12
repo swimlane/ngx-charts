@@ -16,13 +16,10 @@ import { ColorHelper } from '../common/color.helper';
 @Component({
   selector: 'ngx-charts-linear-gauge',
   template: `
-    <ngx-charts-chart
-      [view]="[width, height]"
-      [showLegend]="false"
-      [animations]="animations"
-      (click)="onClick()">
+    <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations" (click)="onClick()">
       <svg:g class="linear-gauge chart">
-        <svg:g ngx-charts-bar
+        <svg:g
+          ngx-charts-bar
           class="background-bar"
           [width]="dims.width"
           [height]="3"
@@ -31,9 +28,10 @@ import { ColorHelper } from '../common/color.helper';
           [data]="{}"
           [orientation]="'horizontal'"
           [roundEdges]="true"
-          [animations]="animations">
-        </svg:g>
-        <svg:g ngx-charts-bar
+          [animations]="animations"
+        ></svg:g>
+        <svg:g
+          ngx-charts-bar
           [width]="valueScale(value)"
           [height]="3"
           [x]="margin[3]"
@@ -42,8 +40,8 @@ import { ColorHelper } from '../common/color.helper';
           [data]="{}"
           [orientation]="'horizontal'"
           [roundEdges]="true"
-          [animations]="animations">
-        </svg:g>
+          [animations]="animations"
+        ></svg:g>
 
         <svg:line
           *ngIf="hasPreviousValue"
@@ -67,37 +65,37 @@ import { ColorHelper } from '../common/color.helper';
 
         <svg:g [attr.transform]="transform">
           <svg:g [attr.transform]="valueTranslate">
-            <svg:text #valueTextEl
+            <svg:text
+              #valueTextEl
               class="value"
               [style.textAnchor]="'middle'"
               [attr.transform]="valueTextTransform"
-              alignment-baseline="after-edge">
-              {{displayValue}}
+              alignment-baseline="after-edge"
+            >
+              {{ displayValue }}
             </svg:text>
           </svg:g>
 
           <svg:g [attr.transform]="unitsTranslate">
-            <svg:text #unitsTextEl
+            <svg:text
+              #unitsTextEl
               class="units"
               [style.textAnchor]="'middle'"
               [attr.transform]="unitsTextTransform"
-              alignment-baseline="before-edge">
-              {{units}}
+              alignment-baseline="before-edge"
+            >
+              {{ units }}
             </svg:text>
           </svg:g>
         </svg:g>
       </svg:g>
     </ngx-charts-chart>
   `,
-  styleUrls: [
-    '../common/base-chart.component.scss',
-    './linear-gauge.component.scss'
-  ],
+  styleUrls: ['../common/base-chart.component.scss', './linear-gauge.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LinearGaugeComponent extends BaseChartComponent implements AfterViewInit {
-
   @Input() min: number = 0;
   @Input() max: number = 100;
   @Input() value: number = 0;
@@ -105,8 +103,8 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
   @Input() previousValue;
   @Input() valueFormatting: any;
 
-  @ViewChild('valueTextEl') valueTextEl: ElementRef;
-  @ViewChild('unitsTextEl') unitsTextEl: ElementRef;
+  @ViewChild('valueTextEl', { static: false }) valueTextEl: ElementRef;
+  @ViewChild('unitsTextEl', { static: false }) unitsTextEl: ElementRef;
 
   dims: ViewDimensions;
   valueDomain: any;
@@ -160,8 +158,8 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
     const xOffset = this.margin[3] + this.dims.width / 2;
     const yOffset = this.margin[0] + this.dims.height / 2;
 
-    this.transform = `translate(${ xOffset }, ${ yOffset })`;
-    this.transformLine = `translate(${ this.margin[3] + this.valueScale(this.previousValue) }, ${ yOffset })`;
+    this.transform = `translate(${xOffset}, ${yOffset})`;
+    this.transformLine = `translate(${this.margin[3] + this.valueScale(this.previousValue)}, ${yOffset})`;
     this.valueTranslate = `translate(0, -15)`;
     this.unitsTranslate = `translate(0, 15)`;
     setTimeout(() => this.scaleText('value'), 50);
@@ -208,14 +206,16 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
     if (resizeScale !== oldScale) {
       if (element === 'value') {
         this.valueResizeScale = resizeScale;
-        this.valueTextTransform = `scale(${ resizeScale }, ${ resizeScale })`;
+        this.valueTextTransform = `scale(${resizeScale}, ${resizeScale})`;
       } else {
         this.unitsResizeScale = resizeScale;
-        this.unitsTextTransform = `scale(${ resizeScale }, ${ resizeScale })`;
+        this.unitsTextTransform = `scale(${resizeScale}, ${resizeScale})`;
       }
       this.cd.markForCheck();
       if (repeat) {
-        setTimeout(() => { this.scaleText(element, false); }, 50);
+        setTimeout(() => {
+          this.scaleText(element, false);
+        }, 50);
       }
     }
   }

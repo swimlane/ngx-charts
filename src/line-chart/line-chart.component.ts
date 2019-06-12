@@ -117,7 +117,7 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
                 [activeEntries]="activeEntries"
                 [tooltipDisabled]="tooltipDisabled"
                 [tooltipTemplate]="tooltipTemplate"
-                (select)="onClick($event, series)"
+                (select)="onClick($event)"
                 (activate)="onActivate($event)"
                 (deactivate)="onDeactivate($event)"
               />
@@ -213,8 +213,8 @@ export class LineChartComponent extends BaseChartComponent {
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
-  @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
-  @ContentChild('seriesTooltipTemplate') seriesTooltipTemplate: TemplateRef<any>;
+  @ContentChild('tooltipTemplate', { static: false }) tooltipTemplate: TemplateRef<any>;
+  @ContentChild('seriesTooltipTemplate', { static: false }) seriesTooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
   xSet: any;
@@ -426,11 +426,7 @@ export class LineChartComponent extends BaseChartComponent {
     this.deactivateAll();
   }
 
-  onClick(data, series?): void {
-    if (series) {
-      data.series = series.name;
-    }
-
+  onClick(data): void {
     this.select.emit(data);
   }
 
