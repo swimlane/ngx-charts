@@ -3,7 +3,7 @@ import { scaleBand, scaleLinear, scaleOrdinal, scaleQuantile } from 'd3-scale';
 import { colorSets } from '../utils/color-sets';
 var ColorHelper = /** @class */ (function () {
     function ColorHelper(scheme, type, domain, customColors) {
-        if (typeof (scheme) === 'string') {
+        if (typeof scheme === 'string') {
             scheme = colorSets.find(function (cs) {
                 return cs.name === scheme;
             });
@@ -15,7 +15,7 @@ var ColorHelper = /** @class */ (function () {
         this.scale = this.generateColorScheme(scheme, type, this.domain);
     }
     ColorHelper.prototype.generateColorScheme = function (scheme, type, domain) {
-        if (typeof (scheme) === 'string') {
+        if (typeof scheme === 'string') {
             scheme = colorSets.find(function (cs) {
                 return cs.name === scheme;
             });
@@ -46,11 +46,14 @@ var ColorHelper = /** @class */ (function () {
         return colorScale;
     };
     ColorHelper.prototype.getColor = function (value) {
+        if (value === undefined || value === null) {
+            throw new Error('Value can not be null');
+        }
         if (this.scaleType === 'linear') {
             var valueScale = scaleLinear()
                 .domain(this.domain)
                 .range([0, 1]);
-            return (this.scale(valueScale(value)));
+            return this.scale(valueScale(value));
         }
         else {
             if (typeof this.customColors === 'function') {

@@ -16,14 +16,16 @@ import { formatLabel } from '../common/label.helper';
   template: `
     <svg:g
       ngx-charts-heat-map-cell
-      *ngFor="let c of cells; trackBy:trackBy"
+      *ngFor="let c of cells; trackBy: trackBy"
       [x]="c.x"
       [y]="c.y"
       [width]="c.width"
       [height]="c.height"
       [fill]="c.fill"
       [data]="c.data"
-      (select)="onClick($event, c.label, c.series)"
+      (select)="onClick(c.cell)"
+      (activate)="activate.emit(c.cell)"
+      (deactivate)="deactivate.emit(c.cell)"
       [gradient]="gradient"
       [animations]="animations"
       ngx-tooltip
@@ -32,13 +34,12 @@ import { formatLabel } from '../common/label.helper';
       [tooltipType]="'tooltip'"
       [tooltipTitle]="tooltipTemplate ? undefined : tooltipText(c)"
       [tooltipTemplate]="tooltipTemplate"
-      [tooltipContext]="{series: c.series, name: c.label, value: c.data}">
-    </svg:g>
+      [tooltipContext]="{ series: c.series, name: c.label, value: c.data }"
+    ></svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeatCellSeriesComponent implements OnChanges, OnInit {
-
   @Input() data;
   @Input() colors;
   @Input() xScale;
@@ -48,8 +49,10 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
   @Input() tooltipText: any;
   @Input() tooltipTemplate: TemplateRef<any>;
   @Input() animations: boolean = true;
-  
+
   @Output() select = new EventEmitter();
+  @Output() activate: EventEmitter<any> = new EventEmitter();
+  @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
   cells: any[];
 
@@ -70,9 +73,10 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
   getCells() {
     const cells = [];
 
-    this.data.map((row) => {
-      row.series.map((cell) => {
+    this.data.map(row => {
+      row.series.map(cell => {
         const value = cell.value;
+        cell.series = row.name;
 
         cells.push({
           row,
@@ -103,12 +107,7 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
     return item.tooltipText;
   }
 
-  onClick(value, label, series): void {
-    this.select.emit({
-      name: label,
-      value,
-      series
-    });
+  onClick(data): void {
+    this.select.emit(data);
   }
-
 }

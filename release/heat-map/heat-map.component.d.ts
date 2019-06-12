@@ -1,4 +1,4 @@
-import { TemplateRef } from '@angular/core';
+import { TemplateRef, EventEmitter } from '@angular/core';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
@@ -27,6 +27,9 @@ export declare class HeatMapComponent extends BaseChartComponent {
     tooltipText: any;
     min: any;
     max: any;
+    activeEntries: any[];
+    activate: EventEmitter<any>;
+    deactivate: EventEmitter<any>;
     tooltipTemplate: TemplateRef<any>;
     dims: ViewDimensions;
     xDomain: any[];
@@ -83,4 +86,6 @@ export declare class HeatMapComponent extends BaseChartComponent {
     updateXAxisHeight({ height }: {
         height: any;
     }): void;
+    onActivate(event: any, group: any, fromLegend?: boolean): void;
+    onDeactivate(event: any, group: any, fromLegend?: boolean): void;
 }

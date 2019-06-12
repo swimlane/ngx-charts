@@ -33,6 +33,7 @@ export declare class BarHorizontal2DComponent extends BaseChartComponent {
     xScaleMax: number;
     showDataLabel: boolean;
     dataLabelFormatting: any;
+    noBarWhenZero: boolean;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     tooltipTemplate: TemplateRef<any>;
@@ -75,6 +76,6 @@ export declare class BarHorizontal2DComponent extends BaseChartComponent {
         height: any;
     }): void;
     onDataLabelMaxWidthChanged(event: any, groupIndex: any): void;
-    onActivate(event: any, group?: any): void;
-    onDeactivate(event: any, group?: any): void;
+    onActivate(event: any, group: any, fromLegend?: boolean): void;
+    onDeactivate(event: any, group: any, fromLegend?: boolean): void;
 }
