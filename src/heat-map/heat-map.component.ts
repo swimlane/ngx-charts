@@ -4,14 +4,16 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy,
   ContentChild,
-  TemplateRef
+  TemplateRef,
+  Output,
+  EventEmitter
 } from '@angular/core';
 import { scaleBand } from 'd3-scale';
 
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
-import {getScaleType} from '../common/domain.helper';
+import { getScaleType } from '../common/domain.helper';
 
 @Component({
   selector: 'ngx-charts-heat-map',
@@ -21,9 +23,11 @@ import {getScaleType} from '../common/domain.helper';
       [showLegend]="legend"
       [animations]="animations"
       [legendOptions]="legendOptions"
-      (legendLabelClick)="onClick($event)">
+      (legendLabelClick)="onClick($event)"
+    >
       <svg:g [attr.transform]="transform" class="heat-map chart">
-        <svg:g ngx-charts-x-axis
+        <svg:g
+          ngx-charts-x-axis
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
@@ -34,9 +38,10 @@ import {getScaleType} from '../common/domain.helper';
           [maxTickLength]="maxXAxisTickLength"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
-          (dimensionsChanged)="updateXAxisHeight($event)">
-        </svg:g>
-        <svg:g ngx-charts-y-axis
+          (dimensionsChanged)="updateXAxisHeight($event)"
+        ></svg:g>
+        <svg:g
+          ngx-charts-y-axis
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
@@ -46,9 +51,10 @@ import {getScaleType} from '../common/domain.helper';
           [maxTickLength]="maxYAxisTickLength"
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
-          (dimensionsChanged)="updateYAxisWidth($event)">
-        </svg:g>
-        <svg:rect *ngFor="let rect of rects"
+          (dimensionsChanged)="updateYAxisWidth($event)"
+        ></svg:g>
+        <svg:rect
+          *ngFor="let rect of rects"
           [attr.x]="rect.x"
           [attr.y]="rect.y"
           [attr.rx]="rect.rx"
@@ -56,7 +62,8 @@ import {getScaleType} from '../common/domain.helper';
           [attr.height]="rect.height"
           [attr.fill]="rect.fill"
         />
-        <svg:g ngx-charts-heat-map-cell-series
+        <svg:g
+          ngx-charts-heat-map-cell-series
           [xScale]="xScale"
           [yScale]="yScale"
           [colors]="colors"
@@ -67,6 +74,8 @@ import {getScaleType} from '../common/domain.helper';
           [tooltipTemplate]="tooltipTemplate"
           [tooltipText]="tooltipText"
           (select)="onClick($event)"
+          (activate)="onActivate($event, undefined)"
+          (deactivate)="onDeactivate($event, undefined)"
         />
       </svg:g>
     </ngx-charts-chart>
@@ -76,7 +85,6 @@ import {getScaleType} from '../common/domain.helper';
   encapsulation: ViewEncapsulation.None
 })
 export class HeatMapComponent extends BaseChartComponent {
-
   @Input() legend;
   @Input() legendTitle: string = 'Legend';
   @Input() legendPosition: string = 'right';
@@ -101,8 +109,12 @@ export class HeatMapComponent extends BaseChartComponent {
   @Input() tooltipText: any;
   @Input() min: any;
   @Input() max: any;
+  @Input() activeEntries: any[] = [];
 
-  @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
+  @Output() activate: EventEmitter<any> = new EventEmitter();
+  @Output() deactivate: EventEmitter<any> = new EventEmitter();
+
+  @ContentChild('tooltipTemplate', { static: false }) tooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
   xDomain: any[];
@@ -264,8 +276,8 @@ export class HeatMapComponent extends BaseChartComponent {
   getRects(): any[] {
     const rects = [];
 
-    this.xDomain.map((xVal) => {
-      this.yDomain.map((yVal) => {
+    this.xDomain.map(xVal => {
+      this.yDomain.map(yVal => {
         rects.push({
           x: this.xScale(xVal),
           y: this.yScale(yVal),
@@ -308,4 +320,41 @@ export class HeatMapComponent extends BaseChartComponent {
     this.update();
   }
 
+  onActivate(event, group, fromLegend = false) {
+    const item = Object.assign({}, event);
+    if (group) {
+      item.series = group.name;
+    }
+
+    const items = this.results
+      .map(g => g.series)
+      .flat()
+      .filter(i => {
+        if (fromLegend) {
+          return i.label === item.name;
+        } else {
+          return i.name === item.name && i.series === item.series;
+        }
+      });
+
+    this.activeEntries = [...items];
+    this.activate.emit({ value: item, entries: this.activeEntries });
+  }
+
+  onDeactivate(event, group, fromLegend = false) {
+    const item = Object.assign({}, event);
+    if (group) {
+      item.series = group.name;
+    }
+
+    this.activeEntries = this.activeEntries.filter(i => {
+      if (fromLegend) {
+        return i.label !== item.name;
+      } else {
+        return !(i.name === item.name && i.series === item.series);
+      }
+    });
+
+    this.deactivate.emit({ value: item, entries: this.activeEntries });
+  }
 }

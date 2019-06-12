@@ -19,11 +19,7 @@ import * as ease from 'd3-ease';
   selector: 'g[ngx-charts-bar]',
   template: `
     <svg:defs *ngIf="hasGradient">
-      <svg:g ngx-charts-svg-linear-gradient
-        [orientation]="orientation"
-        [name]="gradientId"
-        [stops]="gradientStops"
-      />
+      <svg:g ngx-charts-svg-linear-gradient [orientation]="orientation" [name]="gradientId" [stops]="gradientStops" />
     </svg:defs>
     <svg:path
       class="bar"
@@ -41,9 +37,8 @@ import * as ease from 'd3-ease';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BarComponent implements OnChanges {
-
   @Input() fill;
-  @Input() data;
+  @Input() data: any;
   @Input() width: number;
   @Input() height: number;
   @Input() x: number;
@@ -96,7 +91,7 @@ export class BarComponent implements OnChanges {
     } else {
       this.hasGradient = false;
     }
-    
+
     this.updatePathEl();
     this.checkToHideBar();
   }
@@ -138,7 +133,8 @@ export class BarComponent implements OnChanges {
         offset: 100,
         color: this.fill,
         opacity: 1
-    }];
+      }
+    ];
   }
 
   getStartingPath() {
@@ -242,15 +238,15 @@ export class BarComponent implements OnChanges {
     if (this.roundEdges) {
       if (this.orientation === 'vertical') {
         if (this.data.value > 0) {
-          edges =  [true, true, false, false];
+          edges = [true, true, false, false];
         } else {
-          edges =  [false, false, true, true];
+          edges = [false, false, true, true];
         }
       } else if (this.orientation === 'horizontal') {
         if (this.data.value > 0) {
-          edges =  [false, true, false, true];
+          edges = [false, true, false, true];
         } else {
-          edges =  [true, false, true, false];
+          edges = [true, false, true, false];
         }
       }
     }
@@ -268,8 +264,9 @@ export class BarComponent implements OnChanges {
   }
 
   private checkToHideBar() {
-    this.hideBar = this.noBarWhenZero
-      && (this.orientation === 'vertical' && this.height === 0
-          || this.orientation === 'horizontal' && this.width === 0);
+    this.hideBar =
+      this.noBarWhenZero &&
+      ((this.orientation === 'vertical' && this.height === 0) ||
+        (this.orientation === 'horizontal' && this.width === 0));
   }
 }

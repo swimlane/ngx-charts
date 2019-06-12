@@ -2,6 +2,7 @@ import { EventEmitter, TemplateRef } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
+import { DataItem } from '../models/chart-data.model';
 export declare class BarVerticalComponent extends BaseChartComponent {
     legend: boolean;
     legendTitle: string;
@@ -33,6 +34,7 @@ export declare class BarVerticalComponent extends BaseChartComponent {
     yScaleMin: number;
     showDataLabel: boolean;
     dataLabelFormatting: any;
+    noBarWhenZero: boolean;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     tooltipTemplate: TemplateRef<any>;
@@ -52,8 +54,8 @@ export declare class BarVerticalComponent extends BaseChartComponent {
     getXScale(): any;
     getYScale(): any;
     getXDomain(): any[];
-    getYDomain(): number[];
-    onClick(data: any): void;
+    getYDomain(): [number, number];
+    onClick(data: DataItem): void;
     setColors(): void;
     getLegendOptions(): {
         scaleType: string;
@@ -69,6 +71,6 @@ export declare class BarVerticalComponent extends BaseChartComponent {
         height: any;
     }): void;
     onDataLabelMaxHeightChanged(event: any): void;
-    onActivate(item: any): void;
-    onDeactivate(item: any): void;
+    onActivate(item: any, fromLegend?: boolean): void;
+    onDeactivate(item: any, fromLegend?: boolean): void;
 }

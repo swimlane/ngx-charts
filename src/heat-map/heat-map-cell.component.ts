@@ -6,7 +6,8 @@ import {
   SimpleChanges,
   ElementRef,
   OnChanges,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  HostListener
 } from '@angular/core';
 import { select } from 'd3-selection';
 
@@ -17,11 +18,7 @@ import { id } from '../utils/id';
   template: `
     <svg:g [attr.transform]="transform" class="cell">
       <defs *ngIf="gradient">
-        <svg:g ngx-charts-svg-linear-gradient
-          orientation="vertical"
-          [name]="gradientId"
-          [stops]="gradientStops"
-        />
+        <svg:g ngx-charts-svg-linear-gradient orientation="vertical" [name]="gradientId" [stops]="gradientStops" />
       </defs>
       <svg:rect
         [attr.fill]="gradient ? gradientUrl : fill"
@@ -37,7 +34,6 @@ import { id } from '../utils/id';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeatMapCellComponent implements OnChanges {
-
   @Input() fill;
   @Input() x;
   @Input() y;
@@ -49,6 +45,8 @@ export class HeatMapCellComponent implements OnChanges {
   @Input() animations: boolean = true;
 
   @Output() select = new EventEmitter();
+  @Output() activate = new EventEmitter();
+  @Output() deactivate = new EventEmitter();
 
   element: HTMLElement;
   transform: string;
@@ -86,7 +84,8 @@ export class HeatMapCellComponent implements OnChanges {
         offset: 100,
         color: this.fill,
         opacity: 1
-    }];
+      }
+    ];
   }
 
   loadAnimation(): void {
@@ -97,8 +96,10 @@ export class HeatMapCellComponent implements OnChanges {
 
   animateToCurrentForm(): void {
     const node = select(this.element).select('.cell');
-    
-    node.transition().duration(750)
+
+    node
+      .transition()
+      .duration(750)
       .attr('opacity', 1);
   }
 
@@ -106,4 +107,13 @@ export class HeatMapCellComponent implements OnChanges {
     this.select.emit(this.data);
   }
 
+  @HostListener('mouseenter')
+  onMouseEnter(): void {
+    this.activate.emit(this.data);
+  }
+
+  @HostListener('mouseleave')
+  onMouseLeave(): void {
+    this.deactivate.emit(this.data);
+  }
 }

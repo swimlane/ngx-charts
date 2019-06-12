@@ -16,8 +16,9 @@ import { formatLabel } from '../common/label.helper';
 @Component({
   selector: 'g[ngx-charts-pie-series]',
   template: `
-    <svg:g *ngFor="let arc of data; trackBy:trackBy">
-      <svg:g ngx-charts-pie-label
+    <svg:g *ngFor="let arc of data; trackBy: trackBy">
+      <svg:g
+        ngx-charts-pie-label
         *ngIf="labelVisible(arc)"
         [data]="arc"
         [radius]="outerRadius"
@@ -28,8 +29,8 @@ import { formatLabel } from '../common/label.helper';
         [max]="max"
         [value]="arc.value"
         [explodeSlices]="explodeSlices"
-        [animations]="animations">
-      </svg:g>
+        [animations]="animations"
+      ></svg:g>
       <svg:g
         ngx-charts-pie-arc
         [startAngle]="arc.startAngle"
@@ -54,8 +55,8 @@ import { formatLabel } from '../common/label.helper';
         [tooltipType]="'tooltip'"
         [tooltipTitle]="getTooltipTitle(arc)"
         [tooltipTemplate]="tooltipTemplate"
-        [tooltipContext]="arc.data">
-      </svg:g>
+        [tooltipContext]="arc.data"
+      ></svg:g>
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush

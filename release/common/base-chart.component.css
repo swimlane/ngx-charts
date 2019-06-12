@@ -19,6 +19,11 @@
   .ngx-charts .arc:focus,
   .ngx-charts .card:focus {
     outline: none; }
+  .ngx-charts .bar.hidden,
+  .ngx-charts .cell.hidden,
+  .ngx-charts .arc.hidden,
+  .ngx-charts .card.hidden {
+    display: none; }
   .ngx-charts g:focus {
     outline: none; }
   .ngx-charts .line-series.inactive,

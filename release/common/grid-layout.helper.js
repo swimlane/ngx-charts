@@ -39,19 +39,18 @@ export function gridLayout(dims, data, minWidth, designatedTotal) {
             name: data[i] ? data[i].name : '',
             value: data[i] ? data[i].value : undefined,
             extra: data[i] ? data[i].extra : undefined,
+            label: data[i] ? data[i].label : ''
         };
         res[i].x = xScale(i % columns);
         res[i].y = yScale(Math.floor(i / columns));
         res[i].width = cardWidth;
         res[i].height = cardHeight;
-        res[i].data.percent = (total > 0) ? res[i].data.value / total : 0;
+        res[i].data.percent = total > 0 ? res[i].data.value / total : 0;
         res[i].data.total = total;
     }
     return res;
 }
 function getTotal(results) {
-    return results
-        .map(function (d) { return d ? d.value : 0; })
-        .reduce(function (sum, val) { return sum + val; }, 0);
+    return results.map(function (d) { return (d ? d.value : 0); }).reduce(function (sum, val) { return sum + val; }, 0);
 }
 //# sourceMappingURL=grid-layout.helper.js.map

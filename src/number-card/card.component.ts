@@ -1,7 +1,16 @@
 import {
-  Component, Input, Output, EventEmitter, ElementRef,
-  SimpleChanges, OnChanges, ViewChild, ChangeDetectionStrategy,
-  ChangeDetectorRef, NgZone, OnDestroy
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ElementRef,
+  SimpleChanges,
+  OnChanges,
+  ViewChild,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  NgZone,
+  OnDestroy
 } from '@angular/core';
 import { trimLabel } from '../common/trim-label.helper';
 import { roundedRect } from '../common/shape.helper';
@@ -10,18 +19,8 @@ import { count, decimalChecker } from '../common/count';
 @Component({
   selector: 'g[ngx-charts-card]',
   template: `
-    <svg:g
-      [attr.transform]="transform"
-      class="cell"
-      (click)="onClick()">
-      <svg:rect
-        class="card"
-        [style.fill]="color"
-        [attr.width]="cardWidth"
-        [attr.height]="cardHeight"
-        rx="3"
-        ry="3"
-      />
+    <svg:g [attr.transform]="transform" class="cell" (click)="onClick()">
+      <svg:rect class="card" [style.fill]="color" [attr.width]="cardWidth" [attr.height]="cardHeight" rx="3" ry="3" />
       <svg:path
         *ngIf="bandColor && bandColor !== color"
         class="card-band"
@@ -30,7 +29,7 @@ import { count, decimalChecker } from '../common/count';
         stroke="none"
         [attr.d]="bandPath"
       />
-      <title>{{label}}</title>
+      <title>{{ label }}</title>
       <svg:foreignObject
         class="trimmed-label"
         x="5"
@@ -38,30 +37,33 @@ import { count, decimalChecker } from '../common/count';
         [attr.y]="cardHeight - textPadding[2]"
         [attr.width]="textWidth"
         [attr.height]="labelFontSize + textPadding[2]"
-        alignment-baseline="hanging">
+        alignment-baseline="hanging"
+      >
         <xhtml:p
           [style.color]="textColor"
           [style.fontSize.px]="labelFontSize"
           [style.lineHeight.px]="labelFontSize"
-          [innerHTML]="formattedLabel">
+          [innerHTML]="formattedLabel"
+        >
         </xhtml:p>
       </svg:foreignObject>
-      <svg:text #textEl
+      <svg:text
+        #textEl
         class="value-text"
         [attr.x]="textPadding[3]"
         [attr.y]="textPadding[0]"
         [style.fill]="textColor"
         text-anchor="start"
         alignment-baseline="hanging"
-        [style.font-size.pt]="textFontSize">
-        {{value}}
+        [style.font-size.pt]="textFontSize"
+      >
+        {{ value }}
       </svg:text>
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardComponent implements OnChanges, OnDestroy {
-
   @Input() color;
   @Input() bandColor;
   @Input() textColor;
@@ -79,7 +81,7 @@ export class CardComponent implements OnChanges, OnDestroy {
 
   @Output() select = new EventEmitter();
 
-  @ViewChild('textEl') textEl: ElementRef;
+  @ViewChild('textEl', { static: false }) textEl: ElementRef;
 
   element: HTMLElement;
   value: string = '';
@@ -124,7 +126,7 @@ export class CardComponent implements OnChanges, OnDestroy {
       this.cardWidth = Math.max(0, this.width);
       this.cardHeight = Math.max(0, this.height);
 
-      this.label = this.data ? this.data.name : '';
+      this.label = this.label ? this.label : this.data.name;
 
       const cardData = {
         label: this.label,
@@ -167,10 +169,10 @@ export class CardComponent implements OnChanges, OnDestroy {
       const decs = decimalChecker(val);
       const valueFormatting = this.valueFormatting || (card => card.value.toLocaleString());
 
-      const callback = ({value, finished}) => {
+      const callback = ({ value, finished }) => {
         this.zone.run(() => {
           value = finished ? val : value;
-          this.value = valueFormatting({label: this.label, data: this.data, value});
+          this.value = valueFormatting({ label: this.label, data: this.data, value });
           if (!finished) {
             this.value = this.paddedValue(this.value);
           }
@@ -190,7 +192,7 @@ export class CardComponent implements OnChanges, OnDestroy {
         return;
       }
 
-      const textPadding = this.textPadding[1] = this.textPadding[3] = this.cardWidth / 8;
+      const textPadding = (this.textPadding[1] = this.textPadding[3] = this.cardWidth / 8);
       const availableWidth = this.cardWidth - 2 * textPadding;
       const availableHeight = this.cardHeight / 3;
 
@@ -211,9 +213,6 @@ export class CardComponent implements OnChanges, OnDestroy {
   }
 
   onClick(): void {
-    this.select.emit({
-      name: this.data.name,
-      value: this.data.value
-    });
+    this.select.emit(this.data);
   }
 }

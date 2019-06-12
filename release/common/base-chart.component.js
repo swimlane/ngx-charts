@@ -90,14 +90,16 @@ var BaseChartComponent = /** @class */ (function () {
     BaseChartComponent.prototype.formatDates = function () {
         for (var i = 0; i < this.results.length; i++) {
             var g = this.results[i];
-            if (g.name instanceof Date) {
-                g.name = g.name.toLocaleDateString();
+            g.label = g.name;
+            if (g.label instanceof Date) {
+                g.label = g.label.toLocaleDateString();
             }
             if (g.series) {
                 for (var j = 0; j < g.series.length; j++) {
                     var d = g.series[j];
-                    if (d.name instanceof Date) {
-                        d.name = d.name.toLocaleDateString();
+                    d.label = d.name;
+                    if (d.label instanceof Date) {
+                        d.label = d.label.toLocaleDateString();
                     }
                 }
             }
@@ -184,11 +186,9 @@ var BaseChartComponent = /** @class */ (function () {
     BaseChartComponent = __decorate([
         Component({
             selector: 'base-chart',
-            template: "<div></div>"
+            template: "\n    <div></div>\n  "
         }),
-        __metadata("design:paramtypes", [ElementRef,
-            NgZone,
-            ChangeDetectorRef])
+        __metadata("design:paramtypes", [ElementRef, NgZone, ChangeDetectorRef])
     ], BaseChartComponent);
     return BaseChartComponent;
 }());

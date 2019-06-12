@@ -3,6 +3,7 @@ export * from './advanced-pie-chart.component';
 export * from './pie-chart.component';
 export * from './pie-arc.component';
 export * from './pie-grid.component';
+export * from './pie-grid-series.component';
 export * from './pie-series.component';
 export * from './pie-label.component';
 //# sourceMappingURL=index.js.map

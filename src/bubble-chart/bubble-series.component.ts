@@ -8,12 +8,7 @@ import {
   ChangeDetectionStrategy,
   TemplateRef
 } from '@angular/core';
-import {
-  trigger,
-  style,
-  animate,
-  transition
-} from '@angular/animations';
+import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel } from '../common/label.helper';
 
 @Component({
@@ -21,7 +16,8 @@ import { formatLabel } from '../common/label.helper';
   template: `
     <svg:g *ngFor="let circle of circles; trackBy: trackBy">
       <svg:g [attr.transform]="circle.transform">
-        <svg:g ngx-charts-circle
+        <svg:g
+          ngx-charts-circle
           [@animationState]="'active'"
           class="circle"
           [cx]="0"
@@ -33,7 +29,7 @@ import { formatLabel } from '../common/label.helper';
           [pointerEvents]="'all'"
           [data]="circle.value"
           [classNames]="circle.classNames"
-          (select)="onClick($event, circle.label)"
+          (select)="onClick(circle.data)"
           (activate)="activateCircle(circle)"
           (deactivate)="deactivateCircle(circle)"
           ngx-tooltip
@@ -55,13 +51,12 @@ import { formatLabel } from '../common/label.helper';
           opacity: 0,
           transform: 'scale(0)'
         }),
-        animate(250, style({opacity: 1, transform: 'scale(1)'}))
+        animate(250, style({ opacity: 1, transform: 'scale(1)' }))
       ])
     ])
   ]
 })
 export class BubbleSeriesComponent implements OnChanges {
-
   @Input() data;
   @Input() xScale;
   @Input() yScale;
@@ -94,53 +89,53 @@ export class BubbleSeriesComponent implements OnChanges {
   getCircles(): any[] {
     const seriesName = this.data.name;
 
-    return this.data.series.map((d, i) => {
-      if (typeof d.y !== 'undefined' && typeof d.x !== 'undefined') {
-        const y = d.y;
-        const x = d.x;
-        const r = d.r;
+    return this.data.series
+      .map((d, i) => {
+        if (typeof d.y !== 'undefined' && typeof d.x !== 'undefined') {
+          const y = d.y;
+          const x = d.x;
+          const r = d.r;
 
-        const radius = this.rScale(r || 1);
-        const tooltipLabel = formatLabel(d.name);
+          const radius = this.rScale(r || 1);
+          const tooltipLabel = formatLabel(d.name);
 
-        const cx = (this.xScaleType === 'linear') ? this.xScale(Number(x)) : this.xScale(x);
-        const cy = (this.yScaleType === 'linear') ? this.yScale(Number(y)) : this.yScale(y);
+          const cx = this.xScaleType === 'linear' ? this.xScale(Number(x)) : this.xScale(x);
+          const cy = this.yScaleType === 'linear' ? this.yScale(Number(y)) : this.yScale(y);
 
-        const color = (this.colors.scaleType === 'linear') ?
-          this.colors.getColor(r) :
-          this.colors.getColor(seriesName);
+          const color = this.colors.scaleType === 'linear' ? this.colors.getColor(r) : this.colors.getColor(seriesName);
 
-        const isActive = !this.activeEntries.length ? true : this.isActive({name: seriesName});
-        const opacity = isActive ? 1 : 0.3;
+          const isActive = !this.activeEntries.length ? true : this.isActive({ name: seriesName });
+          const opacity = isActive ? 1 : 0.3;
 
-        const data = Object.assign({}, d, {
-          series: seriesName,
-          name: d.name,
-          value: d.y,
-          x: d.x,
-          radius: d.r
-        });
+          const data = Object.assign({}, d, {
+            series: seriesName,
+            name: d.name,
+            value: d.y,
+            x: d.x,
+            radius: d.r
+          });
 
-        return {
-          data,
-          x,
-          y,
-          r,
-          classNames: [`circle-data-${i}`],
-          value: y,
-          label: x,
-          cx,
-          cy,
-          radius,
-          tooltipLabel,
-          color,
-          opacity,
-          seriesName,
-          isActive,
-          transform: `translate(${cx},${cy})`
-        };
-      }
-    }).filter((circle) => circle !== undefined);
+          return {
+            data,
+            x,
+            y,
+            r,
+            classNames: [`circle-data-${i}`],
+            value: y,
+            label: x,
+            cx,
+            cy,
+            radius,
+            tooltipLabel,
+            color,
+            opacity,
+            seriesName,
+            isActive,
+            transform: `translate(${cx},${cy})`
+          };
+        }
+      })
+      .filter(circle => circle !== undefined);
   }
 
   getTooltipText(circle): string {
@@ -153,12 +148,11 @@ export class BubbleSeriesComponent implements OnChanges {
     const yAxisLabel = this.yAxisLabel && this.yAxisLabel !== '' ? `${this.yAxisLabel}:` : '';
     const x = formatLabel(circle.x);
     const y = formatLabel(circle.y);
-    const name = (hasSeriesName && hasTooltipLabel) ?
-      `${circle.seriesName} • ${circle.tooltipLabel}` :
-      circle.seriesName + circle.tooltipLabel;
-    const tooltipTitle = (hasSeriesName || hasTooltipLabel) ?
-      `<span class="tooltip-label">${name}</span>` :
-      '';
+    const name =
+      hasSeriesName && hasTooltipLabel
+        ? `${circle.seriesName} • ${circle.tooltipLabel}`
+        : circle.seriesName + circle.tooltipLabel;
+    const tooltipTitle = hasSeriesName || hasTooltipLabel ? `<span class="tooltip-label">${name}</span>` : '';
 
     return `
       ${tooltipTitle}
@@ -172,15 +166,12 @@ export class BubbleSeriesComponent implements OnChanges {
     `;
   }
 
-  onClick(value, label): void {
-    this.select.emit({
-      name: label,
-      value
-    });
+  onClick(data): void {
+    this.select.emit(data);
   }
 
   isActive(entry): boolean {
-    if(!this.activeEntries) return false;
+    if (!this.activeEntries) return false;
     const item = this.activeEntries.find(d => {
       return entry.name === d.name;
     });
@@ -189,7 +180,7 @@ export class BubbleSeriesComponent implements OnChanges {
 
   isVisible(circle): boolean {
     if (this.activeEntries.length > 0) {
-      return this.isActive({name: circle.seriesName});
+      return this.isActive({ name: circle.seriesName });
     }
 
     return circle.opacity !== 0;
@@ -197,12 +188,12 @@ export class BubbleSeriesComponent implements OnChanges {
 
   activateCircle(circle): void {
     circle.barVisible = true;
-    this.activate.emit({name: this.data.name});
+    this.activate.emit({ name: this.data.name });
   }
 
   deactivateCircle(circle): void {
     circle.barVisible = false;
-    this.deactivate.emit({name: this.data.name});
+    this.deactivate.emit({ name: this.data.name });
   }
 
   trackBy(index, circle): string {

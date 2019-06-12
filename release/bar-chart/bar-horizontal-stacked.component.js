@@ -4,7 +4,7 @@ var __extends = (this && this.__extends) || (function () {
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
         return extendStatics(d, b);
-    }
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -44,6 +44,7 @@ var BarHorizontalStackedComponent = /** @class */ (function (_super) {
         _this.barPadding = 8;
         _this.roundDomains = false;
         _this.showDataLabel = false;
+        _this.noBarWhenZero = true;
         _this.activate = new EventEmitter();
         _this.deactivate = new EventEmitter();
         _this.margin = [10, 20, 10, 20];
@@ -86,8 +87,8 @@ var BarHorizontalStackedComponent = /** @class */ (function (_super) {
         var domain = [];
         for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
             var group = _a[_i];
-            if (!domain.includes(group.name)) {
-                domain.push(group.name);
+            if (!domain.includes(group.label)) {
+                domain.push(group.label);
             }
         }
         return domain;
@@ -98,8 +99,8 @@ var BarHorizontalStackedComponent = /** @class */ (function (_super) {
             var group = _a[_i];
             for (var _b = 0, _c = group.series; _b < _c.length; _b++) {
                 var d = _c[_b];
-                if (!domain.includes(d.name)) {
-                    domain.push(d.name);
+                if (!domain.includes(d.label)) {
+                    domain.push(d.label);
                 }
             }
         }
@@ -130,8 +131,7 @@ var BarHorizontalStackedComponent = /** @class */ (function (_super) {
         domain.push(smallest);
         domain.push(biggest);
         var min = Math.min.apply(Math, [0].concat(domain));
-        var max = this.xScaleMax
-            ? Math.max.apply(Math, [this.xScaleMax].concat(domain)) : Math.max.apply(Math, domain);
+        var max = this.xScaleMax ? Math.max.apply(Math, [this.xScaleMax].concat(domain)) : Math.max.apply(Math, domain);
         return [min, max];
     };
     BarHorizontalStackedComponent.prototype.getYScale = function () {
@@ -206,34 +206,44 @@ var BarHorizontalStackedComponent = /** @class */ (function (_super) {
         else {
             this.dataLabelMaxWidth.positive = Math.max(this.dataLabelMaxWidth.positive, event.size.width);
         }
-        if (groupIndex === (this.results.length - 1)) {
+        if (groupIndex === this.results.length - 1) {
             setTimeout(function () { return _this.update(); });
         }
     };
-    BarHorizontalStackedComponent.prototype.onActivate = function (event, group) {
+    BarHorizontalStackedComponent.prototype.onActivate = function (event, group, fromLegend) {
+        if (fromLegend === void 0) { fromLegend = false; }
         var item = Object.assign({}, event);
         if (group) {
             item.series = group.name;
         }
-        var idx = this.activeEntries.findIndex(function (d) {
-            return d.name === item.name && d.value === item.value && d.series === item.series;
+        var items = this.results
+            .map(function (g) { return g.series; })
+            .flat()
+            .filter(function (i) {
+            if (fromLegend) {
+                return i.label === item.name;
+            }
+            else {
+                return i.name === item.name && i.series === item.series;
+            }
         });
-        if (idx > -1) {
-            return;
-        }
-        this.activeEntries = [item].concat(this.activeEntries);
+        this.activeEntries = items.slice();
         this.activate.emit({ value: item, entries: this.activeEntries });
     };
-    BarHorizontalStackedComponent.prototype.onDeactivate = function (event, group) {
+    BarHorizontalStackedComponent.prototype.onDeactivate = function (event, group, fromLegend) {
+        if (fromLegend === void 0) { fromLegend = false; }
         var item = Object.assign({}, event);
         if (group) {
             item.series = group.name;
         }
-        var idx = this.activeEntries.findIndex(function (d) {
-            return d.name === item.name && d.value === item.value && d.series === item.series;
+        this.activeEntries = this.activeEntries.filter(function (i) {
+            if (fromLegend) {
+                return i.label !== item.name;
+            }
+            else {
+                return !(i.name === item.name && i.series === item.series);
+            }
         });
-        this.activeEntries.splice(idx, 1);
-        this.activeEntries = this.activeEntries.slice();
         this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     __decorate([
@@ -349,6 +359,10 @@ var BarHorizontalStackedComponent = /** @class */ (function (_super) {
         __metadata("design:type", Object)
     ], BarHorizontalStackedComponent.prototype, "dataLabelFormatting", void 0);
     __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], BarHorizontalStackedComponent.prototype, "noBarWhenZero", void 0);
+    __decorate([
         Output(),
         __metadata("design:type", EventEmitter)
     ], BarHorizontalStackedComponent.prototype, "activate", void 0);
@@ -357,13 +371,13 @@ var BarHorizontalStackedComponent = /** @class */ (function (_super) {
         __metadata("design:type", EventEmitter)
     ], BarHorizontalStackedComponent.prototype, "deactivate", void 0);
     __decorate([
-        ContentChild('tooltipTemplate'),
+        ContentChild('tooltipTemplate', { static: false }),
         __metadata("design:type", TemplateRef)
     ], BarHorizontalStackedComponent.prototype, "tooltipTemplate", void 0);
     BarHorizontalStackedComponent = __decorate([
         Component({
             selector: 'ngx-charts-bar-horizontal-stacked',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      [animations]=\"animations\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [trimTicks]=\"trimXAxisTicks\"\n          [rotateTicks]=\"rotateXAxisTicks\"\n          [maxTickLength]=\"maxXAxisTickLength\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          [ticks]=\"xAxisTicks\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [trimTicks]=\"trimYAxisTicks\"\n          [maxTickLength]=\"maxYAxisTickLength\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          [ticks]=\"yAxisTicks\"\n          [yAxisOffset]=\"dataLabelMaxWidth.negative\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; let index = index; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g ngx-charts-series-horizontal\n            type=\"stacked\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [activeEntries]=\"activeEntries\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            [tooltipDisabled]=\"tooltipDisabled\"\n            [tooltipTemplate]=\"tooltipTemplate\"\n            [seriesName]=\"group.name\"\n            [animations]=\"animations\"\n            [showDataLabel]=\"showDataLabel\"\n            [dataLabelFormatting]=\"dataLabelFormatting\"\n            (select)=\"onClick($event, group)\"\n            (activate)=\"onActivate($event, group)\"\n            (deactivate)=\"onDeactivate($event, group)\"\n            (dataLabelWidthChanged)=\"onDataLabelMaxWidthChanged($event, index)\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      [animations]=\"animations\"\n      (legendLabelActivate)=\"onActivate($event, undefined, true)\"\n      (legendLabelDeactivate)=\"onDeactivate($event, undefined, true)\"\n      (legendLabelClick)=\"onClick($event)\"\n    >\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g\n          ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [trimTicks]=\"trimXAxisTicks\"\n          [rotateTicks]=\"rotateXAxisTicks\"\n          [maxTickLength]=\"maxXAxisTickLength\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          [ticks]=\"xAxisTicks\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\"\n        ></svg:g>\n        <svg:g\n          ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [trimTicks]=\"trimYAxisTicks\"\n          [maxTickLength]=\"maxYAxisTickLength\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          [ticks]=\"yAxisTicks\"\n          [yAxisOffset]=\"dataLabelMaxWidth.negative\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\"\n        ></svg:g>\n        <svg:g\n          *ngFor=\"let group of results; let index = index; trackBy: trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\"\n        >\n          <svg:g\n            ngx-charts-series-horizontal\n            type=\"stacked\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [activeEntries]=\"activeEntries\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            [tooltipDisabled]=\"tooltipDisabled\"\n            [tooltipTemplate]=\"tooltipTemplate\"\n            [seriesName]=\"group.name\"\n            [animations]=\"animations\"\n            [showDataLabel]=\"showDataLabel\"\n            [dataLabelFormatting]=\"dataLabelFormatting\"\n            [noBarWhenZero]=\"noBarWhenZero\"\n            (select)=\"onClick($event, group)\"\n            (activate)=\"onActivate($event, group)\"\n            (deactivate)=\"onDeactivate($event, group)\"\n            (dataLabelWidthChanged)=\"onDataLabelMaxWidthChanged($event, index)\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: ChangeDetectionStrategy.OnPush,
             styleUrls: ['../common/base-chart.component.css'],
             encapsulation: ViewEncapsulation.None,
@@ -372,7 +386,7 @@ var BarHorizontalStackedComponent = /** @class */ (function (_super) {
                     transition(':leave', [
                         style({
                             opacity: 1,
-                            transform: '*',
+                            transform: '*'
                         }),
                         animate(500, style({ opacity: 0, transform: 'scale(0)' }))
                     ])

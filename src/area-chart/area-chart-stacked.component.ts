@@ -29,17 +29,20 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
       [animations]="animations"
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
-      (legendLabelDeactivate)="onDeactivate($event)">
+      (legendLabelDeactivate)="onDeactivate($event)"
+    >
       <svg:defs>
         <svg:clipPath [attr.id]="clipPathId">
           <svg:rect
             [attr.width]="dims.width + 10"
             [attr.height]="dims.height + 10"
-            [attr.transform]="'translate(-5, -5)'"/>
+            [attr.transform]="'translate(-5, -5)'"
+          />
         </svg:clipPath>
       </svg:defs>
       <svg:g [attr.transform]="transform" class="area-chart chart">
-        <svg:g ngx-charts-x-axis
+        <svg:g
+          ngx-charts-x-axis
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
@@ -51,9 +54,10 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
           [maxTickLength]="maxXAxisTickLength"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
-          (dimensionsChanged)="updateXAxisHeight($event)">
-        </svg:g>
-        <svg:g ngx-charts-y-axis
+          (dimensionsChanged)="updateXAxisHeight($event)"
+        ></svg:g>
+        <svg:g
+          ngx-charts-y-axis
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
@@ -64,11 +68,12 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
           [maxTickLength]="maxYAxisTickLength"
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
-          (dimensionsChanged)="updateYAxisWidth($event)">
-        </svg:g>
+          (dimensionsChanged)="updateYAxisWidth($event)"
+        ></svg:g>
         <svg:g [attr.clip-path]="clipPath">
-          <svg:g *ngFor="let series of results; trackBy:trackBy">
-            <svg:g ngx-charts-area-series
+          <svg:g *ngFor="let series of results; trackBy: trackBy">
+            <svg:g
+              ngx-charts-area-series
               [xScale]="xScale"
               [yScale]="yScale"
               [colors]="colors"
@@ -83,7 +88,8 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
           </svg:g>
 
           <svg:g *ngIf="!tooltipDisabled" (mouseleave)="hideCircles()">
-            <svg:g ngx-charts-tooltip-area
+            <svg:g
+              ngx-charts-tooltip-area
               [dims]="dims"
               [xSet]="xSet"
               [xScale]="xScale"
@@ -95,8 +101,9 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
               (hover)="updateHoveredVertical($event)"
             />
 
-            <svg:g *ngFor="let series of results; trackBy:trackBy">
-              <svg:g ngx-charts-circle-series
+            <svg:g *ngFor="let series of results; trackBy: trackBy">
+              <svg:g
+                ngx-charts-circle-series
                 type="stacked"
                 [xScale]="xScale"
                 [yScale]="yScale"
@@ -115,7 +122,8 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
           </svg:g>
         </svg:g>
       </svg:g>
-      <svg:g ngx-charts-timeline
+      <svg:g
+        ngx-charts-timeline
         *ngIf="timeline && scaleType != 'ordinal'"
         [attr.transform]="timelineTransform"
         [results]="results"
@@ -125,9 +133,11 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
         [customColors]="customColors"
         [legend]="legend"
         [scaleType]="scaleType"
-        (onDomainChange)="updateDomain($event)">
-        <svg:g *ngFor="let series of results; trackBy:trackBy">
-          <svg:g ngx-charts-area-series
+        (onDomainChange)="updateDomain($event)"
+      >
+        <svg:g *ngFor="let series of results; trackBy: trackBy">
+          <svg:g
+            ngx-charts-area-series
             [xScale]="timelineXScale"
             [yScale]="timelineYScale"
             [colors]="colors"
@@ -147,7 +157,6 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
   encapsulation: ViewEncapsulation.None
 })
 export class AreaChartStackedComponent extends BaseChartComponent {
-
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
   @Input() legendPosition: string = 'right';
@@ -182,8 +191,8 @@ export class AreaChartStackedComponent extends BaseChartComponent {
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
-  @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
-  @ContentChild('seriesTooltipTemplate') seriesTooltipTemplate: TemplateRef<any>;
+  @ContentChild('tooltipTemplate', { static: false }) tooltipTemplate: TemplateRef<any>;
+  @ContentChild('seriesTooltipTemplate', { static: false }) seriesTooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
   scaleType: string;
@@ -231,7 +240,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
     });
 
     if (this.timeline) {
-      this.dims.height -= (this.timelineHeight + this.margin[2] + this.timelinePadding);
+      this.dims.height -= this.timelineHeight + this.margin[2] + this.timelinePadding;
     }
 
     this.xDomain = this.getXDomain();
@@ -249,7 +258,6 @@ export class AreaChartStackedComponent extends BaseChartComponent {
       const val = this.xSet[i];
       let d0 = 0;
       for (const group of this.results) {
-
         let d = group.series.find(item => {
           let a = item.name;
           let b = val;
@@ -281,7 +289,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
 
     this.clipPathId = 'clip' + id().toString();
     this.clipPath = `url(#${this.clipPathId})`;
@@ -293,7 +301,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
       this.timelineXDomain = this.getXDomain();
       this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
       this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
-      this.timelineTransform = `translate(${ this.dims.xOffset }, ${ -this.margin[2] })`;
+      this.timelineTransform = `translate(${this.dims.xOffset}, ${-this.margin[2]})`;
     }
   }
 
@@ -310,13 +318,9 @@ export class AreaChartStackedComponent extends BaseChartComponent {
     let min;
     let max;
     if (this.scaleType === 'time' || this.scaleType === 'linear') {
-      min = this.xScaleMin
-        ? this.xScaleMin
-        : Math.min(...values);
+      min = this.xScaleMin ? this.xScaleMin : Math.min(...values);
 
-      max = this.xScaleMax
-        ? this.xScaleMax
-        : Math.max(...values);
+      max = this.xScaleMax ? this.xScaleMax : Math.max(...values);
     }
 
     if (this.scaleType === 'time') {
@@ -331,7 +335,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
     } else if (this.scaleType === 'linear') {
       domain = [min, max];
       // Use compare function to sort numbers numerically
-      this.xSet = [...values].sort((a, b) => (a - b));
+      this.xSet = [...values].sort((a, b) => a - b);
     } else {
       domain = values;
       this.xSet = values;
@@ -365,13 +369,9 @@ export class AreaChartStackedComponent extends BaseChartComponent {
       domain.push(sum);
     }
 
-    const min = this.yScaleMin
-      ? this.yScaleMin
-      : Math.min(0, ...domain);
+    const min = this.yScaleMin ? this.yScaleMin : Math.min(0, ...domain);
 
-    const max = this.yScaleMax
-      ? this.yScaleMax
-      : Math.max(...domain);
+    const max = this.yScaleMax ? this.yScaleMax : Math.max(...domain);
     return [min, max];
   }
 
@@ -387,13 +387,10 @@ export class AreaChartStackedComponent extends BaseChartComponent {
     } else if (this.scaleType === 'linear') {
       scale = scaleLinear();
     } else if (this.scaleType === 'ordinal') {
-      scale = scalePoint()
-        .padding(0.1);
+      scale = scalePoint().padding(0.1);
     }
 
-    scale
-      .range([0, width])
-      .domain(domain);
+    scale.range([0, width]).domain(domain);
 
     return this.roundDomains ? scale.nice() : scale;
   }
@@ -482,7 +479,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
       return;
     }
 
-    this.activeEntries = [ item, ...this.activeEntries ];
+    this.activeEntries = [item, ...this.activeEntries];
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
@@ -504,5 +501,4 @@ export class AreaChartStackedComponent extends BaseChartComponent {
     }
     this.activeEntries = [];
   }
-
 }

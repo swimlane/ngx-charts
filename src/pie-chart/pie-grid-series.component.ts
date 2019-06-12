@@ -14,7 +14,9 @@ import { pie } from 'd3-shape';
   selector: 'g[ngx-charts-pie-grid-series]',
   template: `
     <svg:g class="pie-grid-arcs">
-      <svg:g ngx-charts-pie-arc *ngFor="let arc of arcs; trackBy:trackBy"
+      <svg:g
+        ngx-charts-pie-arc
+        *ngFor="let arc of arcs; trackBy: trackBy"
         [attr.class]="arc.class"
         [startAngle]="arc.startAngle"
         [endAngle]="arc.endAngle"
@@ -26,15 +28,15 @@ import { pie } from 'd3-shape';
         [gradient]="false"
         [pointerEvents]="arc.pointerEvents"
         [animate]="arc.animate"
-        (select)="onClick($event)">
-      </svg:g>
+        (select)="onClick($event)"
+        (activate)="activate.emit($event)"
+        (deactivate)="deactivate.emit($event)"
+      ></svg:g>
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-
 export class PieGridSeriesComponent implements OnChanges {
-
   @Input() colors;
   @Input() data;
   @Input() innerRadius = 70;
@@ -42,6 +44,8 @@ export class PieGridSeriesComponent implements OnChanges {
   @Input() animations: boolean = true;
 
   @Output() select = new EventEmitter();
+  @Output() activate = new EventEmitter();
+  @Output() deactivate = new EventEmitter();
 
   element: HTMLElement;
   layout: any;
@@ -57,7 +61,8 @@ export class PieGridSeriesComponent implements OnChanges {
 
   update(): void {
     this.layout = pie<any, any>()
-      .value((d) => d.data.value).sort(null);
+      .value(d => d.data.value)
+      .sort(null);
 
     this.arcs = this.getArcs();
   }
@@ -85,10 +90,7 @@ export class PieGridSeriesComponent implements OnChanges {
   }
 
   onClick(data): void {
-    this.select.emit({
-      name: this.data[0].data.name,
-      value: this.data[0].data.value
-    });
+    this.select.emit(this.data[0].data);
   }
 
   trackBy(index, item): string {
@@ -102,5 +104,4 @@ export class PieGridSeriesComponent implements OnChanges {
   color(arc): any {
     return this.colors(this.label(arc));
   }
-
 }

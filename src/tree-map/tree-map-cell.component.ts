@@ -10,11 +10,7 @@ import { id } from '../utils/id';
   template: `
     <svg:g>
       <defs *ngIf="gradient">
-        <svg:g ngx-charts-svg-linear-gradient
-          orientation="vertical"
-          [name]="gradientId"
-          [stops]="gradientStops"
-        />
+        <svg:g ngx-charts-svg-linear-gradient orientation="vertical" [name]="gradientId" [stops]="gradientStops" />
       </defs>
       <svg:rect
         [attr.fill]="gradient ? gradientUrl : fill"
@@ -33,23 +29,21 @@ import { id } from '../utils/id';
         [attr.width]="width"
         [attr.height]="height"
         class="treemap-label"
-        [style.pointer-events]="'none'">
-        <xhtml:p
-          [style.color]="getTextColor()"
-          [style.height]="height + 'px'"
-          [style.width]="width + 'px'">
-          <xhtml:span class="treemap-label" [innerHTML]="formattedLabel">
-          </xhtml:span>
+        [style.pointer-events]="'none'"
+      >
+        <xhtml:p [style.color]="getTextColor()" [style.height]="height + 'px'" [style.width]="width + 'px'">
+          <xhtml:span class="treemap-label" [innerHTML]="formattedLabel"> </xhtml:span>
           <xhtml:br />
-          <xhtml:span *ngIf="animations"
-            class="treemap-val" 
-            ngx-charts-count-up 
+          <xhtml:span
+            *ngIf="animations"
+            class="treemap-val"
+            ngx-charts-count-up
             [countTo]="value"
-            [valueFormatting]="valueFormatting">
+            [valueFormatting]="valueFormatting"
+          >
           </xhtml:span>
-          <xhtml:span *ngIf="!animations"
-            class="treemap-val">
-            {{formattedValue}}
+          <xhtml:span *ngIf="!animations" class="treemap-val">
+            {{ formattedValue }}
           </xhtml:span>
         </xhtml:p>
       </svg:foreignObject>
@@ -157,10 +151,7 @@ export class TreeMapCellComponent implements OnChanges {
   }
 
   onClick(): void {
-    this.select.emit({
-      name: this.label,
-      value: this.value
-    });
+    this.select.emit(this.data);
   }
 
   getGradientStops() {

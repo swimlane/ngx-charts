@@ -6,22 +6,19 @@ import {
   OnChanges,
   SimpleChanges,
   ChangeDetectionStrategy,
-  TemplateRef  
+  TemplateRef
 } from '@angular/core';
-import {
-  trigger,
-  style,
-  animate,
-  transition
-} from '@angular/animations';
+import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel } from '../common/label.helper';
 import { D0Types } from './series-vertical.component';
+import { DataItem } from '../models/chart-data.model';
 
 @Component({
   selector: 'g[ngx-charts-series-horizontal]',
   template: `
-    <svg:g ngx-charts-bar
-      *ngFor="let bar of bars; trackBy:trackBy"
+    <svg:g
+      ngx-charts-bar
+      *ngFor="let bar of bars; trackBy: trackBy"
       [@animationState]="'active'"
       [width]="bar.width"
       [height]="bar.height"
@@ -46,10 +43,12 @@ import { D0Types } from './series-vertical.component';
       [tooltipTitle]="tooltipTemplate ? undefined : bar.tooltipText"
       [tooltipTemplate]="tooltipTemplate"
       [tooltipContext]="bar.data"
-      [noBarWhenZero]="noBarWhenZero">
-    </svg:g>
+      [noBarWhenZero]="noBarWhenZero"
+    ></svg:g>
     <svg:g *ngIf="showDataLabel">
-      <svg:g ngx-charts-bar-label *ngFor="let b of barsForDataLabels; let i = index; trackBy:trackDataLabelBy"         
+      <svg:g
+        ngx-charts-bar-label
+        *ngFor="let b of barsForDataLabels; let i = index; trackBy: trackDataLabelBy"
         [barX]="b.x"
         [barY]="b.y"
         [barWidth]="b.width"
@@ -57,9 +56,9 @@ import { D0Types } from './series-vertical.component';
         [value]="b.total"
         [valueFormatting]="dataLabelFormatting"
         [orientation]="'horizontal'"
-        (dimensionsChanged)="dataLabelWidthChanged.emit({size:$event, index:i})"      
+        (dimensionsChanged)="dataLabelWidthChanged.emit({ size: $event, index: i })"
       />
-    </svg:g> 
+    </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
@@ -76,10 +75,9 @@ import { D0Types } from './series-vertical.component';
 export class SeriesHorizontal implements OnChanges {
   bars: any;
   x: any;
-  y: any;       
-  barsForDataLabels: Array<{x: number, y: number, width: number, height: number, 
-                            total: number, series: string}> = [];
-  
+  y: any;
+  barsForDataLabels: Array<{ x: number; y: number; width: number; height: number; total: number; series: string }> = [];
+
   @Input() dims;
   @Input() type = 'standard';
   @Input() series;
@@ -104,13 +102,12 @@ export class SeriesHorizontal implements OnChanges {
 
   tooltipPlacement: string;
   tooltipType: string;
- 
+
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 
   update(): void {
-   
     this.updateTooltipSettings();
     const d0 = {
       [D0Types.positive]: 0,
@@ -126,7 +123,7 @@ export class SeriesHorizontal implements OnChanges {
 
     this.bars = this.series.map((d, index) => {
       let value = d.value;
-      const label = d.name;
+      const label = this.getLabel(d);
       const formattedLabel = formatLabel(label);
       const roundEdges = this.roundEdges;
       d0Type = value > 0 ? D0Types.positive : D0Types.negative;
@@ -197,54 +194,54 @@ export class SeriesHorizontal implements OnChanges {
       if (this.seriesName) {
         tooltipLabel = `${this.seriesName} • ${formattedLabel}`;
         bar.data.series = this.seriesName;
-        bar.ariaLabel = this.seriesName + ' ' +  bar.ariaLabel;
+        bar.ariaLabel = this.seriesName + ' ' + bar.ariaLabel;
       }
 
-      bar.tooltipText = this.tooltipDisabled ? undefined : `
+      bar.tooltipText = this.tooltipDisabled
+        ? undefined
+        : `
         <span class="tooltip-label">${tooltipLabel}</span>
         <span class="tooltip-val">${value.toLocaleString()}</span>
       `;
 
       return bar;
     });
-    
-    this.updateDataLabels();
 
+    this.updateDataLabels();
   }
 
   updateDataLabels() {
-
-    if (this.type === 'stacked') {        
-      this.barsForDataLabels = [];          
-      const section: any = {};      
-      section.series =  this.seriesName;
-      const totalPositive = this.series.map(d => d.value).reduce((sum, d) => d > 0 ? sum + d : sum, 0);
-      const totalNegative = this.series.map(d => d.value).reduce((sum, d) => d < 0 ? sum + d : sum, 0);
+    if (this.type === 'stacked') {
+      this.barsForDataLabels = [];
+      const section: any = {};
+      section.series = this.seriesName;
+      const totalPositive = this.series.map(d => d.value).reduce((sum, d) => (d > 0 ? sum + d : sum), 0);
+      const totalNegative = this.series.map(d => d.value).reduce((sum, d) => (d < 0 ? sum + d : sum), 0);
       section.total = totalPositive + totalNegative;
       section.x = 0;
-      section.y = 0;        
+      section.y = 0;
       // if total is positive then we show it on the right, otherwise on the left
       if (section.total > 0) {
         section.width = this.xScale(totalPositive);
       } else {
         section.width = this.xScale(totalNegative);
-      }         
-      section.height = this.yScale.bandwidth();       
-      this.barsForDataLabels.push(section);          
+      }
+      section.height = this.yScale.bandwidth();
+      this.barsForDataLabels.push(section);
     } else {
-        this.barsForDataLabels = this.series.map(d => {
-        const section: any = {}; 
-        section.series =  this.seriesName ? this.seriesName : d.name;
-        section.total = d.value;          
+      this.barsForDataLabels = this.series.map(d => {
+        const section: any = {};
+        section.series = this.seriesName ? this.seriesName : d.label;
+        section.total = d.value;
         section.x = this.xScale(0);
-        section.y = this.yScale(d.name);
+        section.y = this.yScale(d.label);
         section.width = this.xScale(section.total) - this.xScale(0);
-        section.height = this.yScale.bandwidth();         
-        return section; 
-        });
-      }            
+        section.height = this.yScale.bandwidth();
+        return section;
+      });
+    }
   }
-  
+
   updateTooltipSettings() {
     this.tooltipPlacement = this.tooltipDisabled ? undefined : 'top';
     this.tooltipType = this.tooltipDisabled ? undefined : 'tooltip';
@@ -258,15 +255,22 @@ export class SeriesHorizontal implements OnChanges {
     return item !== undefined;
   }
 
+  getLabel(dataItem): string {
+    if (dataItem.label) {
+      return dataItem.label;
+    }
+    return dataItem.name;
+  }
+
   trackBy(index, bar) {
     return bar.label;
   }
 
-  trackDataLabelBy(index, barLabel) {       
+  trackDataLabelBy(index, barLabel) {
     return index + '#' + barLabel.series + '#' + barLabel.total;
   }
 
-  click(data): void {
+  click(data: DataItem): void {
     this.select.emit(data);
   }
 }

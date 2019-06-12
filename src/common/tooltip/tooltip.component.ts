@@ -1,6 +1,13 @@
 import {
-  Input, Component, ElementRef, AfterViewInit, ViewEncapsulation,
-  HostListener, ViewChild, HostBinding, Renderer2
+  Input,
+  Component,
+  ElementRef,
+  AfterViewInit,
+  ViewEncapsulation,
+  HostListener,
+  ViewChild,
+  HostBinding,
+  Renderer2
 } from '@angular/core';
 
 import { throttleable } from '../../utils/throttle';
@@ -13,22 +20,12 @@ import { AlignmentTypes } from './alignment.type';
   selector: 'ngx-tooltip-content',
   template: `
     <div>
-      <span
-        #caretElm
-        [hidden]="!showCaret"
-        class="tooltip-caret position-{{this.placement}}">
-      </span>
+      <span #caretElm [hidden]="!showCaret" class="tooltip-caret position-{{ this.placement }}"> </span>
       <div class="tooltip-content">
         <span *ngIf="!title">
-          <ng-template
-            [ngTemplateOutlet]="template"
-            [ngTemplateOutletContext]="{ model: context }">
-          </ng-template>
+          <ng-template [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ model: context }"> </ng-template>
         </span>
-        <span
-          *ngIf="title"
-          [innerHTML]="title">
-        </span>
+        <span *ngIf="title" [innerHTML]="title"> </span>
       </div>
     </div>
   `,
@@ -36,7 +33,6 @@ import { AlignmentTypes } from './alignment.type';
   styleUrls: ['./tooltip.component.scss']
 })
 export class TooltipContentComponent implements AfterViewInit {
-
   @Input() host: any;
   @Input() showCaret: boolean;
   @Input() type: StyleTypes;
@@ -48,7 +44,7 @@ export class TooltipContentComponent implements AfterViewInit {
   @Input() template: any;
   @Input() context: any;
 
-  @ViewChild('caretElm') caretElm;
+  @ViewChild('caretElm', { static: false }) caretElm;
 
   @HostBinding('class')
   get cssClasses(): string {
@@ -59,10 +55,7 @@ export class TooltipContentComponent implements AfterViewInit {
     return clz;
   }
 
-  constructor(
-    public element: ElementRef,
-    private renderer: Renderer2) {
-  }
+  constructor(public element: ElementRef, private renderer: Renderer2) {}
 
   ngAfterViewInit(): void {
     setTimeout(this.position.bind(this));
@@ -73,13 +66,13 @@ export class TooltipContentComponent implements AfterViewInit {
     const hostDim = this.host.nativeElement.getBoundingClientRect();
 
     // if no dims were found, never show
-    if(!hostDim.height && !hostDim.width) return;
+    if (!hostDim.height && !hostDim.width) return;
 
     const elmDim = nativeElm.getBoundingClientRect();
     this.checkFlip(hostDim, elmDim);
     this.positionContent(nativeElm, hostDim, elmDim);
 
-    if(this.showCaret) {
+    if (this.showCaret) {
       this.positionCaret(hostDim, elmDim);
     }
 
@@ -88,8 +81,7 @@ export class TooltipContentComponent implements AfterViewInit {
   }
 
   positionContent(nativeElm, hostDim, elmDim): void {
-    const { top, left } = PositionHelper.positionContent(
-      this.placement, elmDim, hostDim, this.spacing, this.alignment);
+    const { top, left } = PositionHelper.positionContent(this.placement, elmDim, hostDim, this.spacing, this.alignment);
 
     this.renderer.setStyle(nativeElm, 'top', `${top}px`);
     this.renderer.setStyle(nativeElm, 'left', `${left}px`);
@@ -99,15 +91,19 @@ export class TooltipContentComponent implements AfterViewInit {
     const caretElm = this.caretElm.nativeElement;
     const caretDimensions = caretElm.getBoundingClientRect();
     const { top, left } = PositionHelper.positionCaret(
-      this.placement, elmDim, hostDim, caretDimensions, this.alignment);
+      this.placement,
+      elmDim,
+      hostDim,
+      caretDimensions,
+      this.alignment
+    );
 
     this.renderer.setStyle(caretElm, 'top', `${top}px`);
     this.renderer.setStyle(caretElm, 'left', `${left}px`);
   }
 
   checkFlip(hostDim, elmDim): void {
-    this.placement = PositionHelper.determinePlacement(
-      this.placement, elmDim, hostDim, this.spacing);
+    this.placement = PositionHelper.determinePlacement(this.placement, elmDim, hostDim, this.spacing);
   }
 
   @HostListener('window:resize')
@@ -115,5 +111,4 @@ export class TooltipContentComponent implements AfterViewInit {
   onWindowResize(): void {
     this.position();
   }
-
 }

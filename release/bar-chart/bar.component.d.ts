@@ -2,10 +2,10 @@ import { EventEmitter, ElementRef, SimpleChanges, OnChanges } from '@angular/cor
 export declare class BarComponent implements OnChanges {
     fill: any;
     data: any;
-    width: any;
-    height: any;
-    x: any;
-    y: any;
+    width: number;
+    height: number;
+    x: number;
+    y: number;
     orientation: any;
     roundEdges: boolean;
     gradient: boolean;
@@ -14,6 +14,7 @@ export declare class BarComponent implements OnChanges {
     stops: any[];
     animations: boolean;
     ariaLabel: string;
+    noBarWhenZero: boolean;
     select: EventEmitter<{}>;
     activate: EventEmitter<{}>;
     deactivate: EventEmitter<{}>;
@@ -25,6 +26,7 @@ export declare class BarComponent implements OnChanges {
     initialized: boolean;
     gradientStops: any[];
     hasGradient: boolean;
+    hideBar: boolean;
     constructor(element: ElementRef);
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
@@ -38,4 +40,5 @@ export declare class BarComponent implements OnChanges {
     readonly edges: boolean[];
     onMouseEnter(): void;
     onMouseLeave(): void;
+    private checkToHideBar;
 }
