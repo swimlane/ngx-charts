@@ -1,5 +1,9 @@
 # Changelog
 
+## 12.0.1
+
+- Bug: Pass the correct number of parameters to fix production build (#1203)
+
 ## 12.0.0
 
 - Breaking: Upgrade to angular 8.0.0 (#1201)
