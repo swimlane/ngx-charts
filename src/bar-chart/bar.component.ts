@@ -227,8 +227,10 @@ export class BarComponent implements OnChanges {
   }
 
   private checkToHideBar() {
-    this.hideBar = this.noBarWhenZero
+    this.hideBar = (this.noBarWhenZero
       && (this.orientation === 'vertical' && this.height === 0
-          || this.orientation === 'horizontal' && this.width === 0);
+          || this.orientation === 'horizontal' && this.width === 0))
+      || this.data.value === null
+      || this.data.value === undefined;
   }
 }
