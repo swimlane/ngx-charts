@@ -194,7 +194,8 @@ export class SeriesVerticalComponent implements OnChanges {
       }
 
       let tooltipLabel = formattedLabel;
-      bar.ariaLabel = formattedLabel + (value !== null ? ' ' + value.toLocaleString() : '');
+      const labelValue = value !== null ? ' ' + value.toLocaleString() : '';
+      bar.ariaLabel = formattedLabel + labelValue;
       if (this.seriesName) {
         tooltipLabel = `${this.seriesName} • ${formattedLabel}`;
         bar.data.series = this.seriesName;
@@ -205,7 +206,7 @@ export class SeriesVerticalComponent implements OnChanges {
         ? undefined
         : `
         <span class="tooltip-label">${tooltipLabel}</span>
-        <span class="tooltip-val">${value !== null ? value.toLocaleString() : ''}</span>
+        <span class="tooltip-val">${labelValue}</span>
       `;
 
       return bar;

@@ -117,7 +117,8 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
       return label
         && this.visibleValue
         && label.toString() === this.visibleValue.toString()
-        && d.value !== undefined;
+        && d.value !== undefined
+        && d.value !== null;
     });
 
     if (indexActiveDataPoint === -1) {
