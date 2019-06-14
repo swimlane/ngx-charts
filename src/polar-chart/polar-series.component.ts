@@ -175,7 +175,7 @@ export class PolarSeriesComponent implements OnChanges {
   defaultTooltipText({ label, value }): string {
     return `
       <span class="tooltip-label">${this.data.name} • ${label}</span>
-      <span class="tooltip-val">${value.toLocaleString()}</span>
+      <span class="tooltip-val">${value !== null ? value.toLocaleString() : ''}</span>
     `;
   }
 
