@@ -57,9 +57,14 @@ export class ColorHelper {
   }
 
   getColor(value) {
-    if (value === undefined || value === null) {
-      throw new Error('Value can not be null');
+    if (value === undefined) {
+      throw new Error('Value can not be undefined');
     }
+
+    if (value === null) {
+      value = 0;
+    }
+
     if (this.scaleType === 'linear') {
       const valueScale = scaleLinear()
         .domain(this.domain)

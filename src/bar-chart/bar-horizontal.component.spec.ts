@@ -59,13 +59,13 @@ describe('<ngx-charts-bar-horizontal>', () => {
       expect(svg.getAttribute('height')).toBe('800');
     }));
 
-    it('should render 12 cell elements', async(() => {
+    it('should render 14 cell elements', async(() => {
       const fixture = TestBed.createComponent(TestComponent);
       fixture.detectChanges();
 
       const compiled = fixture.debugElement.nativeElement;
 
-      expect(compiled.querySelectorAll('path.bar').length).toEqual(6);
+      expect(compiled.querySelectorAll('path.bar').length).toEqual(7);
     }));
 
     it('should render correct cell size', async(() => {
@@ -74,7 +74,7 @@ describe('<ngx-charts-bar-horizontal>', () => {
 
       const bar = fixture.debugElement.query(By.directive(BarComponent));
 
-      expect(bar.componentInstance.height).toEqual(123); // ~(780 - 5 * barPadding) / 6
+      expect(bar.componentInstance.height).toEqual(104); // ~(780 - 5 * barPadding) / 7
     }));
   });
 
@@ -99,7 +99,7 @@ describe('<ngx-charts-bar-horizontal>', () => {
 
         const bar = fixture.debugElement.query(By.directive(BarComponent));
 
-        expect(bar.componentInstance.height).toEqual(130); // ~(780 - 5 * barPadding) / 6
+        expect(bar.componentInstance.height).toEqual(111); // ~(780 - 5 * barPadding) / 7
       });
     }));
 
@@ -122,7 +122,7 @@ describe('<ngx-charts-bar-horizontal>', () => {
 
         const bar = fixture.debugElement.query(By.directive(BarComponent));
 
-        expect(bar.componentInstance.height).toEqual(113); // ~(780 - 5 * barPadding) / 6
+        expect(bar.componentInstance.height).toEqual(94); // ~(780 - 5 * barPadding) / 7
       });
     }));
     

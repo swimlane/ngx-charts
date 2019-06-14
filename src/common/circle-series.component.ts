@@ -1,23 +1,18 @@
 import {
+  ChangeDetectionStrategy,
   Component,
-  Input,
-  Output,
-  SimpleChanges,
   EventEmitter,
+  Input,
   OnChanges,
   OnInit,
-  ChangeDetectionStrategy,
+  Output,
+  SimpleChanges,
   TemplateRef
 } from '@angular/core';
-import {
-  trigger,
-  style,
-  animate,
-  transition
-} from '@angular/animations';
-import { formatLabel } from '../common/label.helper';
-import { id } from '../utils/id';
-import { ColorHelper } from '../common/color.helper';
+import {animate, style, transition, trigger} from '@angular/animations';
+import {formatLabel} from '../common/label.helper';
+import {id} from '../utils/id';
+import {ColorHelper} from '../common/color.helper';
 
 @Component({
   selector: 'g[ngx-charts-circle-series]',
@@ -189,7 +184,9 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
   getTooltipText({ tooltipLabel, value, seriesName, min, max}): string {
     return `
       <span class="tooltip-label">${seriesName} • ${tooltipLabel}</span>
-      <span class="tooltip-val">${value !== null ? value.toLocaleString() : ''}${this.getTooltipMinMaxText(min, max)}</span>
+      <span class="tooltip-val">${value !== null
+      ? value.toLocaleString()
+      : ''}${this.getTooltipMinMaxText(min, max)}</span>
     `;
   }
 
