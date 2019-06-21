@@ -19,6 +19,7 @@ import { formatLabel } from '../label.helper';
         *ngIf="animations"
         class="total-value"
         ngx-charts-count-up
+        [countDecimals]="countDecimals"
         [countTo]="roundedTotal"
         [valueFormatting]="valueFormatting"
       ></div>
@@ -44,6 +45,7 @@ import { formatLabel } from '../label.helper';
               class="item-value"
               ngx-charts-count-up
               [countTo]="legendItem._value"
+              [countDecimals]="countDecimals"
               [valueFormatting]="valueFormatting"
             ></div>
             <div *ngIf="!animations" class="item-value">
@@ -53,9 +55,10 @@ import { formatLabel } from '../label.helper';
             <div
               *ngIf="animations"
               class="item-percent"
-              ngx-charts-count-up
+              ngx-charts-count-up              
               [countTo]="legendItem.percentage"
               [countSuffix]="'%'"
+              [countDecimals]="countDecimals"
             ></div>
             <div *ngIf="!animations" class="item-percent">{{ legendItem.percentage.toLocaleString() }}%</div>
           </div>
@@ -73,6 +76,7 @@ export class AdvancedLegendComponent implements OnChanges {
   @Input() colors;
   @Input() label: string = 'Total';
   @Input() animations: boolean = true;
+  @Input() countDecimals: number = 0;
 
   @Output() select: EventEmitter<any> = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();
