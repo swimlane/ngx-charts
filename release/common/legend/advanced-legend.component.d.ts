@@ -5,6 +5,7 @@ export declare class AdvancedLegendComponent implements OnChanges {
     colors: any;
     label: string;
     animations: boolean;
+    countDecimals: number;
     select: EventEmitter<any>;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
