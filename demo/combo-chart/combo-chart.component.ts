@@ -254,8 +254,7 @@ export class ComboChartComponent extends BaseChartComponent {
     this.yDomainLine = this.getYDomainLine();
     this.seriesDomain = this.getSeriesDomain();
 
-    this.xScaleLine = this.getXScaleLine(this.xDomainLine, this.dims.width);
-    this.yScaleLine = this.getYScaleLine(this.yDomainLine, this.dims.height);
+    this.scaleLines();
 
     this.setColors();
     this.legendOptions = this.getLegendOptions();
@@ -286,6 +285,11 @@ export class ComboChartComponent extends BaseChartComponent {
     this.filteredDomain = domain;
     this.xDomainLine = this.filteredDomain;
     this.xScaleLine = this.getXScaleLine(this.xDomainLine, this.dims.width);
+  }
+
+  scaleLines() {
+    this.xScaleLine = this.getXScaleLine(this.xDomainLine, this.dims.width);
+    this.yScaleLine = this.getYScaleLine(this.yDomainLine, this.dims.height);
   }
 
   getSeriesDomain(): any[] {
@@ -390,8 +394,9 @@ export class ComboChartComponent extends BaseChartComponent {
   getXScaleLine(domain, width): any {
     let scale;
     if (this.bandwidth === undefined) {
-      this.bandwidth = this.dims.width - this.barPadding;
+      this.bandwidth = width - this.barPadding;
     }
+    const offset = Math.floor((width + this.barPadding - (this.bandwidth + this.barPadding) * domain.length) / 2);
 
     if (this.scaleType === 'time') {
       scale = scaleTime()
@@ -407,7 +412,7 @@ export class ComboChartComponent extends BaseChartComponent {
       }
     } else if (this.scaleType === 'ordinal') {
       scale = scalePoint()
-        .range([this.bandwidth / 2, width - this.bandwidth / 2])
+        .range([offset + this.bandwidth / 2, width - offset - this.bandwidth / 2])
         .domain(domain);
     }
 
@@ -491,6 +496,7 @@ export class ComboChartComponent extends BaseChartComponent {
 
   updateLineWidth(width): void {
     this.bandwidth = width;
+    this.scaleLines();
   }
 
   updateYAxisWidth({ width }): void {
