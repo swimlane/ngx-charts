@@ -421,6 +421,7 @@ const chartGroups = [
           'curve',
           'roundDomains',
           'tooltipDisabled',
+          'seriesTooltipDisabled',
           'xScaleMin',
           'xScaleMax',
           'yScaleMin',

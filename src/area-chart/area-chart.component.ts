@@ -87,7 +87,7 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
             />
           </svg:g>
 
-          <svg:g *ngIf="!tooltipDisabled" (mouseleave)="hideCircles()">
+          <svg:g *ngIf="!tooltipDisabled">
             <svg:g
               ngx-charts-tooltip-area
               [dims]="dims"
@@ -97,26 +97,27 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
               [results]="results"
               [colors]="colors"
               [tooltipDisabled]="tooltipDisabled"
-              [tooltipTemplate]="seriesTooltipTemplate"
+              [tooltipTemplate]="tooltipTemplate"
               (hover)="updateHoveredVertical($event)"
             />
-
-            <svg:g *ngFor="let series of results">
-              <svg:g
-                ngx-charts-circle-series
-                [xScale]="xScale"
-                [yScale]="yScale"
-                [colors]="colors"
-                [activeEntries]="activeEntries"
-                [data]="series"
-                [scaleType]="scaleType"
-                [visibleValue]="hoveredVertical"
-                [tooltipDisabled]="tooltipDisabled"
-                [tooltipTemplate]="tooltipTemplate"
-                (select)="onClick($event, series)"
-                (activate)="onActivate($event)"
-                (deactivate)="onDeactivate($event)"
-              />
+            <svg:g *ngIf="!seriesTooltipDisabled" (mouseleave)="hideCircles()">
+              <svg:g *ngFor="let series of results">
+                <svg:g
+                  ngx-charts-circle-series
+                  [xScale]="xScale"
+                  [yScale]="yScale"
+                  [colors]="colors"
+                  [activeEntries]="activeEntries"
+                  [data]="series"
+                  [scaleType]="scaleType"
+                  [visibleValue]="hoveredVertical"
+                  [tooltipDisabled]="seriesTooltipDisabled"
+                  [tooltipTemplate]="seriesTooltipTemplate"
+                  (select)="onClick($event, series)"
+                  (activate)="onActivate($event)"
+                  (deactivate)="onDeactivate($event)"
+                />
+              </svg:g>
             </svg:g>
           </svg:g>
         </svg:g>
@@ -156,19 +157,19 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
   encapsulation: ViewEncapsulation.None
 })
 export class AreaChartComponent extends BaseChartComponent {
-  @Input() legend;
+  @Input() legend: boolean;
   @Input() legendTitle: string = 'Legend';
   @Input() legendPosition: string = 'right';
-  @Input() state;
-  @Input() xAxis;
-  @Input() yAxis;
+  @Input() state; // What is the purpose of this Input?
+  @Input() xAxis: boolean;
+  @Input() yAxis: boolean;
   @Input() baseValue: any = 'auto';
-  @Input() autoScale;
-  @Input() showXAxisLabel;
-  @Input() showYAxisLabel;
-  @Input() xAxisLabel;
-  @Input() yAxisLabel;
-  @Input() timeline;
+  @Input() autoScale: boolean;
+  @Input() showXAxisLabel: boolean;
+  @Input() showYAxisLabel: boolean;
+  @Input() xAxisLabel: string;
+  @Input() yAxisLabel: string;
+  @Input() timeline: boolean;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
   @Input() curve: any = curveLinear;
@@ -184,6 +185,7 @@ export class AreaChartComponent extends BaseChartComponent {
   @Input() xAxisTicks: any[];
   @Input() yAxisTicks: any[];
   @Input() roundDomains: boolean = false;
+  @Input() seriesTooltipDisabled: boolean = false;
   @Input() tooltipDisabled: boolean = false;
   @Input() xScaleMin: any;
   @Input() xScaleMax: any;
