@@ -13,10 +13,9 @@ import { YAxisTicksComponent } from './y-axis-ticks.component';
 @Component({
   selector: 'g[ngx-charts-y-axis]',
   template: `
-    <svg:g
-      [attr.class]="yAxisClassName"
-      [attr.transform]="transform">
-      <svg:g ngx-charts-y-axis-ticks
+    <svg:g [attr.class]="yAxisClassName" [attr.transform]="transform">
+      <svg:g
+        ngx-charts-y-axis-ticks
         *ngIf="yScale"
         [trimTicks]="trimTicks"
         [maxTickLength]="maxTickLength"
@@ -35,20 +34,20 @@ import { YAxisTicksComponent } from './y-axis-ticks.component';
         (dimensionsChanged)="emitTicksWidth($event)"
       />
 
-      <svg:g ngx-charts-axis-label
+      <svg:g
+        ngx-charts-axis-label
         *ngIf="showLabel"
         [label]="labelText"
         [offset]="labelOffset"
         [orient]="yOrient"
         [height]="dims.height"
-        [width]="dims.width">
-      </svg:g>
+        [width]="dims.width"
+      ></svg:g>
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class YAxisComponent implements OnChanges {
-
   @Input() yScale;
   @Input() dims;
   @Input() trimTicks: boolean;
@@ -78,7 +77,7 @@ export class YAxisComponent implements OnChanges {
   strokeWidth: number = 1;
   padding: number = 5;
 
-  @ViewChild(YAxisTicksComponent) ticksComponent: YAxisTicksComponent;
+  @ViewChild(YAxisTicksComponent, { static: false }) ticksComponent: YAxisTicksComponent;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -91,7 +90,7 @@ export class YAxisComponent implements OnChanges {
       this.transform = `translate(${this.offset + this.dims.width} , 0)`;
     } else {
       this.offset = this.offset;
-      this.transform = `translate(${this.offset } , 0)`;
+      this.transform = `translate(${this.offset} , 0)`;
     }
 
     if (this.yAxisTickCount !== undefined) {
@@ -103,14 +102,13 @@ export class YAxisComponent implements OnChanges {
     if (width !== this.labelOffset && this.yOrient === 'right') {
       this.labelOffset = width + this.labelOffset;
       setTimeout(() => {
-        this.dimensionsChanged.emit({width});
+        this.dimensionsChanged.emit({ width });
       }, 0);
     } else if (width !== this.labelOffset) {
       this.labelOffset = width;
       setTimeout(() => {
-        this.dimensionsChanged.emit({width});
+        this.dimensionsChanged.emit({ width });
       }, 0);
     }
   }
-
 }

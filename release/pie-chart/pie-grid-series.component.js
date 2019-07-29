@@ -15,6 +15,8 @@ var PieGridSeriesComponent = /** @class */ (function () {
         this.outerRadius = 80;
         this.animations = true;
         this.select = new EventEmitter();
+        this.activate = new EventEmitter();
+        this.deactivate = new EventEmitter();
         this.element = element.nativeElement;
     }
     PieGridSeriesComponent.prototype.ngOnChanges = function (changes) {
@@ -22,7 +24,8 @@ var PieGridSeriesComponent = /** @class */ (function () {
     };
     PieGridSeriesComponent.prototype.update = function () {
         this.layout = pie()
-            .value(function (d) { return d.data.value; }).sort(null);
+            .value(function (d) { return d.data.value; })
+            .sort(null);
         this.arcs = this.getArcs();
     };
     PieGridSeriesComponent.prototype.getArcs = function () {
@@ -46,10 +49,7 @@ var PieGridSeriesComponent = /** @class */ (function () {
         });
     };
     PieGridSeriesComponent.prototype.onClick = function (data) {
-        this.select.emit({
-            name: this.data[0].data.name,
-            value: this.data[0].data.value
-        });
+        this.select.emit(this.data[0].data);
     };
     PieGridSeriesComponent.prototype.trackBy = function (index, item) {
         return item.data.name;
@@ -84,11 +84,19 @@ var PieGridSeriesComponent = /** @class */ (function () {
         Output(),
         __metadata("design:type", Object)
     ], PieGridSeriesComponent.prototype, "select", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], PieGridSeriesComponent.prototype, "activate", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], PieGridSeriesComponent.prototype, "deactivate", void 0);
     PieGridSeriesComponent = __decorate([
         Component({
             selector: 'g[ngx-charts-pie-grid-series]',
-            template: "\n    <svg:g class=\"pie-grid-arcs\">\n      <svg:g ngx-charts-pie-arc *ngFor=\"let arc of arcs; trackBy:trackBy\"\n        [attr.class]=\"arc.class\"\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [value]=\"arc.data.value\"\n        [data]=\"arc.data\"\n        [gradient]=\"false\"\n        [pointerEvents]=\"arc.pointerEvents\"\n        [animate]=\"arc.animate\"\n        (select)=\"onClick($event)\">\n      </svg:g>\n    </svg:g>\n  ",
-            changeDetection: ChangeDetectionStrategy.OnPush,
+            template: "\n    <svg:g class=\"pie-grid-arcs\">\n      <svg:g\n        ngx-charts-pie-arc\n        *ngFor=\"let arc of arcs; trackBy: trackBy\"\n        [attr.class]=\"arc.class\"\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [value]=\"arc.data.value\"\n        [data]=\"arc.data\"\n        [gradient]=\"false\"\n        [pointerEvents]=\"arc.pointerEvents\"\n        [animate]=\"arc.animate\"\n        (select)=\"onClick($event)\"\n        (activate)=\"activate.emit($event)\"\n        (deactivate)=\"deactivate.emit($event)\"\n      ></svg:g>\n    </svg:g>\n  ",
+            changeDetection: ChangeDetectionStrategy.OnPush
         }),
         __metadata("design:paramtypes", [ElementRef])
     ], PieGridSeriesComponent);

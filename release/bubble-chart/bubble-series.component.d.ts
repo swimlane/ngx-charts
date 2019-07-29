@@ -22,7 +22,7 @@ export declare class BubbleSeriesComponent implements OnChanges {
     update(): void;
     getCircles(): any[];
     getTooltipText(circle: any): string;
-    onClick(value: any, label: any): void;
+    onClick(data: any): void;
     isActive(entry: any): boolean;
     isVisible(circle: any): boolean;
     activateCircle(circle: any): void;

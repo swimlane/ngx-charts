@@ -1,4 +1,5 @@
 import { EventEmitter, OnChanges, SimpleChanges, TemplateRef } from '@angular/core';
+import { DataItem } from '../models/chart-data.model';
 export declare class SeriesHorizontal implements OnChanges {
     bars: any;
     x: any;
@@ -26,6 +27,7 @@ export declare class SeriesHorizontal implements OnChanges {
     animations: boolean;
     showDataLabel: boolean;
     dataLabelFormatting: any;
+    noBarWhenZero: boolean;
     select: EventEmitter<{}>;
     activate: EventEmitter<{}>;
     deactivate: EventEmitter<{}>;
@@ -37,7 +39,8 @@ export declare class SeriesHorizontal implements OnChanges {
     updateDataLabels(): void;
     updateTooltipSettings(): void;
     isActive(entry: any): boolean;
+    getLabel(dataItem: any): string;
     trackBy(index: any, bar: any): any;
     trackDataLabelBy(index: any, barLabel: any): string;
-    click(data: any): void;
+    click(data: DataItem): void;
 }

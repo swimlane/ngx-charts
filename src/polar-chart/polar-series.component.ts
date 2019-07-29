@@ -1,4 +1,13 @@
-import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  ChangeDetectionStrategy,
+  TemplateRef,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { lineRadial } from 'd3-shape';
 
 import { id } from '../utils/id';
@@ -9,7 +18,9 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
   template: `
     <svg:g class="polar-charts-series">
       <defs>
-        <svg:g ngx-charts-svg-radial-gradient *ngIf="hasGradient"
+        <svg:g
+          ngx-charts-svg-radial-gradient
+          *ngIf="hasGradient"
           orientation="vertical"
           [color]="seriesColor"
           [name]="gradientId"
@@ -18,7 +29,8 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
           [stops]="gradientStops"
         />
       </defs>
-      <svg:g ngx-charts-line
+      <svg:g
+        ngx-charts-line
         class="polar-series-path"
         [path]="path"
         [stroke]="hasGradient ? gradientUrl : seriesColor"
@@ -28,7 +40,8 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
         [fill]="hasGradient ? gradientUrl : seriesColor"
         [animations]="animations"
       />
-      <svg:g ngx-charts-circle
+      <svg:g
+        ngx-charts-circle
         *ngFor="let circle of circles"
         class="circle"
         [cx]="circle.cx"
@@ -42,8 +55,11 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
         tooltipType="tooltip"
         [tooltipTitle]="tooltipTemplate ? undefined : tooltipText(circle)"
         [tooltipTemplate]="tooltipTemplate"
-        [tooltipContext]="circle.data">
-      </svg:g>
+        [tooltipContext]="circle.data"
+        (select)="select.emit(circle.data)"
+        (activate)="activate.emit({ name: circle.data.series })"
+        (deactivate)="deactivate.emit({ name: circle.data.series })"
+      ></svg:g>
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -63,6 +79,10 @@ export class PolarSeriesComponent implements OnChanges {
   @Input() gradient: boolean = false;
   @Input() tooltipTemplate: TemplateRef<any>;
   @Input() animations: boolean = true;
+
+  @Output() select = new EventEmitter();
+  @Output() activate = new EventEmitter();
+  @Output() deactivate = new EventEmitter();
 
   path: string;
   circles: any[];

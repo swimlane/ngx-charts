@@ -12,24 +12,17 @@ import {
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
+import { DataItem } from '../models/chart-data.model';
 
 @Component({
   selector: 'ngx-charts-advanced-pie-chart',
   template: `
-    <div
-      [style.width.px]="width"
-      [style.height.px]="height">
-      <div class="advanced-pie chart"
-        [style.width.px]="dims.width"
-        [style.height.px]="dims.height">
-        <ngx-charts-chart
-          [view]="[width, height]"
-          [showLegend]="false"
-          [animations]="animations">
-          <svg:g
-            [attr.transform]="transform"
-            class="pie chart">
-            <svg:g ngx-charts-pie-series
+    <div [style.width.px]="width" [style.height.px]="height">
+      <div class="advanced-pie chart" [style.width.px]="dims.width" [style.height.px]="dims.height">
+        <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations">
+          <svg:g [attr.transform]="transform" class="pie chart">
+            <svg:g
+              ngx-charts-pie-series
               [colors]="colors"
               [series]="results"
               [innerRadius]="innerRadius"
@@ -40,15 +33,14 @@ import { BaseChartComponent } from '../common/base-chart.component';
               [tooltipTemplate]="tooltipTemplate"
               [tooltipText]="tooltipText"
               (select)="onClick($event)"
-              [animations]="animations">
-            </svg:g>
+              (activate)="onActivate($event)"
+              (deactivate)="onDeactivate($event)"
+              [animations]="animations"
+            ></svg:g>
           </svg:g>
         </ngx-charts-chart>
       </div>
-      <div
-        class="advanced-pie-legend-wrapper"
-        [style.width.px]="width - dims.width"
-        [style.height.px]="height">
+      <div class="advanced-pie-legend-wrapper" [style.width.px]="width - dims.width" [style.height.px]="height">
         <ngx-charts-advanced-legend
           [data]="results"
           [colors]="colors"
@@ -59,8 +51,9 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [labelFormatting]="nameFormatting"
           [percentageFormatting]="percentageFormatting"
           (select)="onClick($event)"
-          (activate)="onActivate($event)"
-          (deactivate)="onDeactivate($event)">
+          (activate)="onActivate($event, true)"
+          (deactivate)="onDeactivate($event, true)"
+        >
         </ngx-charts-advanced-legend>
       </div>
     </div>
@@ -79,7 +72,7 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
-  @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
+  @ContentChild('tooltipTemplate', { static: false }) tooltipTemplate: TemplateRef<any>;
 
   data: any;
   dims: ViewDimensions;
@@ -104,6 +97,8 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
       margins: this.margin
     });
 
+    this.formatDates();
+
     this.domain = this.getDomain();
     this.setColors();
 
@@ -118,10 +113,10 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
   }
 
   getDomain(): any[] {
-    return this.results.map(d => d.name);
+    return this.results.map(d => d.label);
   }
 
-  onClick(data) {
+  onClick(data: DataItem) {
     this.select.emit(data);
   }
 
@@ -129,18 +124,42 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
     this.colors = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
   }
 
-  onActivate(event): void {
-    if (this.activeEntries.indexOf(event) > -1) return;
-    this.activeEntries = [event, ...this.activeEntries];
-    this.activate.emit({ value: event, entries: this.activeEntries });
+  onActivate(item, fromLegend = false) {
+    item = this.results.find(d => {
+      if (fromLegend) {
+        return d.label === item.name;
+      } else {
+        return d.name === item.name;
+      }
+    });
+
+    const idx = this.activeEntries.findIndex(d => {
+      return d.name === item.name && d.value === item.value && d.series === item.series;
+    });
+    if (idx > -1) {
+      return;
+    }
+
+    this.activeEntries = [item, ...this.activeEntries];
+    this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(event): void {
-    const idx = this.activeEntries.indexOf(event);
+  onDeactivate(item, fromLegend = false) {
+    item = this.results.find(d => {
+      if (fromLegend) {
+        return d.label === item.name;
+      } else {
+        return d.name === item.name;
+      }
+    });
+
+    const idx = this.activeEntries.findIndex(d => {
+      return d.name === item.name && d.value === item.value && d.series === item.series;
+    });
 
     this.activeEntries.splice(idx, 1);
     this.activeEntries = [...this.activeEntries];
 
-    this.deactivate.emit({ value: event, entries: this.activeEntries });
+    this.deactivate.emit({ value: item, entries: this.activeEntries });
   }
 }

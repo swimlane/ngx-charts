@@ -8,12 +8,7 @@ import {
   ContentChild,
   TemplateRef
 } from '@angular/core';
-import {
-  trigger,
-  style,
-  animate,
-  transition
-} from '@angular/animations';
+import { trigger, style, animate, transition } from '@angular/animations';
 import { scaleBand, scaleLinear } from 'd3-scale';
 
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
@@ -29,11 +24,13 @@ import { BaseChartComponent } from '../common/base-chart.component';
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"
       [animations]="animations"
-      (legendLabelActivate)="onActivate($event)"
-      (legendLabelDeactivate)="onDeactivate($event)"
-      (legendLabelClick)="onClick($event)">
+      (legendLabelActivate)="onActivate($event, undefined, true)"
+      (legendLabelDeactivate)="onDeactivate($event, undefined, true)"
+      (legendLabelClick)="onClick($event)"
+    >
       <svg:g [attr.transform]="transform" class="bar-chart chart">
-        <svg:g ngx-charts-x-axis
+        <svg:g
+          ngx-charts-x-axis
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
@@ -44,9 +41,10 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [maxTickLength]="maxXAxisTickLength"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
-          (dimensionsChanged)="updateXAxisHeight($event)">
-        </svg:g>
-        <svg:g ngx-charts-y-axis
+          (dimensionsChanged)="updateXAxisHeight($event)"
+        ></svg:g>
+        <svg:g
+          ngx-charts-y-axis
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
@@ -57,13 +55,15 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [maxTickLength]="maxYAxisTickLength"
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
-          (dimensionsChanged)="updateYAxisWidth($event)">
-        </svg:g>
+          (dimensionsChanged)="updateYAxisWidth($event)"
+        ></svg:g>
         <svg:g
-          *ngFor="let group of results; trackBy:trackBy"
+          *ngFor="let group of results; trackBy: trackBy"
           [@animationState]="'active'"
-          [attr.transform]="groupTransform(group)">
-          <svg:g ngx-charts-series-vertical
+          [attr.transform]="groupTransform(group)"
+        >
+          <svg:g
+            ngx-charts-series-vertical
             type="normalized"
             [xScale]="xScale"
             [yScale]="yScale"
@@ -93,15 +93,14 @@ import { BaseChartComponent } from '../common/base-chart.component';
       transition(':leave', [
         style({
           opacity: 1,
-          transform: '*',
+          transform: '*'
         }),
-        animate(500, style({opacity: 0, transform: 'scale(0)'}))
+        animate(500, style({ opacity: 0, transform: 'scale(0)' }))
       ])
     ])
   ]
 })
 export class BarVerticalNormalizedComponent extends BaseChartComponent {
-
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
   @Input() legendPosition: string = 'right';
@@ -132,7 +131,7 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
-  @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
+  @ContentChild('tooltipTemplate', { static: false }) tooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
   groupDomain: any[];
@@ -177,14 +176,14 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
   }
 
   getGroupDomain() {
     const domain = [];
     for (const group of this.results) {
-      if (!domain.includes(group.name)) {
-        domain.push(group.name);
+      if (!domain.includes(group.label)) {
+        domain.push(group.label);
       }
     }
 
@@ -195,8 +194,8 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
     const domain = [];
     for (const group of this.results) {
       for (const d of group.series) {
-        if (!domain.includes(d.name)) {
-          domain.push(d.name);
+        if (!domain.includes(d.label)) {
+          domain.push(d.label);
         }
       }
     }
@@ -271,47 +270,51 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
     return opts;
   }
 
-  updateYAxisWidth({width}) {
+  updateYAxisWidth({ width }) {
     this.yAxisWidth = width;
     this.update();
   }
 
-  updateXAxisHeight({height}) {
+  updateXAxisHeight({ height }) {
     this.xAxisHeight = height;
     this.update();
   }
 
-  onActivate(event, group?) {
+  onActivate(event, group, fromLegend = false) {
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
     }
 
-    const idx = this.activeEntries.findIndex(d => {
-      return d.name === item.name && d.value === item.value && d.series === item.series;
-    });
-    if (idx > -1) {
-      return;
-    }
+    const items = this.results
+      .map(g => g.series)
+      .flat()
+      .filter(i => {
+        if (fromLegend) {
+          return i.label === item.name;
+        } else {
+          return i.name === item.name && i.series === item.series;
+        }
+      });
 
-    this.activeEntries = [ item, ...this.activeEntries ];
+    this.activeEntries = [...items];
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(event, group?) {
+  onDeactivate(event, group, fromLegend = false) {
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
     }
 
-    const idx = this.activeEntries.findIndex(d => {
-      return d.name === item.name && d.value === item.value && d.series === item.series;
+    this.activeEntries = this.activeEntries.filter(i => {
+      if (fromLegend) {
+        return i.label !== item.name;
+      } else {
+        return !(i.name === item.name && i.series === item.series);
+      }
     });
-
-    this.activeEntries.splice(idx, 1);
-    this.activeEntries = [...this.activeEntries];
 
     this.deactivate.emit({ value: item, entries: this.activeEntries });
   }
-
 }

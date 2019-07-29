@@ -30,16 +30,20 @@ import { MouseEvent } from '../events';
       [animations]="animations"
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
-      (legendLabelDeactivate)="onDeactivate($event)">
+      (legendLabelDeactivate)="onDeactivate($event)"
+    >
       <svg:g [attr.transform]="transform" class="force-directed-graph chart">
         <svg:g class="links">
-          <svg:g *ngFor="let link of links; trackBy:trackLinkBy">
-            <ng-template *ngIf="linkTemplate"
+          <svg:g *ngFor="let link of links; trackBy: trackLinkBy">
+            <ng-template
+              *ngIf="linkTemplate"
               [ngTemplateOutlet]="linkTemplate"
-              [ngTemplateOutletContext]="{ $implicit: link }">
-            </ng-template>
-            <svg:line *ngIf="!linkTemplate"
-              strokeWidth="1" class="edge"
+              [ngTemplateOutletContext]="{ $implicit: link }"
+            ></ng-template>
+            <svg:line
+              *ngIf="!linkTemplate"
+              strokeWidth="1"
+              class="edge"
               [attr.x1]="link.source.x"
               [attr.y1]="link.source.y"
               [attr.x2]="link.target.x"
@@ -48,23 +52,26 @@ import { MouseEvent } from '../events';
           </svg:g>
         </svg:g>
         <svg:g class="nodes">
-          <svg:g *ngFor="let node of nodes; trackBy:trackNodeBy"
+          <svg:g
+            *ngFor="let node of nodes; trackBy: trackNodeBy"
             [attr.transform]="'translate(' + node.x + ',' + node.y + ')'"
             [attr.fill]="colors.getColor(groupResultsBy(node))"
             [attr.stroke]="colors.getColor(groupResultsBy(node))"
             (mousedown)="onDragStart(node, $event)"
-            (click)="onClick({name: node.value})"
+            (click)="onClick({ name: node.value })"
             ngx-tooltip
             [tooltipDisabled]="tooltipDisabled"
             [tooltipPlacement]="'top'"
             [tooltipType]="'tooltip'"
             [tooltipTitle]="tooltipTemplate ? undefined : node.value"
             [tooltipTemplate]="tooltipTemplate"
-            [tooltipContext]="node">
-            <ng-template *ngIf="nodeTemplate"
+            [tooltipContext]="node"
+          >
+            <ng-template
+              *ngIf="nodeTemplate"
               [ngTemplateOutlet]="nodeTemplate"
-              [ngTemplateOutletContext]="{ $implicit: node }">
-            </ng-template>
+              [ngTemplateOutletContext]="{ $implicit: node }"
+            ></ng-template>
             <svg:circle *ngIf="!nodeTemplate" r="5" />
           </svg:g>
         </svg:g>
@@ -95,10 +102,10 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
-  @ContentChild('linkTemplate') linkTemplate: TemplateRef<any>;
-  @ContentChild('nodeTemplate') nodeTemplate: TemplateRef<any>;
-  @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
-  @ViewChild(ChartComponent, { read: ElementRef })
+  @ContentChild('linkTemplate', { static: false }) linkTemplate: TemplateRef<any>;
+  @ContentChild('nodeTemplate', { static: false }) nodeTemplate: TemplateRef<any>;
+  @ContentChild('tooltipTemplate', { static: false }) tooltipTemplate: TemplateRef<any>;
+  @ViewChild(ChartComponent, { read: ElementRef, static: false })
   chart: ElementRef;
 
   colors: ColorHelper;

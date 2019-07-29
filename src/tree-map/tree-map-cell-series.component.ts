@@ -12,8 +12,10 @@ import {
 @Component({
   selector: 'g[ngx-charts-tree-map-cell-series]',
   template: `
-    <svg:g ngx-charts-tree-map-cell *ngFor="let c of cells; trackBy:trackBy"
-      [data]="c"
+    <svg:g
+      ngx-charts-tree-map-cell
+      *ngFor="let c of cells; trackBy: trackBy"
+      [data]="c.data"
       [x]="c.x"
       [y]="c.y"
       [width]="c.width"
@@ -33,13 +35,12 @@ import {
       [tooltipType]="'tooltip'"
       [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(c)"
       [tooltipTemplate]="tooltipTemplate"
-      [tooltipContext]="c.data">
-    </svg:g>
+      [tooltipContext]="c.data"
+    ></svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreeMapCellSeriesComponent implements OnChanges {
-
   @Input() data;
   @Input() dims;
   @Input() colors;
@@ -60,19 +61,14 @@ export class TreeMapCellSeriesComponent implements OnChanges {
 
   getCells(): any[] {
     return this.data.children
-      .filter((d) => {
+      .filter(d => {
         return d.depth === 1;
       })
       .map((d, index) => {
         const label = d.id;
 
-        const data = {
-          name: label,
-          value: d.value
-        };
-
         return {
-          data,
+          data: d.data,
           x: d.x0,
           y: d.y0,
           width: d.x1 - d.x0,
