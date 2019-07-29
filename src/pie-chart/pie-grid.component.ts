@@ -156,7 +156,7 @@ export class PieGridComponent extends BaseChartComponent {
       const label = formatLabel(name);
       const value = d.data.value;
       const radius = min([d.width - padding, d.height - baselineLabelHeight]) / 2 - 5;
-      const innerRadius = radius * ( 1- this.arcWidth);
+      const innerRadius = radius * (1 - this.arcWidth);
 
       let count = 0;
       const colors = () => {
