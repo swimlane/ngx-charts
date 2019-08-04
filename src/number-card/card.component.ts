@@ -64,15 +64,15 @@ import { count, decimalChecker } from '../common/count';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardComponent implements OnChanges, OnDestroy {
-  @Input() color;
-  @Input() bandColor;
-  @Input() textColor;
+  @Input() color: string;
+  @Input() bandColor: string;
+  @Input() textColor: string;
 
-  @Input() x;
-  @Input() y;
-  @Input() width;
-  @Input() height;
-  @Input() label;
+  @Input() x: number;
+  @Input() y: number;
+  @Input() width: number;
+  @Input() height: number;
+  @Input() label: string;
   @Input() data;
   @Input() medianSize: number;
   @Input() valueFormatting: any;

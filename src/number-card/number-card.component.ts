@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input, ContentChild, TemplateRef } from '@angular/core';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
@@ -19,11 +19,13 @@ import { gridLayout, gridSize } from '../common/grid-layout.helper';
           [data]="data"
           [dims]="dims"
           [innerPadding]="innerPadding"
+          [tooltipDisabled]="tooltipDisabled"
+          [tooltipTemplate]="tooltipTemplate"
           [valueFormatting]="valueFormatting"
           [labelFormatting]="labelFormatting"
           [animations]="animations"
           (select)="onClick($event)"
-        />
+        ></svg:g>
       </svg:g>
     </ngx-charts-chart>
   `,
@@ -35,11 +37,14 @@ export class NumberCardComponent extends BaseChartComponent {
   @Input() cardColor: string;
   @Input() bandColor: string;
   @Input() emptyColor: string = 'rgba(0, 0, 0, 0)';
-  @Input() innerPadding = 15;
+  @Input() innerPadding: number = 15;
   @Input() textColor: string;
+  @Input() tooltipDisabled: boolean = false;
   @Input() valueFormatting: any;
   @Input() labelFormatting: any;
   @Input() designatedTotal: number;
+
+  @ContentChild('tooltipTemplate', { static: false }) tooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
   data: any[];

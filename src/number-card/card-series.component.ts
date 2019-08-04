@@ -5,19 +5,23 @@ import {
   EventEmitter,
   OnChanges,
   SimpleChanges,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  TemplateRef
 } from '@angular/core';
 import { invertColor } from '../utils/color-utils';
+import { ColorHelper } from '../common';
 
 export interface CardModel {
-  x;
-  y;
+  x: number;
+  y: number;
   width: number;
   height: number;
   color: string;
   label: string;
   data;
   tooltipText: string;
+  bandColor?: string;
+  textColor?: string;
 }
 
 @Component({
@@ -51,6 +55,13 @@ export interface CardModel {
       [labelFormatting]="labelFormatting"
       [animations]="animations"
       (select)="onClick($event)"
+      ngx-tooltip
+      [tooltipDisabled]="tooltipDisabled"
+      [tooltipPlacement]="tooltipPlacement"
+      [tooltipType]="tooltipType"
+      [tooltipTitle]="(tooltipTemplate ? undefined : c.tooltipText)"
+      [tooltipTemplate]="tooltipTemplate"
+      [tooltipContext]="c.data"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -59,16 +70,18 @@ export class CardSeriesComponent implements OnChanges {
   @Input() data: any[];
   @Input() slots: any[];
   @Input() dims;
-  @Input() colors;
+  @Input() colors: ColorHelper;
   @Input() innerPadding = 15;
 
-  @Input() cardColor;
-  @Input() bandColor;
-  @Input() emptyColor = 'rgba(0, 0, 0, 0)';
-  @Input() textColor;
+  @Input() cardColor: string;
+  @Input() bandColor: string;
+  @Input() emptyColor: string = 'rgba(0, 0, 0, 0)';
+  @Input() textColor: string;
   @Input() valueFormatting: any;
   @Input() labelFormatting: any;
   @Input() animations: boolean = true;
+  @Input() tooltipDisabled: boolean = false;
+  @Input() tooltipTemplate: TemplateRef<any>;
 
   @Output() select = new EventEmitter();
 
@@ -76,11 +89,15 @@ export class CardSeriesComponent implements OnChanges {
   emptySlots: any[];
   medianSize: number;
 
+  tooltipPlacement: string;
+  tooltipType: string;
+
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 
   update(): void {
+    this.updateTooltipSettings();
     if (this.data.length > 2) {
       const valueFormatting = this.valueFormatting || (card => card.value.toLocaleString());
 
@@ -137,8 +154,13 @@ export class CardSeriesComponent implements OnChanges {
     });
   }
 
-  trackBy(index, card): string {
+  trackBy(index: number, card: CardModel): string {
     return card.label;
+  }
+
+  updateTooltipSettings() {
+    this.tooltipPlacement = this.tooltipDisabled ? undefined : 'top';
+    this.tooltipType = this.tooltipDisabled ? undefined : 'tooltip';
   }
 
   onClick(data): void {
