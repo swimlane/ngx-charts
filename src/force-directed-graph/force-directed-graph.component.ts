@@ -17,9 +17,9 @@ import { ChartComponent } from '../common/charts/chart.component';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
+import { escapeLabel } from '../common/label.helper'
 /* tslint:disable */
 import { MouseEvent } from '../events';
-import { escapeLabel } from '../common/label.helper'
 
 @Component({
   selector: 'ngx-charts-force-directed-graph',
