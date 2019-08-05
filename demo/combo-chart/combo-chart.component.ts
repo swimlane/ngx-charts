@@ -20,7 +20,7 @@ import {
   LineComponent,
   LineSeriesComponent,
   calculateViewDimensions,
-  ViewDimensions,
+  IViewDimensions,
   ColorHelper
 } from '../../src';
 import { area, line, curveLinear } from 'd3-shape';
@@ -185,7 +185,7 @@ export class ComboChartComponent extends BaseChartComponent {
 
   @ViewChild(LineSeriesComponent, { static: false }) lineSeriesComponent: LineSeriesComponent;
 
-  dims: ViewDimensions;
+  dims: IViewDimensions;
   xScale: any;
   yScale: any;
   xDomain: any;

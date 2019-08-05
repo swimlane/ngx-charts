@@ -15,6 +15,7 @@ import {
 import { trimLabel } from '../common/trim-label.helper';
 import { roundedRect } from '../common/shape.helper';
 import { count, decimalChecker } from '../common/count';
+import { NumberCardsChartDataItem } from '../models/chart-data.model';
 
 @Component({
   selector: 'g[ngx-charts-card]',
@@ -72,11 +73,11 @@ export class CardComponent implements OnChanges, OnDestroy {
   @Input() y: number;
   @Input() width: number;
   @Input() height: number;
-  @Input() label: string;
-  @Input() data;
+  @Input() label: string | number | Date;
+  @Input() data: NumberCardsChartDataItem;
   @Input() medianSize: number;
-  @Input() valueFormatting: any;
-  @Input() labelFormatting: any;
+  @Input() valueFormatting: (val: any) => string;
+  @Input() labelFormatting: (val: any) => string;
   @Input() animations: boolean = true;
 
   @Output() select = new EventEmitter();
@@ -137,7 +138,7 @@ export class CardComponent implements OnChanges, OnDestroy {
       this.formattedLabel = labelFormatting(cardData);
       this.transformBand = `translate(0 , ${this.cardHeight - this.bandHeight})`;
 
-      const value = hasValue ? valueFormatting(cardData) : '';
+      const value: string = hasValue ? valueFormatting(cardData) : '';
 
       this.value = this.paddedValue(value);
       this.setPadding();
@@ -169,7 +170,7 @@ export class CardComponent implements OnChanges, OnDestroy {
       const decs = decimalChecker(val);
       const valueFormatting = this.valueFormatting || (card => card.value.toLocaleString());
 
-      const callback = ({ value, finished }) => {
+      const callback = ({ value, finished }: { value: number, finished: boolean }) => {
         this.zone.run(() => {
           value = finished ? val : value;
           this.value = valueFormatting({ label: this.label, data: this.data, value });

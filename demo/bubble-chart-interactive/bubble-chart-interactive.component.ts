@@ -12,7 +12,7 @@ import {
 import { trigger, style, animate, transition } from '@angular/animations';
 import { scaleLinear } from 'd3-scale';
 
-import { BaseChartComponent, calculateViewDimensions, ViewDimensions, ColorHelper } from '../../src';
+import { BaseChartComponent, calculateViewDimensions, IViewDimensions, ColorHelper } from '../../src';
 import { getDomain, getScale } from '../../src/bubble-chart/bubble-chart.utils';
 import { getScaleType } from '../../src/common/domain.helper';
 import { id } from '../../src/utils/id';
@@ -149,7 +149,7 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
 
   @ContentChild('tooltipTemplate', { static: false }) tooltipTemplate: TemplateRef<any>;
 
-  dims: ViewDimensions;
+  dims: IViewDimensions;
   colors: ColorHelper;
   scaleType = 'linear';
   margin = [10, 20, 10, 20];

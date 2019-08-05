@@ -3,7 +3,7 @@ import { scaleLinear, scaleTime, scaleBand } from 'd3-scale';
 import { brushX } from 'd3-brush';
 import { select, event as d3event } from 'd3-selection';
 
-import { calculateViewDimensions, ViewDimensions, BaseChartComponent, ColorHelper } from '../../src';
+import { calculateViewDimensions, IViewDimensions, BaseChartComponent, ColorHelper } from '../../src';
 import { id } from '../../src/utils';
 
 @Component({
@@ -85,7 +85,7 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
 
   @Output() onFilter = new EventEmitter();
 
-  dims: ViewDimensions;
+  dims: IViewDimensions;
   xSet: any;
   xDomain: any;
   yDomain: any;

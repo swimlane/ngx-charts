@@ -9,20 +9,8 @@ import {
   TemplateRef
 } from '@angular/core';
 import { invertColor } from '../utils/color-utils';
-import { ColorHelper } from '../common';
-
-export interface CardModel {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  color: string;
-  label: string;
-  data;
-  tooltipText: string;
-  bandColor?: string;
-  textColor?: string;
-}
+import { ColorHelper, IViewDimensions } from '../common';
+import { IGridLayout, ICardModel, NumberCardsChartDataItem } from '../models/chart-data.model';
 
 @Component({
   selector: 'g[ngx-charts-card-series]',
@@ -67,25 +55,24 @@ export interface CardModel {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardSeriesComponent implements OnChanges {
-  @Input() data: any[];
-  @Input() slots: any[];
-  @Input() dims;
+  @Input() data: IGridLayout[];
+  @Input() dims: IViewDimensions;
   @Input() colors: ColorHelper;
-  @Input() innerPadding = 15;
+  @Input() innerPadding: number | number[] = 15;
 
   @Input() cardColor: string;
   @Input() bandColor: string;
   @Input() emptyColor: string = 'rgba(0, 0, 0, 0)';
   @Input() textColor: string;
-  @Input() valueFormatting: any;
-  @Input() labelFormatting: any;
+  @Input() valueFormatting: (val: any) => string;
+  @Input() labelFormatting: (val: any) => string;
   @Input() animations: boolean = true;
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipTemplate: TemplateRef<any>;
 
-  @Output() select = new EventEmitter();
+  @Output() select: EventEmitter<NumberCardsChartDataItem> = new EventEmitter<NumberCardsChartDataItem>();
 
-  cards: CardModel[];
+  cards: ICardModel[];
   emptySlots: any[];
   medianSize: number;
 
@@ -130,7 +117,7 @@ export class CardSeriesComponent implements OnChanges {
 
     return this.data.map((d, index) => {
       let label = d.data.name;
-      if (label && label.constructor.name === 'Date') {
+      if (label && label instanceof Date) {
         label = label.toLocaleDateString();
       } else {
         label = label ? label.toLocaleString() : label;
@@ -154,7 +141,7 @@ export class CardSeriesComponent implements OnChanges {
     });
   }
 
-  trackBy(index: number, card: CardModel): string {
+  trackBy(index: number, card: ICardModel): string {
     return card.label;
   }
 
@@ -163,7 +150,7 @@ export class CardSeriesComponent implements OnChanges {
     this.tooltipType = this.tooltipDisabled ? undefined : 'tooltip';
   }
 
-  onClick(data): void {
+  onClick(data: NumberCardsChartDataItem): void {
     this.select.emit(data);
   }
 }

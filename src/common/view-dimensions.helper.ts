@@ -1,20 +1,38 @@
-export interface ViewDimensions {
+import { LegendType, LegendPosition } from '../enums/legend.enum';
+
+export interface IViewDimensions {
   width: number;
   height: number;
   xOffset: number;
 }
 
+interface IViewDimensionsInput {
+  width: number;
+  height: number;
+  margins: number[];
+  showXAxis?: boolean;
+  showYAxis?: boolean;
+  xAxisHeight?: number;
+  yAxisWidth?: number;
+  showXLabel?: boolean;
+  showYLabel?: boolean;
+  showLegend?: boolean;
+  legendType?: string;
+  legendPosition?: string;
+  columns?: number;
+}
+
 export function calculateViewDimensions({
   width, height, margins, showXAxis = false, showYAxis = false, xAxisHeight = 0,
   yAxisWidth = 0, showXLabel = false, showYLabel = false, showLegend = false,
-  legendType = 'ordinal', legendPosition = 'right', columns = 12
-}): ViewDimensions {
+  legendType = LegendType.ordinal, legendPosition = LegendPosition.right, columns = 12
+}: IViewDimensionsInput): IViewDimensions {
   let xOffset = margins[3];
   let chartWidth = width;
   let chartHeight = height - margins[0] - margins[2];
 
-  if (showLegend && legendPosition === 'right') {
-    if (legendType === 'ordinal') {
+  if (showLegend && legendPosition === LegendPosition.right) {
+    if (legendType === LegendType.ordinal) {
       columns -= 2;
     } else {
       columns -= 1;

@@ -1,8 +1,9 @@
 import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input, ContentChild, TemplateRef } from '@angular/core';
 import { BaseChartComponent } from '../common/base-chart.component';
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions, IViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { gridLayout, gridSize } from '../common/grid-layout.helper';
+import { IGridLayout } from '../models/chart-data.model';
 
 @Component({
   selector: 'ngx-charts-number-card',
@@ -37,24 +38,21 @@ export class NumberCardComponent extends BaseChartComponent {
   @Input() cardColor: string;
   @Input() bandColor: string;
   @Input() emptyColor: string = 'rgba(0, 0, 0, 0)';
-  @Input() innerPadding: number = 15;
+  @Input() innerPadding: number | number[] = 15;
   @Input() textColor: string;
   @Input() tooltipDisabled: boolean = false;
-  @Input() valueFormatting: any;
-  @Input() labelFormatting: any;
+  @Input() valueFormatting: (val: any) => string;
+  @Input() labelFormatting: (val: any) => string;
   @Input() designatedTotal: number;
 
   @ContentChild('tooltipTemplate', { static: false }) tooltipTemplate: TemplateRef<any>;
 
-  dims: ViewDimensions;
-  data: any[];
-  slots: any[];
+  dims: IViewDimensions;
+  data: IGridLayout[];
   colors: ColorHelper;
   transform: string;
   domain: any[];
-  margin = [10, 10, 10, 10];
-
-  backgroundCards: any[];
+  margin: number[] = [10, 10, 10, 10];
 
   get clickable() {
     return !!this.select.observers.length;

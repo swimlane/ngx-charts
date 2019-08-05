@@ -7,7 +7,7 @@ import {
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
 import { curveLinear } from 'd3-shape';
 
-import { calculateViewDimensions, ViewDimensions, BaseChartComponent, ColorHelper } from '../../src';
+import { calculateViewDimensions, IViewDimensions, BaseChartComponent, ColorHelper } from '../../src';
 import { getUniqueXDomainValues } from '../../src/common/domain.helper';
 
 @Component({
@@ -42,13 +42,13 @@ import { getUniqueXDomainValues } from '../../src/common/domain.helper';
 })
 export class SparklineComponent extends BaseChartComponent {
 
-  @Input() autoScale = false;
+  @Input() autoScale: boolean = false;
   @Input() curve: any = curveLinear;
   @Input() schemeType: string = 'linear';
   @Input() valueDomain: number[];
   @Input() animations: boolean = true;
 
-  dims: ViewDimensions;
+  dims: IViewDimensions;
   xSet: any;
   xDomain: any;
   yDomain: any;

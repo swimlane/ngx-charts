@@ -15,7 +15,7 @@ import { forceCollide, forceLink, forceManyBody, forceSimulation, forceX, forceY
 
 import { ChartComponent } from '../common/charts/chart.component';
 import { BaseChartComponent } from '../common/base-chart.component';
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions, IViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 /* tslint:disable */
 import { MouseEvent } from '../events';
@@ -109,7 +109,7 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
   chart: ElementRef;
 
   colors: ColorHelper;
-  dims: ViewDimensions;
+  dims: IViewDimensions;
   draggingNode: any;
   draggingStart: { x: number; y: number };
   margin = [0, 0, 0, 0];
