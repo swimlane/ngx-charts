@@ -6,7 +6,7 @@ import * as shape from 'd3-shape';
 import * as d3 from 'd3';
 
 import { colorSets } from '../src/utils/color-sets';
-import { formatLabel } from '../src/common/label.helper';
+import { formatLabel, escapeLabel } from '../src/common/label.helper';
 import {
   single,
   multi,
@@ -544,7 +544,7 @@ export class AppComponent implements OnInit {
     const val = formatLabel(data.value);
 
     return `
-      <span class="tooltip-label">${label}</span>
+      <span class="tooltip-label">${escapeLabel(label)}</span>
       <span class="tooltip-val">$${val}</span>
     `;
   }
@@ -613,7 +613,7 @@ export class AppComponent implements OnInit {
   }
 
   gdpLabelFormatting(c) {
-    return `${c.label}<br/><small class="number-card-label">GDP Per Capita</small>`;
+    return `${escapeLabel(c.label)}<br/><small class="number-card-label">GDP Per Capita</small>`;
   }
 
   statusLabelFormat(c): string {
