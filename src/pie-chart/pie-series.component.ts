@@ -11,7 +11,7 @@ import {
 import { max } from 'd3-array';
 import { arc, pie } from 'd3-shape';
 
-import { formatLabel } from '../common/label.helper';
+import { formatLabel, escapeLabel } from '../common/label.helper';
 
 @Component({
   selector: 'g[ngx-charts-pie-series]',
@@ -178,7 +178,7 @@ export class PieSeriesComponent implements OnChanges {
     const val = formatLabel(myArc.data.value);
 
     return `
-      <span class="tooltip-label">${label}</span>
+      <span class="tooltip-label">${escapeLabel(label)}</span>
       <span class="tooltip-val">${val}</span>
     `;
   }

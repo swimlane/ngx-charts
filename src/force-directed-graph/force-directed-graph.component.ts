@@ -19,6 +19,7 @@ import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensio
 import { ColorHelper } from '../common/color.helper';
 /* tslint:disable */
 import { MouseEvent } from '../events';
+import { escapeLabel } from '../common/label.helper'
 
 @Component({
   selector: 'ngx-charts-force-directed-graph',
@@ -63,7 +64,7 @@ import { MouseEvent } from '../events';
             [tooltipDisabled]="tooltipDisabled"
             [tooltipPlacement]="'top'"
             [tooltipType]="'tooltip'"
-            [tooltipTitle]="tooltipTemplate ? undefined : node.value"
+            [tooltipTitle]="tooltipTemplate ? undefined : escape(node.value)"
             [tooltipTemplate]="tooltipTemplate"
             [tooltipContext]="node"
           >
@@ -221,5 +222,9 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
     this.draggingNode.fx = undefined;
     this.draggingNode.fy = undefined;
     this.draggingNode = undefined;
+  }
+
+  escape(label: any): string {
+    return escapeLabel(label);
   }
 }
