@@ -46,6 +46,8 @@
 | xScaleMax             | any                |               | the maximum value of the x axis \(if the x scale is linear or time\)                                                             |
 | yScaleMin             | number             |               | the minimum value of the y axis                                                                                                  |
 | yScaleMax             | number             |               | the maximum value of the y axis                                                                                                  |
+| showXAxisLine         | boolean            | false         | show or hide the actual line of the x axis                                                                                       |
+| showYAxisLine         | boolean            | false         | show or hide the actual line of the y axis                                                                                       |
 
 ## Outputs
 
