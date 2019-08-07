@@ -23,7 +23,7 @@ export function formatLabel(label: any): string {
  * @returns {string}
  */
 export function escapeLabel(label: any): string {
-  return label.replace(/[&'`"<>]/g, match => {
+  return label.toLocaleString().replace(/[&'`"<>]/g, match => {
     return {
       '&': '&amp;',
       '\'': '&#x27;',
