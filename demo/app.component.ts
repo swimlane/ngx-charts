@@ -105,6 +105,8 @@ export class AppComponent implements OnInit {
   rotateXAxisTicks = true;
   maxXAxisTickLength = 16;
   maxYAxisTickLength = 16;
+  showXAxisLine = false;
+  showYAxisLine = false;
 
   curves = {
     Basis: shape.curveBasis,
