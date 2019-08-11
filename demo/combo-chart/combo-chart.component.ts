@@ -21,7 +21,8 @@ import {
   LineSeriesComponent,
   calculateViewDimensions,
   ViewDimensions,
-  ColorHelper
+  ColorHelper,
+  IColorSet
 } from '../../src';
 import { area, line, curveLinear } from 'd3-shape';
 import { scaleBand, scaleLinear, scalePoint, scaleTime } from 'd3-scale';
@@ -168,7 +169,7 @@ export class ComboChartComponent extends BaseChartComponent {
   @Input() yAxisTickFormatting: any;
   @Input() yRightAxisTickFormatting: any;
   @Input() roundDomains: boolean = false;
-  @Input() colorSchemeLine: any[];
+  @Input() colorSchemeLine: IColorSet;
   @Input() autoScale;
   @Input() lineChart: any;
   @Input() yLeftAxisScaleFactor: any;

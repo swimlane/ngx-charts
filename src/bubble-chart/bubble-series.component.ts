@@ -13,6 +13,7 @@ import { formatLabel } from '../common/label.helper';
 import { ColorHelper } from '../common';
 import { ScaleTime, ScaleLinear, ScalePoint } from 'd3-scale';
 import { BubbleChartSeries } from '../models/chart-data.model';
+import { IShapeCircle } from '../models/shape.model';
 import { ScaleType } from '../enums/scale.enum';
 
 @Component({
@@ -79,7 +80,7 @@ export class BubbleSeriesComponent implements OnChanges {
   @Output() deactivate = new EventEmitter();
 
   areaPath: any;
-  circles: any[];
+  circles: IShapeCircle[];
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -89,14 +90,14 @@ export class BubbleSeriesComponent implements OnChanges {
     this.circles = this.getCircles();
   }
 
-  getCircles(): any[] {
+  getCircles(): IShapeCircle[] {
     const seriesName = this.data.name;
 
     return this.data.series
       .map((d, i) => {
         if (typeof d.y !== 'undefined' && typeof d.x !== 'undefined') {
-          const y = d.y;
           const x = d.x;
+          const y = d.y;
           const r = d.r;
 
           const radius = this.rScale(r || 1);
@@ -119,7 +120,7 @@ export class BubbleSeriesComponent implements OnChanges {
             radius: d.r
           });
 
-          return {
+          const circleData: IShapeCircle = {
             data,
             x,
             y,
@@ -135,17 +136,19 @@ export class BubbleSeriesComponent implements OnChanges {
             opacity,
             seriesName,
             isActive,
-            transform: `translate(${cx},${cy})`
+            transform: `translate(${cx},${cy})`,
+            barVisible: true
           };
+          return circleData;
         }
       })
       .filter(circle => circle !== undefined);
   }
 
-  getTooltipText(circle): string {
+  getTooltipText(circle: IShapeCircle): string {
     const hasRadius = typeof circle.r !== 'undefined';
     const hasTooltipLabel = circle.tooltipLabel && circle.tooltipLabel.length;
-    const hasSeriesName = circle.seriesName && circle.seriesName.length;
+    const hasSeriesName = circle.seriesName && circle.seriesName.toString().length;
 
     const radiusValue = hasRadius ? formatLabel(circle.r) : '';
     const xAxisLabel = this.xAxisLabel && this.xAxisLabel !== '' ? `${this.xAxisLabel}:` : '';
@@ -182,7 +185,7 @@ export class BubbleSeriesComponent implements OnChanges {
     return item !== undefined;
   }
 
-  isVisible(circle): boolean {
+  isVisible(circle: IShapeCircle): boolean {
     if (this.activeEntries.length > 0) {
       return this.isActive({ name: circle.seriesName });
     }
@@ -190,17 +193,17 @@ export class BubbleSeriesComponent implements OnChanges {
     return circle.opacity !== 0;
   }
 
-  activateCircle(circle): void {
+  activateCircle(circle: IShapeCircle): void {
     circle.barVisible = true;
     this.activate.emit({ name: this.data.name });
   }
 
-  deactivateCircle(circle): void {
+  deactivateCircle(circle: IShapeCircle): void {
     circle.barVisible = false;
     this.deactivate.emit({ name: this.data.name });
   }
 
-  trackBy(index, circle): string {
+  trackBy(index: number, circle: IShapeCircle): string {
     return `${circle.data.series} ${circle.data.name}`;
   }
 }

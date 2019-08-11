@@ -16,6 +16,7 @@ import { BaseChartComponent, calculateViewDimensions, ViewDimensions, ColorHelpe
 import { getBubbleDomain, getBubbleScale } from '../../src/bubble-chart/bubble-chart.utils';
 import { getScaleType } from '../../src/common/domain.helper';
 import { id } from '../../src/utils/id';
+import { ScaleType } from '../../src/enums/scale.enum';
 
 @Component({
   selector: 'ngx-charts-bubble-chart-interactive',
@@ -132,10 +133,10 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
   @Input() xAxisTicks: any[];
   @Input() yAxisTicks: any[];
   @Input() roundDomains: boolean = false;
-  @Input() maxRadius = 10;
-  @Input() minRadius = 3;
+  @Input() maxRadius: number = 10;
+  @Input() minRadius: number = 3;
   @Input() autoScale: boolean;
-  @Input() schemeType = 'ordinal';
+  @Input() schemeType: string = 'ordinal';
   @Input() legendPosition: string = 'right';
   @Input() tooltipDisabled: boolean = false;
   @Input() xScaleMin: any;
@@ -151,9 +152,9 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
 
   dims: ViewDimensions;
   colors: ColorHelper;
-  scaleType = 'linear';
-  margin = [10, 20, 10, 20];
-  bubblePadding = [0, 0, 0, 0];
+  scaleType: string = ScaleType.linear;
+  margin: number[] = [10, 20, 10, 20];
+  bubblePadding: number[] = [0, 0, 0, 0];
   data: any;
 
   legendOptions: any;

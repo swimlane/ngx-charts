@@ -40,7 +40,7 @@ import { formatLabel } from '../../src/common/label.helper';
           [tooltipDisabled]="tooltipDisabled"
           [tooltipPlacement]="'top'"
           [tooltipType]="'tooltip'"
-          [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(circle)"
+          [tooltipTitle]="(tooltipTemplate ? undefined : getTooltipText(circle))"
           [tooltipTemplate]="tooltipTemplate"
           [tooltipContext]="circle.data"
         />

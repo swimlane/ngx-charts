@@ -150,7 +150,7 @@ export class BubbleChartComponent extends BaseChartComponent {
   @Input() maxRadius: number = 10;
   @Input() minRadius: number = 3;
   @Input() autoScale: boolean;
-  @Input() schemeType = ScaleType.ordinal;
+  @Input() schemeType: string = ScaleType.ordinal;
   @Input() tooltipDisabled: boolean = false;
   @Input() xScaleMin: any;
   @Input() xScaleMax: any;
@@ -164,9 +164,9 @@ export class BubbleChartComponent extends BaseChartComponent {
 
   dims: ViewDimensions;
   colors: ColorHelper;
-  scaleType = 'linear';
-  margin = [10, 20, 10, 20];
-  bubblePadding = [0, 0, 0, 0];
+  scaleType: string = ScaleType.linear;
+  margin: number[] = [10, 20, 10, 20];
+  bubblePadding: number[] = [0, 0, 0, 0];
   results: BubbleChartMultiSeries;
   data: BubbleChartMultiSeries;
 
@@ -176,7 +176,7 @@ export class BubbleChartComponent extends BaseChartComponent {
   clipPath: string;
   clipPathId: string;
 
-  seriesDomain: any[];
+  seriesDomain: string[];
   xDomain: Array<string | number | Date>;
   yDomain: Array<string | number | Date>;
   rDomain: number[];
@@ -211,7 +211,7 @@ export class BubbleChartComponent extends BaseChartComponent {
       legendPosition: this.legendPosition
     });
 
-    this.seriesDomain = this.results.map(d => d.name);
+    this.seriesDomain = this.results.map(d => d.name.toString());
     this.rDomain = this.getRDomain();
     this.xDomain = this.getXDomain();
     this.yDomain = this.getYDomain();
@@ -222,7 +222,8 @@ export class BubbleChartComponent extends BaseChartComponent {
 
     this.transform = `translate(${this.dims.xOffset},${this.margin[0]})`;
 
-    const colorDomain = this.schemeType === 'ordinal' ? this.seriesDomain : this.rDomain;
+    const colorDomain = this.schemeType === ScaleType.ordinal ? this.seriesDomain : this.rDomain;
+    console.log('Custom Colors: \n', this.customColors);
     this.colors = new ColorHelper(this.scheme, this.schemeType, colorDomain, this.customColors);
 
     this.data = this.results;
