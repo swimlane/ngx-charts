@@ -10,6 +10,10 @@ import {
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel } from '../common/label.helper';
+import { ColorHelper } from '../common';
+import { ScaleTime, ScaleLinear, ScalePoint } from 'd3-scale';
+import { BubbleChartSeries } from '../models/chart-data.model';
+import { ScaleType } from '../enums/scale.enum';
 
 @Component({
   selector: 'g[ngx-charts-bubble-series]',
@@ -36,7 +40,7 @@ import { formatLabel } from '../common/label.helper';
           [tooltipDisabled]="tooltipDisabled"
           [tooltipPlacement]="'top'"
           [tooltipType]="'tooltip'"
-          [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(circle)"
+          [tooltipTitle]="(tooltipTemplate ? undefined : getTooltipText(circle))"
           [tooltipTemplate]="tooltipTemplate"
           [tooltipContext]="circle.data"
         />
@@ -57,14 +61,13 @@ import { formatLabel } from '../common/label.helper';
   ]
 })
 export class BubbleSeriesComponent implements OnChanges {
-  @Input() data;
-  @Input() xScale;
-  @Input() yScale;
-  @Input() rScale;
-  @Input() xScaleType;
-  @Input() yScaleType;
-  @Input() colors;
-  @Input() visibleValue;
+  @Input() data: BubbleChartSeries;
+  @Input() xScale: ScaleTime<number, number> | ScaleLinear<number, number> | ScalePoint<string>;
+  @Input() yScale: ScaleTime<number, number> | ScaleLinear<number, number> | ScalePoint<string>;
+  @Input() rScale: ScaleLinear<number, number>;
+  @Input() xScaleType: string;
+  @Input() yScaleType: string;
+  @Input() colors: ColorHelper;
   @Input() activeEntries: any[];
   @Input() xAxisLabel: string;
   @Input() yAxisLabel: string;
@@ -99,10 +102,11 @@ export class BubbleSeriesComponent implements OnChanges {
           const radius = this.rScale(r || 1);
           const tooltipLabel = formatLabel(d.name);
 
-          const cx = this.xScaleType === 'linear' ? this.xScale(Number(x)) : this.xScale(x);
-          const cy = this.yScaleType === 'linear' ? this.yScale(Number(y)) : this.yScale(y);
+          const cx = this.xScale(x as any);
+          const cy = this.yScale(y as any);
 
-          const color = this.colors.scaleType === 'linear' ? this.colors.getColor(r) : this.colors.getColor(seriesName);
+          const color =
+            this.colors.scaleType === ScaleType.linear ? this.colors.getColor(r) : this.colors.getColor(seriesName);
 
           const isActive = !this.activeEntries.length ? true : this.isActive({ name: seriesName });
           const opacity = isActive ? 1 : 0.3;
