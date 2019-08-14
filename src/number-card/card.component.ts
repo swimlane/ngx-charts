@@ -15,6 +15,7 @@ import {
 import { trimLabel } from '../common/trim-label.helper';
 import { roundedRect } from '../common/shape.helper';
 import { count, decimalChecker } from '../common/count';
+import { escapeLabel } from '../common/label.helper';
 
 @Component({
   selector: 'g[ngx-charts-card]',
@@ -118,7 +119,7 @@ export class CardComponent implements OnChanges, OnDestroy {
     this.zone.run(() => {
       const hasValue = this.data && typeof this.data.value !== 'undefined';
       const valueFormatting = this.valueFormatting || (card => card.value.toLocaleString());
-      const labelFormatting = this.labelFormatting || (card => trimLabel(card.label, 55));
+      const labelFormatting = this.labelFormatting || (card => escapeLabel(trimLabel(card.label, 55)));
 
       this.transform = `translate(${this.x} , ${this.y})`;
 

@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnChanges, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { formatLabel } from '../common/label.helper';
+import { formatLabel, escapeLabel } from '../common/label.helper';
 import { DataItem } from '../models/chart-data.model';
 
 export enum D0Types {
@@ -205,7 +205,7 @@ export class SeriesVerticalComponent implements OnChanges {
       bar.tooltipText = this.tooltipDisabled
         ? undefined
         : `
-        <span class="tooltip-label">${tooltipLabel}</span>
+        <span class="tooltip-label">${escapeLabel(tooltipLabel)}</span>
         <span class="tooltip-val">${value.toLocaleString()}</span>
       `;
 

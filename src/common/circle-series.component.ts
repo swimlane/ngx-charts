@@ -10,7 +10,7 @@ import {
   TemplateRef
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { formatLabel } from '../common/label.helper';
+import { formatLabel, escapeLabel } from '../common/label.helper';
 import { id } from '../utils/id';
 import { ColorHelper } from '../common/color.helper';
 
@@ -180,7 +180,7 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
 
   getTooltipText({ tooltipLabel, value, seriesName, min, max }): string {
     return `
-      <span class="tooltip-label">${seriesName} • ${tooltipLabel}</span>
+      <span class="tooltip-label">${escapeLabel(seriesName)} • ${escapeLabel(tooltipLabel)}</span>
       <span class="tooltip-val">${value.toLocaleString()}${this.getTooltipMinMaxText(min, max)}</span>
     `;
   }

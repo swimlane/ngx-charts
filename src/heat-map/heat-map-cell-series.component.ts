@@ -9,7 +9,7 @@ import {
   ChangeDetectionStrategy,
   TemplateRef
 } from '@angular/core';
-import { formatLabel } from '../common/label.helper';
+import { formatLabel, escapeLabel } from '../common/label.helper';
 
 @Component({
   selector: 'g[ngx-charts-heat-map-cell-series]',
@@ -98,7 +98,7 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
 
   getTooltipText({ label, data, series }): string {
     return `
-      <span class="tooltip-label">${series} • ${label}</span>
+      <span class="tooltip-label">${escapeLabel(series)} • ${escapeLabel(label)}</span>
       <span class="tooltip-val">${data.toLocaleString()}</span>
     `;
   }

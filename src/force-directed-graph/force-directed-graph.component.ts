@@ -17,6 +17,7 @@ import { ChartComponent } from '../common/charts/chart.component';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
+import { escapeLabel } from '../common/label.helper';
 /* tslint:disable */
 import { MouseEvent } from '../events';
 
@@ -63,7 +64,7 @@ import { MouseEvent } from '../events';
             [tooltipDisabled]="tooltipDisabled"
             [tooltipPlacement]="'top'"
             [tooltipType]="'tooltip'"
-            [tooltipTitle]="tooltipTemplate ? undefined : node.value"
+            [tooltipTitle]="tooltipTemplate ? undefined : escape(node.value)"
             [tooltipTemplate]="tooltipTemplate"
             [tooltipContext]="node"
           >
@@ -221,5 +222,9 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
     this.draggingNode.fx = undefined;
     this.draggingNode.fy = undefined;
     this.draggingNode = undefined;
+  }
+
+  escape(label: any): string {
+    return escapeLabel(label);
   }
 }
