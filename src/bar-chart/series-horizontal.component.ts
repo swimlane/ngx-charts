@@ -9,7 +9,7 @@ import {
   TemplateRef
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { formatLabel } from '../common/label.helper';
+import { formatLabel, escapeLabel } from '../common/label.helper';
 import { D0Types } from './series-vertical.component';
 import { DataItem } from '../models/chart-data.model';
 
@@ -200,7 +200,7 @@ export class SeriesHorizontal implements OnChanges {
       bar.tooltipText = this.tooltipDisabled
         ? undefined
         : `
-        <span class="tooltip-label">${tooltipLabel}</span>
+        <span class="tooltip-label">${escapeLabel(tooltipLabel)}</span>
         <span class="tooltip-val">${value.toLocaleString()}</span>
       `;
 
