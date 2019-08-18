@@ -1,14 +1,19 @@
-export interface IShapeCircle {
-  data: any;
+export interface IShapeData {
+  series: string | number | Date;
+  name: string | number | Date;
+  value: string | number | Date;
   x: string | number | Date;
   y: string | number | Date;
   r: number;
+}
+
+export interface IShapeBase {
+  data: IShapeData;
+  x: string | number | Date;
+  y: string | number | Date;
   classNames: string[];
   value: string | number | Date;
   label: string | number | Date;
-  cx: number;
-  cy: number;
-  radius: number;
   tooltipLabel: string;
   color: string;
   opacity: number;
@@ -16,4 +21,11 @@ export interface IShapeCircle {
   isActive: boolean;
   transform: string;
   barVisible: boolean;
+}
+
+export interface IShapeCircle extends IShapeBase {
+  r: number;
+  cx: number;
+  cy: number;
+  radius: number;
 }

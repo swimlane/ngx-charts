@@ -18,8 +18,9 @@ import { ColorHelper } from '../common/color.helper';
 import { getScaleType } from '../common/domain.helper';
 import { getBubbleDomain, getBubbleScale } from './bubble-chart.utils';
 import { id } from '../utils/id';
-import { BubbleChartMultiSeries } from '../models/chart-data.model';
+import { BubbleChartMultiSeries, BubbleChartSeries } from '../models/chart-data.model';
 import { ScaleType } from '../enums/scale.enum';
+import { IShapeData } from '../models/shape.model';
 
 @Component({
   selector: 'ngx-charts-bubble-chart',
@@ -216,14 +217,14 @@ export class BubbleChartComponent extends BaseChartComponent {
     this.xDomain = this.getXDomain();
     this.yDomain = this.getYDomain();
 
-    console.log(
-      `Domains: \n - R Domain: ${this.rDomain} \n - X Domain: ${this.xDomain} \n - Y Domain: ${this.yDomain}`
-    );
+    // console.log(
+    //   `Domains: \n - R Domain: ${this.rDomain} \n - X Domain: ${this.xDomain} \n - Y Domain: ${this.yDomain}`
+    // );
 
     this.transform = `translate(${this.dims.xOffset},${this.margin[0]})`;
 
     const colorDomain = this.schemeType === ScaleType.ordinal ? this.seriesDomain : this.rDomain;
-    console.log('Custom Colors: \n', this.customColors);
+    // console.log('Custom Colors: \n', this.customColors);
     this.colors = new ColorHelper(this.scheme, this.schemeType, colorDomain, this.customColors);
 
     this.data = this.results;
@@ -250,11 +251,10 @@ export class BubbleChartComponent extends BaseChartComponent {
     this.deactivateAll();
   }
 
-  onClick(data, series?): void {
+  onClick(data: IShapeData, series?: BubbleChartSeries): void {
     if (series) {
       data.series = series.name;
     }
-
     this.select.emit(data);
   }
 
@@ -387,7 +387,7 @@ export class BubbleChartComponent extends BaseChartComponent {
     this.update();
   }
 
-  onActivate(item): void {
+  onActivate(item: IShapeData): void {
     const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name;
     });
@@ -399,7 +399,7 @@ export class BubbleChartComponent extends BaseChartComponent {
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(item): void {
+  onDeactivate(item: IShapeData): void {
     const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name;
     });
@@ -410,7 +410,7 @@ export class BubbleChartComponent extends BaseChartComponent {
     this.deactivate.emit({ value: item, entries: this.activeEntries });
   }
 
-  deactivateAll() {
+  deactivateAll(): void {
     this.activeEntries = [...this.activeEntries];
     for (const entry of this.activeEntries) {
       this.deactivate.emit({ value: entry, entries: [] });
@@ -418,7 +418,7 @@ export class BubbleChartComponent extends BaseChartComponent {
     this.activeEntries = [];
   }
 
-  trackBy(index, item): string {
+  trackBy(index: number, item: BubbleChartSeries): string | number | Date {
     return item.name;
   }
 }

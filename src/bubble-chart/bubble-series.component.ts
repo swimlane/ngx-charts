@@ -12,8 +12,8 @@ import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel } from '../common/label.helper';
 import { ColorHelper } from '../common';
 import { ScaleTime, ScaleLinear, ScalePoint } from 'd3-scale';
-import { BubbleChartSeries } from '../models/chart-data.model';
-import { IShapeCircle } from '../models/shape.model';
+import { BubbleChartSeries, BubbleChartDataItem } from '../models/chart-data.model';
+import { IShapeCircle, IShapeData } from '../models/shape.model';
 import { ScaleType } from '../enums/scale.enum';
 
 @Component({
@@ -69,15 +69,15 @@ export class BubbleSeriesComponent implements OnChanges {
   @Input() xScaleType: string;
   @Input() yScaleType: string;
   @Input() colors: ColorHelper;
-  @Input() activeEntries: any[];
+  @Input() activeEntries: BubbleChartSeries[];
   @Input() xAxisLabel: string;
   @Input() yAxisLabel: string;
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipTemplate: TemplateRef<any>;
 
-  @Output() select = new EventEmitter();
-  @Output() activate = new EventEmitter();
-  @Output() deactivate = new EventEmitter();
+  @Output() select: EventEmitter<IShapeData> = new EventEmitter();
+  @Output() activate: EventEmitter<Partial<IShapeData>> = new EventEmitter();
+  @Output() deactivate: EventEmitter<Partial<IShapeData>> = new EventEmitter();
 
   areaPath: any;
   circles: IShapeCircle[];
@@ -112,7 +112,7 @@ export class BubbleSeriesComponent implements OnChanges {
           const isActive = !this.activeEntries.length ? true : this.isActive({ name: seriesName });
           const opacity = isActive ? 1 : 0.3;
 
-          const data = Object.assign({}, d, {
+          const data: IShapeData = Object.assign({}, d, {
             series: seriesName,
             name: d.name,
             value: d.y,
@@ -173,11 +173,11 @@ export class BubbleSeriesComponent implements OnChanges {
     `;
   }
 
-  onClick(data): void {
+  onClick(data: IShapeData): void {
     this.select.emit(data);
   }
 
-  isActive(entry): boolean {
+  isActive(entry: Partial<BubbleChartDataItem>): boolean {
     if (!this.activeEntries) return false;
     const item = this.activeEntries.find(d => {
       return entry.name === d.name;
