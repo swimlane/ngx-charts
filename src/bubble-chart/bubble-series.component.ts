@@ -69,7 +69,7 @@ export class BubbleSeriesComponent implements OnChanges {
   @Input() xScaleType: string;
   @Input() yScaleType: string;
   @Input() colors: ColorHelper;
-  @Input() activeEntries: BubbleChartSeries[];
+  @Input() activeEntries: IShapeData[];
   @Input() xAxisLabel: string;
   @Input() yAxisLabel: string;
   @Input() tooltipDisabled: boolean = false;
@@ -79,10 +79,10 @@ export class BubbleSeriesComponent implements OnChanges {
   @Output() activate: EventEmitter<Partial<IShapeData>> = new EventEmitter();
   @Output() deactivate: EventEmitter<Partial<IShapeData>> = new EventEmitter();
 
-  areaPath: any;
   circles: IShapeCircle[];
 
   ngOnChanges(changes: SimpleChanges): void {
+    // console.log('Bubble series:', changes);
     this.update();
   }
 
@@ -112,13 +112,13 @@ export class BubbleSeriesComponent implements OnChanges {
           const isActive = !this.activeEntries.length ? true : this.isActive({ name: seriesName });
           const opacity = isActive ? 1 : 0.3;
 
-          const data: IShapeData = Object.assign({}, d, {
+          const data: IShapeData = {
             series: seriesName,
             name: d.name,
             value: d.y,
             x: d.x,
             radius: d.r
-          });
+          };
 
           const circleData: IShapeCircle = {
             data,
@@ -127,7 +127,7 @@ export class BubbleSeriesComponent implements OnChanges {
             r,
             classNames: [`circle-data-${i}`],
             value: y,
-            label: x,
+            label: d.name,
             cx,
             cy,
             radius,
@@ -179,14 +179,12 @@ export class BubbleSeriesComponent implements OnChanges {
 
   isActive(entry: Partial<BubbleChartDataItem>): boolean {
     if (!this.activeEntries) return false;
-    const item = this.activeEntries.find(d => {
-      return entry.name === d.name;
-    });
+    const item = this.activeEntries.find(d => entry.name === d.series);
     return item !== undefined;
   }
 
   isVisible(circle: IShapeCircle): boolean {
-    if (this.activeEntries.length > 0) {
+    if (this.activeEntries.length) {
       return this.isActive({ name: circle.seriesName });
     }
 
@@ -195,12 +193,12 @@ export class BubbleSeriesComponent implements OnChanges {
 
   activateCircle(circle: IShapeCircle): void {
     circle.barVisible = true;
-    this.activate.emit({ name: this.data.name });
+    this.activate.emit(circle.data);
   }
 
   deactivateCircle(circle: IShapeCircle): void {
     circle.barVisible = false;
-    this.deactivate.emit({ name: this.data.name });
+    this.deactivate.emit(circle.data);
   }
 
   trackBy(index: number, circle: IShapeCircle): string {

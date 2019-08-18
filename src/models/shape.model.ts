@@ -3,8 +3,7 @@ export interface IShapeData {
   name: string | number | Date;
   value: string | number | Date;
   x: string | number | Date;
-  y: string | number | Date;
-  r: number;
+  radius: number;
 }
 
 export interface IShapeBase {
