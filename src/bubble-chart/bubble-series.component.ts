@@ -82,7 +82,6 @@ export class BubbleSeriesComponent implements OnChanges {
   circles: IShapeCircle[];
 
   ngOnChanges(changes: SimpleChanges): void {
-    // console.log('Bubble series:', changes);
     this.update();
   }
 

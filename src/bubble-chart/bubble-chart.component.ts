@@ -224,7 +224,6 @@ export class BubbleChartComponent extends BaseChartComponent {
     this.transform = `translate(${this.dims.xOffset},${this.margin[0]})`;
 
     const colorDomain = this.schemeType === ScaleType.ordinal ? this.seriesDomain : this.rDomain;
-    // console.log('Custom Colors: \n', this.customColors);
     this.colors = new ColorHelper(this.scheme, this.schemeType, colorDomain, this.customColors);
 
     this.data = this.results;

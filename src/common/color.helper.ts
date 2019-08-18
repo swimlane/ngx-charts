@@ -106,20 +106,16 @@ export class ColorHelper {
         }
         const formattedValue = value.toString();
         let found: ICustomColor; // todo type customColors
-        console.log('Formatted Value: \n', formattedValue, '\n Custom Colors', this.customColors);
         if (this.customColors && this.customColors.length > 0) {
           found = this.customColors.find(mapping => {
-            console.log(`Mapped name: ${mapping.name.toString().toLowerCase()}`);
             return mapping.name.toString().toLowerCase() === formattedValue.toLowerCase();
           });
         }
 
         if (found) {
-          console.log('Found value: ', found.value);
           return found.value;
         } else {
-          console.log('Scale returns: \n', this.scale(Number(value)));
-          return this.scale(Number(value));
+          return this.scale(value as any);
         }
         break;
     }
