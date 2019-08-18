@@ -9,6 +9,7 @@ import {
   transition
 } from '@angular/animations';
 import { TooltipService } from '../tooltip';
+import { ColorHelper } from '../color.helper';
 
 @Component({
   providers: [TooltipService],
@@ -62,7 +63,7 @@ import { TooltipService } from '../tooltip';
 })
 export class ChartComponent implements OnChanges {
 
-  @Input() view;
+  @Input() view: number[];
   @Input() showLegend = false;
   @Input() legendOptions: any;
 
@@ -70,7 +71,7 @@ export class ChartComponent implements OnChanges {
   @Input() data;
   @Input() legendData;
   @Input() legendType: any;
-  @Input() colors: any;
+  @Input() colors: ColorHelper;
   @Input() activeEntries: any[];
   @Input() animations: boolean = true;
 
