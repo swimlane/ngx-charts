@@ -10,6 +10,7 @@ export interface IShapeBase {
   data: IShapeData;
   x: string | number | Date;
   y: string | number | Date;
+  r: number;
   classNames: string[];
   value: string | number | Date;
   label: string | number | Date;
@@ -20,11 +21,25 @@ export interface IShapeBase {
   isActive: boolean;
   transform: string;
   barVisible: boolean;
+  radius?: number;
+  formattedPoints?: string;
 }
 
 export interface IShapeCircle extends IShapeBase {
-  r: number;
   cx: number;
   cy: number;
   radius: number;
+}
+
+export interface IShapeRectangle extends IShapeBase {
+  cx: number;
+  cy: number;
+  width: number;
+  height: number;
+  rx?: number;
+  ry?: number;
+}
+
+export interface IShapePolygon extends IShapeBase {
+  formattedPoints: string;
 }
