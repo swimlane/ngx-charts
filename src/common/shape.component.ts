@@ -87,9 +87,6 @@ export class ShapeComponent implements OnChanges {
   x: number;
   y: number;
 
-  // Polygons formatted points
-  formattedPoints: string;
-
   @HostListener('click')
   onClick() {
     this.select.emit(this.data);
