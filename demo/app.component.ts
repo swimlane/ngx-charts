@@ -12,6 +12,7 @@ import {
   single,
   multi,
   bubble,
+  bubbleActiveEntries,
   generateData,
   generateGraph,
   treemap,
@@ -23,7 +24,7 @@ import { BubbleChartInteractiveServerDataModel } from './bubble-chart-interactiv
 import { data as countries } from 'emoji-flags';
 import chartGroups from './chartTypes';
 import { barChart, lineChartSeries } from './combo-chart-data';
-import { IColorSet } from '../src';
+import { IColorSet, BubbleChartMultiSeries, BubbleChartDataItem } from '../src';
 
 const monthName = new Intl.DateTimeFormat('en-us', { month: 'short' });
 const weekdayName = new Intl.DateTimeFormat('en-us', { weekday: 'short' });
@@ -64,9 +65,11 @@ export class AppComponent implements OnInit {
   sparklineData: any[];
   timelineFilterBarData: any[];
   graph: { links: any[]; nodes: any[] };
-  bubble: any;
+  bubble: BubbleChartMultiSeries;
   linearScale: boolean = false;
   range: boolean = false;
+
+  bubbleActiveEntries: BubbleChartDataItem[];
 
   view: number[];
   width: number = 700;
@@ -250,6 +253,7 @@ export class AppComponent implements OnInit {
       colorSets,
       graph: generateGraph(50),
       bubble,
+      bubbleActiveEntries,
       plotData: this.generatePlotData(),
       treemap,
       bubbleDemoData,

@@ -393,7 +393,7 @@ export class BubbleChartComponent extends BaseChartComponent {
     if (idx !== -1) {
       return;
     } else {
-      this.activeEntriesCopy = [item, ...this.activeEntries];
+      this.activeEntriesCopy = [item, ...this.activeEntriesCopy];
       this.activate.emit({ value: item, entries: this.activeEntriesCopy });
     }
   }

@@ -113,8 +113,8 @@ export class BubbleSeriesComponent implements OnChanges {
           const opacity = isActive ? 1 : 0.3;
 
           const data: IShapeData = {
-            series: seriesName,
-            name: d.name,
+            series: d.name,
+            name: seriesName,
             value: d.y,
             x: d.x,
             radius: d.r
@@ -179,7 +179,7 @@ export class BubbleSeriesComponent implements OnChanges {
 
   isActive(entry: Partial<BubbleChartDataItem>): boolean {
     if (!this.activeEntries) return false;
-    const item = this.activeEntries.find(d => entry.name === d.series);
+    const item = this.activeEntries.find(d => entry.name === d.name);
     return item !== undefined;
   }
 
