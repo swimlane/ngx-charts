@@ -115,7 +115,6 @@ export class BubbleSeriesComponent implements OnChanges {
           const height = radius * 2;
 
           // Example of triangle using circle data.
-          // console.log('Center X: ', cx, cy, radius);
           const polygonPoints = [
             [cx, cy + radius],
             [Math.round(cx - 0.866 * radius), Math.round(cy - 0.5 * radius)],

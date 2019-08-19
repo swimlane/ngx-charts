@@ -253,7 +253,7 @@ export class BubbleChartComponent extends BaseChartComponent {
 
   onClick(data: IShapeData, series?: BubbleChartSeries): void {
     if (series) {
-      data.series = series.name;
+      data.name = series.name;
     }
     this.select.emit(data);
   }

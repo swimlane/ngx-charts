@@ -732,7 +732,7 @@ export class AppComponent implements OnInit {
   */
 
   onSelect(event) {
-    console.log(event);
+    console.log('Select Event', event);
   }
 
   dblclick(event) {
