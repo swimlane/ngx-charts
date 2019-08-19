@@ -9,7 +9,7 @@ import {
   TemplateRef
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { formatLabel } from '../common/label.helper';
+import { formatLabel, escapeLabel } from '../common/label.helper';
 import { ColorHelper } from '../common';
 import { ScaleTime, ScaleLinear, ScalePoint } from 'd3-scale';
 import { BubbleChartSeries, BubbleChartDataItem } from '../models/chart-data.model';
@@ -190,16 +190,17 @@ export class BubbleSeriesComponent implements OnChanges {
       hasSeriesName && hasTooltipLabel
         ? `${shape.seriesName} • ${shape.tooltipLabel}`
         : shape.seriesName + shape.tooltipLabel;
-    const tooltipTitle = hasSeriesName || hasTooltipLabel ? `<span class="tooltip-label">${name}</span>` : '';
+    const tooltipTitle = hasSeriesName || hasTooltipLabel ? 
+      `<span class="tooltip-label">${escapeLabel(name)}</span>` : '';
 
     return `
       ${tooltipTitle}
       <span class="tooltip-label">
-        <label>${xAxisLabel}</label> ${x}<br />
-        <label>${yAxisLabel}</label> ${y}
+        <label>${escapeLabel(xAxisLabel)}</label> ${escapeLabel(x)}<br />
+        <label>${escapeLabel(yAxisLabel)}</label> ${escapeLabel(y)}
       </span>
       <span class="tooltip-val">
-        ${radiusValue}
+        ${escapeLabel(radiusValue)}
       </span>
     `;
   }

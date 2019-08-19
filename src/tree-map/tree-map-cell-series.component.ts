@@ -8,6 +8,7 @@ import {
   ChangeDetectionStrategy,
   TemplateRef
 } from '@angular/core';
+import { escapeLabel } from '../common/label.helper';
 
 @Component({
   selector: 'g[ngx-charts-tree-map-cell-series]',
@@ -83,7 +84,7 @@ export class TreeMapCellSeriesComponent implements OnChanges {
 
   getTooltipText({ label, value }): string {
     return `
-      <span class="tooltip-label">${label}</span>
+      <span class="tooltip-label">${escapeLabel(label)}</span>
       <span class="tooltip-val">${value.toLocaleString()}</span>
     `;
   }

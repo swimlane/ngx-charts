@@ -12,6 +12,7 @@ import { lineRadial } from 'd3-shape';
 
 import { id } from '../utils/id';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
+import { escapeLabel } from '../common/label.helper';
 
 @Component({
   selector: 'g[ngx-charts-polar-series]',
@@ -194,7 +195,7 @@ export class PolarSeriesComponent implements OnChanges {
 
   defaultTooltipText({ label, value }): string {
     return `
-      <span class="tooltip-label">${this.data.name} • ${label}</span>
+      <span class="tooltip-label">${escapeLabel(this.data.name)} • ${escapeLabel(label)}</span>
       <span class="tooltip-val">${value.toLocaleString()}</span>
     `;
   }
