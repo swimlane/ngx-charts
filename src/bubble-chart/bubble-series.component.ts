@@ -26,8 +26,10 @@ import { ShapeType } from '../enums/shape.enum';
           ngx-charts-shape
           [@animationState]="'active'"
           class="circle"
-          [cx]="0"
-          [cy]="0"
+          [cx]="shape.cx"
+          [cy]="shape.cy"
+          [width]="shape.width"
+          [height]="shape.height"
           [r]="shape.radius"
           [shapeType]="shapeType"
           [points]="shape.formattedPoints"
@@ -77,7 +79,7 @@ export class BubbleSeriesComponent implements OnChanges {
   @Input() yAxisLabel: string;
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipTemplate: TemplateRef<any>;
-  @Input() shapeType: string = ShapeType.circle;
+  @Input() shapeType: string = ShapeType.rectangle;
 
   @Output() select: EventEmitter<IShapeData> = new EventEmitter();
   @Output() activate: EventEmitter<Partial<IShapeData>> = new EventEmitter();
@@ -158,10 +160,18 @@ export class BubbleSeriesComponent implements OnChanges {
 
           switch (this.shapeType) {
             case ShapeType.circle:
-              const circleData: IShapeCircle = { ...baseData, cx, cy, radius };
+              const circleData: IShapeCircle = { ...baseData, cx: 0, cy: 0, radius };
               return circleData;
             case ShapeType.rectangle:
-              const rectData: IShapeRectangle =  { ...baseData, cx, cy, width, height, rx: 0, ry: 0 };
+              const rectData: IShapeRectangle = {
+                ...baseData,
+                cx: - width / 2,
+                cy: - height / 2,
+                width,
+                height,
+                rx: 0,
+                ry: 0
+              };
               return rectData;
             case ShapeType.polygon:
               const polygonData: IShapePolygon = { ...baseData, formattedPoints, transform: `` };

@@ -8,6 +8,7 @@ import {
   ChangeDetectionStrategy,
   HostListener
 } from '@angular/core';
+import { ShapeType } from '../enums/shape.enum';
 
 @Component({
   selector: 'g[ngx-charts-shape]',
@@ -15,8 +16,8 @@ import {
     <ng-container [ngSwitch]="shapeType">
       <ng-container *ngSwitchCase="'rect'">
         <svg:rect
-          [attr.x]="x"
-          [attr.y]="y"
+          [attr.x]="cx"
+          [attr.y]="cy"
           [attr.rx]="rx"
           [attr.ry]="ry"
           [attr.width]="width"
@@ -55,9 +56,11 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShapeComponent implements OnChanges {
-  @Input() shapeType: string = 'circle';
+  @Input() shapeType: string = ShapeType.circle;
 
   // Circle Inputs
+  @Input() cx: number;
+  @Input() cy: number;
   @Input() r: number;
 
   // Rectangle Inputs
@@ -70,8 +73,6 @@ export class ShapeComponent implements OnChanges {
   @Input() points: string = '';
 
   // Common Inputs
-  @Input() cx: number;
-  @Input() cy: number;
   @Input() fill: string;
   @Input() stroke: string;
   @Input() data: string | number | Date;
@@ -82,10 +83,6 @@ export class ShapeComponent implements OnChanges {
   @Output() select: EventEmitter<string | number | Date> = new EventEmitter();
   @Output() activate: EventEmitter<string | number | Date> = new EventEmitter();
   @Output() deactivate: EventEmitter<string | number | Date> = new EventEmitter();
-
-  // Rectangle Center.
-  x: number;
-  y: number;
 
   @HostListener('click')
   onClick() {
@@ -105,6 +102,5 @@ export class ShapeComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     this.classNames = Array.isArray(this.classNames) ? this.classNames.join(' ') : '';
     this.classNames += 'circle';
-    console.log('Changes Shape: ', changes);
   }
 }

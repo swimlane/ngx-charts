@@ -21,6 +21,10 @@ export interface IShapeBase {
   isActive: boolean;
   transform: string;
   barVisible: boolean;
+  cx?: number;
+  cy?: number;
+  width?: number;
+  height?: number;
   radius?: number;
   formattedPoints?: string;
 }
