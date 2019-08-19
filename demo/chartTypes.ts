@@ -556,6 +556,14 @@ const chartGroups = [
         }
       },
       {
+        name: 'Box Chart',
+        selector: 'box-plot',
+        inputFormat: 'multiSeries',
+        options: [
+          'showLegend',
+        ]
+      },
+      {
         name: 'Force Directed Graph (deprecated)',
         selector: 'force-directed-graph',
         inputFormat: 'graph',
