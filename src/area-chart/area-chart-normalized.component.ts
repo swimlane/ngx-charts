@@ -16,7 +16,7 @@ import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensio
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
-import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
+import { getUniqueXDomainValues, getXDomainArray } from '../common/domain.helper';
 
 @Component({
   selector: 'ngx-charts-area-chart-normalized',
@@ -329,34 +329,11 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
   }
 
   getXDomain(): any[] {
-    let values = getUniqueXDomainValues(this.results);
+    const values = getUniqueXDomainValues(this.results);
 
-    this.scaleType = getScaleType(values);
-    let domain = [];
-
-    if (this.scaleType === 'time') {
-      const min = Math.min(...values);
-      const max = Math.max(...values);
-      domain = [new Date(min), new Date(max)];
-      this.xSet = [...values].sort((a, b) => {
-        const aDate = a.getTime();
-        const bDate = b.getTime();
-        if (aDate > bDate) return 1;
-        if (bDate > aDate) return -1;
-        return 0;
-      });
-    } else if (this.scaleType === 'linear') {
-      values = values.map(v => Number(v));
-      const min = Math.min(...values);
-      const max = Math.max(...values);
-      domain = [min, max];
-      // Use compare function to sort numbers numerically
-      this.xSet = [...values].sort((a, b) => a - b);
-    } else {
-      domain = values;
-      this.xSet = values;
-    }
-
+    const { domain, xSet, scaleType } = getXDomainArray(values);
+    this.scaleType = scaleType;
+    this.xSet = xSet;
     return domain;
   }
 
