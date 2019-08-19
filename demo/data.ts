@@ -1,5 +1,12 @@
 import { data as countries } from 'emoji-flags';
-import { SingleSeries, MultiSeries, BubbleChartMultiSeries, Series, TreeMapData } from '../src/models/chart-data.model';
+import {
+  SingleSeries,
+  MultiSeries,
+  BubbleChartMultiSeries,
+  Series,
+  TreeMapData,
+  BoxChartMultiSeries
+} from '../src/models/chart-data.model';
 
 export const single: SingleSeries = [
   {
@@ -301,6 +308,59 @@ export const bubble: BubbleChartMultiSeries = [
       }
     ]
   }
+];
+
+export const boxData: BoxChartMultiSeries = [
+  {
+    name: 'Colombia',
+    series: [
+      {
+        name: '2019',
+        value: 12
+      },
+      {
+        name: '2020',
+        value: 23
+      },
+      {
+        name: '2021',
+        value: 34
+      },
+      {
+        name: '2022',
+        value: 27
+      },
+      {
+        name: '2023',
+        value: 18
+      }
+    ]
+  },
+  {
+    name: 'Chile',
+    series: [
+      {
+        name: '2019',
+        value: 20
+      },
+      {
+        name: '2020',
+        value: 28
+      },
+      {
+        name: '2021',
+        value: 42
+      },
+      {
+        name: '2022',
+        value: 39
+      },
+      {
+        name: '2023',
+        value: 31
+      }
+    ]
+  },
 ];
 
 export function generateGraph(nodeCount: number) {

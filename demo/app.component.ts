@@ -10,6 +10,7 @@ import { formatLabel, escapeLabel } from '../src/common/label.helper';
 import {
   single,
   multi,
+  boxData,
   bubble,
   generateData,
   generateGraph,
@@ -247,6 +248,7 @@ export class AppComponent implements OnInit {
       chartGroups,
       colorSets,
       graph: generateGraph(50),
+      boxData,
       bubble,
       plotData: this.generatePlotData(),
       treemap,

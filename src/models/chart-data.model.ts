@@ -39,3 +39,14 @@ export interface TreeMapDataItem {
 }
 
 export interface TreeMapData extends Array<TreeMapDataItem> {}
+
+export interface BoxChartDataItem extends DataItem {
+  value: number | Date;
+}
+
+export interface BoxChartSeries {
+  name: string | number | Date;
+  series: BoxChartDataItem[];
+}
+
+export interface BoxChartMultiSeries extends Array<BoxChartSeries> {}
