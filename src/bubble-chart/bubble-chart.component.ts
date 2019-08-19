@@ -158,7 +158,7 @@ export class BubbleChartComponent extends BaseChartComponent {
   @Input() yScaleMin: any;
   @Input() yScaleMax: any;
   @Input() activeEntries: IShapeData[] = [];
-  
+
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
@@ -227,7 +227,7 @@ export class BubbleChartComponent extends BaseChartComponent {
     this.colors = new ColorHelper(this.scheme, this.schemeType, colorDomain, this.customColors);
 
     this.data = this.results;
-    this.activeEntriesCopy = this.activeEntries;
+    this.activeEntriesCopy = this.activeEntries && this.activeEntries.length ? this.activeEntries : [];
 
     this.minRadius = Math.max(this.minRadius, 1);
     this.maxRadius = Math.max(this.maxRadius, 1);
@@ -266,7 +266,7 @@ export class BubbleChartComponent extends BaseChartComponent {
 
     for (const s of this.data) {
       for (const d of s.series) {
-        const r = this.rScale(d.r);       
+        const r = this.rScale(d.r);
         const cx = this.xScale(d.x as any);
         const cy = this.yScale(d.y as any);
         xMin = Math.max(r - cx, xMin);
@@ -388,7 +388,10 @@ export class BubbleChartComponent extends BaseChartComponent {
   }
 
   onActivate(item: IShapeData): void {
-    const idx = this.activeEntries.findIndex(entry => entry.name === item.name);
+    const idx =
+      this.activeEntries && this.activeEntries.length
+        ? this.activeEntries.findIndex(entry => entry.name === item.name)
+        : -1;
     if (idx !== -1) {
       return;
     } else {
@@ -403,7 +406,7 @@ export class BubbleChartComponent extends BaseChartComponent {
       return;
     } else {
       this.activeEntriesCopy.splice(idx, 1);
-      this.activeEntriesCopy = [...this.activeEntriesCopy];  
+      this.activeEntriesCopy = [...this.activeEntriesCopy];
       this.deactivate.emit({ value: item, entries: this.activeEntriesCopy });
     }
   }
@@ -413,7 +416,7 @@ export class BubbleChartComponent extends BaseChartComponent {
     for (const entry of this.activeEntriesCopy) {
       this.deactivate.emit({ value: entry, entries: [] });
     }
-    this.activeEntriesCopy = [...this.activeEntries];
+    this.activeEntriesCopy = this.activeEntries && this.activeEntries.length ? [...this.activeEntries] : [];
   }
 
   trackBy(index: number, item: BubbleChartSeries): string | number | Date {

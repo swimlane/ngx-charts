@@ -72,7 +72,7 @@ export class BubbleSeriesComponent implements OnChanges {
   @Input() xScaleType: string;
   @Input() yScaleType: string;
   @Input() colors: ColorHelper;
-  @Input() activeEntries: IShapeData[];
+  @Input() activeEntries: IShapeData[] = [];
   @Input() xAxisLabel: string;
   @Input() yAxisLabel: string;
   @Input() tooltipDisabled: boolean = false;
