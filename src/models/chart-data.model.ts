@@ -54,12 +54,13 @@ export interface BoxChartMultiSeries extends Array<BoxChartSeries> {}
 export interface IBoxModel {
   value: number | Date;
   label: string | number | Date;
-  data: BoxChartDataItem;
+  data: BoxChartDataItem[];
   formattedLabel: string;
   height: number;
   width: number;
   x: number;
   y: number;
+  quantile: number[];
   ariaLabel?: string;
   color?: string;
 }

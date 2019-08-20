@@ -55,7 +55,7 @@ import { scaleLinear, ScaleLinear, scaleBand, ScaleBand } from 'd3-scale';
             [xScale]="xScale"
             [yScale]="yScale"
             [colors]="colors"
-            [series]="result.series"
+            [dataSerie]="result"
             [dims]="dims"
             [animations]="animations"
             (activate)="onActivate($event)"
@@ -172,9 +172,7 @@ export class BoxChartComponent extends BaseChartComponent {
   getUniqueBoxChartXDomainValues(results: BoxChartMultiSeries) {
     const valueSet = new Set<string | number | Date>();
     for (const result of results) {
-      for (const d of result.series) {
-        valueSet.add(d.name);
-      }
+      valueSet.add(result.name);
     }
     return Array.from(valueSet);
   }
