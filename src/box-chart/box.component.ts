@@ -14,7 +14,7 @@ import { roundedRect } from '../common/shape.helper';
 import { id } from '../utils/id';
 
 @Component({
-  selector: 'g[ngx-charts-bar]',
+  selector: 'g[ngx-charts-box]',
   template: `
     <svg:defs *ngIf="hasGradient">
       <svg:g ngx-charts-svg-linear-gradient [orientation]="orientation" [name]="gradientId" [stops]="gradientStops" />
@@ -34,17 +34,17 @@ import { id } from '../utils/id';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BarComponent implements OnChanges {
-  @Input() fill;
+export class BoxComponent implements OnChanges {
+  @Input() fill: string;
   @Input() data: any;
   @Input() width: number;
   @Input() height: number;
   @Input() x: number;
   @Input() y: number;
-  @Input() orientation;
+  @Input() orientation: string;
   @Input() roundEdges: boolean = true;
   @Input() gradient: boolean = false;
-  @Input() offset = 0;
+  @Input() offset: number = 0;
   @Input() isActive: boolean = false;
   @Input() stops: any[];
   @Input() animations: boolean = true;

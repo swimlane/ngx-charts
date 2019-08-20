@@ -2,8 +2,8 @@ import { Component, ChangeDetectionStrategy, ViewEncapsulation, EventEmitter, Ou
 
 import { BaseChartComponent } from '../common/base-chart.component';
 import { ILegendOptions } from '../models/legend.model';
-import { ViewDimensions, ColorHelper, calculateViewDimensions, getUniqueXDomainValues } from '../common';
-import { BoxChartMultiSeries } from '../models/chart-data.model';
+import { ViewDimensions, ColorHelper, calculateViewDimensions } from '../common';
+import { BoxChartMultiSeries, BoxChartSeries } from '../models/chart-data.model';
 import { id } from '../utils';
 import { scalePoint, scaleLinear, ScaleLinear, ScalePoint } from 'd3-scale';
 
@@ -48,6 +48,22 @@ import { scalePoint, scaleLinear, ScaleLinear, ScalePoint } from 'd3-scale';
           (dimensionsChanged)="updateYAxisWidth($event)"
         />
       </svg:g>
+      <svg:g [attr.clip-path]="clipPath">
+        <svg:g *ngFor="let result of results; trackBy: trackBy">
+          <svg:g
+            ngx-charts-box-series
+            [xScale]="xScale"
+            [yScale]="yScale"
+            [colors]="colors"
+            [series]="result.series"
+            [dims]="dims"
+            [animations]="animations"
+            (activate)="onActivate($event)"
+            (deactivate)="onDeactivate($event)"
+            (select)="onClick($event)"
+          />
+        </svg:g>
+      </svg:g>
     </ngx-charts-chart>
   `,
   styleUrls: ['../common/base-chart.component.scss'],
@@ -66,6 +82,7 @@ export class BoxChartComponent extends BaseChartComponent {
   @Input() showYAxisLabel: boolean = true;
   @Input() xAxisLabel: string;
   @Input() yAxisLabel: string;
+  @Output() select: EventEmitter<any> = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
@@ -96,6 +113,10 @@ export class BoxChartComponent extends BaseChartComponent {
   yDomain: number[];
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
+
+  trackBy(index: number, item: BoxChartSeries): string | number | Date {
+    return item.name;
+  }
 
   update(): void {
     super.update();
