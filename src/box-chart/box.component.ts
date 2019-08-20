@@ -12,6 +12,7 @@ import {
 import { select } from 'd3-selection';
 import { roundedRect } from '../common/shape.helper';
 import { id } from '../utils/id';
+import { IBoxModel } from '../models/chart-data.model';
 
 @Component({
   selector: 'g[ngx-charts-box]',
@@ -36,7 +37,7 @@ import { id } from '../utils/id';
 })
 export class BoxComponent implements OnChanges {
   @Input() fill: string;
-  @Input() data: any;
+  @Input() data: IBoxModel;
   @Input() width: number;
   @Input() height: number;
   @Input() x: number;
@@ -51,9 +52,9 @@ export class BoxComponent implements OnChanges {
   @Input() ariaLabel: string;
   @Input() noBarWhenZero: boolean = true;
 
-  @Output() select = new EventEmitter();
-  @Output() activate = new EventEmitter();
-  @Output() deactivate = new EventEmitter();
+  @Output() select: EventEmitter<IBoxModel> = new EventEmitter();
+  @Output() activate: EventEmitter<IBoxModel> = new EventEmitter();
+  @Output() deactivate: EventEmitter<IBoxModel> = new EventEmitter();
 
   element: any;
   boxPath: any;
@@ -194,7 +195,7 @@ export class BoxComponent implements OnChanges {
     }
   }
 
-  get edges() {
+  get edges(): boolean[] {
     let edges = [false, false, false, false];
     if (this.roundEdges) {
       if (this.orientation === 'vertical') {
@@ -224,7 +225,7 @@ export class BoxComponent implements OnChanges {
     this.deactivate.emit(this.data);
   }
 
-  private checkToHideBar() {
+  private checkToHideBar(): void {
     this.hideBar =
       this.noBarWhenZero &&
       ((this.orientation === 'vertical' && this.height === 0) ||

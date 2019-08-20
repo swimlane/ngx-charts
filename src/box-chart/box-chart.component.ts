@@ -3,7 +3,7 @@ import { Component, ChangeDetectionStrategy, ViewEncapsulation, EventEmitter, Ou
 import { BaseChartComponent } from '../common/base-chart.component';
 import { ILegendOptions } from '../models/legend.model';
 import { ViewDimensions, ColorHelper, calculateViewDimensions } from '../common';
-import { BoxChartMultiSeries, BoxChartSeries } from '../models/chart-data.model';
+import { BoxChartMultiSeries, BoxChartSeries, IBoxModel } from '../models/chart-data.model';
 import { id } from '../utils';
 import { scaleLinear, ScaleLinear, scaleBand, ScaleBand } from 'd3-scale';
 
@@ -82,9 +82,9 @@ export class BoxChartComponent extends BaseChartComponent {
   @Input() showYAxisLabel: boolean = true;
   @Input() xAxisLabel: string;
   @Input() yAxisLabel: string;
-  @Output() select: EventEmitter<any> = new EventEmitter();
-  @Output() activate: EventEmitter<any> = new EventEmitter();
-  @Output() deactivate: EventEmitter<any> = new EventEmitter();
+  @Output() select: EventEmitter<IBoxModel> = new EventEmitter();
+  @Output() activate: EventEmitter<IBoxModel> = new EventEmitter();
+  @Output() deactivate: EventEmitter<IBoxModel> = new EventEmitter();
 
   /** Input Data, this came from Base Chart Component. */
   results: BoxChartMultiSeries;
@@ -229,15 +229,15 @@ export class BoxChartComponent extends BaseChartComponent {
     this.update();
   }
 
-  onClick(data: any): void {
+  onClick(data: IBoxModel): void {
     this.select.emit(data);
   }
 
-  onActivate(data: any): void {
+  onActivate(data: IBoxModel): void {
     this.activate.emit(data);
   }
 
-  onDeactivate(data: any): void {
+  onDeactivate(data: IBoxModel): void {
     this.deactivate.emit(data);
   }
 

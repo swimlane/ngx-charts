@@ -53,9 +53,9 @@ export class BoxSeriesComponent implements OnChanges {
   @Input() colors: ColorHelper;
   @Input() animations: boolean = true;
 
-  @Output() select = new EventEmitter();
-  @Output() activate = new EventEmitter();
-  @Output() deactivate = new EventEmitter();
+  @Output() select: EventEmitter<IBoxModel> = new EventEmitter();
+  @Output() activate: EventEmitter<IBoxModel> = new EventEmitter();
+  @Output() deactivate: EventEmitter<IBoxModel> = new EventEmitter();
 
   boxes: IBoxModel[];
 
@@ -67,7 +67,7 @@ export class BoxSeriesComponent implements OnChanges {
     return box.formattedLabel;
   }
 
-  onClick(data: any): void {
+  onClick(data: IBoxModel): void {
     this.select.emit(data);
   }
 
