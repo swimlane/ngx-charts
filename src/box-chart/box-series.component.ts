@@ -8,7 +8,7 @@ import {
   EventEmitter
 } from '@angular/core';
 import { ColorHelper, ViewDimensions, formatLabel } from '../common';
-import { ScaleLinear, ScalePoint } from 'd3-scale';
+import { ScaleLinear, ScaleBand } from 'd3-scale';
 import { BoxChartDataItem, IBoxModel } from '../models/chart-data.model';
 import { trigger, transition, style, animate } from '@angular/animations';
 
@@ -48,7 +48,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
 export class BoxSeriesComponent implements OnChanges {
   @Input() dims: ViewDimensions;
   @Input() series: BoxChartDataItem[];
-  @Input() xScale: ScalePoint<string>;
+  @Input() xScale: ScaleBand<string>;
   @Input() yScale: ScaleLinear<number, number>;
   @Input() colors: ColorHelper;
   @Input() animations: boolean = true;
@@ -72,7 +72,7 @@ export class BoxSeriesComponent implements OnChanges {
   }
 
   update(): void {
-    const width = this.series && this.series.length ? Math.round(this.xScale.bandwidth()) : 20;
+    const width = this.series && this.series.length ? Math.round(this.xScale.bandwidth()) : null;
     const yScaleMin = Math.max(this.yScale.domain()[0], 0);
 
     this.boxes = this.series.map((serie, idx) => {

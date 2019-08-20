@@ -26,7 +26,7 @@ import { id } from '../utils/id';
       tabIndex="-1"
       [class.active]="isActive"
       [class.hidden]="hideBar"
-      [attr.d]="path"
+      [attr.d]="boxPath"
       [attr.aria-label]="ariaLabel"
       [attr.fill]="(hasGradient ? gradientFill : fill)"
       (click)="select.emit(data)"
@@ -56,7 +56,7 @@ export class BoxComponent implements OnChanges {
   @Output() deactivate = new EventEmitter();
 
   element: any;
-  path: any;
+  boxPath: any;
   gradientId: any;
   gradientFill: any;
   startOpacity: any;
@@ -94,7 +94,7 @@ export class BoxComponent implements OnChanges {
   }
 
   loadAnimation(): void {
-    this.path = this.getStartingPath();
+    this.boxPath = this.getStartingPath();
     setTimeout(this.update.bind(this), 100);
   }
 
@@ -136,7 +136,7 @@ export class BoxComponent implements OnChanges {
     }
 
     let radius = this.getRadius();
-    let path;
+    let path = '';
 
     if (this.roundEdges) {
       if (this.orientation === 'vertical') {
@@ -159,7 +159,7 @@ export class BoxComponent implements OnChanges {
 
   getPath() {
     let radius = this.getRadius();
-    let path;
+    let path = '';
 
     if (this.roundEdges) {
       if (this.orientation === 'vertical') {

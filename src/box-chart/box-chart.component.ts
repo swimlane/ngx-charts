@@ -5,7 +5,7 @@ import { ILegendOptions } from '../models/legend.model';
 import { ViewDimensions, ColorHelper, calculateViewDimensions } from '../common';
 import { BoxChartMultiSeries, BoxChartSeries } from '../models/chart-data.model';
 import { id } from '../utils';
-import { scalePoint, scaleLinear, ScaleLinear, ScalePoint } from 'd3-scale';
+import { scaleLinear, ScaleLinear, scaleBand, ScaleBand } from 'd3-scale';
 
 @Component({
   selector: 'ngx-charts-box-chart',
@@ -107,7 +107,7 @@ export class BoxChartComponent extends BaseChartComponent {
   clipPath: string;
   clipPathId: string;
 
-  xScale: ScalePoint<string>;
+  xScale: ScaleBand<string>;
   yScale: ScaleLinear<number, number>;
   xDomain: Array<string | number | Date>;
   yDomain: number[];
@@ -152,8 +152,8 @@ export class BoxChartComponent extends BaseChartComponent {
     this.yScale = this.getYScale(this.yDomain, this.dims.height);
   }
 
-  getXScale(domain: Array<string | number | Date>, width: number): ScalePoint<string> {
-    const scale = scalePoint()
+  getXScale(domain: Array<string | number | Date>, width: number): ScaleBand<string> {
+    const scale = scaleBand()
       .domain(domain.map(d => d.toString()))
       .rangeRound([0, width])
       .padding(0.5);
