@@ -13,6 +13,7 @@ import { select } from 'd3-selection';
 import { roundedRect } from '../common/shape.helper';
 import { id } from '../utils/id';
 import { IBoxModel } from '../models/chart-data.model';
+import { IVector2D } from '../models/coordinates.model';
 
 @Component({
   selector: 'g[ngx-charts-box]',
@@ -21,6 +22,16 @@ import { IBoxModel } from '../models/chart-data.model';
       <svg:g ngx-charts-svg-linear-gradient [orientation]="orientation" [name]="gradientId" [stops]="gradientStops" />
     </svg:defs>
     <svg:g>
+      <svg:line
+        class="bar-line"
+        [attr.x1]="horizontalLines[2].v1.x"
+        [attr.y1]="horizontalLines[2].v1.y"
+        [attr.x2]="horizontalLines[2].v2.x"
+        [attr.y2]="horizontalLines[2].v2.y"
+        [attr.stroke]="stroke"
+        [attr.stroke-width]="strokeWidth"
+        fill="none"
+      />
       <svg:line
         class="bar-line"
         [attr.x1]="lineCoordinates[0]"
@@ -44,6 +55,26 @@ import { IBoxModel } from '../models/chart-data.model';
         [attr.fill]="(hasGradient ? gradientFill : fill)"
         (click)="select.emit(data)"
       />
+      <svg:line
+        class="bar-line"
+        [attr.x1]="horizontalLines[1].v1.x"
+        [attr.y1]="horizontalLines[1].v1.y"
+        [attr.x2]="horizontalLines[1].v2.x"
+        [attr.y2]="horizontalLines[1].v2.y"
+        [attr.stroke]="stroke"
+        [attr.stroke-width]="strokeWidth"
+        fill="none"
+      />
+      <svg:line
+        class="bar-line"
+        [attr.x1]="horizontalLines[0].v1.x"
+        [attr.y1]="horizontalLines[0].v1.y"
+        [attr.x2]="horizontalLines[0].v2.x"
+        [attr.y2]="horizontalLines[0].v2.y"
+        [attr.stroke]="stroke"
+        [attr.stroke-width]="strokeWidth"
+        fill="none"
+      />
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -58,6 +89,7 @@ export class BoxComponent implements OnChanges {
   @Input() x: number;
   @Input() y: number;
   @Input() lineCoordinates: [number, number, number, number];
+  @Input() horizontalLines: [IVector2D, IVector2D, IVector2D];
   @Input() orientation: string;
   @Input() roundEdges: boolean = true;
   @Input() gradient: boolean = false;

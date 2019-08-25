@@ -30,6 +30,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
       [strokeWidth]="strokeWidth"
       [data]="box.data"
       [lineCoordinates]="box.lineCoordinates"
+      [horizontalLines]="box.horizontalLines"
       [orientation]="'vertical'"
       [ariaLabel]="box.ariaLabel"
       (select)="onClick($event)"
@@ -133,6 +134,7 @@ export class BoxSeriesComponent implements OnChanges {
     const x2 = this.xScale(seriesName);
     const y1 = this.yScale(whiskers[0]);
     const y2 = this.yScale(whiskers[1]);
+    // The X value is not being centered, so had to sum half the width to align it.
     return [x1 + width / 2, y1, x2 + width / 2, y2];
   }
 
@@ -146,18 +148,21 @@ export class BoxSeriesComponent implements OnChanges {
     quartiles: [number, number, number],
     barWidth: number
   ): [IVector2D, IVector2D, IVector2D] {
+    // The X value is not being centered, so had to sum half the width to align it.
     const commonX = this.xScale(seriesName) + barWidth / 2;
+    const commonPlusX = commonX + barWidth / 2;
+    const commonMinusX = commonX - barWidth / 2;
     const topLine: IVector2D = {
-      v1: { x: commonX, y: this.yScale(whiskers[0]) },
-      v2: { x: commonX, y: this.yScale(whiskers[0]) }
+      v1: { x: commonPlusX, y: this.yScale(whiskers[0]) },
+      v2: { x: commonMinusX, y: this.yScale(whiskers[0]) }
     };
     const medianLine: IVector2D = {
-      v1: { x: commonX, y: this.yScale(quartiles[1]) },
-      v2: { x: commonX, y: this.yScale(quartiles[1]) }
+      v1: { x: commonPlusX, y: this.yScale(quartiles[1]) },
+      v2: { x: commonMinusX, y: this.yScale(quartiles[1]) }
     };
     const bottomLine: IVector2D = {
-      v1: { x: commonX, y: this.yScale(whiskers[1]) },
-      v2: { x: commonX, y: this.yScale(whiskers[1]) }
+      v1: { x: commonPlusX, y: this.yScale(whiskers[1]) },
+      v2: { x: commonMinusX, y: this.yScale(whiskers[1]) }
     };
     return [topLine, medianLine, bottomLine];
   }
