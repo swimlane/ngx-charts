@@ -34,6 +34,7 @@ import { DataItem } from '../models/chart-data.model';
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
+          [showGridLines]="showGridLines"
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [trimTicks]="trimXAxisTicks"

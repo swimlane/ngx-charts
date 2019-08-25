@@ -64,9 +64,9 @@ export class BoxSeriesComponent implements OnChanges {
 
   box: IBoxModel;
   counts: BoxChartDataItem[];
-  quantile: number[];
+  quartiles: [number, number, number];
   whiskers: number[];
-  lineCoordinates: number[];
+  lineCoordinates: [number, number, number, number];
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -78,8 +78,6 @@ export class BoxSeriesComponent implements OnChanges {
 
   update(): void {
     const width = this.dataSerie && this.dataSerie.series.length ? Math.round(this.xScale.bandwidth()) : null;
-    const yScaleMin = Math.max(this.yScale.domain()[0], 0);
-
     const seriesName = this.dataSerie.name;
 
     // Calculate Quantile and Whiskers for each box serie.
@@ -91,10 +89,10 @@ export class BoxSeriesComponent implements OnChanges {
     // We get the group count and must sort it in order to retrieve quantiles.
     const groupCounts = this.counts.map(item => item.value).sort((a, b) => Number(a) - Number(b));
     // console.log('Sorted Group Counts: ', groupCounts);
-    this.quantile = this.getBoxQuantiles(groupCounts);
+    this.quartiles = this.getBoxQuantiles(groupCounts);
     this.lineCoordinates = this.getLineCoordinates(seriesName.toString(), this.whiskers, width);
 
-    const value = this.quantile[1];
+    const value = this.quartiles[1];
     const formattedLabel = formatLabel(seriesName);
     const box: IBoxModel = {
       value,
@@ -105,11 +103,11 @@ export class BoxSeriesComponent implements OnChanges {
       height: 0,
       x: 0,
       y: 0,
-      quantile: this.quantile,
+      quartiles: this.quartiles,
       lineCoordinates: this.lineCoordinates
     };
 
-    box.height = Math.abs(this.yScale(value) - this.yScale(yScaleMin));
+    box.height = Math.abs(this.yScale(this.quartiles[0]) - this.yScale(this.quartiles[2]));
     box.x = this.xScale(seriesName.toString());
     box.ariaLabel = formattedLabel + ' - Quantile 50%: ' + value.toLocaleString();
 
@@ -118,13 +116,19 @@ export class BoxSeriesComponent implements OnChanges {
     } else {
       box.y = this.yScale(value);
     }
-    console.log(`- X value: ${box.x} \n- Y value: ${box.y} \n- Quantile 50%: ${value}`);
+    console.log(
+      `Serie Name: ${seriesName}` +
+        `- X value: ${box.x}\n- Y value: ${box.y}\n` +
+        `- Quantile 25%: ${this.quartiles[0]}\n` +
+        `- Quantile 50%: ${this.quartiles[1]}\n` +
+        `- Quantile 75%: ${this.quartiles[2]}`
+    );
     box.color = this.colors.getColor(seriesName);
 
     this.box = box;
   }
 
-  getLineCoordinates(seriesName: string, whiskers: number[], width: number): number[] {
+  getLineCoordinates(seriesName: string, whiskers: number[], width: number): [number, number, number, number] {
     const x1 = this.xScale(seriesName);
     const x2 = this.xScale(seriesName);
     const y1 = this.yScale(whiskers[0]);
@@ -132,7 +136,7 @@ export class BoxSeriesComponent implements OnChanges {
     return [x1 + width / 2, y1, x2 + width / 2, y2];
   }
 
-  getBoxQuantiles(inputData: Array<number | Date>): number[] {
+  getBoxQuantiles(inputData: Array<number | Date>): [number, number, number] {
     return [quantile(inputData, 0.25), quantile(inputData, 0.5), quantile(inputData, 0.75)];
   }
 
