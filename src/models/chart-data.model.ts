@@ -1,3 +1,5 @@
+import { IVector2D } from './coordinates.model';
+
 export interface DataItem {
   name: string | number | Date;
   value: string | number | Date;
@@ -60,6 +62,7 @@ export interface IBoxModel {
   width: number;
   x: number;
   y: number;
+  horizontalLines: IVector2D[];
   lineCoordinates: number[];
   quartiles: number[];
   ariaLabel?: string;

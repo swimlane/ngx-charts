@@ -11,6 +11,7 @@ import { ColorHelper, ViewDimensions, formatLabel } from '../common';
 import { min, max, quantile } from 'd3-array';
 import { ScaleLinear, ScaleBand } from 'd3-scale';
 import { IBoxModel, BoxChartSeries, BoxChartDataItem } from '../models/chart-data.model';
+import { IPoint, IVector2D } from '../models/coordinates.model';
 import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
@@ -65,7 +66,8 @@ export class BoxSeriesComponent implements OnChanges {
   box: IBoxModel;
   counts: BoxChartDataItem[];
   quartiles: [number, number, number];
-  whiskers: number[];
+  whiskers: [number, number];
+  horizontalLines: [IVector2D, IVector2D, IVector2D];
   lineCoordinates: [number, number, number, number];
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -91,6 +93,7 @@ export class BoxSeriesComponent implements OnChanges {
     // console.log('Sorted Group Counts: ', groupCounts);
     this.quartiles = this.getBoxQuantiles(groupCounts);
     this.lineCoordinates = this.getLineCoordinates(seriesName.toString(), this.whiskers, width);
+    this.horizontalLines = this.getHorizontalLines(seriesName.toString(), this.whiskers, this.quartiles, width);
 
     const value = this.quartiles[1];
     const formattedLabel = formatLabel(seriesName);
@@ -104,7 +107,8 @@ export class BoxSeriesComponent implements OnChanges {
       x: 0,
       y: 0,
       quartiles: this.quartiles,
-      lineCoordinates: this.lineCoordinates
+      lineCoordinates: this.lineCoordinates,
+      horizontalLines: this.horizontalLines
     };
 
     box.height = Math.abs(this.yScale(this.quartiles[0]) - this.yScale(this.quartiles[2]));
@@ -124,7 +128,7 @@ export class BoxSeriesComponent implements OnChanges {
     this.box = box;
   }
 
-  getLineCoordinates(seriesName: string, whiskers: number[], width: number): [number, number, number, number] {
+  getLineCoordinates(seriesName: string, whiskers: [number, number], width: number): [number, number, number, number] {
     const x1 = this.xScale(seriesName);
     const x2 = this.xScale(seriesName);
     const y1 = this.yScale(whiskers[0]);
@@ -136,29 +140,25 @@ export class BoxSeriesComponent implements OnChanges {
     return [quantile(inputData, 0.25), quantile(inputData, 0.5), quantile(inputData, 0.75)];
   }
 
-  getWhiskers(barWidth: number) {
-    return [
-      // Top whisker
-      {
-        x1: datum => this.xScale(datum.key) - barWidth / 2,
-        y1: datum => this.yScale(datum.whiskers[0]),
-        x2: datum => this.xScale(datum.key) + barWidth / 2,
-        y2: datum => this.yScale(datum.whiskers[0])
-      },
-      // Median line
-      {
-        x1: datum => this.xScale(datum.key) - barWidth / 2,
-        y1: datum => this.yScale(datum.quartile[1]),
-        x2: datum => this.xScale(datum.key) + barWidth / 2,
-        y2: datum => this.yScale(datum.quartile[1])
-      },
-      // Bottom whisker
-      {
-        x1: datum => this.xScale(datum.key) - barWidth / 2,
-        y1: datum => this.yScale(datum.whiskers[1]),
-        x2: datum => this.xScale(datum.key) + barWidth / 2,
-        y2: datum => this.yScale(datum.whiskers[1])
-      }
-    ];
+  getHorizontalLines(
+    seriesName: string,
+    whiskers: [number, number],
+    quartiles: [number, number, number],
+    barWidth: number
+  ): [IVector2D, IVector2D, IVector2D] {
+    const commonX = this.xScale(seriesName) + barWidth / 2;
+    const topLine: IVector2D = {
+      v1: { x: commonX, y: this.yScale(whiskers[0]) },
+      v2: { x: commonX, y: this.yScale(whiskers[0]) }
+    };
+    const medianLine: IVector2D = {
+      v1: { x: commonX, y: this.yScale(quartiles[1]) },
+      v2: { x: commonX, y: this.yScale(quartiles[1]) }
+    };
+    const bottomLine: IVector2D = {
+      v1: { x: commonX, y: this.yScale(whiskers[1]) },
+      v2: { x: commonX, y: this.yScale(whiskers[1]) }
+    };
+    return [topLine, medianLine, bottomLine];
   }
 }
