@@ -109,15 +109,11 @@ export class BoxSeriesComponent implements OnChanges {
 
     box.height = Math.abs(this.yScale(this.quartiles[0]) - this.yScale(this.quartiles[2]));
     box.x = this.xScale(seriesName.toString());
+    box.y = this.yScale(this.quartiles[2]);
     box.ariaLabel = formattedLabel + ' - Quantile 50%: ' + value.toLocaleString();
 
-    if (value < 0) {
-      box.y = this.yScale(0);
-    } else {
-      box.y = this.yScale(value);
-    }
     console.log(
-      `Serie Name: ${seriesName}` +
+      `Serie Name: ${seriesName}\n` +
         `- X value: ${box.x}\n- Y value: ${box.y}\n` +
         `- Quantile 25%: ${this.quartiles[0]}\n` +
         `- Quantile 50%: ${this.quartiles[1]}\n` +

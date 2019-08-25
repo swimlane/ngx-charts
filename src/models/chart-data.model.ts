@@ -61,7 +61,7 @@ export interface IBoxModel {
   x: number;
   y: number;
   lineCoordinates: number[];
-  quantile: number[];
+  quartiles: number[];
   ariaLabel?: string;
   color?: string;
 }
