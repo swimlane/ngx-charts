@@ -20,28 +20,44 @@ import { IBoxModel } from '../models/chart-data.model';
     <svg:defs *ngIf="hasGradient">
       <svg:g ngx-charts-svg-linear-gradient [orientation]="orientation" [name]="gradientId" [stops]="gradientStops" />
     </svg:defs>
-    <svg:path
-      class="bar"
-      stroke="none"
-      role="img"
-      tabIndex="-1"
-      [class.active]="isActive"
-      [class.hidden]="hideBar"
-      [attr.d]="boxPath"
-      [attr.aria-label]="ariaLabel"
-      [attr.fill]="(hasGradient ? gradientFill : fill)"
-      (click)="select.emit(data)"
-    />
+    <svg:g>
+      <svg:line
+        class="bar-line"
+        [attr.x1]="lineCoordinates[0]"
+        [attr.y1]="lineCoordinates[1]"
+        [attr.x2]="lineCoordinates[2]"
+        [attr.y2]="lineCoordinates[3]"
+        [attr.stroke]="stroke"
+        [attr.stroke-width]="strokeWidth"
+        fill="none"
+      />
+      <svg:path
+        class="bar"
+        role="img"
+        tabIndex="-1"
+        [class.active]="isActive"
+        [class.hidden]="hideBar"
+        [attr.d]="boxPath"
+        [attr.stroke]="stroke"
+        [attr.stroke-width]="strokeWidth"
+        [attr.aria-label]="ariaLabel"
+        [attr.fill]="(hasGradient ? gradientFill : fill)"
+        (click)="select.emit(data)"
+      />
+    </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BoxComponent implements OnChanges {
+  @Input() stroke: string;
+  @Input() strokeWidth: number = 2;
   @Input() fill: string;
   @Input() data: IBoxModel;
   @Input() width: number;
   @Input() height: number;
   @Input() x: number;
   @Input() y: number;
+  @Input() lineCoordinates: [number, number, number, number];
   @Input() orientation: string;
   @Input() roundEdges: boolean = true;
   @Input() gradient: boolean = false;
@@ -60,7 +76,7 @@ export class BoxComponent implements OnChanges {
   gradientId: string;
   gradientFill: string;
   initialized: boolean = false;
-  gradientStops: Array<{ offset: number, color: string, opacity: number }>;
+  gradientStops: Array<{ offset: number; color: string; opacity: number }>;
   hasGradient: boolean = false;
   hideBar: boolean = false;
 
@@ -111,7 +127,7 @@ export class BoxComponent implements OnChanges {
   }
 
   // TODO: Create IColorGradient Interface.
-  getGradient(): Array<{ offset: number, color: string, opacity: number }> {
+  getGradient(): Array<{ offset: number; color: string; opacity: number }> {
     return [
       {
         offset: 0,

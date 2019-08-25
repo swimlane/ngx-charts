@@ -25,7 +25,10 @@ import { trigger, transition, style, animate } from '@angular/animations';
       [x]="box.x"
       [y]="box.y"
       [fill]="box.color"
+      [stroke]="strokeColor"
+      [strokeWidth]="strokeWidth"
       [data]="box.data"
+      [lineCoordinates]="box.lineCoordinates"
       [orientation]="'vertical'"
       [ariaLabel]="box.ariaLabel"
       (select)="onClick($event)"
@@ -52,6 +55,8 @@ export class BoxSeriesComponent implements OnChanges {
   @Input() yScale: ScaleLinear<number, number>;
   @Input() colors: ColorHelper;
   @Input() animations: boolean = true;
+  @Input() strokeColor: string;
+  @Input() strokeWidth: number;
 
   @Output() select: EventEmitter<IBoxModel> = new EventEmitter();
   @Output() activate: EventEmitter<IBoxModel> = new EventEmitter();
@@ -61,6 +66,7 @@ export class BoxSeriesComponent implements OnChanges {
   counts: BoxChartDataItem[];
   quantile: number[];
   whiskers: number[];
+  lineCoordinates: number[];
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -86,6 +92,7 @@ export class BoxSeriesComponent implements OnChanges {
     const groupCounts = this.counts.map(item => item.value).sort((a, b) => Number(a) - Number(b));
     // console.log('Sorted Group Counts: ', groupCounts);
     this.quantile = this.getBoxQuantiles(groupCounts);
+    this.lineCoordinates = this.getLineCoordinates(seriesName.toString(), this.whiskers, width);
 
     const value = this.quantile[1];
     const formattedLabel = formatLabel(seriesName);
@@ -98,7 +105,8 @@ export class BoxSeriesComponent implements OnChanges {
       height: 0,
       x: 0,
       y: 0,
-      quantile: this.quantile
+      quantile: this.quantile,
+      lineCoordinates: this.lineCoordinates
     };
 
     box.height = Math.abs(this.yScale(value) - this.yScale(yScaleMin));
@@ -114,35 +122,14 @@ export class BoxSeriesComponent implements OnChanges {
     box.color = this.colors.getColor(seriesName);
 
     this.box = box;
-    // this.boxes = this.dataSerie.series.map((serie, idx) => {
-    //   const value = serie.value;
-    //   const label = serie.label ? serie.label : serie.name;
-    //   const formattedLabel = formatLabel(label);
+  }
 
-    //   const box: IBoxModel = {
-    //     value,
-    //     label,
-    //     data: serie,
-    //     formattedLabel,
-    //     width,
-    //     height: 0,
-    //     x: 0,
-    //     y: 0
-    //   };
-
-    //   box.height = Math.abs(this.yScale(value) - this.yScale(yScaleMin));
-    //   box.x = this.xScale(label.toString());
-    //   box.ariaLabel = formattedLabel + ' ' + value.toLocaleString();
-
-    //   if (value < 0) {
-    //     box.y = this.yScale(0);
-    //   } else {
-    //     box.y = this.yScale(value);
-    //   }
-    //   box.color = this.colors.getColor(label);
-
-    //   return box;
-    // });
+  getLineCoordinates(seriesName: string, whiskers: number[], width: number): number[] {
+    const x1 = this.xScale(seriesName);
+    const x2 = this.xScale(seriesName);
+    const y1 = this.yScale(whiskers[0]);
+    const y2 = this.yScale(whiskers[1]);
+    return [x1 + width / 2, y1, x2 + width / 2, y2];
   }
 
   getBoxQuantiles(inputData: Array<number | Date>): number[] {

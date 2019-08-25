@@ -60,6 +60,7 @@ export interface IBoxModel {
   width: number;
   x: number;
   y: number;
+  lineCoordinates: number[];
   quantile: number[];
   ariaLabel?: string;
   color?: string;

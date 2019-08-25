@@ -55,6 +55,8 @@ import { scaleLinear, ScaleLinear, scaleBand, ScaleBand } from 'd3-scale';
             [xScale]="xScale"
             [yScale]="yScale"
             [colors]="colors"
+            [strokeColor]="strokeColor"
+            [strokeWidth]="strokeWidth"
             [dataSerie]="result"
             [dims]="dims"
             [animations]="animations"
@@ -82,6 +84,8 @@ export class BoxChartComponent extends BaseChartComponent {
   @Input() showYAxisLabel: boolean = true;
   @Input() xAxisLabel: string;
   @Input() yAxisLabel: string;
+  @Input() strokeColor: string = '#FFFFFF';
+  @Input() strokeWidth: number = 2;
   @Output() select: EventEmitter<IBoxModel> = new EventEmitter();
   @Output() activate: EventEmitter<IBoxModel> = new EventEmitter();
   @Output() deactivate: EventEmitter<IBoxModel> = new EventEmitter();
