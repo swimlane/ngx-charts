@@ -24,7 +24,7 @@ import { scaleLinear, ScaleLinear, scaleBand, ScaleBand } from 'd3-scale';
           <svg:rect
             [attr.width]="dims.width + 10"
             [attr.height]="dims.height + 10"
-            [attr.transform]="'translate(-5, -5)'"
+            [attr.transform]="transform"
           />
         </svg:clipPath>
       </svg:defs>
@@ -41,14 +41,14 @@ import { scaleLinear, ScaleLinear, scaleBand, ScaleBand } from 'd3-scale';
         <svg:g
           ngx-charts-y-axis
           [showGridLines]="showGridLines"
-          [yScale]="yScale"
           [dims]="dims"
+          [yScale]="yScale"
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
           (dimensionsChanged)="updateYAxisWidth($event)"
         />
       </svg:g>
-      <svg:g [attr.clip-path]="clipPath">
+      <svg:g [attr.clip-path]="clipPath" [attr.transform]="transform">
         <svg:g *ngFor="let result of results; trackBy: trackBy">
           <svg:g
             ngx-charts-box-series
@@ -96,7 +96,7 @@ export class BoxChartComponent extends BaseChartComponent {
   transform: string;
 
   /** Chart Margins (For each side, counterclock wise). */
-  margin: number[] = [10, 20, 10, 20];
+  margin: [number, number, number, number] = [10, 20, 10, 20];
 
   /** Array of series names from the input data. */
   seriesDomain: Array<string | number | Date>;
@@ -111,7 +111,9 @@ export class BoxChartComponent extends BaseChartComponent {
   yScale: ScaleLinear<number, number>;
   xDomain: Array<string | number | Date>;
   yDomain: number[];
+  /** Chart X axis dimension. */
   xAxisHeight: number = 0;
+  /** Chart Y axis dimension. */
   yAxisWidth: number = 0;
 
   trackBy(index: number, item: BoxChartSeries): string | number | Date {
@@ -127,6 +129,10 @@ export class BoxChartComponent extends BaseChartComponent {
       margins: this.margin,
       showXAxis: true,
       showYAxis: true,
+      xAxisHeight: this.xAxisHeight,
+      yAxisWidth: this.yAxisWidth,
+      showXLabel: this.showXAxisLabel,
+      showYLabel: this.showYAxisLabel,
       showLegend: this.legend,
       legendPosition: this.legendPosition
     });
@@ -163,8 +169,8 @@ export class BoxChartComponent extends BaseChartComponent {
 
   getYScale(domain: number[], height: number): ScaleLinear<number, number> {
     const scale = scaleLinear()
-      .range([height, 0])
-      .domain(domain);
+      .domain(domain)
+      .range([height, 0]);
 
     return scale;
   }

@@ -47,7 +47,6 @@ export class BoxComponent implements OnChanges {
   @Input() gradient: boolean = false;
   @Input() offset: number = 0;
   @Input() isActive: boolean = false;
-  @Input() stops: any[];
   @Input() animations: boolean = true;
   @Input() ariaLabel: string;
   @Input() noBarWhenZero: boolean = true;
@@ -56,18 +55,17 @@ export class BoxComponent implements OnChanges {
   @Output() activate: EventEmitter<IBoxModel> = new EventEmitter();
   @Output() deactivate: EventEmitter<IBoxModel> = new EventEmitter();
 
-  element: any;
-  boxPath: any;
-  gradientId: any;
-  gradientFill: any;
-  startOpacity: any;
+  nativeElm: any;
+  boxPath: string;
+  gradientId: string;
+  gradientFill: string;
   initialized: boolean = false;
-  gradientStops: any[];
+  gradientStops: Array<{ offset: number, color: string, opacity: number }>;
   hasGradient: boolean = false;
   hideBar: boolean = false;
 
   constructor(element: ElementRef) {
-    this.element = element.nativeElement;
+    this.nativeElm = element.nativeElement;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -83,7 +81,7 @@ export class BoxComponent implements OnChanges {
     this.gradientId = 'grad' + id().toString();
     this.gradientFill = `url(#${this.gradientId})`;
 
-    if (this.gradient || this.stops) {
+    if (this.gradient) {
       this.gradientStops = this.getGradient();
       this.hasGradient = true;
     } else {
@@ -100,7 +98,7 @@ export class BoxComponent implements OnChanges {
   }
 
   updatePathEl(): void {
-    const node = select(this.element).select('.bar');
+    const node = select(this.nativeElm).select('.bar');
     const path = this.getPath();
     if (this.animations) {
       node
@@ -112,11 +110,8 @@ export class BoxComponent implements OnChanges {
     }
   }
 
-  getGradient() {
-    if (this.stops) {
-      return this.stops;
-    }
-
+  // TODO: Create IColorGradient Interface.
+  getGradient(): Array<{ offset: number, color: string, opacity: number }> {
     return [
       {
         offset: 0,
@@ -131,7 +126,7 @@ export class BoxComponent implements OnChanges {
     ];
   }
 
-  getStartingPath() {
+  getStartingPath(): string {
     if (!this.animations) {
       return this.getPath();
     }
@@ -158,7 +153,7 @@ export class BoxComponent implements OnChanges {
     return path;
   }
 
-  getPath() {
+  getPath(): string {
     let radius = this.getRadius();
     let path = '';
 
@@ -196,21 +191,9 @@ export class BoxComponent implements OnChanges {
   }
 
   get edges(): boolean[] {
-    let edges = [false, false, false, false];
+    let edges: [boolean, boolean, boolean, boolean] = [false, false, false, false];
     if (this.roundEdges) {
-      if (this.orientation === 'vertical') {
-        if (this.data.value > 0) {
-          edges = [true, true, false, false];
-        } else {
-          edges = [false, false, true, true];
-        }
-      } else if (this.orientation === 'horizontal') {
-        if (this.data.value > 0) {
-          edges = [false, true, false, true];
-        } else {
-          edges = [true, false, true, false];
-        }
-      }
+      edges = [true, true, true, true];
     }
     return edges;
   }

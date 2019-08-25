@@ -110,6 +110,7 @@ export class BoxSeriesComponent implements OnChanges {
     } else {
       box.y = this.yScale(value);
     }
+    console.log(`- X value: ${box.x} \n- Y value: ${box.y} \n- Quantile 50%: ${value}`);
     box.color = this.colors.getColor(seriesName);
 
     this.box = box;
