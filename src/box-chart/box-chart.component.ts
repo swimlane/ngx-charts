@@ -1,4 +1,13 @@
-import { Component, ChangeDetectionStrategy, ViewEncapsulation, EventEmitter, Output, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ContentChild,
+  EventEmitter,
+  Input,
+  Output,
+  TemplateRef,
+  ViewEncapsulation
+} from '@angular/core';
 
 import { BaseChartComponent } from '../common/base-chart.component';
 import { ILegendOptions } from '../models/legend.model';
@@ -21,11 +30,7 @@ import { scaleLinear, ScaleLinear, scaleBand, ScaleBand } from 'd3-scale';
     >
       <svg:defs>
         <svg:clipPath [attr.id]="clipPathId">
-          <svg:rect
-            [attr.width]="dims.width + 10"
-            [attr.height]="dims.height + 40"
-            [attr.transform]="transform"
-          />
+          <svg:rect [attr.width]="dims.width + 10" [attr.height]="dims.height + 40" [attr.transform]="transform" />
         </svg:clipPath>
       </svg:defs>
       <svg:g [attr.transform]="transform" class="box-chart chart">
@@ -57,6 +62,8 @@ import { scaleLinear, ScaleLinear, scaleBand, ScaleBand } from 'd3-scale';
             [colors]="colors"
             [strokeColor]="strokeColor"
             [strokeWidth]="strokeWidth"
+            [tooltipDisabled]="tooltipDisabled"
+            [tooltipTemplate]="tooltipTemplate"
             [dataSerie]="result"
             [dims]="dims"
             [animations]="animations"
@@ -86,9 +93,13 @@ export class BoxChartComponent extends BaseChartComponent {
   @Input() yAxisLabel: string;
   @Input() strokeColor: string = '#FFFFFF';
   @Input() strokeWidth: number = 2;
+  @Input() tooltipDisabled: boolean = false;
+
   @Output() select: EventEmitter<IBoxModel> = new EventEmitter();
   @Output() activate: EventEmitter<IBoxModel> = new EventEmitter();
   @Output() deactivate: EventEmitter<IBoxModel> = new EventEmitter();
+
+  @ContentChild('tooltipTemplate', { static: false }) tooltipTemplate: TemplateRef<any>;
 
   /** Input Data, this came from Base Chart Component. */
   results: BoxChartMultiSeries;

@@ -1,13 +1,14 @@
 import {
-  Component,
   ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
   Input,
+  OnChanges,
   Output,
   SimpleChanges,
-  OnChanges,
-  EventEmitter
+  TemplateRef
 } from '@angular/core';
-import { ColorHelper, ViewDimensions, formatLabel } from '../common';
+import { ColorHelper, ViewDimensions, formatLabel, escapeLabel } from '../common';
 import { min, max, quantile } from 'd3-array';
 import { ScaleLinear, ScaleBand } from 'd3-scale';
 import { IBoxModel, BoxChartSeries, BoxChartDataItem } from '../models/chart-data.model';
@@ -36,6 +37,14 @@ import { trigger, transition, style, animate } from '@angular/animations';
       (select)="onClick($event)"
       (activate)="activate.emit($event)"
       (deactivate)="deactivate.emit($event)"
+      ngx-tooltip
+      [tooltipDisabled]="tooltipDisabled"
+      [tooltipPlacement]="tooltipPlacement"
+      [tooltipType]="tooltipType"
+      [tooltipTitle]="tooltipTitle"
+      [tooltipTemplate]="tooltipTemplate"
+      [tooltipContext]="box.data"
+      [animations]="animations"
     ></svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -59,6 +68,10 @@ export class BoxSeriesComponent implements OnChanges {
   @Input() animations: boolean = true;
   @Input() strokeColor: string;
   @Input() strokeWidth: number;
+  @Input() tooltipDisabled: boolean = false;
+  @Input() tooltipTemplate: TemplateRef<any>;
+  @Input() tooltipPlacement: string;
+  @Input() tooltipType: string;
 
   @Output() select: EventEmitter<IBoxModel> = new EventEmitter();
   @Output() activate: EventEmitter<IBoxModel> = new EventEmitter();
@@ -70,6 +83,7 @@ export class BoxSeriesComponent implements OnChanges {
   whiskers: [number, number];
   horizontalLines: [IVector2D, IVector2D, IVector2D];
   lineCoordinates: [number, number, number, number];
+  tooltipTitle: string;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -80,6 +94,7 @@ export class BoxSeriesComponent implements OnChanges {
   }
 
   update(): void {
+    this.updateTooltipSettings();
     const width = this.dataSerie && this.dataSerie.series.length ? Math.round(this.xScale.bandwidth()) : null;
     const seriesName = this.dataSerie.name;
 
@@ -126,6 +141,14 @@ export class BoxSeriesComponent implements OnChanges {
     );
     box.color = this.colors.getColor(seriesName);
 
+    const tooltipLabel = `${seriesName} • ${formattedLabel}`;
+    const formattedTooltipLabel = `
+    <span class="tooltip-label">${escapeLabel(tooltipLabel)}</span>
+    <span class="tooltip-val">${value.toLocaleString()}</span>`;
+
+    box.tooltipText = this.tooltipDisabled ? undefined : formattedTooltipLabel;
+    this.tooltipTitle = this.tooltipDisabled ? undefined : box.tooltipText;
+
     this.box = box;
   }
 
@@ -165,5 +188,19 @@ export class BoxSeriesComponent implements OnChanges {
       v2: { x: commonMinusX, y: this.yScale(whiskers[1]) }
     };
     return [topLine, medianLine, bottomLine];
+  }
+
+  updateTooltipSettings() {
+    if (this.tooltipDisabled) {
+      this.tooltipPlacement = undefined;
+      this.tooltipType = undefined;
+    } else {
+      if (!this.tooltipPlacement) {
+        this.tooltipPlacement = 'top';
+      }
+      if (!this.tooltipType) {
+        this.tooltipType = 'tooltip';
+      }
+    }
   }
 }
