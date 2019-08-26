@@ -11,7 +11,7 @@ import { ColorHelper, ViewDimensions, formatLabel } from '../common';
 import { min, max, quantile } from 'd3-array';
 import { ScaleLinear, ScaleBand } from 'd3-scale';
 import { IBoxModel, BoxChartSeries, BoxChartDataItem } from '../models/chart-data.model';
-import { IPoint, IVector2D } from '../models/coordinates.model';
+import { IVector2D } from '../models/coordinates.model';
 import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({

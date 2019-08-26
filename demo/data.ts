@@ -333,6 +333,10 @@ export const boxData: BoxChartMultiSeries = [
       {
         name: '2023',
         value: 18
+      },
+      {
+        name: '2024',
+        value: 45
       }
     ]
   },
@@ -358,6 +362,10 @@ export const boxData: BoxChartMultiSeries = [
       {
         name: '2023',
         value: 31
+      },
+      {
+        name: '2024',
+        value: 61
       }
     ]
   },
@@ -383,6 +391,10 @@ export const boxData: BoxChartMultiSeries = [
       {
         name: '2023',
         value: 49
+      },
+      {
+        name: '2024',
+        value: 71
       }
     ]
   },

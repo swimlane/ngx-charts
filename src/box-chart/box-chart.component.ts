@@ -23,7 +23,7 @@ import { scaleLinear, ScaleLinear, scaleBand, ScaleBand } from 'd3-scale';
         <svg:clipPath [attr.id]="clipPathId">
           <svg:rect
             [attr.width]="dims.width + 10"
-            [attr.height]="dims.height + 10"
+            [attr.height]="dims.height + 40"
             [attr.transform]="transform"
           />
         </svg:clipPath>
@@ -100,7 +100,7 @@ export class BoxChartComponent extends BaseChartComponent {
   transform: string;
 
   /** Chart Margins (For each side, counterclock wise). */
-  margin: [number, number, number, number] = [10, 20, 10, 20];
+  margin: [number, number, number, number] = [-10, 20, -10, 20];
 
   /** Array of series names from the input data. */
   seriesDomain: Array<string | number | Date>;
