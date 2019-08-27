@@ -1,44 +1,27 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "module": "es2015",
-    "lib": [
-      "es2016",
-      "dom"
-    ],
-    "moduleResolution": "node",
-    "declaration": true,
-    "noEmitHelpers": false,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "sourceMap": true,
-    "pretty": true,
-    "allowUnreachableCode": true,
-    "allowUnusedLabels": true,
-    "noImplicitAny": false,
-    "noImplicitReturns": false,
-    "noImplicitUseStrict": false,
-    "noFallthroughCasesInSwitch": false,
-    "allowSyntheticDefaultImports": true,
-    "suppressExcessPropertyErrors": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "outDir": "dist",
-    "declarationDir": "release"
-  },
-  "files": [
-    "src/declarations.d.ts",
-    "src/index.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ],
   "compileOnSave": false,
-  "buildOnSave": false,
-  "awesomeTypescriptLoaderOptions": {
-    "forkChecker": false
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2018", "dom"],
+    "resolveJsonModule": true,
+    "paths": {
+      "ngx-charts-cli": ["dist/ngx-charts-cli"],
+      "ngx-charts-cli/*": ["dist/ngx-charts-cli/*"]
+    }
   },
   "angularCompilerOptions": {
-    "genDir": "release/",
-    "skipTemplateCodegen": true
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true,
+    "enableIvy": false
   }
 }

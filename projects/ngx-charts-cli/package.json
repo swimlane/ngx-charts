@@ -1,0 +1,65 @@
+{
+  "name": "@swimlane/ngx-charts",
+  "version": "13.0.0",
+  "description": "Declarative Charting Framework for Angular",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swimlane/ngx-charts.git"
+  },
+  "keywords": [
+    "angular",
+    "angularjs",
+    "charts",
+    "charting",
+    "angular",
+    "d3",
+    "d3.js",
+    "d3js",
+    "viz",
+    "graph",
+    "svg",
+    "dataviz",
+    "data visualization",
+    "viz",
+    "graph"
+  ],
+  "author": "Swimlane",
+  "contributors": [
+    "Marjan Georgiev",
+    "Jayson Harshbarger",
+    "Austin McDaniel",
+    "Luis Bello"
+  ],
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "bugs": {
+    "url": "https://github.com/swimlane/ngx-charts/issues"
+  },
+  "homepage": "https://github.com/swimlane/ngx-charts#readme",
+  "peerDependencies": {
+    "@angular/animations": "7.x || 8.x",
+    "@angular/cdk": "7.x || 8.x",
+    "@angular/core": "7.x || 8.x",
+    "@angular/common": "7.x || 8.x",
+    "@angular/forms": "7.x || 8.x",
+    "@angular/platform-browser": "7.x || 8.x",
+    "@angular/platform-browser-dynamic": "7.x || 8.x",
+    "rxjs": "6.x"
+  },
+  "dependencies": {
+    "d3": "^4.10.2",
+    "d3-array": "^1.2.1",
+    "d3-brush": "^1.0.4",
+    "d3-color": "^1.0.3",
+    "d3-force": "^1.1.0",
+    "d3-format": "^1.2.0",
+    "d3-hierarchy": "^1.1.5",
+    "d3-interpolate": "^1.1.5",
+    "d3-scale": "^1.0.6",
+    "d3-selection": "^1.1.0",
+    "d3-shape": "^1.2.0",
+    "d3-time-format": "^2.1.0"
+  }
+}
