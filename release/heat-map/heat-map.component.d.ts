@@ -1,10 +1,11 @@
-import { TemplateRef } from '@angular/core';
+import { TemplateRef, EventEmitter } from '@angular/core';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 export declare class HeatMapComponent extends BaseChartComponent {
     legend: any;
     legendTitle: string;
+    legendPosition: string;
     xAxis: any;
     yAxis: any;
     showXAxisLabel: any;
@@ -13,6 +14,11 @@ export declare class HeatMapComponent extends BaseChartComponent {
     yAxisLabel: any;
     gradient: boolean;
     innerPadding: number | number[];
+    trimXAxisTicks: boolean;
+    trimYAxisTicks: boolean;
+    rotateXAxisTicks: boolean;
+    maxXAxisTickLength: number;
+    maxYAxisTickLength: number;
     xAxisTickFormatting: any;
     yAxisTickFormatting: any;
     xAxisTicks: any[];
@@ -21,6 +27,9 @@ export declare class HeatMapComponent extends BaseChartComponent {
     tooltipText: any;
     min: any;
     max: any;
+    activeEntries: any[];
+    activate: EventEmitter<any>;
+    deactivate: EventEmitter<any>;
     tooltipTemplate: TemplateRef<any>;
     dims: ViewDimensions;
     xDomain: any[];
@@ -63,18 +72,20 @@ export declare class HeatMapComponent extends BaseChartComponent {
     getYScale(): any;
     getRects(): any[];
     onClick(data: any): void;
-    getScaleType(values: any): string;
     setColors(): void;
     getLegendOptions(): {
         scaleType: string;
         domain: any[];
         colors: any;
         title: string;
+        position: string;
     };
-    updateYAxisWidth({width}: {
+    updateYAxisWidth({ width }: {
         width: any;
     }): void;
-    updateXAxisHeight({height}: {
+    updateXAxisHeight({ height }: {
         height: any;
     }): void;
+    onActivate(event: any, group: any, fromLegend?: boolean): void;
+    onDeactivate(event: any, group: any, fromLegend?: boolean): void;
 }

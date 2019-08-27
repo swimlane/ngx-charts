@@ -1,4 +1,4 @@
-import { OnChanges, SimpleChanges, TemplateRef } from '@angular/core';
+import { OnChanges, SimpleChanges, TemplateRef, EventEmitter } from '@angular/core';
 export declare class PolarSeriesComponent implements OnChanges {
     name: any;
     data: any;
@@ -14,6 +14,9 @@ export declare class PolarSeriesComponent implements OnChanges {
     gradient: boolean;
     tooltipTemplate: TemplateRef<any>;
     animations: boolean;
+    select: EventEmitter<{}>;
+    activate: EventEmitter<{}>;
+    deactivate: EventEmitter<{}>;
     path: string;
     circles: any[];
     circleRadius: number;
@@ -35,7 +38,7 @@ export declare class PolarSeriesComponent implements OnChanges {
     sortData(data: any): any;
     isActive(entry: any): boolean;
     isInactive(entry: any): boolean;
-    defaultTooltipText({label, value}: {
+    defaultTooltipText({ label, value }: {
         label: any;
         value: any;
     }): string;

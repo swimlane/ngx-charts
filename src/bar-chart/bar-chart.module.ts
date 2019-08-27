@@ -13,14 +13,6 @@ import { SeriesHorizontal } from './series-horizontal.component';
 import { SeriesVerticalComponent } from './series-vertical.component';
 import { BarLabelComponent } from './bar-label.component';
 
-export {
-  BarLabelComponent, BarComponent, BarHorizontalComponent, BarHorizontal2DComponent,
-  BarHorizontalNormalizedComponent, BarHorizontalStackedComponent,
-  BarVerticalComponent, BarVertical2DComponent,
-  BarVerticalNormalizedComponent, BarVerticalStackedComponent, SeriesHorizontal,
-  SeriesVerticalComponent 
-};
-
 @NgModule({
   imports: [ChartCommonModule],
   declarations: [

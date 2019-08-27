@@ -24,7 +24,7 @@ export declare function invertColor(value: string): string;
  * @param {any} percent
  * @returns
  */
-export declare function shadeRGBColor({r, g, b}: {
+export declare function shadeRGBColor({ r, g, b }: {
     r: any;
     g: any;
     b: any;

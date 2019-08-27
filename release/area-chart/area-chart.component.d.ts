@@ -5,6 +5,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
 export declare class AreaChartComponent extends BaseChartComponent {
     legend: any;
     legendTitle: string;
+    legendPosition: string;
     state: any;
     xAxis: any;
     yAxis: any;
@@ -20,6 +21,11 @@ export declare class AreaChartComponent extends BaseChartComponent {
     curve: any;
     activeEntries: any[];
     schemeType: string;
+    trimXAxisTicks: boolean;
+    trimYAxisTicks: boolean;
+    rotateXAxisTicks: boolean;
+    maxXAxisTickLength: number;
+    maxYAxisTickLength: number;
     xAxisTickFormatting: any;
     yAxisTickFormatting: any;
     xAxisTicks: any[];
@@ -80,11 +86,12 @@ export declare class AreaChartComponent extends BaseChartComponent {
         colors: any;
         domain: any[];
         title: any;
+        position: string;
     };
-    updateYAxisWidth({width}: {
+    updateYAxisWidth({ width }: {
         width: any;
     }): void;
-    updateXAxisHeight({height}: {
+    updateXAxisHeight({ height }: {
         height: any;
     }): void;
     onActivate(item: any): void;

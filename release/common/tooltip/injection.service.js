@@ -22,6 +22,16 @@ var InjectionService = /** @class */ (function () {
         this.componentFactoryResolver = componentFactoryResolver;
         this.injector = injector;
     }
+    InjectionService_1 = InjectionService;
+    /**
+     * Sets a default global root view container. This is useful for
+     * things like ngUpgrade that doesn't have a ApplicationRef root.
+     *
+     * @param container
+     */
+    InjectionService.setGlobalRootViewContainer = function (container) {
+        InjectionService_1.globalRootViewContainer = container;
+    };
     /**
      * Gets the root view container to inject the component to.
      *
@@ -38,6 +48,8 @@ var InjectionService = /** @class */ (function () {
         }
         if (this._container)
             return this._container;
+        if (InjectionService_1.globalRootViewContainer)
+            return InjectionService_1.globalRootViewContainer;
         throw new Error('View Container not found! ngUpgrade needs to manually set this via setRootViewContainer.');
     };
     /**
@@ -129,10 +141,12 @@ var InjectionService = /** @class */ (function () {
         });
         // use the renderer to append the element for univseral support
         var renderer = componentRef.instance.renderer;
-        renderer.projectNodes(location, [componentRootNode]);
+        renderer.appendChild(location, componentRootNode);
         return componentRef;
     };
-    InjectionService = __decorate([
+    var InjectionService_1;
+    InjectionService.globalRootViewContainer = null;
+    InjectionService = InjectionService_1 = __decorate([
         Injectable(),
         __metadata("design:paramtypes", [ApplicationRef,
             ComponentFactoryResolver,

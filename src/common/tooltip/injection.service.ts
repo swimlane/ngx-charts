@@ -1,6 +1,12 @@
 import {
-  ApplicationRef, ComponentFactoryResolver, ComponentRef, Injectable,
-  Injector, EmbeddedViewRef, Type
+  ApplicationRef,
+  ComponentFactoryResolver,
+  ComponentRef,
+  Injectable,
+  Injector,
+  EmbeddedViewRef,
+  Type,
+  Renderer2
 } from '@angular/core';
 
 /**
@@ -13,14 +19,25 @@ import {
  */
 @Injectable()
 export class InjectionService {
+  static globalRootViewContainer: ComponentRef<any> = null;
+
+  /**
+   * Sets a default global root view container. This is useful for
+   * things like ngUpgrade that doesn't have a ApplicationRef root.
+   *
+   * @param container
+   */
+  static setGlobalRootViewContainer(container: ComponentRef<any>): void {
+    InjectionService.globalRootViewContainer = container;
+  }
 
   private _container: ComponentRef<any>;
 
   constructor(
     private applicationRef: ApplicationRef,
     private componentFactoryResolver: ComponentFactoryResolver,
-    private injector: Injector) {
-  }
+    private injector: Injector
+  ) {}
 
   /**
    * Gets the root view container to inject the component to.
@@ -37,7 +54,8 @@ export class InjectionService {
       if (rootComponents.length) return rootComponents[0];
     }
 
-    if(this._container) return this._container;
+    if (this._container) return this._container;
+    if (InjectionService.globalRootViewContainer) return InjectionService.globalRootViewContainer;
 
     throw new Error('View Container not found! ngUpgrade needs to manually set this via setRootViewContainer.');
   }
@@ -64,7 +82,7 @@ export class InjectionService {
    */
   getComponentRootNode(componentRef: any): HTMLElement {
     // the top most component root node has no `hostView`
-    if(!componentRef.hostView) return componentRef.element.nativeElement;
+    if (!componentRef.hostView) return componentRef.element.nativeElement;
 
     return (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
   }
@@ -90,7 +108,7 @@ export class InjectionService {
    * @memberOf InjectionService
    */
   projectComponentBindings(component: ComponentRef<any>, bindings: any): ComponentRef<any> {
-    if(bindings) {
+    if (bindings) {
       if (bindings.inputs !== undefined) {
         const bindingKeys = Object.getOwnPropertyNames(bindings.inputs);
         for (const bindingName of bindingKeys) {
@@ -123,8 +141,8 @@ export class InjectionService {
   appendComponent<T>(
     componentClass: Type<T>,
     bindings: any = {},
-    location: Element = this.getRootViewContainerNode()): ComponentRef<any> {
-
+    location: Element = this.getRootViewContainerNode()
+  ): ComponentRef<any> {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentClass);
     const componentRef: any = componentFactory.create(this.injector);
     const appRef: any = this.applicationRef;
@@ -140,10 +158,9 @@ export class InjectionService {
     });
 
     // use the renderer to append the element for univseral support
-    const renderer = componentRef.instance.renderer;
-    renderer.projectNodes(location, [componentRootNode]);
+    const renderer: Renderer2 = componentRef.instance.renderer;
+    renderer.appendChild(location, componentRootNode);
 
     return componentRef;
   }
-
 }

@@ -1,19 +1,6 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ViewChild,
-  Renderer,
-  ChangeDetectionStrategy,
-  TemplateRef,
-} from '@angular/core';
-import {
-  trigger,
-  style,
-  animate,
-  transition
-} from '@angular/animations';
+import { Component, Input, Output, EventEmitter, ViewChild, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
+import { trigger, style, animate, transition } from '@angular/animations';
+import { createMouseEvent } from '../events';
 
 @Component({
   selector: 'g[ngx-charts-tooltip-area]',
@@ -31,14 +18,9 @@ import {
       />
       <xhtml:ng-template #defaultTooltipTemplate let-model="model">
         <xhtml:div class="area-tooltip-container">
-          <xhtml:div
-            *ngFor="let tooltipItem of model"
-            class="tooltip-item">
-            <span
-              class="tooltip-item-color"
-              [style.background-color]="tooltipItem.color">
-            </span>
-            {{getToolTipText(tooltipItem)}}
+          <xhtml:div *ngFor="let tooltipItem of model" class="tooltip-item">
+            <span class="tooltip-item-color" [style.background-color]="tooltipItem.color"> </span>
+            {{ getToolTipText(tooltipItem) }}
           </xhtml:div>
         </xhtml:div>
       </xhtml:ng-template>
@@ -57,7 +39,7 @@ import {
         [tooltipPlacement]="'right'"
         [tooltipType]="'tooltip'"
         [tooltipSpacing]="15"
-        [tooltipTemplate]="tooltipTemplate ? tooltipTemplate: defaultTooltipTemplate"
+        [tooltipTemplate]="tooltipTemplate ? tooltipTemplate : defaultTooltipTemplate"
         [tooltipContext]="anchorValues"
         [tooltipImmediateExit]="true"
       />
@@ -68,15 +50,15 @@ import {
     trigger('animationState', [
       transition('inactive => active', [
         style({
-          opacity: 0,
+          opacity: 0
         }),
-        animate(250, style({opacity: 0.7}))
+        animate(250, style({ opacity: 0.7 }))
       ]),
       transition('active => inactive', [
         style({
-          opacity: 0.7,
+          opacity: 0.7
         }),
-        animate(250, style({opacity: 0}))
+        animate(250, style({ opacity: 0 }))
       ])
     ])
   ]
@@ -99,9 +81,7 @@ export class TooltipArea {
 
   @Output() hover = new EventEmitter();
 
-  @ViewChild('tooltipAnchor') tooltipAnchor;
-
-  constructor(private renderer: Renderer) { }
+  @ViewChild('tooltipAnchor', { static: false }) tooltipAnchor;
 
   getValues(xVal): any[] {
     const results = [];
@@ -130,7 +110,7 @@ export class TooltipArea {
           color = this.colors.getColor(group.name);
         }
 
-        results.push({
+        const data = Object.assign({}, item, {
           value: val,
           name: label,
           series: groupName,
@@ -138,6 +118,8 @@ export class TooltipArea {
           max: item.max,
           color
         });
+
+        results.push(data);
       }
     }
 
@@ -155,8 +137,8 @@ export class TooltipArea {
 
     this.anchorValues = this.getValues(closestPoint);
     if (this.anchorPos !== this.lastAnchorPos) {
-      const ev = new MouseEvent('mouseleave', {bubbles: false});
-      this.renderer.invokeElementMethod(this.tooltipAnchor.nativeElement, 'dispatchEvent', [ev]);
+      const ev = createMouseEvent('mouseleave');
+      this.tooltipAnchor.nativeElement.dispatchEvent(ev);
       this.anchorOpacity = 0.7;
       this.hover.emit({
         value: closestPoint
@@ -174,7 +156,7 @@ export class TooltipArea {
     let closestIndex = 0;
 
     while (minIndex <= maxIndex) {
-      const currentIndex = (minIndex + maxIndex) / 2 | 0;
+      const currentIndex = ((minIndex + maxIndex) / 2) | 0;
       const currentElement = this.xScale(this.xSet[currentIndex]);
 
       const curDiff = Math.abs(currentElement - xPos);
@@ -199,13 +181,13 @@ export class TooltipArea {
   }
 
   showTooltip(): void {
-    const event = new MouseEvent('mouseenter', {bubbles: false});
-    this.renderer.invokeElementMethod(this.tooltipAnchor.nativeElement, 'dispatchEvent', [event]);
+    const event = createMouseEvent('mouseenter');
+    this.tooltipAnchor.nativeElement.dispatchEvent(event);
   }
 
   hideTooltip(): void {
-    const event = new MouseEvent('mouseleave', {bubbles: false});
-    this.renderer.invokeElementMethod(this.tooltipAnchor.nativeElement, 'dispatchEvent', [event]);
+    const event = createMouseEvent('mouseleave');
+    this.tooltipAnchor.nativeElement.dispatchEvent(event);
     this.anchorOpacity = 0;
     this.lastAnchorPos = -1;
   }
@@ -241,5 +223,4 @@ export class TooltipArea {
     }
     return result;
   }
-
 }

@@ -40,7 +40,6 @@ var PieArcComponent = /** @class */ (function () {
     };
     PieArcComponent.prototype.update = function () {
         var calc = this.calculateArc();
-        this.path = calc.startAngle(this.startAngle).endAngle(this.endAngle)();
         this.startOpacity = 0.5;
         this.radialGradientId = 'linearGrad' + id().toString();
         this.gradientFill = "url(#" + this.radialGradientId + ")";
@@ -53,11 +52,14 @@ var PieArcComponent = /** @class */ (function () {
                 this.initialized = true;
             }
         }
+        else {
+            this.path = calc.startAngle(this.startAngle).endAngle(this.endAngle)();
+        }
     };
     PieArcComponent.prototype.calculateArc = function () {
         var outerRadius = this.outerRadius;
         if (this.explodeSlices && this.innerRadius === 0) {
-            outerRadius = this.outerRadius * this.value / this.max;
+            outerRadius = (this.outerRadius * this.value) / this.max;
         }
         return arc()
             .innerRadius(this.innerRadius)
@@ -81,7 +83,8 @@ var PieArcComponent = /** @class */ (function () {
                 return calc(interpolater(t));
             };
         })
-            .transition().duration(750)
+            .transition()
+            .duration(750)
             .attrTween('d', function (d) {
             this._current = this._current || d;
             var interpolater = interpolate(this._current, d);
@@ -97,7 +100,8 @@ var PieArcComponent = /** @class */ (function () {
             .data([{ startAngle: this.startAngle, endAngle: this.endAngle }]);
         var calc = this.calculateArc();
         node
-            .transition().duration(750)
+            .transition()
+            .duration(750)
             .attrTween('d', function (d) {
             this._current = this._current || d;
             var interpolater = interpolate(this._current, d);
@@ -197,7 +201,7 @@ var PieArcComponent = /** @class */ (function () {
         Component({
             selector: 'g[ngx-charts-pie-arc]',
             template: "\n    <svg:g class=\"arc-group\">\n      <svg:defs *ngIf=\"gradient\">\n        <svg:g ngx-charts-svg-radial-gradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"radialGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n      </svg:defs>\n      <svg:path\n        [attr.d]=\"path\"\n        class=\"arc\"\n        [class.active]=\"isActive\"\n        [attr.fill]=\"getGradient()\"\n        (click)=\"onClick()\"\n        (dblclick)=\"onDblClick($event)\"\n        (mouseenter)=\"activate.emit(data)\"\n        (mouseleave)=\"deactivate.emit(data)\"\n        [style.pointer-events]=\"getPointerEvents()\"\n      />\n    </svg:g>\n  ",
-            changeDetection: ChangeDetectionStrategy.OnPush,
+            changeDetection: ChangeDetectionStrategy.OnPush
         }),
         __metadata("design:paramtypes", [ElementRef])
     ], PieArcComponent);

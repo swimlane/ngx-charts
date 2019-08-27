@@ -8,12 +8,7 @@ import {
   ContentChild,
   TemplateRef
 } from '@angular/core';
-import {
-  trigger,
-  style,
-  animate,
-  transition
-} from '@angular/animations';
+import { trigger, style, animate, transition } from '@angular/animations';
 import { scaleBand, scaleLinear } from 'd3-scale';
 
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
@@ -29,37 +24,47 @@ import { BaseChartComponent } from '../common/base-chart.component';
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"
       [animations]="animations"
-      (legendLabelActivate)="onActivate($event)"
-      (legendLabelDeactivate)="onDeactivate($event)"
-      (legendLabelClick)="onClick($event)">
+      (legendLabelActivate)="onActivate($event, undefined, true)"
+      (legendLabelDeactivate)="onDeactivate($event, undefined, true)"
+      (legendLabelClick)="onClick($event)"
+    >
       <svg:g [attr.transform]="transform" class="bar-chart chart">
-        <svg:g ngx-charts-x-axis
+        <svg:g
+          ngx-charts-x-axis
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
+          [trimTicks]="trimXAxisTicks"
+          [rotateTicks]="rotateXAxisTicks"
+          [maxTickLength]="maxXAxisTickLength"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
           [xAxisOffset]="dataLabelMaxHeight.negative"
-          (dimensionsChanged)="updateXAxisHeight($event)">
-        </svg:g>
-        <svg:g ngx-charts-y-axis
+          (dimensionsChanged)="updateXAxisHeight($event)"
+        ></svg:g>
+        <svg:g
+          ngx-charts-y-axis
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
           [showGridLines]="showGridLines"
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
+          [trimTicks]="trimYAxisTicks"
+          [maxTickLength]="maxYAxisTickLength"
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
-          (dimensionsChanged)="updateYAxisWidth($event)">
-        </svg:g>
+          (dimensionsChanged)="updateYAxisWidth($event)"
+        ></svg:g>
         <svg:g
-          *ngFor="let group of results; let index = index; trackBy:trackBy"
+          *ngFor="let group of results; let index = index; trackBy: trackBy"
           [@animationState]="'active'"
-          [attr.transform]="groupTransform(group)">
-          <svg:g ngx-charts-series-vertical
+          [attr.transform]="groupTransform(group)"
+        >
+          <svg:g
+            ngx-charts-series-vertical
             type="stacked"
             [xScale]="xScale"
             [yScale]="yScale"
@@ -74,6 +79,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
             [dataLabelFormatting]="dataLabelFormatting"
             [seriesName]="group.name"
             [animations]="animations"
+            [noBarWhenZero]="noBarWhenZero"
             (select)="onClick($event, group)"
             (activate)="onActivate($event, group)"
             (deactivate)="onDeactivate($event, group)"
@@ -91,17 +97,17 @@ import { BaseChartComponent } from '../common/base-chart.component';
       transition(':leave', [
         style({
           opacity: 1,
-          transform: '*',
+          transform: '*'
         }),
-        animate(500, style({opacity: 0, transform: 'scale(0)'}))
+        animate(500, style({ opacity: 0, transform: 'scale(0)' }))
       ])
     ])
   ]
 })
 export class BarVerticalStackedComponent extends BaseChartComponent {
-
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
+  @Input() legendPosition: string = 'right';
   @Input() xAxis;
   @Input() yAxis;
   @Input() showXAxisLabel;
@@ -113,6 +119,11 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
   @Input() schemeType: string;
+  @Input() trimXAxisTicks: boolean = true;
+  @Input() trimYAxisTicks: boolean = true;
+  @Input() rotateXAxisTicks: boolean = true;
+  @Input() maxXAxisTickLength: number = 16;
+  @Input() maxYAxisTickLength: number = 16;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
   @Input() xAxisTicks: any[];
@@ -122,11 +133,12 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   @Input() yScaleMax: number;
   @Input() showDataLabel: boolean = false;
   @Input() dataLabelFormatting: any;
+  @Input() noBarWhenZero: boolean = true;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
-  @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
+  @ContentChild('tooltipTemplate', { static: false }) tooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
   groupDomain: any[];
@@ -141,15 +153,15 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
   legendOptions: any;
-  dataLabelMaxHeight: any = {negative: 0, positive: 0};
+  dataLabelMaxHeight: any = { negative: 0, positive: 0 };
 
   update(): void {
     super.update();
 
     if (!this.showDataLabel) {
-      this.dataLabelMaxHeight = {negative: 0, positive: 0};          
+      this.dataLabelMaxHeight = { negative: 0, positive: 0 };
     }
-    this.margin = [10 + this.dataLabelMaxHeight.positive, 20, 10 + this.dataLabelMaxHeight.negative, 20]; 
+    this.margin = [10 + this.dataLabelMaxHeight.positive, 20, 10 + this.dataLabelMaxHeight.negative, 20];
 
     this.dims = calculateViewDimensions({
       width: this.width,
@@ -162,11 +174,12 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
       showXLabel: this.showXAxisLabel,
       showYLabel: this.showYAxisLabel,
       showLegend: this.legend,
-      legendType: this.schemeType
+      legendType: this.schemeType,
+      legendPosition: this.legendPosition
     });
 
     if (this.showDataLabel) {
-      this.dims.height -= this.dataLabelMaxHeight.negative;    
+      this.dims.height -= this.dataLabelMaxHeight.negative;
     }
 
     this.formatDates();
@@ -181,14 +194,14 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] + this.dataLabelMaxHeight.negative})`;
+    this.transform = `translate(${this.dims.xOffset} , ${this.margin[0] + this.dataLabelMaxHeight.negative})`;
   }
 
   getGroupDomain() {
     const domain = [];
     for (const group of this.results) {
-      if (!domain.includes(group.name)) {
-        domain.push(group.name);
+      if (!domain.includes(group.label)) {
+        domain.push(group.label);
       }
     }
     return domain;
@@ -198,8 +211,8 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
     const domain = [];
     for (const group of this.results) {
       for (const d of group.series) {
-        if (!domain.includes(d.name)) {
-          domain.push(d.name);
+        if (!domain.includes(d.label)) {
+          domain.push(d.label);
         }
       }
     }
@@ -229,9 +242,7 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
     domain.push(biggest);
 
     const min = Math.min(0, ...domain);
-    const max = this.yScaleMax
-      ? Math.max(this.yScaleMax, ...domain)
-      : Math.max(...domain);
+    const max = this.yScaleMax ? Math.max(this.yScaleMax, ...domain) : Math.max(...domain);
     return [min, max];
   }
 
@@ -250,13 +261,13 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
     return this.roundDomains ? scale.nice() : scale;
   }
 
-  onDataLabelMaxHeightChanged(event, groupIndex) {                   
-    if (event.size.negative)  {
+  onDataLabelMaxHeightChanged(event, groupIndex) {
+    if (event.size.negative) {
       this.dataLabelMaxHeight.negative = Math.max(this.dataLabelMaxHeight.negative, event.size.height);
     } else {
-      this.dataLabelMaxHeight.positive = Math.max(this.dataLabelMaxHeight.positive, event.size.height);              
-    }  
-    if (groupIndex === (this.results.length - 1)) {
+      this.dataLabelMaxHeight.positive = Math.max(this.dataLabelMaxHeight.positive, event.size.height);
+    }
+    if (groupIndex === this.results.length - 1) {
       setTimeout(() => this.update());
     }
   }
@@ -293,7 +304,8 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
       scaleType: this.schemeType,
       colors: undefined,
       domain: [],
-      title: undefined
+      title: undefined,
+      position: this.legendPosition
     };
     if (opts.scaleType === 'ordinal') {
       opts.domain = this.innerDomain;
@@ -307,47 +319,51 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
     return opts;
   }
 
-  updateYAxisWidth({width}) {
+  updateYAxisWidth({ width }) {
     this.yAxisWidth = width;
     this.update();
   }
 
-  updateXAxisHeight({height}) {
+  updateXAxisHeight({ height }) {
     this.xAxisHeight = height;
     this.update();
   }
 
-  onActivate(event, group?) {
+  onActivate(event, group, fromLegend = false) {
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
     }
 
-    const idx = this.activeEntries.findIndex(d => {
-      return d.name === item.name && d.value === item.value && d.series === item.series;
-    });
-    if (idx > -1) {
-      return;
-    }
+    const items = this.results
+      .map(g => g.series)
+      .flat()
+      .filter(i => {
+        if (fromLegend) {
+          return i.label === item.name;
+        } else {
+          return i.name === item.name && i.series === item.series;
+        }
+      });
 
-    this.activeEntries = [ item, ...this.activeEntries ];
+    this.activeEntries = [...items];
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(event, group?) {
+  onDeactivate(event, group, fromLegend = false) {
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
     }
 
-    const idx = this.activeEntries.findIndex(d => {
-      return d.name === item.name && d.value === item.value && d.series === item.series;
+    this.activeEntries = this.activeEntries.filter(i => {
+      if (fromLegend) {
+        return i.label !== item.name;
+      } else {
+        return !(i.name === item.name && i.series === item.series);
+      }
     });
-
-    this.activeEntries.splice(idx, 1);
-    this.activeEntries = [...this.activeEntries];
 
     this.deactivate.emit({ value: item, entries: this.activeEntries });
   }
-
 }

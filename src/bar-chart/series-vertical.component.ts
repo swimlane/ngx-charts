@@ -1,19 +1,7 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  OnChanges,
-  ChangeDetectionStrategy,
-  TemplateRef,
-} from '@angular/core';
-import {
-  trigger,
-  style,
-  animate,
-  transition,
-} from '@angular/animations';
-import { formatLabel } from '../common/label.helper';
+import { Component, Input, Output, EventEmitter, OnChanges, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
+import { trigger, style, animate, transition } from '@angular/animations';
+import { formatLabel, escapeLabel } from '../common/label.helper';
+import { DataItem } from '../models/chart-data.model';
 
 export enum D0Types {
   positive = 'positive',
@@ -23,7 +11,8 @@ export enum D0Types {
 @Component({
   selector: 'g[ngx-charts-series-vertical]',
   template: `
-    <svg:g ngx-charts-bar
+    <svg:g
+      ngx-charts-bar
       *ngFor="let bar of bars; trackBy: trackBy"
       [@animationState]="'active'"
       [@.disabled]="!animations"
@@ -37,6 +26,7 @@ export enum D0Types {
       [orientation]="'vertical'"
       [roundEdges]="bar.roundEdges"
       [gradient]="gradient"
+      [ariaLabel]="bar.ariaLabel"
       [isActive]="isActive(bar.data)"
       (select)="onClick($event)"
       (activate)="activate.emit($event)"
@@ -48,10 +38,13 @@ export enum D0Types {
       [tooltipTitle]="tooltipTemplate ? undefined : bar.tooltipText"
       [tooltipTemplate]="tooltipTemplate"
       [tooltipContext]="bar.data"
-      [animations]="animations">
-    </svg:g>
+      [noBarWhenZero]="noBarWhenZero"
+      [animations]="animations"
+    ></svg:g>
     <svg:g *ngIf="showDataLabel">
-      <svg:g ngx-charts-bar-label *ngFor="let b of barsForDataLabels; let i = index; trackBy:trackDataLabelBy"         
+      <svg:g
+        ngx-charts-bar-label
+        *ngFor="let b of barsForDataLabels; let i = index; trackBy: trackDataLabelBy"
         [barX]="b.x"
         [barY]="b.y"
         [barWidth]="b.width"
@@ -59,9 +52,9 @@ export enum D0Types {
         [value]="b.total"
         [valueFormatting]="dataLabelFormatting"
         [orientation]="'vertical'"
-        (dimensionsChanged)="dataLabelHeightChanged.emit({size:$event, index:i})"
+        (dimensionsChanged)="dataLabelHeightChanged.emit({ size: $event, index: i })"
       />
-    </svg:g> 
+    </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
@@ -76,7 +69,6 @@ export enum D0Types {
   ]
 })
 export class SeriesVerticalComponent implements OnChanges {
-
   @Input() dims;
   @Input() type = 'standard';
   @Input() series;
@@ -92,6 +84,7 @@ export class SeriesVerticalComponent implements OnChanges {
   @Input() animations: boolean = true;
   @Input() showDataLabel: boolean = false;
   @Input() dataLabelFormatting: any;
+  @Input() noBarWhenZero: boolean = true;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
@@ -104,8 +97,7 @@ export class SeriesVerticalComponent implements OnChanges {
   bars: any;
   x: any;
   y: any;
-  barsForDataLabels: Array<{x: number, y: number, width: number, height: number, 
-                            total: number, series: string}> = [];
+  barsForDataLabels: Array<{ x: number; y: number; width: number; height: number; total: number; series: string }> = [];
 
   ngOnChanges(changes): void {
     this.update();
@@ -117,6 +109,7 @@ export class SeriesVerticalComponent implements OnChanges {
     if (this.series.length) {
       width = this.xScale.bandwidth();
     }
+    width = Math.round(width);
     const yScaleMin = Math.max(this.yScale.domain()[0], 0);
 
     const d0 = {
@@ -132,7 +125,7 @@ export class SeriesVerticalComponent implements OnChanges {
 
     this.bars = this.series.map((d, index) => {
       let value = d.value;
-      const label = d.name;
+      const label = this.getLabel(d);
       const formattedLabel = formatLabel(label);
       const roundEdges = this.roundEdges;
       d0Type = value > 0 ? D0Types.positive : D0Types.negative;
@@ -146,7 +139,7 @@ export class SeriesVerticalComponent implements OnChanges {
         formattedLabel,
         height: 0,
         x: 0,
-        y: 0,
+        y: 0
       };
 
       if (this.type === 'standard') {
@@ -197,19 +190,22 @@ export class SeriesVerticalComponent implements OnChanges {
           bar.gradientStops = this.colors.getLinearGradientStops(value);
         } else {
           bar.color = this.colors.getColor(bar.offset1);
-          bar.gradientStops =
-            this.colors.getLinearGradientStops(bar.offset1, bar.offset0);
+          bar.gradientStops = this.colors.getLinearGradientStops(bar.offset1, bar.offset0);
         }
       }
 
       let tooltipLabel = formattedLabel;
+      bar.ariaLabel = formattedLabel + ' ' + value.toLocaleString();
       if (this.seriesName) {
         tooltipLabel = `${this.seriesName} • ${formattedLabel}`;
         bar.data.series = this.seriesName;
+        bar.ariaLabel = this.seriesName + ' ' + bar.ariaLabel;
       }
 
-      bar.tooltipText = this.tooltipDisabled ? undefined : `
-        <span class="tooltip-label">${tooltipLabel}</span>
+      bar.tooltipText = this.tooltipDisabled
+        ? undefined
+        : `
+        <span class="tooltip-label">${escapeLabel(tooltipLabel)}</span>
         <span class="tooltip-val">${value.toLocaleString()}</span>
       `;
 
@@ -217,39 +213,37 @@ export class SeriesVerticalComponent implements OnChanges {
     });
 
     this.updateDataLabels();
-    
   }
 
   updateDataLabels() {
-    if (this.type === 'stacked') {        
-        this.barsForDataLabels = [];          
-        const section: any = {};
-        section.series =  this.seriesName;
-        const totalPositive = this.series.map(d => d.value).reduce((sum, d) => d > 0 ? sum + d : sum, 0);
-        const totalNegative = this.series.map(d => d.value).reduce((sum, d) => d < 0 ? sum + d : sum, 0);
-        section.total = totalPositive + totalNegative;
-        section.x = 0;
-        section.y = 0;    
-        if (section.total > 0)   {
-          section.height = this.yScale(totalPositive);
-        } else {
-          section.height = this.yScale(totalNegative);
-        }    
-        section.width = this.xScale.bandwidth();
-        this.barsForDataLabels.push(section);          
+    if (this.type === 'stacked') {
+      this.barsForDataLabels = [];
+      const section: any = {};
+      section.series = this.seriesName;
+      const totalPositive = this.series.map(d => d.value).reduce((sum, d) => (d > 0 ? sum + d : sum), 0);
+      const totalNegative = this.series.map(d => d.value).reduce((sum, d) => (d < 0 ? sum + d : sum), 0);
+      section.total = totalPositive + totalNegative;
+      section.x = 0;
+      section.y = 0;
+      if (section.total > 0) {
+        section.height = this.yScale(totalPositive);
+      } else {
+        section.height = this.yScale(totalNegative);
+      }
+      section.width = this.xScale.bandwidth();
+      this.barsForDataLabels.push(section);
     } else {
       this.barsForDataLabels = this.series.map(d => {
-        const section: any = {};      
-        section.series =  this.seriesName ? this.seriesName : d.name;               
+        const section: any = {};
+        section.series = this.seriesName ? this.seriesName : d.label;
         section.total = d.value;
-        section.x = this.xScale(d.name);
+        section.x = this.xScale(d.label);
         section.y = this.yScale(0);
         section.height = this.yScale(section.total) - this.yScale(0);
-        section.width = this.xScale.bandwidth();  
-        return section; 
+        section.width = this.xScale.bandwidth();
+        return section;
       });
     }
-    
   }
 
   updateTooltipSettings() {
@@ -265,16 +259,22 @@ export class SeriesVerticalComponent implements OnChanges {
     return item !== undefined;
   }
 
-  onClick(data): void {
+  onClick(data: DataItem): void {
     this.select.emit(data);
+  }
+
+  getLabel(dataItem): string {
+    if (dataItem.label) {
+      return dataItem.label;
+    }
+    return dataItem.name;
   }
 
   trackBy(index, bar): string {
     return bar.label;
   }
 
-  trackDataLabelBy(index, barLabel) {       
+  trackDataLabelBy(index, barLabel) {
     return index + '#' + barLabel.series + '#' + barLabel.total;
   }
-
 }

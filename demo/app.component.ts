@@ -6,7 +6,7 @@ import * as shape from 'd3-shape';
 import * as d3 from 'd3';
 
 import { colorSets } from '../src/utils/color-sets';
-import { formatLabel } from '../src/common/label.helper';
+import { formatLabel, escapeLabel } from '../src/common/label.helper';
 import {
   single,
   multi,
@@ -17,6 +17,8 @@ import {
   timelineFilterBarData,
   fiscalYearReport
 } from './data';
+import { bubbleDemoData } from './bubble-chart-interactive/data';
+import { BubbleChartInteractiveServerDataModel } from './bubble-chart-interactive/models';
 import { data as countries } from 'emoji-flags';
 import chartGroups from './chartTypes';
 import { barChart, lineChartSeries } from './combo-chart-data';
@@ -36,13 +38,12 @@ function multiFormat(value) {
 
 @Component({
   selector: 'app',
-  providers: [Location, {provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [Location, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['../node_modules/@swimlane/ngx-ui/release/index.css', './app.component.scss'],
+  styleUrls: ['../node_modules/@swimlane/ngx-ui/index.css', './app.component.scss'],
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-
   version = APP_VERSION;
 
   theme = 'dark';
@@ -60,7 +61,7 @@ export class AppComponent implements OnInit {
   statusData: any[];
   sparklineData: any[];
   timelineFilterBarData: any[];
-  graph: { links: any[], nodes: any[] };
+  graph: { links: any[]; nodes: any[] };
   bubble: any;
   linearScale: boolean = false;
   range: boolean = false;
@@ -76,8 +77,10 @@ export class AppComponent implements OnInit {
   gradient = false;
   showLegend = true;
   legendTitle = 'Legend';
+  legendPosition = 'right';
   showXAxisLabel = true;
   tooltipDisabled = false;
+  showText = true;
   xAxisLabel = 'Country';
   showYAxisLabel = true;
   yAxisLabel = 'GDP Per Capita';
@@ -97,6 +100,12 @@ export class AppComponent implements OnInit {
   yScaleMax: number;
   showDataLabel = false;
   barMaxWidth:number;
+  noBarWhenZero = true;
+  trimXAxisTicks = true;
+  trimYAxisTicks = true;
+  rotateXAxisTicks = true;
+  maxXAxisTickLength = 16;
+  maxYAxisTickLength = 16;
 
   curves = {
     Basis: shape.curveBasis,
@@ -121,15 +130,22 @@ export class AppComponent implements OnInit {
   curveType: string = 'Linear';
   curve: any = this.curves[this.curveType];
   interpolationTypes = [
-    'Basis', 'Bundle', 'Cardinal', 'Catmull Rom', 'Linear', 'Monotone X',
-    'Monotone Y', 'Natural', 'Step', 'Step After', 'Step Before'
+    'Basis',
+    'Bundle',
+    'Cardinal',
+    'Catmull Rom',
+    'Linear',
+    'Monotone X',
+    'Monotone Y',
+    'Natural',
+    'Step',
+    'Step After',
+    'Step Before'
   ];
 
   closedCurveType: string = 'Linear Closed';
   closedCurve: any = this.curves[this.closedCurveType];
-  closedInterpolationTypes = [
-    'Basis Closed', 'Cardinal Closed', 'Catmull Rom Closed', 'Linear Closed'
-  ];
+  closedInterpolationTypes = ['Basis Closed', 'Cardinal Closed', 'Catmull Rom Closed', 'Linear Closed'];
 
   colorSets: any;
   colorScheme: any;
@@ -186,18 +202,14 @@ export class AppComponent implements OnInit {
     name: 'coolthree',
     selectable: true,
     group: 'Ordinal',
-    domain: [
-      '#01579b', '#7aa3e5', '#a8385d', '#00bfa5'
-    ]
+    domain: ['#01579b', '#7aa3e5', '#a8385d', '#00bfa5']
   };
 
   comboBarScheme = {
     name: 'singleLightBlue',
     selectable: true,
     group: 'Ordinal',
-    domain: [
-      '#01579b'
-    ]
+    domain: ['#01579b']
   };
 
   showRightYAxisLabel: boolean = true;
@@ -215,16 +227,16 @@ export class AppComponent implements OnInit {
   treemapPath: any[] = [];
   sumBy: string = 'Size';
 
+  // bubble chart interactive demo
+  bubbleDemoTempData: any[] = [];
+  bubbleDemoChart: BubbleChartInteractiveServerDataModel;
+
   // Reference lines
   showRefLines: boolean = true;
   showRefLabels: boolean = true;
 
   // Supports any number of reference lines.
-  refLines = [
-    { value: 42500, name: 'Maximum' },
-    { value: 37750, name: 'Average' },
-    { value: 33000, name: 'Minimum' }
-  ];
+  refLines = [{ value: 42500, name: 'Maximum' }, { value: 37750, name: 'Average' }, { value: 33000, name: 'Minimum' }];
 
   constructor(public location: Location) {
     this.mathFunction = this.getFunction();
@@ -239,10 +251,14 @@ export class AppComponent implements OnInit {
       bubble,
       plotData: this.generatePlotData(),
       treemap,
+      bubbleDemoData,
       fiscalYearReport
     });
 
+    // interactive drilldown demos
     this.treemapProcess();
+    this.bubbleDemoChart = new BubbleChartInteractiveServerDataModel();
+    this.bubbleDemoProcess(bubbleDemoData[0]);
 
     this.dateData = generateData(5, false);
     this.dateDataWithRange = generateData(2, true);
@@ -306,11 +322,12 @@ export class AppComponent implements OnInit {
         const index = Math.floor(Math.random() * this.graph.nodes.length);
         const value = this.graph.nodes[index].value;
         this.graph.nodes.splice(index, 1);
-        const nodes = [ ...this.graph.nodes ];
+        const nodes = [...this.graph.nodes];
 
         const links = this.graph.links.filter(link => {
-          return link.source !== value && link.source.value !== value &&
-            link.target !== value && link.target.value !== value;
+          return (
+            link.source !== value && link.source.value !== value && link.target !== value && link.target.value !== value
+          );
         });
         this.graph = { links, nodes };
       }
@@ -327,48 +344,62 @@ export class AppComponent implements OnInit {
       // multi
       const multiEntry = {
         name: country.name,
-        series: [{
-          name: '1990',
-          value: Math.floor(10000 + Math.random() * 50000)
-        }, {
-          name: '2000',
-          value: Math.floor(10000 + Math.random() * 50000)
-        }, {
-          name: '2010',
-          value: Math.floor(10000 + Math.random() * 50000)
-        }]
+        series: [
+          {
+            name: '1990',
+            value: Math.floor(10000 + Math.random() * 50000)
+          },
+          {
+            name: '2000',
+            value: Math.floor(10000 + Math.random() * 50000)
+          },
+          {
+            name: '2010',
+            value: Math.floor(10000 + Math.random() * 50000)
+          }
+        ]
       };
 
       this.multi = [...this.multi, multiEntry];
 
       // graph
       const node = { value: country.name };
-      const nodes = [ ...this.graph.nodes, node];
+      const nodes = [...this.graph.nodes, node];
       const link = {
         source: country.name,
-        target: nodes[Math.floor(Math.random() * (nodes.length - 1))].value,
+        target: nodes[Math.floor(Math.random() * (nodes.length - 1))].value
       };
-      const links = [ ...this.graph.links, link];
+      const links = [...this.graph.links, link];
       this.graph = { links, nodes };
 
       // bubble
       const bubbleYear = Math.floor((2010 - 1990) * Math.random() + 1990);
       const bubbleEntry = {
         name: country.name,
-        series: [{
-          name: '' + bubbleYear,
-          x: new Date(bubbleYear, 0, 1),
-          y: Math.floor(30 + Math.random() * 70),
-          r: Math.floor(30 + Math.random() * 20),
-        }]
+        series: [
+          {
+            name: '' + bubbleYear,
+            x: new Date(bubbleYear, 0, 1),
+            y: Math.floor(30 + Math.random() * 70),
+            r: Math.floor(30 + Math.random() * 20)
+          }
+        ]
       };
 
       this.bubble = [...this.bubble, bubbleEntry];
 
+      // bubble interactive demo
+      const getRandomInt = (min, max) => {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      };
+      this.bubbleDemoProcess(bubbleDemoData[getRandomInt(0, bubbleDemoData.length - 1)]);
+
       this.statusData = this.getStatusData();
+
+      this.timelineFilterBarData = timelineFilterBarData();
     }
 
-    const date = new Date(Math.floor(1473700105009 +  Math.random() * 1000000000));
+    const date = new Date(Math.floor(1473700105009 + Math.random() * 1000000000));
     for (const series of this.dateData) {
       series.series.push({
         name: date,
@@ -420,7 +451,15 @@ export class AppComponent implements OnInit {
   }
 
   select(data) {
-    console.log('Item clicked', data);
+    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+  }
+
+  activate(data) {
+    console.log('Activate', JSON.parse(JSON.stringify(data)));
+  }
+
+  deactivate(data) {
+    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 
   getInterpolationType(curveType) {
@@ -452,7 +491,7 @@ export class AppComponent implements OnInit {
     const calendarData = [];
     const getDate = d => new Date(thisMondayYear, thisMondayMonth, d);
     for (let week = -52; week <= 0; week++) {
-      const mondayDay = thisMondayDay + (week * 7);
+      const mondayDay = thisMondayDay + week * 7;
       const monday = getDate(mondayDay);
 
       // one week
@@ -466,7 +505,7 @@ export class AppComponent implements OnInit {
         }
 
         // value
-        const value = (dayOfWeek < 6) ? (date.getMonth() + 1) : 0;
+        const value = dayOfWeek < 6 ? date.getMonth() + 1 : 0;
 
         series.push({
           date,
@@ -491,7 +530,7 @@ export class AppComponent implements OnInit {
     const year = monday.getFullYear();
     const lastSunday = new Date(year, month, day - 1);
     const nextSunday = new Date(year, month, day + 6);
-    return (lastSunday.getMonth() !== nextSunday.getMonth()) ? monthName.format(nextSunday) : '';
+    return lastSunday.getMonth() !== nextSunday.getMonth() ? monthName.format(nextSunday) : '';
   }
 
   calendarTooltipText(c): string {
@@ -501,12 +540,12 @@ export class AppComponent implements OnInit {
     `;
   }
 
-  pieTooltipText({data}) {
+  pieTooltipText({ data }) {
     const label = formatLabel(data.name);
     const val = formatLabel(data.value);
 
     return `
-      <span class="tooltip-label">${label}</span>
+      <span class="tooltip-label">${escapeLabel(label)}</span>
       <span class="tooltip-val">$${val}</span>
     `;
   }
@@ -516,14 +555,14 @@ export class AppComponent implements OnInit {
   }
 
   getStatusData() {
-    const sales = Math.round(1E4 * Math.random());
-    const dur = 36E5 * Math.random();
+    const sales = Math.round(1e4 * Math.random());
+    const dur = 36e5 * Math.random();
     return this.calcStatusData(sales, dur);
   }
 
   calcStatusData(sales = this.statusData[0].value, dur = this.statusData[2].value) {
     const ret = sales * this.salePrice;
-    const cost = sales * dur / 60 / 60 / 1000 * this.personnelCost;
+    const cost = ((sales * dur) / 60 / 60 / 1000) * this.personnelCost;
     const ROI = (ret - cost) / cost;
     return [
       {
@@ -554,7 +593,7 @@ export class AppComponent implements OnInit {
   }
 
   statusValueFormat(c): string {
-    switch(c.data.extra ? c.data.extra.format : '') {
+    switch (c.data.extra ? c.data.extra.format : '') {
       case 'currency':
         return `\$${Math.round(c.value).toLocaleString()}`;
       case 'time':
@@ -566,12 +605,16 @@ export class AppComponent implements OnInit {
     }
   }
 
-  currencyFormatting(c) {
-    return `\$${Math.round(c.value).toLocaleString()}`;
+  valueFormatting(value: number): string {
+    return `${Math.round(value).toLocaleString()} €`;
+  }
+
+  currencyFormatting(value: number) {
+    return `\$${Math.round(value).toLocaleString()}`;
   }
 
   gdpLabelFormatting(c) {
-    return `${c.label}<br/><small class="number-card-label">GDP Per Capita</small>`;
+    return `${escapeLabel(c.label)}<br/><small class="number-card-label">GDP Per Capita</small>`;
   }
 
   statusLabelFormat(c): string {
@@ -584,28 +627,30 @@ export class AppComponent implements OnInit {
     }
     const twoPi = 2 * Math.PI;
     const length = 25;
-    const series = Array.apply(null, { length })
-      .map((d, i) => {
-        const x = i / (length - 1);
-        const t = x * twoPi;
-        return {
-          name: ~~(x * 360),
-          value: this.mathFunction(t)
-        };
-      });
+    const series = Array.apply(null, { length }).map((d, i) => {
+      const x = i / (length - 1);
+      const t = x * twoPi;
+      return {
+        name: ~~(x * 360),
+        value: this.mathFunction(t)
+      };
+    });
 
-    return [{
-      name: this.mathText,
-      series
-    }];
+    return [
+      {
+        name: this.mathText,
+        series
+      }
+    ];
   }
 
   getFunction(text = this.mathText) {
     try {
       text = `with (Math) { return ${this.mathText} }`;
+      // tslint:disable-next-line:function-constructor
       const fn = new Function('x', text).bind(Math);
-      return (typeof fn(1) === 'number') ? fn : null;
-    } catch(err) {
+      return typeof fn(1) === 'number' ? fn : null;
+    } catch (err) {
       return null;
     }
   }
@@ -613,16 +658,16 @@ export class AppComponent implements OnInit {
   treemapProcess(sumBy = this.sumBy) {
     this.sumBy = sumBy;
     const children = treemap[0];
-    const value = (sumBy === 'Size') ? sumChildren(children) : countChildren(children);
+    const value = sumBy === 'Size' ? sumChildren(children) : countChildren(children);
     this.treemap = [children];
-    this.treemapPath = [{name: 'Top', children: [children], value }];
+    this.treemapPath = [{ name: 'Top', children: [children], value }];
 
     function sumChildren(node) {
-      return node.value = node.size || d3.sum(node.children, sumChildren);
+      return (node.value = node.size || d3.sum(node.children, sumChildren));
     }
 
     function countChildren(node) {
-      return node.value = node.children ? d3.sum(node.children, countChildren) : 1;
+      return (node.value = node.children ? d3.sum(node.children, countChildren) : 1);
     }
   }
 
@@ -661,11 +706,11 @@ export class AppComponent implements OnInit {
   */
 
   yLeftAxisScale(min, max) {
-    return {min: `${min}`, max: `${max}`};
+    return { min: `${min}`, max: `${max}` };
   }
 
   yRightAxisScale(min, max) {
-    return {min: `${min}`, max: `${max}`};
+    return { min: `${min}`, max: `${max}` };
   }
 
   yLeftTickFormat(data) {
@@ -689,4 +734,32 @@ export class AppComponent implements OnInit {
     console.log('Doube click', event);
   }
 
+  /*
+  **
+  Bubble Chart Interactive Demo
+  **
+  */
+
+  bubbleDemoProcess(dataFromServer) {
+    this.bubbleDemoChart.setDataFromServer(dataFromServer);
+    this.bubbleDemoTempData = this.bubbleDemoChart.toChart();
+  }
+
+  getBubbleInteractiveTitle() {
+    return this.bubbleDemoChart.getChartTitle();
+  }
+
+  bubbleShowDrilldownResetLink() {
+    return this.bubbleDemoChart.getDrilldownDepth() > 0;
+  }
+
+  onClickResetBubbleInteractiveDrill() {
+    this.bubbleDemoChart.resetDrilldown();
+    this.bubbleDemoTempData = this.bubbleDemoChart.toChart();
+  }
+
+  onSelectBubbleInteractivePoint(event) {
+    this.bubbleDemoChart.drilldown(event);
+    this.bubbleDemoTempData = this.bubbleDemoChart.toChart();
+  }
 }

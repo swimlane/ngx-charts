@@ -5,7 +5,7 @@ export declare class BaseChartComponent implements OnChanges, AfterViewInit, OnD
     protected zone: NgZone;
     protected cd: ChangeDetectorRef;
     results: any;
-    view: number[];
+    view: [number, number];
     scheme: any;
     schemeType: string;
     customColors: any;
@@ -27,7 +27,7 @@ export declare class BaseChartComponent implements OnChanges, AfterViewInit, OnD
      */
     formatDates(): void;
     protected unbindEvents(): void;
-    private bindWindowResizeEvent();
+    private bindWindowResizeEvent;
     /**
      * Clones the data into a new object
      *
@@ -37,5 +37,5 @@ export declare class BaseChartComponent implements OnChanges, AfterViewInit, OnD
      *
      * @memberOf BaseChart
      */
-    private cloneData(data);
+    private cloneData;
 }

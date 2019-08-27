@@ -11,19 +11,15 @@ import {
   EventEmitter,
   ChangeDetectionStrategy
 } from '@angular/core';
-import {
-  forceCollide,
-  forceLink,
-  forceManyBody,
-  forceSimulation,
-  forceX,
-  forceY
-} from 'd3-force';
+import { forceCollide, forceLink, forceManyBody, forceSimulation, forceX, forceY } from 'd3-force';
 
 import { ChartComponent } from '../common/charts/chart.component';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
+import { escapeLabel } from '../common/label.helper';
+/* tslint:disable */
+import { MouseEvent } from '../events';
 
 @Component({
   selector: 'ngx-charts-force-directed-graph',
@@ -35,16 +31,20 @@ import { ColorHelper } from '../common/color.helper';
       [animations]="animations"
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
-      (legendLabelDeactivate)="onDeactivate($event)">
+      (legendLabelDeactivate)="onDeactivate($event)"
+    >
       <svg:g [attr.transform]="transform" class="force-directed-graph chart">
         <svg:g class="links">
-          <svg:g *ngFor="let link of links; trackBy:trackLinkBy">
-            <ng-template *ngIf="linkTemplate"
+          <svg:g *ngFor="let link of links; trackBy: trackLinkBy">
+            <ng-template
+              *ngIf="linkTemplate"
               [ngTemplateOutlet]="linkTemplate"
-              [ngTemplateOutletContext]="{ $implicit: link }">
-            </ng-template>
-            <svg:line *ngIf="!linkTemplate"
-              strokeWidth="1" class="edge"
+              [ngTemplateOutletContext]="{ $implicit: link }"
+            ></ng-template>
+            <svg:line
+              *ngIf="!linkTemplate"
+              strokeWidth="1"
+              class="edge"
               [attr.x1]="link.source.x"
               [attr.y1]="link.source.y"
               [attr.x2]="link.target.x"
@@ -53,39 +53,39 @@ import { ColorHelper } from '../common/color.helper';
           </svg:g>
         </svg:g>
         <svg:g class="nodes">
-          <svg:g *ngFor="let node of nodes; trackBy:trackNodeBy"
+          <svg:g
+            *ngFor="let node of nodes; trackBy: trackNodeBy"
             [attr.transform]="'translate(' + node.x + ',' + node.y + ')'"
             [attr.fill]="colors.getColor(groupResultsBy(node))"
             [attr.stroke]="colors.getColor(groupResultsBy(node))"
             (mousedown)="onDragStart(node, $event)"
-            (click)="onClick({name: node.value})"
+            (click)="onClick({ name: node.value })"
             ngx-tooltip
             [tooltipDisabled]="tooltipDisabled"
             [tooltipPlacement]="'top'"
             [tooltipType]="'tooltip'"
-            [tooltipTitle]="tooltipTemplate ? undefined : node.value"
+            [tooltipTitle]="tooltipTemplate ? undefined : escape(node.value)"
             [tooltipTemplate]="tooltipTemplate"
-            [tooltipContext]="node">
-            <ng-template *ngIf="nodeTemplate"
+            [tooltipContext]="node"
+          >
+            <ng-template
+              *ngIf="nodeTemplate"
               [ngTemplateOutlet]="nodeTemplate"
-              [ngTemplateOutletContext]="{ $implicit: node }">
-            </ng-template>
+              [ngTemplateOutletContext]="{ $implicit: node }"
+            ></ng-template>
             <svg:circle *ngIf="!nodeTemplate" r="5" />
           </svg:g>
         </svg:g>
       </svg:g>
     </ngx-charts-chart>
   `,
-  styleUrls: [
-    '../common/base-chart.component.scss',
-    './force-directed-graph.component.scss'
-  ],
+  styleUrls: ['../common/base-chart.component.scss', './force-directed-graph.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ForceDirectedGraphComponent extends BaseChartComponent {
-
-  @Input() force: any = forceSimulation<any>()
+  @Input()
+  force: any = forceSimulation<any>()
     .force('charge', forceManyBody())
     .force('collide', forceCollide(5))
     .force('x', forceX())
@@ -94,23 +94,25 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
   @Input() forceLink: any = forceLink<any, any>().id(node => node.value);
   @Input() legend: boolean;
   @Input() legendTitle: string = 'Legend';
+  @Input() legendPosition: string = 'right';
   @Input() nodes: any[] = [];
-  @Input() links: Array<{ source: any, target: any }> = [];
+  @Input() links: Array<{ source: any; target: any }> = [];
   @Input() activeEntries: any[] = [];
   @Input() tooltipDisabled: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
-  @ContentChild('linkTemplate') linkTemplate: TemplateRef<any>;
-  @ContentChild('nodeTemplate') nodeTemplate: TemplateRef<any>;
-  @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
-  @ViewChild(ChartComponent, { read: ElementRef }) chart: ElementRef;
+  @ContentChild('linkTemplate', { static: false }) linkTemplate: TemplateRef<any>;
+  @ContentChild('nodeTemplate', { static: false }) nodeTemplate: TemplateRef<any>;
+  @ContentChild('tooltipTemplate', { static: false }) tooltipTemplate: TemplateRef<any>;
+  @ViewChild(ChartComponent, { read: ElementRef, static: false })
+  chart: ElementRef;
 
   colors: ColorHelper;
   dims: ViewDimensions;
   draggingNode: any;
-  draggingStart: { x: number, y: number };
+  draggingStart: { x: number; y: number };
   margin = [0, 0, 0, 0];
   results = [];
   seriesDomain: any;
@@ -128,6 +130,7 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
       height: this.height,
       margins: this.margin,
       showLegend: this.legend,
+      legendPosition: this.legendPosition
     });
 
     this.seriesDomain = this.getSeriesDomain();
@@ -135,12 +138,14 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
     this.legendOptions = this.getLegendOptions();
 
     this.transform = `
-      translate(${ this.dims.xOffset + this.dims.width / 2 }, ${ this.margin[0] + this.dims.height / 2 })
+      translate(${this.dims.xOffset + this.dims.width / 2}, ${this.margin[0] + this.dims.height / 2})
     `;
-    if(this.force) {
-      this.force.nodes(this.nodes)
+    if (this.force) {
+      this.force
+        .nodes(this.nodes)
         .force('link', this.forceLink.links(this.links))
-        .alpha(0.5).restart();
+        .alpha(0.5)
+        .restart();
     }
   }
 
@@ -149,8 +154,8 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
   }
 
   onActivate(event): void {
-    if(this.activeEntries.indexOf(event) > -1) return;
-    this.activeEntries = [ event, ...this.activeEntries ];
+    if (this.activeEntries.indexOf(event) > -1) return;
+    this.activeEntries = [event, ...this.activeEntries];
     this.activate.emit({ value: event, entries: this.activeEntries });
   }
 
@@ -164,8 +169,9 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
   }
 
   getSeriesDomain(): any[] {
-    return this.nodes.map(d => this.groupResultsBy(d))
-      .reduce((nodes: any[], node): any[] => nodes.includes(node) ? nodes : nodes.concat([node]), [])
+    return this.nodes
+      .map(d => this.groupResultsBy(d))
+      .reduce((nodes: any[], node): any[] => (nodes.includes(node) ? nodes : nodes.concat([node])), [])
       .sort();
   }
 
@@ -186,7 +192,8 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
       scaleType: 'ordinal',
       domain: this.seriesDomain,
       colors: this.colors,
-      title: this.legendTitle
+      title: this.legendTitle,
+      position: this.legendPosition
     };
   }
 
@@ -215,5 +222,9 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
     this.draggingNode.fx = undefined;
     this.draggingNode.fy = undefined;
     this.draggingNode = undefined;
+  }
+
+  escape(label: any): string {
+    return escapeLabel(label);
   }
 }

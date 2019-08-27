@@ -1,7 +1,10 @@
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -28,13 +31,20 @@ var BarHorizontalComponent = /** @class */ (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.legend = false;
         _this.legendTitle = 'Legend';
+        _this.legendPosition = 'right';
         _this.tooltipDisabled = false;
         _this.showGridLines = true;
         _this.activeEntries = [];
+        _this.trimXAxisTicks = true;
+        _this.trimYAxisTicks = true;
+        _this.rotateXAxisTicks = true;
+        _this.maxXAxisTickLength = 16;
+        _this.maxYAxisTickLength = 16;
         _this.barPadding = 8;
         _this.roundDomains = false;
         _this.roundEdges = true;
         _this.showDataLabel = false;
+        _this.noBarWhenZero = true;
         _this.activate = new EventEmitter();
         _this.deactivate = new EventEmitter();
         _this.margin = [10, 20, 10, 20];
@@ -60,8 +70,10 @@ var BarHorizontalComponent = /** @class */ (function (_super) {
             showXLabel: this.showXAxisLabel,
             showYLabel: this.showYAxisLabel,
             showLegend: this.legend,
-            legendType: this.schemeType
+            legendType: this.schemeType,
+            legendPosition: this.legendPosition
         });
+        this.formatDates();
         this.xScale = this.getXScale();
         this.yScale = this.getYScale();
         this.setColors();
@@ -85,14 +97,12 @@ var BarHorizontalComponent = /** @class */ (function (_super) {
     };
     BarHorizontalComponent.prototype.getXDomain = function () {
         var values = this.results.map(function (d) { return d.value; });
-        var min = this.xScaleMin
-            ? Math.min.apply(Math, [this.xScaleMin].concat(values)) : Math.min.apply(Math, [0].concat(values));
-        var max = this.xScaleMax
-            ? Math.max.apply(Math, [this.xScaleMax].concat(values)) : Math.max.apply(Math, values);
+        var min = this.xScaleMin ? Math.min.apply(Math, [this.xScaleMin].concat(values)) : Math.min.apply(Math, [0].concat(values));
+        var max = this.xScaleMax ? Math.max.apply(Math, [this.xScaleMax].concat(values)) : Math.max.apply(Math, [0].concat(values));
         return [min, max];
     };
     BarHorizontalComponent.prototype.getYDomain = function () {
-        return this.results.map(function (d) { return d.name; });
+        return this.results.map(function (d) { return d.label; });
     };
     BarHorizontalComponent.prototype.onClick = function (data) {
         this.select.emit(data);
@@ -112,7 +122,8 @@ var BarHorizontalComponent = /** @class */ (function (_super) {
             scaleType: this.schemeType,
             colors: undefined,
             domain: [],
-            title: undefined
+            title: undefined,
+            position: this.legendPosition
         };
         if (opts.scaleType === 'ordinal') {
             opts.domain = this.yDomain;
@@ -143,11 +154,20 @@ var BarHorizontalComponent = /** @class */ (function (_super) {
         else {
             this.dataLabelMaxWidth.positive = Math.max(this.dataLabelMaxWidth.positive, event.size.width);
         }
-        if (event.index === (this.results.length - 1)) {
+        if (event.index === this.results.length - 1) {
             setTimeout(function () { return _this.update(); });
         }
     };
-    BarHorizontalComponent.prototype.onActivate = function (item) {
+    BarHorizontalComponent.prototype.onActivate = function (item, fromLegend) {
+        if (fromLegend === void 0) { fromLegend = false; }
+        item = this.results.find(function (d) {
+            if (fromLegend) {
+                return d.label === item.name;
+            }
+            else {
+                return d.name === item.name;
+            }
+        });
         var idx = this.activeEntries.findIndex(function (d) {
             return d.name === item.name && d.value === item.value && d.series === item.series;
         });
@@ -157,7 +177,16 @@ var BarHorizontalComponent = /** @class */ (function (_super) {
         this.activeEntries = [item].concat(this.activeEntries);
         this.activate.emit({ value: item, entries: this.activeEntries });
     };
-    BarHorizontalComponent.prototype.onDeactivate = function (item) {
+    BarHorizontalComponent.prototype.onDeactivate = function (item, fromLegend) {
+        if (fromLegend === void 0) { fromLegend = false; }
+        item = this.results.find(function (d) {
+            if (fromLegend) {
+                return d.label === item.name;
+            }
+            else {
+                return d.name === item.name;
+            }
+        });
         var idx = this.activeEntries.findIndex(function (d) {
             return d.name === item.name && d.value === item.value && d.series === item.series;
         });
@@ -173,6 +202,10 @@ var BarHorizontalComponent = /** @class */ (function (_super) {
         Input(),
         __metadata("design:type", String)
     ], BarHorizontalComponent.prototype, "legendTitle", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", String)
+    ], BarHorizontalComponent.prototype, "legendPosition", void 0);
     __decorate([
         Input(),
         __metadata("design:type", Object)
@@ -219,6 +252,26 @@ var BarHorizontalComponent = /** @class */ (function (_super) {
     ], BarHorizontalComponent.prototype, "schemeType", void 0);
     __decorate([
         Input(),
+        __metadata("design:type", Boolean)
+    ], BarHorizontalComponent.prototype, "trimXAxisTicks", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], BarHorizontalComponent.prototype, "trimYAxisTicks", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], BarHorizontalComponent.prototype, "rotateXAxisTicks", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Number)
+    ], BarHorizontalComponent.prototype, "maxXAxisTickLength", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Number)
+    ], BarHorizontalComponent.prototype, "maxYAxisTickLength", void 0);
+    __decorate([
+        Input(),
         __metadata("design:type", Object)
     ], BarHorizontalComponent.prototype, "xAxisTickFormatting", void 0);
     __decorate([
@@ -262,6 +315,10 @@ var BarHorizontalComponent = /** @class */ (function (_super) {
         __metadata("design:type", Object)
     ], BarHorizontalComponent.prototype, "dataLabelFormatting", void 0);
     __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], BarHorizontalComponent.prototype, "noBarWhenZero", void 0);
+    __decorate([
         Output(),
         __metadata("design:type", EventEmitter)
     ], BarHorizontalComponent.prototype, "activate", void 0);
@@ -270,13 +327,13 @@ var BarHorizontalComponent = /** @class */ (function (_super) {
         __metadata("design:type", EventEmitter)
     ], BarHorizontalComponent.prototype, "deactivate", void 0);
     __decorate([
-        ContentChild('tooltipTemplate'),
+        ContentChild('tooltipTemplate', { static: false }),
         __metadata("design:type", TemplateRef)
     ], BarHorizontalComponent.prototype, "tooltipTemplate", void 0);
     BarHorizontalComponent = __decorate([
         Component({
             selector: 'ngx-charts-bar-horizontal',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      [animations]=\"animations\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          [ticks]=\"xAxisTicks\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          [ticks]=\"yAxisTicks\"\n          [yAxisOffset]=\"dataLabelMaxWidth.negative\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g ngx-charts-series-horizontal\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          [tooltipDisabled]=\"tooltipDisabled\"\n          [tooltipTemplate]=\"tooltipTemplate\"\n          [activeEntries]=\"activeEntries\"\n          [roundEdges]=\"roundEdges\"\n          [animations]=\"animations\"\n          [showDataLabel]=\"showDataLabel\"\n          [dataLabelFormatting]=\"dataLabelFormatting\"\n          (select)=\"onClick($event)\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\"\n          (dataLabelWidthChanged)=\"onDataLabelMaxWidthChanged($event)\"\n          >\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      [animations]=\"animations\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event, true)\"\n      (legendLabelDeactivate)=\"onDeactivate($event, true)\"\n    >\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g\n          ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [trimTicks]=\"trimXAxisTicks\"\n          [rotateTicks]=\"rotateXAxisTicks\"\n          [maxTickLength]=\"maxXAxisTickLength\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          [ticks]=\"xAxisTicks\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\"\n        ></svg:g>\n        <svg:g\n          ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [trimTicks]=\"trimYAxisTicks\"\n          [maxTickLength]=\"maxYAxisTickLength\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          [ticks]=\"yAxisTicks\"\n          [yAxisOffset]=\"dataLabelMaxWidth.negative\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\"\n        ></svg:g>\n        <svg:g\n          ngx-charts-series-horizontal\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          [tooltipDisabled]=\"tooltipDisabled\"\n          [tooltipTemplate]=\"tooltipTemplate\"\n          [activeEntries]=\"activeEntries\"\n          [roundEdges]=\"roundEdges\"\n          [animations]=\"animations\"\n          [showDataLabel]=\"showDataLabel\"\n          [dataLabelFormatting]=\"dataLabelFormatting\"\n          [noBarWhenZero]=\"noBarWhenZero\"\n          (select)=\"onClick($event)\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\"\n          (dataLabelWidthChanged)=\"onDataLabelMaxWidthChanged($event)\"\n        ></svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: ChangeDetectionStrategy.OnPush,
             styleUrls: ['../common/base-chart.component.css'],
             encapsulation: ViewEncapsulation.None

@@ -4,19 +4,24 @@ import {
   OnChanges,
   SimpleChanges,
   ChangeDetectionStrategy,
-  TemplateRef
+  TemplateRef,
+  Output,
+  EventEmitter
 } from '@angular/core';
-import { radialLine } from 'd3-shape';
+import { lineRadial } from 'd3-shape';
 
 import { id } from '../utils/id';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
+import { escapeLabel } from '../common/label.helper';
 
 @Component({
   selector: 'g[ngx-charts-polar-series]',
   template: `
     <svg:g class="polar-charts-series">
       <defs>
-        <svg:g ngx-charts-svg-radial-gradient *ngIf="hasGradient"
+        <svg:g
+          ngx-charts-svg-radial-gradient
+          *ngIf="hasGradient"
           orientation="vertical"
           [color]="seriesColor"
           [name]="gradientId"
@@ -25,7 +30,8 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
           [stops]="gradientStops"
         />
       </defs>
-      <svg:g ngx-charts-line
+      <svg:g
+        ngx-charts-line
         class="polar-series-path"
         [path]="path"
         [stroke]="hasGradient ? gradientUrl : seriesColor"
@@ -35,7 +41,8 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
         [fill]="hasGradient ? gradientUrl : seriesColor"
         [animations]="animations"
       />
-      <svg:g ngx-charts-circle
+      <svg:g
+        ngx-charts-circle
         *ngFor="let circle of circles"
         class="circle"
         [cx]="circle.cx"
@@ -49,18 +56,20 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
         tooltipType="tooltip"
         [tooltipTitle]="tooltipTemplate ? undefined : tooltipText(circle)"
         [tooltipTemplate]="tooltipTemplate"
-        [tooltipContext]="circle.data">
-      </svg:g>
+        [tooltipContext]="circle.data"
+        (select)="select.emit(circle.data)"
+        (activate)="activate.emit({ name: circle.data.series })"
+        (deactivate)="deactivate.emit({ name: circle.data.series })"
+      ></svg:g>
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PolarSeriesComponent implements OnChanges {
-
   @Input() name;
   @Input() data;
-  @Input() xScale;  // Theta
-  @Input() yScale;  // R
+  @Input() xScale; // Theta
+  @Input() yScale; // R
   @Input() colors;
   @Input() scaleType;
   @Input() curve: any;
@@ -71,6 +80,10 @@ export class PolarSeriesComponent implements OnChanges {
   @Input() gradient: boolean = false;
   @Input() tooltipTemplate: TemplateRef<any>;
   @Input() animations: boolean = true;
+
+  @Output() select = new EventEmitter();
+  @Output() activate = new EventEmitter();
+  @Output() deactivate = new EventEmitter();
 
   path: string;
   circles: any[];
@@ -113,11 +126,11 @@ export class PolarSeriesComponent implements OnChanges {
 
       const color = this.colors.getColor(linearScaleType ? Math.abs(value) : seriesName);
 
-      const cData = {
+      const cData = Object.assign({}, d, {
         series: seriesName,
         value,
         name: d.name
-      };
+      });
 
       return {
         data: cData,
@@ -149,7 +162,7 @@ export class PolarSeriesComponent implements OnChanges {
   }
 
   getLineGenerator(): any {
-    return radialLine<any>()
+    return lineRadial<any>()
       .angle(d => this.getAngle(d))
       .radius(d => this.getRadius(d))
       .curve(this.curve);
@@ -165,7 +178,7 @@ export class PolarSeriesComponent implements OnChanges {
   }
 
   isActive(entry): boolean {
-    if(!this.activeEntries) return false;
+    if (!this.activeEntries) return false;
     const item = this.activeEntries.find(d => {
       return entry.name === d.name;
     });
@@ -173,7 +186,7 @@ export class PolarSeriesComponent implements OnChanges {
   }
 
   isInactive(entry): boolean {
-    if(!this.activeEntries || this.activeEntries.length === 0) return false;
+    if (!this.activeEntries || this.activeEntries.length === 0) return false;
     const item = this.activeEntries.find(d => {
       return entry.name === d.name;
     });
@@ -182,7 +195,7 @@ export class PolarSeriesComponent implements OnChanges {
 
   defaultTooltipText({ label, value }): string {
     return `
-      <span class="tooltip-label">${this.data.name} • ${label}</span>
+      <span class="tooltip-label">${escapeLabel(this.data.name)} • ${escapeLabel(label)}</span>
       <span class="tooltip-val">${value.toLocaleString()}</span>
     `;
   }

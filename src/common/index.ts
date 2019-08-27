@@ -20,3 +20,4 @@ export * from './tick-format.helper';
 export * from './trim-label.helper';
 export * from './view-dimensions.helper';
 export * from './label.helper';
+export * from './domain.helper';

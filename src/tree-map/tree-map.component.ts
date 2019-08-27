@@ -17,12 +17,10 @@ import { ColorHelper } from '../common/color.helper';
 @Component({
   selector: 'ngx-charts-tree-map',
   template: `
-    <ngx-charts-chart
-      [view]="[width, height]"
-      [showLegend]="false"
-      [animations]="animations">
+    <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations">
       <svg:g [attr.transform]="transform" class="tree-map chart">
-        <svg:g ngx-charts-tree-map-cell-series
+        <svg:g
+          ngx-charts-tree-map-cell-series
           [colors]="colors"
           [data]="data"
           [dims]="dims"
@@ -42,7 +40,6 @@ import { ColorHelper } from '../common/color.helper';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreeMapComponent extends BaseChartComponent {
-
   @Input() results;
   @Input() tooltipDisabled: boolean = false;
   @Input() valueFormatting: any;
@@ -51,7 +48,7 @@ export class TreeMapComponent extends BaseChartComponent {
 
   @Output() select = new EventEmitter();
 
-  @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
+  @ContentChild('tooltipTemplate', { static: false }) tooltipTemplate: TemplateRef<any>;
 
   dims: any;
   domain: any;
@@ -72,8 +69,7 @@ export class TreeMapComponent extends BaseChartComponent {
 
     this.domain = this.getDomain();
 
-    this.treemap = treemap<any>()
-      .size([this.dims.width, this.dims.height]);
+    this.treemap = treemap<any>().size([this.dims.width, this.dims.height]);
 
     const rootNode = {
       name: 'root',
@@ -92,15 +88,14 @@ export class TreeMapComponent extends BaseChartComponent {
         }
         return label;
       })
-      .parentId(d => d.isRoot ? null : 'root')
-      ([rootNode, ...this.results])
+      .parentId(d => (d.isRoot ? null : 'root'))([rootNode, ...this.results])
       .sum(d => d.value);
 
     this.data = this.treemap(root);
 
     this.setColors();
 
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
   }
 
   getDomain(): any[] {
@@ -114,5 +109,4 @@ export class TreeMapComponent extends BaseChartComponent {
   setColors(): void {
     this.colors = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
   }
-
 }

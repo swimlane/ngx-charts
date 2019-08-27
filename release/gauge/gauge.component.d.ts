@@ -5,6 +5,7 @@ import { ColorHelper } from '../common/color.helper';
 export declare class GaugeComponent extends BaseChartComponent implements AfterViewInit {
     legend: boolean;
     legendTitle: string;
+    legendPosition: string;
     min: number;
     max: number;
     textValue: string;
@@ -19,6 +20,7 @@ export declare class GaugeComponent extends BaseChartComponent implements AfterV
     axisTickFormatting: any;
     tooltipDisabled: boolean;
     valueFormatting: (value: any) => string;
+    showText: boolean;
     margin: any[];
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;

@@ -8,7 +8,7 @@ import {
   SimpleChanges,
   OnChanges,
   ChangeDetectionStrategy
- } from '@angular/core';
+} from '@angular/core';
 import { select } from 'd3-selection';
 import { roundedRect } from '../common/shape.helper';
 import { id } from '../utils/id';
@@ -17,17 +17,17 @@ import { id } from '../utils/id';
   selector: 'g[ngx-charts-bar]',
   template: `
     <svg:defs *ngIf="hasGradient">
-      <svg:g ngx-charts-svg-linear-gradient
-        [orientation]="orientation"
-        [name]="gradientId"
-        [stops]="gradientStops"
-      />
+      <svg:g ngx-charts-svg-linear-gradient [orientation]="orientation" [name]="gradientId" [stops]="gradientStops" />
     </svg:defs>
     <svg:path
       class="bar"
       stroke="none"
+      role="img"
+      tabIndex="-1"
       [class.active]="isActive"
+      [class.hidden]="hideBar"
       [attr.d]="path"
+      [attr.aria-label]="ariaLabel"
       [attr.fill]="hasGradient ? gradientFill : fill"
       (click)="select.emit(data)"
     />
@@ -35,13 +35,12 @@ import { id } from '../utils/id';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BarComponent implements OnChanges {
-
   @Input() fill;
-  @Input() data;
-  @Input() width;
-  @Input() height;
-  @Input() x;
-  @Input() y;
+  @Input() data: any;
+  @Input() width: number;
+  @Input() height: number;
+  @Input() x: number;
+  @Input() y: number;
   @Input() orientation;
   @Input() roundEdges: boolean = true;
   @Input() gradient: boolean = false;
@@ -49,6 +48,8 @@ export class BarComponent implements OnChanges {
   @Input() isActive: boolean = false;
   @Input() stops: any[];
   @Input() animations: boolean = true;
+  @Input() ariaLabel: string;
+  @Input() noBarWhenZero: boolean = true;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
@@ -62,6 +63,7 @@ export class BarComponent implements OnChanges {
   initialized: boolean = false;
   gradientStops: any[];
   hasGradient: boolean = false;
+  hideBar: boolean = false;
 
   constructor(element: ElementRef) {
     this.element = element.nativeElement;
@@ -86,8 +88,9 @@ export class BarComponent implements OnChanges {
     } else {
       this.hasGradient = false;
     }
-    
+
     this.updatePathEl();
+    this.checkToHideBar();
   }
 
   loadAnimation(): void {
@@ -99,11 +102,13 @@ export class BarComponent implements OnChanges {
     const node = select(this.element).select('.bar');
     const path = this.getPath();
     if (this.animations) {
-     node.transition().duration(500)
-         .attr('d', path);
+      node
+        .transition()
+        .duration(500)
+        .attr('d', path);
     } else {
       node.attr('d', path);
-    }    
+    }
   }
 
   getGradient() {
@@ -121,7 +126,8 @@ export class BarComponent implements OnChanges {
         offset: 100,
         color: this.fill,
         opacity: 1
-    }];
+      }
+    ];
   }
 
   getStartingPath() {
@@ -193,15 +199,15 @@ export class BarComponent implements OnChanges {
     if (this.roundEdges) {
       if (this.orientation === 'vertical') {
         if (this.data.value > 0) {
-          edges =  [true, true, false, false];
+          edges = [true, true, false, false];
         } else {
-          edges =  [false, false, true, true];
+          edges = [false, false, true, true];
         }
       } else if (this.orientation === 'horizontal') {
         if (this.data.value > 0) {
-          edges =  [false, true, false, true];
+          edges = [false, true, false, true];
         } else {
-          edges =  [true, false, true, false];
+          edges = [true, false, true, false];
         }
       }
     }
@@ -218,4 +224,10 @@ export class BarComponent implements OnChanges {
     this.deactivate.emit(this.data);
   }
 
+  private checkToHideBar() {
+    this.hideBar =
+      this.noBarWhenZero &&
+      ((this.orientation === 'vertical' && this.height === 0) ||
+        (this.orientation === 'horizontal' && this.width === 0));
+  }
 }

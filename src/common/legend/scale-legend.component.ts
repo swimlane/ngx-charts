@@ -8,7 +8,8 @@ import { DomSanitizer } from '@angular/platform-browser';
   template: `
     <div
       class="scale-legend"
-      [style.height.px]="height"
+      [class.horizontal-legend]="horizontal"
+      [style.height.px]="horizontal ? undefined : height"
       [style.width.px]="width">
       <div class="scale-legend-label">
         <span>{{ valueRange[1].toLocaleString() }}</span>
@@ -32,6 +33,7 @@ export class ScaleLegendComponent implements OnChanges {
   @Input() colors;
   @Input() height;
   @Input() width;
+  @Input() horizontal = false;
 
   gradient: any;
 
@@ -39,7 +41,8 @@ export class ScaleLegendComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     const gradientValues = this.gradientString(this.colors.range(), this.colors.domain());
-    this.gradient = this.sanitizer.bypassSecurityTrustStyle(`linear-gradient(to bottom, ${gradientValues})`);
+    const direction = (this.horizontal) ? 'right' : 'bottom';
+    this.gradient = this.sanitizer.bypassSecurityTrustStyle(`linear-gradient(to ${direction}, ${gradientValues})`);
   }
 
   /**

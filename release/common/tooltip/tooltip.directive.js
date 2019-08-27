@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Directive, Input, Output, EventEmitter, HostListener, ViewContainerRef, Renderer } from '@angular/core';
+import { Directive, Input, Output, EventEmitter, HostListener, ViewContainerRef, Renderer2 } from '@angular/core';
 import { PlacementTypes } from './position';
 import { StyleTypes } from './style.type';
 import { AlignmentTypes } from './alignment.type';
@@ -278,7 +278,7 @@ var TooltipDirective = /** @class */ (function () {
         Directive({ selector: '[ngx-tooltip]' }),
         __metadata("design:paramtypes", [TooltipService,
             ViewContainerRef,
-            Renderer])
+            Renderer2])
     ], TooltipDirective);
     return TooltipDirective;
 }());

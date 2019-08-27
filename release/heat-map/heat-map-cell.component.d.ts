@@ -10,6 +10,8 @@ export declare class HeatMapCellComponent implements OnChanges {
     gradient: boolean;
     animations: boolean;
     select: EventEmitter<{}>;
+    activate: EventEmitter<{}>;
+    deactivate: EventEmitter<{}>;
     element: HTMLElement;
     transform: string;
     activeRange: any[];
@@ -27,4 +29,6 @@ export declare class HeatMapCellComponent implements OnChanges {
     loadAnimation(): void;
     animateToCurrentForm(): void;
     onClick(): void;
+    onMouseEnter(): void;
+    onMouseLeave(): void;
 }

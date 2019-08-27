@@ -18,6 +18,12 @@
     list-style: none;
   }
 
+  .horizontal-legend {
+    li {
+      display: inline-block;
+    }
+  }
+
   .legend-wrap {
     width: calc(100% - 10px);
   }

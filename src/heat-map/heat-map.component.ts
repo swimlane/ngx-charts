@@ -4,13 +4,16 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy,
   ContentChild,
-  TemplateRef
+  TemplateRef,
+  Output,
+  EventEmitter
 } from '@angular/core';
 import { scaleBand } from 'd3-scale';
 
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
+import { getScaleType } from '../common/domain.helper';
 
 @Component({
   selector: 'ngx-charts-heat-map',
@@ -20,29 +23,38 @@ import { ColorHelper } from '../common/color.helper';
       [showLegend]="legend"
       [animations]="animations"
       [legendOptions]="legendOptions"
-      (legendLabelClick)="onClick($event)">
+      (legendLabelClick)="onClick($event)"
+    >
       <svg:g [attr.transform]="transform" class="heat-map chart">
-        <svg:g ngx-charts-x-axis
+        <svg:g
+          ngx-charts-x-axis
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
+          [trimTicks]="trimXAxisTicks"
+          [rotateTicks]="rotateXAxisTicks"
+          [maxTickLength]="maxXAxisTickLength"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
-          (dimensionsChanged)="updateXAxisHeight($event)">
-        </svg:g>
-        <svg:g ngx-charts-y-axis
+          (dimensionsChanged)="updateXAxisHeight($event)"
+        ></svg:g>
+        <svg:g
+          ngx-charts-y-axis
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
+          [trimTicks]="trimYAxisTicks"
+          [maxTickLength]="maxYAxisTickLength"
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
-          (dimensionsChanged)="updateYAxisWidth($event)">
-        </svg:g>
-        <svg:rect *ngFor="let rect of rects"
+          (dimensionsChanged)="updateYAxisWidth($event)"
+        ></svg:g>
+        <svg:rect
+          *ngFor="let rect of rects"
           [attr.x]="rect.x"
           [attr.y]="rect.y"
           [attr.rx]="rect.rx"
@@ -50,7 +62,8 @@ import { ColorHelper } from '../common/color.helper';
           [attr.height]="rect.height"
           [attr.fill]="rect.fill"
         />
-        <svg:g ngx-charts-heat-map-cell-series
+        <svg:g
+          ngx-charts-heat-map-cell-series
           [xScale]="xScale"
           [yScale]="yScale"
           [colors]="colors"
@@ -61,6 +74,8 @@ import { ColorHelper } from '../common/color.helper';
           [tooltipTemplate]="tooltipTemplate"
           [tooltipText]="tooltipText"
           (select)="onClick($event)"
+          (activate)="onActivate($event, undefined)"
+          (deactivate)="onDeactivate($event, undefined)"
         />
       </svg:g>
     </ngx-charts-chart>
@@ -70,9 +85,9 @@ import { ColorHelper } from '../common/color.helper';
   encapsulation: ViewEncapsulation.None
 })
 export class HeatMapComponent extends BaseChartComponent {
-
   @Input() legend;
   @Input() legendTitle: string = 'Legend';
+  @Input() legendPosition: string = 'right';
   @Input() xAxis;
   @Input() yAxis;
   @Input() showXAxisLabel;
@@ -81,6 +96,11 @@ export class HeatMapComponent extends BaseChartComponent {
   @Input() yAxisLabel;
   @Input() gradient: boolean;
   @Input() innerPadding: number | number[] = 8;
+  @Input() trimXAxisTicks: boolean = true;
+  @Input() trimYAxisTicks: boolean = true;
+  @Input() rotateXAxisTicks: boolean = true;
+  @Input() maxXAxisTickLength: number = 16;
+  @Input() maxYAxisTickLength: number = 16;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
   @Input() xAxisTicks: any[];
@@ -89,8 +109,12 @@ export class HeatMapComponent extends BaseChartComponent {
   @Input() tooltipText: any;
   @Input() min: any;
   @Input() max: any;
+  @Input() activeEntries: any[] = [];
 
-  @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
+  @Output() activate: EventEmitter<any> = new EventEmitter();
+  @Output() deactivate: EventEmitter<any> = new EventEmitter();
+
+  @ContentChild('tooltipTemplate', { static: false }) tooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
   xDomain: any[];
@@ -118,7 +142,7 @@ export class HeatMapComponent extends BaseChartComponent {
     this.yDomain = this.getYDomain();
     this.valueDomain = this.getValueDomain();
 
-    this.scaleType = this.getScaleType(this.valueDomain);
+    this.scaleType = getScaleType(this.valueDomain, false);
 
     this.dims = calculateViewDimensions({
       width: this.width,
@@ -131,7 +155,8 @@ export class HeatMapComponent extends BaseChartComponent {
       showXLabel: this.showXAxisLabel,
       showYLabel: this.showYAxisLabel,
       showLegend: this.legend,
-      legendType: this.scaleType
+      legendType: this.scaleType,
+      legendPosition: this.legendPosition
     });
 
     if (this.scaleType === 'linear') {
@@ -251,8 +276,8 @@ export class HeatMapComponent extends BaseChartComponent {
   getRects(): any[] {
     const rects = [];
 
-    this.xDomain.map((xVal) => {
-      this.yDomain.map((yVal) => {
+    this.xDomain.map(xVal => {
+      this.yDomain.map(yVal => {
         rects.push({
           x: this.xScale(xVal),
           y: this.yScale(yVal),
@@ -271,19 +296,6 @@ export class HeatMapComponent extends BaseChartComponent {
     this.select.emit(data);
   }
 
-  getScaleType(values): string {
-    let num = true;
-
-    for (const value of values) {
-      if (typeof value !== 'number') {
-        num = false;
-      }
-    }
-
-    if (num) return 'linear';
-    return 'ordinal';
-  }
-
   setColors(): void {
     this.colors = new ColorHelper(this.scheme, this.scaleType, this.valueDomain);
   }
@@ -293,7 +305,8 @@ export class HeatMapComponent extends BaseChartComponent {
       scaleType: this.scaleType,
       domain: this.valueDomain,
       colors: this.scaleType === 'ordinal' ? this.colors : this.colors.scale,
-      title: this.scaleType === 'ordinal' ? this.legendTitle : undefined
+      title: this.scaleType === 'ordinal' ? this.legendTitle : undefined,
+      position: this.legendPosition
     };
   }
 
@@ -307,4 +320,41 @@ export class HeatMapComponent extends BaseChartComponent {
     this.update();
   }
 
+  onActivate(event, group, fromLegend = false) {
+    const item = Object.assign({}, event);
+    if (group) {
+      item.series = group.name;
+    }
+
+    const items = this.results
+      .map(g => g.series)
+      .flat()
+      .filter(i => {
+        if (fromLegend) {
+          return i.label === item.name;
+        } else {
+          return i.name === item.name && i.series === item.series;
+        }
+      });
+
+    this.activeEntries = [...items];
+    this.activate.emit({ value: item, entries: this.activeEntries });
+  }
+
+  onDeactivate(event, group, fromLegend = false) {
+    const item = Object.assign({}, event);
+    if (group) {
+      item.series = group.name;
+    }
+
+    this.activeEntries = this.activeEntries.filter(i => {
+      if (fromLegend) {
+        return i.label !== item.name;
+      } else {
+        return !(i.name === item.name && i.series === item.series);
+      }
+    });
+
+    this.deactivate.emit({ value: item, entries: this.activeEntries });
+  }
 }

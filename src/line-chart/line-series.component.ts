@@ -146,8 +146,8 @@ export class LineSeriesComponent implements OnChanges {
           }
           return value;
         })
-        .y0(d => this.yScale(d.min ? d.min : d.value))
-        .y1(d => this.yScale(d.max ? d.max : d.value))
+        .y0(d => this.yScale(typeof d.min === 'number' ? d.min : d.value))
+        .y1(d => this.yScale(typeof d.max === 'number' ? d.max : d.value))
         .curve(this.curve);
   }
 

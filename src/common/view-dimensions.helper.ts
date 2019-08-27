@@ -6,14 +6,14 @@ export interface ViewDimensions {
 
 export function calculateViewDimensions({
   width, height, margins, showXAxis = false, showYAxis = false, xAxisHeight = 0,
-  yAxisWidth = 0, showXLabel = false, showYLabel = false, showLegend = false, 
-  legendType = 'ordinal', columns = 12
+  yAxisWidth = 0, showXLabel = false, showYLabel = false, showLegend = false,
+  legendType = 'ordinal', legendPosition = 'right', columns = 12
 }): ViewDimensions {
   let xOffset = margins[3];
   let chartWidth = width;
   let chartHeight = height - margins[0] - margins[2];
 
-  if (showLegend) {
+  if (showLegend && legendPosition === 'right') {
     if (legendType === 'ordinal') {
       columns -= 2;
     } else {
@@ -54,8 +54,8 @@ export function calculateViewDimensions({
   chartHeight = Math.max(0, chartHeight);
 
   return {
-    width: ~~chartWidth,
-    height: ~~chartHeight,
-    xOffset: ~~xOffset
+    width: Math.floor(chartWidth),
+    height: Math.floor(chartHeight),
+    xOffset: Math.floor(xOffset)
   };
 }

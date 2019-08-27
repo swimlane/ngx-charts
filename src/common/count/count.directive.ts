@@ -1,7 +1,4 @@
-import {
-  Component, Input, Output, EventEmitter,
-  ChangeDetectorRef, OnDestroy, ElementRef
-} from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectorRef, OnDestroy, ElementRef } from '@angular/core';
 import { count, decimalChecker } from './count.helper';
 
 /**
@@ -19,7 +16,6 @@ import { count, decimalChecker } from './count.helper';
   template: `{{value}}`
 })
 export class CountUpDirective implements OnDestroy {
-
   @Input() countDuration: number = 1;
   @Input() countPrefix: string = '';
   @Input() countSuffix: string = '';
@@ -31,7 +27,7 @@ export class CountUpDirective implements OnDestroy {
   }
 
   get countDecimals(): number {
-    if(this._countDecimals) return this._countDecimals;
+    if (this._countDecimals) return this._countDecimals;
     return decimalChecker(this.countTo);
   }
 
@@ -80,23 +76,16 @@ export class CountUpDirective implements OnDestroy {
   start(): void {
     cancelAnimationFrame(this.animationReq);
 
-    const valueFormatting = this.valueFormatting ||
-      (data => `${this.countPrefix}${data.value.toLocaleString()}${this.countSuffix}`);
+    const valueFormatting =
+      this.valueFormatting || (value => `${this.countPrefix}${value.toLocaleString()}${this.countSuffix}`);
 
     const callback = ({ value, progress, finished }) => {
-      this.value = valueFormatting({value});
+      this.value = valueFormatting(value);
       this.cd.markForCheck();
-
-      if(!finished) this.countChange.emit({ value, progress });
-      if(finished) this.countFinish.emit({ value, progress });
+      if (!finished) this.countChange.emit({ value: this.value, progress });
+      if (finished) this.countFinish.emit({ value: this.value, progress });
     };
 
-    this.animationReq = count(
-      this.countFrom,
-      this.countTo,
-      this.countDecimals,
-      this.countDuration,
-      callback);
+    this.animationReq = count(this.countFrom, this.countTo, this.countDecimals, this.countDuration, callback);
   }
-
 }

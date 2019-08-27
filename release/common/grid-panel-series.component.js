@@ -19,7 +19,7 @@ var GridPanelSeriesComponent = /** @class */ (function () {
     };
     GridPanelSeriesComponent.prototype.getGridPanels = function () {
         var _this = this;
-        return this.data.map(function (d, i) {
+        return this.data.map(function (d) {
             var offset;
             var width;
             var height;
@@ -28,7 +28,7 @@ var GridPanelSeriesComponent = /** @class */ (function () {
             var className = 'odd';
             if (_this.orient === 'vertical') {
                 var position = _this.xScale(d.name);
-                var positionIndex = Number.parseInt((position / _this.xScale.step()).toString());
+                var positionIndex = Number.parseInt((position / _this.xScale.step()).toString(), 10);
                 if (positionIndex % 2 === 1) {
                     className = 'even';
                 }
@@ -40,7 +40,7 @@ var GridPanelSeriesComponent = /** @class */ (function () {
             }
             else if (_this.orient === 'horizontal') {
                 var position = _this.yScale(d.name);
-                var positionIndex = Number.parseInt((position / _this.yScale.step()).toString());
+                var positionIndex = Number.parseInt((position / _this.yScale.step()).toString(), 10);
                 if (positionIndex % 2 === 1) {
                     className = 'even';
                 }

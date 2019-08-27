@@ -2,9 +2,11 @@ import { EventEmitter, TemplateRef } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
+import { DataItem } from '../models/chart-data.model';
 export declare class BarVerticalComponent extends BaseChartComponent {
     legend: boolean;
     legendTitle: string;
+    legendPosition: string;
     xAxis: any;
     yAxis: any;
     showXAxisLabel: any;
@@ -16,6 +18,11 @@ export declare class BarVerticalComponent extends BaseChartComponent {
     showGridLines: boolean;
     activeEntries: any[];
     schemeType: string;
+    trimXAxisTicks: boolean;
+    trimYAxisTicks: boolean;
+    rotateXAxisTicks: boolean;
+    maxXAxisTickLength: number;
+    maxYAxisTickLength: number;
     xAxisTickFormatting: any;
     yAxisTickFormatting: any;
     xAxisTicks: any[];
@@ -27,7 +34,7 @@ export declare class BarVerticalComponent extends BaseChartComponent {
     yScaleMin: number;
     showDataLabel: boolean;
     dataLabelFormatting: any;
-    barMaxWidth: number;
+    noBarWhenZero: boolean;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     tooltipTemplate: TemplateRef<any>;
@@ -47,22 +54,23 @@ export declare class BarVerticalComponent extends BaseChartComponent {
     getXScale(): any;
     getYScale(): any;
     getXDomain(): any[];
-    getYDomain(): number[];
-    onClick(data: any): void;
+    getYDomain(): [number, number];
+    onClick(data: DataItem): void;
     setColors(): void;
     getLegendOptions(): {
         scaleType: string;
         colors: any;
         domain: any[];
         title: any;
+        position: string;
     };
-    updateYAxisWidth({width}: {
+    updateYAxisWidth({ width }: {
         width: any;
     }): void;
-    updateXAxisHeight({height}: {
+    updateXAxisHeight({ height }: {
         height: any;
     }): void;
     onDataLabelMaxHeightChanged(event: any): void;
-    onActivate(item: any): void;
-    onDeactivate(item: any): void;
+    onActivate(item: any, fromLegend?: boolean): void;
+    onDeactivate(item: any, fromLegend?: boolean): void;
 }

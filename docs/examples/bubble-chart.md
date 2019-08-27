@@ -2,10 +2,10 @@
 
 <!-- iframe width="100%" height="550" frameborder="0" src="https://embed.plnkr.co/7SqwjBi1hGcN2q6Ox1GU?show=preview"></iframe -->
 
- # Inputs
+# Inputs
 
 | Property            | Type               | Default Value | Description                                                                                                     |
-|---------------------|--------------------|---------------|-----------------------------------------------------------------------------------------------------------------|
+| ------------------- | ------------------ | ------------- | --------------------------------------------------------------------------------------------------------------- |
 | view                | number[]           |               | the dimensions of the chart [width, height]. If left undefined, the chart will fit to the parent container size |
 | results             | object[]           |               | the chart data                                                                                                  |
 | scheme              | object             |               | the color scheme of the chart                                                                                   |
@@ -14,6 +14,7 @@
 | animations          | boolean            | true          | enable animations                                                                                               |
 | legend              | boolean            | false         | show or hide the legend                                                                                         |
 | legendTitle         | string             | 'Legend'      | the legend title                                                                                                |
+| legendPosition      | string             | 'right'       | the legend position ['right', 'below']                                                                          |
 | xAxis               | boolean            | false         | show or hide the x axis                                                                                         |
 | yAxis               | boolean            | false         | show or hide the y axis                                                                                         |
 | showGridLines       | boolean            | true          | show or hide the grid lines                                                                                     |
@@ -22,6 +23,7 @@
 | showYAxisLabel      | boolean            | false         | show or hide the y axis label                                                                                   |
 | xAxisLabel          | string             |               | the x axis label text                                                                                           |
 | yAxisLabel          | string             |               | the y axis label text                                                                                           |
+| rotateXAxisTicks    | boolean            | true          | enable automic rotation of x-axis ticks to prevent overlaps                                                     |
 | xAxisTickFormatting | function           |               | the x axis tick formatting                                                                                      |
 | yAxisTickFormatting | function           |               | the y axis tick formatting                                                                                      |
 | xAxisTicks          | any[]              |               | predefined list of x axis tick values                                                                           |
@@ -39,7 +41,7 @@
 # Outputs
 
 | Property   | Description                              |
-|------------|------------------------------------------|
+| ---------- | ---------------------------------------- |
 | select     | click event                              |
 | activate   | element activation event (mouse enter)   |
 | deactivate | element deactivation event (mouse leave) |

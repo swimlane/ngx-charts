@@ -14,6 +14,7 @@ export declare class AdvancedLegendComponent implements OnChanges {
     valueFormatting: (value: number) => any;
     labelFormatting: (value: string) => any;
     percentageFormatting: (value: number) => any;
+    defaultValueFormatting: (value: number) => any;
     ngOnChanges(changes: SimpleChanges): void;
     getTotal(): number;
     update(): void;

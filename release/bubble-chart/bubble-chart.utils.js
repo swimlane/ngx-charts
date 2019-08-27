@@ -1,28 +1,4 @@
 import { scaleLinear, scalePoint, scaleTime } from 'd3-scale';
-export function getScaleType(values) {
-    var date = true;
-    var num = true;
-    for (var _i = 0, values_1 = values; _i < values_1.length; _i++) {
-        var value = values_1[_i];
-        if (!isDate(value)) {
-            date = false;
-        }
-        if (typeof value !== 'number') {
-            num = false;
-        }
-    }
-    if (date)
-        return 'time';
-    if (num)
-        return 'linear';
-    return 'ordinal';
-}
-function isDate(value) {
-    if (value instanceof Date) {
-        return true;
-    }
-    return false;
-}
 export function getDomain(values, scaleType, autoScale, minVal, maxVal) {
     var domain = [];
     if (scaleType === 'linear') {

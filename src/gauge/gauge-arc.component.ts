@@ -6,7 +6,7 @@ import {
   ChangeDetectionStrategy,
   TemplateRef
 } from '@angular/core';
-import { formatLabel } from '../common/label.helper';
+import { formatLabel, escapeLabel } from '../common/label.helper';
 import { ColorHelper } from '../common/color.helper';
 
 @Component({
@@ -74,7 +74,7 @@ export class GaugeArcComponent {
     }
 
     return `
-      <span class="tooltip-label">${label}</span>
+      <span class="tooltip-label">${escapeLabel(label)}</span>
       <span class="tooltip-val">${val}</span>
     `;
   }

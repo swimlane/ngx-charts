@@ -2,6 +2,7 @@ import { EventEmitter, TemplateRef } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
+import { DataItem } from '../models/chart-data.model';
 export declare class AdvancedPieChartComponent extends BaseChartComponent {
     gradient: boolean;
     activeEntries: any[];
@@ -25,8 +26,8 @@ export declare class AdvancedPieChartComponent extends BaseChartComponent {
     percentageFormatting: (value: number) => any;
     update(): void;
     getDomain(): any[];
-    onClick(data: any): void;
+    onClick(data: DataItem): void;
     setColors(): void;
-    onActivate(event: any): void;
-    onDeactivate(event: any): void;
+    onActivate(item: any, fromLegend?: boolean): void;
+    onDeactivate(item: any, fromLegend?: boolean): void;
 }

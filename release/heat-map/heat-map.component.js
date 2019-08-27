@@ -1,7 +1,10 @@
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -17,18 +20,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Component, Input, ViewEncapsulation, ChangeDetectionStrategy, ContentChild, TemplateRef } from '@angular/core';
+import { Component, Input, ViewEncapsulation, ChangeDetectionStrategy, ContentChild, TemplateRef, Output, EventEmitter } from '@angular/core';
 import { scaleBand } from 'd3-scale';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
+import { getScaleType } from '../common/domain.helper';
 var HeatMapComponent = /** @class */ (function (_super) {
     __extends(HeatMapComponent, _super);
     function HeatMapComponent() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.legendTitle = 'Legend';
+        _this.legendPosition = 'right';
         _this.innerPadding = 8;
+        _this.trimXAxisTicks = true;
+        _this.trimYAxisTicks = true;
+        _this.rotateXAxisTicks = true;
+        _this.maxXAxisTickLength = 16;
+        _this.maxYAxisTickLength = 16;
         _this.tooltipDisabled = false;
+        _this.activeEntries = [];
+        _this.activate = new EventEmitter();
+        _this.deactivate = new EventEmitter();
         _this.margin = [10, 20, 10, 20];
         _this.xAxisHeight = 0;
         _this.yAxisWidth = 0;
@@ -41,7 +54,7 @@ var HeatMapComponent = /** @class */ (function (_super) {
         this.xDomain = this.getXDomain();
         this.yDomain = this.getYDomain();
         this.valueDomain = this.getValueDomain();
-        this.scaleType = this.getScaleType(this.valueDomain);
+        this.scaleType = getScaleType(this.valueDomain, false);
         this.dims = calculateViewDimensions({
             width: this.width,
             height: this.height,
@@ -53,7 +66,8 @@ var HeatMapComponent = /** @class */ (function (_super) {
             showXLabel: this.showXAxisLabel,
             showYLabel: this.showYAxisLabel,
             showLegend: this.legend,
-            legendType: this.scaleType
+            legendType: this.scaleType,
+            legendPosition: this.legendPosition
         });
         if (this.scaleType === 'linear') {
             var min = this.min;
@@ -179,18 +193,6 @@ var HeatMapComponent = /** @class */ (function (_super) {
     HeatMapComponent.prototype.onClick = function (data) {
         this.select.emit(data);
     };
-    HeatMapComponent.prototype.getScaleType = function (values) {
-        var num = true;
-        for (var _i = 0, values_1 = values; _i < values_1.length; _i++) {
-            var value = values_1[_i];
-            if (typeof value !== 'number') {
-                num = false;
-            }
-        }
-        if (num)
-            return 'linear';
-        return 'ordinal';
-    };
     HeatMapComponent.prototype.setColors = function () {
         this.colors = new ColorHelper(this.scheme, this.scaleType, this.valueDomain);
     };
@@ -199,7 +201,8 @@ var HeatMapComponent = /** @class */ (function (_super) {
             scaleType: this.scaleType,
             domain: this.valueDomain,
             colors: this.scaleType === 'ordinal' ? this.colors : this.colors.scale,
-            title: this.scaleType === 'ordinal' ? this.legendTitle : undefined
+            title: this.scaleType === 'ordinal' ? this.legendTitle : undefined,
+            position: this.legendPosition
         };
     };
     HeatMapComponent.prototype.updateYAxisWidth = function (_a) {
@@ -212,6 +215,42 @@ var HeatMapComponent = /** @class */ (function (_super) {
         this.xAxisHeight = height;
         this.update();
     };
+    HeatMapComponent.prototype.onActivate = function (event, group, fromLegend) {
+        if (fromLegend === void 0) { fromLegend = false; }
+        var item = Object.assign({}, event);
+        if (group) {
+            item.series = group.name;
+        }
+        var items = this.results
+            .map(function (g) { return g.series; })
+            .flat()
+            .filter(function (i) {
+            if (fromLegend) {
+                return i.label === item.name;
+            }
+            else {
+                return i.name === item.name && i.series === item.series;
+            }
+        });
+        this.activeEntries = items.slice();
+        this.activate.emit({ value: item, entries: this.activeEntries });
+    };
+    HeatMapComponent.prototype.onDeactivate = function (event, group, fromLegend) {
+        if (fromLegend === void 0) { fromLegend = false; }
+        var item = Object.assign({}, event);
+        if (group) {
+            item.series = group.name;
+        }
+        this.activeEntries = this.activeEntries.filter(function (i) {
+            if (fromLegend) {
+                return i.label !== item.name;
+            }
+            else {
+                return !(i.name === item.name && i.series === item.series);
+            }
+        });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
+    };
     __decorate([
         Input(),
         __metadata("design:type", Object)
@@ -220,6 +259,10 @@ var HeatMapComponent = /** @class */ (function (_super) {
         Input(),
         __metadata("design:type", String)
     ], HeatMapComponent.prototype, "legendTitle", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", String)
+    ], HeatMapComponent.prototype, "legendPosition", void 0);
     __decorate([
         Input(),
         __metadata("design:type", Object)
@@ -254,6 +297,26 @@ var HeatMapComponent = /** @class */ (function (_super) {
     ], HeatMapComponent.prototype, "innerPadding", void 0);
     __decorate([
         Input(),
+        __metadata("design:type", Boolean)
+    ], HeatMapComponent.prototype, "trimXAxisTicks", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], HeatMapComponent.prototype, "trimYAxisTicks", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], HeatMapComponent.prototype, "rotateXAxisTicks", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Number)
+    ], HeatMapComponent.prototype, "maxXAxisTickLength", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Number)
+    ], HeatMapComponent.prototype, "maxYAxisTickLength", void 0);
+    __decorate([
+        Input(),
         __metadata("design:type", Object)
     ], HeatMapComponent.prototype, "xAxisTickFormatting", void 0);
     __decorate([
@@ -285,13 +348,25 @@ var HeatMapComponent = /** @class */ (function (_super) {
         __metadata("design:type", Object)
     ], HeatMapComponent.prototype, "max", void 0);
     __decorate([
-        ContentChild('tooltipTemplate'),
+        Input(),
+        __metadata("design:type", Array)
+    ], HeatMapComponent.prototype, "activeEntries", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", EventEmitter)
+    ], HeatMapComponent.prototype, "activate", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", EventEmitter)
+    ], HeatMapComponent.prototype, "deactivate", void 0);
+    __decorate([
+        ContentChild('tooltipTemplate', { static: false }),
         __metadata("design:type", TemplateRef)
     ], HeatMapComponent.prototype, "tooltipTemplate", void 0);
     HeatMapComponent = __decorate([
         Component({
             selector: 'ngx-charts-heat-map',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [animations]=\"animations\"\n      [legendOptions]=\"legendOptions\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"heat-map chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          [ticks]=\"xAxisTicks\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          [ticks]=\"yAxisTicks\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:rect *ngFor=\"let rect of rects\"\n          [attr.x]=\"rect.x\"\n          [attr.y]=\"rect.y\"\n          [attr.rx]=\"rect.rx\"\n          [attr.width]=\"rect.width\"\n          [attr.height]=\"rect.height\"\n          [attr.fill]=\"rect.fill\"\n        />\n        <svg:g ngx-charts-heat-map-cell-series\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [data]=\"results\"\n          [gradient]=\"gradient\"\n          [animations]=\"animations\"\n          [tooltipDisabled]=\"tooltipDisabled\"\n          [tooltipTemplate]=\"tooltipTemplate\"\n          [tooltipText]=\"tooltipText\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [animations]=\"animations\"\n      [legendOptions]=\"legendOptions\"\n      (legendLabelClick)=\"onClick($event)\"\n    >\n      <svg:g [attr.transform]=\"transform\" class=\"heat-map chart\">\n        <svg:g\n          ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [trimTicks]=\"trimXAxisTicks\"\n          [rotateTicks]=\"rotateXAxisTicks\"\n          [maxTickLength]=\"maxXAxisTickLength\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          [ticks]=\"xAxisTicks\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\"\n        ></svg:g>\n        <svg:g\n          ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [trimTicks]=\"trimYAxisTicks\"\n          [maxTickLength]=\"maxYAxisTickLength\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          [ticks]=\"yAxisTicks\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\"\n        ></svg:g>\n        <svg:rect\n          *ngFor=\"let rect of rects\"\n          [attr.x]=\"rect.x\"\n          [attr.y]=\"rect.y\"\n          [attr.rx]=\"rect.rx\"\n          [attr.width]=\"rect.width\"\n          [attr.height]=\"rect.height\"\n          [attr.fill]=\"rect.fill\"\n        />\n        <svg:g\n          ngx-charts-heat-map-cell-series\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [data]=\"results\"\n          [gradient]=\"gradient\"\n          [animations]=\"animations\"\n          [tooltipDisabled]=\"tooltipDisabled\"\n          [tooltipTemplate]=\"tooltipTemplate\"\n          [tooltipText]=\"tooltipText\"\n          (select)=\"onClick($event)\"\n          (activate)=\"onActivate($event, undefined)\"\n          (deactivate)=\"onDeactivate($event, undefined)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: ChangeDetectionStrategy.OnPush,
             styleUrls: ['../common/base-chart.component.css'],
             encapsulation: ViewEncapsulation.None

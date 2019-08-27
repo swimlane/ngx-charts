@@ -1,10 +1,12 @@
 import { EventEmitter, TemplateRef } from '@angular/core';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
+import { DataItem } from '../models/chart-data.model';
 export declare class PieChartComponent extends BaseChartComponent {
     labels: boolean;
     legend: boolean;
     legendTitle: string;
+    legendPosition: string;
     explodeSlices: boolean;
     doughnut: boolean;
     arcWidth: number;
@@ -16,6 +18,7 @@ export declare class PieChartComponent extends BaseChartComponent {
     maxLabelLength: number;
     tooltipText: any;
     dblclick: EventEmitter<{}>;
+    margins: number[];
     select: EventEmitter<{}>;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
@@ -27,18 +30,19 @@ export declare class PieChartComponent extends BaseChartComponent {
     colors: ColorHelper;
     domain: any;
     dims: any;
-    margin: number[];
     legendOptions: any;
     update(): void;
     getDomain(): any[];
-    onClick(data: any): void;
+    onClick(data: DataItem): void;
     setColors(): void;
     getLegendOptions(): {
         scaleType: string;
         domain: any;
         colors: ColorHelper;
         title: string;
+        position: string;
     };
-    onActivate(item: any): void;
-    onDeactivate(item: any): void;
+    onActivate(item: any, fromLegend?: boolean): void;
+    onDeactivate(item: any, fromLegend?: boolean): void;
+    private hasNoOptionalMarginsSet;
 }
