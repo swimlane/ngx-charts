@@ -26,8 +26,10 @@ import { trigger, transition, style, animate } from '@angular/animations';
       [height]="box.height"
       [x]="box.x"
       [y]="box.y"
+      [roundEdges]="box.roundEdges"
       [fill]="box.color"
-      [stroke]="strokeColor"
+      [gradientStops]="box.gradientStops"
+      [strokeColor]="strokeColor"
       [strokeWidth]="strokeWidth"
       [data]="box.data"
       [lineCoordinates]="box.lineCoordinates"
@@ -72,6 +74,7 @@ export class BoxSeriesComponent implements OnChanges {
   @Input() tooltipTemplate: TemplateRef<any>;
   @Input() tooltipPlacement: string;
   @Input() tooltipType: string;
+  @Input() roundEdges: boolean;
 
   @Output() select: EventEmitter<IBoxModel> = new EventEmitter();
   @Output() activate: EventEmitter<IBoxModel> = new EventEmitter();
@@ -122,6 +125,7 @@ export class BoxSeriesComponent implements OnChanges {
       height: 0,
       x: 0,
       y: 0,
+      roundEdges: this.roundEdges,
       quartiles: this.quartiles,
       lineCoordinates: this.lineCoordinates,
       horizontalLines: this.horizontalLines
@@ -130,21 +134,30 @@ export class BoxSeriesComponent implements OnChanges {
     box.height = Math.abs(this.yScale(this.quartiles[0]) - this.yScale(this.quartiles[2]));
     box.x = this.xScale(seriesName.toString());
     box.y = this.yScale(this.quartiles[2]);
-    box.ariaLabel = formattedLabel + ' - Quantile 50%: ' + value.toLocaleString();
+    box.ariaLabel = formattedLabel + ' - Median: ' + value.toLocaleString();
 
-    console.log(
-      `Serie Name: ${seriesName}\n` +
-        `- X value: ${box.x}\n- Y value: ${box.y}\n` +
-        `- Quantile 25%: ${this.quartiles[0]}\n` +
-        `- Quantile 50%: ${this.quartiles[1]}\n` +
-        `- Quantile 75%: ${this.quartiles[2]}`
-    );
-    box.color = this.colors.getColor(seriesName);
+    // console.log(
+    //   `Serie Name: ${seriesName}\n` +
+    //     `- X value: ${box.x}\n- Y value: ${box.y}\n` +
+    //     `- Quantile 25%: ${this.quartiles[0]}\n` +
+    //     `- Quantile 50%: ${this.quartiles[1]}\n` +
+    //     `- Quantile 75%: ${this.quartiles[2]}`
+    // );
 
-    const tooltipLabel = `${seriesName} • ${formattedLabel}`;
+    if (this.colors.scaleType === 'ordinal') {
+      box.color = this.colors.getColor(seriesName);
+    } else {
+      box.color = this.colors.getColor(this.quartiles[1]);
+      box.gradientStops = this.colors.getLinearGradientStops(this.quartiles[0], this.quartiles[2]);
+    }
+
+    const tooltipLabel = formattedLabel;
     const formattedTooltipLabel = `
     <span class="tooltip-label">${escapeLabel(tooltipLabel)}</span>
-    <span class="tooltip-val">${value.toLocaleString()}</span>`;
+    <span class="tooltip-val">
+      • Q1: ${this.quartiles[0]} • Q2: ${this.quartiles[1]} • Q3: ${this.quartiles[2]}<br>
+      • Min: ${this.whiskers[0]} • Max: ${this.whiskers[1]}
+    </span>`;
 
     box.tooltipText = this.tooltipDisabled ? undefined : formattedTooltipLabel;
     this.tooltipTitle = this.tooltipDisabled ? undefined : box.tooltipText;

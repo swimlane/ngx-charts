@@ -62,10 +62,13 @@ export interface IBoxModel {
   width: number;
   x: number;
   y: number;
+  roundEdges: boolean;
   horizontalLines: IVector2D[];
   lineCoordinates: number[];
   quartiles: number[];
   tooltipText?: string;
   ariaLabel?: string;
   color?: string;
+  // TODO: Replace by IColorGradient Interface
+  gradientStops?: Array<{ offset: number; color: string; opacity: number }>;
 }

@@ -28,11 +28,6 @@ import { scaleLinear, ScaleLinear, scaleBand, ScaleBand } from 'd3-scale';
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)"
     >
-      <svg:defs>
-        <svg:clipPath [attr.id]="clipPathId">
-          <svg:rect [attr.width]="dims.width + 10" [attr.height]="dims.height + 40" [attr.transform]="transform" />
-        </svg:clipPath>
-      </svg:defs>
       <svg:g [attr.transform]="transform" class="box-chart chart">
         <svg:g
           ngx-charts-x-axis
@@ -53,13 +48,14 @@ import { scaleLinear, ScaleLinear, scaleBand, ScaleBand } from 'd3-scale';
           (dimensionsChanged)="updateYAxisWidth($event)"
         />
       </svg:g>
-      <svg:g [attr.clip-path]="clipPath" [attr.transform]="transform">
+      <svg:g [attr.transform]="transform">
         <svg:g *ngFor="let result of results; trackBy: trackBy">
           <svg:g
             ngx-charts-box-series
             [xScale]="xScale"
             [yScale]="yScale"
             [colors]="colors"
+            [roundEdges]="roundEdges"
             [strokeColor]="strokeColor"
             [strokeWidth]="strokeWidth"
             [tooltipDisabled]="tooltipDisabled"
@@ -87,10 +83,14 @@ export class BoxChartComponent extends BaseChartComponent {
   /** I think it is better to handle legend options as single Input object of type ILegendOptions */
   @Input() legendOptionsConfig: ILegendOptions; // TODO: Change previous legend options for this one.
   @Input() showGridLines: boolean = true;
+  @Input() xAxis: boolean = true;
+  @Input() yAxis: boolean = true;
   @Input() showXAxisLabel: boolean = true;
   @Input() showYAxisLabel: boolean = true;
+  @Input() roundDomains: boolean = false;
   @Input() xAxisLabel: string;
   @Input() yAxisLabel: string;
+  @Input() roundEdges: boolean = true;
   @Input() strokeColor: string = '#FFFFFF';
   @Input() strokeWidth: number = 2;
   @Input() tooltipDisabled: boolean = false;
@@ -111,16 +111,10 @@ export class BoxChartComponent extends BaseChartComponent {
   transform: string;
 
   /** Chart Margins (For each side, counterclock wise). */
-  margin: [number, number, number, number] = [-10, 20, -10, 20];
+  margin: [number, number, number, number] = [10, 20, 10, 20];
 
-  /** Array of series names from the input data. */
-  seriesDomain: Array<string | number | Date>;
   /** Legend Options object to handle positioning, title, colors and domain. */
   legendOptions: ILegendOptions;
-
-  /** Clip Path ID for the chart. */
-  clipPath: string;
-  clipPathId: string;
 
   xScale: ScaleBand<string>;
   yScale: ScaleLinear<number, number>;
@@ -142,8 +136,8 @@ export class BoxChartComponent extends BaseChartComponent {
       width: this.width,
       height: this.height,
       margins: this.margin,
-      showXAxis: true,
-      showYAxis: true,
+      showXAxis: this.xAxis,
+      showYAxis: this.yAxis,
       xAxisHeight: this.xAxisHeight,
       yAxisWidth: this.yAxisWidth,
       showXLabel: this.showXAxisLabel,
@@ -152,20 +146,23 @@ export class BoxChartComponent extends BaseChartComponent {
       legendPosition: this.legendPosition
     });
 
-    this.seriesDomain = this.results.map(d => d.name);
     this.xDomain = this.getXDomain();
     this.yDomain = this.getYDomain();
     this.setScales();
-
-    const colorDomain = this.seriesDomain;
-    this.colors = new ColorHelper(this.scheme, this.schemeType, colorDomain, this.customColors);
+    this.setColors();
 
     this.legendOptions = this.getLegendOptions();
-
     this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
+  }
 
-    this.clipPathId = 'clip' + id().toString();
-    this.clipPath = `url(#${this.clipPathId})`;
+  setColors(): void {
+    let colorDomain: Array<string | number | Date>;
+    if (this.schemeType === 'ordinal') {
+      colorDomain = this.xDomain;
+    } else {
+      colorDomain = this.yDomain;
+    }
+    this.colors = new ColorHelper(this.scheme, this.schemeType, colorDomain, this.customColors);
   }
 
   setScales() {
@@ -187,7 +184,7 @@ export class BoxChartComponent extends BaseChartComponent {
       .domain(domain)
       .range([height, 0]);
 
-    return scale;
+    return this.roundDomains ? scale.nice() : scale;
   }
 
   getUniqueBoxChartXDomainValues(results: BoxChartMultiSeries) {
@@ -262,12 +259,19 @@ export class BoxChartComponent extends BaseChartComponent {
 
   private getLegendOptions(): ILegendOptions {
     const legendOpts: ILegendOptions = {
-      scaleType: 'ordinal',
+      scaleType: this.schemeType,
       colors: this.colors,
       domain: [],
       position: this.legendPosition,
       title: this.legendTitle
     };
+    if (this.schemeType === 'ordinal') {
+      legendOpts.domain = this.xDomain;
+      legendOpts.colors = this.colors;
+    } else {
+      legendOpts.domain = this.yDomain;
+      legendOpts.colors = this.colors.scale;
+    }
     return legendOpts;
   }
 }

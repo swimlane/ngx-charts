@@ -99,13 +99,15 @@ export class AppComponent implements OnInit {
   xScaleMax: any;
   yScaleMin: number;
   yScaleMax: number;
-  showDataLabel = false;
-  noBarWhenZero = true;
-  trimXAxisTicks = true;
-  trimYAxisTicks = true;
-  rotateXAxisTicks = true;
-  maxXAxisTickLength = 16;
-  maxYAxisTickLength = 16;
+  showDataLabel: boolean = false;
+  noBarWhenZero: boolean = true;
+  trimXAxisTicks: boolean = true;
+  trimYAxisTicks: boolean = true;
+  rotateXAxisTicks: boolean = true;
+  maxXAxisTickLength: number = 16;
+  maxYAxisTickLength: number = 16;
+  strokeColor: string = '#FFFFFF';
+  strokeWidth: number = 2;
 
   curves = {
     Basis: shape.curveBasis,
@@ -448,6 +450,15 @@ export class AppComponent implements OnInit {
 
     if (!this.fitContainer) {
       this.applyDimensions();
+    }
+  }
+
+  changeTheme(theme: string) {
+    this.theme = theme;
+    if (theme === 'light') {
+      this.strokeColor = '#000000';
+    } else {
+      this.strokeColor = '#FFFFFF';
     }
   }
 
