@@ -9,7 +9,7 @@ import {
   OnChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
-import { select } from 'd3-selection';
+import { select, BaseType } from 'd3-selection';
 import { interpolate } from 'd3-interpolate';
 import * as ease from 'd3-ease';
 import { roundedRect } from '../common/shape.helper';
@@ -21,7 +21,8 @@ import { IVector2D } from '../models/coordinates.model';
   selector: 'g[ngx-charts-box]',
   template: `
     <svg:defs>
-      <svg:g *ngIf="hasGradient"
+      <svg:g
+        *ngIf="hasGradient"
         ngx-charts-svg-linear-gradient
         [orientation]="orientation"
         [name]="gradientId"
@@ -29,40 +30,12 @@ import { IVector2D } from '../models/coordinates.model';
       />
       <svg:mask [attr.id]="maskLineId">
         <svg:g>
-          <rect height="100%" width="100%" fill="white" fill-opacity="1"/>
-          <path
-            class="bar"
-            [attr.d]="boxPath"
-            fill="black"
-            fill-opacity="1"
-          />
+          <rect height="100%" width="100%" fill="white" fill-opacity="1" />
+          <path class="bar" [attr.d]="boxPath" fill="black" fill-opacity="1" />
         </svg:g>
       </svg:mask>
     </svg:defs>
     <svg:g>
-      <svg:line
-        class="bar-line"
-        [class.hidden]="hideBar"
-        [attr.x1]="horizontalLines[2].v1.x"
-        [attr.y1]="horizontalLines[2].v1.y"
-        [attr.x2]="horizontalLines[2].v2.x"
-        [attr.y2]="horizontalLines[2].v2.y"
-        [attr.stroke]="strokeColor"
-        [attr.stroke-width]="strokeWidth"
-        fill="none"
-      />
-      <svg:line
-        class="bar-line"
-        [class.hidden]="hideBar"
-        [attr.x1]="lineCoordinates[0] + 2"
-        [attr.y1]="lineCoordinates[1]" 
-        [attr.x2]="lineCoordinates[2]"
-        [attr.y2]="lineCoordinates[3]"
-        [attr.stroke]="strokeColor"
-        [attr.stroke-width]="strokeWidth"
-        [attr.mask]="maskLine"
-        fill="none"
-      />
       <svg:path
         class="bar"
         role="img"
@@ -79,10 +52,22 @@ import { IVector2D } from '../models/coordinates.model';
       <svg:line
         class="bar-line"
         [class.hidden]="hideBar"
-        [attr.x1]="horizontalLines[1].v1.x"
-        [attr.y1]="horizontalLines[1].v1.y"
-        [attr.x2]="horizontalLines[1].v2.x"
-        [attr.y2]="horizontalLines[1].v2.y"
+        [attr.x1]="lineCoordinates[0].v1.x"
+        [attr.y1]="lineCoordinates[0].v1.y"
+        [attr.x2]="lineCoordinates[0].v2.x"
+        [attr.y2]="lineCoordinates[0].v2.y"
+        [attr.stroke]="strokeColor"
+        [attr.stroke-width]="strokeWidth"
+        [attr.mask]="maskLine"
+        fill="none"
+      />
+      <svg:line
+        class="bar-line"
+        [class.hidden]="hideBar"
+        [attr.x1]="lineCoordinates[1].v1.x"
+        [attr.y1]="lineCoordinates[1].v1.y"
+        [attr.x2]="lineCoordinates[1].v2.x"
+        [attr.y2]="lineCoordinates[1].v2.y"
         [attr.stroke]="strokeColor"
         [attr.stroke-width]="strokeWidth"
         fill="none"
@@ -90,10 +75,21 @@ import { IVector2D } from '../models/coordinates.model';
       <svg:line
         class="bar-line"
         [class.hidden]="hideBar"
-        [attr.x1]="horizontalLines[0].v1.x"
-        [attr.y1]="horizontalLines[0].v1.y"
-        [attr.x2]="horizontalLines[0].v2.x"
-        [attr.y2]="horizontalLines[0].v2.y"
+        [attr.x1]="lineCoordinates[2].v1.x"
+        [attr.y1]="lineCoordinates[2].v1.y"
+        [attr.x2]="lineCoordinates[2].v2.x"
+        [attr.y2]="lineCoordinates[2].v2.y"
+        [attr.stroke]="strokeColor"
+        [attr.stroke-width]="strokeWidth"
+        fill="none"
+      />
+      <svg:line
+        class="bar-line"
+        [class.hidden]="hideBar"
+        [attr.x1]="lineCoordinates[3].v1.x"
+        [attr.y1]="lineCoordinates[3].v1.y"
+        [attr.x2]="lineCoordinates[3].v2.x"
+        [attr.y2]="lineCoordinates[3].v2.y"
         [attr.stroke]="strokeColor"
         [attr.stroke-width]="strokeWidth"
         fill="none"
@@ -111,8 +107,7 @@ export class BoxComponent implements OnChanges {
   @Input() height: number;
   @Input() x: number;
   @Input() y: number;
-  @Input() lineCoordinates: [number, number, number, number];
-  @Input() horizontalLines: [IVector2D, IVector2D, IVector2D];
+  @Input() lineCoordinates: [IVector2D, IVector2D, IVector2D, IVector2D];
   @Input() orientation: string;
   @Input() roundEdges: boolean = true;
   @Input() gradient: boolean = false;
@@ -129,8 +124,13 @@ export class BoxComponent implements OnChanges {
   @Output() deactivate: EventEmitter<IBoxModel> = new EventEmitter();
 
   nativeElm: any;
+
+  // Path related properties.
   oldPath: string;
   boxPath: string;
+  oldLineCoordinates: [IVector2D, IVector2D, IVector2D, IVector2D];
+
+  // Color related properties.
   gradientId: string;
   gradientFill: string;
   initialized: boolean = false;
@@ -166,6 +166,7 @@ export class BoxComponent implements OnChanges {
       this.hasGradient = false;
     }
 
+    this.updateLineEl();
     this.updatePathEl();
     this.checkToHideBar();
     this.maskLineId = 'mask' + id().toString();
@@ -193,20 +194,56 @@ export class BoxComponent implements OnChanges {
     this.oldPath = path;
   }
 
-  // TODO: Create IColorGradient Interface.
-  getGradient(): Array<{ offset: number; color: string; opacity: number }> {
-    return [
-      {
-        offset: 0,
-        color: this.fill,
-        opacity: this.getStartOpacity()
-      },
-      {
-        offset: 100,
-        color: this.fill,
-        opacity: 1
-      }
-    ];
+  updateLineEl(): void {
+    const lineEl = select(this.nativeElm).selectAll('.bar-line');
+    if (this.animations) {
+      // The one below showcase the use of this to retrieve attributes.
+      // lineEl.transition().duration(500)
+      // .attr('x1', function(d, i, node) {
+      //   return parseInt((this as SVGLineElement).getAttribute('x1'), 10) + 10;
+      // });
+      lineEl
+        .transition()
+        .duration(0)
+        .attr('x1', (d, index, node) => this.oldLineCoordinates ? this.oldLineCoordinates[index].v1.x : undefined)
+        .attr('y1', (d, index, node) => this.oldLineCoordinates ? this.oldLineCoordinates[index].v1.y : undefined)
+        .attr('x2', (d, index, node) => this.oldLineCoordinates ? this.oldLineCoordinates[index].v2.x : undefined)
+        .attr('y2', (d, index, node) => this.oldLineCoordinates ? this.oldLineCoordinates[index].v2.y : undefined)
+        .transition()
+        .ease(ease.easeSinInOut)
+        .duration(500)
+        .attr('x1', (d, index, node) => this.lineCoordinates[index].v1.x)
+        .attr('y1', (d, index, node) => this.lineCoordinates[index].v1.y)
+        .attr('x2', (d, index, node) => this.lineCoordinates[index].v2.x)
+        .attr('y2', (d, index, node) => this.lineCoordinates[index].v2.y);
+
+      // Looking for a short way of perform each attr transition.
+      // lineEl.each((d, i, node) => this.lineTween('x1', d, i, node));
+    } else {
+      lineEl
+        .attr('x1', (d, index, node) => this.lineCoordinates[index].v1.x)
+        .attr('y1', (d, index, node) => this.lineCoordinates[index].v1.y)
+        .attr('x2', (d, index, node) => this.lineCoordinates[index].v2.x)
+        .attr('y2', (d, index, node) => this.lineCoordinates[index].v2.y);
+    }
+    this.oldLineCoordinates = this.lineCoordinates;
+  }
+
+  /**
+   * See [D3 Selections](https://www.d3indepth.com/selections/)
+   * @param d The joined data.
+   * @param index The index of the element within the selection
+   * @param node The node element (Line).
+   */
+  lineTween(attr: string, d: any, index: number, node: BaseType[] | ArrayLike<BaseType>) {
+    const nodeLineEl = node[index] as SVGLineElement;
+    console.log('NodeEL: ', nodeLineEl);
+    console.log(`- ${attr} `, nodeLineEl[attr].baseVal.value);
+    // console.log('- X1: ', nodeLineEl.x1.baseVal.value);
+    // console.log('- Y1: ', nodeLineEl.y1.baseVal.value);
+    // console.log('- X2: ', nodeLineEl.x2.baseVal.value);
+    // console.log('- Y2: ', nodeLineEl.y2.baseVal.value);
+    return nodeLineEl[attr].baseVal.value;
   }
 
   // TODO: Refactor into another .ts file if https://github.com/swimlane/ngx-charts/pull/1179 gets merged.
@@ -218,7 +255,7 @@ export class BoxComponent implements OnChanges {
       const n0 = path0.getTotalLength();
       // tslint:disable-next-line: ban-comma-operator
       const n1 = (path1.setAttribute('d', d1), path1).getTotalLength();
-   
+
       // Uniform sampling of distance based on specified precision.
       const distances = [0];
       let i = 0;
@@ -228,16 +265,17 @@ export class BoxComponent implements OnChanges {
         i += dt;
       }
       distances.push(1);
-   
+
       // Compute point-interpolators at each distance.
       const points = distances.map((t: number) => {
         const p0 = path0.getPointAtLength(t * n0);
         const p1 = path1.getPointAtLength(t * n1);
         return interpolate([p0.x, p0.y], [p1.x, p1.y]);
       });
-   
+
+      // 't': T is the fraction of time (between 0 and 1) since the transition began.
       return (t: any) => {
-        return t < 1 ? 'M' + points.map((p: ((t: number) => any[])) => p(t)).join('L') : d1;
+        return t < 1 ? 'M' + points.map((p: (t: number) => any[]) => p(t)).join('L') : d1;
       };
     };
   }
@@ -293,6 +331,22 @@ export class BoxComponent implements OnChanges {
     }
 
     return radius;
+  }
+
+  // TODO: Create IColorGradient Interface.
+  getGradient(): Array<{ offset: number; color: string; opacity: number }> {
+    return [
+      {
+        offset: 0,
+        color: this.fill,
+        opacity: this.getStartOpacity()
+      },
+      {
+        offset: 100,
+        color: this.fill,
+        opacity: 1
+      }
+    ];
   }
 
   getStartOpacity(): number {

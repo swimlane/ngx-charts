@@ -63,8 +63,7 @@ export interface IBoxModel {
   x: number;
   y: number;
   roundEdges: boolean;
-  horizontalLines: IVector2D[];
-  lineCoordinates: number[];
+  lineCoordinates: IVector2D[];
   quartiles: number[];
   tooltipText?: string;
   ariaLabel?: string;

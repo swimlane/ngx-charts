@@ -33,7 +33,6 @@ import { trigger, transition, style, animate } from '@angular/animations';
       [strokeWidth]="strokeWidth"
       [data]="box.data"
       [lineCoordinates]="box.lineCoordinates"
-      [horizontalLines]="box.horizontalLines"
       [orientation]="'vertical'"
       [ariaLabel]="box.ariaLabel"
       (select)="onClick($event)"
@@ -84,8 +83,7 @@ export class BoxSeriesComponent implements OnChanges {
   counts: BoxChartDataItem[];
   quartiles: [number, number, number];
   whiskers: [number, number];
-  horizontalLines: [IVector2D, IVector2D, IVector2D];
-  lineCoordinates: [number, number, number, number];
+  lineCoordinates: [IVector2D, IVector2D, IVector2D, IVector2D];
   tooltipTitle: string;
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -111,8 +109,7 @@ export class BoxSeriesComponent implements OnChanges {
     const groupCounts = this.counts.map(item => item.value).sort((a, b) => Number(a) - Number(b));
     // console.log('Sorted Group Counts: ', groupCounts);
     this.quartiles = this.getBoxQuantiles(groupCounts);
-    this.lineCoordinates = this.getLineCoordinates(seriesName.toString(), this.whiskers, width);
-    this.horizontalLines = this.getHorizontalLines(seriesName.toString(), this.whiskers, this.quartiles, width);
+    this.lineCoordinates = this.getLinesCoordinates(seriesName.toString(), this.whiskers, this.quartiles, width);
 
     const value = this.quartiles[1];
     const formattedLabel = formatLabel(seriesName);
@@ -127,8 +124,7 @@ export class BoxSeriesComponent implements OnChanges {
       y: 0,
       roundEdges: this.roundEdges,
       quartiles: this.quartiles,
-      lineCoordinates: this.lineCoordinates,
-      horizontalLines: this.horizontalLines
+      lineCoordinates: this.lineCoordinates
     };
 
     box.height = Math.abs(this.yScale(this.quartiles[0]) - this.yScale(this.quartiles[2]));
@@ -165,42 +161,41 @@ export class BoxSeriesComponent implements OnChanges {
     this.box = box;
   }
 
-  getLineCoordinates(seriesName: string, whiskers: [number, number], width: number): [number, number, number, number] {
-    const x1 = this.xScale(seriesName);
-    const x2 = this.xScale(seriesName);
-    const y1 = this.yScale(whiskers[0]);
-    const y2 = this.yScale(whiskers[1]);
-    // The X value is not being centered, so had to sum half the width to align it.
-    return [x1 + width / 2, y1, x2 + width / 2, y2];
-  }
-
   getBoxQuantiles(inputData: Array<number | Date>): [number, number, number] {
     return [quantile(inputData, 0.25), quantile(inputData, 0.5), quantile(inputData, 0.75)];
   }
 
-  getHorizontalLines(
+  getLinesCoordinates(
     seriesName: string,
     whiskers: [number, number],
     quartiles: [number, number, number],
     barWidth: number
-  ): [IVector2D, IVector2D, IVector2D] {
+  ): [IVector2D, IVector2D, IVector2D, IVector2D] {
     // The X value is not being centered, so had to sum half the width to align it.
-    const commonX = this.xScale(seriesName) + barWidth / 2;
-    const commonPlusX = commonX + barWidth / 2;
-    const commonMinusX = commonX - barWidth / 2;
+    const commonX = this.xScale(seriesName);
+    const offsetX = commonX + barWidth / 2;
+    const offsetPlusX = offsetX + barWidth / 2;
+    const offsetMinusX = offsetX - barWidth / 2;
+    const whiskerZero = this.yScale(whiskers[0]);
+    const whiskerOne = this.yScale(whiskers[1]);
     const topLine: IVector2D = {
-      v1: { x: commonPlusX, y: this.yScale(whiskers[0]) },
-      v2: { x: commonMinusX, y: this.yScale(whiskers[0]) }
+      v1: { x: offsetPlusX, y: whiskerZero },
+      v2: { x: offsetMinusX, y: whiskerZero }
     };
     const medianLine: IVector2D = {
-      v1: { x: commonPlusX, y: this.yScale(quartiles[1]) },
-      v2: { x: commonMinusX, y: this.yScale(quartiles[1]) }
+      v1: { x: offsetPlusX, y: this.yScale(quartiles[1]) },
+      v2: { x: offsetMinusX, y: this.yScale(quartiles[1]) }
     };
     const bottomLine: IVector2D = {
-      v1: { x: commonPlusX, y: this.yScale(whiskers[1]) },
-      v2: { x: commonMinusX, y: this.yScale(whiskers[1]) }
+      v1: { x: offsetPlusX, y: whiskerOne },
+      v2: { x: offsetMinusX, y: whiskerOne }
     };
-    return [topLine, medianLine, bottomLine];
+    // The X value is not being centered, so had to sum half the width to align it.
+    const verticalLine: IVector2D = {
+      v1: { x: commonX + barWidth / 2 + 1, y: whiskerZero },
+      v2: { x: commonX + barWidth / 2 - 1, y: whiskerOne }
+    };
+    return [verticalLine, topLine, medianLine, bottomLine];
   }
 
   updateTooltipSettings() {
