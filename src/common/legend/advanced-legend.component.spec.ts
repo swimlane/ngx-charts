@@ -83,8 +83,12 @@ describe('<ngx-charts-advanced-legend>', () => {
         .toEqual(['8', '12', '20', '30', '46', '24']);
       expect(Array.from(legendItemLabelElements).map((x: Element) => x.textContent.trim()))
         .toEqual(['a', 'b', 'c', 'd', 'e', 'f']);
+
+      let i18nNumberFormatter = new Intl.NumberFormat(); 
       expect(Array.from(legendItemPercentElements).map((x: Element) => x.textContent.trim()))
-        .toEqual(['5.714%', '8.571%', '14.286%', '21.429%', '32.857%', '17.143%']);
+        .toEqual([5.714, 8.571, 14.286, 21.429, 32.857, 17.143].map(
+          (percentage: number) => i18nNumberFormatter.format(percentage) + '%')
+        );
     });
   }));
 
