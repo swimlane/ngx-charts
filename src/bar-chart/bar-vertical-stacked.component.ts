@@ -273,7 +273,7 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   }
 
   groupTransform(group) {
-    return `translate(${this.xScale(group.name)}, 0)`;
+    return `translate(${this.xScale(group.name) || 0}, 0)`;
   }
 
   onClick(data, group?) {
