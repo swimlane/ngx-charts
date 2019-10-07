@@ -5207,9 +5207,11 @@ var BarVerticalComponent = /** @class */ (function (_super) {
     BarVerticalComponent.prototype.getXScale = function () {
         this.xDomain = this.getXDomain();
         var spacing = this.xDomain.length / (this.dims.width / this.barPadding + 1);
+        var maxWidth = Math.min(this.barMaxWidth * this.xDomain.length, this.dims.width);
         return Object(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scaleBand"])()
             .range([0, this.dims.width])
             .paddingInner(spacing)
+            .align(0)
             .domain(this.xDomain);
     };
     BarVerticalComponent.prototype.getYScale = function () {

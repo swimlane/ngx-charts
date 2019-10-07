@@ -86,9 +86,11 @@ var BarVerticalComponent = /** @class */ (function (_super) {
     BarVerticalComponent.prototype.getXScale = function () {
         this.xDomain = this.getXDomain();
         var spacing = this.xDomain.length / (this.dims.width / this.barPadding + 1);
+        var maxWidth = Math.min(this.barMaxWidth * this.xDomain.length, this.dims.width);
         return scaleBand()
             .range([0, this.dims.width])
             .paddingInner(spacing)
+            .align(0)
             .domain(this.xDomain);
     };
     BarVerticalComponent.prototype.getYScale = function () {
