@@ -9,6 +9,7 @@ import {
   TemplateRef
 } from '@angular/core';
 import { escapeLabel } from '../common/label.helper';
+import { ColorHelper } from '../common';
 
 @Component({
   selector: 'g[ngx-charts-tree-map-cell-series]',
@@ -44,7 +45,7 @@ import { escapeLabel } from '../common/label.helper';
 export class TreeMapCellSeriesComponent implements OnChanges {
   @Input() data;
   @Input() dims;
-  @Input() colors;
+  @Input() colors: ColorHelper;
   @Input() valueFormatting: any;
   @Input() labelFormatting: any;
   @Input() gradient: boolean = false;

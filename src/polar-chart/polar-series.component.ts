@@ -13,6 +13,7 @@ import { lineRadial } from 'd3-shape';
 import { id } from '../utils/id';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
 import { escapeLabel } from '../common/label.helper';
+import { ColorHelper } from '../common';
 
 @Component({
   selector: 'g[ngx-charts-polar-series]',
@@ -70,7 +71,7 @@ export class PolarSeriesComponent implements OnChanges {
   @Input() data;
   @Input() xScale; // Theta
   @Input() yScale; // R
-  @Input() colors;
+  @Input() colors: ColorHelper;
   @Input() scaleType;
   @Input() curve: any;
   @Input() activeEntries: any[];

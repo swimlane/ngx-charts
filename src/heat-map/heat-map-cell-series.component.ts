@@ -10,6 +10,7 @@ import {
   TemplateRef
 } from '@angular/core';
 import { formatLabel, escapeLabel } from '../common/label.helper';
+import { ColorHelper } from '../common';
 
 @Component({
   selector: 'g[ngx-charts-heat-map-cell-series]',
@@ -41,7 +42,7 @@ import { formatLabel, escapeLabel } from '../common/label.helper';
 })
 export class HeatCellSeriesComponent implements OnChanges, OnInit {
   @Input() data;
-  @Input() colors;
+  @Input() colors: ColorHelper;
   @Input() xScale;
   @Input() yScale;
   @Input() gradient: boolean;

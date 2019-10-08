@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel, escapeLabel } from '../common/label.helper';
+import { ColorHelper } from '../common';
 
 @Component({
   selector: 'g[ngx-charts-bubble-series]',
@@ -63,7 +64,7 @@ export class BubbleSeriesComponent implements OnChanges {
   @Input() rScale;
   @Input() xScaleType;
   @Input() yScaleType;
-  @Input() colors;
+  @Input() colors: ColorHelper;
   @Input() visibleValue;
   @Input() activeEntries: any[];
   @Input() xAxisLabel: string;
@@ -152,7 +153,7 @@ export class BubbleSeriesComponent implements OnChanges {
       hasSeriesName && hasTooltipLabel
         ? `${circle.seriesName} • ${circle.tooltipLabel}`
         : circle.seriesName + circle.tooltipLabel;
-    const tooltipTitle = hasSeriesName || hasTooltipLabel ? 
+    const tooltipTitle = hasSeriesName || hasTooltipLabel ?
       `<span class="tooltip-label">${escapeLabel(name)}</span>` : '';
 
     return `

@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnChanges, ChangeDetectionStrat
 import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel, escapeLabel } from '../common/label.helper';
 import { DataItem } from '../models/chart-data.model';
+import { ColorHelper } from '../common';
 
 export enum D0Types {
   positive = 'positive',
@@ -74,7 +75,7 @@ export class SeriesVerticalComponent implements OnChanges {
   @Input() series;
   @Input() xScale;
   @Input() yScale;
-  @Input() colors;
+  @Input() colors: ColorHelper;
   @Input() gradient: boolean;
   @Input() activeEntries: any[];
   @Input() seriesName: string;

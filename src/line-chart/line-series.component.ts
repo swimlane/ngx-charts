@@ -9,6 +9,7 @@ import { area, line } from 'd3-shape';
 
 import { id } from '../utils/id';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
+import { ColorHelper } from '../common';
 
 @Component({
   selector: 'g[ngx-charts-line-series]',
@@ -63,7 +64,7 @@ export class LineSeriesComponent implements OnChanges {
   @Input() data;
   @Input() xScale;
   @Input() yScale;
-  @Input() colors;
+  @Input() colors: ColorHelper;
   @Input() scaleType;
   @Input() curve: any;
   @Input() activeEntries: any[];
@@ -134,21 +135,21 @@ export class LineSeriesComponent implements OnChanges {
 
   getRangeGenerator(): any {
     return area<any>()
-        .x(d => {
-          const label = d.name;
-          let value;
-          if (this.scaleType === 'time') {
-            value = this.xScale(label);
-          } else if (this.scaleType === 'linear') {
-            value = this.xScale(Number(label));
-          } else {
-            value = this.xScale(label);
-          }
-          return value;
-        })
-        .y0(d => this.yScale(typeof d.min === 'number' ? d.min : d.value))
-        .y1(d => this.yScale(typeof d.max === 'number' ? d.max : d.value))
-        .curve(this.curve);
+      .x(d => {
+        const label = d.name;
+        let value;
+        if (this.scaleType === 'time') {
+          value = this.xScale(label);
+        } else if (this.scaleType === 'linear') {
+          value = this.xScale(Number(label));
+        } else {
+          value = this.xScale(label);
+        }
+        return value;
+      })
+      .y0(d => this.yScale(typeof d.min === 'number' ? d.min : d.value))
+      .y1(d => this.yScale(typeof d.max === 'number' ? d.max : d.value))
+      .curve(this.curve);
   }
 
   getAreaGenerator(): any {
@@ -194,7 +195,7 @@ export class LineSeriesComponent implements OnChanges {
   }
 
   isActive(entry): boolean {
-    if(!this.activeEntries) return false;
+    if (!this.activeEntries) return false;
     const item = this.activeEntries.find(d => {
       return entry.name === d.name;
     });
@@ -202,7 +203,7 @@ export class LineSeriesComponent implements OnChanges {
   }
 
   isInactive(entry): boolean {
-    if(!this.activeEntries || this.activeEntries.length === 0) return false;
+    if (!this.activeEntries || this.activeEntries.length === 0) return false;
     const item = this.activeEntries.find(d => {
       return entry.name === d.name;
     });

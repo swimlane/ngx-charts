@@ -10,6 +10,7 @@ import {
 import { area } from 'd3-shape';
 
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
+import { ColorHelper } from '../common';
 
 @Component({
   selector: 'g[ngx-charts-area-series]',
@@ -36,7 +37,7 @@ export class AreaSeriesComponent implements OnChanges {
   @Input() xScale;
   @Input() yScale;
   @Input() baseValue: any = 'auto';
-  @Input() colors;
+  @Input() colors: ColorHelper;
   @Input() scaleType;
   @Input() stacked: boolean = false;
   @Input() normalized: boolean = false;
@@ -112,7 +113,7 @@ export class AreaSeriesComponent implements OnChanges {
   updateGradient() {
     if (this.colors.scaleType === 'linear') {
       this.hasGradient = true;
-      if (this.stacked || this.normalized) {        
+      if (this.stacked || this.normalized) {
         const d0values = this.data.series.map(d => d.d0);
         const d1values = this.data.series.map(d => d.d1);
         const max = Math.max(...d1values);
@@ -130,7 +131,7 @@ export class AreaSeriesComponent implements OnChanges {
   }
 
   isActive(entry): boolean {
-    if(!this.activeEntries) return false;
+    if (!this.activeEntries) return false;
     const item = this.activeEntries.find(d => {
       return entry.name === d.name;
     });
@@ -138,11 +139,11 @@ export class AreaSeriesComponent implements OnChanges {
   }
 
   isInactive(entry): boolean {
-    if(!this.activeEntries || this.activeEntries.length === 0) return false;
+    if (!this.activeEntries || this.activeEntries.length === 0) return false;
     const item = this.activeEntries.find(d => {
       return entry.name === d.name;
     });
     return item === undefined;
   }
-  
+
 }

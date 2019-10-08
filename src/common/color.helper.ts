@@ -89,7 +89,7 @@ export class ColorHelper {
     }
   }
 
-  getLinearGradientStops(value, start) {
+  getLinearGradientStops(value, start?) {
     if (start === undefined) {
       start = this.domain[0];
     }
