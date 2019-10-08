@@ -1,7 +1,7 @@
 import { ColorSet } from './color-set';
 import { ColorSetGroup } from './color-set-group.enum';
 
-export let colorSets: ColorSet[] = [
+export const colorSets: ColorSet[] = [
   {
     name: 'vivid',
     selectable: true,
