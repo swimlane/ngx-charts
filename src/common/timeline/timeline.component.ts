@@ -8,6 +8,7 @@ import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
 import { select, event as d3event } from 'd3-selection';
 
 import { id } from '../../utils';
+import { ScaleType } from '../../utils/scale-type.enum';
 
 @Component({
   selector: 'g[ngx-charts-timeline]',
@@ -46,7 +47,7 @@ export class Timeline implements OnChanges {
   @Input() legend;
   @Input() miniChart;
   @Input() autoScale;
-  @Input() scaleType;
+  @Input() scaleType: ScaleType;
   @Input() height: number = 50;
 
   @Output() select = new EventEmitter();
@@ -65,7 +66,7 @@ export class Timeline implements OnChanges {
   constructor(
     element: ElementRef,
     private cd: ChangeDetectorRef) {
-      this.element = element.nativeElement;
+    this.element = element.nativeElement;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -89,7 +90,7 @@ export class Timeline implements OnChanges {
       this.updateBrush();
     }
 
-    this.transform = `translate(0 , ${ offsetY })`;
+    this.transform = `translate(0 , ${offsetY})`;
 
     this.filterId = 'filter' + id().toString();
     this.filter = `url(#${this.filterId})`;

@@ -14,6 +14,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { getScaleType } from '../common/domain.helper';
+import { ScaleType } from '../utils/scale-type.enum';
 
 @Component({
   selector: 'ngx-charts-heat-map',
@@ -131,7 +132,7 @@ export class HeatMapComponent extends BaseChartComponent {
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
   legendOptions: any;
-  scaleType: string = 'linear';
+  scaleType = ScaleType.linear;
 
   update(): void {
     super.update();

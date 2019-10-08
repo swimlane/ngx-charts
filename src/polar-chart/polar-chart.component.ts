@@ -17,6 +17,7 @@ import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { getScaleType } from '../common/domain.helper';
 import { isDate } from '../utils/types';
+import { ScaleType } from '../utils/scale-type.enum';
 
 const twoPI = 2 * Math.PI;
 
@@ -146,7 +147,7 @@ export class PolarChartComponent extends BaseChartComponent {
   @Input() showGridLines: boolean = true;
   @Input() curve: any = curveCardinalClosed;
   @Input() activeEntries: any[] = [];
-  @Input() schemeType: string;
+  @Input() schemeType: ScaleType;
   @Input() rangeFillOpacity: number = 0.15;
   @Input() trimYAxisTicks: boolean = true;
   @Input() maxYAxisTickLength: number = 16;
@@ -175,7 +176,7 @@ export class PolarChartComponent extends BaseChartComponent {
   xScale: any; // -> tScale
   yAxisScale: any; // -> yScale
   colors: ColorHelper;
-  scaleType: string;
+  scaleType: ScaleType;
   transform: string;
   transformPlot: string;
   transformYAxis: string;

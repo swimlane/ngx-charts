@@ -10,6 +10,7 @@ import { area, line } from 'd3-shape';
 import { id } from '../utils/id';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
 import { ColorHelper } from '../common';
+import { ScaleType } from '../utils/scale-type.enum';
 
 @Component({
   selector: 'g[ngx-charts-line-series]',
@@ -65,7 +66,7 @@ export class LineSeriesComponent implements OnChanges {
   @Input() xScale;
   @Input() yScale;
   @Input() colors: ColorHelper;
-  @Input() scaleType;
+  @Input() scaleType: ScaleType;
   @Input() curve: any;
   @Input() activeEntries: any[];
   @Input() rangeFillOpacity: number;

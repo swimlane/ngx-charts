@@ -18,6 +18,7 @@ import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
 import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
+import { ScaleType } from '../utils/scale-type.enum';
 
 @Component({
   selector: 'ngx-charts-line-chart',
@@ -189,7 +190,7 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() showGridLines: boolean = true;
   @Input() curve: any = curveLinear;
   @Input() activeEntries: any[] = [];
-  @Input() schemeType: string;
+  @Input() schemeType: ScaleType;
   @Input() rangeFillOpacity: number;
   @Input() trimXAxisTicks: boolean = true;
   @Input() trimYAxisTicks: boolean = true;
@@ -224,7 +225,7 @@ export class LineChartComponent extends BaseChartComponent {
   yScale: any;
   xScale: any;
   colors: ColorHelper;
-  scaleType: string;
+  scaleType: ScaleType;
   transform: string;
   clipPath: string;
   clipPathId: string;

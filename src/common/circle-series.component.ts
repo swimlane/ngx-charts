@@ -13,6 +13,7 @@ import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel, escapeLabel } from '../common/label.helper';
 import { id } from '../utils/id';
 import { ColorHelper } from '../common/color.helper';
+import { ScaleType } from '../utils/scale-type.enum';
 
 @Component({
   selector: 'g[ngx-charts-circle-series]',
@@ -78,7 +79,7 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
   @Input() xScale;
   @Input() yScale;
   @Input() colors: ColorHelper;
-  @Input() scaleType;
+  @Input() scaleType: ScaleType;
   @Input() visibleValue;
   @Input() activeEntries: any[];
   @Input() tooltipDisabled: boolean = false;

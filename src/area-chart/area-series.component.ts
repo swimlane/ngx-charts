@@ -11,6 +11,7 @@ import { area } from 'd3-shape';
 
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
 import { ColorHelper } from '../common';
+import { ScaleType } from '../utils/scale-type.enum';
 
 @Component({
   selector: 'g[ngx-charts-area-series]',
@@ -38,7 +39,7 @@ export class AreaSeriesComponent implements OnChanges {
   @Input() yScale;
   @Input() baseValue: any = 'auto';
   @Input() colors: ColorHelper;
-  @Input() scaleType;
+  @Input() scaleType: ScaleType;
   @Input() stacked: boolean = false;
   @Input() normalized: boolean = false;
   @Input() gradient;

@@ -17,6 +17,7 @@ import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
 import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
+import { ScaleType } from '../utils/scale-type.enum';
 
 @Component({
   selector: 'ngx-charts-area-chart-normalized',
@@ -172,7 +173,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
   @Input() showGridLines: boolean = true;
   @Input() curve: any = curveLinear;
   @Input() activeEntries: any[] = [];
-  @Input() schemeType: string;
+  @Input() schemeType: ScaleType;
   @Input() trimXAxisTicks: boolean = true;
   @Input() trimYAxisTicks: boolean = true;
   @Input() rotateXAxisTicks: boolean = true;
@@ -192,7 +193,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
   @ContentChild('seriesTooltipTemplate', { static: false }) seriesTooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
-  scaleType: string;
+  scaleType: ScaleType;
   xDomain: any[];
   xSet: any[]; // the set of all values on the X Axis
   yDomain: any[];
