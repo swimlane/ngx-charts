@@ -18,6 +18,7 @@ import { trimLabel } from '../common/trim-label.helper';
 import { gridLayout } from '../common/grid-layout.helper';
 import { formatLabel } from '../common/label.helper';
 import { DataItem } from '../models/chart-data.model';
+import { ScaleType } from '../utils/scale-type.enum';
 
 @Component({
   selector: 'ngx-charts-pie-grid',
@@ -203,7 +204,7 @@ export class PieGridComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    this.colorScale = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+    this.colorScale = new ColorHelper(this.scheme, ScaleType.ordinal, this.domain, this.customColors);
   }
 
   onActivate(item, fromLegend = false) {

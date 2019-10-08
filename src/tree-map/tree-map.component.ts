@@ -13,6 +13,7 @@ import { treemap, stratify } from 'd3-hierarchy';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
+import { ScaleType } from '../utils/scale-type.enum';
 
 @Component({
   selector: 'ngx-charts-tree-map',
@@ -107,6 +108,6 @@ export class TreeMapComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    this.colors = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+    this.colors = new ColorHelper(this.scheme, ScaleType.ordinal, this.domain, this.customColors);
   }
 }
