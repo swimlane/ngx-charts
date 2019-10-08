@@ -3,15 +3,16 @@ import { scaleBand, scaleLinear, scaleOrdinal, scaleQuantile } from 'd3-scale';
 
 import { ColorSet } from '../utils/color-set';
 import { colorSets } from '../utils/color-sets';
+import { ScaleType } from '../utils/scale-type.enum';
 
 export class ColorHelper {
   scale: any;
-  scaleType: any;
+  scaleType: ScaleType;
   colorDomain: string[];
   domain: any;
   customColors: any;
 
-  constructor(scheme: ColorSet | string, type, domain, customColors?) {
+  constructor(scheme: ColorSet | string, type: ScaleType, domain, customColors?) {
     if (typeof scheme === 'string') {
       scheme = colorSets.find(cs => {
         return cs.name === scheme;
@@ -25,7 +26,7 @@ export class ColorHelper {
     this.scale = this.generateColorScheme(scheme, type, this.domain);
   }
 
-  generateColorScheme(scheme: ColorSet | string, type, domain) {
+  generateColorScheme(scheme: ColorSet | string, type: ScaleType, domain) {
     if (typeof scheme === 'string') {
       scheme = colorSets.find(cs => {
         return cs.name === scheme;
