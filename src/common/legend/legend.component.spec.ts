@@ -2,10 +2,11 @@ import {
   TestBed,
   async
 } from '@angular/core/testing';
-import { Component  } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { ChartCommonModule } from '../chart-common.module';
 import { ColorHelper } from '../color.helper';
+import { ScaleType } from '../../utils/scale-type.enum';
 
 // some test data (includes just enought data to run the tests)
 const seriesData = ['complete', 'not complete'];
@@ -22,7 +23,7 @@ class TestComponent {
 
   constructor() {
     const scheme = { domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'] };
-    this.colors = new ColorHelper(scheme, 'ordinal', [], null);
+    this.colors = new ColorHelper(scheme, ScaleType.ordinal, [], null);
   }
 }
 
