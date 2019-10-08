@@ -18,6 +18,8 @@ import { BaseChartComponent } from '../common/base-chart.component';
 import { getScaleType } from '../common/domain.helper';
 import { isDate } from '../utils/types';
 import { ScaleType } from '../utils/scale-type.enum';
+import { LegendPosition } from '../common/legend/legend-position.enum';
+import { LegendOptions } from '../common/legend/legend-options';
 
 const twoPI = 2 * Math.PI;
 
@@ -136,7 +138,7 @@ const twoPI = 2 * Math.PI;
 export class PolarChartComponent extends BaseChartComponent {
   @Input() legend: boolean;
   @Input() legendTitle: string = 'Legend';
-  @Input() legendPosition: string = 'right';
+  @Input() legendPosition = LegendPosition.right;
   @Input() xAxis: boolean;
   @Input() yAxis: boolean;
   @Input() showXAxisLabel: boolean;
@@ -415,7 +417,7 @@ export class PolarChartComponent extends BaseChartComponent {
     this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
   }
 
-  getLegendOptions() {
+  getLegendOptions(): LegendOptions {
     if (this.schemeType === 'ordinal') {
       return {
         scaleType: this.schemeType,

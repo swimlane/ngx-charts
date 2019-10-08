@@ -19,6 +19,8 @@ import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
 import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
 import { ScaleType } from '../utils/scale-type.enum';
+import { LegendPosition } from '../common/legend/legend-position.enum';
+import { LegendOptions } from '../common/legend/legend-options';
 
 @Component({
   selector: 'ngx-charts-line-chart',
@@ -177,7 +179,7 @@ import { ScaleType } from '../utils/scale-type.enum';
 export class LineChartComponent extends BaseChartComponent {
   @Input() legend;
   @Input() legendTitle: string = 'Legend';
-  @Input() legendPosition: string = 'right';
+  @Input() legendPosition = LegendPosition.right;
   @Input() xAxis;
   @Input() yAxis;
   @Input() showXAxisLabel;
@@ -446,7 +448,7 @@ export class LineChartComponent extends BaseChartComponent {
     this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
   }
 
-  getLegendOptions() {
+  getLegendOptions(): LegendOptions {
     const opts = {
       scaleType: this.schemeType,
       colors: undefined,

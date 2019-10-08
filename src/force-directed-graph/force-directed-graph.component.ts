@@ -20,6 +20,9 @@ import { ColorHelper } from '../common/color.helper';
 import { escapeLabel } from '../common/label.helper';
 /* tslint:disable */
 import { MouseEvent } from '../events';
+import { ScaleType } from '../utils/scale-type.enum';
+import { LegendOptions } from '../common/legend/legend-options';
+import { LegendPosition } from '../common/legend/legend-position.enum';
 
 @Component({
   selector: 'ngx-charts-force-directed-graph',
@@ -94,7 +97,7 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
   @Input() forceLink: any = forceLink<any, any>().id(node => node.value);
   @Input() legend: boolean;
   @Input() legendTitle: string = 'Legend';
-  @Input() legendPosition: string = 'right';
+  @Input() legendPosition = LegendPosition.right;
   @Input() nodes: any[] = [];
   @Input() links: Array<{ source: any; target: any }> = [];
   @Input() activeEntries: any[] = [];
@@ -184,12 +187,12 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    this.colors = new ColorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
+    this.colors = new ColorHelper(this.scheme, ScaleType.ordinal, this.seriesDomain, this.customColors);
   }
 
-  getLegendOptions() {
+  getLegendOptions(): LegendOptions {
     return {
-      scaleType: 'ordinal',
+      scaleType: ScaleType.ordinal,
       domain: this.seriesDomain,
       colors: this.colors,
       title: this.legendTitle,

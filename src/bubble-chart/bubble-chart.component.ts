@@ -18,6 +18,9 @@ import { ColorHelper } from '../common/color.helper';
 import { getScaleType } from '../common/domain.helper';
 import { getDomain, getScale } from './bubble-chart.utils';
 import { id } from '../utils/id';
+import { ScaleType } from '../utils/scale-type.enum';
+import { LegendPosition } from '../common/legend/legend-position.enum';
+import { LegendOptions } from '../common/legend/legend-options';
 
 @Component({
   selector: 'ngx-charts-bubble-chart',
@@ -128,7 +131,7 @@ export class BubbleChartComponent extends BaseChartComponent {
   @Input() showGridLines: boolean = true;
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
-  @Input() legendPosition: string = 'right';
+  @Input() legendPosition = LegendPosition.right;
   @Input() xAxis: boolean = true;
   @Input() yAxis: boolean = true;
   @Input() showXAxisLabel: boolean;
@@ -148,7 +151,7 @@ export class BubbleChartComponent extends BaseChartComponent {
   @Input() maxRadius = 10;
   @Input() minRadius = 3;
   @Input() autoScale: boolean;
-  @Input() schemeType = 'ordinal';
+  @Input() schemeType = ScaleType.ordinal;
   @Input() tooltipDisabled: boolean = false;
   @Input() xScaleMin: any;
   @Input() xScaleMax: any;
@@ -303,7 +306,7 @@ export class BubbleChartComponent extends BaseChartComponent {
     return this.roundDomains ? scale.nice() : scale;
   }
 
-  getLegendOptions(): any {
+  getLegendOptions(): LegendOptions {
     const opts = {
       scaleType: this.schemeType,
       colors: undefined,

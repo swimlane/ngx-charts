@@ -12,6 +12,9 @@ import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { DataItem } from '../models/chart-data.model';
+import { LegendPosition } from '../common/legend/legend-position.enum';
+import { LegendOptions } from '../common/legend/legend-options';
+import { ScaleType } from '../utils/scale-type.enum';
 
 @Component({
   selector: 'ngx-charts-pie-chart',
@@ -60,7 +63,7 @@ export class PieChartComponent extends BaseChartComponent {
   @Input() labels = false;
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
-  @Input() legendPosition: string = 'right';
+  @Input() legendPosition = LegendPosition.right;
   @Input() explodeSlices = false;
   @Input() doughnut = false;
   @Input() arcWidth = 0.25;
@@ -144,12 +147,12 @@ export class PieChartComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    this.colors = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+    this.colors = new ColorHelper(this.scheme, ScaleType.ordinal, this.domain, this.customColors);
   }
 
-  getLegendOptions() {
+  getLegendOptions(): LegendOptions {
     return {
-      scaleType: 'ordinal',
+      scaleType: ScaleType.ordinal,
       domain: this.domain,
       colors: this.colors,
       title: this.legendTitle,

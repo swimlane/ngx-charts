@@ -16,6 +16,9 @@ import { scaleLinear } from 'd3-scale';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
+import { LegendOptions } from '../common/legend/legend-options';
+import { ScaleType } from '../utils/scale-type.enum';
+import { LegendPosition } from '../common/legend/legend-position.enum';
 
 @Component({
   selector: 'ngx-charts-gauge',
@@ -83,7 +86,7 @@ import { ColorHelper } from '../common/color.helper';
 export class GaugeComponent extends BaseChartComponent implements AfterViewInit {
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
-  @Input() legendPosition: string = 'right';
+  @Input() legendPosition = LegendPosition.right;
   @Input() min: number = 0;
   @Input() max: number = 100;
   @Input() textValue: string;
@@ -300,9 +303,9 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
     this.select.emit(data);
   }
 
-  getLegendOptions(): any {
+  getLegendOptions(): LegendOptions {
     return {
-      scaleType: 'ordinal',
+      scaleType: ScaleType.ordinal,
       colors: this.colors,
       domain: this.domain,
       title: this.legendTitle,
@@ -311,7 +314,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   }
 
   setColors(): void {
-    this.colors = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+    this.colors = new ColorHelper(this.scheme, ScaleType.ordinal, this.domain, this.customColors);
   }
 
   onActivate(item): void {

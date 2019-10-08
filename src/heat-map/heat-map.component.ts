@@ -15,6 +15,8 @@ import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensio
 import { ColorHelper } from '../common/color.helper';
 import { getScaleType } from '../common/domain.helper';
 import { ScaleType } from '../utils/scale-type.enum';
+import { LegendOptions } from '../common/legend/legend-options';
+import { LegendPosition } from '../common/legend/legend-position.enum';
 
 @Component({
   selector: 'ngx-charts-heat-map',
@@ -88,7 +90,7 @@ import { ScaleType } from '../utils/scale-type.enum';
 export class HeatMapComponent extends BaseChartComponent {
   @Input() legend;
   @Input() legendTitle: string = 'Legend';
-  @Input() legendPosition: string = 'right';
+  @Input() legendPosition = LegendPosition.right;
   @Input() xAxis;
   @Input() yAxis;
   @Input() showXAxisLabel;
@@ -301,7 +303,7 @@ export class HeatMapComponent extends BaseChartComponent {
     this.colors = new ColorHelper(this.scheme, this.scaleType, this.valueDomain);
   }
 
-  getLegendOptions() {
+  getLegendOptions(): LegendOptions {
     return {
       scaleType: this.scaleType,
       domain: this.valueDomain,

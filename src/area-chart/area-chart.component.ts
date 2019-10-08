@@ -18,6 +18,8 @@ import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
 import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
 import { ScaleType } from '../utils/scale-type.enum';
+import { LegendOptions } from '../common/legend/legend-options';
+import { LegendPosition } from '../common/legend/legend-position.enum';
 
 @Component({
   selector: 'ngx-charts-area-chart',
@@ -159,7 +161,7 @@ import { ScaleType } from '../utils/scale-type.enum';
 export class AreaChartComponent extends BaseChartComponent {
   @Input() legend;
   @Input() legendTitle: string = 'Legend';
-  @Input() legendPosition: string = 'right';
+  @Input() legendPosition = LegendPosition.right;
   @Input() state;
   @Input() xAxis;
   @Input() yAxis;
@@ -442,7 +444,7 @@ export class AreaChartComponent extends BaseChartComponent {
     this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
   }
 
-  getLegendOptions() {
+  getLegendOptions(): LegendOptions {
     const opts = {
       scaleType: this.schemeType,
       colors: undefined,
