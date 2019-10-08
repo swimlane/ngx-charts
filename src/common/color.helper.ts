@@ -1,16 +1,17 @@
 import { range } from 'd3-array';
 import { scaleBand, scaleLinear, scaleOrdinal, scaleQuantile } from 'd3-scale';
 
+import { ColorSet } from '../utils/color-set';
 import { colorSets } from '../utils/color-sets';
 
 export class ColorHelper {
   scale: any;
   scaleType: any;
-  colorDomain: any[];
+  colorDomain: string[];
   domain: any;
   customColors: any;
 
-  constructor(scheme, type, domain, customColors?) {
+  constructor(scheme: ColorSet | string, type, domain, customColors?) {
     if (typeof scheme === 'string') {
       scheme = colorSets.find(cs => {
         return cs.name === scheme;
@@ -24,7 +25,7 @@ export class ColorHelper {
     this.scale = this.generateColorScheme(scheme, type, this.domain);
   }
 
-  generateColorScheme(scheme, type, domain) {
+  generateColorScheme(scheme: ColorSet | string, type, domain) {
     if (typeof scheme === 'string') {
       scheme = colorSets.find(cs => {
         return cs.name === scheme;
@@ -33,7 +34,7 @@ export class ColorHelper {
     let colorScale;
     if (type === 'quantile') {
       colorScale = scaleQuantile()
-        .range(scheme.domain)
+        .range(scheme.domain as unknown as number[])
         .domain(domain);
     } else if (type === 'ordinal') {
       colorScale = scaleOrdinal()
@@ -50,7 +51,7 @@ export class ColorHelper {
       const points = range(0, 1, 1.0 / colorDomain.length);
       colorScale = scaleLinear()
         .domain(points)
-        .range(colorDomain);
+        .range(colorDomain as unknown as number[]);
     }
 
     return colorScale;
