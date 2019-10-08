@@ -25,6 +25,9 @@ import {
 } from '../../src';
 import { area, line, curveLinear } from 'd3-shape';
 import { scaleBand, scaleLinear, scalePoint, scaleTime } from 'd3-scale';
+import { ScaleType } from '../../src/utils/scale-type.enum';
+import { LegendPosition } from '../../src/common/legend/legend-position.enum';
+import { ColorSet } from '../../src/utils/color-set';
 
 @Component({
   selector: 'combo-chart-component',
@@ -150,7 +153,7 @@ export class ComboChartComponent extends BaseChartComponent {
   @Input() curve: any = curveLinear;
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
-  @Input() legendPosition: string = 'right';
+  @Input() legendPosition = LegendPosition.right;
   @Input() xAxis;
   @Input() yAxis;
   @Input() showXAxisLabel;
@@ -163,12 +166,12 @@ export class ComboChartComponent extends BaseChartComponent {
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
-  @Input() schemeType: string;
+  @Input() schemeType: ScaleType;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
   @Input() yRightAxisTickFormatting: any;
   @Input() roundDomains: boolean = false;
-  @Input() colorSchemeLine: any[];
+  @Input() colorSchemeLine: ColorSet | string;
   @Input() autoScale;
   @Input() lineChart: any;
   @Input() yLeftAxisScaleFactor: any;

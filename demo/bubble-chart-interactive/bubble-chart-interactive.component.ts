@@ -16,6 +16,7 @@ import { BaseChartComponent, calculateViewDimensions, ViewDimensions, ColorHelpe
 import { getDomain, getScale } from '../../src/bubble-chart/bubble-chart.utils';
 import { getScaleType } from '../../src/common/domain.helper';
 import { id } from '../../src/utils/id';
+import { ScaleType } from '../../src/utils/scale-type.enum';
 
 @Component({
   selector: 'ngx-charts-bubble-chart-interactive',
@@ -135,7 +136,7 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
   @Input() maxRadius = 10;
   @Input() minRadius = 3;
   @Input() autoScale: boolean;
-  @Input() schemeType = 'ordinal';
+  @Input() schemeType = ScaleType.ordinal;
   @Input() legendPosition: string = 'right';
   @Input() tooltipDisabled: boolean = false;
   @Input() xScaleMin: any;

@@ -9,6 +9,7 @@ import { curveLinear } from 'd3-shape';
 
 import { calculateViewDimensions, ViewDimensions, BaseChartComponent, ColorHelper } from '../../src';
 import { getUniqueXDomainValues } from '../../src/common/domain.helper';
+import { ScaleType } from '../../src/utils/scale-type.enum';
 
 @Component({
   selector: 'ngx-charts-sparkline',
@@ -44,7 +45,7 @@ export class SparklineComponent extends BaseChartComponent {
 
   @Input() autoScale = false;
   @Input() curve: any = curveLinear;
-  @Input() schemeType: string = 'linear';
+  @Input() schemeType = ScaleType.linear;
   @Input() valueDomain: number[];
   @Input() animations: boolean = true;
 
@@ -86,7 +87,7 @@ export class SparklineComponent extends BaseChartComponent {
     this.yScale = this.getYScale(this.yDomain, this.dims.height);
 
     this.setColors();
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
   }
 
   getXDomain(): any[] {
