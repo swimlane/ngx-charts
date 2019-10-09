@@ -3,6 +3,7 @@ import { select } from 'd3-selection';
 
 import { invertColor } from '../utils/color-utils';
 import { trimLabel } from '../common/trim-label.helper';
+import { escapeLabel } from '../common/label.helper';
 import { id } from '../utils/id';
 
 @Component({
@@ -86,7 +87,7 @@ export class TreeMapCellComponent implements OnChanges {
     this.update();
 
     this.valueFormatting = this.valueFormatting || (value => value.toLocaleString());
-    const labelFormatting = this.labelFormatting || (cell => trimLabel(cell.label, 55));
+    const labelFormatting = this.labelFormatting || (cell => escapeLabel(trimLabel(cell.label, 55)));
 
     const cellData = {
       data: this.data,
