@@ -33,6 +33,7 @@ import { DataItem } from '../models/chart-data.model';
           [series]="data"
           [showLabels]="labels"
           [labelFormatting]="labelFormatting"
+          [labelVisibility]="labelVisibility"
           [trimLabels]="trimLabels"
           [maxLabelLength]="maxLabelLength"
           [activeEntries]="activeEntries"
@@ -68,6 +69,7 @@ export class PieChartComponent extends BaseChartComponent {
   @Input() activeEntries: any[] = [];
   @Input() tooltipDisabled: boolean = false;
   @Input() labelFormatting: any;
+  @Input() labelVisibility: (arc: any) => boolean;
   @Input() trimLabels: boolean = true;
   @Input() maxLabelLength: number = 10;
   @Input() tooltipText: any;

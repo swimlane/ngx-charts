@@ -15,6 +15,7 @@
 | animations      | boolean     | true          | enable animations                                                                                                 |
 | labels          | boolean     | false         | show or hide the labels                                                                                           |
 | labelFormatting | function    |               | function that formats the label text                                                                              |
+| labelVisibility | function    |               | function that determines label visivility. By default labels for very small pie arcs are not visible              |
 | trimLabels      | boolean     | true          | trim the labels beyond a certain maximum length                                                                   |
 | maxLabelLength  | number      | 10            | maximum length of the labels. If `trimLabels` is `true`, labels over this length will be trimmed                  |
 | legend          | boolean     | false         | show or hide the legend                                                                                           |
