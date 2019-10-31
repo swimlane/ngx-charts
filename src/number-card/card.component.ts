@@ -123,7 +123,7 @@ export class CardComponent implements OnChanges, OnDestroy {
 
       this.transform = `translate(${this.x} , ${this.y})`;
 
-      this.textWidth = Math.max(0, this.width) - this.textPadding[1] - this.textPadding[3];
+      this.textWidth = Math.max(0, this.width - this.textPadding[1] - this.textPadding[3]);
       this.cardWidth = Math.max(0, this.width);
       this.cardHeight = Math.max(0, this.height);
 
