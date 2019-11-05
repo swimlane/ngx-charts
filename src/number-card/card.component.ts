@@ -151,7 +151,7 @@ export class CardComponent implements OnChanges, OnDestroy {
         if (hasValue && !this.initialized) {
           setTimeout(() => this.startCount(), 20);
         }
-      }, 8);
+      }, 400);
     });
   }
 
