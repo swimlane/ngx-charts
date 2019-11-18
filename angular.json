@@ -54,8 +54,7 @@
             "tsConfig": "projects/ngx-charts-demo/tsconfig.app.json",
             "aot": false,
             "assets": ["projects/ngx-charts-demo/src/favicon.ico", "projects/ngx-charts-demo/src/assets"],
-            "styles": ["projects/ngx-charts-demo/src/styles.scss"],
-            "scripts": []
+            "styles": ["projects/ngx-charts-demo/src/styles.scss"]
           },
           "configurations": {
             "production": {
