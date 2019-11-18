@@ -1,8 +1,9 @@
 import { Component, Input, Output, EventEmitter, OnChanges, ChangeDetectionStrategy } from '@angular/core';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel } from '../../../../ngx-charts-cli/src/common/label.helper';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'g[ngx-combo-charts-series-vertical]',
   template: `
     <svg:g
@@ -163,7 +164,6 @@ export class ComboSeriesVerticalComponent implements OnChanges {
 
       this.getSeriesTooltips(this.seriesLine, index);
       const lineValue = this.seriesLine[0].series[index].value;
-      const lineName = this.seriesLine[0].series[index].name;
       bar.tooltipText = `
         <span class="tooltip-label">${tooltipLabel}</span>
         <span class="tooltip-val"> Y1 - ${value.toLocaleString()} • Y2 - ${lineValue.toLocaleString()}%</span>

@@ -12,6 +12,7 @@ import {
 import { id } from '../../../../ngx-charts-cli/src/utils';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'ngx-charts-timeline-filter-bar-chart',
   template: `
     <ngx-charts-chart

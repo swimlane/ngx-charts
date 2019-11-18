@@ -10,9 +10,11 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { select } from 'd3-selection';
-import { transition } from 'd3-transition';
 import { roundedRect } from '../common/shape.helper';
 import { id } from '../utils/id';
+
+/* tslint:disable-next-line */
+import { transition } from 'd3-transition';
 
 @Component({
   selector: 'g[ngx-charts-bar]',

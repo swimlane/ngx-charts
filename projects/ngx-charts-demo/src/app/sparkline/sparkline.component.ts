@@ -11,6 +11,7 @@ import {
 import { getUniqueXDomainValues } from '../../../../ngx-charts-cli/src/common/domain.helper';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'ngx-charts-sparkline',
   template: `
     <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations">

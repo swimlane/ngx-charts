@@ -23,6 +23,7 @@ import { getScaleType } from '../../../../ngx-charts-cli/src/common/domain.helpe
 import { id } from '../../../../ngx-charts-cli/src/utils/id';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'ngx-charts-bubble-chart-interactive',
   template: `
     <ngx-charts-chart

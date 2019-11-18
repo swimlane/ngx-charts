@@ -4,29 +4,24 @@ import {
   ViewEncapsulation,
   Output,
   EventEmitter,
-  ChangeDetectionStrategy,
   ViewChild,
   HostListener,
-  OnInit,
-  OnChanges,
   ContentChild,
   TemplateRef
 } from '@angular/core';
-import { trigger, state, style, animate, transition } from '@angular/animations';
 
 import {
-  NgxChartsModule,
   BaseChartComponent,
-  LineComponent,
   LineSeriesComponent,
   calculateViewDimensions,
   ViewDimensions,
   ColorHelper
 } from '../../../../ngx-charts-cli/src';
-import { area, line, curveLinear } from 'd3-shape';
+import { curveLinear } from 'd3-shape';
 import { scaleBand, scaleLinear, scalePoint, scaleTime } from 'd3-scale';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'combo-chart-component',
   template: `
     <ngx-charts-chart

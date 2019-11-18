@@ -12,6 +12,7 @@ import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel } from '../../../../ngx-charts-cli/src/common/label.helper';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'g[ngx-charts-bubble-series-interactive]',
   template: `
     <svg:g *ngFor="let circle of circles; trackBy: trackBy">

@@ -20,7 +20,6 @@ import {
 export class InjectionService {
   static globalRootViewContainer: ComponentRef<any> = null;
   // tslint:disable-next-line: variable-name
-  private _container: ComponentRef<any>;
 
   /**
    * Sets a default global root view container. This is useful for
@@ -30,6 +29,8 @@ export class InjectionService {
   static setGlobalRootViewContainer(container: ComponentRef<any>): void {
     InjectionService.globalRootViewContainer = container;
   }
+
+  private _container: ComponentRef<any>;
 
   constructor(
     private applicationRef: ApplicationRef,
