@@ -1,5 +1,11 @@
 # Changelog
 
+## 12.1.0
+
+- Enhancement: Sanitize tooltip labels (#1241)
+- Bug: fix line chart scaling on charts with large domain (#1204)
+- Bug: add check for undefined xScale in groupTransform (#1273)
+
 ## 12.0.1
 
 - Bug: Pass the correct number of parameters to fix production build (#1203)

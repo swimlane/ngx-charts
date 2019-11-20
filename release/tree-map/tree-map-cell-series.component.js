@@ -8,6 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
+import { escapeLabel } from '../common/label.helper';
 var TreeMapCellSeriesComponent = /** @class */ (function () {
     function TreeMapCellSeriesComponent() {
         this.gradient = false;
@@ -41,7 +42,7 @@ var TreeMapCellSeriesComponent = /** @class */ (function () {
     };
     TreeMapCellSeriesComponent.prototype.getTooltipText = function (_a) {
         var label = _a.label, value = _a.value;
-        return "\n      <span class=\"tooltip-label\">" + label + "</span>\n      <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n    ";
+        return "\n      <span class=\"tooltip-label\">" + escapeLabel(label) + "</span>\n      <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n    ";
     };
     TreeMapCellSeriesComponent.prototype.onClick = function (data) {
         this.select.emit(data);

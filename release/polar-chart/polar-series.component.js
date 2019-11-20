@@ -11,6 +11,7 @@ import { Component, Input, ChangeDetectionStrategy, TemplateRef, Output, EventEm
 import { lineRadial } from 'd3-shape';
 import { id } from '../utils/id';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
+import { escapeLabel } from '../common/label.helper';
 var PolarSeriesComponent = /** @class */ (function () {
     function PolarSeriesComponent() {
         this.tooltipDisabled = false;
@@ -104,7 +105,7 @@ var PolarSeriesComponent = /** @class */ (function () {
     };
     PolarSeriesComponent.prototype.defaultTooltipText = function (_a) {
         var label = _a.label, value = _a.value;
-        return "\n      <span class=\"tooltip-label\">" + this.data.name + " \u2022 " + label + "</span>\n      <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n    ";
+        return "\n      <span class=\"tooltip-label\">" + escapeLabel(this.data.name) + " \u2022 " + escapeLabel(label) + "</span>\n      <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n    ";
     };
     PolarSeriesComponent.prototype.updateGradients = function () {
         this.hasGradient = this.gradient || this.colors.scaleType === 'linear';

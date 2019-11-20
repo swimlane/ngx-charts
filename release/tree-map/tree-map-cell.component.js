@@ -11,6 +11,7 @@ import { Component, Input, Output, EventEmitter, ElementRef, ChangeDetectionStra
 import { select } from 'd3-selection';
 import { invertColor } from '../utils/color-utils';
 import { trimLabel } from '../common/trim-label.helper';
+import { escapeLabel } from '../common/label.helper';
 import { id } from '../utils/id';
 var TreeMapCellComponent = /** @class */ (function () {
     function TreeMapCellComponent(element) {
@@ -23,7 +24,7 @@ var TreeMapCellComponent = /** @class */ (function () {
     TreeMapCellComponent.prototype.ngOnChanges = function () {
         this.update();
         this.valueFormatting = this.valueFormatting || (function (value) { return value.toLocaleString(); });
-        var labelFormatting = this.labelFormatting || (function (cell) { return trimLabel(cell.label, 55); });
+        var labelFormatting = this.labelFormatting || (function (cell) { return escapeLabel(trimLabel(cell.label, 55)); });
         var cellData = {
             data: this.data,
             label: this.label,

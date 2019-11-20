@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { formatLabel } from '../common/label.helper';
+import { formatLabel, escapeLabel } from '../common/label.helper';
 var BubbleSeriesComponent = /** @class */ (function () {
     function BubbleSeriesComponent() {
         this.tooltipDisabled = false;
@@ -80,8 +80,9 @@ var BubbleSeriesComponent = /** @class */ (function () {
         var name = hasSeriesName && hasTooltipLabel
             ? circle.seriesName + " \u2022 " + circle.tooltipLabel
             : circle.seriesName + circle.tooltipLabel;
-        var tooltipTitle = hasSeriesName || hasTooltipLabel ? "<span class=\"tooltip-label\">" + name + "</span>" : '';
-        return "\n      " + tooltipTitle + "\n      <span class=\"tooltip-label\">\n        <label>" + xAxisLabel + "</label> " + x + "<br />\n        <label>" + yAxisLabel + "</label> " + y + "\n      </span>\n      <span class=\"tooltip-val\">\n        " + radiusValue + "\n      </span>\n    ";
+        var tooltipTitle = hasSeriesName || hasTooltipLabel ?
+            "<span class=\"tooltip-label\">" + escapeLabel(name) + "</span>" : '';
+        return "\n      " + tooltipTitle + "\n      <span class=\"tooltip-label\">\n        <label>" + escapeLabel(xAxisLabel) + "</label> " + escapeLabel(x) + "<br />\n        <label>" + escapeLabel(yAxisLabel) + "</label> " + escapeLabel(y) + "\n      </span>\n      <span class=\"tooltip-val\">\n        " + escapeLabel(radiusValue) + "\n      </span>\n    ";
     };
     BubbleSeriesComponent.prototype.onClick = function (data) {
         this.select.emit(data);
