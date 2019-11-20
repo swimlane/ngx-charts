@@ -6,3 +6,11 @@
  * @returns {string}
  */
 export declare function formatLabel(label: any): string;
+/**
+ * Escapes a label.
+ *
+ * @export
+ * @param {*} label
+ * @returns {string}
+ */
+export declare function escapeLabel(label: any): string;

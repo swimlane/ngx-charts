@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
 import { max } from 'd3-array';
 import { arc, pie } from 'd3-shape';
-import { formatLabel } from '../common/label.helper';
+import { formatLabel, escapeLabel } from '../common/label.helper';
 var PieSeriesComponent = /** @class */ (function () {
     function PieSeriesComponent() {
         this.series = [];
@@ -98,7 +98,7 @@ var PieSeriesComponent = /** @class */ (function () {
     PieSeriesComponent.prototype.defaultTooltipText = function (myArc) {
         var label = this.label(myArc);
         var val = formatLabel(myArc.data.value);
-        return "\n      <span class=\"tooltip-label\">" + label + "</span>\n      <span class=\"tooltip-val\">" + val + "</span>\n    ";
+        return "\n      <span class=\"tooltip-label\">" + escapeLabel(label) + "</span>\n      <span class=\"tooltip-val\">" + val + "</span>\n    ";
     };
     PieSeriesComponent.prototype.color = function (myArc) {
         return this.colors.getColor(this.label(myArc));

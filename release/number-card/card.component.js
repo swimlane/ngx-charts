@@ -11,6 +11,7 @@ import { Component, Input, Output, EventEmitter, ElementRef, ViewChild, ChangeDe
 import { trimLabel } from '../common/trim-label.helper';
 import { roundedRect } from '../common/shape.helper';
 import { count, decimalChecker } from '../common/count';
+import { escapeLabel } from '../common/label.helper';
 var CardComponent = /** @class */ (function () {
     function CardComponent(element, cd, zone) {
         this.cd = cd;
@@ -37,7 +38,7 @@ var CardComponent = /** @class */ (function () {
         this.zone.run(function () {
             var hasValue = _this.data && typeof _this.data.value !== 'undefined';
             var valueFormatting = _this.valueFormatting || (function (card) { return card.value.toLocaleString(); });
-            var labelFormatting = _this.labelFormatting || (function (card) { return trimLabel(card.label, 55); });
+            var labelFormatting = _this.labelFormatting || (function (card) { return escapeLabel(trimLabel(card.label, 55)); });
             _this.transform = "translate(" + _this.x + " , " + _this.y + ")";
             _this.textWidth = Math.max(0, _this.width) - _this.textPadding[1] - _this.textPadding[3];
             _this.cardWidth = Math.max(0, _this.width);

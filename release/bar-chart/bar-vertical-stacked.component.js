@@ -163,7 +163,7 @@ var BarVerticalStackedComponent = /** @class */ (function (_super) {
         }
     };
     BarVerticalStackedComponent.prototype.groupTransform = function (group) {
-        return "translate(" + this.xScale(group.name) + ", 0)";
+        return "translate(" + (this.xScale(group.name) || 0) + ", 0)";
     };
     BarVerticalStackedComponent.prototype.onClick = function (data, group) {
         if (group) {

@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { formatLabel } from '../common/label.helper';
+import { formatLabel, escapeLabel } from '../common/label.helper';
 export var D0Types;
 (function (D0Types) {
     D0Types["positive"] = "positive";
@@ -128,7 +128,7 @@ var SeriesVerticalComponent = /** @class */ (function () {
             }
             bar.tooltipText = _this.tooltipDisabled
                 ? undefined
-                : "\n        <span class=\"tooltip-label\">" + tooltipLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
+                : "\n        <span class=\"tooltip-label\">" + escapeLabel(tooltipLabel) + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
             return bar;
         });
         this.updateDataLabels();

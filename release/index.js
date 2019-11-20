@@ -1,5 +1,5 @@
 /**
- * ngx-charts v"12.0.1" (https://github.com/swimlane/ngx-charts)
+ * ngx-charts v"12.1.0" (https://github.com/swimlane/ngx-charts)
  * Copyright 2019
  * Licensed under MIT
  */
@@ -3814,7 +3814,7 @@ var BarLabelComponent = /** @class */ (function () {
             this.formatedValue = this.valueFormatting(this.value);
         }
         else {
-            this.formatedValue = Object(__WEBPACK_IMPORTED_MODULE_1__common_label_helper__["a" /* formatLabel */])(this.value);
+            this.formatedValue = Object(__WEBPACK_IMPORTED_MODULE_1__common_label_helper__["b" /* formatLabel */])(this.value);
         }
         if (this.orientation === 'horizontal') {
             this.x = this.barX + this.barWidth;
@@ -4866,7 +4866,7 @@ var BarVerticalStackedComponent = /** @class */ (function (_super) {
         }
     };
     BarVerticalStackedComponent.prototype.groupTransform = function (group) {
-        return "translate(" + this.xScale(group.name) + ", 0)";
+        return "translate(" + (this.xScale(group.name) || 0) + ", 0)";
     };
     BarVerticalStackedComponent.prototype.onClick = function (data, group) {
         if (group) {
@@ -5874,7 +5874,7 @@ var SeriesHorizontal = /** @class */ (function () {
         this.bars = this.series.map(function (d, index) {
             var value = d.value;
             var label = _this.getLabel(d);
-            var formattedLabel = Object(__WEBPACK_IMPORTED_MODULE_2__common_label_helper__["a" /* formatLabel */])(label);
+            var formattedLabel = Object(__WEBPACK_IMPORTED_MODULE_2__common_label_helper__["b" /* formatLabel */])(label);
             var roundEdges = _this.roundEdges;
             d0Type = value > 0 ? __WEBPACK_IMPORTED_MODULE_3__series_vertical_component__["a" /* D0Types */].positive : __WEBPACK_IMPORTED_MODULE_3__series_vertical_component__["a" /* D0Types */].negative;
             var bar = {
@@ -5946,7 +5946,7 @@ var SeriesHorizontal = /** @class */ (function () {
             }
             bar.tooltipText = _this.tooltipDisabled
                 ? undefined
-                : "\n        <span class=\"tooltip-label\">" + tooltipLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
+                : "\n        <span class=\"tooltip-label\">" + Object(__WEBPACK_IMPORTED_MODULE_2__common_label_helper__["a" /* escapeLabel */])(tooltipLabel) + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
             return bar;
         });
         this.updateDataLabels();
@@ -6182,7 +6182,7 @@ var SeriesVerticalComponent = /** @class */ (function () {
         this.bars = this.series.map(function (d, index) {
             var value = d.value;
             var label = _this.getLabel(d);
-            var formattedLabel = Object(__WEBPACK_IMPORTED_MODULE_2__common_label_helper__["a" /* formatLabel */])(label);
+            var formattedLabel = Object(__WEBPACK_IMPORTED_MODULE_2__common_label_helper__["b" /* formatLabel */])(label);
             var roundEdges = _this.roundEdges;
             d0Type = value > 0 ? D0Types.positive : D0Types.negative;
             var bar = {
@@ -6257,7 +6257,7 @@ var SeriesVerticalComponent = /** @class */ (function () {
             }
             bar.tooltipText = _this.tooltipDisabled
                 ? undefined
-                : "\n        <span class=\"tooltip-label\">" + tooltipLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
+                : "\n        <span class=\"tooltip-label\">" + Object(__WEBPACK_IMPORTED_MODULE_2__common_label_helper__["a" /* escapeLabel */])(tooltipLabel) + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
             return bar;
         });
         this.updateDataLabels();
@@ -6997,7 +6997,7 @@ var BubbleSeriesComponent = /** @class */ (function () {
                 var x = d.x;
                 var r = d.r;
                 var radius = _this.rScale(r || 1);
-                var tooltipLabel = Object(__WEBPACK_IMPORTED_MODULE_2__common_label_helper__["a" /* formatLabel */])(d.name);
+                var tooltipLabel = Object(__WEBPACK_IMPORTED_MODULE_2__common_label_helper__["b" /* formatLabel */])(d.name);
                 var cx = _this.xScaleType === 'linear' ? _this.xScale(Number(x)) : _this.xScale(x);
                 var cy = _this.yScaleType === 'linear' ? _this.yScale(Number(y)) : _this.yScale(y);
                 var color = _this.colors.scaleType === 'linear' ? _this.colors.getColor(r) : _this.colors.getColor(seriesName);
@@ -7036,16 +7036,17 @@ var BubbleSeriesComponent = /** @class */ (function () {
         var hasRadius = typeof circle.r !== 'undefined';
         var hasTooltipLabel = circle.tooltipLabel && circle.tooltipLabel.length;
         var hasSeriesName = circle.seriesName && circle.seriesName.length;
-        var radiusValue = hasRadius ? Object(__WEBPACK_IMPORTED_MODULE_2__common_label_helper__["a" /* formatLabel */])(circle.r) : '';
+        var radiusValue = hasRadius ? Object(__WEBPACK_IMPORTED_MODULE_2__common_label_helper__["b" /* formatLabel */])(circle.r) : '';
         var xAxisLabel = this.xAxisLabel && this.xAxisLabel !== '' ? this.xAxisLabel + ":" : '';
         var yAxisLabel = this.yAxisLabel && this.yAxisLabel !== '' ? this.yAxisLabel + ":" : '';
-        var x = Object(__WEBPACK_IMPORTED_MODULE_2__common_label_helper__["a" /* formatLabel */])(circle.x);
-        var y = Object(__WEBPACK_IMPORTED_MODULE_2__common_label_helper__["a" /* formatLabel */])(circle.y);
+        var x = Object(__WEBPACK_IMPORTED_MODULE_2__common_label_helper__["b" /* formatLabel */])(circle.x);
+        var y = Object(__WEBPACK_IMPORTED_MODULE_2__common_label_helper__["b" /* formatLabel */])(circle.y);
         var name = hasSeriesName && hasTooltipLabel
             ? circle.seriesName + " \u2022 " + circle.tooltipLabel
             : circle.seriesName + circle.tooltipLabel;
-        var tooltipTitle = hasSeriesName || hasTooltipLabel ? "<span class=\"tooltip-label\">" + name + "</span>" : '';
-        return "\n      " + tooltipTitle + "\n      <span class=\"tooltip-label\">\n        <label>" + xAxisLabel + "</label> " + x + "<br />\n        <label>" + yAxisLabel + "</label> " + y + "\n      </span>\n      <span class=\"tooltip-val\">\n        " + radiusValue + "\n      </span>\n    ";
+        var tooltipTitle = hasSeriesName || hasTooltipLabel ?
+            "<span class=\"tooltip-label\">" + Object(__WEBPACK_IMPORTED_MODULE_2__common_label_helper__["a" /* escapeLabel */])(name) + "</span>" : '';
+        return "\n      " + tooltipTitle + "\n      <span class=\"tooltip-label\">\n        <label>" + Object(__WEBPACK_IMPORTED_MODULE_2__common_label_helper__["a" /* escapeLabel */])(xAxisLabel) + "</label> " + Object(__WEBPACK_IMPORTED_MODULE_2__common_label_helper__["a" /* escapeLabel */])(x) + "<br />\n        <label>" + Object(__WEBPACK_IMPORTED_MODULE_2__common_label_helper__["a" /* escapeLabel */])(yAxisLabel) + "</label> " + Object(__WEBPACK_IMPORTED_MODULE_2__common_label_helper__["a" /* escapeLabel */])(y) + "\n      </span>\n      <span class=\"tooltip-val\">\n        " + Object(__WEBPACK_IMPORTED_MODULE_2__common_label_helper__["a" /* escapeLabel */])(radiusValue) + "\n      </span>\n    ";
     };
     BubbleSeriesComponent.prototype.onClick = function (data) {
         this.select.emit(data);
@@ -8783,7 +8784,7 @@ var CircleSeriesComponent = /** @class */ (function () {
         var seriesName = this.data.name;
         var value = d.value;
         var label = d.name;
-        var tooltipLabel = Object(__WEBPACK_IMPORTED_MODULE_2__common_label_helper__["a" /* formatLabel */])(label);
+        var tooltipLabel = Object(__WEBPACK_IMPORTED_MODULE_2__common_label_helper__["b" /* formatLabel */])(label);
         var cx;
         if (this.scaleType === 'time') {
             cx = this.xScale(label);
@@ -8835,7 +8836,7 @@ var CircleSeriesComponent = /** @class */ (function () {
     };
     CircleSeriesComponent.prototype.getTooltipText = function (_a) {
         var tooltipLabel = _a.tooltipLabel, value = _a.value, seriesName = _a.seriesName, min = _a.min, max = _a.max;
-        return "\n      <span class=\"tooltip-label\">" + seriesName + " \u2022 " + tooltipLabel + "</span>\n      <span class=\"tooltip-val\">" + value.toLocaleString() + this.getTooltipMinMaxText(min, max) + "</span>\n    ";
+        return "\n      <span class=\"tooltip-label\">" + Object(__WEBPACK_IMPORTED_MODULE_2__common_label_helper__["a" /* escapeLabel */])(seriesName) + " \u2022 " + Object(__WEBPACK_IMPORTED_MODULE_2__common_label_helper__["a" /* escapeLabel */])(tooltipLabel) + "</span>\n      <span class=\"tooltip-val\">" + value.toLocaleString() + this.getTooltipMinMaxText(min, max) + "</span>\n    ";
     };
     CircleSeriesComponent.prototype.getTooltipMinMaxText = function (min, max) {
         if (min !== undefined || max !== undefined) {
@@ -9786,7 +9787,7 @@ var GridPanelComponent = /** @class */ (function () {
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "C", function() { return __WEBPACK_IMPORTED_MODULE_3__axes__["d"]; });
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "D", function() { return __WEBPACK_IMPORTED_MODULE_3__axes__["e"]; });
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "E", function() { return __WEBPACK_IMPORTED_MODULE_3__axes__["f"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "N", function() { return __WEBPACK_IMPORTED_MODULE_3__axes__["g"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "O", function() { return __WEBPACK_IMPORTED_MODULE_3__axes__["g"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__count__ = __webpack_require__("./src/common/count/index.ts");
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "l", function() { return __WEBPACK_IMPORTED_MODULE_4__count__["a"]; });
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "G", function() { return __WEBPACK_IMPORTED_MODULE_4__count__["b"]; });
@@ -9806,8 +9807,8 @@ var GridPanelComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__circle_series_component__ = __webpack_require__("./src/common/circle-series.component.ts");
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "j", function() { return __WEBPACK_IMPORTED_MODULE_11__circle_series_component__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__grid_layout_helper__ = __webpack_require__("./src/common/grid-layout.helper.ts");
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "L", function() { return __WEBPACK_IMPORTED_MODULE_12__grid_layout_helper__["a"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "M", function() { return __WEBPACK_IMPORTED_MODULE_12__grid_layout_helper__["b"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "M", function() { return __WEBPACK_IMPORTED_MODULE_12__grid_layout_helper__["a"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "N", function() { return __WEBPACK_IMPORTED_MODULE_12__grid_layout_helper__["b"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__grid_panel_component__ = __webpack_require__("./src/common/grid-panel.component.ts");
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "m", function() { return __WEBPACK_IMPORTED_MODULE_13__grid_panel_component__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__grid_panel_series_component__ = __webpack_require__("./src/common/grid-panel-series.component.ts");
@@ -9819,16 +9820,17 @@ var GridPanelComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__tooltip_area_component__ = __webpack_require__("./src/common/tooltip-area.component.ts");
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "w", function() { return __WEBPACK_IMPORTED_MODULE_17__tooltip_area_component__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__tick_format_helper__ = __webpack_require__("./src/common/tick-format.helper.ts");
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "O", function() { return __WEBPACK_IMPORTED_MODULE_18__tick_format_helper__["a"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "P", function() { return __WEBPACK_IMPORTED_MODULE_18__tick_format_helper__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__trim_label_helper__ = __webpack_require__("./src/common/trim-label.helper.ts");
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "P", function() { return __WEBPACK_IMPORTED_MODULE_19__trim_label_helper__["a"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "Q", function() { return __WEBPACK_IMPORTED_MODULE_19__trim_label_helper__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__view_dimensions_helper__ = __webpack_require__("./src/common/view-dimensions.helper.ts");
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "F", function() { return __WEBPACK_IMPORTED_MODULE_20__view_dimensions_helper__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__label_helper__ = __webpack_require__("./src/common/label.helper.ts");
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "I", function() { return __WEBPACK_IMPORTED_MODULE_21__label_helper__["a"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "J", function() { return __WEBPACK_IMPORTED_MODULE_21__label_helper__["b"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__domain_helper__ = __webpack_require__("./src/common/domain.helper.ts");
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "J", function() { return __WEBPACK_IMPORTED_MODULE_22__domain_helper__["a"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "K", function() { return __WEBPACK_IMPORTED_MODULE_22__domain_helper__["b"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "K", function() { return __WEBPACK_IMPORTED_MODULE_22__domain_helper__["a"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "L", function() { return __WEBPACK_IMPORTED_MODULE_22__domain_helper__["b"]; });
 
 
 
@@ -9860,7 +9862,8 @@ var GridPanelComponent = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = formatLabel;
+/* harmony export (immutable) */ __webpack_exports__["b"] = formatLabel;
+/* harmony export (immutable) */ __webpack_exports__["a"] = escapeLabel;
 /**
  * Formats a label given a date, number or string.
  *
@@ -9876,6 +9879,25 @@ function formatLabel(label) {
         label = label.toLocaleString();
     }
     return label;
+}
+/**
+ * Escapes a label.
+ *
+ * @export
+ * @param {*} label
+ * @returns {string}
+ */
+function escapeLabel(label) {
+    return label.toLocaleString().replace(/[&'`"<>]/g, function (match) {
+        return {
+            '&': '&amp;',
+            '\'': '&#x27;',
+            '`': '&#x60;',
+            '"': '&quot;',
+            '<': '&lt;',
+            '>': '&gt;',
+        }[match];
+    });
 }
 
 
@@ -9943,7 +9965,7 @@ var AdvancedLegendComponent = /** @class */ (function () {
     AdvancedLegendComponent.prototype.getLegendItems = function () {
         var _this = this;
         return this.data.map(function (d) {
-            var label = Object(__WEBPACK_IMPORTED_MODULE_2__label_helper__["a" /* formatLabel */])(d.name);
+            var label = Object(__WEBPACK_IMPORTED_MODULE_2__label_helper__["b" /* formatLabel */])(d.name);
             var value = d.value;
             var color = _this.colors.getColor(label);
             var percentage = _this.total > 0 ? (value / _this.total) * 100 : 0;
@@ -10192,7 +10214,7 @@ var LegendComponent = /** @class */ (function () {
     LegendComponent.prototype.getLegendEntries = function () {
         var items = [];
         var _loop_1 = function (label) {
-            var formattedLabel = Object(__WEBPACK_IMPORTED_MODULE_1__label_helper__["a" /* formatLabel */])(label);
+            var formattedLabel = Object(__WEBPACK_IMPORTED_MODULE_1__label_helper__["b" /* formatLabel */])(label);
             var idx = items.findIndex(function (i) {
                 return i.label === formattedLabel;
             });
@@ -12420,7 +12442,8 @@ function createMouseEvent(name, bubbles, cancelable) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_chart_component__ = __webpack_require__("./src/common/base-chart.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_view_dimensions_helper__ = __webpack_require__("./src/common/view-dimensions.helper.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_color_helper__ = __webpack_require__("./src/common/color.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__events__ = __webpack_require__("./src/events.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__common_label_helper__ = __webpack_require__("./src/common/label.helper.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__events__ = __webpack_require__("./src/events.ts");
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -12443,6 +12466,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -12558,6 +12582,9 @@ var ForceDirectedGraphComponent = /** @class */ (function (_super) {
         this.draggingNode.fy = undefined;
         this.draggingNode = undefined;
     };
+    ForceDirectedGraphComponent.prototype.escape = function (label) {
+        return Object(__WEBPACK_IMPORTED_MODULE_6__common_label_helper__["a" /* escapeLabel */])(label);
+    };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
         __metadata("design:type", Object)
@@ -12637,7 +12664,7 @@ var ForceDirectedGraphComponent = /** @class */ (function (_super) {
     ForceDirectedGraphComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'ngx-charts-force-directed-graph',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [animations]=\"animations\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n    >\n      <svg:g [attr.transform]=\"transform\" class=\"force-directed-graph chart\">\n        <svg:g class=\"links\">\n          <svg:g *ngFor=\"let link of links; trackBy: trackLinkBy\">\n            <ng-template\n              *ngIf=\"linkTemplate\"\n              [ngTemplateOutlet]=\"linkTemplate\"\n              [ngTemplateOutletContext]=\"{ $implicit: link }\"\n            ></ng-template>\n            <svg:line\n              *ngIf=\"!linkTemplate\"\n              strokeWidth=\"1\"\n              class=\"edge\"\n              [attr.x1]=\"link.source.x\"\n              [attr.y1]=\"link.source.y\"\n              [attr.x2]=\"link.target.x\"\n              [attr.y2]=\"link.target.y\"\n            />\n          </svg:g>\n        </svg:g>\n        <svg:g class=\"nodes\">\n          <svg:g\n            *ngFor=\"let node of nodes; trackBy: trackNodeBy\"\n            [attr.transform]=\"'translate(' + node.x + ',' + node.y + ')'\"\n            [attr.fill]=\"colors.getColor(groupResultsBy(node))\"\n            [attr.stroke]=\"colors.getColor(groupResultsBy(node))\"\n            (mousedown)=\"onDragStart(node, $event)\"\n            (click)=\"onClick({ name: node.value })\"\n            ngx-tooltip\n            [tooltipDisabled]=\"tooltipDisabled\"\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"tooltipTemplate ? undefined : node.value\"\n            [tooltipTemplate]=\"tooltipTemplate\"\n            [tooltipContext]=\"node\"\n          >\n            <ng-template\n              *ngIf=\"nodeTemplate\"\n              [ngTemplateOutlet]=\"nodeTemplate\"\n              [ngTemplateOutletContext]=\"{ $implicit: node }\"\n            ></ng-template>\n            <svg:circle *ngIf=\"!nodeTemplate\" r=\"5\" />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [animations]=\"animations\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n    >\n      <svg:g [attr.transform]=\"transform\" class=\"force-directed-graph chart\">\n        <svg:g class=\"links\">\n          <svg:g *ngFor=\"let link of links; trackBy: trackLinkBy\">\n            <ng-template\n              *ngIf=\"linkTemplate\"\n              [ngTemplateOutlet]=\"linkTemplate\"\n              [ngTemplateOutletContext]=\"{ $implicit: link }\"\n            ></ng-template>\n            <svg:line\n              *ngIf=\"!linkTemplate\"\n              strokeWidth=\"1\"\n              class=\"edge\"\n              [attr.x1]=\"link.source.x\"\n              [attr.y1]=\"link.source.y\"\n              [attr.x2]=\"link.target.x\"\n              [attr.y2]=\"link.target.y\"\n            />\n          </svg:g>\n        </svg:g>\n        <svg:g class=\"nodes\">\n          <svg:g\n            *ngFor=\"let node of nodes; trackBy: trackNodeBy\"\n            [attr.transform]=\"'translate(' + node.x + ',' + node.y + ')'\"\n            [attr.fill]=\"colors.getColor(groupResultsBy(node))\"\n            [attr.stroke]=\"colors.getColor(groupResultsBy(node))\"\n            (mousedown)=\"onDragStart(node, $event)\"\n            (click)=\"onClick({ name: node.value })\"\n            ngx-tooltip\n            [tooltipDisabled]=\"tooltipDisabled\"\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"tooltipTemplate ? undefined : escape(node.value)\"\n            [tooltipTemplate]=\"tooltipTemplate\"\n            [tooltipContext]=\"node\"\n          >\n            <ng-template\n              *ngIf=\"nodeTemplate\"\n              [ngTemplateOutlet]=\"nodeTemplate\"\n              [ngTemplateOutletContext]=\"{ $implicit: node }\"\n            ></ng-template>\n            <svg:circle *ngIf=\"!nodeTemplate\" r=\"5\" />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             styles: [__webpack_require__("./src/common/base-chart.component.scss"), __webpack_require__("./src/force-directed-graph/force-directed-graph.component.scss")],
             encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None,
             changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush
@@ -12734,15 +12761,15 @@ var GaugeArcComponent = /** @class */ (function () {
         this.deactivate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
     }
     GaugeArcComponent.prototype.tooltipText = function (arc) {
-        var label = Object(__WEBPACK_IMPORTED_MODULE_1__common_label_helper__["a" /* formatLabel */])(arc.data.name);
+        var label = Object(__WEBPACK_IMPORTED_MODULE_1__common_label_helper__["b" /* formatLabel */])(arc.data.name);
         var val;
         if (this.valueFormatting) {
             val = this.valueFormatting(arc.data.value);
         }
         else {
-            val = Object(__WEBPACK_IMPORTED_MODULE_1__common_label_helper__["a" /* formatLabel */])(arc.data.value);
+            val = Object(__WEBPACK_IMPORTED_MODULE_1__common_label_helper__["b" /* formatLabel */])(arc.data.value);
         }
-        return "\n      <span class=\"tooltip-label\">" + label + "</span>\n      <span class=\"tooltip-val\">" + val + "</span>\n    ";
+        return "\n      <span class=\"tooltip-label\">" + Object(__WEBPACK_IMPORTED_MODULE_1__common_label_helper__["a" /* escapeLabel */])(label) + "</span>\n      <span class=\"tooltip-val\">" + val + "</span>\n    ";
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
@@ -13677,7 +13704,7 @@ var HeatCellSeriesComponent = /** @class */ (function () {
                     height: _this.yScale.bandwidth(),
                     fill: _this.colors.getColor(value),
                     data: value,
-                    label: Object(__WEBPACK_IMPORTED_MODULE_1__common_label_helper__["a" /* formatLabel */])(cell.name),
+                    label: Object(__WEBPACK_IMPORTED_MODULE_1__common_label_helper__["b" /* formatLabel */])(cell.name),
                     series: row.name
                 });
             });
@@ -13686,7 +13713,7 @@ var HeatCellSeriesComponent = /** @class */ (function () {
     };
     HeatCellSeriesComponent.prototype.getTooltipText = function (_a) {
         var label = _a.label, data = _a.data, series = _a.series;
-        return "\n      <span class=\"tooltip-label\">" + series + " \u2022 " + label + "</span>\n      <span class=\"tooltip-val\">" + data.toLocaleString() + "</span>\n    ";
+        return "\n      <span class=\"tooltip-label\">" + Object(__WEBPACK_IMPORTED_MODULE_1__common_label_helper__["a" /* escapeLabel */])(series) + " \u2022 " + Object(__WEBPACK_IMPORTED_MODULE_1__common_label_helper__["a" /* escapeLabel */])(label) + "</span>\n      <span class=\"tooltip-val\">" + data.toLocaleString() + "</span>\n    ";
     };
     HeatCellSeriesComponent.prototype.trackBy = function (index, item) {
         return item.tooltipText;
@@ -14383,26 +14410,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "XAxisTicksComponent", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["C"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "YAxisComponent", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["D"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "YAxisTicksComponent", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["E"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "reduceTicks", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["N"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "reduceTicks", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["O"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "ColorHelper", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["k"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "ChartComponent", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["h"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "AreaComponent", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["c"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "BaseChartComponent", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["f"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "CircleComponent", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["i"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "CircleSeriesComponent", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["j"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "gridSize", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["M"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "gridLayout", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["L"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "gridSize", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["N"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "gridLayout", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["M"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "GridPanelComponent", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["m"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "GridPanelSeriesComponent", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["n"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "SvgLinearGradientComponent", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["t"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "SvgRadialGradientComponent", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["u"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "TooltipArea", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["w"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "tickFormat", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["O"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "trimLabel", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["P"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "tickFormat", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["P"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "trimLabel", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["Q"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "calculateViewDimensions", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["F"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "formatLabel", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["I"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getUniqueXDomainValues", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["K"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getScaleType", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["J"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "formatLabel", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["J"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "escapeLabel", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["I"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getUniqueXDomainValues", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["L"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getScaleType", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["K"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "LegendComponent", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["o"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "ScaleLegendComponent", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["q"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "LegendEntryComponent", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["p"]; });
@@ -15619,6 +15647,7 @@ var CardSeriesComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_trim_label_helper__ = __webpack_require__("./src/common/trim-label.helper.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_shape_helper__ = __webpack_require__("./src/common/shape.helper.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_count__ = __webpack_require__("./src/common/count/index.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_label_helper__ = __webpack_require__("./src/common/label.helper.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -15628,6 +15657,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -15658,7 +15688,7 @@ var CardComponent = /** @class */ (function () {
         this.zone.run(function () {
             var hasValue = _this.data && typeof _this.data.value !== 'undefined';
             var valueFormatting = _this.valueFormatting || (function (card) { return card.value.toLocaleString(); });
-            var labelFormatting = _this.labelFormatting || (function (card) { return Object(__WEBPACK_IMPORTED_MODULE_1__common_trim_label_helper__["a" /* trimLabel */])(card.label, 55); });
+            var labelFormatting = _this.labelFormatting || (function (card) { return Object(__WEBPACK_IMPORTED_MODULE_4__common_label_helper__["a" /* escapeLabel */])(Object(__WEBPACK_IMPORTED_MODULE_1__common_trim_label_helper__["a" /* trimLabel */])(card.label, 55)); });
             _this.transform = "translate(" + _this.x + " , " + _this.y + ")";
             _this.textWidth = Math.max(0, _this.width) - _this.textPadding[1] - _this.textPadding[3];
             _this.cardWidth = Math.max(0, _this.width);
@@ -16995,7 +17025,7 @@ var PieGridComponent = /** @class */ (function (_super) {
     };
     PieGridComponent.prototype.defaultTooltipText = function (_a) {
         var data = _a.data;
-        var label = Object(__WEBPACK_IMPORTED_MODULE_6__common_trim_label_helper__["a" /* trimLabel */])(Object(__WEBPACK_IMPORTED_MODULE_8__common_label_helper__["a" /* formatLabel */])(data.name));
+        var label = Object(__WEBPACK_IMPORTED_MODULE_6__common_trim_label_helper__["a" /* trimLabel */])(Object(__WEBPACK_IMPORTED_MODULE_8__common_label_helper__["b" /* formatLabel */])(data.name));
         var val = data.value.toLocaleString();
         return "\n      <span class=\"tooltip-label\">" + label + "</span>\n      <span class=\"tooltip-val\">" + val + "</span>\n    ";
     };
@@ -17009,7 +17039,7 @@ var PieGridComponent = /** @class */ (function (_super) {
             var baselineLabelHeight = 20;
             var padding = 10;
             var name = d.data.name;
-            var label = Object(__WEBPACK_IMPORTED_MODULE_8__common_label_helper__["a" /* formatLabel */])(name);
+            var label = Object(__WEBPACK_IMPORTED_MODULE_8__common_label_helper__["b" /* formatLabel */])(name);
             var value = d.data.value;
             var radius = Object(__WEBPACK_IMPORTED_MODULE_1_d3_array__["min"])([d.width - padding, d.height - baselineLabelHeight]) / 2 - 5;
             var innerRadius = radius * 0.9;
@@ -17398,12 +17428,12 @@ var PieSeriesComponent = /** @class */ (function () {
         return this.label(myArc);
     };
     PieSeriesComponent.prototype.label = function (myArc) {
-        return Object(__WEBPACK_IMPORTED_MODULE_3__common_label_helper__["a" /* formatLabel */])(myArc.data.name);
+        return Object(__WEBPACK_IMPORTED_MODULE_3__common_label_helper__["b" /* formatLabel */])(myArc.data.name);
     };
     PieSeriesComponent.prototype.defaultTooltipText = function (myArc) {
         var label = this.label(myArc);
-        var val = Object(__WEBPACK_IMPORTED_MODULE_3__common_label_helper__["a" /* formatLabel */])(myArc.data.value);
-        return "\n      <span class=\"tooltip-label\">" + label + "</span>\n      <span class=\"tooltip-val\">" + val + "</span>\n    ";
+        var val = Object(__WEBPACK_IMPORTED_MODULE_3__common_label_helper__["b" /* formatLabel */])(myArc.data.value);
+        return "\n      <span class=\"tooltip-label\">" + Object(__WEBPACK_IMPORTED_MODULE_3__common_label_helper__["a" /* escapeLabel */])(label) + "</span>\n      <span class=\"tooltip-val\">" + val + "</span>\n    ";
     };
     PieSeriesComponent.prototype.color = function (myArc) {
         return this.colors.getColor(this.label(myArc));
@@ -18094,6 +18124,7 @@ var PolarChartModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_shape___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_d3_shape__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_id__ = __webpack_require__("./src/utils/id.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_sort__ = __webpack_require__("./src/utils/sort.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_label_helper__ = __webpack_require__("./src/common/label.helper.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18103,6 +18134,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -18200,7 +18232,7 @@ var PolarSeriesComponent = /** @class */ (function () {
     };
     PolarSeriesComponent.prototype.defaultTooltipText = function (_a) {
         var label = _a.label, value = _a.value;
-        return "\n      <span class=\"tooltip-label\">" + this.data.name + " \u2022 " + label + "</span>\n      <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n    ";
+        return "\n      <span class=\"tooltip-label\">" + Object(__WEBPACK_IMPORTED_MODULE_4__common_label_helper__["a" /* escapeLabel */])(this.data.name) + " \u2022 " + Object(__WEBPACK_IMPORTED_MODULE_4__common_label_helper__["a" /* escapeLabel */])(label) + "</span>\n      <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n    ";
     };
     PolarSeriesComponent.prototype.updateGradients = function () {
         this.hasGradient = this.gradient || this.colors.scaleType === 'linear';
@@ -18346,6 +18378,7 @@ ngxChartsPolyfills();
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreeMapCellSeriesComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("@angular/core");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_label_helper__ = __webpack_require__("./src/common/label.helper.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18355,6 +18388,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 var TreeMapCellSeriesComponent = /** @class */ (function () {
     function TreeMapCellSeriesComponent() {
@@ -18389,7 +18423,7 @@ var TreeMapCellSeriesComponent = /** @class */ (function () {
     };
     TreeMapCellSeriesComponent.prototype.getTooltipText = function (_a) {
         var label = _a.label, value = _a.value;
-        return "\n      <span class=\"tooltip-label\">" + label + "</span>\n      <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n    ";
+        return "\n      <span class=\"tooltip-label\">" + Object(__WEBPACK_IMPORTED_MODULE_1__common_label_helper__["a" /* escapeLabel */])(label) + "</span>\n      <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n    ";
     };
     TreeMapCellSeriesComponent.prototype.onClick = function (data) {
         this.select.emit(data);
@@ -18462,7 +18496,8 @@ var TreeMapCellSeriesComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_selection___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_d3_selection__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_color_utils__ = __webpack_require__("./src/utils/color-utils.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_trim_label_helper__ = __webpack_require__("./src/common/trim-label.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_id__ = __webpack_require__("./src/utils/id.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_label_helper__ = __webpack_require__("./src/common/label.helper.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_id__ = __webpack_require__("./src/utils/id.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18472,6 +18507,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -18488,7 +18524,7 @@ var TreeMapCellComponent = /** @class */ (function () {
     TreeMapCellComponent.prototype.ngOnChanges = function () {
         this.update();
         this.valueFormatting = this.valueFormatting || (function (value) { return value.toLocaleString(); });
-        var labelFormatting = this.labelFormatting || (function (cell) { return Object(__WEBPACK_IMPORTED_MODULE_3__common_trim_label_helper__["a" /* trimLabel */])(cell.label, 55); });
+        var labelFormatting = this.labelFormatting || (function (cell) { return Object(__WEBPACK_IMPORTED_MODULE_4__common_label_helper__["a" /* escapeLabel */])(Object(__WEBPACK_IMPORTED_MODULE_3__common_trim_label_helper__["a" /* trimLabel */])(cell.label, 55)); });
         var cellData = {
             data: this.data,
             label: this.label,
@@ -18496,7 +18532,7 @@ var TreeMapCellComponent = /** @class */ (function () {
         };
         this.formattedValue = this.valueFormatting(cellData.value);
         this.formattedLabel = labelFormatting(cellData);
-        this.gradientId = 'grad' + Object(__WEBPACK_IMPORTED_MODULE_4__utils_id__["a" /* id */])().toString();
+        this.gradientId = 'grad' + Object(__WEBPACK_IMPORTED_MODULE_5__utils_id__["a" /* id */])().toString();
         this.gradientUrl = "url(#" + this.gradientId + ")";
         this.gradientStops = this.getGradientStops();
     };

@@ -8,7 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
-import { formatLabel } from '../common/label.helper';
+import { formatLabel, escapeLabel } from '../common/label.helper';
 import { ColorHelper } from '../common/color.helper';
 var GaugeArcComponent = /** @class */ (function () {
     function GaugeArcComponent() {
@@ -28,7 +28,7 @@ var GaugeArcComponent = /** @class */ (function () {
         else {
             val = formatLabel(arc.data.value);
         }
-        return "\n      <span class=\"tooltip-label\">" + label + "</span>\n      <span class=\"tooltip-val\">" + val + "</span>\n    ";
+        return "\n      <span class=\"tooltip-label\">" + escapeLabel(label) + "</span>\n      <span class=\"tooltip-val\">" + val + "</span>\n    ";
     };
     __decorate([
         Input(),
