@@ -50,6 +50,7 @@ import { DataItem } from '../models/chart-data.model';
           [valueFormatting]="valueFormatting"
           [labelFormatting]="nameFormatting"
           [percentageFormatting]="percentageFormatting"
+          [countDecimals]="countDecimals"
           (select)="onClick($event)"
           (activate)="onActivate($event, true)"
           (deactivate)="onDeactivate($event, true)"
@@ -68,6 +69,7 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipText: any;
   @Input() label: string = 'Total';
+  @Input() countDecimals: number = 0;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

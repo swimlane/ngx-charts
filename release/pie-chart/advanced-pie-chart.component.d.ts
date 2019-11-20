@@ -9,6 +9,7 @@ export declare class AdvancedPieChartComponent extends BaseChartComponent {
     tooltipDisabled: boolean;
     tooltipText: any;
     label: string;
+    countDecimals: number;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     tooltipTemplate: TemplateRef<any>;
