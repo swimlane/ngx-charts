@@ -15,6 +15,9 @@ import { scaleBand, scaleLinear } from 'd3-scale';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
+import { LegendOptions } from '../common/legend/legend-options';
+import { ScaleType } from '../utils/scale-type.enum';
+import { LegendPosition } from '../common/legend/legend-position.enum';
 
 @Component({
   selector: 'ngx-charts-bar-horizontal-stacked',
@@ -108,7 +111,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
 export class BarHorizontalStackedComponent extends BaseChartComponent {
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
-  @Input() legendPosition: string = 'right';
+  @Input() legendPosition = LegendPosition.right;
   @Input() xAxis;
   @Input() yAxis;
   @Input() showXAxisLabel;
@@ -119,7 +122,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
-  @Input() schemeType: string;
+  @Input() schemeType: ScaleType;
   @Input() trimXAxisTicks: boolean = true;
   @Input() trimYAxisTicks: boolean = true;
   @Input() rotateXAxisTicks: boolean = true;
@@ -290,7 +293,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
     this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
   }
 
-  getLegendOptions() {
+  getLegendOptions(): LegendOptions {
     const opts = {
       scaleType: this.schemeType,
       colors: undefined,

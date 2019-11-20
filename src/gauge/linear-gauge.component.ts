@@ -12,6 +12,7 @@ import { scaleLinear } from 'd3-scale';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
+import { ScaleType } from '../utils/scale-type.enum';
 
 @Component({
   selector: 'ngx-charts-linear-gauge',
@@ -228,6 +229,6 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
   }
 
   setColors(): void {
-    this.colors = new ColorHelper(this.scheme, 'ordinal', [this.value], this.customColors);
+    this.colors = new ColorHelper(this.scheme, ScaleType.ordinal, [this.value], this.customColors);
   }
 }

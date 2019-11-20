@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 
 import { ChartCommonModule } from '../chart-common.module';
 import { ColorHelper } from '../color.helper';
+import { ScaleType } from '../../utils/scale-type.enum';
 
 @Component({
   selector: 'test-component',
@@ -16,15 +17,15 @@ class TestComponent {
   data: any;
 
   constructor() {
-    const scheme = {domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']};
-    this.colors = new ColorHelper(scheme, 'ordinal', [], null);
+    const scheme = { domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'] };
+    this.colors = new ColorHelper(scheme, ScaleType.ordinal, [], null);
     this.data = [
-      {name: 'a', value: 8},
-      {name: 'b', value: 12},
-      {name: 'c', value: 20},
-      {name: 'd', value: 30},
-      {name: 'e', value: 46},
-      {name: 'f', value: 24}
+      { name: 'a', value: 8 },
+      { name: 'b', value: 12 },
+      { name: 'c', value: 20 },
+      { name: 'd', value: 30 },
+      { name: 'e', value: 46 },
+      { name: 'f', value: 24 }
     ];
   }
 

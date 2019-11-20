@@ -8,6 +8,7 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { invertColor } from '../utils/color-utils';
+import { ColorHelper } from '../common';
 
 export interface CardModel {
   x;
@@ -59,7 +60,7 @@ export class CardSeriesComponent implements OnChanges {
   @Input() data: any[];
   @Input() slots: any[];
   @Input() dims;
-  @Input() colors;
+  @Input() colors: ColorHelper;
   @Input() innerPadding = 15;
 
   @Input() cardColor;
@@ -89,10 +90,10 @@ export class CardSeriesComponent implements OnChanges {
           const hasValue = d && d.data && typeof d.data.value !== 'undefined' && d.data.value !== null;
           return hasValue
             ? valueFormatting({
-                data: d.data,
-                label: d ? d.data.name : '',
-                value: d && d.data ? d.data.value : ''
-              }).length
+              data: d.data,
+              label: d ? d.data.name : '',
+              value: d && d.data ? d.data.value : ''
+            }).length
             : 0;
         })
         .sort((a, b) => b - a);

@@ -1,3 +1,5 @@
+import { ScaleType } from '../utils/scale-type.enum';
+
 /**
  * Based on the data, return an array with unique values.
  *
@@ -20,18 +22,18 @@ export function getUniqueXDomainValues(results: any[]): any[] {
  * @param values
  * @returns {string} 'time', 'linear' or 'ordinal'
  */
-export function getScaleType(values: any[], checkDateType = true): string {
+export function getScaleType(values: any[], checkDateType = true): ScaleType {
   if (checkDateType) {
     const allDates = values.every(value => value instanceof Date);
     if (allDates) {
-      return 'time';
+      return ScaleType.time;
     }
   }
 
   const allNumbers = values.every(value => typeof value === 'number');
   if (allNumbers) {
-      return 'linear';
-    }
+    return ScaleType.linear;
+  }
 
-  return 'ordinal';
+  return ScaleType.ordinal;
 }

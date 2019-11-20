@@ -12,6 +12,7 @@ import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel, escapeLabel } from '../common/label.helper';
 import { D0Types } from './series-vertical.component';
 import { DataItem } from '../models/chart-data.model';
+import { ColorHelper } from '../common';
 
 @Component({
   selector: 'g[ngx-charts-series-horizontal]',
@@ -83,7 +84,7 @@ export class SeriesHorizontal implements OnChanges {
   @Input() series;
   @Input() xScale;
   @Input() yScale;
-  @Input() colors;
+  @Input() colors: ColorHelper;
   @Input() tooltipDisabled: boolean = false;
   @Input() gradient: boolean;
   @Input() activeEntries: any[];

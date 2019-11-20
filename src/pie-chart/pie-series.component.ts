@@ -12,6 +12,7 @@ import { max } from 'd3-array';
 import { arc, pie } from 'd3-shape';
 
 import { formatLabel, escapeLabel } from '../common/label.helper';
+import { ColorHelper } from '../common';
 
 @Component({
   selector: 'g[ngx-charts-pie-series]',
@@ -62,7 +63,7 @@ import { formatLabel, escapeLabel } from '../common/label.helper';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PieSeriesComponent implements OnChanges {
-  @Input() colors;
+  @Input() colors: ColorHelper;
   @Input() series: any = [];
   @Input() dims;
   @Input() innerRadius = 60;

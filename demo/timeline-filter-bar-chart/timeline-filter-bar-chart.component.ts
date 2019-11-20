@@ -5,6 +5,7 @@ import { select, event as d3event } from 'd3-selection';
 
 import { calculateViewDimensions, ViewDimensions, BaseChartComponent, ColorHelper } from '../../src';
 import { id } from '../../src/utils';
+import { ScaleType } from '../../src/utils/scale-type.enum';
 
 @Component({
   selector: 'ngx-charts-timeline-filter-bar-chart',
@@ -70,7 +71,7 @@ import { id } from '../../src/utils';
 })
 export class TimelineFilterBarChartComponent extends BaseChartComponent {
   @Input() autoScale = false;
-  @Input() schemeType: string = 'ordinal';
+  @Input() schemeType = ScaleType.ordinal;
   @Input() valueDomain: number[];
   @Input() xAxis;
   @Input() yAxis;

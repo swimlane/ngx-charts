@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { createMouseEvent } from '../events';
+import { ColorHelper } from './color.helper';
 
 @Component({
   selector: 'g[ngx-charts-tooltip-area]',
@@ -74,7 +75,7 @@ export class TooltipArea {
   @Input() xScale;
   @Input() yScale;
   @Input() results;
-  @Input() colors;
+  @Input() colors: ColorHelper;
   @Input() showPercentage: boolean = false;
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipTemplate: TemplateRef<any>;

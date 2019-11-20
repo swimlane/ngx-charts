@@ -1,3 +1,6 @@
+import { LegendPosition } from '../common/legend/legend-position.enum';
+import { ScaleType } from '../utils/scale-type.enum';
+
 export interface ViewDimensions {
   width: number;
   height: number;
@@ -7,14 +10,14 @@ export interface ViewDimensions {
 export function calculateViewDimensions({
   width, height, margins, showXAxis = false, showYAxis = false, xAxisHeight = 0,
   yAxisWidth = 0, showXLabel = false, showYLabel = false, showLegend = false,
-  legendType = 'ordinal', legendPosition = 'right', columns = 12
+  legendType = ScaleType.ordinal, legendPosition = LegendPosition.right, columns = 12
 }): ViewDimensions {
   let xOffset = margins[3];
   let chartWidth = width;
   let chartHeight = height - margins[0] - margins[2];
 
-  if (showLegend && legendPosition === 'right') {
-    if (legendType === 'ordinal') {
+  if (showLegend && legendPosition === LegendPosition.right) {
+    if (legendType === ScaleType.ordinal) {
       columns -= 2;
     } else {
       columns -= 1;

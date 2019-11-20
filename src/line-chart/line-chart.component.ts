@@ -18,6 +18,9 @@ import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
 import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
+import { ScaleType } from '../utils/scale-type.enum';
+import { LegendPosition } from '../common/legend/legend-position.enum';
+import { LegendOptions } from '../common/legend/legend-options';
 
 @Component({
   selector: 'ngx-charts-line-chart',
@@ -176,7 +179,7 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
 export class LineChartComponent extends BaseChartComponent {
   @Input() legend;
   @Input() legendTitle: string = 'Legend';
-  @Input() legendPosition: string = 'right';
+  @Input() legendPosition = LegendPosition.right;
   @Input() xAxis;
   @Input() yAxis;
   @Input() showXAxisLabel;
@@ -189,7 +192,7 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() showGridLines: boolean = true;
   @Input() curve: any = curveLinear;
   @Input() activeEntries: any[] = [];
-  @Input() schemeType: string;
+  @Input() schemeType: ScaleType;
   @Input() rangeFillOpacity: number;
   @Input() trimXAxisTicks: boolean = true;
   @Input() trimYAxisTicks: boolean = true;
@@ -224,7 +227,7 @@ export class LineChartComponent extends BaseChartComponent {
   yScale: any;
   xScale: any;
   colors: ColorHelper;
-  scaleType: string;
+  scaleType: ScaleType;
   transform: string;
   clipPath: string;
   clipPathId: string;
@@ -445,7 +448,7 @@ export class LineChartComponent extends BaseChartComponent {
     this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
   }
 
-  getLegendOptions() {
+  getLegendOptions(): LegendOptions {
     const opts = {
       scaleType: this.schemeType,
       colors: undefined,
