@@ -196,7 +196,7 @@ export class PolarSeriesComponent implements OnChanges {
   defaultTooltipText({ label, value }): string {
     return `
       <span class="tooltip-label">${escapeLabel(this.data.name)} • ${escapeLabel(label)}</span>
-      <span class="tooltip-val">${value.toLocaleString()}</span>
+      <span class="tooltip-val">${value !== null ? value.toLocaleString() : ''}</span>
     `;
   }
 

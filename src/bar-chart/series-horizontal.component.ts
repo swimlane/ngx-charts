@@ -190,7 +190,9 @@ export class SeriesHorizontal implements OnChanges {
       }
 
       let tooltipLabel = formattedLabel;
-      bar.ariaLabel = formattedLabel + ' ' + value.toLocaleString();
+      const labelValue = value !== null ? ' ' + value.toLocaleString() : '';
+
+      bar.ariaLabel = formattedLabel + ' ' + labelValue;
       if (this.seriesName) {
         tooltipLabel = `${this.seriesName} • ${formattedLabel}`;
         bar.data.series = this.seriesName;
@@ -201,7 +203,7 @@ export class SeriesHorizontal implements OnChanges {
         ? undefined
         : `
         <span class="tooltip-label">${escapeLabel(tooltipLabel)}</span>
-        <span class="tooltip-val">${value.toLocaleString()}</span>
+        <span class="tooltip-val">${labelValue}</span>
       `;
 
       return bar;

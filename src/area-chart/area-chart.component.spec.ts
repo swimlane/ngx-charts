@@ -59,13 +59,13 @@ describe('<ngx-charts-area-chart>', () => {
       expect(svg.getAttribute('height')).toBe('800');
     }));
 
-    it('should render 4 area elements', async(() => {
+    it('should render 5 area elements', async(() => {
       const fixture = TestBed.createComponent(TestComponent);
       fixture.detectChanges();
 
       const compiled = fixture.debugElement.nativeElement;
 
-      expect(compiled.querySelectorAll('path.area').length).toEqual(4);
+      expect(compiled.querySelectorAll('path.area').length).toEqual(5);
     }));
 
     it('should match specified colors for area elements', async(() => {

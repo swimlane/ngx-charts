@@ -57,13 +57,13 @@ describe('<ngx-charts-heat-map>', () => {
       expect(svg.getAttribute('height')).toBe('800');
     }));
 
-    it('should render 12 cell elements', async(() => {
+    it('should render 15 cell elements', async(() => {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
         const compiled = fixture.debugElement.nativeElement;
 
-        expect(compiled.querySelectorAll('rect.cell').length).toEqual(12);
+        expect(compiled.querySelectorAll('rect.cell').length).toEqual(15);
     }));
 
     it('should render correct cell size', async(() => {
@@ -72,7 +72,7 @@ describe('<ngx-charts-heat-map>', () => {
 
         const svg = fixture.debugElement.nativeElement.querySelector('rect.cell');
 
-        expect(svg.getAttribute('width')).toBe('84');
+        expect(svg.getAttribute('width')).toBe('65');
         expect(svg.getAttribute('height')).toBe('254');
     }));
   });
@@ -126,7 +126,7 @@ describe('<ngx-charts-heat-map>', () => {
 
         const svg = fixture.debugElement.nativeElement.querySelector('rect.cell');
 
-        expect(svg.getAttribute('width')).toBe('90');
+        expect(svg.getAttribute('width')).toBe('72');
         expect(svg.getAttribute('height')).toBe('260');
       });
     }));
@@ -151,7 +151,7 @@ describe('<ngx-charts-heat-map>', () => {
 
         const svg = fixture.debugElement.nativeElement.querySelector('rect.cell');
 
-        expect(svg.getAttribute('width')).toBe('75'); // ~(360 - 3 * innerPadding) / 4
+        expect(svg.getAttribute('width')).toBe('56'); // ~(360 - 3 * innerPadding) / 5
         expect(svg.getAttribute('height')).toBe('246'); // ~(780 - 2 * innnerPadding) / 3
       });
     }));
@@ -176,7 +176,7 @@ describe('<ngx-charts-heat-map>', () => {
 
         const svg = fixture.debugElement.nativeElement.querySelector('rect.cell');
 
-        expect(svg.getAttribute('width')).toBe('52'); // ~(360 - 3 * innerPadding) / 4
+        expect(svg.getAttribute('width')).toBe('32'); // ~(360 - 3 * innerPadding) / 5
         expect(svg.getAttribute('height')).toBe('233'); // ~(780 - 2 * innnerPadding) / 3
       });
     }));

@@ -194,13 +194,13 @@ export class TooltipArea {
 
   getToolTipText(tooltipItem: any): string {
     let result: string = '';
-    if (tooltipItem.series !== undefined) {
+    if (tooltipItem.series !== undefined && tooltipItem.series !== null) {
       result += tooltipItem.series;
     } else {
       result += '???';
     }
     result += ': ';
-    if (tooltipItem.value !== undefined) {
+    if (tooltipItem.value !== undefined && tooltipItem.value !== null) {
       result += tooltipItem.value.toLocaleString();
     }
     if (tooltipItem.min !== undefined || tooltipItem.max !== undefined) {

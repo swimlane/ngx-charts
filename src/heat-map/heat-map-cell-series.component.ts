@@ -99,7 +99,7 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
   getTooltipText({ label, data, series }): string {
     return `
       <span class="tooltip-label">${escapeLabel(series)} • ${escapeLabel(label)}</span>
-      <span class="tooltip-val">${data.toLocaleString()}</span>
+      <span class="tooltip-val">${data !== null ? data.toLocaleString() : ''}</span>
     `;
   }
 

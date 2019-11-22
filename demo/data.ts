@@ -17,6 +17,13 @@ export const single: SingleSeries = [
     }
   },
   {
+    name: 'Switzerland',
+    value: null,
+    extra: {
+      code: 'ch'
+    }
+  },
+  {
     name: 'France',
     value: 36745,
     extra: {
@@ -95,6 +102,32 @@ export const multi: MultiSeries = [
         value: 37060,
         extra: {
           code: 'us'
+        }
+      }
+    ]
+  },
+  {
+    name: 'Switzerland',
+    series: [
+      {
+        name: '2010',
+        value: null,
+        extra: {
+          code: 'ch'
+        }
+      },
+      {
+        name: '2000',
+        value: 37060,
+        extra: {
+          code: 'ch'
+        }
+      },
+      {
+        name: '1990',
+        value: 36745,
+        extra: {
+          code: 'ch'
         }
       }
     ]
@@ -320,7 +353,7 @@ export function generateGraph(nodeCount: number) {
       }
     }
   }
-  return { links, nodes };
+  return {links, nodes};
 }
 
 export function timelineFilterBarData(): SingleSeries {
@@ -349,8 +382,8 @@ export function generateData(seriesLength: number, includeMinMaxRange: boolean, 
   const domain: Date[] = []; // array of time stamps in milliseconds
 
   for (let j = 0; j < dataPoints; j++) {
-    // random dates between Sep 12, 2016 and Sep 24, 2016
-    domain.push(new Date(Math.floor(1473700105009 + Math.random() * 1000000000)));
+    // dates between Sep 12, 2016 and Sep 24, 2016
+    domain.push(new Date(Math.floor(1473700105009 + ((j * 100000000) / dataPoints))));
   }
 
   for (let i = 0; i < seriesLength; i++) {
@@ -361,7 +394,8 @@ export function generateData(seriesLength: number, includeMinMaxRange: boolean, 
     };
 
     for (let j = 0; j < domain.length; j++) {
-      const value = Math.floor(2000 + Math.random() * 5000);
+      const nullProbability = Math.random() > 0.9;
+      const value = nullProbability ? null : Math.floor(2000 + Math.random() * 5000);
       // let timestamp = Math.floor(1473700105009 + Math.random() * 1000000000);
       const timestamp = domain[j];
       if (includeMinMaxRange) {
