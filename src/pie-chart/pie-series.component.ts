@@ -58,7 +58,7 @@ import { formatLabel, escapeLabel } from '../common/label.helper';
         [tooltipContext]="arc.data"
       ></svg:g>
     </svg:g>
-    <svg:text *ngIf="showSum" class="label" x="0" y="5" text-anchor="middle">
+    <svg:text *ngIf="showSum" class="doughnut-sum-label" x="0" y="5" text-anchor="middle">
       {{ sum() }}
     </svg:text>
   `,
