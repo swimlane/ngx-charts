@@ -1,13 +1,18 @@
 .linear-gauge {
   cursor: pointer;
-  
+
   .background-bar {
     path {
       fill: rgba(0,0,0,0.05);
     }
   }
 
+  .value {
+    dominant-baseline: text-after-edge;
+  }
+
   .units {
     fill: #666;
+    dominant-baseline: hanging;
   }
 }
