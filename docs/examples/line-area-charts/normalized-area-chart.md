@@ -42,6 +42,8 @@
 | tooltipDisabled       | boolean            | false         | show or hide the tooltip                                                                                                         |
 | tooltipTemplate       | TemplateRef        |               | a custom ng-template to be displayed inside the tooltip when hovering a single point                                             |
 | seriesTooltipTemplate | TemplateRef        |               | a custom ng-template to be displayed inside the tooltip when hovering series                                                     |
+| showXAxisLine         | boolean            | false         | show or hide the actual line of the x axis                                                                                       |
+| showYAxisLine         | boolean            | false         | show or hide the actual line of the y axis                                                                                       |
 
 ## Outputs
 

@@ -30,6 +30,12 @@ import { reduceTicks } from './ticks.helper';
       </svg:g>
     </svg:g>
 
+  <svg:g *ngIf="showAxisLine" [attr.transform]="axisTickTransform()">
+    <svg:g [attr.transform]="axisLineTransform()">
+      <svg:line class="gridline-path gridline-path-vertical" [attr.y1]="-gridLineHeight" y2="0" />
+    </svg:g>
+    
+  </svg:g>
     <svg:g *ngFor="let tick of ticks" [attr.transform]="tickTransform(tick)">
       <svg:g *ngIf="showGridLines" [attr.transform]="gridLineTransform()">
         <svg:line class="gridline-path gridline-path-vertical" [attr.y1]="-gridLineHeight" y2="0" />
@@ -51,6 +57,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() gridLineHeight;
   @Input() width;
   @Input() rotateTicks: boolean = true;
+  @Input() showAxisLine: boolean = false;
 
   @Output() dimensionsChanged = new EventEmitter();
 
@@ -182,6 +189,14 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
 
   gridLineTransform(): string {
     return `translate(0,${-this.verticalSpacing - 5})`;
+  }
+
+  axisLineTransform(): string {
+    return 'translate(-5, -5)';
+  }
+
+  axisTickTransform(): string {
+    return 'translate(5, 0)';
   }
 
   tickTrim(label: string): string {

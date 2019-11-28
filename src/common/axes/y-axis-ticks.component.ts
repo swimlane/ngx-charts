@@ -55,6 +55,22 @@ import { roundedRect } from '../../common/shape.helper';
         />
       </svg:g>
     </svg:g>
+    <svg:g *ngIf="showAxisLine" [attr.transform]="axisTickTransform()">
+      <svg:g [attr.transform]="axisLineTransform()">
+        <svg:line
+          *ngIf="orient === 'left'"
+          class="gridline-path gridline-path-horizontal"
+          x1="0"
+          [attr.x2]="gridLineWidth"
+        />
+        <svg:line
+          *ngIf="orient === 'right'"
+         class="gridline-path gridline-path-horizontal"
+        x1="0"
+        [attr.x2]="-gridLineWidth"
+        />
+      </svg:g>
+    </svg:g>
 
     <svg:g *ngFor="let refLine of referenceLines">
       <svg:g *ngIf="showRefLines" [attr.transform]="transform(refLine.value)">
@@ -96,6 +112,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() referenceLines;
   @Input() showRefLabels: boolean = false;
   @Input() showRefLines: boolean = false;
+  @Input() showAxisLine: boolean = false;
 
   @Output() dimensionsChanged = new EventEmitter();
 
@@ -253,6 +270,14 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
 
   gridLineTransform(): string {
     return `translate(5,0)`;
+  }
+
+  axisTickTransform(): string {
+    return `translate(5, ${this.height})`;
+  }
+
+  axisLineTransform(): string {
+    return 'translate(0, 0)';
   }
 
   tickTrim(label: string): string {

@@ -356,7 +356,9 @@ const chartGroups = [
           'trimYAxisTicks',
           'rotateXAxisTicks',
           'maxXAxisTickLength',
-          'maxYAxisTickLength'
+          'maxYAxisTickLength',
+          'showXAxisLine',
+          'showYAxisLine'
         ],
         defaults: {
           yAxisLabel: 'GDP Per Capita',
@@ -428,7 +430,9 @@ const chartGroups = [
           'trimYAxisTicks',
           'rotateXAxisTicks',
           'maxXAxisTickLength',
-          'maxYAxisTickLength'
+          'maxYAxisTickLength',
+          'showXAxisLine',
+          'showYAxisLine'
         ],
         defaults: {
           yAxisLabel: 'GDP Per Capita',
@@ -468,7 +472,9 @@ const chartGroups = [
           'trimYAxisTicks',
           'rotateXAxisTicks',
           'maxXAxisTickLength',
-          'maxYAxisTickLength'
+          'maxYAxisTickLength',
+          'showXAxisLine',
+          'showYAxisLine'
         ],
         defaults: {
           yAxisLabel: 'GDP Per Capita',
@@ -504,7 +510,9 @@ const chartGroups = [
           'trimYAxisTicks',
           'rotateXAxisTicks',
           'maxXAxisTickLength',
-          'maxYAxisTickLength'
+          'maxYAxisTickLength',
+          'showXAxisLine',
+          'showYAxisLine'
         ],
         defaults: {
           yAxisLabel: 'Normalized GDP Per Capita',
@@ -719,7 +727,7 @@ const chartGroups = [
           'xScaleMin',
           'xScaleMax',
           'yScaleMin',
-          'yScaleMax'
+          'yScaleMax',
         ],
         defaults: {
           xAxisLabel: 'Order Total',
@@ -811,7 +819,9 @@ const chartGroups = [
           'trimXAxisTicks',
           'trimYAxisTicks',
           'maxXAxisTickLength',
-          'maxYAxisTickLength'
+          'maxYAxisTickLength',
+          'showXAxisLine',
+          'showYAxisLine'
         ],
         defaults: {
           yAxisLabel: 'GDP Per Capita',

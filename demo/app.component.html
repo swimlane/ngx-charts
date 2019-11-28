@@ -383,6 +383,8 @@
         [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
+        [showXAxisLine]="showXAxisLine"
+        [showYAxisLine]="showYAxisLine"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -514,6 +516,8 @@
         [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
+        [showXAxisLine]="showXAxisLine"
+        [showYAxisLine]="showYAxisLine"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -552,6 +556,8 @@
         [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
+        [showXAxisLine]="showXAxisLine"
+        [showYAxisLine]="showYAxisLine"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -586,6 +592,8 @@
         [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
+        [showXAxisLine]="showXAxisLine"
+        [showYAxisLine]="showYAxisLine"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -974,6 +982,8 @@
         [trimYAxisTicks]="trimYAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
+        [showXAxisLine]="showXAxisLine"
+        [showYAxisLine]="showYAxisLine"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -1240,6 +1250,13 @@
           </label>
           <br />
         </div>
+        <div *ngIf="chart.options.includes('showXAxisLine')">
+          <label>
+            <input type="checkbox" [checked]="showXAxisLine" (change)="showXAxisLine = $event.target.checked" />
+            Show X Axis Line
+          </label>
+          <br />
+        </div>
         <div *ngIf="chart.options.includes('showRefLabels')">
           <label>
             <input type="checkbox" [checked]="showRefLabels" (change)="showRefLabels = $event.target.checked" />
@@ -1258,6 +1275,13 @@
           <label>
             <input type="checkbox" [checked]="showYAxis" (change)="showYAxis = $event.target.checked" />
             Show Y Axis
+          </label>
+          <br />
+        </div>
+        <div *ngIf="chart.options.includes('showYAxisLine')">
+          <label>
+            <input type="checkbox" [checked]="showYAxisLine" (change)="showYAxisLine = $event.target.checked" />
+            Show Y Axis Line
           </label>
           <br />
         </div>
