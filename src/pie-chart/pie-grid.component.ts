@@ -96,6 +96,7 @@ export class PieGridComponent extends BaseChartComponent {
   @Input() label: string = 'Total';
   @Input() minWidth: number = 150;
   @Input() activeEntries: any[] = [];
+  @Input() arcWidth = 0.1;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -155,7 +156,7 @@ export class PieGridComponent extends BaseChartComponent {
       const label = formatLabel(name);
       const value = d.data.value;
       const radius = min([d.width - padding, d.height - baselineLabelHeight]) / 2 - 5;
-      const innerRadius = radius * 0.9;
+      const innerRadius = radius * (1 - this.arcWidth);
 
       let count = 0;
       const colors = () => {
