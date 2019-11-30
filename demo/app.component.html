@@ -970,6 +970,10 @@
         [showRefLines]="showRefLines"
         [showRefLabels]="showRefLabels"
         [referenceLines]="refLines"
+        [showMarkers]="showMarkers"
+        [showMarkerLabels]="showMarkerLabels"
+        [markers]="markers"
+        [markerColors]="markerColors"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
@@ -1254,6 +1258,20 @@
           </label>
           <br />
         </div>
+        <div *ngIf="chart.options.includes('showMarkerLabels')">
+          <label>
+            <input type="checkbox" [checked]="showMarkerLabels" (change)="showMarkerLabels = $event.target.checked" />
+            Show Marker Labels
+          </label>
+          <br />
+        </div>
+        <div *ngIf="chart.options.includes('showMarkers')">
+          <label>
+            <input type="checkbox" [checked]="showMarkers" (change)="showMarkers = $event.target.checked" />
+            Show Markers
+          </label>
+          <br />
+        </div>
         <div *ngIf="chart.options.includes('showYAxis')">
           <label>
             <input type="checkbox" [checked]="showYAxis" (change)="showYAxis = $event.target.checked" />
@@ -1294,7 +1312,7 @@
             <input type="checkbox" [checked]="noBarWhenZero" (change)="noBarWhenZero = $event.target.checked">
             Hide bar if value is 0
           </label> <br/>
-        </div>        
+        </div>
         <div *ngIf="chart.options.includes('showLegend')">
           <label>
             <input type="checkbox" [checked]="showLegend" (change)="showLegend = $event.target.checked" />

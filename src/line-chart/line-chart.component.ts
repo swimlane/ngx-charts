@@ -55,6 +55,10 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
           [maxTickLength]="maxXAxisTickLength"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
+          [markers]="markers"
+          [showMarkers]="showMarkers"
+          [showMarkerLabels]="showMarkerLabels"
+          [markerColors]="markerColors"
           (dimensionsChanged)="updateXAxisHeight($event)"
         ></svg:g>
         <svg:g
@@ -205,6 +209,10 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() showRefLines: boolean = false;
   @Input() referenceLines: any;
   @Input() showRefLabels: boolean = true;
+  @Input() showMarkers: boolean = false;
+  @Input() markers: any;
+  @Input() showMarkerLabels: boolean = true;
+  @Input() markerColors: any[];
   @Input() xScaleMin: any;
   @Input() xScaleMax: any;
   @Input() yScaleMin: number;

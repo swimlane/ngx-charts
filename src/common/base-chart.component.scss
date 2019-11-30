@@ -92,6 +92,22 @@
     fill: #000;
   }
 
+  .marker-path {
+    stroke: #a8b2c7;
+    stroke-width: 1;
+    stroke-dasharray: 5;
+    stroke-dashoffset: 5;
+  }
+
+  .marker-label {
+    font-size: 9px;
+  }
+
+  .marker-area {
+    fill-opacity: 0.05;
+    fill: #000;
+  }
+
   .gridline-path-dotted {
     stroke: #ddd;
     stroke-width: 1;

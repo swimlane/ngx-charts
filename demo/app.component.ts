@@ -237,6 +237,18 @@ export class AppComponent implements OnInit {
   // Supports any number of reference lines.
   refLines = [{ value: 42500, name: 'Maximum' }, { value: 37750, name: 'Average' }, { value: 33000, name: 'Minimum' }];
 
+  // Reference lines
+  showMarkers: boolean = false;
+  showMarkerLabels: boolean = true;
+  markerColors: any[] = ['#fff'];
+
+  // Supports any number of reference lines.
+  markers = [
+    { value: 2010, name: 'Latest', group: 1, color: 0 },
+    { value: 2000, name: 'Earliest', group: 1, color: 0 }
+  ];
+  // markerLines = [{ value: 2005, name: 'Maximum' }, { value: 2015, name: 'Average' }];
+
   constructor(public location: Location) {
     this.mathFunction = this.getFunction();
 
@@ -345,15 +357,15 @@ export class AppComponent implements OnInit {
         name: country.name,
         series: [
           {
-            name: '1990',
+            name: 1990,
             value: Math.floor(10000 + Math.random() * 50000)
           },
           {
-            name: '2000',
+            name: 2000,
             value: Math.floor(10000 + Math.random() * 50000)
           },
           {
-            name: '2010',
+            name: 2010,
             value: Math.floor(10000 + Math.random() * 50000)
           }
         ]

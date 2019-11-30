@@ -12,10 +12,45 @@ import {
 } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
+import { roundedRect } from '../../common/shape.helper';
+import * as d3 from 'd3';
 
 @Component({
   selector: 'g[ngx-charts-x-axis-ticks]',
   template: `
+    <svg:g *ngFor="let marker of markers">
+      <svg:g *ngIf="showMarkers && marker.active" [attr.transform]="tickTransform(marker.value)">
+        <svg:line
+          class="marker-path gridline-path-vertical"
+          [attr.y1]="-gridLineHeight"
+          [attr.y2]="0"
+          [attr.transform]="gridLineTransform()"
+          [style.stroke]="getMarkerColor(marker.color)"
+        />
+        <svg:g *ngIf="showMarkerLabels">
+          <title>{{ tickTrim(tickFormat(marker.value)) }}</title>
+          <svg:text
+            class="marker-label"
+            [attr.dy]="dy"
+            [attr.y]="-5"
+            [attr.x]="gridLineHeight + verticalSpacing"
+            [attr.text-anchor]="'end'"
+            transform="rotate(-90)"
+          >
+            {{ marker.name }}
+          </svg:text>
+        </svg:g>
+      </svg:g>
+    </svg:g>
+
+    <svg:g *ngFor="let markerArea of markerAreas">
+      <svg:path *ngIf="markerArea.markerGroupLength > 1 && showMarkers"
+        class="marker-area"
+        [attr.d]="markerArea.markerAreaPath"
+        [style.fill]="getMarkerColor(markerArea.color)"
+      />
+    </svg:g>
+
     <svg:g #ticksel>
       <svg:g *ngFor="let tick of ticks" class="tick" [attr.transform]="tickTransform(tick)">
         <title>{{ tickFormat(tick) }}</title>
@@ -35,6 +70,7 @@ import { reduceTicks } from './ticks.helper';
         <svg:line class="gridline-path gridline-path-vertical" [attr.y1]="-gridLineHeight" y2="0" />
       </svg:g>
     </svg:g>
+
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -51,6 +87,10 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() gridLineHeight;
   @Input() width;
   @Input() rotateTicks: boolean = true;
+  @Input() markers;
+  @Input() showMarkerLabels: boolean = false;
+  @Input() showMarkers: boolean = false;
+  @Input() markerColors: any[] = ['#000000'];
 
   @Output() dimensionsChanged = new EventEmitter();
 
@@ -67,6 +107,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   ticks: any;
   tickFormat: (o: any) => any;
   height: number = 0;
+  markerAreas: any[] = [];
 
   @ViewChild('ticksel', { static: false }) ticksElement: ElementRef;
 
@@ -112,6 +153,10 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
         }
       : this.scale;
 
+    if (this.showMarkers && this.markers) {
+      this.setMarkers();
+    }
+
     this.textTransform = '';
     if (angle && angle !== 0) {
       this.textTransform = `rotate(${angle})`;
@@ -153,6 +198,67 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     }
 
     return angle;
+  }
+
+  getMarkerColor(color: number): string {
+    if(color == null || this.markerColors == null || this.markerColors.length === 0 ||
+        color >= this.markerColors.length) {
+      return '';
+    }
+    return `${this.markerColors[color]}`;
+  }
+
+  setMarkers(): void {
+
+    // hide markers out of visual range
+    this.markers.forEach(line => {
+      const p = this.adjustedScale(line.value);
+      line.active = p > 0 && p < this.width;
+    });
+
+    const markerAreas = [];
+    const groupedMarkers = d3.nest()
+      .key(d => d.group)
+      .entries(this.markers)
+      .map(group => group.values);
+
+    groupedMarkers.forEach(markerGroup => {
+
+      // use color only if it is uniform amongst all markers in group
+      const color = markerGroup.every(item => item.color === markerGroup[0].color)
+        ? markerGroup[0].color : null;
+
+      let min = this.adjustedScale(Math.min.apply(null, markerGroup.map(item => item.value)));
+      let max = this.adjustedScale(Math.max.apply(null, markerGroup.map(item => item.value)));
+      const markerGroupLength = markerGroup.length;
+
+      // get visual order
+      const tmin = min;
+      min = Math.min(min, max);
+      max = Math.max(tmin, max);
+
+      // clip
+      if(min < 0) {
+        min = 0;
+      }
+      if(max > this.width) {
+        max = this.width;
+      }
+      const w = max - min;
+
+      if(w > 0) {
+        const markerAreaPath = roundedRect(min, -this.gridLineHeight - 5, w, this.gridLineHeight,
+          0, [false, false, false, false]);
+
+        markerAreas.push({
+          markerGroupLength,
+          markerAreaPath,
+          color
+        });
+      }
+    });
+
+    this.markerAreas = markerAreas;
   }
 
   getTicks() {
