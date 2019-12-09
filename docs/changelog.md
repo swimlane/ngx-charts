@@ -1,5 +1,10 @@
 # Changelog
 
+## 13.0.0
+
+- Breaking: Upgrade to angular 9
+- Breaking: Remove deprecated force-directed graph chart
+
 ## 12.0.1
 
 - Bug: Pass the correct number of parameters to fix production build (#1203)

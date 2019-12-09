@@ -13,15 +13,14 @@
     "target": "es2015",
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2018", "dom"],
-    "resolveJsonModule": true,
     "paths": {
-      "ngx-charts-cli": ["dist/ngx-charts-cli"],
-      "ngx-charts-cli/*": ["dist/ngx-charts-cli/*"]
-    }
+      "@swimlane/ngx-charts": ["projects/swimlane/ngx-charts/src/public_api"],
+      "@swimlane/ngx-charts/*": ["projects/swimlane/ngx-charts/src/lib/*"]
+    },
+    "resolveJsonModule": true
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true,
-    "enableIvy": false
+    "strictInjectionParameters": true
   }
 }
