@@ -5,6 +5,8 @@ body {
   height: 100%;
 }
 
+$color-blue-grey: #5a6884;
+
 body {
   font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
   font-style: normal;
@@ -22,6 +24,26 @@ body {
 
 * {
   box-sizing: border-box;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: rgba(darken($color-blue-grey, 5%), 0.3);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(darken($color-blue-grey, 5%), 1);
 }
 
 app {
