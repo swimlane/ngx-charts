@@ -2,8 +2,17 @@
 
 ## 13.0.0
 
-- Breaking: Upgrade to angular 9
+- Breaking: Upgrade to Angular 9. Add compatibility with Ivy
 - Breaking: Remove deprecated force-directed graph chart
+- Breaking: Remove release folder
+- Chore: Remove d3 dependency
+- Chore: Update all d3 packages to latest versions
+
+## 12.1.0
+
+- Enhancement: Sanitize tooltip labels (#1241)
+- Bug: fix line chart scaling on charts with large domain (#1204)
+- Bug: add check for undefined xScale in groupTransform (#1273)
 
 ## 12.0.1
 

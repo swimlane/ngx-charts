@@ -2,11 +2,12 @@ language: node_js
 
 node_js:
   - 'node'
+  
+addons:
+  chrome: stable
 
-before_install:
-  - export CHROME_BIN=chromium-browser
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
+services:
+  - xvfb
 
 install:
   - travis_wait 30 npm install
