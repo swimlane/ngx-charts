@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { single } from '../../../ngx-charts-demo/data';
+import { single } from '../../../../../../src/app/data';
 import { APP_BASE_HREF } from '@angular/common';
 
 import { BarChartModule } from './bar-chart.module';

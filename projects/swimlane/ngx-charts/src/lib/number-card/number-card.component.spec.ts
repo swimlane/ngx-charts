@@ -2,7 +2,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { multi } from '../../../ngx-charts-demo/data';
+import { multi } from '../../../../../../src/app/data';
 import { APP_BASE_HREF } from '@angular/common';
 
 import { NumberCardModule } from './number-card.module';

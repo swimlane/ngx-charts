@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { arc } from 'd3-shape';
 
-import { single } from '../../../ngx-charts-demo/data';
+import { single } from '../../../../../../src/app/data';
 import { APP_BASE_HREF } from '@angular/common';
 
 import { PieChartModule } from './pie-chart.module';
