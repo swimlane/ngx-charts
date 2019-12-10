@@ -2,20 +2,29 @@ language: node_js
 
 node_js:
   - 'node'
-  
+
+cache:
+  directories:
+    - ~/.npm
+    - ~/.cache
+    - node_modules
+
 addons:
   chrome: stable
+  apt:
+    packages:
+      - libgconf-2-4
 
 services:
   - xvfb
 
+before_install:
+  - export NG_CLI_ANALYTICS=ci
+
 install:
-  - travis_wait 30 npm install
-  - npm install codeclimate-test-reporter
+  - npm install
+  - npm run build
+  - npm run build:lib
 
-after_script:
-  - codeclimate-test-reporter < coverage/lcov.info
-
-addons:
-  code_climate:
-    repo_token: f45df226a75d3a1995f101fe89920334b4114ce4f2aa1256dcbb3a36884b6040
+script:
+  - npm run ci
