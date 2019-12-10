@@ -70,12 +70,10 @@ export class BarComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (!this.initialized) {
+    if (changes.roundEdges) {
       this.loadAnimation();
-      this.initialized = true;
-    } else {
-      this.update();
     }
+    this.update();
   }
 
   update(): void {
