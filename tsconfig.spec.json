@@ -1,29 +1,9 @@
 {
+  "extends": "./tsconfig.json",
   "compilerOptions": {
-    "sourceMap": true,
-    "pretty": true,
-    "declaration": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "lib": [
-      "es2016",
-      "dom"
-    ],
-    "outDir": "dist/spec",
-    "module": "commonjs",
-    "target": "es5",
-    "baseUrl": "",
-    "types": [
-      "jasmine",
-      "node",
-      "d3-transition"
-    ]
+    "outDir": "./out-tsc/spec",
+    "types": ["jasmine", "node"]
   },
-  "files": [
-    "src/declarations.d.ts"
-  ],
-  "include": [
-    "src/**/*.spec.ts"
-  ]
+  "files": ["src/test.ts", "src/polyfills.ts"],
+  "include": ["src/**/*.spec.ts", "src/**/*.d.ts"]
 }

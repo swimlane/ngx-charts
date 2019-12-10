@@ -1,0 +1,34 @@
+.pie-label {
+  font-size: 11px;
+
+  &.animation {
+    animation: 750ms ease-in fadeIn;
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.pie-label-line {
+  stroke-dasharray: 100%;
+
+  &.animation {
+    animation: 3s linear drawOut;
+    transition: d 750ms;
+
+    @keyframes drawOut {
+      from {
+        stroke-dashoffset: 100%;
+      }
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+  }
+}

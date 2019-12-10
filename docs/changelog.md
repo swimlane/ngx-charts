@@ -1,5 +1,13 @@
 # Changelog
 
+## 13.0.0
+
+- Breaking: Upgrade to Angular 9. Add compatibility with Ivy
+- Breaking: Remove deprecated force-directed graph chart
+- Breaking: Remove release folder
+- Chore: Remove d3 dependency
+- Chore: Update all d3 packages to latest versions
+
 ## 12.1.0
 
 - Enhancement: Sanitize tooltip labels (#1241)
