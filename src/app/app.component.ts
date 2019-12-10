@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Location, LocationStrategy, HashLocationStrategy } from '@angular/common';
 import * as shape from 'd3-shape';
-import * as d3 from 'd3';
+import * as d3Array from 'd3-array';
 
 import { colorSets } from '@swimlane/ngx-charts/utils/color-sets';
 import { formatLabel, escapeLabel } from '@swimlane/ngx-charts/common/label.helper';
@@ -674,11 +674,11 @@ export class AppComponent implements OnInit {
     this.treemapPath = [{ name: 'Top', children: [children], value }];
 
     function sumChildren(node) {
-      return (node.value = node.size || d3.sum(node.children, sumChildren));
+      return (node.value = node.size || d3Array.sum(node.children, sumChildren));
     }
 
     function countChildren(node) {
-      return (node.value = node.children ? d3.sum(node.children, countChildren) : 1);
+      return (node.value = node.children ? d3Array.sum(node.children, countChildren) : 1);
     }
   }
 
