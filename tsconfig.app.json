@@ -8,6 +8,7 @@
   "include": ["src/**/*.d.ts"],
   "exclude": ["src/test.ts", "src/**/*.spec.ts"],
   "angularCompilerOptions": {
-    "preserveWhitespaces": true
+    "preserveWhitespaces": true,
+    "enableIvy": false
   }
 }
