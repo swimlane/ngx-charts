@@ -1,0 +1,31 @@
+ngx-charts-number-card {
+  .cell {
+    .trimmed-label {
+      font-size: 12px;
+      pointer-events: none;
+      overflow: hidden;
+      text-align: left;
+      line-height: 1em;
+
+      p {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+      }
+    }
+
+    .value-text {
+      pointer-events: none;
+    }
+  }
+
+  .number-card.clickable .cell {
+    .card,
+    .card-band {
+      cursor: pointer;
+    }
+  }
+}
