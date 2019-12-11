@@ -38,6 +38,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
         [path]="path"
         [stroke]="stroke"
         [animations]="animations"
+        [showPoints]="isActive(data)"
         [class.active]="isActive(data)"
         [class.inactive]="isInactive(data)"
       />

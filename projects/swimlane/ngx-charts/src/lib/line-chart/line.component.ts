@@ -1,19 +1,16 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  OnChanges,
-  ElementRef,
-  ChangeDetectionStrategy,
-  SimpleChanges
-} from '@angular/core';
+import { Component, Input, OnChanges, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { select } from 'd3-selection';
+import { id } from '../utils';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Series } from '../models/chart-data.model';
 
 @Component({
   selector: 'g[ngx-charts-line]',
   template: `
+    <svg:marker *ngIf="showPoints" [attr.id]="markerId" markerWidth="8" markerHeight="8" refX="5" refY="5">
+      <svg:circle cx="5" cy="5" r="3" [attr.fill]="stroke" style="stroke: none" />
+    </svg:marker>
     <svg:path
       [@animationState]="'active'"
       class="line"
@@ -21,6 +18,9 @@ import { select } from 'd3-selection';
       [attr.fill]="fill"
       [attr.stroke]="stroke"
       stroke-width="1.5px"
+      [style.marker-start]="markerRef"
+      [style.marker-mid]="markerRef"
+      [style.marker-end]="markerRef"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -42,20 +42,24 @@ import { select } from 'd3-selection';
   ]
 })
 export class LineComponent implements OnChanges {
-  @Input() path;
-  @Input() stroke;
-  @Input() data;
+  @Input() path: string;
+  @Input() stroke: string;
+  @Input() data: Series;
   @Input() fill: string = 'none';
   @Input() animations: boolean = true;
-
-  @Output() select = new EventEmitter();
+  @Input() showPoints: boolean = false;
 
   initialized: boolean = false;
   initialPath: string;
+  markerId: string = '';
+  markerRef: any = {};
 
-  constructor(private element: ElementRef) {}
+  constructor(private element: ElementRef, private sanitizer: DomSanitizer) {
+    this.markerId = `marker${id()}`;
+    this.markerRef = this.sanitizer.bypassSecurityTrustStyle(`url(#${this.markerId})`);
+  }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if (!this.initialized) {
       this.initialized = true;
       this.initialPath = this.path;
