@@ -13,7 +13,6 @@ import {
 import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
 import { roundedRect } from '../../common/shape.helper';
-import * as d3 from 'd3';
 
 @Component({
   selector: 'g[ngx-charts-x-axis-ticks]',
@@ -31,7 +30,6 @@ import * as d3 from 'd3';
           <title>{{ tickTrim(tickFormat(marker.value)) }}</title>
           <svg:text
             class="marker-label"
-            [attr.dy]="dy"
             [attr.y]="-5"
             [attr.x]="gridLineHeight + verticalSpacing"
             [attr.text-anchor]="'end'"
@@ -217,12 +215,15 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     });
 
     const markerAreas = [];
-    const groupedMarkers = d3.nest()
-      .key(d => d.group)
-      .entries(this.markers)
-      .map(group => group.values);
 
-    groupedMarkers.forEach(markerGroup => {
+    const groupedMarkers = this.markers.reduce(function (r, a) {
+          r[a.group] = r[a.group] || [];
+          r[a.group].push(a);
+          return r;
+      }, Object.create(null));
+
+    for (let group in groupedMarkers) {
+      const markerGroup = groupedMarkers[group];
 
       // use color only if it is uniform amongst all markers in group
       const color = markerGroup.every(item => item.color === markerGroup[0].color)
@@ -256,7 +257,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
           color
         });
       }
-    });
+    };
 
     this.markerAreas = markerAreas;
   }
