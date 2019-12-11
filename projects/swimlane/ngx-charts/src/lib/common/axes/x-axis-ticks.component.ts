@@ -222,7 +222,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
           return r;
       }, Object.create(null));
 
-    for (let group in groupedMarkers) {
+    for (const group in groupedMarkers) {
       const markerGroup = groupedMarkers[group];
 
       // use color only if it is uniform amongst all markers in group
