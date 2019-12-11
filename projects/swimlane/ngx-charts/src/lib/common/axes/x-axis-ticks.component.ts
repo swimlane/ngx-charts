@@ -42,7 +42,8 @@ import { roundedRect } from '../../common/shape.helper';
     </svg:g>
 
     <svg:g *ngFor="let markerArea of markerAreas">
-      <svg:path *ngIf="markerArea.markerGroupLength > 1 && showMarkers"
+      <svg:path
+        *ngIf="markerArea.markerGroupLength > 1 && showMarkers"
         class="marker-area"
         [attr.d]="markerArea.markerAreaPath"
         [style.fill]="getMarkerColor(markerArea.color)"
@@ -68,7 +69,6 @@ import { roundedRect } from '../../common/shape.helper';
         <svg:line class="gridline-path gridline-path-vertical" [attr.y1]="-gridLineHeight" y2="0" />
       </svg:g>
     </svg:g>
-
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -199,15 +199,18 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   }
 
   getMarkerColor(color: number): string {
-    if(color == null || this.markerColors == null || this.markerColors.length === 0 ||
-        color >= this.markerColors.length) {
+    if (
+      color == null ||
+      this.markerColors == null ||
+      this.markerColors.length === 0 ||
+      color >= this.markerColors.length
+    ) {
       return '';
     }
     return `${this.markerColors[color]}`;
   }
 
   setMarkers(): void {
-
     // hide markers out of visual range
     this.markers.forEach(line => {
       const p = this.adjustedScale(line.value);
@@ -216,21 +219,30 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
 
     const markerAreas = [];
 
-    const groupedMarkers = this.markers.reduce(function (r, a) {
-          r[a.group] = r[a.group] || [];
-          r[a.group].push(a);
-          return r;
-      }, Object.create(null));
+    const groupedMarkers = this.markers.reduce(function(r, a) {
+      r[a.group] = r[a.group] || [];
+      r[a.group].push(a);
+      return r;
+    }, Object.create(null));
 
     for (const group in groupedMarkers) {
       const markerGroup = groupedMarkers[group];
 
       // use color only if it is uniform amongst all markers in group
-      const color = markerGroup.every(item => item.color === markerGroup[0].color)
-        ? markerGroup[0].color : null;
+      const color = markerGroup.every(item => item.color === markerGroup[0].color) ? markerGroup[0].color : null;
 
-      let min = this.adjustedScale(Math.min.apply(null, markerGroup.map(item => item.value)));
-      let max = this.adjustedScale(Math.max.apply(null, markerGroup.map(item => item.value)));
+      let min = this.adjustedScale(
+        Math.min.apply(
+          null,
+          markerGroup.map(item => item.value)
+        )
+      );
+      let max = this.adjustedScale(
+        Math.max.apply(
+          null,
+          markerGroup.map(item => item.value)
+        )
+      );
       const markerGroupLength = markerGroup.length;
 
       // get visual order
@@ -239,17 +251,21 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
       max = Math.max(tmin, max);
 
       // clip
-      if(min < 0) {
+      if (min < 0) {
         min = 0;
       }
-      if(max > this.width) {
+      if (max > this.width) {
         max = this.width;
       }
       const w = max - min;
 
-      if(w > 0) {
-        const markerAreaPath = roundedRect(min, -this.gridLineHeight - 5, w, this.gridLineHeight,
-          0, [false, false, false, false]);
+      if (w > 0) {
+        const markerAreaPath = roundedRect(min, -this.gridLineHeight - 5, w, this.gridLineHeight, 0, [
+          false,
+          false,
+          false,
+          false
+        ]);
 
         markerAreas.push({
           markerGroupLength,
@@ -257,7 +273,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
           color
         });
       }
-    };
+    }
 
     this.markerAreas = markerAreas;
   }
