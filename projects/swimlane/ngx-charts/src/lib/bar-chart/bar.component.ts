@@ -63,7 +63,6 @@ export class BarComponent implements OnChanges {
   gradientId: any;
   gradientFill: any;
   startOpacity: any;
-  initialized: boolean = false;
   gradientStops: any[];
   hasGradient: boolean = false;
   hideBar: boolean = false;
@@ -73,12 +72,10 @@ export class BarComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (!this.initialized) {
+    if (changes.roundEdges) {
       this.loadAnimation();
-      this.initialized = true;
-    } else {
-      this.update();
     }
+    this.update();
   }
 
   update(): void {
