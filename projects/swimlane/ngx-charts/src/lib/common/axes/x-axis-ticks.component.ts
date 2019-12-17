@@ -15,16 +15,44 @@ import { reduceTicks } from './ticks.helper';
 import { roundedRect } from '../../common/shape.helper';
 import { Marker } from '../../models/common.model';
 
-
 interface MarkerArea {
-    markerCount: number;
-    svgPath: string;
-    color: number | string;
+  markerCount: number;
+  svgPath: string;
+  color: number | string;
 }
 
 @Component({
   selector: 'g[ngx-charts-x-axis-ticks]',
   template: `
+    <svg:g #ticksel>
+      <svg:g *ngFor="let tick of ticks" class="tick" [attr.transform]="tickTransform(tick)">
+        <title>{{ tickFormat(tick) }}</title>
+        <svg:text
+          stroke-width="0.01"
+          [attr.text-anchor]="textAnchor"
+          [attr.transform]="textTransform"
+          [style.font-size]="'12px'"
+        >
+          {{ tickTrim(tickFormat(tick)) }}
+        </svg:text>
+      </svg:g>
+    </svg:g>
+
+    <svg:g *ngFor="let tick of ticks" [attr.transform]="tickTransform(tick)">
+      <svg:g *ngIf="showGridLines" [attr.transform]="gridLineTransform()">
+        <svg:line class="gridline-path gridline-path-vertical" [attr.y1]="-gridLineHeight" y2="0" />
+      </svg:g>
+    </svg:g>
+
+    <svg:g *ngFor="let markerArea of markerAreas">
+      <svg:path
+        *ngIf="markerArea.markerCount > 1 && showMarkers"
+        class="marker-area"
+        [attr.d]="markerArea.svgPath"
+        [style.fill]="getMarkerColor(markerArea.color)"
+      />
+    </svg:g>
+
     <svg:g *ngFor="let marker of markers">
       <svg:g *ngIf="showMarkers && marker.active" [attr.transform]="tickTransform(marker.value)">
         <svg:line
@@ -46,35 +74,6 @@ interface MarkerArea {
             {{ marker.name }}
           </svg:text>
         </svg:g>
-      </svg:g>
-    </svg:g>
-
-    <svg:g *ngFor="let markerArea of markerAreas">
-      <svg:path
-        *ngIf="markerArea.markerCount > 1 && showMarkers"
-        class="marker-area"
-        [attr.d]="markerArea.svgPath"
-        [style.fill]="getMarkerColor(markerArea.color)"
-      />
-    </svg:g>
-
-    <svg:g #ticksel>
-      <svg:g *ngFor="let tick of ticks" class="tick" [attr.transform]="tickTransform(tick)">
-        <title>{{ tickFormat(tick) }}</title>
-        <svg:text
-          stroke-width="0.01"
-          [attr.text-anchor]="textAnchor"
-          [attr.transform]="textTransform"
-          [style.font-size]="'12px'"
-        >
-          {{ tickTrim(tickFormat(tick)) }}
-        </svg:text>
-      </svg:g>
-    </svg:g>
-
-    <svg:g *ngFor="let tick of ticks" [attr.transform]="tickTransform(tick)">
-      <svg:g *ngIf="showGridLines" [attr.transform]="gridLineTransform()">
-        <svg:line class="gridline-path gridline-path-vertical" [attr.y1]="-gridLineHeight" y2="0" />
       </svg:g>
     </svg:g>
   `,
