@@ -2,7 +2,7 @@
 
 ## Grouped Vertical Bar Chart
 
-{% embed data="{\"url\":\"https://embed.plnkr.co/HJBUlMEUl3eJotj6YCdZ?show=preview\",\"type\":\"rich\",\"title\":\"Grouped Vertical Bar Chart\",\"description\":\"Created on Plnkr: Helping developers build the web.\",\"icon\":{\"type\":\"icon\",\"url\":\"https://embed.plnkr.co/favicon.ico\",\"aspectRatio\":0},\"thumbnail\":{\"type\":\"thumbnail\",\"url\":\"https://shot.plnkr.co/HJBUlMEUl3eJotj6YCdZ.png?d=2017-03-31T15:17:44.402Z\",\"width\":400,\"height\":300,\"aspectRatio\":0.75},\"embed\":{\"type\":\"reader\",\"url\":\"https://embed.plnkr.co/plunk/HJBUlMEUl3eJotj6YCdZ?autoCloseSidebar&deferRun&show=preview\",\"html\":\"<div style=\\"left: 0; width: 100%; height: 0; position: relative; padding-bottom: 66.6667%;\\"><iframe src=\\"https://embed.plnkr.co/plunk/HJBUlMEUl3eJotj6YCdZ?autoCloseSidebar&amp;deferRun&amp;show=preview\\" style=\\"border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;\\" allowfullscreen scrolling=\\"no\\"></iframe></div>\",\"aspectRatio\":1.5}}" %}
+{% embed data="{\"url\":\"https://stackblitz.com/edit/swimlane-grouped-vertical-bar-chart?embed=1&file=app/app.component.ts\",\"type\":\"link\",\"title\":\"grouped-vertical-bar-chart - StackBlitz\",\"description\":\"Grouped Vertical Bar Chart demo for ngx-charts\",\"icon\":{\"type\":\"icon\",\"url\":\"https://c.staticblitz.com/assets/icon-664493542621427cc8adae5e8f50d632f87aaa6ea1ce5b01e9a3d05b57940a9f.png\",\"aspectRatio\":0},\"thumbnail\":{\"type\":\"thumbnail\",\"url\":\"https://c.staticblitz.com/assets/icon-664493542621427cc8adae5e8f50d632f87aaa6ea1ce5b01e9a3d05b57940a9f.png\",\"aspectRatio\":0}}" %}
 
 ## Inputs
 
@@ -25,10 +25,10 @@
 | showYAxisLabel      | boolean            | false         | show or hide the y axis label                                                                                     |
 | xAxisLabel          | string             |               | the x axis label text                                                                                             |
 | yAxisLabel          | string             |               | the y axis label text                                                                                             |
-| trimXAxisTicks | boolean | true | trim or not ticks on the x axis |
-| trimYAxisTicks | boolean | true | trim or not ticks on the Y axis |
-| maxXAxisTickLength | number | 16 | max length of the ticks. If `trimXAxisTicks` is `true`, ticks over this length will be trimmed |
-| maxYAxisTickLength | number | 16 | max length of the ticks. If `trimYAxisTicks` is `true`, ticks over this length will be trimmed |
+| trimXAxisTicks      | boolean            | true          | trim or not ticks on the x axis                                                                                   |
+| trimYAxisTicks      | boolean            | true          | trim or not ticks on the Y axis                                                                                   |
+| maxXAxisTickLength  | number             | 16            | max length of the ticks. If `trimXAxisTicks` is `true`, ticks over this length will be trimmed                    |
+| maxYAxisTickLength  | number             | 16            | max length of the ticks. If `trimYAxisTicks` is `true`, ticks over this length will be trimmed                    |
 | xAxisTickFormatting | function           |               | the x axis tick formatting                                                                                        |
 | yAxisTickFormatting | function           |               | the y axis tick formatting                                                                                        |
 | xAxisTicks          | any\[\]            |               | predefined list of x axis tick values                                                                             |
