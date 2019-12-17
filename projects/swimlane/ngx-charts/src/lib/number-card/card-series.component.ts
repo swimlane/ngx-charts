@@ -47,7 +47,7 @@ import { IGridLayout, ICardModel, NumberCardsChartDataItem } from '../models/cha
       [tooltipDisabled]="tooltipDisabled"
       [tooltipPlacement]="tooltipPlacement"
       [tooltipType]="tooltipType"
-      [tooltipTitle]="(tooltipTemplate ? undefined : c.tooltipText)"
+      [tooltipTitle]="tooltipTemplate ? undefined : c.tooltipText"
       [tooltipTemplate]="tooltipTemplate"
       [tooltipContext]="c.data"
     />

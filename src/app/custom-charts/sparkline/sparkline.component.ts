@@ -33,7 +33,6 @@ import { BaseChartComponent, IViewDimensions, ColorHelper, calculateViewDimensio
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SparklineComponent extends BaseChartComponent {
-
   @Input() autoScale: boolean = false;
   @Input() curve: any = curveLinear;
   @Input() schemeType: string = 'linear';

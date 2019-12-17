@@ -171,7 +171,7 @@ export class CardComponent implements OnChanges, OnDestroy {
       const decs = decimalChecker(val);
       const valueFormatting = this.valueFormatting || (card => card.value.toLocaleString());
 
-      const callback = ({ value, finished }: { value: number, finished: boolean }) => {
+      const callback = ({ value, finished }: { value: number; finished: boolean }) => {
         this.zone.run(() => {
           value = finished ? val : value;
           this.value = valueFormatting({ label: this.label, data: this.data, value });

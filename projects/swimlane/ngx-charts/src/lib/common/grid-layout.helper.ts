@@ -59,14 +59,14 @@ export function gridLayout(
         name: item && item.name ? item.name : '',
         value: item && item.value ? item.value : undefined,
         extra: item && item.extra ? item.extra : undefined,
-        label: item && item.label ? item.label : '',
+        label: item && item.label ? item.label : ''
       },
       x: xScale(i % columns),
       y: yScale(Math.floor(i / columns)),
       width: cardWidth,
       height: cardHeight,
       percent: total > 0 ? item.value / total : 0,
-      total: total ? total : 0,
+      total: total ? total : 0
     });
   }
   return res;
