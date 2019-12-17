@@ -26,7 +26,7 @@ import { createMouseEvent } from '../events';
       </ng-template>
       <svg:rect
         #tooltipAnchor
-        [@animationState]="(anchorOpacity !== 0 ? 'active' : 'inactive')"
+        [@animationState]="anchorOpacity !== 0 ? 'active' : 'inactive'"
         class="tooltip-anchor"
         [attr.x]="anchorPos"
         y="0"

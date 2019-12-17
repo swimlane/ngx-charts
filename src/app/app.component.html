@@ -1318,7 +1318,11 @@
         </div>
         <div *ngIf="chart.options.includes('seriesTooltipDisabled')">
           <label>
-            <input type="checkbox" [checked]="seriesTooltipDisabled" (change)="seriesTooltipDisabled = $event.target.checked" />
+            <input
+              type="checkbox"
+              [checked]="seriesTooltipDisabled"
+              (change)="seriesTooltipDisabled = $event.target.checked"
+            />
             Disable Series tooltip
           </label>
           <br />

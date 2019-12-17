@@ -90,9 +90,9 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
               [animations]="animations"
             />
           </svg:g>
-          
+
           <svg:g *ngIf="!tooltipDisabled">
-            <svg:g 
+            <svg:g
               ngx-charts-tooltip-area
               [dims]="dims"
               [xSet]="xSet"
@@ -106,7 +106,8 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
             />
           </svg:g>
           <svg:g *ngIf="!seriesTooltipDisabled" (mouseleave)="hideCircles()">
-            <svg:g *ngFor="let series of results"
+            <svg:g
+              *ngFor="let series of results"
               ngx-charts-circle-series
               [xScale]="xScale"
               [yScale]="yScale"
@@ -119,8 +120,8 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
               [tooltipTemplate]="seriesTooltipTemplate"
               (select)="onClick($event)"
               (activate)="onActivate($event)"
-              (deactivate)="onDeactivate($event)">
-            </svg:g>
+              (deactivate)="onDeactivate($event)"
+            ></svg:g>
           </svg:g>
         </svg:g>
       </svg:g>
