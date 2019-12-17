@@ -16,6 +16,7 @@ import { curveLinear } from 'd3-shape';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
+import { Marker } from '../models/common.model';
 import { id } from '../utils/id';
 import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
 
@@ -55,6 +56,10 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
           [maxTickLength]="maxXAxisTickLength"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
+          [markers]="markers"
+          [showMarkers]="showMarkers"
+          [showMarkerLabels]="showMarkerLabels"
+          [markerColors]="markerColors"
           (dimensionsChanged)="updateXAxisHeight($event)"
         ></svg:g>
         <svg:g
@@ -205,6 +210,10 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() showRefLines: boolean = false;
   @Input() referenceLines: any;
   @Input() showRefLabels: boolean = true;
+  @Input() showMarkers: boolean = false;
+  @Input() markers: Marker[];
+  @Input() showMarkerLabels: boolean = true;
+  @Input() markerColors: any[];
   @Input() xScaleMin: any;
   @Input() xScaleMax: any;
   @Input() yScaleMin: number;

@@ -948,6 +948,10 @@
         [showRefLines]="showRefLines"
         [showRefLabels]="showRefLabels"
         [referenceLines]="refLines"
+        [showMarkers]="showMarkers"
+        [showMarkerLabels]="showMarkerLabels"
+        [markers]="markers"
+        [markerColors]="markerColors"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
@@ -1228,6 +1232,20 @@
           <label>
             <input type="checkbox" [checked]="showRefLines" (change)="showRefLines = $event.target.checked" />
             Show Reference Lines
+          </label>
+          <br />
+        </div>
+        <div *ngIf="chart.options.includes('showMarkerLabels')">
+          <label>
+            <input type="checkbox" [checked]="showMarkerLabels" (change)="showMarkerLabels = $event.target.checked" />
+            Show Marker Labels
+          </label>
+          <br />
+        </div>
+        <div *ngIf="chart.options.includes('showMarkers')">
+          <label>
+            <input type="checkbox" [checked]="showMarkers" (change)="showMarkers = $event.target.checked" />
+            Show Markers
           </label>
           <br />
         </div>
