@@ -1,5 +1,45 @@
 # Changelog
 
+## 13.0.0
+
+- Breaking: Upgrade to Angular 9. Add compatibility with Ivy
+- Breaking: Remove deprecated force-directed graph chart
+- Breaking: Remove release folder
+- Bug: Sanitize tooltip labels (#1241)
+- Bug: Fix line chart scaling on charts with large domain (#1204)
+- Chore: Remove d3 dependency
+- Chore: Update all d3 packages to latest versions
+
+## 12.1.0
+
+- Enhancement: Sanitize tooltip labels (#1241)
+- Bug: fix line chart scaling on charts with large domain (#1204)
+- Bug: add check for undefined xScale in groupTransform (#1273)
+
+## 12.0.1
+
+- Bug: Pass the correct number of parameters to fix production build (#1203)
+
+## 12.0.0
+
+- Breaking: Upgrade to angular 8.0.0 (#1201)
+- Breaking: Rework mouse events to make the format more consistent (#1185)
+- Feature: Allow passing extra data to the data items and include it in click and activate events (#1185)
+
+## 11.2.0
+
+- Feature: Made margins for pie chart component optional (#759)
+- Feature: Added option to gauge to show or hide inner text (#1175)
+- Feature: Added `noBarWhenZero` input to all bar related (#1086)
+- Bug: Updated Color.Helper.ts to handle null values (#1167)
+- Bug: Added missing export (#1193)
+- Bug: Fixed chart height with large number of yAxisTicks (#1105)
+- Chore: Bumped extract-text-plugin to version 3.0.2 (#861)
+- Chore: Updated zone.js version to 0.9.1 (#1187)
+- Docs: Deprecated force-directed graph chart (#1159)
+- Docs: Fixed link typo in motication.md (#1172)
+- Docs: Added interactive bubble chart to demo (#1174)
+
 ## 11.1.0
 
 - Feature: added option to disable x axis tick rotation (#1139)
