@@ -2,7 +2,7 @@
 
 ## Stacked Horizontal Bar Chart
 
-{% embed data="{\"url\":\"https://embed.plnkr.co/UHQVvMUmxsieiYITMVPq?show=preview\",\"type\":\"rich\",\"title\":\"Stacked Horizontal Bar Chart\",\"description\":\"Created on Plnkr: Helping developers build the web.\",\"icon\":{\"type\":\"icon\",\"url\":\"https://embed.plnkr.co/favicon.ico\",\"aspectRatio\":0},\"thumbnail\":{\"type\":\"thumbnail\",\"url\":\"https://shot.plnkr.co/UHQVvMUmxsieiYITMVPq.png?d=2017-03-31T15:16:57.703Z\",\"width\":400,\"height\":300,\"aspectRatio\":0.75},\"embed\":{\"type\":\"reader\",\"url\":\"https://embed.plnkr.co/plunk/UHQVvMUmxsieiYITMVPq?autoCloseSidebar&deferRun&show=preview\",\"html\":\"<div style=\\"left: 0; width: 100%; height: 0; position: relative; padding-bottom: 66.6667%;\\"><iframe src=\\"https://embed.plnkr.co/plunk/UHQVvMUmxsieiYITMVPq?autoCloseSidebar&amp;deferRun&amp;show=preview\\" style=\\"border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;\\" allowfullscreen scrolling=\\"no\\"></iframe></div>\",\"aspectRatio\":1.5}}" %}
+{% embed data="{\"url\":\"https://stackblitz.com/edit/swimlane-stacked-horizontal-bar-chart?embed=1&file=app/app.component.ts\",\"type\":\"link\",\"title\":\"stacked-horizontal-bar-chart - StackBlitz\",\"description\":\"Stacked Horizontal Bar Chart demo for ngx-charts\",\"icon\":{\"type\":\"icon\",\"url\":\"https://c.staticblitz.com/assets/icon-664493542621427cc8adae5e8f50d632f87aaa6ea1ce5b01e9a3d05b57940a9f.png\",\"aspectRatio\":0},\"thumbnail\":{\"type\":\"thumbnail\",\"url\":\"https://c.staticblitz.com/assets/icon-664493542621427cc8adae5e8f50d632f87aaa6ea1ce5b01e9a3d05b57940a9f.png\",\"aspectRatio\":0}}" %}
 
 ## Inputs
 
