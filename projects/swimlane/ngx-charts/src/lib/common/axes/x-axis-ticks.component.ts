@@ -13,6 +13,7 @@ import {
 import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
 import { roundedRect } from '../../common/shape.helper';
+import { Marker } from '../../models/common.model';
 
 @Component({
   selector: 'g[ngx-charts-x-axis-ticks]',
@@ -85,7 +86,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() gridLineHeight;
   @Input() width;
   @Input() rotateTicks: boolean = true;
-  @Input() markers;
+  @Input() markers: Marker[];
   @Input() showMarkerLabels: boolean = false;
   @Input() showMarkers: boolean = false;
   @Input() markerColors: string[] = ['#000000'];
@@ -198,7 +199,10 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     return angle;
   }
 
-  getMarkerColor(color: number): string {
+  getMarkerColor(color: number | string): string {
+    if (color != null && typeof color === 'string') {
+      return color;
+    }
     if (
       color == null ||
       this.markerColors == null ||
@@ -212,9 +216,9 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
 
   setMarkers(): void {
     // hide markers out of visual range
-    this.markers.forEach(line => {
-      const p = this.adjustedScale(line.value);
-      line.active = p > 0 && p < this.width;
+    this.markers.forEach(marker => {
+      const p = this.adjustedScale(marker.value);
+      marker.active = p > 0 && p < this.width;
     });
 
     const markerAreas = [];

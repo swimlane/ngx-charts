@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 
 import { XAxisTicksComponent } from './x-axis-ticks.component';
+import { Marker } from '../../models/common.model';
 
 @Component({
   selector: 'g[ngx-charts-x-axis]',
@@ -64,7 +65,7 @@ export class XAxisComponent implements OnChanges {
   @Input() xAxisTickCount: any;
   @Input() xOrient: string = 'bottom';
   @Input() xAxisOffset: number = 0;
-  @Input() markers;
+  @Input() markers: Marker[];
   @Input() showMarkers;
   @Input() showMarkerLabels;
   @Input() markerColors: any[];
