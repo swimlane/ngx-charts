@@ -11,9 +11,9 @@ export function trimLabel(text: any, max = 16): string {
       newString = '';
       break;
   }
-  
+
   newString = newString.trim();
-  if(newString.length <= max) {
+  if (newString.length <= max) {
     return newString;
   } else {
     return `${newString.slice(0, max)}...`;

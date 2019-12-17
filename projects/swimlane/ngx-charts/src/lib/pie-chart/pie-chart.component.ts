@@ -57,7 +57,6 @@ import { DataItem } from '../models/chart-data.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PieChartComponent extends BaseChartComponent {
-
   @Input() labels: boolean = false;
   @Input() legend: boolean = false;
   @Input() legendTitle: string = 'Legend';
