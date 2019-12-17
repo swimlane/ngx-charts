@@ -121,10 +121,7 @@ export class BubbleSeriesComponent implements OnChanges {
             [Math.round(cx + 0.866 * radius), Math.round(cy - 0.5 * radius)]
           ];
 
-          let formattedPoints = '';
-          if (polygonPoints && polygonPoints.length) {
-            formattedPoints = polygonPoints.map(item => item.join(',')).join(' ');
-          }
+          const formattedPoints = polygonPoints.map(item => item.join(',')).join(' ');
 
           const color =
             this.colors.scaleType === ScaleType.linear ? this.colors.getColor(r) : this.colors.getColor(seriesName);

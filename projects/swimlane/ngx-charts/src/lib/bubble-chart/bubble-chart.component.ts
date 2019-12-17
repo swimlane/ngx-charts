@@ -18,7 +18,7 @@ import { ColorHelper } from '../common/color.helper';
 import { getScaleType } from '../common/domain.helper';
 import { getBubbleDomain, getBubbleScale } from './bubble-chart.utils';
 import { id } from '../utils/id';
-import { BubbleChartMultiSeries, BubbleChartSeries, BubbleChartDataItem } from '../models/chart-data.model';
+import { BubbleChartMultiSeries, BubbleChartSeries } from '../models/chart-data.model';
 import { ScaleType } from '../enums/scale.enum';
 import { IShapeData } from '../models/shape.model';
 

@@ -117,7 +117,6 @@ export class ColorHelper {
         } else {
           return this.scale(value as any);
         }
-        break;
     }
   }
 
