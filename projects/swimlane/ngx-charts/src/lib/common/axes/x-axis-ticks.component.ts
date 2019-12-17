@@ -15,6 +15,13 @@ import { reduceTicks } from './ticks.helper';
 import { roundedRect } from '../../common/shape.helper';
 import { Marker } from '../../models/common.model';
 
+
+interface MarkerArea {
+    markerCount: number;
+    svgPath: string;
+    color: number | string;
+}
+
 @Component({
   selector: 'g[ngx-charts-x-axis-ticks]',
   template: `
@@ -44,9 +51,9 @@ import { Marker } from '../../models/common.model';
 
     <svg:g *ngFor="let markerArea of markerAreas">
       <svg:path
-        *ngIf="markerArea.markerGroupLength > 1 && showMarkers"
+        *ngIf="markerArea.markerCount > 1 && showMarkers"
         class="marker-area"
-        [attr.d]="markerArea.markerAreaPath"
+        [attr.d]="markerArea.svgPath"
         [style.fill]="getMarkerColor(markerArea.color)"
       />
     </svg:g>
@@ -106,7 +113,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   ticks: any;
   tickFormat: (o: any) => any;
   height: number = 0;
-  markerAreas: any[] = [];
+  markerAreas: MarkerArea[] = [];
 
   @ViewChild('ticksel') ticksElement: ElementRef;
 
@@ -272,8 +279,8 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
         ]);
 
         markerAreas.push({
-          markerGroupLength,
-          markerAreaPath,
+          markerCount: markerGroupLength,
+          svgPath: markerAreaPath,
           color
         });
       }
