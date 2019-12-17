@@ -10,10 +10,10 @@ The charts under the 'Demos' group in our demo page are not distributed with the
 
 ## Custom Chart Index
 
-* [Bar/Line Combo Chart](https://github.com/swimlane/ngx-charts/tree/master/demo/combo-chart)
-* [Sparkline](https://github.com/swimlane/ngx-charts/tree/master/demo/sparkline)
-* [Timeline filter bar chart](https://github.com/swimlane/ngx-charts/tree/master/demo/timeline-filter-bar-chart)
-* [Bubble Chart Interactive Drilldown](https://github.com/swimlane/ngx-charts/tree/master/demo/bubble-chart-interactive-demo)
+- [Bar/Line Combo Chart](https://github.com/swimlane/ngx-charts/tree/master/demo/combo-chart)
+- [Sparkline](https://github.com/swimlane/ngx-charts/tree/master/demo/sparkline)
+- [Timeline filter bar chart](https://github.com/swimlane/ngx-charts/tree/master/demo/timeline-filter-bar-chart)
+- [Bubble Chart Interactive Drilldown](https://github.com/swimlane/ngx-charts/tree/master/demo/bubble-chart-interactive-demo)
 
 _If you want to have your custom chart featured above, please submit a pull request to_ [_this file_](https://github.com/swimlane/ngx-charts/blob/master/docs/intro/custom-charts.md)_._
 
