@@ -88,7 +88,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() markers;
   @Input() showMarkerLabels: boolean = false;
   @Input() showMarkers: boolean = false;
-  @Input() markerColors: any[] = ['#000000'];
+  @Input() markerColors: string[] = ['#000000'];
 
   @Output() dimensionsChanged = new EventEmitter();
 
