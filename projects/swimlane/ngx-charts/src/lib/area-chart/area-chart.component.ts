@@ -16,7 +16,7 @@ import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensio
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
-import { getUniqueXDomainValues, getScaleType, getXDomainArray } from '../common/domain.helper';
+import { getUniqueXDomainValues, getXDomainArray } from '../common/domain.helper';
 
 @Component({
   selector: 'ngx-charts-area-chart',

@@ -285,15 +285,12 @@ export class BoxComponent implements OnChanges {
       return this.getPath();
     }
 
-    let radius = this.getRadius();
     let path = '';
 
     if (this.roundEdges) {
       if (this.orientation === 'vertical') {
-        radius = Math.min(this.height, radius);
         path = roundedRect(this.x, this.y + this.height, this.width, 1, 0, this.edges);
       } else if (this.orientation === 'horizontal') {
-        radius = Math.min(this.width, radius);
         path = roundedRect(this.x, this.y, 1, this.height, 0, this.edges);
       }
     } else {
