@@ -30,8 +30,8 @@ export function getScaleType(values: any[], checkDateType = true): string {
 
   const allNumbers = values.every(value => typeof value === 'number');
   if (allNumbers) {
-      return ScaleType.linear;
-    }
+    return ScaleType.linear;
+  }
 
   return ScaleType.ordinal;
 }

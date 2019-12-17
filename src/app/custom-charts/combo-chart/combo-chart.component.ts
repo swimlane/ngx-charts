@@ -12,7 +12,13 @@ import {
 
 import { curveLinear } from 'd3-shape';
 import { scaleBand, scaleLinear, scalePoint, scaleTime } from 'd3-scale';
-import { BaseChartComponent, ViewDimensions, ColorHelper, calculateViewDimensions, IColorSet } from '@swimlane/ngx-charts/common';
+import {
+  BaseChartComponent,
+  ViewDimensions,
+  ColorHelper,
+  calculateViewDimensions,
+  IColorSet
+} from '@swimlane/ngx-charts/common';
 import { LineSeriesComponent } from '@swimlane/ngx-charts/line-chart';
 
 @Component({

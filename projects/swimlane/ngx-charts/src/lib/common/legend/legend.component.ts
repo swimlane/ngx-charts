@@ -90,7 +90,7 @@ export class LegendComponent implements OnChanges {
   }
 
   isActive(entry: any): boolean {
-    if(!this.activeEntries) return false;
+    if (!this.activeEntries) return false;
     const item = this.activeEntries.find(d => entry.label === d.name);
     return item !== undefined;
   }

@@ -55,7 +55,6 @@ import { ColorHelper } from '../color.helper';
   ]
 })
 export class ChartComponent implements OnChanges {
-
   @Input() view: number[];
   @Input() showLegend = false;
   @Input() legendOptions: any;

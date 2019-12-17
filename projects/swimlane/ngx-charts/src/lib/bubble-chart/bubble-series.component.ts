@@ -46,7 +46,7 @@ import { ShapeType } from '../enums/shape.enum';
           [tooltipDisabled]="tooltipDisabled"
           [tooltipPlacement]="'top'"
           [tooltipType]="'tooltip'"
-          [tooltipTitle]="(tooltipTemplate ? undefined : getTooltipText(shape))"
+          [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(shape)"
           [tooltipTemplate]="tooltipTemplate"
           [tooltipContext]="shape.data"
         />
@@ -164,8 +164,8 @@ export class BubbleSeriesComponent implements OnChanges {
             case ShapeType.rectangle:
               const rectData: IShapeRectangle = {
                 ...baseData,
-                cx: - width / 2,
-                cy: - height / 2,
+                cx: -width / 2,
+                cy: -height / 2,
                 width,
                 height,
                 rx: 0,
@@ -199,8 +199,8 @@ export class BubbleSeriesComponent implements OnChanges {
       hasSeriesName && hasTooltipLabel
         ? `${shape.seriesName} • ${shape.tooltipLabel}`
         : shape.seriesName + shape.tooltipLabel;
-    const tooltipTitle = hasSeriesName || hasTooltipLabel ? 
-      `<span class="tooltip-label">${escapeLabel(name)}</span>` : '';
+    const tooltipTitle =
+      hasSeriesName || hasTooltipLabel ? `<span class="tooltip-label">${escapeLabel(name)}</span>` : '';
 
     return `
       ${tooltipTitle}
