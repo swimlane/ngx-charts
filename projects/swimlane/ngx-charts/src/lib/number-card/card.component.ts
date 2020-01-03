@@ -14,8 +14,8 @@ import {
 } from '@angular/core';
 import { trimLabel } from '../common/trim-label.helper';
 import { roundedRect } from '../common/shape.helper';
-import { count, decimalChecker } from '../common/count';
 import { escapeLabel } from '../common/label.helper';
+import { decimalChecker, count } from '../common/count/count.helper';
 
 @Component({
   selector: 'g[ngx-charts-card]',
