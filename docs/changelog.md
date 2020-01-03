@@ -1,5 +1,9 @@
 # Changelog
 
+## 13.0.1
+
+- Bug: Fix AOT builds by removing barrel exports
+
 ## 13.0.0
 
 - Breaking: Upgrade to Angular 9. Add compatibility with Ivy
