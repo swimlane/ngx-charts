@@ -7,7 +7,6 @@ cache:
   directories:
     - ~/.npm
     - ~/.cache
-    - node_modules
 
 addons:
   chrome: stable
