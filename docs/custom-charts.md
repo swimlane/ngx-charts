@@ -2,7 +2,7 @@
 
 Other than the library of available charts, ngx-charts also exports all of the components and helpers used as building blocks for the charts. Things like legends, axes, dimension helpers, gradients, shapes, series of shapes, can all be directly imported into your application and used in your components. This allows you to combine them and build custom charts that implement use cases that the pre-made charts do not support.
 
-You can find an example of how to use these components to build a custom chart here: [https://github.com/swimlane/ngx-charts/tree/master/demo/combo-chart](https://github.com/swimlane/ngx-charts/tree/master/demo/combo-chart)
+You can find an example of how to use these components to build a custom chart here: [https://github.com/swimlane/ngx-charts/tree/master/src/app/custom-charts/combo-chart](https://github.com/swimlane/ngx-charts/tree/master/src/app/custom-charts/combo-chart)
 
 The demo of the above combo-chart can be seen here: [https://swimlane.github.io/ngx-charts/\#/ngx-charts/combo-chart](https://swimlane.github.io/ngx-charts/#/ngx-charts/combo-chart)
 
