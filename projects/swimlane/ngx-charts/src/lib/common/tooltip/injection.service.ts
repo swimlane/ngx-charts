@@ -10,6 +10,10 @@ import {
 } from '@angular/core';
 import { DomPortalHost, ComponentPortal } from '@angular/cdk/portal';
 
+function isViewContainerRef(x: any): x is ViewContainerRef {
+  return x.element;
+}
+
 /**
  * Injection service is a helper to append components
  * dynamically to a known location in the DOM, most
@@ -74,13 +78,16 @@ export class InjectionService {
    *
    * @memberOf InjectionService
    */
-  getComponentRootNode(componentRef: any): HTMLElement {
-    if (componentRef.hostView && (componentRef.hostView as EmbeddedViewRef<any>).rootNodes.length > 0) {
-      return (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
+  getComponentRootNode(component: ViewContainerRef | ComponentRef<any>): HTMLElement {
+    if (isViewContainerRef(component)) {
+      return component.element.nativeElement;
+    }
+    if (component.hostView && (component.hostView as EmbeddedViewRef<any>).rootNodes.length > 0) {
+      return (component.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
     }
 
     // the top most component root node has no `hostView`
-    return componentRef.location.nativeElement;
+    return component.location.nativeElement;
   }
 
   /**
@@ -88,8 +95,8 @@ export class InjectionService {
    *
    * @memberOf InjectionService
    */
-  getRootViewContainerNode(componentRef): HTMLElement {
-    return this.getComponentRootNode(componentRef);
+  getRootViewContainerNode(component: ViewContainerRef | ComponentRef<any>): HTMLElement {
+    return this.getComponentRootNode(component);
   }
 
   /**
