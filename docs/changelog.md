@@ -1,5 +1,9 @@
 # Changelog
 
+## 13.0.2
+
+- Regression bug: Allow ViewContainerRef as the injection service root
+
 ## 13.0.1
 
 - Bug: Fix AOT builds by removing barrel exports
