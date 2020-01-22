@@ -15,7 +15,12 @@ import { scaleLinear } from 'd3-scale';
 import { getDomain, getScale } from '@swimlane/ngx-charts/bubble-chart/bubble-chart.utils';
 import { getScaleType } from '@swimlane/ngx-charts/common/domain.helper';
 import { id } from '@swimlane/ngx-charts//utils/id';
-import { BaseChartComponent, ViewDimensions, ColorHelper, calculateViewDimensions } from '@swimlane/ngx-charts/common';
+import {
+  ViewDimensions,
+  ColorHelper,
+  BaseChartComponent,
+  calculateViewDimensions
+} from 'projects/swimlane/ngx-charts/src/public-api';
 
 @Component({
   // tslint:disable-next-line: component-selector

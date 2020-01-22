@@ -12,8 +12,13 @@ import {
 
 import { curveLinear } from 'd3-shape';
 import { scaleBand, scaleLinear, scalePoint, scaleTime } from 'd3-scale';
-import { BaseChartComponent, ViewDimensions, ColorHelper, calculateViewDimensions } from '@swimlane/ngx-charts/common';
-import { LineSeriesComponent } from '@swimlane/ngx-charts/line-chart';
+import {
+  BaseChartComponent,
+  LineSeriesComponent,
+  ViewDimensions,
+  ColorHelper,
+  calculateViewDimensions
+} from 'projects/swimlane/ngx-charts/src/public-api';
 
 @Component({
   // tslint:disable-next-line: component-selector
