@@ -22,11 +22,3 @@ Use `barMaxWidth` attribute with default value 100px
 >
 </ngx-charts-bar-vertical-stacked>
 ```
-
-## Potential features(bar-chart)
-
-- center the chart
-
-- round corner of each bar svg
-
-- adjust padding for small amount of values
