@@ -42,6 +42,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
           [xAxisOffset]="dataLabelMaxHeight.negative"
+          [chartLeftOffset]="chartLeftOffset"
           (dimensionsChanged)="updateXAxisHeight($event)"
         ></svg:g>
         <svg:g
@@ -79,6 +80,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
             [dataLabelFormatting]="dataLabelFormatting"
             [seriesName]="group.name"
             [animations]="animations"
+            [chartLeftOffset]="chartLeftOffset"
             [noBarWhenZero]="noBarWhenZero"
             (select)="onClick($event, group)"
             (activate)="onActivate($event, group)"
@@ -135,6 +137,7 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   @Input() dataLabelFormatting: any;
   @Input() noBarWhenZero: boolean = true;
   @Input() barMaxWidth: number = 100;
+  chartLeftOffset: number = 0;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -191,6 +194,14 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
 
     this.xScale = this.getXScale();
     this.yScale = this.getYScale();
+
+    if (this.results.length > 0) {
+      const firstGroupName = this.results[0].name;
+      const lastGroupName = this.results[this.results.length - 1].name;
+      const chartWidth = this.xScale(lastGroupName) - this.xScale(firstGroupName) + this.xScale.bandwidth();
+
+      this.chartLeftOffset = (this.dims.width - chartWidth) / 2 - this.xScale(firstGroupName);
+    }
 
     this.setColors();
     this.legendOptions = this.getLegendOptions();

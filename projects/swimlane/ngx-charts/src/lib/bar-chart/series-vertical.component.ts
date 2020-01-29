@@ -85,6 +85,7 @@ export class SeriesVerticalComponent implements OnChanges {
   @Input() showDataLabel: boolean = false;
   @Input() dataLabelFormatting: any;
   @Input() noBarWhenZero: boolean = true;
+  @Input() chartLeftOffset: number = 0;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
@@ -174,7 +175,7 @@ export class SeriesVerticalComponent implements OnChanges {
         d0[d0Type] += value;
 
         bar.height = this.yScale(offset0) - this.yScale(offset1);
-        bar.x = 0;
+        bar.x = this.chartLeftOffset;
         bar.y = this.yScale(offset1);
         bar.offset0 = offset0;
         bar.offset1 = offset1;
