@@ -1,6 +1,6 @@
 {
   "name": "@okendo/ngx-charts",
-  "version": "13.0.7",
+  "version": "13.0.8",
   "description": "Declarative Charting Framework for Angular",
   "repository": {
     "type": "git",
