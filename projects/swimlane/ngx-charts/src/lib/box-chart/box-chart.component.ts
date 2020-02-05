@@ -10,10 +10,11 @@ import {
 } from '@angular/core';
 
 import { BaseChartComponent } from '../common/base-chart.component';
-import { ILegendOptions } from '../../../../../../src/models/legend.model';
-import { ViewDimensions, ColorHelper, calculateViewDimensions } from '../common';
+import { ILegendOptions } from '../models/legend.model';
+import { ColorHelper } from '../common/color.helper';
 import { BoxChartMultiSeries, BoxChartSeries, IBoxModel } from '../models/chart-data.model';
 import { scaleLinear, ScaleLinear, scaleBand, ScaleBand } from 'd3-scale';
+import { ViewDimensions, calculateViewDimensions } from '../common/view-dimensions.helper';
 
 @Component({
   selector: 'ngx-charts-box-chart',

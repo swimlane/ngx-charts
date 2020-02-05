@@ -2,14 +2,13 @@ import {
   Component,
   Input,
   OnChanges,
-  ViewContainerRef,
   ChangeDetectionStrategy,
   EventEmitter,
   Output,
   SimpleChanges
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { TooltipService } from '../tooltip';
+import { TooltipService } from '../tooltip/tooltip.service';
 
 @Component({
   providers: [TooltipService],
@@ -73,10 +72,6 @@ export class ChartComponent implements OnChanges {
   chartWidth: any;
   title: any;
   legendWidth: any;
-
-  constructor(private vcr: ViewContainerRef, private tooltipService: TooltipService) {
-    // this.tooltipService.injectionService.setRootViewContainer(this.vcr);
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();

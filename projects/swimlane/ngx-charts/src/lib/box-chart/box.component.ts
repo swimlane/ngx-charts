@@ -15,7 +15,7 @@ import * as ease from 'd3-ease';
 import { roundedRect } from '../common/shape.helper';
 import { id } from '../utils/id';
 import { IBoxModel } from '../models/chart-data.model';
-import { IVector2D } from '../../../../../../src/models/coordinates.model';
+import { IVector2D } from '../models/coordinates.model';
 
 @Component({
   selector: 'g[ngx-charts-box]',

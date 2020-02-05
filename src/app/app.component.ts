@@ -179,6 +179,9 @@ export class AppComponent implements OnInit {
   marginBottom: number = 40;
   marginLeft: number = 40;
 
+  // box
+  boxData = boxData;
+
   // gauge
   gaugeMin: number = 0;
   gaugeMax: number = 100;

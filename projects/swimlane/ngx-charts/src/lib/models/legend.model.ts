@@ -1,4 +1,4 @@
-import { ColorHelper } from '../common';
+import { ColorHelper } from '../common/color.helper';
 
 export interface ILegendOptions {
   scaleType: string;

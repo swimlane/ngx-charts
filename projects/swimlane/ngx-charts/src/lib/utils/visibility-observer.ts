@@ -1,16 +1,18 @@
-import { Output, EventEmitter, NgZone, Directive } from '@angular/core';
+import { Output, EventEmitter, NgZone, Directive, ElementRef } from '@angular/core';
 
 /**
  * Visibility Observer
  */
-@Directive()
+@Directive({
+  selector: 'visibility-observer'
+})
 export class VisibilityObserver {
   @Output() visible: EventEmitter<any> = new EventEmitter();
 
   timeout: any;
   isVisible: boolean = false;
 
-  constructor(private element: any, private zone: NgZone) {
+  constructor(private element: ElementRef, private zone: NgZone) {
     this.runCheck();
   }
 
