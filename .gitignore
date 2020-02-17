@@ -12,3 +12,4 @@ ngx-charts.iml
 release/src/
 release/demo/
 .vscode/
+/*.tgz
