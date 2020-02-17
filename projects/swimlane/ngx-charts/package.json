@@ -35,13 +35,13 @@
   },
   "homepage": "https://github.com/swimlane/ngx-charts#readme",
   "peerDependencies": {
-    "@angular/animations": "7.x || 8.x || 9.x",
-    "@angular/cdk": "7.x || 8.x || 9.x",
-    "@angular/core": "7.x || 8.x || 9.x",
-    "@angular/common": "7.x || 8.x || 9.x",
-    "@angular/forms": "7.x || 8.x || 9.x",
-    "@angular/platform-browser": "7.x || 8.x || 9.x",
-    "@angular/platform-browser-dynamic": "7.x || 8.x || 9.x",
+    "@angular/animations": "9.0.1",
+    "@angular/cdk": "9.0.0",
+    "@angular/core": "9.0.1",
+    "@angular/common": "9.0.1",
+    "@angular/forms": "9.0.1",
+    "@angular/platform-browser": "9.0.1",
+    "@angular/platform-browser-dynamic": "9.0.1",
     "rxjs": "6.x"
   },
   "dependencies": {

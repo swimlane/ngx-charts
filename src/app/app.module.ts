@@ -23,7 +23,6 @@ import { BubbleChartInteractiveModule } from './custom-charts/bubble-chart-inter
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    NgxUIModule,
     BubbleChartInteractiveModule
   ],
   declarations: [
