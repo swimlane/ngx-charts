@@ -1,6 +1,6 @@
 {
-  "name": "ngx-charts",
-  "version": "0.0.0",
+  "name": "@activia/swimlane-ngx-charts",
+  "version": "13.0.2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -22,6 +22,9 @@
     "prepack": "npm run package",
     "pack": "npm pack ./dist/swimlane/ngx-charts",
     "prettier": "prettier --write \"{src,projects}/**/*.{js,ts,html,scss,css,md,json}\""
+  },
+  "publishConfig": {
+    "registry": "https://nexus.activia.io:8443/repository/npm-internal"
   },
   "dependencies": {
     "@angular/animations": "~9.0.0-rc.6",
