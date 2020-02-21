@@ -13,7 +13,8 @@
 | scheme             | object             |               | the color scheme of the chart                                                                                     |
 | customColors       | function or object |               | custom colors for the chart. Used to override a color for a specific value                                        |
 | animations         | boolean            | true          | enable animations                                                                                                 |
-| legend             | boolean            | false         | show or hide the legend                                                                                           |
+| legend             | boolean            | false         | show or hide the legend
+| legendPosition     | string         | 'right'           | the legend position ['right', 'below']                                                                             |
 | legendTitle        | string             | 'Legend'      | the legend title                                                                                                  |
 | min                | number             | 0             | starting point of the scale                                                                                       |
 | max                | number             | 100           | ending point of the scale                                                                                         |
@@ -26,8 +27,8 @@
 | angleSpan          | number             | 240           | the angle that the chart spans \(in degrees\)                                                                     |
 | startAngle         | number             | -120          | the angle that the chart is rotated by. Use negative half of the spanning angle to centralize                     |
 | tooltipDisabled    | boolean            | false         | show or hide the tooltip                                                                                          |
-| tooltipTemplate    | TemplateRef        |               | a custom ng-template to be displayed inside the tooltip                                                           |
-| showText           | boolean            | true          | show or hide the inner text                                                                                       |
+| tooltipTemplate    | TemplateRef        |               | a custom ng-template to be displayed inside the tooltip                     
+
 
 ## Outputs
 
