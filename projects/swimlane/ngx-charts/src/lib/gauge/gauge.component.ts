@@ -94,6 +94,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   @Input() showAxis: boolean = true;
   @Input() startAngle: number = -120;
   @Input() angleSpan: number = 240;
+  @Input() minRadiusPerArc: number = 10;
   @Input() activeEntries: any[] = [];
   @Input() axisTickFormatting: any;
   @Input() tooltipDisabled: boolean = false;
@@ -186,7 +187,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
 
     const availableRadius = this.outerRadius * 0.7;
 
-    const radiusPerArc = Math.min(availableRadius / this.results.length, 10);
+    const radiusPerArc = Math.min(availableRadius / this.results.length, this.minRadiusPerArc);
     const arcWidth = radiusPerArc * 0.7;
     this.textRadius = this.outerRadius - this.results.length * radiusPerArc;
     this.cornerRadius = Math.floor(arcWidth / 2);
