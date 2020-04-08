@@ -24,6 +24,7 @@ import { reduceTicks } from './ticks.helper';
           [attr.text-anchor]="textAnchor"
           [attr.transform]="textTransform"
           [style.font-size]="'12px'"
+          [style.dominantBaseline]="dominantBaseline"
         >
           {{ tickTrim(tickFormat(tick)) }}
         </svg:text>
@@ -54,6 +55,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
 
   @Output() dimensionsChanged = new EventEmitter();
 
+  dominantBaseline: string = 'initial';
   verticalSpacing: number = 20;
   rotateLabels: boolean = false;
   innerTickSize: number = 6;
@@ -117,8 +119,10 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
       this.textTransform = `rotate(${angle})`;
       this.textAnchor = 'end';
       this.verticalSpacing = 10;
+      this.dominantBaseline = 'middle';
     } else {
       this.textAnchor = 'middle';
+      this.dominantBaseline = 'initial';
     }
 
     setTimeout(() => this.updateDims());
