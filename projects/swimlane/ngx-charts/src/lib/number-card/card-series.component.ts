@@ -82,10 +82,10 @@ export class CardSeriesComponent implements OnChanges {
 
   update(): void {
     if (this.data.length > 2) {
-      const valueFormatting = this.valueFormatting || (card => card.value.toLocaleString());
+      const valueFormatting = this.valueFormatting || ((card) => card.value.toLocaleString());
 
       const sortedLengths = this.data
-        .map(d => {
+        .map((d) => {
           const hasValue = d && d.data && typeof d.data.value !== 'undefined' && d.data.value !== null;
           return hasValue
             ? valueFormatting({
@@ -101,8 +101,8 @@ export class CardSeriesComponent implements OnChanges {
     }
 
     const cards = this.getCards();
-    this.cards = cards.filter(d => d.data.value !== null);
-    this.emptySlots = cards.filter(d => d.data.value === null);
+    this.cards = cards.filter((d) => d.data.value !== null);
+    this.emptySlots = cards.filter((d) => d.data.value === null);
   }
 
   getCards(): any[] {

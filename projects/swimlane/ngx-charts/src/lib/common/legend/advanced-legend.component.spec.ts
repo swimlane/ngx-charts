@@ -27,9 +27,9 @@ class TestComponent {
     ];
   }
 
-  valueFormatting: (value: number) => any = value => value;
-  labelFormatting: (value: string) => any = label => label;
-  percentageFormatting: (value: number) => any = percentage => percentage;
+  valueFormatting: (value: number) => any = (value) => value;
+  labelFormatting: (value: string) => any = (label) => label;
+  percentageFormatting: (value: number) => any = (percentage) => percentage;
 }
 
 describe('<ngx-charts-advanced-legend>', () => {
@@ -105,9 +105,9 @@ describe('<ngx-charts-advanced-legend>', () => {
   it('should apply formatting functions', () => {
     const fixture = TestBed.createComponent(TestComponent);
     const component = fixture.componentInstance;
-    component.valueFormatting = value => value.toFixed(2);
-    component.labelFormatting = label => `X:${label}`;
-    component.percentageFormatting = percentage => Math.round(percentage);
+    component.valueFormatting = (value) => value.toFixed(2);
+    component.labelFormatting = (label) => `X:${label}`;
+    component.percentageFormatting = (percentage) => Math.round(percentage);
     fixture.detectChanges();
 
     const {

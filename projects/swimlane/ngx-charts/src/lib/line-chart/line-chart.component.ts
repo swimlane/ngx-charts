@@ -306,7 +306,7 @@ export class LineChartComponent extends BaseChartComponent {
     let domain = [];
 
     if (this.scaleType === 'linear') {
-      values = values.map(v => Number(v));
+      values = values.map((v) => Number(v));
     }
 
     let min;
@@ -373,38 +373,29 @@ export class LineChartComponent extends BaseChartComponent {
   }
 
   getSeriesDomain(): any[] {
-    return this.results.map(d => d.name);
+    return this.results.map((d) => d.name);
   }
 
   getXScale(domain, width): any {
     let scale;
 
     if (this.scaleType === 'time') {
-      scale = scaleTime()
-        .range([0, width])
-        .domain(domain);
+      scale = scaleTime().range([0, width]).domain(domain);
     } else if (this.scaleType === 'linear') {
-      scale = scaleLinear()
-        .range([0, width])
-        .domain(domain);
+      scale = scaleLinear().range([0, width]).domain(domain);
 
       if (this.roundDomains) {
         scale = scale.nice();
       }
     } else if (this.scaleType === 'ordinal') {
-      scale = scalePoint()
-        .range([0, width])
-        .padding(0.1)
-        .domain(domain);
+      scale = scalePoint().range([0, width]).padding(0.1).domain(domain);
     }
 
     return scale;
   }
 
   getYScale(domain, height): any {
-    const scale = scaleLinear()
-      .range([height, 0])
-      .domain(domain);
+    const scale = scaleLinear().range([height, 0]).domain(domain);
 
     return this.roundDomains ? scale.nice() : scale;
   }
@@ -477,7 +468,7 @@ export class LineChartComponent extends BaseChartComponent {
   onActivate(item) {
     this.deactivateAll();
 
-    const idx = this.activeEntries.findIndex(d => {
+    const idx = this.activeEntries.findIndex((d) => {
       return d.name === item.name && d.value === item.value;
     });
     if (idx > -1) {
@@ -489,7 +480,7 @@ export class LineChartComponent extends BaseChartComponent {
   }
 
   onDeactivate(item) {
-    const idx = this.activeEntries.findIndex(d => {
+    const idx = this.activeEntries.findIndex((d) => {
       return d.name === item.name && d.value === item.value;
     });
 

@@ -96,7 +96,7 @@ export class SparklineComponent extends BaseChartComponent {
       const max = Math.max(...values);
       domain = [min, max];
     } else if (this.scaleType === 'linear') {
-      values = values.map(v => Number(v));
+      values = values.map((v) => Number(v));
       const min = Math.min(...values);
       const max = Math.max(...values);
       domain = [min, max];
@@ -143,34 +143,25 @@ export class SparklineComponent extends BaseChartComponent {
   }
 
   getSeriesDomain(): any[] {
-    return this.results.map(d => d.name);
+    return this.results.map((d) => d.name);
   }
 
   getXScale(domain, width): any {
     let scale;
 
     if (this.scaleType === 'time') {
-      scale = scaleTime()
-        .range([0, width])
-        .domain(domain);
+      scale = scaleTime().range([0, width]).domain(domain);
     } else if (this.scaleType === 'linear') {
-      scale = scaleLinear()
-        .range([0, width])
-        .domain(domain);
+      scale = scaleLinear().range([0, width]).domain(domain);
     } else if (this.scaleType === 'ordinal') {
-      scale = scalePoint()
-        .range([0, width])
-        .padding(0.1)
-        .domain(domain);
+      scale = scalePoint().range([0, width]).padding(0.1).domain(domain);
     }
 
     return scale;
   }
 
   getYScale(domain, height): any {
-    const scale = scaleLinear()
-      .range([height, 0])
-      .domain(domain);
+    const scale = scaleLinear().range([height, 0]).domain(domain);
 
     return scale;
   }

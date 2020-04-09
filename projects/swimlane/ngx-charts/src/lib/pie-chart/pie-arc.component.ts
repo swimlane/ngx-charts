@@ -114,10 +114,7 @@ export class PieArcComponent implements OnChanges {
       outerRadius = (this.outerRadius * this.value) / this.max;
     }
 
-    return arc()
-      .innerRadius(this.innerRadius)
-      .outerRadius(outerRadius)
-      .cornerRadius(this.cornerRadius);
+    return arc().innerRadius(this.innerRadius).outerRadius(outerRadius).cornerRadius(this.cornerRadius);
   }
 
   loadAnimation(): void {
@@ -129,23 +126,23 @@ export class PieArcComponent implements OnChanges {
 
     node
       .transition()
-      .attrTween('d', function(d) {
+      .attrTween('d', function (d) {
         (<any>this)._current = (<any>this)._current || d;
         const copyOfD = Object.assign({}, d);
         copyOfD.endAngle = copyOfD.startAngle;
         const interpolater = interpolate(copyOfD, copyOfD);
         (<any>this)._current = interpolater(0);
-        return function(t) {
+        return function (t) {
           return calc(interpolater(t));
         };
       })
       .transition()
       .duration(750)
-      .attrTween('d', function(d) {
+      .attrTween('d', function (d) {
         (<any>this)._current = (<any>this)._current || d;
         const interpolater = interpolate((<any>this)._current, d);
         (<any>this)._current = interpolater(0);
-        return function(t) {
+        return function (t) {
           return calc(interpolater(t));
         };
       });
@@ -161,11 +158,11 @@ export class PieArcComponent implements OnChanges {
     node
       .transition()
       .duration(750)
-      .attrTween('d', function(d) {
+      .attrTween('d', function (d) {
         (<any>this)._current = (<any>this)._current || d;
         const interpolater = interpolate((<any>this)._current, d);
         (<any>this)._current = interpolater(0);
-        return function(t) {
+        return function (t) {
           return calc(interpolater(t));
         };
       });

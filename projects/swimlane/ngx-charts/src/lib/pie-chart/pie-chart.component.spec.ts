@@ -77,11 +77,7 @@ describe('<ngx-charts-pie>', () => {
     it('should render an arc', () => {
       const arcElement = fixture.debugElement.nativeElement.querySelector('path.arc');
 
-      const testArc: any = arc()
-        .innerRadius(0)
-        .outerRadius(180)
-        .startAngle(0)
-        .endAngle(1.0984497063524654);
+      const testArc: any = arc().innerRadius(0).outerRadius(180).startAngle(0).endAngle(1.0984497063524654);
 
       expect(arcElement.getAttribute('d')).toEqual(testArc());
     });

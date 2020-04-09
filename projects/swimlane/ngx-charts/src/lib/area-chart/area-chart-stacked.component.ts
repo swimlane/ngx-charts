@@ -258,7 +258,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
       const val = this.xSet[i];
       let d0 = 0;
       for (const group of this.results) {
-        let d = group.series.find(item => {
+        let d = group.series.find((item) => {
           let a = item.name;
           let b = val;
           if (this.scaleType === 'time') {
@@ -312,7 +312,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
     let domain = [];
 
     if (this.scaleType === 'linear') {
-      values = values.map(v => Number(v));
+      values = values.map((v) => Number(v));
     }
 
     let min;
@@ -351,7 +351,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
       const val = this.xSet[i];
       let sum = 0;
       for (const group of this.results) {
-        const d = group.series.find(item => {
+        const d = group.series.find((item) => {
           let a = item.name;
           let b = val;
           if (this.scaleType === 'time') {
@@ -376,7 +376,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
   }
 
   getSeriesDomain(): any[] {
-    return this.results.map(d => d.name);
+    return this.results.map((d) => d.name);
   }
 
   getXScale(domain, width): any {
@@ -396,9 +396,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
   }
 
   getYScale(domain, height): any {
-    const scale = scaleLinear()
-      .range([height, 0])
-      .domain(domain);
+    const scale = scaleLinear().range([height, 0]).domain(domain);
     return this.roundDomains ? scale.nice() : scale;
   }
 
@@ -472,7 +470,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
   }
 
   onActivate(item) {
-    const idx = this.activeEntries.findIndex(d => {
+    const idx = this.activeEntries.findIndex((d) => {
       return d.name === item.name && d.value === item.value;
     });
     if (idx > -1) {
@@ -484,7 +482,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
   }
 
   onDeactivate(item) {
-    const idx = this.activeEntries.findIndex(d => {
+    const idx = this.activeEntries.findIndex((d) => {
       return d.name === item.name && d.value === item.value;
     });
 

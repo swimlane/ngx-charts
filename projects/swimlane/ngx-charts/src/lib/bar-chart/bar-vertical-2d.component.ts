@@ -229,16 +229,11 @@ export class BarVertical2DComponent extends BaseChartComponent {
   getInnerScale(): any {
     const width = this.groupScale.bandwidth();
     const spacing = this.innerDomain.length / (width / this.barPadding + 1);
-    return scaleBand()
-      .rangeRound([0, width])
-      .paddingInner(spacing)
-      .domain(this.innerDomain);
+    return scaleBand().rangeRound([0, width]).paddingInner(spacing).domain(this.innerDomain);
   }
 
   getValueScale(): any {
-    const scale = scaleLinear()
-      .range([this.dims.height, 0])
-      .domain(this.valuesDomain);
+    const scale = scaleLinear().range([this.dims.height, 0]).domain(this.valuesDomain);
     return this.roundDomains ? scale.nice() : scale;
   }
 
@@ -346,9 +341,9 @@ export class BarVertical2DComponent extends BaseChartComponent {
     }
 
     const items = this.results
-      .map(g => g.series)
+      .map((g) => g.series)
       .flat()
-      .filter(i => {
+      .filter((i) => {
         if (fromLegend) {
           return i.label === item.name;
         } else {
@@ -366,7 +361,7 @@ export class BarVertical2DComponent extends BaseChartComponent {
       item.series = group.name;
     }
 
-    this.activeEntries = this.activeEntries.filter(i => {
+    this.activeEntries = this.activeEntries.filter((i) => {
       if (fromLegend) {
         return i.label !== item.name;
       } else {

@@ -135,7 +135,7 @@ export class BubbleSeriesComponent implements OnChanges {
           };
         }
       })
-      .filter(circle => circle !== undefined);
+      .filter((circle) => circle !== undefined);
   }
 
   getTooltipText(circle): string {
@@ -173,7 +173,7 @@ export class BubbleSeriesComponent implements OnChanges {
 
   isActive(entry): boolean {
     if (!this.activeEntries) return false;
-    const item = this.activeEntries.find(d => {
+    const item = this.activeEntries.find((d) => {
       return entry.name === d.name;
     });
     return item !== undefined;

@@ -179,7 +179,7 @@ export class ComboChartComponent extends BaseChartComponent {
       name: this.yAxisLabel,
       series: this.results
     });
-    return this.combinedSeries.map(d => d.name);
+    return this.combinedSeries.map((d) => d.name);
   }
 
   isDate(value): boolean {
@@ -228,7 +228,7 @@ export class ComboChartComponent extends BaseChartComponent {
       const max = Math.max(...values);
       domain = [min, max];
     } else if (this.scaleType === 'linear') {
-      values = values.map(v => Number(v));
+      values = values.map((v) => Number(v));
       const min = Math.min(...values);
       const max = Math.max(...values);
       domain = [min, max];
@@ -280,13 +280,9 @@ export class ComboChartComponent extends BaseChartComponent {
     const offset = Math.floor((width + this.barPadding - (this.bandwidth + this.barPadding) * domain.length) / 2);
 
     if (this.scaleType === 'time') {
-      scale = scaleTime()
-        .range([0, width])
-        .domain(domain);
+      scale = scaleTime().range([0, width]).domain(domain);
     } else if (this.scaleType === 'linear') {
-      scale = scaleLinear()
-        .range([0, width])
-        .domain(domain);
+      scale = scaleLinear().range([0, width]).domain(domain);
 
       if (this.roundDomains) {
         scale = scale.nice();
@@ -301,9 +297,7 @@ export class ComboChartComponent extends BaseChartComponent {
   }
 
   getYScaleLine(domain, height): any {
-    const scale = scaleLinear()
-      .range([height, 0])
-      .domain(domain);
+    const scale = scaleLinear().range([height, 0]).domain(domain);
 
     return this.roundDomains ? scale.nice() : scale;
   }
@@ -311,26 +305,21 @@ export class ComboChartComponent extends BaseChartComponent {
   getXScale(): any {
     this.xDomain = this.getXDomain();
     const spacing = this.xDomain.length / (this.dims.width / this.barPadding + 1);
-    return scaleBand()
-      .range([0, this.dims.width])
-      .paddingInner(spacing)
-      .domain(this.xDomain);
+    return scaleBand().range([0, this.dims.width]).paddingInner(spacing).domain(this.xDomain);
   }
 
   getYScale(): any {
     this.yDomain = this.getYDomain();
-    const scale = scaleLinear()
-      .range([this.dims.height, 0])
-      .domain(this.yDomain);
+    const scale = scaleLinear().range([this.dims.height, 0]).domain(this.yDomain);
     return this.roundDomains ? scale.nice() : scale;
   }
 
   getXDomain(): any[] {
-    return this.results.map(d => d.name);
+    return this.results.map((d) => d.name);
   }
 
   getYDomain() {
-    const values = this.results.map(d => d.value);
+    const values = this.results.map((d) => d.value);
     const min = Math.min(0, ...values);
     const max = Math.max(...values);
     if (this.yLeftAxisScaleFactor) {
@@ -391,7 +380,7 @@ export class ComboChartComponent extends BaseChartComponent {
   }
 
   onActivate(item) {
-    const idx = this.activeEntries.findIndex(d => {
+    const idx = this.activeEntries.findIndex((d) => {
       return d.name === item.name && d.value === item.value && d.series === item.series;
     });
     if (idx > -1) {
@@ -403,7 +392,7 @@ export class ComboChartComponent extends BaseChartComponent {
   }
 
   onDeactivate(item) {
-    const idx = this.activeEntries.findIndex(d => {
+    const idx = this.activeEntries.findIndex((d) => {
       return d.name === item.name && d.value === item.value && d.series === item.series;
     });
 

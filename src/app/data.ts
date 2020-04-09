@@ -342,7 +342,7 @@ export function timelineFilterBarData(): SingleSeries {
     });
     date += dayLength;
   }
-  if (!results.some(r => r.value === 0)) {
+  if (!results.some((r) => r.value === 0)) {
     results[Math.floor(Math.random() * results.length)].value = 0;
   }
 

@@ -207,22 +207,15 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
   }
 
   getXScale(domain, width): any {
-    return scaleBand()
-      .range([0, width])
-      .paddingInner(0.1)
-      .domain(domain);
+    return scaleBand().range([0, width]).paddingInner(0.1).domain(domain);
   }
 
   getTimeScale(domain, width): any {
-    return scaleTime()
-      .range([0, width])
-      .domain(domain);
+    return scaleTime().range([0, width]).domain(domain);
   }
 
   getYScale(domain, height): any {
-    const scale = scaleLinear()
-      .range([height, 0])
-      .domain(domain);
+    const scale = scaleLinear().range([height, 0]).domain(domain);
 
     return scale;
   }
@@ -275,9 +268,7 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
         this.cd.markForCheck();
       });
 
-    select(this.chartElement.nativeElement)
-      .select('.brush')
-      .call(this.brush);
+    select(this.chartElement.nativeElement).select('.brush').call(this.brush);
   }
 
   updateBrush(): void {
@@ -290,9 +281,7 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
       [0, 0],
       [width, height]
     ]);
-    select(this.chartElement.nativeElement)
-      .select('.brush')
-      .call(this.brush);
+    select(this.chartElement.nativeElement).select('.brush').call(this.brush);
 
     // clear hardcoded properties so they can be defined by CSS
     select(this.chartElement.nativeElement)
