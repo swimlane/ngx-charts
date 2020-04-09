@@ -54,7 +54,7 @@
     "moment-timezone": "^0.5.27",
     "ngx-moment": "^3.5.0",
     "resize-observer-polyfill": "^1.5.1",
-    "rxjs": "~6.5.3",
+    "rxjs": "~6.5.5",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.3"
   },
