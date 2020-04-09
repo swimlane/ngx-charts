@@ -1,4 +1,4 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -32,20 +32,21 @@ describe('<ngx-charts-bar-vertical>', () => {
   });
 
   describe('basic setup', () => {
-    beforeEach(async(() => {
+    beforeEach(() => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
                <ngx-charts-bar-vertical
+                [animations]="false"
                 [view]="[400,800]"
                 [scheme]="colorScheme"
                 [results]="single">
               </ngx-charts-bar-vertical>`
         }
       });
-    }));
+    });
 
-    it('should set the svg width and height', async(() => {
+    it('should set the svg width and height', () => {
       const fixture = TestBed.createComponent(TestComponent);
       fixture.detectChanges();
 
@@ -53,72 +54,76 @@ describe('<ngx-charts-bar-vertical>', () => {
 
       expect(svg.getAttribute('width')).toBe('400');
       expect(svg.getAttribute('height')).toBe('800');
-    }));
+    });
 
-    it('should render 12 cell elements', async(() => {
+    it('should render 12 cell elements', () => {
       const fixture = TestBed.createComponent(TestComponent);
       fixture.detectChanges();
 
       const compiled = fixture.debugElement.nativeElement;
 
       expect(compiled.querySelectorAll('path.bar').length).toEqual(6);
-    }));
+    });
 
-    it('should render correct cell size', async(() => {
+    it('should render correct cell size', () => {
       const fixture = TestBed.createComponent(TestComponent);
       fixture.detectChanges();
 
       const bar = fixture.debugElement.query(By.directive(BarComponent));
 
       expect(bar.componentInstance.width).toEqual(53); // ~(360 - 5 * barPadding) / 6
-    }));
+    });
   });
 
   describe('padding', () => {
-    it('should render correct cell size, with zero padding', async(() => {
+    beforeEach(() => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
                <ngx-charts-bar-vertical
+                [animations]="false"
                 [view]="[400,800]"
                 [scheme]="colorScheme"
                 [results]="single"
                 [barPadding]="0">
               </ngx-charts-bar-vertical>`
         }
-      });
+      }).compileComponents();
+    });
 
-      TestBed.compileComponents().then(() => {
-        const fixture = TestBed.createComponent(TestComponent);
-        fixture.detectChanges();
+    it('should render correct cell size, with zero padding', () => {
+      const fixture = TestBed.createComponent(TestComponent);
+      fixture.detectChanges();
 
-        const bar = fixture.debugElement.query(By.directive(BarComponent));
+      const bar = fixture.debugElement.query(By.directive(BarComponent));
 
-        expect(bar.componentInstance.width).toEqual(60); // ~(360 - 5 * barPadding) / 6
-      });
-    }));
+      expect(bar.componentInstance.width).toEqual(60); // ~(360 - 5 * barPadding) / 6
+    });
+  });
 
-    it('should render correct cell size, with padding', async(() => {
+  describe('padding - 2', () => {
+    beforeEach(() => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
-               <ngx-charts-bar-vertical
-                [view]="[400,800]"
-                [scheme]="colorScheme"
-                [results]="single"
-                [barPadding]="20">
-              </ngx-charts-bar-vertical>`
+          <ngx-charts-bar-vertical
+            [animations]="false"
+            [view]="[400,800]"
+            [scheme]="colorScheme"
+            [results]="single"
+            [barPadding]="20">
+          </ngx-charts-bar-vertical>`
         }
-      });
+      }).compileComponents();
+    });
 
-      TestBed.compileComponents().then(() => {
-        const fixture = TestBed.createComponent(TestComponent);
-        fixture.detectChanges();
+    it('should render correct cell size, with padding', () => {
+      const fixture = TestBed.createComponent(TestComponent);
+      fixture.detectChanges();
 
-        const bar = fixture.debugElement.query(By.directive(BarComponent));
+      const bar = fixture.debugElement.query(By.directive(BarComponent));
 
-        expect(bar.componentInstance.width).toEqual(43); // ~(360 - 5 * barPadding) / 6
-      });
-    }));
+      expect(bar.componentInstance.width).toEqual(43); // ~(360 - 5 * barPadding) / 6
+    });
   });
 });
