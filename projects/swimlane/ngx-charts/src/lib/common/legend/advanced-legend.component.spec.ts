@@ -1,4 +1,4 @@
-import { async, TestBed } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { Component } from '@angular/core';
 
 import { ChartCommonModule } from '../chart-common.module';
@@ -54,101 +54,97 @@ describe('<ngx-charts-advanced-legend>', () => {
                 </ngx-charts-advanced-legend>
             `
       }
-    });
+    }).compileComponents();
   });
 
-  it('should render label and legend with values for each item', async(() => {
-    TestBed.compileComponents().then(() => {
-      const fixture = TestBed.createComponent(TestComponent);
-      fixture.detectChanges();
+  it('should render label and legend with values for each item', () => {
+    const fixture = TestBed.createComponent(TestComponent);
+    fixture.detectChanges();
 
-      const labelElement = fixture.debugElement.nativeElement.querySelector('.total-label');
-      const roundedTotalElement = fixture.debugElement.nativeElement.querySelector('.advanced-pie-legend').children[0];
-      const {
-        legendItemsElements,
-        legendItemValueElements,
-        legendItemLabelElements,
-        legendItemPercentElements
-      } = loadLegendItemElements(fixture);
+    const labelElement = fixture.debugElement.nativeElement.querySelector('.total-label');
+    const roundedTotalElement = fixture.debugElement.nativeElement.querySelector('.advanced-pie-legend').children[0];
+    const {
+      legendItemsElements,
+      legendItemValueElements,
+      legendItemLabelElements,
+      legendItemPercentElements
+    } = loadLegendItemElements(fixture);
 
-      expect(labelElement).toBeDefined();
-      expect(roundedTotalElement).toBeDefined();
+    expect(labelElement).toBeDefined();
+    expect(roundedTotalElement).toBeDefined();
 
-      expect(labelElement.textContent).toContain('Test legend label');
-      expect(roundedTotalElement.textContent).toContain('140');
-      expect(legendItemsElements.childElementCount).toBe(6);
-      expect(Array.from(legendItemValueElements).map((x: Element) => x.textContent.trim())).toEqual([
-        '8',
-        '12',
-        '20',
-        '30',
-        '46',
-        '24'
-      ]);
-      expect(Array.from(legendItemLabelElements).map((x: Element) => x.textContent.trim())).toEqual([
-        'a',
-        'b',
-        'c',
-        'd',
-        'e',
-        'f'
-      ]);
-      expect(Array.from(legendItemPercentElements).map((x: Element) => x.textContent.trim())).toEqual([
-        '5.714%',
-        '8.571%',
-        '14.286%',
-        '21.429%',
-        '32.857%',
-        '17.143%'
-      ]);
-    });
-  }));
+    expect(labelElement.textContent).toContain('Test legend label');
+    expect(roundedTotalElement.textContent).toContain('140');
+    expect(legendItemsElements.childElementCount).toBe(6);
+    expect(Array.from(legendItemValueElements).map((x: Element) => x.textContent.trim())).toEqual([
+      '8',
+      '12',
+      '20',
+      '30',
+      '46',
+      '24'
+    ]);
+    expect(Array.from(legendItemLabelElements).map((x: Element) => x.textContent.trim())).toEqual([
+      'a',
+      'b',
+      'c',
+      'd',
+      'e',
+      'f'
+    ]);
+    expect(Array.from(legendItemPercentElements).map((x: Element) => x.textContent.trim())).toEqual([
+      '5.714%',
+      '8.571%',
+      '14.286%',
+      '21.429%',
+      '32.857%',
+      '17.143%'
+    ]);
+  });
 
-  it('should apply formatting functions', async(() => {
-    TestBed.compileComponents().then(() => {
-      const fixture = TestBed.createComponent(TestComponent);
-      const component = fixture.componentInstance;
-      component.valueFormatting = value => value.toFixed(2);
-      component.labelFormatting = label => `X:${label}`;
-      component.percentageFormatting = percentage => Math.round(percentage);
-      fixture.detectChanges();
+  it('should apply formatting functions', () => {
+    const fixture = TestBed.createComponent(TestComponent);
+    const component = fixture.componentInstance;
+    component.valueFormatting = value => value.toFixed(2);
+    component.labelFormatting = label => `X:${label}`;
+    component.percentageFormatting = percentage => Math.round(percentage);
+    fixture.detectChanges();
 
-      const {
-        legendItemsElements,
-        legendItemValueElements,
-        legendItemLabelElements,
-        legendItemPercentElements
-      } = loadLegendItemElements(fixture);
+    const {
+      legendItemsElements,
+      legendItemValueElements,
+      legendItemLabelElements,
+      legendItemPercentElements
+    } = loadLegendItemElements(fixture);
 
-      expect(legendItemsElements.childElementCount).toBe(6);
-      expect(Array.from(legendItemValueElements).map((x: Element) => x.textContent.trim())).toEqual([
-        '8.00',
-        '12.00',
-        '20.00',
-        '30.00',
-        '46.00',
-        '24.00'
-      ]);
-      expect(Array.from(legendItemLabelElements).map((x: Element) => x.textContent.trim())).toEqual([
-        'X:a',
-        'X:b',
-        'X:c',
-        'X:d',
-        'X:e',
-        'X:f'
-      ]);
-      expect(Array.from(legendItemPercentElements).map((x: Element) => x.textContent.trim())).toEqual([
-        '6%',
-        '9%',
-        '14%',
-        '21%',
-        '33%',
-        '17%'
-      ]);
-    });
-  }));
+    expect(legendItemsElements.childElementCount).toBe(6);
+    expect(Array.from(legendItemValueElements).map((x: Element) => x.textContent.trim())).toEqual([
+      '8.00',
+      '12.00',
+      '20.00',
+      '30.00',
+      '46.00',
+      '24.00'
+    ]);
+    expect(Array.from(legendItemLabelElements).map((x: Element) => x.textContent.trim())).toEqual([
+      'X:a',
+      'X:b',
+      'X:c',
+      'X:d',
+      'X:e',
+      'X:f'
+    ]);
+    expect(Array.from(legendItemPercentElements).map((x: Element) => x.textContent.trim())).toEqual([
+      '6%',
+      '9%',
+      '14%',
+      '21%',
+      '33%',
+      '17%'
+    ]);
+  });
 
-  function loadLegendItemElements(fixture) {
+  function loadLegendItemElements(fixture: ComponentFixture<TestComponent>) {
     const legendItemsElements = fixture.debugElement.nativeElement.querySelector('.legend-items');
     const legendItemValueElements = fixture.debugElement.nativeElement.querySelectorAll('.legend-items .item-value');
     const legendItemLabelElements = fixture.debugElement.nativeElement.querySelectorAll('.legend-items .item-label');
