@@ -32,7 +32,7 @@
     "@angular/common": "~9.1.1",
     "@angular/compiler": "~9.1.1",
     "@angular/core": "~9.1.1",
-    "@angular/flex-layout": "^9.0.0-beta.29",
+    "@angular/flex-layout": "9.0.0-beta.29",
     "@angular/forms": "~9.1.1",
     "@angular/platform-browser": "~9.1.1",
     "@angular/platform-browser-dynamic": "~9.1.1",
