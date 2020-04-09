@@ -174,9 +174,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
   getXScale(): any {
     this.xDomain = this.getXDomain();
 
-    const scale = scaleLinear()
-      .range([0, this.dims.width])
-      .domain(this.xDomain);
+    const scale = scaleLinear().range([0, this.dims.width]).domain(this.xDomain);
 
     return this.roundDomains ? scale.nice() : scale;
   }
@@ -185,14 +183,11 @@ export class BarHorizontalComponent extends BaseChartComponent {
     this.yDomain = this.getYDomain();
     const spacing = this.yDomain.length / (this.dims.height / this.barPadding + 1);
 
-    return scaleBand()
-      .rangeRound([0, this.dims.height])
-      .paddingInner(spacing)
-      .domain(this.yDomain);
+    return scaleBand().rangeRound([0, this.dims.height]).paddingInner(spacing).domain(this.yDomain);
   }
 
   getXDomain(): any[] {
-    const values = this.results.map(d => d.value);
+    const values = this.results.map((d) => d.value);
     const min = this.xScaleMin ? Math.min(this.xScaleMin, ...values) : Math.min(0, ...values);
 
     const max = this.xScaleMax ? Math.max(this.xScaleMax, ...values) : Math.max(0, ...values);
@@ -200,7 +195,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
   }
 
   getYDomain(): any[] {
-    return this.results.map(d => d.label);
+    return this.results.map((d) => d.label);
   }
 
   onClick(data): void {
@@ -260,7 +255,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
   }
 
   onActivate(item, fromLegend = false) {
-    item = this.results.find(d => {
+    item = this.results.find((d) => {
       if (fromLegend) {
         return d.label === item.name;
       } else {
@@ -268,7 +263,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
       }
     });
 
-    const idx = this.activeEntries.findIndex(d => {
+    const idx = this.activeEntries.findIndex((d) => {
       return d.name === item.name && d.value === item.value && d.series === item.series;
     });
     if (idx > -1) {
@@ -280,7 +275,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
   }
 
   onDeactivate(item, fromLegend = false) {
-    item = this.results.find(d => {
+    item = this.results.find((d) => {
       if (fromLegend) {
         return d.label === item.name;
       } else {
@@ -288,7 +283,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
       }
     });
 
-    const idx = this.activeEntries.findIndex(d => {
+    const idx = this.activeEntries.findIndex((d) => {
       return d.name === item.name && d.value === item.value && d.series === item.series;
     });
 

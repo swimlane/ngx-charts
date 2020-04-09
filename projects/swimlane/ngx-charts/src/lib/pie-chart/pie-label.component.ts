@@ -59,9 +59,7 @@ export class PieLabelComponent implements OnChanges {
       startRadius = (this.radius * this.value) / this.max;
     }
 
-    const innerArc = arc()
-      .innerRadius(startRadius)
-      .outerRadius(startRadius);
+    const innerArc = arc().innerRadius(startRadius).outerRadius(startRadius);
 
     // Calculate innerPos then scale outer position to match label position
     const innerPos = innerArc.centroid(this.data);

@@ -78,7 +78,7 @@ export class TreeMapComponent extends BaseChartComponent {
     };
 
     const root = stratify<any>()
-      .id(d => {
+      .id((d) => {
         let label = d.name;
 
         if (label.constructor.name === 'Date') {
@@ -88,8 +88,8 @@ export class TreeMapComponent extends BaseChartComponent {
         }
         return label;
       })
-      .parentId(d => (d.isRoot ? null : 'root'))([rootNode, ...this.results])
-      .sum(d => d.value);
+      .parentId((d) => (d.isRoot ? null : 'root'))([rootNode, ...this.results])
+      .sum((d) => d.value);
 
     this.data = this.treemap(root);
 
@@ -99,7 +99,7 @@ export class TreeMapComponent extends BaseChartComponent {
   }
 
   getDomain(): any[] {
-    return this.results.map(d => d.name);
+    return this.results.map((d) => d.name);
   }
 
   onClick(data): void {

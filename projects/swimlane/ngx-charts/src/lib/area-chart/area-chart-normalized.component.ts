@@ -258,7 +258,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
 
       let total = 0;
       for (const group of this.results) {
-        const d = group.series.find(item => {
+        const d = group.series.find((item) => {
           let a = item.name;
           let b = val;
           if (this.scaleType === 'time') {
@@ -273,7 +273,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
       }
 
       for (const group of this.results) {
-        let d = group.series.find(item => {
+        let d = group.series.find((item) => {
           let a = item.name;
           let b = val;
           if (this.scaleType === 'time') {
@@ -346,7 +346,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
         return 0;
       });
     } else if (this.scaleType === 'linear') {
-      values = values.map(v => Number(v));
+      values = values.map((v) => Number(v));
       const min = Math.min(...values);
       const max = Math.max(...values);
       domain = [min, max];
@@ -365,7 +365,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
   }
 
   getSeriesDomain(): any[] {
-    return this.results.map(d => d.name);
+    return this.results.map((d) => d.name);
   }
 
   getXScale(domain, width): any {
@@ -385,9 +385,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
   }
 
   getYScale(domain, height): any {
-    const scale = scaleLinear()
-      .range([height, 0])
-      .domain(domain);
+    const scale = scaleLinear().range([height, 0]).domain(domain);
     return this.roundDomains ? scale.nice() : scale;
   }
 
@@ -461,7 +459,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
   }
 
   onActivate(item) {
-    const idx = this.activeEntries.findIndex(d => {
+    const idx = this.activeEntries.findIndex((d) => {
       return d.name === item.name && d.value === item.value;
     });
     if (idx > -1) {
@@ -473,7 +471,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
   }
 
   onDeactivate(item) {
-    const idx = this.activeEntries.findIndex(d => {
+    const idx = this.activeEntries.findIndex((d) => {
       return d.name === item.name && d.value === item.value;
     });
 

@@ -64,7 +64,7 @@ export class AreaSeriesComponent implements OnChanges {
     let currentArea;
     let startingArea;
 
-    const xProperty = d => {
+    const xProperty = (d) => {
       const label = d.name;
       return this.xScale(label);
     };
@@ -77,18 +77,18 @@ export class AreaSeriesComponent implements OnChanges {
 
       startingArea = area<any>()
         .x(xProperty)
-        .y0(d => this.yScale.range()[0])
-        .y1(d => this.yScale.range()[0]);
+        .y0((d) => this.yScale.range()[0])
+        .y1((d) => this.yScale.range()[0]);
     } else {
       currentArea = area<any>()
         .x(xProperty)
         .y0(() => (this.baseValue === 'auto' ? this.yScale.range()[0] : this.yScale(this.baseValue)))
-        .y1(d => this.yScale(d.value));
+        .y1((d) => this.yScale(d.value));
 
       startingArea = area<any>()
         .x(xProperty)
-        .y0(d => (this.baseValue === 'auto' ? this.yScale.range()[0] : this.yScale(this.baseValue)))
-        .y1(d => (this.baseValue === 'auto' ? this.yScale.range()[0] : this.yScale(this.baseValue)));
+        .y0((d) => (this.baseValue === 'auto' ? this.yScale.range()[0] : this.yScale(this.baseValue)))
+        .y1((d) => (this.baseValue === 'auto' ? this.yScale.range()[0] : this.yScale(this.baseValue)));
     }
 
     currentArea.curve(this.curve);
@@ -113,13 +113,13 @@ export class AreaSeriesComponent implements OnChanges {
     if (this.colors.scaleType === 'linear') {
       this.hasGradient = true;
       if (this.stacked || this.normalized) {
-        const d0values = this.data.series.map(d => d.d0);
-        const d1values = this.data.series.map(d => d.d1);
+        const d0values = this.data.series.map((d) => d.d0);
+        const d1values = this.data.series.map((d) => d.d1);
         const max = Math.max(...d1values);
         const min = Math.min(...d0values);
         this.gradientStops = this.colors.getLinearGradientStops(max, min);
       } else {
-        const values = this.data.series.map(d => d.value);
+        const values = this.data.series.map((d) => d.value);
         const max = Math.max(...values);
         this.gradientStops = this.colors.getLinearGradientStops(max);
       }
@@ -131,7 +131,7 @@ export class AreaSeriesComponent implements OnChanges {
 
   isActive(entry): boolean {
     if (!this.activeEntries) return false;
-    const item = this.activeEntries.find(d => {
+    const item = this.activeEntries.find((d) => {
       return entry.name === d.name;
     });
     return item !== undefined;
@@ -139,7 +139,7 @@ export class AreaSeriesComponent implements OnChanges {
 
   isInactive(entry): boolean {
     if (!this.activeEntries || this.activeEntries.length === 0) return false;
-    const item = this.activeEntries.find(d => {
+    const item = this.activeEntries.find((d) => {
       return entry.name === d.name;
     });
     return item === undefined;

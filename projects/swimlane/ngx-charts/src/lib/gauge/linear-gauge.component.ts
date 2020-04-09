@@ -171,9 +171,7 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
   }
 
   getValueScale(): any {
-    return scaleLinear()
-      .range([0, this.dims.width])
-      .domain(this.valueDomain);
+    return scaleLinear().range([0, this.dims.width]).domain(this.valueDomain);
   }
 
   getDisplayValue(): string {

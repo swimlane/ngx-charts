@@ -120,7 +120,7 @@ export class SeriesVerticalComponent implements OnChanges {
 
     let total;
     if (this.type === 'normalized') {
-      total = this.series.map(d => d.value).reduce((sum, d) => sum + d, 0);
+      total = this.series.map((d) => d.value).reduce((sum, d) => sum + d, 0);
     }
 
     this.bars = this.series.map((d, index) => {
@@ -220,8 +220,8 @@ export class SeriesVerticalComponent implements OnChanges {
       this.barsForDataLabels = [];
       const section: any = {};
       section.series = this.seriesName;
-      const totalPositive = this.series.map(d => d.value).reduce((sum, d) => (d > 0 ? sum + d : sum), 0);
-      const totalNegative = this.series.map(d => d.value).reduce((sum, d) => (d < 0 ? sum + d : sum), 0);
+      const totalPositive = this.series.map((d) => d.value).reduce((sum, d) => (d > 0 ? sum + d : sum), 0);
+      const totalNegative = this.series.map((d) => d.value).reduce((sum, d) => (d < 0 ? sum + d : sum), 0);
       section.total = totalPositive + totalNegative;
       section.x = 0;
       section.y = 0;
@@ -233,7 +233,7 @@ export class SeriesVerticalComponent implements OnChanges {
       section.width = this.xScale.bandwidth();
       this.barsForDataLabels.push(section);
     } else {
-      this.barsForDataLabels = this.series.map(d => {
+      this.barsForDataLabels = this.series.map((d) => {
         const section: any = {};
         section.series = this.seriesName ? this.seriesName : d.label;
         section.total = d.value;
@@ -253,7 +253,7 @@ export class SeriesVerticalComponent implements OnChanges {
 
   isActive(entry): boolean {
     if (!this.activeEntries) return false;
-    const item = this.activeEntries.find(d => {
+    const item = this.activeEntries.find((d) => {
       return entry.name === d.name && entry.series === d.series;
     });
     return item !== undefined;

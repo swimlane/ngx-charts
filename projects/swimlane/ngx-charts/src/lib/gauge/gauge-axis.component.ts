@@ -131,8 +131,8 @@ export class GaugeAxisComponent implements OnChanges {
       { x: x2, y: y2 }
     ];
     const lineGenerator = line<any>()
-      .x(d => d.x)
-      .y(d => d.y);
+      .x((d) => d.x)
+      .y((d) => d.y);
     return lineGenerator(points);
   }
 }

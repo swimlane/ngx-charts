@@ -102,10 +102,7 @@ export class BarComponent implements OnChanges {
     const node = select(this.element).select('.bar');
     const path = this.getPath();
     if (this.animations) {
-      node
-        .transition()
-        .duration(500)
-        .attr('d', path);
+      node.transition().duration(500).attr('d', path);
     } else {
       node.attr('d', path);
     }

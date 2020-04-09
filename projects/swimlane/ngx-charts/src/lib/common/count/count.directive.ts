@@ -12,9 +12,7 @@ import { count, decimalChecker } from './count.helper';
  */
 @Component({
   selector: '[ngx-charts-count-up]',
-  template: `
-    {{ value }}
-  `
+  template: ` {{ value }} `
 })
 export class CountUpDirective implements OnDestroy {
   @Input() countDuration: number = 1;
@@ -78,7 +76,7 @@ export class CountUpDirective implements OnDestroy {
     cancelAnimationFrame(this.animationReq);
 
     const valueFormatting =
-      this.valueFormatting || (value => `${this.countPrefix}${value.toLocaleString()}${this.countSuffix}`);
+      this.valueFormatting || ((value) => `${this.countPrefix}${value.toLocaleString()}${this.countSuffix}`);
 
     const callback = ({ value, progress, finished }) => {
       this.value = valueFormatting(value);

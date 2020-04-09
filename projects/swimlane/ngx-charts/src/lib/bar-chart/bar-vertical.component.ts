@@ -177,26 +177,21 @@ export class BarVerticalComponent extends BaseChartComponent {
   getXScale(): any {
     this.xDomain = this.getXDomain();
     const spacing = this.xDomain.length / (this.dims.width / this.barPadding + 1);
-    return scaleBand()
-      .range([0, this.dims.width])
-      .paddingInner(spacing)
-      .domain(this.xDomain);
+    return scaleBand().range([0, this.dims.width]).paddingInner(spacing).domain(this.xDomain);
   }
 
   getYScale(): any {
     this.yDomain = this.getYDomain();
-    const scale = scaleLinear()
-      .range([this.dims.height, 0])
-      .domain(this.yDomain);
+    const scale = scaleLinear().range([this.dims.height, 0]).domain(this.yDomain);
     return this.roundDomains ? scale.nice() : scale;
   }
 
   getXDomain(): any[] {
-    return this.results.map(d => d.label);
+    return this.results.map((d) => d.label);
   }
 
   getYDomain(): [number, number] {
-    const values = this.results.map(d => d.value);
+    const values = this.results.map((d) => d.value);
 
     let min = this.yScaleMin ? Math.min(this.yScaleMin, ...values) : Math.min(0, ...values);
     if (this.yAxisTicks && !this.yAxisTicks.some(isNaN)) {
@@ -266,7 +261,7 @@ export class BarVerticalComponent extends BaseChartComponent {
   }
 
   onActivate(item, fromLegend = false) {
-    item = this.results.find(d => {
+    item = this.results.find((d) => {
       if (fromLegend) {
         return d.label === item.name;
       } else {
@@ -274,7 +269,7 @@ export class BarVerticalComponent extends BaseChartComponent {
       }
     });
 
-    const idx = this.activeEntries.findIndex(d => {
+    const idx = this.activeEntries.findIndex((d) => {
       return d.name === item.name && d.value === item.value && d.series === item.series;
     });
     if (idx > -1) {
@@ -286,7 +281,7 @@ export class BarVerticalComponent extends BaseChartComponent {
   }
 
   onDeactivate(item, fromLegend = false) {
-    item = this.results.find(d => {
+    item = this.results.find((d) => {
       if (fromLegend) {
         return d.label === item.name;
       } else {
@@ -294,7 +289,7 @@ export class BarVerticalComponent extends BaseChartComponent {
       }
     });
 
-    const idx = this.activeEntries.findIndex(d => {
+    const idx = this.activeEntries.findIndex((d) => {
       return d.name === item.name && d.value === item.value && d.series === item.series;
     });
 

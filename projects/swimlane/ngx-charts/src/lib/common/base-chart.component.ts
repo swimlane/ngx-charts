@@ -18,9 +18,7 @@ import { VisibilityObserver } from '../utils/visibility-observer';
 
 @Component({
   selector: 'base-chart',
-  template: `
-    <div></div>
-  `
+  template: ` <div></div> `
 })
 export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() results: any;
@@ -145,7 +143,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   private bindWindowResizeEvent(): void {
     const source = observableFromEvent(window, 'resize');
-    const subscription = source.pipe(debounceTime(200)).subscribe(e => {
+    const subscription = source.pipe(debounceTime(200)).subscribe((e) => {
       this.update();
       if (this.cd) {
         this.cd.markForCheck();

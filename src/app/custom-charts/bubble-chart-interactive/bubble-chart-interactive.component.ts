@@ -202,7 +202,7 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
       legendType: this.schemeType
     });
 
-    this.seriesDomain = this.results.map(d => d.name);
+    this.seriesDomain = this.results.map((d) => d.name);
     this.rDomain = this.getRDomain();
     this.xDomain = this.getXDomain();
     this.yDomain = this.getYDomain();
@@ -244,7 +244,7 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
 
   onClickSeries(eventOnBubbleSeriesCircleSelect, seriesObj) {
     // bubbles up from the series circle item select event
-    const bubbleObj = seriesObj.series.find(b => b.name === eventOnBubbleSeriesCircleSelect.name);
+    const bubbleObj = seriesObj.series.find((b) => b.name === eventOnBubbleSeriesCircleSelect.name);
     const eventOnBubbleSeriesSelect = {
       bubble: bubbleObj,
       series: seriesObj
@@ -299,9 +299,7 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
   }
 
   getRScale(domain, range): any {
-    const scale = scaleLinear()
-      .range(range)
-      .domain(domain);
+    const scale = scaleLinear().range(range).domain(domain);
 
     return this.roundDomains ? scale.nice() : scale;
   }
@@ -383,7 +381,7 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
   }
 
   onActivate(item): void {
-    const idx = this.activeEntries.findIndex(d => {
+    const idx = this.activeEntries.findIndex((d) => {
       return d.name === item.name;
     });
     if (idx > -1) {
@@ -395,7 +393,7 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
   }
 
   onDeactivate(item): void {
-    const idx = this.activeEntries.findIndex(d => {
+    const idx = this.activeEntries.findIndex((d) => {
       return d.name === item.name;
     });
 

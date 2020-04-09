@@ -62,7 +62,7 @@ export class TreeMapCellSeriesComponent implements OnChanges {
 
   getCells(): any[] {
     return this.data.children
-      .filter(d => {
+      .filter((d) => {
         return d.depth === 1;
       })
       .map((d, index) => {

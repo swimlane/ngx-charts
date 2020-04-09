@@ -285,7 +285,7 @@ export class AreaChartComponent extends BaseChartComponent {
     let domain = [];
 
     if (this.scaleType === 'linear') {
-      values = values.map(v => Number(v));
+      values = values.map((v) => Number(v));
     }
 
     let min;
@@ -344,7 +344,7 @@ export class AreaChartComponent extends BaseChartComponent {
   }
 
   getSeriesDomain(): any[] {
-    return this.results.map(d => d.name);
+    return this.results.map((d) => d.name);
   }
 
   getXScale(domain, width): any {
@@ -364,9 +364,7 @@ export class AreaChartComponent extends BaseChartComponent {
   }
 
   getYScale(domain, height): any {
-    const scale = scaleLinear()
-      .range([height, 0])
-      .domain(domain);
+    const scale = scaleLinear().range([height, 0]).domain(domain);
     return this.roundDomains ? scale.nice() : scale;
   }
 
@@ -471,7 +469,7 @@ export class AreaChartComponent extends BaseChartComponent {
   }
 
   onActivate(item) {
-    const idx = this.activeEntries.findIndex(d => {
+    const idx = this.activeEntries.findIndex((d) => {
       return d.name === item.name && d.value === item.value;
     });
     if (idx > -1) {
@@ -483,7 +481,7 @@ export class AreaChartComponent extends BaseChartComponent {
   }
 
   onDeactivate(item) {
-    const idx = this.activeEntries.findIndex(d => {
+    const idx = this.activeEntries.findIndex((d) => {
       return d.name === item.name && d.value === item.value;
     });
 

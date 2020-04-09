@@ -250,16 +250,11 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   getYScale(): any {
     const spacing = this.groupDomain.length / (this.dims.height / this.barPadding + 1);
 
-    return scaleBand()
-      .rangeRound([0, this.dims.height])
-      .paddingInner(spacing)
-      .domain(this.groupDomain);
+    return scaleBand().rangeRound([0, this.dims.height]).paddingInner(spacing).domain(this.groupDomain);
   }
 
   getXScale(): any {
-    const scale = scaleLinear()
-      .range([0, this.dims.width])
-      .domain(this.valueDomain);
+    const scale = scaleLinear().range([0, this.dims.width]).domain(this.valueDomain);
     return this.roundDomains ? scale.nice() : scale;
   }
 
@@ -338,9 +333,9 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
     }
 
     const items = this.results
-      .map(g => g.series)
+      .map((g) => g.series)
       .flat()
-      .filter(i => {
+      .filter((i) => {
         if (fromLegend) {
           return i.label === item.name;
         } else {
@@ -358,7 +353,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
       item.series = group.name;
     }
 
-    this.activeEntries = this.activeEntries.filter(i => {
+    this.activeEntries = this.activeEntries.filter((i) => {
       if (fromLegend) {
         return i.label !== item.name;
       } else {

@@ -20,13 +20,13 @@ export function getUniqueXDomainValues(results: any[]): any[] {
  */
 export function getScaleType(values: any[], checkDateType = true): string {
   if (checkDateType) {
-    const allDates = values.every(value => value instanceof Date);
+    const allDates = values.every((value) => value instanceof Date);
     if (allDates) {
       return 'time';
     }
   }
 
-  const allNumbers = values.every(value => typeof value === 'number');
+  const allNumbers = values.every((value) => typeof value === 'number');
   if (allNumbers) {
     return 'linear';
   }

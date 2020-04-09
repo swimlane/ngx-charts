@@ -335,7 +335,7 @@ export class AppComponent implements OnInit {
         this.graph.nodes.splice(index, 1);
         const nodes = [...this.graph.nodes];
 
-        const links = this.graph.links.filter(link => {
+        const links = this.graph.links.filter((link) => {
           return (
             link.source !== value && link.source.value !== value && link.target !== value && link.target.value !== value
           );
@@ -443,7 +443,7 @@ export class AppComponent implements OnInit {
     this.location.replaceState(this.chartType);
 
     for (const group of this.chartGroups) {
-      this.chart = group.charts.find(x => x.selector === chartSelector);
+      this.chart = group.charts.find((x) => x.selector === chartSelector);
       if (this.chart) break;
     }
 
@@ -479,7 +479,7 @@ export class AppComponent implements OnInit {
 
   setColorScheme(name) {
     this.selectedColorScheme = name;
-    this.colorScheme = this.colorSets.find(s => s.name === name);
+    this.colorScheme = this.colorSets.find((s) => s.name === name);
   }
 
   onLegendLabelClick(entry) {
@@ -500,7 +500,7 @@ export class AppComponent implements OnInit {
 
     // 52 weeks before monday
     const calendarData = [];
-    const getDate = d => new Date(thisMondayYear, thisMondayMonth, d);
+    const getDate = (d) => new Date(thisMondayYear, thisMondayMonth, d);
     for (let week = -52; week <= 0; week++) {
       const mondayDay = thisMondayDay + week * 7;
       const monday = getDate(mondayDay);
@@ -658,8 +658,8 @@ export class AppComponent implements OnInit {
   getFunction(text = this.mathText) {
     try {
       text = `with (Math) { return ${this.mathText} }`;
-      // tslint:disable-next-line:function-constructor
-      const fn = new Function('x', text).bind(Math);
+      // tslint:disable-next-line: function-constructor
+      const fn = new Function('x', text).bind(Math); // tslint:disable-line: tsr-detect-eval-with-expression
       return typeof fn(1) === 'number' ? fn : null;
     } catch (err) {
       return null;
@@ -690,7 +690,7 @@ export class AppComponent implements OnInit {
       this.treemap = this.treemapPath[idx].children;
       return;
     }
-    node = this.treemap.find(d => d.name === item.name);
+    node = this.treemap.find((d) => d.name === item.name);
     if (node.children) {
       this.treemapPath.push(node);
       this.treemap = node.children;
@@ -698,7 +698,7 @@ export class AppComponent implements OnInit {
   }
 
   getFlag(country) {
-    return this.countries.find(c => c.name === country).emoji;
+    return this.countries.find((c) => c.name === country).emoji;
   }
 
   onFilter(event) {
