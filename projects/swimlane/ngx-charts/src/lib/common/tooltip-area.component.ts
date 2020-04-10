@@ -96,7 +96,7 @@ export class TooltipArea {
 
       if (item) {
         const label = item.name;
-        let val = this.yAxisTickFormatting? this.yAxisTickFormatting(item.value): item.value.toLocaleString();
+        let val = item.value
         if (this.showPercentage) {
           val = (item.d1 - item.d0).toFixed(2) + '%';
         }
@@ -202,7 +202,7 @@ export class TooltipArea {
     }
     result += ': ';
     if (tooltipItem.value !== undefined) {
-      result += tooltipItem.value;
+      result += this.yAxisTickFormatting? this.yAxisTickFormatting(tooltipItem.value): tooltipItem.value.toLocaleString();
     }
     if (tooltipItem.min !== undefined || tooltipItem.max !== undefined) {
       result += ' (';
@@ -210,7 +210,7 @@ export class TooltipArea {
         if (tooltipItem.max === undefined) {
           result += '≥';
         }
-        result += tooltipItem.value;
+        result += this.yAxisTickFormatting? this.yAxisTickFormatting(tooltipItem.min): tooltipItem.min.toLocaleString();
         if (tooltipItem.max !== undefined) {
           result += ' - ';
         }
@@ -218,7 +218,7 @@ export class TooltipArea {
         result += '≤';
       }
       if (tooltipItem.max !== undefined) {
-        result += tooltipItem.value;;
+        result += this.yAxisTickFormatting? this.yAxisTickFormatting(tooltipItem.max): tooltipItem.max.toLocaleString();;
       }
       result += ')';
     }
