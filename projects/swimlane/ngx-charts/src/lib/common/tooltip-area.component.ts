@@ -75,6 +75,7 @@ export class TooltipArea {
   @Input() yScale;
   @Input() results;
   @Input() colors;
+  @Input() yAxisTickFormatting;
   @Input() showPercentage: boolean = false;
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipTemplate: TemplateRef<any>;
@@ -95,7 +96,7 @@ export class TooltipArea {
 
       if (item) {
         const label = item.name;
-        let val = item.value;
+        let val = this.yAxisTickFormatting? this.yAxisTickFormatting(item.value): item.value.toLocaleString();
         if (this.showPercentage) {
           val = (item.d1 - item.d0).toFixed(2) + '%';
         }
@@ -201,7 +202,7 @@ export class TooltipArea {
     }
     result += ': ';
     if (tooltipItem.value !== undefined) {
-      result += tooltipItem.value.toLocaleString();
+      result += tooltipItem.value;
     }
     if (tooltipItem.min !== undefined || tooltipItem.max !== undefined) {
       result += ' (';
@@ -209,7 +210,7 @@ export class TooltipArea {
         if (tooltipItem.max === undefined) {
           result += '≥';
         }
-        result += tooltipItem.min.toLocaleString();
+        result += tooltipItem.value;
         if (tooltipItem.max !== undefined) {
           result += ' - ';
         }
@@ -217,7 +218,7 @@ export class TooltipArea {
         result += '≤';
       }
       if (tooltipItem.max !== undefined) {
-        result += tooltipItem.max.toLocaleString();
+        result += tooltipItem.value;;
       }
       result += ')';
     }
