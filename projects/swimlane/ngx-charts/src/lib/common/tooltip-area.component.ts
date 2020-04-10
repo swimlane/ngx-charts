@@ -202,7 +202,9 @@ export class TooltipArea {
     }
     result += ': ';
     if (tooltipItem.value !== undefined) {
-      result += this.yAxisTickFormatting? this.yAxisTickFormatting(tooltipItem.value): tooltipItem.value.toLocaleString();
+      result += this.yAxisTickFormatting
+        ? this.yAxisTickFormatting(tooltipItem.value)
+        : tooltipItem.value.toLocaleString();
     }
     if (tooltipItem.min !== undefined || tooltipItem.max !== undefined) {
       result += ' (';
@@ -210,7 +212,9 @@ export class TooltipArea {
         if (tooltipItem.max === undefined) {
           result += '≥';
         }
-        result += this.yAxisTickFormatting? this.yAxisTickFormatting(tooltipItem.min): tooltipItem.min.toLocaleString();
+        result += this.yAxisTickFormatting
+          ? this.yAxisTickFormatting(tooltipItem.min)
+          : tooltipItem.min.toLocaleString();
         if (tooltipItem.max !== undefined) {
           result += ' - ';
         }
@@ -218,7 +222,9 @@ export class TooltipArea {
         result += '≤';
       }
       if (tooltipItem.max !== undefined) {
-        result += this.yAxisTickFormatting? this.yAxisTickFormatting(tooltipItem.max): tooltipItem.max.toLocaleString();;
+        result += this.yAxisTickFormatting
+          ? this.yAxisTickFormatting(tooltipItem.max)
+          : tooltipItem.max.toLocaleString();
       }
       result += ')';
     }
