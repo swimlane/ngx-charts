@@ -194,7 +194,7 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
         if (max === undefined) {
           result += '≥';
         }
-        result += min.toLocaleString();
+        result += this.yAxisTickFormatting? this.yAxisTickFormatting(min): min.toLocaleString();
         if (max !== undefined) {
           result += ' - ';
         }
@@ -202,7 +202,7 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
         result += '≤';
       }
       if (max !== undefined) {
-        result += max.toLocaleString();
+        result += this.yAxisTickFormatting? this.yAxisTickFormatting(max): max.toLocaleString();
       }
       result += ')';
       return result;

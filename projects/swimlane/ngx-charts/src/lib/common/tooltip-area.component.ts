@@ -96,7 +96,7 @@ export class TooltipArea {
 
       if (item) {
         const label = item.name;
-        let val = item.value
+        let val = item.value;
         if (this.showPercentage) {
           val = (item.d1 - item.d0).toFixed(2) + '%';
         }
