@@ -1,4 +1,4 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -30,20 +30,21 @@ describe('<ngx-charts-number-card>', () => {
   });
 
   describe('basic setup', () => {
-    beforeEach(async(() => {
+    beforeEach(() => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
               <ngx-charts-number-card
+                [animations]="false"
                 [view]="[400,800]"
                 [scheme]="colorScheme"
                 [results]="multi">
               </ngx-charts-number-card>`
         }
       }).compileComponents();
-    }));
+    });
 
-    it('should set the svg width and height', async(() => {
+    it('should set the svg width and height', () => {
       const fixture = TestBed.createComponent(TestComponent);
       fixture.detectChanges();
 
@@ -51,15 +52,15 @@ describe('<ngx-charts-number-card>', () => {
 
       expect(svg.getAttribute('width')).toBe('400');
       expect(svg.getAttribute('height')).toBe('800');
-    }));
+    });
 
-    it(`should render ${multi.length} ngx-charts-cards`, async(() => {
+    it(`should render ${multi.length} ngx-charts-cards`, () => {
       const fixture = TestBed.createComponent(TestComponent);
       fixture.detectChanges();
 
       const compiled = fixture.debugElement.nativeElement;
 
       expect(compiled.querySelectorAll('g[ngx-charts-card]').length).toEqual(multi.length);
-    }));
+    });
   });
 });

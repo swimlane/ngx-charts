@@ -97,10 +97,7 @@ export class HeatMapCellComponent implements OnChanges {
   animateToCurrentForm(): void {
     const node = select(this.element).select('.cell');
 
-    node
-      .transition()
-      .duration(750)
-      .attr('opacity', 1);
+    node.transition().duration(750).attr('opacity', 1);
   }
 
   onClick() {
