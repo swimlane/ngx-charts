@@ -23,7 +23,7 @@ import { formatLabel } from '../label.helper';
         [valueFormatting]="valueFormatting"
       ></div>
       <div class="total-value" *ngIf="!animations">
-        {{ valueFormatting ? valueFormatting(roundedTotal) : defaultValueFormatting(roundedTotal) }}
+        {{ valueFormatting ? valueFormatting(roundedTotal, true) : defaultValueFormatting(roundedTotal) }}
       </div>
       <div class="total-label">
         {{ label }}
@@ -47,7 +47,7 @@ import { formatLabel } from '../label.helper';
               [valueFormatting]="valueFormatting"
             ></div>
             <div *ngIf="!animations" class="item-value">
-              {{ valueFormatting ? valueFormatting(legendItem.value) : defaultValueFormatting(legendItem.value) }}
+              {{ valueFormatting ? valueFormatting(legendItem.value, false) : defaultValueFormatting(legendItem.value) }}
             </div>
             <div class="item-label">{{ legendItem.displayLabel }}</div>
             <div
@@ -82,7 +82,7 @@ export class AdvancedLegendComponent implements OnChanges {
   total: number;
   roundedTotal: number;
 
-  @Input() valueFormatting: (value: number) => any;
+  @Input() valueFormatting: (value: number, isTotal: boolean) => any;
   @Input() labelFormatting: (value: string) => any = label => label;
   @Input() percentageFormatting: (value: number) => any = percentage => percentage;
 
