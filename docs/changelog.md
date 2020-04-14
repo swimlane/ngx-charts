@@ -1,5 +1,10 @@
 # Changelog
 
+## 13.0.3
+
+- Chore: update dependecies
+- Testing: update tests to not use animation
+
 ## 13.0.2
 
 - Regression bug: Allow ViewContainerRef as the injection service root
