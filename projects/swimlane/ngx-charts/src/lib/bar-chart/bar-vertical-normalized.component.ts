@@ -282,9 +282,9 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
     }
 
     const items = this.results
-      .map((g) => g.series)
+      .map(g => g.series)
       .flat()
-      .filter((i) => {
+      .filter(i => {
         if (fromLegend) {
           return i.label === item.name;
         } else {
@@ -302,7 +302,7 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
       item.series = group.name;
     }
 
-    this.activeEntries = this.activeEntries.filter((i) => {
+    this.activeEntries = this.activeEntries.filter(i => {
       if (fromLegend) {
         return i.label !== item.name;
       } else {

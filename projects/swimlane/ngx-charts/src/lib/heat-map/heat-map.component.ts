@@ -265,8 +265,8 @@ export class HeatMapComponent extends BaseChartComponent {
   getRects(): any[] {
     const rects = [];
 
-    this.xDomain.map((xVal) => {
-      this.yDomain.map((yVal) => {
+    this.xDomain.map(xVal => {
+      this.yDomain.map(yVal => {
         rects.push({
           x: this.xScale(xVal),
           y: this.yScale(yVal),
@@ -316,9 +316,9 @@ export class HeatMapComponent extends BaseChartComponent {
     }
 
     const items = this.results
-      .map((g) => g.series)
+      .map(g => g.series)
       .flat()
-      .filter((i) => {
+      .filter(i => {
         if (fromLegend) {
           return i.label === item.name;
         } else {
@@ -336,7 +336,7 @@ export class HeatMapComponent extends BaseChartComponent {
       item.series = group.name;
     }
 
-    this.activeEntries = this.activeEntries.filter((i) => {
+    this.activeEntries = this.activeEntries.filter(i => {
       if (fromLegend) {
         return i.label !== item.name;
       } else {

@@ -70,7 +70,7 @@ describe('<ngx-charts-area-chart>', () => {
       const fills = Array.from(compiled.querySelectorAll('path.area')).map((areaElement: Element) =>
         areaElement.getAttribute('fill')
       );
-      expect(colors.every((color) => fills.includes(color))).toBeTruthy();
+      expect(colors.every(color => fills.includes(color))).toBeTruthy();
     });
   });
 });

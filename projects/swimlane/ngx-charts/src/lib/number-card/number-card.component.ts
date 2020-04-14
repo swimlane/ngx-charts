@@ -84,7 +84,7 @@ export class NumberCardComponent extends BaseChartComponent {
   }
 
   getDomain(): any[] {
-    return this.results.map((d) => d.label);
+    return this.results.map(d => d.label);
   }
 
   onClick(data): void {

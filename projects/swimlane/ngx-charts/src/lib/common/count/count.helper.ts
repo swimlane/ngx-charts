@@ -42,11 +42,11 @@ export function count(countFrom, countTo, countDecimals, countDuration, callback
     });
 
     if (tick) {
-      return requestAnimationFrame((val) => runCount(val));
+      return requestAnimationFrame(val => runCount(val));
     }
   }
 
-  return requestAnimationFrame((timestamp) => {
+  return requestAnimationFrame(timestamp => {
     startTime = timestamp;
     return runCount(timestamp);
   });

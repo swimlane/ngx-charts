@@ -44,7 +44,7 @@ export class GridPanelSeriesComponent implements OnChanges {
   }
 
   getGridPanels(): any[] {
-    return this.data.map((d) => {
+    return this.data.map(d => {
       let offset;
       let width;
       let height;

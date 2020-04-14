@@ -84,7 +84,7 @@ export class ComboSeriesVerticalComponent implements OnChanges {
     let d0 = 0;
     let total;
     if (this.type === 'normalized') {
-      total = this.series.map((d) => d.value).reduce((sum, d) => sum + d, 0);
+      total = this.series.map(d => d.value).reduce((sum, d) => sum + d, 0);
     }
 
     this.bars = this.series.map((d, index) => {
@@ -173,13 +173,13 @@ export class ComboSeriesVerticalComponent implements OnChanges {
     });
   }
   getSeriesTooltips(seriesLine, index) {
-    return seriesLine.map((d) => {
+    return seriesLine.map(d => {
       return d.series[index];
     });
   }
   isActive(entry): boolean {
     if (!this.activeEntries) return false;
-    const item = this.activeEntries.find((d) => {
+    const item = this.activeEntries.find(d => {
       return entry.name === d.name && entry.series === d.series;
     });
     return item !== undefined;

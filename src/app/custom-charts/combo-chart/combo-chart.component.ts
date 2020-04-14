@@ -179,7 +179,7 @@ export class ComboChartComponent extends BaseChartComponent {
       name: this.yAxisLabel,
       series: this.results
     });
-    return this.combinedSeries.map((d) => d.name);
+    return this.combinedSeries.map(d => d.name);
   }
 
   isDate(value): boolean {
@@ -228,7 +228,7 @@ export class ComboChartComponent extends BaseChartComponent {
       const max = Math.max(...values);
       domain = [min, max];
     } else if (this.scaleType === 'linear') {
-      values = values.map((v) => Number(v));
+      values = values.map(v => Number(v));
       const min = Math.min(...values);
       const max = Math.max(...values);
       domain = [min, max];
@@ -315,11 +315,11 @@ export class ComboChartComponent extends BaseChartComponent {
   }
 
   getXDomain(): any[] {
-    return this.results.map((d) => d.name);
+    return this.results.map(d => d.name);
   }
 
   getYDomain() {
-    const values = this.results.map((d) => d.value);
+    const values = this.results.map(d => d.value);
     const min = Math.min(0, ...values);
     const max = Math.max(...values);
     if (this.yLeftAxisScaleFactor) {
@@ -380,7 +380,7 @@ export class ComboChartComponent extends BaseChartComponent {
   }
 
   onActivate(item) {
-    const idx = this.activeEntries.findIndex((d) => {
+    const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value && d.series === item.series;
     });
     if (idx > -1) {
@@ -392,7 +392,7 @@ export class ComboChartComponent extends BaseChartComponent {
   }
 
   onDeactivate(item) {
-    const idx = this.activeEntries.findIndex((d) => {
+    const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value && d.series === item.series;
     });
 

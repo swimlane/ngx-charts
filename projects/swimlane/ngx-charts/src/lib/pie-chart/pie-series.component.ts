@@ -93,12 +93,12 @@ export class PieSeriesComponent implements OnChanges {
 
   update(): void {
     const pieGenerator = pie<any, any>()
-      .value((d) => d.value)
+      .value(d => d.value)
       .sort(null);
 
     const arcData = pieGenerator(this.series);
 
-    this.max = max(arcData, (d) => {
+    this.max = max(arcData, d => {
       return d.value;
     });
 
@@ -123,7 +123,7 @@ export class PieSeriesComponent implements OnChanges {
     const minDistance = 10;
     const labelPositions = pieData;
 
-    labelPositions.forEach((d) => {
+    labelPositions.forEach(d => {
       d.pos = this.outerArc().centroid(d);
       d.pos[0] = factor * this.outerRadius * (this.midAngle(d) < Math.PI ? 1 : -1);
     });
@@ -197,7 +197,7 @@ export class PieSeriesComponent implements OnChanges {
 
   isActive(entry): boolean {
     if (!this.activeEntries) return false;
-    const item = this.activeEntries.find((d) => {
+    const item = this.activeEntries.find(d => {
       return entry.name === d.name && entry.series === d.series;
     });
     return item !== undefined;

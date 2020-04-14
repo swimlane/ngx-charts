@@ -86,8 +86,8 @@ export class TreeMapCellComponent implements OnChanges {
   ngOnChanges(): void {
     this.update();
 
-    this.valueFormatting = this.valueFormatting || ((value) => value.toLocaleString());
-    const labelFormatting = this.labelFormatting || ((cell) => escapeLabel(trimLabel(cell.label, 55)));
+    this.valueFormatting = this.valueFormatting || (value => value.toLocaleString());
+    const labelFormatting = this.labelFormatting || (cell => escapeLabel(trimLabel(cell.label, 55)));
 
     const cellData = {
       data: this.data,

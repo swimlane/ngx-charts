@@ -256,7 +256,7 @@ export class PolarChartComponent extends BaseChartComponent {
     } else if (this.xScale.tickFormat) {
       tickFormat = this.xScale.tickFormat.apply(this.xScale, [5]);
     } else {
-      tickFormat = (d) => {
+      tickFormat = d => {
         if (isDate(d)) {
           return d.toLocaleDateString();
         }
@@ -267,7 +267,7 @@ export class PolarChartComponent extends BaseChartComponent {
     const outerRadius = this.outerRadius;
     const s = 1.1;
 
-    this.thetaTicks = this.xDomain.map((d) => {
+    this.thetaTicks = this.xDomain.map(d => {
       const startAngle = this.xScale(d);
       const dd = s * outerRadius * (startAngle > Math.PI ? -1 : 1);
       const label = tickFormat(d);
@@ -306,7 +306,7 @@ export class PolarChartComponent extends BaseChartComponent {
       }
     }
 
-    this.radiusTicks = this.yAxisScale.ticks(Math.floor(this.dims.height / 50)).map((d) => this.yScale(d));
+    this.radiusTicks = this.yAxisScale.ticks(Math.floor(this.dims.height / 50)).map(d => this.yScale(d));
   }
 
   getXValues(): any[] {
@@ -327,7 +327,7 @@ export class PolarChartComponent extends BaseChartComponent {
       const max = Math.max(...values);
       return [min, max];
     } else if (this.scaleType === 'linear') {
-      values = values.map((v) => Number(v));
+      values = values.map(v => Number(v));
       const min = Math.min(...values);
       const max = Math.max(...values);
       return [min, max];
@@ -371,7 +371,7 @@ export class PolarChartComponent extends BaseChartComponent {
   }
 
   getSeriesDomain(): any[] {
-    return this.results.map((d) => d.name);
+    return this.results.map(d => d.name);
   }
 
   getXScale(domain, width): any {
@@ -438,7 +438,7 @@ export class PolarChartComponent extends BaseChartComponent {
   }
 
   onActivate(item) {
-    const idx = this.activeEntries.findIndex((d) => {
+    const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value;
     });
     if (idx > -1) {
@@ -449,7 +449,7 @@ export class PolarChartComponent extends BaseChartComponent {
   }
 
   onDeactivate(item) {
-    const idx = this.activeEntries.findIndex((d) => {
+    const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value;
     });
 

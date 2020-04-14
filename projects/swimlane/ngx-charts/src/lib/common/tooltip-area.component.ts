@@ -87,7 +87,7 @@ export class TooltipArea {
     const results = [];
 
     for (const group of this.results) {
-      const item = group.series.find((d) => d.name.toString() === xVal.toString());
+      const item = group.series.find(d => d.name.toString() === xVal.toString());
       let groupName = group.name;
       if (groupName instanceof Date) {
         groupName = groupName.toLocaleDateString();

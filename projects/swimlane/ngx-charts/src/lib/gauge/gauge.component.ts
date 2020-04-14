@@ -229,11 +229,11 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   }
 
   getDomain(): any[] {
-    return this.results.map((d) => d.name);
+    return this.results.map(d => d.name);
   }
 
   getValueDomain(): any[] {
-    const values = this.results.map((d) => d.value);
+    const values = this.results.map(d => d.value);
     const dataMin = Math.min(...values);
     const dataMax = Math.max(...values);
 
@@ -257,7 +257,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   }
 
   getDisplayValue(): string {
-    const value = this.results.map((d) => d.value).reduce((a, b) => a + b, 0);
+    const value = this.results.map(d => d.value).reduce((a, b) => a + b, 0);
 
     if (this.textValue && 0 !== this.textValue.length) {
       return this.textValue.toLocaleString();
@@ -312,7 +312,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   }
 
   onActivate(item): void {
-    const idx = this.activeEntries.findIndex((d) => {
+    const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value;
     });
     if (idx > -1) {
@@ -324,7 +324,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   }
 
   onDeactivate(item): void {
-    const idx = this.activeEntries.findIndex((d) => {
+    const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value;
     });
 
@@ -336,7 +336,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
 
   isActive(entry): boolean {
     if (!this.activeEntries) return false;
-    const item = this.activeEntries.find((d) => {
+    const item = this.activeEntries.find(d => {
       return entry.name === d.name && entry.series === d.series;
     });
     return item !== undefined;
