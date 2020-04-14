@@ -127,18 +127,11 @@ export class Timeline implements OnChanges {
     let scale;
 
     if (this.scaleType === 'time') {
-      scale = scaleTime()
-        .range([0, this.dims.width])
-        .domain(this.xDomain);
+      scale = scaleTime().range([0, this.dims.width]).domain(this.xDomain);
     } else if (this.scaleType === 'linear') {
-      scale = scaleLinear()
-        .range([0, this.dims.width])
-        .domain(this.xDomain);
+      scale = scaleLinear().range([0, this.dims.width]).domain(this.xDomain);
     } else if (this.scaleType === 'ordinal') {
-      scale = scalePoint()
-        .range([0, this.dims.width])
-        .padding(0.1)
-        .domain(this.xDomain);
+      scale = scalePoint().range([0, this.dims.width]).padding(0.1).domain(this.xDomain);
     }
 
     return scale;
@@ -163,9 +156,7 @@ export class Timeline implements OnChanges {
         this.cd.markForCheck();
       });
 
-    select(this.element)
-      .select('.brush')
-      .call(this.brush);
+    select(this.element).select('.brush').call(this.brush);
   }
 
   updateBrush(): void {
@@ -178,9 +169,7 @@ export class Timeline implements OnChanges {
       [0, 0],
       [width, height]
     ]);
-    select(this.element)
-      .select('.brush')
-      .call(this.brush);
+    select(this.element).select('.brush').call(this.brush);
 
     // clear hardcoded properties so they can be defined by CSS
     select(this.element)

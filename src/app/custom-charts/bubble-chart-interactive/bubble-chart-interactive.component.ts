@@ -299,9 +299,7 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
   }
 
   getRScale(domain, range): any {
-    const scale = scaleLinear()
-      .range(range)
-      .domain(domain);
+    const scale = scaleLinear().range(range).domain(domain);
 
     return this.roundDomains ? scale.nice() : scale;
   }

@@ -117,10 +117,7 @@ export class TreeMapCellComponent implements OnChanges {
   loadAnimation(): void {
     const node = select(this.element).select('.cell');
 
-    node
-      .attr('opacity', 0)
-      .attr('x', this.x)
-      .attr('y', this.y);
+    node.attr('opacity', 0).attr('x', this.x).attr('y', this.y);
 
     this.animateToCurrentForm();
   }
@@ -142,12 +139,7 @@ export class TreeMapCellComponent implements OnChanges {
         .attr('width', this.width)
         .attr('height', this.height);
     } else {
-      node
-        .attr('opacity', 1)
-        .attr('x', this.x)
-        .attr('y', this.y)
-        .attr('width', this.width)
-        .attr('height', this.height);
+      node.attr('opacity', 1).attr('x', this.x).attr('y', this.y).attr('width', this.width).attr('height', this.height);
     }
   }
 

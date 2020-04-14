@@ -174,9 +174,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
   getXScale(): any {
     this.xDomain = this.getXDomain();
 
-    const scale = scaleLinear()
-      .range([0, this.dims.width])
-      .domain(this.xDomain);
+    const scale = scaleLinear().range([0, this.dims.width]).domain(this.xDomain);
 
     return this.roundDomains ? scale.nice() : scale;
   }
@@ -185,10 +183,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
     this.yDomain = this.getYDomain();
     const spacing = this.yDomain.length / (this.dims.height / this.barPadding + 1);
 
-    return scaleBand()
-      .rangeRound([0, this.dims.height])
-      .paddingInner(spacing)
-      .domain(this.yDomain);
+    return scaleBand().rangeRound([0, this.dims.height]).paddingInner(spacing).domain(this.yDomain);
   }
 
   getXDomain(): any[] {

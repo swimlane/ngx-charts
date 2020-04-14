@@ -25,21 +25,15 @@ export function getScale(domain, range: number[], scaleType, roundDomains): any 
   let scale: any;
 
   if (scaleType === 'time') {
-    scale = scaleTime()
-      .range(range)
-      .domain(domain);
+    scale = scaleTime().range(range).domain(domain);
   } else if (scaleType === 'linear') {
-    scale = scaleLinear()
-      .range(range)
-      .domain(domain);
+    scale = scaleLinear().range(range).domain(domain);
 
     if (roundDomains) {
       scale = scale.nice();
     }
   } else if (scaleType === 'ordinal') {
-    scale = scalePoint()
-      .range([range[0], range[1]])
-      .domain(domain);
+    scale = scalePoint().range([range[0], range[1]]).domain(domain);
   }
 
   return scale;
