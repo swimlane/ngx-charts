@@ -80,10 +80,7 @@ export class AreaComponent implements OnChanges {
     const node = select(this.element).select('.area');
 
     if (this.animations) {
-      node
-        .transition()
-        .duration(750)
-        .attr('d', this.path);
+      node.transition().duration(750).attr('d', this.path);
     } else {
       node.attr('d', this.path);
     }

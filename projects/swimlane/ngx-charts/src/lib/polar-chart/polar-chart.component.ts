@@ -377,13 +377,9 @@ export class PolarChartComponent extends BaseChartComponent {
   getXScale(domain, width): any {
     switch (this.scaleType) {
       case 'time':
-        return scaleTime()
-          .range([0, width])
-          .domain(domain);
+        return scaleTime().range([0, width]).domain(domain);
       case 'linear':
-        const scale = scaleLinear()
-          .range([0, width])
-          .domain(domain);
+        const scale = scaleLinear().range([0, width]).domain(domain);
         return this.roundDomains ? scale.nice() : scale;
       default:
         return scalePoint()
@@ -394,9 +390,7 @@ export class PolarChartComponent extends BaseChartComponent {
   }
 
   getYScale(domain, height): any {
-    const scale = scaleLinear()
-      .range([0, height])
-      .domain(domain);
+    const scale = scaleLinear().range([0, height]).domain(domain);
 
     return this.roundDomains ? scale.nice() : scale;
   }
