@@ -47,7 +47,9 @@ import { formatLabel } from '../label.helper';
               [valueFormatting]="valueFormatting"
             ></div>
             <div *ngIf="!animations" class="item-value">
-              {{ valueFormatting ? valueFormatting(legendItem.value, false) : defaultValueFormatting(legendItem.value) }}
+              {{
+                valueFormatting ? valueFormatting(legendItem.value, false) : defaultValueFormatting(legendItem.value)
+              }}
             </div>
             <div class="item-label">{{ legendItem.displayLabel }}</div>
             <div
