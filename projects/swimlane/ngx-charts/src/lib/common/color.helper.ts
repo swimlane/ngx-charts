@@ -12,7 +12,7 @@ export class ColorHelper {
 
   constructor(scheme, type, domain, customColors?) {
     if (typeof scheme === 'string') {
-      scheme = colorSets.find((cs) => {
+      scheme = colorSets.find(cs => {
         return cs.name === scheme;
       });
     }
@@ -26,7 +26,7 @@ export class ColorHelper {
 
   generateColorScheme(scheme, type, domain) {
     if (typeof scheme === 'string') {
-      scheme = colorSets.find((cs) => {
+      scheme = colorSets.find(cs => {
         return cs.name === scheme;
       });
     }
@@ -66,7 +66,7 @@ export class ColorHelper {
       const formattedValue = value.toString();
       let found: any; // todo type customColors
       if (this.customColors && this.customColors.length > 0) {
-        found = this.customColors.find((mapping) => {
+        found = this.customColors.find(mapping => {
           return mapping.name.toLowerCase() === formattedValue.toLowerCase();
         });
       }

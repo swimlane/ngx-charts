@@ -217,13 +217,13 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
     this.refMin = this.adjustedScale(
       Math.min.apply(
         null,
-        this.referenceLines.map((item) => item.value)
+        this.referenceLines.map(item => item.value)
       )
     );
     this.refMax = this.adjustedScale(
       Math.max.apply(
         null,
-        this.referenceLines.map((item) => item.value)
+        this.referenceLines.map(item => item.value)
       )
     );
     this.referenceLineLength = this.referenceLines.length;

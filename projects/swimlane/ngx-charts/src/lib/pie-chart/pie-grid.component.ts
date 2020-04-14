@@ -142,13 +142,13 @@ export class PieGridComponent extends BaseChartComponent {
   }
 
   getDomain(): any[] {
-    return this.results.map((d) => d.label);
+    return this.results.map(d => d.label);
   }
 
   getSeries(): any[] {
     const total = this.designatedTotal ? this.designatedTotal : this.getTotal();
 
-    return this.data.map((d) => {
+    return this.data.map(d => {
       const baselineLabelHeight = 20;
       const padding = 10;
       const name = d.data.name;
@@ -195,7 +195,7 @@ export class PieGridComponent extends BaseChartComponent {
   }
 
   getTotal(): any {
-    return this.results.map((d) => d.value).reduce((sum, d) => sum + d, 0);
+    return this.results.map(d => d.value).reduce((sum, d) => sum + d, 0);
   }
 
   onClick(data: DataItem): void {
@@ -207,7 +207,7 @@ export class PieGridComponent extends BaseChartComponent {
   }
 
   onActivate(item, fromLegend = false) {
-    item = this.results.find((d) => {
+    item = this.results.find(d => {
       if (fromLegend) {
         return d.label === item.name;
       } else {
@@ -215,7 +215,7 @@ export class PieGridComponent extends BaseChartComponent {
       }
     });
 
-    const idx = this.activeEntries.findIndex((d) => {
+    const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value && d.series === item.series;
     });
     if (idx > -1) {
@@ -227,7 +227,7 @@ export class PieGridComponent extends BaseChartComponent {
   }
 
   onDeactivate(item, fromLegend = false) {
-    item = this.results.find((d) => {
+    item = this.results.find(d => {
       if (fromLegend) {
         return d.label === item.name;
       } else {
@@ -235,7 +235,7 @@ export class PieGridComponent extends BaseChartComponent {
       }
     });
 
-    const idx = this.activeEntries.findIndex((d) => {
+    const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value && d.series === item.series;
     });
 

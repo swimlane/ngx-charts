@@ -72,7 +72,7 @@ export class LegendComponent implements OnChanges {
     for (const label of this.data) {
       const formattedLabel = formatLabel(label);
 
-      const idx = items.findIndex((i) => {
+      const idx = items.findIndex(i => {
         return i.label === formattedLabel;
       });
 
@@ -90,7 +90,7 @@ export class LegendComponent implements OnChanges {
 
   isActive(entry): boolean {
     if (!this.activeEntries) return false;
-    const item = this.activeEntries.find((d) => {
+    const item = this.activeEntries.find(d => {
       return entry.label === d.name;
     });
     return item !== undefined;

@@ -187,11 +187,11 @@ export class BarVerticalComponent extends BaseChartComponent {
   }
 
   getXDomain(): any[] {
-    return this.results.map((d) => d.label);
+    return this.results.map(d => d.label);
   }
 
   getYDomain(): [number, number] {
-    const values = this.results.map((d) => d.value);
+    const values = this.results.map(d => d.value);
 
     let min = this.yScaleMin ? Math.min(this.yScaleMin, ...values) : Math.min(0, ...values);
     if (this.yAxisTicks && !this.yAxisTicks.some(isNaN)) {
@@ -261,7 +261,7 @@ export class BarVerticalComponent extends BaseChartComponent {
   }
 
   onActivate(item, fromLegend = false) {
-    item = this.results.find((d) => {
+    item = this.results.find(d => {
       if (fromLegend) {
         return d.label === item.name;
       } else {
@@ -269,7 +269,7 @@ export class BarVerticalComponent extends BaseChartComponent {
       }
     });
 
-    const idx = this.activeEntries.findIndex((d) => {
+    const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value && d.series === item.series;
     });
     if (idx > -1) {
@@ -281,7 +281,7 @@ export class BarVerticalComponent extends BaseChartComponent {
   }
 
   onDeactivate(item, fromLegend = false) {
-    item = this.results.find((d) => {
+    item = this.results.find(d => {
       if (fromLegend) {
         return d.label === item.name;
       } else {
@@ -289,7 +289,7 @@ export class BarVerticalComponent extends BaseChartComponent {
       }
     });
 
-    const idx = this.activeEntries.findIndex((d) => {
+    const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value && d.series === item.series;
     });
 

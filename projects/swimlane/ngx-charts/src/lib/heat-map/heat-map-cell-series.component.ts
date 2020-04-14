@@ -73,8 +73,8 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
   getCells() {
     const cells = [];
 
-    this.data.map((row) => {
-      row.series.map((cell) => {
+    this.data.map(row => {
+      row.series.map(cell => {
         const value = cell.value;
         cell.series = row.name;
 

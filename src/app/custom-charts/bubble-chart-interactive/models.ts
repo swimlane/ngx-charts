@@ -48,7 +48,7 @@ export class Store {
     this.name = json.name;
     this.storeId = json.storeId;
     this.storeCode = json.storeCode;
-    this.orders = json.orders.map((o) => new Order(o));
+    this.orders = json.orders.map(o => new Order(o));
     // calc props
     this.processAggregateData();
   }
@@ -57,7 +57,7 @@ export class Store {
     let finTotal = 0;
     let itmTotal = 0;
     let completionTotal = 0;
-    this.orders.forEach((o) => {
+    this.orders.forEach(o => {
       finTotal += o.orderFinTotal;
       itmTotal += o.orderItemCount;
       completionTotal += o.orderCompletionPercent;
@@ -69,7 +69,7 @@ export class Store {
   }
 
   toChartAsStore() {
-    return this.orders && this.orders.length > 0 ? this.orders.map((o) => o.toChart()) : [];
+    return this.orders && this.orders.length > 0 ? this.orders.map(o => o.toChart()) : [];
   }
 
   toChartAsEnterprise() {
@@ -83,7 +83,7 @@ export class Store {
           x: this.averageOrderFinTotal,
           y: this.averageOrderItemCount,
           r: this.averageOrderCompletionPercent,
-          children: this.orders.map((o) => o.toChart()),
+          children: this.orders.map(o => o.toChart()),
           //
           storeId: this.storeId,
           storeCode: this.storeCode
@@ -104,7 +104,7 @@ export class Enterprise {
   constructor(json: any) {
     this.name = json.name;
     this.clientId = json.clientId;
-    this.stores = json.stores.map((s) => new Store(s));
+    this.stores = json.stores.map(s => new Store(s));
     // calc props
     this.processAggregateData();
   }
@@ -113,7 +113,7 @@ export class Enterprise {
     let finTotal = 0;
     let itmTotal = 0;
     let completionTotal = 0;
-    this.stores.forEach((s) => {
+    this.stores.forEach(s => {
       finTotal += s.averageOrderFinTotal;
       itmTotal += s.averageOrderItemCount;
       completionTotal += s.averageOrderCompletionPercent;
@@ -125,7 +125,7 @@ export class Enterprise {
   }
 
   toChart() {
-    return this.stores.map((s) => s.toChartAsEnterprise());
+    return this.stores.map(s => s.toChartAsEnterprise());
   }
 }
 
@@ -152,7 +152,7 @@ export class BubbleChartInteractiveServerDataModel {
     return this.enterprise.toChart();
   }
   toChartAsStore(storeJsonObj: any) {
-    const store = this.enterprise.stores.find((s) => {
+    const store = this.enterprise.stores.find(s => {
       return s.storeId === storeJsonObj.storeId;
     });
     return store && store.toChartAsStore();

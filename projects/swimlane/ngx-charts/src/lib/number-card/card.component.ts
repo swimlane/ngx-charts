@@ -118,8 +118,8 @@ export class CardComponent implements OnChanges, OnDestroy {
   update(): void {
     this.zone.run(() => {
       const hasValue = this.data && typeof this.data.value !== 'undefined';
-      const valueFormatting = this.valueFormatting || ((card) => card.value.toLocaleString());
-      const labelFormatting = this.labelFormatting || ((card) => escapeLabel(trimLabel(card.label, 55)));
+      const valueFormatting = this.valueFormatting || (card => card.value.toLocaleString());
+      const labelFormatting = this.labelFormatting || (card => escapeLabel(trimLabel(card.label, 55)));
 
       this.transform = `translate(${this.x} , ${this.y})`;
 
@@ -168,7 +168,7 @@ export class CardComponent implements OnChanges, OnDestroy {
 
       const val = this.data.value;
       const decs = decimalChecker(val);
-      const valueFormatting = this.valueFormatting || ((card) => card.value.toLocaleString());
+      const valueFormatting = this.valueFormatting || (card => card.value.toLocaleString());
 
       const callback = ({ value, finished }) => {
         this.zone.run(() => {

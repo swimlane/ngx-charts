@@ -1,3 +1,6 @@
 'use strict';
 
-module.exports = require('@swimlane/prettier-config-swimlane');
+module.exports = {
+  ...require('@swimlane/prettier-config-swimlane'),
+  arrowParens: 'avoid'
+};

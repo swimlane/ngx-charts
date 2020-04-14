@@ -61,7 +61,7 @@ export class PieGridSeriesComponent implements OnChanges {
 
   update(): void {
     this.layout = pie<any, any>()
-      .value((d) => d.data.value)
+      .value(d => d.data.value)
       .sort(null);
 
     this.arcs = this.getArcs();

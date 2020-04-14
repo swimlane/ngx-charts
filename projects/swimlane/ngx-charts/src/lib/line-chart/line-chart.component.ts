@@ -306,7 +306,7 @@ export class LineChartComponent extends BaseChartComponent {
     let domain = [];
 
     if (this.scaleType === 'linear') {
-      values = values.map((v) => Number(v));
+      values = values.map(v => Number(v));
     }
 
     let min;
@@ -373,7 +373,7 @@ export class LineChartComponent extends BaseChartComponent {
   }
 
   getSeriesDomain(): any[] {
-    return this.results.map((d) => d.name);
+    return this.results.map(d => d.name);
   }
 
   getXScale(domain, width): any {
@@ -468,7 +468,7 @@ export class LineChartComponent extends BaseChartComponent {
   onActivate(item) {
     this.deactivateAll();
 
-    const idx = this.activeEntries.findIndex((d) => {
+    const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value;
     });
     if (idx > -1) {
@@ -480,7 +480,7 @@ export class LineChartComponent extends BaseChartComponent {
   }
 
   onDeactivate(item) {
-    const idx = this.activeEntries.findIndex((d) => {
+    const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value;
     });
 

@@ -83,17 +83,17 @@ export class AdvancedLegendComponent implements OnChanges {
   roundedTotal: number;
 
   @Input() valueFormatting: (value: number) => any;
-  @Input() labelFormatting: (value: string) => any = (label) => label;
-  @Input() percentageFormatting: (value: number) => any = (percentage) => percentage;
+  @Input() labelFormatting: (value: string) => any = label => label;
+  @Input() percentageFormatting: (value: number) => any = percentage => percentage;
 
-  defaultValueFormatting: (value: number) => any = (value) => value.toLocaleString();
+  defaultValueFormatting: (value: number) => any = value => value.toLocaleString();
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 
   getTotal(): number {
-    return this.data.map((d) => d.value).reduce((sum, d) => sum + d, 0);
+    return this.data.map(d => d.value).reduce((sum, d) => sum + d, 0);
   }
 
   update(): void {
@@ -104,7 +104,7 @@ export class AdvancedLegendComponent implements OnChanges {
   }
 
   getLegendItems(): any {
-    return this.data.map((d) => {
+    return this.data.map(d => {
       const label = formatLabel(d.name);
       const value = d.value;
       const color = this.colors.getColor(label);
