@@ -94,7 +94,7 @@ export class PieLabelComponent implements OnChanges {
   }
 
   textAnchor(): any {
-    return this.midAngle(this.data) < Math.PI ? 'start' : 'end';
+    return this.midAngle(this.data) <= Math.PI ? 'start' : 'end';
   }
 
   midAngle(d): number {
