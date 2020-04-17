@@ -1,5 +1,9 @@
 # Changelog
 
+## 14.0.0
+
+- Chore: explicitly only suppot ng9
+
 ## 13.0.3
 
 - Chore: update dependecies
