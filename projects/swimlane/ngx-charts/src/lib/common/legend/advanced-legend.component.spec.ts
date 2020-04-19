@@ -144,7 +144,7 @@ describe('<ngx-charts-advanced-legend>', () => {
     ]);
   });
 
-  it('should apply formatting functions with different total', async(() => {
+  it('should apply formatting functions with different total', () => {
     TestBed.compileComponents().then(() => {
       const fixture = TestBed.createComponent(TestComponent);
       const component = fixture.componentInstance;
@@ -166,7 +166,7 @@ describe('<ngx-charts-advanced-legend>', () => {
         '24.00'
       ]);
     });
-  }));
+  });
 
   function loadLegendItemElements(fixture: ComponentFixture<TestComponent>) {
     const legendItemsElements = fixture.debugElement.nativeElement.querySelector('.legend-items');
