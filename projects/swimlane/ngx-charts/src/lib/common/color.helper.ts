@@ -32,13 +32,9 @@ export class ColorHelper {
     }
     let colorScale;
     if (type === 'quantile') {
-      colorScale = scaleQuantile()
-        .range(scheme.domain)
-        .domain(domain);
+      colorScale = scaleQuantile().range(scheme.domain).domain(domain);
     } else if (type === 'ordinal') {
-      colorScale = scaleOrdinal()
-        .range(scheme.domain)
-        .domain(domain);
+      colorScale = scaleOrdinal().range(scheme.domain).domain(domain);
     } else if (type === 'linear') {
       // linear schemes must have at least 2 colors
       const colorDomain = [...scheme.domain];
@@ -48,9 +44,7 @@ export class ColorHelper {
       }
 
       const points = range(0, 1, 1.0 / colorDomain.length);
-      colorScale = scaleLinear()
-        .domain(points)
-        .range(colorDomain);
+      colorScale = scaleLinear().domain(points).range(colorDomain);
     }
 
     return colorScale;
@@ -61,9 +55,7 @@ export class ColorHelper {
       throw new Error('Value can not be null');
     }
     if (this.scaleType === 'linear') {
-      const valueScale = scaleLinear()
-        .domain(this.domain)
-        .range([0, 1]);
+      const valueScale = scaleLinear().domain(this.domain).range([0, 1]);
 
       return this.scale(valueScale(value));
     } else {
@@ -92,13 +84,9 @@ export class ColorHelper {
       start = this.domain[0];
     }
 
-    const valueScale = scaleLinear()
-      .domain(this.domain)
-      .range([0, 1]);
+    const valueScale = scaleLinear().domain(this.domain).range([0, 1]);
 
-    const colorValueScale = scaleBand()
-      .domain(this.colorDomain)
-      .range([0, 1]);
+    const colorValueScale = scaleBand().domain(this.colorDomain).range([0, 1]);
 
     const endColor = this.getColor(value);
 

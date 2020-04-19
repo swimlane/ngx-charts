@@ -1,4 +1,4 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 
 import { ChartCommonModule } from '../chart-common.module';
@@ -41,21 +41,19 @@ describe('<ngx-charts-legend>', () => {
                 </ngx-charts-legend>
             `
       }
-    });
+    }).compileComponents();
   });
 
-  it('should set the legend labels', async(() => {
-    TestBed.compileComponents().then(() => {
-      const fixture = TestBed.createComponent(TestComponent);
-      fixture.detectChanges();
+  it('should set the legend labels', () => {
+    const fixture = TestBed.createComponent(TestComponent);
+    fixture.detectChanges();
 
-      const labelsElement = fixture.debugElement.nativeElement.querySelector('.legend-labels');
+    const labelsElement = fixture.debugElement.nativeElement.querySelector('.legend-labels');
 
-      expect(labelsElement).toBeDefined();
-      expect(labelsElement.childElementCount).toEqual(2); // 2 legend labels
+    expect(labelsElement).toBeDefined();
+    expect(labelsElement.childElementCount).toEqual(2); // 2 legend labels
 
-      expect(labelsElement.children[0].textContent).toContain('complete');
-      expect(labelsElement.children[1].textContent).toContain('not complete');
-    });
-  }));
+    expect(labelsElement.children[0].textContent).toContain('complete');
+    expect(labelsElement.children[1].textContent).toContain('not complete');
+  });
 });

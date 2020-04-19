@@ -253,10 +253,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   }
 
   getValueScale(): any {
-    return scaleLinear()
-      .range([0, this.angleSpan])
-      .nice()
-      .domain(this.valueDomain);
+    return scaleLinear().range([0, this.angleSpan]).nice().domain(this.valueDomain);
   }
 
   getDisplayValue(): string {

@@ -229,16 +229,11 @@ export class BarVertical2DComponent extends BaseChartComponent {
   getInnerScale(): any {
     const width = this.groupScale.bandwidth();
     const spacing = this.innerDomain.length / (width / this.barPadding + 1);
-    return scaleBand()
-      .rangeRound([0, width])
-      .paddingInner(spacing)
-      .domain(this.innerDomain);
+    return scaleBand().rangeRound([0, width]).paddingInner(spacing).domain(this.innerDomain);
   }
 
   getValueScale(): any {
-    const scale = scaleLinear()
-      .range([this.dims.height, 0])
-      .domain(this.valuesDomain);
+    const scale = scaleLinear().range([this.dims.height, 0]).domain(this.valuesDomain);
     return this.roundDomains ? scale.nice() : scale;
   }
 
