@@ -201,7 +201,9 @@ export class SeriesHorizontal implements OnChanges {
         ? undefined
         : `
         <span class="tooltip-label">${escapeLabel(tooltipLabel)}</span>
-        <span class="tooltip-val">${value.toLocaleString()}</span>
+        <span class="tooltip-val">${
+          this.dataLabelFormatting ? this.dataLabelFormatting(value) : value.toLocaleString()
+        }</span>
       `;
 
       return bar;
