@@ -46,10 +46,13 @@ import { ColorHelper } from '../common/color.helper';
         [class.active]="isActive({ name: circle.seriesName })"
         [pointerEvents]="circle.value === 0 ? 'none' : 'all'"
         [data]="circle.value"
+        [series]="circle.seriesName"
+        [label]="circle.label"
         [classNames]="circle.classNames"
         (select)="onClick(circle.data)"
         (activate)="activateCircle()"
         (deactivate)="deactivateCircle()"
+        (drag)="drag.emit($event)"
         ngx-tooltip
         [tooltipDisabled]="tooltipDisabled"
         [tooltipPlacement]="'top'"
@@ -87,6 +90,7 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
+  @Output() drag = new EventEmitter();
 
   areaPath: any;
   circle: any; // active circle

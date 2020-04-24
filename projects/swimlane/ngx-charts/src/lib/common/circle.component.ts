@@ -21,6 +21,8 @@ import {
       [attr.opacity]="circleOpacity"
       [attr.class]="classNames"
       [attr.pointer-events]="pointerEvents"
+      [attr.data-series]="series"
+      [attr.data-label]="label"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -32,6 +34,8 @@ export class CircleComponent implements OnChanges {
   @Input() fill;
   @Input() stroke;
   @Input() data;
+  @Input() series;
+  @Input() label;
   @Input() classNames;
   @Input() circleOpacity;
   @Input() pointerEvents;
@@ -39,6 +43,7 @@ export class CircleComponent implements OnChanges {
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
+  @Output() drag = new EventEmitter();
 
   @HostListener('click')
   onClick() {
@@ -53,6 +58,16 @@ export class CircleComponent implements OnChanges {
   @HostListener('mouseleave')
   onMouseLeave(): void {
     this.deactivate.emit(this.data);
+  }
+
+  @HostListener('mousedown', ['$event'])
+  startDrag(event: MouseEvent) {
+    this.drag.emit({
+      x:event.clientX,
+      y:event.clientY,
+      series:this.series,
+      label:this.label
+    })
   }
 
   ngOnChanges(changes: SimpleChanges): void {

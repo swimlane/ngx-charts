@@ -120,6 +120,7 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
                 (select)="onClick($event)"
                 (activate)="onActivate($event)"
                 (deactivate)="onDeactivate($event)"
+                (drag)="dragStart($event)"
               />
             </svg:g>
           </svg:g>
@@ -244,6 +245,50 @@ export class LineChartComponent extends BaseChartComponent {
   timelineXDomain: any;
   timelineTransform: any;
   timelinePadding: number = 10;
+
+  dragActive = false;
+  x;
+  y;
+  activeSeries;
+  activeLabel;
+  updateTimeout;
+  lastUpdate = new Date().getTime();
+
+  dragStart(event) {
+    this.dragActive = true;
+    this.x = event.x;
+    this.y = event.y;
+    this.activeSeries = event.series;
+    this.activeLabel = event.label;
+  }
+
+  @HostListener('mouseup', ['$event'])
+  dragEnd(_event: MouseEvent) {
+    this.dragActive = false;
+  }
+
+  @HostListener('document:mousemove', ['$event'])
+  drag(event: MouseEvent) {
+    if (this.dragActive) {
+      // How far has the mouse moved?
+      const dy = event.clientY - this.y;
+      this.y = event.clientY;
+
+      // What data point needs to be moved
+      const currentSeries = this.results.find(series => series.name === this.activeSeries); // which series
+      const currentData = currentSeries.series.find(data => data.name === this.activeLabel); //which point
+      currentData.value = this.yScale.invert(this.yScale(currentData.value) + dy); // update
+
+      // update
+      const now = new Date().getTime();
+      clearTimeout(this.updateTimeout);
+      if (now - this.lastUpdate > 20) { // if last update was more than 20ms ago
+        this.update(); // update immediately
+      } else { // otherwise
+        this.updateTimeout = setTimeout(() => this.update(), 20); // wait 20ms before updating
+      }
+    }
+  }
 
   update(): void {
     super.update();
