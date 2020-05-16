@@ -187,7 +187,6 @@ export class AreaChartStackedComponent extends BaseChartComponent {
   @Input() xScaleMax: any;
   @Input() yScaleMin: number;
   @Input() yScaleMax: number;
-  @Input() posNegDiff = false; // y-axis differentiation when negative and positive value-series exist
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -270,39 +269,29 @@ export class AreaChartStackedComponent extends BaseChartComponent {
           }
           return a === b;
         });
-        if ((d && !this.posNegDiff) || (d && this.posNegDiff && d.value > 0)) {
+
+        if (d && d.value > 0) {
           d.d0 = d0;
           d.d1 = d0 + d.value;
           d0 += d.value;
           signMemory.push('+');
-        } else
-        if (d && this.posNegDiff && d.value < 0) {
+        } else if (d && d.value < 0) {
           d.d0 = d0neg;
           d.d1 = d0neg + d.value;
           d0neg += d.value;
           signMemory.push('-');
-        } else
-        if (d && this.posNegDiff && d.value === 0) {
+        } else if (d && d.value === 0) {
           d.d0 = signMemory[signMemory.length - this.results.length] === '+' ? d0 : d0neg;
           d.d1 = signMemory[signMemory.length - this.results.length] === '+' ? d0 : d0neg;
           signMemory.push(signMemory[signMemory.length - this.results.length] === '-' ? '-' : '+');
-        } else
-        if (!d && this.posNegDiff) {
-          d = {
-            name: val,
-            value: 0,
-            d0: signMemory[signMemory.length - this.results.length] === '+' ? d0 : d0neg,
-            d1: signMemory[signMemory.length - this.results.length] === '+' ? d0 : d0neg,
-          };
-          signMemory.push(signMemory[signMemory.length - this.results.length] === '-' ? '-' : '+');
-          group.series.push(d);
         } else {
           d = {
             name: val,
             value: 0,
-            d0,
-            d1: d0
+            d0: signMemory[signMemory.length - this.results.length] === '+' ? d0 : d0neg,
+            d1: signMemory[signMemory.length - this.results.length] === '+' ? d0 : d0neg
           };
+          signMemory.push(signMemory[signMemory.length - this.results.length] === '-' ? '-' : '+');
           group.series.push(d);
         }
       }
@@ -369,8 +358,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
   }
 
   getYDomain(): any[] {
-    const domain = [];
-    const diffDomain: { positive: number, negative: number }[] = []; // get separate y-Domain-max-values for combined positive and negative value-series
+    const domain: Array<{ positive: number; negative: number }> = []; // get separate y-Domain-values for (combined) pos and neg value-series
 
     for (let i = 0; i < this.xSet.length; i++) {
       const val = this.xSet[i];
@@ -387,28 +375,19 @@ export class AreaChartStackedComponent extends BaseChartComponent {
           return a === b;
         });
 
-        if (d && !this.posNegDiff || (d && this.posNegDiff && d.value >= 0)) {
+        if (d && d.value >= 0) {
           sum += d.value;
-        } else
-        if (d && this.posNegDiff && d.value < 0) {
+        } else if (d && d.value < 0) {
           neg += d.value;
         }
       }
-      if (!this.posNegDiff) {
-        domain.push(sum);
-      } else {
-        diffDomain.push({ positive: sum, negative: neg });
-      }
+
+      domain.push({ positive: sum, negative: neg });
     }
-    let min: number;
-    let max: number;
-    if (!this.posNegDiff) {
-      min = this.yScaleMin ? this.yScaleMin : Math.min(0, ...domain);
-      max = this.yScaleMax ? this.yScaleMax : Math.max(...domain);
-    } else {
-      min = this.yScaleMin ? this.yScaleMin : Math.min(0, ...diffDomain.map(n => n.negative ? n.negative : 0));
-      max = this.yScaleMax ? this.yScaleMax : Math.max(...diffDomain.map(n => n.positive ? n.positive : 0));
-    }
+
+    const min = this.yScaleMin ? this.yScaleMin : Math.min(0, ...domain.map(n => (n.negative ? n.negative : 0)));
+
+    const max = this.yScaleMax ? this.yScaleMax : Math.max(...domain.map(n => (n.positive ? n.positive : 0)));
     return [min, max];
   }
 
