@@ -8,10 +8,8 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { TooltipService } from '../tooltip/tooltip.service';
 
 @Component({
-  providers: [TooltipService],
   selector: 'ngx-charts-chart',
   template: `
     <div class="ngx-charts-outer" [style.width.px]="view[0]" [@animationState]="'active'" [@.disabled]="!animations">
