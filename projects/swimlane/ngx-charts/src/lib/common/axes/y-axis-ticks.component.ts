@@ -17,7 +17,7 @@ import { roundedRect } from '../../common/shape.helper';
 @Component({
   selector: 'g[ngx-charts-y-axis-ticks]',
   template: `
-    <svg:g #ticksel>
+    <svg:g #ticksel *ngIf="showYAxis">
       <svg:g *ngFor="let tick of ticks" class="tick" [attr.transform]="transform(tick)">
         <title>{{ tickFormat(tick) }}</title>
         <svg:text
@@ -82,6 +82,7 @@ import { roundedRect } from '../../common/shape.helper';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class YAxisTicksComponent implements OnChanges, AfterViewInit {
+  @Input() showYAxis: boolean = true;
   @Input() scale;
   @Input() orient;
   @Input() tickArguments = [5];
