@@ -43,16 +43,16 @@ import { roundedRect } from '../../common/shape.helper';
       <svg:g *ngFor="let tick of ticks" [attr.transform]="transform(tick)">
         <svg:g *ngIf="showGridLines" [attr.transform]="gridLineTransform()">
           <svg:line
-          *ngIf="orient === 'left'"
-          class="gridline-path gridline-path-horizontal"
-          x1="0"
-          [attr.x2]="gridLineWidth"
+            *ngIf="orient === 'left'"
+            class="gridline-path gridline-path-horizontal"
+            x1="0"
+            [attr.x2]="gridLineWidth"
           />
           <svg:line
-          *ngIf="orient === 'right'"
-          class="gridline-path gridline-path-horizontal"
-          x1="0"
-          [attr.x2]="-gridLineWidth"
+            *ngIf="orient === 'right'"
+            class="gridline-path gridline-path-horizontal"
+            x1="0"
+            [attr.x2]="-gridLineWidth"
           />
         </svg:g>
       </svg:g>
@@ -135,9 +135,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   }
 
   updateDims(): void {
-    const width = this.showYAxis
-      ? parseInt(this.ticksElement.nativeElement.getBoundingClientRect().width, 10)
-      : 0;
+    const width = this.showYAxis ? parseInt(this.ticksElement.nativeElement.getBoundingClientRect().width, 10) : 0;
     if (width !== this.width) {
       this.width = width;
       this.dimensionsChanged.emit({ width });
