@@ -39,22 +39,24 @@ import { roundedRect } from '../../common/shape.helper';
       [attr.d]="referenceAreaPath"
       [attr.transform]="gridLineTransform()"
     />
-    <svg:g *ngFor="let tick of ticks" [attr.transform]="transform(tick)">
-      <svg:g *ngIf="showGridLines" [attr.transform]="gridLineTransform()">
-        <svg:line
+    <ng-container *ngIf="showYAxis">
+      <svg:g *ngFor="let tick of ticks" [attr.transform]="transform(tick)">
+        <svg:g *ngIf="showGridLines" [attr.transform]="gridLineTransform()">
+          <svg:line
           *ngIf="orient === 'left'"
           class="gridline-path gridline-path-horizontal"
           x1="0"
           [attr.x2]="gridLineWidth"
-        />
-        <svg:line
+          />
+          <svg:line
           *ngIf="orient === 'right'"
           class="gridline-path gridline-path-horizontal"
           x1="0"
           [attr.x2]="-gridLineWidth"
-        />
+          />
+        </svg:g>
       </svg:g>
-    </svg:g>
+    </ng-container>
 
     <svg:g *ngFor="let refLine of referenceLines">
       <svg:g *ngIf="showRefLines" [attr.transform]="transform(refLine.value)">
