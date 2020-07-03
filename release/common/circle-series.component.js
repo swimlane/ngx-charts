@@ -33,6 +33,10 @@ var CircleSeriesComponent = /** @class */ (function () {
     };
     CircleSeriesComponent.prototype.getActiveCircle = function () {
         var _this = this;
+        // if there is a single point in a series show it as active
+        if (_this.data.series.length === 1) {
+            _this.visibleValue = _this.data.series[0].name;
+        }
         var indexActiveDataPoint = this.data.series.findIndex(function (d) {
             var label = d.name;
             return label && _this.visibleValue && label.toString() === _this.visibleValue.toString() && d.value !== undefined;
