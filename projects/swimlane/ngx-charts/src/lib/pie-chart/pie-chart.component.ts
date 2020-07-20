@@ -39,6 +39,7 @@ import { DataItem } from '../models/chart-data.model';
           [innerRadius]="innerRadius"
           [outerRadius]="outerRadius"
           [explodeSlices]="explodeSlices"
+          [explodeOnHover]="explodeOnHover"
           [gradient]="gradient"
           [animations]="animations"
           [sliceBorderColor]="sliceBorderColor"
@@ -75,6 +76,7 @@ export class PieChartComponent extends BaseChartComponent {
   @Input() tooltipText: any;
   @Input() sliceBorderColor: string;
   @Input() sliceBorderWidth: number;
+  @Input() explodeOnHover: boolean;
   @Output() dblclick = new EventEmitter();
   // optional margins
   @Input() margins: number[];

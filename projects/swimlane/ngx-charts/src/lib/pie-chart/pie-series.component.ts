@@ -45,6 +45,7 @@ import { formatLabel, escapeLabel } from '../common/label.helper';
         [data]="arc.data"
         [max]="max"
         [explodeSlices]="explodeSlices"
+        [explodeOnHover]="explodeOnHover"
         [isActive]="isActive(arc.data)"
         [animate]="animations"
         (select)="onClick($event)"
@@ -70,6 +71,7 @@ export class PieSeriesComponent implements OnChanges {
   @Input() innerRadius = 60;
   @Input() outerRadius = 80;
   @Input() explodeSlices;
+  @Input() explodeOnHover: boolean;
   @Input() showLabels;
   @Input() gradient: boolean;
   @Input() activeEntries: any[];

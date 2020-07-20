@@ -167,6 +167,7 @@ export class AppComponent implements OnInit {
   sliceBorder: boolean = false;
   sliceBorderColor: string;
   sliceBorderWidth: number;
+  explodeOnHover: boolean = false;
 
   // line, area
   autoScale = true;

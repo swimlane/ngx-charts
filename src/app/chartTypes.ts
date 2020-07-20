@@ -301,7 +301,8 @@ const chartGroups = [
           'explodeSlices',
           'showLabels',
           'tooltipDisabled',
-          'sliceBorders'
+          'sliceBorders',
+          'explodeOnHover'
         ]
       },
       {
