@@ -105,15 +105,14 @@ export class PieArcComponent implements OnChanges {
       node
         .transition()
         .duration(300)
-        .attr('d',
+        .attr(
+          'd',
           arc()
             .innerRadius(this.innerRadius)
-            .outerRadius(this.calculateOuterRadius() + this.calculateOuterRadius()*0.25)
-            .cornerRadius(this.cornerRadius));
-    else
-      node.transition()
-        .attr('d',
-          this.calculateArc())
+            .outerRadius(this.calculateOuterRadius() + this.calculateOuterRadius() * 0.25)
+            .cornerRadius(this.cornerRadius)
+        );
+    else node.transition().attr('d', this.calculateArc());
   }
 
   update(): void {
@@ -143,8 +142,7 @@ export class PieArcComponent implements OnChanges {
   }
 
   calculateArc(): any {
-    return arc().innerRadius(this.innerRadius).outerRadius(this.calculateOuterRadius())
-    .cornerRadius(this.cornerRadius);
+    return arc().innerRadius(this.innerRadius).outerRadius(this.calculateOuterRadius()).cornerRadius(this.cornerRadius);
   }
 
   loadAnimation(): void {
