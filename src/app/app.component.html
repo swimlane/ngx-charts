@@ -1389,7 +1389,7 @@
           </label>
           <br />
         </div>
-        <div *ngIf="chart.options.includes('explodeOnHover') && !doughnut">
+        <div *ngIf="chart.options.includes('explodeOnHover')">
           <label>
             <input type="checkbox" [checked]="explodeOnHover" (change)="explodeOnHover = $event.target.checked" />
             Explode on Hover
