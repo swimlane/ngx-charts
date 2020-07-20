@@ -301,7 +301,6 @@ const chartGroups = [
           'explodeSlices',
           'showLabels',
           'tooltipDisabled',
-          'sliceBorders',
           'explodeOnHover'
         ]
       },
@@ -309,7 +308,7 @@ const chartGroups = [
         name: 'Advanced Pie Chart',
         selector: 'advanced-pie-chart',
         inputFormat: 'singleSeries',
-        options: ['animations', 'colorScheme', 'gradient', 'tooltipDisabled', 'sliceBorders']
+        options: ['animations', 'colorScheme', 'gradient', 'tooltipDisabled']
       },
       {
         name: 'Pie Grid',
