@@ -41,6 +41,8 @@ import { DataItem } from '../models/chart-data.model';
           [explodeSlices]="explodeSlices"
           [gradient]="gradient"
           [animations]="animations"
+          [sliceBorderColor]="sliceBorderColor"
+          [sliceBorderWidth]="sliceBorderWidth"
           [tooltipDisabled]="tooltipDisabled"
           [tooltipTemplate]="tooltipTemplate"
           [tooltipText]="tooltipText"
@@ -71,6 +73,8 @@ export class PieChartComponent extends BaseChartComponent {
   @Input() trimLabels: boolean = true;
   @Input() maxLabelLength: number = 10;
   @Input() tooltipText: any;
+  @Input() sliceBorderColor: string;
+  @Input() sliceBorderWidth: number;
   @Output() dblclick = new EventEmitter();
   // optional margins
   @Input() margins: number[];

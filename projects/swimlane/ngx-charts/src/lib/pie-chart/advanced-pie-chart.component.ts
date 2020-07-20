@@ -28,6 +28,8 @@ import { DataItem } from '../models/chart-data.model';
               [innerRadius]="innerRadius"
               [activeEntries]="activeEntries"
               [outerRadius]="outerRadius"
+              [sliceBorderColor]="sliceBorderColor"
+              [sliceBorderWidth]="sliceBorderWidth"
               [gradient]="gradient"
               [tooltipDisabled]="tooltipDisabled"
               [tooltipTemplate]="tooltipTemplate"
@@ -68,6 +70,8 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipText: any;
   @Input() label: string = 'Total';
+  @Input() sliceBorderColor: string;
+  @Input() sliceBorderWidth: number;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
