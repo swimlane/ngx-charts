@@ -39,8 +39,6 @@ import { MouseEvent } from '../events';
         (mouseenter)="activate.emit(data)"
         (mouseleave)="deactivate.emit(data)"
         [style.pointer-events]="getPointerEvents()"
-        [attr.stroke]="sliceBorderColor"
-        [attr.stroke-width]="sliceBorderWidth"
       />
     </svg:g>
   `,
@@ -61,8 +59,6 @@ export class PieArcComponent implements OnChanges {
   @Input() animate: boolean = true;
   @Input() pointerEvents: boolean = true;
   @Input() isActive: boolean = false;
-  @Input() sliceBorderColor: string;
-  @Input() sliceBorderWidth: number;
   @Input() explodeOnHover: boolean;
 
   @Output() select = new EventEmitter();
