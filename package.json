@@ -52,7 +52,7 @@
     "d3-transition": "^1.3.2",
     "emoji-flags": "^1.2.0",
     "moment-timezone": "^0.5.28",
-    "ngx-moment": "^3.5.0",
+    "ngx-moment": "^5.0.0",
     "resize-observer-polyfill": "^1.5.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
