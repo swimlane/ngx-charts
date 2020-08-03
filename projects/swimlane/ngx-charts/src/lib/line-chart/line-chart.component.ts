@@ -212,6 +212,7 @@ export class LineChartComponent extends BaseChartComponent {
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
+  @Output() onDomainChange: EventEmitter<any> = new EventEmitter();
 
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
   @ContentChild('seriesTooltipTemplate') seriesTooltipTemplate: TemplateRef<any>;
@@ -404,6 +405,7 @@ export class LineChartComponent extends BaseChartComponent {
     this.filteredDomain = domain;
     this.xDomain = this.filteredDomain;
     this.xScale = this.getXScale(this.xDomain, this.dims.width);
+    this.onDomainChange.emit(this.filteredDomain);
   }
 
   updateHoveredVertical(item): void {
