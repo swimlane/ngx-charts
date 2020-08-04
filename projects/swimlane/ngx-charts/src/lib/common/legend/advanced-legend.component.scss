@@ -4,6 +4,7 @@
 
   top: 50%;
   transform: translate(0, -50%);
+
   [dir='rtl'] & {
     text-align: right;
     float: right;
@@ -29,9 +30,10 @@
         margin-right: 20px;
         display: inline-block;
         cursor: pointer;
+
         [dir='rtl'] & {
           margin-left: 20px;
-          margin-right: 0px;
+          margin-right: inherit;
         }
 
         &:focus {
@@ -52,7 +54,7 @@
 
           [dir='rtl'] & {
             margin-right: 11px;
-            margin-left: 0px;
+            margin-left: inherit;
           }
         }
 
@@ -63,7 +65,7 @@
 
           [dir='rtl'] & {
             margin-right: 11px;
-            margin-left: 0px;
+            margin-left: inherit;
           }
           margin-top: -6px;
         }
@@ -72,9 +74,10 @@
           font-size: 24px;
           opacity: 0.7;
           margin-left: 11px;
+
           [dir='rtl'] & {
             margin-right: 11px;
-            margin-left: 0px;
+            margin-left: inherit;
           }
         }
 
@@ -84,10 +87,11 @@
           height: 42px;
           float: left;
           margin-right: 7px;
+
           [dir='rtl'] & {
             float: right;
             margin-left: 7px;
-            margin-right: 0px;
+            margin-right: inherit;
           }
         }
       }
