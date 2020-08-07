@@ -305,6 +305,7 @@
         [explodeSlices]="explodeSlices"
         [labels]="showLabels"
         [doughnut]="doughnut"
+        [showDoughnutSum]="showDoughnutSum"
         [arcWidth]="arcWidth"
         (legendLabelClick)="onLegendLabelClick($event)"
         [gradient]="gradient"
@@ -1374,6 +1375,13 @@
           <label>
             <input type="checkbox" [checked]="doughnut" (change)="doughnut = $event.target.checked" />
             Doughnut
+          </label>
+          <br />
+        </div>
+        <div *ngIf="chart.options.includes('showDoughnutSum')">
+          <label>
+            <input type="checkbox" [checked]="showDoughnutSum" (change)="showDoughnutSum = $event.target.checked" />
+            Show Doughnut Sum
           </label>
           <br />
         </div>
