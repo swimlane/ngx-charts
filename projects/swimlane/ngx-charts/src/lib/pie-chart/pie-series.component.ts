@@ -1,17 +1,23 @@
 import {
-  Component,
-  SimpleChanges,
-  Input,
-  Output,
-  EventEmitter,
-  OnChanges,
-  ChangeDetectionStrategy,
+  ChangeDetectionStrategy, Component,
+
+
+
+  EventEmitter, Input,
+
+
+  OnChanges, Output, SimpleChanges,
+
+
+
+
+
   TemplateRef
 } from '@angular/core';
 import { max } from 'd3-array';
 import { arc, pie } from 'd3-shape';
+import { escapeLabel, formatLabel } from '../common/label.helper';
 
-import { formatLabel, escapeLabel } from '../common/label.helper';
 
 @Component({
   selector: 'g[ngx-charts-pie-series]',
@@ -210,7 +216,7 @@ export class PieSeriesComponent implements OnChanges {
   sum(): string {
     let total = 0;
     if (this.series != null && this.series.length > 0) {
-      total = this.series.reduce((sum, val) => sum += val.value, 0)
+      total = this.series.reduce((sum, val) => sum += val.value, 0);
     }
 
     return formatLabel(total);
