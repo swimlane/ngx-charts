@@ -246,6 +246,7 @@ export class LineChartComponent extends BaseChartComponent {
   timelinePadding: number = 10;
 
   update(): void {
+    console.log('In line chart: ', this.results);
     super.update();
 
     this.dims = calculateViewDimensions({

@@ -82,6 +82,7 @@ export class LineSeriesComponent implements OnChanges {
   stroke: any;
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.data);
     this.update();
   }
 
