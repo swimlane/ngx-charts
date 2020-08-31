@@ -1,5 +1,10 @@
 # Changelog
 
+## 16.0.0
+
+- Breaking: Update to angular 10
+- Bug: Apply dataLabelFormatting to tooltip value in bar charts (#1419)
+
 ## 14.0.0
 
 - Chore: explicitly only suppot ng9
