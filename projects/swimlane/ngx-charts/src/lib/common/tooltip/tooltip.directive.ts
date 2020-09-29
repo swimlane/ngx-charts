@@ -144,7 +144,7 @@ export class TooltipDirective implements OnDestroy {
 
     // content close on click outside
     if (this.tooltipCloseOnClickOutside) {
-      this.documentClickEvent = this.renderer.listen(document, 'click', event => {
+      this.documentClickEvent = this.renderer.listen(document.body, 'click', event => {
         const contains = tooltip.contains(event.target);
         if (!contains) this.hideTooltip();
       });
