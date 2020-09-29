@@ -15,13 +15,13 @@ import { TooltipService } from '../tooltip/tooltip.service';
   selector: 'ngx-charts-chart',
   template: `
     <div class="ngx-charts-outer" [style.width.px]="view[0]" [@animationState]="'active'" [@.disabled]="!animations">
-      <svg class="ngx-charts" [attr.width]="chartWidth" [attr.height]="view[1]">
+      <svg *ngIf="legendOptions && (legendOptions.position === 'below' || legendOptions.position === 'right')" class="ngx-charts" [attr.width]="chartWidth" [attr.height]="view[1]">
         <ng-content></ng-content>
       </svg>
       <ngx-charts-scale-legend
         *ngIf="showLegend && legendType === 'scaleLegend'"
         class="chart-legend"
-        [horizontal]="legendOptions && legendOptions.position === 'below'"
+        [horizontal]="legendOptions && (legendOptions.position === 'below' || legendOptions.position === 'above')"
         [valueRange]="legendOptions.domain"
         [colors]="legendOptions.colors"
         [height]="view[1]"
@@ -31,7 +31,7 @@ import { TooltipService } from '../tooltip/tooltip.service';
       <ngx-charts-legend
         *ngIf="showLegend && legendType === 'legend'"
         class="chart-legend"
-        [horizontal]="legendOptions && legendOptions.position === 'below'"
+        [horizontal]="legendOptions && (legendOptions.position === 'below' || legendOptions.position === 'above')"
         [data]="legendOptions.domain"
         [title]="legendOptions.title"
         [colors]="legendOptions.colors"
@@ -43,6 +43,9 @@ import { TooltipService } from '../tooltip/tooltip.service';
         (labelDeactivate)="legendLabelDeactivate.emit($event)"
       >
       </ngx-charts-legend>
+      <svg *ngIf="legendOptions && legendOptions.position === 'above'" class="ngx-charts" [attr.width]="chartWidth" [attr.height]="view[1]">
+        <ng-content></ng-content>
+      </svg>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
