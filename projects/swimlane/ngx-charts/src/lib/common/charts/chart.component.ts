@@ -15,8 +15,14 @@ import { TooltipService } from '../tooltip/tooltip.service';
   selector: 'ngx-charts-chart',
   template: `
     <div class="ngx-charts-outer" [style.width.px]="view[0]" [@animationState]="'active'" [@.disabled]="!animations">
-      <svg *ngIf="legendOptions && (legendOptions.position === 'below' || legendOptions.position === 'right')" class="ngx-charts" [attr.width]="chartWidth" [attr.height]="view[1]">
-        <ng-content></ng-content>
+      <ng-template #content><ng-content></ng-content></ng-template>
+      <svg
+        *ngIf="legendOptions && (legendOptions.position === 'below' || legendOptions.position === 'right')"
+        class="ngx-charts"
+        [attr.width]="chartWidth"
+        [attr.height]="view[1]"
+      >
+        <ng-container *ngTemplateOutlet="content"></ng-container>
       </svg>
       <ngx-charts-scale-legend
         *ngIf="showLegend && legendType === 'scaleLegend'"
@@ -43,8 +49,13 @@ import { TooltipService } from '../tooltip/tooltip.service';
         (labelDeactivate)="legendLabelDeactivate.emit($event)"
       >
       </ngx-charts-legend>
-      <svg *ngIf="legendOptions && legendOptions.position === 'above'" class="ngx-charts" [attr.width]="chartWidth" [attr.height]="view[1]">
-        <ng-content></ng-content>
+      <svg
+        *ngIf="legendOptions && legendOptions.position === 'above'"
+        class="ngx-charts"
+        [attr.width]="chartWidth"
+        [attr.height]="view[1]"
+      >
+        <ng-container *ngTemplateOutlet="content"></ng-container>
       </svg>
     </div>
   `,
