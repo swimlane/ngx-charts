@@ -36,6 +36,7 @@ import {
           [yScale]="yScale"
           [dims]="dims"
           [showGridLines]="showGridLines"
+          [showAxis]="yAxis"
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
           (dimensionsChanged)="updateYAxisWidth($event)"

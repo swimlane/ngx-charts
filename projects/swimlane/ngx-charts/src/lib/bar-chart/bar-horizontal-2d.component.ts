@@ -44,6 +44,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [xScale]="valueScale"
           [dims]="dims"
           [showGridLines]="showGridLines"
+          [showAxis]="xAxis"
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [trimTicks]="trimXAxisTicks"

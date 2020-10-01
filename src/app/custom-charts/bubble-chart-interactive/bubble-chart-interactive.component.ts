@@ -50,6 +50,7 @@ import {
           ngx-charts-x-axis
           *ngIf="xAxis"
           [showGridLines]="showGridLines"
+          [showAxis]="xAxis"
           [dims]="dims"
           [xScale]="xScale"
           [showLabel]="showXAxisLabel"
@@ -62,6 +63,7 @@ import {
           ngx-charts-y-axis
           *ngIf="yAxis"
           [showGridLines]="showGridLines"
+          [showAxis]="yAxis"
           [yScale]="yScale"
           [dims]="dims"
           [showLabel]="showYAxisLabel"

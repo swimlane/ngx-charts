@@ -50,6 +50,7 @@ import { DataItem } from '../models/chart-data.model';
           [yScale]="yScale"
           [dims]="dims"
           [showGridLines]="showGridLines"
+          [showAxis]="yAxis"
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
           [trimTicks]="trimYAxisTicks"
