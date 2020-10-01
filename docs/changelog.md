@@ -1,5 +1,9 @@
 # Changelog
 
+## 14.0.1
+
+- Bug: Fix issue rendering empty bubble charts (#1517)
+
 ## 14.0.0
 
 - Chore: explicitly only suppot ng9
