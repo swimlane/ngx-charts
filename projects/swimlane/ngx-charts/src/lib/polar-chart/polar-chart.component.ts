@@ -68,7 +68,6 @@ const twoPI = 2 * Math.PI;
           [yScale]="yAxisScale"
           [dims]="yAxisDims"
           [showGridLines]="showGridLines"
-          [showAxis]="yAxis"
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
           [trimTicks]="trimYAxisTicks"

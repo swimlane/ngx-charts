@@ -58,7 +58,6 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [yScale]="valueScale"
           [dims]="dims"
           [showGridLines]="showGridLines"
-          [showAxis]="yAxis"
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
           [trimTicks]="trimYAxisTicks"

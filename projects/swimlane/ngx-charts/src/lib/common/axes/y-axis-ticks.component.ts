@@ -40,7 +40,7 @@ import { roundedRect } from '../../common/shape.helper';
       [attr.transform]="gridLineTransform()"
     />
     <svg:g *ngFor="let tick of ticks" [attr.transform]="transform(tick)">
-      <svg:g *ngIf="showGridLines || (showAxis && tick === 0)" [attr.transform]="gridLineTransform()">
+      <svg:g *ngIf="showGridLines || tick === 0" [attr.transform]="gridLineTransform()">
         <svg:line
           *ngIf="orient === 'left'"
           class="gridline-path gridline-path-horizontal"
@@ -91,7 +91,6 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() maxTickLength: number = 16;
   @Input() tickFormatting;
   @Input() showGridLines = false;
-  @Input() showAxis = false;
   @Input() gridLineWidth;
   @Input() height;
   @Input() referenceLines;
