@@ -31,11 +31,7 @@ export function calculateViewDimensions({
         columns -= 1;
       }
     } else if (legendPosition === 'below') {
-      if (legendType === 'ordinal') {
-        chartHeight -= 100;
-      } else {
-        chartHeight -= 50;
-      }
+      chartHeight -= 100;
     }
   }
 
