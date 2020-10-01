@@ -17,6 +17,20 @@ import { TooltipService } from '../tooltip/tooltip.service';
     <div class="ngx-charts-outer" [style.width.px]="view[0]" [@animationState]="'active'" [@.disabled]="!animations">
       <ng-template #content><ng-content></ng-content></ng-template>
       <svg
+        *ngIf="
+          !legendOptions ||
+          (legendOptions &&
+            legendOptions.position !== 'below' &&
+            legendOptions.position !== 'right' &&
+            legendOptions.position !== 'above')
+        "
+        class="ngx-charts"
+        [attr.width]="chartWidth"
+        [attr.height]="view[1]"
+      >
+        <ng-container *ngTemplateOutlet="content"></ng-container>
+      </svg>
+      <svg
         *ngIf="legendOptions && (legendOptions.position === 'below' || legendOptions.position === 'right')"
         class="ngx-charts"
         [attr.width]="chartWidth"
