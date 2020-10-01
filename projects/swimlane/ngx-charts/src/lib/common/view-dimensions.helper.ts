@@ -23,11 +23,19 @@ export function calculateViewDimensions({
   let chartWidth = width;
   let chartHeight = height - margins[0] - margins[2];
 
-  if (showLegend && legendPosition === 'right') {
-    if (legendType === 'ordinal') {
-      columns -= 2;
-    } else {
-      columns -= 1;
+  if (showLegend) {
+    if (legendPosition === 'right') {
+      if (legendType === 'ordinal') {
+        columns -= 2;
+      } else {
+        columns -= 1;
+      }
+    } else if (legendPosition === 'below') {
+      if (legendType === 'ordinal') {
+        chartHeight -= 100;
+      } else {
+        chartHeight -= 50;
+      }
     }
   }
 
