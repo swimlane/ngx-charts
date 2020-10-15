@@ -410,7 +410,7 @@ export class AreaChartComponent extends BaseChartComponent {
   updateDomain(domain): void {
     this.filteredDomain = domain;
     this.xDomain = this.filteredDomain;
-    this.yDomain = this.getYDomain()
+    this.yDomain = this.getYDomain();
     this.xScale = this.getXScale(this.xDomain, this.dims.width);
     this.yScale = this.getYScale(this.yDomain, this.dims.height);
   }

@@ -340,17 +340,16 @@ export class LineChartComponent extends BaseChartComponent {
     return domain;
   }
 
-  getYDomain(applyFilteredDomain:boolean = true): any[] {
+  getYDomain(applyFilteredDomain: boolean = true): any[] {
     const domain = [];
     for (const results of this.results) {
       for (const d of results.series) {
         if (domain.indexOf(d.value) < 0) {
           if (applyFilteredDomain && this.filteredDomain) {
-            if (d.name >= this.filteredDomain[0] && d.name <=this.filteredDomain[1]) {
+            if (d.name >= this.filteredDomain[0] && d.name <= this.filteredDomain[1]) {
               domain.push(d.value);
             }
-          }
-          else {
+          } else {
             domain.push(d.value);
           }
         }
@@ -412,7 +411,7 @@ export class LineChartComponent extends BaseChartComponent {
   updateDomain(domain): void {
     this.filteredDomain = domain;
     this.xDomain = this.filteredDomain;
-    this.yDomain = this.getYDomain()
+    this.yDomain = this.getYDomain();
     this.xScale = this.getXScale(this.xDomain, this.dims.width);
     this.yScale = this.getYScale(this.yDomain, this.dims.height);
   }

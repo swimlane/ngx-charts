@@ -346,7 +346,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
     return domain;
   }
 
-  getYDomain(applyFilteredDomain:boolean = true): any[] {
+  getYDomain(applyFilteredDomain: boolean = true): any[] {
     const domain = [];
 
     for (let i = 0; i < this.xSet.length; i++) {
@@ -368,11 +368,10 @@ export class AreaChartStackedComponent extends BaseChartComponent {
         }
       }
       if (applyFilteredDomain && this.filteredDomain) {
-        if (val >= this.filteredDomain[0] && val <=this.filteredDomain[1]) {
+        if (val >= this.filteredDomain[0] && val <= this.filteredDomain[1]) {
           domain.push(sum);
         }
-      }
-      else {
+      } else {
         domain.push(sum);
       }
     }
@@ -411,7 +410,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
   updateDomain(domain): void {
     this.filteredDomain = domain;
     this.xDomain = this.filteredDomain;
-    this.yDomain = this.getYDomain()
+    this.yDomain = this.getYDomain();
     this.xScale = this.getXScale(this.xDomain, this.dims.width);
     this.yScale = this.getYScale(this.yDomain, this.dims.height);
   }
