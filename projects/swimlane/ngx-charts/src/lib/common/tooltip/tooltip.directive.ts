@@ -109,8 +109,9 @@ export class TooltipDirective implements OnDestroy {
   showTooltip(immediate?: boolean): void {
     if (this.component || this.tooltipDisabled) return;
 
-    const time = immediate ? 0 : (this.tooltipShowTimeout + 
-      (navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) ? 300 : 0));
+    const time = immediate
+      ? 0
+      : this.tooltipShowTimeout + (navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) ? 300 : 0);
 
     clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
