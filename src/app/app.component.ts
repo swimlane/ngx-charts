@@ -212,6 +212,7 @@ export class AppComponent implements OnInit {
 
   showRightYAxisLabel: boolean = true;
   yAxisLabelRight: string = 'Utilization';
+  yScaleMaxCombo = 0 ;
 
   // demos
   totalSales = 0;
