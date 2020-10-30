@@ -48,6 +48,7 @@ export class Timeline implements OnChanges {
   @Input() autoScale;
   @Input() scaleType;
   @Input() height: number = 50;
+  @Input() liveOnDomainChange = true;
 
   @Output() select = new EventEmitter();
   @Output() onDomainChange = new EventEmitter();
@@ -142,13 +143,14 @@ export class Timeline implements OnChanges {
 
     const height = this.height;
     const width = this.view[0];
+    const brushEvents = this.liveOnDomainChange ? 'brush end' : 'end';
 
     this.brush = brushX()
       .extent([
         [0, 0],
         [width, height]
       ])
-      .on('brush end', () => {
+      .on(brushEvents, () => {
         const selection = d3event.selection || this.xScale.range();
         const newDomain = selection.map(this.xScale.invert);
 
