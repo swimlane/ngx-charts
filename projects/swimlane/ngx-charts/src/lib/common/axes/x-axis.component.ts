@@ -30,6 +30,7 @@ import { XAxisTicksComponent } from './x-axis-ticks.component';
         [gridLineHeight]="dims.height"
         [width]="dims.width"
         [tickValues]="ticks"
+        [tickMultiLine]="tickMultiLine"
         (dimensionsChanged)="emitTicksHeight($event)"
       />
       <svg:g
@@ -60,6 +61,7 @@ export class XAxisComponent implements OnChanges {
   @Input() xAxisTickCount: any;
   @Input() xOrient: string = 'bottom';
   @Input() xAxisOffset: number = 0;
+  @Input() tickMultiLine: boolean = false;
 
   @Output() dimensionsChanged = new EventEmitter();
 

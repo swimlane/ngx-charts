@@ -40,6 +40,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [rotateTicks]="rotateXAxisTicks"
           [maxTickLength]="maxXAxisTickLength"
           [tickFormatting]="xAxisTickFormatting"
+          [tickMultiLine]="xAxisTickMultiLine"
           [ticks]="xAxisTicks"
           [xAxisOffset]="dataLabelMaxHeight.negative"
           (dimensionsChanged)="updateXAxisHeight($event)"
@@ -126,6 +127,7 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   @Input() maxYAxisTickLength: number = 16;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
+  @Input() xAxisTickMultiLine: boolean = false;
   @Input() xAxisTicks: any[];
   @Input() yAxisTicks: any[];
   @Input() barPadding = 8;
