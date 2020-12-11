@@ -20,15 +20,15 @@ import { reduceTicks } from './ticks.helper';
   selector: 'g[ngx-charts-x-axis-ticks]',
   template: `
     <svg:g #ticksel>
-      <svg:g *ngFor="let tick of ticks" class="tick" [attr.transform]="tickTransform(tick)">
-        <title>{{ tickFormat(tick) }}</title>
+      <svg:g *ngFor="let tick of ticks; let i = index" class="tick" [attr.transform]="tickTransform(tick)">
+        <title>{{ tickFormat(tick, i) }}</title>
         <svg:text
           stroke-width="0.01"
           [attr.text-anchor]="textAnchor"
           [attr.transform]="textTransform"
           [style.font-size]="'12px'"
         >
-          {{ tickTrim(tickFormat(tick)) }}
+          {{ tickTrim(tickFormat(tick, i)) }}
         </svg:text>
       </svg:g>
     </svg:g>
@@ -68,7 +68,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   adjustedScale: any;
   textTransform: any;
   ticks: any;
-  tickFormat: (o: any) => any;
+  tickFormat: (o: any, index: number) => any;
   height: number = 0;
   approxHeight: number = 10;
 
@@ -140,7 +140,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     let angle = 0;
     this.maxTicksLength = 0;
     for (let i = 0; i < ticks.length; i++) {
-      const tick = this.tickFormat(ticks[i]).toString();
+      const tick = this.tickFormat(ticks[i], i).toString();
       let tickLength = tick.length;
       if (this.trimTicks) {
         tickLength = this.tickTrim(tick).length;
