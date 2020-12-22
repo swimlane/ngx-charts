@@ -25,7 +25,14 @@
             "aot": true,
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.scss"],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "emoji-flags",
+              "codemirror",
+              "ajv",
+              "mousetrap",
+              "moment-timezone"
+            ]
           },
           "configurations": {
             "production": {

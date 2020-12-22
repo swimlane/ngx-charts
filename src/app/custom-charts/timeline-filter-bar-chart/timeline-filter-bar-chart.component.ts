@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { scaleLinear, scaleTime, scaleBand } from 'd3-scale';
 import { brushX } from 'd3-brush';
-import { select, event as d3event } from 'd3-selection';
+import { select } from 'd3-selection';
 import {
   BaseChartComponent,
   ColorHelper,
@@ -260,8 +260,8 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
         [0, 0],
         [width, height]
       ])
-      .on('brush end', () => {
-        const selection = d3event.selection || this.xScale.range();
+      .on('brush end', ({d3selection}) => {
+        const selection = d3selection || this.xScale.range();
         const newDomain = selection.map(this.timeScale.invert);
 
         this.onFilter.emit(newDomain);
