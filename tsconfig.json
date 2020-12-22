@@ -1,23 +1,27 @@
-/*
-  This is a "Solution Style" tsconfig.json file, and is used by editors and TypeScript’s language server to improve development experience.
-  It is not intended to be used to perform a compilation.
-
-  To learn more about this file see: https://angular.io/config/solution-tsconfig.
-*/
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.app.json"
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "module": "es2020",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2018", "dom"],
+    "paths": {
+      "@swimlane/ngx-charts": ["projects/swimlane/ngx-charts/src/public_api"],
+      "@swimlane/ngx-charts/*": ["projects/swimlane/ngx-charts/src/lib/*"]
     },
-    {
-      "path": "./tsconfig.spec.json"
-    },
-    {
-      "path": "./projects/swimlane/ngx-charts/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/swimlane/ngx-charts/tsconfig.spec.json"
-    }
-  ]
+    "resolveJsonModule": true
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
+  }
 }
