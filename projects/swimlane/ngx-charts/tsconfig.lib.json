@@ -5,7 +5,7 @@
     "target": "es2015",
     "declaration": true,
     "inlineSources": true,
-    "types": [],
+    "typeRoots": ["../../../node_modules/@types"],
     "lib": ["dom", "es2018"]
   },
   "angularCompilerOptions": {
