@@ -260,7 +260,7 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
         [0, 0],
         [width, height]
       ])
-      .on('brush end', ({d3selection}) => {
+      .on('brush end', ({ d3selection }) => {
         const selection = d3selection || this.xScale.range();
         const newDomain = selection.map(this.timeScale.invert);
 
