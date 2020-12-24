@@ -110,7 +110,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     if (this.tickFilling) {
       this.tickFill = this.tickFilling;
     } else {
-      this.tickFill = function() {
+      this.tickFill = function () {
         return 'black';
       };
     }
