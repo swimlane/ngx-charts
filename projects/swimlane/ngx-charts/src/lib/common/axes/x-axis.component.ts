@@ -24,6 +24,7 @@ import { XAxisTicksComponent } from './x-axis-ticks.component';
         [tickFormatting]="tickFormatting"
         [tickArguments]="tickArguments"
         [tickStroke]="tickStroke"
+        [tickFilling]="tickFilling"
         [scale]="xScale"
         [orient]="xOrient"
         [showGridLines]="showGridLines"
@@ -60,6 +61,7 @@ export class XAxisComponent implements OnChanges {
   @Input() xAxisTickCount: any;
   @Input() xOrient: string = 'bottom';
   @Input() xAxisOffset: number = 0;
+  @Input() tickFilling: (o: any) => string;
 
   @Output() dimensionsChanged = new EventEmitter();
 

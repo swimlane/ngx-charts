@@ -22,6 +22,7 @@ import { roundedRect } from '../../common/shape.helper';
         <title>{{ tickFormat(tick) }}</title>
         <svg:text
           stroke-width="0.01"
+          [attr.fill]="tickFill(tick)"
           [attr.dy]="dy"
           [attr.x]="x1"
           [attr.y]="y1"
@@ -96,7 +97,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() referenceLines;
   @Input() showRefLabels: boolean = false;
   @Input() showRefLines: boolean = false;
-
+  @Input() tickFilling: (o: any) => string;
   @Output() dimensionsChanged = new EventEmitter();
 
   innerTickSize: any = 6;
@@ -120,6 +121,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   refMin: number;
   referenceLineLength: number = 0;
   referenceAreaPath: string;
+  tickFill!: (o: any) => string;
 
   @ViewChild('ticksel') ticksElement: ElementRef;
 
@@ -158,6 +160,14 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
           return d.toLocaleDateString();
         }
         return d.toLocaleString();
+      };
+    }
+
+    if (this.tickFilling) {
+      this.tickFill = this.tickFilling;
+    } else {
+      this.tickFill = function() {
+        return 'black';
       };
     }
 

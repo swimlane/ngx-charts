@@ -23,6 +23,7 @@ import { YAxisTicksComponent } from './y-axis-ticks.component';
         [tickArguments]="tickArguments"
         [tickValues]="ticks"
         [tickStroke]="tickStroke"
+        [tickFilling]="tickFilling"
         [scale]="yScale"
         [orient]="yOrient"
         [showGridLines]="showGridLines"
@@ -64,6 +65,7 @@ export class YAxisComponent implements OnChanges {
   @Input() showRefLines;
   @Input() showRefLabels;
   @Input() yAxisOffset: number = 0;
+  @Input() tickFilling: (o: any) => string;
   @Output() dimensionsChanged = new EventEmitter();
 
   yAxisClassName: string = 'y axis';

@@ -21,6 +21,7 @@ import { reduceTicks } from './ticks.helper';
         <title>{{ tickFormat(tick) }}</title>
         <svg:text
           stroke-width="0.01"
+          [attr.fill]="tickFill(tick)"
           [attr.text-anchor]="textAnchor"
           [attr.transform]="textTransform"
           [style.font-size]="'12px'"
@@ -47,6 +48,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() trimTicks: boolean = true;
   @Input() maxTickLength: number = 16;
   @Input() tickFormatting;
+  @Input() tickFilling: (o: any) => string;
   @Input() showGridLines = false;
   @Input() gridLineHeight;
   @Input() width;
@@ -66,6 +68,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   textTransform: any;
   ticks: any;
   tickFormat: (o: any) => any;
+  tickFill!: (o: any) => string;
   height: number = 0;
 
   @ViewChild('ticksel') ticksElement: ElementRef;
@@ -101,6 +104,14 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
           return d.toLocaleDateString();
         }
         return d.toLocaleString();
+      };
+    }
+
+    if (this.tickFilling) {
+      this.tickFill = this.tickFilling;
+    } else {
+      this.tickFill = function() {
+        return 'black';
       };
     }
 
