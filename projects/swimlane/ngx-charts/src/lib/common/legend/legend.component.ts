@@ -10,7 +10,7 @@ import {
   ViewEncapsulation,
   TemplateRef
 } from '@angular/core';
-import {formatLabel} from '../label.helper';
+import { formatLabel } from '../label.helper';
 
 @Component({
   selector: 'ngx-charts-legend',
@@ -58,8 +58,7 @@ export class LegendComponent implements OnChanges {
 
   legendEntries: any[] = [];
 
-  constructor(private cd: ChangeDetectorRef) {
-  }
+  constructor(private cd: ChangeDetectorRef) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();

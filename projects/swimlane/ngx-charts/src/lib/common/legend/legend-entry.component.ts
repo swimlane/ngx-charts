@@ -1,18 +1,26 @@
-import { Component, Input, Output, ChangeDetectionStrategy, HostListener, EventEmitter, TemplateRef } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  ChangeDetectionStrategy,
+  HostListener,
+  EventEmitter,
+  TemplateRef
+} from '@angular/core';
 
 @Component({
   selector: 'ngx-charts-legend-entry',
   template: `
     <ng-container *ngIf="legendEntryTemplate">
-      <ng-container *ngTemplateOutlet="legendEntryTemplate;context:{label:label,color:color}"></ng-container>
+      <ng-container *ngTemplateOutlet="legendEntryTemplate; context: { label: label, color: color }"></ng-container>
     </ng-container>
     <ng-container *ngIf="!legendEntryTemplate">
       <span [title]="formattedLabel" tabindex="-1" [class.active]="isActive" (click)="select.emit(formattedLabel)">
-      <span class="legend-label-color" [style.background-color]="color" (click)="toggle.emit(formattedLabel)"> </span>
-      <span class="legend-label-text">
-        {{ trimmedLabel }}
+        <span class="legend-label-color" [style.background-color]="color" (click)="toggle.emit(formattedLabel)"> </span>
+        <span class="legend-label-text">
+          {{ trimmedLabel }}
+        </span>
       </span>
-    </span>
     </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
