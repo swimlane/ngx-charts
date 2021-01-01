@@ -23,6 +23,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
       [view]="[width, height]"
       [showLegend]="legend"
       [legendOptions]="legendOptions"
+      [legendEntryTemplate]="legendEntryTemplate"
       [activeEntries]="activeEntries"
       [animations]="animations"
       (legendLabelActivate)="onActivate($event, undefined, true)"
@@ -133,6 +134,7 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
+  @ContentChild('legendEntryTemplate') legendEntryTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
   groupDomain: any[];
