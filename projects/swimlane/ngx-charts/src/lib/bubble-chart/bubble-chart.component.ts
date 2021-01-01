@@ -27,6 +27,7 @@ import { id } from '../utils/id';
       [showLegend]="legend"
       [activeEntries]="activeEntries"
       [legendOptions]="legendOptions"
+      [legendEntryTemplate]="legendEntryTemplate"
       [animations]="animations"
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
@@ -159,6 +160,7 @@ export class BubbleChartComponent extends BaseChartComponent {
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
+  @ContentChild('legendEntryTemplate') legendEntryTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
   colors: ColorHelper;
