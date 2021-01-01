@@ -7,9 +7,10 @@ import {
   SimpleChanges,
   OnChanges,
   ChangeDetectorRef,
-  ViewEncapsulation
+  ViewEncapsulation,
+  TemplateRef
 } from '@angular/core';
-import { formatLabel } from '../label.helper';
+import {formatLabel} from '../label.helper';
 
 @Component({
   selector: 'ngx-charts-legend',
@@ -24,6 +25,7 @@ import { formatLabel } from '../label.helper';
             <ngx-charts-legend-entry
               [label]="entry.label"
               [formattedLabel]="entry.formattedLabel"
+              [legendEntryTemplate]="legendEntryTemplate"
               [color]="entry.color"
               [isActive]="isActive(entry)"
               (select)="labelClick.emit($event)"
@@ -48,6 +50,7 @@ export class LegendComponent implements OnChanges {
   @Input() width;
   @Input() activeEntries;
   @Input() horizontal = false;
+  @Input() legendEntryTemplate: TemplateRef<any>;
 
   @Output() labelClick: EventEmitter<any> = new EventEmitter();
   @Output() labelActivate: EventEmitter<any> = new EventEmitter();
@@ -55,7 +58,8 @@ export class LegendComponent implements OnChanges {
 
   legendEntries: any[] = [];
 
-  constructor(private cd: ChangeDetectorRef) {}
+  constructor(private cd: ChangeDetectorRef) {
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
