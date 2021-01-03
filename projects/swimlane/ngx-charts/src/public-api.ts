@@ -42,6 +42,7 @@ export * from './lib/common/tooltip/tooltip.directive';
 export * from './lib/common/tooltip/style.type';
 export * from './lib/common/tooltip/alignment.type';
 export * from './lib/common/tooltip/show.type';
+export * from './lib/common/tooltip/position/placement.type';
 
 export * from './lib/common/axes/axes.module';
 export * from './lib/common/axes/axis-label.component';
