@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { brushX } from 'd3-brush';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
-import { select, event as d3event } from 'd3-selection';
+import { select } from 'd3-selection';
 import { id } from '../..//utils/id';
 
 @Component({
@@ -148,8 +148,8 @@ export class Timeline implements OnChanges {
         [0, 0],
         [width, height]
       ])
-      .on('brush end', () => {
-        const selection = d3event.selection || this.xScale.range();
+      .on('brush end', ({ d3selection }) => {
+        const selection = d3selection || this.xScale.range();
         const newDomain = selection.map(this.xScale.invert);
 
         this.onDomainChange.emit(newDomain);
