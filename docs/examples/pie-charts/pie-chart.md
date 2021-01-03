@@ -17,7 +17,7 @@
 | labelFormatting | function    |               | function that formats the label text                                                                              |
 | trimLabels      | boolean     | true          | trim the labels beyond a certain maximum length                                                                   |
 | maxLabelLength  | number      | 10            | maximum length of the labels. If `trimLabels` is `true`, labels over this length will be trimmed                  |
-| legend          | boolean     | false         | show or hide the legend                                                                                           |
+| legend          | boolean     | true         | show or hide the legend                                                                                           |
 | legendTitle     | string      | 'Legend'      | the legend title                                                                                                  |
 | legendPosition  | string      | 'right'       | the legend position ['right', 'below']                                                                            |
 | explodeSlices   | boolean     | false         | make the radius of each slice proportional to it's value                                                          |
