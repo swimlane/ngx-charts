@@ -1,7 +1,6 @@
 # ngx-charts
 
 [![Join the chat at https://gitter.im/swimlane/ngx-charts](https://badges.gitter.im/swimlane/ngx-charts.svg)](https://gitter.im/swimlane/ngx-charts?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Build Status](https://travis-ci.org/swimlane/ngx-charts.svg?branch=master)](https://travis-ci.org/swimlane/ngx-charts)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b097196f7f544412a79a99080a41bbc1)](https://www.codacy.com/app/Swimlane/ngx-charts?utm_source=github.com&utm_medium=referral&utm_content=swimlane/ngx-charts&utm_campaign=Badge_Grade)
 [![npm version](https://badge.fury.io/js/%40swimlane%2Fngx-charts.svg)](https://badge.fury.io/js/%40swimlane%2Fngx-charts)
 [![npm downloads](https://img.shields.io/npm/dm/@swimlane/ngx-charts.svg)](https://npmjs.org/@swimlane/ngx-charts)
