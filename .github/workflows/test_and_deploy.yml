@@ -32,7 +32,6 @@ jobs:
     - name: Prepare and deploy
       run: |
         npm run deploy -- --name="Swimlane" --email="swimlane-devops@swimlane.com" --no-silent
-      if: ${{ github.ref == 'refs/heads/master' }}
       env:
         CI: true
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
