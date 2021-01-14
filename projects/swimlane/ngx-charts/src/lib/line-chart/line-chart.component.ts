@@ -59,7 +59,7 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
         ></svg:g>
         <svg:g
           ngx-charts-y-axis
-          *ngIf="yAxis"
+          [showYAxis]="yAxis"
           [yScale]="yScale"
           [dims]="dims"
           [showGridLines]="showGridLines"

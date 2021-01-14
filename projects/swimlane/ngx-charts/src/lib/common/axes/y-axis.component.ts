@@ -17,6 +17,7 @@ import { YAxisTicksComponent } from './y-axis-ticks.component';
       <svg:g
         ngx-charts-y-axis-ticks
         *ngIf="yScale"
+        [showYAxis]="showYAxis"
         [trimTicks]="trimTicks"
         [maxTickLength]="maxTickLength"
         [tickFormatting]="tickFormatting"
@@ -36,7 +37,7 @@ import { YAxisTicksComponent } from './y-axis-ticks.component';
 
       <svg:g
         ngx-charts-axis-label
-        *ngIf="showLabel"
+        *ngIf="showLabel && showYAxis"
         [label]="labelText"
         [offset]="labelOffset"
         [orient]="yOrient"
@@ -48,6 +49,7 @@ import { YAxisTicksComponent } from './y-axis-ticks.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class YAxisComponent implements OnChanges {
+  @Input() showYAxis: boolean = true;
   @Input() yScale;
   @Input() dims;
   @Input() trimTicks: boolean;
