@@ -12,8 +12,9 @@ import {
   SimpleChanges
 } from '@angular/core';
 
-import { fromEvent as observableFromEvent } from 'rxjs';
+import { fromEvent as observableFromEvent, merge } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { ResizeObserverService } from '../utils/resize-observer.service';
 import { VisibilityObserver } from '../utils/visibility-observer';
 
 @Component({
@@ -35,10 +36,15 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   resizeSubscription: any;
   visibilityObserver: VisibilityObserver;
 
-  constructor(protected chartElement: ElementRef, protected zone: NgZone, protected cd: ChangeDetectorRef) {}
+  constructor(
+    protected chartElement: ElementRef,
+    protected zone: NgZone,
+    protected cd: ChangeDetectorRef,
+    protected resizeObserverService: ResizeObserverService
+  ) {}
 
   ngAfterViewInit(): void {
-    this.bindWindowResizeEvent();
+    this.bindResizeEvent();
 
     // listen for visibility of the element for hidden by default scenario
     this.visibilityObserver = new VisibilityObserver(this.chartElement, this.zone);
@@ -139,17 +145,16 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
     if (this.resizeSubscription) {
       this.resizeSubscription.unsubscribe();
     }
+    this.resizeObserverService.unobserve(this.chartElement.nativeElement);
   }
 
-  private bindWindowResizeEvent(): void {
-    const source = observableFromEvent(window, 'resize');
-    const subscription = source.pipe(debounceTime(200)).subscribe(e => {
-      this.update();
-      if (this.cd) {
-        this.cd.markForCheck();
-      }
-    });
-    this.resizeSubscription = subscription;
+  private bindResizeEvent(): void {
+    const windowResize$ = observableFromEvent(window, 'resize');
+    const elementResize$ = this.resizeObserverService.observe(this.chartElement.nativeElement);
+
+    this.resizeSubscription = merge(windowResize$, elementResize$)
+      .pipe(debounceTime(200))
+      .subscribe(() => this.update());
   }
 
   /**

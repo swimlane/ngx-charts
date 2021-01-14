@@ -70,6 +70,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/json-schema": "^7.0.4",
     "@types/node": "^12.11.1",
+    "@types/resize-observer-browser": "^0.1.4",
     "angular-cli-ghpages": "^0.6.2",
     "codelyzer": "^6.0.0",
     "cross-env": "^7.0.2",
