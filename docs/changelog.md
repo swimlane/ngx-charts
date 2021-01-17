@@ -1,5 +1,12 @@
 # Changelog
 
+## 17.0.0
+
+- Breaking: Update to angular 11
+- Bug: Improve SSR capabilities by approximating axis dimensions (#1567)
+- Bug: Chart Tooltip does not work on touch devices (#1213)
+- Chore: Remove bypassSecurityTrustStyle call (#1561)
+
 ## 16.0.0
 
 - Breaking: Update to angular 10
