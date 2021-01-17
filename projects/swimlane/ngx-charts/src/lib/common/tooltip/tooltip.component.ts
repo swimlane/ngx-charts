@@ -7,7 +7,9 @@ import {
   HostListener,
   ViewChild,
   HostBinding,
-  Renderer2
+  Renderer2,
+  PLATFORM_ID,
+  Inject
 } from '@angular/core';
 
 import { throttleable } from '../../utils/throttle';
@@ -15,6 +17,7 @@ import { PositionHelper, PlacementTypes } from './position';
 
 import { StyleTypes } from './style.type';
 import { AlignmentTypes } from './alignment.type';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'ngx-tooltip-content',
@@ -55,13 +58,17 @@ export class TooltipContentComponent implements AfterViewInit {
     return clz;
   }
 
-  constructor(public element: ElementRef, private renderer: Renderer2) {}
+  constructor(public element: ElementRef, private renderer: Renderer2, @Inject(PLATFORM_ID) private platformId: any) {}
 
   ngAfterViewInit(): void {
     setTimeout(this.position.bind(this));
   }
 
   position(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     const nativeElm = this.element.nativeElement;
     const hostDim = this.host.nativeElement.getBoundingClientRect();
 

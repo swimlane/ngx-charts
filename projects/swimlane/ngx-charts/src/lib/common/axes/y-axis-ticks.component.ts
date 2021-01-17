@@ -8,11 +8,14 @@ import {
   EventEmitter,
   AfterViewInit,
   ChangeDetectionStrategy,
-  SimpleChanges
+  SimpleChanges,
+  PLATFORM_ID,
+  Inject
 } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
 import { roundedRect } from '../../common/shape.helper';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'g[ngx-charts-y-axis-ticks]',
@@ -123,6 +126,8 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
 
   @ViewChild('ticksel') ticksElement: ElementRef;
 
+  constructor(@Inject(PLATFORM_ID) private platformId: any) {}
+
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
@@ -132,6 +137,13 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   }
 
   updateDims(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      // for SSR, use approximate value instead of measured
+      this.width = this.getApproximateAxisWidth();
+      this.dimensionsChanged.emit({ width: this.width });
+      return;
+    }
+
     const width = parseInt(this.ticksElement.nativeElement.getBoundingClientRect().width, 10);
     if (width !== this.width) {
       this.width = width;
@@ -267,5 +279,11 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
 
   tickTrim(label: string): string {
     return this.trimTicks ? trimLabel(label, this.maxTickLength) : label;
+  }
+
+  getApproximateAxisWidth() {
+    const maxChars = Math.max(...this.ticks.map(t => this.tickTrim(this.tickFormat(t)).length));
+    const charWidth = 7;
+    return maxChars * charWidth;
   }
 }
