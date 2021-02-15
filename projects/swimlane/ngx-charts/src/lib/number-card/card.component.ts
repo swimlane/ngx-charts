@@ -10,12 +10,15 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   NgZone,
-  OnDestroy
+  OnDestroy,
+  PLATFORM_ID,
+  Inject
 } from '@angular/core';
 import { trimLabel } from '../common/trim-label.helper';
 import { roundedRect } from '../common/shape.helper';
 import { escapeLabel } from '../common/label.helper';
 import { decimalChecker, count } from '../common/count/count.helper';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'g[ngx-charts-card]',
@@ -103,7 +106,12 @@ export class CardComponent implements OnChanges, OnDestroy {
 
   bandPath: string;
 
-  constructor(element: ElementRef, private cd: ChangeDetectorRef, private zone: NgZone) {
+  constructor(
+    element: ElementRef,
+    private cd: ChangeDetectorRef,
+    private zone: NgZone,
+    @Inject(PLATFORM_ID) private platformId: any
+  ) {
     this.element = element.nativeElement;
   }
 
@@ -112,7 +120,9 @@ export class CardComponent implements OnChanges, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    cancelAnimationFrame(this.animationReq);
+    if (isPlatformBrowser(this.platformId)) {
+      cancelAnimationFrame(this.animationReq);
+    }
   }
 
   update(): void {
