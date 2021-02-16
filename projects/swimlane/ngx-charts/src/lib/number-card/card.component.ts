@@ -18,7 +18,9 @@ import { trimLabel } from '../common/trim-label.helper';
 import { roundedRect } from '../common/shape.helper';
 import { escapeLabel } from '../common/label.helper';
 import { decimalChecker, count } from '../common/count/count.helper';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { calculateTextWidth } from '../utils/calculate-width';
+import { VERDANA_FONT_WIDTHS_16_PX } from '../common/constants/font-widths';
 
 @Component({
   selector: 'g[ngx-charts-card]',
@@ -119,6 +121,12 @@ export class CardComponent implements OnChanges, OnDestroy {
     this.update();
   }
 
+  ngOnInit() {
+    if (isPlatformServer(this.platformId)) {
+      this.scaleTextSSR();
+    }
+  }
+
   ngOnDestroy(): void {
     if (isPlatformBrowser(this.platformId)) {
       cancelAnimationFrame(this.animationReq);
@@ -156,7 +164,9 @@ export class CardComponent implements OnChanges, OnDestroy {
       this.bandPath = roundedRect(0, 0, this.cardWidth, this.bandHeight, 3, [false, false, true, true]);
 
       setTimeout(() => {
-        this.scaleText();
+        if (isPlatformBrowser(this.platformId)) {
+          this.scaleText();
+        }
         this.value = value;
         if (hasValue && !this.initialized) {
           setTimeout(() => this.startCount(), 20);
@@ -214,6 +224,21 @@ export class CardComponent implements OnChanges, OnDestroy {
       this.setPadding();
       this.cd.markForCheck();
     });
+  }
+
+  scaleTextSSR() {
+    const width = calculateTextWidth(VERDANA_FONT_WIDTHS_16_PX, this.value, 10);
+    const height = 18;
+    const textPadding = (this.textPadding[1] = this.textPadding[3] = this.cardWidth / 8);
+    const availableWidth = this.cardWidth - 2 * textPadding;
+    const availableHeight = this.cardHeight / 3;
+
+    const resizeScale = Math.min(availableWidth / width, availableHeight / height);
+
+    this.textFontSize = Math.floor(this.textFontSize * resizeScale);
+    this.labelFontSize = Math.min(this.textFontSize, 15);
+
+    this.setPadding();
   }
 
   setPadding() {
