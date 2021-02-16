@@ -42,7 +42,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
     protected chartElement: ElementRef,
     protected zone: NgZone,
     protected cd: ChangeDetectorRef,
-    @Inject(PLATFORM_ID) private platformId: any
+    @Inject(PLATFORM_ID) public platformId: any
   ) {}
 
   ngOnInit() {
