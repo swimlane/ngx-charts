@@ -254,9 +254,11 @@ export class AreaChartStackedComponent extends BaseChartComponent {
     this.xScale = this.getXScale(this.xDomain, this.dims.width);
     this.yScale = this.getYScale(this.yDomain, this.dims.height);
 
+    const signMemory: string[] = []; // to determine the correct area on y-axis for d.value === 0
     for (let i = 0; i < this.xSet.length; i++) {
       const val = this.xSet[i];
       let d0 = 0;
+      let d0neg = 0;
       for (const group of this.results) {
         let d = group.series.find(item => {
           let a = item.name;
@@ -268,17 +270,28 @@ export class AreaChartStackedComponent extends BaseChartComponent {
           return a === b;
         });
 
-        if (d) {
+        if (d && d.value > 0) {
           d.d0 = d0;
           d.d1 = d0 + d.value;
           d0 += d.value;
+          signMemory.push('+');
+        } else if (d && d.value < 0) {
+          d.d0 = d0neg;
+          d.d1 = d0neg + d.value;
+          d0neg += d.value;
+          signMemory.push('-');
+        } else if (d && d.value === 0) {
+          d.d0 = signMemory[signMemory.length - this.results.length] === '+' ? d0 : d0neg;
+          d.d1 = signMemory[signMemory.length - this.results.length] === '+' ? d0 : d0neg;
+          signMemory.push(signMemory[signMemory.length - this.results.length] === '-' ? '-' : '+');
         } else {
           d = {
             name: val,
             value: 0,
-            d0,
-            d1: d0
+            d0: signMemory[signMemory.length - this.results.length] === '+' ? d0 : d0neg,
+            d1: signMemory[signMemory.length - this.results.length] === '+' ? d0 : d0neg
           };
+          signMemory.push(signMemory[signMemory.length - this.results.length] === '-' ? '-' : '+');
           group.series.push(d);
         }
       }
@@ -345,11 +358,12 @@ export class AreaChartStackedComponent extends BaseChartComponent {
   }
 
   getYDomain(): any[] {
-    const domain = [];
+    const domain: Array<{ positive: number; negative: number }> = []; // get separate y-Domain-values for (combined) pos and neg value-series
 
     for (let i = 0; i < this.xSet.length; i++) {
       const val = this.xSet[i];
       let sum = 0;
+      let neg = 0;
       for (const group of this.results) {
         const d = group.series.find(item => {
           let a = item.name;
@@ -361,17 +375,19 @@ export class AreaChartStackedComponent extends BaseChartComponent {
           return a === b;
         });
 
-        if (d) {
+        if (d && d.value >= 0) {
           sum += d.value;
+        } else if (d && d.value < 0) {
+          neg += d.value;
         }
       }
 
-      domain.push(sum);
+      domain.push({ positive: sum, negative: neg });
     }
 
-    const min = this.yScaleMin ? this.yScaleMin : Math.min(0, ...domain);
+    const min = this.yScaleMin ? this.yScaleMin : Math.min(0, ...domain.map(n => (n.negative ? n.negative : 0)));
 
-    const max = this.yScaleMax ? this.yScaleMax : Math.max(...domain);
+    const max = this.yScaleMax ? this.yScaleMax : Math.max(...domain.map(n => (n.positive ? n.positive : 0)));
     return [min, max];
   }
 
