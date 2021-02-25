@@ -22,6 +22,7 @@
 | legendPosition  | string      | 'right'       | the legend position ['right', 'below']                                                                            |
 | explodeSlices   | boolean     | false         | make the radius of each slice proportional to it's value                                                          |
 | doughnut        | boolean     | false         | should doughnut instead of pie slices                                                                             |
+| showDoughnutSum | boolean     | false         | show or hide the sum of all values in the center of the doughnut chart                                            |
 | arcWidth        | number      | 0.25          | arc width, expressed as a fraction of outer radius                                                                |
 | gradient        | boolean     | false         | fill elements with a gradient instead of a solid color                                                            |
 | activeEntries   | object\[\]  | \[\]          | elements to highlight                                                                                             |
