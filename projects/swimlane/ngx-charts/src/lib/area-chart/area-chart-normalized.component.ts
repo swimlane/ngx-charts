@@ -87,7 +87,7 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
             />
           </svg:g>
 
-          <svg:g *ngIf="!tooltipDisabled" (mouseleave)="hideCircles()">
+          <svg:g *ngIf="!tooltipDisabled">
             <svg:g
               ngx-charts-tooltip-area
               [dims]="dims"
@@ -98,27 +98,28 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
               [colors]="colors"
               [showPercentage]="true"
               [tooltipDisabled]="tooltipDisabled"
-              [tooltipTemplate]="seriesTooltipTemplate"
+              [tooltipTemplate]="tooltipTemplate"
               (hover)="updateHoveredVertical($event)"
             />
-
-            <svg:g *ngFor="let series of results">
-              <svg:g
-                ngx-charts-circle-series
-                type="stacked"
-                [xScale]="xScale"
-                [yScale]="yScale"
-                [colors]="colors"
-                [activeEntries]="activeEntries"
-                [data]="series"
-                [scaleType]="scaleType"
-                [visibleValue]="hoveredVertical"
-                [tooltipDisabled]="tooltipDisabled"
-                [tooltipTemplate]="tooltipTemplate"
-                (select)="onClick($event, series)"
-                (activate)="onActivate($event)"
-                (deactivate)="onDeactivate($event)"
-              />
+            <svg:g *ngIf="!seriesTooltipDisabled" (mouseleave)="hideCircles()">
+              <svg:g *ngFor="let series of results">
+                <svg:g
+                  ngx-charts-circle-series
+                  type="stacked"
+                  [xScale]="xScale"
+                  [yScale]="yScale"
+                  [colors]="colors"
+                  [activeEntries]="activeEntries"
+                  [data]="series"
+                  [scaleType]="scaleType"
+                  [visibleValue]="hoveredVertical"
+                  [tooltipDisabled]="seriesTooltipDisabled"
+                  [tooltipTemplate]="seriesTooltipTemplate"
+                  (select)="onClick($event, series)"
+                  (activate)="onActivate($event)"
+                  (deactivate)="onDeactivate($event)"
+                />
+              </svg:g>
             </svg:g>
           </svg:g>
         </svg:g>
@@ -161,14 +162,14 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
   @Input() legendPosition: string = 'right';
-  @Input() xAxis;
-  @Input() yAxis;
-  @Input() showXAxisLabel;
-  @Input() showYAxisLabel;
-  @Input() xAxisLabel;
-  @Input() yAxisLabel;
-  @Input() timeline;
-  @Input() gradient;
+  @Input() xAxis: boolean;
+  @Input() yAxis: boolean;
+  @Input() showXAxisLabel: boolean;
+  @Input() showYAxisLabel: boolean;
+  @Input() xAxisLabel: string;
+  @Input() yAxisLabel: string;
+  @Input() timeline: boolean;
+  @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
   @Input() curve: any = curveLinear;
   @Input() activeEntries: any[] = [];
@@ -183,6 +184,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
   @Input() xAxisTicks: any[];
   @Input() yAxisTicks: any[];
   @Input() roundDomains: boolean = false;
+  @Input() seriesTooltipDisabled: boolean = false;
   @Input() tooltipDisabled: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();

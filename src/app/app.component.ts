@@ -79,6 +79,7 @@ export class AppComponent implements OnInit {
   legendPosition = 'right';
   showXAxisLabel = true;
   tooltipDisabled = false;
+  seriesTooltipDisabled = false;
   showText = true;
   xAxisLabel = 'Country';
   showYAxisLabel = true;

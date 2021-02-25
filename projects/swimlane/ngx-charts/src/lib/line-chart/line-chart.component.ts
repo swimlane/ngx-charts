@@ -91,7 +91,7 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
             />
           </svg:g>
 
-          <svg:g *ngIf="!tooltipDisabled" (mouseleave)="hideCircles()">
+          <svg:g *ngIf="!tooltipDisabled">
             <svg:g
               ngx-charts-tooltip-area
               [dims]="dims"
@@ -101,27 +101,27 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
               [results]="results"
               [colors]="colors"
               [tooltipDisabled]="tooltipDisabled"
-              [tooltipTemplate]="seriesTooltipTemplate"
+              [tooltipTemplate]="tooltipTemplate"
               (hover)="updateHoveredVertical($event)"
             />
-
-            <svg:g *ngFor="let series of results">
-              <svg:g
-                ngx-charts-circle-series
-                [xScale]="xScale"
-                [yScale]="yScale"
-                [colors]="colors"
-                [data]="series"
-                [scaleType]="scaleType"
-                [visibleValue]="hoveredVertical"
-                [activeEntries]="activeEntries"
-                [tooltipDisabled]="tooltipDisabled"
-                [tooltipTemplate]="tooltipTemplate"
-                (select)="onClick($event)"
-                (activate)="onActivate($event)"
-                (deactivate)="onDeactivate($event)"
-              />
-            </svg:g>
+          </svg:g>
+          <svg:g *ngIf="!seriesTooltipDisabled" (mouseleave)="hideCircles()">
+            <svg:g
+              *ngFor="let series of results"
+              ngx-charts-circle-series
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [colors]="colors"
+              [data]="series"
+              [scaleType]="scaleType"
+              [visibleValue]="hoveredVertical"
+              [activeEntries]="activeEntries"
+              [tooltipDisabled]="seriesTooltipDisabled"
+              [tooltipTemplate]="seriesTooltipTemplate"
+              (select)="onClick($event)"
+              (activate)="onActivate($event)"
+              (deactivate)="onDeactivate($event)"
+            ></svg:g>
           </svg:g>
         </svg:g>
       </svg:g>
@@ -202,6 +202,7 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() yAxisTicks: any[];
   @Input() roundDomains: boolean = false;
   @Input() tooltipDisabled: boolean = false;
+  @Input() seriesTooltipDisabled: boolean = false;
   @Input() showRefLines: boolean = false;
   @Input() referenceLines: any;
   @Input() showRefLabels: boolean = true;

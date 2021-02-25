@@ -41,6 +41,7 @@
 | activeEntries         | object\[\]         | \[\]          | elements to highlight                                                                                                            |
 | tooltipDisabled       | boolean            | false         | show or hide the tooltip                                                                                                         |
 | tooltipTemplate       | TemplateRef        |               | a custom ng-template to be displayed inside the tooltip when hovering a single point                                             |
+| seriesTooltipDisabled | boolean            | false         | show or hide the series tooltip                                                                                                  |
 | seriesTooltipTemplate | TemplateRef        |               | a custom ng-template to be displayed inside the tooltip when hovering series                                                     |
 | xScaleMin             | any                |               | the minimum value of the x axis \(if the x scale is linear or time\)                                                             |
 | xScaleMax             | any                |               | the maximum value of the x axis \(if the x scale is linear or time\)                                                             |
