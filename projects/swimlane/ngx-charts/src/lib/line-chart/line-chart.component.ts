@@ -48,6 +48,7 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
           [xScale]="xScale"
           [dims]="dims"
           [showGridLines]="showGridLines"
+          [gridLineNgStyleByAxisTick]="gridLineNgStyleByXAxisTick"
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [trimTicks]="trimXAxisTicks"
@@ -63,6 +64,7 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
           [yScale]="yScale"
           [dims]="dims"
           [showGridLines]="showGridLines"
+          [gridLineNgStyleByAxisTick]="gridLineNgStyleByYAxisTick"
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
           [trimTicks]="trimYAxisTicks"
@@ -187,6 +189,8 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() timeline;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
+  @Input() gridLineNgStyleByXAxisTick;
+  @Input() gridLineNgStyleByYAxisTick;
   @Input() curve: any = curveLinear;
   @Input() activeEntries: any[] = [];
   @Input() schemeType: string;

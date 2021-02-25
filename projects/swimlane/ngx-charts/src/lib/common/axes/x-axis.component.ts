@@ -27,6 +27,7 @@ import { XAxisTicksComponent } from './x-axis-ticks.component';
         [scale]="xScale"
         [orient]="xOrient"
         [showGridLines]="showGridLines"
+        [gridLineNgStyleByAxisTick]="gridLineNgStyleByAxisTick"
         [gridLineHeight]="dims.height"
         [width]="dims.width"
         [tickValues]="ticks"
@@ -53,6 +54,7 @@ export class XAxisComponent implements OnChanges {
   @Input() maxTickLength: number;
   @Input() tickFormatting;
   @Input() showGridLines = false;
+  @Input() gridLineNgStyleByAxisTick;
   @Input() showLabel;
   @Input() labelText;
   @Input() ticks: any[];

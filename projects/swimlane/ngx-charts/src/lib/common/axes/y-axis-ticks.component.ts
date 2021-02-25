@@ -47,6 +47,7 @@ import { isPlatformBrowser } from '@angular/common';
         <svg:line
           *ngIf="orient === 'left'"
           class="gridline-path gridline-path-horizontal"
+          [ngStyle]="gridLineNgStyleByAxisTick ? gridLineNgStyleByAxisTick(tick) : null"
           x1="0"
           [attr.x2]="gridLineWidth"
         />
@@ -94,6 +95,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() maxTickLength: number = 16;
   @Input() tickFormatting;
   @Input() showGridLines = false;
+  @Input() gridLineNgStyleByAxisTick;
   @Input() gridLineWidth;
   @Input() height;
   @Input() referenceLines;
