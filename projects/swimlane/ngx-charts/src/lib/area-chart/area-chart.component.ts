@@ -96,6 +96,7 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
               [yScale]="yScale"
               [results]="results"
               [colors]="colors"
+              [yAxisTickFormatting]="yAxisTickFormatting"
               [tooltipDisabled]="tooltipDisabled"
               [tooltipTemplate]="seriesTooltipTemplate"
               (hover)="updateHoveredVertical($event)"

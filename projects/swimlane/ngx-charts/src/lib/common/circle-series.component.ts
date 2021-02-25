@@ -81,6 +81,7 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
   @Input() scaleType;
   @Input() visibleValue;
   @Input() activeEntries: any[];
+  @Input() yAxisTickFormatting;
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipTemplate: TemplateRef<any>;
 
@@ -179,9 +180,10 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
   }
 
   getTooltipText({ tooltipLabel, value, seriesName, min, max }): string {
+    const val = this.yAxisTickFormatting ? this.yAxisTickFormatting(value) : value.toLocaleString();
     return `
       <span class="tooltip-label">${escapeLabel(seriesName)} • ${escapeLabel(tooltipLabel)}</span>
-      <span class="tooltip-val">${value.toLocaleString()}${this.getTooltipMinMaxText(min, max)}</span>
+      <span class="tooltip-val">${val}${this.getTooltipMinMaxText(min, max)}</span>
     `;
   }
 
@@ -192,7 +194,7 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
         if (max === undefined) {
           result += '≥';
         }
-        result += min.toLocaleString();
+        result += this.yAxisTickFormatting ? this.yAxisTickFormatting(min) : min.toLocaleString();
         if (max !== undefined) {
           result += ' - ';
         }
@@ -200,7 +202,7 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
         result += '≤';
       }
       if (max !== undefined) {
-        result += max.toLocaleString();
+        result += this.yAxisTickFormatting ? this.yAxisTickFormatting(max) : max.toLocaleString();
       }
       result += ')';
       return result;

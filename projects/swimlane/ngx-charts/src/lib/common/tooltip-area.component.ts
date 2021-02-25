@@ -86,6 +86,7 @@ export class TooltipArea {
   @Input() yScale;
   @Input() results;
   @Input() colors;
+  @Input() yAxisTickFormatting;
   @Input() showPercentage: boolean = false;
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipTemplate: TemplateRef<any>;
@@ -218,7 +219,9 @@ export class TooltipArea {
     }
     result += ': ';
     if (tooltipItem.value !== undefined) {
-      result += tooltipItem.value.toLocaleString();
+      result += this.yAxisTickFormatting
+        ? this.yAxisTickFormatting(tooltipItem.value)
+        : tooltipItem.value.toLocaleString();
     }
     if (tooltipItem.min !== undefined || tooltipItem.max !== undefined) {
       result += ' (';
@@ -226,7 +229,9 @@ export class TooltipArea {
         if (tooltipItem.max === undefined) {
           result += '≥';
         }
-        result += tooltipItem.min.toLocaleString();
+        result += this.yAxisTickFormatting
+          ? this.yAxisTickFormatting(tooltipItem.min)
+          : tooltipItem.min.toLocaleString();
         if (tooltipItem.max !== undefined) {
           result += ' - ';
         }
@@ -234,7 +239,9 @@ export class TooltipArea {
         result += '≤';
       }
       if (tooltipItem.max !== undefined) {
-        result += tooltipItem.max.toLocaleString();
+        result += this.yAxisTickFormatting
+          ? this.yAxisTickFormatting(tooltipItem.max)
+          : tooltipItem.max.toLocaleString();
       }
       result += ')';
     }
