@@ -19,12 +19,6 @@
     list-style: none;
   }
 
-  .horizontal-legend {
-    li {
-      display: inline-block;
-    }
-  }
-
   .legend-wrap {
     width: calc(100% - 10px);
   }
@@ -40,6 +34,20 @@
     overflow-x: hidden;
     white-space: nowrap;
     background: rgba(0, 0, 0, 0.05);
+  }
+
+  .horizontal-legend {
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-left: 10px;
+
+    &.legend-labels {
+      width: calc(100% - 10px);
+    }
+
+    li {
+      display: inline-block;
+    }
   }
 
   .legend-label {
