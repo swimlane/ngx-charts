@@ -577,7 +577,7 @@ const chartGroups = [
           'roundEdges',
           'strokeColor',
           'strokeWidth',
-          'tooltipDisabled',
+          'tooltipDisabled'
         ],
         defaults: {
           xAxisLabel: 'Latin American Countries',

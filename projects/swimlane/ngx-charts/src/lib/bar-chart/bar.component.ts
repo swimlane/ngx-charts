@@ -31,7 +31,7 @@ import { transition } from 'd3-transition';
       [class.hidden]="hideBar"
       [attr.d]="path"
       [attr.aria-label]="ariaLabel"
-      [attr.fill]="(hasGradient ? gradientFill : fill)"
+      [attr.fill]="hasGradient ? gradientFill : fill"
       (click)="select.emit(data)"
     />
   `,

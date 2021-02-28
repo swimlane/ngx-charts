@@ -397,7 +397,7 @@ export const boxData: BoxChartMultiSeries = [
         value: 71
       }
     ]
-  },
+  }
 ];
 
 export function generateGraph(nodeCount: number) {

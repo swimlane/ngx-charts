@@ -1140,8 +1140,8 @@
       </select>
 
       <h3>Theme</h3>
-      <select [ngModel]="theme" (ngModelChange)="changeTheme($event)"
-        >>
+      <select [ngModel]="theme" (ngModelChange)="changeTheme($event)">
+        >
         <option [value]="'dark'">Dark</option>
         <option [value]="'light'">Light</option>
       </select>
@@ -1298,11 +1298,12 @@
           <label>
             <input type="checkbox" [checked]="noBarWhenZero" (change)="noBarWhenZero = $event.target.checked" />
             Hide bar if value is 0
-          </label> <br/>
+          </label>
+          <br />
         </div>
         <div *ngIf="chart.options.includes('strokeColor')">
           <label>Stroke Color:</label><br />
-          <input type="text" [(ngModel)]="strokeColor"/><br />
+          <input type="text" [(ngModel)]="strokeColor" /><br />
         </div>
         <div *ngIf="chart.options.includes('strokeWidth')">
           <label>Stroke Width:</label><br />

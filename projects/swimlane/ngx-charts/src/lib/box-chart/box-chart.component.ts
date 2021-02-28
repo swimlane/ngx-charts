@@ -180,9 +180,7 @@ export class BoxChartComponent extends BaseChartComponent {
   }
 
   getYScale(domain: number[], height: number): ScaleLinear<number, number> {
-    const scale = scaleLinear()
-      .domain(domain)
-      .range([height, 0]);
+    const scale = scaleLinear().domain(domain).range([height, 0]);
 
     return this.roundDomains ? scale.nice() : scale;
   }

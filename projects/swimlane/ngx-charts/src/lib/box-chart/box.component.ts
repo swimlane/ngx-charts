@@ -46,7 +46,7 @@ import { IVector2D } from '../models/coordinates.model';
         [attr.stroke]="strokeColor"
         [attr.stroke-width]="strokeWidth"
         [attr.aria-label]="ariaLabel"
-        [attr.fill]="(hasGradient ? gradientFill : fill)"
+        [attr.fill]="hasGradient ? gradientFill : fill"
         (click)="select.emit(data)"
       />
       <svg:line
@@ -205,10 +205,10 @@ export class BoxComponent implements OnChanges {
       lineEl
         .transition()
         .duration(0)
-        .attr('x1', (d, index, node) => this.oldLineCoordinates ? this.oldLineCoordinates[index].v1.x : undefined)
-        .attr('y1', (d, index, node) => this.oldLineCoordinates ? this.oldLineCoordinates[index].v1.y : undefined)
-        .attr('x2', (d, index, node) => this.oldLineCoordinates ? this.oldLineCoordinates[index].v2.x : undefined)
-        .attr('y2', (d, index, node) => this.oldLineCoordinates ? this.oldLineCoordinates[index].v2.y : undefined)
+        .attr('x1', (d, index, node) => (this.oldLineCoordinates ? this.oldLineCoordinates[index].v1.x : undefined))
+        .attr('y1', (d, index, node) => (this.oldLineCoordinates ? this.oldLineCoordinates[index].v1.y : undefined))
+        .attr('x2', (d, index, node) => (this.oldLineCoordinates ? this.oldLineCoordinates[index].v2.x : undefined))
+        .attr('y2', (d, index, node) => (this.oldLineCoordinates ? this.oldLineCoordinates[index].v2.y : undefined))
         .transition()
         .ease(ease.easeSinInOut)
         .duration(500)
@@ -248,7 +248,7 @@ export class BoxComponent implements OnChanges {
 
   // TODO: Refactor into another .ts file if https://github.com/swimlane/ngx-charts/pull/1179 gets merged.
   pathTween(d1: string, precision: number) {
-    return function() {
+    return function () {
       // tslint:disable-next-line: no-this-assignment
       const path0 = this;
       const path1 = this.cloneNode();
