@@ -1,4 +1,4 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -30,20 +30,21 @@ describe('<ngx-charts-bubble-chart>', () => {
   });
 
   describe('basic setup', () => {
-    beforeEach(async(() => {
+    beforeEach(() => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
               <ngx-charts-bubble-chart
+                [animations]="false"
                 [view]="[400,800]"
                 [scheme]="colorScheme"
                 [results]="results">
               </ngx-charts-bubble-chart>`
         }
       }).compileComponents();
-    }));
+    });
 
-    it('should set the svg width and height', async(() => {
+    it('should set the svg width and height', () => {
       const fixture = TestBed.createComponent(TestComponent);
       fixture.detectChanges();
 
@@ -51,15 +52,15 @@ describe('<ngx-charts-bubble-chart>', () => {
 
       expect(svg.getAttribute('width')).toBe('400');
       expect(svg.getAttribute('height')).toBe('800');
-    }));
+    });
 
-    it('should render 12 circle elements', async(() => {
+    it('should render 12 circle elements', () => {
       const fixture = TestBed.createComponent(TestComponent);
       fixture.detectChanges();
 
       const circleElements = fixture.debugElement.nativeElement.querySelectorAll('g.circle');
 
       expect(circleElements.length).toEqual(12);
-    }));
+    });
   });
 });

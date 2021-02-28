@@ -68,10 +68,7 @@ export class LineComponent implements OnChanges {
     const node = select(this.element.nativeElement).select('.line');
 
     if (this.animations) {
-      node
-        .transition()
-        .duration(750)
-        .attr('d', this.path);
+      node.transition().duration(750).attr('d', this.path);
     } else {
       node.attr('d', this.path);
     }

@@ -1,5 +1,32 @@
 # Changelog
 
+## 17.0.1
+
+- Bug: Fix pie label component on SSR (#1583)
+- Bug: Adjust scaleText for linear geauge and number cards on SSR (#1581)
+- Bug: Disable animation on ssr and remove unnecesary call on ssr (#1579)
+
+## 17.0.0
+
+- Breaking: Update to angular 11
+- Bug: Improve SSR capabilities by approximating axis dimensions (#1567)
+- Bug: Chart Tooltip does not work on touch devices (#1213)
+- Chore: Remove bypassSecurityTrustStyle call (#1561)
+
+## 16.0.0
+
+- Breaking: Update to angular 10
+- Bug: Apply dataLabelFormatting to tooltip value in bar charts (#1419)
+
+## 14.0.0
+
+- Chore: explicitly only suppot ng9
+
+## 13.0.3
+
+- Chore: update dependecies
+- Testing: update tests to not use animation
+
 ## 13.0.2
 
 - Regression bug: Allow ViewContainerRef as the injection service root
@@ -45,7 +72,7 @@
 - Chore: Bumped extract-text-plugin to version 3.0.2 (#861)
 - Chore: Updated zone.js version to 0.9.1 (#1187)
 - Docs: Deprecated force-directed graph chart (#1159)
-- Docs: Fixed link typo in motication.md (#1172)
+- Docs: Fixed link typo in motivation.md (#1172)
 - Docs: Added interactive bubble chart to demo (#1174)
 
 ## 11.1.0
@@ -87,7 +114,7 @@
 ## 10.0.0
 
 - Breaking: Upgraded to angular 7
-- Feature: Implemented legened positioning
+- Feature: Implemented legend positioning
 - Feature: Added accessibility attributes to bar charts (#977)
 - Chore: Migrated to Renderer2 (#1021)
 - Chore: getScaleType performance improvements (#995)
@@ -399,7 +426,7 @@
 - Fixed typo in circle series (#149)
 - Fixed gradient bug in heatmap
 - Updated Axis components to allow tick count to be an input
-- Changed scaleText methods on gauge charts to not be recoursive
+- Changed scaleText methods on gauge charts to not be recursive
 
 ## 3.0.5
 
@@ -433,7 +460,7 @@
 - Implemented BaseChartComponent as an angular component and set up proper component inheritance
 - Converted color helper to a class
 - Implemented linear color schemes for bar, line and area charts and added schemeType input
-- Added support for multiple values in gague chart
+- Added support for multiple values in gauge chart
 - Implemented linear gauge chart
 - Implemented triggering legend item activation when chart items are being hovered
 

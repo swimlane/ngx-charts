@@ -1,6 +1,17 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChild,
+  ChangeDetectionStrategy,
+  TemplateRef,
+  PLATFORM_ID,
+  Inject
+} from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { createMouseEvent } from '../events';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'g[ngx-charts-tooltip-area]',
@@ -83,6 +94,8 @@ export class TooltipArea {
 
   @ViewChild('tooltipAnchor', { static: false }) tooltipAnchor;
 
+  constructor(@Inject(PLATFORM_ID) private platformId: any) {}
+
   getValues(xVal): any[] {
     const results = [];
 
@@ -127,6 +140,10 @@ export class TooltipArea {
   }
 
   mouseMove(event) {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     const xPos = event.pageX - event.target.getBoundingClientRect().left;
 
     const closestIndex = this.findClosestPointIndex(xPos);

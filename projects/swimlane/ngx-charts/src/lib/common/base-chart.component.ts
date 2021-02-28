@@ -1,3 +1,4 @@
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import {
   ElementRef,
   NgZone,
@@ -9,7 +10,9 @@ import {
   AfterViewInit,
   OnDestroy,
   OnChanges,
-  SimpleChanges
+  SimpleChanges,
+  PLATFORM_ID,
+  Inject
 } from '@angular/core';
 
 import { fromEvent as observableFromEvent } from 'rxjs';
@@ -18,9 +21,7 @@ import { VisibilityObserver } from '../utils/visibility-observer';
 
 @Component({
   selector: 'base-chart',
-  template: `
-    <div></div>
-  `
+  template: ` <div></div> `
 })
 export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() results: any;
@@ -37,7 +38,18 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   resizeSubscription: any;
   visibilityObserver: VisibilityObserver;
 
-  constructor(protected chartElement: ElementRef, protected zone: NgZone, protected cd: ChangeDetectorRef) {}
+  constructor(
+    protected chartElement: ElementRef,
+    protected zone: NgZone,
+    protected cd: ChangeDetectorRef,
+    @Inject(PLATFORM_ID) public platformId: any
+  ) {}
+
+  ngOnInit() {
+    if (isPlatformServer(this.platformId)) {
+      this.animations = false;
+    }
+  }
 
   ngAfterViewInit(): void {
     this.bindWindowResizeEvent();
@@ -99,7 +111,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
     let height;
     const hostElem = this.chartElement.nativeElement;
 
-    if (hostElem.parentNode !== null) {
+    if (isPlatformBrowser(this.platformId) && hostElem.parentNode !== null) {
       // Get the container dimensions
       const dims = hostElem.parentNode.getBoundingClientRect();
       width = dims.width;
@@ -144,6 +156,10 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   private bindWindowResizeEvent(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     const source = observableFromEvent(window, 'resize');
     const subscription = source.pipe(debounceTime(200)).subscribe(e => {
       this.update();

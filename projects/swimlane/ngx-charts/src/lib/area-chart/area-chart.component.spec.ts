@@ -1,9 +1,9 @@
-import { TestBed, async } from '@angular/core/testing';
-import { Component } from '@angular/core';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { Component, DebugElement } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { APP_BASE_HREF } from '@angular/common';
 
 import { multi } from '../../../../../../src/app/data';
-import { APP_BASE_HREF } from '@angular/common';
 
 import { AreaChartModule } from './area-chart.module';
 
@@ -32,48 +32,45 @@ describe('<ngx-charts-area-chart>', () => {
   });
 
   describe('basic setup', () => {
-    beforeEach(async(() => {
+    let fixture: ComponentFixture<TestComponent>;
+    let de: DebugElement;
+
+    beforeEach(() => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
                <ngx-charts-area-chart
+                [animations]="false"
                 [view]="[400,800]"
                 [scheme]="colorScheme"
                 [results]="data">
               </ngx-charts-area-chart>`
         }
       }).compileComponents();
-    }));
-
-    it('should set the svg width and height', async(() => {
-      const fixture = TestBed.createComponent(TestComponent);
+      fixture = TestBed.createComponent(TestComponent);
       fixture.detectChanges();
+      de = fixture.debugElement;
+    });
 
-      const svg = fixture.debugElement.nativeElement.querySelector('svg');
+    it('should set the svg width and height', () => {
+      const svg = de.nativeElement.querySelector('svg');
 
       expect(svg.getAttribute('width')).toBe('400');
       expect(svg.getAttribute('height')).toBe('800');
-    }));
+    });
 
-    it('should render 4 area elements', async(() => {
-      const fixture = TestBed.createComponent(TestComponent);
-      fixture.detectChanges();
-
-      const compiled = fixture.debugElement.nativeElement;
-
+    it('should render 4 area elements', () => {
+      const compiled = de.nativeElement;
       expect(compiled.querySelectorAll('path.area').length).toEqual(4);
-    }));
+    });
 
-    it('should match specified colors for area elements', async(() => {
-      const fixture = TestBed.createComponent(TestComponent);
-      fixture.detectChanges();
-
-      const compiled = fixture.debugElement.nativeElement;
+    it('should match specified colors for area elements', () => {
+      const compiled = de.nativeElement;
 
       const fills = Array.from(compiled.querySelectorAll('path.area')).map((areaElement: Element) =>
         areaElement.getAttribute('fill')
       );
       expect(colors.every(color => fills.includes(color))).toBeTruthy();
-    }));
+    });
   });
 });

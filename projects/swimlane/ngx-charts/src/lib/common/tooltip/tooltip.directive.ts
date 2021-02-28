@@ -109,7 +109,9 @@ export class TooltipDirective implements OnDestroy {
   showTooltip(immediate?: boolean): void {
     if (this.component || this.tooltipDisabled) return;
 
-    const time = immediate ? 0 : this.tooltipShowTimeout;
+    const time = immediate
+      ? 0
+      : this.tooltipShowTimeout + (navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) ? 300 : 0);
 
     clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
@@ -144,7 +146,7 @@ export class TooltipDirective implements OnDestroy {
 
     // content close on click outside
     if (this.tooltipCloseOnClickOutside) {
-      this.documentClickEvent = this.renderer.listen(document, 'click', event => {
+      this.documentClickEvent = this.renderer.listen('window', 'click', event => {
         const contains = tooltip.contains(event.target);
         if (!contains) this.hideTooltip();
       });

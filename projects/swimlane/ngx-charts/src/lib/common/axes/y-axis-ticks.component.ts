@@ -8,11 +8,14 @@ import {
   EventEmitter,
   AfterViewInit,
   ChangeDetectionStrategy,
-  SimpleChanges
+  SimpleChanges,
+  PLATFORM_ID,
+  Inject
 } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
 import { roundedRect } from '../../common/shape.helper';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'g[ngx-charts-y-axis-ticks]',
@@ -123,6 +126,8 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
 
   @ViewChild('ticksel') ticksElement: ElementRef;
 
+  constructor(@Inject(PLATFORM_ID) private platformId: any) {}
+
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
@@ -132,6 +137,13 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   }
 
   updateDims(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      // for SSR, use approximate value instead of measured
+      this.width = this.getApproximateAxisWidth();
+      this.dimensionsChanged.emit({ width: this.width });
+      return;
+    }
+
     const width = parseInt(this.ticksElement.nativeElement.getBoundingClientRect().width, 10);
     if (width !== this.width) {
       this.width = width;
@@ -153,7 +165,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
     } else if (scale.tickFormat) {
       this.tickFormat = scale.tickFormat.apply(scale, this.tickArguments);
     } else {
-      this.tickFormat = function(d) {
+      this.tickFormat = function (d) {
         if (d.constructor.name === 'Date') {
           return d.toLocaleDateString();
         }
@@ -162,7 +174,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
     }
 
     this.adjustedScale = scale.bandwidth
-      ? function(d) {
+      ? function (d) {
           return scale(d) + scale.bandwidth() * 0.5;
         }
       : scale;
@@ -173,7 +185,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
 
     switch (this.orient) {
       case 'top':
-        this.transform = function(tick) {
+        this.transform = function (tick) {
           return 'translate(' + this.adjustedScale(tick) + ',0)';
         };
         this.textAnchor = 'middle';
@@ -182,7 +194,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
         this.dy = sign < 0 ? '0em' : '.71em';
         break;
       case 'bottom':
-        this.transform = function(tick) {
+        this.transform = function (tick) {
           return 'translate(' + this.adjustedScale(tick) + ',0)';
         };
         this.textAnchor = 'middle';
@@ -191,7 +203,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
         this.dy = sign < 0 ? '0em' : '.71em';
         break;
       case 'left':
-        this.transform = function(tick) {
+        this.transform = function (tick) {
           return 'translate(0,' + this.adjustedScale(tick) + ')';
         };
         this.textAnchor = 'end';
@@ -200,7 +212,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
         this.dy = '.32em';
         break;
       case 'right':
-        this.transform = function(tick) {
+        this.transform = function (tick) {
           return 'translate(0,' + this.adjustedScale(tick) + ')';
         };
         this.textAnchor = 'start';
@@ -267,5 +279,11 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
 
   tickTrim(label: string): string {
     return this.trimTicks ? trimLabel(label, this.maxTickLength) : label;
+  }
+
+  getApproximateAxisWidth() {
+    const maxChars = Math.max(...this.ticks.map(t => this.tickTrim(this.tickFormat(t)).length));
+    const charWidth = 7;
+    return maxChars * charWidth;
   }
 }

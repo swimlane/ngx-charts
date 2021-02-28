@@ -1,3 +1,4 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
   Component,
   Input,
@@ -8,7 +9,9 @@ import {
   ViewChild,
   SimpleChanges,
   AfterViewInit,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  Inject,
+  PLATFORM_ID
 } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
@@ -67,8 +70,11 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   ticks: any;
   tickFormat: (o: any) => any;
   height: number = 0;
+  approxHeight: number = 10;
 
   @ViewChild('ticksel') ticksElement: ElementRef;
+
+  constructor(@Inject(PLATFORM_ID) private platformId: any) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -79,10 +85,16 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   }
 
   updateDims(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      // for SSR, use approximate value instead of measured
+      this.dimensionsChanged.emit({ height: this.approxHeight });
+      return;
+    }
+
     const height = parseInt(this.ticksElement.nativeElement.getBoundingClientRect().height, 10);
     if (height !== this.height) {
       this.height = height;
-      this.dimensionsChanged.emit({ height });
+      this.dimensionsChanged.emit({ height: this.height });
       setTimeout(() => this.updateDims());
     }
   }
@@ -96,7 +108,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     } else if (scale.tickFormat) {
       this.tickFormat = scale.tickFormat.apply(scale, this.tickArguments);
     } else {
-      this.tickFormat = function(d) {
+      this.tickFormat = function (d) {
         if (d.constructor.name === 'Date') {
           return d.toLocaleDateString();
         }
@@ -107,7 +119,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     const angle = this.rotateTicks ? this.getRotationAngle(this.ticks) : null;
 
     this.adjustedScale = this.scale.bandwidth
-      ? function(d) {
+      ? function (d) {
           return this.scale(d) + this.scale.bandwidth() * 0.5;
         }
       : this.scale;
@@ -140,7 +152,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     }
 
     const len = Math.min(this.maxTicksLength, this.maxAllowedLength);
-    const charWidth = 8; // need to measure this
+    const charWidth = 7; // need to measure this
     const wordWidth = len * charWidth;
 
     let baseWidth = wordWidth;
@@ -151,6 +163,8 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
       angle -= 30;
       baseWidth = Math.cos(angle * (Math.PI / 180)) * wordWidth;
     }
+
+    this.approxHeight = Math.max(Math.abs(Math.sin(angle * (Math.PI / 180)) * wordWidth), 10);
 
     return angle;
   }

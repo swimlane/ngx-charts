@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { brushX } from 'd3-brush';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
-import { select, event as d3event } from 'd3-selection';
+import { select } from 'd3-selection';
 import { id } from '../..//utils/id';
 
 @Component({
@@ -127,18 +127,11 @@ export class Timeline implements OnChanges {
     let scale;
 
     if (this.scaleType === 'time') {
-      scale = scaleTime()
-        .range([0, this.dims.width])
-        .domain(this.xDomain);
+      scale = scaleTime().range([0, this.dims.width]).domain(this.xDomain);
     } else if (this.scaleType === 'linear') {
-      scale = scaleLinear()
-        .range([0, this.dims.width])
-        .domain(this.xDomain);
+      scale = scaleLinear().range([0, this.dims.width]).domain(this.xDomain);
     } else if (this.scaleType === 'ordinal') {
-      scale = scalePoint()
-        .range([0, this.dims.width])
-        .padding(0.1)
-        .domain(this.xDomain);
+      scale = scalePoint().range([0, this.dims.width]).padding(0.1).domain(this.xDomain);
     }
 
     return scale;
@@ -155,17 +148,15 @@ export class Timeline implements OnChanges {
         [0, 0],
         [width, height]
       ])
-      .on('brush end', () => {
-        const selection = d3event.selection || this.xScale.range();
+      .on('brush end', ({ d3selection }) => {
+        const selection = d3selection || this.xScale.range();
         const newDomain = selection.map(this.xScale.invert);
 
         this.onDomainChange.emit(newDomain);
         this.cd.markForCheck();
       });
 
-    select(this.element)
-      .select('.brush')
-      .call(this.brush);
+    select(this.element).select('.brush').call(this.brush);
   }
 
   updateBrush(): void {
@@ -178,9 +169,7 @@ export class Timeline implements OnChanges {
       [0, 0],
       [width, height]
     ]);
-    select(this.element)
-      .select('.brush')
-      .call(this.brush);
+    select(this.element).select('.brush').call(this.brush);
 
     // clear hardcoded properties so they can be defined by CSS
     select(this.element)

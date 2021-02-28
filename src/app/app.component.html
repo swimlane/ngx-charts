@@ -1,6 +1,6 @@
 <main [class]="theme">
   <div class="chart-col">
-    <div style="position: absolute; top: 50px; left: 50px; right: 50px; bottom: 50px;">
+    <div style="position: absolute; top: 50px; left: 50px; right: 50px; bottom: 50px">
       <ngx-charts-bar-vertical
         *ngIf="chartType === 'bar-vertical'"
         class="chart-container"
@@ -807,7 +807,7 @@
         >
         </ngx-input>
         <ngx-charts-line-chart
-          style="position: static; display: inline-block; transform: none;"
+          style="position: static; display: inline-block; transform: none"
           [view]="view"
           class="chart-container"
           [scheme]="colorScheme"
@@ -841,7 +841,7 @@
         </ngx-charts-line-chart>
         <p></p>
         <ngx-charts-polar-chart
-          style="position: static; display: inline-block; transform: none;"
+          style="position: static; display: inline-block; transform: none"
           [view]="view"
           class="chart-container"
           [scheme]="colorScheme"
@@ -874,12 +874,8 @@
         >
         </ngx-charts-polar-chart>
       </div>
-      <div
-        class="chart-container"
-        *ngIf="chartType === 'tree-map-demo'"
-        style="padding: 10px; border: 1px solid white;"
-      >
-        <h4 style="text-align: center;">
+      <div class="chart-container" *ngIf="chartType === 'tree-map-demo'" style="padding: 10px; border: 1px solid white">
+        <h4 style="text-align: center">
           <button class="btn btn-link" [class.active]="sumBy === 'Size'" (click)="treemapProcess('Size')">
             By Size
           </button>
@@ -887,7 +883,7 @@
             By Count
           </button>
         </h4>
-        <div style="height: 17px; font-size: 12px;">
+        <div style="height: 17px; font-size: 12px">
           <ng-container *ngFor="let item of treemapPath; let last = last">
             <button class="btn btn-link" [class.active]="last" [disabled]="last" (click)="treemapSelect(item)">
               {{ item.name }} ({{ item.value }})
@@ -912,14 +908,14 @@
       <div
         class="chart-container"
         *ngIf="chartType === 'bubble-chart-interactive-demo'"
-        style="padding: 10px; border: 1px solid white;"
+        style="padding: 10px; border: 1px solid white"
       >
         <div>
           <span class="active">{{ getBubbleInteractiveTitle() }}</span>
           <button
             *ngIf="bubbleShowDrilldownResetLink()"
             class="btn btn-link"
-            style="float: right;"
+            style="float: right"
             (click)="onClickResetBubbleInteractiveDrill()"
           >
             <span>Go Back</span>
@@ -1133,7 +1129,7 @@
       <small class="version">{{ APP_VERSION }}</small>
       <small class="subtitle">Angular Chart Framework</small>
     </h1>
-    <div style="margin:20px">
+    <div style="margin: 20px">
       <h3>Chart Type</h3>
       <select [ngModel]="chartType" (ngModelChange)="selectChart($event)">
         <ng-template ngFor let-group [ngForOf]="chartGroups">
@@ -1154,7 +1150,7 @@
         <span [class.arrow-down]="dataVisible" [class.arrow-right]="!dataVisible"> </span>
         <strong>Data</strong>
       </h3>
-      <div [hidden]="!dataVisible" style="margin-left: 10px;">
+      <div [hidden]="!dataVisible" style="margin-left: 10px">
         <pre *ngIf="chart.inputFormat === 'singleSeries'">{{ single | json }}</pre>
         <pre *ngIf="chart.inputFormat === 'multiSeries' && !linearScale">{{ multi | json }}</pre>
         <pre *ngIf="chart.inputFormat === 'multiSeriesNegative' && !linearScale">{{ fiscalYearReport | json }}</pre>
@@ -1184,7 +1180,7 @@
           <span [class.arrow-down]="dimVisible" [class.arrow-right]="!dimVisible"> </span>
           <strong>Dimensions</strong>
         </h3>
-        <div [hidden]="!dimVisible" style="margin-left: 10px;">
+        <div [hidden]="!dimVisible" style="margin-left: 10px">
           <label>
             <input type="checkbox" [checked]="fitContainer" (change)="toggleFitContainer($event.target.checked)" />
             Fit Container
@@ -1205,7 +1201,7 @@
       </h3>
       <select
         [hidden]="!colorVisible"
-        style="margin-left: 10px;"
+        style="margin-left: 10px"
         [ngModel]="selectedColorScheme"
         (ngModelChange)="setColorScheme($event)"
       >
@@ -1215,7 +1211,7 @@
       <select
         *ngIf="chart.options.includes('schemeType')"
         [hidden]="!colorVisible"
-        style="margin-left: 10px;"
+        style="margin-left: 10px"
         [ngModel]="schemeType"
         (ngModelChange)="schemeType = $event"
       >
@@ -1223,7 +1219,7 @@
         <option value="linear">Linear</option>
       </select>
 
-      <div [hidden]="!colorVisible || !range" style="margin-left: 10px;">
+      <div [hidden]="!colorVisible || !range" style="margin-left: 10px">
         <div>
           <label>Range fill color opacity (0.0 - 1.0):</label><br />
           <input type="number" [(ngModel)]="rangeFillOpacity" /><br />
@@ -1234,7 +1230,7 @@
         <span [class.arrow-down]="optsVisible" [class.arrow-right]="!optsVisible"> </span>
         <strong>Options</strong>
       </h3>
-      <div [hidden]="!optsVisible" style="margin-left: 10px;">
+      <div [hidden]="!optsVisible" style="margin-left: 10px">
         <div *ngIf="chart.options.includes('animations')">
           <label>
             <input type="checkbox" [checked]="animations" (change)="animations = $event.target.checked" />
@@ -1339,9 +1335,9 @@
         </div>
         <div *ngIf="chart.options.includes('legendPosition')">
           <label>Legend Position:</label><br />
-          <select style="margin-left: 10px;" [(ngModel)]="legendPosition">
+          <select style="margin-left: 10px" [(ngModel)]="legendPosition">
             <option value="right">Right</option>
-            <option value="below">Below</option> </select
+            <option value="below">Below</option></select
           ><br />
         </div>
         <div *ngIf="chart.options.includes('tooltipDisabled')">
