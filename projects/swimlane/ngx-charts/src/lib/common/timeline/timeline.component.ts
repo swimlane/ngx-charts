@@ -148,9 +148,9 @@ export class Timeline implements OnChanges {
         [0, 0],
         [width, height]
       ])
-      .on('brush end', ({ d3selection }) => {
-        const selection = d3selection || this.xScale.range();
-        const newDomain = selection.map(this.xScale.invert);
+      .on('brush end', ({ selection }) => {
+        const newSelection = selection || this.xScale.range();
+        const newDomain = newSelection.map(this.xScale.invert);
 
         this.onDomainChange.emit(newDomain);
         this.cd.markForCheck();
