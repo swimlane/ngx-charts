@@ -10,8 +10,12 @@ import {
 } from '@angular/core';
 import { max } from 'd3-array';
 import { arc, pie } from 'd3-shape';
+import { ViewDimensions } from '../common/types';
+import { ColorHelper } from '../common/color.helper';
 
 import { formatLabel, escapeLabel } from '../common/label.helper';
+import { DataItem } from '../models/chart-data.model';
+import { PieData } from './pie-label.component';
 
 @Component({
   selector: 'g[ngx-charts-pie-series]',
@@ -62,13 +66,13 @@ import { formatLabel, escapeLabel } from '../common/label.helper';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PieSeriesComponent implements OnChanges {
-  @Input() colors;
-  @Input() series: any = [];
-  @Input() dims;
-  @Input() innerRadius = 60;
-  @Input() outerRadius = 80;
-  @Input() explodeSlices;
-  @Input() showLabels;
+  @Input() colors: ColorHelper;
+  @Input() series: DataItem[] = [];
+  @Input() dims: ViewDimensions;
+  @Input() innerRadius: number = 60;
+  @Input() outerRadius: number = 80;
+  @Input() explodeSlices: boolean;
+  @Input() showLabels: boolean;
   @Input() gradient: boolean;
   @Input() activeEntries: any[];
   @Input() labelFormatting: any;
@@ -85,7 +89,7 @@ export class PieSeriesComponent implements OnChanges {
   @Output() dblclick = new EventEmitter();
 
   max: number;
-  data: any;
+  data: PieData[];
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();

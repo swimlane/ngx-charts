@@ -13,6 +13,17 @@ import { lineRadial } from 'd3-shape';
 import { id } from '../utils/id';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
 import { escapeLabel } from '../common/label.helper';
+import { ScaleType } from '../common/types';
+import { Series, DataItem } from '../models/chart-data.model';
+
+interface PolarChartCircle {
+  color: string;
+  cx: number;
+  cy: number;
+  data: Series;
+  label: string;
+  value: number;
+}
 
 @Component({
   selector: 'g[ngx-charts-polar-series]',
@@ -86,7 +97,7 @@ export class PolarSeriesComponent implements OnChanges {
   @Output() deactivate = new EventEmitter();
 
   path: string;
-  circles: any[];
+  circles: PolarChartCircle[];
   circleRadius: number = 3;
 
   outerPath: string;
@@ -113,7 +124,7 @@ export class PolarSeriesComponent implements OnChanges {
     const data = this.sortData(this.data.series);
 
     const seriesName = this.data.name;
-    const linearScaleType = this.colors.scaleType === 'linear';
+    const linearScaleType = this.colors.scaleType === ScaleType.Linear;
     const min = this.yScale.domain()[0];
     this.seriesColor = this.colors.getColor(linearScaleType ? min : seriesName);
 
@@ -147,17 +158,17 @@ export class PolarSeriesComponent implements OnChanges {
     this.tooltipText = this.tooltipText || (c => this.defaultTooltipText(c));
   }
 
-  getAngle(d) {
+  getAngle(d: DataItem) {
     const label = d.name;
-    if (this.scaleType === 'time') {
+    if (this.scaleType === ScaleType.Time) {
       return this.xScale(label);
-    } else if (this.scaleType === 'linear') {
+    } else if (this.scaleType === ScaleType.Linear) {
       return this.xScale(Number(label));
     }
     return this.xScale(label);
   }
 
-  getRadius(d) {
+  getRadius(d: DataItem) {
     return this.yScale(d.value);
   }
 
@@ -168,16 +179,16 @@ export class PolarSeriesComponent implements OnChanges {
       .curve(this.curve);
   }
 
-  sortData(data) {
-    if (this.scaleType === 'linear') {
+  sortData(data: DataItem) {
+    if (this.scaleType === ScaleType.Linear) {
       return sortLinear(data, 'name');
-    } else if (this.scaleType === 'time') {
+    } else if (this.scaleType === ScaleType.Time) {
       return sortByTime(data, 'name');
     }
     return sortByDomain(data, 'name', 'asc', this.xScale.domain());
   }
 
-  isActive(entry): boolean {
+  isActive(entry: DataItem): boolean {
     if (!this.activeEntries) return false;
     const item = this.activeEntries.find(d => {
       return entry.name === d.name;
@@ -185,7 +196,7 @@ export class PolarSeriesComponent implements OnChanges {
     return item !== undefined;
   }
 
-  isInactive(entry): boolean {
+  isInactive(entry: DataItem): boolean {
     if (!this.activeEntries || this.activeEntries.length === 0) return false;
     const item = this.activeEntries.find(d => {
       return entry.name === d.name;
@@ -193,7 +204,7 @@ export class PolarSeriesComponent implements OnChanges {
     return item === undefined;
   }
 
-  defaultTooltipText({ label, value }): string {
+  defaultTooltipText({ label, value }: { label: string; value: number }): string {
     return `
       <span class="tooltip-label">${escapeLabel(this.data.name)} • ${escapeLabel(label)}</span>
       <span class="tooltip-val">${value.toLocaleString()}</span>
@@ -201,7 +212,7 @@ export class PolarSeriesComponent implements OnChanges {
   }
 
   updateGradients() {
-    this.hasGradient = this.gradient || this.colors.scaleType === 'linear';
+    this.hasGradient = this.gradient || this.colors.scaleType === ScaleType.Linear;
 
     if (!this.hasGradient) {
       return;
@@ -210,7 +221,7 @@ export class PolarSeriesComponent implements OnChanges {
     this.gradientId = 'grad' + id().toString();
     this.gradientUrl = `url(#${this.gradientId})`;
 
-    if (this.colors.scaleType === 'linear') {
+    if (this.colors.scaleType === ScaleType.Linear) {
       const values = this.data.series.map(d => d.value);
       const max = Math.max(...values);
       const min = Math.min(...values);

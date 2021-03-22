@@ -10,6 +10,13 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { formatLabel } from '../label.helper';
+import { ColorHelper } from '../color.helper';
+
+export interface LegendEntry {
+  color: string;
+  formattedLable: string;
+  label: string;
+}
 
 @Component({
   selector: 'ngx-charts-legend',
@@ -41,19 +48,19 @@ import { formatLabel } from '../label.helper';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LegendComponent implements OnChanges {
-  @Input() data;
-  @Input() title;
-  @Input() colors;
-  @Input() height;
-  @Input() width;
+  @Input() data: string[];
+  @Input() title: string;
+  @Input() colors: ColorHelper;
+  @Input() height: number;
+  @Input() width: number;
   @Input() activeEntries;
   @Input() horizontal = false;
 
-  @Output() labelClick: EventEmitter<any> = new EventEmitter();
-  @Output() labelActivate: EventEmitter<any> = new EventEmitter();
-  @Output() labelDeactivate: EventEmitter<any> = new EventEmitter();
+  @Output() labelClick: EventEmitter<string> = new EventEmitter();
+  @Output() labelActivate: EventEmitter<{ name: string }> = new EventEmitter();
+  @Output() labelDeactivate: EventEmitter<{ name: string }> = new EventEmitter();
 
-  legendEntries: any[] = [];
+  legendEntries: LegendEntry[] = [];
 
   constructor(private cd: ChangeDetectorRef) {}
 
@@ -66,9 +73,8 @@ export class LegendComponent implements OnChanges {
     this.legendEntries = this.getLegendEntries();
   }
 
-  getLegendEntries(): any[] {
+  getLegendEntries(): LegendEntry[] {
     const items = [];
-
     for (const label of this.data) {
       const formattedLabel = formatLabel(label);
 
@@ -88,7 +94,7 @@ export class LegendComponent implements OnChanges {
     return items;
   }
 
-  isActive(entry): boolean {
+  isActive(entry: LegendEntry): boolean {
     if (!this.activeEntries) return false;
     const item = this.activeEntries.find(d => {
       return entry.label === d.name;
@@ -96,15 +102,15 @@ export class LegendComponent implements OnChanges {
     return item !== undefined;
   }
 
-  activate(item) {
+  activate(item: { name: string }) {
     this.labelActivate.emit(item);
   }
 
-  deactivate(item) {
+  deactivate(item: { name: string }) {
     this.labelDeactivate.emit(item);
   }
 
-  trackBy(index, item): string {
+  trackBy(index: number, item: LegendEntry): string {
     return item.label;
   }
 }

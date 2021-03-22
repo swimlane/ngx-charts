@@ -1,4 +1,5 @@
 import { Component, Input, ElementRef, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
+import { Orientation } from '../types/orientation.enum';
 
 @Component({
   selector: 'g[ngx-charts-axis-label]',
@@ -16,17 +17,17 @@ import { Component, Input, ElementRef, OnChanges, SimpleChanges, ChangeDetection
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AxisLabelComponent implements OnChanges {
-  @Input() orient;
-  @Input() label;
-  @Input() offset;
-  @Input() width;
-  @Input() height;
+  @Input() orient: Orientation;
+  @Input() label: string;
+  @Input() offset: number;
+  @Input() width: number;
+  @Input() height: number;
 
-  x: any;
-  y: any;
-  transform: any;
-  strokeWidth: any;
-  textAnchor: any;
+  x: number;
+  y: number;
+  transform: string;
+  strokeWidth: string;
+  textAnchor: string;
   element: ElementRef;
   textHeight = 25;
   margin = 5;
@@ -45,20 +46,20 @@ export class AxisLabelComponent implements OnChanges {
     this.transform = '';
 
     switch (this.orient) {
-      case 'top':
+      case Orientation.Top:
         this.y = this.offset;
         this.x = this.width / 2;
         break;
-      case 'bottom':
+      case Orientation.Bottom:
         this.y = this.offset;
         this.x = this.width / 2;
         break;
-      case 'left':
+      case Orientation.Left:
         this.y = -(this.offset + this.textHeight + this.margin);
         this.x = -this.height / 2;
         this.transform = 'rotate(270)';
         break;
-      case 'right':
+      case Orientation.Right:
         this.y = this.offset + this.margin;
         this.x = -this.height / 2;
         this.transform = 'rotate(270)';

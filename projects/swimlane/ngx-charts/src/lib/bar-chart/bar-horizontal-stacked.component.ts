@@ -12,9 +12,11 @@ import { trigger, style, animate, transition } from '@angular/animations';
 
 import { scaleBand, scaleLinear } from 'd3-scale';
 
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
+import { Series } from '../models/chart-data.model';
 import { BaseChartComponent } from '../common/base-chart.component';
+import { ViewDimensions, LegendPosition, ScaleType, LegendOptions } from '../common/types';
 
 @Component({
   selector: 'ngx-charts-bar-horizontal-stacked',
@@ -106,20 +108,20 @@ import { BaseChartComponent } from '../common/base-chart.component';
   ]
 })
 export class BarHorizontalStackedComponent extends BaseChartComponent {
-  @Input() legend = false;
+  @Input() legend: boolean = false;
   @Input() legendTitle: string = 'Legend';
-  @Input() legendPosition: string = 'right';
+  @Input() legendPosition: LegendPosition = LegendPosition.Right;
   @Input() xAxis;
   @Input() yAxis;
-  @Input() showXAxisLabel;
-  @Input() showYAxisLabel;
-  @Input() xAxisLabel;
-  @Input() yAxisLabel;
+  @Input() showXAxisLabel: boolean;
+  @Input() showYAxisLabel: boolean;
+  @Input() xAxisLabel: string;
+  @Input() yAxisLabel: string;
   @Input() tooltipDisabled: boolean = false;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
-  @Input() schemeType: string;
+  @Input() schemeType: ScaleType;
   @Input() trimXAxisTicks: boolean = true;
   @Input() trimYAxisTicks: boolean = true;
   @Input() rotateXAxisTicks: boolean = true;
@@ -129,7 +131,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   @Input() yAxisTickFormatting: any;
   @Input() xAxisTicks: any[];
   @Input() yAxisTicks: any[];
-  @Input() barPadding = 8;
+  @Input() barPadding: number = 8;
   @Input() roundDomains: boolean = false;
   @Input() xScaleMax: number;
   @Input() showDataLabel: boolean = false;
@@ -142,9 +144,9 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
-  groupDomain: any[];
-  innerDomain: any[];
-  valueDomain: any[];
+  groupDomain: string[];
+  innerDomain: string[];
+  valueDomain: [number, number];
   xScale: any;
   yScale: any;
   transform: string;
@@ -152,7 +154,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   margin = [10, 20, 10, 20];
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
-  legendOptions: any;
+  legendOptions: LegendOptions;
   dataLabelMaxWidth: any = { negative: 0, positive: 0 };
 
   update(): void {
@@ -194,7 +196,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
     this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
   }
 
-  getGroupDomain(): any[] {
+  getGroupDomain(): string[] {
     const domain = [];
 
     for (const group of this.results) {
@@ -206,7 +208,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
     return domain;
   }
 
-  getInnerDomain(): any[] {
+  getInnerDomain(): string[] {
     const domain = [];
 
     for (const group of this.results) {
@@ -220,7 +222,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
     return domain;
   }
 
-  getValueDomain(): any[] {
+  getValueDomain(): [number, number] {
     const domain = [];
     let smallest = 0;
     let biggest = 0;
@@ -258,11 +260,11 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
     return this.roundDomains ? scale.nice() : scale;
   }
 
-  groupTransform(group): string {
+  groupTransform(group: Series): string {
     return `translate(0, ${this.yScale(group.name)})`;
   }
 
-  onClick(data, group?): void {
+  onClick(data, group?: Series): void {
     if (group) {
       data.series = group.name;
     }
@@ -270,13 +272,13 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
     this.select.emit(data);
   }
 
-  trackBy(index, item): string {
+  trackBy(index: string, item: Series): any {
     return item.name;
   }
 
   setColors(): void {
     let domain;
-    if (this.schemeType === 'ordinal') {
+    if (this.schemeType === ScaleType.Ordinal) {
       domain = this.innerDomain;
     } else {
       domain = this.valueDomain;
@@ -285,15 +287,15 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
     this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
   }
 
-  getLegendOptions() {
+  getLegendOptions(): LegendOptions {
     const opts = {
-      scaleType: this.schemeType,
+      scaleType: this.schemeType as any,
       colors: undefined,
       domain: [],
       title: undefined,
       position: this.legendPosition
     };
-    if (opts.scaleType === 'ordinal') {
+    if (opts.scaleType === ScaleType.Ordinal) {
       opts.domain = this.innerDomain;
       opts.colors = this.colors;
       opts.title = this.legendTitle;
@@ -305,17 +307,17 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
     return opts;
   }
 
-  updateYAxisWidth({ width }): void {
+  updateYAxisWidth({ width }: { width: number }): void {
     this.yAxisWidth = width;
     this.update();
   }
 
-  updateXAxisHeight({ height }): void {
+  updateXAxisHeight({ height }: { height: number }): void {
     this.xAxisHeight = height;
     this.update();
   }
 
-  onDataLabelMaxWidthChanged(event, groupIndex) {
+  onDataLabelMaxWidthChanged(event, groupIndex: number) {
     if (event.size.negative) {
       this.dataLabelMaxWidth.negative = Math.max(this.dataLabelMaxWidth.negative, event.size.width);
     } else {
@@ -326,7 +328,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
     }
   }
 
-  onActivate(event, group, fromLegend = false) {
+  onActivate(event, group: Series, fromLegend: boolean = false) {
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
@@ -347,7 +349,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(event, group, fromLegend = false) {
+  onDeactivate(event, group: Series, fromLegend: boolean = false) {
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;

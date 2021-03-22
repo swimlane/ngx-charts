@@ -10,6 +10,8 @@ import {
 } from '@angular/core';
 import { select } from 'd3-selection';
 import { id } from '../utils/id';
+import { Gradient } from './types';
+import { AreaChartSeries } from '../models/chart-data.model';
 
 @Component({
   selector: 'g[ngx-charts-area]',
@@ -22,16 +24,15 @@ import { id } from '../utils/id';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AreaComponent implements OnChanges {
-  @Input() data;
-  @Input() path;
-  @Input() startingPath;
-  @Input() fill;
-  @Input() opacity = 1;
-  @Input() startOpacity = 0.5;
-  @Input() endOpacity = 1;
-  @Input() activeLabel;
+  @Input() data: AreaChartSeries;
+  @Input() path: string;
+  @Input() startingPath: string;
+  @Input() fill: string;
+  @Input() opacity: number = 1;
+  @Input() startOpacity: number = 0.5;
+  @Input() endOpacity: number = 1;
   @Input() gradient: boolean = false;
-  @Input() stops: any[];
+  @Input() stops: Gradient[];
   @Input() animations: boolean = true;
 
   @Output() select = new EventEmitter();
@@ -41,14 +42,14 @@ export class AreaComponent implements OnChanges {
   gradientFill: string;
   areaPath: string;
   initialized: boolean = false;
-  gradientStops: any[];
+  gradientStops: Gradient[];
   hasGradient: boolean = false;
 
   constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if (!this.initialized) {
       this.loadAnimation();
       this.initialized = true;
@@ -86,7 +87,7 @@ export class AreaComponent implements OnChanges {
     }
   }
 
-  getGradient() {
+  getGradient(): Gradient[] {
     if (this.stops) {
       return this.stops;
     }

@@ -10,9 +10,14 @@ import {
 import { scaleLinear } from 'd3-scale';
 
 import { BaseChartComponent } from '../common/base-chart.component';
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
+import { ScaleType, ViewDimensions } from '../common/types';
 
+enum ElementType {
+  Value = 'value',
+  Units = 'units'
+}
 @Component({
   selector: 'ngx-charts-linear-gauge',
   template: `
@@ -100,19 +105,19 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
   @Input() max: number = 100;
   @Input() value: number = 0;
   @Input() units: string;
-  @Input() previousValue;
+  @Input() previousValue: number;
   @Input() valueFormatting: any;
 
   @ViewChild('valueTextEl') valueTextEl: ElementRef;
   @ViewChild('unitsTextEl') unitsTextEl: ElementRef;
 
   dims: ViewDimensions;
-  valueDomain: any;
+  valueDomain: [number, number];
   valueScale: any;
 
   colors: ColorHelper;
   transform: string;
-  margin: any[] = [10, 20, 10, 20];
+  margin: number[] = [10, 20, 10, 20];
   transformLine: string;
 
   valueResizeScale: number = 1;
@@ -127,8 +132,8 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
   ngAfterViewInit(): void {
     super.ngAfterViewInit();
     setTimeout(() => {
-      this.scaleText('value');
-      this.scaleText('units');
+      this.scaleText(ElementType.Value);
+      this.scaleText(ElementType.Units);
     });
   }
 
@@ -162,11 +167,11 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
     this.transformLine = `translate(${this.margin[3] + this.valueScale(this.previousValue)}, ${yOffset})`;
     this.valueTranslate = `translate(0, -15)`;
     this.unitsTranslate = `translate(0, 15)`;
-    setTimeout(() => this.scaleText('value'), 50);
-    setTimeout(() => this.scaleText('units'), 50);
+    setTimeout(() => this.scaleText(ElementType.Value), 50);
+    setTimeout(() => this.scaleText(ElementType.Units), 50);
   }
 
-  getValueDomain(): any[] {
+  getValueDomain(): [number, number] {
     return [this.min, this.max];
   }
 
@@ -181,10 +186,10 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
     return this.value.toLocaleString();
   }
 
-  scaleText(element, repeat: boolean = true): void {
+  scaleText(element: ElementType, repeat: boolean = true): void {
     let el;
     let resizeScale;
-    if (element === 'value') {
+    if (element === ElementType.Value) {
       el = this.valueTextEl;
       resizeScale = this.valueResizeScale;
     } else {
@@ -202,7 +207,7 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
     resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
 
     if (resizeScale !== oldScale) {
-      if (element === 'value') {
+      if (element === ElementType.Value) {
         this.valueResizeScale = resizeScale;
         this.valueTextTransform = `scale(${resizeScale}, ${resizeScale})`;
       } else {
@@ -226,6 +231,6 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
   }
 
   setColors(): void {
-    this.colors = new ColorHelper(this.scheme, 'ordinal', [this.value], this.customColors);
+    this.colors = new ColorHelper(this.scheme, ScaleType.Ordinal, [this.value], this.customColors);
   }
 }

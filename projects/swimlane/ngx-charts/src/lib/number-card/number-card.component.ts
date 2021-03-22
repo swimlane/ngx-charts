@@ -1,8 +1,10 @@
 import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@angular/core';
 import { BaseChartComponent } from '../common/base-chart.component';
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { gridLayout, gridSize } from '../common/grid-layout.helper';
+import { ScaleType, ViewDimensions } from '../common/types';
+import { CardModel } from './card-series.component';
 
 @Component({
   selector: 'ngx-charts-number-card',
@@ -35,23 +37,20 @@ export class NumberCardComponent extends BaseChartComponent {
   @Input() cardColor: string;
   @Input() bandColor: string;
   @Input() emptyColor: string = 'rgba(0, 0, 0, 0)';
-  @Input() innerPadding = 15;
+  @Input() innerPadding: number = 15;
   @Input() textColor: string;
   @Input() valueFormatting: any;
   @Input() labelFormatting: any;
   @Input() designatedTotal: number;
 
   dims: ViewDimensions;
-  data: any[];
-  slots: any[];
+  data: CardModel[];
   colors: ColorHelper;
   transform: string;
   domain: any[];
-  margin = [10, 10, 10, 10];
+  margin: number[] = [10, 10, 10, 10];
 
-  backgroundCards: any[];
-
-  get clickable() {
+  get clickable(): boolean {
     return !!this.select.observers.length;
   }
 
@@ -80,10 +79,10 @@ export class NumberCardComponent extends BaseChartComponent {
       data.push({ value: null });
     }
 
-    this.data = gridLayout(this.dims, data, 150, this.designatedTotal);
+    this.data = gridLayout(this.dims, data, 150, this.designatedTotal) as any;
   }
 
-  getDomain(): any[] {
+  getDomain(): string[] {
     return this.results.map(d => d.label);
   }
 
@@ -92,6 +91,6 @@ export class NumberCardComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    this.colors = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+    this.colors = new ColorHelper(this.scheme, ScaleType.Ordinal, this.domain, this.customColors);
   }
 }

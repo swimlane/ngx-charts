@@ -11,9 +11,19 @@ import {
 import { scaleBand } from 'd3-scale';
 
 import { BaseChartComponent } from '../common/base-chart.component';
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { getScaleType } from '../common/domain.helper';
+import { LegendOptions, LegendPosition, ScaleType, ViewDimensions } from '../common/types';
+
+interface RectItem {
+  fill: string;
+  height: number;
+  rx: number;
+  width: number;
+  x: number;
+  y: number;
+}
 
 @Component({
   selector: 'ngx-charts-heat-map',
@@ -85,15 +95,15 @@ import { getScaleType } from '../common/domain.helper';
   encapsulation: ViewEncapsulation.None
 })
 export class HeatMapComponent extends BaseChartComponent {
-  @Input() legend;
+  @Input() legend: boolean;
   @Input() legendTitle: string = 'Legend';
-  @Input() legendPosition: string = 'right';
-  @Input() xAxis;
-  @Input() yAxis;
-  @Input() showXAxisLabel;
-  @Input() showYAxisLabel;
-  @Input() xAxisLabel;
-  @Input() yAxisLabel;
+  @Input() legendPosition: LegendPosition = LegendPosition.Right;
+  @Input() xAxis: boolean;
+  @Input() yAxis: boolean;
+  @Input() showXAxisLabel: boolean;
+  @Input() showYAxisLabel: boolean;
+  @Input() xAxisLabel: string;
+  @Input() yAxisLabel: string;
   @Input() gradient: boolean;
   @Input() innerPadding: number | number[] = 8;
   @Input() trimXAxisTicks: boolean = true;
@@ -107,8 +117,8 @@ export class HeatMapComponent extends BaseChartComponent {
   @Input() yAxisTicks: any[];
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipText: any;
-  @Input() min: any;
-  @Input() max: any;
+  @Input() min: number;
+  @Input() max: number;
   @Input() activeEntries: any[] = [];
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
@@ -117,21 +127,20 @@ export class HeatMapComponent extends BaseChartComponent {
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
-  xDomain: any[];
-  yDomain: any[];
+  xDomain: string[];
+  yDomain: string[];
   valueDomain: any[];
   xScale: any;
   yScale: any;
-  color: any;
   colors: ColorHelper;
   colorScale: any;
   transform: string;
-  rects: any[];
-  margin = [10, 20, 10, 20];
+  rects: RectItem[];
+  margin: number[] = [10, 20, 10, 20];
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
-  legendOptions: any;
-  scaleType: string = 'linear';
+  legendOptions: LegendOptions;
+  scaleType: ScaleType = ScaleType.Linear;
 
   update(): void {
     super.update();
@@ -155,11 +164,11 @@ export class HeatMapComponent extends BaseChartComponent {
       showXLabel: this.showXAxisLabel,
       showYLabel: this.showYAxisLabel,
       showLegend: this.legend,
-      legendType: this.scaleType,
+      legendType: this.scaleType as any,
       legendPosition: this.legendPosition
     });
 
-    if (this.scaleType === 'linear') {
+    if (this.scaleType === ScaleType.Linear) {
       let min = this.min;
       let max = this.max;
       if (!this.min) {
@@ -181,7 +190,7 @@ export class HeatMapComponent extends BaseChartComponent {
     this.rects = this.getRects();
   }
 
-  getXDomain(): any {
+  getXDomain(): string[] {
     const domain = [];
     for (const group of this.results) {
       if (!domain.includes(group.name)) {
@@ -192,7 +201,7 @@ export class HeatMapComponent extends BaseChartComponent {
     return domain;
   }
 
-  getYDomain(): any[] {
+  getYDomain(): string[] {
     const domain = [];
 
     for (const group of this.results) {
@@ -230,7 +239,7 @@ export class HeatMapComponent extends BaseChartComponent {
    *
    * @memberOf HeatMapComponent
    */
-  getDimension(value: string | number | Array<string | number>, index = 0, N: number, L: number): number {
+  getDimension(value: string | number | Array<string | number>, index: number = 0, N: number, L: number): number {
     if (typeof value === 'string') {
       value = value
         .replace('[', '')
@@ -262,7 +271,7 @@ export class HeatMapComponent extends BaseChartComponent {
     return scaleBand().rangeRound([this.dims.height, 0]).domain(this.yDomain).paddingInner(f);
   }
 
-  getRects(): any[] {
+  getRects(): RectItem[] {
     const rects = [];
 
     this.xDomain.map(xVal => {
@@ -289,27 +298,27 @@ export class HeatMapComponent extends BaseChartComponent {
     this.colors = new ColorHelper(this.scheme, this.scaleType, this.valueDomain);
   }
 
-  getLegendOptions() {
+  getLegendOptions(): LegendOptions {
     return {
       scaleType: this.scaleType,
       domain: this.valueDomain,
-      colors: this.scaleType === 'ordinal' ? this.colors : this.colors.scale,
-      title: this.scaleType === 'ordinal' ? this.legendTitle : undefined,
+      colors: this.scaleType === ScaleType.Ordinal ? this.colors : this.colors.scale,
+      title: this.scaleType === ScaleType.Ordinal ? this.legendTitle : undefined,
       position: this.legendPosition
     };
   }
 
-  updateYAxisWidth({ width }): void {
+  updateYAxisWidth({ width }: { width: number }): void {
     this.yAxisWidth = width;
     this.update();
   }
 
-  updateXAxisHeight({ height }): void {
+  updateXAxisHeight({ height }: { height: number }): void {
     this.xAxisHeight = height;
     this.update();
   }
 
-  onActivate(event, group, fromLegend = false) {
+  onActivate(event, group, fromLegend: boolean = false) {
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
@@ -330,7 +339,7 @@ export class HeatMapComponent extends BaseChartComponent {
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(event, group, fromLegend = false) {
+  onDeactivate(event, group, fromLegend: boolean = false) {
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;

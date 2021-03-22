@@ -1,4 +1,5 @@
 import { PositionHelper } from './position';
+import { PlacementTypes } from './placement.type';
 
 describe('positioning', () => {
   describe('flip', () => {
@@ -19,7 +20,12 @@ describe('positioning', () => {
           height: 50
         };
 
-        const shouldFlip = PositionHelper.shouldFlip(elementDimensions, popoverDimensions, 'top', 0);
+        const shouldFlip = PositionHelper.shouldFlip(
+          elementDimensions as any,
+          popoverDimensions as any,
+          PlacementTypes.Top,
+          0
+        );
         expect(shouldFlip).toEqual(false);
       });
 
@@ -39,7 +45,12 @@ describe('positioning', () => {
           height: 50
         };
 
-        const shouldFlip = PositionHelper.shouldFlip(elementDimensions, popoverDimensions, 'top', 0);
+        const shouldFlip = PositionHelper.shouldFlip(
+          elementDimensions as any,
+          popoverDimensions as any,
+          PlacementTypes.Top,
+          0
+        );
         expect(shouldFlip).toEqual(true);
       });
     });
@@ -61,7 +72,12 @@ describe('positioning', () => {
           height: 50
         };
 
-        const shouldFlip = PositionHelper.shouldFlip(elementDimensions, popoverDimensions, 'bottom', 0);
+        const shouldFlip = PositionHelper.shouldFlip(
+          elementDimensions as any,
+          popoverDimensions as any,
+          PlacementTypes.Bottom,
+          0
+        );
         expect(shouldFlip).toEqual(false);
       });
 
@@ -81,7 +97,12 @@ describe('positioning', () => {
           height: 50
         };
 
-        const shouldFlip = PositionHelper.shouldFlip(elementDimensions, popoverDimensions, 'bottom', 0);
+        const shouldFlip = PositionHelper.shouldFlip(
+          elementDimensions as any,
+          popoverDimensions as any,
+          PlacementTypes.Bottom,
+          0
+        );
         expect(shouldFlip).toEqual(true);
       });
     });
@@ -103,7 +124,12 @@ describe('positioning', () => {
           height: 50
         };
 
-        const shouldFlip = PositionHelper.shouldFlip(elementDimensions, popoverDimensions, 'left', 0);
+        const shouldFlip = PositionHelper.shouldFlip(
+          elementDimensions as any,
+          popoverDimensions as any,
+          PlacementTypes.Left,
+          0
+        );
         expect(shouldFlip).toEqual(false);
       });
 
@@ -123,7 +149,12 @@ describe('positioning', () => {
           height: 50
         };
 
-        const shouldFlip = PositionHelper.shouldFlip(elementDimensions, popoverDimensions, 'left', 0);
+        const shouldFlip = PositionHelper.shouldFlip(
+          elementDimensions as any,
+          popoverDimensions as any,
+          PlacementTypes.Left,
+          0
+        );
         expect(shouldFlip).toEqual(true);
       });
     });
@@ -145,7 +176,12 @@ describe('positioning', () => {
           height: 50
         };
 
-        const shouldFlip = PositionHelper.shouldFlip(elementDimensions, popoverDimensions, 'right', 0);
+        const shouldFlip = PositionHelper.shouldFlip(
+          elementDimensions as any,
+          popoverDimensions as any,
+          PlacementTypes.Right,
+          0
+        );
         expect(shouldFlip).toEqual(false);
       });
 
@@ -165,7 +201,12 @@ describe('positioning', () => {
           height: 50
         };
 
-        const shouldFlip = PositionHelper.shouldFlip(elementDimensions, popoverDimensions, 'right', 0);
+        const shouldFlip = PositionHelper.shouldFlip(
+          elementDimensions as any,
+          popoverDimensions as any,
+          PlacementTypes.Right,
+          0
+        );
         expect(shouldFlip).toEqual(true);
       });
     });
