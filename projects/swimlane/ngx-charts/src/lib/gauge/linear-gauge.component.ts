@@ -13,6 +13,9 @@ import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { ScaleType, ViewDimensions } from '../common/types';
+import { calculateTextWidth } from '../utils/calculate-width';
+import { VERDANA_FONT_WIDTHS_16_PX } from '../common/constants/font-widths';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 enum ElementType {
   Value = 'value',
@@ -167,8 +170,14 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
     this.transformLine = `translate(${this.margin[3] + this.valueScale(this.previousValue)}, ${yOffset})`;
     this.valueTranslate = `translate(0, -15)`;
     this.unitsTranslate = `translate(0, 15)`;
-    setTimeout(() => this.scaleText(ElementType.Value), 50);
-    setTimeout(() => this.scaleText(ElementType.Units), 50);
+
+    if (isPlatformServer(this.platformId)) {
+      this.scaleTextSSR('value');
+      this.scaleTextSSR('units');
+    } else {
+      setTimeout(() => this.scaleText(ElementType.Value), 50);
+      setTimeout(() => this.scaleText(ElementType.Units), 50);
+    }
   }
 
   getValueDomain(): [number, number] {
@@ -215,12 +224,36 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
         this.unitsTextTransform = `scale(${resizeScale}, ${resizeScale})`;
       }
       this.cd.markForCheck();
-      if (repeat) {
+      if (repeat && isPlatformBrowser(this.platformId)) {
         setTimeout(() => {
           this.scaleText(element, false);
         }, 50);
       }
     }
+  }
+
+  scaleTextSSR(element) {
+    let resizeScale = 1;
+
+    const value = element === 'value' ? this.displayValue : this.units;
+    const width = calculateTextWidth(VERDANA_FONT_WIDTHS_16_PX, value, 10);
+    const height = 25;
+
+    const availableWidth = this.dims.width;
+    const availableHeight = Math.max(this.dims.height / 2 - 15, 0);
+    const resizeScaleWidth = Math.floor((availableWidth / (width / resizeScale)) * 100) / 100;
+    const resizeScaleHeight = Math.floor((availableHeight / (height / resizeScale)) * 100) / 100;
+    resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
+
+    if (element === 'value') {
+      this.valueResizeScale = resizeScale;
+      this.valueTextTransform = `scale(${resizeScale}, ${resizeScale})`;
+    } else {
+      this.unitsResizeScale = resizeScale;
+      this.unitsTextTransform = `scale(${resizeScale}, ${resizeScale})`;
+    }
+
+    this.cd.markForCheck();
   }
 
   onClick(): void {

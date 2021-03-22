@@ -1,4 +1,4 @@
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import {
   ElementRef,
   NgZone,
@@ -44,8 +44,14 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
     protected chartElement: ElementRef,
     protected zone: NgZone,
     protected cd: ChangeDetectorRef,
-    @Inject(PLATFORM_ID) private platformId: any
+    @Inject(PLATFORM_ID) public platformId: any
   ) {}
+
+  ngOnInit() {
+    if (isPlatformServer(this.platformId)) {
+      this.animations = false;
+    }
+  }
 
   ngAfterViewInit(): void {
     this.bindWindowResizeEvent();

@@ -1,5 +1,11 @@
 # Changelog
 
+## 17.0.1
+
+- Bug: Fix pie label component on SSR (#1583)
+- Bug: Adjust scaleText for linear geauge and number cards on SSR (#1581)
+- Bug: Disable animation on ssr and remove unnecesary call on ssr (#1579)
+
 ## 17.0.0
 
 - Breaking: Update to angular 11
