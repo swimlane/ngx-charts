@@ -7,12 +7,12 @@ import { StringOrNumberOrDate } from '../models/chart-data.model';
 
 export class ColorHelper {
   scale: any;
-  scaleType: ScaleType | ScaleType;
+  scaleType: ScaleType;
   colorDomain: string[];
   domain: number[] | string[];
   customColors: any;
 
-  constructor(scheme: any, type: ScaleType | ScaleType, domain: number[] | string[], customColors?) {
+  constructor(scheme: any, type: ScaleType, domain: number[] | string[], customColors?) {
     if (typeof scheme === 'string') {
       scheme = colorSets.find(cs => {
         return cs.name === scheme;
@@ -26,7 +26,7 @@ export class ColorHelper {
     this.scale = this.generateColorScheme(scheme, type, this.domain);
   }
 
-  generateColorScheme(scheme: any, type: ScaleType | ScaleType, domain: number[] | string[]): any {
+  generateColorScheme(scheme: any, type: ScaleType, domain: number[] | string[]): any {
     if (typeof scheme === 'string') {
       scheme = colorSets.find(cs => {
         return cs.name === scheme;
