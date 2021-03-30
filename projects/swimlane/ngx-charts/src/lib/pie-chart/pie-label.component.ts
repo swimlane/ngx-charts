@@ -11,6 +11,18 @@ import {
 import { arc } from 'd3-shape';
 
 import { trimLabel } from '../common/trim-label.helper';
+import { TextAnchor } from '../common/types';
+import { DataItem } from '../models/chart-data.model';
+
+export interface PieData {
+  data: DataItem;
+  endAngle: number;
+  index: number;
+  padAngle: number;
+  pos: [number, number];
+  startAngle: number;
+  value: number;
+}
 
 @Component({
   selector: 'g[ngx-charts-pie-label]',
@@ -38,13 +50,13 @@ import { trimLabel } from '../common/trim-label.helper';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PieLabelComponent implements OnChanges {
-  @Input() data;
-  @Input() radius;
-  @Input() label;
-  @Input() color;
-  @Input() max;
-  @Input() value;
-  @Input() explodeSlices;
+  @Input() data: PieData;
+  @Input() radius: number;
+  @Input() label: string;
+  @Input() color: string;
+  @Input() max: number;
+  @Input() value: number;
+  @Input() explodeSlices: boolean;
   @Input() animations: boolean = true;
   @Input() labelTrim: boolean = true;
   @Input() labelTrimSize: number = 10;
@@ -105,8 +117,8 @@ export class PieLabelComponent implements OnChanges {
     return this.data.pos[1];
   }
 
-  textAnchor(): any {
-    return this.midAngle(this.data) < Math.PI ? 'start' : 'end';
+  textAnchor(): TextAnchor {
+    return this.midAngle(this.data) < Math.PI ? TextAnchor.Start : TextAnchor.End;
   }
 
   midAngle(d): number {

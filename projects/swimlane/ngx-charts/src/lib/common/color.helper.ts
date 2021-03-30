@@ -2,15 +2,17 @@ import { range } from 'd3-array';
 import { scaleBand, scaleLinear, scaleOrdinal, scaleQuantile } from 'd3-scale';
 
 import { colorSets } from '../utils/color-sets';
+import { Gradient, ScaleType } from './types';
+import { StringOrNumberOrDate } from '../models/chart-data.model';
 
 export class ColorHelper {
   scale: any;
-  scaleType: any;
-  colorDomain: any[];
-  domain: any;
+  scaleType: ScaleType;
+  colorDomain: string[];
+  domain: number[] | string[];
   customColors: any;
 
-  constructor(scheme, type, domain, customColors?) {
+  constructor(scheme: any, type: ScaleType, domain: number[] | string[], customColors?) {
     if (typeof scheme === 'string') {
       scheme = colorSets.find(cs => {
         return cs.name === scheme;
@@ -24,18 +26,18 @@ export class ColorHelper {
     this.scale = this.generateColorScheme(scheme, type, this.domain);
   }
 
-  generateColorScheme(scheme, type, domain) {
+  generateColorScheme(scheme: any, type: ScaleType, domain: number[] | string[]): any {
     if (typeof scheme === 'string') {
       scheme = colorSets.find(cs => {
         return cs.name === scheme;
       });
     }
     let colorScale;
-    if (type === 'quantile') {
+    if (type === ScaleType.Quantile) {
       colorScale = scaleQuantile().range(scheme.domain).domain(domain);
-    } else if (type === 'ordinal') {
+    } else if (type === ScaleType.Ordinal) {
       colorScale = scaleOrdinal().range(scheme.domain).domain(domain);
-    } else if (type === 'linear') {
+    } else if (type === ScaleType.Linear) {
       // linear schemes must have at least 2 colors
       const colorDomain = [...scheme.domain];
       if (colorDomain.length === 1) {
@@ -50,11 +52,11 @@ export class ColorHelper {
     return colorScale;
   }
 
-  getColor(value) {
+  getColor(value: StringOrNumberOrDate): string {
     if (value === undefined || value === null) {
       throw new Error('Value can not be null');
     }
-    if (this.scaleType === 'linear') {
+    if (this.scaleType === ScaleType.Linear) {
       const valueScale = scaleLinear().domain(this.domain).range([0, 1]);
 
       return this.scale(valueScale(value));
@@ -79,11 +81,10 @@ export class ColorHelper {
     }
   }
 
-  getLinearGradientStops(value, start) {
+  getLinearGradientStops(value: number | string, start?: number | string): Gradient[] {
     if (start === undefined) {
       start = this.domain[0];
     }
-
     const valueScale = scaleLinear().domain(this.domain).range([0, 1]);
 
     const colorValueScale = scaleBand().domain(this.colorDomain).range([0, 1]);
@@ -97,7 +98,7 @@ export class ColorHelper {
     const endVal = valueScale(value);
     let i = 1;
     let currentVal = startVal;
-    const stops = [];
+    const stops: Gradient[] = [];
 
     stops.push({
       color: startColor,

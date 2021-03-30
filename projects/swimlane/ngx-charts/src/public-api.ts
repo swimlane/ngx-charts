@@ -23,6 +23,9 @@ export * from './lib/bar-chart/bar-vertical-2d.component';
 export * from './lib/bar-chart/bar-vertical-normalized.component';
 export * from './lib/bar-chart/bar-vertical-stacked.component';
 export * from './lib/bar-chart/series-vertical.component';
+export * from './lib/bar-chart/types/bar.model';
+export * from './lib/bar-chart/types/bar-chart-type.enum';
+export * from './lib/bar-chart/types/d0-type.enum';
 
 export * from './lib/bubble-chart/bubble-chart.module';
 export * from './lib/bubble-chart/bubble-chart.component';
@@ -40,9 +43,10 @@ export * from './lib/common/tooltip/tooltip.service';
 export * from './lib/common/tooltip/tooltip.component';
 export * from './lib/common/tooltip/tooltip.directive';
 export * from './lib/common/tooltip/style.type';
-export * from './lib/common/tooltip/alignment.type';
 export * from './lib/common/tooltip/show.type';
 export * from './lib/common/tooltip/position/placement.type';
+
+export * from './lib/common/types';
 
 export * from './lib/common/axes/axes.module';
 export * from './lib/common/axes/axis-label.component';

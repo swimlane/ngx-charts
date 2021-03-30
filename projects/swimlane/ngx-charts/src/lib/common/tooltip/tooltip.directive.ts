@@ -6,12 +6,13 @@ import {
   HostListener,
   ViewContainerRef,
   Renderer2,
-  OnDestroy
+  OnDestroy,
+  TemplateRef,
+  ComponentRef
 } from '@angular/core';
 
 import { PlacementTypes } from './position';
 import { StyleTypes } from './style.type';
-import { AlignmentTypes } from './alignment.type';
 import { ShowTypes } from './show.type';
 
 import { TooltipService } from './tooltip.service';
@@ -24,20 +25,20 @@ export class TooltipDirective implements OnDestroy {
   @Input() tooltipSpacing: number = 10;
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipShowCaret: boolean = true;
-  @Input() tooltipPlacement: PlacementTypes = PlacementTypes.top;
-  @Input() tooltipAlignment: AlignmentTypes = AlignmentTypes.center;
+  @Input() tooltipPlacement: PlacementTypes = PlacementTypes.Top;
+  @Input() tooltipAlignment: PlacementTypes = PlacementTypes.Center;
   @Input() tooltipType: StyleTypes = StyleTypes.popover;
   @Input() tooltipCloseOnClickOutside: boolean = true;
   @Input() tooltipCloseOnMouseLeave: boolean = true;
   @Input() tooltipHideTimeout: number = 300;
   @Input() tooltipShowTimeout: number = 100;
-  @Input() tooltipTemplate: any;
+  @Input() tooltipTemplate: TemplateRef<any>;
   @Input() tooltipShowEvent: ShowTypes = ShowTypes.all;
   @Input() tooltipContext: any;
   @Input() tooltipImmediateExit: boolean = false;
 
-  @Output() show = new EventEmitter();
-  @Output() hide = new EventEmitter();
+  @Output() show: EventEmitter<boolean> = new EventEmitter();
+  @Output() hide: EventEmitter<boolean> = new EventEmitter();
 
   private get listensForFocus(): boolean {
     return this.tooltipShowEvent === ShowTypes.all || this.tooltipShowEvent === ShowTypes.focus;
@@ -47,8 +48,8 @@ export class TooltipDirective implements OnDestroy {
     return this.tooltipShowEvent === ShowTypes.all || this.tooltipShowEvent === ShowTypes.mouseover;
   }
 
-  private component: any;
-  private timeout: any;
+  private component: ComponentRef<any>;
+  private timeout: ReturnType<typeof setTimeout>;
   private mouseLeaveContentEvent: any;
   private mouseEnterContentEvent: any;
   private documentClickEvent: any;
@@ -131,7 +132,7 @@ export class TooltipDirective implements OnDestroy {
     }, time);
   }
 
-  addHideListeners(tooltip): void {
+  addHideListeners(tooltip: HTMLElement): void {
     // on mouse enter, cancel the hide triggered by the leave
     this.mouseEnterContentEvent = this.renderer.listen(tooltip, 'mouseenter', () => {
       clearTimeout(this.timeout);

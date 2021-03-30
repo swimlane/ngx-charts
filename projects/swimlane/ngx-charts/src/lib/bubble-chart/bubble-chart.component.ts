@@ -13,11 +13,13 @@ import { trigger, style, animate, transition } from '@angular/animations';
 import { scaleLinear } from 'd3-scale';
 
 import { BaseChartComponent } from '../common/base-chart.component';
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { getScaleType } from '../common/domain.helper';
 import { getDomain, getScale } from './bubble-chart.utils';
 import { id } from '../utils/id';
+import { LegendOptions, LegendPosition, ScaleType, ViewDimensions } from '../common/types';
+import { BubbleChartSeries } from '../models/chart-data.model';
 
 @Component({
   selector: 'ngx-charts-bubble-chart',
@@ -128,7 +130,7 @@ export class BubbleChartComponent extends BaseChartComponent {
   @Input() showGridLines: boolean = true;
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
-  @Input() legendPosition: string = 'right';
+  @Input() legendPosition: LegendPosition = LegendPosition.Right;
   @Input() xAxis: boolean = true;
   @Input() yAxis: boolean = true;
   @Input() showXAxisLabel: boolean;
@@ -145,15 +147,15 @@ export class BubbleChartComponent extends BaseChartComponent {
   @Input() xAxisTicks: any[];
   @Input() yAxisTicks: any[];
   @Input() roundDomains: boolean = false;
-  @Input() maxRadius = 10;
-  @Input() minRadius = 3;
+  @Input() maxRadius: number = 10;
+  @Input() minRadius: number = 3;
   @Input() autoScale: boolean;
-  @Input() schemeType = 'ordinal';
+  @Input() schemeType: ScaleType = ScaleType.Ordinal;
   @Input() tooltipDisabled: boolean = false;
-  @Input() xScaleMin: any;
-  @Input() xScaleMax: any;
-  @Input() yScaleMin: any;
-  @Input() yScaleMax: any;
+  @Input() xScaleMin: number;
+  @Input() xScaleMax: number;
+  @Input() yScaleMin: number;
+  @Input() yScaleMax: number;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -162,24 +164,24 @@ export class BubbleChartComponent extends BaseChartComponent {
 
   dims: ViewDimensions;
   colors: ColorHelper;
-  scaleType = 'linear';
-  margin = [10, 20, 10, 20];
-  bubblePadding = [0, 0, 0, 0];
-  data: any;
+  scaleType: ScaleType = ScaleType.Linear;
+  margin: number[] = [10, 20, 10, 20];
+  bubblePadding: number[] = [0, 0, 0, 0];
+  data: BubbleChartSeries[];
 
-  legendOptions: any;
+  legendOptions: LegendOptions;
   transform: string;
 
   clipPath: string;
   clipPathId: string;
 
-  seriesDomain: any[];
-  xDomain: any[];
-  yDomain: any[];
+  seriesDomain: number[];
+  xDomain: number[];
+  yDomain: number[];
   rDomain: number[];
 
-  xScaleType: string;
-  yScaleType: string;
+  xScaleType: ScaleType;
+  yScaleType: ScaleType;
 
   yScale: any;
   xScale: any;
@@ -215,7 +217,7 @@ export class BubbleChartComponent extends BaseChartComponent {
 
     this.transform = `translate(${this.dims.xOffset},${this.margin[0]})`;
 
-    const colorDomain = this.schemeType === 'ordinal' ? this.seriesDomain : this.rDomain;
+    const colorDomain = this.schemeType === ScaleType.Ordinal ? this.seriesDomain : this.rDomain;
     this.colors = new ColorHelper(this.scheme, this.schemeType, colorDomain, this.customColors);
 
     this.data = this.results;
@@ -250,7 +252,7 @@ export class BubbleChartComponent extends BaseChartComponent {
     this.select.emit(data);
   }
 
-  getBubblePadding() {
+  getBubblePadding(): number[] {
     let yMin = 0;
     let xMin = 0;
     let yMax = this.dims.height;
@@ -259,8 +261,8 @@ export class BubbleChartComponent extends BaseChartComponent {
     for (const s of this.data) {
       for (const d of s.series) {
         const r = this.rScale(d.r);
-        const cx = this.xScaleType === 'linear' ? this.xScale(Number(d.x)) : this.xScale(d.x);
-        const cy = this.yScaleType === 'linear' ? this.yScale(Number(d.y)) : this.yScale(d.y);
+        const cx = this.xScaleType === ScaleType.Linear ? this.xScale(Number(d.x)) : this.xScale(d.x);
+        const cy = this.yScaleType === ScaleType.Linear ? this.yScale(Number(d.y)) : this.yScale(d.y);
         xMin = Math.max(r - cx, xMin);
         yMin = Math.max(r - cy, yMin);
         yMax = Math.max(cy + r, yMax);
@@ -287,11 +289,11 @@ export class BubbleChartComponent extends BaseChartComponent {
     this.yScale = this.getYScale(this.yDomain, height);
   }
 
-  getYScale(domain, height): any {
+  getYScale(domain, height: number): any {
     return getScale(domain, [height, this.bubblePadding[0]], this.yScaleType, this.roundDomains);
   }
 
-  getXScale(domain, width): any {
+  getXScale(domain, width: number): any {
     return getScale(domain, [this.bubblePadding[3], width], this.xScaleType, this.roundDomains);
   }
 
@@ -301,16 +303,16 @@ export class BubbleChartComponent extends BaseChartComponent {
     return this.roundDomains ? scale.nice() : scale;
   }
 
-  getLegendOptions(): any {
+  getLegendOptions(): LegendOptions {
     const opts = {
-      scaleType: this.schemeType,
+      scaleType: this.schemeType as any,
       colors: undefined,
       domain: [],
       position: this.legendPosition,
       title: undefined
     };
 
-    if (opts.scaleType === 'ordinal') {
+    if (opts.scaleType === ScaleType.Ordinal) {
       opts.domain = this.seriesDomain;
       opts.colors = this.colors;
       opts.title = this.legendTitle;
@@ -322,7 +324,7 @@ export class BubbleChartComponent extends BaseChartComponent {
     return opts;
   }
 
-  getXDomain(): any[] {
+  getXDomain(): number[] {
     const values = [];
 
     for (const results of this.results) {
@@ -337,7 +339,7 @@ export class BubbleChartComponent extends BaseChartComponent {
     return getDomain(values, this.xScaleType, this.autoScale, this.xScaleMin, this.xScaleMax);
   }
 
-  getYDomain(): any[] {
+  getYDomain(): number[] {
     const values = [];
 
     for (const results of this.results) {
@@ -352,7 +354,7 @@ export class BubbleChartComponent extends BaseChartComponent {
     return getDomain(values, this.yScaleType, this.autoScale, this.yScaleMin, this.yScaleMax);
   }
 
-  getRDomain(): number[] {
+  getRDomain(): [number, number] {
     let min = Infinity;
     let max = -Infinity;
 
@@ -367,12 +369,12 @@ export class BubbleChartComponent extends BaseChartComponent {
     return [min, max];
   }
 
-  updateYAxisWidth({ width }): void {
+  updateYAxisWidth({ width }: { width: number }): void {
     this.yAxisWidth = width;
     this.update();
   }
 
-  updateXAxisHeight({ height }): void {
+  updateXAxisHeight({ height }: { height: number }): void {
     this.xAxisHeight = height;
     this.update();
   }
@@ -400,7 +402,7 @@ export class BubbleChartComponent extends BaseChartComponent {
     this.deactivate.emit({ value: item, entries: this.activeEntries });
   }
 
-  deactivateAll() {
+  deactivateAll(): void {
     this.activeEntries = [...this.activeEntries];
     for (const entry of this.activeEntries) {
       this.deactivate.emit({ value: entry, entries: [] });
@@ -408,7 +410,7 @@ export class BubbleChartComponent extends BaseChartComponent {
     this.activeEntries = [];
   }
 
-  trackBy(index, item): string {
+  trackBy(index: number, item): string {
     return item.name;
   }
 }

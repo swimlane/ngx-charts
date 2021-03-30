@@ -13,11 +13,12 @@ import { trigger, style, animate, transition } from '@angular/animations';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
 import { curveLinear } from 'd3-shape';
 
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
 import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
+import { LegendOptions, LegendPosition, ScaleType, ViewDimensions } from '../common/types';
 
 @Component({
   selector: 'ngx-charts-line-chart',
@@ -174,22 +175,22 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
   ]
 })
 export class LineChartComponent extends BaseChartComponent {
-  @Input() legend;
+  @Input() legend: boolean;
   @Input() legendTitle: string = 'Legend';
-  @Input() legendPosition: string = 'right';
-  @Input() xAxis;
-  @Input() yAxis;
-  @Input() showXAxisLabel;
-  @Input() showYAxisLabel;
-  @Input() xAxisLabel;
-  @Input() yAxisLabel;
-  @Input() autoScale;
-  @Input() timeline;
+  @Input() legendPosition: LegendPosition = LegendPosition.Right;
+  @Input() xAxis: boolean;
+  @Input() yAxis: boolean;
+  @Input() showXAxisLabel: boolean;
+  @Input() showYAxisLabel: boolean;
+  @Input() xAxisLabel: string;
+  @Input() yAxisLabel: string;
+  @Input() autoScale: boolean;
+  @Input() timeline: boolean;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
   @Input() curve: any = curveLinear;
   @Input() activeEntries: any[] = [];
-  @Input() schemeType: string;
+  @Input() schemeType: ScaleType;
   @Input() rangeFillOpacity: number;
   @Input() trimXAxisTicks: boolean = true;
   @Input() trimYAxisTicks: boolean = true;
@@ -205,8 +206,8 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() showRefLines: boolean = false;
   @Input() referenceLines: any;
   @Input() showRefLabels: boolean = true;
-  @Input() xScaleMin: any;
-  @Input() xScaleMax: any;
+  @Input() xScaleMin: number;
+  @Input() xScaleMax: number;
   @Input() yScaleMin: number;
   @Input() yScaleMax: number;
 
@@ -219,18 +220,17 @@ export class LineChartComponent extends BaseChartComponent {
   dims: ViewDimensions;
   xSet: any;
   xDomain: any;
-  yDomain: any;
+  yDomain: [number, number];
   seriesDomain: any;
   yScale: any;
   xScale: any;
   colors: ColorHelper;
-  scaleType: string;
+  scaleType: ScaleType;
   transform: string;
   clipPath: string;
   clipPathId: string;
-  series: any;
   areaPath: any;
-  margin = [10, 20, 10, 20];
+  margin: number[] = [10, 20, 10, 20];
   hoveredVertical: any; // the value of the x axis that is hovered over
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
@@ -305,19 +305,19 @@ export class LineChartComponent extends BaseChartComponent {
     this.scaleType = getScaleType(values);
     let domain = [];
 
-    if (this.scaleType === 'linear') {
+    if (this.scaleType === ScaleType.Linear) {
       values = values.map(v => Number(v));
     }
 
     let min;
     let max;
-    if (this.scaleType === 'time' || this.scaleType === 'linear') {
+    if (this.scaleType === ScaleType.Time || this.scaleType === ScaleType.Linear) {
       min = this.xScaleMin ? this.xScaleMin : Math.min(...values);
 
       max = this.xScaleMax ? this.xScaleMax : Math.max(...values);
     }
 
-    if (this.scaleType === 'time') {
+    if (this.scaleType === ScaleType.Time) {
       domain = [new Date(min), new Date(max)];
       this.xSet = [...values].sort((a, b) => {
         const aDate = a.getTime();
@@ -326,7 +326,7 @@ export class LineChartComponent extends BaseChartComponent {
         if (bDate > aDate) return -1;
         return 0;
       });
-    } else if (this.scaleType === 'linear') {
+    } else if (this.scaleType === ScaleType.Linear) {
       domain = [min, max];
       // Use compare function to sort numbers numerically
       this.xSet = [...values].sort((a, b) => a - b);
@@ -338,7 +338,7 @@ export class LineChartComponent extends BaseChartComponent {
     return domain;
   }
 
-  getYDomain(): any[] {
+  getYDomain(): [number, number] {
     const domain = [];
     for (const results of this.results) {
       for (const d of results.series) {
@@ -372,29 +372,29 @@ export class LineChartComponent extends BaseChartComponent {
     return [min, max];
   }
 
-  getSeriesDomain(): any[] {
+  getSeriesDomain(): string[] {
     return this.results.map(d => d.name);
   }
 
-  getXScale(domain, width): any {
+  getXScale(domain, width: number): any {
     let scale;
 
-    if (this.scaleType === 'time') {
+    if (this.scaleType === ScaleType.Time) {
       scale = scaleTime().range([0, width]).domain(domain);
-    } else if (this.scaleType === 'linear') {
+    } else if (this.scaleType === ScaleType.Linear) {
       scale = scaleLinear().range([0, width]).domain(domain);
 
       if (this.roundDomains) {
         scale = scale.nice();
       }
-    } else if (this.scaleType === 'ordinal') {
+    } else if (this.scaleType === ScaleType.Ordinal) {
       scale = scalePoint().range([0, width]).padding(0.1).domain(domain);
     }
 
     return scale;
   }
 
-  getYScale(domain, height): any {
+  getYScale(domain, height: number): any {
     const scale = scaleLinear().range([height, 0]).domain(domain);
 
     return this.roundDomains ? scale.nice() : scale;
@@ -421,13 +421,13 @@ export class LineChartComponent extends BaseChartComponent {
     this.select.emit(data);
   }
 
-  trackBy(index, item): string {
+  trackBy(index: number, item): string {
     return item.name;
   }
 
   setColors(): void {
     let domain;
-    if (this.schemeType === 'ordinal') {
+    if (this.schemeType === ScaleType.Ordinal) {
       domain = this.seriesDomain;
     } else {
       domain = this.yDomain;
@@ -436,15 +436,15 @@ export class LineChartComponent extends BaseChartComponent {
     this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
   }
 
-  getLegendOptions() {
+  getLegendOptions(): LegendOptions {
     const opts = {
-      scaleType: this.schemeType,
+      scaleType: this.schemeType as any,
       colors: undefined,
       domain: [],
       title: undefined,
       position: this.legendPosition
     };
-    if (opts.scaleType === 'ordinal') {
+    if (opts.scaleType === ScaleType.Ordinal) {
       opts.domain = this.seriesDomain;
       opts.colors = this.colors;
       opts.title = this.legendTitle;
@@ -455,17 +455,17 @@ export class LineChartComponent extends BaseChartComponent {
     return opts;
   }
 
-  updateYAxisWidth({ width }): void {
+  updateYAxisWidth({ width }: { width: number }): void {
     this.yAxisWidth = width;
     this.update();
   }
 
-  updateXAxisHeight({ height }): void {
+  updateXAxisHeight({ height }: { height: number }): void {
     this.xAxisHeight = height;
     this.update();
   }
 
-  onActivate(item) {
+  onActivate(item): void {
     this.deactivateAll();
 
     const idx = this.activeEntries.findIndex(d => {
@@ -479,7 +479,7 @@ export class LineChartComponent extends BaseChartComponent {
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(item) {
+  onDeactivate(item): void {
     const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value;
     });
@@ -490,7 +490,7 @@ export class LineChartComponent extends BaseChartComponent {
     this.deactivate.emit({ value: item, entries: this.activeEntries });
   }
 
-  deactivateAll() {
+  deactivateAll(): void {
     this.activeEntries = [...this.activeEntries];
     for (const entry of this.activeEntries) {
       this.deactivate.emit({ value: entry, entries: [] });

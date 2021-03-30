@@ -1,5 +1,18 @@
 import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { line } from 'd3-shape';
+import { TextAnchor } from '../common/types';
+
+interface Big {
+  line: string;
+  text: string;
+  textAnchor: string;
+  textTransform: string;
+}
+
+interface Ticks {
+  big: Big[];
+  small: Array<{ line: string }>;
+}
 
 @Component({
   selector: 'g[ngx-charts-gauge-axis]',
@@ -25,17 +38,17 @@ import { line } from 'd3-shape';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GaugeAxisComponent implements OnChanges {
-  @Input() bigSegments: any;
-  @Input() smallSegments: any;
-  @Input() min: any;
-  @Input() max: any;
+  @Input() bigSegments: number;
+  @Input() smallSegments: number;
+  @Input() min: number;
+  @Input() max: number;
   @Input() angleSpan: number;
   @Input() startAngle: number;
-  @Input() radius: any;
+  @Input() radius: number;
   @Input() valueScale: any;
   @Input() tickFormatting: any;
 
-  ticks: any;
+  ticks: Ticks;
   rotationAngle: number;
   rotate: string = '';
 
@@ -49,7 +62,7 @@ export class GaugeAxisComponent implements OnChanges {
     this.ticks = this.getTicks();
   }
 
-  getTicks(): any {
+  getTicks(): Ticks {
     const bigTickSegment = this.angleSpan / this.bigSegments;
     const smallTickSegment = bigTickSegment / this.smallSegments;
     const tickLength = 20;
@@ -104,23 +117,23 @@ export class GaugeAxisComponent implements OnChanges {
     return ticks;
   }
 
-  getTextAnchor(angle) {
+  getTextAnchor(angle: number): TextAnchor {
     // [0, 45] = 'middle';
     // [46, 135] = 'start';
     // [136, 225] = 'middle';
     // [226, 315] = 'end';
 
     angle = (this.startAngle + angle) % 360;
-    let textAnchor = 'middle';
+    let textAnchor = TextAnchor.Middle;
     if (angle > 45 && angle <= 135) {
-      textAnchor = 'start';
+      textAnchor = TextAnchor.Start;
     } else if (angle > 225 && angle <= 315) {
-      textAnchor = 'end';
+      textAnchor = TextAnchor.End;
     }
     return textAnchor;
   }
 
-  getTickPath(startDistance, tickLength, angle): any {
+  getTickPath(startDistance: number, tickLength: number, angle: number): any {
     const y1 = startDistance * Math.sin(angle);
     const y2 = (startDistance + tickLength) * Math.sin(angle);
     const x1 = startDistance * Math.cos(angle);

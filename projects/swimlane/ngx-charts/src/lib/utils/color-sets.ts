@@ -1,8 +1,17 @@
-export let colorSets = [
+import { ScaleType } from '../common/types';
+
+export interface Color {
+  name: string;
+  selectable: boolean;
+  group: ScaleType;
+  domain: string[];
+}
+
+export let colorSets: Color[] = [
   {
     name: 'vivid',
     selectable: true,
-    group: 'Ordinal',
+    group: ScaleType.Ordinal,
     domain: [
       '#647c8a',
       '#3f51b5',
@@ -19,7 +28,7 @@ export let colorSets = [
   {
     name: 'natural',
     selectable: true,
-    group: 'Ordinal',
+    group: ScaleType.Ordinal,
     domain: [
       '#bf9d76',
       '#e99450',
@@ -36,7 +45,7 @@ export let colorSets = [
   {
     name: 'cool',
     selectable: true,
-    group: 'Ordinal',
+    group: ScaleType.Ordinal,
     domain: [
       '#a8385d',
       '#7aa3e5',
@@ -53,13 +62,13 @@ export let colorSets = [
   {
     name: 'fire',
     selectable: true,
-    group: 'Ordinal',
+    group: ScaleType.Ordinal,
     domain: ['#ff3d00', '#bf360c', '#ff8f00', '#ff6f00', '#ff5722', '#e65100', '#ffca28', '#ffab00']
   },
   {
     name: 'solar',
     selectable: true,
-    group: 'Continuous',
+    group: ScaleType.Linear,
     domain: [
       '#fff8e1',
       '#ffecb3',
@@ -76,7 +85,7 @@ export let colorSets = [
   {
     name: 'air',
     selectable: true,
-    group: 'Continuous',
+    group: ScaleType.Linear,
     domain: [
       '#e1f5fe',
       '#b3e5fc',
@@ -93,7 +102,7 @@ export let colorSets = [
   {
     name: 'aqua',
     selectable: true,
-    group: 'Continuous',
+    group: ScaleType.Linear,
     domain: [
       '#e0f7fa',
       '#b2ebf2',
@@ -110,7 +119,7 @@ export let colorSets = [
   {
     name: 'flame',
     selectable: false,
-    group: 'Ordinal',
+    group: ScaleType.Ordinal,
     domain: [
       '#A10A28',
       '#D3342D',
@@ -127,7 +136,7 @@ export let colorSets = [
   {
     name: 'ocean',
     selectable: false,
-    group: 'Ordinal',
+    group: ScaleType.Ordinal,
     domain: [
       '#1D68FB',
       '#33C0FC',
@@ -144,7 +153,7 @@ export let colorSets = [
   {
     name: 'forest',
     selectable: false,
-    group: 'Ordinal',
+    group: ScaleType.Ordinal,
     domain: [
       '#55C22D',
       '#C1F33D',
@@ -161,7 +170,7 @@ export let colorSets = [
   {
     name: 'horizon',
     selectable: false,
-    group: 'Ordinal',
+    group: ScaleType.Ordinal,
     domain: [
       '#2597FB',
       '#65EBFD',
@@ -178,7 +187,7 @@ export let colorSets = [
   {
     name: 'neons',
     selectable: false,
-    group: 'Ordinal',
+    group: ScaleType.Ordinal,
     domain: [
       '#FF3333',
       '#FF33FF',
@@ -195,7 +204,7 @@ export let colorSets = [
   {
     name: 'picnic',
     selectable: false,
-    group: 'Ordinal',
+    group: ScaleType.Ordinal,
     domain: [
       '#FAC51D',
       '#66BD6D',
@@ -212,7 +221,7 @@ export let colorSets = [
   {
     name: 'night',
     selectable: false,
-    group: 'Ordinal',
+    group: ScaleType.Ordinal,
     domain: [
       '#2B1B5A',
       '#501356',
@@ -234,7 +243,7 @@ export let colorSets = [
   {
     name: 'nightLights',
     selectable: false,
-    group: 'Ordinal',
+    group: ScaleType.Ordinal,
     domain: [
       '#4e31a5',
       '#9c25a7',
