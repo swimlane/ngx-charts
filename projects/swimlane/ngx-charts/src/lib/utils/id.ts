@@ -47,5 +47,6 @@ export function id(): string {
   } while (newId >= MAX_ID);
 
   // append a 'a' because neo gets mad
-  return `a${newId.toString(36)}`;
+  let id = ('0000' + newId.toString(36)).slice(-4);
+  return `a${id}`;
 }
