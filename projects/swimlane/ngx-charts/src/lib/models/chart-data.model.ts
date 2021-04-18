@@ -1,3 +1,5 @@
+import { IVector2D } from "./coordinates.model";
+
 export type StringOrNumberOrDate = string | number | Date;
 
 export interface DataItem {
@@ -9,14 +11,14 @@ export interface DataItem {
   label?: string;
 }
 
-export interface SingleSeries extends Array<DataItem> {}
+export interface SingleSeries extends Array<DataItem> { }
 
 export interface Series {
   name: StringOrNumberOrDate;
   series: DataItem[];
 }
 
-export interface MultiSeries extends Array<Series> {}
+export interface MultiSeries extends Array<Series> { }
 
 export interface AreaChartDataItem extends DataItem {
   d0: number;
@@ -47,7 +49,7 @@ export interface BubbleChartSeries {
   series: BubbleChartDataItem[];
 }
 
-export interface BubbleChartMultiSeries extends Array<BubbleChartSeries> {}
+export interface BubbleChartMultiSeries extends Array<BubbleChartSeries> { }
 
 export interface TreeMapDataItem {
   name: StringOrNumberOrDate;
@@ -56,10 +58,10 @@ export interface TreeMapDataItem {
   extra?: any;
 }
 
-export interface TreeMapData extends Array<TreeMapDataItem> {}
+export interface TreeMapData extends Array<TreeMapDataItem> { }
 
 export interface BoxChartDataItem extends DataItem {
-  value: number | Date;
+  value: number;
 }
 
 export interface BoxChartSeries {
@@ -67,7 +69,7 @@ export interface BoxChartSeries {
   series: BoxChartDataItem[];
 }
 
-export interface BoxChartMultiSeries extends Array<BoxChartSeries> {}
+export interface BoxChartMultiSeries extends Array<BoxChartSeries> { }
 
 export interface IBoxModel {
   value: number | Date;

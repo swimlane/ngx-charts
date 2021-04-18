@@ -16,7 +16,7 @@ import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
-import { getUniqueXDomainValues, getXDomainArray } from '../common/domain.helper';
+import { getScaleType, getUniqueXDomainValues, getXDomainArray } from '../common/domain.helper';
 import { ViewDimensions, LegendPosition, LegendOptions, ScaleType } from '../common/types';
 import { isDate, isNumber } from '../utils/types';
 import { Series, StringOrNumberOrDate } from '../models/chart-data.model';

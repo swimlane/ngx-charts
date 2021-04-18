@@ -14,7 +14,8 @@ import { ILegendOptions } from '../models/legend.model';
 import { ColorHelper } from '../common/color.helper';
 import { BoxChartMultiSeries, BoxChartSeries, IBoxModel } from '../models/chart-data.model';
 import { scaleLinear, ScaleLinear, scaleBand, ScaleBand } from 'd3-scale';
-import { ViewDimensions, calculateViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions } from '../common/view-dimensions.helper';
+import { ViewDimensions, LegendPosition, ScaleType } from '../common/types';
 
 @Component({
   selector: 'ngx-charts-box-chart',
@@ -78,7 +79,7 @@ import { ViewDimensions, calculateViewDimensions } from '../common/view-dimensio
 export class BoxChartComponent extends BaseChartComponent {
   /** Show or hide the legend. */
   @Input() legend: boolean = false;
-  @Input() legendPosition: string = 'right';
+  @Input() legendPosition: LegendPosition = LegendPosition.Right;
   @Input() legendTitle: string = 'Legend';
   /** I think it is better to handle legend options as single Input object of type ILegendOptions */
   @Input() legendOptionsConfig: ILegendOptions; // TODO: Change previous legend options for this one.
@@ -120,6 +121,7 @@ export class BoxChartComponent extends BaseChartComponent {
   yScale: ScaleLinear<number, number>;
   xDomain: Array<string | number | Date>;
   yDomain: number[];
+  seriesDomain: string[];
   /** Chart X axis dimension. */
   xAxisHeight: number = 0;
   /** Chart Y axis dimension. */
@@ -156,13 +158,14 @@ export class BoxChartComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    let colorDomain: Array<string | number | Date>;
-    if (this.schemeType === 'ordinal') {
-      colorDomain = this.xDomain;
+    let domain;
+    if (this.schemeType === ScaleType.Ordinal) {
+      domain = this.seriesDomain;
     } else {
-      colorDomain = this.yDomain;
+      domain = this.yDomain;
     }
-    this.colors = new ColorHelper(this.scheme, this.schemeType, colorDomain, this.customColors);
+
+    this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
   }
 
   setScales() {

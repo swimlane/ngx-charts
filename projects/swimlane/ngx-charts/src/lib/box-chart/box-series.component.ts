@@ -14,7 +14,7 @@ import { IBoxModel, BoxChartSeries, BoxChartDataItem } from '../models/chart-dat
 import { IVector2D } from '../models/coordinates.model';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { ColorHelper } from '../common/color.helper';
-import { ViewDimensions } from '../common/view-dimensions.helper';
+import { ViewDimensions } from '../common/types';
 import { formatLabel, escapeLabel } from '../common/label.helper';
 
 @Component({
