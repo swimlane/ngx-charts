@@ -14,6 +14,13 @@ import { brushX } from 'd3-brush';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
 import { select } from 'd3-selection';
 import { id } from '../..//utils/id';
+import { ViewDimensions } from '../types';
+
+export enum TimelineScaleType {
+  Time = 'time',
+  Linear = 'linear',
+  Ordinal = 'ordinal'
+}
 
 @Component({
   selector: 'g[ngx-charts-timeline]',
@@ -38,29 +45,27 @@ import { id } from '../..//utils/id';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Timeline implements OnChanges {
-  @Input() view;
-  @Input() state;
-  @Input() results;
-  @Input() scheme;
-  @Input() customColors;
-  @Input() legend;
-  @Input() miniChart;
-  @Input() autoScale;
-  @Input() scaleType;
+  @Input() view: [number, number];
+  @Input() results; // type this
+  @Input() scheme; // type this
+  @Input() customColors; // type this
+  @Input() legend: boolean;
+  @Input() autoScale: boolean;
+  @Input() scaleType: TimelineScaleType;
   @Input() height: number = 50;
 
   @Output() select = new EventEmitter();
   @Output() onDomainChange = new EventEmitter();
 
   element: HTMLElement;
-  dims: any;
+  dims: ViewDimensions;
   xDomain: any[];
   xScale: any;
   brush: any;
   transform: string;
   initialized: boolean = false;
-  filterId: any;
-  filter: any;
+  filterId: string;
+  filter: string;
 
   constructor(element: ElementRef, private cd: ChangeDetectorRef) {
     this.element = element.nativeElement;
@@ -107,11 +112,11 @@ export class Timeline implements OnChanges {
     }
 
     let domain = [];
-    if (this.scaleType === 'time') {
+    if (this.scaleType === TimelineScaleType.Time) {
       const min = Math.min(...values);
       const max = Math.max(...values);
       domain = [min, max];
-    } else if (this.scaleType === 'linear') {
+    } else if (this.scaleType === TimelineScaleType.Linear) {
       values = values.map(v => Number(v));
       const min = Math.min(...values);
       const max = Math.max(...values);
@@ -126,11 +131,11 @@ export class Timeline implements OnChanges {
   getXScale() {
     let scale;
 
-    if (this.scaleType === 'time') {
+    if (this.scaleType === TimelineScaleType.Time) {
       scale = scaleTime().range([0, this.dims.width]).domain(this.xDomain);
-    } else if (this.scaleType === 'linear') {
+    } else if (this.scaleType === TimelineScaleType.Linear) {
       scale = scaleLinear().range([0, this.dims.width]).domain(this.xDomain);
-    } else if (this.scaleType === 'ordinal') {
+    } else if (this.scaleType === TimelineScaleType.Ordinal) {
       scale = scalePoint().range([0, this.dims.width]).padding(0.1).domain(this.xDomain);
     }
 
@@ -181,7 +186,7 @@ export class Timeline implements OnChanges {
     this.cd.markForCheck();
   }
 
-  getDims(): any {
+  getDims(): ViewDimensions {
     const width = this.view[0];
 
     const dims = {

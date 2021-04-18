@@ -14,8 +14,15 @@ import {
 import { scaleLinear } from 'd3-scale';
 
 import { BaseChartComponent } from '../common/base-chart.component';
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
+import { LegendOptions, LegendPosition, ScaleType, ViewDimensions } from '../common/types';
+import { ArcItem } from './gauge-arc.component';
+
+interface Arcs {
+  backgroundArc: ArcItem;
+  valueArc: ArcItem;
+}
 
 @Component({
   selector: 'ngx-charts-gauge',
@@ -81,9 +88,9 @@ import { ColorHelper } from '../common/color.helper';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GaugeComponent extends BaseChartComponent implements AfterViewInit {
-  @Input() legend = false;
+  @Input() legend: boolean = false;
   @Input() legendTitle: string = 'Legend';
-  @Input() legendPosition: string = 'right';
+  @Input() legendPosition: LegendPosition = LegendPosition.Right;
   @Input() min: number = 0;
   @Input() max: number = 100;
   @Input() textValue: string;
@@ -101,7 +108,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   @Input() showText: boolean = true;
 
   // Specify margins
-  @Input() margin: any[];
+  @Input() margin: number[];
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -112,7 +119,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
 
   dims: ViewDimensions;
   domain: any[];
-  valueDomain: any;
+  valueDomain: [number, number];
   valueScale: any;
 
   colors: ColorHelper;
@@ -124,9 +131,9 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   rotation: string = '';
   textTransform: string = 'scale(1, 1)';
   cornerRadius: number = 10;
-  arcs: any[];
+  arcs: Arcs[];
   displayValue: string;
-  legendOptions: any;
+  legendOptions: LegendOptions;
 
   ngAfterViewInit(): void {
     super.ngAfterViewInit();
@@ -228,11 +235,11 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
     return arcs;
   }
 
-  getDomain(): any[] {
+  getDomain(): string[] {
     return this.results.map(d => d.name);
   }
 
-  getValueDomain(): any[] {
+  getValueDomain(): [number, number] {
     const values = this.results.map(d => d.value);
     const dataMin = Math.min(...values);
     const dataMax = Math.max(...values);
@@ -297,9 +304,9 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
     this.select.emit(data);
   }
 
-  getLegendOptions(): any {
+  getLegendOptions(): LegendOptions {
     return {
-      scaleType: 'ordinal',
+      scaleType: ScaleType.Ordinal,
       colors: this.colors,
       domain: this.domain,
       title: this.legendTitle,
@@ -308,7 +315,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   }
 
   setColors(): void {
-    this.colors = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+    this.colors = new ColorHelper(this.scheme, ScaleType.Ordinal, this.domain, this.customColors);
   }
 
   onActivate(item): void {
@@ -342,7 +349,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
     return item !== undefined;
   }
 
-  trackBy(index, item): string {
+  trackBy(index: number, item: Arcs): any {
     return item.valueArc.data.name;
   }
 }

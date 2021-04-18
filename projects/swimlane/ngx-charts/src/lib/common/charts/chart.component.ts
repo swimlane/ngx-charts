@@ -9,6 +9,8 @@ import {
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { TooltipService } from '../tooltip/tooltip.service';
+import { LegendOptions, LegendType, LegendPosition } from '../types/legend.model';
+import { ScaleType } from '../types';
 
 @Component({
   providers: [TooltipService],
@@ -19,9 +21,9 @@ import { TooltipService } from '../tooltip/tooltip.service';
         <ng-content></ng-content>
       </svg>
       <ngx-charts-scale-legend
-        *ngIf="showLegend && legendType === 'scaleLegend'"
+        *ngIf="showLegend && legendType === LegendType.ScaleLegend"
         class="chart-legend"
-        [horizontal]="legendOptions && legendOptions.position === 'below'"
+        [horizontal]="legendOptions && legendOptions.position === LegendPosition.Below"
         [valueRange]="legendOptions.domain"
         [colors]="legendOptions.colors"
         [height]="view[1]"
@@ -29,9 +31,9 @@ import { TooltipService } from '../tooltip/tooltip.service';
       >
       </ngx-charts-scale-legend>
       <ngx-charts-legend
-        *ngIf="showLegend && legendType === 'legend'"
+        *ngIf="showLegend && legendType === LegendType.Legend"
         class="chart-legend"
-        [horizontal]="legendOptions && legendOptions.position === 'below'"
+        [horizontal]="legendOptions && legendOptions.position === LegendPosition.Below"
         [data]="legendOptions.domain"
         [title]="legendOptions.title"
         [colors]="legendOptions.colors"
@@ -53,25 +55,23 @@ import { TooltipService } from '../tooltip/tooltip.service';
   ]
 })
 export class ChartComponent implements OnChanges {
-  @Input() view;
-  @Input() showLegend = false;
-  @Input() legendOptions: any;
-
-  // remove
-  @Input() data;
-  @Input() legendData;
-  @Input() legendType: any;
-  @Input() colors: any;
+  @Input() view: [number, number];
+  @Input() showLegend: boolean = false;
+  @Input() legendOptions: LegendOptions;
+  @Input() legendType: LegendType;
   @Input() activeEntries: any[];
   @Input() animations: boolean = true;
 
-  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
-  @Output() legendLabelActivate: EventEmitter<any> = new EventEmitter();
-  @Output() legendLabelDeactivate: EventEmitter<any> = new EventEmitter();
+  @Output() legendLabelClick: EventEmitter<string> = new EventEmitter();
+  @Output() legendLabelActivate: EventEmitter<{ name: string }> = new EventEmitter();
+  @Output() legendLabelDeactivate: EventEmitter<{ name: string }> = new EventEmitter();
 
-  chartWidth: any;
-  title: any;
-  legendWidth: any;
+  chartWidth: number;
+  title: string;
+  legendWidth: number;
+
+  readonly LegendPosition = LegendPosition;
+  readonly LegendType = LegendType;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -82,8 +82,8 @@ export class ChartComponent implements OnChanges {
     if (this.showLegend) {
       this.legendType = this.getLegendType();
 
-      if (!this.legendOptions || this.legendOptions.position === 'right') {
-        if (this.legendType === 'scaleLegend') {
+      if (!this.legendOptions || this.legendOptions.position === LegendPosition.Right) {
+        if (this.legendType === LegendType.ScaleLegend) {
           legendColumns = 1;
         } else {
           legendColumns = 2;
@@ -95,16 +95,12 @@ export class ChartComponent implements OnChanges {
 
     this.chartWidth = Math.floor((this.view[0] * chartColumns) / 12.0);
     this.legendWidth =
-      !this.legendOptions || this.legendOptions.position === 'right'
+      !this.legendOptions || this.legendOptions.position === LegendPosition.Right
         ? Math.floor((this.view[0] * legendColumns) / 12.0)
         : this.chartWidth;
   }
 
-  getLegendType(): string {
-    if (this.legendOptions.scaleType === 'linear') {
-      return 'scaleLegend';
-    } else {
-      return 'legend';
-    }
+  getLegendType(): LegendType {
+    return this.legendOptions.scaleType === ScaleType.Linear ? LegendType.ScaleLegend : LegendType.Legend;
   }
 }

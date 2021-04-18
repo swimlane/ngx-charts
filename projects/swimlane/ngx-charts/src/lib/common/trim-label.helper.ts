@@ -1,4 +1,4 @@
-export function trimLabel(s, max = 16): string {
+export function trimLabel(s: any, max: number = 16): string {
   if (typeof s !== 'string') {
     if (typeof s === 'number') {
       return s + '';

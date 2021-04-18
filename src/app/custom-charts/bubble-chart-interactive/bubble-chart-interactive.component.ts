@@ -19,7 +19,8 @@ import {
   ViewDimensions,
   ColorHelper,
   BaseChartComponent,
-  calculateViewDimensions
+  calculateViewDimensions,
+  ScaleType
 } from 'projects/swimlane/ngx-charts/src/public-api';
 
 @Component({
@@ -141,7 +142,7 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
   @Input() maxRadius = 10;
   @Input() minRadius = 3;
   @Input() autoScale: boolean;
-  @Input() schemeType = 'ordinal';
+  @Input() schemeType: ScaleType = ScaleType.Ordinal;
   @Input() legendPosition: string = 'right';
   @Input() tooltipDisabled: boolean = false;
   @Input() xScaleMin: any;
@@ -173,8 +174,8 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
   yDomain: any[];
   rDomain: number[];
 
-  xScaleType: string;
-  yScaleType: string;
+  xScaleType: ScaleType;
+  yScaleType: ScaleType;
 
   yScale: any;
   xScale: any;
@@ -209,7 +210,7 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
 
     this.transform = `translate(${this.dims.xOffset},${this.margin[0]})`;
 
-    const colorDomain = this.schemeType === 'ordinal' ? this.seriesDomain : this.rDomain;
+    const colorDomain = this.schemeType === ScaleType.Ordinal ? this.seriesDomain : this.rDomain;
     this.colors = new ColorHelper(this.scheme, this.schemeType, colorDomain, this.customColors);
 
     this.data = this.results;
@@ -238,7 +239,6 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
 
   onClickLabel(eventOnLegendSeriesLabelSelect) {
     const eventOnLegendLabelSelect = { name: eventOnLegendSeriesLabelSelect };
-    // console.log(eventOnLegendLabelSelect);
     this.legendLabelClick.emit(eventOnLegendLabelSelect);
   }
 
@@ -249,7 +249,6 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
       bubble: bubbleObj,
       series: seriesObj
     };
-    // console.log(eventOnBubbleSeriesSelect);
     this.select.emit(eventOnBubbleSeriesSelect);
   }
 
@@ -262,8 +261,8 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
     for (const s of this.data) {
       for (const d of s.series) {
         const r = this.rScale(d.r);
-        const cx = this.xScaleType === 'linear' ? this.xScale(Number(d.x)) : this.xScale(d.x);
-        const cy = this.yScaleType === 'linear' ? this.yScale(Number(d.y)) : this.yScale(d.y);
+        const cx = this.xScaleType === ScaleType.Linear ? this.xScale(Number(d.x)) : this.xScale(d.x);
+        const cy = this.yScaleType === ScaleType.Linear ? this.yScale(Number(d.y)) : this.yScale(d.y);
         xMin = Math.max(r - cx, xMin);
         yMin = Math.max(r - cy, yMin);
         yMax = Math.max(cy + r, yMax);
@@ -306,14 +305,14 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
 
   getLegendOptions(): any {
     const opts = {
-      scaleType: this.schemeType,
+      scaleType: this.schemeType as any,
       colors: undefined,
       domain: [],
       position: this.legendPosition,
       title: undefined
     };
 
-    if (opts.scaleType === 'ordinal') {
+    if (opts.scaleType === ScaleType.Ordinal) {
       opts.domain = this.seriesDomain;
       opts.colors = this.colors;
       opts.title = this.legendTitle;

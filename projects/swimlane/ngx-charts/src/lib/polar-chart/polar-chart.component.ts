@@ -12,11 +12,12 @@ import { trigger, style, animate, transition } from '@angular/animations';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
 import { curveCardinalClosed } from 'd3-shape';
 
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { getScaleType } from '../common/domain.helper';
 import { isDate } from '../utils/types';
+import { ViewDimensions, LegendPosition, ScaleType } from '../common/types';
 
 const twoPI = 2 * Math.PI;
 
@@ -135,7 +136,7 @@ const twoPI = 2 * Math.PI;
 export class PolarChartComponent extends BaseChartComponent {
   @Input() legend: boolean;
   @Input() legendTitle: string = 'Legend';
-  @Input() legendPosition: string = 'right';
+  @Input() legendPosition: LegendPosition = LegendPosition.Right;
   @Input() xAxis: boolean;
   @Input() yAxis: boolean;
   @Input() showXAxisLabel: boolean;
@@ -146,7 +147,7 @@ export class PolarChartComponent extends BaseChartComponent {
   @Input() showGridLines: boolean = true;
   @Input() curve: any = curveCardinalClosed;
   @Input() activeEntries: any[] = [];
-  @Input() schemeType: string;
+  @Input() schemeType: ScaleType;
   @Input() rangeFillOpacity: number = 0.15;
   @Input() trimYAxisTicks: boolean = true;
   @Input() maxYAxisTickLength: number = 16;
@@ -175,13 +176,13 @@ export class PolarChartComponent extends BaseChartComponent {
   xScale: any; // -> tScale
   yAxisScale: any; // -> yScale
   colors: ColorHelper;
-  scaleType: string;
+  scaleType: ScaleType;
   transform: string;
   transformPlot: string;
   transformYAxis: string;
   transformXAxis: string;
-  series: any; // ???
-  margin = [10, 20, 10, 20];
+  // series: any; // ???
+  margin: number[] = [10, 20, 10, 20];
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
   filteredDomain: any;
@@ -322,11 +323,11 @@ export class PolarChartComponent extends BaseChartComponent {
   }
 
   getXDomain(values = this.getXValues()): any[] {
-    if (this.scaleType === 'time') {
+    if (this.scaleType === ScaleType.Time) {
       const min = Math.min(...values);
       const max = Math.max(...values);
       return [min, max];
-    } else if (this.scaleType === 'linear') {
+    } else if (this.scaleType === ScaleType.Linear) {
       values = values.map(v => Number(v));
       const min = Math.min(...values);
       const max = Math.max(...values);
@@ -374,11 +375,11 @@ export class PolarChartComponent extends BaseChartComponent {
     return this.results.map(d => d.name);
   }
 
-  getXScale(domain, width): any {
+  getXScale(domain, width: number): any {
     switch (this.scaleType) {
-      case 'time':
+      case ScaleType.Time:
         return scaleTime().range([0, width]).domain(domain);
-      case 'linear':
+      case ScaleType.Linear:
         const scale = scaleLinear().range([0, width]).domain(domain);
         return this.roundDomains ? scale.nice() : scale;
       default:
@@ -389,7 +390,7 @@ export class PolarChartComponent extends BaseChartComponent {
     }
   }
 
-  getYScale(domain, height): any {
+  getYScale(domain, height: number): any {
     const scale = scaleLinear().range([0, height]).domain(domain);
 
     return this.roundDomains ? scale.nice() : scale;
@@ -404,12 +405,12 @@ export class PolarChartComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    const domain = this.schemeType === 'ordinal' ? this.seriesDomain : this.yDomain.reverse();
+    const domain = this.schemeType === ScaleType.Ordinal ? this.seriesDomain : this.yDomain.reverse();
     this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
   }
 
   getLegendOptions() {
-    if (this.schemeType === 'ordinal') {
+    if (this.schemeType === ScaleType.Ordinal) {
       return {
         scaleType: this.schemeType,
         colors: this.colors,
@@ -427,17 +428,17 @@ export class PolarChartComponent extends BaseChartComponent {
     };
   }
 
-  updateYAxisWidth({ width }): void {
+  updateYAxisWidth({ width }: { width: number }): void {
     this.yAxisWidth = width;
     this.update();
   }
 
-  updateXAxisHeight({ height }): void {
+  updateXAxisHeight({ height }: { height: number }): void {
     this.xAxisHeight = height;
     this.update();
   }
 
-  onActivate(item) {
+  onActivate(item): void {
     const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value;
     });
@@ -448,7 +449,7 @@ export class PolarChartComponent extends BaseChartComponent {
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(item) {
+  onDeactivate(item): void {
     const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value;
     });
@@ -459,7 +460,7 @@ export class PolarChartComponent extends BaseChartComponent {
     this.deactivate.emit({ value: item, entries: this.activeEntries });
   }
 
-  deactivateAll() {
+  deactivateAll(): void {
     this.activeEntries = [...this.activeEntries];
     for (const entry of this.activeEntries) {
       this.deactivate.emit({ value: entry, entries: [] });
@@ -467,7 +468,7 @@ export class PolarChartComponent extends BaseChartComponent {
     this.activeEntries = [];
   }
 
-  trackBy(index, item) {
+  trackBy(index: number, item): string {
     return item.name;
   }
 }

@@ -8,15 +8,12 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { invertColor } from '../utils/color-utils';
+import { GridItem, GridData } from '../common/grid-layout.helper';
+import { ViewDimensions } from '../common/types';
+import { ColorHelper } from '../common/color.helper';
 
-export interface CardModel {
-  x;
-  y;
-  width: number;
-  height: number;
+export interface CardModel extends GridItem {
   color: string;
-  label: string;
-  data;
   tooltipText: string;
 }
 
@@ -56,16 +53,15 @@ export interface CardModel {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardSeriesComponent implements OnChanges {
-  @Input() data: any[];
-  @Input() slots: any[];
-  @Input() dims;
-  @Input() colors;
-  @Input() innerPadding = 15;
+  @Input() data: CardModel[];
+  @Input() dims: ViewDimensions;
+  @Input() colors: ColorHelper;
+  @Input() innerPadding: number = 15;
 
-  @Input() cardColor;
-  @Input() bandColor;
+  @Input() cardColor: string;
+  @Input() bandColor: string;
   @Input() emptyColor = 'rgba(0, 0, 0, 0)';
-  @Input() textColor;
+  @Input() textColor: string;
   @Input() valueFormatting: any;
   @Input() labelFormatting: any;
   @Input() animations: boolean = true;
@@ -105,14 +101,14 @@ export class CardSeriesComponent implements OnChanges {
     this.emptySlots = cards.filter(d => d.data.value === null);
   }
 
-  getCards(): any[] {
+  getCards(): CardModel[] {
     const yPadding =
       typeof this.innerPadding === 'number' ? this.innerPadding : this.innerPadding[0] + this.innerPadding[2];
     const xPadding =
       typeof this.innerPadding === 'number' ? this.innerPadding : this.innerPadding[1] + this.innerPadding[3];
 
     return this.data.map((d, index) => {
-      let label = d.data.name;
+      let label = d.data.name as any;
       if (label && label.constructor.name === 'Date') {
         label = label.toLocaleDateString();
       } else {

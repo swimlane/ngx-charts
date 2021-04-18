@@ -1,12 +1,14 @@
 import { Component, Input, Output, EventEmitter, OnChanges, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel, escapeLabel } from '../common/label.helper';
-import { DataItem } from '../models/chart-data.model';
-
-export enum D0Types {
-  positive = 'positive',
-  negative = 'negative'
-}
+import { DataItem, StringOrNumberOrDate } from '../models/chart-data.model';
+import { PlacementTypes } from '../common/tooltip/position';
+import { StyleTypes } from '../common/tooltip/style.type';
+import { ScaleType, ViewDimensions } from '../common/types';
+import { ColorHelper } from '../common/color.helper';
+import { BarChartType } from './types/bar-chart-type.enum';
+import { D0Types } from './types/d0-type.enum';
+import { Bar } from './types/bar.model';
 
 @Component({
   selector: 'g[ngx-charts-series-vertical]',
@@ -69,12 +71,12 @@ export enum D0Types {
   ]
 })
 export class SeriesVerticalComponent implements OnChanges {
-  @Input() dims;
-  @Input() type = 'standard';
-  @Input() series;
+  @Input() dims: ViewDimensions;
+  @Input() type: BarChartType = BarChartType.Standard;
+  @Input() series: DataItem[];
   @Input() xScale;
   @Input() yScale;
-  @Input() colors;
+  @Input() colors: ColorHelper;
   @Input() gradient: boolean;
   @Input() activeEntries: any[];
   @Input() seriesName: string;
@@ -86,17 +88,15 @@ export class SeriesVerticalComponent implements OnChanges {
   @Input() dataLabelFormatting: any;
   @Input() noBarWhenZero: boolean = true;
 
-  @Output() select = new EventEmitter();
+  @Output() select: EventEmitter<DataItem> = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
   @Output() dataLabelHeightChanged = new EventEmitter();
 
-  tooltipPlacement: string;
-  tooltipType: string;
+  tooltipPlacement: PlacementTypes;
+  tooltipType: StyleTypes;
 
-  bars: any;
-  x: any;
-  y: any;
+  bars: Bar[];
   barsForDataLabels: Array<{ x: number; y: number; width: number; height: number; total: number; series: string }> = [];
 
   ngOnChanges(changes): void {
@@ -119,12 +119,12 @@ export class SeriesVerticalComponent implements OnChanges {
     let d0Type = D0Types.positive;
 
     let total;
-    if (this.type === 'normalized') {
+    if (this.type === BarChartType.Normalized) {
       total = this.series.map(d => d.value).reduce((sum, d) => sum + d, 0);
     }
 
     this.bars = this.series.map((d, index) => {
-      let value = d.value;
+      let value = d.value as any;
       const label = this.getLabel(d);
       const formattedLabel = formatLabel(label);
       const roundEdges = this.roundEdges;
@@ -142,7 +142,7 @@ export class SeriesVerticalComponent implements OnChanges {
         y: 0
       };
 
-      if (this.type === 'standard') {
+      if (this.type === BarChartType.Standard) {
         bar.height = Math.abs(this.yScale(value) - this.yScale(yScaleMin));
         bar.x = this.xScale(label);
 
@@ -151,7 +151,7 @@ export class SeriesVerticalComponent implements OnChanges {
         } else {
           bar.y = this.yScale(value);
         }
-      } else if (this.type === 'stacked') {
+      } else if (this.type === BarChartType.Stacked) {
         const offset0 = d0[d0Type];
         const offset1 = offset0 + value;
         d0[d0Type] += value;
@@ -161,7 +161,7 @@ export class SeriesVerticalComponent implements OnChanges {
         bar.y = this.yScale(offset1);
         bar.offset0 = offset0;
         bar.offset1 = offset1;
-      } else if (this.type === 'normalized') {
+      } else if (this.type === BarChartType.Normalized) {
         let offset0 = d0[d0Type];
         let offset1 = offset0 + value;
         d0[d0Type] += value;
@@ -182,10 +182,10 @@ export class SeriesVerticalComponent implements OnChanges {
         value = (offset1 - offset0).toFixed(2) + '%';
       }
 
-      if (this.colors.scaleType === 'ordinal') {
+      if (this.colors.scaleType === ScaleType.Ordinal) {
         bar.color = this.colors.getColor(label);
       } else {
-        if (this.type === 'standard') {
+        if (this.type === BarChartType.Standard) {
           bar.color = this.colors.getColor(value);
           bar.gradientStops = this.colors.getLinearGradientStops(value);
         } else {
@@ -217,8 +217,8 @@ export class SeriesVerticalComponent implements OnChanges {
     this.updateDataLabels();
   }
 
-  updateDataLabels() {
-    if (this.type === 'stacked') {
+  updateDataLabels(): void {
+    if (this.type === BarChartType.Stacked) {
       this.barsForDataLabels = [];
       const section: any = {};
       section.series = this.seriesName;
@@ -248,9 +248,9 @@ export class SeriesVerticalComponent implements OnChanges {
     }
   }
 
-  updateTooltipSettings() {
-    this.tooltipPlacement = this.tooltipDisabled ? undefined : 'top';
-    this.tooltipType = this.tooltipDisabled ? undefined : 'tooltip';
+  updateTooltipSettings(): void {
+    this.tooltipPlacement = this.tooltipDisabled ? undefined : PlacementTypes.Top;
+    this.tooltipType = this.tooltipDisabled ? undefined : StyleTypes.tooltip;
   }
 
   isActive(entry): boolean {
@@ -265,18 +265,18 @@ export class SeriesVerticalComponent implements OnChanges {
     this.select.emit(data);
   }
 
-  getLabel(dataItem): string {
+  getLabel(dataItem: DataItem): StringOrNumberOrDate {
     if (dataItem.label) {
       return dataItem.label;
     }
     return dataItem.name;
   }
 
-  trackBy(index, bar): string {
+  trackBy(index: number, bar: Bar): string {
     return bar.label;
   }
 
-  trackDataLabelBy(index, barLabel) {
+  trackDataLabelBy(index: number, barLabel: any): string {
     return index + '#' + barLabel.series + '#' + barLabel.total;
   }
 }

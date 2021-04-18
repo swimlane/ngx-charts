@@ -1,12 +1,12 @@
 // Robert Penner's easeOutExpo
-function easeOutExpo(t, b, c, d) {
+function easeOutExpo(t, b, c, d): number {
   return (c * (-Math.pow(2, (-10 * t) / d) + 1) * 1024) / 1023 + b;
 }
 
 /**
  * Counts from a number to the end incrementally.
  */
-export function count(countFrom, countTo, countDecimals, countDuration, callback) {
+export function count(countFrom: number, countTo: number, countDecimals: number, countDuration: number, callback: any) {
   const startVal = Number(countFrom);
   const endVal = Number(countTo);
   const countDown = startVal > endVal;
@@ -15,7 +15,7 @@ export function count(countFrom, countTo, countDecimals, countDuration, callback
   const duration = Number(countDuration) * 1000;
   let startTime;
 
-  function runCount(timestamp) {
+  function runCount(timestamp: number) {
     let frameVal;
     const progress = timestamp - startTime;
 
@@ -57,7 +57,7 @@ export function count(countFrom, countTo, countDecimals, countDuration, callback
  *
  * @export
  */
-export function decimalChecker(countTo) {
+export function decimalChecker(countTo: number): number {
   const endVal = Number(countTo);
 
   if (endVal % 1 !== 0 && Math.abs(endVal) <= 10) {

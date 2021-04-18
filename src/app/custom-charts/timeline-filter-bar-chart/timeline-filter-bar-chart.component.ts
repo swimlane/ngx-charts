@@ -7,7 +7,8 @@ import {
   ColorHelper,
   ViewDimensions,
   calculateViewDimensions,
-  id
+  id,
+  ScaleType
 } from 'projects/swimlane/ngx-charts/src/public-api';
 
 @Component({
@@ -73,7 +74,7 @@ import {
 })
 export class TimelineFilterBarChartComponent extends BaseChartComponent {
   @Input() autoScale = false;
-  @Input() schemeType: string = 'ordinal';
+  @Input() schemeType: ScaleType = ScaleType.Ordinal;
   @Input() valueDomain: number[];
   @Input() xAxis;
   @Input() yAxis;
@@ -230,7 +231,7 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
 
   setColors(): void {
     let domain;
-    if (this.schemeType === 'ordinal') {
+    if (this.schemeType === ScaleType.Ordinal) {
       domain = this.xSet;
     } else {
       domain = this.yDomain;

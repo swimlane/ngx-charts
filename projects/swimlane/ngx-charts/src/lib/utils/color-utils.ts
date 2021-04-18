@@ -35,7 +35,7 @@ export function invertColor(value: string): string {
  * @export
  * @param \{ r, g, b }
  */
-export function shadeRGBColor({ r, g, b }, percent) {
+export function shadeRGBColor({ r, g, b }, percent: number): string {
   const t = percent < 0 ? 0 : 255;
   const p = percent < 0 ? percent * -1 : percent;
 

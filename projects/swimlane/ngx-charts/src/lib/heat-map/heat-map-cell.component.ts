@@ -10,6 +10,7 @@ import {
   HostListener
 } from '@angular/core';
 import { select } from 'd3-selection';
+import { Gradient } from '../common/types';
 
 import { id } from '../utils/id';
 
@@ -34,27 +35,25 @@ import { id } from '../utils/id';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeatMapCellComponent implements OnChanges {
-  @Input() fill;
-  @Input() x;
-  @Input() y;
-  @Input() width;
-  @Input() height;
-  @Input() data;
-  @Input() label;
+  @Input() fill: string;
+  @Input() x: number;
+  @Input() y: number;
+  @Input() width: number;
+  @Input() height: number;
+  @Input() data: number;
   @Input() gradient: boolean = false;
   @Input() animations: boolean = true;
 
-  @Output() select = new EventEmitter();
-  @Output() activate = new EventEmitter();
-  @Output() deactivate = new EventEmitter();
+  @Output() select: EventEmitter<number> = new EventEmitter();
+  @Output() activate: EventEmitter<number> = new EventEmitter();
+  @Output() deactivate: EventEmitter<number> = new EventEmitter();
 
   element: HTMLElement;
   transform: string;
-  activeRange: any[];
   startOpacity: number;
   gradientId: string;
   gradientUrl: string;
-  gradientStops: any[];
+  gradientStops: Gradient[];
 
   constructor(element: ElementRef) {
     this.element = element.nativeElement;
@@ -73,7 +72,7 @@ export class HeatMapCellComponent implements OnChanges {
     }
   }
 
-  getGradientStops() {
+  getGradientStops(): Gradient[] {
     return [
       {
         offset: 0,
@@ -100,7 +99,7 @@ export class HeatMapCellComponent implements OnChanges {
     node.transition().duration(750).attr('opacity', 1);
   }
 
-  onClick() {
+  onClick(): void {
     this.select.emit(this.data);
   }
 

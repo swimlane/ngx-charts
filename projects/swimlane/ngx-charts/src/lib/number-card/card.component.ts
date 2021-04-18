@@ -18,6 +18,7 @@ import { trimLabel } from '../common/trim-label.helper';
 import { roundedRect } from '../common/shape.helper';
 import { escapeLabel } from '../common/label.helper';
 import { decimalChecker, count } from '../common/count/count.helper';
+import { GridData } from '../common/grid-layout.helper';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { calculateTextWidth } from '../utils/calculate-width';
 import { VERDANA_FONT_WIDTHS_16_PX } from '../common/constants/font-widths';
@@ -70,16 +71,15 @@ import { VERDANA_FONT_WIDTHS_16_PX } from '../common/constants/font-widths';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardComponent implements OnChanges, OnDestroy {
-  @Input() color;
-  @Input() bandColor;
-  @Input() textColor;
-
-  @Input() x;
-  @Input() y;
-  @Input() width;
-  @Input() height;
-  @Input() label;
-  @Input() data;
+  @Input() color: string;
+  @Input() bandColor: string;
+  @Input() textColor: string;
+  @Input() x: number;
+  @Input() y: number;
+  @Input() width: number;
+  @Input() height: number;
+  @Input() label: string;
+  @Input() data: GridData;
   @Input() medianSize: number;
   @Input() valueFormatting: any;
   @Input() labelFormatting: any;
@@ -99,12 +99,12 @@ export class CardComponent implements OnChanges, OnDestroy {
   textFontSize: number = 12;
   textTransform: string = '';
   initialized: boolean = false;
-  animationReq: any;
+  animationReq: number;
 
   bandHeight: number = 10;
   transformBand: string;
-  textPadding = [10, 20, 5, 20];
-  labelFontSize = 15;
+  textPadding: number[] = [10, 20, 5, 20];
+  labelFontSize: number = 15;
 
   bandPath: string;
 
@@ -145,7 +145,7 @@ export class CardComponent implements OnChanges, OnDestroy {
       this.cardWidth = Math.max(0, this.width);
       this.cardHeight = Math.max(0, this.height);
 
-      this.label = this.label ? this.label : this.data.name;
+      this.label = this.label ? this.label : (this.data.name as any);
 
       const cardData = {
         label: this.label,
@@ -175,7 +175,7 @@ export class CardComponent implements OnChanges, OnDestroy {
     });
   }
 
-  paddedValue(value: string) {
+  paddedValue(value: string): string {
     if (this.medianSize && this.medianSize > value.length) {
       value += '\u2007'.repeat(this.medianSize - value.length);
     }

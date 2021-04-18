@@ -10,6 +10,19 @@ import {
 } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
 import { formatLabel } from '../label.helper';
+import { DataItem, StringOrNumberOrDate } from '../../models/chart-data.model';
+import { ColorHelper } from '../color.helper';
+
+export interface AdvancedLegendItem {
+  value: StringOrNumberOrDate;
+  _value: StringOrNumberOrDate;
+  color: string;
+  data: DataItem;
+  label: string;
+  displayLabel: string;
+  originalLabel: string;
+  percentage: string;
+}
 
 @Component({
   selector: 'ngx-charts-advanced-legend',
@@ -69,16 +82,16 @@ import { formatLabel } from '../label.helper';
 })
 export class AdvancedLegendComponent implements OnChanges {
   @Input() width: number;
-  @Input() data;
-  @Input() colors;
+  @Input() data: DataItem[];
+  @Input() colors: ColorHelper;
   @Input() label: string = 'Total';
   @Input() animations: boolean = true;
 
-  @Output() select: EventEmitter<any> = new EventEmitter();
-  @Output() activate: EventEmitter<any> = new EventEmitter();
-  @Output() deactivate: EventEmitter<any> = new EventEmitter();
+  @Output() select: EventEmitter<DataItem> = new EventEmitter();
+  @Output() activate: EventEmitter<DataItem> = new EventEmitter();
+  @Output() deactivate: EventEmitter<DataItem> = new EventEmitter();
 
-  legendItems: any[] = [];
+  legendItems: AdvancedLegendItem[] = [];
   total: number;
   roundedTotal: number;
 
@@ -93,7 +106,7 @@ export class AdvancedLegendComponent implements OnChanges {
   }
 
   getTotal(): number {
-    return this.data.map(d => d.value).reduce((sum, d) => sum + d, 0);
+    return this.data.map(d => Number(d.value)).reduce((sum, d) => sum + d, 0);
   }
 
   update(): void {
@@ -103,8 +116,8 @@ export class AdvancedLegendComponent implements OnChanges {
     this.legendItems = this.getLegendItems();
   }
 
-  getLegendItems(): any {
-    return this.data.map(d => {
+  getLegendItems(): AdvancedLegendItem[] {
+    return (this.data as any).map(d => {
       const label = formatLabel(d.name);
       const value = d.value;
       const color = this.colors.getColor(label);
@@ -124,7 +137,7 @@ export class AdvancedLegendComponent implements OnChanges {
     });
   }
 
-  trackBy(item) {
-    return item.formattedLabel;
+  trackBy(item: AdvancedLegendItem): string {
+    return item.label;
   }
 }

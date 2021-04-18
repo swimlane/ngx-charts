@@ -2,7 +2,6 @@ import {
   Component,
   Input,
   Output,
-  SimpleChanges,
   EventEmitter,
   OnChanges,
   OnInit,
@@ -13,6 +12,31 @@ import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel, escapeLabel } from '../common/label.helper';
 import { id } from '../utils/id';
 import { ColorHelper } from '../common/color.helper';
+import { Gradient, ScaleType } from './types';
+import { DataItem, Series, StringOrNumberOrDate } from '../models/chart-data.model';
+
+enum SeriesType {
+  Standard = 'standard',
+  Stacked = 'stacked'
+}
+
+export interface Circle {
+  classNames: string[];
+  value: string | number;
+  label: string;
+  data: DataItem;
+  cx: number;
+  cy: number;
+  radius: number;
+  height: number;
+  tooltipLabel: string;
+  color: string;
+  opacity: number;
+  seriesName: string;
+  gradientStops: Gradient[];
+  min: number;
+  max: number;
+}
 
 @Component({
   selector: 'g[ngx-charts-circle-series]',
@@ -73,23 +97,23 @@ import { ColorHelper } from '../common/color.helper';
   ]
 })
 export class CircleSeriesComponent implements OnChanges, OnInit {
-  @Input() data;
-  @Input() type = 'standard';
+  @Input() data: Series;
+  @Input() type: SeriesType = SeriesType.Standard;
   @Input() xScale;
   @Input() yScale;
   @Input() colors: ColorHelper;
-  @Input() scaleType;
-  @Input() visibleValue;
+  @Input() scaleType: ScaleType;
+  @Input() visibleValue: boolean;
   @Input() activeEntries: any[];
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipTemplate: TemplateRef<any>;
 
-  @Output() select = new EventEmitter();
-  @Output() activate = new EventEmitter();
-  @Output() deactivate = new EventEmitter();
+  @Output() select: EventEmitter<DataItem> = new EventEmitter();
+  @Output() activate: EventEmitter<{ name: StringOrNumberOrDate }> = new EventEmitter();
+  @Output() deactivate: EventEmitter<{ name: StringOrNumberOrDate }> = new EventEmitter();
 
   areaPath: any;
-  circle: any; // active circle
+  circle: Circle; // active circle
   barVisible: boolean = false;
   gradientId: string;
   gradientFill: string;
@@ -99,7 +123,7 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
     this.gradientFill = `url(#${this.gradientId})`;
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     this.update();
   }
 
@@ -107,7 +131,7 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
     this.circle = this.getActiveCircle();
   }
 
-  getActiveCircle(): {} {
+  getActiveCircle(): Circle {
     const indexActiveDataPoint = this.data.series.findIndex(d => {
       const label = d.name;
       return label && this.visibleValue && label.toString() === this.visibleValue.toString() && d.value !== undefined;
@@ -121,30 +145,30 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
     return this.mapDataPointToCircle(this.data.series[indexActiveDataPoint], indexActiveDataPoint);
   }
 
-  mapDataPointToCircle(d: any, i: number): any {
-    const seriesName = this.data.name;
+  mapDataPointToCircle(d: any, i: number): Circle {
+    const seriesName = this.data.name as string;
 
     const value = d.value;
     const label = d.name;
     const tooltipLabel = formatLabel(label);
 
     let cx;
-    if (this.scaleType === 'time') {
+    if (this.scaleType === ScaleType.Time) {
       cx = this.xScale(label);
-    } else if (this.scaleType === 'linear') {
+    } else if (this.scaleType === ScaleType.Linear) {
       cx = this.xScale(Number(label));
     } else {
       cx = this.xScale(label);
     }
 
-    const cy = this.yScale(this.type === 'standard' ? value : d.d1);
+    const cy = this.yScale(this.type === SeriesType.Standard ? value : d.d1);
     const radius = 5;
     const height = this.yScale.range()[0] - cy;
     const opacity = 1;
 
     let color;
-    if (this.colors.scaleType === 'linear') {
-      if (this.type === 'standard') {
+    if (this.colors.scaleType === ScaleType.Linear) {
+      if (this.type === SeriesType.Standard) {
         color = this.colors.getColor(value);
       } else {
         color = this.colors.getColor(d.d1);
@@ -178,14 +202,26 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
     };
   }
 
-  getTooltipText({ tooltipLabel, value, seriesName, min, max }): string {
+  getTooltipText({
+    tooltipLabel,
+    value,
+    seriesName,
+    min,
+    max
+  }: {
+    tooltipLabel: string;
+    value: any;
+    seriesName: string;
+    min: number;
+    max: number;
+  }): string {
     return `
       <span class="tooltip-label">${escapeLabel(seriesName)} • ${escapeLabel(tooltipLabel)}</span>
       <span class="tooltip-val">${value.toLocaleString()}${this.getTooltipMinMaxText(min, max)}</span>
     `;
   }
 
-  getTooltipMinMaxText(min: any, max: any) {
+  getTooltipMinMaxText(min: number, max: number): string {
     if (min !== undefined || max !== undefined) {
       let result = ' (';
       if (min !== undefined) {
@@ -209,7 +245,7 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
     }
   }
 
-  getGradientStops(color) {
+  getGradientStops(color: string): Gradient[] {
     return [
       {
         offset: 0,
@@ -224,7 +260,7 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
     ];
   }
 
-  onClick(data): void {
+  onClick(data: DataItem): void {
     this.select.emit(data);
   }
 

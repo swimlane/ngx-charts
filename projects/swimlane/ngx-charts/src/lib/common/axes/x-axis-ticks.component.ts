@@ -15,6 +15,8 @@ import {
 } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
+import { Orientation } from '../types/orientation.enum';
+import { TextAnchor } from '../types/text-anchor.enum';
 
 @Component({
   selector: 'g[ngx-charts-x-axis-ticks]',
@@ -43,16 +45,16 @@ import { reduceTicks } from './ticks.helper';
 })
 export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() scale;
-  @Input() orient;
-  @Input() tickArguments = [5];
-  @Input() tickValues: any[];
-  @Input() tickStroke = '#ccc';
+  @Input() orient: Orientation;
+  @Input() tickArguments: number[] = [5];
+  @Input() tickValues: string[] | number[];
+  @Input() tickStroke: string = '#ccc';
   @Input() trimTicks: boolean = true;
   @Input() maxTickLength: number = 16;
   @Input() tickFormatting;
   @Input() showGridLines = false;
-  @Input() gridLineHeight;
-  @Input() width;
+  @Input() gridLineHeight: number;
+  @Input() width: number;
   @Input() rotateTicks: boolean = true;
 
   @Output() dimensionsChanged = new EventEmitter();
@@ -62,12 +64,12 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   innerTickSize: number = 6;
   outerTickSize: number = 6;
   tickPadding: number = 3;
-  textAnchor: string = 'middle';
+  textAnchor: TextAnchor = TextAnchor.Middle;
   maxTicksLength: number = 0;
   maxAllowedLength: number = 16;
   adjustedScale: any;
-  textTransform: any;
-  ticks: any;
+  textTransform: string;
+  ticks: any[];
   tickFormat: (o: any) => any;
   height: number = 0;
   approxHeight: number = 10;
@@ -127,16 +129,16 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     this.textTransform = '';
     if (angle && angle !== 0) {
       this.textTransform = `rotate(${angle})`;
-      this.textAnchor = 'end';
+      this.textAnchor = TextAnchor.End;
       this.verticalSpacing = 10;
     } else {
-      this.textAnchor = 'middle';
+      this.textAnchor = TextAnchor.Middle;
     }
 
     setTimeout(() => this.updateDims());
   }
 
-  getRotationAngle(ticks): number {
+  getRotationAngle(ticks: any[]): number {
     let angle = 0;
     this.maxTicksLength = 0;
     for (let i = 0; i < ticks.length; i++) {
@@ -169,7 +171,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     return angle;
   }
 
-  getTicks() {
+  getTicks(): any[] {
     let ticks;
     const maxTicks = this.getMaxTicks(20);
     const maxScaleTicks = this.getMaxTicks(100);
@@ -190,7 +192,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     return Math.floor(this.width / tickWidth);
   }
 
-  tickTransform(tick): string {
+  tickTransform(tick: number): string {
     return 'translate(' + this.adjustedScale(tick) + ',' + this.verticalSpacing + ')';
   }
 

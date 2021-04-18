@@ -1,4 +1,4 @@
-import { MultiSeries } from '../models/chart-data.model';
+import { ScaleType } from './types';
 
 /**
  * Based on the data, return an array with unique values.
@@ -6,8 +6,8 @@ import { MultiSeries } from '../models/chart-data.model';
  * @export
  * @returns array
  */
-export function getUniqueXDomainValues(results: MultiSeries): Array<string | number | Date> {
-  const valueSet = new Set<string | number | Date>();
+export function getUniqueXDomainValues(results: any[]): any[] {
+  const valueSet = new Set();
   for (const result of results) {
     for (const d of result.series) {
       valueSet.add(d.name);
@@ -20,20 +20,20 @@ export function getUniqueXDomainValues(results: MultiSeries): Array<string | num
  * Get the scaleType of enumerable of values.
  * @returns  'time', 'linear' or 'ordinal'
  */
-export function getScaleType(values: any[], checkDateType = true): string {
+export function getScaleType(values: any[], checkDateType: boolean = true): ScaleType {
   if (checkDateType) {
     const allDates = values.every(value => value instanceof Date);
     if (allDates) {
-      return 'time';
+      return ScaleType.Time;
     }
   }
 
   const allNumbers = values.every(value => typeof value === 'number');
   if (allNumbers) {
-    return 'linear';
+    return ScaleType.Linear;
   }
 
-  return 'ordinal';
+  return ScaleType.Ordinal;
 }
 
 export function getXDomainArray(
