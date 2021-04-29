@@ -12,12 +12,13 @@ import { select } from 'd3-selection';
 import { id } from '../utils/id';
 import { Gradient } from './types';
 import { AreaChartSeries } from '../models/chart-data.model';
+import { GradientOrientation } from './svg-linear-gradient.component';
 
 @Component({
   selector: 'g[ngx-charts-area]',
   template: `
     <svg:defs *ngIf="gradient">
-      <svg:g ngx-charts-svg-linear-gradient orientation="vertical" [name]="gradientId" [stops]="gradientStops" />
+      <svg:g ngx-charts-svg-linear-gradient [orientation]="gradientOrientation" [name]="gradientId" [stops]="gradientStops" />
     </svg:defs>
     <svg:path class="area" [attr.d]="areaPath" [attr.fill]="gradient ? gradientFill : fill" [style.opacity]="opacity" />
   `,
@@ -32,6 +33,7 @@ export class AreaComponent implements OnChanges {
   @Input() startOpacity: number = 0.5;
   @Input() endOpacity: number = 1;
   @Input() gradient: boolean = false;
+  @Input() gradientOrientation: GradientOrientation = GradientOrientation.Vertical;
   @Input() stops: Gradient[];
   @Input() animations: boolean = true;
 

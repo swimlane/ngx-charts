@@ -7,6 +7,7 @@ import {
   SimpleChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
+import { GradientOrientation } from '../common/svg-linear-gradient.component';
 import { area } from 'd3-shape';
 import { ColorHelper } from '../common/color.helper';
 import { Gradient, ScaleType } from '../common/types';
@@ -26,6 +27,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
       [startingPath]="startingPath"
       [opacity]="opacity"
       [gradient]="gradient || hasGradient"
+      [gradientOrientation]="gradientOrientation"
       [animations]="animations"
       [class.active]="isActive(data)"
       [class.inactive]="isInactive(data)"
@@ -43,6 +45,7 @@ export class AreaSeriesComponent implements OnChanges {
   @Input() stacked: boolean = false;
   @Input() normalized: boolean = false;
   @Input() gradient: boolean;
+  @Input() gradientOrientation: GradientOrientation = GradientOrientation.Vertical;
   @Input() curve: any;
   @Input() activeEntries: any[];
   @Input() animations: boolean = true;
