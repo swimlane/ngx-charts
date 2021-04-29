@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { GradientOrientation } from '../common/svg-linear-gradient.component';
 import { scaleLinear, scalePoint, scaleTime } from 'd3-scale';
-import { curveLinear, CurveLinear } from 'd3-shape';
+import { curveLinear, CurveFactory } from 'd3-shape';
 
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
@@ -177,7 +177,7 @@ export class AreaChartComponent extends BaseChartComponent {
   @Input() gradient: boolean;
   @Input() gradientOrientation: GradientOrientation = GradientOrientation.Vertical;
   @Input() showGridLines: boolean = true;
-  @Input() curve: CurveLinear = curveLinear;
+  @Input() curve: CurveFactory = curveLinear;
   @Input() activeEntries: any[] = [];
   @Input() schemeType: ScaleType;
   @Input() trimXAxisTicks: boolean = true;
