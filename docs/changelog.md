@@ -1,5 +1,10 @@
 # Changelog
 
+## 18.0.0
+
+- Breaking: Improve typing
+- Bug: Fix timeline selection
+
 ## 17.0.1
 
 - Bug: Fix pie label component on SSR (#1583)
