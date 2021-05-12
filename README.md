@@ -55,6 +55,22 @@ npm i @swimlane/ngx-charts --save
 
 To learn how to use the ngx-charts components to build custom charts and find examples, please refer to our [Custom Charts Page](https://github.com/swimlane/ngx-charts/blob/master/docs/custom-charts.md).
 
+## Release
+
+- Checkout master (`git checkout master`)
+- Pull master (`git pull`)
+- Refresh node modules (`npm ci`)
+- Run tests (`npm test`)
+- Examine log to determine next version (X.Y.Z)
+- Run `git checkout -b release/X.Y.Z`
+- Update version in `projects/swimlane/ngx-charts/package.json`.
+- Update changelog in `projects/docs/changelog.md`
+- Run `git commit -am "(release): X.Y.Z"`
+- Run `git tag X.Y.Z`
+- Run `git push origin HEAD --tags`
+- Run `npm run publish:lib`
+- Submit PR
+
 ## Credits
 
 `ngx-charts` is a [Swimlane](http://swimlane.com) open-source project; we believe in giving back to the open-source community by sharing some of the projects we build for our application. Swimlane is an automated cyber security operations and incident response platform that enables cyber security teams to leverage threat intelligence, speed up incident response and automate security operations.
