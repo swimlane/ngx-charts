@@ -10,7 +10,7 @@ import {
   TemplateRef
 } from '@angular/core';
 import { scaleLinear, scalePoint, scaleTime } from 'd3-scale';
-import { curveLinear, CurveLinear } from 'd3-shape';
+import { curveLinear, CurveFactory } from 'd3-shape';
 
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
@@ -173,7 +173,7 @@ export class AreaChartComponent extends BaseChartComponent {
   @Input() timeline: boolean = false;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
-  @Input() curve: CurveLinear = curveLinear;
+  @Input() curve: CurveFactory = curveLinear;
   @Input() activeEntries: any[] = [];
   @Input() schemeType: ScaleType;
   @Input() trimXAxisTicks: boolean = true;

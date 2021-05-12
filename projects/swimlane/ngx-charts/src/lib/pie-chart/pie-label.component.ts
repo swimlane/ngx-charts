@@ -8,13 +8,13 @@ import {
   PLATFORM_ID,
   Inject
 } from '@angular/core';
-import { arc } from 'd3-shape';
+import { arc, DefaultArcObject } from 'd3-shape';
 
 import { trimLabel } from '../common/trim-label.helper';
 import { TextAnchor } from '../common/types';
 import { DataItem } from '../models/chart-data.model';
 
-export interface PieData {
+export interface PieData extends DefaultArcObject {
   data: DataItem;
   endAngle: number;
   index: number;
