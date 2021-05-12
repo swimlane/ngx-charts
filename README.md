@@ -19,29 +19,29 @@ For more info, check out the [documentation](https://swimlane.gitbook.io/ngx-cha
 
 ### Chart Types
 
-  - Horizontal & Vertical Bar Charts (Standard, Grouped, Stacked, Normalized)
-  - Line
-  - Area (Standard, Stacked, Normalized)
-  - Pie (Explodable, Grid, Custom legends)
-  - Bubble
-  - Donut
-  - Gauge (Linear & Radial)
-  - Heatmap
-  - Treemap
-  - Number Cards
+- Horizontal & Vertical Bar Charts (Standard, Grouped, Stacked, Normalized)
+- Line
+- Area (Standard, Stacked, Normalized)
+- Pie (Explodable, Grid, Custom legends)
+- Bubble
+- Donut
+- Gauge (Linear & Radial)
+- Heatmap
+- Treemap
+- Number Cards
 
 ### Customization
 
-  - Autoscaling
-  - Timeline Filtering
-  - Line Interpolation
-  - Configurable Axis Labels
-  - Legends (Labels & Gradient)
-  - Advanced Label Positioning
-  - Real-time data support
-  - Advanced Tooltips
-  - Data point Event Handlers
-  - Works with ngUpgrade
+- Autoscaling
+- Timeline Filtering
+- Line Interpolation
+- Configurable Axis Labels
+- Legends (Labels & Gradient)
+- Advanced Label Positioning
+- Real-time data support
+- Advanced Tooltips
+- Data point Event Handlers
+- Works with ngUpgrade
 
 ## Install
 
@@ -57,19 +57,19 @@ To learn how to use the ngx-charts components to build custom charts and find ex
 
 ## Release
 
-  - Checkout master (`git checkout master`)
-  - Pull master (`git pull`)
-  - Refresh node modules (`npm ci`)
-  - Run tests (`npm test`)
-  - Examine log to determine next version (X.Y.Z)
-  - Run `git checkout -b release/X.Y.Z`
-  - Update version in `projects/swimlane/ngx-charts/package.json`.
-  - Update changelog in `projects/docs/changelog.md`
-  - Run `git commit -am "(release): X.Y.Z"`
-  - Run `git tag X.Y.Z`
-  - Run `git push origin HEAD --tags`
-  - Run `npm run publish:lib`
-  - Submit PR
+- Checkout master (`git checkout master`)
+- Pull master (`git pull`)
+- Refresh node modules (`npm ci`)
+- Run tests (`npm test`)
+- Examine log to determine next version (X.Y.Z)
+- Run `git checkout -b release/X.Y.Z`
+- Update version in `projects/swimlane/ngx-charts/package.json`.
+- Update changelog in `projects/docs/changelog.md`
+- Run `git commit -am "(release): X.Y.Z"`
+- Run `git tag X.Y.Z`
+- Run `git push origin HEAD --tags`
+- Run `npm run publish:lib`
+- Submit PR
 
 ## Credits
 
