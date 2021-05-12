@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Bug: Use correct curve type
+- Bug: include `@types/d3-shape` as a dependency in published package.
+
 ## 18.0.0
 
 - Breaking: Improve typing
