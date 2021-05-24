@@ -403,9 +403,9 @@ export class DoubleLineChartComponent extends BaseChartComponent implements OnIn
     let min;
     let max;
     if (this.scaleType === ScaleType.Time || this.scaleType === ScaleType.Linear) {
-      min = this.xScaleMin == null ? Math.min(...xAxisValues) : this.xScaleMin;
+      min = this.xScaleMin ?? Math.min(...xAxisValues);
 
-      max = this.xScaleMax == null ? Math.max(...xAxisValues) : this.xScaleMax;
+      max = this.xScaleMax ?? Math.max(...xAxisValues);
     }
 
     if (this.scaleType === ScaleType.Time) {
@@ -473,8 +473,8 @@ export class DoubleLineChartComponent extends BaseChartComponent implements OnIn
       min = limitMin == null ? Math.min(...values) : Math.min(...values, limitMin);
       max = limitMax == null ? Math.max(...values) : Math.max(...values, limitMax);
     } else {
-      min = limitMin == null ? Math.min(...values) : limitMin;
-      max = limitMax == null ? Math.max(...values) : limitMax;
+      min = limitMin ?? Math.min(...values);
+      max = limitMax ?? Math.max(...values);
     }
 
     return [min, max];
