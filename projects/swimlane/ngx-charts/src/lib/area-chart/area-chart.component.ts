@@ -293,9 +293,9 @@ export class AreaChartComponent extends BaseChartComponent {
     let min;
     let max;
     if (this.scaleType === ScaleType.Time || this.scaleType === ScaleType.Linear) {
-      min = this.xScaleMin == null ? Math.min(...values) : this.xScaleMin;
+      min = this.xScaleMin ?? Math.min(...values);
 
-      max = this.xScaleMax == null ? Math.max(...values) : this.xScaleMax;
+      max = this.xScaleMax ?? Math.max(...values);
     }
 
     if (this.scaleType === ScaleType.Time) {
@@ -338,9 +338,9 @@ export class AreaChartComponent extends BaseChartComponent {
       values.push(this.baseValue);
     }
 
-    const min = this.yScaleMin == null ? Math.min(...values) : this.yScaleMin;
+    const min = this.yScaleMin ?? Math.min(...values);
 
-    const max = this.yScaleMax == null ? Math.max(...values) : this.yScaleMax;
+    const max = this.yScaleMax ?? Math.max(...values);
 
     return [min, max];
   }
