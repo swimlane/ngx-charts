@@ -405,6 +405,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
     this.filteredDomain = domain;
     this.xDomain = this.filteredDomain;
     this.xScale = this.getXScale(this.xDomain, this.dims.width);
+    this.timelineSelectionChanged.emit(domain);
   }
 
   updateHoveredVertical(item) {

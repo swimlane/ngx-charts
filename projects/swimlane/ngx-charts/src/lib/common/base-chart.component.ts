@@ -34,6 +34,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() animations: boolean = true;
 
   @Output() select = new EventEmitter();
+  @Output() timelineSelectionChanged = new EventEmitter();
 
   width: number;
   height: number;
