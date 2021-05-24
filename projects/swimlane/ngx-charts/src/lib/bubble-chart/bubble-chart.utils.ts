@@ -17,8 +17,8 @@ export function getDomain(
   }
 
   if (scaleType === ScaleType.Time || scaleType === ScaleType.Linear) {
-    const min = minVal ? minVal : Math.min(...values);
-    const max = maxVal ? maxVal : Math.max(...values);
+    const min = minVal == null ? Math.min(...values) : minVal;
+    const max = maxVal == null ? Math.max(...values) : maxVal;
 
     domain = [min, max];
   } else {
