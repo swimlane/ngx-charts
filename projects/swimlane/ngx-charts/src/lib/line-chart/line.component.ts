@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { select } from 'd3-selection';
+import { Series } from '../models/chart-data.model';
 
 @Component({
   selector: 'g[ngx-charts-line]',
@@ -42,13 +43,13 @@ import { select } from 'd3-selection';
   ]
 })
 export class LineComponent implements OnChanges {
-  @Input() path;
-  @Input() stroke;
-  @Input() data;
+  @Input() path: string;
+  @Input() stroke: string;
+  @Input() data: Series;
   @Input() fill: string = 'none';
   @Input() animations: boolean = true;
 
-  @Output() select = new EventEmitter();
+  // @Output() select = new EventEmitter();
 
   initialized: boolean = false;
   initialPath: string;
@@ -68,10 +69,7 @@ export class LineComponent implements OnChanges {
     const node = select(this.element.nativeElement).select('.line');
 
     if (this.animations) {
-      node
-        .transition()
-        .duration(750)
-        .attr('d', this.path);
+      node.transition().duration(750).attr('d', this.path);
     } else {
       node.attr('d', this.path);
     }

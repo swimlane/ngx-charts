@@ -10,7 +10,20 @@ import {
   TemplateRef
 } from '@angular/core';
 import { formatLabel, escapeLabel } from '../common/label.helper';
+import { DataItem, Series } from '../models/chart-data.model';
 
+interface Cell {
+  cell: DataItem;
+  data: number;
+  fill: string;
+  height: number;
+  label: string;
+  row: Series;
+  series: string;
+  width: number;
+  x: number;
+  y: number;
+}
 @Component({
   selector: 'g[ngx-charts-heat-map-cell-series]',
   template: `
@@ -50,11 +63,11 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
   @Input() tooltipTemplate: TemplateRef<any>;
   @Input() animations: boolean = true;
 
-  @Output() select = new EventEmitter();
-  @Output() activate: EventEmitter<any> = new EventEmitter();
-  @Output() deactivate: EventEmitter<any> = new EventEmitter();
+  @Output() select: EventEmitter<DataItem> = new EventEmitter();
+  @Output() activate: EventEmitter<DataItem> = new EventEmitter();
+  @Output() deactivate: EventEmitter<DataItem> = new EventEmitter();
 
-  cells: any[];
+  cells: Cell[];
 
   ngOnInit() {
     if (!this.tooltipText) {
@@ -70,7 +83,7 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
     this.cells = this.getCells();
   }
 
-  getCells() {
+  getCells(): Cell[] {
     const cells = [];
 
     this.data.map(row => {
@@ -96,15 +109,15 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
     return cells;
   }
 
-  getTooltipText({ label, data, series }): string {
+  getTooltipText({ label, data, series }: { label: string; data: number; series: string }): string {
     return `
       <span class="tooltip-label">${escapeLabel(series)} • ${escapeLabel(label)}</span>
       <span class="tooltip-val">${data.toLocaleString()}</span>
     `;
   }
 
-  trackBy(index, item): string {
-    return item.tooltipText;
+  trackBy(index: number, item): string {
+    return item.label;
   }
 
   onClick(data): void {

@@ -1,6 +1,30 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChild,
+  ChangeDetectionStrategy,
+  TemplateRef,
+  PLATFORM_ID,
+  Inject
+} from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { createMouseEvent } from '../events';
+import { isPlatformBrowser } from '@angular/common';
+import { ScaleType, ViewDimensions } from '../common/types';
+import { ColorHelper } from '../common/color.helper';
+
+export interface Tooltip {
+  color: string;
+  d0: number;
+  d1: number;
+  max: number;
+  min: number;
+  name: any;
+  series: any;
+  value: any;
+}
 
 @Component({
   selector: 'g[ngx-charts-tooltip-area]',
@@ -66,24 +90,26 @@ import { createMouseEvent } from '../events';
 export class TooltipArea {
   anchorOpacity: number = 0;
   anchorPos: number = -1;
-  anchorValues: any[] = [];
+  anchorValues: Tooltip[] = [];
   lastAnchorPos: number;
 
-  @Input() dims;
-  @Input() xSet;
+  @Input() dims: ViewDimensions;
+  @Input() xSet: any[];
   @Input() xScale;
   @Input() yScale;
-  @Input() results;
-  @Input() colors;
+  @Input() results: any[];
+  @Input() colors: ColorHelper;
   @Input() showPercentage: boolean = false;
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipTemplate: TemplateRef<any>;
 
-  @Output() hover = new EventEmitter();
+  @Output() hover: EventEmitter<{ value: any }> = new EventEmitter();
 
   @ViewChild('tooltipAnchor', { static: false }) tooltipAnchor;
 
-  getValues(xVal): any[] {
+  constructor(@Inject(PLATFORM_ID) private platformId: any) {}
+
+  getValues(xVal): Tooltip[] {
     const results = [];
 
     for (const group of this.results) {
@@ -100,7 +126,7 @@ export class TooltipArea {
           val = (item.d1 - item.d0).toFixed(2) + '%';
         }
         let color;
-        if (this.colors.scaleType === 'linear') {
+        if (this.colors.scaleType === ScaleType.Linear) {
           let v = val;
           if (item.d1) {
             v = item.d1;
@@ -127,6 +153,10 @@ export class TooltipArea {
   }
 
   mouseMove(event) {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     const xPos = event.pageX - event.target.getBoundingClientRect().left;
 
     const closestIndex = this.findClosestPointIndex(xPos);
@@ -149,7 +179,7 @@ export class TooltipArea {
     }
   }
 
-  findClosestPointIndex(xPos) {
+  findClosestPointIndex(xPos: number): number {
     let minIndex = 0;
     let maxIndex = this.xSet.length - 1;
     let minDiff = Number.MAX_VALUE;
@@ -192,7 +222,7 @@ export class TooltipArea {
     this.lastAnchorPos = -1;
   }
 
-  getToolTipText(tooltipItem: any): string {
+  getToolTipText(tooltipItem: Tooltip): string {
     let result: string = '';
     if (tooltipItem.series !== undefined) {
       result += tooltipItem.series;

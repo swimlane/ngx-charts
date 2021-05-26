@@ -11,13 +11,22 @@ import {
 import { min } from 'd3-array';
 import { format } from 'd3-format';
 
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { trimLabel } from '../common/trim-label.helper';
 import { gridLayout } from '../common/grid-layout.helper';
 import { formatLabel } from '../common/label.helper';
-import { DataItem } from '../models/chart-data.model';
+import { DataItem, PieGridDataItem } from '../models/chart-data.model';
+import { ScaleType, ViewDimensions } from '../common/types';
+
+export interface PieGridData {
+  data: PieGridDataItem;
+  height: number;
+  width: number;
+  x: number;
+  y: number;
+}
 
 @Component({
   selector: 'ngx-charts-pie-grid',
@@ -101,12 +110,12 @@ export class PieGridComponent extends BaseChartComponent {
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
   dims: ViewDimensions;
-  data: any[];
+  data: PieGridData[];
   transform: string;
   series: any[];
-  domain: any[];
+  domain: string[];
   colorScale: ColorHelper;
-  margin = [20, 20, 20, 20];
+  margin: number[] = [20, 20, 20, 20];
 
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
@@ -141,7 +150,7 @@ export class PieGridComponent extends BaseChartComponent {
     `;
   }
 
-  getDomain(): any[] {
+  getDomain(): string[] {
     return this.results.map(d => d.label);
   }
 
@@ -203,7 +212,7 @@ export class PieGridComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    this.colorScale = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+    this.colorScale = new ColorHelper(this.scheme, ScaleType.Ordinal, this.domain, this.customColors);
   }
 
   onActivate(item, fromLegend = false) {

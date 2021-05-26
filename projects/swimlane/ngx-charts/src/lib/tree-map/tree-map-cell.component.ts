@@ -5,7 +5,8 @@ import { invertColor } from '../utils/color-utils';
 import { trimLabel } from '../common/trim-label.helper';
 import { escapeLabel } from '../common/label.helper';
 import { id } from '../utils/id';
-
+import { Gradient } from '../common/types';
+import { DataItem } from '../models/chart-data.model';
 @Component({
   selector: 'g[ngx-charts-tree-map-cell]',
   template: `
@@ -53,15 +54,15 @@ import { id } from '../utils/id';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreeMapCellComponent implements OnChanges {
-  @Input() data;
-  @Input() fill;
-  @Input() x;
-  @Input() y;
-  @Input() width;
-  @Input() height;
-  @Input() label;
-  @Input() value;
-  @Input() valueType;
+  @Input() data: DataItem;
+  @Input() fill: string;
+  @Input() x: number;
+  @Input() y: number;
+  @Input() width: number;
+  @Input() height: number;
+  @Input() label: string;
+  @Input() value: any;
+  // @Input() valueType;
   @Input() valueFormatting: any;
   @Input() labelFormatting: any;
   @Input() gradient: boolean = false;
@@ -69,7 +70,7 @@ export class TreeMapCellComponent implements OnChanges {
 
   @Output() select = new EventEmitter();
 
-  gradientStops: any[];
+  gradientStops: Gradient[];
   gradientId: string;
   gradientUrl: string;
 
@@ -117,10 +118,7 @@ export class TreeMapCellComponent implements OnChanges {
   loadAnimation(): void {
     const node = select(this.element).select('.cell');
 
-    node
-      .attr('opacity', 0)
-      .attr('x', this.x)
-      .attr('y', this.y);
+    node.attr('opacity', 0).attr('x', this.x).attr('y', this.y);
 
     this.animateToCurrentForm();
   }
@@ -142,12 +140,7 @@ export class TreeMapCellComponent implements OnChanges {
         .attr('width', this.width)
         .attr('height', this.height);
     } else {
-      node
-        .attr('opacity', 1)
-        .attr('x', this.x)
-        .attr('y', this.y)
-        .attr('width', this.width)
-        .attr('height', this.height);
+      node.attr('opacity', 1).attr('x', this.x).attr('y', this.y).attr('width', this.width).attr('height', this.height);
     }
   }
 
@@ -155,7 +148,7 @@ export class TreeMapCellComponent implements OnChanges {
     this.select.emit(this.data);
   }
 
-  getGradientStops() {
+  getGradientStops(): Gradient[] {
     return [
       {
         offset: 0,

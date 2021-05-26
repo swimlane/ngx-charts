@@ -13,6 +13,8 @@ import { treemap, stratify } from 'd3-hierarchy';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
+import { ViewDimensions, ScaleType } from '../common/types';
+import { DataItem } from '../models/chart-data.model';
 
 @Component({
   selector: 'ngx-charts-tree-map',
@@ -40,7 +42,7 @@ import { ColorHelper } from '../common/color.helper';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreeMapComponent extends BaseChartComponent {
-  @Input() results;
+  @Input() results: DataItem[];
   @Input() tooltipDisabled: boolean = false;
   @Input() valueFormatting: any;
   @Input() labelFormatting: any;
@@ -50,13 +52,13 @@ export class TreeMapComponent extends BaseChartComponent {
 
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
-  dims: any;
+  dims: ViewDimensions;
   domain: any;
   transform: any;
   colors: ColorHelper;
   treemap: any;
-  data: any;
-  margin = [10, 10, 10, 10];
+  data: DataItem;
+  margin: number[] = [10, 10, 10, 10];
 
   update(): void {
     super.update();
@@ -102,11 +104,11 @@ export class TreeMapComponent extends BaseChartComponent {
     return this.results.map(d => d.name);
   }
 
-  onClick(data): void {
+  onClick(data: DataItem): void {
     this.select.emit(data);
   }
 
   setColors(): void {
-    this.colors = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+    this.colors = new ColorHelper(this.scheme, ScaleType.Ordinal, this.domain, this.customColors);
   }
 }

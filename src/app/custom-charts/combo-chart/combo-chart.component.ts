@@ -17,7 +17,8 @@ import {
   LineSeriesComponent,
   ViewDimensions,
   ColorHelper,
-  calculateViewDimensions
+  calculateViewDimensions,
+  ScaleType
 } from 'projects/swimlane/ngx-charts/src/public-api';
 
 @Component({
@@ -44,7 +45,7 @@ export class ComboChartComponent extends BaseChartComponent {
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
-  @Input() schemeType: string;
+  @Input() schemeType: ScaleType;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
   @Input() yRightAxisTickFormatting: any;
@@ -113,7 +114,7 @@ export class ComboChartComponent extends BaseChartComponent {
       showYLabel: this.showYAxisLabel,
       showLegend: this.legend,
       legendType: this.schemeType,
-      legendPosition: this.legendPosition
+      legendPosition: this.legendPosition as any
     });
 
     if (!this.yAxis) {
@@ -280,13 +281,9 @@ export class ComboChartComponent extends BaseChartComponent {
     const offset = Math.floor((width + this.barPadding - (this.bandwidth + this.barPadding) * domain.length) / 2);
 
     if (this.scaleType === 'time') {
-      scale = scaleTime()
-        .range([0, width])
-        .domain(domain);
+      scale = scaleTime().range([0, width]).domain(domain);
     } else if (this.scaleType === 'linear') {
-      scale = scaleLinear()
-        .range([0, width])
-        .domain(domain);
+      scale = scaleLinear().range([0, width]).domain(domain);
 
       if (this.roundDomains) {
         scale = scale.nice();
@@ -301,9 +298,7 @@ export class ComboChartComponent extends BaseChartComponent {
   }
 
   getYScaleLine(domain, height): any {
-    const scale = scaleLinear()
-      .range([height, 0])
-      .domain(domain);
+    const scale = scaleLinear().range([height, 0]).domain(domain);
 
     return this.roundDomains ? scale.nice() : scale;
   }
@@ -311,17 +306,12 @@ export class ComboChartComponent extends BaseChartComponent {
   getXScale(): any {
     this.xDomain = this.getXDomain();
     const spacing = this.xDomain.length / (this.dims.width / this.barPadding + 1);
-    return scaleBand()
-      .range([0, this.dims.width])
-      .paddingInner(spacing)
-      .domain(this.xDomain);
+    return scaleBand().range([0, this.dims.width]).paddingInner(spacing).domain(this.xDomain);
   }
 
   getYScale(): any {
     this.yDomain = this.getYDomain();
-    const scale = scaleLinear()
-      .range([this.dims.height, 0])
-      .domain(this.yDomain);
+    const scale = scaleLinear().range([this.dims.height, 0]).domain(this.yDomain);
     return this.roundDomains ? scale.nice() : scale;
   }
 
@@ -347,7 +337,7 @@ export class ComboChartComponent extends BaseChartComponent {
 
   setColors(): void {
     let domain;
-    if (this.schemeType === 'ordinal') {
+    if (this.schemeType === ScaleType.Ordinal) {
       domain = this.xDomain;
     } else {
       domain = this.yDomain;
@@ -364,7 +354,7 @@ export class ComboChartComponent extends BaseChartComponent {
       title: undefined,
       position: this.legendPosition
     };
-    if (opts.scaleType === 'ordinal') {
+    if (opts.scaleType === ScaleType.Ordinal) {
       opts.domain = this.seriesDomain;
       opts.colors = this.colorsLine;
       opts.title = this.legendTitle;

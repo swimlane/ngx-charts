@@ -1,5 +1,4 @@
 import { Component, Input, OnChanges, ChangeDetectionStrategy, SimpleChanges, ViewEncapsulation } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'ngx-charts-scale-legend',
@@ -24,20 +23,18 @@ import { DomSanitizer } from '@angular/platform-browser';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ScaleLegendComponent implements OnChanges {
-  @Input() valueRange;
-  @Input() colors;
-  @Input() height;
-  @Input() width;
-  @Input() horizontal = false;
+  @Input() valueRange: number[];
+  @Input() colors: any;
+  @Input() height: number;
+  @Input() width: number;
+  @Input() horizontal: boolean = false;
 
-  gradient: any;
-
-  constructor(private sanitizer: DomSanitizer) {}
+  gradient: string;
 
   ngOnChanges(changes: SimpleChanges): void {
     const gradientValues = this.gradientString(this.colors.range(), this.colors.domain());
     const direction = this.horizontal ? 'right' : 'bottom';
-    this.gradient = this.sanitizer.bypassSecurityTrustStyle(`linear-gradient(to ${direction}, ${gradientValues})`);
+    this.gradient = `linear-gradient(to ${direction}, ${gradientValues})`;
   }
 
   /**
@@ -45,7 +42,7 @@ export class ScaleLegendComponent implements OnChanges {
    * @param colors array of colors
    * @param splits array of splits on a scale of (0, 1)
    */
-  gradientString(colors, splits): string {
+  gradientString(colors: string[], splits: number[]): string {
     // add the 100%
     splits.push(1);
     const pairs = [];

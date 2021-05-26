@@ -2,32 +2,32 @@ import { PlacementTypes } from './placement.type';
 
 const caretOffset = 7;
 
-function verticalPosition(elDimensions, popoverDimensions, alignment) {
-  if (alignment === 'top') {
+function verticalPosition(elDimensions: DOMRect, popoverDimensions: DOMRect, alignment: PlacementTypes): number {
+  if (alignment === PlacementTypes.Top) {
     return elDimensions.top - caretOffset;
   }
 
-  if (alignment === 'bottom') {
+  if (alignment === PlacementTypes.Bottom) {
     return elDimensions.top + elDimensions.height - popoverDimensions.height + caretOffset;
   }
 
-  if (alignment === 'center') {
+  if (alignment === PlacementTypes.Center) {
     return elDimensions.top + elDimensions.height / 2 - popoverDimensions.height / 2;
   }
 
   return undefined;
 }
 
-function horizontalPosition(elDimensions, popoverDimensions, alignment) {
-  if (alignment === 'left') {
+function horizontalPosition(elDimensions: DOMRect, popoverDimensions: DOMRect, alignment: PlacementTypes): number {
+  if (alignment === PlacementTypes.Left) {
     return elDimensions.left - caretOffset;
   }
 
-  if (alignment === 'right') {
+  if (alignment === PlacementTypes.Right) {
     return elDimensions.left + elDimensions.width - popoverDimensions.width + caretOffset;
   }
 
-  if (alignment === 'center') {
+  if (alignment === PlacementTypes.Center) {
     return elDimensions.left + elDimensions.width / 2 - popoverDimensions.width / 2;
   }
 
@@ -45,7 +45,11 @@ export class PositionHelper {
    *
    * @memberOf PositionHelper
    */
-  static calculateVerticalAlignment(elDimensions, popoverDimensions, alignment): number {
+  static calculateVerticalAlignment(
+    elDimensions: DOMRect,
+    popoverDimensions: DOMRect,
+    alignment: PlacementTypes
+  ): number {
     let result = verticalPosition(elDimensions, popoverDimensions, alignment);
 
     if (result + popoverDimensions.height > window.innerHeight) {
@@ -60,18 +64,23 @@ export class PositionHelper {
    *
    * @memberOf PositionHelper
    */
-  static calculateVerticalCaret(elDimensions, popoverDimensions, caretDimensions, alignment): number {
+  static calculateVerticalCaret(
+    elDimensions: DOMRect,
+    popoverDimensions: DOMRect,
+    caretDimensions: DOMRect,
+    alignment: PlacementTypes
+  ): number {
     let result;
 
-    if (alignment === 'top') {
+    if (alignment === PlacementTypes.Top) {
       result = elDimensions.height / 2 - caretDimensions.height / 2 + caretOffset;
     }
 
-    if (alignment === 'bottom') {
+    if (alignment === PlacementTypes.Bottom) {
       result = popoverDimensions.height - elDimensions.height / 2 - caretDimensions.height / 2 - caretOffset;
     }
 
-    if (alignment === 'center') {
+    if (alignment === PlacementTypes.Center) {
       result = popoverDimensions.height / 2 - caretDimensions.height / 2;
     }
 
@@ -88,7 +97,11 @@ export class PositionHelper {
    *
    * @memberOf PositionHelper
    */
-  static calculateHorizontalAlignment(elDimensions, popoverDimensions, alignment): number {
+  static calculateHorizontalAlignment(
+    elDimensions: DOMRect,
+    popoverDimensions: DOMRect,
+    alignment: PlacementTypes
+  ): number {
     let result = horizontalPosition(elDimensions, popoverDimensions, alignment);
 
     if (result + popoverDimensions.width > window.innerWidth) {
@@ -103,18 +116,23 @@ export class PositionHelper {
    *
    * @memberOf PositionHelper
    */
-  static calculateHorizontalCaret(elDimensions, popoverDimensions, caretDimensions, alignment): number {
+  static calculateHorizontalCaret(
+    elDimensions: DOMRect,
+    popoverDimensions: DOMRect,
+    caretDimensions: DOMRect,
+    alignment: PlacementTypes
+  ): number {
     let result;
 
-    if (alignment === 'left') {
+    if (alignment === PlacementTypes.Left) {
       result = elDimensions.width / 2 - caretDimensions.width / 2 + caretOffset;
     }
 
-    if (alignment === 'right') {
+    if (alignment === PlacementTypes.Right) {
       result = popoverDimensions.width - elDimensions.width / 2 - caretDimensions.width / 2 - caretOffset;
     }
 
-    if (alignment === 'center') {
+    if (alignment === PlacementTypes.Center) {
       result = popoverDimensions.width / 2 - caretDimensions.width / 2;
     }
 
@@ -131,28 +149,33 @@ export class PositionHelper {
    *
    * @memberOf PositionHelper
    */
-  static shouldFlip(elDimensions, popoverDimensions, placement, spacing): boolean {
+  static shouldFlip(
+    elDimensions: DOMRect,
+    popoverDimensions: DOMRect,
+    placement: PlacementTypes,
+    spacing: number
+  ): boolean {
     let flip = false;
 
-    if (placement === 'right') {
+    if (placement === PlacementTypes.Right) {
       if (elDimensions.left + elDimensions.width + popoverDimensions.width + spacing > window.innerWidth) {
         flip = true;
       }
     }
 
-    if (placement === 'left') {
+    if (placement === PlacementTypes.Left) {
       if (elDimensions.left - popoverDimensions.width - spacing < 0) {
         flip = true;
       }
     }
 
-    if (placement === 'top') {
+    if (placement === PlacementTypes.Top) {
       if (elDimensions.top - popoverDimensions.height - spacing < 0) {
         flip = true;
       }
     }
 
-    if (placement === 'bottom') {
+    if (placement === PlacementTypes.Bottom) {
       if (elDimensions.top + elDimensions.height + popoverDimensions.height + spacing > window.innerHeight) {
         flip = true;
       }
@@ -166,20 +189,20 @@ export class PositionHelper {
    *
    * @memberOf PositionHelper
    */
-  static positionCaret(placement, elmDim, hostDim, caretDimensions, alignment): any {
+  static positionCaret(placement, elmDim, hostDim, caretDimensions, alignment: PlacementTypes): any {
     let top = 0;
     let left = 0;
 
-    if (placement === PlacementTypes.right) {
+    if (placement === PlacementTypes.Right) {
       left = -7;
       top = PositionHelper.calculateVerticalCaret(hostDim, elmDim, caretDimensions, alignment);
-    } else if (placement === PlacementTypes.left) {
+    } else if (placement === PlacementTypes.Left) {
       left = elmDim.width;
       top = PositionHelper.calculateVerticalCaret(hostDim, elmDim, caretDimensions, alignment);
-    } else if (placement === PlacementTypes.top) {
+    } else if (placement === PlacementTypes.Top) {
       top = elmDim.height;
       left = PositionHelper.calculateHorizontalCaret(hostDim, elmDim, caretDimensions, alignment);
-    } else if (placement === PlacementTypes.bottom) {
+    } else if (placement === PlacementTypes.Bottom) {
       top = -7;
       left = PositionHelper.calculateHorizontalCaret(hostDim, elmDim, caretDimensions, alignment);
     }
@@ -196,16 +219,16 @@ export class PositionHelper {
     let top = 0;
     let left = 0;
 
-    if (placement === PlacementTypes.right) {
+    if (placement === PlacementTypes.Right) {
       left = hostDim.left + hostDim.width + spacing;
       top = PositionHelper.calculateVerticalAlignment(hostDim, elmDim, alignment);
-    } else if (placement === PlacementTypes.left) {
+    } else if (placement === PlacementTypes.Left) {
       left = hostDim.left - elmDim.width - spacing;
       top = PositionHelper.calculateVerticalAlignment(hostDim, elmDim, alignment);
-    } else if (placement === PlacementTypes.top) {
+    } else if (placement === PlacementTypes.Top) {
       top = hostDim.top - elmDim.height - spacing;
       left = PositionHelper.calculateHorizontalAlignment(hostDim, elmDim, alignment);
-    } else if (placement === PlacementTypes.bottom) {
+    } else if (placement === PlacementTypes.Bottom) {
       top = hostDim.top + hostDim.height + spacing;
       left = PositionHelper.calculateHorizontalAlignment(hostDim, elmDim, alignment);
     }
@@ -218,18 +241,18 @@ export class PositionHelper {
    *
    * @memberOf PositionHelper
    */
-  static determinePlacement(placement, elmDim, hostDim, spacing): any {
+  static determinePlacement(placement: PlacementTypes, elmDim: DOMRect, hostDim: DOMRect, spacing: number): any {
     const shouldFlip = PositionHelper.shouldFlip(hostDim, elmDim, placement, spacing);
 
     if (shouldFlip) {
-      if (placement === PlacementTypes.right) {
-        return PlacementTypes.left;
-      } else if (placement === PlacementTypes.left) {
-        return PlacementTypes.right;
-      } else if (placement === PlacementTypes.top) {
-        return PlacementTypes.bottom;
-      } else if (placement === PlacementTypes.bottom) {
-        return PlacementTypes.top;
+      if (placement === PlacementTypes.Right) {
+        return PlacementTypes.Left;
+      } else if (placement === PlacementTypes.Left) {
+        return PlacementTypes.Right;
+      } else if (placement === PlacementTypes.Top) {
+        return PlacementTypes.Bottom;
+      } else if (placement === PlacementTypes.Bottom) {
+        return PlacementTypes.Top;
       }
     }
 

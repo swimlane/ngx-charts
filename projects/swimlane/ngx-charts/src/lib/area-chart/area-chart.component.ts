@@ -10,13 +10,16 @@ import {
   TemplateRef
 } from '@angular/core';
 import { scaleLinear, scalePoint, scaleTime } from 'd3-scale';
-import { curveLinear } from 'd3-shape';
+import { curveLinear, CurveFactory } from 'd3-shape';
 
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
 import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
+import { ViewDimensions, LegendPosition, LegendOptions, ScaleType } from '../common/types';
+import { isDate, isNumber } from '../utils/types';
+import { Series, StringOrNumberOrDate } from '../models/chart-data.model';
 
 @Component({
   selector: 'ngx-charts-area-chart',
@@ -156,24 +159,23 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
   encapsulation: ViewEncapsulation.None
 })
 export class AreaChartComponent extends BaseChartComponent {
-  @Input() legend;
+  @Input() legend: boolean = false;
   @Input() legendTitle: string = 'Legend';
-  @Input() legendPosition: string = 'right';
-  @Input() state;
-  @Input() xAxis;
-  @Input() yAxis;
+  @Input() legendPosition: LegendPosition = LegendPosition.Right;
+  @Input() xAxis: boolean = false;
+  @Input() yAxis: boolean = false;
   @Input() baseValue: any = 'auto';
-  @Input() autoScale;
-  @Input() showXAxisLabel;
-  @Input() showYAxisLabel;
-  @Input() xAxisLabel;
-  @Input() yAxisLabel;
-  @Input() timeline;
+  @Input() autoScale: boolean = false;
+  @Input() showXAxisLabel: boolean;
+  @Input() showYAxisLabel: boolean;
+  @Input() xAxisLabel: string;
+  @Input() yAxisLabel: string;
+  @Input() timeline: boolean = false;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
-  @Input() curve: any = curveLinear;
+  @Input() curve: CurveFactory = curveLinear;
   @Input() activeEntries: any[] = [];
-  @Input() schemeType: string;
+  @Input() schemeType: ScaleType;
   @Input() trimXAxisTicks: boolean = true;
   @Input() trimYAxisTicks: boolean = true;
   @Input() rotateXAxisTicks: boolean = true;
@@ -198,29 +200,29 @@ export class AreaChartComponent extends BaseChartComponent {
 
   dims: ViewDimensions;
   xSet: any;
-  xDomain: any;
-  yDomain: any;
-  seriesDomain: any;
+  xDomain: any[];
+  yDomain: [number, number];
+  seriesDomain: string[];
   xScale: any;
   yScale: any;
   transform: string;
   colors: ColorHelper;
   clipPathId: string;
   clipPath: string;
-  scaleType: string;
-  series: any;
-  margin = [10, 20, 10, 20];
+  scaleType: ScaleType;
+  series: Series;
+  margin: number[] = [10, 20, 10, 20];
   hoveredVertical: any; // the value of the x axis that is hovered over
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
   filteredDomain: any;
-  legendOptions: any;
+  legendOptions: LegendOptions;
 
-  timelineWidth: any;
+  timelineWidth: number;
   timelineHeight: number = 50;
   timelineXScale: any;
   timelineYScale: any;
-  timelineXDomain: any;
+  timelineXDomain: any[];
   timelineTransform: any;
   timelinePadding: number = 10;
 
@@ -284,19 +286,19 @@ export class AreaChartComponent extends BaseChartComponent {
     this.scaleType = getScaleType(values);
     let domain = [];
 
-    if (this.scaleType === 'linear') {
+    if (this.scaleType === ScaleType.Linear) {
       values = values.map(v => Number(v));
     }
 
     let min;
     let max;
-    if (this.scaleType === 'time' || this.scaleType === 'linear') {
+    if (this.scaleType === ScaleType.Time || this.scaleType === ScaleType.Linear) {
       min = this.xScaleMin ? this.xScaleMin : Math.min(...values);
 
       max = this.xScaleMax ? this.xScaleMax : Math.max(...values);
     }
 
-    if (this.scaleType === 'time') {
+    if (this.scaleType === ScaleType.Time) {
       domain = [new Date(min), new Date(max)];
       this.xSet = [...values].sort((a, b) => {
         const aDate = a.getTime();
@@ -305,7 +307,7 @@ export class AreaChartComponent extends BaseChartComponent {
         if (bDate > aDate) return -1;
         return 0;
       });
-    } else if (this.scaleType === 'linear') {
+    } else if (this.scaleType === ScaleType.Linear) {
       domain = [min, max];
       // Use compare function to sort numbers numerically
       this.xSet = [...values].sort((a, b) => a - b);
@@ -317,7 +319,7 @@ export class AreaChartComponent extends BaseChartComponent {
     return domain;
   }
 
-  getYDomain(): any[] {
+  getYDomain(): [number, number] {
     const domain = [];
 
     for (const results of this.results) {
@@ -343,18 +345,18 @@ export class AreaChartComponent extends BaseChartComponent {
     return [min, max];
   }
 
-  getSeriesDomain(): any[] {
+  getSeriesDomain(): string[] {
     return this.results.map(d => d.name);
   }
 
-  getXScale(domain, width): any {
+  getXScale(domain, width: number): number {
     let scale;
 
-    if (this.scaleType === 'time') {
+    if (this.scaleType === ScaleType.Time) {
       scale = scaleTime();
-    } else if (this.scaleType === 'linear') {
+    } else if (this.scaleType === ScaleType.Linear) {
       scale = scaleLinear();
-    } else if (this.scaleType === 'ordinal') {
+    } else if (this.scaleType === ScaleType.Ordinal) {
       scale = scalePoint().padding(0.1);
     }
 
@@ -363,42 +365,32 @@ export class AreaChartComponent extends BaseChartComponent {
     return this.roundDomains ? scale.nice() : scale;
   }
 
-  getYScale(domain, height): any {
-    const scale = scaleLinear()
-      .range([height, 0])
-      .domain(domain);
+  getYScale(domain, height: number): number {
+    const scale = scaleLinear().range([height, 0]).domain(domain);
     return this.roundDomains ? scale.nice() : scale;
   }
 
-  getScaleType(values): string {
+  getScaleType(values): ScaleType {
     let date = true;
     let num = true;
     for (const value of values) {
-      if (!this.isDate(value)) {
+      if (isDate(value)) {
         date = false;
       }
-      if (typeof value !== 'number') {
+      if (isNumber(value)) {
         num = false;
       }
     }
 
     if (date) {
-      return 'time';
+      return ScaleType.Time;
     }
 
     if (num) {
-      return 'linear';
+      return ScaleType.Linear;
     }
 
-    return 'ordinal';
-  }
-
-  isDate(value): boolean {
-    if (value instanceof Date) {
-      return true;
-    }
-
-    return false;
+    return ScaleType.Ordinal;
   }
 
   updateDomain(domain): void {
@@ -418,7 +410,7 @@ export class AreaChartComponent extends BaseChartComponent {
     this.deactivateAll();
   }
 
-  onClick(data, series?): void {
+  onClick(data, series?: Series): void {
     if (series) {
       data.series = series.name;
     }
@@ -426,13 +418,13 @@ export class AreaChartComponent extends BaseChartComponent {
     this.select.emit(data);
   }
 
-  trackBy(index, item): string {
+  trackBy(index: number, item: Series): StringOrNumberOrDate {
     return item.name;
   }
 
   setColors(): void {
     let domain;
-    if (this.schemeType === 'ordinal') {
+    if (this.schemeType === ScaleType.Ordinal) {
       domain = this.seriesDomain;
     } else {
       domain = this.yDomain;
@@ -441,15 +433,15 @@ export class AreaChartComponent extends BaseChartComponent {
     this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
   }
 
-  getLegendOptions() {
-    const opts = {
-      scaleType: this.schemeType,
+  getLegendOptions(): LegendOptions {
+    const opts: LegendOptions = {
+      scaleType: this.schemeType as any,
       colors: undefined,
       domain: [],
       title: undefined,
       position: this.legendPosition
     };
-    if (opts.scaleType === 'ordinal') {
+    if (opts.scaleType === ScaleType.Ordinal) {
       opts.domain = this.seriesDomain;
       opts.colors = this.colors;
       opts.title = this.legendTitle;
@@ -460,17 +452,17 @@ export class AreaChartComponent extends BaseChartComponent {
     return opts;
   }
 
-  updateYAxisWidth({ width }): void {
+  updateYAxisWidth({ width }: { width: number }): void {
     this.yAxisWidth = width;
     this.update();
   }
 
-  updateXAxisHeight({ height }): void {
+  updateXAxisHeight({ height }: { height: number }): void {
     this.xAxisHeight = height;
     this.update();
   }
 
-  onActivate(item) {
+  onActivate(item): void {
     const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value;
     });
@@ -482,7 +474,7 @@ export class AreaChartComponent extends BaseChartComponent {
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(item) {
+  onDeactivate(item): void {
     const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value;
     });
@@ -493,7 +485,7 @@ export class AreaChartComponent extends BaseChartComponent {
     this.deactivate.emit({ value: item, entries: this.activeEntries });
   }
 
-  deactivateAll() {
+  deactivateAll(): void {
     this.activeEntries = [...this.activeEntries];
     for (const entry of this.activeEntries) {
       this.deactivate.emit({ value: entry, entries: [] });

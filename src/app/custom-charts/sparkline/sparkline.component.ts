@@ -7,7 +7,8 @@ import {
   BaseChartComponent,
   ViewDimensions,
   ColorHelper,
-  calculateViewDimensions
+  calculateViewDimensions,
+  ScaleType
 } from 'projects/swimlane/ngx-charts/src/public-api';
 
 @Component({
@@ -40,7 +41,7 @@ import {
 export class SparklineComponent extends BaseChartComponent {
   @Input() autoScale = false;
   @Input() curve: any = curveLinear;
-  @Input() schemeType: string = 'linear';
+  @Input() schemeType: ScaleType = ScaleType.Linear;
   @Input() valueDomain: number[];
   @Input() animations: boolean = true;
 
@@ -150,27 +151,18 @@ export class SparklineComponent extends BaseChartComponent {
     let scale;
 
     if (this.scaleType === 'time') {
-      scale = scaleTime()
-        .range([0, width])
-        .domain(domain);
+      scale = scaleTime().range([0, width]).domain(domain);
     } else if (this.scaleType === 'linear') {
-      scale = scaleLinear()
-        .range([0, width])
-        .domain(domain);
+      scale = scaleLinear().range([0, width]).domain(domain);
     } else if (this.scaleType === 'ordinal') {
-      scale = scalePoint()
-        .range([0, width])
-        .padding(0.1)
-        .domain(domain);
+      scale = scalePoint().range([0, width]).padding(0.1).domain(domain);
     }
 
     return scale;
   }
 
   getYScale(domain, height): any {
-    const scale = scaleLinear()
-      .range([height, 0])
-      .domain(domain);
+    const scale = scaleLinear().range([height, 0]).domain(domain);
 
     return scale;
   }
@@ -208,7 +200,7 @@ export class SparklineComponent extends BaseChartComponent {
 
   setColors(): void {
     let domain;
-    if (this.schemeType === 'ordinal') {
+    if (this.schemeType === ScaleType.Ordinal) {
       domain = this.seriesDomain;
     } else {
       domain = this.yDomain;

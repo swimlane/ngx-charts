@@ -1,7 +1,6 @@
 # ngx-charts
 
 [![Join the chat at https://gitter.im/swimlane/ngx-charts](https://badges.gitter.im/swimlane/ngx-charts.svg)](https://gitter.im/swimlane/ngx-charts?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Build Status](https://travis-ci.org/swimlane/ngx-charts.svg?branch=master)](https://travis-ci.org/swimlane/ngx-charts)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b097196f7f544412a79a99080a41bbc1)](https://www.codacy.com/app/Swimlane/ngx-charts?utm_source=github.com&utm_medium=referral&utm_content=swimlane/ngx-charts&utm_campaign=Badge_Grade)
 [![npm version](https://badge.fury.io/js/%40swimlane%2Fngx-charts.svg)](https://badge.fury.io/js/%40swimlane%2Fngx-charts)
 [![npm downloads](https://img.shields.io/npm/dm/@swimlane/ngx-charts.svg)](https://npmjs.org/@swimlane/ngx-charts)
@@ -55,6 +54,22 @@ npm i @swimlane/ngx-charts --save
 ## Custom Charts
 
 To learn how to use the ngx-charts components to build custom charts and find examples, please refer to our [Custom Charts Page](https://github.com/swimlane/ngx-charts/blob/master/docs/custom-charts.md).
+
+## Release
+
+- Checkout master (`git checkout master`)
+- Pull master (`git pull`)
+- Refresh node modules (`npm ci`)
+- Run tests (`npm test`)
+- Examine log to determine next version (X.Y.Z)
+- Run `git checkout -b release/X.Y.Z`
+- Update version in `projects/swimlane/ngx-charts/package.json`.
+- Update changelog in `projects/docs/changelog.md`
+- Run `git commit -am "(release): X.Y.Z"`
+- Run `git tag X.Y.Z`
+- Run `git push origin HEAD --tags`
+- Run `npm run publish:lib`
+- Submit PR
 
 ## Credits
 

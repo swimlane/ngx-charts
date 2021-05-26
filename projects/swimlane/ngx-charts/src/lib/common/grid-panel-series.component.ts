@@ -1,4 +1,25 @@
 import { Component, SimpleChanges, Input, OnChanges, ChangeDetectionStrategy } from '@angular/core';
+import { ViewDimensions } from './types/view-dimension.interface';
+import { DataItem } from '../models/chart-data.model';
+
+interface GridPanel {
+  class: ClassEnum;
+  height: number;
+  name: string;
+  width: number;
+  x: number;
+  y: number;
+}
+
+enum GridOrientation {
+  Vertical = 'vertical',
+  Horizontal = 'horizontal'
+}
+
+enum ClassEnum {
+  Odd = 'odd',
+  Even = 'even'
+}
 
 @Component({
   selector: 'g[ngx-charts-grid-panel-series]',
@@ -18,22 +39,17 @@ import { Component, SimpleChanges, Input, OnChanges, ChangeDetectionStrategy } f
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GridPanelSeriesComponent implements OnChanges {
-  gridPanels: any[];
+  gridPanels: GridPanel[];
 
-  @Input()
-  data;
+  @Input() data: any[];
 
-  @Input()
-  dims;
+  @Input() dims: ViewDimensions;
 
-  @Input()
-  xScale;
+  @Input() xScale: any;
 
-  @Input()
-  yScale;
+  @Input() yScale: any;
 
-  @Input()
-  orient;
+  @Input() orient: GridOrientation;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -43,33 +59,33 @@ export class GridPanelSeriesComponent implements OnChanges {
     this.gridPanels = this.getGridPanels();
   }
 
-  getGridPanels(): any[] {
+  getGridPanels(): GridPanel[] {
     return this.data.map(d => {
       let offset;
       let width;
       let height;
       let x;
       let y;
-      let className = 'odd';
+      let className = ClassEnum.Odd;
 
-      if (this.orient === 'vertical') {
+      if (this.orient === GridOrientation.Vertical) {
         const position: number = this.xScale(d.name);
         const positionIndex = Number.parseInt((position / this.xScale.step()).toString(), 10);
 
         if (positionIndex % 2 === 1) {
-          className = 'even';
+          className = ClassEnum.Even;
         }
         offset = this.xScale.bandwidth() * this.xScale.paddingInner();
         width = this.xScale.bandwidth() + offset;
         height = this.dims.height;
         x = this.xScale(d.name) - offset / 2;
         y = 0;
-      } else if (this.orient === 'horizontal') {
+      } else if (this.orient === GridOrientation.Horizontal) {
         const position = this.yScale(d.name);
         const positionIndex = Number.parseInt((position / this.yScale.step()).toString(), 10);
 
         if (positionIndex % 2 === 1) {
-          className = 'even';
+          className = ClassEnum.Even;
         }
         offset = this.yScale.bandwidth() * this.yScale.paddingInner();
 

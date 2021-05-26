@@ -8,7 +8,21 @@ import {
   ChangeDetectionStrategy,
   TemplateRef
 } from '@angular/core';
+import { ColorHelper } from '../common/color.helper';
 import { escapeLabel } from '../common/label.helper';
+import { DataItem } from '../models/chart-data.model';
+import { ViewDimensions } from '../common/types';
+
+interface TreeMapCell {
+  data: DataItem;
+  fill: string;
+  height: number;
+  label: string;
+  value: any;
+  width: number;
+  x: number;
+  y: number;
+}
 
 @Component({
   selector: 'g[ngx-charts-tree-map-cell-series]',
@@ -24,7 +38,6 @@ import { escapeLabel } from '../common/label.helper';
       [fill]="c.fill"
       [label]="c.label"
       [value]="c.value"
-      [valueType]="c.valueType"
       [valueFormatting]="valueFormatting"
       [labelFormatting]="labelFormatting"
       [gradient]="gradient"
@@ -42,9 +55,9 @@ import { escapeLabel } from '../common/label.helper';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreeMapCellSeriesComponent implements OnChanges {
-  @Input() data;
-  @Input() dims;
-  @Input() colors;
+  @Input() data: any; // type this
+  @Input() dims: ViewDimensions;
+  @Input() colors: ColorHelper;
   @Input() valueFormatting: any;
   @Input() labelFormatting: any;
   @Input() gradient: boolean = false;
@@ -54,13 +67,13 @@ export class TreeMapCellSeriesComponent implements OnChanges {
 
   @Output() select = new EventEmitter();
 
-  cells: any[];
+  cells: TreeMapCell[];
 
   ngOnChanges(changes: SimpleChanges): void {
     this.cells = this.getCells();
   }
 
-  getCells(): any[] {
+  getCells(): TreeMapCell[] {
     return this.data.children
       .filter(d => {
         return d.depth === 1;
@@ -76,13 +89,12 @@ export class TreeMapCellSeriesComponent implements OnChanges {
           height: d.y1 - d.y0,
           fill: this.colors.getColor(label),
           label,
-          value: d.value,
-          valueType: d.valueType
+          value: d.value
         };
       });
   }
 
-  getTooltipText({ label, value }): string {
+  getTooltipText({ label, value }: { label: any; value: any }): string {
     return `
       <span class="tooltip-label">${escapeLabel(label)}</span>
       <span class="tooltip-val">${value.toLocaleString()}</span>

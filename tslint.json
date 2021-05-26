@@ -2,7 +2,14 @@
   "rulesDirectory": ["codelyzer"],
   "extends": ["codelyzer", "tslint-config-swimlane/base", "tslint-config-prettier"],
   "rules": {
+    "deprecation": {
+      "severity": "warning"
+    },
     "no-implicit-dependencies": [false, "dev"],
+    "no-any": false,
+    "typedef": true,
+    "no-floating-promises": false,
+    "array-type": [true, "array-simple"],
     "directive-selector": [false],
     "component-selector": [false]
   }
