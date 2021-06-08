@@ -28,7 +28,7 @@ import { Series } from '../models/chart-data.model';
         [fill]="hasGradient ? gradientUrl : colors.getColor(data.name)"
         [opacity]="0.25"
         [startOpacity]="0"
-        [gradient]="true"
+        [gradient]="hasGradient"
         [stops]="areaGradientStops"
         [class.active]="isActive(data)"
         [class.inactive]="isInactive(data)"
