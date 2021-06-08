@@ -13,15 +13,11 @@ import { select } from 'd3-selection';
 import { roundedRect } from '../common/shape.helper';
 import { id } from '../utils/id';
 import { Gradient } from '../common/types';
+import { BarOrientation } from '../common/types/bar-orientation';
 import { DataItem } from '../models/chart-data.model';
 
 /* tslint:disable-next-line */
 import { transition } from 'd3-transition';
-
-enum BarOrientation {
-  Vertical = 'vertical',
-  Horizontal = 'horizontal'
-}
 
 @Component({
   selector: 'g[ngx-charts-bar]',
