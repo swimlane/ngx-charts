@@ -41,7 +41,7 @@ export class AreaComponent implements OnChanges {
   gradientId: string;
   gradientFill: string;
   areaPath: string;
-  initialized: boolean = false;
+  animationsLoaded: boolean = false;
   gradientStops: Gradient[];
   hasGradient: boolean = false;
 
@@ -50,11 +50,11 @@ export class AreaComponent implements OnChanges {
   }
 
   ngOnChanges(): void {
-    if (!this.initialized) {
+    this.update();
+
+    if (!this.animationsLoaded) {
       this.loadAnimation();
-      this.initialized = true;
-    } else {
-      this.update();
+      this.animationsLoaded = true;
     }
   }
 
@@ -74,7 +74,7 @@ export class AreaComponent implements OnChanges {
 
   loadAnimation(): void {
     this.areaPath = this.startingPath;
-    setTimeout(this.update.bind(this), 100);
+    setTimeout(this.updatePathEl.bind(this), 100);
   }
 
   updatePathEl(): void {
