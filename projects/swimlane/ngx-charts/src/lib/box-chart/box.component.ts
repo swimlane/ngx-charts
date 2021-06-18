@@ -11,11 +11,12 @@ import {
 } from '@angular/core';
 import { select, BaseType } from 'd3-selection';
 import { interpolate } from 'd3-interpolate';
-import * as ease from 'd3-ease';
+import { easeSinInOut } from 'd3-ease';
 import { roundedRect } from '../common/shape.helper';
 import { id } from '../utils/id';
 import { IBoxModel } from '../models/chart-data.model';
 import { IVector2D } from '../models/coordinates.model';
+import { BarOrientation, Gradient } from '../common/types';
 
 @Component({
   selector: 'g[ngx-charts-box]',
@@ -108,11 +109,10 @@ export class BoxComponent implements OnChanges {
   @Input() x: number;
   @Input() y: number;
   @Input() lineCoordinates: [IVector2D, IVector2D, IVector2D, IVector2D];
-  @Input() orientation: string;
+  @Input() orientation: BarOrientation;
   @Input() roundEdges: boolean = true;
   @Input() gradient: boolean = false;
-  // TODO: Replace by IColorGradient Interface.
-  @Input() gradientStops: Array<{ offset: number; color: string; opacity: number }>;
+  @Input() gradientStops: Gradient[];
   @Input() offset: number = 0;
   @Input() isActive: boolean = false;
   @Input() animations: boolean = true;
@@ -185,7 +185,7 @@ export class BoxComponent implements OnChanges {
       nodeBar
         .attr('d', this.oldPath)
         .transition()
-        .ease(ease.easeSinInOut)
+        .ease(easeSinInOut)
         .duration(500)
         .attrTween('d', this.pathTween(path, 4));
     } else {
@@ -197,11 +197,6 @@ export class BoxComponent implements OnChanges {
   updateLineEl(): void {
     const lineEl = select(this.nativeElm).selectAll('.bar-line');
     if (this.animations) {
-      // The one below showcase the use of this to retrieve attributes.
-      // lineEl.transition().duration(500)
-      // .attr('x1', function(d, i, node) {
-      //   return parseInt((this as SVGLineElement).getAttribute('x1'), 10) + 10;
-      // });
       lineEl
         .transition()
         .duration(0)
@@ -210,15 +205,12 @@ export class BoxComponent implements OnChanges {
         .attr('x2', (d, index, node) => (this.oldLineCoordinates ? this.oldLineCoordinates[index].v2.x : undefined))
         .attr('y2', (d, index, node) => (this.oldLineCoordinates ? this.oldLineCoordinates[index].v2.y : undefined))
         .transition()
-        .ease(ease.easeSinInOut)
+        .ease(easeSinInOut)
         .duration(500)
         .attr('x1', (d, index, node) => this.lineCoordinates[index].v1.x)
         .attr('y1', (d, index, node) => this.lineCoordinates[index].v1.y)
         .attr('x2', (d, index, node) => this.lineCoordinates[index].v2.x)
         .attr('y2', (d, index, node) => this.lineCoordinates[index].v2.y);
-
-      // Looking for a short way of perform each attr transition.
-      // lineEl.each((d, i, node) => this.lineTween('x1', d, i, node));
     } else {
       lineEl
         .attr('x1', (d, index, node) => this.lineCoordinates[index].v1.x)
@@ -237,12 +229,6 @@ export class BoxComponent implements OnChanges {
    */
   lineTween(attr: string, d: any, index: number, node: BaseType[] | ArrayLike<BaseType>) {
     const nodeLineEl = node[index] as SVGLineElement;
-    console.log('NodeEL: ', nodeLineEl);
-    console.log(`- ${attr} `, nodeLineEl[attr].baseVal.value);
-    // console.log('- X1: ', nodeLineEl.x1.baseVal.value);
-    // console.log('- Y1: ', nodeLineEl.y1.baseVal.value);
-    // console.log('- X2: ', nodeLineEl.x2.baseVal.value);
-    // console.log('- Y2: ', nodeLineEl.y2.baseVal.value);
     return nodeLineEl[attr].baseVal.value;
   }
 
@@ -253,7 +239,6 @@ export class BoxComponent implements OnChanges {
       const path0 = this;
       const path1 = this.cloneNode();
       const n0 = path0.getTotalLength();
-      // tslint:disable-next-line: ban-comma-operator
       const n1 = (path1.setAttribute('d', d1), path1).getTotalLength();
 
       // Uniform sampling of distance based on specified precision.
@@ -288,15 +273,15 @@ export class BoxComponent implements OnChanges {
     let path = '';
 
     if (this.roundEdges) {
-      if (this.orientation === 'vertical') {
+      if (this.orientation === BarOrientation.Vertical) {
         path = roundedRect(this.x, this.y + this.height, this.width, 1, 0, this.edges);
-      } else if (this.orientation === 'horizontal') {
+      } else if (this.orientation === BarOrientation.Horizontal) {
         path = roundedRect(this.x, this.y, 1, this.height, 0, this.edges);
       }
     } else {
-      if (this.orientation === 'vertical') {
+      if (this.orientation === BarOrientation.Vertical) {
         path = roundedRect(this.x, this.y + this.height, this.width, 1, 0, this.edges);
-      } else if (this.orientation === 'horizontal') {
+      } else if (this.orientation === BarOrientation.Horizontal) {
         path = roundedRect(this.x, this.y, 1, this.height, 0, this.edges);
       }
     }
@@ -330,8 +315,7 @@ export class BoxComponent implements OnChanges {
     return radius;
   }
 
-  // TODO: Create IColorGradient Interface.
-  getGradient(): Array<{ offset: number; color: string; opacity: number }> {
+  getGradient(): Gradient[] {
     return [
       {
         offset: 0,

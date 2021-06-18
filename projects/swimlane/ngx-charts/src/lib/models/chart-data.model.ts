@@ -60,13 +60,9 @@ export interface TreeMapDataItem {
 
 export interface TreeMapData extends Array<TreeMapDataItem> {}
 
-export interface BoxChartDataItem extends DataItem {
-  value: number;
-}
-
 export interface BoxChartSeries {
   name: StringOrNumberOrDate;
-  series: BoxChartDataItem[];
+  series: DataItem[];
 }
 
 export interface BoxChartMultiSeries extends Array<BoxChartSeries> {}
@@ -74,7 +70,7 @@ export interface BoxChartMultiSeries extends Array<BoxChartSeries> {}
 export interface IBoxModel {
   value: number | Date;
   label: StringOrNumberOrDate;
-  data: BoxChartDataItem[];
+  data: DataItem[];
   formattedLabel: string;
   height: number;
   width: number;

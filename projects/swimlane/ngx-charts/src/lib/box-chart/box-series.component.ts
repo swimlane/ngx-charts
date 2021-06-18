@@ -10,12 +10,14 @@ import {
 } from '@angular/core';
 import { min, max, quantile } from 'd3-array';
 import { ScaleLinear, ScaleBand } from 'd3-scale';
-import { IBoxModel, BoxChartSeries, BoxChartDataItem } from '../models/chart-data.model';
+import { IBoxModel, BoxChartSeries, DataItem } from '../models/chart-data.model';
 import { IVector2D } from '../models/coordinates.model';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { ColorHelper } from '../common/color.helper';
 import { ViewDimensions } from '../common/types';
 import { formatLabel, escapeLabel } from '../common/label.helper';
+import { StyleTypes } from '../common/tooltip/style.type';
+import { PlacementTypes } from '../common/tooltip/position';
 
 @Component({
   selector: 'g[ngx-charts-box-series]',
@@ -73,8 +75,8 @@ export class BoxSeriesComponent implements OnChanges {
   @Input() strokeWidth: number;
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipTemplate: TemplateRef<any>;
-  @Input() tooltipPlacement: string;
-  @Input() tooltipType: string;
+  @Input() tooltipPlacement: PlacementTypes;
+  @Input() tooltipType: StyleTypes;
   @Input() roundEdges: boolean;
 
   @Output() select: EventEmitter<IBoxModel> = new EventEmitter();
@@ -82,7 +84,7 @@ export class BoxSeriesComponent implements OnChanges {
   @Output() deactivate: EventEmitter<IBoxModel> = new EventEmitter();
 
   box: IBoxModel;
-  counts: BoxChartDataItem[];
+  counts: DataItem[];
   quartiles: [number, number, number];
   whiskers: [number, number];
   lineCoordinates: [IVector2D, IVector2D, IVector2D, IVector2D];
@@ -109,7 +111,6 @@ export class BoxSeriesComponent implements OnChanges {
 
     // We get the group count and must sort it in order to retrieve quantiles.
     const groupCounts = this.counts.map(item => item.value).sort((a, b) => Number(a) - Number(b));
-    // console.log('Sorted Group Counts: ', groupCounts);
     this.quartiles = this.getBoxQuantiles(groupCounts);
     this.lineCoordinates = this.getLinesCoordinates(seriesName.toString(), this.whiskers, this.quartiles, width);
 
@@ -133,14 +134,6 @@ export class BoxSeriesComponent implements OnChanges {
     box.x = this.xScale(seriesName.toString());
     box.y = this.yScale(this.quartiles[2]);
     box.ariaLabel = formattedLabel + ' - Median: ' + value.toLocaleString();
-
-    // console.log(
-    //   `Serie Name: ${seriesName}\n` +
-    //     `- X value: ${box.x}\n- Y value: ${box.y}\n` +
-    //     `- Quantile 25%: ${this.quartiles[0]}\n` +
-    //     `- Quantile 50%: ${this.quartiles[1]}\n` +
-    //     `- Quantile 75%: ${this.quartiles[2]}`
-    // );
 
     if (this.colors.scaleType === 'ordinal') {
       box.color = this.colors.getColor(seriesName);
@@ -206,10 +199,10 @@ export class BoxSeriesComponent implements OnChanges {
       this.tooltipType = undefined;
     } else {
       if (!this.tooltipPlacement) {
-        this.tooltipPlacement = 'top';
+        this.tooltipPlacement = PlacementTypes.Top;
       }
       if (!this.tooltipType) {
-        this.tooltipType = 'tooltip';
+        this.tooltipType = StyleTypes.tooltip;
       }
     }
   }

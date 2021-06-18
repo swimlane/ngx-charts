@@ -10,12 +10,11 @@ import {
 } from '@angular/core';
 
 import { BaseChartComponent } from '../common/base-chart.component';
-import { ILegendOptions } from '../models/legend.model';
 import { ColorHelper } from '../common/color.helper';
-import { BoxChartMultiSeries, BoxChartSeries, IBoxModel } from '../models/chart-data.model';
+import { BoxChartMultiSeries, BoxChartSeries, IBoxModel, StringOrNumberOrDate } from '../models/chart-data.model';
 import { scaleLinear, ScaleLinear, scaleBand, ScaleBand } from 'd3-scale';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
-import { ViewDimensions, LegendPosition, ScaleType } from '../common/types';
+import { ViewDimensions, LegendPosition, ScaleType, LegendOptions } from '../common/types';
 
 @Component({
   selector: 'ngx-charts-box-chart',
@@ -82,7 +81,7 @@ export class BoxChartComponent extends BaseChartComponent {
   @Input() legendPosition: LegendPosition = LegendPosition.Right;
   @Input() legendTitle: string = 'Legend';
   /** I think it is better to handle legend options as single Input object of type ILegendOptions */
-  @Input() legendOptionsConfig: ILegendOptions; // TODO: Change previous legend options for this one.
+  @Input() legendOptionsConfig: LegendOptions;
   @Input() showGridLines: boolean = true;
   @Input() xAxis: boolean = true;
   @Input() yAxis: boolean = true;
@@ -115,11 +114,11 @@ export class BoxChartComponent extends BaseChartComponent {
   margin: [number, number, number, number] = [10, 20, 10, 20];
 
   /** Legend Options object to handle positioning, title, colors and domain. */
-  legendOptions: ILegendOptions;
+  legendOptions: LegendOptions;
 
   xScale: ScaleBand<string>;
   yScale: ScaleLinear<number, number>;
-  xDomain: Array<string | number | Date>;
+  xDomain: StringOrNumberOrDate[];
   yDomain: number[];
   seriesDomain: string[];
   /** Chart X axis dimension. */
@@ -127,7 +126,7 @@ export class BoxChartComponent extends BaseChartComponent {
   /** Chart Y axis dimension. */
   yAxisWidth: number = 0;
 
-  trackBy(index: number, item: BoxChartSeries): string | number | Date {
+  trackBy(index: number, item: BoxChartSeries): StringOrNumberOrDate {
     return item.name;
   }
 
@@ -158,7 +157,7 @@ export class BoxChartComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    let domain;
+    let domain: string[] | number[];
     if (this.schemeType === ScaleType.Ordinal) {
       domain = this.seriesDomain;
     } else {
@@ -258,15 +257,15 @@ export class BoxChartComponent extends BaseChartComponent {
     this.deactivate.emit(data);
   }
 
-  private getLegendOptions(): ILegendOptions {
-    const legendOpts: ILegendOptions = {
+  private getLegendOptions(): LegendOptions {
+    const legendOpts: LegendOptions = {
       scaleType: this.schemeType,
       colors: this.colors,
       domain: [],
       position: this.legendPosition,
       title: this.legendTitle
     };
-    if (this.schemeType === 'ordinal') {
+    if (this.schemeType === ScaleType.Ordinal) {
       legendOpts.domain = this.xDomain;
       legendOpts.colors = this.colors;
     } else {
