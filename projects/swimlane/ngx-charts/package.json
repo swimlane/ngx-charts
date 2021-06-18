@@ -1,6 +1,6 @@
 {
   "name": "@swimlane/ngx-charts",
-  "version": "17.0.1",
+  "version": "18.0.1",
   "description": "Declarative Charting Framework for Angular",
   "repository": {
     "type": "git",
@@ -56,6 +56,7 @@
     "d3-shape": "^2.0.0",
     "d3-time-format": "^3.0.0",
     "d3-transition": "^2.0.0",
-    "tslib": "^2.0.0"
+    "tslib": "^2.0.0",
+    "@types/d3-shape": "^2.0.0"
   }
 }
