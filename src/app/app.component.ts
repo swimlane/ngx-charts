@@ -20,7 +20,7 @@ import { BubbleChartInteractiveServerDataModel } from './custom-charts/bubble-ch
 import { data as countries } from 'emoji-flags';
 import chartGroups from './chartTypes';
 import { barChart, lineChartSeries } from './combo-chart-data';
-import { version } from '../../projects/swimlane/ngx-charts/package.json';
+import pkg from '../../projects/swimlane/ngx-charts/package.json';
 
 const monthName = new Intl.DateTimeFormat('en-us', { month: 'short' });
 const weekdayName = new Intl.DateTimeFormat('en-us', { weekday: 'short' });
@@ -43,7 +43,7 @@ function multiFormat(value) {
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-  APP_VERSION = version;
+  APP_VERSION = pkg.version;
 
   theme = 'dark';
   chartType: string;
