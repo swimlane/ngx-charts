@@ -10,7 +10,7 @@ if (typeof window !== 'undefined') {
 }
 
 // tslint:disable-next-line:variable-name
-export const MouseEvent = root.MouseEvent as MouseEvent & {
+export const MouseEvent = root.MouseEvent as any & {
   prototype?: MouseEvent;
   new (typeArg: string, eventInitDict?: MouseEventInit): MouseEvent;
 };
