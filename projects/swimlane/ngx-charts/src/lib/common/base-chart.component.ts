@@ -30,7 +30,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() view: [number, number];
   @Input() scheme: any = 'cool';
   @Input() schemeType: ScaleType = ScaleType.Ordinal;
-  @Input() customColors: any[];
+  @Input() customColors: any;
   @Input() animations: boolean = true;
 
   @Output() select = new EventEmitter();

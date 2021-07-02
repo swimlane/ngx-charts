@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Bug: Fix `ColorHelper.customColors` typing to allow for functions or objects (#1641)
+
 ## 18.0.1
 
 - Bug: Use correct curve type
