@@ -1,6 +1,6 @@
 # Changelog
 
-## 18.0.2
+## Unreleased
 
 - Bug: Fix `ColorHelper.customColors` typing to allow for functions or objects (#1641)
 
