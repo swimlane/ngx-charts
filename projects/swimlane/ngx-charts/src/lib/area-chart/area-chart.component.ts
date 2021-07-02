@@ -9,6 +9,7 @@ import {
   ContentChild,
   TemplateRef
 } from '@angular/core';
+import { GradientOrientation } from '../common/svg-linear-gradient.component';
 import { scaleLinear, scalePoint, scaleTime } from 'd3-scale';
 import { curveLinear, CurveFactory } from 'd3-shape';
 
@@ -85,6 +86,7 @@ import { Series, StringOrNumberOrDate } from '../models/chart-data.model';
               [activeEntries]="activeEntries"
               [scaleType]="scaleType"
               [gradient]="gradient"
+              [gradientOrientation]="gradientOrientation"
               [curve]="curve"
               [animations]="animations"
             />
@@ -147,6 +149,7 @@ import { Series, StringOrNumberOrDate } from '../models/chart-data.model';
             [data]="series"
             [scaleType]="scaleType"
             [gradient]="gradient"
+            [gradientOrientation]="gradientOrientation"
             [curve]="curve"
             [animations]="animations"
           />
@@ -172,6 +175,7 @@ export class AreaChartComponent extends BaseChartComponent {
   @Input() yAxisLabel: string;
   @Input() timeline: boolean = false;
   @Input() gradient: boolean;
+  @Input() gradientOrientation: GradientOrientation = GradientOrientation.Vertical;
   @Input() showGridLines: boolean = true;
   @Input() curve: CurveFactory = curveLinear;
   @Input() activeEntries: any[] = [];
