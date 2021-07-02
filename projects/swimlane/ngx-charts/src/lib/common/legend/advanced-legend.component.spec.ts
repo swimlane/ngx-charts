@@ -28,7 +28,7 @@ class TestComponent {
     ];
   }
 
-  valueFormatting: (value: number) => any = value => value;
+  valueFormatting: (value: number, isTotal: boolean) => any = value => value;
   labelFormatting: (value: string) => any = label => label;
   percentageFormatting: (value: number) => any = percentage => percentage;
 }
@@ -143,6 +143,30 @@ describe('<ngx-charts-advanced-legend>', () => {
       '33%',
       '17%'
     ]);
+  });
+
+  it('should apply formatting functions with different total', () => {
+    TestBed.compileComponents().then(() => {
+      const fixture = TestBed.createComponent(TestComponent);
+      const component = fixture.componentInstance;
+      component.valueFormatting = (value, isTotal) => (isTotal ? `total:${value}` : value.toFixed(2));
+      fixture.detectChanges();
+
+      const roundedTotalElement = fixture.debugElement.nativeElement.querySelector('.advanced-pie-legend').children[0];
+      const { legendItemValueElements } = loadLegendItemElements(fixture);
+
+      expect(roundedTotalElement).toBeDefined();
+      expect(roundedTotalElement.textContent).toContain('total:140');
+
+      expect(Array.from(legendItemValueElements).map((x: Element) => x.textContent.trim())).toEqual([
+        '8.00',
+        '12.00',
+        '20.00',
+        '30.00',
+        '46.00',
+        '24.00'
+      ]);
+    });
   });
 
   function loadLegendItemElements(fixture: ComponentFixture<TestComponent>) {
