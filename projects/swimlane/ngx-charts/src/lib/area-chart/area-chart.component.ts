@@ -7,7 +7,8 @@ import {
   HostListener,
   ChangeDetectionStrategy,
   ContentChild,
-  TemplateRef
+  TemplateRef,
+  TrackByFunction
 } from '@angular/core';
 import { scaleLinear, scalePoint, scaleTime } from 'd3-scale';
 import { curveLinear, CurveFactory } from 'd3-shape';
@@ -418,9 +419,9 @@ export class AreaChartComponent extends BaseChartComponent {
     this.select.emit(data);
   }
 
-  trackBy(index: number, item: Series): StringOrNumberOrDate {
+  trackBy: TrackByFunction<Series> = (index: number, item: Series) => {
     return item.name;
-  }
+  };
 
   setColors(): void {
     let domain;

@@ -62,9 +62,9 @@ export class ChartComponent implements OnChanges {
   @Input() activeEntries: any[];
   @Input() animations: boolean = true;
 
-  @Output() legendLabelClick: EventEmitter<string> = new EventEmitter();
-  @Output() legendLabelActivate: EventEmitter<{ name: string }> = new EventEmitter();
-  @Output() legendLabelDeactivate: EventEmitter<{ name: string }> = new EventEmitter();
+  @Output() legendLabelClick = new EventEmitter<string>();
+  @Output() legendLabelActivate = new EventEmitter<{ name: string }>();
+  @Output() legendLabelDeactivate = new EventEmitter<{ name: string }>();
 
   chartWidth: number;
   title: string;

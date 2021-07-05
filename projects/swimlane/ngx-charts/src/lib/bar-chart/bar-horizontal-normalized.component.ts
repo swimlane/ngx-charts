@@ -6,7 +6,8 @@ import {
   EventEmitter,
   ChangeDetectionStrategy,
   ContentChild,
-  TemplateRef
+  TemplateRef,
+  TrackByFunction
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 
@@ -18,6 +19,7 @@ import { Series } from '../models/chart-data.model';
 
 import { BaseChartComponent } from '../common/base-chart.component';
 import { ViewDimensions, LegendPosition, ScaleType, LegendOptions } from '../common/types';
+import { BarChartType } from './types/bar-chart-type.enum';
 
 @Component({
   selector: 'ngx-charts-bar-horizontal-normalized',
@@ -68,7 +70,7 @@ import { ViewDimensions, LegendPosition, ScaleType, LegendOptions } from '../com
         >
           <svg:g
             ngx-charts-series-horizontal
-            type="normalized"
+            [type]="barChartType.Normalized"
             [xScale]="xScale"
             [yScale]="yScale"
             [activeEntries]="activeEntries"
@@ -149,6 +151,7 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
   legendOptions: LegendOptions;
+  barChartType = BarChartType;
 
   update(): void {
     super.update();
@@ -231,9 +234,9 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
     this.select.emit(data);
   }
 
-  trackBy(index: number, item: Series): string {
-    return item.name as any;
-  }
+  trackBy: TrackByFunction<Series> = (index: number, item: Series) => {
+    return item.name;
+  };
 
   setColors(): void {
     let domain;

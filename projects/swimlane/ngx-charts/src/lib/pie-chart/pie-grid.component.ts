@@ -19,6 +19,8 @@ import { gridLayout } from '../common/grid-layout.helper';
 import { formatLabel } from '../common/label.helper';
 import { DataItem, PieGridDataItem } from '../models/chart-data.model';
 import { ScaleType, ViewDimensions } from '../common/types';
+import { PlacementTypes } from '../common/tooltip/position';
+import { StyleTypes } from '../common/tooltip/style.type';
 
 export interface PieGridData {
   data: PieGridDataItem;
@@ -44,8 +46,8 @@ export interface PieGridData {
             (select)="onClick($event)"
             ngx-tooltip
             [tooltipDisabled]="tooltipDisabled"
-            [tooltipPlacement]="'top'"
-            [tooltipType]="'tooltip'"
+            [tooltipPlacement]="placementTypes.Top"
+            [tooltipType]="styleTypes.tooltip"
             [tooltipTitle]="tooltipTemplate ? undefined : tooltipText({ data: series })"
             [tooltipTemplate]="tooltipTemplate"
             [tooltipContext]="series.data[0].data"
@@ -116,6 +118,9 @@ export class PieGridComponent extends BaseChartComponent {
   domain: string[];
   colorScale: ColorHelper;
   margin: number[] = [20, 20, 20, 20];
+
+  placementTypes = PlacementTypes;
+  styleTypes = StyleTypes;
 
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 

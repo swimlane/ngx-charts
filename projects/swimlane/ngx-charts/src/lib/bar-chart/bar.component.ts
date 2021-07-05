@@ -1,27 +1,20 @@
 import {
+  ChangeDetectionStrategy,
   Component,
-  Input,
-  Output,
+  ElementRef,
   EventEmitter,
   HostListener,
-  ElementRef,
-  SimpleChanges,
+  Input,
   OnChanges,
-  ChangeDetectionStrategy
+  Output,
+  SimpleChanges
 } from '@angular/core';
 import { select } from 'd3-selection';
 import { roundedRect } from '../common/shape.helper';
 import { id } from '../utils/id';
 import { Gradient } from '../common/types';
 import { DataItem } from '../models/chart-data.model';
-
-/* tslint:disable-next-line */
-import { transition } from 'd3-transition';
-
-enum BarOrientation {
-  Vertical = 'vertical',
-  Horizontal = 'horizontal'
-}
+import { BarOrientation } from '../common/types/bar-orientation.enum';
 
 @Component({
   selector: 'g[ngx-charts-bar]',
@@ -69,7 +62,6 @@ export class BarComponent implements OnChanges {
   path: string;
   gradientId: string;
   gradientFill: string;
-  startOpacity: number;
   gradientStops: Gradient[];
   hasGradient: boolean = false;
   hideBar: boolean = false;

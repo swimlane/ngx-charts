@@ -53,7 +53,7 @@ export class SparklineComponent extends BaseChartComponent {
   yScale: any;
   xScale: any;
   colors: ColorHelper;
-  scaleType: string;
+  scaleType: ScaleType;
   transform: string;
   margin = [0, 0, 0, 0];
 
@@ -167,7 +167,7 @@ export class SparklineComponent extends BaseChartComponent {
     return scale;
   }
 
-  getScaleType(values): string {
+  getScaleType(values): ScaleType {
     let date = true;
     let num = true;
 
@@ -181,9 +181,15 @@ export class SparklineComponent extends BaseChartComponent {
       }
     }
 
-    if (date) return 'time';
-    if (num) return 'linear';
-    return 'ordinal';
+    if (date) {
+      return ScaleType.Time;
+    }
+
+    if (num) {
+      return ScaleType.Linear;
+    }
+
+    return ScaleType.Ordinal;
   }
 
   isDate(value): boolean {
@@ -195,7 +201,7 @@ export class SparklineComponent extends BaseChartComponent {
   }
 
   trackBy(index, item): string {
-    return item.name;
+    return `${item.name}`;
   }
 
   setColors(): void {

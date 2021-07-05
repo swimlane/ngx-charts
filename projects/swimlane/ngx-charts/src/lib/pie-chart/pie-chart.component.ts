@@ -76,8 +76,8 @@ export class PieChartComponent extends BaseChartComponent {
   // optional margins
   @Input() margins: number[];
   @Output() select = new EventEmitter();
-  @Output() activate: EventEmitter<any> = new EventEmitter();
-  @Output() deactivate: EventEmitter<any> = new EventEmitter();
+  @Output() activate = new EventEmitter();
+  @Output() deactivate = new EventEmitter();
 
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
@@ -140,7 +140,7 @@ export class PieChartComponent extends BaseChartComponent {
     return this.results.map(d => d.label);
   }
 
-  onClick(data: DataItem): void {
+  onClick(data: DataItem | string): void {
     this.select.emit(data);
   }
 

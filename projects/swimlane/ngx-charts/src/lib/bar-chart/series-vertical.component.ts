@@ -4,7 +4,7 @@ import { formatLabel, escapeLabel } from '../common/label.helper';
 import { DataItem, StringOrNumberOrDate } from '../models/chart-data.model';
 import { PlacementTypes } from '../common/tooltip/position';
 import { StyleTypes } from '../common/tooltip/style.type';
-import { ScaleType, ViewDimensions } from '../common/types';
+import { ScaleType, ViewDimensions, BarOrientation } from '../common/types';
 import { ColorHelper } from '../common/color.helper';
 import { BarChartType } from './types/bar-chart-type.enum';
 import { D0Types } from './types/d0-type.enum';
@@ -25,7 +25,7 @@ import { Bar } from './types/bar.model';
       [fill]="bar.color"
       [stops]="bar.gradientStops"
       [data]="bar.data"
-      [orientation]="'vertical'"
+      [orientation]="barOrientation.Vertical"
       [roundEdges]="bar.roundEdges"
       [gradient]="gradient"
       [ariaLabel]="bar.ariaLabel"
@@ -98,6 +98,8 @@ export class SeriesVerticalComponent implements OnChanges {
 
   bars: Bar[];
   barsForDataLabels: Array<{ x: number; y: number; width: number; height: number; total: number; series: string }> = [];
+
+  barOrientation = BarOrientation;
 
   ngOnChanges(changes): void {
     this.update();

@@ -20,7 +20,7 @@ import { TooltipService } from './tooltip.service';
 @Directive({ selector: '[ngx-tooltip]' })
 export class TooltipDirective implements OnDestroy {
   @Input() tooltipCssClass: string = '';
-  @Input() tooltipTitle: string = '';
+  @Input() tooltipTitle?: string;
   @Input() tooltipAppendToBody: boolean = true;
   @Input() tooltipSpacing: number = 10;
   @Input() tooltipDisabled: boolean = false;
