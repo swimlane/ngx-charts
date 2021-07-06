@@ -87,7 +87,7 @@ import { ViewDimensions, LegendPosition, ScaleType, LegendOptions, BarOrientatio
             [gradient]="gradient"
             [tooltipDisabled]="tooltipDisabled"
             [tooltipTemplate]="tooltipTemplate"
-            [seriesName]="group.name"
+            [seriesName]="group.name.toString()"
             [roundEdges]="roundEdges"
             [animations]="animations"
             [showDataLabel]="showDataLabel"

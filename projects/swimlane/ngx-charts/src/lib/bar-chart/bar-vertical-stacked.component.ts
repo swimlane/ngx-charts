@@ -81,7 +81,7 @@ import { BarChartType } from './types/bar-chart-type.enum';
             [tooltipTemplate]="tooltipTemplate"
             [showDataLabel]="showDataLabel"
             [dataLabelFormatting]="dataLabelFormatting"
-            [seriesName]="group.name"
+            [seriesName]="group.name.toString()"
             [animations]="animations"
             [noBarWhenZero]="noBarWhenZero"
             (select)="onClick($event, group)"
