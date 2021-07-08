@@ -1,13 +1,15 @@
 import { DataItem } from '../../models/chart-data.model';
+import { Gradient } from '../../common/types';
 
 export interface Bar {
   ariaLabel: string;
   color: string;
   data: DataItem;
   formattedLabel: string;
+  gradientStops: Gradient[];
   height: number;
   label: string;
-  roundedEdges: boolean;
+  roundEdges: boolean;
   tooltipText: string;
   value: number;
   width: number;

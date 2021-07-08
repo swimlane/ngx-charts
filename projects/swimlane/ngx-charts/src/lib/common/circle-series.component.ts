@@ -9,13 +9,16 @@ import {
   TemplateRef
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { formatLabel, escapeLabel } from '../common/label.helper';
+import { formatLabel, escapeLabel } from './label.helper';
 import { id } from '../utils/id';
-import { ColorHelper } from '../common/color.helper';
+import { ColorHelper } from './color.helper';
 import { Gradient, ScaleType } from './types';
 import { DataItem, Series, StringOrNumberOrDate } from '../models/chart-data.model';
+import { PlacementTypes } from './tooltip/position';
+import { StyleTypes } from './tooltip/style.type';
+import { BarOrientation } from './types/bar-orientation.enum';
 
-enum SeriesType {
+export enum SeriesType {
   Standard = 'standard',
   Stacked = 'stacked'
 }
@@ -45,7 +48,7 @@ export interface Circle {
       <defs>
         <svg:g
           ngx-charts-svg-linear-gradient
-          orientation="vertical"
+          [orientation]="barOrientation.Vertical"
           [name]="gradientId"
           [stops]="circle.gradientStops"
         />
@@ -76,8 +79,8 @@ export interface Circle {
         (deactivate)="deactivateCircle()"
         ngx-tooltip
         [tooltipDisabled]="tooltipDisabled"
-        [tooltipPlacement]="'top'"
-        [tooltipType]="'tooltip'"
+        [tooltipPlacement]="placementTypes.Top"
+        [tooltipType]="styleTypes.tooltip"
         [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(circle)"
         [tooltipTemplate]="tooltipTemplate"
         [tooltipContext]="circle.data"
@@ -117,6 +120,10 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
   barVisible: boolean = false;
   gradientId: string;
   gradientFill: string;
+
+  barOrientation = BarOrientation;
+  placementTypes = PlacementTypes;
+  styleTypes = StyleTypes;
 
   ngOnInit() {
     this.gradientId = 'grad' + id().toString();

@@ -1,5 +1,5 @@
 import { PositionHelper } from './position';
-import { PlacementTypes } from './placement.type';
+import { PlacementTypes } from './placement-type.enum';
 
 describe('positioning', () => {
   describe('flip', () => {

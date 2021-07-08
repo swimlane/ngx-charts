@@ -3,7 +3,7 @@ import { Location, LocationStrategy, HashLocationStrategy } from '@angular/commo
 import * as shape from 'd3-shape';
 import * as d3Array from 'd3-array';
 
-import { colorSets } from '@swimlane/ngx-charts/utils/color-sets';
+import { Color, colorSets } from '@swimlane/ngx-charts/utils/color-sets';
 import { formatLabel, escapeLabel } from '@swimlane/ngx-charts/common/label.helper';
 import {
   single,
@@ -21,6 +21,8 @@ import { data as countries } from 'emoji-flags';
 import chartGroups from './chartTypes';
 import { barChart, lineChartSeries } from './combo-chart-data';
 import pkg from '../../projects/swimlane/ngx-charts/package.json';
+import { LegendPosition, ScaleType } from '@swimlane/ngx-charts/common/types';
+import { InputTypes } from '@swimlane/ngx-ui';
 
 const monthName = new Intl.DateTimeFormat('en-us', { month: 'short' });
 const weekdayName = new Intl.DateTimeFormat('en-us', { weekday: 'short' });
@@ -45,6 +47,8 @@ function multiFormat(value) {
 export class AppComponent implements OnInit {
   APP_VERSION = pkg.version;
 
+  inputTypes = InputTypes;
+
   theme = 'dark';
   chartType: string;
   chartGroups: any[];
@@ -65,7 +69,7 @@ export class AppComponent implements OnInit {
   linearScale: boolean = false;
   range: boolean = false;
 
-  view: any[];
+  view: [number, number];
   width: number = 700;
   height: number = 300;
   fitContainer: boolean = false;
@@ -76,7 +80,7 @@ export class AppComponent implements OnInit {
   gradient = false;
   showLegend = true;
   legendTitle = 'Legend';
-  legendPosition = 'right';
+  legendPosition = LegendPosition.Right;
   showXAxisLabel = true;
   tooltipDisabled = false;
   showText = true;
@@ -147,7 +151,7 @@ export class AppComponent implements OnInit {
 
   colorSets: any;
   colorScheme: any;
-  schemeType: string = 'ordinal';
+  schemeType = ScaleType.Ordinal;
   selectedColorScheme: string;
   rangeFillOpacity: number = 0.15;
 
@@ -196,17 +200,17 @@ export class AppComponent implements OnInit {
   // Combo Chart
   barChart: any[] = barChart;
   lineChartSeries: any[] = lineChartSeries;
-  lineChartScheme = {
+  lineChartScheme: Color = {
     name: 'coolthree',
     selectable: true,
-    group: 'Ordinal',
+    group: ScaleType.Ordinal,
     domain: ['#01579b', '#7aa3e5', '#a8385d', '#00bfa5']
   };
 
-  comboBarScheme = {
+  comboBarScheme: Color = {
     name: 'singleLightBlue',
     selectable: true,
-    group: 'Ordinal',
+    group: ScaleType.Ordinal,
     domain: ['#01579b']
   };
 
@@ -266,7 +270,7 @@ export class AppComponent implements OnInit {
       fiscalYearReport
     });
 
-    // interactive drilldown demos
+    // interactive drill down demos
     this.treemapProcess();
     this.bubbleDemoChart = new BubbleChartInteractiveServerDataModel();
     this.bubbleDemoProcess(bubbleDemoData[0]);
@@ -428,9 +432,7 @@ export class AppComponent implements OnInit {
     this.view = [this.width, this.height];
   }
 
-  toggleFitContainer(event) {
-    this.fitContainer = event;
-
+  toggleFitContainer() {
     if (this.fitContainer) {
       this.view = undefined;
     } else {
@@ -712,7 +714,7 @@ export class AppComponent implements OnInit {
   [yLeftAxisScaleFactor]="yLeftAxisScale" and [yRightAxisScaleFactor]="yRightAxisScale"
   exposes the left and right min and max axis values for custom scaling, it is probably best to
   scale one axis in relation to the other axis but for flexibility to scale either the left or
-  right axis bowth were exposed.
+  right axis both were exposed.
   **
   */
 
@@ -742,7 +744,7 @@ export class AppComponent implements OnInit {
   }
 
   dblclick(event) {
-    console.log('Doube click', event);
+    console.log('Double click', event);
   }
 
   /*
@@ -760,7 +762,7 @@ export class AppComponent implements OnInit {
     return this.bubbleDemoChart.getChartTitle();
   }
 
-  bubbleShowDrilldownResetLink() {
+  bubbleShowDrillDownResetLink() {
     return this.bubbleDemoChart.getDrilldownDepth() > 0;
   }
 

@@ -18,6 +18,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
 import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
 import { ViewDimensions, LegendPosition, ScaleType, LegendOptions } from '../common/types';
+import { SeriesType } from '../common/circle-series.component';
 
 @Component({
   selector: 'ngx-charts-area-chart-stacked',
@@ -82,7 +83,7 @@ import { ViewDimensions, LegendPosition, ScaleType, LegendOptions } from '../com
               [scaleType]="scaleType"
               [gradient]="gradient"
               [activeEntries]="activeEntries"
-              stacked="true"
+              [stacked]="true"
               [curve]="curve"
               [animations]="animations"
             />
@@ -105,7 +106,7 @@ import { ViewDimensions, LegendPosition, ScaleType, LegendOptions } from '../com
             <svg:g *ngFor="let series of results; trackBy: trackBy">
               <svg:g
                 ngx-charts-circle-series
-                type="stacked"
+                [type]="seriesType.Stacked"
                 [xScale]="xScale"
                 [yScale]="yScale"
                 [colors]="colors"
@@ -145,7 +146,7 @@ import { ViewDimensions, LegendPosition, ScaleType, LegendOptions } from '../com
             [data]="series"
             [scaleType]="scaleType"
             [gradient]="gradient"
-            stacked="true"
+            [stacked]="true"
             [curve]="curve"
             [animations]="animations"
           />
@@ -221,6 +222,8 @@ export class AreaChartStackedComponent extends BaseChartComponent {
   timelineXDomain: any;
   timelineTransform: any;
   timelinePadding: number = 10;
+
+  seriesType = SeriesType;
 
   update(): void {
     super.update();
@@ -427,7 +430,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
   }
 
   trackBy(index, item): string {
-    return item.name;
+    return `${item.name}`;
   }
 
   setColors(): void {

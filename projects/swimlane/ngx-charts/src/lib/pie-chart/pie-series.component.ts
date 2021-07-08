@@ -16,6 +16,8 @@ import { ColorHelper } from '../common/color.helper';
 import { formatLabel, escapeLabel } from '../common/label.helper';
 import { DataItem } from '../models/chart-data.model';
 import { PieData } from './pie-label.component';
+import { PlacementTypes } from '../common/tooltip/position';
+import { StyleTypes } from '../common/tooltip/style.type';
 
 @Component({
   selector: 'g[ngx-charts-pie-series]',
@@ -55,8 +57,8 @@ import { PieData } from './pie-label.component';
         (dblclick)="dblclick.emit($event)"
         ngx-tooltip
         [tooltipDisabled]="tooltipDisabled"
-        [tooltipPlacement]="'top'"
-        [tooltipType]="'tooltip'"
+        [tooltipPlacement]="placementTypes.Top"
+        [tooltipType]="styleTypes.tooltip"
         [tooltipTitle]="getTooltipTitle(arc)"
         [tooltipTemplate]="tooltipTemplate"
         [tooltipContext]="arc.data"
@@ -90,6 +92,9 @@ export class PieSeriesComponent implements OnChanges {
 
   max: number;
   data: PieData[];
+
+  placementTypes = PlacementTypes;
+  styleTypes = StyleTypes;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();

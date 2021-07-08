@@ -31,14 +31,14 @@ export class CircleComponent implements OnChanges {
   @Input() r: number;
   @Input() fill: string;
   @Input() stroke: string;
-  @Input() data: number;
+  @Input() data: number | string;
   @Input() classNames: string[] | string;
   @Input() circleOpacity: number;
   @Input() pointerEvents: string;
 
-  @Output() select: EventEmitter<number> = new EventEmitter();
-  @Output() activate: EventEmitter<number> = new EventEmitter();
-  @Output() deactivate: EventEmitter<number> = new EventEmitter();
+  @Output() select: EventEmitter<number | string> = new EventEmitter();
+  @Output() activate: EventEmitter<number | string> = new EventEmitter();
+  @Output() deactivate: EventEmitter<number | string> = new EventEmitter();
 
   @HostListener('click')
   onClick() {

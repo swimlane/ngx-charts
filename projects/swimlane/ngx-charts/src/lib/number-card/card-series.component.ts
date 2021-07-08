@@ -15,6 +15,9 @@ import { ColorHelper } from '../common/color.helper';
 export interface CardModel extends GridItem {
   color: string;
   tooltipText: string;
+  textColor: string;
+  bandColor: string;
+  label: string;
 }
 
 @Component({

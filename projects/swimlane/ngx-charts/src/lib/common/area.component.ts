@@ -12,12 +12,18 @@ import { select } from 'd3-selection';
 import { id } from '../utils/id';
 import { Gradient } from './types';
 import { AreaChartSeries } from '../models/chart-data.model';
+import { BarOrientation } from './types/bar-orientation.enum';
 
 @Component({
   selector: 'g[ngx-charts-area]',
   template: `
     <svg:defs *ngIf="gradient">
-      <svg:g ngx-charts-svg-linear-gradient orientation="vertical" [name]="gradientId" [stops]="gradientStops" />
+      <svg:g
+        ngx-charts-svg-linear-gradient
+        [orientation]="barOrientation.Vertical"
+        [name]="gradientId"
+        [stops]="gradientStops"
+      />
     </svg:defs>
     <svg:path class="area" [attr.d]="areaPath" [attr.fill]="gradient ? gradientFill : fill" [style.opacity]="opacity" />
   `,
@@ -44,6 +50,8 @@ export class AreaComponent implements OnChanges {
   animationsLoaded: boolean = false;
   gradientStops: Gradient[];
   hasGradient: boolean = false;
+
+  barOrientation = BarOrientation;
 
   constructor(element: ElementRef) {
     this.element = element.nativeElement;
