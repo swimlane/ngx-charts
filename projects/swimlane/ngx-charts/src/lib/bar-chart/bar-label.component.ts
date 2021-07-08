@@ -9,6 +9,7 @@ import {
   EventEmitter
 } from '@angular/core';
 import { formatLabel } from '../common/label.helper';
+import { BarOrientation } from "../common/types";
 
 @Component({
   selector: 'g[ngx-charts-bar-label]',
@@ -34,7 +35,7 @@ export class BarLabelComponent implements OnChanges {
   @Input() barY;
   @Input() barWidth;
   @Input() barHeight;
-  @Input() orientation;
+  @Input() orientation: BarOrientation;
 
   @Output() dimensionsChanged: EventEmitter<any> = new EventEmitter();
 

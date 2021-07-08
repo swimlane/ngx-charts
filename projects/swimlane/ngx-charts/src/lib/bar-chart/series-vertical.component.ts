@@ -53,7 +53,7 @@ import { Bar } from './types/bar.model';
         [barHeight]="b.height"
         [value]="b.total"
         [valueFormatting]="dataLabelFormatting"
-        [orientation]="'vertical'"
+        [orientation]="barOrientation.Vertical"
         (dimensionsChanged)="dataLabelHeightChanged.emit({ size: $event, index: i })"
       />
     </svg:g>
