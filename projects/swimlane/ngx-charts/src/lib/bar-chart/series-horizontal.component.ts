@@ -88,7 +88,7 @@ export class SeriesHorizontal implements OnChanges {
   @Input() tooltipDisabled: boolean = false;
   @Input() gradient: boolean;
   @Input() activeEntries: DataItem[];
-  @Input() seriesName: string;
+  @Input() seriesName: StringOrNumberOrDate;
   @Input() tooltipTemplate: TemplateRef<any>;
   @Input() roundEdges: boolean;
   @Input() animations: boolean = true;
@@ -196,7 +196,7 @@ export class SeriesHorizontal implements OnChanges {
 
       let tooltipLabel = formattedLabel;
       bar.ariaLabel = formattedLabel + ' ' + value.toLocaleString();
-      if (this.seriesName) {
+      if (`${this.seriesName}`) {
         tooltipLabel = `${this.seriesName} • ${formattedLabel}`;
         bar.data.series = this.seriesName;
         bar.ariaLabel = this.seriesName + ' ' + bar.ariaLabel;
@@ -238,7 +238,7 @@ export class SeriesHorizontal implements OnChanges {
     } else {
       this.barsForDataLabels = this.series.map(d => {
         const section: any = {};
-        section.series = this.seriesName ? this.seriesName : d.label;
+        section.series = `${this.seriesName}` ? this.seriesName : d.label;
         section.total = d.value;
         section.x = this.xScale(0);
         section.y = this.yScale(d.label);
