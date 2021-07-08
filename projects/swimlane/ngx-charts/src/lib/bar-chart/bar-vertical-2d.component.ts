@@ -86,7 +86,7 @@ import { ViewDimensions, LegendPosition, ScaleType, LegendOptions, BarOrientatio
           [tooltipTemplate]="tooltipTemplate"
           [showDataLabel]="showDataLabel"
           [dataLabelFormatting]="dataLabelFormatting"
-          [seriesName]="group.name.toString()"
+          [seriesName]="group.name"
           [roundEdges]="roundEdges"
           [animations]="animations"
           [noBarWhenZero]="noBarWhenZero"

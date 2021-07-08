@@ -78,7 +78,7 @@ import { BarChartType } from './types/bar-chart-type.enum';
             [gradient]="gradient"
             [tooltipDisabled]="tooltipDisabled"
             [tooltipTemplate]="tooltipTemplate"
-            [seriesName]="group.name.toString()"
+            [seriesName]="group.name"
             [animations]="animations"
             [noBarWhenZero]="noBarWhenZero"
             (select)="onClick($event, group)"
