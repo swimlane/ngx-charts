@@ -78,7 +78,7 @@ export class SeriesVerticalComponent implements OnChanges {
   @Input() yScale;
   @Input() colors: ColorHelper;
   @Input() gradient: boolean;
-  @Input() activeEntries: any[];
+  @Input() activeEntries: DataItem[];
   @Input() seriesName: string;
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipTemplate: TemplateRef<any>;
@@ -255,11 +255,13 @@ export class SeriesVerticalComponent implements OnChanges {
     this.tooltipType = this.tooltipDisabled ? undefined : StyleTypes.tooltip;
   }
 
-  isActive(entry): boolean {
+  isActive(entry: DataItem): boolean {
     if (!this.activeEntries) return false;
-    const item = this.activeEntries.find(d => {
-      return entry.name === d.name && entry.series === d.series;
+
+    const item = this.activeEntries.find(active => {
+      return entry.name === active.name && entry.value === active.value;
     });
+
     return item !== undefined;
   }
 
