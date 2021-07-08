@@ -9,7 +9,7 @@ import {
   EventEmitter
 } from '@angular/core';
 import { formatLabel } from '../common/label.helper';
-import { BarOrientation } from "../common/types";
+import { BarOrientation } from '../common/types';
 
 @Component({
   selector: 'g[ngx-charts-bar-label]',
