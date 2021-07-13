@@ -239,9 +239,9 @@ export class AppComponent implements OnInit {
 
   // Supports any number of reference lines.
   refLines = [
-    { value: 42500, name: 'Maximum' },
-    { value: 37750, name: 'Average' },
-    { value: 33000, name: 'Minimum' }
+    { value: 6500, name: 'Maximum' },
+    { value: 6000, name: 'Average' },
+    { value: 5500, name: 'Minimum' }
   ];
 
   // data
