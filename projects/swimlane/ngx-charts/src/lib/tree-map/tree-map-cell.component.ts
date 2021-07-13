@@ -5,9 +5,8 @@ import { invertColor } from '../utils/color-utils';
 import { trimLabel } from '../common/trim-label.helper';
 import { escapeLabel } from '../common/label.helper';
 import { id } from '../utils/id';
-import { Gradient } from '../common/types';
+import { BarOrientation, Gradient } from '../common/types';
 import { DataItem } from '../models/chart-data.model';
-import { BarOrientation } from '../common/types/bar-orientation.enum';
 
 @Component({
   selector: 'g[ngx-charts-tree-map-cell]',
@@ -27,7 +26,6 @@ import { BarOrientation } from '../common/types/bar-orientation.enum';
         [attr.height]="height"
         [attr.x]="x"
         [attr.y]="y"
-        [style.cursor]="'pointer'"
         class="cell"
         (click)="onClick()"
       />

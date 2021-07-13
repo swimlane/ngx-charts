@@ -10,10 +10,8 @@ import {
   HostListener
 } from '@angular/core';
 import { select } from 'd3-selection';
-import { Gradient } from '../common/types';
-
+import { Gradient, BarOrientation } from '../common/types';
 import { id } from '../utils/id';
-import { BarOrientation } from '../common/types/bar-orientation.enum';
 
 @Component({
   selector: 'g[ngx-charts-heat-map-cell]',
@@ -33,7 +31,6 @@ import { BarOrientation } from '../common/types/bar-orientation.enum';
         [attr.width]="width"
         [attr.height]="height"
         class="cell"
-        style="cursor: pointer"
         (click)="onClick()"
       />
     </svg:g>
