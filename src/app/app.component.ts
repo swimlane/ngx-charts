@@ -21,7 +21,7 @@ import { data as countries } from 'emoji-flags';
 import chartGroups from './chartTypes';
 import { barChart, lineChartSeries } from './combo-chart-data';
 import pkg from '../../projects/swimlane/ngx-charts/package.json';
-import { LegendPosition, ScaleType } from '@swimlane/ngx-charts/common/types';
+import { LegendPosition, ReferenceLine, ScaleType } from '@swimlane/ngx-charts/common/types';
 import { InputTypes } from '@swimlane/ngx-ui';
 
 const monthName = new Intl.DateTimeFormat('en-us', { month: 'short' });
@@ -238,7 +238,7 @@ export class AppComponent implements OnInit {
   showRefLabels: boolean = true;
 
   // Supports any number of reference lines.
-  refLines = [
+  refLines: ReferenceLine[] = [
     { value: 6500, name: 'Maximum' },
     { value: 6000, name: 'Average' },
     { value: 5500, name: 'Minimum' }
