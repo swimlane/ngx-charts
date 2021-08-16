@@ -366,9 +366,9 @@ export class AreaChartComponent extends BaseChartComponent {
     return this.roundDomains ? scale.nice() : scale;
   }
 
-  getYScale(domain: [number, number], height: number): number[] {
+  getYScale(domain: [number, number], height: number): any {
     const scale = scaleLinear().range([height, 0]).domain(domain);
-    return this.roundDomains ? scale.nice().domain() : scale.domain();
+    return this.roundDomains ? scale.nice() : scale;
   }
 
   getScaleType(values): ScaleType {

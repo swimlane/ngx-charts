@@ -240,9 +240,9 @@ export class BoxComponent implements OnChanges {
       // tslint:disable-next-line: no-this-assignment
       const path0 = this;
       const path1 = this.cloneNode();
-      const n0 = path0.getTotalLength();
-      const n1 = (path1.setAttribute('d', d1), path1).getTotalLength();
-
+      path1.setAttribute('d', d1);
+      const n0 = path0?.getTotalLength();
+      const n1 = path1?.getTotalLength();
       // Uniform sampling of distance based on specified precision.
       const distances = [0];
       let i = 0;
