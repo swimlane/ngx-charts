@@ -62,7 +62,9 @@ export class ColorHelper {
           }
 
           const points = range(0, 1, 1.0 / colorDomain.length);
-          colorScale = scaleLinear().range(colorDomain as any).domain(points);
+          colorScale = scaleLinear()
+            .range(colorDomain as any)
+            .domain(points);
         }
         break;
       default:
@@ -107,7 +109,9 @@ export class ColorHelper {
     if (start === undefined) {
       start = this.domain[0];
     }
-    const valueScale = scaleLinear().domain(this.domain as number[]).range([0, 1]);
+    const valueScale = scaleLinear()
+      .domain(this.domain as number[])
+      .range([0, 1]);
 
     const colorValueScale = scaleBand().domain(this.colorDomain).range([0, 1]);
 
