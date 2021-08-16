@@ -422,7 +422,7 @@ export class LineChartComponent extends BaseChartComponent {
   }
 
   trackBy(index: number, item): string {
-    return item.name;
+    return `${item.name}`;
   }
 
   setColors(): void {

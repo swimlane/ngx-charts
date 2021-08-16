@@ -1,14 +1,14 @@
-import { Component, Input, Output, EventEmitter, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
-import { scaleLinear, scaleTime, scaleBand } from 'd3-scale';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { scaleBand, scaleLinear, scaleTime } from 'd3-scale';
 import { brushX } from 'd3-brush';
 import { select } from 'd3-selection';
 import {
   BaseChartComponent,
-  ColorHelper,
-  ViewDimensions,
   calculateViewDimensions,
+  ColorHelper,
   id,
-  ScaleType
+  ScaleType,
+  ViewDimensions
 } from 'projects/swimlane/ngx-charts/src/public-api';
 
 @Component({
@@ -51,7 +51,7 @@ import {
           [gradient]="gradient"
           [animations]="animations"
           [noBarWhenZero]="noBarWhenZero"
-          tooltipDisabled="true"
+          [tooltipDisabled]="true"
         ></svg:g>
       </svg:g>
 
@@ -221,12 +221,12 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
     return scale;
   }
 
-  getScaleType(values): string {
-    return 'time';
+  getScaleType(values): ScaleType {
+    return ScaleType.Time;
   }
 
   trackBy(index, item): string {
-    return item.name;
+    return `${item.name}`;
   }
 
   setColors(): void {

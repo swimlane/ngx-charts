@@ -1,10 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
-import { Gradient } from './types/gradient.interface';
-
-enum Orientation {
-  Vertical = 'vertical',
-  Horizontal = 'horizontal'
-}
+import { Gradient, BarOrientation } from './types';
 
 @Component({
   selector: 'g[ngx-charts-svg-linear-gradient]',
@@ -21,7 +16,7 @@ enum Orientation {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SvgLinearGradientComponent implements OnChanges {
-  @Input() orientation: Orientation = Orientation.Vertical;
+  @Input() orientation = BarOrientation.Vertical;
   @Input() name: string;
   @Input() stops: Gradient[];
 
@@ -36,9 +31,9 @@ export class SvgLinearGradientComponent implements OnChanges {
     this.y1 = '0%';
     this.y2 = '0%';
 
-    if (this.orientation === Orientation.Horizontal) {
+    if (this.orientation === BarOrientation.Horizontal) {
       this.x2 = '100%';
-    } else if (this.orientation === Orientation.Vertical) {
+    } else if (this.orientation === BarOrientation.Vertical) {
       this.y1 = '100%';
     }
   }

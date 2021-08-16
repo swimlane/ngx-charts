@@ -9,7 +9,7 @@ import {
   scaleQuantile
 } from 'd3-scale';
 
-import { colorSets } from '../utils/color-sets';
+import { Color, colorSets } from '../utils/color-sets';
 import { Gradient, ScaleType } from './types';
 import { StringOrNumberOrDate } from '../models/chart-data.model';
 
@@ -20,7 +20,7 @@ export class ColorHelper {
   domain: number[] | string[];
   customColors: any;
 
-  constructor(scheme: any, type: ScaleType, domain: number[] | string[], customColors?) {
+  constructor(scheme: string | Color, type: ScaleType, domain: number[] | string[], customColors?) {
     if (typeof scheme === 'string') {
       scheme = colorSets.find(cs => {
         return cs.name === scheme;
@@ -34,7 +34,7 @@ export class ColorHelper {
     this.scale = this.generateColorScheme(scheme, type, this.domain);
   }
 
-  generateColorScheme(scheme: any, type: ScaleType, domain: number[] | string[]): any {
+  generateColorScheme(scheme: string | Color, type: ScaleType, domain: number[] | string[]): any {
     if (typeof scheme === 'string') {
       scheme = colorSets.find(cs => {
         return cs.name === scheme;

@@ -14,19 +14,14 @@ import { arc } from 'd3-shape';
 
 import { id } from '../utils/id';
 import { DataItem } from '../models/chart-data.model';
+import { BarOrientation } from '../common/types/bar-orientation.enum';
 
 @Component({
   selector: 'g[ngx-charts-pie-arc]',
   template: `
     <svg:g class="arc-group">
       <svg:defs *ngIf="gradient">
-        <svg:g
-          ngx-charts-svg-radial-gradient
-          [color]="fill"
-          orientation="vertical"
-          [name]="radialGradientId"
-          [startOpacity]="startOpacity"
-        />
+        <svg:g ngx-charts-svg-radial-gradient [color]="fill" [name]="radialGradientId" [startOpacity]="startOpacity" />
       </svg:defs>
       <svg:path
         [attr.d]="path"
@@ -64,13 +59,15 @@ export class PieArcComponent implements OnChanges {
   @Output() deactivate = new EventEmitter();
   @Output() dblclick = new EventEmitter();
 
+  barOrientation = BarOrientation;
+
   element: HTMLElement;
   path: any;
   startOpacity: number;
   radialGradientId: string;
-  linearGradientId: string;
   gradientFill: string;
   initialized: boolean = false;
+
   private _timeout;
 
   constructor(element: ElementRef) {

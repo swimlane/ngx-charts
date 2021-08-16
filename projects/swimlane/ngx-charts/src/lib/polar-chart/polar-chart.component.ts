@@ -17,7 +17,7 @@ import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { getScaleType } from '../common/domain.helper';
 import { isDate } from '../utils/types';
-import { ViewDimensions, LegendPosition, ScaleType } from '../common/types';
+import { ViewDimensions, LegendPosition, ScaleType, Orientation } from '../common/types';
 
 const twoPI = 2 * Math.PI;
 
@@ -81,7 +81,7 @@ const twoPI = 2 * Math.PI;
           *ngIf="xAxis && showXAxisLabel"
           [label]="xAxisLabel"
           [offset]="labelOffset"
-          [orient]="'bottom'"
+          [orient]="orientation.Bottom"
           [height]="dims.height"
           [width]="dims.width"
         ></svg:g>
@@ -190,6 +190,8 @@ export class PolarChartComponent extends BaseChartComponent {
   thetaTicks: any[];
   radiusTicks: number[];
   outerRadius: number;
+
+  orientation = Orientation;
 
   update(): void {
     super.update();
@@ -469,6 +471,6 @@ export class PolarChartComponent extends BaseChartComponent {
   }
 
   trackBy(index: number, item): string {
-    return item.name;
+    return `${item.name}`;
   }
 }

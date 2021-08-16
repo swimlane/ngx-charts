@@ -49,7 +49,7 @@ export * from './lib/common/tooltip/tooltip.component';
 export * from './lib/common/tooltip/tooltip.directive';
 export * from './lib/common/tooltip/style.type';
 export * from './lib/common/tooltip/show.type';
-export * from './lib/common/tooltip/position/placement.type';
+export * from './lib/common/tooltip/position/placement-type.enum';
 
 export * from './lib/common/types';
 

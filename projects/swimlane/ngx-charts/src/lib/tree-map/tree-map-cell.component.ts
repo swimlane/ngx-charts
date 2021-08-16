@@ -5,14 +5,20 @@ import { invertColor } from '../utils/color-utils';
 import { trimLabel } from '../common/trim-label.helper';
 import { escapeLabel } from '../common/label.helper';
 import { id } from '../utils/id';
-import { Gradient } from '../common/types';
+import { BarOrientation, Gradient } from '../common/types';
 import { DataItem } from '../models/chart-data.model';
+
 @Component({
   selector: 'g[ngx-charts-tree-map-cell]',
   template: `
     <svg:g>
       <defs *ngIf="gradient">
-        <svg:g ngx-charts-svg-linear-gradient orientation="vertical" [name]="gradientId" [stops]="gradientStops" />
+        <svg:g
+          ngx-charts-svg-linear-gradient
+          [orientation]="orientation.Vertical"
+          [name]="gradientId"
+          [stops]="gradientStops"
+        />
       </defs>
       <svg:rect
         [attr.fill]="gradient ? gradientUrl : fill"
@@ -20,7 +26,6 @@ import { DataItem } from '../models/chart-data.model';
         [attr.height]="height"
         [attr.x]="x"
         [attr.y]="y"
-        [style.cursor]="'pointer'"
         class="cell"
         (click)="onClick()"
       />
@@ -79,6 +84,8 @@ export class TreeMapCellComponent implements OnChanges {
   formattedLabel: string;
   formattedValue: string;
   initialized: boolean = false;
+
+  orientation = BarOrientation;
 
   constructor(element: ElementRef) {
     this.element = element.nativeElement;

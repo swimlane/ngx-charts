@@ -207,7 +207,7 @@ export class BarVerticalComponent extends BaseChartComponent {
     return [min, max];
   }
 
-  onClick(data: DataItem) {
+  onClick(data: DataItem | string) {
     this.select.emit(data);
   }
 

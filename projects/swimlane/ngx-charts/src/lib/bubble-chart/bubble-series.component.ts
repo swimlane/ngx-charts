@@ -13,6 +13,8 @@ import { formatLabel, escapeLabel } from '../common/label.helper';
 import { ScaleType } from '../common/types';
 import { ColorHelper } from '../common/color.helper';
 import { BubbleChartSeries } from '../models/chart-data.model';
+import { PlacementTypes } from '../common/tooltip/position';
+import { StyleTypes } from '../common/tooltip/style.type';
 
 @Component({
   selector: 'g[ngx-charts-bubble-series]',
@@ -37,8 +39,8 @@ import { BubbleChartSeries } from '../models/chart-data.model';
           (deactivate)="deactivateCircle(circle)"
           ngx-tooltip
           [tooltipDisabled]="tooltipDisabled"
-          [tooltipPlacement]="'top'"
-          [tooltipType]="'tooltip'"
+          [tooltipPlacement]="placementTypes.Top"
+          [tooltipType]="styleTypes.tooltip"
           [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(circle)"
           [tooltipTemplate]="tooltipTemplate"
           [tooltipContext]="circle.data"
@@ -80,6 +82,9 @@ export class BubbleSeriesComponent implements OnChanges {
 
   areaPath: any;
   circles: any[]; // TODO type this
+
+  placementTypes = PlacementTypes;
+  styleTypes = StyleTypes;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();

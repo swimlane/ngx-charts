@@ -6,7 +6,8 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy,
   ContentChild,
-  TemplateRef
+  TemplateRef,
+  TrackByFunction
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 
@@ -17,6 +18,7 @@ import { ColorHelper } from '../common/color.helper';
 import { Series } from '../models/chart-data.model';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { ViewDimensions, LegendPosition, ScaleType, LegendOptions } from '../common/types';
+import { BarChartType } from './types/bar-chart-type.enum';
 
 @Component({
   selector: 'ngx-charts-bar-horizontal-stacked',
@@ -68,7 +70,7 @@ import { ViewDimensions, LegendPosition, ScaleType, LegendOptions } from '../com
         >
           <svg:g
             ngx-charts-series-horizontal
-            type="stacked"
+            [type]="barChartType.Stacked"
             [xScale]="xScale"
             [yScale]="yScale"
             [colors]="colors"
@@ -156,6 +158,8 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   yAxisWidth: number = 0;
   legendOptions: LegendOptions;
   dataLabelMaxWidth: any = { negative: 0, positive: 0 };
+
+  barChartType = BarChartType;
 
   update(): void {
     super.update();
@@ -272,9 +276,9 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
     this.select.emit(data);
   }
 
-  trackBy(index: string, item: Series): any {
+  trackBy: TrackByFunction<Series> = (index: number, item: Series) => {
     return item.name;
-  }
+  };
 
   setColors(): void {
     let domain;

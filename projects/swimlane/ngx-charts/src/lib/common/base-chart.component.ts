@@ -19,7 +19,8 @@ import { fromEvent as observableFromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { VisibilityObserver } from '../utils/visibility-observer';
 import { isDate } from '../utils/types';
-import { ScaleType, ViewDimensions } from '../common/types';
+import { ScaleType, ViewDimensions } from './types';
+import { Color } from '../utils/color-sets';
 
 @Component({
   selector: 'base-chart',
@@ -28,9 +29,9 @@ import { ScaleType, ViewDimensions } from '../common/types';
 export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() results: any;
   @Input() view: [number, number];
-  @Input() scheme: any = 'cool';
+  @Input() scheme: string | Color = 'cool';
   @Input() schemeType: ScaleType = ScaleType.Ordinal;
-  @Input() customColors: any[];
+  @Input() customColors: any;
   @Input() animations: boolean = true;
 
   @Output() select = new EventEmitter();
@@ -56,7 +57,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     this.bindWindowResizeEvent();
 
-    // listen for visibility ofhe element for hidden by default scenario
+    // listen for visibility of the element for hidden by default scenario
     this.visibilityObserver = new VisibilityObserver(this.chartElement, this.zone);
     this.visibilityObserver.visible.subscribe(this.update.bind(this));
   }

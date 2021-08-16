@@ -6,7 +6,8 @@ import {
   EventEmitter,
   ChangeDetectionStrategy,
   ContentChild,
-  TemplateRef
+  TemplateRef,
+  TrackByFunction
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { scaleBand, scaleLinear } from 'd3-scale';
@@ -16,7 +17,7 @@ import { ColorHelper } from '../common/color.helper';
 import { DataItem } from '../models/chart-data.model';
 
 import { BaseChartComponent } from '../common/base-chart.component';
-import { ViewDimensions, LegendPosition, ScaleType, LegendOptions } from '../common/types';
+import { ViewDimensions, LegendPosition, ScaleType, LegendOptions, BarOrientation } from '../common/types';
 
 @Component({
   selector: 'ngx-charts-bar-vertical-2d',
@@ -38,7 +39,7 @@ import { ViewDimensions, LegendPosition, ScaleType, LegendOptions } from '../com
           [yScale]="valueScale"
           [data]="results"
           [dims]="dims"
-          orient="vertical"
+          [orient]="barOrientation.Vertical"
         ></svg:g>
         <svg:g
           ngx-charts-x-axis
@@ -166,6 +167,8 @@ export class BarVertical2DComponent extends BaseChartComponent {
   legendOptions: LegendOptions;
   dataLabelMaxHeight: any = { negative: 0, positive: 0 };
 
+  barOrientation = BarOrientation;
+
   update(): void {
     super.update();
 
@@ -292,9 +295,9 @@ export class BarVertical2DComponent extends BaseChartComponent {
     this.select.emit(data);
   }
 
-  trackBy(index: number, item: DataItem): any {
+  trackBy: TrackByFunction<DataItem> = (index: number, item: DataItem) => {
     return item.name;
-  }
+  };
 
   setColors(): void {
     let domain;
