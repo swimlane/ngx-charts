@@ -45,7 +45,7 @@ export class ColorHelper {
     switch (type) {
       case ScaleType.Quantile:
         colorScale = scaleQuantile()
-          .range(scheme.domain)
+          .range(scheme.domain as any)
           .domain(domain as number[]);
         break;
       case ScaleType.Ordinal:
@@ -62,7 +62,7 @@ export class ColorHelper {
           }
 
           const points = range(0, 1, 1.0 / colorDomain.length);
-          colorScale = scaleLinear().range(colorDomain).domain(points);
+          colorScale = scaleLinear().range(colorDomain as any).domain(points);
         }
         break;
       default:

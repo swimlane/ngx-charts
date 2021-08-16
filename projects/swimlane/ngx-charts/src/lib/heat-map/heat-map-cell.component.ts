@@ -9,9 +9,11 @@ import {
   ChangeDetectionStrategy,
   HostListener
 } from '@angular/core';
-import { select } from 'd3-selection';
+import { select as d3Select } from 'd3-selection';
+import { transition as d3Transition } from 'd3-transition';
 import { Gradient, BarOrientation } from '../common/types';
 import { id } from '../utils/id';
+d3Select.prototype.transition = d3Transition;
 
 @Component({
   selector: 'g[ngx-charts-heat-map-cell]',
@@ -93,13 +95,13 @@ export class HeatMapCellComponent implements OnChanges {
   }
 
   loadAnimation(): void {
-    const node = select(this.element).select('.cell');
+    const node = d3Select(this.element).select('.cell');
     node.attr('opacity', 0);
     this.animateToCurrentForm();
   }
 
   animateToCurrentForm(): void {
-    const node = select(this.element).select('.cell');
+    const node = d3Select(this.element).select('.cell');
 
     node.transition().duration(750).attr('opacity', 1);
   }

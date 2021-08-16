@@ -90,7 +90,7 @@ export class SparklineComponent extends BaseChartComponent {
     const values = getUniqueXDomainValues(this.results);
 
     const { domain, xSet, scaleType } = getXDomainArray(values);
-    this.scaleType = scaleType;
+    this.scaleType = scaleType as ScaleType;
     this.xSet = xSet;
     return domain;
   }

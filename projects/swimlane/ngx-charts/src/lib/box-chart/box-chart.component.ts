@@ -149,6 +149,7 @@ export class BoxChartComponent extends BaseChartComponent {
 
     this.xDomain = this.getXDomain();
     this.yDomain = this.getYDomain();
+    this.seriesDomain = this.getSeriesDomain();
     this.setScales();
     this.setColors();
 
@@ -157,7 +158,7 @@ export class BoxChartComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    let domain: string[] | number[];
+    let domain: string[] | number[] = [];
     if (this.schemeType === ScaleType.Ordinal) {
       domain = this.seriesDomain;
     } else {
@@ -233,6 +234,10 @@ export class BoxChartComponent extends BaseChartComponent {
     const max: number = Math.max(...mappedValues);
 
     return [min, max];
+  }
+
+  getSeriesDomain(): string[] {
+    return this.results.map(d => `${d.name}`);
   }
 
   updateYAxisWidth({ width }): void {

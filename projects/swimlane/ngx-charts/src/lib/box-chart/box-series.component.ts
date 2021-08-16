@@ -14,7 +14,7 @@ import { IBoxModel, BoxChartSeries, DataItem } from '../models/chart-data.model'
 import { IVector2D } from '../models/coordinates.model';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { ColorHelper } from '../common/color.helper';
-import { ViewDimensions } from '../common/types';
+import { ScaleType, ViewDimensions } from '../common/types';
 import { formatLabel, escapeLabel } from '../common/label.helper';
 import { StyleTypes } from '../common/tooltip/style.type';
 import { PlacementTypes } from '../common/tooltip/position';
@@ -135,7 +135,7 @@ export class BoxSeriesComponent implements OnChanges {
     box.y = this.yScale(this.quartiles[2]);
     box.ariaLabel = formattedLabel + ' - Median: ' + value.toLocaleString();
 
-    if (this.colors.scaleType === 'ordinal') {
+    if (this.colors.scaleType === ScaleType.Ordinal) {
       box.color = this.colors.getColor(seriesName);
     } else {
       box.color = this.colors.getColor(this.quartiles[1]);

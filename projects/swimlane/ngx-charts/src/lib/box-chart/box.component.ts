@@ -9,7 +9,8 @@ import {
   OnChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
-import { select, BaseType } from 'd3-selection';
+import { select as d3Select, BaseType } from 'd3-selection';
+import { transition as d3Transition } from 'd3-transition';
 import { interpolate } from 'd3-interpolate';
 import { easeSinInOut } from 'd3-ease';
 import { roundedRect } from '../common/shape.helper';
@@ -17,6 +18,7 @@ import { id } from '../utils/id';
 import { IBoxModel } from '../models/chart-data.model';
 import { IVector2D } from '../models/coordinates.model';
 import { BarOrientation, Gradient } from '../common/types';
+d3Select.prototype.transition = d3Transition;
 
 @Component({
   selector: 'g[ngx-charts-box]',
@@ -179,7 +181,7 @@ export class BoxComponent implements OnChanges {
   }
 
   updatePathEl(): void {
-    const nodeBar = select(this.nativeElm).selectAll('.bar');
+    const nodeBar = d3Select(this.nativeElm).selectAll('.bar');
     const path = this.getPath();
     if (this.animations) {
       nodeBar
@@ -195,7 +197,7 @@ export class BoxComponent implements OnChanges {
   }
 
   updateLineEl(): void {
-    const lineEl = select(this.nativeElm).selectAll('.bar-line');
+    const lineEl = d3Select(this.nativeElm).selectAll('.bar-line');
     if (this.animations) {
       lineEl
         .transition()
@@ -294,9 +296,9 @@ export class BoxComponent implements OnChanges {
     let path = '';
 
     if (this.roundEdges) {
-      if (this.orientation === 'vertical') {
+      if (this.orientation === BarOrientation.Vertical) {
         radius = Math.min(this.height, radius);
-      } else if (this.orientation === 'horizontal') {
+      } else if (this.orientation === BarOrientation.Horizontal) {
         radius = Math.min(this.width, radius);
       }
     }
@@ -359,7 +361,7 @@ export class BoxComponent implements OnChanges {
   private checkToHideBar(): void {
     this.hideBar =
       this.noBarWhenZero &&
-      ((this.orientation === 'vertical' && this.height === 0) ||
-        (this.orientation === 'horizontal' && this.width === 0));
+      ((this.orientation === BarOrientation.Vertical && this.height === 0) ||
+        (this.orientation === BarOrientation.Horizontal && this.width === 0));
   }
 }

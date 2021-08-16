@@ -7,11 +7,13 @@ import {
   OnChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
-import { select } from 'd3-selection';
+import { select as d3Select } from 'd3-selection';
+import { transition as d3Transition } from 'd3-transition';
 import { id } from '../utils/id';
 import { Gradient } from './types';
 import { AreaChartSeries } from '../models/chart-data.model';
 import { BarOrientation } from './types/bar-orientation.enum';
+d3Select.prototype.transition = d3Transition;
 
 @Component({
   selector: 'g[ngx-charts-area]',
@@ -85,7 +87,7 @@ export class AreaComponent implements OnChanges {
   }
 
   updatePathEl(): void {
-    const node = select(this.element).select('.area');
+    const node = d3Select(this.element).select('.area');
 
     if (this.animations) {
       node.transition().duration(750).attr('d', this.path);

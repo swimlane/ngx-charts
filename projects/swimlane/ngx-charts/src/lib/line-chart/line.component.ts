@@ -9,8 +9,10 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { select } from 'd3-selection';
+import { select as d3Select } from 'd3-selection';
+import { transition as d3Transition } from 'd3-transition';
 import { Series } from '../models/chart-data.model';
+d3Select.prototype.transition = d3Transition;
 
 @Component({
   selector: 'g[ngx-charts-line]',
@@ -66,7 +68,7 @@ export class LineComponent implements OnChanges {
   }
 
   updatePathEl(): void {
-    const node = select(this.element.nativeElement).select('.line');
+    const node = d3Select(this.element.nativeElement).select('.line');
 
     if (this.animations) {
       node.transition().duration(750).attr('d', this.path);
