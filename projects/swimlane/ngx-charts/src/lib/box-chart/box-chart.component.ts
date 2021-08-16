@@ -63,6 +63,7 @@ import { ViewDimensions, LegendPosition, ScaleType, LegendOptions } from '../com
             [dataSerie]="result"
             [dims]="dims"
             [animations]="animations"
+            [gradient]="gradient"
             (activate)="onActivate($event)"
             (deactivate)="onDeactivate($event)"
             (select)="onClick($event)"
@@ -94,6 +95,7 @@ export class BoxChartComponent extends BaseChartComponent {
   @Input() strokeColor: string = '#FFFFFF';
   @Input() strokeWidth: number = 2;
   @Input() tooltipDisabled: boolean = false;
+  @Input() gradient: boolean;
 
   @Output() select: EventEmitter<IBoxModel> = new EventEmitter();
   @Output() activate: EventEmitter<IBoxModel> = new EventEmitter();

@@ -38,6 +38,10 @@ function multiFormat(value) {
   return `${value.toFixed(2)}hrs`;
 }
 
+const getRandomInt = (min: number, max: number) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
 @Component({
   selector: 'app-root',
   providers: [Location, { provide: LocationStrategy, useClass: HashLocationStrategy }],
@@ -353,6 +357,12 @@ export class AppComponent implements OnInit {
         });
         this.graph = { links, nodes };
       }
+      
+      if (this.boxData.length > 1) {
+        const index = Math.floor(Math.random() * this.boxData.length);
+        this.boxData.splice(index, 1);
+        this.boxData = [...this.boxData];
+      }
     }
 
     if (add) {
@@ -410,10 +420,41 @@ export class AppComponent implements OnInit {
 
       this.bubble = [...this.bubble, bubbleEntry];
 
-      // bubble interactive demo
-      const getRandomInt = (min, max) => {
-        return Math.floor(Math.random() * (max - min + 1) + min);
+      // box
+      const boxEntry = {
+        name: country.name,
+        series: [
+          {
+            name: '1990',
+            value: getRandomInt(10, 5)
+          },
+          {
+            name: '2000',
+            value: getRandomInt(15, 5)
+          },
+          {
+            name: '2010',
+            value: getRandomInt(20, 10)
+          },
+          {
+            name: '2020',
+            value: getRandomInt(30, 10)
+          },
+          {
+            name: '2030',
+            value: getRandomInt(50, 20)
+          }
+        ]
       };
+
+      const index = this.boxData.findIndex(box => box.name === country.name);
+      if (index > -1) {
+        this.boxData[index] = boxEntry;
+      } else {
+        this.boxData = [...this.boxData, boxEntry];        
+      }
+
+      // bubble interactive demo
       this.bubbleDemoProcess(bubbleDemoData[getRandomInt(0, bubbleDemoData.length - 1)]);
 
       this.statusData = this.getStatusData();

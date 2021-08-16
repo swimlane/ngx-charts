@@ -37,7 +37,7 @@ import { PlacementTypes } from '../common/tooltip/position';
       [strokeWidth]="strokeWidth"
       [data]="box.data"
       [lineCoordinates]="box.lineCoordinates"
-      [orientation]="'vertical'"
+      [gradient]="gradient"
       [ariaLabel]="box.ariaLabel"
       (select)="onClick($event)"
       (activate)="activate.emit($event)"
@@ -78,6 +78,7 @@ export class BoxSeriesComponent implements OnChanges {
   @Input() tooltipPlacement: PlacementTypes;
   @Input() tooltipType: StyleTypes;
   @Input() roundEdges: boolean;
+  @Input() gradient: boolean = false;
 
   @Output() select: EventEmitter<IBoxModel> = new EventEmitter();
   @Output() activate: EventEmitter<IBoxModel> = new EventEmitter();

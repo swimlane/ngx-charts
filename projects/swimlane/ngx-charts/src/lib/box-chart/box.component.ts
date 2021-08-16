@@ -7,7 +7,8 @@ import {
   ElementRef,
   SimpleChanges,
   OnChanges,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
 } from '@angular/core';
 import { select as d3Select, BaseType } from 'd3-selection';
 import { transition as d3Transition } from 'd3-transition';
@@ -20,6 +21,8 @@ import { IVector2D } from '../models/coordinates.model';
 import { BarOrientation, Gradient } from '../common/types';
 d3Select.prototype.transition = d3Transition;
 
+type LineCoordinates = [IVector2D, IVector2D, IVector2D, IVector2D];
+
 @Component({
   selector: 'g[ngx-charts-box]',
   template: `
@@ -27,7 +30,7 @@ d3Select.prototype.transition = d3Transition;
       <svg:g
         *ngIf="hasGradient"
         ngx-charts-svg-linear-gradient
-        [orientation]="orientation"
+        [orientation]="BarOrientation.Vertical"
         [name]="gradientId"
         [stops]="gradientStops"
       />
@@ -110,8 +113,7 @@ export class BoxComponent implements OnChanges {
   @Input() height: number;
   @Input() x: number;
   @Input() y: number;
-  @Input() lineCoordinates: [IVector2D, IVector2D, IVector2D, IVector2D];
-  @Input() orientation: BarOrientation;
+  @Input() lineCoordinates: LineCoordinates;
   @Input() roundEdges: boolean = true;
   @Input() gradient: boolean = false;
   @Input() gradientStops: Gradient[];
@@ -125,12 +127,14 @@ export class BoxComponent implements OnChanges {
   @Output() activate: EventEmitter<IBoxModel> = new EventEmitter();
   @Output() deactivate: EventEmitter<IBoxModel> = new EventEmitter();
 
+  BarOrientation = BarOrientation;
+
   nativeElm: any;
 
   // Path related properties.
   oldPath: string;
   boxPath: string;
-  oldLineCoordinates: [IVector2D, IVector2D, IVector2D, IVector2D];
+  oldLineCoordinates: LineCoordinates;
 
   // Color related properties.
   gradientId: string;
@@ -144,7 +148,7 @@ export class BoxComponent implements OnChanges {
   /** Mask Path Id to keep track of the mask element */
   maskLineId: string;
 
-  constructor(element: ElementRef) {
+  constructor(element: ElementRef, protected cd: ChangeDetectorRef) {
     this.nativeElm = element.nativeElement;
   }
 
@@ -173,10 +177,15 @@ export class BoxComponent implements OnChanges {
     this.checkToHideBar();
     this.maskLineId = 'mask' + id().toString();
     this.maskLine = `url(#${this.maskLineId})`;
+
+    if (this.cd) {
+      this.cd.markForCheck();
+    }
   }
 
   loadAnimation(): void {
-    this.boxPath = this.getStartingPath();
+    this.boxPath = this.oldPath = this.getStartingPath();
+    this.oldLineCoordinates = this.getStartingLineCoordinates();
     setTimeout(this.update.bind(this), 100);
   }
 
@@ -198,29 +207,29 @@ export class BoxComponent implements OnChanges {
 
   updateLineEl(): void {
     const lineEl = d3Select(this.nativeElm).selectAll('.bar-line');
+    const lineCoordinates = this.lineCoordinates;
+    const oldLineCoordinates = this.oldLineCoordinates;
     if (this.animations) {
       lineEl
-        .transition()
-        .duration(0)
-        .attr('x1', (d, index, node) => (this.oldLineCoordinates ? this.oldLineCoordinates[index].v1.x : undefined))
-        .attr('y1', (d, index, node) => (this.oldLineCoordinates ? this.oldLineCoordinates[index].v1.y : undefined))
-        .attr('x2', (d, index, node) => (this.oldLineCoordinates ? this.oldLineCoordinates[index].v2.x : undefined))
-        .attr('y2', (d, index, node) => (this.oldLineCoordinates ? this.oldLineCoordinates[index].v2.y : undefined))
+        .attr('x1', (_, index) => oldLineCoordinates[index].v1.x)
+        .attr('y1', (_, index) => oldLineCoordinates[index].v1.y)
+        .attr('x2', (_, index) => oldLineCoordinates[index].v2.x)
+        .attr('y2', (_, index) => oldLineCoordinates[index].v2.y)
         .transition()
         .ease(easeSinInOut)
         .duration(500)
-        .attr('x1', (d, index, node) => this.lineCoordinates[index].v1.x)
-        .attr('y1', (d, index, node) => this.lineCoordinates[index].v1.y)
-        .attr('x2', (d, index, node) => this.lineCoordinates[index].v2.x)
-        .attr('y2', (d, index, node) => this.lineCoordinates[index].v2.y);
+        .attr('x1', (_, index) => lineCoordinates[index].v1.x)
+        .attr('y1', (_, index) => lineCoordinates[index].v1.y)
+        .attr('x2', (_, index) => lineCoordinates[index].v2.x)
+        .attr('y2', (_, index) => lineCoordinates[index].v2.y);
     } else {
       lineEl
-        .attr('x1', (d, index, node) => this.lineCoordinates[index].v1.x)
-        .attr('y1', (d, index, node) => this.lineCoordinates[index].v1.y)
-        .attr('x2', (d, index, node) => this.lineCoordinates[index].v2.x)
-        .attr('y2', (d, index, node) => this.lineCoordinates[index].v2.y);
+        .attr('x1', (_, index) => lineCoordinates[index].v1.x)
+        .attr('y1', (_, index) => lineCoordinates[index].v1.y)
+        .attr('x2', (_, index) => lineCoordinates[index].v2.x)
+        .attr('y2', (_, index) => lineCoordinates[index].v2.y);
     }
-    this.oldLineCoordinates = this.lineCoordinates;
+    this.oldLineCoordinates = [...lineCoordinates];
   }
 
   /**
@@ -273,38 +282,38 @@ export class BoxComponent implements OnChanges {
     }
 
     let path = '';
+    const radius = this.roundEdges ? 1 : 0;
+    const { x, y } = this.lineCoordinates[2].v1;
 
-    if (this.roundEdges) {
-      if (this.orientation === BarOrientation.Vertical) {
-        path = roundedRect(this.x, this.y + this.height, this.width, 1, 0, this.edges);
-      } else if (this.orientation === BarOrientation.Horizontal) {
-        path = roundedRect(this.x, this.y, 1, this.height, 0, this.edges);
-      }
-    } else {
-      if (this.orientation === BarOrientation.Vertical) {
-        path = roundedRect(this.x, this.y + this.height, this.width, 1, 0, this.edges);
-      } else if (this.orientation === BarOrientation.Horizontal) {
-        path = roundedRect(this.x, this.y, 1, this.height, 0, this.edges);
-      }
-    }
-
-    return path;
+    return roundedRect(x - this.width, y - 1, this.width, 2, radius, this.edges);;
   }
 
   getPath(): string {
     let radius = this.getRadius();
     let path = '';
 
-    if (this.roundEdges) {
-      if (this.orientation === BarOrientation.Vertical) {
-        radius = Math.min(this.height, radius);
-      } else if (this.orientation === BarOrientation.Horizontal) {
-        radius = Math.min(this.width, radius);
-      }
-    }
-    path = roundedRect(this.x, this.y, this.width, this.height, radius, this.edges);
+    path = roundedRect(this.x, this.y, this.width, this.height, Math.min(this.height, radius), this.edges);
 
     return path;
+  }
+
+  getStartingLineCoordinates(): LineCoordinates {
+    if (!this.animations) {
+      return [...this.lineCoordinates];
+    }
+
+    const lineCoordinates: LineCoordinates = [...this.lineCoordinates];
+    lineCoordinates[1] = {...lineCoordinates[2]};
+    lineCoordinates[3] = {...lineCoordinates[2]};
+    lineCoordinates[0] = {...lineCoordinates[0]};
+
+    lineCoordinates[0].v1 = { ...lineCoordinates[0].v1 };
+    lineCoordinates[0].v2 = { ...lineCoordinates[0].v2 };
+
+    lineCoordinates[0].v1.y = lineCoordinates[2].v1.y - 1;
+    lineCoordinates[0].v2.y = lineCoordinates[2].v1.y + 1;
+
+    return lineCoordinates;
   }
 
   getRadius(): number {
@@ -360,8 +369,6 @@ export class BoxComponent implements OnChanges {
 
   private checkToHideBar(): void {
     this.hideBar =
-      this.noBarWhenZero &&
-      ((this.orientation === BarOrientation.Vertical && this.height === 0) ||
-        (this.orientation === BarOrientation.Horizontal && this.width === 0));
+      this.noBarWhenZero && this.height === 0;
   }
 }
