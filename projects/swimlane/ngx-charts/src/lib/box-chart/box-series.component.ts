@@ -66,7 +66,7 @@ import { PlacementTypes } from '../common/tooltip/position';
 })
 export class BoxSeriesComponent implements OnChanges {
   @Input() dims: ViewDimensions;
-  @Input() dataSerie: BoxChartSeries;
+  @Input() series: BoxChartSeries;
   @Input() xScale: ScaleBand<string>;
   @Input() yScale: ScaleLinear<number, number>;
   @Input() colors: ColorHelper;
@@ -101,11 +101,11 @@ export class BoxSeriesComponent implements OnChanges {
 
   update(): void {
     this.updateTooltipSettings();
-    const width = this.dataSerie && this.dataSerie.series.length ? Math.round(this.xScale.bandwidth()) : null;
-    const seriesName = this.dataSerie.name;
+    const width = this.series && this.series.series.length ? Math.round(this.xScale.bandwidth()) : null;
+    const seriesName = this.series.name;
 
     // Calculate Quantile and Whiskers for each box serie.
-    this.counts = this.dataSerie.series;
+    this.counts = this.series.series;
 
     const mappedCounts = this.counts.map(serie => Number(serie.value));
     this.whiskers = [min(mappedCounts), max(mappedCounts)];
@@ -170,26 +170,29 @@ export class BoxSeriesComponent implements OnChanges {
     // The X value is not being centered, so had to sum half the width to align it.
     const commonX = this.xScale(seriesName);
     const offsetX = commonX + barWidth / 2;
-    const offsetPlusX = offsetX + barWidth / 2;
-    const offsetMinusX = offsetX - barWidth / 2;
+
+    const medianLineWidth = Math.max(barWidth + 4 * this.strokeWidth, 1);
+    const whiskerLineWidth = Math.max(barWidth / 3, 1);
+
     const whiskerZero = this.yScale(whiskers[0]);
     const whiskerOne = this.yScale(whiskers[1]);
+    const median = this.yScale(quartiles[1]);
+
     const topLine: IVector2D = {
-      v1: { x: offsetPlusX, y: whiskerZero },
-      v2: { x: offsetMinusX, y: whiskerZero }
+      v1: { x:  offsetX + whiskerLineWidth / 2, y: whiskerZero },
+      v2: { x: offsetX - whiskerLineWidth / 2, y: whiskerZero }
     };
     const medianLine: IVector2D = {
-      v1: { x: offsetPlusX, y: this.yScale(quartiles[1]) },
-      v2: { x: offsetMinusX, y: this.yScale(quartiles[1]) }
+      v1: { x: offsetX + medianLineWidth / 2, y: median },
+      v2: { x: offsetX - medianLineWidth / 2, y: median }
     };
     const bottomLine: IVector2D = {
-      v1: { x: offsetPlusX, y: whiskerOne },
-      v2: { x: offsetMinusX, y: whiskerOne }
+      v1: { x: offsetX + whiskerLineWidth / 2, y: whiskerOne },
+      v2: { x: offsetX - whiskerLineWidth / 2, y: whiskerOne }
     };
-    // The X value is not being centered, so had to sum half the width to align it.
     const verticalLine: IVector2D = {
-      v1: { x: commonX + barWidth / 2 + 1, y: whiskerZero },
-      v2: { x: commonX + barWidth / 2 - 1, y: whiskerOne }
+      v1: { x: offsetX, y: whiskerZero },
+      v2: { x: offsetX, y: whiskerOne }
     };
     return [verticalLine, topLine, medianLine, bottomLine];
   }

@@ -60,7 +60,7 @@ import { ViewDimensions, LegendPosition, ScaleType, LegendOptions } from '../com
             [strokeWidth]="strokeWidth"
             [tooltipDisabled]="tooltipDisabled"
             [tooltipTemplate]="tooltipTemplate"
-            [dataSerie]="result"
+            [series]="result"
             [dims]="dims"
             [animations]="animations"
             [gradient]="gradient"

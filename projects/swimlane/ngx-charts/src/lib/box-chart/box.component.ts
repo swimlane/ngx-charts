@@ -14,11 +14,17 @@ import { select as d3Select, BaseType } from 'd3-selection';
 import { transition as d3Transition } from 'd3-transition';
 import { interpolate } from 'd3-interpolate';
 import { easeSinInOut } from 'd3-ease';
+
+import cloneDeep from 'clone-deep';
+
 import { roundedRect } from '../common/shape.helper';
 import { id } from '../utils/id';
 import { IBoxModel } from '../models/chart-data.model';
 import { IVector2D } from '../models/coordinates.model';
 import { BarOrientation, Gradient } from '../common/types';
+
+
+
 d3Select.prototype.transition = d3Transition;
 
 type LineCoordinates = [IVector2D, IVector2D, IVector2D, IVector2D];
@@ -50,54 +56,22 @@ type LineCoordinates = [IVector2D, IVector2D, IVector2D, IVector2D];
         [class.hidden]="hideBar"
         [attr.d]="boxPath"
         [attr.stroke]="strokeColor"
-        [attr.stroke-width]="strokeWidth"
+        [attr.stroke-width]="boxStrokeWidth"
         [attr.aria-label]="ariaLabel"
         [attr.fill]="hasGradient ? gradientFill : fill"
         (click)="select.emit(data)"
       />
       <svg:line
+        *ngFor="let line of lineCoordinates; let i = index"
         class="bar-line"
         [class.hidden]="hideBar"
-        [attr.x1]="lineCoordinates[0].v1.x"
-        [attr.y1]="lineCoordinates[0].v1.y"
-        [attr.x2]="lineCoordinates[0].v2.x"
-        [attr.y2]="lineCoordinates[0].v2.y"
+        [attr.x1]="line.v1.x"
+        [attr.y1]="line.v1.y"
+        [attr.x2]="line.v2.x"
+        [attr.y2]="line.v2.y"
         [attr.stroke]="strokeColor"
-        [attr.stroke-width]="strokeWidth"
-        [attr.mask]="maskLine"
-        fill="none"
-      />
-      <svg:line
-        class="bar-line"
-        [class.hidden]="hideBar"
-        [attr.x1]="lineCoordinates[1].v1.x"
-        [attr.y1]="lineCoordinates[1].v1.y"
-        [attr.x2]="lineCoordinates[1].v2.x"
-        [attr.y2]="lineCoordinates[1].v2.y"
-        [attr.stroke]="strokeColor"
-        [attr.stroke-width]="strokeWidth"
-        fill="none"
-      />
-      <svg:line
-        class="bar-line"
-        [class.hidden]="hideBar"
-        [attr.x1]="lineCoordinates[2].v1.x"
-        [attr.y1]="lineCoordinates[2].v1.y"
-        [attr.x2]="lineCoordinates[2].v2.x"
-        [attr.y2]="lineCoordinates[2].v2.y"
-        [attr.stroke]="strokeColor"
-        [attr.stroke-width]="strokeWidth"
-        fill="none"
-      />
-      <svg:line
-        class="bar-line"
-        [class.hidden]="hideBar"
-        [attr.x1]="lineCoordinates[3].v1.x"
-        [attr.y1]="lineCoordinates[3].v1.y"
-        [attr.x2]="lineCoordinates[3].v2.x"
-        [attr.y2]="lineCoordinates[3].v2.y"
-        [attr.stroke]="strokeColor"
-        [attr.stroke-width]="strokeWidth"
+        [attr.stroke-width]="i === 2 ? medianLineWidth : whiskerStrokeWidth"
+        [attr.mask]="i ? undefined : maskLine"
         fill="none"
       />
     </svg:g>
@@ -148,6 +122,10 @@ export class BoxComponent implements OnChanges {
   /** Mask Path Id to keep track of the mask element */
   maskLineId: string;
 
+  boxStrokeWidth: number;
+  whiskerStrokeWidth: number;
+  medianLineWidth: number;
+
   constructor(element: ElementRef, protected cd: ChangeDetectorRef) {
     this.nativeElm = element.nativeElement;
   }
@@ -162,6 +140,10 @@ export class BoxComponent implements OnChanges {
   }
 
   update(): void {
+    this.boxStrokeWidth = Math.max(this.strokeWidth, 1);
+    this.whiskerStrokeWidth = Math.max(this.strokeWidth/2, 1);
+    this.medianLineWidth = 1.5*this.strokeWidth;
+
     this.gradientId = 'grad' + id().toString();
     this.gradientFill = `url(#${this.gradientId})`;
 
@@ -302,16 +284,14 @@ export class BoxComponent implements OnChanges {
       return [...this.lineCoordinates];
     }
 
-    const lineCoordinates: LineCoordinates = [...this.lineCoordinates];
-    lineCoordinates[1] = {...lineCoordinates[2]};
-    lineCoordinates[3] = {...lineCoordinates[2]};
-    lineCoordinates[0] = {...lineCoordinates[0]};
+    const lineCoordinates: LineCoordinates = cloneDeep(this.lineCoordinates);
 
-    lineCoordinates[0].v1 = { ...lineCoordinates[0].v1 };
-    lineCoordinates[0].v2 = { ...lineCoordinates[0].v2 };
-
-    lineCoordinates[0].v1.y = lineCoordinates[2].v1.y - 1;
-    lineCoordinates[0].v2.y = lineCoordinates[2].v1.y + 1;
+    lineCoordinates[1].v1.y =
+    lineCoordinates[1].v2.y =
+    lineCoordinates[3].v1.y =
+    lineCoordinates[3].v2.y =
+    lineCoordinates[0].v1.y =
+    lineCoordinates[0].v2.y = lineCoordinates[2].v1.y;
 
     return lineCoordinates;
   }
