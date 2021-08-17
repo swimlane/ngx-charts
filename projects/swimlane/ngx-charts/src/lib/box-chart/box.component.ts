@@ -23,8 +23,6 @@ import { IBoxModel } from '../models/chart-data.model';
 import { IVector2D } from '../models/coordinates.model';
 import { BarOrientation, Gradient } from '../common/types';
 
-
-
 d3Select.prototype.transition = d3Transition;
 
 type LineCoordinates = [IVector2D, IVector2D, IVector2D, IVector2D];
@@ -141,8 +139,8 @@ export class BoxComponent implements OnChanges {
 
   update(): void {
     this.boxStrokeWidth = Math.max(this.strokeWidth, 1);
-    this.whiskerStrokeWidth = Math.max(this.strokeWidth/2, 1);
-    this.medianLineWidth = 1.5*this.strokeWidth;
+    this.whiskerStrokeWidth = Math.max(this.strokeWidth / 2, 1);
+    this.medianLineWidth = 1.5 * this.strokeWidth;
 
     this.gradientId = 'grad' + id().toString();
     this.gradientFill = `url(#${this.gradientId})`;
@@ -263,15 +261,14 @@ export class BoxComponent implements OnChanges {
       return this.getPath();
     }
 
-    let path = '';
     const radius = this.roundEdges ? 1 : 0;
     const { x, y } = this.lineCoordinates[2].v1;
 
-    return roundedRect(x - this.width, y - 1, this.width, 2, radius, this.edges);;
+    return roundedRect(x - this.width, y - 1, this.width, 2, radius, this.edges);
   }
 
   getPath(): string {
-    let radius = this.getRadius();
+    const radius = this.getRadius();
     let path = '';
 
     path = roundedRect(this.x, this.y, this.width, this.height, Math.min(this.height, radius), this.edges);
@@ -286,12 +283,8 @@ export class BoxComponent implements OnChanges {
 
     const lineCoordinates: LineCoordinates = cloneDeep(this.lineCoordinates);
 
-    lineCoordinates[1].v1.y =
-    lineCoordinates[1].v2.y =
-    lineCoordinates[3].v1.y =
-    lineCoordinates[3].v2.y =
-    lineCoordinates[0].v1.y =
-    lineCoordinates[0].v2.y = lineCoordinates[2].v1.y;
+    lineCoordinates[1].v1.y = lineCoordinates[1].v2.y = lineCoordinates[3].v1.y = lineCoordinates[3].v2.y = lineCoordinates[0].v1.y = lineCoordinates[0].v2.y =
+      lineCoordinates[2].v1.y;
 
     return lineCoordinates;
   }
@@ -348,7 +341,6 @@ export class BoxComponent implements OnChanges {
   }
 
   private checkToHideBar(): void {
-    this.hideBar =
-      this.noBarWhenZero && this.height === 0;
+    this.hideBar = this.noBarWhenZero && this.height === 0;
   }
 }

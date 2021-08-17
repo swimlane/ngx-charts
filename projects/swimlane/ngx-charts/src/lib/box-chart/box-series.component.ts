@@ -179,7 +179,7 @@ export class BoxSeriesComponent implements OnChanges {
     const median = this.yScale(quartiles[1]);
 
     const topLine: IVector2D = {
-      v1: { x:  offsetX + whiskerLineWidth / 2, y: whiskerZero },
+      v1: { x: offsetX + whiskerLineWidth / 2, y: whiskerZero },
       v2: { x: offsetX - whiskerLineWidth / 2, y: whiskerZero }
     };
     const medianLine: IVector2D = {

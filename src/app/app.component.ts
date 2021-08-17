@@ -357,7 +357,7 @@ export class AppComponent implements OnInit {
         });
         this.graph = { links, nodes };
       }
-      
+
       if (this.boxData.length > 1) {
         const index = Math.floor(Math.random() * this.boxData.length);
         this.boxData.splice(index, 1);
@@ -451,7 +451,7 @@ export class AppComponent implements OnInit {
       if (index > -1) {
         this.boxData[index] = boxEntry;
       } else {
-        this.boxData = [...this.boxData, boxEntry];        
+        this.boxData = [...this.boxData, boxEntry];
       }
 
       // bubble interactive demo
