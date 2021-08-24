@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 19.0.1
+
+- Fix: remove remove barrel file causing issues running ngcc (#1667)
+
 ## 19.0.0
 
 - Chore: Remove inline styles on `heat-map-cell` and `tree-map-cell` 
