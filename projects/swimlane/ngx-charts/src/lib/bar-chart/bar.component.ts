@@ -12,9 +12,9 @@ import {
 import { select } from 'd3-selection';
 import { roundedRect } from '../common/shape.helper';
 import { id } from '../utils/id';
-import { Gradient } from '../common/types';
 import { DataItem } from '../models/chart-data.model';
 import { BarOrientation } from '../common/types/bar-orientation.enum';
+import { Gradient } from '../common/types/gradient.interface';
 
 @Component({
   selector: 'g[ngx-charts-bar]',

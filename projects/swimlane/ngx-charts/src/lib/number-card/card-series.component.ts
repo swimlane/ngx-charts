@@ -9,8 +9,8 @@ import {
 } from '@angular/core';
 import { invertColor } from '../utils/color-utils';
 import { GridItem, GridData } from '../common/grid-layout.helper';
-import { ViewDimensions } from '../common/types';
 import { ColorHelper } from '../common/color.helper';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
 
 export interface CardModel extends GridItem {
   color: string;

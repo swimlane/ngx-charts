@@ -12,11 +12,12 @@ import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel, escapeLabel } from './label.helper';
 import { id } from '../utils/id';
 import { ColorHelper } from './color.helper';
-import { Gradient, ScaleType } from './types';
 import { DataItem, Series, StringOrNumberOrDate } from '../models/chart-data.model';
 import { PlacementTypes } from './tooltip/position';
 import { StyleTypes } from './tooltip/style.type';
 import { BarOrientation } from './types/bar-orientation.enum';
+import { Gradient } from './types/gradient.interface';
+import { ScaleType } from './types/scale-type.enum';
 
 export enum SeriesType {
   Standard = 'standard',

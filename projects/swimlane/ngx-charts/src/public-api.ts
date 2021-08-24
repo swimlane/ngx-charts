@@ -46,7 +46,13 @@ export * from './lib/common/tooltip/style.type';
 export * from './lib/common/tooltip/show.type';
 export * from './lib/common/tooltip/position/placement-type.enum';
 
-export * from './lib/common/types';
+export * from './lib/common/types/bar-orientation.enum';
+export * from './lib/common/types/gradient.interface';
+export * from './lib/common/types/legend.model';
+export * from './lib/common/types/orientation.enum';
+export * from './lib/common/types/scale-type.enum';
+export * from './lib/common/types/text-anchor.enum';
+export * from './lib/common/types/view-dimension.interface';
 
 export * from './lib/common/axes/axes.module';
 export * from './lib/common/axes/axis-label.component';

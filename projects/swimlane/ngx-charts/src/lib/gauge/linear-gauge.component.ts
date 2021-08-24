@@ -12,10 +12,12 @@ import { scaleLinear } from 'd3-scale';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
-import { ScaleType, ViewDimensions, BarOrientation } from '../common/types';
 import { calculateTextWidth } from '../utils/calculate-width';
 import { VERDANA_FONT_WIDTHS_16_PX } from '../common/constants/font-widths';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { BarOrientation } from '../common/types/bar-orientation.enum';
+import { ScaleType } from '../common/types/scale-type.enum';
 
 enum ElementType {
   Value = 'value',
