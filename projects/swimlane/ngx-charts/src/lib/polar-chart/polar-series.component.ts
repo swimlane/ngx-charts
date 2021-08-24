@@ -13,11 +13,11 @@ import { lineRadial } from 'd3-shape';
 import { id } from '../utils/id';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
 import { escapeLabel } from '../common/label.helper';
-import { ScaleType } from '../common/types';
 import { Series, DataItem } from '../models/chart-data.model';
 import { PlacementTypes } from '../common/tooltip/position';
 import { StyleTypes } from '../common/tooltip/style.type';
 import { BarOrientation } from '../common/types/bar-orientation.enum';
+import { ScaleType } from '../common/types/scale-type.enum';
 
 interface PolarChartCircle {
   color: string;

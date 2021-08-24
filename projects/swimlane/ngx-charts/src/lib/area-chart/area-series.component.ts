@@ -9,7 +9,8 @@ import {
 } from '@angular/core';
 import { area } from 'd3-shape';
 import { ColorHelper } from '../common/color.helper';
-import { Gradient, ScaleType } from '../common/types';
+import { Gradient } from '../common/types/gradient.interface';
+import { ScaleType } from '../common/types/scale-type.enum';
 import { AreaChartSeries } from '../models/chart-data.model';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
 

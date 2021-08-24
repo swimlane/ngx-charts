@@ -18,9 +18,11 @@ import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
 import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
-import { ViewDimensions, LegendPosition, LegendOptions, ScaleType } from '../common/types';
 import { isDate, isNumber } from '../utils/types';
-import { Series, StringOrNumberOrDate } from '../models/chart-data.model';
+import { Series } from '../models/chart-data.model';
+import { LegendOptions, LegendPosition } from '../common/types/legend.model';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { ScaleType } from '../common/types/scale-type.enum';
 
 @Component({
   selector: 'ngx-charts-area-chart',

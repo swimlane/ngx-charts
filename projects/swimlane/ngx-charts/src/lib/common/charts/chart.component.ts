@@ -10,7 +10,7 @@ import {
 import { trigger, style, animate, transition } from '@angular/animations';
 import { TooltipService } from '../tooltip/tooltip.service';
 import { LegendOptions, LegendType, LegendPosition } from '../types/legend.model';
-import { ScaleType } from '../types';
+import { ScaleType } from '../types/scale-type.enum';
 
 @Component({
   providers: [TooltipService],

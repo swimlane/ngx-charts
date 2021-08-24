@@ -10,7 +10,6 @@ import {
 } from '@angular/core';
 import { max } from 'd3-array';
 import { arc, pie } from 'd3-shape';
-import { ViewDimensions } from '../common/types';
 import { ColorHelper } from '../common/color.helper';
 
 import { formatLabel, escapeLabel } from '../common/label.helper';
@@ -18,6 +17,7 @@ import { DataItem } from '../models/chart-data.model';
 import { PieData } from './pie-label.component';
 import { PlacementTypes } from '../common/tooltip/position';
 import { StyleTypes } from '../common/tooltip/style.type';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
 
 @Component({
   selector: 'g[ngx-charts-pie-series]',

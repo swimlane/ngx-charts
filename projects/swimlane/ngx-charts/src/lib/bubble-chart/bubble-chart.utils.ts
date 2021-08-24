@@ -1,5 +1,5 @@
 import { scaleLinear, scalePoint, scaleTime } from 'd3-scale';
-import { ScaleType } from '../common/types';
+import { ScaleType } from '../common/types/scale-type.enum';
 
 export function getDomain(
   values: any[],

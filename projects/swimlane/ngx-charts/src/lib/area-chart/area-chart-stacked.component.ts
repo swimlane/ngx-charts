@@ -17,8 +17,10 @@ import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
 import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
-import { ViewDimensions, LegendPosition, ScaleType, LegendOptions } from '../common/types';
 import { SeriesType } from '../common/circle-series.component';
+import { LegendOptions, LegendPosition } from '../common/types/legend.model';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { ScaleType } from '../common/types/scale-type.enum';
 
 @Component({
   selector: 'ngx-charts-area-chart-stacked',

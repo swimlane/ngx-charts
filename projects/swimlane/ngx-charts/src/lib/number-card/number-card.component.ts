@@ -3,8 +3,9 @@ import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { gridLayout, gridSize } from '../common/grid-layout.helper';
-import { ScaleType, ViewDimensions } from '../common/types';
 import { CardModel } from './card-series.component';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { ScaleType } from '../common/types/scale-type.enum';
 
 @Component({
   selector: 'ngx-charts-number-card',

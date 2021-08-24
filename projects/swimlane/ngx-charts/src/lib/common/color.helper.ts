@@ -2,8 +2,9 @@ import { range } from 'd3-array';
 import { scaleBand, scaleLinear, scaleOrdinal, scaleQuantile } from 'd3-scale';
 
 import { Color, colorSets } from '../utils/color-sets';
-import { Gradient, ScaleType } from './types';
 import { StringOrNumberOrDate } from '../models/chart-data.model';
+import { ScaleType } from './types/scale-type.enum';
+import { Gradient } from './types/gradient.interface';
 
 export class ColorHelper {
   scale: any;
