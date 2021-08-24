@@ -28,7 +28,13 @@ import { roundedRect } from '../../common/shape.helper';
           [attr.text-anchor]="textAnchor"
           [style.font-size]="'12px'"
         >
-          {{ tickTrim(tickFormat(tick)) }}
+          <tspan
+            *ngFor="let str of tickTrimToArray(tickFormat(tick)); let i = index; let f = first"
+            [attr.dy]="!f ? '20px' : '0px'"
+            [attr.dx]="!f ? '-20px' : '0px'"
+          >
+            {{ str }}
+          </tspan>
         </svg:text>
       </svg:g>
     </svg:g>
@@ -267,5 +273,11 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
 
   tickTrim(label: string): string {
     return this.trimTicks ? trimLabel(label, this.maxTickLength) : label;
+  }
+
+  tickTrimToArray(label: string) {
+    const value = this.trimTicks ? trimLabel(label, this.maxTickLength) : label;
+    console.log(label.split('\n'), label, value);
+    return value.split('\n');
   }
 }
