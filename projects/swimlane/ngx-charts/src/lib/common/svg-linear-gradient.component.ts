@@ -2,7 +2,6 @@ import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } f
 import { BarOrientation } from './types/bar-orientation.enum';
 import { Gradient } from './types/gradient.interface';
 
-
 @Component({
   selector: 'g[ngx-charts-svg-linear-gradient]',
   template: `

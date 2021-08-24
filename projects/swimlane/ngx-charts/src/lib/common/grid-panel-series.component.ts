@@ -2,7 +2,6 @@ import { Component, SimpleChanges, Input, OnChanges, ChangeDetectionStrategy } f
 import { BarOrientation } from './types/bar-orientation.enum';
 import { ViewDimensions } from './types/view-dimension.interface';
 
-
 interface GridPanel {
   class: ClassEnum;
   height: number;

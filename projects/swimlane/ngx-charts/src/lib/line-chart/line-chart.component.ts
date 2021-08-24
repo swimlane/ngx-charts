@@ -22,7 +22,6 @@ import { LegendOptions, LegendPosition } from '../common/types/legend.model';
 import { ScaleType } from '../common/types/scale-type.enum';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
 
-
 @Component({
   selector: 'ngx-charts-line-chart',
   template: `

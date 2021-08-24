@@ -1,4 +1,4 @@
-import { ScaleType } from "./types/scale-type.enum";
+import { ScaleType } from './types/scale-type.enum';
 
 /**
  * Based on the data, return an array with unique values.
