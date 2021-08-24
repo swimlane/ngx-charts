@@ -1,9 +1,9 @@
 import { Component, Input, Output, EventEmitter, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel } from '@swimlane/ngx-charts/common/label.helper';
-import { BarOrientation } from '@swimlane/ngx-charts/common/types';
 import { PlacementTypes } from '@swimlane/ngx-charts/common/tooltip/position/placement-type.enum';
 import { StyleTypes } from '@swimlane/ngx-charts/common/tooltip/style.type';
+import { BarOrientation } from '@swimlane/ngx-charts/common/types/bar-orientation.enum';
 
 @Component({
   // tslint:disable-next-line: component-selector
