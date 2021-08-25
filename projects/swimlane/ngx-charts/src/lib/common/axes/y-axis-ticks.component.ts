@@ -276,8 +276,6 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   }
 
   tickTrimToArray(label: string) {
-    const value = this.trimTicks ? trimLabel(label, this.maxTickLength) : label;
-    console.log(label.split('\n'), label, value);
-    return value.split('\n');
+    return (this.trimTicks ? trimLabel(label, this.maxTickLength) : label).split('\n');
   }
 }
