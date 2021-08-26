@@ -18,7 +18,6 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
 import { LegendPosition, LegendOptions } from '../common/types/legend.model';
 import { ScaleType } from '../common/types/scale-type.enum';
 
-
 @Component({
   selector: 'ngx-charts-box-chart',
   template: `
