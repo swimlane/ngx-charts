@@ -18,7 +18,10 @@ import { ColorHelper } from '../common/color.helper';
 import { DataItem } from '../models/chart-data.model';
 
 import { BaseChartComponent } from '../common/base-chart.component';
-import { ViewDimensions, LegendPosition, ScaleType, LegendOptions, BarOrientation } from '../common/types';
+import { ScaleType } from '../common/types/scale-type.enum';
+import { LegendOptions, LegendPosition } from '../common/types/legend.model';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { BarOrientation } from '../common/types/bar-orientation.enum';
 
 @Component({
   selector: 'ngx-charts-bar-horizontal-2d',

@@ -18,9 +18,10 @@ import { trimLabel } from '../common/trim-label.helper';
 import { gridLayout } from '../common/grid-layout.helper';
 import { formatLabel } from '../common/label.helper';
 import { DataItem, PieGridDataItem } from '../models/chart-data.model';
-import { ScaleType, ViewDimensions } from '../common/types';
 import { PlacementTypes } from '../common/tooltip/position';
 import { StyleTypes } from '../common/tooltip/style.type';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { ScaleType } from '../common/types/scale-type.enum';
 
 export interface PieGridData {
   data: PieGridDataItem;

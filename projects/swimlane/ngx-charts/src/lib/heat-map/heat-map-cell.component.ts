@@ -9,9 +9,15 @@ import {
   ChangeDetectionStrategy,
   HostListener
 } from '@angular/core';
+<<<<<<< HEAD
 import { select as d3Select } from 'd3-selection';
 import { transition as d3Transition } from 'd3-transition';
 import { Gradient, BarOrientation } from '../common/types';
+=======
+import { select } from 'd3-selection';
+import { BarOrientation } from '../common/types/bar-orientation.enum';
+import { Gradient } from '../common/types/gradient.interface';
+>>>>>>> e4a39b4baad966ceb9aa83851694ffcb730db472
 import { id } from '../utils/id';
 d3Select.prototype.transition = d3Transition;
 

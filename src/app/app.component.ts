@@ -22,8 +22,9 @@ import { data as countries } from 'emoji-flags';
 import chartGroups from './chartTypes';
 import { barChart, lineChartSeries } from './combo-chart-data';
 import pkg from '../../projects/swimlane/ngx-charts/package.json';
-import { LegendPosition, ScaleType } from '@swimlane/ngx-charts/common/types';
 import { InputTypes } from '@swimlane/ngx-ui';
+import { LegendPosition } from '@swimlane/ngx-charts/common/types/legend.model';
+import { ScaleType } from '@swimlane/ngx-charts/common/types/scale-type.enum';
 
 const monthName = new Intl.DateTimeFormat('en-us', { month: 'short' });
 const weekdayName = new Intl.DateTimeFormat('en-us', { weekday: 'short' });

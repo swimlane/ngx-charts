@@ -11,9 +11,9 @@ import {
 import { ColorHelper } from '../common/color.helper';
 import { escapeLabel } from '../common/label.helper';
 import { DataItem } from '../models/chart-data.model';
-import { ViewDimensions } from '../common/types';
 import { StyleTypes } from '../common/tooltip/style.type';
 import { PlacementTypes } from '../common/tooltip/position';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
 
 interface TreeMapCell {
   data: DataItem;

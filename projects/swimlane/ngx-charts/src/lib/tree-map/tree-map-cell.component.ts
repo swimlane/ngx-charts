@@ -5,9 +5,14 @@ import { invertColor } from '../utils/color-utils';
 import { trimLabel } from '../common/trim-label.helper';
 import { escapeLabel } from '../common/label.helper';
 import { id } from '../utils/id';
-import { BarOrientation, Gradient } from '../common/types';
 import { DataItem } from '../models/chart-data.model';
+<<<<<<< HEAD
 d3Select.prototype.transition = d3Transition;
+=======
+import { Gradient } from '../common/types/gradient.interface';
+import { BarOrientation } from '../common/types/bar-orientation.enum';
+
+>>>>>>> e4a39b4baad966ceb9aa83851694ffcb730db472
 @Component({
   selector: 'g[ngx-charts-tree-map-cell]',
   template: `

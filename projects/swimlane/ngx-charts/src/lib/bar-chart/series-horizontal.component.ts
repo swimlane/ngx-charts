@@ -11,13 +11,15 @@ import {
 import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel, escapeLabel } from '../common/label.helper';
 import { DataItem, StringOrNumberOrDate } from '../models/chart-data.model';
-import { ScaleType, ViewDimensions, BarOrientation } from '../common/types';
 import { ColorHelper } from '../common/color.helper';
 import { PlacementTypes } from '../common/tooltip/position';
 import { StyleTypes } from '../common/tooltip/style.type';
 import { BarChartType } from './types/bar-chart-type.enum';
 import { Bar } from './types/bar.model';
 import { D0Types } from './types/d0-type.enum';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { BarOrientation } from '../common/types/bar-orientation.enum';
+import { ScaleType } from '../common/types/scale-type.enum';
 
 @Component({
   selector: 'g[ngx-charts-series-horizontal]',

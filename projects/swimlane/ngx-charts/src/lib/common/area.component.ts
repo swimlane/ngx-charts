@@ -2,10 +2,13 @@ import { Component, Input, Output, EventEmitter, ElementRef, OnChanges, ChangeDe
 import { select as d3Select } from 'd3-selection';
 import { transition as d3Transition } from 'd3-transition';
 import { id } from '../utils/id';
-import { Gradient } from './types';
 import { AreaChartSeries } from '../models/chart-data.model';
 import { BarOrientation } from './types/bar-orientation.enum';
+<<<<<<< HEAD
 d3Select.prototype.transition = d3Transition;
+=======
+import { Gradient } from './types/gradient.interface';
+>>>>>>> e4a39b4baad966ceb9aa83851694ffcb730db472
 
 @Component({
   selector: 'g[ngx-charts-area]',

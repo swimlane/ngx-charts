@@ -4,11 +4,13 @@ import { formatLabel, escapeLabel } from '../common/label.helper';
 import { DataItem, StringOrNumberOrDate } from '../models/chart-data.model';
 import { PlacementTypes } from '../common/tooltip/position';
 import { StyleTypes } from '../common/tooltip/style.type';
-import { ScaleType, ViewDimensions, BarOrientation } from '../common/types';
 import { ColorHelper } from '../common/color.helper';
 import { BarChartType } from './types/bar-chart-type.enum';
 import { D0Types } from './types/d0-type.enum';
 import { Bar } from './types/bar.model';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { BarOrientation } from '../common/types/bar-orientation.enum';
+import { ScaleType } from '../common/types/scale-type.enum';
 
 @Component({
   selector: 'g[ngx-charts-series-vertical]',
