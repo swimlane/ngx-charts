@@ -17,15 +17,10 @@ import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
-<<<<<<< HEAD
-import { getScaleType, getUniqueXDomainValues } from '../common/domain.helper';
-import { LegendOptions, LegendPosition, ScaleType, ViewDimensions } from '../common/types';
-=======
 import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
 import { LegendOptions, LegendPosition } from '../common/types/legend.model';
 import { ScaleType } from '../common/types/scale-type.enum';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
->>>>>>> e4a39b4baad966ceb9aa83851694ffcb730db472
 
 @Component({
   selector: 'ngx-charts-line-chart',

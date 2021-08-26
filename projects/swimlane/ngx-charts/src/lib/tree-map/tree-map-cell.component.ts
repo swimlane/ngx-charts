@@ -1,18 +1,13 @@
 import { Component, Input, Output, EventEmitter, ElementRef, OnChanges, ChangeDetectionStrategy } from '@angular/core';
-import { select as d3Select } from 'd3-selection';
-import { transition as d3Transition } from 'd3-transition';
+import { select } from 'd3-selection';
 import { invertColor } from '../utils/color-utils';
 import { trimLabel } from '../common/trim-label.helper';
 import { escapeLabel } from '../common/label.helper';
 import { id } from '../utils/id';
 import { DataItem } from '../models/chart-data.model';
-<<<<<<< HEAD
-d3Select.prototype.transition = d3Transition;
-=======
 import { Gradient } from '../common/types/gradient.interface';
 import { BarOrientation } from '../common/types/bar-orientation.enum';
 
->>>>>>> e4a39b4baad966ceb9aa83851694ffcb730db472
 @Component({
   selector: 'g[ngx-charts-tree-map-cell]',
   template: `
@@ -128,7 +123,7 @@ export class TreeMapCellComponent implements OnChanges {
   }
 
   loadAnimation(): void {
-    const node = d3Select(this.element).select('.cell');
+    const node = select(this.element).select('.cell');
 
     node.attr('opacity', 0).attr('x', this.x).attr('y', this.y);
 
@@ -140,7 +135,7 @@ export class TreeMapCellComponent implements OnChanges {
   }
 
   animateToCurrentForm(): void {
-    const node = d3Select(this.element).select('.cell');
+    const node = select(this.element).select('.cell');
 
     if (this.animations) {
       node

@@ -14,10 +14,11 @@ import { IBoxModel, BoxChartSeries, DataItem } from '../models/chart-data.model'
 import { IVector2D } from '../models/coordinates.model';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { ColorHelper } from '../common/color.helper';
-import { ScaleType, ViewDimensions } from '../common/types';
 import { formatLabel, escapeLabel } from '../common/label.helper';
 import { StyleTypes } from '../common/tooltip/style.type';
 import { PlacementTypes } from '../common/tooltip/position';
+import { ScaleType } from '../common/types/scale-type.enum';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
 
 @Component({
   selector: 'g[ngx-charts-box-series]',

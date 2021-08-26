@@ -9,17 +9,12 @@ import {
   Output,
   SimpleChanges
 } from '@angular/core';
-import { select as d3Select } from 'd3-selection';
-import { transition as d3Transition } from 'd3-transition';
+import { select } from 'd3-selection';
 import { roundedRect } from '../common/shape.helper';
 import { id } from '../utils/id';
 import { DataItem } from '../models/chart-data.model';
 import { BarOrientation } from '../common/types/bar-orientation.enum';
-<<<<<<< HEAD
-d3Select.prototype.transition = d3Transition;
-=======
 import { Gradient } from '../common/types/gradient.interface';
->>>>>>> e4a39b4baad966ceb9aa83851694ffcb730db472
 
 @Component({
   selector: 'g[ngx-charts-bar]',
@@ -103,7 +98,7 @@ export class BarComponent implements OnChanges {
   }
 
   updatePathEl(): void {
-    const node = d3Select(this.element).select('.bar');
+    const node = select(this.element).select('.bar');
     const path = this.getPath();
     if (this.animations) {
       node.transition().duration(500).attr('d', path);

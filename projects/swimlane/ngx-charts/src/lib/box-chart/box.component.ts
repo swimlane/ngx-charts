@@ -10,8 +10,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef
 } from '@angular/core';
-import { select as d3Select, BaseType } from 'd3-selection';
-import { transition as d3Transition } from 'd3-transition';
+import { select, BaseType } from 'd3-selection';
 import { interpolate } from 'd3-interpolate';
 import { easeSinInOut } from 'd3-ease';
 
@@ -21,9 +20,8 @@ import { roundedRect } from '../common/shape.helper';
 import { id } from '../utils/id';
 import { IBoxModel } from '../models/chart-data.model';
 import { IVector2D } from '../models/coordinates.model';
-import { BarOrientation, Gradient } from '../common/types';
-
-d3Select.prototype.transition = d3Transition;
+import { BarOrientation } from '../common/types/bar-orientation.enum';
+import { Gradient } from '../common/types/gradient.interface';
 
 type LineCoordinates = [IVector2D, IVector2D, IVector2D, IVector2D];
 
@@ -170,7 +168,7 @@ export class BoxComponent implements OnChanges {
   }
 
   updatePathEl(): void {
-    const nodeBar = d3Select(this.nativeElm).selectAll('.bar');
+    const nodeBar = select(this.nativeElm).selectAll('.bar');
     const path = this.getPath();
     if (this.animations) {
       nodeBar
@@ -186,7 +184,7 @@ export class BoxComponent implements OnChanges {
   }
 
   updateLineEl(): void {
-    const lineEl = d3Select(this.nativeElm).selectAll('.bar-line');
+    const lineEl = select(this.nativeElm).selectAll('.bar-line');
     const lineCoordinates = this.lineCoordinates;
     const oldLineCoordinates = this.oldLineCoordinates;
     if (this.animations) {

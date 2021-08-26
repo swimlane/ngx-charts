@@ -14,7 +14,10 @@ import { ColorHelper } from '../common/color.helper';
 import { BoxChartMultiSeries, BoxChartSeries, IBoxModel, StringOrNumberOrDate } from '../models/chart-data.model';
 import { scaleLinear, ScaleLinear, scaleBand, ScaleBand } from 'd3-scale';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
-import { ViewDimensions, LegendPosition, ScaleType, LegendOptions } from '../common/types';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { LegendPosition, LegendOptions } from '../common/types/legend.model';
+import { ScaleType } from '../common/types/scale-type.enum';
+
 
 @Component({
   selector: 'ngx-charts-box-chart',

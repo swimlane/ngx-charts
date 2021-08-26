@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import { StringOrNumberOrDate } from '../models/chart-data.model';
-import { ScaleType } from './types';
-=======
 import { ScaleType } from './types/scale-type.enum';
->>>>>>> e4a39b4baad966ceb9aa83851694ffcb730db472
-
+import { StringOrNumberOrDate } from '../models/chart-data.model';
 /**
  * Based on the data, return an array with unique values.
  *

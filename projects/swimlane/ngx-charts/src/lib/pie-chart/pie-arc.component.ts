@@ -9,13 +9,11 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { interpolate } from 'd3-interpolate';
-import { select as d3Select } from 'd3-selection';
-import { transition as d3Transition } from 'd3-transition';
+import { select } from 'd3-selection';
 import { arc } from 'd3-shape';
 import { id } from '../utils/id';
 import { DataItem } from '../models/chart-data.model';
 import { BarOrientation } from '../common/types/bar-orientation.enum';
-d3Select.prototype.transition = d3Transition;
 
 @Component({
   selector: 'g[ngx-charts-pie-arc]',
@@ -115,7 +113,7 @@ export class PieArcComponent implements OnChanges {
   }
 
   loadAnimation(): void {
-    const node = d3Select(this.element)
+    const node = select(this.element)
       .selectAll('.arc')
       .data([{ startAngle: this.startAngle, endAngle: this.endAngle }]);
 
@@ -146,7 +144,7 @@ export class PieArcComponent implements OnChanges {
   }
 
   updateAnimation(): void {
-    const node = d3Select(this.element)
+    const node = select(this.element)
       .selectAll('.arc')
       .data([{ startAngle: this.startAngle, endAngle: this.endAngle }]);
 

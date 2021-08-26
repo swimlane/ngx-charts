@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 import { ScaleLinear, scaleLinear, ScalePoint, scalePoint, ScaleTime, scaleTime } from 'd3-scale';
-import { ScaleType } from '../common/types';
-=======
-import { scaleLinear, scalePoint, scaleTime } from 'd3-scale';
 import { ScaleType } from '../common/types/scale-type.enum';
->>>>>>> e4a39b4baad966ceb9aa83851694ffcb730db472
 
 export function getDomain(
   values: any[],
