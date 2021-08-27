@@ -11,7 +11,7 @@ import {
   TrackByFunction
 } from '@angular/core';
 import { scaleLinear, scalePoint, scaleTime } from 'd3-scale';
-import { curveLinear, CurveFactory } from 'd3-shape';
+import { CurveFactory, curveLinear } from 'd3-shape';
 
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
@@ -368,7 +368,7 @@ export class AreaChartComponent extends BaseChartComponent {
     return this.roundDomains ? scale.nice() : scale;
   }
 
-  getYScale(domain, height: number): number {
+  getYScale(domain: [number, number], height: number): any {
     const scale = scaleLinear().range([height, 0]).domain(domain);
     return this.roundDomains ? scale.nice() : scale;
   }

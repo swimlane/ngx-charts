@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter, ElementRef, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import { select } from 'd3-selection';
-
 import { invertColor } from '../utils/color-utils';
 import { trimLabel } from '../common/trim-label.helper';
 import { escapeLabel } from '../common/label.helper';

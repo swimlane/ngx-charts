@@ -1,13 +1,4 @@
-import {
-  Component,
-  Input,
-  Output,
-  SimpleChanges,
-  EventEmitter,
-  ElementRef,
-  OnChanges,
-  ChangeDetectionStrategy
-} from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import { select } from 'd3-selection';
 import { id } from '../utils/id';
 import { AreaChartSeries } from '../models/chart-data.model';

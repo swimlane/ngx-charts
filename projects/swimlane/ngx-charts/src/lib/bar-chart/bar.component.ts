@@ -158,10 +158,10 @@ export class BarComponent implements OnChanges {
     let path;
 
     if (this.roundEdges) {
-      if (this.orientation === 'vertical') {
+      if (this.orientation === BarOrientation.Vertical) {
         radius = Math.min(this.height, radius);
         path = roundedRect(this.x, this.y, this.width, this.height, radius, this.edges);
-      } else if (this.orientation === 'horizontal') {
+      } else if (this.orientation === BarOrientation.Horizontal) {
         radius = Math.min(this.width, radius);
         path = roundedRect(this.x, this.y, this.width, this.height, radius, this.edges);
       }
