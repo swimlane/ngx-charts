@@ -16,7 +16,9 @@ import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
 import { roundedRect } from '../shape.helper';
 import { isPlatformBrowser } from '@angular/common';
-import { Orientation, TextAnchor, ReferenceLine } from '../types';
+import { Orientation } from '../types/orientation.enum';
+import { TextAnchor } from '../types/text-anchor.enum';
+import { ReferenceLine } from '../types/reference-line.interface';
 
 @Component({
   selector: 'g[ngx-charts-y-axis-ticks]',
