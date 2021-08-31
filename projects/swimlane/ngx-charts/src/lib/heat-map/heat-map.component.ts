@@ -14,7 +14,9 @@ import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { getScaleType } from '../common/domain.helper';
-import { LegendOptions, LegendPosition, ScaleType, ViewDimensions } from '../common/types';
+import { LegendOptions, LegendPosition } from '../common/types/legend.model';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { ScaleType } from '../common/types/scale-type.enum';
 
 interface RectItem {
   fill: string;

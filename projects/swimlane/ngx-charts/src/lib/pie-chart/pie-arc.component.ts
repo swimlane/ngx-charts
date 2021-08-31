@@ -11,10 +11,7 @@ import {
 import { interpolate } from 'd3-interpolate';
 import { select } from 'd3-selection';
 import { arc } from 'd3-shape';
-
 import { id } from '../utils/id';
-/* tslint:disable */
-import { MouseEvent } from '../events';
 import { DataItem } from '../models/chart-data.model';
 import { BarOrientation } from '../common/types/bar-orientation.enum';
 

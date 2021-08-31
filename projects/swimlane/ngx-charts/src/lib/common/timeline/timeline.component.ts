@@ -14,7 +14,8 @@ import { brushX } from 'd3-brush';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
 import { select } from 'd3-selection';
 import { id } from '../../utils/id';
-import { ScaleType, ViewDimensions } from '../types';
+import { ScaleType } from '../types/scale-type.enum';
+import { ViewDimensions } from '../types/view-dimension.interface';
 
 @Component({
   selector: 'g[ngx-charts-timeline]',

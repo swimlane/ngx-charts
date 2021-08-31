@@ -18,7 +18,10 @@ import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
 import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
-import { LegendOptions, LegendPosition, ReferenceLine, ScaleType, ViewDimensions } from '../common/types';
+import { LegendOptions, LegendPosition } from '../common/types/legend.model';
+import { ScaleType } from '../common/types/scale-type.enum';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { ReferenceLine } from '../common/types/reference-line.interface';
 
 @Component({
   selector: 'ngx-charts-line-chart',

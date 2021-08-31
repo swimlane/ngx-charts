@@ -12,10 +12,11 @@ import {
 import { trigger, style, animate, transition } from '@angular/animations';
 import { createMouseEvent } from '../events';
 import { isPlatformBrowser } from '@angular/common';
-import { ScaleType, ViewDimensions } from '../common/types';
 import { ColorHelper } from '../common/color.helper';
 import { PlacementTypes } from './tooltip/position';
 import { StyleTypes } from './tooltip/style.type';
+import { ViewDimensions } from './types/view-dimension.interface';
+import { ScaleType } from './types/scale-type.enum';
 
 export interface Tooltip {
   color: string;

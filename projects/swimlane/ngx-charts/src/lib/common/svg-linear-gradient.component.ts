@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
-import { Gradient, BarOrientation } from './types';
+import { BarOrientation } from './types/bar-orientation.enum';
+import { Gradient } from './types/gradient.interface';
 
 @Component({
   selector: 'g[ngx-charts-svg-linear-gradient]',

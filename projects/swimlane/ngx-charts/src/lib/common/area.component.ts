@@ -1,18 +1,9 @@
-import {
-  Component,
-  Input,
-  Output,
-  SimpleChanges,
-  EventEmitter,
-  ElementRef,
-  OnChanges,
-  ChangeDetectionStrategy
-} from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import { select } from 'd3-selection';
 import { id } from '../utils/id';
-import { Gradient } from './types';
 import { AreaChartSeries } from '../models/chart-data.model';
 import { BarOrientation } from './types/bar-orientation.enum';
+import { Gradient } from './types/gradient.interface';
 
 @Component({
   selector: 'g[ngx-charts-area]',

@@ -18,9 +18,11 @@ import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
 import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
-import { ViewDimensions, LegendPosition, LegendOptions, ScaleType } from '../common/types';
 import { Series } from '../models/chart-data.model';
 import { SeriesType } from '../common/circle-series.component';
+import { LegendOptions, LegendPosition } from '../common/types/legend.model';
+import { ScaleType } from '../common/types/scale-type.enum';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
 
 @Component({
   selector: 'ngx-charts-area-chart-normalized',

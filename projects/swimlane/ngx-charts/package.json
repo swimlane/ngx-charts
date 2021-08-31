@@ -1,6 +1,6 @@
 {
   "name": "@swimlane/ngx-charts",
-  "version": "18.0.1",
+  "version": "19.0.1",
   "description": "Declarative Charting Framework for Angular",
   "repository": {
     "type": "git",
@@ -27,7 +27,7 @@
   "maintainers": [
     "Marjan Georgiev",
     "Jayson Harshbarger",
-    "Luis Bello"
+    "Haemin Park"
   ],
   "license": "MIT",
   "bugs": {

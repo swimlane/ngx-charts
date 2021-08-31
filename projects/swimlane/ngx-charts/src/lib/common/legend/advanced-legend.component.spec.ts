@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 
 import { ChartCommonModule } from '../chart-common.module';
 import { ColorHelper } from '../color.helper';
-import { ScaleType } from '../types';
 import { Color } from '../../utils/color-sets';
+import { ScaleType } from '../types/scale-type.enum';
 
 @Component({
   selector: 'test-component',

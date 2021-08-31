@@ -12,9 +12,9 @@ import {
 import { select } from 'd3-selection';
 import { roundedRect } from '../common/shape.helper';
 import { id } from '../utils/id';
-import { Gradient } from '../common/types';
 import { DataItem } from '../models/chart-data.model';
 import { BarOrientation } from '../common/types/bar-orientation.enum';
+import { Gradient } from '../common/types/gradient.interface';
 
 @Component({
   selector: 'g[ngx-charts-bar]',
@@ -158,10 +158,10 @@ export class BarComponent implements OnChanges {
     let path;
 
     if (this.roundEdges) {
-      if (this.orientation === 'vertical') {
+      if (this.orientation === BarOrientation.Vertical) {
         radius = Math.min(this.height, radius);
         path = roundedRect(this.x, this.y, this.width, this.height, radius, this.edges);
-      } else if (this.orientation === 'horizontal') {
+      } else if (this.orientation === BarOrientation.Horizontal) {
         radius = Math.min(this.width, radius);
         path = roundedRect(this.x, this.y, this.width, this.height, radius, this.edges);
       }
