@@ -1,5 +1,6 @@
+import { LegendPosition } from './types/legend.model';
+import { ScaleType } from './types/scale-type.enum';
 import { ViewDimensions } from './types/view-dimension.interface';
-import { ScaleType, LegendPosition } from '../common/types';
 
 export function calculateViewDimensions({
   width,

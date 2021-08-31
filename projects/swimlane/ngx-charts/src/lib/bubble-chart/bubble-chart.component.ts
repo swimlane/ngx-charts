@@ -18,8 +18,10 @@ import { ColorHelper } from '../common/color.helper';
 import { getScaleType } from '../common/domain.helper';
 import { getDomain, getScale } from './bubble-chart.utils';
 import { id } from '../utils/id';
-import { LegendOptions, LegendPosition, ScaleType, ViewDimensions } from '../common/types';
 import { BubbleChartMultiSeries } from '../models/chart-data.model';
+import { LegendOptions, LegendPosition } from '../common/types/legend.model';
+import { ScaleType } from '../common/types/scale-type.enum';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
 
 @Component({
   selector: 'ngx-charts-bubble-chart',

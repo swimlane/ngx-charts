@@ -1,5 +1,5 @@
 import { DataItem } from '../../models/chart-data.model';
-import { Gradient } from '../../common/types';
+import { Gradient } from '../../common/types/gradient.interface';
 
 export interface Bar {
   ariaLabel: string;

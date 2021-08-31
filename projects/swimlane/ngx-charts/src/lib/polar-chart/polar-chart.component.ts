@@ -17,7 +17,10 @@ import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { getScaleType } from '../common/domain.helper';
 import { isDate } from '../utils/types';
-import { ViewDimensions, LegendPosition, ScaleType, Orientation } from '../common/types';
+import { LegendPosition } from '../common/types/legend.model';
+import { ScaleType } from '../common/types/scale-type.enum';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { Orientation } from '../common/types/orientation.enum';
 import { MultiSeries } from '../models/chart-data.model';
 
 const twoPI = 2 * Math.PI;

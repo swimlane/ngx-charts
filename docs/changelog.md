@@ -2,7 +2,17 @@
 
 ## Unreleased
 
+## 19.0.1
+
+- Fix: remove remove barrel file causing issues running ngcc (#1667)
+
+## 19.0.0
+
+- Chore: Remove inline styles on `heat-map-cell` and `tree-map-cell` 
+- Bug: Fix typing issues to support enabling `strictTemplates` option
+- Breaking: Upgrade Angular to v12
 - Bug: Fix `ColorHelper.customColors` typing to allow for functions or objects (#1641)
+- Bug: Fix gradient background hover issue (#1158)
 
 ## 18.0.1
 

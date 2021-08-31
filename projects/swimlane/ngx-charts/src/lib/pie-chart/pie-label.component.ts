@@ -11,16 +11,13 @@ import {
 import { arc, DefaultArcObject } from 'd3-shape';
 
 import { trimLabel } from '../common/trim-label.helper';
-import { TextAnchor } from '../common/types';
+import { TextAnchor } from '../common/types/text-anchor.enum';
 import { DataItem } from '../models/chart-data.model';
 
 export interface PieData extends DefaultArcObject {
   data: DataItem;
-  endAngle: number;
   index: number;
-  padAngle: number;
   pos: [number, number];
-  startAngle: number;
   value: number;
 }
 

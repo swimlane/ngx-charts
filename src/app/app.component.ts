@@ -8,6 +8,7 @@ import { formatLabel, escapeLabel } from '@swimlane/ngx-charts/common/label.help
 import {
   single,
   multi,
+  boxData,
   bubble,
   generateData,
   generateGraph,
@@ -21,7 +22,6 @@ import { data as countries } from 'emoji-flags';
 import chartGroups, { ChartConfig, ChartGroup } from './chartTypes';
 import { barChart, lineChartSeries } from './combo-chart-data';
 import pkg from '../../projects/swimlane/ngx-charts/package.json';
-import { LegendPosition, ScaleType } from '@swimlane/ngx-charts/common/types';
 import { InputTypes } from '@swimlane/ngx-ui';
 import {
   BubbleChartMultiSeries,
@@ -31,6 +31,8 @@ import {
   SingleSeries
 } from '@swimlane/ngx-charts/models/chart-data.model';
 import { CustomColor } from '@swimlane/ngx-charts/common/color.helper';
+import { LegendPosition } from '@swimlane/ngx-charts/common/types/legend.model';
+import { ScaleType } from '@swimlane/ngx-charts/common/types/scale-type.enum';
 
 const monthName = new Intl.DateTimeFormat('en-us', { month: 'short' });
 const weekdayName = new Intl.DateTimeFormat('en-us', { weekday: 'short' });
@@ -44,6 +46,10 @@ function multiFormat(value) {
   value /= 60;
   return `${value.toFixed(2)}hrs`;
 }
+
+const getRandomInt = (min: number, max: number) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
 
 @Component({
   selector: 'app-root',
@@ -109,13 +115,15 @@ export class AppComponent implements OnInit {
   xScaleMax: any;
   yScaleMin: number;
   yScaleMax: number;
-  showDataLabel = false;
-  noBarWhenZero = true;
-  trimXAxisTicks = true;
-  trimYAxisTicks = true;
-  rotateXAxisTicks = true;
-  maxXAxisTickLength = 16;
-  maxYAxisTickLength = 16;
+  showDataLabel: boolean = false;
+  noBarWhenZero: boolean = true;
+  trimXAxisTicks: boolean = true;
+  trimYAxisTicks: boolean = true;
+  rotateXAxisTicks: boolean = true;
+  maxXAxisTickLength: number = 16;
+  maxYAxisTickLength: number = 16;
+  strokeColor: string = '#FFFFFF';
+  strokeWidth: number = 2;
 
   curves = {
     Basis: shape.curveBasis,
@@ -187,6 +195,9 @@ export class AppComponent implements OnInit {
   marginRight: number = 40;
   marginBottom: number = 40;
   marginLeft: number = 40;
+
+  // box
+  boxData = boxData;
 
   // gauge
   gaugeMin: number = 0;
@@ -271,6 +282,7 @@ export class AppComponent implements OnInit {
       chartGroups,
       colorSets,
       graph: generateGraph(50),
+      boxData,
       bubble,
       plotData: this.generatePlotData(),
       treemap,
@@ -354,6 +366,12 @@ export class AppComponent implements OnInit {
         });
         this.graph = { links, nodes };
       }
+
+      if (this.boxData.length > 1) {
+        const index = Math.floor(Math.random() * this.boxData.length);
+        this.boxData.splice(index, 1);
+        this.boxData = [...this.boxData];
+      }
     }
 
     if (add) {
@@ -411,10 +429,41 @@ export class AppComponent implements OnInit {
 
       this.bubble = [...this.bubble, bubbleEntry];
 
-      // bubble interactive demo
-      const getRandomInt = (min, max) => {
-        return Math.floor(Math.random() * (max - min + 1) + min);
+      // box
+      const boxEntry = {
+        name: country.name,
+        series: [
+          {
+            name: '1990',
+            value: getRandomInt(10, 5)
+          },
+          {
+            name: '2000',
+            value: getRandomInt(15, 5)
+          },
+          {
+            name: '2010',
+            value: getRandomInt(20, 10)
+          },
+          {
+            name: '2020',
+            value: getRandomInt(30, 10)
+          },
+          {
+            name: '2030',
+            value: getRandomInt(50, 20)
+          }
+        ]
       };
+
+      const index = this.boxData.findIndex(box => box.name === country.name);
+      if (index > -1) {
+        this.boxData[index] = boxEntry;
+      } else {
+        this.boxData = [...this.boxData, boxEntry];
+      }
+
+      // bubble interactive demo
       this.bubbleDemoProcess(bubbleDemoData[getRandomInt(0, bubbleDemoData.length - 1)]);
 
       this.statusData = this.getStatusData();
@@ -468,6 +517,15 @@ export class AppComponent implements OnInit {
 
     if (!this.fitContainer) {
       this.applyDimensions();
+    }
+  }
+
+  changeTheme(theme: string) {
+    this.theme = theme;
+    if (theme === 'light') {
+      this.strokeColor = '#000000';
+    } else {
+      this.strokeColor = '#FFFFFF';
     }
   }
 

@@ -1,12 +1,12 @@
 import { Component, Input, Output, EventEmitter, ElementRef, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import { select } from 'd3-selection';
-
 import { invertColor } from '../utils/color-utils';
 import { trimLabel } from '../common/trim-label.helper';
 import { escapeLabel } from '../common/label.helper';
 import { id } from '../utils/id';
-import { BarOrientation, Gradient } from '../common/types';
 import { DataItem } from '../models/chart-data.model';
+import { Gradient } from '../common/types/gradient.interface';
+import { BarOrientation } from '../common/types/bar-orientation.enum';
 
 @Component({
   selector: 'g[ngx-charts-tree-map-cell]',
