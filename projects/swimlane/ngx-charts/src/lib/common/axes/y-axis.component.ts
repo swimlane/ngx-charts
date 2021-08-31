@@ -9,7 +9,9 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { YAxisTicksComponent } from './y-axis-ticks.component';
-import { Orientation, ReferenceLine, ViewDimensions } from '../types';
+import { ReferenceLine } from '../types/reference-line.interface';
+import { ViewDimensions } from '../types/view-dimension.interface';
+import { Orientation } from '../types/orientation.enum';
 
 @Component({
   selector: 'g[ngx-charts-y-axis]',
