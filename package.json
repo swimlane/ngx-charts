@@ -21,6 +21,8 @@
     "package": "run-s build:lib:prod copy-files",
     "prepublish:lib": "npm run package",
     "publish:lib": "npm publish ./dist/swimlane/ngx-charts",
+    "wd-prepublish:lib": "ng build webdave-ngx-charts --prod",
+    "wd-publish:lib": "npm publish ./dist/swimlane/ngx-charts",
     "prepack": "npm run package",
     "pack": "npm pack ./dist/swimlane/ngx-charts",
     "prettier": "prettier --write \"{src,projects}/**/*.{js,ts,html,scss,css,md,json}\"",
