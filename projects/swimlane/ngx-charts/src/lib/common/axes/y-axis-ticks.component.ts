@@ -276,8 +276,10 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   }
 
   tickTrimToArray(label: string) {
-    return String(this.trimTicks ? trimLabel(label, this.maxTickLength) : label)
-      .split('\n')
-      .map(label => label.trim());
+    let splitetdLables = String(this.trimTicks ? trimLabel(label, this.maxTickLength) : label).split('<br/>');
+    if (String(this.trimTicks ? trimLabel(label, this.maxTickLength) : label).includes('\n')) {
+      splitetdLables = String(this.trimTicks ? trimLabel(label, this.maxTickLength) : label).split('\n');
+    }
+    return splitetdLables.map(label => label.trim());
   }
 }

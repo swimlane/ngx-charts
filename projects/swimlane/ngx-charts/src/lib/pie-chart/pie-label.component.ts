@@ -15,7 +15,13 @@ import { trimLabel } from '../common/trim-label.helper';
         [style.textAnchor]="textAnchor()"
         [style.shapeRendering]="'crispEdges'"
       >
-        {{ labelTrim ? trimLabel(label, labelTrimSize) : label }}
+        <tspan
+          *ngFor="let str of tickTrimToArray(label); let i = index; let f = first"
+          [attr.dy]="!f ? '20px' : '0px'"
+          [attr.dx]="!f ? '-20px' : '0px'"
+        >
+          {{ str }}
+        </tspan>
       </svg:text>
     </svg:g>
     <svg:path
@@ -99,5 +105,13 @@ export class PieLabelComponent implements OnChanges {
 
   midAngle(d): number {
     return d.startAngle + (d.endAngle - d.startAngle) / 2;
+  }
+
+  tickTrimToArray(label: string) {
+    let splitetdLables = String(label).split('<br/>');
+    if (String(label).includes('\n')) {
+      splitetdLables = String(label).split('\n');
+    }
+    return splitetdLables.map(label => label.trim());
   }
 }
