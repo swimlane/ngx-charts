@@ -1,6 +1,6 @@
 {
   "name": "webdave-ngx-charts",
-  "version": "16.0.0",
+  "version": "16.0.3",
   "description": "Declarative Charting Framework for Angular",
   "repository": {
     "type": "git",
