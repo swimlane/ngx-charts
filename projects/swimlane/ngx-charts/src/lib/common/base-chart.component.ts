@@ -1,3 +1,4 @@
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import {
   ElementRef,
   NgZone,
@@ -9,12 +10,18 @@ import {
   AfterViewInit,
   OnDestroy,
   OnChanges,
-  SimpleChanges
+  SimpleChanges,
+  PLATFORM_ID,
+  Inject
 } from '@angular/core';
 
 import { fromEvent as observableFromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { VisibilityObserver } from '../utils/visibility-observer';
+import { isDate } from '../utils/types';
+import { Color } from '../utils/color-sets';
+import { ScaleType } from './types/scale-type.enum';
+import { ViewDimensions } from './types/view-dimension.interface';
 
 @Component({
   selector: 'base-chart',
@@ -23,8 +30,8 @@ import { VisibilityObserver } from '../utils/visibility-observer';
 export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() results: any;
   @Input() view: [number, number];
-  @Input() scheme: any = 'cool';
-  @Input() schemeType: string = 'ordinal';
+  @Input() scheme: string | Color = 'cool';
+  @Input() schemeType: ScaleType = ScaleType.Ordinal;
   @Input() customColors: any;
   @Input() animations: boolean = true;
 
@@ -35,7 +42,18 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   resizeSubscription: any;
   visibilityObserver: VisibilityObserver;
 
-  constructor(protected chartElement: ElementRef, protected zone: NgZone, protected cd: ChangeDetectorRef) {}
+  constructor(
+    protected chartElement: ElementRef,
+    protected zone: NgZone,
+    protected cd: ChangeDetectorRef,
+    @Inject(PLATFORM_ID) public platformId: any
+  ) {}
+
+  ngOnInit() {
+    if (isPlatformServer(this.platformId)) {
+      this.animations = false;
+    }
+  }
 
   ngAfterViewInit(): void {
     this.bindWindowResizeEvent();
@@ -92,12 +110,12 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
     }
   }
 
-  getContainerDims(): any {
+  getContainerDims(): ViewDimensions {
     let width;
     let height;
     const hostElem = this.chartElement.nativeElement;
 
-    if (hostElem.parentNode !== null) {
+    if (isPlatformBrowser(this.platformId) && hostElem.parentNode !== null) {
       // Get the container dimensions
       const dims = hostElem.parentNode.getBoundingClientRect();
       width = dims.width;
@@ -119,7 +137,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
     for (let i = 0; i < this.results.length; i++) {
       const g = this.results[i];
       g.label = g.name;
-      if (g.label instanceof Date) {
+      if (isDate(g.label)) {
         g.label = g.label.toLocaleDateString();
       }
 
@@ -127,7 +145,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
         for (let j = 0; j < g.series.length; j++) {
           const d = g.series[j];
           d.label = d.name;
-          if (d.label instanceof Date) {
+          if (isDate(d.label)) {
             d.label = d.label.toLocaleDateString();
           }
         }
@@ -142,6 +160,10 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   private bindWindowResizeEvent(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     const source = observableFromEvent(window, 'resize');
     const subscription = source.pipe(debounceTime(200)).subscribe(e => {
       this.update();

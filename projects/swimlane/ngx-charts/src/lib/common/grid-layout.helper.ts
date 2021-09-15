@@ -1,6 +1,25 @@
 import { scaleBand } from 'd3-scale';
+import { ViewDimensions } from './types/view-dimension.interface';
+import { StringOrNumberOrDate } from '../models/chart-data.model';
 
-export function gridSize(dims, len, minWidth) {
+export interface GridItem {
+  data: GridData;
+  height: number;
+  width: number;
+  x: number;
+  y: number;
+}
+
+export interface GridData {
+  extra?: any;
+  label: string;
+  name: StringOrNumberOrDate;
+  percent: number;
+  total: number;
+  value: number;
+}
+
+export function gridSize(dims: ViewDimensions, len: number, minWidth: number): [number, number] {
   let rows = 1;
   let cols = len;
   const width = dims.width;
@@ -15,7 +34,12 @@ export function gridSize(dims, len, minWidth) {
   return [cols, rows];
 }
 
-export function gridLayout(dims, data, minWidth, designatedTotal) {
+export function gridLayout(
+  dims: ViewDimensions,
+  data: GridData[],
+  minWidth: number,
+  designatedTotal: number
+): GridItem[] {
   const xScale: any = scaleBand<number>();
   const yScale: any = scaleBand<number>();
   const width = dims.width;
@@ -57,10 +81,9 @@ export function gridLayout(dims, data, minWidth, designatedTotal) {
     res[i].data.percent = total > 0 ? res[i].data.value / total : 0;
     res[i].data.total = total;
   }
-
   return res;
 }
 
-function getTotal(results) {
+function getTotal(results: any): number {
   return results.map(d => (d ? d.value : 0)).reduce((sum, val) => sum + val, 0);
 }
