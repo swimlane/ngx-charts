@@ -16,6 +16,7 @@ Out of the box, we wanted to create a low level robust framework on which to bui
 - Treemap
 - Number Cards
 - Bubble/Scatter
+- Vertical Box Chart
 
 ### Customization
 

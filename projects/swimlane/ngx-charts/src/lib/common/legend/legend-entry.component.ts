@@ -14,14 +14,14 @@ import { Component, Input, Output, ChangeDetectionStrategy, HostListener, EventE
 })
 export class LegendEntryComponent {
   @Input() color: string;
-  @Input() label: any;
+  @Input() label: string;
   @Input() formattedLabel: string;
   @Input() isActive: boolean = false;
 
-  @Output() select: EventEmitter<any> = new EventEmitter();
-  @Output() activate: EventEmitter<any> = new EventEmitter();
-  @Output() deactivate: EventEmitter<any> = new EventEmitter();
-  @Output() toggle: EventEmitter<any> = new EventEmitter();
+  @Output() select: EventEmitter<string> = new EventEmitter();
+  @Output() activate: EventEmitter<{ name: string }> = new EventEmitter();
+  @Output() deactivate: EventEmitter<{ name: string }> = new EventEmitter();
+  @Output() toggle: EventEmitter<string> = new EventEmitter();
 
   get trimmedLabel(): string {
     return this.formattedLabel || '(empty)';

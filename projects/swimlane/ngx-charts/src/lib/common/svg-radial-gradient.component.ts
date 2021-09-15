@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, ChangeDetectionStrategy, SimpleChanges } from '@angular/core';
+import { Gradient } from './types/gradient.interface';
 
 @Component({
   selector: 'g[ngx-charts-svg-radial-gradient]',
@@ -23,18 +24,18 @@ export class SvgRadialGradientComponent implements OnChanges {
   @Input() cy: number = 0;
 
   @Input()
-  get stops(): any[] {
+  get stops(): Gradient[] {
     return this.stopsInput || this.stopsDefault;
   }
 
-  set stops(value: any[]) {
+  set stops(value: Gradient[]) {
     this.stopsInput = value;
   }
 
   r: string;
 
-  private stopsInput: any[];
-  private stopsDefault: any[];
+  private stopsInput: Gradient[];
+  private stopsDefault: Gradient[];
 
   ngOnChanges(changes: SimpleChanges): void {
     this.r = '30%';

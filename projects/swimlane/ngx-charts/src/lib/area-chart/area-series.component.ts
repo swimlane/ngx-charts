@@ -8,7 +8,10 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { area } from 'd3-shape';
-
+import { ColorHelper } from '../common/color.helper';
+import { Gradient } from '../common/types/gradient.interface';
+import { ScaleType } from '../common/types/scale-type.enum';
+import { AreaChartSeries } from '../models/chart-data.model';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
 
 @Component({
@@ -32,16 +35,16 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AreaSeriesComponent implements OnChanges {
-  @Input() data;
-  @Input() xScale;
-  @Input() yScale;
+  @Input() data: AreaChartSeries;
+  @Input() xScale: any;
+  @Input() yScale: any;
   @Input() baseValue: any = 'auto';
-  @Input() colors;
-  @Input() scaleType;
+  @Input() colors: ColorHelper;
+  @Input() scaleType: ScaleType;
   @Input() stacked: boolean = false;
   @Input() normalized: boolean = false;
-  @Input() gradient;
-  @Input() curve;
+  @Input() gradient: boolean;
+  @Input() curve: any;
   @Input() activeEntries: any[];
   @Input() animations: boolean = true;
 
@@ -52,7 +55,7 @@ export class AreaSeriesComponent implements OnChanges {
   startingPath: string;
 
   hasGradient: boolean;
-  gradientStops: any[];
+  gradientStops: Gradient[];
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -97,9 +100,9 @@ export class AreaSeriesComponent implements OnChanges {
     this.opacity = 0.8;
 
     let data = this.data.series;
-    if (this.scaleType === 'linear') {
+    if (this.scaleType === ScaleType.Linear) {
       data = sortLinear(data, 'name');
-    } else if (this.scaleType === 'time') {
+    } else if (this.scaleType === ScaleType.Time) {
       data = sortByTime(data, 'name');
     } else {
       data = sortByDomain(data, 'name', 'asc', this.xScale.domain());
@@ -110,7 +113,7 @@ export class AreaSeriesComponent implements OnChanges {
   }
 
   updateGradient() {
-    if (this.colors.scaleType === 'linear') {
+    if (this.colors.scaleType === ScaleType.Linear) {
       this.hasGradient = true;
       if (this.stacked || this.normalized) {
         const d0values = this.data.series.map(d => d.d0);
