@@ -9,10 +9,12 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { DataItem } from '../models/chart-data.model';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { ScaleType } from '../common/types/scale-type.enum';
 
 @Component({
   selector: 'ngx-charts-advanced-pie-chart',
@@ -78,15 +80,14 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
 
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
-  data: any;
   dims: ViewDimensions;
-  domain: any[];
+  domain: string[];
   outerRadius: number;
   innerRadius: number;
   transform: string;
   colors: ColorHelper;
   legendWidth: number;
-  margin = [20, 20, 20, 20];
+  margin: number[] = [20, 20, 20, 20];
 
   @Input() valueFormatting: (value: number) => any;
   @Input() nameFormatting: (value: string) => any;
@@ -116,7 +117,7 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
     this.transform = `translate(${xOffset} , ${yOffset})`;
   }
 
-  getDomain(): any[] {
+  getDomain(): string[] {
     return this.results.map(d => d.label);
   }
 
@@ -125,7 +126,7 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    this.colors = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+    this.colors = new ColorHelper(this.scheme, ScaleType.Ordinal, this.domain, this.customColors);
   }
 
   onActivate(item, fromLegend = false) {

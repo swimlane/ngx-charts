@@ -10,6 +10,11 @@ import {
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel, escapeLabel } from '../common/label.helper';
+import { ColorHelper } from '../common/color.helper';
+import { BubbleChartSeries } from '../models/chart-data.model';
+import { PlacementTypes } from '../common/tooltip/position';
+import { StyleTypes } from '../common/tooltip/style.type';
+import { ScaleType } from '../common/types/scale-type.enum';
 
 @Component({
   selector: 'g[ngx-charts-bubble-series]',
@@ -34,8 +39,8 @@ import { formatLabel, escapeLabel } from '../common/label.helper';
           (deactivate)="deactivateCircle(circle)"
           ngx-tooltip
           [tooltipDisabled]="tooltipDisabled"
-          [tooltipPlacement]="'top'"
-          [tooltipType]="'tooltip'"
+          [tooltipPlacement]="placementTypes.Top"
+          [tooltipType]="styleTypes.tooltip"
           [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(circle)"
           [tooltipTemplate]="tooltipTemplate"
           [tooltipContext]="circle.data"
@@ -57,13 +62,13 @@ import { formatLabel, escapeLabel } from '../common/label.helper';
   ]
 })
 export class BubbleSeriesComponent implements OnChanges {
-  @Input() data;
+  @Input() data: BubbleChartSeries;
   @Input() xScale;
   @Input() yScale;
   @Input() rScale;
-  @Input() xScaleType;
-  @Input() yScaleType;
-  @Input() colors;
+  @Input() xScaleType: ScaleType;
+  @Input() yScaleType: ScaleType;
+  @Input() colors: ColorHelper;
   @Input() visibleValue;
   @Input() activeEntries: any[];
   @Input() xAxisLabel: string;
@@ -76,7 +81,10 @@ export class BubbleSeriesComponent implements OnChanges {
   @Output() deactivate = new EventEmitter();
 
   areaPath: any;
-  circles: any[];
+  circles: any[]; // TODO type this
+
+  placementTypes = PlacementTypes;
+  styleTypes = StyleTypes;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -99,10 +107,11 @@ export class BubbleSeriesComponent implements OnChanges {
           const radius = this.rScale(r || 1);
           const tooltipLabel = formatLabel(d.name);
 
-          const cx = this.xScaleType === 'linear' ? this.xScale(Number(x)) : this.xScale(x);
-          const cy = this.yScaleType === 'linear' ? this.yScale(Number(y)) : this.yScale(y);
+          const cx = this.xScaleType === ScaleType.Linear ? this.xScale(Number(x)) : this.xScale(x);
+          const cy = this.yScaleType === ScaleType.Linear ? this.yScale(Number(y)) : this.yScale(y);
 
-          const color = this.colors.scaleType === 'linear' ? this.colors.getColor(r) : this.colors.getColor(seriesName);
+          const color =
+            this.colors.scaleType === ScaleType.Linear ? this.colors.getColor(r) : this.colors.getColor(seriesName);
 
           const isActive = !this.activeEntries.length ? true : this.isActive({ name: seriesName });
           const opacity = isActive ? 1 : 0.3;

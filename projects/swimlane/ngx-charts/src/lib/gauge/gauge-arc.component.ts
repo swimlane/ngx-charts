@@ -1,6 +1,16 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
 import { formatLabel, escapeLabel } from '../common/label.helper';
 import { ColorHelper } from '../common/color.helper';
+import { DataItem } from '../models/chart-data.model';
+import { PlacementTypes } from '../common/tooltip/position';
+import { StyleTypes } from '../common/tooltip/style.type';
+
+export interface ArcItem {
+  data: DataItem;
+  endAngle: number;
+  innerRadius: number;
+  outerRadius: number;
+}
 
 @Component({
   selector: 'g[ngx-charts-gauge-arc]',
@@ -33,8 +43,8 @@ import { ColorHelper } from '../common/color.helper';
       (deactivate)="deactivate.emit($event)"
       ngx-tooltip
       [tooltipDisabled]="tooltipDisabled"
-      [tooltipPlacement]="'top'"
-      [tooltipType]="'tooltip'"
+      [tooltipPlacement]="placementTypes.Top"
+      [tooltipType]="styleTypes.tooltip"
       [tooltipTitle]="tooltipTemplate ? undefined : tooltipText(valueArc)"
       [tooltipTemplate]="tooltipTemplate"
       [tooltipContext]="valueArc.data"
@@ -43,9 +53,9 @@ import { ColorHelper } from '../common/color.helper';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GaugeArcComponent {
-  @Input() backgroundArc: any;
-  @Input() valueArc: any;
-  @Input() cornerRadius: any;
+  @Input() backgroundArc: ArcItem;
+  @Input() valueArc: ArcItem;
+  @Input() cornerRadius: number;
   @Input() colors: ColorHelper;
   @Input() isActive: boolean = false;
   @Input() tooltipDisabled: boolean = false;
@@ -57,7 +67,10 @@ export class GaugeArcComponent {
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
 
-  tooltipText(arc): string {
+  placementTypes = PlacementTypes;
+  styleTypes = StyleTypes;
+
+  tooltipText(arc: ArcItem): string {
     const label = formatLabel(arc.data.name);
     let val;
 
