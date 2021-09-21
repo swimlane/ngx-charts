@@ -48,6 +48,8 @@ export class Timeline implements OnChanges {
   @Input() autoScale: boolean;
   @Input() scaleType: ScaleType;
   @Input() height: number = 50;
+  @Input() xScaleMin: any;
+  @Input() xScaleMax: any;
 
   @Output() select = new EventEmitter();
   @Output() onDomainChange = new EventEmitter();
