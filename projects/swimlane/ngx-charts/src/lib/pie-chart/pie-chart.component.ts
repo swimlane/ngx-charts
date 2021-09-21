@@ -12,6 +12,9 @@ import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { DataItem } from '../models/chart-data.model';
+import { LegendOptions, LegendPosition } from '../common/types/legend.model';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { ScaleType } from '../common/types/scale-type.enum';
 
 @Component({
   selector: 'ngx-charts-pie-chart',
@@ -57,13 +60,13 @@ import { DataItem } from '../models/chart-data.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PieChartComponent extends BaseChartComponent {
-  @Input() labels = false;
-  @Input() legend = false;
+  @Input() labels: boolean = false;
+  @Input() legend: boolean = false;
   @Input() legendTitle: string = 'Legend';
-  @Input() legendPosition: string = 'right';
-  @Input() explodeSlices = false;
-  @Input() doughnut = false;
-  @Input() arcWidth = 0.25;
+  @Input() legendPosition: LegendPosition = LegendPosition.Right;
+  @Input() explodeSlices: boolean = false;
+  @Input() doughnut: boolean = false;
+  @Input() arcWidth: number = 0.25;
   @Input() gradient: boolean;
   @Input() activeEntries: any[] = [];
   @Input() tooltipDisabled: boolean = false;
@@ -75,19 +78,19 @@ export class PieChartComponent extends BaseChartComponent {
   // optional margins
   @Input() margins: number[];
   @Output() select = new EventEmitter();
-  @Output() activate: EventEmitter<any> = new EventEmitter();
-  @Output() deactivate: EventEmitter<any> = new EventEmitter();
+  @Output() activate = new EventEmitter();
+  @Output() deactivate = new EventEmitter();
 
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
   translation: string;
   outerRadius: number;
   innerRadius: number;
-  data: any;
+  data: DataItem[];
   colors: ColorHelper;
-  domain: any;
-  dims: any;
-  legendOptions: any;
+  domain: string[];
+  dims: ViewDimensions;
+  legendOptions: LegendOptions;
 
   update(): void {
     super.update();
@@ -135,21 +138,21 @@ export class PieChartComponent extends BaseChartComponent {
     this.legendOptions = this.getLegendOptions();
   }
 
-  getDomain(): any[] {
+  getDomain(): string[] {
     return this.results.map(d => d.label);
   }
 
-  onClick(data: DataItem): void {
+  onClick(data: DataItem | string): void {
     this.select.emit(data);
   }
 
   setColors(): void {
-    this.colors = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+    this.colors = new ColorHelper(this.scheme, ScaleType.Ordinal, this.domain, this.customColors);
   }
 
-  getLegendOptions() {
+  getLegendOptions(): LegendOptions {
     return {
-      scaleType: 'ordinal',
+      scaleType: ScaleType.Ordinal,
       domain: this.domain,
       colors: this.colors,
       title: this.legendTitle,
@@ -157,7 +160,7 @@ export class PieChartComponent extends BaseChartComponent {
     };
   }
 
-  onActivate(item, fromLegend = false) {
+  onActivate(item, fromLegend = false): void {
     item = this.results.find(d => {
       if (fromLegend) {
         return d.label === item.name;
@@ -177,7 +180,7 @@ export class PieChartComponent extends BaseChartComponent {
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(item, fromLegend = false) {
+  onDeactivate(item, fromLegend = false): void {
     item = this.results.find(d => {
       if (fromLegend) {
         return d.label === item.name;

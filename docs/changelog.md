@@ -1,5 +1,47 @@
 # Changelog
 
+## Unreleased
+
+## 19.0.1
+
+- Fix: remove remove barrel file causing issues running ngcc (#1667)
+
+## 19.0.0
+
+- Chore: Remove inline styles on `heat-map-cell` and `tree-map-cell` 
+- Bug: Fix typing issues to support enabling `strictTemplates` option
+- Breaking: Upgrade Angular to v12
+- Bug: Fix `ColorHelper.customColors` typing to allow for functions or objects (#1641)
+- Bug: Fix gradient background hover issue (#1158)
+
+## 18.0.1
+
+- Bug: Use correct curve type
+- Bug: include `@types/d3-shape` as a dependency in published package.
+
+## 18.0.0
+
+- Breaking: Improve typing
+- Bug: Fix timeline selection
+
+## 17.0.1
+
+- Bug: Fix pie label component on SSR (#1583)
+- Bug: Adjust scaleText for linear geauge and number cards on SSR (#1581)
+- Bug: Disable animation on ssr and remove unnecesary call on ssr (#1579)
+
+## 17.0.0
+
+- Breaking: Update to angular 11
+- Bug: Improve SSR capabilities by approximating axis dimensions (#1567)
+- Bug: Chart Tooltip does not work on touch devices (#1213)
+- Chore: Remove bypassSecurityTrustStyle call (#1561)
+
+## 16.0.0
+
+- Breaking: Update to angular 10
+- Bug: Apply dataLabelFormatting to tooltip value in bar charts (#1419)
+
 ## 14.0.0
 
 - Chore: explicitly only suppot ng9

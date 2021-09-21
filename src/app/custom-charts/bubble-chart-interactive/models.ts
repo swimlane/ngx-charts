@@ -174,14 +174,12 @@ export class BubbleChartInteractiveServerDataModel {
     this.chartDrilldownPath = [];
   }
   drilldown(event) {
-    // console.log(event);
     let toExpand;
     const clickedBubble = event.bubble;
     const clickedSeries = event.series;
     if (clickedBubble) {
       toExpand = clickedBubble.children;
       if (toExpand && toExpand.length) {
-        // console.log('found children', toExpand);
         this.chartDrilldownPath.push({
           storeId: clickedBubble.storeId,
           //

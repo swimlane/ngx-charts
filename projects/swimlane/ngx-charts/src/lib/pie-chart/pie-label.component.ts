@@ -1,7 +1,25 @@
-import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
-import { arc } from 'd3-shape';
+import { isPlatformServer } from '@angular/common';
+import {
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  ChangeDetectionStrategy,
+  PLATFORM_ID,
+  Inject
+} from '@angular/core';
+import { arc, DefaultArcObject } from 'd3-shape';
 
 import { trimLabel } from '../common/trim-label.helper';
+import { TextAnchor } from '../common/types/text-anchor.enum';
+import { DataItem } from '../models/chart-data.model';
+
+export interface PieData extends DefaultArcObject {
+  data: DataItem;
+  index: number;
+  pos: [number, number];
+  value: number;
+}
 
 @Component({
   selector: 'g[ngx-charts-pie-label]',
@@ -29,28 +47,43 @@ import { trimLabel } from '../common/trim-label.helper';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PieLabelComponent implements OnChanges {
-  @Input() data;
-  @Input() radius;
-  @Input() label;
-  @Input() color;
-  @Input() max;
-  @Input() value;
-  @Input() explodeSlices;
+  @Input() data: PieData;
+  @Input() radius: number;
+  @Input() label: string;
+  @Input() color: string;
+  @Input() max: number;
+  @Input() value: number;
+  @Input() explodeSlices: boolean;
   @Input() animations: boolean = true;
   @Input() labelTrim: boolean = true;
   @Input() labelTrimSize: number = 10;
 
   trimLabel: (label: string, max?: number) => string;
   line: string;
+  styleTransform: string;
+  attrTransform: string;
+  textTransition: string;
 
-  private readonly isIE = /(edge|msie|trident)/i.test(navigator.userAgent);
-
-  constructor() {
+  constructor(@Inject(PLATFORM_ID) public platformId: any) {
     this.trimLabel = trimLabel;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.setTransforms();
     this.update();
+  }
+
+  setTransforms() {
+    if (isPlatformServer(this.platformId)) {
+      this.styleTransform = `translate3d(${this.textX}px,${this.textY}px, 0)`;
+      this.attrTransform = `translate(${this.textX},${this.textY})`;
+      this.textTransition = !this.animations ? null : 'transform 0.75s';
+    } else {
+      const isIE = /(edge|msie|trident)/i.test(navigator.userAgent);
+      this.styleTransform = isIE ? null : `translate3d(${this.textX}px,${this.textY}px, 0)`;
+      this.attrTransform = !isIE ? null : `translate(${this.textX},${this.textY})`;
+      this.textTransition = isIE || !this.animations ? null : 'transform 0.75s';
+    }
   }
 
   update(): void {
@@ -81,20 +114,8 @@ export class PieLabelComponent implements OnChanges {
     return this.data.pos[1];
   }
 
-  get styleTransform(): string {
-    return this.isIE ? null : `translate3d(${this.textX}px,${this.textY}px, 0)`;
-  }
-
-  get attrTransform(): string {
-    return !this.isIE ? null : `translate(${this.textX},${this.textY})`;
-  }
-
-  get textTransition(): string {
-    return this.isIE || !this.animations ? null : 'transform 0.75s';
-  }
-
-  textAnchor(): any {
-    return this.midAngle(this.data) < Math.PI ? 'start' : 'end';
+  textAnchor(): TextAnchor {
+    return this.midAngle(this.data) < Math.PI ? TextAnchor.Start : TextAnchor.End;
   }
 
   midAngle(d): number {
