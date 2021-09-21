@@ -110,13 +110,13 @@ export class Timeline implements OnChanges {
 
     let domain = [];
     if (this.scaleType === 'time') {
-      const min = this.xScaleMin ? this.xScaleMin : Math.min(...values);
-      const max = this.xScaleMax ? this.xScaleMax : Math.max(...values);
+      const min = this.xScaleMin ?? Math.min(...values);
+      const max = this.xScaleMax ?? Math.max(...values);
       domain = [min, max];
     } else if (this.scaleType === 'linear') {
       values = values.map(v => Number(v));
-      const min = this.xScaleMin ? this.xScaleMin : Math.min(...values);
-      const max = this.xScaleMax ? this.xScaleMax : Math.max(...values);
+      const min = this.xScaleMin ?? Math.min(...values);
+      const max = this.xScaleMax ?? Math.max(...values);
       domain = [min, max];
     } else {
       domain = values;
