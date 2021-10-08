@@ -5,7 +5,7 @@ import {
   BubbleChartMultiSeries,
   Series,
   TreeMapData
-} from '@swimlane/ngx-charts/models/chart-data.model';
+} from '@soeren_balke/ngx-charts/models/chart-data.model';
 
 export const single: SingleSeries = [
   {

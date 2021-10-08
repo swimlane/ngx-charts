@@ -6,8 +6,10 @@
 export function formatLabel(label: any): string {
   if (label instanceof Date) {
     label = label.toLocaleDateString();
-  } else {
+  } else if(typeof label === 'string') {
     label = label.toLocaleString();
+  } else {
+    label = '';
   }
 
   return label;

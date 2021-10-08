@@ -2,7 +2,7 @@
 
 You can grab the latest release from the [Releases Page](https://github.com/swimlane/ngx-charts/releases) in Github or via NPM.
 
-- `npm install @swimlane/ngx-charts --save`
+- `npm install @soeren_balke/ngx-charts --save`
 
 Also, the release code is checked in and resides [here](https://github.com/swimlane/ngx-charts/tree/master/release).
 

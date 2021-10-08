@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/swimlane/ngx-charts.svg?branch=master)](https://travis-ci.org/swimlane/ngx-charts)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b097196f7f544412a79a99080a41bbc1)](https://www.codacy.com/app/Swimlane/ngx-charts?utm_source=github.com&utm_medium=referral&utm_content=swimlane/ngx-charts&utm_campaign=Badge_Grade)
 [![npm version](https://badge.fury.io/js/%40swimlane%2Fngx-charts.svg)](https://badge.fury.io/js/%40swimlane%2Fngx-charts)
-[![npm downloads](https://img.shields.io/npm/dm/@swimlane/ngx-charts.svg)](https://npmjs.org/@swimlane/ngx-charts)
+[![npm downloads](https://img.shields.io/npm/dm/@soeren_balke/ngx-charts.svg)](https://npmjs.org/@soeren_balke/ngx-charts)
 
 Declarative Charting Framework for Angular!
 
@@ -46,10 +46,10 @@ For more info, check out the [documentation](https://swimlane.gitbook.io/ngx-cha
 
 ## Install
 
-To use ngx-charts in your project install it via [npm](https://www.npmjs.com/package/@swimlane/ngx-charts):
+To use ngx-charts in your project install it via [npm](https://www.npmjs.com/package/@soeren_balke/ngx-charts):
 
 ```
-npm i @swimlane/ngx-charts --save
+npm i @soeren_balke/ngx-charts --save
 ```
 
 ## Custom Charts

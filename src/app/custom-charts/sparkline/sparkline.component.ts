@@ -2,7 +2,7 @@ import { Component, Input, ViewEncapsulation, ChangeDetectionStrategy } from '@a
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
 import { curveLinear } from 'd3-shape';
 
-import { getUniqueXDomainValues } from '@swimlane/ngx-charts/common/domain.helper';
+import { getUniqueXDomainValues } from '@soeren_balke/ngx-charts/common/domain.helper';
 import {
   BaseChartComponent,
   ViewDimensions,

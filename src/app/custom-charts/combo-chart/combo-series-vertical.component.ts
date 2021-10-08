@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { formatLabel } from '@swimlane/ngx-charts/common/label.helper';
+import { formatLabel } from '@soeren_balke/ngx-charts/common/label.helper';
 
 @Component({
   // tslint:disable-next-line: component-selector

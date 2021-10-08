@@ -3,8 +3,8 @@ import { Location, LocationStrategy, HashLocationStrategy } from '@angular/commo
 import * as shape from 'd3-shape';
 import * as d3Array from 'd3-array';
 
-import { colorSets } from '@swimlane/ngx-charts/utils/color-sets';
-import { formatLabel, escapeLabel } from '@swimlane/ngx-charts/common/label.helper';
+import { colorSets } from '@soeren_balke/ngx-charts/utils/color-sets';
+import { formatLabel, escapeLabel } from '@soeren_balke/ngx-charts/common/label.helper';
 import {
   single,
   multi,
