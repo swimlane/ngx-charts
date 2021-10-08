@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 19.1.0
+
+- Feature: New Chart type: Box chart
+
 ## 19.0.1
 
 - Fix: remove remove barrel file causing issues running ngcc (#1667)
