@@ -152,6 +152,7 @@
         *ngIf="chartType === 'bar-vertical-stacked'"
         class="chart-container"
         [view]="view"
+        [customColors]="customColors"
         [scheme]="colorScheme"
         [schemeType]="schemeType"
         [results]="multi"
@@ -943,6 +944,7 @@
         [showRefLines]="showRefLines"
         [showRefLabels]="showRefLabels"
         [referenceLines]="refLines"
+        [showRefIconPlaceholder]="showRefIconPlaceholder"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
@@ -952,6 +954,46 @@
         (deactivate)="deactivate($event)"
       >
       </ngx-charts-line-chart>
+      <ngx-charts-bar-vertical-stacked
+        *ngIf="chartType === 'bar-vertical-stacked-ref-lines'"
+        class="chart-container"
+        [view]="view"
+        [scheme]="colorScheme"
+        [schemeType]="schemeType"
+        [results]="multi"
+        [animations]="animations"
+        [gradient]="gradient"
+        [tooltipDisabled]="tooltipDisabled"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [legendTitle]="legendTitle"
+        [legendPosition]="legendPosition"
+        (legendLabelClick)="onLegendLabelClick($event)"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [showGridLines]="showGridLines"
+        [barPadding]="barPadding"
+        [roundDomains]="roundDomains"
+        [yScaleMax]="yScaleMax"
+        [noBarWhenZero]="noBarWhenZero"
+        [showDataLabel]="showDataLabel"
+        [trimXAxisTicks]="trimXAxisTicks"
+        [trimYAxisTicks]="trimYAxisTicks"
+        [rotateXAxisTicks]="rotateXAxisTicks"
+        [maxXAxisTickLength]="maxXAxisTickLength"
+        [maxYAxisTickLength]="maxYAxisTickLength"
+        [referenceLines]="refLinesBar"
+        [showRefLines]="showRefLines"
+        [showRefLabels]="showRefLabels"
+        [showRefIconPlaceholder]="showRefIconPlaceholder"
+        (select)="select($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
+      >
+      </ngx-charts-bar-vertical-stacked>
       <ngx-charts-bar-vertical
         *ngIf="chartType === 'tooltip-templates'"
         class="chart-container"
@@ -1215,6 +1257,13 @@
           <label>
             <input type="checkbox" [(ngModel)]="showRefLabels" />
             Show Reference Labels
+          </label>
+          <br />
+        </div>
+        <div *ngIf="chart.options.includes('showRefIconPlaceholder')">
+          <label>
+            <input type="checkbox" [checked]="showRefIconPlaceholder" (change)="showRefIconPlaceholder = $event.target.checked" />
+            Enable Reference Label Placeholder
           </label>
           <br />
         </div>

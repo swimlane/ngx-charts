@@ -75,7 +75,7 @@ export class ColorHelper {
     return colorScale;
   }
 
-  getColor(value: StringOrNumberOrDate): string {
+  getColor(value: StringOrNumberOrDate, label?: StringOrNumberOrDate): string {
     if (value === undefined || value === null) {
       throw new Error('Value can not be null');
     }
@@ -93,9 +93,10 @@ export class ColorHelper {
       const formattedValue = value.toString();
       let found: any; // todo type customColors
       if (this.customColors && this.customColors.length > 0) {
-        found = this.customColors.find(mapping => {
-          return mapping.name.toLowerCase() === formattedValue.toLowerCase();
-        });
+        found = this.customColors.find((mapping: {name: string, label: string, value: string}) => 
+          (mapping.name.toLowerCase() === formattedValue.toLowerCase()) &&
+          (mapping.label ? (mapping.label === label) : true)
+        );
       }
 
       if (found) {

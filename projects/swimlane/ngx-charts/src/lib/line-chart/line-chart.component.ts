@@ -75,6 +75,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
           [referenceLines]="referenceLines"
           [showRefLines]="showRefLines"
           [showRefLabels]="showRefLabels"
+          [showRefIconPlaceholder]="showRefIconPlaceholder"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
         <svg:g [attr.clip-path]="clipPath">
@@ -208,6 +209,7 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() showRefLines: boolean = false;
   @Input() referenceLines: any;
   @Input() showRefLabels: boolean = true;
+  @Input() showRefIconPlaceholder: boolean = false;
   @Input() xScaleMin: number;
   @Input() xScaleMax: number;
   @Input() yScaleMin: number;

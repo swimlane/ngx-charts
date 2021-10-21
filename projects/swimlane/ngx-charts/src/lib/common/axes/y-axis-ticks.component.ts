@@ -28,7 +28,7 @@ import { TextAnchor } from '../types/text-anchor.enum';
         <svg:text
           stroke-width="0.01"
           [attr.dy]="dy"
-          [attr.x]="x1"
+          [attr.x]="showRefLines && showRefIconPlaceholder ? x1 - 12 : x1"
           [attr.y]="y1"
           [attr.text-anchor]="textAnchor"
           [style.font-size]="'12px'"
@@ -65,10 +65,19 @@ import { TextAnchor } from '../types/text-anchor.enum';
       <svg:g *ngIf="showRefLines" [attr.transform]="transform(refLine.value)">
         <svg:line
           class="refline-path gridline-path-horizontal"
-          x1="0"
-          [attr.x2]="gridLineWidth"
+          x1="-10"
+          [attr.x2]="gridLineWidth + 10"
           [attr.transform]="gridLineTransform()"
         />
+        <svg:g *ngIf="showRefIconPlaceholder">
+          <svg:rect
+          id="{{ 'refIconPlaceholder' + refLine.name}}"
+          [attr.y]="-5"
+          [attr.x]="-12"
+          height="10"
+          width="10"
+          opacity="0"/>
+        </svg:g>
         <svg:g *ngIf="showRefLabels">
           <title>{{ tickTrim(tickFormat(refLine.value)) }}</title>
           <svg:text
@@ -101,6 +110,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() referenceLines;
   @Input() showRefLabels: boolean = false;
   @Input() showRefLines: boolean = false;
+  @Input() showRefIconPlaceholder: boolean = false;
 
   @Output() dimensionsChanged = new EventEmitter();
 
