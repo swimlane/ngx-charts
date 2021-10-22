@@ -154,7 +154,7 @@ export class PolarChartComponent extends BaseChartComponent {
   @Input() rangeFillOpacity: number = 0.15;
   @Input() trimYAxisTicks: boolean = true;
   @Input() maxYAxisTickLength: number = 16;
-  @Input() xAxisTickFormatting: (o: any) => any;
+  @Input() xAxisTickFormatting: (value: any) => any|undefined;
   @Input() yAxisTickFormatting: (o: any) => any;
   @Input() roundDomains: boolean = false;
   @Input() tooltipDisabled: boolean = false;
