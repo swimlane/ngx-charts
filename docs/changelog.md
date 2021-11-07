@@ -1,5 +1,10 @@
 # Changelog
 
+
+## 19.1.1
+- Addding roundedEdge for stacked vertical/horizontal bar (#835)
+
+- Feature: New Chart type: Box chart
 ## Unreleased
 
 ## 19.1.0

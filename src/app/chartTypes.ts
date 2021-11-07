@@ -173,7 +173,8 @@ const chartGroups = [
           'trimYAxisTicks',
           'rotateXAxisTicks',
           'maxXAxisTickLength',
-          'maxYAxisTickLength'
+          'maxYAxisTickLength',
+          'roundEdges',
         ]
       },
       {
@@ -205,7 +206,8 @@ const chartGroups = [
           'trimYAxisTicks',
           'rotateXAxisTicks',
           'maxXAxisTickLength',
-          'maxYAxisTickLength'
+          'maxYAxisTickLength',
+          'roundEdges',
         ],
         defaults: {
           yAxisLabel: 'Country',

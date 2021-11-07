@@ -9,6 +9,7 @@ export interface DataItem {
   min?: number;
   max?: number;
   label?: string;
+  roundEdges?: boolean
 }
 
 export interface SingleSeries extends Array<DataItem> {}

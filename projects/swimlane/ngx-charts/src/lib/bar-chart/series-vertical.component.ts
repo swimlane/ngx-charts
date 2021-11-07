@@ -131,7 +131,7 @@ export class SeriesVerticalComponent implements OnChanges {
       let value = d.value as any;
       const label = this.getLabel(d);
       const formattedLabel = formatLabel(label);
-      const roundEdges = this.roundEdges;
+      const roundEdges = d.roundEdges;
       d0Type = value > 0 ? D0Types.positive : D0Types.negative;
 
       const bar: any = {

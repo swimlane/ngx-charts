@@ -65,7 +65,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
         <svg:g
-          *ngFor="let group of results; let index = index; trackBy: trackBy"
+          *ngFor="let group of series; let index = index; trackBy: trackBy"
           [@animationState]="'active'"
           [attr.transform]="groupTransform(group)"
         >
@@ -140,6 +140,7 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   @Input() showDataLabel: boolean = false;
   @Input() dataLabelFormatting: any;
   @Input() noBarWhenZero: boolean = true;
+  @Input() roundEdges: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -160,6 +161,7 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   yAxisWidth: number = 0;
   legendOptions: LegendOptions;
   dataLabelMaxHeight: any = { negative: 0, positive: 0 };
+  series: any[];
 
   barChartType = BarChartType;
 
@@ -201,7 +203,7 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
 
     this.setColors();
     this.legendOptions = this.getLegendOptions();
-
+    this.series =  this.getRoundedEdgeBar(this.roundEdges);
     this.transform = `translate(${this.dims.xOffset} , ${this.margin[0] + this.dataLabelMaxHeight.negative})`;
   }
 
@@ -320,6 +322,23 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
     }
 
     return opts;
+  }
+
+  getRoundedEdgeBar(roundEdges: boolean = false): any {
+    const results = [];
+    for (const group of this.results) {
+      const series = [];
+      for (const d of group.series) {
+        series.push({
+          ...d,
+          roundEdges: false
+        });
+      }
+      if (roundEdges) series[group.series.length - 1].roundEdges = true;
+      group.series = series;
+      results.push(group);
+    }
+   return results;
   }
 
   updateYAxisWidth({ width }: { width: number }): void {
