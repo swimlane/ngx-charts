@@ -48,6 +48,10 @@ export class TooltipDirective implements OnDestroy {
     return this.tooltipShowEvent === ShowTypes.all || this.tooltipShowEvent === ShowTypes.mouseover;
   }
 
+  private get listensForTouch(): boolean {
+    return this.tooltipShowEvent === ShowTypes.all || this.tooltipShowEvent === ShowTypes.touchstart;
+  }
+
   private component: ComponentRef<any>;
   private timeout: ReturnType<typeof setTimeout>;
   private mouseLeaveContentEvent: any;
@@ -68,6 +72,16 @@ export class TooltipDirective implements OnDestroy {
   onFocus(): void {
     if (this.listensForFocus) {
       this.showTooltip();
+    }
+  }
+
+  @HostListener('touchstart', ['$event'])
+  onTouchStart(event): void {
+    this.hideTooltip(true);
+    if (this.listensForTouch) {
+      this.showTooltip();
+      // prevent additional mouse events (click) from hiding the tooltip on iOS
+      event.preventDefault();
     }
   }
 
