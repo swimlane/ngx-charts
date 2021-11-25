@@ -1,3 +1,19 @@
+.ngx-charts-outer {
+  animation: chartFadeIn linear 600ms;
+
+  @keyframes chartFadeIn {
+    0% {
+      opacity: 0;
+    }
+    20% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}
+
 .ngx-charts {
   float: left;
   overflow: visible;
