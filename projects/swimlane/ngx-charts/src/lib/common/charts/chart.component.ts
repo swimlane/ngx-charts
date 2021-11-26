@@ -7,7 +7,6 @@ import {
   Output,
   SimpleChanges
 } from '@angular/core';
-import { trigger, style, animate, transition } from '@angular/animations';
 import { TooltipService } from '../tooltip/tooltip.service';
 import { LegendOptions, LegendType, LegendPosition } from '../types/legend.model';
 import { ScaleType } from '../types/scale-type.enum';
@@ -16,7 +15,7 @@ import { ScaleType } from '../types/scale-type.enum';
   providers: [TooltipService],
   selector: 'ngx-charts-chart',
   template: `
-    <div class="ngx-charts-outer" [style.width.px]="view[0]" [@animationState]="'active'" [@.disabled]="!animations">
+    <div class="ngx-charts-outer" [style.width.px]="view[0]">
       <svg class="ngx-charts" [attr.width]="chartWidth" [attr.height]="view[1]">
         <ng-content></ng-content>
       </svg>
@@ -47,12 +46,7 @@ import { ScaleType } from '../types/scale-type.enum';
       </ngx-charts-legend>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('animationState', [
-      transition(':enter', [style({ opacity: 0 }), animate('500ms 100ms', style({ opacity: 1 }))])
-    ])
-  ]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChartComponent implements OnChanges {
   @Input() view: [number, number];
