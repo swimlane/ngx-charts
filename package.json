@@ -57,7 +57,7 @@
     "ng-in-viewport": "^6.1.5",
     "ngx-moment": "^5.0.0",
     "resize-observer-polyfill": "^1.5.1",
-    "rxjs": "~6.6.0",
+    "rxjs": "~6.6.0 || ~7.4.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
