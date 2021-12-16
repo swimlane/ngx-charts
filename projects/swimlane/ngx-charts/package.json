@@ -42,7 +42,7 @@
     "@angular/forms": ">=12.0.0",
     "@angular/platform-browser": ">=12.0.0",
     "@angular/platform-browser-dynamic": ">=12.0.0",
-    "rxjs": "6.x"
+    "rxjs": "^6.5.3 || ^7.4.0"
   },
   "dependencies": {
     "d3-array": "^2.9.1",
