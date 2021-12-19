@@ -11,7 +11,7 @@ import {
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
-import { DataItem } from '../models/chart-data.model';
+import { DataItem, SingleSeries } from '../models/chart-data.model';
 import { LegendOptions, LegendPosition } from '../common/types/legend.model';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
 import { ScaleType } from '../common/types/scale-type.enum';
@@ -60,6 +60,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PieChartComponent extends BaseChartComponent {
+  @Input() results: SingleSeries;
   @Input() labels: boolean = false;
   @Input() legend: boolean = false;
   @Input() legendTitle: string = 'Legend';
@@ -131,7 +132,7 @@ export class PieChartComponent extends BaseChartComponent {
 
     // sort data according to domain
     this.data = this.results.sort((a, b) => {
-      return this.domain.indexOf(a.name) - this.domain.indexOf(b.name);
+      return this.domain.indexOf(a.label) - this.domain.indexOf(b.label);
     });
 
     this.setColors();

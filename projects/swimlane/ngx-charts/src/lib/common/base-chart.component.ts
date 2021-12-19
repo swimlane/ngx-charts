@@ -15,13 +15,14 @@ import {
   Inject
 } from '@angular/core';
 
-import { fromEvent as observableFromEvent } from 'rxjs';
+import { fromEvent as observableFromEvent, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { VisibilityObserver } from '../utils/visibility-observer';
 import { isDate } from '../utils/types';
 import { Color } from '../utils/color-sets';
 import { ScaleType } from './types/scale-type.enum';
 import { ViewDimensions } from './types/view-dimension.interface';
+import { CustomColor, CustomColorFn } from './color.helper';
 
 @Component({
   selector: 'base-chart',
@@ -32,14 +33,14 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() view: [number, number];
   @Input() scheme: string | Color = 'cool';
   @Input() schemeType: ScaleType = ScaleType.Ordinal;
-  @Input() customColors: any;
+  @Input() customColors: CustomColor[] | CustomColorFn;
   @Input() animations: boolean = true;
 
   @Output() select = new EventEmitter();
 
   width: number;
   height: number;
-  resizeSubscription: any;
+  resizeSubscription: Subscription;
   visibilityObserver: VisibilityObserver;
 
   constructor(

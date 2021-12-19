@@ -2,8 +2,9 @@ import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@a
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
-import { gridLayout, gridSize } from '../common/grid-layout.helper';
+import { gridLayout } from '../common/grid-layout.helper';
 import { CardModel } from './card-series.component';
+import { SingleSeries } from '../models/chart-data.model';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
 import { ScaleType } from '../common/types/scale-type.enum';
 
@@ -35,6 +36,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NumberCardComponent extends BaseChartComponent {
+  @Input() results: SingleSeries;
   @Input() cardColor: string;
   @Input() bandColor: string;
   @Input() emptyColor: string = 'rgba(0, 0, 0, 0)';
@@ -71,15 +73,7 @@ export class NumberCardComponent extends BaseChartComponent {
     this.setColors();
     this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
 
-    const size = gridSize(this.dims, this.results.length, 150);
-    const N = size[0] * size[1];
-
     const data = this.results.slice();
-
-    while (data.length < N) {
-      data.push({ value: null });
-    }
-
     this.data = gridLayout(this.dims, data, 150, this.designatedTotal) as any;
   }
 

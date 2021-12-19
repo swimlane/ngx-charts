@@ -1,9 +1,9 @@
 import {
   Component,
   Input,
-  ViewEncapsulation,
   Output,
   EventEmitter,
+  ViewEncapsulation,
   ChangeDetectionStrategy,
   ContentChild,
   TemplateRef
@@ -13,7 +13,7 @@ import { scaleBand, scaleLinear } from 'd3-scale';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
-import { DataItem } from '../models/chart-data.model';
+import { DataItem, SingleSeries } from '../models/chart-data.model';
 import { LegendOptions, LegendPosition } from '../common/types/legend.model';
 import { ScaleType } from '../common/types/scale-type.enum';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
@@ -72,11 +72,11 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
           [gradient]="gradient"
           [tooltipDisabled]="tooltipDisabled"
           [tooltipTemplate]="tooltipTemplate"
-          [showDataLabel]="showDataLabel"
-          [dataLabelFormatting]="dataLabelFormatting"
           [activeEntries]="activeEntries"
           [roundEdges]="roundEdges"
           [animations]="animations"
+          [showDataLabel]="showDataLabel"
+          [dataLabelFormatting]="dataLabelFormatting"
           [noBarWhenZero]="noBarWhenZero"
           (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)"
@@ -91,6 +91,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
   encapsulation: ViewEncapsulation.None
 })
 export class BarVerticalComponent extends BaseChartComponent {
+  @Input() results: SingleSeries;
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
   @Input() legendPosition: LegendPosition = LegendPosition.Right;
@@ -114,7 +115,7 @@ export class BarVerticalComponent extends BaseChartComponent {
   @Input() yAxisTickFormatting: any;
   @Input() xAxisTicks: any[];
   @Input() yAxisTicks: any[];
-  @Input() barPadding = 8;
+  @Input() barPadding: number = 8;
   @Input() roundDomains: boolean = false;
   @Input() roundEdges: boolean = true;
   @Input() yScaleMax: number;
@@ -131,15 +132,15 @@ export class BarVerticalComponent extends BaseChartComponent {
   dims: ViewDimensions;
   xScale: any;
   yScale: any;
-  xDomain: any;
-  yDomain: any;
+  xDomain: string[];
+  yDomain: [number, number];
   transform: string;
   colors: ColorHelper;
   margin: number[] = [10, 20, 10, 20];
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
   legendOptions: LegendOptions;
-  dataLabelMaxHeight: any = { negative: 0, positive: 0 };
+  dataLabelMaxHeight = { negative: 0, positive: 0 };
 
   update(): void {
     super.update();
@@ -178,7 +179,7 @@ export class BarVerticalComponent extends BaseChartComponent {
     this.transform = `translate(${this.dims.xOffset} , ${this.margin[0] + this.dataLabelMaxHeight.negative})`;
   }
 
-  getXScale(): any {
+  getXScale(): string[] {
     this.xDomain = this.getXDomain();
     const spacing = this.xDomain.length / (this.dims.width / this.barPadding + 1);
     return scaleBand().range([0, this.dims.width]).paddingInner(spacing).domain(this.xDomain);
@@ -209,7 +210,7 @@ export class BarVerticalComponent extends BaseChartComponent {
     return [min, max];
   }
 
-  onClick(data: DataItem | string) {
+  onClick(data: DataItem | string): void {
     this.select.emit(data);
   }
 
@@ -224,7 +225,7 @@ export class BarVerticalComponent extends BaseChartComponent {
     this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
   }
 
-  getLegendOptions() {
+  getLegendOptions(): LegendOptions {
     const opts = {
       scaleType: this.schemeType as any,
       colors: undefined,

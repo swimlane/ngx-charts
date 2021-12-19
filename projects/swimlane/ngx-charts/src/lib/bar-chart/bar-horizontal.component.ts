@@ -13,6 +13,7 @@ import { scaleBand, scaleLinear } from 'd3-scale';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
+import { DataItem, SingleSeries } from '../models/chart-data.model';
 import { LegendOptions, LegendPosition } from '../common/types/legend.model';
 import { ScaleType } from '../common/types/scale-type.enum';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
@@ -76,9 +77,9 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
           [showDataLabel]="showDataLabel"
           [dataLabelFormatting]="dataLabelFormatting"
           [noBarWhenZero]="noBarWhenZero"
-          (select)="onClick($event)"
           (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)"
+          (select)="onClick($event)"
           (dataLabelWidthChanged)="onDataLabelMaxWidthChanged($event)"
         ></svg:g>
       </svg:g>
@@ -89,6 +90,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
   encapsulation: ViewEncapsulation.None
 })
 export class BarHorizontalComponent extends BaseChartComponent {
+  @Input() results: SingleSeries;
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
   @Input() legendPosition: LegendPosition = LegendPosition.Right;
@@ -127,8 +129,8 @@ export class BarHorizontalComponent extends BaseChartComponent {
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
-  yScale: any;
   xScale: any;
+  yScale: any;
   xDomain: [number, number];
   yDomain: string[];
   transform: string;
@@ -137,7 +139,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
   legendOptions: LegendOptions;
-  dataLabelMaxWidth: any = { negative: 0, positive: 0 };
+  dataLabelMaxWidth = { negative: 0, positive: 0 };
 
   update(): void {
     super.update();
@@ -201,7 +203,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
     return this.results.map(d => d.label);
   }
 
-  onClick(data): void {
+  onClick(data: DataItem | string): void {
     this.select.emit(data);
   }
 
@@ -224,7 +226,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
       title: undefined,
       position: this.legendPosition
     };
-    if (opts.scaleType === 'ordinal') {
+    if (opts.scaleType === ScaleType.Ordinal) {
       opts.domain = this.yDomain;
       opts.colors = this.colors;
       opts.title = this.legendTitle;

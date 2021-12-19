@@ -33,7 +33,6 @@ export interface AreaChartSeries {
 export interface PieGridDataItem extends DataItem {
   percent: number;
   total: number;
-  value: number;
 }
 
 export interface BubbleChartDataItem {
