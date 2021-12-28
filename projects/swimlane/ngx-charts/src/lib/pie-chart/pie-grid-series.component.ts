@@ -10,7 +10,14 @@ import {
 } from '@angular/core';
 import { pie } from 'd3-shape';
 import { PieGridDataItem } from '../models/chart-data.model';
-import { PieGridData } from './pie-grid.component';
+
+export interface PieGridData {
+  data: PieGridDataItem;
+  height: number;
+  width: number;
+  x: number;
+  y: number;
+}
 
 export interface PieArc {
   animate: boolean;
