@@ -12,6 +12,9 @@ export interface SingleSeries extends Array<DataItem> {}
 export interface Series {
   name: string | number | Date;
   series: DataItem[];
+  extra?: {
+    gradientDirection?: string;
+  };
 }
 
 export interface MultiSeries extends Array<Series> {}

@@ -250,16 +250,11 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   getYScale(): any {
     const spacing = this.groupDomain.length / (this.dims.height / this.barPadding + 1);
 
-    return scaleBand()
-      .rangeRound([0, this.dims.height])
-      .paddingInner(spacing)
-      .domain(this.groupDomain);
+    return scaleBand().rangeRound([0, this.dims.height]).paddingInner(spacing).domain(this.groupDomain);
   }
 
   getXScale(): any {
-    const scale = scaleLinear()
-      .range([0, this.dims.width])
-      .domain(this.valueDomain);
+    const scale = scaleLinear().range([0, this.dims.width]).domain(this.valueDomain);
     return this.roundDomains ? scale.nice() : scale;
   }
 

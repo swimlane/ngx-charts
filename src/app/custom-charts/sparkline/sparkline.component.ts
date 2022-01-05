@@ -27,6 +27,8 @@ import {
               [scaleType]="scaleType"
               [curve]="curve"
               [animations]="animations"
+              [gradient]="gradient"
+              [trueZero]="trueZero"
             />
           </svg:g>
         </svg:g>
@@ -43,7 +45,9 @@ export class SparklineComponent extends BaseChartComponent {
   @Input() schemeType: string = 'linear';
   @Input() valueDomain: number[];
   @Input() animations: boolean = true;
-
+  @Input() gradient: boolean = true;
+  @Input() trueZero: boolean;
+  
   dims: ViewDimensions;
   xSet: any;
   xDomain: any;
@@ -150,27 +154,18 @@ export class SparklineComponent extends BaseChartComponent {
     let scale;
 
     if (this.scaleType === 'time') {
-      scale = scaleTime()
-        .range([0, width])
-        .domain(domain);
+      scale = scaleTime().range([0, width]).domain(domain);
     } else if (this.scaleType === 'linear') {
-      scale = scaleLinear()
-        .range([0, width])
-        .domain(domain);
+      scale = scaleLinear().range([0, width]).domain(domain);
     } else if (this.scaleType === 'ordinal') {
-      scale = scalePoint()
-        .range([0, width])
-        .padding(0.1)
-        .domain(domain);
+      scale = scalePoint().range([0, width]).padding(0.1).domain(domain);
     }
 
     return scale;
   }
 
   getYScale(domain, height): any {
-    const scale = scaleLinear()
-      .range([height, 0])
-      .domain(domain);
+    const scale = scaleLinear().range([height, 0]).domain(domain);
 
     return scale;
   }

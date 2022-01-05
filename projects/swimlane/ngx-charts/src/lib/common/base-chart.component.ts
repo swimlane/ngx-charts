@@ -18,9 +18,7 @@ import { VisibilityObserver } from '../utils/visibility-observer';
 
 @Component({
   selector: 'base-chart',
-  template: `
-    <div></div>
-  `
+  template: ` <div></div> `
 })
 export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() results: any;

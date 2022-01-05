@@ -18,6 +18,7 @@ export class SvgLinearGradientComponent implements OnChanges {
   @Input() orientation = 'vertical';
   @Input() name;
   @Input() stops: any[];
+  @Input() gradientDirection: string;
 
   x1: any;
   x2: any;
@@ -33,7 +34,24 @@ export class SvgLinearGradientComponent implements OnChanges {
     if (this.orientation === 'horizontal') {
       this.x2 = '100%';
     } else if (this.orientation === 'vertical') {
-      this.y1 = '100%';
+      switch (this.gradientDirection) {
+        case 'down':
+          this.y2 = '0%';
+          this.y1 = '100%';
+          break;
+        case 'up':
+          this.y2 = '100%';
+          this.y1 = '0%';
+          break;
+        case 'none':
+          this.y2 = '0%';
+          this.y1 = '0%';
+          break;
+        default:
+          this.y2 = '0%';
+          this.y1 = '100%';
+          break;
+      }
     }
   }
 }

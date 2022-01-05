@@ -27,7 +27,7 @@ import { ColorHelper } from '../common/color.helper';
         />
       </defs>
       <svg:rect
-        *ngIf="barVisible && type === 'standard'"
+        *ngIf="!tooltipBarDisabled && barVisible && type === 'standard'"
         [@animationState]="'active'"
         [attr.x]="circle.cx - circle.radius"
         [attr.y]="circle.cy"
@@ -81,6 +81,7 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
   @Input() scaleType;
   @Input() visibleValue;
   @Input() activeEntries: any[];
+  @Input() tooltipBarDisabled: boolean = false;
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipTemplate: TemplateRef<any>;
 

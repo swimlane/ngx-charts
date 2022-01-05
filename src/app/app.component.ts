@@ -69,7 +69,8 @@ export class AppComponent implements OnInit {
   width: number = 700;
   height: number = 300;
   fitContainer: boolean = false;
-
+  margins: [number, number, number, number];
+  
   // options
   showXAxis = true;
   showYAxis = true;
@@ -78,7 +79,9 @@ export class AppComponent implements OnInit {
   legendTitle = 'Legend';
   legendPosition = 'right';
   showXAxisLabel = true;
+  tooltipBarDisabled = false;
   tooltipDisabled = false;
+  trueZero = false;
   showText = true;
   xAxisLabel = 'Country';
   showYAxisLabel = true;
@@ -658,8 +661,8 @@ export class AppComponent implements OnInit {
   getFunction(text = this.mathText) {
     try {
       text = `with (Math) { return ${this.mathText} }`;
-      // tslint:disable-next-line:function-constructor
-      const fn = new Function('x', text).bind(Math);
+      // tslint:disable-next-line: function-constructor
+      const fn = new Function('x', text).bind(Math); // tslint:disable-line: tsr-detect-eval-with-expression
       return typeof fn(1) === 'number' ? fn : null;
     } catch (err) {
       return null;

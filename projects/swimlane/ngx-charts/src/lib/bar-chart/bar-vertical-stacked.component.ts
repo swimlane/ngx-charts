@@ -269,9 +269,7 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   }
 
   getYScale(): any {
-    const scale = scaleLinear()
-      .range([this.dims.height, 0])
-      .domain(this.valueDomain);
+    const scale = scaleLinear().range([this.dims.height, 0]).domain(this.valueDomain);
     return this.roundDomains ? scale.nice() : scale;
   }
 

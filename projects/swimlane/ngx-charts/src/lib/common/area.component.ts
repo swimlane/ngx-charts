@@ -15,7 +15,7 @@ import { id } from '../utils/id';
   selector: 'g[ngx-charts-area]',
   template: `
     <svg:defs *ngIf="gradient">
-      <svg:g ngx-charts-svg-linear-gradient orientation="vertical" [name]="gradientId" [stops]="gradientStops" />
+      <svg:g ngx-charts-svg-linear-gradient orientation="vertical" [gradientDirection]="gradientDirection" [name]="gradientId" [stops]="gradientStops" />
     </svg:defs>
     <svg:path class="area" [attr.d]="areaPath" [attr.fill]="gradient ? gradientFill : fill" [style.opacity]="opacity" />
   `,
@@ -33,7 +33,8 @@ export class AreaComponent implements OnChanges {
   @Input() gradient: boolean = false;
   @Input() stops: any[];
   @Input() animations: boolean = true;
-
+  @Input() gradientDirection: string;
+  
   @Output() select = new EventEmitter();
 
   element: HTMLElement;
@@ -80,10 +81,7 @@ export class AreaComponent implements OnChanges {
     const node = select(this.element).select('.area');
 
     if (this.animations) {
-      node
-        .transition()
-        .duration(750)
-        .attr('d', this.path);
+      node.transition().duration(750).attr('d', this.path);
     } else {
       node.attr('d', this.path);
     }

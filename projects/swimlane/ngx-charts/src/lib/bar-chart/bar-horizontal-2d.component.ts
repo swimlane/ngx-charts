@@ -220,16 +220,11 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
     const height = this.groupScale.bandwidth();
     const spacing = this.innerDomain.length / (height / this.barPadding + 1);
 
-    return scaleBand()
-      .rangeRound([0, height])
-      .paddingInner(spacing)
-      .domain(this.innerDomain);
+    return scaleBand().rangeRound([0, height]).paddingInner(spacing).domain(this.innerDomain);
   }
 
   getValueScale(): any {
-    const scale = scaleLinear()
-      .range([0, this.dims.width])
-      .domain(this.valuesDomain);
+    const scale = scaleLinear().range([0, this.dims.width]).domain(this.valuesDomain);
 
     return this.roundDomains ? scale.nice() : scale;
   }
