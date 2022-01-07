@@ -9,18 +9,8 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { pie } from 'd3-shape';
-import { PieGridDataItem } from '../models/chart-data.model';
-import { PieGridData } from './pie-grid.component';
-
-export interface PieArc {
-  animate: boolean;
-  class: string;
-  data: PieGridDataItem;
-  endAngle: number;
-  fill: string;
-  pointerEvents: boolean;
-  startAngle: number;
-}
+import { PieGridData } from '../models/pie-grid-data.model';
+import { PieArc } from '../models/pie-arc.model';
 
 @Component({
   selector: 'g[ngx-charts-pie-grid-series]',
