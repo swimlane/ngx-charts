@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 20.0.0
+
+- Breaking: Upgrade Angular to v13
+
 ## 19.2.0
 
 - Fix: Change transition to CSS for Angular Universal fix
