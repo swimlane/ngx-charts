@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 20.0.1
+
+- Fix: Add missing interfaces
+
 ## 20.0.0
 
 - Breaking: Upgrade Angular to v13
