@@ -9,8 +9,7 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { pie } from 'd3-shape';
-import { PieGridData } from '../models/chart-data.model';
-import { PieArc } from './pie-grid.component';
+import { PieArc, PieGridData } from '../models/chart-data.model';
 
 @Component({
   selector: 'g[ngx-charts-pie-grid-series]',

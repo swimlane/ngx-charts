@@ -44,6 +44,16 @@ export interface PieGridData {
   y: number;
 }
 
+export interface PieArc {
+  animate: boolean;
+  class: string;
+  data: PieGridDataItem;
+  endAngle: number;
+  fill: string;
+  pointerEvents: boolean;
+  startAngle: number;
+}
+
 export interface BubbleChartDataItem {
   name: StringOrNumberOrDate;
   x: StringOrNumberOrDate;

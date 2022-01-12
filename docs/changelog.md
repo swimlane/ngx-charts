@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 19.2.1
+
+- Fix: Prevent Cycle error by moving interface PieGridData to the Models directory.
+
 ## 19.2.0
 
 - Fix: Change transition to CSS for Angular Universal fix
