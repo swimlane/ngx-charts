@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Fix: Cyclic import error cause by interface export in `PieGridComponent`.
+- Fix: Cyclic import error caused by interface export in `PieGridComponent`.
 
 ## 19.2.0
 
