@@ -36,6 +36,24 @@ export interface PieGridDataItem extends DataItem {
   value: number;
 }
 
+export interface PieGridData {
+  data: PieGridDataItem;
+  height: number;
+  width: number;
+  x: number;
+  y: number;
+}
+
+export interface PieArc {
+  animate: boolean;
+  class: string;
+  data: PieGridDataItem;
+  endAngle: number;
+  fill: string;
+  pointerEvents: boolean;
+  startAngle: number;
+}
+
 export interface BubbleChartDataItem {
   name: StringOrNumberOrDate;
   x: StringOrNumberOrDate;
