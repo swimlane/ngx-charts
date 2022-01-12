@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Fix: Cyclic import error cause by interface export in `PieGridComponent`.
+
 ## 19.2.0
 
 - Fix: Change transition to CSS for Angular Universal fix

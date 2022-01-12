@@ -30,6 +30,14 @@ export interface AreaChartSeries {
   series: AreaChartDataItem[];
 }
 
+export interface PieGridData {
+  data: PieGridDataItem;
+  height: number;
+  width: number;
+  x: number;
+  y: number;
+}
+
 export interface PieGridDataItem extends DataItem {
   percent: number;
   total: number;
