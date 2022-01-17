@@ -1,12 +1,16 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "extends": "../../../tsconfig.json",
   "compilerOptions": {
     "outDir": "../../../out-tsc/lib",
-    "target": "es2015",
     "declaration": true,
     "inlineSources": true,
     "types": [],
-    "lib": ["dom", "es2018"]
+    "target": "es2017",
+    "lib": [
+      "dom",
+      "es2020"
+    ]
   },
   "angularCompilerOptions": {
     "skipTemplateCodegen": true,
