@@ -95,11 +95,11 @@ export class AdvancedLegendComponent implements OnChanges {
   total: number;
   roundedTotal: number;
 
-  @Input() valueFormatting: (value: number) => any;
-  @Input() labelFormatting: (value: string) => any = label => label;
-  @Input() percentageFormatting: (value: number) => any = percentage => percentage;
+  @Input() valueFormatting: (value: StringOrNumberOrDate) => any;
+  @Input() labelFormatting: (value: string) => string = label => label;
+  @Input() percentageFormatting: (value: number) => number = percentage => percentage;
 
-  defaultValueFormatting: (value: number) => any = value => value.toLocaleString();
+  defaultValueFormatting: (value: StringOrNumberOrDate) => string = value => value.toLocaleString();
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -137,7 +137,7 @@ export class AdvancedLegendComponent implements OnChanges {
     });
   }
 
-  trackBy(item: AdvancedLegendItem): string {
+  trackBy(index: number, item: AdvancedLegendItem) {
     return item.label;
   }
 }

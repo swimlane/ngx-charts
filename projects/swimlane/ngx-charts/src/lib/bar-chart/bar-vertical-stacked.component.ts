@@ -6,7 +6,8 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy,
   ContentChild,
-  TemplateRef
+  TemplateRef,
+  TrackByFunction
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { scaleBand, scaleLinear } from 'd3-scale';
@@ -15,7 +16,10 @@ import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { Series } from '../models/chart-data.model';
 import { BaseChartComponent } from '../common/base-chart.component';
-import { ViewDimensions, LegendPosition, ScaleType, LegendOptions } from '../common/types';
+import { BarChartType } from './types/bar-chart-type.enum';
+import { LegendOptions, LegendPosition } from '../common/types/legend.model';
+import { ScaleType } from '../common/types/scale-type.enum';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
 
 @Component({
   selector: 'ngx-charts-bar-vertical-stacked',
@@ -67,7 +71,7 @@ import { ViewDimensions, LegendPosition, ScaleType, LegendOptions } from '../com
         >
           <svg:g
             ngx-charts-series-vertical
-            type="stacked"
+            [type]="barChartType.Stacked"
             [xScale]="xScale"
             [yScale]="yScale"
             [activeEntries]="activeEntries"
@@ -156,6 +160,8 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   yAxisWidth: number = 0;
   legendOptions: LegendOptions;
   dataLabelMaxHeight: any = { negative: 0, positive: 0 };
+
+  barChartType = BarChartType;
 
   update(): void {
     super.update();
@@ -281,9 +287,9 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
     this.select.emit(data);
   }
 
-  trackBy(index: number, item: Series): any {
+  trackBy: TrackByFunction<Series> = (index: number, item: Series) => {
     return item.name;
-  }
+  };
 
   setColors(): void {
     let domain;

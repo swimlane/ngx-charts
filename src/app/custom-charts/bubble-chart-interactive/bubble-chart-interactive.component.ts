@@ -411,6 +411,6 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
   }
 
   trackBy(index, item): string {
-    return item.name;
+    return `${item.name}`;
   }
 }

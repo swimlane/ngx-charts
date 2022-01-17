@@ -13,8 +13,11 @@ import { lineRadial } from 'd3-shape';
 import { id } from '../utils/id';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
 import { escapeLabel } from '../common/label.helper';
-import { ScaleType } from '../common/types';
 import { Series, DataItem } from '../models/chart-data.model';
+import { PlacementTypes } from '../common/tooltip/position';
+import { StyleTypes } from '../common/tooltip/style.type';
+import { BarOrientation } from '../common/types/bar-orientation.enum';
+import { ScaleType } from '../common/types/scale-type.enum';
 
 interface PolarChartCircle {
   color: string;
@@ -33,7 +36,6 @@ interface PolarChartCircle {
         <svg:g
           ngx-charts-svg-radial-gradient
           *ngIf="hasGradient"
-          orientation="vertical"
           [color]="seriesColor"
           [name]="gradientId"
           [startOpacity]="0.25"
@@ -63,8 +65,8 @@ interface PolarChartCircle {
         [style.opacity]="inactive ? 0.2 : 1"
         ngx-tooltip
         [tooltipDisabled]="tooltipDisabled"
-        [tooltipPlacement]="'top'"
-        tooltipType="tooltip"
+        [tooltipPlacement]="placementTypes.Top"
+        [tooltipType]="styleTypes.tooltip"
         [tooltipTitle]="tooltipTemplate ? undefined : tooltipText(circle)"
         [tooltipTemplate]="tooltipTemplate"
         [tooltipContext]="circle.data"
@@ -100,7 +102,6 @@ export class PolarSeriesComponent implements OnChanges {
   circles: PolarChartCircle[];
   circleRadius: number = 3;
 
-  outerPath: string;
   areaPath: string;
   gradientId: string;
   gradientUrl: string;
@@ -111,6 +112,10 @@ export class PolarSeriesComponent implements OnChanges {
 
   active: boolean;
   inactive: boolean;
+
+  barOrientation = BarOrientation;
+  placementTypes = PlacementTypes;
+  styleTypes = StyleTypes;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();

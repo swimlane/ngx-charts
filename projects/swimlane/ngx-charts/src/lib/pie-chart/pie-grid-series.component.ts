@@ -9,8 +9,7 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { pie } from 'd3-shape';
-import { PieGridDataItem } from '../models/chart-data.model';
-import { PieGridData } from './pie-grid.component';
+import { PieGridData, PieGridDataItem } from '../models/chart-data.model';
 
 export interface PieArc {
   animate: boolean;

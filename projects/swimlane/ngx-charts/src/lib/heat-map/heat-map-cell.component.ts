@@ -10,8 +10,9 @@ import {
   HostListener
 } from '@angular/core';
 import { select } from 'd3-selection';
-import { Gradient } from '../common/types';
-
+import { Transition } from 'd3-transition';
+import { BarOrientation } from '../common/types/bar-orientation.enum';
+import { Gradient } from '../common/types/gradient.interface';
 import { id } from '../utils/id';
 
 @Component({
@@ -19,7 +20,12 @@ import { id } from '../utils/id';
   template: `
     <svg:g [attr.transform]="transform" class="cell">
       <defs *ngIf="gradient">
-        <svg:g ngx-charts-svg-linear-gradient orientation="vertical" [name]="gradientId" [stops]="gradientStops" />
+        <svg:g
+          ngx-charts-svg-linear-gradient
+          [orientation]="barOrientation.Vertical"
+          [name]="gradientId"
+          [stops]="gradientStops"
+        />
       </defs>
       <svg:rect
         [attr.fill]="gradient ? gradientUrl : fill"
@@ -27,7 +33,6 @@ import { id } from '../utils/id';
         [attr.width]="width"
         [attr.height]="height"
         class="cell"
-        style="cursor: pointer"
         (click)="onClick()"
       />
     </svg:g>
@@ -54,6 +59,8 @@ export class HeatMapCellComponent implements OnChanges {
   gradientId: string;
   gradientUrl: string;
   gradientStops: Gradient[];
+
+  barOrientation = BarOrientation;
 
   constructor(element: ElementRef) {
     this.element = element.nativeElement;

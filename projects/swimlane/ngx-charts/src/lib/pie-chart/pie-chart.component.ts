@@ -12,7 +12,9 @@ import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { DataItem } from '../models/chart-data.model';
-import { LegendOptions, LegendPosition, ScaleType, ViewDimensions } from '../common/types';
+import { LegendOptions, LegendPosition } from '../common/types/legend.model';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { ScaleType } from '../common/types/scale-type.enum';
 
 @Component({
   selector: 'ngx-charts-pie-chart',
@@ -76,8 +78,8 @@ export class PieChartComponent extends BaseChartComponent {
   // optional margins
   @Input() margins: number[];
   @Output() select = new EventEmitter();
-  @Output() activate: EventEmitter<any> = new EventEmitter();
-  @Output() deactivate: EventEmitter<any> = new EventEmitter();
+  @Output() activate = new EventEmitter();
+  @Output() deactivate = new EventEmitter();
 
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
@@ -140,7 +142,7 @@ export class PieChartComponent extends BaseChartComponent {
     return this.results.map(d => d.label);
   }
 
-  onClick(data: DataItem): void {
+  onClick(data: DataItem | string): void {
     this.select.emit(data);
   }
 

@@ -10,6 +10,8 @@ import {
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel } from '@swimlane/ngx-charts/common/label.helper';
+import { PlacementTypes } from '@swimlane/ngx-charts/common/tooltip/position';
+import { StyleTypes } from '@swimlane/ngx-charts/common/tooltip/style.type';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -35,8 +37,8 @@ import { formatLabel } from '@swimlane/ngx-charts/common/label.helper';
           (deactivate)="deactivateCircle(circle)"
           ngx-tooltip
           [tooltipDisabled]="tooltipDisabled"
-          [tooltipPlacement]="'top'"
-          [tooltipType]="'tooltip'"
+          [tooltipPlacement]="placementTypes.Top"
+          [tooltipType]="styleTypes.tooltip"
           [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(circle)"
           [tooltipTemplate]="tooltipTemplate"
           [tooltipContext]="circle.data"
@@ -78,6 +80,9 @@ export class BubbleSeriesInteractiveComponent implements OnChanges {
 
   areaPath: any;
   circles: any[];
+
+  placementTypes = PlacementTypes;
+  styleTypes = StyleTypes;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();

@@ -4,11 +4,13 @@ import { formatLabel, escapeLabel } from '../common/label.helper';
 import { DataItem, StringOrNumberOrDate } from '../models/chart-data.model';
 import { PlacementTypes } from '../common/tooltip/position';
 import { StyleTypes } from '../common/tooltip/style.type';
-import { ScaleType, ViewDimensions } from '../common/types';
 import { ColorHelper } from '../common/color.helper';
 import { BarChartType } from './types/bar-chart-type.enum';
 import { D0Types } from './types/d0-type.enum';
 import { Bar } from './types/bar.model';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { BarOrientation } from '../common/types/bar-orientation.enum';
+import { ScaleType } from '../common/types/scale-type.enum';
 
 @Component({
   selector: 'g[ngx-charts-series-vertical]',
@@ -25,7 +27,7 @@ import { Bar } from './types/bar.model';
       [fill]="bar.color"
       [stops]="bar.gradientStops"
       [data]="bar.data"
-      [orientation]="'vertical'"
+      [orientation]="barOrientation.Vertical"
       [roundEdges]="bar.roundEdges"
       [gradient]="gradient"
       [ariaLabel]="bar.ariaLabel"
@@ -53,7 +55,7 @@ import { Bar } from './types/bar.model';
         [barHeight]="b.height"
         [value]="b.total"
         [valueFormatting]="dataLabelFormatting"
-        [orientation]="'vertical'"
+        [orientation]="barOrientation.Vertical"
         (dimensionsChanged)="dataLabelHeightChanged.emit({ size: $event, index: i })"
       />
     </svg:g>
@@ -78,8 +80,8 @@ export class SeriesVerticalComponent implements OnChanges {
   @Input() yScale;
   @Input() colors: ColorHelper;
   @Input() gradient: boolean;
-  @Input() activeEntries: any[];
-  @Input() seriesName: string;
+  @Input() activeEntries: DataItem[];
+  @Input() seriesName: StringOrNumberOrDate;
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipTemplate: TemplateRef<any>;
   @Input() roundEdges: boolean;
@@ -98,6 +100,8 @@ export class SeriesVerticalComponent implements OnChanges {
 
   bars: Bar[];
   barsForDataLabels: Array<{ x: number; y: number; width: number; height: number; total: number; series: string }> = [];
+
+  barOrientation = BarOrientation;
 
   ngOnChanges(changes): void {
     this.update();
@@ -196,7 +200,7 @@ export class SeriesVerticalComponent implements OnChanges {
 
       let tooltipLabel = formattedLabel;
       bar.ariaLabel = formattedLabel + ' ' + value.toLocaleString();
-      if (this.seriesName) {
+      if (this.seriesName !== null && this.seriesName !== undefined) {
         tooltipLabel = `${this.seriesName} • ${formattedLabel}`;
         bar.data.series = this.seriesName;
         bar.ariaLabel = this.seriesName + ' ' + bar.ariaLabel;
@@ -237,7 +241,7 @@ export class SeriesVerticalComponent implements OnChanges {
     } else {
       this.barsForDataLabels = this.series.map(d => {
         const section: any = {};
-        section.series = this.seriesName ? this.seriesName : d.label;
+        section.series = this.seriesName ?? d.label;
         section.total = d.value;
         section.x = this.xScale(d.label);
         section.y = this.yScale(0);
@@ -253,11 +257,13 @@ export class SeriesVerticalComponent implements OnChanges {
     this.tooltipType = this.tooltipDisabled ? undefined : StyleTypes.tooltip;
   }
 
-  isActive(entry): boolean {
+  isActive(entry: DataItem): boolean {
     if (!this.activeEntries) return false;
-    const item = this.activeEntries.find(d => {
-      return entry.name === d.name && entry.series === d.series;
+
+    const item = this.activeEntries.find(active => {
+      return entry.name === active.name && entry.value === active.value;
     });
+
     return item !== undefined;
   }
 

@@ -1,6 +1,6 @@
 {
   "name": "@swimlane/ngx-charts",
-  "version": "18.0.1",
+  "version": "19.2.0",
   "description": "Declarative Charting Framework for Angular",
   "repository": {
     "type": "git",
@@ -27,7 +27,7 @@
   "maintainers": [
     "Marjan Georgiev",
     "Jayson Harshbarger",
-    "Luis Bello"
+    "Haemin Park"
   ],
   "license": "MIT",
   "bugs": {
@@ -35,14 +35,14 @@
   },
   "homepage": "https://github.com/swimlane/ngx-charts#readme",
   "peerDependencies": {
-    "@angular/animations": ">=11.0.0",
-    "@angular/cdk": ">=11.0.0",
-    "@angular/core": ">=11.0.0",
-    "@angular/common": ">=11.0.0",
-    "@angular/forms": ">=11.0.0",
-    "@angular/platform-browser": ">=11.0.0",
-    "@angular/platform-browser-dynamic": ">=11.0.0",
-    "rxjs": "6.x"
+    "@angular/animations": ">=12.0.0",
+    "@angular/cdk": ">=12.0.0",
+    "@angular/core": ">=12.0.0",
+    "@angular/common": ">=12.0.0",
+    "@angular/forms": ">=12.0.0",
+    "@angular/platform-browser": ">=12.0.0",
+    "@angular/platform-browser-dynamic": ">=12.0.0",
+    "rxjs": "^6.5.3 || ^7.4.0"
   },
   "dependencies": {
     "d3-array": "^2.9.1",

@@ -4,8 +4,10 @@ import { area, line } from 'd3-shape';
 import { id } from '../utils/id';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
 import { ColorHelper } from '../common/color.helper';
-import { ScaleType, Gradient } from '../common/types';
 import { Series } from '../models/chart-data.model';
+import { BarOrientation } from '../common/types/bar-orientation.enum';
+import { ScaleType } from '../common/types/scale-type.enum';
+import { Gradient } from '../common/types/gradient.interface';
 
 @Component({
   selector: 'g[ngx-charts-line-series]',
@@ -15,7 +17,7 @@ import { Series } from '../models/chart-data.model';
         <svg:g
           ngx-charts-svg-linear-gradient
           *ngIf="hasGradient"
-          orientation="vertical"
+          [orientation]="barOrientation.Vertical"
           [name]="gradientId"
           [stops]="gradientStops"
         />
@@ -81,6 +83,8 @@ export class LineSeriesComponent implements OnChanges {
   gradientStops: Gradient[];
   areaGradientStops: Gradient[];
   stroke: string;
+
+  barOrientation = BarOrientation;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();

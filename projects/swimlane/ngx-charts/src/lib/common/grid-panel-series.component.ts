@@ -1,6 +1,6 @@
 import { Component, SimpleChanges, Input, OnChanges, ChangeDetectionStrategy } from '@angular/core';
+import { BarOrientation } from './types/bar-orientation.enum';
 import { ViewDimensions } from './types/view-dimension.interface';
-import { DataItem } from '../models/chart-data.model';
 
 interface GridPanel {
   class: ClassEnum;
@@ -9,11 +9,6 @@ interface GridPanel {
   width: number;
   x: number;
   y: number;
-}
-
-enum GridOrientation {
-  Vertical = 'vertical',
-  Horizontal = 'horizontal'
 }
 
 enum ClassEnum {
@@ -49,7 +44,7 @@ export class GridPanelSeriesComponent implements OnChanges {
 
   @Input() yScale: any;
 
-  @Input() orient: GridOrientation;
+  @Input() orient: BarOrientation;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -68,7 +63,7 @@ export class GridPanelSeriesComponent implements OnChanges {
       let y;
       let className = ClassEnum.Odd;
 
-      if (this.orient === GridOrientation.Vertical) {
+      if (this.orient === BarOrientation.Vertical) {
         const position: number = this.xScale(d.name);
         const positionIndex = Number.parseInt((position / this.xScale.step()).toString(), 10);
 
@@ -80,7 +75,7 @@ export class GridPanelSeriesComponent implements OnChanges {
         height = this.dims.height;
         x = this.xScale(d.name) - offset / 2;
         y = 0;
-      } else if (this.orient === GridOrientation.Horizontal) {
+      } else if (this.orient === BarOrientation.Horizontal) {
         const position = this.yScale(d.name);
         const positionIndex = Number.parseInt((position / this.yScale.step()).toString(), 10);
 

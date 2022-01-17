@@ -6,7 +6,8 @@ import {
   EventEmitter,
   ChangeDetectionStrategy,
   ContentChild,
-  TemplateRef
+  TemplateRef,
+  TrackByFunction
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 
@@ -17,7 +18,10 @@ import { ColorHelper } from '../common/color.helper';
 import { DataItem } from '../models/chart-data.model';
 
 import { BaseChartComponent } from '../common/base-chart.component';
-import { ViewDimensions, LegendPosition, ScaleType, LegendOptions } from '../common/types';
+import { ScaleType } from '../common/types/scale-type.enum';
+import { LegendOptions, LegendPosition } from '../common/types/legend.model';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { BarOrientation } from '../common/types/bar-orientation.enum';
 
 @Component({
   selector: 'ngx-charts-bar-horizontal-2d',
@@ -39,7 +43,7 @@ import { ViewDimensions, LegendPosition, ScaleType, LegendOptions } from '../com
           [yScale]="groupScale"
           [data]="results"
           [dims]="dims"
-          orient="horizontal"
+          [orient]="barOrientation.Horizontal"
         ></svg:g>
         <svg:g
           ngx-charts-x-axis
@@ -169,6 +173,8 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   legendOptions: LegendOptions;
   dataLabelMaxWidth: any = { negative: 0, positive: 0 };
 
+  barOrientation = BarOrientation;
+
   update(): void {
     super.update();
 
@@ -286,9 +292,9 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
     this.select.emit(data);
   }
 
-  trackBy(index: number, item: DataItem): string {
-    return item.name as any;
-  }
+  trackBy: TrackByFunction<DataItem> = (index: number, item: DataItem) => {
+    return item.name;
+  };
 
   setColors(): void {
     let domain;

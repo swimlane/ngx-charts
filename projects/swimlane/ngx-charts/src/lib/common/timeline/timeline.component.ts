@@ -13,14 +13,9 @@ import {
 import { brushX } from 'd3-brush';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
 import { select } from 'd3-selection';
-import { id } from '../..//utils/id';
-import { ViewDimensions } from '../types';
-
-export enum TimelineScaleType {
-  Time = 'time',
-  Linear = 'linear',
-  Ordinal = 'ordinal'
-}
+import { id } from '../../utils/id';
+import { ScaleType } from '../types/scale-type.enum';
+import { ViewDimensions } from '../types/view-dimension.interface';
 
 @Component({
   selector: 'g[ngx-charts-timeline]',
@@ -51,7 +46,7 @@ export class Timeline implements OnChanges {
   @Input() customColors; // type this
   @Input() legend: boolean;
   @Input() autoScale: boolean;
-  @Input() scaleType: TimelineScaleType;
+  @Input() scaleType: ScaleType;
   @Input() height: number = 50;
 
   @Output() select = new EventEmitter();
@@ -112,11 +107,11 @@ export class Timeline implements OnChanges {
     }
 
     let domain = [];
-    if (this.scaleType === TimelineScaleType.Time) {
+    if (this.scaleType === ScaleType.Time) {
       const min = Math.min(...values);
       const max = Math.max(...values);
       domain = [min, max];
-    } else if (this.scaleType === TimelineScaleType.Linear) {
+    } else if (this.scaleType === ScaleType.Linear) {
       values = values.map(v => Number(v));
       const min = Math.min(...values);
       const max = Math.max(...values);
@@ -131,11 +126,11 @@ export class Timeline implements OnChanges {
   getXScale() {
     let scale;
 
-    if (this.scaleType === TimelineScaleType.Time) {
+    if (this.scaleType === ScaleType.Time) {
       scale = scaleTime().range([0, this.dims.width]).domain(this.xDomain);
-    } else if (this.scaleType === TimelineScaleType.Linear) {
+    } else if (this.scaleType === ScaleType.Linear) {
       scale = scaleLinear().range([0, this.dims.width]).domain(this.xDomain);
-    } else if (this.scaleType === TimelineScaleType.Ordinal) {
+    } else if (this.scaleType === ScaleType.Ordinal) {
       scale = scalePoint().range([0, this.dims.width]).padding(0.1).domain(this.xDomain);
     }
 
