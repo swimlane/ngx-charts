@@ -1,23 +1,20 @@
-import {
-  Component,
-  Input,
-  Output,
-  SimpleChanges,
-  EventEmitter,
-  ElementRef,
-  OnChanges,
-  ChangeDetectionStrategy
-} from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import { select } from 'd3-selection';
 import { id } from '../utils/id';
-import { Gradient } from './types';
 import { AreaChartSeries } from '../models/chart-data.model';
+import { BarOrientation } from './types/bar-orientation.enum';
+import { Gradient } from './types/gradient.interface';
 
 @Component({
   selector: 'g[ngx-charts-area]',
   template: `
     <svg:defs *ngIf="gradient">
-      <svg:g ngx-charts-svg-linear-gradient orientation="vertical" [name]="gradientId" [stops]="gradientStops" />
+      <svg:g
+        ngx-charts-svg-linear-gradient
+        [orientation]="barOrientation.Vertical"
+        [name]="gradientId"
+        [stops]="gradientStops"
+      />
     </svg:defs>
     <svg:path class="area" [attr.d]="areaPath" [attr.fill]="gradient ? gradientFill : fill" [style.opacity]="opacity" />
   `,
@@ -41,20 +38,22 @@ export class AreaComponent implements OnChanges {
   gradientId: string;
   gradientFill: string;
   areaPath: string;
-  initialized: boolean = false;
+  animationsLoaded: boolean = false;
   gradientStops: Gradient[];
   hasGradient: boolean = false;
+
+  barOrientation = BarOrientation;
 
   constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 
   ngOnChanges(): void {
-    if (!this.initialized) {
+    this.update();
+
+    if (!this.animationsLoaded) {
       this.loadAnimation();
-      this.initialized = true;
-    } else {
-      this.update();
+      this.animationsLoaded = true;
     }
   }
 
@@ -74,7 +73,7 @@ export class AreaComponent implements OnChanges {
 
   loadAnimation(): void {
     this.areaPath = this.startingPath;
-    setTimeout(this.update.bind(this), 100);
+    setTimeout(this.updatePathEl.bind(this), 100);
   }
 
   updatePathEl(): void {

@@ -1,4 +1,4 @@
-import { ScaleType } from '../common/types';
+import { ScaleType } from '../common/types/scale-type.enum';
 
 export interface Color {
   name: string;

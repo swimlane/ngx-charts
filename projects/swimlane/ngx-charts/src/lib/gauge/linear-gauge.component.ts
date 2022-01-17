@@ -12,15 +12,18 @@ import { scaleLinear } from 'd3-scale';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
-import { ScaleType, ViewDimensions } from '../common/types';
 import { calculateTextWidth } from '../utils/calculate-width';
 import { VERDANA_FONT_WIDTHS_16_PX } from '../common/constants/font-widths';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { BarOrientation } from '../common/types/bar-orientation.enum';
+import { ScaleType } from '../common/types/scale-type.enum';
 
 enum ElementType {
   Value = 'value',
   Units = 'units'
 }
+
 @Component({
   selector: 'ngx-charts-linear-gauge',
   template: `
@@ -34,7 +37,7 @@ enum ElementType {
           [x]="margin[3]"
           [y]="dims.height / 2 + margin[0] - 2"
           [data]="{}"
-          [orientation]="'horizontal'"
+          [orientation]="barOrientation.Horizontal"
           [roundEdges]="true"
           [animations]="animations"
         ></svg:g>
@@ -46,7 +49,7 @@ enum ElementType {
           [y]="dims.height / 2 + margin[0] - 2"
           [fill]="colors.getColor(units)"
           [data]="{}"
-          [orientation]="'horizontal'"
+          [orientation]="barOrientation.Horizontal"
           [roundEdges]="true"
           [animations]="animations"
         ></svg:g>
@@ -131,6 +134,8 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
   unitsTranslate: string = '';
   displayValue: string;
   hasPreviousValue: boolean;
+
+  barOrientation = BarOrientation;
 
   ngAfterViewInit(): void {
     super.ngAfterViewInit();

@@ -14,7 +14,7 @@ import { ColorHelper } from '../color.helper';
 
 export interface LegendEntry {
   color: string;
-  formattedLable: string;
+  formattedLabel: string;
   label: string;
 }
 

@@ -11,6 +11,8 @@ import {
 } from '@angular/core';
 import { formatLabel, escapeLabel } from '../common/label.helper';
 import { DataItem, Series } from '../models/chart-data.model';
+import { PlacementTypes } from '../common/tooltip/position';
+import { StyleTypes } from '../common/tooltip/style.type';
 
 interface Cell {
   cell: DataItem;
@@ -43,8 +45,8 @@ interface Cell {
       [animations]="animations"
       ngx-tooltip
       [tooltipDisabled]="tooltipDisabled"
-      [tooltipPlacement]="'top'"
-      [tooltipType]="'tooltip'"
+      [tooltipPlacement]="placementTypes.Top"
+      [tooltipType]="styleTypes.tooltip"
       [tooltipTitle]="tooltipTemplate ? undefined : tooltipText(c)"
       [tooltipTemplate]="tooltipTemplate"
       [tooltipContext]="{ series: c.series, name: c.label, value: c.data }"
@@ -68,6 +70,9 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
   @Output() deactivate: EventEmitter<DataItem> = new EventEmitter();
 
   cells: Cell[];
+
+  placementTypes = PlacementTypes;
+  styleTypes = StyleTypes;
 
   ngOnInit() {
     if (!this.tooltipText) {

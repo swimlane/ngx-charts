@@ -11,7 +11,9 @@ import {
 import { ColorHelper } from '../common/color.helper';
 import { escapeLabel } from '../common/label.helper';
 import { DataItem } from '../models/chart-data.model';
-import { ViewDimensions } from '../common/types';
+import { StyleTypes } from '../common/tooltip/style.type';
+import { PlacementTypes } from '../common/tooltip/position';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
 
 interface TreeMapCell {
   data: DataItem;
@@ -45,8 +47,8 @@ interface TreeMapCell {
       (select)="onClick($event)"
       ngx-tooltip
       [tooltipDisabled]="tooltipDisabled"
-      [tooltipPlacement]="'top'"
-      [tooltipType]="'tooltip'"
+      [tooltipPlacement]="placementTypes.Top"
+      [tooltipType]="styleTypes.tooltip"
       [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(c)"
       [tooltipTemplate]="tooltipTemplate"
       [tooltipContext]="c.data"
@@ -68,6 +70,8 @@ export class TreeMapCellSeriesComponent implements OnChanges {
   @Output() select = new EventEmitter();
 
   cells: TreeMapCell[];
+  styleTypes = StyleTypes;
+  placementTypes = PlacementTypes;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.cells = this.getCells();

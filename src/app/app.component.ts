@@ -3,11 +3,12 @@ import { Location, LocationStrategy, HashLocationStrategy } from '@angular/commo
 import * as shape from 'd3-shape';
 import * as d3Array from 'd3-array';
 
-import { colorSets } from '@swimlane/ngx-charts/utils/color-sets';
+import { Color, colorSets } from '@swimlane/ngx-charts/utils/color-sets';
 import { formatLabel, escapeLabel } from '@swimlane/ngx-charts/common/label.helper';
 import {
   single,
   multi,
+  boxData,
   bubble,
   generateData,
   generateGraph,
@@ -20,8 +21,11 @@ import { BubbleChartInteractiveServerDataModel } from './custom-charts/bubble-ch
 import { data as countries } from 'emoji-flags';
 import chartGroups from './chartTypes';
 import { barChart, lineChartSeries } from './combo-chart-data';
-import { version } from '../../projects/swimlane/ngx-charts/package.json';
 import { MultiSeries } from '@swimlane/ngx-charts/models/chart-data.model';
+import pkg from '../../projects/swimlane/ngx-charts/package.json';
+import { InputTypes } from '@swimlane/ngx-ui';
+import { LegendPosition } from '@swimlane/ngx-charts/common/types/legend.model';
+import { ScaleType } from '@swimlane/ngx-charts/common/types/scale-type.enum';
 
 const monthName = new Intl.DateTimeFormat('en-us', { month: 'short' });
 const weekdayName = new Intl.DateTimeFormat('en-us', { weekday: 'short' });
@@ -36,6 +40,10 @@ function multiFormat(value) {
   return `${value.toFixed(2)}hrs`;
 }
 
+const getRandomInt = (min: number, max: number) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
 @Component({
   selector: 'app-root',
   providers: [Location, { provide: LocationStrategy, useClass: HashLocationStrategy }],
@@ -44,7 +52,9 @@ function multiFormat(value) {
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-  APP_VERSION = version;
+  APP_VERSION = pkg.version;
+
+  inputTypes = InputTypes;
 
   theme = 'dark';
   chartType: string;
@@ -66,7 +76,7 @@ export class AppComponent implements OnInit {
   linearScale: boolean = false;
   range: boolean = false;
 
-  view: any[];
+  view: [number, number];
   width: number = 700;
   height: number = 300;
   fitContainer: boolean = false;
@@ -77,7 +87,7 @@ export class AppComponent implements OnInit {
   gradient = false;
   showLegend = true;
   legendTitle = 'Legend';
-  legendPosition = 'right';
+  legendPosition = LegendPosition.Right;
   showXAxisLabel = true;
   tooltipDisabled = false;
   showText = true;
@@ -98,13 +108,15 @@ export class AppComponent implements OnInit {
   xScaleMax: any;
   yScaleMin: number;
   yScaleMax: number;
-  showDataLabel = false;
-  noBarWhenZero = true;
-  trimXAxisTicks = true;
-  trimYAxisTicks = true;
-  rotateXAxisTicks = true;
-  maxXAxisTickLength = 16;
-  maxYAxisTickLength = 16;
+  showDataLabel: boolean = false;
+  noBarWhenZero: boolean = true;
+  trimXAxisTicks: boolean = true;
+  trimYAxisTicks: boolean = true;
+  rotateXAxisTicks: boolean = true;
+  maxXAxisTickLength: number = 16;
+  maxYAxisTickLength: number = 16;
+  strokeColor: string = '#FFFFFF';
+  strokeWidth: number = 2;
 
   curves = {
     Basis: shape.curveBasis,
@@ -148,7 +160,7 @@ export class AppComponent implements OnInit {
 
   colorSets: any;
   colorScheme: any;
-  schemeType: string = 'ordinal';
+  schemeType = ScaleType.Ordinal;
   selectedColorScheme: string;
   rangeFillOpacity: number = 0.15;
 
@@ -177,6 +189,9 @@ export class AppComponent implements OnInit {
   marginBottom: number = 40;
   marginLeft: number = 40;
 
+  // box
+  boxData = boxData;
+
   // gauge
   gaugeMin: number = 0;
   gaugeMax: number = 100;
@@ -197,17 +212,17 @@ export class AppComponent implements OnInit {
   // Combo Chart
   barChart: any[] = barChart;
   lineChartSeries: any[] = lineChartSeries;
-  lineChartScheme = {
+  lineChartScheme: Color = {
     name: 'coolthree',
     selectable: true,
-    group: 'Ordinal',
+    group: ScaleType.Ordinal,
     domain: ['#01579b', '#7aa3e5', '#a8385d', '#00bfa5']
   };
 
-  comboBarScheme = {
+  comboBarScheme: Color = {
     name: 'singleLightBlue',
     selectable: true,
-    group: 'Ordinal',
+    group: ScaleType.Ordinal,
     domain: ['#01579b']
   };
 
@@ -270,6 +285,7 @@ export class AppComponent implements OnInit {
       chartGroups,
       colorSets,
       graph: generateGraph(50),
+      boxData,
       bubble,
       plotData: this.generatePlotData(),
       treemap,
@@ -277,7 +293,7 @@ export class AppComponent implements OnInit {
       fiscalYearReport
     });
 
-    // interactive drilldown demos
+    // interactive drill down demos
     this.treemapProcess();
     this.bubbleDemoChart = new BubbleChartInteractiveServerDataModel();
     this.bubbleDemoProcess(bubbleDemoData[0]);
@@ -354,6 +370,12 @@ export class AppComponent implements OnInit {
         });
         this.graph = { links, nodes };
       }
+
+      if (this.boxData.length > 1) {
+        const index = Math.floor(Math.random() * this.boxData.length);
+        this.boxData.splice(index, 1);
+        this.boxData = [...this.boxData];
+      }
     }
 
     if (add) {
@@ -411,10 +433,41 @@ export class AppComponent implements OnInit {
 
       this.bubble = [...this.bubble, bubbleEntry];
 
-      // bubble interactive demo
-      const getRandomInt = (min, max) => {
-        return Math.floor(Math.random() * (max - min + 1) + min);
+      // box
+      const boxEntry = {
+        name: country.name,
+        series: [
+          {
+            name: '1990',
+            value: getRandomInt(10, 5)
+          },
+          {
+            name: '2000',
+            value: getRandomInt(15, 5)
+          },
+          {
+            name: '2010',
+            value: getRandomInt(20, 10)
+          },
+          {
+            name: '2020',
+            value: getRandomInt(30, 10)
+          },
+          {
+            name: '2030',
+            value: getRandomInt(50, 20)
+          }
+        ]
       };
+
+      const index = this.boxData.findIndex(box => box.name === country.name);
+      if (index > -1) {
+        this.boxData[index] = boxEntry;
+      } else {
+        this.boxData = [...this.boxData, boxEntry];
+      }
+
+      // bubble interactive demo
       this.bubbleDemoProcess(bubbleDemoData[getRandomInt(0, bubbleDemoData.length - 1)]);
 
       this.statusData = this.getStatusData();
@@ -448,9 +501,7 @@ export class AppComponent implements OnInit {
     this.view = [this.width, this.height];
   }
 
-  toggleFitContainer(event) {
-    this.fitContainer = event;
-
+  toggleFitContainer() {
     if (this.fitContainer) {
       this.view = undefined;
     } else {
@@ -478,6 +529,15 @@ export class AppComponent implements OnInit {
 
     if (!this.fitContainer) {
       this.applyDimensions();
+    }
+  }
+
+  changeTheme(theme: string) {
+    this.theme = theme;
+    if (theme === 'light') {
+      this.strokeColor = '#000000';
+    } else {
+      this.strokeColor = '#FFFFFF';
     }
   }
 
@@ -732,7 +792,7 @@ export class AppComponent implements OnInit {
   [yLeftAxisScaleFactor]="yLeftAxisScale" and [yRightAxisScaleFactor]="yRightAxisScale"
   exposes the left and right min and max axis values for custom scaling, it is probably best to
   scale one axis in relation to the other axis but for flexibility to scale either the left or
-  right axis bowth were exposed.
+  right axis both were exposed.
   **
   */
 
@@ -762,7 +822,7 @@ export class AppComponent implements OnInit {
   }
 
   dblclick(event) {
-    console.log('Doube click', event);
+    console.log('Double click', event);
   }
 
   /*
@@ -780,7 +840,7 @@ export class AppComponent implements OnInit {
     return this.bubbleDemoChart.getChartTitle();
   }
 
-  bubbleShowDrilldownResetLink() {
+  bubbleShowDrillDownResetLink() {
     return this.bubbleDemoChart.getDrilldownDepth() > 0;
   }
 

@@ -39,7 +39,7 @@ import { ViewDimensions } from '../types/view-dimension.interface';
         *ngIf="showLabel"
         [label]="labelText"
         [offset]="labelOffset"
-        [orient]="Orientation.Bottom"
+        [orient]="orientation.Bottom"
         [height]="dims.height"
         [width]="dims.width"
       ></svg:g>
@@ -75,7 +75,7 @@ export class XAxisComponent implements OnChanges {
   strokeWidth: string = 'none';
   padding: number = 5;
 
-  readonly Orientation = Orientation;
+  readonly orientation = Orientation;
 
   @ViewChild(XAxisTicksComponent) ticksComponent: XAxisTicksComponent;
 
