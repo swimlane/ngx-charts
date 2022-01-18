@@ -21,6 +21,7 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
 import { LegendOptions, LegendPosition } from '../common/types/legend.model';
 import { ScaleType } from '../common/types/scale-type.enum';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { ReferenceLine } from '../common/types/reference-line.interface';
 
 @Component({
   selector: 'ngx-charts-line-chart',
@@ -206,7 +207,7 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() roundDomains: boolean = false;
   @Input() tooltipDisabled: boolean = false;
   @Input() showRefLines: boolean = false;
-  @Input() referenceLines: any;
+  @Input() referenceLines: ReferenceLine[];
   @Input() showRefLabels: boolean = true;
   @Input() xScaleMin: number;
   @Input() xScaleMax: number;

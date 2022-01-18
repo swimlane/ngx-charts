@@ -9,8 +9,9 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { YAxisTicksComponent } from './y-axis-ticks.component';
-import { Orientation } from '../types/orientation.enum';
+import { ReferenceLine } from '../types/reference-line.interface';
 import { ViewDimensions } from '../types/view-dimension.interface';
+import { Orientation } from '../types/orientation.enum';
 
 @Component({
   selector: 'g[ngx-charts-y-axis]',
@@ -61,7 +62,7 @@ export class YAxisComponent implements OnChanges {
   @Input() labelText: string;
   @Input() yAxisTickCount: any;
   @Input() yOrient: Orientation = Orientation.Left;
-  @Input() referenceLines;
+  @Input() referenceLines: ReferenceLine[];
   @Input() showRefLines: boolean;
   @Input() showRefLabels: boolean;
   @Input() yAxisOffset: number = 0;
