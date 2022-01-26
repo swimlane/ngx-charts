@@ -324,9 +324,8 @@ export class AreaChartStackedComponent extends BaseChartComponent {
     let min;
     let max;
     if (this.scaleType === ScaleType.Time || this.scaleType === ScaleType.Linear) {
-      min = this.xScaleMin ?? Math.min(...values);
-
-      max = this.xScaleMax ?? Math.max(...values);
+      min = (isNaN(this.xScaleMin) ? undefined : this.xScaleMin) ?? Math.min(...values);
+      max = (isNaN(this.xScaleMax) ? undefined : this.xScaleMax) ?? Math.max(...values);
     }
 
     if (this.scaleType === ScaleType.Time) {
@@ -375,9 +374,8 @@ export class AreaChartStackedComponent extends BaseChartComponent {
       domain.push(sum);
     }
 
-    const min = this.yScaleMin ?? Math.min(0, ...domain);
-
-    const max = this.yScaleMax ?? Math.max(...domain);
+    const min = (isNaN(this.yScaleMin) ? undefined : this.yScaleMin) ?? Math.min(0, ...domain);
+    const max = (isNaN(this.yScaleMax) ? undefined : this.yScaleMax) ?? Math.max(...domain);
     return [min, max];
   }
 
