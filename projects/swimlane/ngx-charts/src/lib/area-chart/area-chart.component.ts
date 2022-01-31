@@ -339,7 +339,7 @@ export class AreaChartComponent extends BaseChartComponent {
     if (this.baseValue !== 'auto') {
       values.push(this.baseValue);
     }
-    
+
     const min = (isNaN(this.yScaleMin) ? undefined : this.yScaleMin) ?? Math.min(...values);
     const max = (isNaN(this.yScaleMax) ? undefined : this.yScaleMax) ?? Math.max(...values);
 
