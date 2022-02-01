@@ -1,4 +1,14 @@
-import { Component, Input, Output, EventEmitter, OnChanges, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  ChangeDetectionStrategy,
+  TemplateRef,
+  PLATFORM_ID,
+  Inject
+} from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel, escapeLabel } from '../common/label.helper';
 import { DataItem, StringOrNumberOrDate } from '../models/chart-data.model';
@@ -11,40 +21,73 @@ import { Bar } from './types/bar.model';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
 import { BarOrientation } from '../common/types/bar-orientation.enum';
 import { ScaleType } from '../common/types/scale-type.enum';
+import { isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'g[ngx-charts-series-vertical]',
   template: `
-    <svg:g
-      ngx-charts-bar
-      *ngFor="let bar of bars; trackBy: trackBy"
-      [@animationState]="'active'"
-      [@.disabled]="!animations"
-      [width]="bar.width"
-      [height]="bar.height"
-      [x]="bar.x"
-      [y]="bar.y"
-      [fill]="bar.color"
-      [stops]="bar.gradientStops"
-      [data]="bar.data"
-      [orientation]="barOrientation.Vertical"
-      [roundEdges]="bar.roundEdges"
-      [gradient]="gradient"
-      [ariaLabel]="bar.ariaLabel"
-      [isActive]="isActive(bar.data)"
-      (select)="onClick($event)"
-      (activate)="activate.emit($event)"
-      (deactivate)="deactivate.emit($event)"
-      ngx-tooltip
-      [tooltipDisabled]="tooltipDisabled"
-      [tooltipPlacement]="tooltipPlacement"
-      [tooltipType]="tooltipType"
-      [tooltipTitle]="tooltipTemplate ? undefined : bar.tooltipText"
-      [tooltipTemplate]="tooltipTemplate"
-      [tooltipContext]="bar.data"
-      [noBarWhenZero]="noBarWhenZero"
-      [animations]="animations"
-    ></svg:g>
+    <svg:g *ngIf="!isSSR">
+      <svg:g
+        ngx-charts-bar
+        *ngFor="let bar of bars; trackBy: trackBy"
+        [@animationState]="'active'"
+        [@.disabled]="!animations"
+        [width]="bar.width"
+        [height]="bar.height"
+        [x]="bar.x"
+        [y]="bar.y"
+        [fill]="bar.color"
+        [stops]="bar.gradientStops"
+        [data]="bar.data"
+        [orientation]="barOrientation.Vertical"
+        [roundEdges]="bar.roundEdges"
+        [gradient]="gradient"
+        [ariaLabel]="bar.ariaLabel"
+        [isActive]="isActive(bar.data)"
+        (select)="onClick($event)"
+        (activate)="activate.emit($event)"
+        (deactivate)="deactivate.emit($event)"
+        ngx-tooltip
+        [tooltipDisabled]="tooltipDisabled"
+        [tooltipPlacement]="tooltipPlacement"
+        [tooltipType]="tooltipType"
+        [tooltipTitle]="tooltipTemplate ? undefined : bar.tooltipText"
+        [tooltipTemplate]="tooltipTemplate"
+        [tooltipContext]="bar.data"
+        [noBarWhenZero]="noBarWhenZero"
+        [animations]="animations"
+      ></svg:g>
+    </svg:g>
+    <svg:g *ngIf="isSSR">
+      <svg:g
+        ngx-charts-bar
+        *ngFor="let bar of bars; trackBy: trackBy"
+        [width]="bar.width"
+        [height]="bar.height"
+        [x]="bar.x"
+        [y]="bar.y"
+        [fill]="bar.color"
+        [stops]="bar.gradientStops"
+        [data]="bar.data"
+        [orientation]="barOrientation.Vertical"
+        [roundEdges]="bar.roundEdges"
+        [gradient]="gradient"
+        [ariaLabel]="bar.ariaLabel"
+        [isActive]="isActive(bar.data)"
+        (select)="onClick($event)"
+        (activate)="activate.emit($event)"
+        (deactivate)="deactivate.emit($event)"
+        ngx-tooltip
+        [tooltipDisabled]="tooltipDisabled"
+        [tooltipPlacement]="tooltipPlacement"
+        [tooltipType]="tooltipType"
+        [tooltipTitle]="tooltipTemplate ? undefined : bar.tooltipText"
+        [tooltipTemplate]="tooltipTemplate"
+        [tooltipContext]="bar.data"
+        [noBarWhenZero]="noBarWhenZero"
+        [animations]="animations"
+      ></svg:g>
+    </svg:g>
     <svg:g *ngIf="showDataLabel">
       <svg:g
         ngx-charts-bar-label
@@ -102,6 +145,16 @@ export class SeriesVerticalComponent implements OnChanges {
   barsForDataLabels: Array<{ x: number; y: number; width: number; height: number; total: number; series: string }> = [];
 
   barOrientation = BarOrientation;
+
+  isSSR = false;
+
+  constructor(@Inject(PLATFORM_ID) private platformId: any) {}
+
+  ngOnInit() {
+    if (isPlatformServer(this.platformId)) {
+      this.isSSR = true;
+    }
+  }
 
   ngOnChanges(changes): void {
     this.update();
