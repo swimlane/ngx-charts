@@ -21,6 +21,7 @@ import { LegendOptions, LegendPosition } from '../common/types/legend.model';
 import { ScaleType } from '../common/types/scale-type.enum';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
 import { BarOrientation } from '../common/types/bar-orientation.enum';
+import { isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'ngx-charts-bar-vertical-2d',
@@ -73,10 +74,38 @@ import { BarOrientation } from '../common/types/bar-orientation.enum';
           [ticks]="yAxisTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
+        <svg:g *ngIf="!isSSR">
+          <svg:g
+            ngx-charts-series-vertical
+            *ngFor="let group of results; let index = index; trackBy: trackBy"
+            [@animationState]="'active'"
+            [attr.transform]="groupTransform(group)"
+            [activeEntries]="activeEntries"
+            [xScale]="innerScale"
+            [yScale]="valueScale"
+            [colors]="colors"
+            [series]="group.series"
+            [dims]="dims"
+            [gradient]="gradient"
+            [tooltipDisabled]="tooltipDisabled"
+            [tooltipTemplate]="tooltipTemplate"
+            [showDataLabel]="showDataLabel"
+            [dataLabelFormatting]="dataLabelFormatting"
+            [seriesName]="group.name"
+            [roundEdges]="roundEdges"
+            [animations]="animations"
+            [noBarWhenZero]="noBarWhenZero"
+            (select)="onClick($event, group)"
+            (activate)="onActivate($event, group)"
+            (deactivate)="onDeactivate($event, group)"
+            (dataLabelHeightChanged)="onDataLabelMaxHeightChanged($event, index)"
+          />
+        </svg:g>
+      </svg:g>
+      <svg:g *ngIf="isSSR">
         <svg:g
           ngx-charts-series-vertical
           *ngFor="let group of results; let index = index; trackBy: trackBy"
-          [@animationState]="'active'"
           [attr.transform]="groupTransform(group)"
           [activeEntries]="activeEntries"
           [xScale]="innerScale"
@@ -169,8 +198,15 @@ export class BarVertical2DComponent extends BaseChartComponent {
   yAxisWidth: number = 0;
   legendOptions: LegendOptions;
   dataLabelMaxHeight: any = { negative: 0, positive: 0 };
+  isSSR = false;
 
   barOrientation = BarOrientation;
+
+  ngOnInit() {
+    if (isPlatformServer(this.platformId)) {
+      this.isSSR = true;
+    }
+  }
 
   update(): void {
     super.update();

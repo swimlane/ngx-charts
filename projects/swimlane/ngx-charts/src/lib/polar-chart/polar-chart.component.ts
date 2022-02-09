@@ -21,6 +21,7 @@ import { LegendPosition } from '../common/types/legend.model';
 import { ScaleType } from '../common/types/scale-type.enum';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
 import { Orientation } from '../common/types/orientation.enum';
+import { isPlatformServer } from '@angular/common';
 
 const twoPI = 2 * Math.PI;
 
@@ -88,8 +89,30 @@ const twoPI = 2 * Math.PI;
           [height]="dims.height"
           [width]="dims.width"
         ></svg:g>
-        <svg:g [attr.transform]="transformPlot">
+        <svg:g *ngIf="!isSSR" [attr.transform]="transformPlot">
           <svg:g *ngFor="let series of results; trackBy: trackBy" [@animationState]="'active'">
+            <svg:g
+              ngx-charts-polar-series
+              [gradient]="gradient"
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [colors]="colors"
+              [data]="series"
+              [activeEntries]="activeEntries"
+              [scaleType]="scaleType"
+              [curve]="curve"
+              [rangeFillOpacity]="rangeFillOpacity"
+              [animations]="animations"
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="tooltipTemplate"
+              (select)="onClick($event)"
+              (activate)="onActivate($event)"
+              (deactivate)="onDeactivate($event)"
+            />
+          </svg:g>
+        </svg:g>
+        <svg:g *ngIf="isSSR" [attr.transform]="transformPlot">
+          <svg:g *ngFor="let series of results; trackBy: trackBy">
             <svg:g
               ngx-charts-polar-series
               [gradient]="gradient"
@@ -195,6 +218,14 @@ export class PolarChartComponent extends BaseChartComponent {
   outerRadius: number;
 
   orientation = Orientation;
+
+  isSSR = false;
+
+  ngOnInit() {
+    if (isPlatformServer(this.platformId)) {
+      this.isSSR = true;
+    }
+  }
 
   update(): void {
     super.update();
