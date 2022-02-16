@@ -6,16 +6,23 @@ import {
   OnChanges,
   OnInit,
   ChangeDetectionStrategy,
-  TemplateRef
+  TemplateRef,
+  PLATFORM_ID,
+  Inject
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { formatLabel, escapeLabel } from '../common/label.helper';
+import { formatLabel, escapeLabel } from './label.helper';
 import { id } from '../utils/id';
-import { ColorHelper } from '../common/color.helper';
-import { Gradient, ScaleType } from './types';
+import { ColorHelper } from './color.helper';
 import { DataItem, Series, StringOrNumberOrDate } from '../models/chart-data.model';
+import { PlacementTypes } from './tooltip/position';
+import { StyleTypes } from './tooltip/style.type';
+import { BarOrientation } from './types/bar-orientation.enum';
+import { Gradient } from './types/gradient.interface';
+import { ScaleType } from './types/scale-type.enum';
+import { isPlatformServer } from '@angular/common';
 
-enum SeriesType {
+export enum SeriesType {
   Standard = 'standard',
   Stacked = 'stacked'
 }
@@ -45,14 +52,23 @@ export interface Circle {
       <defs>
         <svg:g
           ngx-charts-svg-linear-gradient
-          orientation="vertical"
+          [orientation]="barOrientation.Vertical"
           [name]="gradientId"
           [stops]="circle.gradientStops"
         />
       </defs>
       <svg:rect
-        *ngIf="barVisible && type === 'standard'"
+        *ngIf="!isSSR && barVisible && type === 'standard'"
         [@animationState]="'active'"
+        [attr.x]="circle.cx - circle.radius"
+        [attr.y]="circle.cy"
+        [attr.width]="circle.radius * 2"
+        [attr.height]="circle.height"
+        [attr.fill]="gradientFill"
+        class="tooltip-bar"
+      />
+      <svg:rect
+        *ngIf="isSSR && barVisible && type === 'standard'"
         [attr.x]="circle.cx - circle.radius"
         [attr.y]="circle.cy"
         [attr.width]="circle.radius * 2"
@@ -76,8 +92,8 @@ export interface Circle {
         (deactivate)="deactivateCircle()"
         ngx-tooltip
         [tooltipDisabled]="tooltipDisabled"
-        [tooltipPlacement]="'top'"
-        [tooltipType]="'tooltip'"
+        [tooltipPlacement]="placementTypes.Top"
+        [tooltipType]="styleTypes.tooltip"
         [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(circle)"
         [tooltipTemplate]="tooltipTemplate"
         [tooltipContext]="circle.data"
@@ -118,9 +134,21 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
   gradientId: string;
   gradientFill: string;
 
+  barOrientation = BarOrientation;
+  placementTypes = PlacementTypes;
+  styleTypes = StyleTypes;
+
+  isSSR = false;
+
+  constructor(@Inject(PLATFORM_ID) private platformId: any) {}
+
   ngOnInit() {
     this.gradientId = 'grad' + id().toString();
     this.gradientFill = `url(#${this.gradientId})`;
+
+    if (isPlatformServer(this.platformId)) {
+      this.isSSR = true;
+    }
   }
 
   ngOnChanges(): void {

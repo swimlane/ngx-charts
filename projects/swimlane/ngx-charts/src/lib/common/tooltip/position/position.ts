@@ -1,4 +1,4 @@
-import { PlacementTypes } from './placement.type';
+import { PlacementTypes } from './placement-type.enum';
 
 const caretOffset = 7;
 

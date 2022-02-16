@@ -1,3 +1,5 @@
+import { IVector2D } from './coordinates.model';
+
 export type StringOrNumberOrDate = string | number | Date;
 
 export interface DataItem {
@@ -26,6 +28,14 @@ export interface AreaChartDataItem extends DataItem {
 export interface AreaChartSeries {
   name: StringOrNumberOrDate;
   series: AreaChartDataItem[];
+}
+
+export interface PieGridData {
+  data: PieGridDataItem;
+  height: number;
+  width: number;
+  x: number;
+  y: number;
 }
 
 export interface PieGridDataItem extends DataItem {
@@ -57,3 +67,29 @@ export interface TreeMapDataItem {
 }
 
 export interface TreeMapData extends Array<TreeMapDataItem> {}
+
+export interface BoxChartSeries {
+  name: StringOrNumberOrDate;
+  series: DataItem[];
+}
+
+export interface BoxChartMultiSeries extends Array<BoxChartSeries> {}
+
+export interface IBoxModel {
+  value: number | Date;
+  label: StringOrNumberOrDate;
+  data: DataItem[];
+  formattedLabel: string;
+  height: number;
+  width: number;
+  x: number;
+  y: number;
+  roundEdges: boolean;
+  lineCoordinates: IVector2D[];
+  quartiles: number[];
+  tooltipText?: string;
+  ariaLabel?: string;
+  color?: string;
+  // TODO: Replace by IColorGradient Interface
+  gradientStops?: Array<{ offset: number; color: string; opacity: number }>;
+}

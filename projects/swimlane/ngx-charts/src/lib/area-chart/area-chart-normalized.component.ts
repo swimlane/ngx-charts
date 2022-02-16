@@ -7,7 +7,8 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy,
   ContentChild,
-  TemplateRef
+  TemplateRef,
+  TrackByFunction
 } from '@angular/core';
 import { scaleLinear, scalePoint, scaleTime } from 'd3-scale';
 import { curveLinear } from 'd3-shape';
@@ -17,8 +18,11 @@ import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
 import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
-import { ViewDimensions, LegendPosition, LegendOptions, ScaleType } from '../common/types';
 import { Series } from '../models/chart-data.model';
+import { SeriesType } from '../common/circle-series.component';
+import { LegendOptions, LegendPosition } from '../common/types/legend.model';
+import { ScaleType } from '../common/types/scale-type.enum';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
 
 @Component({
   selector: 'ngx-charts-area-chart-normalized',
@@ -83,7 +87,7 @@ import { Series } from '../models/chart-data.model';
               [scaleType]="scaleType"
               [activeEntries]="activeEntries"
               [gradient]="gradient"
-              normalized="true"
+              [normalized]="true"
               [curve]="curve"
               [animations]="animations"
             />
@@ -107,7 +111,7 @@ import { Series } from '../models/chart-data.model';
             <svg:g *ngFor="let series of results">
               <svg:g
                 ngx-charts-circle-series
-                type="stacked"
+                [type]="seriesType.Stacked"
                 [xScale]="xScale"
                 [yScale]="yScale"
                 [colors]="colors"
@@ -147,7 +151,7 @@ import { Series } from '../models/chart-data.model';
             [data]="series"
             [scaleType]="scaleType"
             [gradient]="gradient"
-            normalized="true"
+            [normalized]="true"
             [curve]="curve"
             [animations]="animations"
           />
@@ -212,6 +216,8 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
   yAxisWidth: number = 0;
   filteredDomain: any;
   legendOptions: LegendOptions;
+
+  seriesType = SeriesType;
 
   timelineWidth: any;
   timelineHeight: number = 50;
@@ -412,9 +418,9 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
     this.select.emit(data);
   }
 
-  trackBy(index: number, item: Series): any {
+  trackBy: TrackByFunction<Series> = (index: number, item: Series) => {
     return item.name;
-  }
+  };
 
   setColors(): void {
     let domain;

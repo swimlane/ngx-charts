@@ -22,6 +22,7 @@ import {
   calculateViewDimensions,
   ScaleType
 } from 'projects/swimlane/ngx-charts/src/public-api';
+import { isPlatformServer } from '@angular/common';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -80,8 +81,30 @@ import {
           style="fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';"
           (mouseenter)="deactivateAll()"
         />
-        <svg:g [attr.clip-path]="clipPath">
+        <svg:g *ngIf="!isSSR" [attr.clip-path]="clipPath">
           <svg:g *ngFor="let series of data; trackBy: trackBy" [@animationState]="'active'">
+            <svg:g
+              ngx-charts-bubble-series-interactive
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [rScale]="rScale"
+              [xScaleType]="xScaleType"
+              [yScaleType]="yScaleType"
+              [xAxisLabel]="xAxisLabel"
+              [yAxisLabel]="yAxisLabel"
+              [colors]="colors"
+              [data]="series"
+              [activeEntries]="activeEntries"
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="tooltipTemplate"
+              (select)="onClickSeries($event, series)"
+              (activate)="onActivate($event)"
+              (deactivate)="onDeactivate($event)"
+            />
+          </svg:g>
+        </svg:g>
+        <svg:g *ngIf="isSSR" [attr.clip-path]="clipPath">
+          <svg:g *ngFor="let series of data; trackBy: trackBy">
             <svg:g
               ngx-charts-bubble-series-interactive
               [xScale]="xScale"
@@ -185,6 +208,14 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
   yAxisWidth: number = 0;
 
   activeEntries: any[] = [];
+
+  isSSR = false;
+
+  ngOnInit() {
+    if (isPlatformServer(this.platformId)) {
+      this.isSSR = true;
+    }
+  }
 
   update(): void {
     super.update();
@@ -411,6 +442,6 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
   }
 
   trackBy(index, item): string {
-    return item.name;
+    return `${item.name}`;
   }
 }

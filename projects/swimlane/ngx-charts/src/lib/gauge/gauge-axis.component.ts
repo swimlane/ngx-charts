@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { line } from 'd3-shape';
-import { TextAnchor } from '../common/types';
+import { TextAnchor } from '../common/types/text-anchor.enum';
 
 interface Big {
   line: string;

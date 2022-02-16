@@ -12,8 +12,11 @@ import {
 import { trigger, style, animate, transition } from '@angular/animations';
 import { createMouseEvent } from '../events';
 import { isPlatformBrowser } from '@angular/common';
-import { ScaleType, ViewDimensions } from '../common/types';
 import { ColorHelper } from '../common/color.helper';
+import { PlacementTypes } from './tooltip/position';
+import { StyleTypes } from './tooltip/style.type';
+import { ViewDimensions } from './types/view-dimension.interface';
+import { ScaleType } from './types/scale-type.enum';
 
 export interface Tooltip {
   color: string;
@@ -60,8 +63,8 @@ export interface Tooltip {
         [style.pointer-events]="'none'"
         ngx-tooltip
         [tooltipDisabled]="tooltipDisabled"
-        [tooltipPlacement]="'right'"
-        [tooltipType]="'tooltip'"
+        [tooltipPlacement]="placementTypes.Right"
+        [tooltipType]="styleTypes.tooltip"
         [tooltipSpacing]="15"
         [tooltipTemplate]="tooltipTemplate ? tooltipTemplate : defaultTooltipTemplate"
         [tooltipContext]="anchorValues"
@@ -92,6 +95,9 @@ export class TooltipArea {
   anchorPos: number = -1;
   anchorValues: Tooltip[] = [];
   lastAnchorPos: number;
+
+  placementTypes = PlacementTypes;
+  styleTypes = StyleTypes;
 
   @Input() dims: ViewDimensions;
   @Input() xSet: any[];

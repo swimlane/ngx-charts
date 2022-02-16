@@ -6,7 +6,8 @@ import {
   EventEmitter,
   ChangeDetectionStrategy,
   ContentChild,
-  TemplateRef
+  TemplateRef,
+  TrackByFunction
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { scaleBand, scaleLinear } from 'd3-scale';
@@ -16,7 +17,11 @@ import { ColorHelper } from '../common/color.helper';
 import { DataItem } from '../models/chart-data.model';
 
 import { BaseChartComponent } from '../common/base-chart.component';
-import { ViewDimensions, LegendPosition, ScaleType, LegendOptions } from '../common/types';
+import { LegendOptions, LegendPosition } from '../common/types/legend.model';
+import { ScaleType } from '../common/types/scale-type.enum';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { BarOrientation } from '../common/types/bar-orientation.enum';
+import { isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'ngx-charts-bar-vertical-2d',
@@ -38,7 +43,7 @@ import { ViewDimensions, LegendPosition, ScaleType, LegendOptions } from '../com
           [yScale]="valueScale"
           [data]="results"
           [dims]="dims"
-          orient="vertical"
+          [orient]="barOrientation.Vertical"
         ></svg:g>
         <svg:g
           ngx-charts-x-axis
@@ -69,10 +74,38 @@ import { ViewDimensions, LegendPosition, ScaleType, LegendOptions } from '../com
           [ticks]="yAxisTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
+        <svg:g *ngIf="!isSSR">
+          <svg:g
+            ngx-charts-series-vertical
+            *ngFor="let group of results; let index = index; trackBy: trackBy"
+            [@animationState]="'active'"
+            [attr.transform]="groupTransform(group)"
+            [activeEntries]="activeEntries"
+            [xScale]="innerScale"
+            [yScale]="valueScale"
+            [colors]="colors"
+            [series]="group.series"
+            [dims]="dims"
+            [gradient]="gradient"
+            [tooltipDisabled]="tooltipDisabled"
+            [tooltipTemplate]="tooltipTemplate"
+            [showDataLabel]="showDataLabel"
+            [dataLabelFormatting]="dataLabelFormatting"
+            [seriesName]="group.name"
+            [roundEdges]="roundEdges"
+            [animations]="animations"
+            [noBarWhenZero]="noBarWhenZero"
+            (select)="onClick($event, group)"
+            (activate)="onActivate($event, group)"
+            (deactivate)="onDeactivate($event, group)"
+            (dataLabelHeightChanged)="onDataLabelMaxHeightChanged($event, index)"
+          />
+        </svg:g>
+      </svg:g>
+      <svg:g *ngIf="isSSR">
         <svg:g
           ngx-charts-series-vertical
           *ngFor="let group of results; let index = index; trackBy: trackBy"
-          [@animationState]="'active'"
           [attr.transform]="groupTransform(group)"
           [activeEntries]="activeEntries"
           [xScale]="innerScale"
@@ -165,6 +198,15 @@ export class BarVertical2DComponent extends BaseChartComponent {
   yAxisWidth: number = 0;
   legendOptions: LegendOptions;
   dataLabelMaxHeight: any = { negative: 0, positive: 0 };
+  isSSR = false;
+
+  barOrientation = BarOrientation;
+
+  ngOnInit() {
+    if (isPlatformServer(this.platformId)) {
+      this.isSSR = true;
+    }
+  }
 
   update(): void {
     super.update();
@@ -292,9 +334,9 @@ export class BarVertical2DComponent extends BaseChartComponent {
     this.select.emit(data);
   }
 
-  trackBy(index: number, item: DataItem): any {
+  trackBy: TrackByFunction<DataItem> = (index: number, item: DataItem) => {
     return item.name;
-  }
+  };
 
   setColors(): void {
     let domain;

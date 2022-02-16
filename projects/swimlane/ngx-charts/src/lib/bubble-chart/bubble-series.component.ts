@@ -6,13 +6,18 @@ import {
   EventEmitter,
   OnChanges,
   ChangeDetectionStrategy,
-  TemplateRef
+  TemplateRef,
+  PLATFORM_ID,
+  Inject
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel, escapeLabel } from '../common/label.helper';
-import { ScaleType } from '../common/types';
 import { ColorHelper } from '../common/color.helper';
 import { BubbleChartSeries } from '../models/chart-data.model';
+import { PlacementTypes } from '../common/tooltip/position';
+import { StyleTypes } from '../common/tooltip/style.type';
+import { ScaleType } from '../common/types/scale-type.enum';
+import { isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'g[ngx-charts-bubble-series]',
@@ -20,6 +25,7 @@ import { BubbleChartSeries } from '../models/chart-data.model';
     <svg:g *ngFor="let circle of circles; trackBy: trackBy">
       <svg:g [attr.transform]="circle.transform">
         <svg:g
+          *ngIf="!isSSR"
           ngx-charts-circle
           [@animationState]="'active'"
           class="circle"
@@ -37,8 +43,32 @@ import { BubbleChartSeries } from '../models/chart-data.model';
           (deactivate)="deactivateCircle(circle)"
           ngx-tooltip
           [tooltipDisabled]="tooltipDisabled"
-          [tooltipPlacement]="'top'"
-          [tooltipType]="'tooltip'"
+          [tooltipPlacement]="placementTypes.Top"
+          [tooltipType]="styleTypes.tooltip"
+          [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(circle)"
+          [tooltipTemplate]="tooltipTemplate"
+          [tooltipContext]="circle.data"
+        />
+        <svg:g
+          *ngIf="isSSR"
+          ngx-charts-circle
+          class="circle"
+          [cx]="0"
+          [cy]="0"
+          [r]="circle.radius"
+          [fill]="circle.color"
+          [style.opacity]="circle.opacity"
+          [class.active]="circle.isActive"
+          [pointerEvents]="'all'"
+          [data]="circle.value"
+          [classNames]="circle.classNames"
+          (select)="onClick(circle.data)"
+          (activate)="activateCircle(circle)"
+          (deactivate)="deactivateCircle(circle)"
+          ngx-tooltip
+          [tooltipDisabled]="tooltipDisabled"
+          [tooltipPlacement]="placementTypes.Top"
+          [tooltipType]="styleTypes.tooltip"
           [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(circle)"
           [tooltipTemplate]="tooltipTemplate"
           [tooltipContext]="circle.data"
@@ -80,6 +110,19 @@ export class BubbleSeriesComponent implements OnChanges {
 
   areaPath: any;
   circles: any[]; // TODO type this
+
+  placementTypes = PlacementTypes;
+  styleTypes = StyleTypes;
+
+  isSSR = false;
+
+  constructor(@Inject(PLATFORM_ID) private platformId: any) {}
+
+  ngOnInit() {
+    if (isPlatformServer(this.platformId)) {
+      this.isSSR = true;
+    }
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();

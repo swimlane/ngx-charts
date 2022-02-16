@@ -17,7 +17,11 @@ import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { getScaleType } from '../common/domain.helper';
 import { isDate } from '../utils/types';
-import { ViewDimensions, LegendPosition, ScaleType } from '../common/types';
+import { LegendPosition } from '../common/types/legend.model';
+import { ScaleType } from '../common/types/scale-type.enum';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { Orientation } from '../common/types/orientation.enum';
+import { isPlatformServer } from '@angular/common';
 
 const twoPI = 2 * Math.PI;
 
@@ -81,12 +85,34 @@ const twoPI = 2 * Math.PI;
           *ngIf="xAxis && showXAxisLabel"
           [label]="xAxisLabel"
           [offset]="labelOffset"
-          [orient]="'bottom'"
+          [orient]="orientation.Bottom"
           [height]="dims.height"
           [width]="dims.width"
         ></svg:g>
-        <svg:g [attr.transform]="transformPlot">
+        <svg:g *ngIf="!isSSR" [attr.transform]="transformPlot">
           <svg:g *ngFor="let series of results; trackBy: trackBy" [@animationState]="'active'">
+            <svg:g
+              ngx-charts-polar-series
+              [gradient]="gradient"
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [colors]="colors"
+              [data]="series"
+              [activeEntries]="activeEntries"
+              [scaleType]="scaleType"
+              [curve]="curve"
+              [rangeFillOpacity]="rangeFillOpacity"
+              [animations]="animations"
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="tooltipTemplate"
+              (select)="onClick($event)"
+              (activate)="onActivate($event)"
+              (deactivate)="onDeactivate($event)"
+            />
+          </svg:g>
+        </svg:g>
+        <svg:g *ngIf="isSSR" [attr.transform]="transformPlot">
+          <svg:g *ngFor="let series of results; trackBy: trackBy">
             <svg:g
               ngx-charts-polar-series
               [gradient]="gradient"
@@ -190,6 +216,16 @@ export class PolarChartComponent extends BaseChartComponent {
   thetaTicks: any[];
   radiusTicks: number[];
   outerRadius: number;
+
+  orientation = Orientation;
+
+  isSSR = false;
+
+  ngOnInit() {
+    if (isPlatformServer(this.platformId)) {
+      this.isSSR = true;
+    }
+  }
 
   update(): void {
     super.update();
@@ -469,6 +505,6 @@ export class PolarChartComponent extends BaseChartComponent {
   }
 
   trackBy(index: number, item): string {
-    return item.name;
+    return `${item.name}`;
   }
 }

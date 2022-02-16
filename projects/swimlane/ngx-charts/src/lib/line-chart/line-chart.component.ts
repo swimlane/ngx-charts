@@ -18,7 +18,10 @@ import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
 import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
-import { LegendOptions, LegendPosition, ScaleType, ViewDimensions } from '../common/types';
+import { LegendOptions, LegendPosition } from '../common/types/legend.model';
+import { ScaleType } from '../common/types/scale-type.enum';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'ngx-charts-line-chart',
@@ -76,20 +79,39 @@ import { LegendOptions, LegendPosition, ScaleType, ViewDimensions } from '../com
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
         <svg:g [attr.clip-path]="clipPath">
-          <svg:g *ngFor="let series of results; trackBy: trackBy" [@animationState]="'active'">
-            <svg:g
-              ngx-charts-line-series
-              [xScale]="xScale"
-              [yScale]="yScale"
-              [colors]="colors"
-              [data]="series"
-              [activeEntries]="activeEntries"
-              [scaleType]="scaleType"
-              [curve]="curve"
-              [rangeFillOpacity]="rangeFillOpacity"
-              [hasRange]="hasRange"
-              [animations]="animations"
-            />
+          <svg:g *ngIf="!isSSR">
+            <svg:g *ngFor="let series of results; trackBy: trackBy" [@animationState]="'active'">
+              <svg:g
+                ngx-charts-line-series
+                [xScale]="xScale"
+                [yScale]="yScale"
+                [colors]="colors"
+                [data]="series"
+                [activeEntries]="activeEntries"
+                [scaleType]="scaleType"
+                [curve]="curve"
+                [rangeFillOpacity]="rangeFillOpacity"
+                [hasRange]="hasRange"
+                [animations]="animations"
+              />
+            </svg:g>
+          </svg:g>
+          <svg:g *ngIf="isSSR">
+            <svg:g *ngFor="let series of results; trackBy: trackBy">
+              <svg:g
+                ngx-charts-line-series
+                [xScale]="xScale"
+                [yScale]="yScale"
+                [colors]="colors"
+                [data]="series"
+                [activeEntries]="activeEntries"
+                [scaleType]="scaleType"
+                [curve]="curve"
+                [rangeFillOpacity]="rangeFillOpacity"
+                [hasRange]="hasRange"
+                [animations]="animations"
+              />
+            </svg:g>
           </svg:g>
 
           <svg:g *ngIf="!tooltipDisabled" (mouseleave)="hideCircles()">
@@ -244,6 +266,14 @@ export class LineChartComponent extends BaseChartComponent {
   timelineXDomain: any;
   timelineTransform: any;
   timelinePadding: number = 10;
+
+  isSSR = false;
+
+  ngOnInit() {
+    if (isPlatformServer(this.platformId)) {
+      this.isSSR = true;
+    }
+  }
 
   update(): void {
     super.update();
@@ -423,7 +453,7 @@ export class LineChartComponent extends BaseChartComponent {
   }
 
   trackBy(index: number, item): string {
-    return item.name;
+    return `${item.name}`;
   }
 
   setColors(): void {

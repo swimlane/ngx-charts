@@ -2,6 +2,8 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, Templa
 import { formatLabel, escapeLabel } from '../common/label.helper';
 import { ColorHelper } from '../common/color.helper';
 import { DataItem } from '../models/chart-data.model';
+import { PlacementTypes } from '../common/tooltip/position';
+import { StyleTypes } from '../common/tooltip/style.type';
 
 export interface ArcItem {
   data: DataItem;
@@ -41,8 +43,8 @@ export interface ArcItem {
       (deactivate)="deactivate.emit($event)"
       ngx-tooltip
       [tooltipDisabled]="tooltipDisabled"
-      [tooltipPlacement]="'top'"
-      [tooltipType]="'tooltip'"
+      [tooltipPlacement]="placementTypes.Top"
+      [tooltipType]="styleTypes.tooltip"
       [tooltipTitle]="tooltipTemplate ? undefined : tooltipText(valueArc)"
       [tooltipTemplate]="tooltipTemplate"
       [tooltipContext]="valueArc.data"
@@ -64,6 +66,9 @@ export class GaugeArcComponent {
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
+
+  placementTypes = PlacementTypes;
+  styleTypes = StyleTypes;
 
   tooltipText(arc: ArcItem): string {
     const label = formatLabel(arc.data.name);
