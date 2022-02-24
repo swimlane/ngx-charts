@@ -1,27 +1,25 @@
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
-  Input,
-  Output,
+  ElementRef,
   EventEmitter,
   HostListener,
-  ElementRef,
-  SimpleChanges,
+  Input,
   OnChanges,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef
+  Output,
+  SimpleChanges
 } from '@angular/core';
-import { select, BaseType } from 'd3-selection';
-import { interpolate } from 'd3-interpolate';
-import { easeSinInOut } from 'd3-ease';
+import {BaseType, select} from 'd3-selection';
+import {interpolate} from 'd3-interpolate';
+import {easeSinInOut} from 'd3-ease';
 
-import cloneDeep from 'clone-deep';
-
-import { roundedRect } from '../common/shape.helper';
-import { id } from '../utils/id';
-import { IBoxModel } from '../models/chart-data.model';
-import { IVector2D } from '../models/coordinates.model';
-import { BarOrientation } from '../common/types/bar-orientation.enum';
-import { Gradient } from '../common/types/gradient.interface';
+import {roundedRect} from '../common/shape.helper';
+import {id} from '../utils/id';
+import {IBoxModel} from '../models/chart-data.model';
+import {IVector2D} from '../models/coordinates.model';
+import {BarOrientation} from '../common/types/bar-orientation.enum';
+import {Gradient} from '../common/types/gradient.interface';
 
 type LineCoordinates = [IVector2D, IVector2D, IVector2D, IVector2D];
 
@@ -279,7 +277,11 @@ export class BoxComponent implements OnChanges {
       return [...this.lineCoordinates];
     }
 
-    const lineCoordinates: LineCoordinates = cloneDeep(this.lineCoordinates);
+    // simple clone for LineCoordinates
+    const lineCoordinates: LineCoordinates = this.lineCoordinates.map(x => ({
+      v1: {...x.v1},
+      v2: {...x.v2}
+    })) as LineCoordinates;
 
     lineCoordinates[1].v1.y = lineCoordinates[1].v2.y = lineCoordinates[3].v1.y = lineCoordinates[3].v2.y = lineCoordinates[0].v1.y = lineCoordinates[0].v2.y =
       lineCoordinates[2].v1.y;

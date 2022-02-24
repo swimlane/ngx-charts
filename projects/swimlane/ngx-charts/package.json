@@ -1,6 +1,6 @@
 {
   "name": "@swimlane/ngx-charts",
-  "version": "19.2.0",
+  "version": "20.0.2",
   "description": "Declarative Charting Framework for Angular",
   "repository": {
     "type": "git",
@@ -35,28 +35,29 @@
   },
   "homepage": "https://github.com/swimlane/ngx-charts#readme",
   "peerDependencies": {
-    "@angular/animations": ">=12.0.0",
-    "@angular/cdk": ">=12.0.0",
-    "@angular/core": ">=12.0.0",
-    "@angular/common": ">=12.0.0",
-    "@angular/forms": ">=12.0.0",
-    "@angular/platform-browser": ">=12.0.0",
-    "@angular/platform-browser-dynamic": ">=12.0.0",
+    "@angular/animations": ">=13.0.0",
+    "@angular/cdk": ">=13.0.0",
+    "@angular/core": ">=13.0.0",
+    "@angular/common": ">=13.0.0",
+    "@angular/forms": ">=13.0.0",
+    "@angular/platform-browser": ">=13.0.0",
+    "@angular/platform-browser-dynamic": ">=13.0.0",
+    "@types/d3": "^7.1.0",
     "rxjs": "^6.5.3 || ^7.4.0"
   },
   "dependencies": {
-    "d3-array": "^2.9.1",
-    "d3-brush": "^2.1.0",
-    "d3-color": "^2.0.0",
-    "d3-format": "^2.0.0",
-    "d3-hierarchy": "^2.0.0",
-    "d3-interpolate": "^2.0.1",
-    "d3-scale": "^3.2.3",
-    "d3-selection": "^2.0.0",
-    "d3-shape": "^2.0.0",
-    "d3-time-format": "^3.0.0",
-    "d3-transition": "^2.0.0",
+    "d3-array": "^3.1.1",
+    "d3-brush": "^3.0.0",
+    "d3-color": "^3.0.1",
+    "d3-format": "^3.1.0",
+    "d3-hierarchy": "^3.1.1",
+    "d3-interpolate": "^3.0.1",
+    "d3-scale": "^4.0.2",
+    "d3-selection": "^3.0.0",
+    "d3-shape": "^3.1.0",
+    "d3-time-format": "^4.1.0",
+    "d3-transition": "^3.0.1",
     "tslib": "^2.0.0",
-    "@types/d3-shape": "^2.0.0"
+    "@types/d3-shape": "^3.0.2"
   }
 }
