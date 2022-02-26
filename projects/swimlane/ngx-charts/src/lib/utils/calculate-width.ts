@@ -1,4 +1,4 @@
-export function calculateTextWidth(fontFamilyKey: {}, text: string, defaultWidth = 8) {
+export function calculateTextWidth(fontFamilyKey: Record<string, never>, text: string, defaultWidth = 8) {
   return text.split('').reduce((acc, curr) => {
     const width = fontFamilyKey[curr] || defaultWidth;
     return acc + width;

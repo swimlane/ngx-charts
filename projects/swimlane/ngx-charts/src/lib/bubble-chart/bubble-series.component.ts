@@ -8,7 +8,8 @@ import {
   ChangeDetectionStrategy,
   TemplateRef,
   PLATFORM_ID,
-  Inject
+  Inject,
+  OnInit
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel, escapeLabel } from '../common/label.helper';
@@ -89,7 +90,7 @@ import { isPlatformServer } from '@angular/common';
     ])
   ]
 })
-export class BubbleSeriesComponent implements OnChanges {
+export class BubbleSeriesComponent implements OnChanges, OnInit {
   @Input() data: BubbleChartSeries;
   @Input() xScale;
   @Input() yScale;

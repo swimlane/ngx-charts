@@ -1,0 +1,32 @@
+root: true
+extends:
+  - '@swimlane'
+  - prettier
+overrides:
+  - files:
+      - '*.ts'
+    parser: '@typescript-eslint/parser'
+    parserOptions:
+      project:
+        - tsconfig.json
+      createDefaultProgram: true
+    extends:
+      - '@swimlane/eslint-config/typescript'
+      - plugin:@angular-eslint/recommended
+      - plugin:@angular-eslint/template/process-inline-templates
+      - prettier
+    rules:
+      '@typescript-eslint/no-explicit-any': off
+      '@typescript-eslint/no-unused-vars': off # should be fixed later
+      '@angular-eslint/use-lifecycle-interface': off  # should be fixed later
+      '@angular-eslint/no-output-on-prefix': off
+      '@angular-eslint/directive-class-suffix': off  # This should be fixed in a future release
+      '@angular-eslint/component-class-suffix': off  # This should be fixed in a future release
+      '@typescript-eslint/no-inferrable-types': off
+      '@angular-eslint/no-output-native': off # This should be fixed in a future release
+  - files:
+      - '*.html'
+    extends:
+      - plugin:@angular-eslint/template/recommended
+    rules:
+      '@angular-eslint/template/eqeqeq': off  # should be fixed later

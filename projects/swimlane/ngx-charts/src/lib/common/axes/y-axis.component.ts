@@ -90,7 +90,6 @@ export class YAxisComponent implements OnChanges {
       this.labelOffset = 65;
       this.transform = `translate(${this.offset + this.dims.width} , 0)`;
     } else {
-      this.offset = this.offset;
       this.transform = `translate(${this.offset} , 0)`;
     }
 

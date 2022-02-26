@@ -157,17 +157,16 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   }
 
   update(): void {
-    let scale;
+    const scale = this.scale;
     const sign = this.orient === Orientation.Top || this.orient === Orientation.Right ? -1 : 1;
     this.tickSpacing = Math.max(this.innerTickSize, 0) + this.tickPadding;
 
-    scale = this.scale;
     this.ticks = this.getTicks();
 
     if (this.tickFormatting) {
       this.tickFormat = this.tickFormatting;
     } else if (scale.tickFormat) {
-      this.tickFormat = scale.tickFormat.apply(scale, this.tickArguments);
+      this.tickFormat = scale.tickFormat.call(scale, ...this.tickArguments);
     } else {
       this.tickFormat = function (d) {
         if (d.constructor.name === 'Date') {
