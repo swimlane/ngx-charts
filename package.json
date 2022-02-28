@@ -10,7 +10,7 @@
     "build:demo": "npm run build:lib:prod && cross-env NODE_ENV=production ng build --configuration production --base-href=\"/ngx-charts/\"",
     "copy-files": "cp README.md dist/swimlane/ngx-charts/README.md && cp LICENSE dist/swimlane/ngx-charts/LICENSE",
     "ci": "run-s lint prettier:ci test:ci",
-    "test": "run-p lint prettier:ci test:unit",
+    "test": "run-s lint prettier:ci test:unit",
     "test:unit": "ng test @swimlane/ngx-charts --watch=false",
     "test:watch": "ng test @swimlane/ngx-charts",
     "test:ci": "ng test @swimlane/ngx-charts --watch=false --progress=false --browsers=ChromeHeadlessCI",

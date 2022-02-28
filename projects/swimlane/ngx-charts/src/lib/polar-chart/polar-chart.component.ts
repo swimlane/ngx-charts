@@ -418,7 +418,7 @@ export class PolarChartComponent extends BaseChartComponent implements OnInit {
         return scaleTime().range([0, width]).domain(domain);
       case ScaleType.Linear: {
         const scale = scaleLinear().range([0, width]).domain(domain);
-        return this.roundDomains ? scale.nice() : scale;        
+        return this.roundDomains ? scale.nice() : scale;
       }
       default:
         return scalePoint()

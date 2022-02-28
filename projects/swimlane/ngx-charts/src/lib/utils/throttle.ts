@@ -16,7 +16,7 @@ export function throttle(func: any, wait: number, options?: any) {
     result = func.apply(context, args);
   }
 
-  return function (..._arguments) {
+  return function () {
     const now = +new Date();
 
     if (!previous && options.leading === false) {
@@ -25,7 +25,8 @@ export function throttle(func: any, wait: number, options?: any) {
 
     const remaining = wait - (now - previous);
     context = this;
-    args = _arguments;
+    // eslint-disable-next-line prefer-rest-params
+    args = arguments;
 
     if (remaining <= 0) {
       clearTimeout(timeout);

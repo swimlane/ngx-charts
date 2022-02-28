@@ -166,7 +166,8 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
     if (this.tickFormatting) {
       this.tickFormat = this.tickFormatting;
     } else if (scale.tickFormat) {
-      this.tickFormat = scale.tickFormat.call(scale, ...this.tickArguments);
+      // eslint-disable-next-line prefer-spread
+      this.tickFormat = scale.tickFormat.apply(scale, this.tickArguments);
     } else {
       this.tickFormat = function (d) {
         if (d.constructor.name === 'Date') {
