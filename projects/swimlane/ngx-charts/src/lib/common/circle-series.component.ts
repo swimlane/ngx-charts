@@ -48,7 +48,32 @@ export interface Circle {
 @Component({
   selector: 'g[ngx-charts-circle-series]',
   template: `
-    <svg:g *ngIf="circle">
+    <svg:g *ngIf="showDataPointCircles">
+      <svg:g
+        *ngFor="let c of dataPointCircles"
+        ngx-charts-circle
+        class="circle"
+        [cx]="c.cx"
+        [cy]="c.cy"
+        [r]="c.radius"
+        [fill]="c.color"
+        [class.active]="isActive({ name: c.seriesName })"
+        [pointerEvents]="c.value === 0 ? 'none' : 'all'"
+        [data]="c.value"
+        [classNames]="c.classNames"
+        (select)="onClick(c.data)"
+        (activate)="activateCircle()"
+        (deactivate)="deactivateCircle()"
+        ngx-tooltip
+        [tooltipDisabled]="tooltipDisabled"
+        [tooltipPlacement]="placementTypes.Top"
+        [tooltipType]="styleTypes.tooltip"
+        [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(c)"
+        [tooltipTemplate]="tooltipTemplate"
+        [tooltipContext]="c.data"
+      />
+    </svg:g>
+    <svg:g *ngIf="circle && !showDataPointCircles">
       <defs>
         <svg:g
           ngx-charts-svg-linear-gradient
@@ -123,6 +148,8 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
   @Input() activeEntries: any[];
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipTemplate: TemplateRef<any>;
+  // Option for always showing all data point circles
+  @Input() showDataPointCircles: boolean = false;
 
   @Output() select: EventEmitter<DataItem> = new EventEmitter();
   @Output() activate: EventEmitter<{ name: StringOrNumberOrDate }> = new EventEmitter();
@@ -140,6 +167,8 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
 
   isSSR = false;
 
+  dataPointCircles: Circle[] = [];
+
   constructor(@Inject(PLATFORM_ID) private platformId: any) {}
 
   ngOnInit() {
@@ -156,7 +185,17 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
   }
 
   update(): void {
-    this.circle = this.getActiveCircle();
+    if (this.showDataPointCircles) {
+      this.createAllCircles();
+    } else {
+      this.circle = this.getActiveCircle();
+    }
+  }
+
+  createAllCircles() {
+    this.dataPointCircles = this.data.series.map((series, index) => {
+      return this.mapDataPointToCircle(series, index);
+    });
   }
 
   getActiveCircle(): Circle {
