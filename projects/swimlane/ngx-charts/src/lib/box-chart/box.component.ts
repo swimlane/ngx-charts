@@ -224,7 +224,7 @@ export class BoxComponent implements OnChanges {
   // TODO: Refactor into another .ts file if https://github.com/swimlane/ngx-charts/pull/1179 gets merged.
   pathTween(d1: string, precision: number) {
     return function () {
-      // tslint:disable-next-line: no-this-assignment
+      // eslint-disable-next-line @typescript-eslint/no-this-alias
       const path0 = this;
       const path1 = this.cloneNode();
       path1.setAttribute('d', d1);

@@ -22,6 +22,7 @@ import { BubbleChartSeries } from '../models/chart-data.model';
 import { LegendOptions, LegendPosition } from '../common/types/legend.model';
 import { ScaleType } from '../common/types/scale-type.enum';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'ngx-charts-bubble-chart',
@@ -84,8 +85,30 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
           style="fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';"
           (mouseenter)="deactivateAll()"
         />
-        <svg:g [attr.clip-path]="clipPath">
+        <svg:g *ngIf="!isSSR" [attr.clip-path]="clipPath">
           <svg:g *ngFor="let series of data; trackBy: trackBy" [@animationState]="'active'">
+            <svg:g
+              ngx-charts-bubble-series
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [rScale]="rScale"
+              [xScaleType]="xScaleType"
+              [yScaleType]="yScaleType"
+              [xAxisLabel]="xAxisLabel"
+              [yAxisLabel]="yAxisLabel"
+              [colors]="colors"
+              [data]="series"
+              [activeEntries]="activeEntries"
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="tooltipTemplate"
+              (select)="onClick($event, series)"
+              (activate)="onActivate($event)"
+              (deactivate)="onDeactivate($event)"
+            />
+          </svg:g>
+        </svg:g>
+        <svg:g *ngIf="isSSR" [attr.clip-path]="clipPath">
+          <svg:g *ngFor="let series of data; trackBy: trackBy">
             <svg:g
               ngx-charts-bubble-series
               [xScale]="xScale"
@@ -193,6 +216,14 @@ export class BubbleChartComponent extends BaseChartComponent {
   yAxisWidth: number = 0;
 
   activeEntries: any[] = [];
+
+  isSSR = false;
+
+  ngOnInit() {
+    if (isPlatformServer(this.platformId)) {
+      this.isSSR = true;
+    }
+  }
 
   update(): void {
     super.update();

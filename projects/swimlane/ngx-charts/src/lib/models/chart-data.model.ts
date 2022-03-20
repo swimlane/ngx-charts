@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-empty-interface */
+
 import { IVector2D } from './coordinates.model';
 
 export type StringOrNumberOrDate = string | number | Date;
@@ -28,6 +30,14 @@ export interface AreaChartDataItem extends DataItem {
 export interface AreaChartSeries {
   name: StringOrNumberOrDate;
   series: AreaChartDataItem[];
+}
+
+export interface PieGridData {
+  data: PieGridDataItem;
+  height: number;
+  width: number;
+  x: number;
+  y: number;
 }
 
 export interface PieGridDataItem extends DataItem {

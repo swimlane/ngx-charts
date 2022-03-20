@@ -2,19 +2,7 @@
   "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../../dist/swimlane/ngx-charts",
   "lib": {
-    "entryFile": "src/public-api.ts",
-    "umdModuleIds": {
-      "d3-array": "d3-array",
-      "d3-brush": "d3-brush",
-      "d3-color": "d3-color",
-      "d3-format": "d3-format",
-      "d3-hierarchy": "d3-hierarchy",
-      "d3-interpolate": "d3-interpolate",
-      "d3-scale": "d3-scale",
-      "d3-selection": "d3-selection",
-      "d3-shape": "d3-shape",
-      "d3-time-format": "d3-time-format"
-    }
+    "entryFile": "src/public-api.ts"
   },
   "allowedNonPeerDependencies": ["d3"]
 }

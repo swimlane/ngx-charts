@@ -1,6 +1,17 @@
 # Changelog
 
-## Unreleased
+## 20.1.0
+
+- Fix: Cyclic import error caused by interface export in `PieGridComponent`.
+- Fix: Remove angular animations when SSR on charts with series
+
+## 20.0.0
+
+- Breaking: Upgrade Angular to v13
+
+## 19.2.0
+
+- Fix: Change transition to CSS for Angular Universal fix
 
 ## 19.1.0
 
@@ -12,7 +23,7 @@
 
 ## 19.0.0
 
-- Chore: Remove inline styles on `heat-map-cell` and `tree-map-cell` 
+- Chore: Remove inline styles on `heat-map-cell` and `tree-map-cell`
 - Bug: Fix typing issues to support enabling `strictTemplates` option
 - Breaking: Upgrade Angular to v12
 - Bug: Fix `ColorHelper.customColors` typing to allow for functions or objects (#1641)
