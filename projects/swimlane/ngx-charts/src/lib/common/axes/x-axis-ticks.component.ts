@@ -108,6 +108,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     if (this.tickFormatting) {
       this.tickFormat = this.tickFormatting;
     } else if (scale.tickFormat) {
+      // eslint-disable-next-line prefer-spread
       this.tickFormat = scale.tickFormat.apply(scale, this.tickArguments);
     } else {
       this.tickFormat = function (d) {

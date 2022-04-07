@@ -9,6 +9,7 @@ import {
   TemplateRef,
   TrackByFunction
 } from '@angular/core';
+import { isPlatformServer } from '@angular/common';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { scaleBand, scaleLinear } from 'd3-scale';
 
@@ -64,9 +65,40 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
           [ticks]="yAxisTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
+        <svg:g *ngIf="!isSSR">
+          <svg:g
+            *ngFor="let group of results; let index = index; trackBy: trackBy"
+            [@animationState]="'active'"
+            [attr.transform]="groupTransform(group)"
+          >
+            <svg:g
+              ngx-charts-series-vertical
+              [type]="barChartType.Stacked"
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [activeEntries]="activeEntries"
+              [colors]="colors"
+              [series]="group.series"
+              [dims]="dims"
+              [gradient]="gradient"
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="tooltipTemplate"
+              [showDataLabel]="showDataLabel"
+              [dataLabelFormatting]="dataLabelFormatting"
+              [seriesName]="group.name"
+              [animations]="animations"
+              [noBarWhenZero]="noBarWhenZero"
+              (select)="onClick($event, group)"
+              (activate)="onActivate($event, group)"
+              (deactivate)="onDeactivate($event, group)"
+              (dataLabelHeightChanged)="onDataLabelMaxHeightChanged($event, index)"
+            />
+          </svg:g>
+        </svg:g>
+      </svg:g>
+      <svg:g *ngIf="isSSR">
         <svg:g
           *ngFor="let group of results; let index = index; trackBy: trackBy"
-          [@animationState]="'active'"
           [attr.transform]="groupTransform(group)"
         >
           <svg:g
@@ -160,8 +192,15 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   yAxisWidth: number = 0;
   legendOptions: LegendOptions;
   dataLabelMaxHeight: any = { negative: 0, positive: 0 };
+  isSSR = false;
 
   barChartType = BarChartType;
+
+  ngOnInit() {
+    if (isPlatformServer(this.platformId)) {
+      this.isSSR = true;
+    }
+  }
 
   update(): void {
     super.update();

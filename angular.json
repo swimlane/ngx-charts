@@ -101,6 +101,12 @@
             "scripts": []
           }
         },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["src/**/*.ts"]
+          }
+        },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
@@ -139,6 +145,12 @@
             "main": "projects/swimlane/ngx-charts/src/test.ts",
             "tsConfig": "projects/swimlane/ngx-charts/tsconfig.spec.json",
             "karmaConfig": "projects/swimlane/ngx-charts/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["projects/swimlane/ngx-charts/src/**/*.ts"]
           }
         }
       }

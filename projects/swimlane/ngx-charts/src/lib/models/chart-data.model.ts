@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-empty-interface */
+
 import { IVector2D } from './coordinates.model';
 
 export type StringOrNumberOrDate = string | number | Date;
