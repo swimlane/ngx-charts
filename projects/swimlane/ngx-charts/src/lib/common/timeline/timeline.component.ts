@@ -8,7 +8,8 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   SimpleChanges,
-  ViewEncapsulation
+  ViewEncapsulation,
+  OnInit
 } from '@angular/core';
 import { brushX } from 'd3-brush';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
