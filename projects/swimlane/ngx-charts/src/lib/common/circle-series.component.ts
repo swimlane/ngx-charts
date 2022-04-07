@@ -6,7 +6,9 @@ import {
   OnChanges,
   OnInit,
   ChangeDetectionStrategy,
-  TemplateRef
+  TemplateRef,
+  PLATFORM_ID,
+  Inject
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel, escapeLabel } from './label.helper';
@@ -18,6 +20,7 @@ import { StyleTypes } from './tooltip/style.type';
 import { BarOrientation } from './types/bar-orientation.enum';
 import { Gradient } from './types/gradient.interface';
 import { ScaleType } from './types/scale-type.enum';
+import { isPlatformServer } from '@angular/common';
 
 export enum SeriesType {
   Standard = 'standard',
@@ -55,8 +58,17 @@ export interface Circle {
         />
       </defs>
       <svg:rect
-        *ngIf="barVisible && type === 'standard'"
+        *ngIf="!isSSR && barVisible && type === 'standard'"
         [@animationState]="'active'"
+        [attr.x]="circle.cx - circle.radius"
+        [attr.y]="circle.cy"
+        [attr.width]="circle.radius * 2"
+        [attr.height]="circle.height"
+        [attr.fill]="gradientFill"
+        class="tooltip-bar"
+      />
+      <svg:rect
+        *ngIf="isSSR && barVisible && type === 'standard'"
         [attr.x]="circle.cx - circle.radius"
         [attr.y]="circle.cy"
         [attr.width]="circle.radius * 2"
@@ -126,9 +138,17 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
   placementTypes = PlacementTypes;
   styleTypes = StyleTypes;
 
+  isSSR = false;
+
+  constructor(@Inject(PLATFORM_ID) private platformId: any) {}
+
   ngOnInit() {
     this.gradientId = 'grad' + id().toString();
     this.gradientFill = `url(#${this.gradientId})`;
+
+    if (isPlatformServer(this.platformId)) {
+      this.isSSR = true;
+    }
   }
 
   ngOnChanges(): void {
