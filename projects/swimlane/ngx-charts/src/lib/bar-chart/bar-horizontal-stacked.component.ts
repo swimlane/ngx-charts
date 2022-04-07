@@ -9,6 +9,7 @@ import {
   TemplateRef,
   TrackByFunction
 } from '@angular/core';
+import { isPlatformServer } from '@angular/common';
 import { trigger, style, animate, transition } from '@angular/animations';
 
 import { scaleBand, scaleLinear } from 'd3-scale';
@@ -65,33 +66,64 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
           [yAxisOffset]="dataLabelMaxWidth.negative"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
-        <svg:g
-          *ngFor="let group of results; let index = index; trackBy: trackBy"
-          [@animationState]="'active'"
-          [attr.transform]="groupTransform(group)"
-        >
+        <svg:g *ngIf="!isSSR">
           <svg:g
-            ngx-charts-series-horizontal
-            [type]="barChartType.Stacked"
-            [xScale]="xScale"
-            [yScale]="yScale"
-            [colors]="colors"
-            [series]="group.series"
-            [activeEntries]="activeEntries"
-            [dims]="dims"
-            [gradient]="gradient"
-            [tooltipDisabled]="tooltipDisabled"
-            [tooltipTemplate]="tooltipTemplate"
-            [seriesName]="group.name"
-            [animations]="animations"
-            [showDataLabel]="showDataLabel"
-            [dataLabelFormatting]="dataLabelFormatting"
-            [noBarWhenZero]="noBarWhenZero"
-            (select)="onClick($event, group)"
-            (activate)="onActivate($event, group)"
-            (deactivate)="onDeactivate($event, group)"
-            (dataLabelWidthChanged)="onDataLabelMaxWidthChanged($event, index)"
-          />
+            *ngFor="let group of results; let index = index; trackBy: trackBy"
+            [@animationState]="'active'"
+            [attr.transform]="groupTransform(group)"
+          >
+            <svg:g
+              ngx-charts-series-horizontal
+              [type]="barChartType.Stacked"
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [colors]="colors"
+              [series]="group.series"
+              [activeEntries]="activeEntries"
+              [dims]="dims"
+              [gradient]="gradient"
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="tooltipTemplate"
+              [seriesName]="group.name"
+              [animations]="animations"
+              [showDataLabel]="showDataLabel"
+              [dataLabelFormatting]="dataLabelFormatting"
+              [noBarWhenZero]="noBarWhenZero"
+              (select)="onClick($event, group)"
+              (activate)="onActivate($event, group)"
+              (deactivate)="onDeactivate($event, group)"
+              (dataLabelWidthChanged)="onDataLabelMaxWidthChanged($event, index)"
+            />
+          </svg:g>
+        </svg:g>
+        <svg:g *ngIf="isSSR">
+          <svg:g
+            *ngFor="let group of results; let index = index; trackBy: trackBy"
+            [attr.transform]="groupTransform(group)"
+          >
+            <svg:g
+              ngx-charts-series-horizontal
+              [type]="barChartType.Stacked"
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [colors]="colors"
+              [series]="group.series"
+              [activeEntries]="activeEntries"
+              [dims]="dims"
+              [gradient]="gradient"
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="tooltipTemplate"
+              [seriesName]="group.name"
+              [animations]="animations"
+              [showDataLabel]="showDataLabel"
+              [dataLabelFormatting]="dataLabelFormatting"
+              [noBarWhenZero]="noBarWhenZero"
+              (select)="onClick($event, group)"
+              (activate)="onActivate($event, group)"
+              (deactivate)="onDeactivate($event, group)"
+              (dataLabelWidthChanged)="onDataLabelMaxWidthChanged($event, index)"
+            />
+          </svg:g>
         </svg:g>
       </svg:g>
     </ngx-charts-chart>
@@ -162,6 +194,13 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   dataLabelMaxWidth: any = { negative: 0, positive: 0 };
 
   barChartType = BarChartType;
+  isSSR = false;
+
+  ngOnInit() {
+    if (isPlatformServer(this.platformId)) {
+      this.isSSR = true;
+    }
+  }
 
   update(): void {
     super.update();

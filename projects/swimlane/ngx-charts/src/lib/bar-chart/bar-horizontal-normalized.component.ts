@@ -22,6 +22,7 @@ import { BarChartType } from './types/bar-chart-type.enum';
 import { ScaleType } from '../common/types/scale-type.enum';
 import { LegendOptions, LegendPosition } from '../common/types/legend.model';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'ngx-charts-bar-horizontal-normalized',
@@ -65,30 +66,55 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
           [ticks]="yAxisTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
-        <svg:g
-          *ngFor="let group of results; trackBy: trackBy"
-          [@animationState]="'active'"
-          [attr.transform]="groupTransform(group)"
-        >
+        <svg:g *ngIf="!isSSR">
           <svg:g
-            ngx-charts-series-horizontal
-            [type]="barChartType.Normalized"
-            [xScale]="xScale"
-            [yScale]="yScale"
-            [activeEntries]="activeEntries"
-            [colors]="colors"
-            [series]="group.series"
-            [dims]="dims"
-            [gradient]="gradient"
-            [tooltipDisabled]="tooltipDisabled"
-            [tooltipTemplate]="tooltipTemplate"
-            [seriesName]="group.name"
-            [animations]="animations"
-            (select)="onClick($event, group)"
-            (activate)="onActivate($event, group)"
-            (deactivate)="onDeactivate($event, group)"
-            [noBarWhenZero]="noBarWhenZero"
-          />
+            *ngFor="let group of results; trackBy: trackBy"
+            [@animationState]="'active'"
+            [attr.transform]="groupTransform(group)"
+          >
+            <svg:g
+              ngx-charts-series-horizontal
+              [type]="barChartType.Normalized"
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [activeEntries]="activeEntries"
+              [colors]="colors"
+              [series]="group.series"
+              [dims]="dims"
+              [gradient]="gradient"
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="tooltipTemplate"
+              [seriesName]="group.name"
+              [animations]="animations"
+              (select)="onClick($event, group)"
+              (activate)="onActivate($event, group)"
+              (deactivate)="onDeactivate($event, group)"
+              [noBarWhenZero]="noBarWhenZero"
+            />
+          </svg:g>
+        </svg:g>
+        <svg:g *ngIf="isSSR">
+          <svg:g *ngFor="let group of results; trackBy: trackBy" [attr.transform]="groupTransform(group)">
+            <svg:g
+              ngx-charts-series-horizontal
+              [type]="barChartType.Normalized"
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [activeEntries]="activeEntries"
+              [colors]="colors"
+              [series]="group.series"
+              [dims]="dims"
+              [gradient]="gradient"
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="tooltipTemplate"
+              [seriesName]="group.name"
+              [animations]="animations"
+              (select)="onClick($event, group)"
+              (activate)="onActivate($event, group)"
+              (deactivate)="onDeactivate($event, group)"
+              [noBarWhenZero]="noBarWhenZero"
+            />
+          </svg:g>
         </svg:g>
       </svg:g>
     </ngx-charts-chart>
@@ -154,6 +180,13 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
   yAxisWidth: number = 0;
   legendOptions: LegendOptions;
   barChartType = BarChartType;
+  isSSR = false;
+
+  ngOnInit() {
+    if (isPlatformServer(this.platformId)) {
+      this.isSSR = true;
+    }
+  }
 
   update(): void {
     super.update();

@@ -1,8 +1,13 @@
 # Changelog
 
-## Unreleased
+## 20.1.0
 
 - Fix: Cyclic import error caused by interface export in `PieGridComponent`.
+- Fix: Remove angular animations when SSR on charts with series
+
+## 20.0.0
+
+- Breaking: Upgrade Angular to v13
 
 ## 19.2.0
 

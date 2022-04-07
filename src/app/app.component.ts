@@ -642,7 +642,7 @@ export class AppComponent implements OnInit {
   }
 
   dollarValueFormat(c): string {
-    return `\$${c.value.toLocaleString()}`;
+    return `$${c.value.toLocaleString()}`;
   }
 
   getStatusData() {
@@ -686,7 +686,7 @@ export class AppComponent implements OnInit {
   statusValueFormat(c): string {
     switch (c.data.extra ? c.data.extra.format : '') {
       case 'currency':
-        return `\$${Math.round(c.value).toLocaleString()}`;
+        return `$${Math.round(c.value).toLocaleString()}`;
       case 'time':
         return multiFormat(c.value);
       case 'percent':
@@ -701,7 +701,7 @@ export class AppComponent implements OnInit {
   }
 
   currencyFormatting(value: number) {
-    return `\$${Math.round(value).toLocaleString()}`;
+    return `$${Math.round(value).toLocaleString()}`;
   }
 
   gdpLabelFormatting(c) {
@@ -718,7 +718,7 @@ export class AppComponent implements OnInit {
     }
     const twoPi = 2 * Math.PI;
     const length = 25;
-    const series = Array.apply(null, { length }).map((d, i) => {
+    const series = Array({ length }).map((d, i) => {
       const x = i / (length - 1);
       const t = x * twoPi;
       return {
@@ -763,14 +763,13 @@ export class AppComponent implements OnInit {
   }
 
   treemapSelect(item) {
-    let node;
     if (item.children) {
       const idx = this.treemapPath.indexOf(item);
       this.treemapPath.splice(idx + 1);
       this.treemap = this.treemapPath[idx].children;
       return;
     }
-    node = this.treemap.find(d => d.name === item.name);
+    const node = this.treemap.find(d => d.name === item.name);
     if (node.children) {
       this.treemapPath.push(node);
       this.treemap = node.children;

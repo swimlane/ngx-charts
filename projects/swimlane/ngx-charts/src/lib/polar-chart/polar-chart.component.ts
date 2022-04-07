@@ -6,7 +6,8 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy,
   ContentChild,
-  TemplateRef
+  TemplateRef,
+  OnInit
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
@@ -21,6 +22,7 @@ import { LegendPosition } from '../common/types/legend.model';
 import { ScaleType } from '../common/types/scale-type.enum';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
 import { Orientation } from '../common/types/orientation.enum';
+import { isPlatformServer } from '@angular/common';
 
 const twoPI = 2 * Math.PI;
 
@@ -88,8 +90,30 @@ const twoPI = 2 * Math.PI;
           [height]="dims.height"
           [width]="dims.width"
         ></svg:g>
-        <svg:g [attr.transform]="transformPlot">
+        <svg:g *ngIf="!isSSR" [attr.transform]="transformPlot">
           <svg:g *ngFor="let series of results; trackBy: trackBy" [@animationState]="'active'">
+            <svg:g
+              ngx-charts-polar-series
+              [gradient]="gradient"
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [colors]="colors"
+              [data]="series"
+              [activeEntries]="activeEntries"
+              [scaleType]="scaleType"
+              [curve]="curve"
+              [rangeFillOpacity]="rangeFillOpacity"
+              [animations]="animations"
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="tooltipTemplate"
+              (select)="onClick($event)"
+              (activate)="onActivate($event)"
+              (deactivate)="onDeactivate($event)"
+            />
+          </svg:g>
+        </svg:g>
+        <svg:g *ngIf="isSSR" [attr.transform]="transformPlot">
+          <svg:g *ngFor="let series of results; trackBy: trackBy">
             <svg:g
               ngx-charts-polar-series
               [gradient]="gradient"
@@ -136,7 +160,7 @@ const twoPI = 2 * Math.PI;
     ])
   ]
 })
-export class PolarChartComponent extends BaseChartComponent {
+export class PolarChartComponent extends BaseChartComponent implements OnInit {
   @Input() legend: boolean;
   @Input() legendTitle: string = 'Legend';
   @Input() legendPosition: LegendPosition = LegendPosition.Right;
@@ -195,6 +219,14 @@ export class PolarChartComponent extends BaseChartComponent {
   outerRadius: number;
 
   orientation = Orientation;
+
+  isSSR = false;
+
+  ngOnInit() {
+    if (isPlatformServer(this.platformId)) {
+      this.isSSR = true;
+    }
+  }
 
   update(): void {
     super.update();
@@ -384,9 +416,10 @@ export class PolarChartComponent extends BaseChartComponent {
     switch (this.scaleType) {
       case ScaleType.Time:
         return scaleTime().range([0, width]).domain(domain);
-      case ScaleType.Linear:
+      case ScaleType.Linear: {
         const scale = scaleLinear().range([0, width]).domain(domain);
         return this.roundDomains ? scale.nice() : scale;
+      }
       default:
         return scalePoint()
           .range([0, width - twoPI / domain.length])
