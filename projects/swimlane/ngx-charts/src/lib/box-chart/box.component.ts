@@ -14,8 +14,7 @@ import { select, BaseType } from 'd3-selection';
 import { interpolate } from 'd3-interpolate';
 import { easeSinInOut } from 'd3-ease';
 
-import cloneDeep from 'clone-deep';
-
+import { cloneDeep } from 'lodash-es';
 import { roundedRect } from '../common/shape.helper';
 import { id } from '../utils/id';
 import { IBoxModel } from '../models/chart-data.model';
@@ -281,8 +280,13 @@ export class BoxComponent implements OnChanges {
 
     const lineCoordinates: LineCoordinates = cloneDeep(this.lineCoordinates);
 
-    lineCoordinates[1].v1.y = lineCoordinates[1].v2.y = lineCoordinates[3].v1.y = lineCoordinates[3].v2.y = lineCoordinates[0].v1.y = lineCoordinates[0].v2.y =
-      lineCoordinates[2].v1.y;
+    lineCoordinates[1].v1.y =
+      lineCoordinates[1].v2.y =
+      lineCoordinates[3].v1.y =
+      lineCoordinates[3].v2.y =
+      lineCoordinates[0].v1.y =
+      lineCoordinates[0].v2.y =
+        lineCoordinates[2].v1.y;
 
     return lineCoordinates;
   }
