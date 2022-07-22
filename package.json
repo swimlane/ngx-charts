@@ -25,7 +25,10 @@
     "pack": "npm pack ./dist/swimlane/ngx-charts",
     "prettier": "prettier --write \"{src,projects}/**/*.{js,ts,html,scss,css,md,json}\"",
     "prettier:ci": "prettier --check \"{src,projects}/**/*.{js,ts,html,scss,css,md,json}\"",
-    "postinstall": "ngcc"
+    "postinstall": "ngcc",
+    "fix": "run-s lint fix:*",
+    "fix:prettier": "prettier --write \"{src,projects}/**/*.{js,ts,html,scss,css,md,json}\"",
+    "fix:lint": "ng lint --fix"
   },
   "dependencies": {
     "@angular/animations": "~13.1.0",
