@@ -1,15 +1,22 @@
-import { scaleLinear, scalePoint, scaleTime } from 'd3-scale';
+import { ScaleLinear, scaleLinear, ScalePoint, scalePoint, ScaleTime, scaleTime } from 'd3-scale';
+import { ScaleType } from '../common/types/scale-type.enum';
 
-export function getDomain(values, scaleType, autoScale, minVal?, maxVal?): number[] {
+export function getDomain(
+  values: any[],
+  scaleType: ScaleType,
+  autoScale: boolean,
+  minVal?: number,
+  maxVal?: number
+): number[] {
   let domain: number[] = [];
-  if (scaleType === 'linear') {
+  if (scaleType === ScaleType.Linear) {
     values = values.map(v => Number(v));
     if (!autoScale) {
       values.push(0);
     }
   }
 
-  if (scaleType === 'time' || scaleType === 'linear') {
+  if (scaleType === ScaleType.Time || scaleType === ScaleType.Linear) {
     const min = minVal || minVal === 0 ? minVal : Math.min(...values);
     const max = maxVal ? maxVal : Math.max(...values);
 
@@ -21,20 +28,27 @@ export function getDomain(values, scaleType, autoScale, minVal?, maxVal?): numbe
   return domain;
 }
 
-export function getScale(domain, range: number[], scaleType, roundDomains): any {
-  let scale: any;
-
-  if (scaleType === 'time') {
-    scale = scaleTime().range(range).domain(domain);
-  } else if (scaleType === 'linear') {
-    scale = scaleLinear().range(range).domain(domain);
-
-    if (roundDomains) {
-      scale = scale.nice();
+export function getScale(
+  domain: number[],
+  range: number[],
+  scaleType: ScaleType,
+  roundDomains: boolean
+): ScaleTime<number, number> | ScaleLinear<number, number> | ScalePoint<string> {
+  switch (scaleType) {
+    case ScaleType.Time:
+      return scaleTime().range(range).domain(domain);
+    case ScaleType.Linear: {
+      const scale = scaleLinear().range(range).domain(domain);
+      if (roundDomains) {
+        return scale.nice();
+      }
+      return scale;
     }
-  } else if (scaleType === 'ordinal') {
-    scale = scalePoint().range([range[0], range[1]]).domain(domain);
+    case ScaleType.Ordinal:
+      return scalePoint()
+        .range([range[0], range[1]])
+        .domain(domain.map(r => r.toString()));
+    default:
+      return undefined;
   }
-
-  return scale;
 }

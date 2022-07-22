@@ -1,5 +1,5 @@
 {
-  "extends": "./tsconfig.base.json",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
     "types": []
@@ -8,7 +8,6 @@
   "include": ["src/**/*.d.ts"],
   "exclude": ["src/test.ts", "src/**/*.spec.ts"],
   "angularCompilerOptions": {
-    "preserveWhitespaces": true,
-    "enableIvy": false
+    "preserveWhitespaces": true
   }
 }

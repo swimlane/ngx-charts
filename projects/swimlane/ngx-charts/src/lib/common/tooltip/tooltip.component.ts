@@ -7,14 +7,17 @@ import {
   HostListener,
   ViewChild,
   HostBinding,
-  Renderer2
+  Renderer2,
+  PLATFORM_ID,
+  Inject,
+  TemplateRef
 } from '@angular/core';
 
 import { throttleable } from '../../utils/throttle';
 import { PositionHelper, PlacementTypes } from './position';
 
 import { StyleTypes } from './style.type';
-import { AlignmentTypes } from './alignment.type';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'ngx-tooltip-content',
@@ -33,18 +36,18 @@ import { AlignmentTypes } from './alignment.type';
   styleUrls: ['./tooltip.component.scss']
 })
 export class TooltipContentComponent implements AfterViewInit {
-  @Input() host: any;
+  @Input() host: ElementRef;
   @Input() showCaret: boolean;
   @Input() type: StyleTypes;
   @Input() placement: PlacementTypes;
-  @Input() alignment: AlignmentTypes;
+  @Input() alignment: PlacementTypes;
   @Input() spacing: number;
   @Input() cssClass: string;
   @Input() title: string;
-  @Input() template: any;
+  @Input() template: TemplateRef<any>;
   @Input() context: any;
 
-  @ViewChild('caretElm') caretElm;
+  @ViewChild('caretElm') caretElm: ElementRef;
 
   @HostBinding('class')
   get cssClasses(): string {
@@ -55,13 +58,17 @@ export class TooltipContentComponent implements AfterViewInit {
     return clz;
   }
 
-  constructor(public element: ElementRef, private renderer: Renderer2) {}
+  constructor(public element: ElementRef, private renderer: Renderer2, @Inject(PLATFORM_ID) private platformId: any) {}
 
   ngAfterViewInit(): void {
     setTimeout(this.position.bind(this));
   }
 
   position(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     const nativeElm = this.element.nativeElement;
     const hostDim = this.host.nativeElement.getBoundingClientRect();
 
@@ -80,14 +87,14 @@ export class TooltipContentComponent implements AfterViewInit {
     setTimeout(() => this.renderer.addClass(nativeElm, 'animate'), 1);
   }
 
-  positionContent(nativeElm, hostDim, elmDim): void {
+  positionContent(nativeElm: HTMLElement, hostDim: DOMRect, elmDim: DOMRect): void {
     const { top, left } = PositionHelper.positionContent(this.placement, elmDim, hostDim, this.spacing, this.alignment);
 
     this.renderer.setStyle(nativeElm, 'top', `${top}px`);
     this.renderer.setStyle(nativeElm, 'left', `${left}px`);
   }
 
-  positionCaret(hostDim, elmDim): void {
+  positionCaret(hostDim: DOMRect, elmDim: DOMRect): void {
     const caretElm = this.caretElm.nativeElement;
     const caretDimensions = caretElm.getBoundingClientRect();
     const { top, left } = PositionHelper.positionCaret(
@@ -102,7 +109,7 @@ export class TooltipContentComponent implements AfterViewInit {
     this.renderer.setStyle(caretElm, 'left', `${left}px`);
   }
 
-  checkFlip(hostDim, elmDim): void {
+  checkFlip(hostDim: DOMRect, elmDim: DOMRect): void {
     this.placement = PositionHelper.determinePlacement(this.placement, elmDim, hostDim, this.spacing);
   }
 

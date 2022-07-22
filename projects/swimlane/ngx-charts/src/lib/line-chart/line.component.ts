@@ -6,22 +6,32 @@ import {
   OnChanges,
   ElementRef,
   ChangeDetectionStrategy,
-  SimpleChanges
+  SimpleChanges,
+  PLATFORM_ID,
+  Inject,
+  OnInit
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { select } from 'd3-selection';
+import { Series } from '../models/chart-data.model';
+import { isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'g[ngx-charts-line]',
   template: `
-    <svg:path
-      [@animationState]="'active'"
-      class="line"
-      [attr.d]="initialPath"
-      [attr.fill]="fill"
-      [attr.stroke]="stroke"
-      stroke-width="1.5px"
-    />
+    <svg:g *ngIf="!isSSR">
+      <svg:path
+        [@animationState]="'active'"
+        class="line"
+        [attr.d]="initialPath"
+        [attr.fill]="fill"
+        [attr.stroke]="stroke"
+        stroke-width="1.5px"
+      />
+    </svg:g>
+    <svg:g *ngIf="isSSR">
+      <svg:path class="line" [attr.d]="initialPath" [attr.fill]="fill" [attr.stroke]="stroke" stroke-width="1.5px" />
+    </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
@@ -41,19 +51,27 @@ import { select } from 'd3-selection';
     ])
   ]
 })
-export class LineComponent implements OnChanges {
-  @Input() path;
-  @Input() stroke;
-  @Input() data;
+export class LineComponent implements OnChanges, OnInit {
+  @Input() path: string;
+  @Input() stroke: string;
+  @Input() data: Series;
   @Input() fill: string = 'none';
   @Input() animations: boolean = true;
 
-  @Output() select = new EventEmitter();
+  // @Output() select = new EventEmitter();
 
   initialized: boolean = false;
   initialPath: string;
 
-  constructor(private element: ElementRef) {}
+  isSSR = false;
+
+  constructor(private element: ElementRef, @Inject(PLATFORM_ID) private platformId: any) {}
+
+  ngOnInit() {
+    if (isPlatformServer(this.platformId)) {
+      this.isSSR = true;
+    }
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.initialized) {

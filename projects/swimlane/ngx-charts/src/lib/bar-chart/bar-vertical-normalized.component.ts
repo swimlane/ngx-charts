@@ -6,14 +6,21 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy,
   ContentChild,
-  TemplateRef
+  TemplateRef,
+  TrackByFunction
 } from '@angular/core';
+import { isPlatformServer } from '@angular/common';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { scaleBand, scaleLinear } from 'd3-scale';
 
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
+import { Series } from '../models/chart-data.model';
 import { BaseChartComponent } from '../common/base-chart.component';
+import { BarChartType } from './types/bar-chart-type.enum';
+import { LegendOptions, LegendPosition } from '../common/types/legend.model';
+import { ScaleType } from '../common/types/scale-type.enum';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
 
 @Component({
   selector: 'ngx-charts-bar-vertical-normalized',
@@ -57,30 +64,55 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [ticks]="yAxisTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
-        <svg:g
-          *ngFor="let group of results; trackBy: trackBy"
-          [@animationState]="'active'"
-          [attr.transform]="groupTransform(group)"
-        >
+        <svg:g *ngIf="!isSSR">
           <svg:g
-            ngx-charts-series-vertical
-            type="normalized"
-            [xScale]="xScale"
-            [yScale]="yScale"
-            [activeEntries]="activeEntries"
-            [colors]="colors"
-            [series]="group.series"
-            [dims]="dims"
-            [gradient]="gradient"
-            [tooltipDisabled]="tooltipDisabled"
-            [tooltipTemplate]="tooltipTemplate"
-            [seriesName]="group.name"
-            [animations]="animations"
-            [noBarWhenZero]="noBarWhenZero"
-            (select)="onClick($event, group)"
-            (activate)="onActivate($event, group)"
-            (deactivate)="onDeactivate($event, group)"
-          />
+            *ngFor="let group of results; trackBy: trackBy"
+            [@animationState]="'active'"
+            [attr.transform]="groupTransform(group)"
+          >
+            <svg:g
+              ngx-charts-series-vertical
+              [type]="barChartType.Normalized"
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [activeEntries]="activeEntries"
+              [colors]="colors"
+              [series]="group.series"
+              [dims]="dims"
+              [gradient]="gradient"
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="tooltipTemplate"
+              [seriesName]="group.name"
+              [animations]="animations"
+              [noBarWhenZero]="noBarWhenZero"
+              (select)="onClick($event, group)"
+              (activate)="onActivate($event, group)"
+              (deactivate)="onDeactivate($event, group)"
+            />
+          </svg:g>
+        </svg:g>
+        <svg:g *ngIf="isSSR">
+          <svg:g *ngFor="let group of results; trackBy: trackBy" [attr.transform]="groupTransform(group)">
+            <svg:g
+              ngx-charts-series-vertical
+              [type]="barChartType.Normalized"
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [activeEntries]="activeEntries"
+              [colors]="colors"
+              [series]="group.series"
+              [dims]="dims"
+              [gradient]="gradient"
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="tooltipTemplate"
+              [seriesName]="group.name"
+              [animations]="animations"
+              [noBarWhenZero]="noBarWhenZero"
+              (select)="onClick($event, group)"
+              (activate)="onActivate($event, group)"
+              (deactivate)="onDeactivate($event, group)"
+            />
+          </svg:g>
         </svg:g>
       </svg:g>
     </ngx-charts-chart>
@@ -101,20 +133,20 @@ import { BaseChartComponent } from '../common/base-chart.component';
   ]
 })
 export class BarVerticalNormalizedComponent extends BaseChartComponent {
-  @Input() legend = false;
+  @Input() legend: boolean = false;
   @Input() legendTitle: string = 'Legend';
-  @Input() legendPosition: string = 'right';
+  @Input() legendPosition: LegendPosition = LegendPosition.Right;
   @Input() xAxis;
   @Input() yAxis;
-  @Input() showXAxisLabel;
-  @Input() showYAxisLabel;
-  @Input() xAxisLabel;
-  @Input() yAxisLabel;
+  @Input() showXAxisLabel: boolean;
+  @Input() showYAxisLabel: boolean;
+  @Input() xAxisLabel: string;
+  @Input() yAxisLabel: string;
   @Input() tooltipDisabled: boolean = false;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
-  @Input() schemeType: string;
+  @Input() schemeType: ScaleType;
   @Input() trimXAxisTicks: boolean = true;
   @Input() trimYAxisTicks: boolean = true;
   @Input() rotateXAxisTicks: boolean = true;
@@ -124,7 +156,7 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
   @Input() yAxisTickFormatting: any;
   @Input() xAxisTicks: any[];
   @Input() yAxisTicks: any[];
-  @Input() barPadding = 8;
+  @Input() barPadding: number = 8;
   @Input() roundDomains: boolean = false;
   @Input() noBarWhenZero: boolean = true;
 
@@ -134,17 +166,26 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
-  groupDomain: any[];
-  innerDomain: any[];
-  valueDomain: any[];
+  groupDomain: string[];
+  innerDomain: string[];
+  valueDomain: [number, number] = [0, 100];
   xScale: any;
   yScale: any;
   transform: string;
   colors: ColorHelper;
-  margin = [10, 20, 10, 20];
+  margin: number[] = [10, 20, 10, 20];
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
-  legendOptions: any;
+  legendOptions: LegendOptions;
+  isSSR = false;
+
+  barChartType = BarChartType;
+
+  ngOnInit() {
+    if (isPlatformServer(this.platformId)) {
+      this.isSSR = true;
+    }
+  }
 
   update(): void {
     super.update();
@@ -168,7 +209,6 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
 
     this.groupDomain = this.getGroupDomain();
     this.innerDomain = this.getInnerDomain();
-    this.valueDomain = this.getValueDomain();
 
     this.xScale = this.getXScale();
     this.yScale = this.getYScale();
@@ -179,7 +219,7 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
     this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
   }
 
-  getGroupDomain() {
+  getGroupDomain(): string[] {
     const domain = [];
     for (const group of this.results) {
       if (!domain.includes(group.label)) {
@@ -190,7 +230,7 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
     return domain;
   }
 
-  getInnerDomain() {
+  getInnerDomain(): string[] {
     const domain = [];
     for (const group of this.results) {
       for (const d of group.series) {
@@ -201,10 +241,6 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
     }
 
     return domain;
-  }
-
-  getValueDomain() {
-    return [0, 100];
   }
 
   getXScale(): any {
@@ -218,11 +254,11 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
     return this.roundDomains ? scale.nice() : scale;
   }
 
-  groupTransform(group) {
+  groupTransform(group: Series): string {
     return `translate(${this.xScale(group.name)}, 0)`;
   }
 
-  onClick(data, group?) {
+  onClick(data, group?: Series) {
     if (group) {
       data.series = group.name;
     }
@@ -230,13 +266,13 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
     this.select.emit(data);
   }
 
-  trackBy(index, item) {
+  trackBy: TrackByFunction<Series> = (index: number, item: Series) => {
     return item.name;
-  }
+  };
 
   setColors(): void {
     let domain;
-    if (this.schemeType === 'ordinal') {
+    if (this.schemeType === ScaleType.Ordinal) {
       domain = this.innerDomain;
     } else {
       domain = this.valueDomain;
@@ -245,15 +281,15 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
     this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
   }
 
-  getLegendOptions() {
+  getLegendOptions(): LegendOptions {
     const opts = {
-      scaleType: this.schemeType,
+      scaleType: this.schemeType as any,
       colors: undefined,
       domain: [],
       title: undefined,
       position: this.legendPosition
     };
-    if (opts.scaleType === 'ordinal') {
+    if (opts.scaleType === ScaleType.Ordinal) {
       opts.domain = this.innerDomain;
       opts.colors = this.colors;
       opts.title = this.legendTitle;
@@ -265,17 +301,17 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
     return opts;
   }
 
-  updateYAxisWidth({ width }) {
+  updateYAxisWidth({ width }: { width: number }) {
     this.yAxisWidth = width;
     this.update();
   }
 
-  updateXAxisHeight({ height }) {
+  updateXAxisHeight({ height }: { height: number }) {
     this.xAxisHeight = height;
     this.update();
   }
 
-  onActivate(event, group, fromLegend = false) {
+  onActivate(event, group: Series, fromLegend: boolean = false) {
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
@@ -296,7 +332,7 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(event, group, fromLegend = false) {
+  onDeactivate(event, group: Series, fromLegend: boolean = false) {
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;

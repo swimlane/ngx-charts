@@ -10,8 +10,16 @@ import {
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel, escapeLabel } from '../common/label.helper';
-import { D0Types } from './series-vertical.component';
-import { DataItem } from '../models/chart-data.model';
+import { DataItem, StringOrNumberOrDate } from '../models/chart-data.model';
+import { ColorHelper } from '../common/color.helper';
+import { PlacementTypes } from '../common/tooltip/position';
+import { StyleTypes } from '../common/tooltip/style.type';
+import { BarChartType } from './types/bar-chart-type.enum';
+import { Bar } from './types/bar.model';
+import { D0Types } from './types/d0-type.enum';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { BarOrientation } from '../common/types/bar-orientation.enum';
+import { ScaleType } from '../common/types/scale-type.enum';
 
 @Component({
   selector: 'g[ngx-charts-series-horizontal]',
@@ -27,7 +35,7 @@ import { DataItem } from '../models/chart-data.model';
       [fill]="bar.color"
       [stops]="bar.gradientStops"
       [data]="bar.data"
-      [orientation]="'horizontal'"
+      [orientation]="barOrientation.Horizontal"
       [roundEdges]="bar.roundEdges"
       (select)="click($event)"
       [gradient]="gradient"
@@ -55,7 +63,7 @@ import { DataItem } from '../models/chart-data.model';
         [barHeight]="b.height"
         [value]="b.total"
         [valueFormatting]="dataLabelFormatting"
-        [orientation]="'horizontal'"
+        [orientation]="barOrientation.Horizontal"
         (dimensionsChanged)="dataLabelWidthChanged.emit({ size: $event, index: i })"
       />
     </svg:g>
@@ -73,21 +81,16 @@ import { DataItem } from '../models/chart-data.model';
   ]
 })
 export class SeriesHorizontal implements OnChanges {
-  bars: any;
-  x: any;
-  y: any;
-  barsForDataLabels: Array<{ x: number; y: number; width: number; height: number; total: number; series: string }> = [];
-
-  @Input() dims;
-  @Input() type = 'standard';
-  @Input() series;
+  @Input() dims: ViewDimensions;
+  @Input() type: BarChartType = BarChartType.Standard;
+  @Input() series: DataItem[];
   @Input() xScale;
   @Input() yScale;
-  @Input() colors;
+  @Input() colors: ColorHelper;
   @Input() tooltipDisabled: boolean = false;
   @Input() gradient: boolean;
-  @Input() activeEntries: any[];
-  @Input() seriesName: string;
+  @Input() activeEntries: DataItem[];
+  @Input() seriesName: StringOrNumberOrDate;
   @Input() tooltipTemplate: TemplateRef<any>;
   @Input() roundEdges: boolean;
   @Input() animations: boolean = true;
@@ -95,13 +98,17 @@ export class SeriesHorizontal implements OnChanges {
   @Input() dataLabelFormatting: any;
   @Input() noBarWhenZero: boolean = true;
 
-  @Output() select = new EventEmitter();
+  @Output() select: EventEmitter<DataItem> = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
-  @Output() dataLabelWidthChanged = new EventEmitter();
+  @Output() dataLabelWidthChanged = new EventEmitter<{ size: Event; index: number }>();
 
-  tooltipPlacement: string;
-  tooltipType: string;
+  tooltipPlacement: PlacementTypes;
+  tooltipType: StyleTypes;
+  bars: Bar[];
+  barsForDataLabels: Array<{ x: number; y: number; width: number; height: number; total: number; series: string }> = [];
+
+  barOrientation = BarOrientation;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -116,13 +123,13 @@ export class SeriesHorizontal implements OnChanges {
     let d0Type: D0Types;
     d0Type = D0Types.positive;
     let total;
-    if (this.type === 'normalized') {
-      total = this.series.map(d => d.value).reduce((sum, d) => sum + d, 0);
+    if (this.type === BarChartType.Normalized) {
+      total = this.series.map(d => d.value).reduce((sum, d) => (sum as any) + d, 0);
     }
     const xScaleMin = Math.max(this.xScale.domain()[0], 0);
 
-    this.bars = this.series.map((d, index) => {
-      let value = d.value;
+    this.bars = this.series.map(d => {
+      let value = d.value as any;
       const label = this.getLabel(d);
       const formattedLabel = formatLabel(label);
       const roundEdges = this.roundEdges;
@@ -138,7 +145,7 @@ export class SeriesHorizontal implements OnChanges {
 
       bar.height = this.yScale.bandwidth();
 
-      if (this.type === 'standard') {
+      if (this.type === BarChartType.Standard) {
         bar.width = Math.abs(this.xScale(value) - this.xScale(xScaleMin));
         if (value < 0) {
           bar.x = this.xScale(value);
@@ -146,7 +153,7 @@ export class SeriesHorizontal implements OnChanges {
           bar.x = this.xScale(xScaleMin);
         }
         bar.y = this.yScale(label);
-      } else if (this.type === 'stacked') {
+      } else if (this.type === BarChartType.Stacked) {
         const offset0 = d0[d0Type];
         const offset1 = offset0 + value;
         d0[d0Type] += value;
@@ -156,7 +163,7 @@ export class SeriesHorizontal implements OnChanges {
         bar.y = 0;
         bar.offset0 = offset0;
         bar.offset1 = offset1;
-      } else if (this.type === 'normalized') {
+      } else if (this.type === BarChartType.Normalized) {
         let offset0 = d0[d0Type];
         let offset1 = offset0 + value;
         d0[d0Type] += value;
@@ -177,10 +184,10 @@ export class SeriesHorizontal implements OnChanges {
         value = (offset1 - offset0).toFixed(2) + '%';
       }
 
-      if (this.colors.scaleType === 'ordinal') {
+      if (this.colors.scaleType === ScaleType.Ordinal) {
         bar.color = this.colors.getColor(label);
       } else {
-        if (this.type === 'standard') {
+        if (this.type === BarChartType.Standard) {
           bar.color = this.colors.getColor(value);
           bar.gradientStops = this.colors.getLinearGradientStops(value);
         } else {
@@ -191,7 +198,7 @@ export class SeriesHorizontal implements OnChanges {
 
       let tooltipLabel = formattedLabel;
       bar.ariaLabel = formattedLabel + ' ' + value.toLocaleString();
-      if (this.seriesName) {
+      if (this.seriesName !== null && this.seriesName !== undefined) {
         tooltipLabel = `${this.seriesName} • ${formattedLabel}`;
         bar.data.series = this.seriesName;
         bar.ariaLabel = this.seriesName + ' ' + bar.ariaLabel;
@@ -212,8 +219,8 @@ export class SeriesHorizontal implements OnChanges {
     this.updateDataLabels();
   }
 
-  updateDataLabels() {
-    if (this.type === 'stacked') {
+  updateDataLabels(): void {
+    if (this.type === BarChartType.Stacked) {
       this.barsForDataLabels = [];
       const section: any = {};
       section.series = this.seriesName;
@@ -233,7 +240,7 @@ export class SeriesHorizontal implements OnChanges {
     } else {
       this.barsForDataLabels = this.series.map(d => {
         const section: any = {};
-        section.series = this.seriesName ? this.seriesName : d.label;
+        section.series = this.seriesName ?? d.label;
         section.total = d.value;
         section.x = this.xScale(0);
         section.y = this.yScale(d.label);
@@ -244,31 +251,33 @@ export class SeriesHorizontal implements OnChanges {
     }
   }
 
-  updateTooltipSettings() {
-    this.tooltipPlacement = this.tooltipDisabled ? undefined : 'top';
-    this.tooltipType = this.tooltipDisabled ? undefined : 'tooltip';
+  updateTooltipSettings(): void {
+    this.tooltipPlacement = this.tooltipDisabled ? undefined : PlacementTypes.Top;
+    this.tooltipType = this.tooltipDisabled ? undefined : StyleTypes.tooltip;
   }
 
-  isActive(entry): boolean {
+  isActive(entry: DataItem): boolean {
     if (!this.activeEntries) return false;
-    const item = this.activeEntries.find(d => {
-      return entry.name === d.name && entry.series === d.series;
+
+    const item = this.activeEntries.find(active => {
+      return entry.name === active.name && entry.value === active.value;
     });
+
     return item !== undefined;
   }
 
-  getLabel(dataItem): string {
+  getLabel(dataItem: DataItem): StringOrNumberOrDate {
     if (dataItem.label) {
       return dataItem.label;
     }
     return dataItem.name;
   }
 
-  trackBy(index, bar) {
+  trackBy(index: number, bar: Bar): string {
     return bar.label;
   }
 
-  trackDataLabelBy(index, barLabel) {
+  trackDataLabelBy(index: number, barLabel: any): string {
     return index + '#' + barLabel.series + '#' + barLabel.total;
   }
 
