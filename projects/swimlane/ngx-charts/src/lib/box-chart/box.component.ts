@@ -14,14 +14,15 @@ import { select, BaseType } from 'd3-selection';
 import { interpolate } from 'd3-interpolate';
 import { easeSinInOut } from 'd3-ease';
 
-import cloneDeep from 'clone-deep';
-
+import rfdc from 'rfdc';
 import { roundedRect } from '../common/shape.helper';
 import { id } from '../utils/id';
 import { IBoxModel } from '../models/chart-data.model';
 import { IVector2D } from '../models/coordinates.model';
 import { BarOrientation } from '../common/types/bar-orientation.enum';
 import { Gradient } from '../common/types/gradient.interface';
+
+const cloneDeep = rfdc();
 
 type LineCoordinates = [IVector2D, IVector2D, IVector2D, IVector2D];
 
