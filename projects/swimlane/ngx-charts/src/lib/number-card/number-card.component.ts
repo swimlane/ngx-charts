@@ -10,7 +10,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
 @Component({
   selector: 'ngx-charts-number-card',
   template: `
-    <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations">
+    <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations" [fadeInAnimation]="fadeInAnimation">
       <svg:g [attr.transform]="transform" class="number-card chart" [class.clickable]="clickable">
         <svg:g
           ngx-charts-card-series

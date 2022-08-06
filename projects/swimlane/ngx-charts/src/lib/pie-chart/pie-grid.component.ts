@@ -26,7 +26,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
 @Component({
   selector: 'ngx-charts-pie-grid',
   template: `
-    <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations">
+    <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations" [fadeInAnimation]="fadeInAnimation">
       <svg:g [attr.transform]="transform" class="pie-grid chart">
         <svg:g *ngFor="let series of series" class="pie-grid-item" [attr.transform]="series.transform">
           <svg:g

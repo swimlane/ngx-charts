@@ -20,7 +20,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
 @Component({
   selector: 'ngx-charts-tree-map',
   template: `
-    <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations">
+    <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations" [fadeInAnimation]="fadeInAnimation">
       <svg:g [attr.transform]="transform" class="tree-map chart">
         <svg:g
           ngx-charts-tree-map-cell-series

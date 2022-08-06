@@ -33,6 +33,7 @@ import { isPlatformServer } from '@angular/common';
       [activeEntries]="activeEntries"
       [legendOptions]="legendOptions"
       [animations]="animations"
+      [fadeInAnimation]="fadeInAnimation"
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)"

@@ -21,7 +21,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
   template: `
     <div [style.width.px]="width" [style.height.px]="height">
       <div class="advanced-pie chart" [style.width.px]="dims.width" [style.height.px]="dims.height">
-        <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations">
+        <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations" [fadeInAnimation]="fadeInAnimation">
           <svg:g [attr.transform]="transform" class="pie chart">
             <svg:g
               ngx-charts-pie-series

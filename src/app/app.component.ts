@@ -103,6 +103,7 @@ export class AppComponent implements OnInit {
   showSeriesOnHover = true;
   roundEdges: boolean = true;
   animations: boolean = true;
+  fadeInAnimation: boolean = true
   xScaleMin: any;
   xScaleMax: any;
   yScaleMin: number;

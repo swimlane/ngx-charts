@@ -31,6 +31,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"
       [animations]="animations"
+      [fadeInAnimation]="fadeInAnimation"
       (legendLabelActivate)="onActivate($event, undefined, true)"
       (legendLabelDeactivate)="onDeactivate($event, undefined, true)"
       (legendLabelClick)="onClick($event)"

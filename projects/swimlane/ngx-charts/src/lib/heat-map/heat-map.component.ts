@@ -34,6 +34,7 @@ interface RectItem {
       [view]="[width, height]"
       [showLegend]="legend"
       [animations]="animations"
+      [fadeInAnimation]="fadeInAnimation"
       [legendOptions]="legendOptions"
       (legendLabelClick)="onClick($event)"
     >

@@ -19,6 +19,7 @@ import {
       [view]="[width, height]"
       [showLegend]="false"
       [animations]="animations"
+      [fadeInAnimation]="fadeInAnimation"
       class="timeline-filter-bar-chart"
     >
       <svg:g [attr.transform]="transform" class="chart">
