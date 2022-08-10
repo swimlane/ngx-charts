@@ -25,7 +25,10 @@
     "pack": "npm pack ./dist/swimlane/ngx-charts",
     "prettier": "prettier --write \"{src,projects}/**/*.{js,ts,html,scss,css,md,json}\"",
     "prettier:ci": "prettier --check \"{src,projects}/**/*.{js,ts,html,scss,css,md,json}\"",
-    "postinstall": "ngcc"
+    "postinstall": "ngcc",
+    "fix": "run-s lint fix:*",
+    "fix:prettier": "prettier --write \"{src,projects}/**/*.{js,ts,html,scss,css,md,json}\"",
+    "fix:lint": "ng lint --fix"
   },
   "dependencies": {
     "@angular/animations": "~13.1.0",
@@ -95,7 +98,7 @@
     "eslint-plugin-security": "^1.4.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
-    "karma": "~6.3.4",
+    "karma": "~6.3.16",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
