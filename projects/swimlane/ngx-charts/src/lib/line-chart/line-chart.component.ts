@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
-import { curveLinear } from 'd3-shape';
+import { CurveFactory, curveLinear } from 'd3-shape';
 
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
@@ -81,7 +81,7 @@ import { isPlatformServer } from '@angular/common';
         ></svg:g>
         <svg:g [attr.clip-path]="clipPath">
           <svg:g *ngIf="!isSSR">
-            <svg:g *ngFor="let series of results; trackBy: trackBy" [@animationState]="'active'">
+            <svg:g *ngFor="let series of finalResults; trackBy: trackBy" [@animationState]="'active'">
               <svg:g
                 ngx-charts-line-series
                 [xScale]="xScale"
@@ -98,7 +98,7 @@ import { isPlatformServer } from '@angular/common';
             </svg:g>
           </svg:g>
           <svg:g *ngIf="isSSR">
-            <svg:g *ngFor="let series of results; trackBy: trackBy">
+            <svg:g *ngFor="let series of finalResults; trackBy: trackBy">
               <svg:g
                 ngx-charts-line-series
                 [xScale]="xScale"
@@ -122,14 +122,14 @@ import { isPlatformServer } from '@angular/common';
               [xSet]="xSet"
               [xScale]="xScale"
               [yScale]="yScale"
-              [results]="results"
+              [results]="finalResults"
               [colors]="colors"
               [tooltipDisabled]="tooltipDisabled"
               [tooltipTemplate]="seriesTooltipTemplate"
               (hover)="updateHoveredVertical($event)"
             />
 
-            <svg:g *ngFor="let series of results">
+            <svg:g *ngFor="let series of finalResults">
               <svg:g
                 ngx-charts-circle-series
                 [xScale]="xScale"
@@ -153,7 +153,7 @@ import { isPlatformServer } from '@angular/common';
         ngx-charts-timeline
         *ngIf="timeline && scaleType != 'ordinal'"
         [attr.transform]="timelineTransform"
-        [results]="results"
+        [results]="finalResults"
         [view]="[timelineWidth, height]"
         [height]="timelineHeight"
         [scheme]="scheme"
@@ -162,7 +162,7 @@ import { isPlatformServer } from '@angular/common';
         [legend]="legend"
         (onDomainChange)="updateDomain($event)"
       >
-        <svg:g *ngFor="let series of results; trackBy: trackBy">
+        <svg:g *ngFor="let series of finalResults; trackBy: trackBy">
           <svg:g
             ngx-charts-line-series
             [xScale]="timelineXScale"
@@ -211,7 +211,7 @@ export class LineChartComponent extends BaseChartComponent implements OnInit {
   @Input() timeline: boolean;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
-  @Input() curve: any = curveLinear;
+  @Input() curve: CurveFactory = curveLinear;
   @Input() activeEntries: any[] = [];
   @Input() schemeType: ScaleType;
   @Input() rangeFillOpacity: number;
@@ -331,7 +331,7 @@ export class LineChartComponent extends BaseChartComponent implements OnInit {
   }
 
   getXDomain(): any[] {
-    let values = getUniqueXDomainValues(this.results);
+    let values = getUniqueXDomainValues(this.finalResults);
 
     this.scaleType = getScaleType(values);
     let domain = [];
@@ -371,7 +371,7 @@ export class LineChartComponent extends BaseChartComponent implements OnInit {
 
   getYDomain(): [number, number] {
     const domain = [];
-    for (const results of this.results) {
+    for (const results of this.finalResults) {
       for (const d of results.series) {
         if (domain.indexOf(d.value) < 0) {
           domain.push(d.value);
@@ -404,7 +404,7 @@ export class LineChartComponent extends BaseChartComponent implements OnInit {
   }
 
   getSeriesDomain(): string[] {
-    return this.results.map(d => d.name);
+    return this.finalResults.map(d => d.name.toString());
   }
 
   getXScale(domain, width: number): any {

@@ -75,7 +75,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
         <svg:g [attr.clip-path]="clipPath">
-          <svg:g *ngFor="let series of results; trackBy: trackBy">
+          <svg:g *ngFor="let series of finalResults; trackBy: trackBy">
             <svg:g
               ngx-charts-area-series
               [xScale]="xScale"
@@ -98,14 +98,14 @@ import { ScaleType } from '../common/types/scale-type.enum';
               [xSet]="xSet"
               [xScale]="xScale"
               [yScale]="yScale"
-              [results]="results"
+              [results]="finalResults"
               [colors]="colors"
               [tooltipDisabled]="tooltipDisabled"
               [tooltipTemplate]="seriesTooltipTemplate"
               (hover)="updateHoveredVertical($event)"
             />
 
-            <svg:g *ngFor="let series of results; trackBy: trackBy">
+            <svg:g *ngFor="let series of finalResults; trackBy: trackBy">
               <svg:g
                 ngx-charts-circle-series
                 [type]="seriesType.Stacked"
@@ -130,7 +130,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
         ngx-charts-timeline
         *ngIf="timeline && scaleType != 'ordinal'"
         [attr.transform]="timelineTransform"
-        [results]="results"
+        [results]="finalResults"
         [view]="[timelineWidth, height]"
         [height]="timelineHeight"
         [scheme]="scheme"
@@ -139,7 +139,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
         [scaleType]="scaleType"
         (onDomainChange)="updateDomain($event)"
       >
-        <svg:g *ngFor="let series of results; trackBy: trackBy">
+        <svg:g *ngFor="let series of finalResults; trackBy: trackBy">
           <svg:g
             ngx-charts-area-series
             [xScale]="timelineXScale"
@@ -263,7 +263,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
     for (let i = 0; i < this.xSet.length; i++) {
       const val = this.xSet[i];
       let d0 = 0;
-      for (const group of this.results) {
+      for (const group of this.finalResults) {
         let d = group.series.find(item => {
           let a = item.name;
           let b = val;
@@ -299,6 +299,8 @@ export class AreaChartStackedComponent extends BaseChartComponent {
 
     this.clipPathId = 'clip' + id().toString();
     this.clipPath = `url(#${this.clipPathId})`;
+
+    console.log('update this.finalResults', this.finalResults);
   }
 
   updateTimeline(): void {
@@ -312,7 +314,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
   }
 
   getXDomain(): any[] {
-    let values = getUniqueXDomainValues(this.results);
+    let values = getUniqueXDomainValues(this.finalResults);
 
     this.scaleType = getScaleType(values);
     let domain = [];
@@ -356,7 +358,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
     for (let i = 0; i < this.xSet.length; i++) {
       const val = this.xSet[i];
       let sum = 0;
-      for (const group of this.results) {
+      for (const group of this.finalResults) {
         const d = group.series.find(item => {
           let a = item.name;
           let b = val;
@@ -382,7 +384,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
   }
 
   getSeriesDomain(): string[] {
-    return this.results.map(d => d.name);
+    return this.finalResults.map(d => d.name.toString());
   }
 
   getXScale(domain, width: number): any {

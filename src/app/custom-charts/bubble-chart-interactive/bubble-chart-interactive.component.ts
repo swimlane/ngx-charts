@@ -234,7 +234,7 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
       legendType: this.schemeType
     });
 
-    this.seriesDomain = this.results.map(d => d.name);
+    this.seriesDomain = this.finalResults.map(d => d.name);
     this.rDomain = this.getRDomain();
     this.xDomain = this.getXDomain();
     this.yDomain = this.getYDomain();
@@ -244,7 +244,7 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
     const colorDomain = this.schemeType === ScaleType.Ordinal ? this.seriesDomain : this.rDomain;
     this.colors = new ColorHelper(this.scheme, this.schemeType, colorDomain, this.customColors);
 
-    this.data = this.results;
+    this.data = this.finalResults;
 
     this.minRadius = Math.max(this.minRadius, 1);
     this.maxRadius = Math.max(this.maxRadius, 1);
@@ -358,7 +358,7 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
   getXDomain(): any[] {
     const values = [];
 
-    for (const results of this.results) {
+    for (const results of this.finalResults) {
       for (const d of results.series) {
         if (!values.includes(d.x)) {
           values.push(d.x);
@@ -373,7 +373,7 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
   getYDomain(): any[] {
     const values = [];
 
-    for (const results of this.results) {
+    for (const results of this.finalResults) {
       for (const d of results.series) {
         if (!values.includes(d.y)) {
           values.push(d.y);
@@ -389,7 +389,7 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
     let min = Infinity;
     let max = -Infinity;
 
-    for (const results of this.results) {
+    for (const results of this.finalResults) {
       for (const d of results.series) {
         const value = Number(d.r) || 1;
         min = Math.min(min, value);

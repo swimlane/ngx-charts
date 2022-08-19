@@ -9,7 +9,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 
-import { BaseChartComponent } from '../common/base-chart.component';
+import { BaseChartComponent, FinalResultItem } from '../common/base-chart.component';
 import { ColorHelper } from '../common/color.helper';
 import { BoxChartMultiSeries, BoxChartSeries, IBoxModel, StringOrNumberOrDate } from '../models/chart-data.model';
 import { scaleLinear, ScaleLinear, scaleBand, ScaleBand } from 'd3-scale';
@@ -51,7 +51,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
         />
       </svg:g>
       <svg:g [attr.transform]="transform">
-        <svg:g *ngFor="let result of results; trackBy: trackBy">
+        <svg:g *ngFor="let result of finalResults; trackBy: trackBy">
           <svg:g
             ngx-charts-box-series
             [xScale]="xScale"
@@ -105,8 +105,6 @@ export class BoxChartComponent extends BaseChartComponent {
 
   @ContentChild('tooltipTemplate', { static: false }) tooltipTemplate: TemplateRef<any>;
 
-  /** Input Data, this came from Base Chart Component. */
-  results: BoxChartMultiSeries;
   /** Chart Dimensions, this came from Base Chart Component. */
   dims: ViewDimensions;
   /** Color data. */
@@ -192,7 +190,7 @@ export class BoxChartComponent extends BaseChartComponent {
     return this.roundDomains ? scale.nice() : scale;
   }
 
-  getUniqueBoxChartXDomainValues(results: BoxChartMultiSeries) {
+  getUniqueBoxChartXDomainValues(results: FinalResultItem[]) {
     const valueSet = new Set<string | number | Date>();
     for (const result of results) {
       valueSet.add(result.name);
@@ -202,7 +200,7 @@ export class BoxChartComponent extends BaseChartComponent {
 
   getXDomain(): Array<string | number | Date> {
     let domain: Array<string | number | Date> = [];
-    const values: Array<string | number | Date> = this.getUniqueBoxChartXDomainValues(this.results);
+    const values: Array<string | number | Date> = this.getUniqueBoxChartXDomainValues(this.finalResults);
     let min: number;
     let max: number;
     if (typeof values[0] === 'string') {
@@ -223,7 +221,7 @@ export class BoxChartComponent extends BaseChartComponent {
 
   getYDomain(): number[] {
     const domain: Array<number | Date> = [];
-    for (const results of this.results) {
+    for (const results of this.finalResults) {
       for (const d of results.series) {
         if (domain.indexOf(d.value) < 0) {
           domain.push(d.value);
@@ -241,7 +239,7 @@ export class BoxChartComponent extends BaseChartComponent {
   }
 
   getSeriesDomain(): string[] {
-    return this.results.map(d => `${d.name}`);
+    return this.finalResults.map(d => `${d.name}`);
   }
 
   updateYAxisWidth({ width }): void {

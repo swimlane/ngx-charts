@@ -65,7 +65,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
           [xScale]="xScale"
           [yScale]="yScale"
           [colors]="colors"
-          [series]="results"
+          [series]="finalResults"
           [dims]="dims"
           [gradient]="gradient"
           [tooltipDisabled]="tooltipDisabled"
@@ -163,8 +163,6 @@ export class BarHorizontalComponent extends BaseChartComponent {
       legendPosition: this.legendPosition
     });
 
-    this.formatDates();
-
     this.xScale = this.getXScale();
     this.yScale = this.getYScale();
 
@@ -190,7 +188,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
   }
 
   getXDomain(): [number, number] {
-    const values = this.results.map(d => d.value);
+    const values = this.finalResults.map(d => d.value);
     const min = this.xScaleMin ? Math.min(this.xScaleMin, ...values) : Math.min(0, ...values);
 
     const max = this.xScaleMax ? Math.max(this.xScaleMax, ...values) : Math.max(0, ...values);
@@ -198,7 +196,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
   }
 
   getYDomain(): string[] {
-    return this.results.map(d => d.label);
+    return this.finalResults.map(d => d.label.toString());
   }
 
   onClick(data): void {
@@ -252,13 +250,13 @@ export class BarHorizontalComponent extends BaseChartComponent {
     } else {
       this.dataLabelMaxWidth.positive = Math.max(this.dataLabelMaxWidth.positive, event.size.width);
     }
-    if (event.index === this.results.length - 1) {
+    if (event.index === this.finalResults.length - 1) {
       setTimeout(() => this.update());
     }
   }
 
   onActivate(item, fromLegend: boolean = false) {
-    item = this.results.find(d => {
+    item = this.finalResults.find(d => {
       if (fromLegend) {
         return d.label === item.name;
       } else {
@@ -278,7 +276,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
   }
 
   onDeactivate(item, fromLegend: boolean = false) {
-    item = this.results.find(d => {
+    item = this.finalResults.find(d => {
       if (fromLegend) {
         return d.label === item.name;
       } else {

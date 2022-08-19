@@ -18,7 +18,7 @@ import {
     <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations">
       <svg:g [attr.transform]="transform" class="line-chart chart">
         <svg:g>
-          <svg:g *ngFor="let series of results; trackBy: trackBy">
+          <svg:g *ngFor="let series of finalResults; trackBy: trackBy">
             <svg:g
               ngx-charts-line-series
               [xScale]="xScale"
@@ -87,7 +87,7 @@ export class SparklineComponent extends BaseChartComponent {
   }
 
   getXDomain(): any[] {
-    const values = getUniqueXDomainValues(this.results);
+    const values = getUniqueXDomainValues(this.finalResults);
 
     const { domain, xSet, scaleType } = getXDomainArray(values);
     this.scaleType = scaleType as ScaleType;
@@ -102,7 +102,7 @@ export class SparklineComponent extends BaseChartComponent {
 
     const domain = [];
 
-    for (const results of this.results) {
+    for (const results of this.finalResults) {
       for (const d of results.series) {
         if (domain.indexOf(d.value) < 0) {
           domain.push(d.value);
@@ -130,7 +130,7 @@ export class SparklineComponent extends BaseChartComponent {
   }
 
   getSeriesDomain(): any[] {
-    return this.results.map(d => d.name);
+    return this.finalResults.map(d => d.name);
   }
 
   getXScale(domain, width): any {

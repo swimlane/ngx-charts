@@ -1,10 +1,10 @@
 import { ScaleType } from '../common/types/scale-type.enum';
 
 export interface Color {
-  name: string;
-  selectable: boolean;
-  group: ScaleType;
-  domain: string[];
+  name?: string;
+  selectable?: boolean;
+  group?: ScaleType;
+  domain?: string[];
 }
 
 export const colorSets: Color[] = [

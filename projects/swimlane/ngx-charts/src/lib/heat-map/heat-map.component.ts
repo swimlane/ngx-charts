@@ -79,7 +79,7 @@ interface RectItem {
           [xScale]="xScale"
           [yScale]="yScale"
           [colors]="colors"
-          [data]="results"
+          [data]="finalResults"
           [gradient]="gradient"
           [animations]="animations"
           [tooltipDisabled]="tooltipDisabled"
@@ -147,8 +147,6 @@ export class HeatMapComponent extends BaseChartComponent {
   update(): void {
     super.update();
 
-    this.formatDates();
-
     this.xDomain = this.getXDomain();
     this.yDomain = this.getYDomain();
     this.valueDomain = this.getValueDomain();
@@ -194,7 +192,7 @@ export class HeatMapComponent extends BaseChartComponent {
 
   getXDomain(): string[] {
     const domain = [];
-    for (const group of this.results) {
+    for (const group of this.finalResults) {
       if (!domain.includes(group.name)) {
         domain.push(group.name);
       }
@@ -206,7 +204,7 @@ export class HeatMapComponent extends BaseChartComponent {
   getYDomain(): string[] {
     const domain = [];
 
-    for (const group of this.results) {
+    for (const group of this.finalResults) {
       for (const d of group.series) {
         if (!domain.includes(d.name)) {
           domain.push(d.name);
@@ -220,7 +218,7 @@ export class HeatMapComponent extends BaseChartComponent {
   getValueDomain(): any[] {
     const domain = [];
 
-    for (const group of this.results) {
+    for (const group of this.finalResults) {
       for (const d of group.series) {
         if (!domain.includes(d.value)) {
           domain.push(d.value);
@@ -326,16 +324,13 @@ export class HeatMapComponent extends BaseChartComponent {
       item.series = group.name;
     }
 
-    const items = this.results
-      .map(g => g.series)
-      .flat()
-      .filter(i => {
-        if (fromLegend) {
-          return i.label === item.name;
-        } else {
-          return i.name === item.name && i.series === item.series;
-        }
-      });
+    const items = this.finalResults.filter(i => {
+      if (fromLegend) {
+        return i.label === item.name;
+      } else {
+        return i.name === item.name && i.series === item.series;
+      }
+    });
 
     this.activeEntries = [...items];
     this.activate.emit({ value: item, entries: this.activeEntries });

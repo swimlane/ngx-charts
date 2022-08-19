@@ -26,7 +26,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
             <svg:g
               ngx-charts-pie-series
               [colors]="colors"
-              [series]="results"
+              [series]="finalResults"
               [innerRadius]="innerRadius"
               [activeEntries]="activeEntries"
               [outerRadius]="outerRadius"
@@ -44,7 +44,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
       </div>
       <div class="advanced-pie-legend-wrapper" [style.width.px]="width - dims.width" [style.height.px]="height">
         <ngx-charts-advanced-legend
-          [data]="results"
+          [data]="finalResults"
           [colors]="colors"
           [width]="width - dims.width - margin[1]"
           [label]="label"
@@ -98,8 +98,6 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
       margins: this.margin
     });
 
-    this.formatDates();
-
     this.domain = this.getDomain();
     this.setColors();
 
@@ -114,7 +112,7 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
   }
 
   getDomain(): string[] {
-    return this.results.map(d => d.label);
+    return this.finalResults.map(d => d.label.toString());
   }
 
   onClick(data: DataItem) {
@@ -126,7 +124,7 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
   }
 
   onActivate(item, fromLegend = false) {
-    item = this.results.find(d => {
+    item = this.finalResults.find(d => {
       if (fromLegend) {
         return d.label === item.name;
       } else {
@@ -146,7 +144,7 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
   }
 
   onDeactivate(item, fromLegend = false) {
-    item = this.results.find(d => {
+    item = this.finalResults.find(d => {
       if (fromLegend) {
         return d.label === item.name;
       } else {

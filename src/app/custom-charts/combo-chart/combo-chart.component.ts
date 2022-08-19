@@ -180,7 +180,7 @@ export class ComboChartComponent extends BaseChartComponent {
     this.combinedSeries = this.lineChart.slice(0);
     this.combinedSeries.push({
       name: this.yAxisLabel,
-      series: this.results
+      series: this.finalResults
     });
     return this.combinedSeries.map(d => d.name);
   }
@@ -324,11 +324,11 @@ export class ComboChartComponent extends BaseChartComponent {
   }
 
   getXDomain(): any[] {
-    return this.results.map(d => d.name);
+    return this.finalResults.map(d => d.name);
   }
 
   getYDomain() {
-    const values = this.results.map(d => d.value);
+    const values = this.finalResults.map(d => d.value);
     const min = Math.min(0, ...values);
     const max = Math.max(...values);
     if (this.yLeftAxisScaleFactor) {

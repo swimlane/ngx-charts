@@ -14,14 +14,25 @@ import { StringOrNumberOrDate } from '../models/chart-data.model';
 import { ScaleType } from './types/scale-type.enum';
 import { Gradient } from './types/gradient.interface';
 
+export interface CustomColor {
+  name: string;
+  value: string;
+}
+export type CustomColorFunc = (value: StringOrNumberOrDate) => string;
+
 export class ColorHelper {
   scale: any;
   scaleType: ScaleType;
   colorDomain: string[];
-  domain: number[] | string[];
-  customColors: any;
+  domain: (string | number)[];
+  customColors: CustomColor[] | CustomColorFunc;
 
-  constructor(scheme: string | Color, type: ScaleType, domain: number[] | string[], customColors?) {
+  constructor(
+    scheme: string | Color,
+    type: ScaleType,
+    domain: (string | number)[],
+    customColors?: CustomColor[] | CustomColorFunc
+  ) {
     if (typeof scheme === 'string') {
       scheme = colorSets.find(cs => {
         return cs.name === scheme;
@@ -35,7 +46,7 @@ export class ColorHelper {
     this.scale = this.generateColorScheme(scheme, type, this.domain);
   }
 
-  generateColorScheme(scheme: string | Color, type: ScaleType, domain: number[] | string[]): any {
+  generateColorScheme(scheme: string | Color, type: ScaleType, domain: (string | number)[]): any {
     if (typeof scheme === 'string') {
       scheme = colorSets.find(cs => {
         return cs.name === scheme;
@@ -91,15 +102,15 @@ export class ColorHelper {
       }
 
       const formattedValue = value.toString();
-      let found: any; // todo type customColors
+      let foundColor: CustomColor;
       if (this.customColors && this.customColors.length > 0) {
-        found = this.customColors.find(mapping => {
+        foundColor = this.customColors.find(mapping => {
           return mapping.name.toLowerCase() === formattedValue.toLowerCase();
         });
       }
 
-      if (found) {
-        return found.value;
+      if (foundColor) {
+        return foundColor.value;
       } else {
         return this.scale(value);
       }

@@ -64,17 +64,15 @@ export class NumberCardComponent extends BaseChartComponent {
       margins: this.margin
     });
 
-    this.formatDates();
-
     this.domain = this.getDomain();
 
     this.setColors();
     this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
 
-    const size = gridSize(this.dims, this.results.length, 150);
+    const size = gridSize(this.dims, this.finalResults.length, 150);
     const N = size[0] * size[1];
 
-    const data = this.results.slice();
+    const data = this.finalResults.slice();
 
     while (data.length < N) {
       data.push({ value: null });
@@ -84,7 +82,7 @@ export class NumberCardComponent extends BaseChartComponent {
   }
 
   getDomain(): string[] {
-    return this.results.map(d => d.label);
+    return this.finalResults.map(d => d.label.toString());
   }
 
   onClick(data): void {

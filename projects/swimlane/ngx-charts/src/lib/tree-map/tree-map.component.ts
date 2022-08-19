@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { treemap, stratify } from 'd3-hierarchy';
 
-import { BaseChartComponent } from '../common/base-chart.component';
+import { BaseChartComponent, ResultItem } from '../common/base-chart.component';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { DataItem } from '../models/chart-data.model';
@@ -43,7 +43,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreeMapComponent extends BaseChartComponent {
-  @Input() results: DataItem[];
+  @Input() results: ResultItem[];
   @Input() tooltipDisabled: boolean = false;
   @Input() valueFormatting: any;
   @Input() labelFormatting: any;
@@ -91,7 +91,7 @@ export class TreeMapComponent extends BaseChartComponent {
         }
         return label;
       })
-      .parentId(d => (d.isRoot ? null : 'root'))([rootNode, ...this.results])
+      .parentId(d => (d.isRoot ? null : 'root'))([rootNode, ...this.finalResults])
       .sum(d => d.value);
 
     this.data = this.treemap(root);
@@ -102,7 +102,7 @@ export class TreeMapComponent extends BaseChartComponent {
   }
 
   getDomain(): any[] {
-    return this.results.map(d => d.name);
+    return this.finalResults.map(d => d.name);
   }
 
   onClick(data: DataItem): void {

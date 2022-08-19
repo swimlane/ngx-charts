@@ -68,7 +68,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
         ></svg:g>
         <svg:g *ngIf="!isSSR">
           <svg:g
-            *ngFor="let group of results; let index = index; trackBy: trackBy"
+            *ngFor="let group of finalResults; let index = index; trackBy: trackBy"
             [@animationState]="'active'"
             [attr.transform]="groupTransform(group)"
           >
@@ -98,7 +98,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
         </svg:g>
         <svg:g *ngIf="isSSR">
           <svg:g
-            *ngFor="let group of results; let index = index; trackBy: trackBy"
+            *ngFor="let group of finalResults; let index = index; trackBy: trackBy"
             [attr.transform]="groupTransform(group)"
           >
             <svg:g
@@ -226,8 +226,6 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
       legendPosition: this.legendPosition
     });
 
-    this.formatDates();
-
     this.groupDomain = this.getGroupDomain();
     this.innerDomain = this.getInnerDomain();
     this.valueDomain = this.getValueDomain();
@@ -244,7 +242,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   getGroupDomain(): string[] {
     const domain = [];
 
-    for (const group of this.results) {
+    for (const group of this.finalResults) {
       if (!domain.includes(group.label)) {
         domain.push(group.label);
       }
@@ -256,7 +254,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   getInnerDomain(): string[] {
     const domain = [];
 
-    for (const group of this.results) {
+    for (const group of this.finalResults) {
       for (const d of group.series) {
         if (!domain.includes(d.label)) {
           domain.push(d.label);
@@ -271,7 +269,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
     const domain = [];
     let smallest = 0;
     let biggest = 0;
-    for (const group of this.results) {
+    for (const group of this.finalResults) {
       let smallestSum = 0;
       let biggestSum = 0;
       for (const d of group.series) {
@@ -368,7 +366,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
     } else {
       this.dataLabelMaxWidth.positive = Math.max(this.dataLabelMaxWidth.positive, event.size.width);
     }
-    if (groupIndex === this.results.length - 1) {
+    if (groupIndex === this.finalResults.length - 1) {
       setTimeout(() => this.update());
     }
   }
@@ -379,16 +377,13 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
       item.series = group.name;
     }
 
-    const items = this.results
-      .map(g => g.series)
-      .flat()
-      .filter(i => {
-        if (fromLegend) {
-          return i.label === item.name;
-        } else {
-          return i.name === item.name && i.series === item.series;
-        }
-      });
+    const items = this.finalResults.filter(i => {
+      if (fromLegend) {
+        return i.label === item.name;
+      } else {
+        return i.name === item.name && i.series === item.series;
+      }
+    });
 
     this.activeEntries = [...items];
     this.activate.emit({ value: item, entries: this.activeEntries });

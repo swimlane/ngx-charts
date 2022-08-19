@@ -1,6 +1,7 @@
 import { scaleBand } from 'd3-scale';
 import { ViewDimensions } from './types/view-dimension.interface';
 import { StringOrNumberOrDate } from '../models/chart-data.model';
+import { FinalResultItem } from './base-chart.component';
 
 export interface GridItem {
   data: GridData;
@@ -36,7 +37,7 @@ export function gridSize(dims: ViewDimensions, len: number, minWidth: number): [
 
 export function gridLayout(
   dims: ViewDimensions,
-  data: GridData[],
+  data: FinalResultItem[],
   minWidth: number,
   designatedTotal: number
 ): GridItem[] {

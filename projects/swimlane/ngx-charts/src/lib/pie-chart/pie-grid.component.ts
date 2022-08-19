@@ -126,11 +126,9 @@ export class PieGridComponent extends BaseChartComponent {
       margins: this.margin
     });
 
-    this.formatDates();
-
     this.domain = this.getDomain();
 
-    this.data = gridLayout(this.dims, this.results, this.minWidth, this.designatedTotal);
+    this.data = gridLayout(this.dims, this.finalResults, this.minWidth, this.designatedTotal);
     this.transform = `translate(${this.margin[3]} , ${this.margin[0]})`;
 
     this.series = this.getSeries();
@@ -149,7 +147,7 @@ export class PieGridComponent extends BaseChartComponent {
   }
 
   getDomain(): string[] {
-    return this.results.map(d => d.label);
+    return this.finalResults.map(d => d.label.toString());
   }
 
   getSeries(): any[] {
@@ -202,7 +200,7 @@ export class PieGridComponent extends BaseChartComponent {
   }
 
   getTotal(): any {
-    return this.results.map(d => d.value).reduce((sum, d) => sum + d, 0);
+    return this.finalResults.map(d => d.value).reduce((sum, d) => sum + d, 0);
   }
 
   onClick(data: DataItem): void {
@@ -214,7 +212,7 @@ export class PieGridComponent extends BaseChartComponent {
   }
 
   onActivate(item, fromLegend = false) {
-    item = this.results.find(d => {
+    item = this.finalResults.find(d => {
       if (fromLegend) {
         return d.label === item.name;
       } else {
@@ -234,7 +232,7 @@ export class PieGridComponent extends BaseChartComponent {
   }
 
   onDeactivate(item, fromLegend = false) {
-    item = this.results.find(d => {
+    item = this.finalResults.find(d => {
       if (fromLegend) {
         return d.label === item.name;
       } else {

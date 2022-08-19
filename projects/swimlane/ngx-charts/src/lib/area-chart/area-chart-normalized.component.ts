@@ -77,7 +77,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
         <svg:g [attr.clip-path]="clipPath">
-          <svg:g *ngFor="let series of results; trackBy: trackBy">
+          <svg:g *ngFor="let series of finalResults; trackBy: trackBy">
             <svg:g
               ngx-charts-area-series
               [xScale]="xScale"
@@ -100,7 +100,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
               [xSet]="xSet"
               [xScale]="xScale"
               [yScale]="yScale"
-              [results]="results"
+              [results]="finalResults"
               [colors]="colors"
               [showPercentage]="true"
               [tooltipDisabled]="tooltipDisabled"
@@ -108,7 +108,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
               (hover)="updateHoveredVertical($event)"
             />
 
-            <svg:g *ngFor="let series of results">
+            <svg:g *ngFor="let series of finalResults">
               <svg:g
                 ngx-charts-circle-series
                 [type]="seriesType.Stacked"
@@ -133,7 +133,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
         ngx-charts-timeline
         *ngIf="timeline && scaleType != 'ordinal'"
         [attr.transform]="timelineTransform"
-        [results]="results"
+        [results]="finalResults"
         [view]="[timelineWidth, height]"
         [height]="timelineHeight"
         [scheme]="scheme"
@@ -142,7 +142,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
         [scaleType]="scaleType"
         (onDomainChange)="updateDomain($event)"
       >
-        <svg:g *ngFor="let series of results; trackBy: trackBy">
+        <svg:g *ngFor="let series of finalResults; trackBy: trackBy">
           <svg:g
             ngx-charts-area-series
             [xScale]="timelineXScale"
@@ -264,7 +264,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
       let d0 = 0;
 
       let total = 0;
-      for (const group of this.results) {
+      for (const group of this.finalResults) {
         const d = group.series.find(item => {
           let a = item.name;
           let b = val;
@@ -279,7 +279,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
         }
       }
 
-      for (const group of this.results) {
+      for (const group of this.finalResults) {
         let d = group.series.find(item => {
           let a = item.name;
           let b = val;
@@ -305,8 +305,8 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
         }
 
         if (total > 0) {
-          d.d0 = (d.d0 * 100) / total;
-          d.d1 = (d.d1 * 100) / total;
+          d.d0 = (+d.d0 * 100) / total;
+          d.d1 = (+d.d1 * 100) / total;
         } else {
           d.d0 = 0;
           d.d1 = 0;
@@ -336,7 +336,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
   }
 
   getXDomain(): any[] {
-    let values = getUniqueXDomainValues(this.results);
+    let values = getUniqueXDomainValues(this.finalResults);
 
     this.scaleType = getScaleType(values);
     let domain = [];
@@ -368,7 +368,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
   }
 
   getSeriesDomain(): string[] {
-    return this.results.map(d => d.name);
+    return this.finalResults.map(d => d.name.toString());
   }
 
   getXScale(domain, width: number): any {

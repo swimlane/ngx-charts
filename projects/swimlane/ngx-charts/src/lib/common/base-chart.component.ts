@@ -19,17 +19,51 @@ import {
 import { fromEvent as observableFromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { VisibilityObserver } from '../utils/visibility-observer';
-import { isDate } from '../utils/types';
+import { isDate, isDefined } from '../utils/types';
 import { Color } from '../utils/color-sets';
 import { ScaleType } from './types/scale-type.enum';
 import { ViewDimensions } from './types/view-dimension.interface';
+import { dataTypeMap } from '@swimlane/ngx-ui';
+import { StringOrNumberOrDate } from '../models/chart-data.model';
+
+export interface ResultItem {
+  extra?: unknown;
+  label?: string | Date;
+  min?: number;
+  max?: number;
+  name?: StringOrNumberOrDate;
+  value?: number;
+  percent?: number;
+  total?: number;
+  x?: StringOrNumberOrDate;
+  y?: StringOrNumberOrDate;
+  r?: number;
+  series?: ResultItem[];
+  [key: string]: unknown;
+}
+
+export interface FinalResultItem {
+  extra?: unknown;
+  label?: string | number;
+  min?: number;
+  max?: number;
+  name?: string | number;
+  value?: number;
+  percent?: number;
+  x?: StringOrNumberOrDate;
+  y?: StringOrNumberOrDate;
+  r?: number;
+  total?: number;
+  series?: FinalResultItem[];
+  [key: string]: unknown;
+}
 
 @Component({
   selector: 'base-chart',
   template: ` <div></div> `
 })
 export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, OnInit {
-  @Input() results: any;
+  @Input() results: ResultItem[];
   @Input() view: [number, number];
   @Input() scheme: string | Color = 'cool';
   @Input() schemeType: ScaleType = ScaleType.Ordinal;
@@ -37,6 +71,8 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, 
   @Input() animations: boolean = true;
 
   @Output() select = new EventEmitter();
+
+  finalResults: FinalResultItem[] = [];
 
   width: number;
   height: number;
@@ -77,11 +113,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, 
   }
 
   update(): void {
-    if (this.results) {
-      this.results = this.cloneData(this.results);
-    } else {
-      this.results = [];
-    }
+    this.finalResults = this.formatResults(this.results);
 
     if (this.view) {
       this.width = this.view[0];
@@ -112,8 +144,8 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, 
   }
 
   getContainerDims(): ViewDimensions {
-    let width;
-    let height;
+    let width: number;
+    let height: number;
     const hostElem = this.chartElement.nativeElement;
 
     if (isPlatformBrowser(this.platformId) && hostElem.parentNode !== null) {
@@ -131,27 +163,74 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, 
   }
 
   /**
-   * Converts all date objects that appear as name
-   * into formatted date strings
+   * Formats the provided results by:
+   *  - filtering out empty/undefined entries
+   *  - setting label equal to name and converting it to a string if it is a Date object
+   *  - setting value, min, max, percent, total, x, y, r, series, and extra
+   * @param results The results provided by the component input.
+   * @returns The formatted final results array.
    */
-  formatDates(): void {
-    for (let i = 0; i < this.results.length; i++) {
-      const g = this.results[i];
-      g.label = g.name;
-      if (isDate(g.label)) {
-        g.label = g.label.toLocaleDateString();
-      }
+  formatResults(results: ResultItem[]): FinalResultItem[] {
+    const finalResults: FinalResultItem[] = [];
 
-      if (g.series) {
-        for (let j = 0; j < g.series.length; j++) {
-          const d = g.series[j];
-          d.label = d.name;
-          if (isDate(d.label)) {
-            d.label = d.label.toLocaleDateString();
-          }
-        }
-      }
+    if (!results?.length) {
+      return [];
     }
+
+    results
+      .filter((item: ResultItem) => !!item)
+      .forEach((item: ResultItem) => {
+        const copy: FinalResultItem = {};
+
+        if (isDefined(item.name)) {
+          copy.name = isDate(item.name) ? (item.name as Date).toLocaleDateString() : item.name.toString();
+          copy.label = copy.name;
+        }
+
+        if (isDefined(item.value)) {
+          copy.value = item.value;
+        }
+
+        if (isDefined(item.min)) {
+          copy.min = item.min;
+        }
+
+        if (isDefined(item.max)) {
+          copy.max = item.max;
+        }
+
+        if (isDefined(item.percent)) {
+          copy.percent = item.percent;
+        }
+
+        if (isDefined(item.total)) {
+          copy.total = item.total;
+        }
+
+        if (isDefined(item.x)) {
+          copy.x = item.x;
+        }
+
+        if (isDefined(item.y)) {
+          copy.y = item.y;
+        }
+
+        if (isDefined(item.r)) {
+          copy.r = item.r;
+        }
+
+        if (isDefined(item.series)) {
+          copy.series = this.formatResults(item.series);
+        }
+
+        if (isDefined(item.extra)) {
+          copy.extra = JSON.parse(JSON.stringify(item.extra));
+        }
+
+        finalResults.push(copy);
+      });
+
+    return finalResults;
   }
 
   protected unbindEvents(): void {
@@ -173,40 +252,5 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, 
       }
     });
     this.resizeSubscription = subscription;
-  }
-
-  /**
-   * Clones the data into a new object
-   *
-   * @memberOf BaseChart
-   */
-  private cloneData(data): any {
-    const results = [];
-
-    for (const item of data) {
-      const copy = {
-        name: item['name']
-      };
-
-      if (item['value'] !== undefined) {
-        copy['value'] = item['value'];
-      }
-
-      if (item['series'] !== undefined) {
-        copy['series'] = [];
-        for (const seriesItem of item['series']) {
-          const seriesItemCopy = Object.assign({}, seriesItem);
-          copy['series'].push(seriesItemCopy);
-        }
-      }
-
-      if (item['extra'] !== undefined) {
-        copy['extra'] = JSON.parse(JSON.stringify(item['extra']));
-      }
-
-      results.push(copy);
-    }
-
-    return results;
   }
 }

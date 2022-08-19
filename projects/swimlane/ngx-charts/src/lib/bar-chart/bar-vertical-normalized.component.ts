@@ -66,7 +66,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
         ></svg:g>
         <svg:g *ngIf="!isSSR">
           <svg:g
-            *ngFor="let group of results; trackBy: trackBy"
+            *ngFor="let group of finalResults; trackBy: trackBy"
             [@animationState]="'active'"
             [attr.transform]="groupTransform(group)"
           >
@@ -92,7 +92,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
           </svg:g>
         </svg:g>
         <svg:g *ngIf="isSSR">
-          <svg:g *ngFor="let group of results; trackBy: trackBy" [attr.transform]="groupTransform(group)">
+          <svg:g *ngFor="let group of finalResults; trackBy: trackBy" [attr.transform]="groupTransform(group)">
             <svg:g
               ngx-charts-series-vertical
               [type]="barChartType.Normalized"
@@ -205,8 +205,6 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
       legendPosition: this.legendPosition
     });
 
-    this.formatDates();
-
     this.groupDomain = this.getGroupDomain();
     this.innerDomain = this.getInnerDomain();
 
@@ -221,7 +219,7 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
 
   getGroupDomain(): string[] {
     const domain = [];
-    for (const group of this.results) {
+    for (const group of this.finalResults) {
       if (!domain.includes(group.label)) {
         domain.push(group.label);
       }
@@ -232,7 +230,7 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
 
   getInnerDomain(): string[] {
     const domain = [];
-    for (const group of this.results) {
+    for (const group of this.finalResults) {
       for (const d of group.series) {
         if (!domain.includes(d.label)) {
           domain.push(d.label);
@@ -317,16 +315,13 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
       item.series = group.name;
     }
 
-    const items = this.results
-      .map(g => g.series)
-      .flat()
-      .filter(i => {
-        if (fromLegend) {
-          return i.label === item.name;
-        } else {
-          return i.name === item.name && i.series === item.series;
-        }
-      });
+    const items = this.finalResults.filter(i => {
+      if (fromLegend) {
+        return i.label === item.name;
+      } else {
+        return i.name === item.name && i.series === item.series;
+      }
+    });
 
     this.activeEntries = [...items];
     this.activate.emit({ value: item, entries: this.activeEntries });

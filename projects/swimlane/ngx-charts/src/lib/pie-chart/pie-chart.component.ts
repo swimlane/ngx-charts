@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
-import { BaseChartComponent } from '../common/base-chart.component';
+import { BaseChartComponent, FinalResultItem } from '../common/base-chart.component';
 import { DataItem } from '../models/chart-data.model';
 import { LegendOptions, LegendPosition } from '../common/types/legend.model';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
@@ -86,7 +86,7 @@ export class PieChartComponent extends BaseChartComponent {
   translation: string;
   outerRadius: number;
   innerRadius: number;
-  data: DataItem[];
+  data: FinalResultItem[];
   colors: ColorHelper;
   domain: string[];
   dims: ViewDimensions;
@@ -110,8 +110,6 @@ export class PieChartComponent extends BaseChartComponent {
       legendPosition: this.legendPosition
     });
 
-    this.formatDates();
-
     const xOffset = this.margins[3] + this.dims.width / 2;
     const yOffset = this.margins[0] + this.dims.height / 2;
     this.translation = `translate(${xOffset}, ${yOffset})`;
@@ -130,8 +128,8 @@ export class PieChartComponent extends BaseChartComponent {
     this.domain = this.getDomain();
 
     // sort data according to domain
-    this.data = this.results.sort((a, b) => {
-      return this.domain.indexOf(a.name) - this.domain.indexOf(b.name);
+    this.data = this.finalResults.sort((a, b) => {
+      return this.domain.indexOf(a.name.toString()) - this.domain.indexOf(b.name.toString());
     });
 
     this.setColors();
@@ -139,7 +137,7 @@ export class PieChartComponent extends BaseChartComponent {
   }
 
   getDomain(): string[] {
-    return this.results.map(d => d.label);
+    return this.finalResults.map(d => d.label.toString());
   }
 
   onClick(data: DataItem | string): void {
@@ -161,7 +159,7 @@ export class PieChartComponent extends BaseChartComponent {
   }
 
   onActivate(item, fromLegend = false): void {
-    item = this.results.find(d => {
+    item = this.finalResults.find(d => {
       if (fromLegend) {
         return d.label === item.name;
       } else {
@@ -181,7 +179,7 @@ export class PieChartComponent extends BaseChartComponent {
   }
 
   onDeactivate(item, fromLegend = false): void {
-    item = this.results.find(d => {
+    item = this.finalResults.find(d => {
       if (fromLegend) {
         return d.label === item.name;
       } else {

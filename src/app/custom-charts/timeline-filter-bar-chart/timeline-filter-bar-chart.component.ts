@@ -46,7 +46,7 @@ import {
           [xScale]="xScale"
           [yScale]="yScale"
           [colors]="colors"
-          [series]="results"
+          [series]="finalResults"
           [dims]="dims"
           [gradient]="gradient"
           [animations]="animations"
@@ -150,7 +150,7 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
   getXDomain(): any[] {
     const values = [];
 
-    for (const d of this.results) {
+    for (const d of this.finalResults) {
       if (!values.includes(d.name)) {
         values.push(d.name);
       }
@@ -182,7 +182,7 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
 
     const domain = [];
 
-    for (const d of this.results) {
+    for (const d of this.finalResults) {
       if (domain.indexOf(d.value) < 0) {
         domain.push(d.value);
       }

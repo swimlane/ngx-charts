@@ -195,13 +195,13 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
 
     const availableRadius = this.outerRadius * 0.7;
 
-    const radiusPerArc = Math.min(availableRadius / this.results.length, 10);
+    const radiusPerArc = Math.min(availableRadius / this.finalResults.length, 10);
     const arcWidth = radiusPerArc * 0.7;
-    this.textRadius = this.outerRadius - this.results.length * radiusPerArc;
+    this.textRadius = this.outerRadius - this.finalResults.length * radiusPerArc;
     this.cornerRadius = Math.floor(arcWidth / 2);
 
     let i = 0;
-    for (const d of this.results) {
+    for (const d of this.finalResults) {
       const outerRadius = this.outerRadius - i * radiusPerArc;
       const innerRadius = outerRadius - arcWidth;
 
@@ -238,11 +238,11 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   }
 
   getDomain(): string[] {
-    return this.results.map(d => d.name);
+    return this.finalResults.map(d => d.name.toString());
   }
 
   getValueDomain(): [number, number] {
-    const values = this.results.map(d => d.value);
+    const values = this.finalResults.map(d => d.value);
     const dataMin = Math.min(...values);
     const dataMax = Math.max(...values);
 
@@ -266,7 +266,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   }
 
   getDisplayValue(): string {
-    const value = this.results.map(d => d.value).reduce((a, b) => a + b, 0);
+    const value = this.finalResults.map(d => d.value).reduce((a, b) => a + b, 0);
 
     if (this.textValue && 0 !== this.textValue.length) {
       return this.textValue.toLocaleString();
