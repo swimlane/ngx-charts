@@ -56,7 +56,7 @@
     "d3-time-format": "^3.0.0",
     "d3-transition": "^2.0.0",
     "emoji-flags": "^1.2.0",
-    "moment-timezone": "^0.5.28",
+    "moment-timezone": "^0.5.35",
     "ng-in-viewport": "^6.1.5",
     "ngx-moment": "^5.0.0",
     "resize-observer-polyfill": "^1.5.1",
