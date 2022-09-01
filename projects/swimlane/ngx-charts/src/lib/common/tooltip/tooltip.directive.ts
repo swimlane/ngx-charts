@@ -112,7 +112,7 @@ export class TooltipDirective implements OnDestroy {
 
     const time = immediate
       ? 0
-      : this.tooltipShowTimeout + (navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) ? 300 : 0);
+      : this.tooltipShowTimeout + (navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) ? 400 : 0);
 
     clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
