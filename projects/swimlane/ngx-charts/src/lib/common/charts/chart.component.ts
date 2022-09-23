@@ -15,7 +15,7 @@ import { ScaleType } from '../types/scale-type.enum';
   providers: [TooltipService],
   selector: 'ngx-charts-chart',
   template: `
-    <div class="ngx-charts-outer" [style.width.px]="view[0]">
+    <div class="ngx-charts-outer" [style.width.px]="view[0]" [style.height.px]="view[1]">
       <svg class="ngx-charts" [attr.width]="chartWidth" [attr.height]="view[1]">
         <ng-content></ng-content>
       </svg>
