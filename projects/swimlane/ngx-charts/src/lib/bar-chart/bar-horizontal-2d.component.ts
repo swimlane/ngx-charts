@@ -33,6 +33,7 @@ import { BarOrientation } from '../common/types/bar-orientation.enum';
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"
       [animations]="animations"
+      [fadeInAnimation]="fadeInAnimation"
       (legendLabelActivate)="onActivate($event, undefined, true)"
       (legendLabelDeactivate)="onDeactivate($event, undefined, true)"
       (legendLabelClick)="onClick($event)"

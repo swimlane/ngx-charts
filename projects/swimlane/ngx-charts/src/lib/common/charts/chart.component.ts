@@ -15,7 +15,7 @@ import { ScaleType } from '../types/scale-type.enum';
   providers: [TooltipService],
   selector: 'ngx-charts-chart',
   template: `
-    <div class="ngx-charts-outer" [style.width.px]="view[0]">
+    <div [ngClass]="{ 'ngx-charts-outer': fadeInAnimation }" [style.width.px]="view[0]">
       <svg class="ngx-charts" [attr.width]="chartWidth" [attr.height]="view[1]">
         <ng-content></ng-content>
       </svg>
@@ -55,6 +55,7 @@ export class ChartComponent implements OnChanges {
   @Input() legendType: LegendType;
   @Input() activeEntries: any[];
   @Input() animations: boolean = true;
+  @Input() fadeInAnimation: boolean = true;
 
   @Output() legendLabelClick = new EventEmitter<string>();
   @Output() legendLabelActivate = new EventEmitter<{ name: string }>();

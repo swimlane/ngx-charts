@@ -8,6 +8,7 @@ const chartGroups = [
         inputFormat: 'singleSeries',
         options: [
           'animations',
+          'fadeInAnimation',
           'colorScheme',
           'schemeType',
           'showXAxis',
@@ -41,6 +42,7 @@ const chartGroups = [
         inputFormat: 'singleSeries',
         options: [
           'animations',
+          'fadeInAnimation',
           'colorScheme',
           'schemeType',
           'showXAxis',
@@ -78,6 +80,7 @@ const chartGroups = [
         inputFormat: 'multiSeries',
         options: [
           'animations',
+          'fadeInAnimation',
           'colorScheme',
           'schemeType',
           'showXAxis',
@@ -112,6 +115,7 @@ const chartGroups = [
         inputFormat: 'multiSeries',
         options: [
           'animations',
+          'fadeInAnimation',
           'colorScheme',
           'schemeType',
           'showXAxis',
@@ -150,6 +154,7 @@ const chartGroups = [
         inputFormat: 'multiSeries',
         options: [
           'animations',
+          'fadeInAnimation',
           'colorScheme',
           'schemeType',
           'showXAxis',
@@ -182,6 +187,7 @@ const chartGroups = [
         inputFormat: 'multiSeries',
         options: [
           'animations',
+          'fadeInAnimation',
           'colorScheme',
           'schemeType',
           'showXAxis',
@@ -218,6 +224,7 @@ const chartGroups = [
         inputFormat: 'multiSeries',
         options: [
           'animations',
+          'fadeInAnimation',
           'colorScheme',
           'schemeType',
           'showXAxis',
@@ -252,6 +259,7 @@ const chartGroups = [
         inputFormat: 'multiSeries',
         options: [
           'animations',
+          'fadeInAnimation',
           'colorScheme',
           'schemeType',
           'showXAxis',
@@ -291,6 +299,7 @@ const chartGroups = [
         inputFormat: 'singleSeries',
         options: [
           'animations',
+          'fadeInAnimation',
           'colorScheme',
           'gradient',
           'showLegend',
@@ -307,13 +316,13 @@ const chartGroups = [
         name: 'Advanced Pie Chart',
         selector: 'advanced-pie-chart',
         inputFormat: 'singleSeries',
-        options: ['animations', 'colorScheme', 'gradient', 'tooltipDisabled']
+        options: ['animations', 'fadeInAnimation', 'colorScheme', 'gradient', 'tooltipDisabled']
       },
       {
         name: 'Pie Grid',
         selector: 'pie-grid',
         inputFormat: 'singleSeries',
-        options: ['animations', 'colorScheme', 'tooltipDisabled']
+        options: ['animations', 'fadeInAnimation', 'colorScheme', 'tooltipDisabled']
       }
     ]
   },
@@ -326,6 +335,7 @@ const chartGroups = [
         inputFormat: 'multiSeries',
         options: [
           'animations',
+          'fadeInAnimation',
           'colorScheme',
           'schemeType',
           'showXAxis',

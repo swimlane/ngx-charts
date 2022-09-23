@@ -15,7 +15,7 @@ import {
   // tslint:disable-next-line: component-selector
   selector: 'ngx-charts-sparkline',
   template: `
-    <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations">
+    <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations" [fadeInAnimation]="fadeInAnimation">
       <svg:g [attr.transform]="transform" class="line-chart chart">
         <svg:g>
           <svg:g *ngFor="let series of results; trackBy: trackBy">

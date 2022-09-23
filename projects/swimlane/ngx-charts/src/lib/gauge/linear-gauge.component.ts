@@ -27,7 +27,7 @@ enum ElementType {
 @Component({
   selector: 'ngx-charts-linear-gauge',
   template: `
-    <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations" (click)="onClick()">
+    <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations" [fadeInAnimation]="fadeInAnimation" (click)="onClick()">
       <svg:g class="linear-gauge chart">
         <svg:g
           ngx-charts-bar

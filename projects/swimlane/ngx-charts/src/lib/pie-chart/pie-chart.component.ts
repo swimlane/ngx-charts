@@ -25,6 +25,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"
       [animations]="animations"
+      [fadeInAnimation]="fadeInAnimation"
       (legendLabelActivate)="onActivate($event, true)"
       (legendLabelDeactivate)="onDeactivate($event, true)"
       (legendLabelClick)="onClick($event)"
