@@ -136,3 +136,4 @@ export * from './lib/utils/sort';
 export * from './lib/utils/throttle';
 export * from './lib/utils/color-utils';
 export * from './lib/utils/visibility-observer';
+export * from './lib/utils/types';
