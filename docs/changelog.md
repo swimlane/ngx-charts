@@ -1,5 +1,10 @@
 # Changelog
 
+## 21.0.0
+
+- Breaking: Upgrade Angular to v14.2
+- upgrade d3 packages
+
 ## 20.1.0
 
 - Fix: Cyclic import error caused by interface export in `PieGridComponent`.
