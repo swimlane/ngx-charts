@@ -1,30 +1,59 @@
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
-  Input,
-  Output,
+  ElementRef,
   EventEmitter,
   HostListener,
-  ElementRef,
-  SimpleChanges,
+  Input,
   OnChanges,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef
+  Output,
+  SimpleChanges
 } from '@angular/core';
-import { select, BaseType } from 'd3-selection';
+import { BaseType, select } from 'd3-selection';
 import { interpolate } from 'd3-interpolate';
 import { easeSinInOut } from 'd3-ease';
 
-import rfdc from 'rfdc';
 import { roundedRect } from '../common/shape.helper';
 import { id } from '../utils/id';
 import { IBoxModel } from '../models/chart-data.model';
-import { IVector2D } from '../models/coordinates.model';
+import { IPoint, IVector2D } from '../models/coordinates.model';
 import { BarOrientation } from '../common/types/bar-orientation.enum';
 import { Gradient } from '../common/types/gradient.interface';
 
-const cloneDeep = rfdc();
-
 type LineCoordinates = [IVector2D, IVector2D, IVector2D, IVector2D];
+
+export function clonePoint(original: IPoint): IPoint {
+  if (!original) {
+    return original;
+  }
+  return {
+    x: original.x,
+    y: original.y
+  };
+}
+
+export function cloneVector2d(original: IVector2D): IVector2D {
+  if (!original) {
+    return original;
+  }
+  return {
+    v1: clonePoint(original.v1),
+    v2: clonePoint(original.v2)
+  };
+}
+
+export function cloneLineCoordinates(original: LineCoordinates): LineCoordinates {
+  if (!original) {
+    return original;
+  }
+  return [
+    cloneVector2d(original[0]),
+    cloneVector2d(original[1]),
+    cloneVector2d(original[2]),
+    cloneVector2d(original[3])
+  ]
+}
 
 @Component({
   selector: 'g[ngx-charts-box]',
@@ -280,8 +309,7 @@ export class BoxComponent implements OnChanges {
       return [...this.lineCoordinates];
     }
 
-    const lineCoordinates: LineCoordinates = cloneDeep(this.lineCoordinates);
-
+    const lineCoordinates: LineCoordinates = cloneLineCoordinates(this.lineCoordinates);
     lineCoordinates[1].v1.y = lineCoordinates[1].v2.y = lineCoordinates[3].v1.y = lineCoordinates[3].v2.y = lineCoordinates[0].v1.y = lineCoordinates[0].v2.y =
       lineCoordinates[2].v1.y;
 

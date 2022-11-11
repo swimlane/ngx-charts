@@ -4,5 +4,7 @@
   "lib": {
     "entryFile": "src/public-api.ts"
   },
-  "allowedNonPeerDependencies": ["d3", "rfdc"]
+  "allowedNonPeerDependencies": [
+    "d3"
+  ]
 }
