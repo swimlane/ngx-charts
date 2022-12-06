@@ -1,5 +1,9 @@
 # Changelog
 
+## 20.2.0
+
+- Bump: d3-color from 2.0.0 to 3.1.0
+
 ## 20.1.0
 
 - Fix: Cyclic import error caused by interface export in `PieGridComponent`.
