@@ -1,6 +1,6 @@
 {
   "name": "ngx-charts",
-  "version": "20.1.1",
+  "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
