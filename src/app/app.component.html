@@ -371,6 +371,7 @@
         [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
+        [showDataPointCircles]="showDataPointCircles"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -1138,6 +1139,12 @@
             <br />
             <input type="checkbox" [(ngModel)]="range" />
             Show min and max values
+          </label>
+
+          <label *ngIf="chart.options.includes('showDataPointCircles')">
+            <br />
+            <input type="checkbox" [(ngModel)]="showDataPointCircles" />
+            Show data point circles
           </label>
         </div>
       </div>

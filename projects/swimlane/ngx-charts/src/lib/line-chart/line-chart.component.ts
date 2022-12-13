@@ -137,6 +137,7 @@ import { isPlatformServer } from '@angular/common';
                 [colors]="colors"
                 [data]="series"
                 [scaleType]="scaleType"
+                [showDataPointCircles]="showDataPointCircles"
                 [visibleValue]="hoveredVertical"
                 [activeEntries]="activeEntries"
                 [tooltipDisabled]="tooltipDisabled"
@@ -233,6 +234,7 @@ export class LineChartComponent extends BaseChartComponent implements OnInit {
   @Input() xScaleMax: number;
   @Input() yScaleMin: number;
   @Input() yScaleMax: number;
+  @Input() showDataPointCircles: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

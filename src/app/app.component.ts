@@ -181,6 +181,9 @@ export class AppComponent implements OnInit {
   autoScale = true;
   timeline = false;
 
+  // line chart
+  showDataPointCircles: boolean = false;
+
   // margin
   margin: boolean = false;
   marginTop: number = 40;

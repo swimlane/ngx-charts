@@ -356,7 +356,8 @@ const chartGroups = [
           'trimYAxisTicks',
           'rotateXAxisTicks',
           'maxXAxisTickLength',
-          'maxYAxisTickLength'
+          'maxYAxisTickLength',
+          'showDataPointCircles'
         ],
         defaults: {
           yAxisLabel: 'GDP Per Capita',
