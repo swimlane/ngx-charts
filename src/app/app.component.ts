@@ -168,6 +168,15 @@ export class AppComponent implements OnInit {
     {
       name: 'Germany',
       value: '#a8385d'
+    },
+    {
+      name: '2010',
+      label: 'United Kingdom',
+      value: 'rgba(200,150,50)'
+    },
+    {
+      name: '2010',
+      value: 'rgb(200,200,200)'
     }
   ];
 
@@ -247,6 +256,8 @@ export class AppComponent implements OnInit {
   // Reference lines
   showRefLines: boolean = true;
   showRefLabels: boolean = true;
+  showRefIconPlaceholder: boolean = true;
+  refLinesBar = [{name: 'Threshold', value: 95000}];
 
   // Supports any number of reference lines.
   refLines = [

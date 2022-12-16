@@ -7,7 +7,7 @@ import { Orientation } from '../types/orientation.enum';
     <svg:text
       [attr.stroke-width]="strokeWidth"
       [attr.x]="x"
-      [attr.y]="y"
+      [attr.y]="showRefIconPlaceholder ? y - 10 : y"
       [attr.text-anchor]="textAnchor"
       [attr.transform]="transform"
     >
@@ -22,6 +22,7 @@ export class AxisLabelComponent implements OnChanges {
   @Input() offset: number;
   @Input() width: number;
   @Input() height: number;
+  @Input() showRefIconPlaceholder: boolean;
 
   x: number;
   y: number;

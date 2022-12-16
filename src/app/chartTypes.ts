@@ -173,7 +173,11 @@ const chartGroups = [
           'trimYAxisTicks',
           'rotateXAxisTicks',
           'maxXAxisTickLength',
-          'maxYAxisTickLength'
+          'maxYAxisTickLength', 
+          'showRefLines',
+          'referenceLines', 
+          'showRefLabels',
+          'showRefIconPlaceholder'
         ]
       },
       {
@@ -838,6 +842,7 @@ const chartGroups = [
           'showRefLines',
           'referenceLines',
           'showRefLabels',
+          'showRefIconPlaceholder',
           'trimXAxisTicks',
           'trimYAxisTicks',
           'maxXAxisTickLength',
@@ -848,6 +853,42 @@ const chartGroups = [
           xAxisLabel: 'Year',
           linearScale: false
         }
+      },
+      {
+        name: 'Stacked Vertical Bar Chart with Reference Lines',
+        selector: 'bar-vertical-stacked-ref-lines',
+        inputFormat: 'multiSeries',
+        options: [
+          'animations',
+          'colorScheme',
+          'schemeType',
+          'showXAxis',
+          'showYAxis',
+          'gradient',
+          'barPadding',
+          'noBarWhenZero',
+          'showLegend',
+          'legendTitle',
+          'legendPosition',
+          'showXAxisLabel',
+          'xAxisLabel',
+          'showYAxisLabel',
+          'yAxisLabel',
+          'showGridLines',
+          'roundDomains',
+          'tooltipDisabled',
+          'yScaleMax',
+          'showDataLabel',
+          'trimXAxisTicks',
+          'trimYAxisTicks',
+          'rotateXAxisTicks',
+          'maxXAxisTickLength',
+          'maxYAxisTickLength', 
+          'showRefLines',
+          'referenceLines', 
+          'showRefLabels',
+          'showRefIconPlaceholder'
+        ]
       },
       {
         name: 'Timeline Filter Bar Chart',

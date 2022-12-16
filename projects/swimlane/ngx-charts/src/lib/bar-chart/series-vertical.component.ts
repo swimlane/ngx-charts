@@ -240,13 +240,13 @@ export class SeriesVerticalComponent implements OnChanges {
       }
 
       if (this.colors.scaleType === ScaleType.Ordinal) {
-        bar.color = this.colors.getColor(label);
+        bar.color = this.colors.getColor(label, this.seriesName);
       } else {
         if (this.type === BarChartType.Standard) {
-          bar.color = this.colors.getColor(value);
+          bar.color = this.colors.getColor(value, this.seriesName);
           bar.gradientStops = this.colors.getLinearGradientStops(value);
         } else {
-          bar.color = this.colors.getColor(bar.offset1);
+          bar.color = this.colors.getColor(bar.offset1, this.seriesName);
           bar.gradientStops = this.colors.getLinearGradientStops(bar.offset1, bar.offset0);
         }
       }
