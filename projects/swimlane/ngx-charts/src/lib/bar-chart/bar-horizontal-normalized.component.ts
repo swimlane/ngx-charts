@@ -63,6 +63,7 @@ import { isPlatformServer } from '@angular/common';
           [trimTicks]="trimYAxisTicks"
           [maxTickLength]="maxYAxisTickLength"
           [tickFormatting]="yAxisTickFormatting"
+          [tickMultiLine]="yAxisTickMultiLine"
           [ticks]="yAxisTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
@@ -156,6 +157,7 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
   @Input() maxYAxisTickLength: number = 16;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
+  @Input() yAxisTickMultiLine: boolean = false;
   @Input() xAxisTicks: any[];
   @Input() yAxisTicks: any[];
   @Input() barPadding: number = 8;

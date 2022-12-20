@@ -71,6 +71,7 @@ import { BarOrientation } from '../common/types/bar-orientation.enum';
           [trimTicks]="trimYAxisTicks"
           [maxTickLength]="maxYAxisTickLength"
           [tickFormatting]="yAxisTickFormatting"
+          [tickMultiLine]="yAxisTickMultiLine"
           [ticks]="yAxisTicks"
           [yAxisOffset]="dataLabelMaxWidth.negative"
           (dimensionsChanged)="updateYAxisWidth($event)"
@@ -175,6 +176,7 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   @Input() maxYAxisTickLength: number = 16;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
+  @Input() yAxisTickMultiLine: boolean = false;
   @Input() xAxisTicks: any[];
   @Input() yAxisTicks: any[];
   @Input() groupPadding: number = 16;
