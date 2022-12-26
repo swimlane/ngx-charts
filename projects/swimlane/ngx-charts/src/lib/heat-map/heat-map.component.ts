@@ -297,7 +297,7 @@ export class HeatMapComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    this.colors = new ColorHelper(this.scheme, this.scaleType, this.valueDomain);
+    this.colors = new ColorHelper(this.scheme, this.scaleType, this.valueDomain, this.customColors);
   }
 
   getLegendOptions(): LegendOptions {
