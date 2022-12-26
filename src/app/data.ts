@@ -27,6 +27,7 @@ export const single: SingleSeries = [
     name: 'France',
     value: 36745,
     extra: {
+      startValue: 50000,
       code: 'fr'
     }
   },
@@ -41,6 +42,7 @@ export const single: SingleSeries = [
     name: 'Spain',
     value: 33000,
     extra: {
+      startValue: 20000,
       code: 'es'
     }
   },
@@ -48,6 +50,7 @@ export const single: SingleSeries = [
     name: 'Italy',
     value: 35800,
     extra: {
+      startValue: 150000,
       code: 'it'
     }
   }
