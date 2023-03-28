@@ -41,6 +41,7 @@
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
     "@swimlane/ngx-ui": "^44.4.0",
+    "ajv": "6.12.6",
     "codemirror": "^5.65.0",
     "d3-array": "^3.2.3",
     "d3-brush": "^3.0.0",
