@@ -1,5 +1,11 @@
 # Changelog
 
+## 20.3.0
+
+- Breaking: Upgrade Angular to v14.2 (for angular 14.x and 15.x)
+- upgrade d3 packages
+- remove rfdc
+
 ## 20.1.2
 
 - Bump: d3-color from 2.0.0 to 3.1.0 in library
