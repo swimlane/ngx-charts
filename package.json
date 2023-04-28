@@ -72,7 +72,7 @@
     "@angular-eslint/eslint-plugin-template": "13.1.0",
     "@angular-eslint/schematics": "13.1.0",
     "@angular-eslint/template-parser": "13.1.0",
-    "@angular/cli": "^13.1.1",
+    "@angular/cli": "13.1.1",
     "@angular/compiler-cli": "~13.1.0",
     "@angular/language-service": "~13.1.0",
     "@swimlane/eslint-config": "^2.0.0",
@@ -112,6 +112,6 @@
     "tslint-config-prettier": "^1.15.0",
     "tslint-config-security": "^1.16.0",
     "tslint-config-swimlane": "^5.0.0",
-    "typescript": "^4.9.5"
+    "typescript": "^4.8.2"
   }
 }
