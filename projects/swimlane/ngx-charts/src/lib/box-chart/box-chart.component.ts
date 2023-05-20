@@ -38,6 +38,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
           [xScale]="xScale"
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateXAxisHeight($event)"
         />
         <svg:g
@@ -47,6 +48,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
           [yScale]="yScale"
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"
         />
       </svg:g>
@@ -98,6 +100,7 @@ export class BoxChartComponent extends BaseChartComponent {
   @Input() strokeWidth: number = 2;
   @Input() tooltipDisabled: boolean = false;
   @Input() gradient: boolean;
+  @Input() wrapTicks = false;
 
   @Output() select: EventEmitter<IBoxModel> = new EventEmitter();
   @Output() activate: EventEmitter<IBoxModel> = new EventEmitter();

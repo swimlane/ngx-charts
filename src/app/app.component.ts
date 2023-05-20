@@ -43,6 +43,8 @@ const getRandomInt = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
+const FAKE_TEXT =
+  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum";
 @Component({
   selector: 'app-root',
   providers: [Location, { provide: LocationStrategy, useClass: HashLocationStrategy }],
@@ -116,6 +118,7 @@ export class AppComponent implements OnInit {
   maxYAxisTickLength: number = 16;
   strokeColor: string = '#FFFFFF';
   strokeWidth: number = 2;
+  wrapTicks = true;
 
   curves = {
     Basis: shape.curveBasis,
@@ -592,6 +595,10 @@ export class AppComponent implements OnInit {
     }
 
     return calendarData;
+  }
+
+  xAxisTickFormatting(incoming: string) {
+    return incoming.toLowerCase().startsWith('united') ? [incoming, ...FAKE_TEXT.split('.')] : incoming;
   }
 
   calendarAxisTickFormatting(mondayString: string) {

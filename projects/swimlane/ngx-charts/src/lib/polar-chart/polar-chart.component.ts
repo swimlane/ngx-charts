@@ -79,6 +79,7 @@ const twoPI = 2 * Math.PI;
           [trimTicks]="trimYAxisTicks"
           [maxTickLength]="maxYAxisTickLength"
           [tickFormatting]="yAxisTickFormatting"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
         <svg:g
@@ -187,6 +188,7 @@ export class PolarChartComponent extends BaseChartComponent implements OnInit {
   @Input() yAxisMinScale: number = 0;
   @Input() labelTrim: boolean = true;
   @Input() labelTrimSize: number = 10;
+  @Input() wrapTicks = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

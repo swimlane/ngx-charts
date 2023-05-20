@@ -58,6 +58,7 @@ import { isPlatformServer } from '@angular/common';
           [labelText]="xAxisLabel"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateXAxisHeight($event)"
         />
         <svg:g
@@ -70,6 +71,7 @@ import { isPlatformServer } from '@angular/common';
           [labelText]="yAxisLabel"
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"
         />
         <svg:rect
@@ -172,6 +174,7 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
   @Input() xScaleMax: any;
   @Input() yScaleMin: any;
   @Input() yScaleMax: any;
+  @Input() wrapTicks = false;
 
   @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();

@@ -14,7 +14,7 @@ import {
   PLATFORM_ID
 } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
-import { reduceTicks } from './ticks.helper';
+import { calculateMaxPossibleWidth, getTickLines, reduceTicks } from './ticks.helper';
 import { Orientation } from '../types/orientation.enum';
 import { TextAnchor } from '../types/text-anchor.enum';
 
@@ -23,15 +23,31 @@ import { TextAnchor } from '../types/text-anchor.enum';
   template: `
     <svg:g #ticksel>
       <svg:g *ngFor="let tick of ticks" class="tick" [attr.transform]="tickTransform(tick)">
-        <title>{{ tickFormat(tick) }}</title>
-        <svg:text
-          stroke-width="0.01"
-          [attr.text-anchor]="textAnchor"
-          [attr.transform]="textTransform"
-          [style.font-size]="'12px'"
-        >
-          {{ tickTrim(tickFormat(tick)) }}
-        </svg:text>
+        <ng-container *ngIf="tickFormat(tick) as tickFormatted">
+          <title>{{ tickFormatted }}</title>
+          <svg:text
+            stroke-width="0.01"
+            font-size="12px"
+            [attr.text-anchor]="textAnchor"
+            [attr.transform]="textTransform"
+          >
+            <ng-container *ngIf="isWrapTicksSupported; then tmplMultilineTick; else tmplSinglelineTick"></ng-container>
+          </svg:text>
+
+          <ng-template #tmplMultilineTick>
+            <ng-container *ngIf="tickChunks(tick) as tickLines">
+              <ng-container *ngIf="tickLines.length > 1; else tmplSinglelineTick">
+                <svg:tspan *ngFor="let tickLine of tickLines; let i = index" x="0" [attr.y]="i * 12">
+                  {{ tickLine }}
+                </svg:tspan>
+              </ng-container>
+            </ng-container>
+          </ng-template>
+
+          <ng-template #tmplSinglelineTick>
+            {{ tickTrim(tickFormatted) }}
+          </ng-template>
+        </ng-container>
       </svg:g>
     </svg:g>
 
@@ -56,6 +72,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() gridLineHeight: number;
   @Input() width: number;
   @Input() rotateTicks: boolean = true;
+  @Input() wrapTicks = false;
 
   @Output() dimensionsChanged = new EventEmitter();
 
@@ -73,8 +90,13 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   tickFormat: (o: any) => any;
   height: number = 0;
   approxHeight: number = 10;
+  maxPossibleLengthForTick = 16;
 
   @ViewChild('ticksel') ticksElement: ElementRef;
+
+  get isWrapTicksSupported() {
+    return this.wrapTicks && this.scale.bandwidth;
+  }
 
   constructor(@Inject(PLATFORM_ID) private platformId: any) {}
 
@@ -134,6 +156,10 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
       this.verticalSpacing = 10;
     } else {
       this.textAnchor = TextAnchor.Middle;
+    }
+
+    if (this.isWrapTicksSupported) {
+      this.maxPossibleLengthForTick = this.getMaxPossibleLengthForTick(this.ticks);
     }
 
     setTimeout(() => this.updateDims());
@@ -203,5 +229,40 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
 
   tickTrim(label: string): string {
     return this.trimTicks ? trimLabel(label, this.maxTickLength) : label;
+  }
+
+  getMaxPossibleLengthForTick(ticks: string[]) {
+    if (this.scale.bandwidth) {
+      let preferredBandWidth = this.scale.bandwidth() * 0.8;
+      if (preferredBandWidth > 300) {
+        preferredBandWidth = 300;
+      }
+
+      const label = ticks.reduce((savedText, text) => (text.length > savedText.length ? text : savedText), '');
+      return Math.max(calculateMaxPossibleWidth(label, preferredBandWidth), this.maxTickLength);
+    }
+
+    return this.maxTickLength;
+  }
+
+  tickChunks(label: string): string[] {
+    if (label.toString().length > this.maxTickLength && this.scale.bandwidth) {
+      const maxAllowedLines = 5;
+
+      let maxLines = this.rotateTicks
+        ? Math.floor((this.scale.bandwidth() || this.scale.step()) / 14)
+        : maxAllowedLines;
+
+      if (maxLines <= 1) {
+        return [label];
+      }
+
+      const possibleStringLength = Math.max(this.maxPossibleLengthForTick, this.maxTickLength);
+      maxLines = Math.min(maxLines, maxAllowedLines);
+      const lines = getTickLines(label, possibleStringLength, maxLines < 1 ? 1 : maxLines);
+      return lines;
+    }
+
+    return [label];
   }
 }

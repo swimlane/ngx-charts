@@ -29,6 +29,7 @@ import {
           [dims]="dims"
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateXAxisHeight($event)"
         ></svg:g>
         <svg:g
@@ -39,6 +40,7 @@ import {
           [showGridLines]="showGridLines"
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
         <svg:g
@@ -86,6 +88,7 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
   @Input() showGridLines: boolean = true;
   @Input() animations: boolean = true;
   @Input() noBarWhenZero: boolean = true;
+  @Input() wrapTicks = false;
 
   @Output() onFilter = new EventEmitter();
 

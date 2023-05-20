@@ -17,28 +17,37 @@ export const single: SingleSeries = [
     }
   },
   {
-    name: 'United States',
+    name: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,
     value: 50000,
     extra: {
       code: 'us'
     }
   },
   {
-    name: 'France',
+    name: 'France United States United States ',
     value: 36745,
     extra: {
       code: 'fr'
     }
   },
   {
-    name: 'United Kingdom',
+    name: 'United Kingdom United Kingdom United Kingdom United Kingdom United Kingdom United Kingdom',
     value: 36240,
     extra: {
       code: 'uk'
     }
   },
   {
-    name: 'Spain',
+    name:
+      'Spain Spain  Spain  Spain  Spain  Spain  Spain  Spain  Spain  Spain  Spain  Spain  Spain  Spain  Spain  Spain  Spain ',
+    value: 33000,
+    extra: {
+      code: 'es'
+    }
+  },
+  {
+    name:
+      'Sp wer wain Spain  Spain  Spain  Spain  Spain  Spdf s fain  Spain  Spain  Spain  Spain  Spain  Spain  Spain  Spain  Spain  Spain ',
     value: 33000,
     extra: {
       code: 'es'
@@ -473,7 +482,7 @@ export function generateData(seriesLength: number, includeMinMaxRange: boolean, 
       } else {
         series.series.push({
           value,
-          name: timestamp
+          name: '' + timestamp
         });
       }
     }

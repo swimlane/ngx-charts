@@ -24,7 +24,7 @@ export function getScaleType(values: any[], checkDateType: boolean = true): Scal
   if (checkDateType) {
     const allDates = values.every(value => value instanceof Date);
     if (allDates) {
-      return ScaleType.Time;
+      return ScaleType.Linear;
     }
   }
 
