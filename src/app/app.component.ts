@@ -118,7 +118,7 @@ export class AppComponent implements OnInit {
   maxYAxisTickLength: number = 16;
   strokeColor: string = '#FFFFFF';
   strokeWidth: number = 2;
-  wrapTicks = true;
+  wrapTicks = false;
 
   curves = {
     Basis: shape.curveBasis,
