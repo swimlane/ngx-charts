@@ -36,11 +36,9 @@ import { TextAnchor } from '../types/text-anchor.enum';
 
           <ng-template #tmplMultilineTick>
             <ng-container *ngIf="tickChunks(tick) as tickLines">
-              <ng-container *ngIf="tickLines.length > 1; else tmplSinglelineTick">
-                <svg:tspan *ngFor="let tickLine of tickLines; let i = index" x="0" [attr.y]="i * 12">
-                  {{ tickLine }}
-                </svg:tspan>
-              </ng-container>
+              <svg:tspan *ngFor="let tickLine of tickLines; let i = index" x="0" [attr.y]="i * 12">
+                {{ tickLine }}
+              </svg:tspan>
             </ng-container>
           </ng-template>
 
@@ -95,7 +93,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   @ViewChild('ticksel') ticksElement: ElementRef;
 
   get isWrapTicksSupported() {
-    return this.wrapTicks && this.scale.bandwidth;
+    return this.wrapTicks && this.scale.step;
   }
 
   constructor(@Inject(PLATFORM_ID) private platformId: any) {}
@@ -232,14 +230,14 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   }
 
   getMaxPossibleLengthForTick(ticks: string[]) {
-    if (this.scale.bandwidth) {
-      let preferredBandWidth = this.scale.bandwidth() * 0.8;
-      if (preferredBandWidth > 300) {
-        preferredBandWidth = 300;
+    if (this.scale.step) {
+      let preferredWidth = this.scale.step() * 0.8;
+      if (preferredWidth > 300) {
+        preferredWidth = 300;
       }
 
       const label = ticks.reduce((savedText, text) => (text.length > savedText.length ? text : savedText), '');
-      return Math.max(calculateMaxPossibleWidth(label, preferredBandWidth), this.maxTickLength);
+      return Math.max(calculateMaxPossibleWidth(label, preferredWidth), this.maxTickLength);
     }
 
     return this.maxTickLength;
@@ -249,9 +247,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     if (label.toString().length > this.maxTickLength && this.scale.bandwidth) {
       const maxAllowedLines = 5;
 
-      let maxLines = this.rotateTicks
-        ? Math.floor((this.scale.bandwidth() || this.scale.step()) / 14)
-        : maxAllowedLines;
+      let maxLines = this.rotateTicks ? Math.floor(this.scale.step() / 14) : maxAllowedLines;
 
       if (maxLines <= 1) {
         return [label];

@@ -196,6 +196,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
 
     this.adjustedScale = scale.bandwidth
       ? d => {
+         // position the tick to middle considering no of lines of the tick
           const positionMiddle = scale(d) + scale.bandwidth() * 0.5;
           if (this.wrapTicks && d.toString().length > this.maxTickLength) {
             const chunksLength = this.tickChunks(d).length;
@@ -205,13 +206,10 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
             }
 
             const bandWidth = scale.bandwidth();
-            let availableFreeSpace = bandWidth - chunksLength * 15;
+            const heightOfLines = chunksLength * 8;
+            const availableFreeSpace = bandWidth * 0.5 - heightOfLines * 0.5;
 
-            if (availableFreeSpace < 0) {
-              availableFreeSpace = 0;
-            }
-
-            return scale(d) + availableFreeSpace * 0.5;
+            return scale(d) + availableFreeSpace;
           }
 
           return positionMiddle;
