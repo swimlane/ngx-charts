@@ -164,7 +164,7 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
   @Input() roundDomains: boolean = false;
   @Input() noBarWhenZero: boolean = true;
   @Input() wrapTicks = false;
-  
+
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
