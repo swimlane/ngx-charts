@@ -196,7 +196,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
 
     this.adjustedScale = scale.bandwidth
       ? d => {
-         // position the tick to middle considering no of lines of the tick
+         // position the tick to middle considering number of lines of the tick
           const positionMiddle = scale(d) + scale.bandwidth() * 0.5;
           if (this.wrapTicks && d.toString().length > this.maxTickLength) {
             const chunksLength = this.tickChunks(d).length;
