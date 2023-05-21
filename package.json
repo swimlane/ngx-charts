@@ -20,7 +20,7 @@
     "deploy": "angular-cli-ghpages --dir ./dist/ngx-charts --name=Swimlane --email=developer@swimlane.com",
     "package": "run-s build:lib:prod copy-files",
     "prepublish:lib": "npm run package",
-    "publish:lib": "npm publish ./dist/swimlane/ngx-charts --tag=beta",
+    "publish:lib": "npm publish ./dist/swimlane/ngx-charts",
     "prepack": "npm run package",
     "pack": "npm pack ./dist/swimlane/ngx-charts",
     "prettier": "prettier --write \"{src,projects}/**/*.{js,ts,html,scss,css,md,json}\"",
