@@ -1,5 +1,9 @@
 # Changelog
 
+## HEAD
+
+- Feature: ability to wrap ticks based on available space.
+
 ## 20.1.2
 
 - Bump: d3-color from 2.0.0 to 3.1.0 in library

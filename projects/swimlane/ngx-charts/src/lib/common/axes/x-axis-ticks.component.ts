@@ -157,6 +157,16 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     }
 
     if (this.isWrapTicksSupported) {
+      // for SSR, if there is no angle, calculate height based on number of tick lines
+      if (!isPlatformBrowser(this.platformId) && (angle === 0 || angle === null)) {
+        const longestTick = this.ticks.reduce(
+          (savedText, text) => (text.length > savedText.length ? text : savedText),
+          ''
+        );
+        const tickLines = this.tickChunks(longestTick);
+        this.approxHeight = 10 * (tickLines.length || 1);
+      }
+
       this.maxPossibleLengthForTick = this.getMaxPossibleLengthForTick(this.ticks);
     }
 
