@@ -50,7 +50,7 @@
 | xScaleMax             | any                |               | the maximum value of the x axis \(if the x scale is linear or time\)                                                                                                                                                                       |
 | yScaleMin             | number             |               | the minimum value of the y axis                                                                                                                                                                                                            |
 | yScaleMax             | number             |               | the maximum value of the y axis                                                                                                                                                                                                            |
-| wrapTicks           | boolean            | false         | axis tick labels will wrapped based on available space
+| wrapTicks           | boolean            | false         | axis tick labels will wrap based on available space
 
 
 ## Outputs

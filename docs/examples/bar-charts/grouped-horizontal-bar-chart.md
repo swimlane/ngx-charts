@@ -42,7 +42,7 @@
 | tooltipDisabled     | boolean            | false         | show or hide the tooltip                                                                                          |
 | tooltipTemplate     | TemplateRef        |               | a custom ng-template to be displayed inside the tooltip                                                           |
 | xScaleMax           | number             |               | the maximum value of the x axis \(ignored if chart data contains a higher value\)                                 |
-| wrapTicks           | boolean            | false         | axis tick labels will wrapped based on available space
+| wrapTicks           | boolean            | false         | axis tick labels will wrap based on available space
 
 ## Outputs
 

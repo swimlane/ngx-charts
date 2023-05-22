@@ -40,7 +40,7 @@
 | barPadding          | number             | 8             | padding between bars in px                                                                                        |
 | tooltipDisabled     | boolean            | false         | show or hide the tooltip                                                                                          |
 | tooltipTemplate     | TemplateRef        |               | a custom ng-template to be displayed inside the tooltip                                                           |
-| wrapTicks           | boolean            | false         | axis tick labels will wrapped based on available space
+| wrapTicks           | boolean            | false         | axis tick labels will wrap based on available space
 
 ## Outputs
 

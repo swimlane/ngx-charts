@@ -35,7 +35,7 @@
 | tooltipDisabled     | boolean              | false          | show or hide the tooltip                                                                                          |
 | tooltipText         | function             | \(see source\) | the HTML text to display in the tooltip                                                                           |
 | tooltipTemplate     | TemplateRef          |                | a custom ng-template to be displayed inside the tooltip                                                           |
-| wrapTicks           | boolean            | false         | axis tick labels will wrapped based on available space
+| wrapTicks           | boolean            | false         | axis tick labels will wrap based on available space
 
 ## Outputs
 
