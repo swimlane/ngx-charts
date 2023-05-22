@@ -29,20 +29,3 @@ export function getTickLines(label: string, maxLength: number, maxLines: number)
 
   return totalLines;
 }
-
-export function calculateMaxPossibleWidth(label: string, maxWidth: number): number {
-  let maxLength = label.length;
-
-  const canvas = document.createElement('canvas');
-  const context = canvas.getContext('2d');
-
-  maxLength = label.length;
-  let truncatedString = label;
-
-  while (context.measureText(truncatedString).width > maxWidth && truncatedString.length > 0) {
-    maxLength--;
-    truncatedString = label.slice(0, maxLength);
-  }
-
-  return maxLength;
-}

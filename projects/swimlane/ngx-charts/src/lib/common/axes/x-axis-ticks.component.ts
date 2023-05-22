@@ -14,7 +14,7 @@ import {
   PLATFORM_ID
 } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
-import { calculateMaxPossibleWidth, getTickLines, reduceTicks } from './ticks.helper';
+import { getTickLines, reduceTicks } from './ticks.helper';
 import { Orientation } from '../types/orientation.enum';
 import { TextAnchor } from '../types/text-anchor.enum';
 
@@ -230,14 +230,12 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   }
 
   getMaxPossibleLengthForTick(ticks: string[]) {
-    if (this.scale.step) {
-      let preferredWidth = this.scale.step() * 0.8;
-      if (preferredWidth > 300) {
-        preferredWidth = 300;
-      }
-
+    if (this.scale.bandwidth) {
+      const averageCharacterWidth = 7; // approximate char width
+      const maxCharacters = Math.floor(this.scale.bandwidth() / averageCharacterWidth);
       const label = ticks.reduce((savedText, text) => (text.length > savedText.length ? text : savedText), '');
-      return Math.max(calculateMaxPossibleWidth(label, preferredWidth), this.maxTickLength);
+      const truncatedText = label.slice(0, maxCharacters);
+      return Math.max(truncatedText.length, this.maxTickLength);
     }
 
     return this.maxTickLength;

@@ -217,11 +217,11 @@ describe('<ngx-charts-bar-vertical>', () => {
 
       expect(axisTicks[1].queryAll(By.css('tspan')).length).toEqual(5);
       expect(getContent(axisTicks[1])).toEqual([
-        'Lorem Ipsum is simply dummy',
-        'text of the printing and',
-        'typesetting industry. Lorem',
-        'Ipsum has been the industrys',
-        'standard dummy text ever...'
+        'Lorem Ipsum is simply',
+        'dummy text of the',
+        'printing and typesetting',
+        'industry. Lorem Ipsum',
+        'has been the industrys...'
       ]);
     });
   });
