@@ -1,6 +1,6 @@
 {
   "name": "@swimlane/ngx-charts",
-  "version": "20.1.2",
+  "version": "20.2.2-beta.4",
   "description": "Declarative Charting Framework for Angular",
   "repository": {
     "type": "git",

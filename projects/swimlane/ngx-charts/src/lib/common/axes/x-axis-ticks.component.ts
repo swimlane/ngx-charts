@@ -248,7 +248,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
       let maxLines = this.rotateTicks ? Math.floor(this.scale.step() / 14) : maxAllowedLines;
 
       if (maxLines <= 1) {
-        return [label];
+        return [this.tickTrim(label)];
       }
 
       const possibleStringLength = Math.max(this.maxPossibleLengthForTick, this.maxTickLength);
@@ -257,6 +257,6 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
       return lines;
     }
 
-    return [label];
+    return [this.tickTrim(label)];
   }
 }
