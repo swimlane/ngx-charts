@@ -58,6 +58,7 @@ import { isPlatformServer } from '@angular/common';
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
           [xAxisOffset]="dataLabelMaxHeight.negative"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateXAxisHeight($event)"
         ></svg:g>
         <svg:g
@@ -72,6 +73,7 @@ import { isPlatformServer } from '@angular/common';
           [maxTickLength]="maxYAxisTickLength"
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
         <svg:g *ngIf="!isSSR">
@@ -178,6 +180,7 @@ export class BarVertical2DComponent extends BaseChartComponent {
   @Input() showDataLabel: boolean = false;
   @Input() dataLabelFormatting: any;
   @Input() noBarWhenZero: boolean = true;
+  @Input() wrapTicks = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

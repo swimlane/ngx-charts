@@ -32,7 +32,8 @@ const chartGroups = [
           'trimYAxisTicks',
           'rotateXAxisTicks',
           'maxXAxisTickLength',
-          'maxYAxisTickLength'
+          'maxYAxisTickLength',
+          'wrapTicks'
         ]
       },
       {
@@ -65,7 +66,8 @@ const chartGroups = [
           'trimYAxisTicks',
           'rotateXAxisTicks',
           'maxXAxisTickLength',
-          'maxYAxisTickLength'
+          'maxYAxisTickLength',
+          'wrapTicks'
         ],
         defaults: {
           yAxisLabel: 'Country',
@@ -103,7 +105,8 @@ const chartGroups = [
           'trimYAxisTicks',
           'rotateXAxisTicks',
           'maxXAxisTickLength',
-          'maxYAxisTickLength'
+          'maxYAxisTickLength',
+          'wrapTicks'
         ]
       },
       {
@@ -137,7 +140,8 @@ const chartGroups = [
           'trimYAxisTicks',
           'rotateXAxisTicks',
           'maxXAxisTickLength',
-          'maxYAxisTickLength'
+          'maxYAxisTickLength',
+          'wrapTicks'
         ],
         defaults: {
           yAxisLabel: 'Country',
@@ -173,7 +177,8 @@ const chartGroups = [
           'trimYAxisTicks',
           'rotateXAxisTicks',
           'maxXAxisTickLength',
-          'maxYAxisTickLength'
+          'maxYAxisTickLength',
+          'wrapTicks'
         ]
       },
       {
@@ -205,7 +210,8 @@ const chartGroups = [
           'trimYAxisTicks',
           'rotateXAxisTicks',
           'maxXAxisTickLength',
-          'maxYAxisTickLength'
+          'maxYAxisTickLength',
+          'wrapTicks'
         ],
         defaults: {
           yAxisLabel: 'Country',
@@ -239,7 +245,8 @@ const chartGroups = [
           'trimYAxisTicks',
           'rotateXAxisTicks',
           'maxXAxisTickLength',
-          'maxYAxisTickLength'
+          'maxYAxisTickLength',
+          'wrapTicks'
         ],
         defaults: {
           yAxisLabel: 'Normalized GDP Per Capita',
@@ -273,7 +280,8 @@ const chartGroups = [
           'trimYAxisTicks',
           'rotateXAxisTicks',
           'maxXAxisTickLength',
-          'maxYAxisTickLength'
+          'maxYAxisTickLength',
+          'wrapTicks'
         ],
         defaults: {
           yAxisLabel: 'Country',
@@ -356,7 +364,8 @@ const chartGroups = [
           'trimYAxisTicks',
           'rotateXAxisTicks',
           'maxXAxisTickLength',
-          'maxYAxisTickLength'
+          'maxYAxisTickLength',
+          'wrapTicks'
         ],
         defaults: {
           yAxisLabel: 'GDP Per Capita',
@@ -388,7 +397,8 @@ const chartGroups = [
           'roundDomains',
           'tooltipDisabled',
           'trimYAxisTicks',
-          'maxYAxisTickLength'
+          'maxYAxisTickLength',
+          'wrapTicks'
         ],
         defaults: {
           yAxisLabel: 'GDP Per Capita',
@@ -428,7 +438,8 @@ const chartGroups = [
           'trimYAxisTicks',
           'rotateXAxisTicks',
           'maxXAxisTickLength',
-          'maxYAxisTickLength'
+          'maxYAxisTickLength',
+          'wrapTicks'
         ],
         defaults: {
           yAxisLabel: 'GDP Per Capita',
@@ -468,7 +479,8 @@ const chartGroups = [
           'trimYAxisTicks',
           'rotateXAxisTicks',
           'maxXAxisTickLength',
-          'maxYAxisTickLength'
+          'maxYAxisTickLength',
+          'wrapTicks'
         ],
         defaults: {
           yAxisLabel: 'GDP Per Capita',
@@ -504,7 +516,8 @@ const chartGroups = [
           'trimYAxisTicks',
           'rotateXAxisTicks',
           'maxXAxisTickLength',
-          'maxYAxisTickLength'
+          'maxYAxisTickLength',
+          'wrapTicks'
         ],
         defaults: {
           yAxisLabel: 'Normalized GDP Per Capita',
@@ -548,7 +561,8 @@ const chartGroups = [
           'trimYAxisTicks',
           'rotateXAxisTicks',
           'maxXAxisTickLength',
-          'maxYAxisTickLength'
+          'maxYAxisTickLength',
+          'wrapTicks'
         ],
         defaults: {
           xAxisLabel: 'Census Date',
@@ -614,7 +628,8 @@ const chartGroups = [
           'maxXAxisTickLength',
           'maxYAxisTickLength',
           'min',
-          'max'
+          'max',
+          'wrapTicks'
         ],
         defaults: {
           yAxisLabel: 'Census Date',

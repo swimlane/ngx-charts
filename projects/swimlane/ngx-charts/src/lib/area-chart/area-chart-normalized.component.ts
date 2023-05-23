@@ -60,6 +60,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
           [maxTickLength]="maxXAxisTickLength"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateXAxisHeight($event)"
         ></svg:g>
         <svg:g
@@ -74,6 +75,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
           [maxTickLength]="maxYAxisTickLength"
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
         <svg:g [attr.clip-path]="clipPath">
@@ -190,6 +192,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
   @Input() yAxisTicks: any[];
   @Input() roundDomains: boolean = false;
   @Input() tooltipDisabled: boolean = false;
+  @Input() wrapTicks = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

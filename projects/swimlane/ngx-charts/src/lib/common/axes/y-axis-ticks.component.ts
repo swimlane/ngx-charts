@@ -13,7 +13,7 @@ import {
   Inject
 } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
-import { reduceTicks } from './ticks.helper';
+import { getTickLines, reduceTicks } from './ticks.helper';
 import { roundedRect } from '../../common/shape.helper';
 import { isPlatformBrowser } from '@angular/common';
 import { Orientation } from '../types/orientation.enum';
@@ -24,17 +24,33 @@ import { TextAnchor } from '../types/text-anchor.enum';
   template: `
     <svg:g #ticksel>
       <svg:g *ngFor="let tick of ticks" class="tick" [attr.transform]="transform(tick)">
-        <title>{{ tickFormat(tick) }}</title>
-        <svg:text
-          stroke-width="0.01"
-          [attr.dy]="dy"
-          [attr.x]="x1"
-          [attr.y]="y1"
-          [attr.text-anchor]="textAnchor"
-          [style.font-size]="'12px'"
-        >
-          {{ tickTrim(tickFormat(tick)) }}
-        </svg:text>
+        <ng-container *ngIf="tickFormat(tick) as tickFormatted">
+          <title>{{ tickFormatted }}</title>
+          <svg:text
+            stroke-width="0.01"
+            [attr.dy]="dy"
+            [attr.x]="x1"
+            [attr.y]="y1"
+            [attr.text-anchor]="textAnchor"
+            [style.font-size]="'12px'"
+          >
+            <ng-container *ngIf="wrapTicks; then tmplMultilineTick; else tmplSinglelineTick"></ng-container>
+          </svg:text>
+
+          <ng-template #tmplMultilineTick>
+            <ng-container *ngIf="tickChunks(tick) as tickLines">
+              <ng-container *ngIf="tickLines.length > 1; else tmplSinglelineTick">
+                <svg:tspan *ngFor="let tickLine of tickLines; let i = index" x="0" [attr.y]="i * (8 + tickSpacing)">
+                  {{ tickLine }}
+                </svg:tspan>
+              </ng-container>
+            </ng-container>
+          </ng-template>
+
+          <ng-template #tmplSinglelineTick>
+            {{ tickTrim(tickFormatted) }}
+          </ng-template>
+        </ng-container>
       </svg:g>
     </svg:g>
 
@@ -101,6 +117,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() referenceLines;
   @Input() showRefLabels: boolean = false;
   @Input() showRefLines: boolean = false;
+  @Input() wrapTicks = false;
 
   @Output() dimensionsChanged = new EventEmitter();
 
@@ -178,8 +195,24 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
     }
 
     this.adjustedScale = scale.bandwidth
-      ? function (d) {
-          return scale(d) + scale.bandwidth() * 0.5;
+      ? d => {
+          // position the tick to middle considering number of lines of the tick
+          const positionMiddle = scale(d) + scale.bandwidth() * 0.5;
+          if (this.wrapTicks && d.toString().length > this.maxTickLength) {
+            const chunksLength = this.tickChunks(d).length;
+
+            if (chunksLength === 1) {
+              return positionMiddle;
+            }
+
+            const bandWidth = scale.bandwidth();
+            const heightOfLines = chunksLength * 8;
+            const availableFreeSpace = bandWidth * 0.5 - heightOfLines * 0.5;
+
+            return scale(d) + availableFreeSpace;
+          }
+
+          return positionMiddle;
         }
       : scale;
 
@@ -289,5 +322,21 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
     const maxChars = Math.max(...this.ticks.map(t => this.tickTrim(this.tickFormat(t)).length));
     const charWidth = 7;
     return maxChars * charWidth;
+  }
+
+  tickChunks(label: string): string[] {
+    if (label.toString().length > this.maxTickLength && this.scale.bandwidth) {
+      // for y-axis the width of the tick is fixed
+      const preferredWidth = this.maxTickLength;
+      const maxLines = Math.floor(this.scale.bandwidth() / 15);
+
+      if (maxLines <= 1) {
+        return [this.tickTrim(label)];
+      }
+
+      return getTickLines(label, preferredWidth, Math.min(maxLines, 5));
+    }
+
+    return [this.tickFormat(label)];
   }
 }

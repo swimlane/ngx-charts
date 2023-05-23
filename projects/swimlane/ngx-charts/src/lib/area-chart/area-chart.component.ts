@@ -60,6 +60,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
           [maxTickLength]="maxXAxisTickLength"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateXAxisHeight($event)"
         ></svg:g>
         <svg:g
@@ -74,6 +75,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
           [maxTickLength]="maxYAxisTickLength"
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
         <svg:g [attr.clip-path]="clipPath">
@@ -194,6 +196,7 @@ export class AreaChartComponent extends BaseChartComponent {
   @Input() xScaleMax: any;
   @Input() yScaleMin: number;
   @Input() yScaleMax: number;
+  @Input() wrapTicks = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

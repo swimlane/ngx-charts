@@ -50,6 +50,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
           [maxTickLength]="maxXAxisTickLength"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateXAxisHeight($event)"
         ></svg:g>
         <svg:g
@@ -64,6 +65,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
           [yAxisOffset]="dataLabelMaxWidth.negative"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
         <svg:g *ngIf="!isSSR">
@@ -173,6 +175,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   @Input() showDataLabel: boolean = false;
   @Input() dataLabelFormatting: any;
   @Input() noBarWhenZero: boolean = true;
+  @Input() wrapTicks = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

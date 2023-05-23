@@ -46,6 +46,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
           [xAxisOffset]="dataLabelMaxHeight.negative"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateXAxisHeight($event)"
         ></svg:g>
         <svg:g
@@ -60,6 +61,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
           [maxTickLength]="maxYAxisTickLength"
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
         <svg:g
@@ -122,6 +124,7 @@ export class BarVerticalComponent extends BaseChartComponent {
   @Input() showDataLabel: boolean = false;
   @Input() dataLabelFormatting: any;
   @Input() noBarWhenZero: boolean = true;
+  @Input() wrapTicks = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
