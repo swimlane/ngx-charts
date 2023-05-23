@@ -1,6 +1,6 @@
 # Changelog
 
-## HEAD
+## 20.3.0
 
 - Feature: ability to wrap ticks based on available space.
 
