@@ -1,6 +1,6 @@
 # Changelog
 
-## HEAD
+## 20.3.1
 
 - Fix: In SSR mode, respect the tick length set and don't cut off the tick label.
 
