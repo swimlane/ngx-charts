@@ -88,7 +88,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   tickFormat: (o: any) => any;
   height: number = 0;
   approxHeight: number = 10;
-  maxPossibleLengthForTick = 16;
+  maxPossibleLengthForTickIfWrapped = 16;
 
   @ViewChild('ticksel') ticksElement: ElementRef;
 
@@ -156,20 +156,6 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
       this.textAnchor = TextAnchor.Middle;
     }
 
-    if (this.isWrapTicksSupported) {
-      // for SSR, if there is no angle, calculate height based on number of tick lines
-      if (!isPlatformBrowser(this.platformId) && (angle === 0 || angle === null)) {
-        const longestTick = this.ticks.reduce(
-          (savedText, text) => (text.length > savedText.length ? text : savedText),
-          ''
-        );
-        const tickLines = this.tickChunks(longestTick);
-        this.approxHeight = 10 * (tickLines.length || 1);
-      }
-
-      this.maxPossibleLengthForTick = this.getMaxPossibleLengthForTick(this.ticks);
-    }
-
     setTimeout(() => this.updateDims());
   }
 
@@ -201,7 +187,25 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
       baseWidth = Math.cos(angle * (Math.PI / 180)) * wordWidth;
     }
 
-    this.approxHeight = Math.max(Math.abs(Math.sin(angle * (Math.PI / 180)) * wordWidth), 10);
+    let labelHeight = 14;
+    if (this.isWrapTicksSupported) {
+      const longestTick = this.ticks.reduce(
+        (earlier, current) => (current.length > earlier.length ? current : earlier),
+        ''
+      );
+
+      const tickLines = this.tickChunks(longestTick);
+      labelHeight = 14 * (tickLines.length || 1);
+
+      this.maxPossibleLengthForTickIfWrapped = this.getMaxPossibleLengthForTick(longestTick);
+    }
+
+    const requiredHeight =
+      angle !== 0
+        ? Math.max(Math.abs(Math.sin((angle * Math.PI) / 180)) * this.maxTickLength * charWidth, 10)
+        : labelHeight;
+
+    this.approxHeight = Math.min(requiredHeight, 200);
 
     return angle;
   }
@@ -239,12 +243,11 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     return this.trimTicks ? trimLabel(label, this.maxTickLength) : label;
   }
 
-  getMaxPossibleLengthForTick(ticks: string[]) {
+  getMaxPossibleLengthForTick(longestLabel: string): number {
     if (this.scale.bandwidth) {
       const averageCharacterWidth = 7; // approximate char width
       const maxCharacters = Math.floor(this.scale.bandwidth() / averageCharacterWidth);
-      const label = ticks.reduce((savedText, text) => (text.length > savedText.length ? text : savedText), '');
-      const truncatedText = label.slice(0, maxCharacters);
+      const truncatedText = longestLabel.slice(0, maxCharacters);
       return Math.max(truncatedText.length, this.maxTickLength);
     }
 
@@ -261,7 +264,17 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
         return [this.tickTrim(label)];
       }
 
-      const possibleStringLength = Math.max(this.maxPossibleLengthForTick, this.maxTickLength);
+      let possibleStringLength = Math.max(this.maxPossibleLengthForTickIfWrapped, this.maxTickLength);
+
+      if (!isPlatformBrowser(this.platformId)) {
+        possibleStringLength = Math.floor(
+          Math.min(
+            this.approxHeight / maxAllowedLines,
+            Math.max(this.maxPossibleLengthForTickIfWrapped, this.maxTickLength)
+          )
+        );
+      }
+
       maxLines = Math.min(maxLines, maxAllowedLines);
       const lines = getTickLines(label, possibleStringLength, maxLines < 1 ? 1 : maxLines);
       return lines;

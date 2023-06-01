@@ -1,5 +1,9 @@
 # Changelog
 
+## HEAD
+
+- Fix: In SSR mode, respect the tick length set and don't cut off the tick label.
+
 ## 20.3.0
 
 - Feature: ability to wrap ticks based on available space.
