@@ -1,5 +1,19 @@
 # Changelog
 
+## 20.4.0
+
+- Bump: d3-array from 2.9.1 to 3.1.1
+- Bump: d3-brush from 2.1.0 to 3.0.0
+- Bump: d3-ease from 2.0.0 to 3.0.1
+- Bump: d3-format from 2.0.0 to 3.1.0
+- Bump: d3-hierarchy from 2.0.0 to 3.1.0
+- Bump: d3-interpolate from 2.0.1 to 3.0.1
+- Bump: d3-scale from 3.2.3 to 4.0.2
+- Bump: d3-selection from 2.0.0 to 3.0.0
+- Bump: d3-shape from 2.0.0 to 3.2.0
+- Bump: d3-transition from 2.0.0 to 3.0.1
+- Bump: moment-timezone from 0.5.28 to 0.5.40
+
 ## 20.3.1
 
 - Fix: In SSR mode, respect the tick length set and don't cut off the tick label.
