@@ -1,6 +1,6 @@
 # Changelog
 
-## 20.4.0
+## 20.4.1
 
 - Bump: d3-array from 2.9.1 to 3.1.1
 - Bump: d3-brush from 2.1.0 to 3.0.0
