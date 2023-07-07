@@ -77,7 +77,7 @@ import { TextAnchor } from '../types/text-anchor.enum';
       </svg:g>
     </svg:g>
 
-    <svg:g *ngFor="let refLine of referenceLines">
+    <svg:g *ngFor="let refLine of referenceLines" class="ref-line">
       <svg:g *ngIf="showRefLines" [attr.transform]="transform(refLine.value)">
         <svg:line
           class="refline-path gridline-path-horizontal"
