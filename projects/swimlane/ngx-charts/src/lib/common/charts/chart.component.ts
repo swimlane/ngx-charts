@@ -8,7 +8,7 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { TooltipService } from '../tooltip/tooltip.service';
-import { LegendOptions, LegendType, LegendPosition } from '../types/legend.model';
+import { LegendOptions, LegendType, LegendPosition,LegendLabelStyle } from '../types/legend.model';
 import { ScaleType } from '../types/scale-type.enum';
 
 @Component({
@@ -38,6 +38,7 @@ import { ScaleType } from '../types/scale-type.enum';
         [colors]="legendOptions.colors"
         [height]="view[1]"
         [width]="legendWidth"
+        [legendLabelStyle]= "legendLabelStyle" 
         [activeEntries]="activeEntries"
         (labelClick)="legendLabelClick.emit($event)"
         (labelActivate)="legendLabelActivate.emit($event)"
@@ -55,6 +56,7 @@ export class ChartComponent implements OnChanges {
   @Input() legendType: LegendType;
   @Input() activeEntries: any[];
   @Input() animations: boolean = true;
+  @Input() legendLabelStyle: LegendLabelStyle;
 
   @Output() legendLabelClick = new EventEmitter<string>();
   @Output() legendLabelActivate = new EventEmitter<{ name: string }>();

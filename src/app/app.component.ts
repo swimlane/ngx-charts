@@ -23,7 +23,7 @@ import chartGroups from './chartTypes';
 import { barChart, lineChartSeries } from './combo-chart-data';
 import pkg from '../../projects/swimlane/ngx-charts/package.json';
 import { InputTypes } from '@swimlane/ngx-ui';
-import { LegendPosition } from '@swimlane/ngx-charts/common/types/legend.model';
+import { LegendPosition, LegendLabelStyle } from '@swimlane/ngx-charts/common/types/legend.model';
 import { ScaleType } from '@swimlane/ngx-charts/common/types/scale-type.enum';
 
 const monthName = new Intl.DateTimeFormat('en-us', { month: 'short' });
@@ -117,6 +117,7 @@ export class AppComponent implements OnInit {
   strokeColor: string = '#FFFFFF';
   strokeWidth: number = 2;
   wrapTicks = false;
+  legendLabelStyle: LegendLabelStyle;
 
   curves = {
     Basis: shape.curveBasis,

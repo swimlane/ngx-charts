@@ -17,3 +17,11 @@ export enum LegendType {
   ScaleLegend = 'scaleLegend',
   Legend = 'legend'
 }
+
+export enum LegendLabelStyle {
+  Square = 'square',
+  Circle = 'circle',
+  Diamond = 'diamond',
+  Ellipse = 'ellipse',
+  Emoji = 'emoji'
+}

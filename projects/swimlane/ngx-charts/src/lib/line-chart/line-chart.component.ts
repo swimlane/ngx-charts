@@ -19,7 +19,7 @@ import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
 import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
-import { LegendOptions, LegendPosition } from '../common/types/legend.model';
+import { LegendOptions, LegendPosition, LegendLabelStyle } from '../common/types/legend.model';
 import { ScaleType } from '../common/types/scale-type.enum';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
 import { isPlatformServer } from '@angular/common';
@@ -31,6 +31,7 @@ import { isPlatformServer } from '@angular/common';
       [view]="[width, height]"
       [showLegend]="legend"
       [legendOptions]="legendOptions"
+      [legendLabelStyle]="legendLabelStyle"
       [activeEntries]="activeEntries"
       [animations]="animations"
       (legendLabelClick)="onClick($event)"
@@ -236,7 +237,8 @@ export class LineChartComponent extends BaseChartComponent implements OnInit {
   @Input() yScaleMin: number;
   @Input() yScaleMax: number;
   @Input() wrapTicks = false;
-
+  @Input() legendLabelStyle: LegendLabelStyle;
+  
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 

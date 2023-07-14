@@ -18,7 +18,7 @@ import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { getScaleType } from '../common/domain.helper';
 import { isDate } from '../utils/types';
-import { LegendPosition } from '../common/types/legend.model';
+import { LegendPosition, LegendLabelStyle } from '../common/types/legend.model';
 import { ScaleType } from '../common/types/scale-type.enum';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
 import { Orientation } from '../common/types/orientation.enum';
@@ -33,6 +33,7 @@ const twoPI = 2 * Math.PI;
       [view]="[width, height]"
       [showLegend]="legend"
       [legendOptions]="legendOptions"
+      [legendLabelStyle]="legendLabelStyle"
       [activeEntries]="activeEntries"
       [animations]="animations"
       (legendLabelClick)="onClick($event)"
@@ -189,7 +190,8 @@ export class PolarChartComponent extends BaseChartComponent implements OnInit {
   @Input() labelTrim: boolean = true;
   @Input() labelTrimSize: number = 10;
   @Input() wrapTicks = false;
-
+  @Input() legendLabelStyle: LegendLabelStyle;
+  
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 

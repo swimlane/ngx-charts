@@ -18,7 +18,7 @@ import { ColorHelper } from '../common/color.helper';
 import { Series } from '../models/chart-data.model';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { BarChartType } from './types/bar-chart-type.enum';
-import { LegendOptions, LegendPosition } from '../common/types/legend.model';
+import { LegendOptions, LegendPosition, LegendLabelStyle } from '../common/types/legend.model';
 import { ScaleType } from '../common/types/scale-type.enum';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
 
@@ -29,6 +29,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
       [view]="[width, height]"
       [showLegend]="legend"
       [legendOptions]="legendOptions"
+      [legendLabelStyle]="legendLabelStyle"
       [activeEntries]="activeEntries"
       [animations]="animations"
       (legendLabelActivate)="onActivate($event, undefined, true)"
@@ -162,7 +163,8 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
   @Input() roundDomains: boolean = false;
   @Input() noBarWhenZero: boolean = true;
   @Input() wrapTicks = false;
-
+  @Input() legendLabelStyle: LegendLabelStyle;
+  
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 

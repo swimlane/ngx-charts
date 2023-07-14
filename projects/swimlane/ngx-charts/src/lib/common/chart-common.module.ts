@@ -20,6 +20,7 @@ import { LegendComponent } from './legend/legend.component';
 import { LegendEntryComponent } from './legend/legend-entry.component';
 import { ScaleLegendComponent } from './legend/scale-legend.component';
 import { AdvancedLegendComponent } from './legend/advanced-legend.component';
+import { NgxEmojiPickerModule } from "ngx-emoji-picker";
 
 const COMPONENTS = [
   AreaComponent,
@@ -41,7 +42,7 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, AxesModule, TooltipModule],
+  imports: [CommonModule, AxesModule, TooltipModule, NgxEmojiPickerModule.forRoot()],
   declarations: [...COMPONENTS, VisibilityObserver],
   exports: [CommonModule, AxesModule, TooltipModule, ...COMPONENTS, VisibilityObserver]
 })

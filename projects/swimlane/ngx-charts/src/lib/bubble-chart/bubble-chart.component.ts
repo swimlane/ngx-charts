@@ -19,7 +19,7 @@ import { getScaleType } from '../common/domain.helper';
 import { getDomain, getScale } from './bubble-chart.utils';
 import { id } from '../utils/id';
 import { BubbleChartSeries } from '../models/chart-data.model';
-import { LegendOptions, LegendPosition } from '../common/types/legend.model';
+import { LegendOptions, LegendPosition, LegendLabelStyle } from '../common/types/legend.model';
 import { ScaleType } from '../common/types/scale-type.enum';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
 import { isPlatformServer } from '@angular/common';
@@ -32,6 +32,7 @@ import { isPlatformServer } from '@angular/common';
       [showLegend]="legend"
       [activeEntries]="activeEntries"
       [legendOptions]="legendOptions"
+      [legendLabelStyle]="legendLabelStyle"
       [animations]="animations"
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
@@ -184,7 +185,8 @@ export class BubbleChartComponent extends BaseChartComponent {
   @Input() yScaleMin: number;
   @Input() yScaleMax: number;
   @Input() wrapTicks = false;
-
+  @Input() legendLabelStyle: LegendLabelStyle;
+  
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
