@@ -33,7 +33,8 @@ const chartGroups = [
           'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength',
-          'wrapTicks'
+          'wrapTicks',
+          'timeline'
         ]
       },
       {
@@ -106,7 +107,8 @@ const chartGroups = [
           'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength',
-          'wrapTicks'
+          'wrapTicks',
+          'timeline'
         ]
       },
       {
@@ -178,7 +180,8 @@ const chartGroups = [
           'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength',
-          'wrapTicks'
+          'wrapTicks',
+          'timeline'
         ]
       },
       {
@@ -246,7 +249,8 @@ const chartGroups = [
           'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength',
-          'wrapTicks'
+          'wrapTicks',
+          'timeline'
         ],
         defaults: {
           yAxisLabel: 'Normalized GDP Per Capita',
