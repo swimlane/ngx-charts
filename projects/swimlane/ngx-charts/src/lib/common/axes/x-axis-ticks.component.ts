@@ -55,7 +55,14 @@ import { roundedRect } from '../../common/shape.helper';
         <svg:line class="gridline-path gridline-path-vertical" [attr.y1]="-gridLineHeight" y2="0" />
       </svg:g>
     </svg:g>
-
+    
+    <svg:path
+      *ngIf="referenceLineLength > 1 && refMax && refMin && showRefLines"
+      class="reference-area"
+      [attr.d]="referenceAreaPath"
+      [attr.transform]="gridLineTransform()"
+    />
+    
     <svg:g *ngFor="let refLine of referenceLines" class="ref-line">
     <svg:g *ngIf="showRefLines" [attr.transform]="transform(refLine.value)">
         <svg:line
@@ -253,7 +260,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     );
     this.referenceLineLength = this.referenceLines.length;
 
-    this.referenceAreaPath = roundedRect(0, this.refMax, this.gridLineHeight, this.refMin - this.refMax, 0, [
+    this.referenceAreaPath = roundedRect(this.refMax, -this.gridLineHeight+25, this.refMin - this.refMax, this.gridLineHeight, 0, [
       false,
       false,
       false,

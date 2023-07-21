@@ -83,7 +83,7 @@ import { TextAnchor } from '../types/text-anchor.enum';
           class="refline-path gridline-path-horizontal"
           x1="0"
           [attr.x2]="gridLineWidth"
-          [attr.transform]="gridLineTransform()"
+
         />
         <svg:g *ngIf="showRefLabels">
           <title>{{ tickTrim(tickFormat(refLine.value)) }}</title>
