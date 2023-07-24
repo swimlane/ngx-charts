@@ -41,6 +41,7 @@ interface Cell {
       (select)="onClick(c.cell)"
       (activate)="activate.emit(c.cell)"
       (deactivate)="deactivate.emit(c.cell)"
+      [rx]="rx"
       [gradient]="gradient"
       [animations]="animations"
       ngx-tooltip
@@ -59,6 +60,7 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
   @Input() colors;
   @Input() xScale;
   @Input() yScale;
+  @Input() rx: number;
   @Input() gradient: boolean;
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipText: any;

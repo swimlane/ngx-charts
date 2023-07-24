@@ -82,6 +82,7 @@ interface RectItem {
           [yScale]="yScale"
           [colors]="colors"
           [data]="results"
+          [rx]="rx"
           [gradient]="gradient"
           [animations]="animations"
           [tooltipDisabled]="tooltipDisabled"
@@ -108,6 +109,7 @@ export class HeatMapComponent extends BaseChartComponent {
   @Input() showYAxisLabel: boolean;
   @Input() xAxisLabel: string;
   @Input() yAxisLabel: string;
+  @Input() rx: number = 3;
   @Input() gradient: boolean;
   @Input() innerPadding: number | number[] | string | string[] = 8;
   @Input() trimXAxisTicks: boolean = true;
