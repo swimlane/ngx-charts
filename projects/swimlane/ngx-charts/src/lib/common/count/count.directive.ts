@@ -11,6 +11,7 @@ import { count, decimalChecker } from './count.helper';
  * @export
  */
 @Component({
+  
   selector: '[ngx-charts-count-up]',
   template: ` {{ value }} `
 })

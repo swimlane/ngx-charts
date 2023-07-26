@@ -52,6 +52,20 @@ import { ScaleType } from '../common/types/scale-type.enum';
           (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)"
         />
+        <svg:text
+          *ngIf="doughnut"
+          class="label percent-label"
+          dy="-0.5em"
+          x="0"
+          y="10"
+          ngx-charts-count-up
+          [countTo]="total"
+          [countSuffix]="suffix"
+          text-anchor="middle"
+        ></svg:text>
+        <svg:text *ngIf="doughnut" class="label" dy="0.5em" x="0" y="10" text-anchor="middle">
+          TOTAL
+        </svg:text>
       </svg:g>
     </ngx-charts-chart>
   `,
@@ -91,6 +105,8 @@ export class PieChartComponent extends BaseChartComponent {
   domain: string[];
   dims: ViewDimensions;
   legendOptions: LegendOptions;
+  total: Number = 0;
+  suffix: String = '';
 
   update(): void {
     super.update();
@@ -136,6 +152,37 @@ export class PieChartComponent extends BaseChartComponent {
 
     this.setColors();
     this.legendOptions = this.getLegendOptions();
+
+    this.calcTotal();
+  }
+
+  calcTotal(): void {
+    let t = 0;
+    for (let d of this.results) {
+      t += d.value;
+    }
+
+    if (Math.abs(t) < 1000) {
+      this.total = t;
+    } else {
+      let coeff, exponent;
+      [coeff, exponent] =
+        t.toExponential().split('e').map(item => Number(item));
+      if (exponent < 6) {
+        this.total = Math.round(coeff * 100) / 100 * Math.pow(10, exponent - 3);
+        this.suffix = 'K';
+      } else if (exponent < 9) {
+        this.total = Math.round(coeff * 100) / 100 * Math.pow(10, exponent - 6);
+        this.suffix = 'M';
+      } else if (exponent < 12) {
+        this.total = Math.round(coeff * 100) / 100 * Math.pow(10, exponent - 9);
+        this.suffix = 'B';
+      } else {
+        this.total = Math.round(coeff * 100) / 100;
+        this.suffix = "e" + exponent;
+      }
+      // todo: fix rounding
+    }
   }
 
   getDomain(): string[] {
