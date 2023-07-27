@@ -36,6 +36,7 @@ export class BarLabelComponent implements OnChanges {
   @Input() barWidth;
   @Input() barHeight;
   @Input() orientation: BarOrientation;
+  @Input() dataLabelPosition: string;
 
   @Output() dimensionsChanged: EventEmitter<any> = new EventEmitter();
 
@@ -73,31 +74,64 @@ export class BarLabelComponent implements OnChanges {
       this.formatedValue = formatLabel(this.value);
     }
 
-    if (this.orientation === 'horizontal') {
-      this.x = this.barX + this.barWidth;
-      // if the value is negative then it's on the left of the x0.
-      // we need to put the data label in front of the bar
-      if (this.value < 0) {
-        this.x = this.x - this.horizontalPadding;
-        this.textAnchor = 'end';
+    if (this.dataLabelPosition == 'outside') {
+      console.log("Outside");
+      if (this.orientation === 'horizontal') {
+        this.x = this.barX + this.barWidth;
+        // if the value is negative then it's on the left of the x0.
+        // we need to put the data label in front of the bar
+        if (this.value < 0) {
+          this.x = this.x - this.horizontalPadding;
+          this.textAnchor = 'end';
+        } else {
+          this.x = this.x + this.horizontalPadding;
+          this.textAnchor = 'start';
+        }
+        this.y = this.barY + this.barHeight / 2;
       } else {
-        this.x = this.x + this.horizontalPadding;
-        this.textAnchor = 'start';
-      }
-      this.y = this.barY + this.barHeight / 2;
-    } else {
-      // orientation must be "vertical"
-      this.x = this.barX + this.barWidth / 2;
-      this.y = this.barY + this.barHeight;
+        // orientation must be "vertical"
+        this.x = this.barX + this.barWidth / 2;
+        this.y = this.barY + this.barHeight;
 
-      if (this.value < 0) {
-        this.y = this.y + this.verticalPadding;
-        this.textAnchor = 'end';
-      } else {
-        this.y = this.y - this.verticalPadding;
-        this.textAnchor = 'start';
+        if (this.value < 0) {
+          this.y = this.y + this.verticalPadding;
+          this.textAnchor = 'end';
+        } else {
+          this.y = this.y - this.verticalPadding;
+          this.textAnchor = 'start';
+        }
+        this.transform = `rotate(-45, ${this.x} , ${this.y})`;
       }
-      this.transform = `rotate(-45, ${this.x} , ${this.y})`;
+    } else {
+      // data label inside bar
+      console.log("Here inside");
+      if (this.orientation === 'horizontal') {
+        this.x = this.barX + this.barWidth;
+        // if the value is negative then it's on the left of the x0.
+        // we need to put the data label in front of the bar
+        if (this.value < 0) {
+          this.x = this.x + this.horizontalPadding * 25;
+          this.textAnchor = 'end';
+        } else {
+          this.x = this.x - this.horizontalPadding * 25;
+          this.textAnchor = 'start';
+        }
+        this.y = this.barY + this.barHeight / 2;
+      } else {
+        // orientation must be "vertical"
+        this.x = this.barX + this.barWidth / 4;
+        this.y = this.barY + this.barHeight;
+
+        if (this.value < 0) {
+          this.y = this.y - this.verticalPadding * 3;
+          this.textAnchor = 'end';
+        } else {
+          this.y = this.y + this.verticalPadding * 3;
+          this.textAnchor = 'start';
+        }
+        this.transform = `rotate(0, ${this.x} , ${this.y})`;
+      }
     }
+
   }
 }
