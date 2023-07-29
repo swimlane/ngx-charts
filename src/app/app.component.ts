@@ -177,6 +177,9 @@ export class AppComponent implements OnInit {
   explodeSlices = false;
   doughnut = true;
   arcWidth = 0.25;
+  displayTotal = true;
+  totalFontSize = 24;
+  totalDisplayText = "TOTAL";
 
   // line, area
   autoScale = true;

@@ -41,7 +41,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
           [activeEntries]="activeEntries"
           [innerRadius]="innerRadius"
           [outerRadius]="outerRadius"
-          [explodeSlices]="explodeSlices"
+          [explodeSlices]="newExplodeSlices"
           [gradient]="gradient"
           [animations]="animations"
           [tooltipDisabled]="tooltipDisabled"
@@ -53,18 +53,21 @@ import { ScaleType } from '../common/types/scale-type.enum';
           (deactivate)="onDeactivate($event)"
         />
         <svg:text
-          *ngIf="doughnut"
-          class="label percent-label"
+          *ngIf="displayTotal && animations"
+          class="label percent-label total-number"
           dy="-0.5em"
           x="0"
-          y="10"
+          [attr.y]="totalFontSize / 2"
           ngx-charts-count-up
           [countTo]="total"
           [countSuffix]="suffix"
           text-anchor="middle"
         ></svg:text>
-        <svg:text *ngIf="doughnut" class="label" dy="0.5em" x="0" y="10" text-anchor="middle">
-          TOTAL
+        <svg:text *ngIf="!animations" class="label percent-label total-number" dy="-0.5em" x="0" [attr.y]="totalFontSize / 2" text-anchor="middle">
+          {{ this.total + this.suffix }}
+        </svg:text>
+        <svg:text *ngIf="displayTotal" class="label total-text" dy="0.5em" x="0" [attr.y]="totalFontSize / 2" text-anchor="middle">
+          {{ this.totalDisplayText }}
         </svg:text>
       </svg:g>
     </ngx-charts-chart>
@@ -88,6 +91,9 @@ export class PieChartComponent extends BaseChartComponent {
   @Input() trimLabels: boolean = true;
   @Input() maxLabelLength: number = 10;
   @Input() tooltipText: any;
+  @Input() displayTotal: boolean = false;
+  @Input() totalFontSize: number = 24;
+  @Input() totalDisplayText: string = "TOTAL";
   @Output() dblclick = new EventEmitter();
   // optional margins
   @Input() margins: number[];
@@ -105,8 +111,9 @@ export class PieChartComponent extends BaseChartComponent {
   domain: string[];
   dims: ViewDimensions;
   legendOptions: LegendOptions;
-  total: Number = 0;
-  suffix: String = '';
+  total: number = 0;
+  suffix: string = '';
+  newExplodeSlices: boolean;
 
   update(): void {
     super.update();
@@ -153,7 +160,23 @@ export class PieChartComponent extends BaseChartComponent {
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
-    this.calcTotal();
+    this.newExplodeSlices = this.explodeSlices;
+    if (this.doughnut) {
+      this.newExplodeSlices = false;
+    }
+
+    if (this.displayTotal) {
+      this.calcTotal();
+
+      const totalText = document.getElementsByClassName('total-text') as HTMLCollectionOf<HTMLElement>;
+      const totalNumber = document.getElementsByClassName('total-number') as HTMLCollectionOf<HTMLElement>;
+      if (totalNumber.length != 0) {
+        totalNumber[0].style.fontSize = this.totalFontSize + "px";
+      }
+      if (totalNumber.length != 0) {
+        totalText[0].style.fontSize = this.totalFontSize / 2 + "px";
+      }
+    }
   }
 
   calcTotal(): void {
@@ -181,7 +204,6 @@ export class PieChartComponent extends BaseChartComponent {
         this.total = Math.round(coeff * 100) / 100;
         this.suffix = "e" + exponent;
       }
-      // todo: fix rounding
     }
   }
 
