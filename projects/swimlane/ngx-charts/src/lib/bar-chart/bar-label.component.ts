@@ -76,7 +76,6 @@ export class BarLabelComponent implements OnChanges {
       this.formatedValue = formatLabel(this.value);
     }
 
-    //for default font size of 11px, the width of a single digit number is 6.29 and width of comma is 3.21
     var valueWidth = this.calculateWidth(this.value);
     if (valueWidth >= this.barWidth - 4) {
       this.formatedValue = this.shortenNum(this.value);
@@ -111,11 +110,8 @@ export class BarLabelComponent implements OnChanges {
         this.transform = `rotate(-45, ${this.x} , ${this.y})`;
       }
     } else {
-      // data label inside bar
       if (this.orientation === 'horizontal') {
         this.x = this.barWidth - valueWidth;
-        // if the value is negative then it's on the left of the x0.
-        // we need to put the data label in front of the bar
         if (this.value < 0) {
           this.x = this.x + this.horizontalPadding * 3;
           this.textAnchor = 'end';
@@ -142,6 +138,7 @@ export class BarLabelComponent implements OnChanges {
   }
 
   calculateWidth(value): number {
+    //for default font size of 11px, the width of a single digit number is 6.29 and width of comma is 3.21, the width of 'K','B','M' is about 5.66
     const digitWidth = 6.29;
     const commaWidth = 3.21;
     const kbmWidth = 5.66;
