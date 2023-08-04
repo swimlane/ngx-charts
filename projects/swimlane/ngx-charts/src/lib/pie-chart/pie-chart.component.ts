@@ -53,7 +53,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
           (deactivate)="onDeactivate($event)"
         />
         <svg:text
-          *ngIf="displayTotal && animations"
+          [style.display]="displayTotal && doughnut && animations ? 'block' : 'none'"
           class="label percent-label total-number"
           dy="-0.5em"
           x="0"
@@ -63,10 +63,24 @@ import { ScaleType } from '../common/types/scale-type.enum';
           [countSuffix]="suffix"
           text-anchor="middle"
         ></svg:text>
-        <svg:text *ngIf="!animations" class="label percent-label total-number" dy="-0.5em" x="0" [attr.y]="totalFontSize / 2" text-anchor="middle">
+        <svg:text 
+          [style.display]="displayTotal && doughnut && !animations ? 'block' : 'none'" 
+          class="label percent-label total-number" 
+          dy="-0.5em" 
+          x="0" 
+          [attr.y]="totalFontSize / 2" 
+          text-anchor="middle"
+        >
           {{ this.total + this.suffix }}
         </svg:text>
-        <svg:text *ngIf="displayTotal" class="label total-text" dy="0.5em" x="0" [attr.y]="totalFontSize / 2" text-anchor="middle">
+        <svg:text 
+          [style.display]="displayTotal && doughnut ? 'block' : 'none'" 
+          class="label total-text" 
+          dy="0.5em" 
+          x="0" 
+          [attr.y]="totalFontSize / 2" 
+          text-anchor="middle"
+        >
           {{ this.totalDisplayText }}
         </svg:text>
       </svg:g>
@@ -111,7 +125,7 @@ export class PieChartComponent extends BaseChartComponent {
   domain: string[];
   dims: ViewDimensions;
   legendOptions: LegendOptions;
-  total: number = 0;
+  total: any;
   suffix: string = '';
   newExplodeSlices: boolean;
 
@@ -173,7 +187,7 @@ export class PieChartComponent extends BaseChartComponent {
       if (totalNumber.length != 0) {
         totalNumber[0].style.fontSize = this.totalFontSize + "px";
       }
-      if (totalNumber.length != 0) {
+      if (totalText.length != 0) {
         totalText[0].style.fontSize = this.totalFontSize / 2 + "px";
       }
     }
@@ -186,22 +200,22 @@ export class PieChartComponent extends BaseChartComponent {
     }
 
     if (Math.abs(t) < 1000) {
-      this.total = t;
+      this.total = t.toFixed(2);
     } else {
       let coeff, exponent;
       [coeff, exponent] =
         t.toExponential().split('e').map(item => Number(item));
       if (exponent < 6) {
-        this.total = Math.round(coeff * 100) / 100 * Math.pow(10, exponent - 3);
+        this.total = (coeff * Math.pow(10, exponent - 3)).toFixed(2);
         this.suffix = 'K';
       } else if (exponent < 9) {
-        this.total = Math.round(coeff * 100) / 100 * Math.pow(10, exponent - 6);
+        this.total = (coeff * Math.pow(10, exponent - 6)).toFixed(2);
         this.suffix = 'M';
       } else if (exponent < 12) {
-        this.total = Math.round(coeff * 100) / 100 * Math.pow(10, exponent - 9);
+        this.total = (coeff * Math.pow(10, exponent - 9)).toFixed(2);
         this.suffix = 'B';
       } else {
-        this.total = Math.round(coeff * 100) / 100;
+        this.total = coeff.toFixed(2);
         this.suffix = "e" + exponent;
       }
     }
