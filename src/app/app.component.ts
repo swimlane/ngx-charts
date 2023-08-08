@@ -256,6 +256,26 @@ export class AppComponent implements OnInit {
     { value: 33000, name: 'Minimum' }
   ];
 
+  mapChartData = [
+    {
+      name: 'A',
+      value: [
+        [40.7128, -74.0060],
+        [42.3601, -71.0589],
+        [39.9526, -75.1652],
+        [35.7796, -78.6382]
+      ]
+    },
+    {
+      name: 'B',
+      value: [
+        [30.2672, -97.7431],
+        [29.7604, -95.3698],
+        [32.7767, -96.7970]
+      ]
+    }
+  ];
+
   // data
   plotData: any;
 

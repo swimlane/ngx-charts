@@ -26,7 +26,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "styles": ["node_modules/leaflet/dist/leaflet.css", "src/styles.scss"],
             "scripts": [],
             "allowedCommonJsDependencies": [
               "emoji-flags",

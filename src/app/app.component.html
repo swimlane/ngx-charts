@@ -597,6 +597,17 @@
         (select)="onSelect($event)"
       >
       </combo-chart-component>
+      <map-chart-component
+        *ngIf="chartType === 'map-chart'"
+        class="chart-container"
+        [view]="view"
+        [legend]="showLegend"
+        [legendTitle]="legendTitle"
+        [legendPosition]="legendPosition"
+        [results]="mapChartData"
+        (select)="onSelect($event)"
+      >
+      </map-chart-component>
       <ngx-charts-heat-map
         *ngIf="chartType === 'heat-map'"
         class="chart-container"

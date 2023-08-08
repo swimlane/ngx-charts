@@ -705,6 +705,16 @@ const chartGroups = [
         ]
       },
       {
+        name: 'Map Chart',
+        selector: 'map-chart',
+        inputFormat: 'mapChart',
+        options: [
+          'showLegend',
+          'legendTitle',
+          'legendPosition',
+        ]
+      },
+      {
         name: 'Heat Map - Calendar',
         selector: 'calendar',
         inputFormat: 'calendarData',

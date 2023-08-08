@@ -1,0 +1,187 @@
+import {
+  Component,
+  Input,
+  ViewEncapsulation,
+  Output,
+  EventEmitter,
+  OnInit
+} from '@angular/core';
+
+import {
+  BaseChartComponent,
+  ViewDimensions,
+  ColorHelper,
+  calculateViewDimensions,
+} from 'projects/swimlane/ngx-charts/src/public-api';
+import { LegendPosition } from '../../../../projects/swimlane/ngx-charts/src/lib/common/types/legend.model';
+import * as L from 'leaflet';
+
+@Component({
+  selector: 'map-chart-component',
+  template: `
+    <div class="map-container" [style.width.px]="width" [style.height.px]="height">
+      <div id="map"></div>
+    </div>
+    <!--<ngx-charts-legend
+      *ngIf="showLegend"
+      class="chart-legend"
+      [horizontal]="legendPosition === LegendPosition.Below"
+      [data]="domain"
+      [title]="legendTitle"
+      [colors]="colors"
+      [height]="height"
+      [width]="legendWidth"
+    >
+    </ngx-charts-legend>-->
+  `,
+  styleUrls: ['./map-chart.component.scss', '../../../../projects/swimlane/ngx-charts/src/lib/common/base-chart.component.scss'],
+  encapsulation: ViewEncapsulation.None
+})
+export class MapChartComponent extends BaseChartComponent implements OnInit {
+  @Input() legend = false;
+  @Input() legendTitle: string = 'Legend';
+  @Input() legendPosition: string = 'right';
+
+  @Output() activate: EventEmitter<any> = new EventEmitter();
+  @Output() deactivate: EventEmitter<any> = new EventEmitter();
+
+  dims: ViewDimensions;
+  transform: string;
+  colors: ColorHelper;
+  margin: any[] = [10, 20, 10, 20];
+  legendOptions: any;
+  legendWidth
+  mapInitialize: boolean = false;
+  map: any;
+  markersLayer: any;
+  domain: any[];
+  filteredDomain: any[];
+
+  trackBy(index, item): string {
+    return `${item.name}`;
+  }
+
+  update(): void {
+    super.update();
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin,
+      showXAxis: false,
+      showYAxis: false,
+      showXLabel: false,
+      showYLabel: false,
+      showLegend: false,
+      legendType: this.schemeType,
+      legendPosition: this.legendPosition as any
+    });
+    console.log(this.legend)
+
+    this.domain = this.getDomain();
+    if (this.filteredDomain) {
+      this.domain = this.filteredDomain;
+    }
+
+    this.colors = new ColorHelper(this.scheme, this.schemeType, this.domain, this.customColors);
+    console.log()
+
+    this.addMarkers();
+    
+    let legendColumns = 0;
+    if (this.legend) {
+
+      if (this.legendPosition === LegendPosition.Right) {
+        legendColumns = 2;
+      }
+    }
+
+    const chartColumns = 12 - legendColumns;
+
+    const chartWidth = Math.floor((this.view[0] * chartColumns) / 12.0);
+    this.legendWidth =
+      !this.legendOptions || this.legendOptions.position === LegendPosition.Right
+        ? Math.floor((this.view[0] * legendColumns) / 12.0)
+        : chartWidth;
+
+    this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
+  }
+  
+  ngOnInit() {
+    this.mapInit();
+  }
+
+
+  mapInit(): void {
+    this.map = L.map('map', {
+      center: [ 39.8282, -98.5795 ],
+      zoom: 3
+    });
+
+    setTimeout(() => {
+      this.map.invalidateSize(true);
+    }, 0);
+
+    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      minZoom: 3,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    });
+
+    tiles.addTo(this.map);
+
+    this.markersLayer = L.layerGroup();
+    this.markersLayer.addTo(this.map);
+
+    this.mapInitialize = true;
+  }
+
+  getDomain(): any[] {
+    let values = [];
+    for (const d of this.results) {
+      values.push(d.name);
+    }
+    return values;
+  }
+
+  addMarkers(): void {
+    if (!this.mapInitialize) return;
+    this.markersLayer.clearLayers();
+    for (const d of this.results) {
+      if (this.domain.includes(d.name)) {
+        for (const coord of d.value) {
+          const markerHtmlStyles = `
+            background-color: ${this.colors.getColor(d.name)};
+            width: 2rem;
+            height: 2rem;
+            display: block;
+            left: -1rem;
+            top: -1rem;
+            position: relative;
+            border-radius: 2rem 2rem 0;
+            transform: rotate(45deg);
+            border: 1px solid #FFFFFF`
+
+          const icon = L.divIcon({
+            className: "my-custom-pin",
+            iconAnchor: [0, 24],
+            tooltipAnchor: [-6, 0],
+            popupAnchor: [0, -36],
+            html: `<span style="${markerHtmlStyles}" />`
+          })
+
+          this.markersLayer.addLayer(L.marker(coord, {icon: icon}));
+        }
+      }
+    }
+  }
+
+  onMapReady(map: L.Map) {
+    setTimeout(() => {
+      map.invalidateSize();
+    }, 0);
+  }
+
+  onClick(data) {
+    this.select.emit(data);
+  }
+}
