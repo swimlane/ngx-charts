@@ -712,6 +712,8 @@ const chartGroups = [
           'showLegend',
           'legendTitle',
           'legendPosition',
+          'colorScheme',
+          'schemeType'
         ]
       },
       {

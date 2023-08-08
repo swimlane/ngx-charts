@@ -604,6 +604,7 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
+        [scheme]="colorScheme"
         [results]="mapChartData"
         (select)="onSelect($event)"
       >
@@ -1192,6 +1193,7 @@
         <strong>Color Scheme</strong>
       </h3>
       <select
+        *ngIf="chart.options.includes('colorScheme')"
         [hidden]="!colorVisible"
         style="margin-left: 10px"
         [ngModel]="selectedColorScheme"

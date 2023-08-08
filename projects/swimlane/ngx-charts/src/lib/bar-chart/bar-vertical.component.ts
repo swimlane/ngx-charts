@@ -179,6 +179,7 @@ export class BarVerticalComponent extends BaseChartComponent {
     this.legendOptions = this.getLegendOptions();
 
     this.transform = `translate(${this.dims.xOffset} , ${this.margin[0] + this.dataLabelMaxHeight.negative})`;
+    console.log(this.scheme);
   }
 
   getXScale(): any {
@@ -213,6 +214,7 @@ export class BarVerticalComponent extends BaseChartComponent {
   }
 
   onClick(data: DataItem | string) {
+    console.log(data);
     this.select.emit(data);
   }
 

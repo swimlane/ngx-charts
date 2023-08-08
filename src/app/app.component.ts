@@ -559,6 +559,7 @@ export class AppComponent implements OnInit {
   }
 
   setColorScheme(name) {
+    console.log("update");
     this.selectedColorScheme = name;
     this.colorScheme = this.colorSets.find(s => s.name === name);
   }
@@ -818,6 +819,7 @@ export class AppComponent implements OnInit {
   */
 
   onSelect(event) {
+    console.log("??");
     console.log(event);
   }
 

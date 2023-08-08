@@ -16,10 +16,9 @@ import { ScaleType } from '../types/scale-type.enum';
   selector: 'ngx-charts-chart',
   template: `
     <div class="ngx-charts-outer" [style.width.px]="view[0]" [style.height.px]="view[1]">
-      <svg *ngIf="!mapChart" class="ngx-charts" [attr.width]="chartWidth" [attr.height]="view[1]">
-        
+      <svg class="ngx-charts" [attr.width]="chartWidth" [attr.height]="view[1]">
+        <ng-content></ng-content>
       </svg>
-      <ng-content *ngIf="mapChart"></ng-content>
       <ngx-charts-scale-legend
         *ngIf="showLegend && legendType === LegendType.ScaleLegend"
         class="chart-legend"
@@ -56,7 +55,6 @@ export class ChartComponent implements OnChanges {
   @Input() legendType: LegendType;
   @Input() activeEntries: any[];
   @Input() animations: boolean = true;
-  @Input() mapChart: boolean = false;
 
   @Output() legendLabelClick = new EventEmitter<string>();
   @Output() legendLabelActivate = new EventEmitter<{ name: string }>();

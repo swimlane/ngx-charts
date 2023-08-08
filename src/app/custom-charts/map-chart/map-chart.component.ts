@@ -19,20 +19,22 @@ import * as L from 'leaflet';
 @Component({
   selector: 'map-chart-component',
   template: `
-    <div class="map-container" [style.width.px]="width" [style.height.px]="height">
+    <div class="map-container" [style.width.px]="dims.width" [style.height.px]="dims.height">
       <div id="map"></div>
+      <ngx-charts-legend
+        *ngIf="legend"
+        class="chart-legend"
+        [horizontal]="legendPosition === LegendPosition.Below"
+        [data]="domain"
+        [title]="legendTitle"
+        [colors]="colors"
+        [height]="height"
+        [width]="legendWidth"
+        [includedEntries]="filteredDomain"
+        (labelClick)="legendOnClick($event)"
+      >
+      </ngx-charts-legend>
     </div>
-    <!--<ngx-charts-legend
-      *ngIf="showLegend"
-      class="chart-legend"
-      [horizontal]="legendPosition === LegendPosition.Below"
-      [data]="domain"
-      [title]="legendTitle"
-      [colors]="colors"
-      [height]="height"
-      [width]="legendWidth"
-    >
-    </ngx-charts-legend>-->
   `,
   styleUrls: ['./map-chart.component.scss', '../../../../projects/swimlane/ngx-charts/src/lib/common/base-chart.component.scss'],
   encapsulation: ViewEncapsulation.None
@@ -56,6 +58,9 @@ export class MapChartComponent extends BaseChartComponent implements OnInit {
   markersLayer: any;
   domain: any[];
   filteredDomain: any[];
+  includedEntries: any[];
+
+  readonly LegendPosition = LegendPosition;
 
   trackBy(index, item): string {
     return `${item.name}`;
@@ -71,39 +76,24 @@ export class MapChartComponent extends BaseChartComponent implements OnInit {
       showYAxis: false,
       showXLabel: false,
       showYLabel: false,
-      showLegend: false,
+      showLegend: this.legend,
       legendType: this.schemeType,
       legendPosition: this.legendPosition as any
     });
-    console.log(this.legend)
 
     this.domain = this.getDomain();
-    if (this.filteredDomain) {
-      this.domain = this.filteredDomain;
+    if (!this.filteredDomain) {
+      this.filteredDomain = this.domain;
     }
 
     this.colors = new ColorHelper(this.scheme, this.schemeType, this.domain, this.customColors);
-    console.log()
 
     this.addMarkers();
     
-    let legendColumns = 0;
-    if (this.legend) {
-
-      if (this.legendPosition === LegendPosition.Right) {
-        legendColumns = 2;
-      }
-    }
-
-    const chartColumns = 12 - legendColumns;
-
-    const chartWidth = Math.floor((this.view[0] * chartColumns) / 12.0);
-    this.legendWidth =
-      !this.legendOptions || this.legendOptions.position === LegendPosition.Right
-        ? Math.floor((this.view[0] * legendColumns) / 12.0)
-        : chartWidth;
+    this.updateLegend();
 
     this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
+    console.log(this.scheme);
   }
   
   ngOnInit() {
@@ -147,7 +137,7 @@ export class MapChartComponent extends BaseChartComponent implements OnInit {
     if (!this.mapInitialize) return;
     this.markersLayer.clearLayers();
     for (const d of this.results) {
-      if (this.domain.includes(d.name)) {
+      if (this.filteredDomain.includes(d.name)) {
         for (const coord of d.value) {
           const markerHtmlStyles = `
             background-color: ${this.colors.getColor(d.name)};
@@ -175,13 +165,33 @@ export class MapChartComponent extends BaseChartComponent implements OnInit {
     }
   }
 
-  onMapReady(map: L.Map) {
-    setTimeout(() => {
-      map.invalidateSize();
-    }, 0);
+  updateLegend(): void {
+    let legendColumns = 0;
+    if (this.legend) {
+
+      if (this.legendPosition === LegendPosition.Right) {
+        legendColumns = 2;
+      }
+    }
+
+    const chartColumns = 12 - legendColumns;
+
+    const chartWidth = Math.floor((this.view[0] * chartColumns) / 12.0);
+    this.legendWidth =
+      this.legendPosition === LegendPosition.Right
+        ? Math.floor((this.view[0] * legendColumns) / 12.0)
+        : chartWidth;
   }
 
-  onClick(data) {
+  legendOnClick(data) {
     this.select.emit(data);
+    var index = this.filteredDomain.indexOf(data);
+    if (index !== -1) {
+      this.filteredDomain.splice(index, 1);
+    }
+    else {
+      this.filteredDomain.push(data);
+    }
+    this.update();
   }
 }
