@@ -176,10 +176,10 @@ export class MapChartComponent extends BaseChartComponent implements OnInit {
 
     const chartColumns = 12 - legendColumns;
 
-    const chartWidth = Math.floor((this.view[0] * chartColumns) / 12.0);
+    const chartWidth = Math.floor((this.width * chartColumns) / 12.0);
     this.legendWidth =
       this.legendPosition === LegendPosition.Right
-        ? Math.floor((this.view[0] * legendColumns) / 12.0)
+        ? Math.floor((this.width * legendColumns) / 12.0)
         : chartWidth;
   }
 
