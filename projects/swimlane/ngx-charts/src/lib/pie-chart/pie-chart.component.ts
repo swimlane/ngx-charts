@@ -41,7 +41,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
           [activeEntries]="activeEntries"
           [innerRadius]="innerRadius"
           [outerRadius]="outerRadius"
-          [explodeSlices]="newExplodeSlices"
+          [explodeSlices]="explodeSlices && !doughnut"
           [gradient]="gradient"
           [animations]="animations"
           [tooltipDisabled]="tooltipDisabled"
@@ -54,10 +54,11 @@ import { ScaleType } from '../common/types/scale-type.enum';
         />
         <svg:text
           [style.display]="displayTotal && doughnut && animations ? 'block' : 'none'"
-          class="label percent-label total-number"
+          class="pieTotal"
           dy="-0.5em"
           x="0"
           [attr.y]="totalFontSize / 2"
+          [attr.font-size]="totalFontSize + 'px'"
           ngx-charts-count-up
           [countTo]="total"
           [countSuffix]="suffix"
@@ -65,20 +66,22 @@ import { ScaleType } from '../common/types/scale-type.enum';
         ></svg:text>
         <svg:text 
           [style.display]="displayTotal && doughnut && !animations ? 'block' : 'none'" 
-          class="label percent-label total-number" 
+          class="pieTotal" 
           dy="-0.5em" 
           x="0" 
           [attr.y]="totalFontSize / 2" 
+          [attr.font-size]="totalFontSize + 'px'"
           text-anchor="middle"
         >
           {{ this.total + this.suffix }}
         </svg:text>
         <svg:text 
           [style.display]="displayTotal && doughnut ? 'block' : 'none'" 
-          class="label total-text" 
+          class="pieTotal" 
           dy="0.5em" 
           x="0" 
           [attr.y]="totalFontSize / 2" 
+          [attr.font-size]="totalFontSize / 2 + 'px'"
           text-anchor="middle"
         >
           {{ this.totalDisplayText }}
@@ -127,7 +130,6 @@ export class PieChartComponent extends BaseChartComponent {
   legendOptions: LegendOptions;
   total: any;
   suffix: string = '';
-  newExplodeSlices: boolean;
 
   update(): void {
     super.update();
@@ -174,22 +176,17 @@ export class PieChartComponent extends BaseChartComponent {
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
-    this.newExplodeSlices = this.explodeSlices;
-    if (this.doughnut) {
-      this.newExplodeSlices = false;
-    }
-
     if (this.displayTotal) {
       this.calcTotal();
 
-      const totalText = document.getElementsByClassName('total-text') as HTMLCollectionOf<HTMLElement>;
+      /*const totalText = document.getElementsByClassName('total-text') as HTMLCollectionOf<HTMLElement>;
       const totalNumber = document.getElementsByClassName('total-number') as HTMLCollectionOf<HTMLElement>;
       if (totalNumber.length != 0) {
         totalNumber[0].style.fontSize = this.totalFontSize + "px";
       }
       if (totalText.length != 0) {
         totalText[0].style.fontSize = this.totalFontSize / 2 + "px";
-      }
+      }*/
     }
   }
 

@@ -175,9 +175,9 @@ export class AppComponent implements OnInit {
   // pie
   showLabels = true;
   explodeSlices = false;
-  doughnut = true;
+  doughnut = false;
   arcWidth = 0.25;
-  displayTotal = true;
+  displayTotal = false;
   totalFontSize = 24;
   totalDisplayText = "TOTAL";
 
@@ -257,51 +257,6 @@ export class AppComponent implements OnInit {
     { value: 42500, name: 'Maximum' },
     { value: 37750, name: 'Average' },
     { value: 33000, name: 'Minimum' }
-  ];
-
-  customData = [
-    {
-      "name": "HIHI",
-      "value": 40632000000000,
-      "extra": {
-        "code": "de"
-      }
-    },
-    {
-      "name": "United States",
-      "value": 4063200000,
-      "extra": {
-        "code": "us"
-      }
-    },
-    {
-      "name": "France",
-      "value": 4063200000,
-      "extra": {
-        "code": "fr"
-      }
-    },
-    {
-      "name": "United Kingdomasdfasdfasdf",
-      "value": 4063200000,
-      "extra": {
-        "code": "uk"
-      }
-    },
-    {
-      "name": "Spain",
-      "value": 40632000000,
-      "extra": {
-        "code": "es"
-      }
-    },
-    {
-      "name": "Italy",
-      "value": 4063200000,
-      "extra": {
-        "code": "it"
-      }
-    }
   ];
 
   // data
