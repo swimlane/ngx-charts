@@ -178,15 +178,6 @@ export class PieChartComponent extends BaseChartComponent {
 
     if (this.displayTotal) {
       this.calcTotal();
-
-      /*const totalText = document.getElementsByClassName('total-text') as HTMLCollectionOf<HTMLElement>;
-      const totalNumber = document.getElementsByClassName('total-number') as HTMLCollectionOf<HTMLElement>;
-      if (totalNumber.length != 0) {
-        totalNumber[0].style.fontSize = this.totalFontSize + "px";
-      }
-      if (totalText.length != 0) {
-        totalText[0].style.fontSize = this.totalFontSize / 2 + "px";
-      }*/
     }
   }
 
