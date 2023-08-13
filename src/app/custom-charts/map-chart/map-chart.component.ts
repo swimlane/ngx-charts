@@ -19,8 +19,11 @@ import * as L from 'leaflet';
 @Component({
   selector: 'map-chart-component',
   template: `
-    <div class="map-container" [style.width.px]="dims.width" [style.height.px]="dims.height">
-      <div id="map"></div>
+    <div 
+      class="map-container" 
+      [style.flexDirection]="legendPosition === LegendPosition.Right ? 'row' : 'column'"
+    >
+      <div id="map" [style.width.px]="dims.width" [style.height.px]="dims.height"></div>
       <ngx-charts-legend
         *ngIf="legend"
         class="chart-legend"
@@ -43,6 +46,9 @@ export class MapChartComponent extends BaseChartComponent implements OnInit {
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
   @Input() legendPosition: string = 'right';
+  @Input() mapZoom: number;
+  @Input() initCoordX: any;
+  @Input() initCoordY: any;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -103,8 +109,8 @@ export class MapChartComponent extends BaseChartComponent implements OnInit {
 
   mapInit(): void {
     this.map = L.map('map', {
-      center: [ 39.8282, -98.5795 ],
-      zoom: 3
+      center: [this.initCoordX, this.initCoordY],
+      zoom: this.mapZoom
     });
 
     setTimeout(() => {
@@ -138,7 +144,7 @@ export class MapChartComponent extends BaseChartComponent implements OnInit {
     this.markersLayer.clearLayers();
     for (const d of this.results) {
       if (this.filteredDomain.includes(d.name)) {
-        for (const coord of d.value) {
+        for (const location of d.series) {
           const markerHtmlStyles = `
             background-color: ${this.colors.getColor(d.name)};
             width: 2rem;
@@ -149,17 +155,24 @@ export class MapChartComponent extends BaseChartComponent implements OnInit {
             position: relative;
             border-radius: 2rem 2rem 0;
             transform: rotate(45deg);
-            border: 1px solid #FFFFFF`
-
+            border: 1px solid #FFFFFF;
+          `;
           const icon = L.divIcon({
-            className: "my-custom-pin",
             iconAnchor: [0, 24],
             tooltipAnchor: [-6, 0],
             popupAnchor: [0, -36],
             html: `<span style="${markerHtmlStyles}" />`
-          })
+          });
+          const marker = L.marker(location.value, {icon: icon});
 
-          this.markersLayer.addLayer(L.marker(coord, {icon: icon}));
+          marker.bindTooltip(location.name, {
+            direction: 'top',
+            offset: L.point(7, -40),
+            className: 'map-tooltip',
+            opacity: 0.75
+          }).openTooltip();
+
+          this.markersLayer.addLayer(marker);
         }
       }
     }

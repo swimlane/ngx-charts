@@ -713,7 +713,9 @@ const chartGroups = [
           'legendTitle',
           'legendPosition',
           'colorScheme',
-          'schemeType'
+          'mapZoom',
+          'initCoordX',
+          'initCoordY'
         ]
       },
       {

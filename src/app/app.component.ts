@@ -259,6 +259,46 @@ export class AppComponent implements OnInit {
   mapChartData = [
     {
       name: 'A',
+      series: [
+        {
+          name: 'New York',
+          value: [40.7128, -74.0060]
+        },
+        {
+          name: 'Boston',
+          value: [42.3601, -71.0589]
+        },
+        {
+          name: 'Philadelphia',
+          value: [39.9526, -75.1652]
+        },
+        {
+          name: 'Raleigh',
+          value: [35.7796, -78.6382]
+        }
+      ]
+    },
+    {
+      name: 'B',
+      series: [
+        {
+          name: 'Austin',
+          value: [30.2672, -97.7431]
+        },
+        {
+          name: 'Houston',
+          value: [29.7604, -95.3698]
+        },
+        {
+          name: 'Dallas',
+          value: [32.7767, -96.7970]
+        }
+      ]
+    }
+  ];
+  /*mapChartData = [
+    {
+      name: 'A',
       value: [
         [40.7128, -74.0060],
         [42.3601, -71.0589],
@@ -274,7 +314,10 @@ export class AppComponent implements OnInit {
         [32.7767, -96.7970]
       ]
     }
-  ];
+  ];*/
+  mapZoom = 3;
+  initCoordX = 39.8282;
+  initCoordY = -98.5795;
 
   // data
   plotData: any;

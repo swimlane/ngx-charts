@@ -1,5 +1,23 @@
 .map-container {
+  display: flex;
+  gap: 30px;
+
   #map {
     height: 100%;
+
+    .map-tooltip {
+      background: black;
+      color: white;
+      border: none;
+    }
+    /* Add custom styles for the tooltip */
+
+    .leaflet-tooltip-top:before, 
+    .leaflet-tooltip-bottom:before, 
+    .leaflet-tooltip-left:before, 
+    .leaflet-tooltip-right:before {
+        border-top-color: black;
+    }
+
   }
 }
