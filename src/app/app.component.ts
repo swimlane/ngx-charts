@@ -263,125 +263,25 @@ export class AppComponent implements OnInit {
 
   mapChartData = [
     {
-      name: 'Successful Logins',
+      name: 'United States',
       series: [
         {
           name: 'New York',
           value: [40.7128, -74.0060]
         },
         {
-          name: 'Boston',
-          value: [42.3601, -71.0589]
-        },
-        {
-          name: 'Philadelphia',
-          value: [39.9526, -75.1652]
-        },
-        {
-          name: 'Raleigh',
-          value: [35.7796, -78.6382]
-        },
-        {
           name: 'Austin',
           value: [30, -97.7431]
         },
         {
-          name: 'Beijing',
-          value: [39.9, 116.4]
-        },
-        {
-          name: 'Chengdu',
-          value: [30.5728, 104.0668]
-        },
-        {
-          name: "Xi'an",
-          value: [34.3416, 108.9398]
-        },
-        {
-          name: 'Wuhan',
-          value: [30.5928, 114.3055]
-        },
-        {
-          name: 'Suzhou',
-          value: [31.2989, 120.5853]
-        },
-        {
-          name: 'Harbin',
-          value: [45.8038, 126.5349]
-        },
-        {
-          name: 'Chongqing',
-          value: [29.4316, 106.9123]
-        },
-        {
-          name: 'Nanjing',
-          value: [32.0603, 118.7969]
-        },
-        {
-          name: 'Tianjin',
-          value: [39.0842, 117.2008]
-        },
-        {
-          name: 'Tokyo',
-          value: [35.6895, 139.6917]
-        },
-        {
-          name: 'Buenos Aires',
-          value: [-34.6037, -58.3816]
-        },
-        {
-          name: 'Cairo',
-          value: [30.0444, 31.2357]
-        },
-        {
-          name: 'Singapore',
-          value: [1.3521, 103.8198]
-        },
-        {
-          name: 'Berlin',
-          value: [52.5200, 13.4050]
-        },
-        {
-          name: 'Rome',
-          value: [41.9028, 12.4964]
-        },
-        {
-          name: 'New Delhi',
-          value: [28.6139, 77.2090]
-        },
-        {
-          name: 'Johannesburg',
-          value: [-26.2041, 28.0473]
-        },
-        {
-          name: 'Seoul',
-          value: [37.5665, 126.9780]
-        },
-        {
-          name: 'Mexico City',
-          value: [19.4326, -99.1332]
+          name: 'Los Angeles',
+          value: [34.0522, -118.2437]
         }
       ]
     },
     {
-      name: 'Failed Logins',
+      name: 'International',
       series: [
-        {
-          name: 'Austin',
-          value: [30.2672, -97.7431]
-        },
-        {
-          name: 'Houston',
-          value: [29.7604, -95.3698]
-        },
-        {
-          name: 'Dallas',
-          value: [32.7767, -96.7970]
-        },
-        {
-          name: 'Washinton DC',
-          value: [38.9072, -77.0369]
-        },
         {
           name: 'Tokyo',
           value: [35.6895, 139.6917]
@@ -393,62 +293,6 @@ export class AppComponent implements OnInit {
         {
           name: 'Guangzhou',
           value: [23.1291, 113.2644]
-        },
-        {
-          name: 'Shenzhen',
-          value: [22.5431, 114.0579]
-        },
-        {
-          name: 'Lanzhou',
-          value: [36.0614, 103.8343]
-        },
-        {
-          name: 'Changsha',
-          value: [28.2282, 112.9388]
-        },
-        {
-          name: 'Urumqi',
-          value: [43.8256, 87.6168]
-        },
-        {
-          name: 'Paris',
-          value: [48.8566, 2.3522]
-        },
-        {
-          name: 'Rio de Janeiro',
-          value: [-22.9068, -43.1729]
-        },
-        {
-          name: 'Cape Town',
-          value: [-33.9249, 18.4241]
-        },
-        {
-          name: 'Dubai',
-          value: [25.276987, 55.296249]
-        },
-        {
-          name: 'Mumbai',
-          value: [19.0760, 72.8777]
-        },
-        {
-          name: 'Sydney',
-          value: [-33.8688, 151.2093]
-        },
-        {
-          name: 'Moscow',
-          value: [55.7558, 37.6176]
-        },
-        {
-          name: 'Sao Paulo',
-          value: [-23.5505, -46.6333]
-        },
-        {
-          name: 'Istanbul',
-          value: [41.0082, 28.9784]
-        },
-        {
-          name: 'Toronto',
-          value: [43.6532, -79.3832]
         }
       ]
     }
