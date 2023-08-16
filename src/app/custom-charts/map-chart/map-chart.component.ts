@@ -231,8 +231,8 @@ export class MapChartComponent extends BaseChartComponent implements OnInit {
 
   adjustSize() {
     if (this.view) {
-      this.width = this.view[0];
-      this.height = this.view[1];
+      this.width = this.dims.width;
+      this.height = this.dims.height;
     }
     const container = select(this.chartElement.nativeElement).select('#map').node() as HTMLElement;
     container.style.width = this.width + "px"; 
