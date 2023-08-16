@@ -104,7 +104,6 @@ export class MapChartComponent extends BaseChartComponent implements OnInit {
     this.colors = new ColorHelper(this.scheme, this.schemeType, this.domain, this.customColors);
 
     this.addMarkers();
-    
     this.updateLegend();
 
     this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
@@ -151,7 +150,7 @@ export class MapChartComponent extends BaseChartComponent implements OnInit {
   }
 
   getDomain(): any[] {
-    let values = [];
+    const values = [];
     for (const d of this.results) {
       values.push(d.name);
     }
