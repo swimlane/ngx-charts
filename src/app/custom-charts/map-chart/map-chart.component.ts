@@ -15,6 +15,7 @@ import {
 } from 'projects/swimlane/ngx-charts/src/public-api';
 import { LegendPosition } from '../../../../projects/swimlane/ngx-charts/src/lib/common/types/legend.model';
 import * as L from 'leaflet';
+import {select} from 'd3-selection';
 
 @Component({
   selector: 'map-chart-component',
@@ -49,6 +50,12 @@ export class MapChartComponent extends BaseChartComponent implements OnInit {
   @Input() mapZoom: number;
   @Input() initCoordX: any;
   @Input() initCoordY: any;
+  @Input() view: [number, number];
+  @Input() longitude: number;
+  @Input() latitude: number;
+  @Input() mapLanguage: string = "native";
+  @Input() centerMapAt: any;
+  @Input() mapLog: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -65,8 +72,10 @@ export class MapChartComponent extends BaseChartComponent implements OnInit {
   domain: any[];
   filteredDomain: any[];
   includedEntries: any[];
+  currentTiles = null;
 
   readonly LegendPosition = LegendPosition;
+
 
   trackBy(index, item): string {
     return `${item.name}`;
@@ -99,31 +108,41 @@ export class MapChartComponent extends BaseChartComponent implements OnInit {
     this.updateLegend();
 
     this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
-    console.log(this.scheme);
-  }
-  
-  ngOnInit() {
-    this.mapInit();
-  }
 
+    this.adjustSize();
+    
+    if (this.map) {
+      //trigger the map to reload
+      this.map.invalidateSize();
+    } else {
+      this.mapInit();
+    }
+
+    if (this.mapLanguage) {
+      this.changeLanguage();
+    }
+  }
 
   mapInit(): void {
     this.map = L.map('map', {
       center: [this.initCoordX, this.initCoordY],
-      zoom: this.mapZoom
+      zoom: this.mapZoom,
+      inertia: false
     });
 
     setTimeout(() => {
       this.map.invalidateSize(true);
     }, 0);
 
-    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    this.map.setMaxBounds(this);
+
+    this.currentTiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
-      minZoom: 3,
+      minZoom: 2,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
 
-    tiles.addTo(this.map);
+    this.currentTiles.addTo(this.map);
 
     this.markersLayer = L.layerGroup();
     this.markersLayer.addTo(this.map);
@@ -178,10 +197,13 @@ export class MapChartComponent extends BaseChartComponent implements OnInit {
     }
   }
 
+  changePosition(): void {
+    this.map.setView([this.latitude, this.longitude]);
+  }
+
   updateLegend(): void {
     let legendColumns = 0;
     if (this.legend) {
-
       if (this.legendPosition === LegendPosition.Right) {
         legendColumns = 2;
       }
@@ -206,5 +228,48 @@ export class MapChartComponent extends BaseChartComponent implements OnInit {
       this.filteredDomain.push(data);
     }
     this.update();
+  }
+
+  adjustSize() {
+    if (this.view) {
+      this.width = this.view[0];
+      this.height = this.view[1];
+    }
+    const container = select(this.chartElement.nativeElement).select('#map').node() as HTMLElement;
+    container.style.width = this.width + "px"; 
+    container.style.height = this.height + "px";
+  }
+
+  changeLanguage() {
+    const oldCenter = this.map.getCenter();
+
+    // Remove the current tile layer if it exists
+    if (this.currentTiles) {
+      this.map.removeLayer(this.currentTiles);
+    }
+
+    // Create and add the new tile layer based on mapLanguage
+    if (this.mapLanguage == "native") {
+      this.currentTiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        minZoom: 1,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      });
+    } else if (this.mapLanguage == "german"){
+      this.currentTiles = L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        minZoom: 1,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      });
+    } else if (this.mapLanguage == "english") {
+      this.currentTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', {
+        minZoom: 1,
+        maxZoom: 18,
+        attribution: '&copy; <a href="https://carto.com/">carto.com</a> contributors'
+      });
+    }
+    this.currentTiles.addTo(this.map);
+
+    this.map.setView(oldCenter);
   }
 }

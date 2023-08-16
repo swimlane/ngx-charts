@@ -715,7 +715,12 @@ const chartGroups = [
           'colorScheme',
           'mapZoom',
           'initCoordX',
-          'initCoordY'
+          'initCoordY',
+          'view',
+          'centerMapAt',
+          'latitude',
+          'longitude',
+          'mapLanguage'
         ]
       },
       {
