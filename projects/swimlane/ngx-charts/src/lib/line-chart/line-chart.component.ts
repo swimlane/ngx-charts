@@ -61,6 +61,9 @@ import { isPlatformServer } from '@angular/common';
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
           [wrapTicks]="wrapTicks"
+          [trimLabel]="trimXAxisLabel"
+          [maxLabelLength]="maxXAxisLabelLength"
+          [wrapLabel]="wrapXAxisLabel"
           (dimensionsChanged)="updateXAxisHeight($event)"
         ></svg:g>
         <svg:g
@@ -79,6 +82,9 @@ import { isPlatformServer } from '@angular/common';
           [showRefLines]="showRefLines"
           [showRefLabels]="showRefLabels"
           [wrapTicks]="wrapTicks"
+          [trimLabel]="trimYAxisLabel"
+          [maxLabelLength]="maxYAxisLabelLength"
+          [wrapLabel]="wrapYAxisLabel"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
         <svg:g [attr.clip-path]="clipPath">
@@ -236,6 +242,12 @@ export class LineChartComponent extends BaseChartComponent implements OnInit {
   @Input() yScaleMin: number;
   @Input() yScaleMax: number;
   @Input() wrapTicks = false;
+  @Input() trimXAxisLabel: boolean;
+  @Input() trimYAxisLabel: boolean;
+  @Input() wrapXAxisLabel: boolean;
+  @Input() wrapYAxisLabel: boolean;
+  @Input() maxXAxisLabelLength: number = 16;
+  @Input() maxYAxisLabelLength: number = 16;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
