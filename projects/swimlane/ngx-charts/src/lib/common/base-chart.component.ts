@@ -23,6 +23,7 @@ import { isDate } from '../utils/types';
 import { Color } from '../utils/color-sets';
 import { ScaleType } from './types/scale-type.enum';
 import { ViewDimensions } from './types/view-dimension.interface';
+import { toJpeg, toPng, toSvg } from '@swimlane/ngx-charts/utils/data-url';
 
 @Component({
   selector: 'base-chart',
@@ -210,7 +211,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, 
     return results;
   }
 
-  private toDataUrl(): Promise<string> {
+  async getDataURL(options?: { type?: 'png' | 'jpg' | 'svg'; pixelRatio?: number }): Promise<string> {
     const dims = this.getContainerDims();
     if (dims === null) {
       // If not browser
@@ -219,55 +220,20 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, 
 
     const chartEl = this.chartElement.nativeElement.firstElementChild;
 
-    function cloneNodeWithStyle(originNode: Element) {
-      const clonedNode = originNode.cloneNode(false);
-
-      if ((clonedNode as any).style) {
-        const computedStyle = window.getComputedStyle(originNode);
-        const styleText = Array.from(computedStyle)
-          .map(e => `${e}:${computedStyle.getPropertyValue(e)}`)
-          .join(';');
-        (clonedNode as any).style.cssText = styleText;
-      }
-
-      if (!(originNode instanceof Element)) return clonedNode;
-      const children = Array.from(originNode.childNodes).map(cloneNodeWithStyle);
-      (clonedNode as Element).append(...children.filter(e => !!e));
-      return clonedNode;
-    }
-
-    function svgToDataURL(svg: SVGElement): Promise<string> {
-      return Promise.resolve()
-        .then(() => new XMLSerializer().serializeToString(svg))
-        .then(encodeURIComponent)
-        .then(html => `data:image/svg+xml;charset=utf-8,${html}`);
-    }
-
-    function nodeToDataURL(node: Element, width: number, height: number): Promise<string> {
-      const xmlns = 'http://www.w3.org/2000/svg';
-      const svg = document.createElementNS(xmlns, 'svg');
-      const foreignObject = document.createElementNS(xmlns, 'foreignObject');
-
-      svg.setAttribute('width', `${width}`);
-      svg.setAttribute('height', `${height}`);
-      svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
-
-      foreignObject.setAttribute('width', '100%');
-      foreignObject.setAttribute('height', '100%');
-      foreignObject.setAttribute('x', '0');
-      foreignObject.setAttribute('y', '0');
-      foreignObject.setAttribute('externalResourcesRequired', 'true');
-
-      svg.appendChild(foreignObject);
-      foreignObject.appendChild(node);
-      return svgToDataURL(svg);
-    }
-
     const { width, height } = dims;
-    return nodeToDataURL(cloneNodeWithStyle(chartEl) as Element, width, height);
-  }
+    const ops = {
+      width,
+      height
+    };
 
-  getDataURL(options?: { type?: 'png' | 'jpg' | 'svg'; pixelRatio?: number }): string {
-    return '';
+    if (options.type === 'svg') {
+      return toSvg(chartEl, ops);
+    }
+    if (options.type === 'png') {
+      return toPng(chartEl, ops);
+    }
+    if (options.type === 'jpg') {
+      return toJpeg(chartEl, ops);
+    }
   }
 }
