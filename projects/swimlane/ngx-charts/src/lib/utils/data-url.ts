@@ -2,20 +2,29 @@ export interface Options {
   width: number;
   height: number;
 }
+
+export interface StyleAble extends Element {
+  style: CSSStyleDeclaration;
+}
+
+function isType<T>(obj: unknown, test: (...args: any[]) => boolean): obj is T {
+  return test(obj);
+}
+
 export function cloneNodeWithStyle<T extends Element>(originNode: T): T {
   const clonedNode = originNode.cloneNode(false) as T;
 
-  if ((clonedNode as any).style) {
+  if (isType<StyleAble>(clonedNode, e => e?.style)) {
     const computedStyle = window.getComputedStyle(originNode);
     const styleText = Array.from(computedStyle)
       .map(e => `${e}:${computedStyle.getPropertyValue(e)}`)
       .join(';');
-    (clonedNode as any).style.cssText = styleText;
+    clonedNode.style.cssText = styleText;
   }
 
   if (!(originNode instanceof Element)) return clonedNode;
   const children = Array.from(originNode.childNodes).map(cloneNodeWithStyle);
-  (clonedNode as Element).append(...children.filter(e => !!e));
+  clonedNode.append(...children.filter(e => !!e));
   return clonedNode;
 }
 
@@ -59,15 +68,16 @@ export async function toJpeg<T extends HTMLElement>(node: T, options: Options): 
   const canvas = await toCanvas(node, options);
   return canvas.toDataURL('image/jpeg');
 }
+
 export function createImage(url: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
     const img = new Image();
-    img.decode = () => resolve(img) as any;
     img.onload = () => resolve(img);
     img.onerror = reject;
     img.crossOrigin = 'anonymous';
     img.decoding = 'async';
     img.src = url;
+    img.decode().then(() => resolve(img));
   });
 }
 
