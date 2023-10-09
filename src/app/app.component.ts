@@ -489,7 +489,7 @@ export class AppComponent implements OnInit {
   }
 
   exportImage() {
-    this.chartEl.getDataURL({ type: this.exportFormat }).then(dataUrl => {
+    this.chartEl.toDataURL({ type: this.exportFormat }).then(dataUrl => {
       const link = document.createElement('a');
       link.download = `${this.chartType}.${this.exportFormat}`;
       link.href = dataUrl;

@@ -211,7 +211,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, 
     return results;
   }
 
-  async getDataURL(options?: { type?: 'png' | 'jpg' | 'svg'; pixelRatio?: number }): Promise<string> {
+  async toDataURL(options?: { type?: 'png' | 'jpg' | 'svg'; pixelRatio?: number }): Promise<string> {
     const dims = this.getContainerDims();
     if (dims === null) {
       // If not browser
