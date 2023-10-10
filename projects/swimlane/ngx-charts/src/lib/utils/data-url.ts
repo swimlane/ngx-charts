@@ -1,6 +1,7 @@
 export interface Options {
   width: number;
   height: number;
+  pixelRatio?: number;
 }
 
 export interface StyleAble extends Element {
@@ -87,7 +88,7 @@ export async function toCanvas<T extends HTMLElement>(node: T, options: Options)
 
   const canvas = document.createElement('canvas');
   const context = canvas.getContext('2d')!;
-  const ratio = window.devicePixelRatio;
+  const ratio = options.pixelRatio || window.devicePixelRatio;
   const canvasWidth = options.width;
   const canvasHeight = options.height;
 

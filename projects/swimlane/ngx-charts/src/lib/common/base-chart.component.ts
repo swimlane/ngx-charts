@@ -23,7 +23,7 @@ import { isDate } from '../utils/types';
 import { Color } from '../utils/color-sets';
 import { ScaleType } from './types/scale-type.enum';
 import { ViewDimensions } from './types/view-dimension.interface';
-import { toJpeg, toPng, toSvg } from '@swimlane/ngx-charts/utils/data-url';
+import { toCanvas, toJpeg, toPng, toSvg } from '@swimlane/ngx-charts/utils/data-url';
 
 @Component({
   selector: 'base-chart',
@@ -211,29 +211,41 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, 
     return results;
   }
 
-  async toDataURL(options?: { type?: 'png' | 'jpg' | 'svg'; pixelRatio?: number }): Promise<string> {
-    const dims = this.getContainerDims();
-    if (dims === null) {
+  toDataURL<T extends 'png' | 'jpg' | 'svg'>(options: { type?: T; pixelRatio?: number } = {}): Promise<string> {
+    if (this.getContainerDims() === null)
       // If not browser
       return null;
-    }
 
     const chartEl = this.chartElement.nativeElement.firstElementChild;
 
-    const { width, height } = dims;
     const ops = {
-      width,
-      height
+      width: this.width,
+      height: this.height
     };
-
-    if (options.type === 'svg') {
+    const { type } = options;
+    if (type === 'svg') {
       return toSvg(chartEl, ops);
     }
-    if (options.type === 'png') {
+    if (type === 'png') {
       return toPng(chartEl, ops);
     }
-    if (options.type === 'jpg') {
+    if (type === 'jpg') {
       return toJpeg(chartEl, ops);
     }
+
+    throw new Error(`Unable to convert to type ${type}`);
+  }
+
+  toCanvas(pixelRatio?: number): Promise<HTMLCanvasElement> {
+    if (this.getContainerDims() === null)
+      // If not browser
+      return null;
+
+    const ops = {
+      width: this.width,
+      height: this.height,
+      pixelRatio
+    };
+    return toCanvas(this.chartElement.nativeElement.firstElementChild, ops);
   }
 }
