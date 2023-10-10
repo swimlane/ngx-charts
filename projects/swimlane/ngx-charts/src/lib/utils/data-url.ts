@@ -2,6 +2,7 @@ export interface Options {
   width: number;
   height: number;
   pixelRatio?: number;
+  transparentBackground?: boolean;
 }
 
 export interface StyleAble extends Element {
@@ -97,6 +98,12 @@ export async function toCanvas<T extends HTMLElement>(node: T, options: Options)
 
   canvas.style.width = `${canvasWidth}`;
   canvas.style.height = `${canvasHeight}`;
+
+  if (!options.transparentBackground) {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = '#fff';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+  }
 
   context.drawImage(img, 0, 0, canvas.width, canvas.height);
 

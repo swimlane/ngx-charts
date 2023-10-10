@@ -270,6 +270,7 @@ export class AppComponent implements OnInit {
   // Export Image
   @ViewChild('ngxCharts') chartEl: BaseChartComponent;
   exportFormat: 'png' | 'jpg' | 'svg' = 'svg';
+  transparentBackground: boolean = false;
 
   constructor(public location: Location) {
     this.mathFunction = this.getFunction();
@@ -489,12 +490,19 @@ export class AppComponent implements OnInit {
   }
 
   exportImage() {
-    this.chartEl.toDataURL({ type: this.exportFormat }).then(dataUrl => {
-      const link = document.createElement('a');
-      link.download = `${this.chartType}.${this.exportFormat}`;
-      link.href = dataUrl;
-      link.click();
-    });
+    this.chartEl
+      .toDataURL({
+        type: this.exportFormat,
+        canvasOptions: {
+          transparentBackground: this.transparentBackground
+        }
+      })
+      .then(dataUrl => {
+        const link = document.createElement('a');
+        link.download = `${this.chartType}.${this.exportFormat}`;
+        link.href = dataUrl;
+        link.click();
+      });
   }
 
   toggleFitContainer() {

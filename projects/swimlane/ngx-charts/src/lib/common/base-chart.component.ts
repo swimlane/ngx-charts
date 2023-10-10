@@ -211,7 +211,9 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, 
     return results;
   }
 
-  toDataURL<T extends 'png' | 'jpg' | 'svg'>(options: { type?: T; pixelRatio?: number } = {}): Promise<string> {
+  toDataURL<T extends 'png' | 'jpg' | 'svg'>(
+    options: { type?: T; canvasOptions?: { pixelRatio?: number; transparentBackground?: boolean } } = {}
+  ): Promise<string> {
     if (this.getContainerDims() === null)
       // If not browser
       return null;
@@ -220,7 +222,8 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, 
 
     const ops = {
       width: this.width,
-      height: this.height
+      height: this.height,
+      ...(options.canvasOptions || {})
     };
     const { type } = options;
     if (type === 'svg') {
@@ -236,7 +239,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, 
     throw new Error(`Unable to convert to type ${type}`);
   }
 
-  toCanvas(pixelRatio?: number): Promise<HTMLCanvasElement> {
+  toCanvas(options: { pixelRatio?: number; transparentBackground?: boolean }): Promise<HTMLCanvasElement> {
     if (this.getContainerDims() === null)
       // If not browser
       return null;
@@ -244,7 +247,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, 
     const ops = {
       width: this.width,
       height: this.height,
-      pixelRatio
+      ...options
     };
     return toCanvas(this.chartElement.nativeElement.firstElementChild, ops);
   }
