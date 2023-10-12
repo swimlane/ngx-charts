@@ -758,6 +758,7 @@
         </ngx-slider>
         Cost: ${{ personnelCost }} / hr
         <ngx-charts-number-card
+          #ngxCharts
           class="chart-container"
           [view]="view"
           [scheme]="colorScheme"
@@ -1035,6 +1036,7 @@
         </ng-template>
       </ngx-charts-bar-vertical>
       <ngx-charts-sparkline
+        #ngxCharts
         *ngIf="chartType === 'sparkline'"
         [view]="[100, 50]"
         class="chart-container"

@@ -268,7 +268,7 @@ export class AppComponent implements OnInit {
   exportVisible: boolean = true;
 
   // Export Image
-  @ViewChild('ngxCharts') chartEl: BaseChartComponent;
+  @ViewChild('ngxCharts') chartEl: BaseChartComponent | HTMLElement | null;
   exportFormat: 'png' | 'jpg' | 'svg' = 'svg';
   transparentBackground: boolean = false;
 
@@ -490,19 +490,24 @@ export class AppComponent implements OnInit {
   }
 
   exportImage() {
-    this.chartEl
-      .toDataURL({
-        type: this.exportFormat,
-        canvasOptions: {
-          transparentBackground: this.transparentBackground
-        }
-      })
-      .then(dataUrl => {
-        const link = document.createElement('a');
-        link.download = `${this.chartType}.${this.exportFormat}`;
-        link.href = dataUrl;
-        link.click();
-      });
+    this.chartEl ||
+      alert(
+        'If you have multiple component instances, you cannot determine the chart to be exported. Manually specify the node to be exported'
+      );
+    if (this.chartEl instanceof BaseChartComponent)
+      this.chartEl
+        .toDataURL({
+          type: this.exportFormat,
+          canvasOptions: {
+            transparentBackground: this.transparentBackground
+          }
+        })
+        .then(dataUrl => {
+          const link = document.createElement('a');
+          link.download = `${this.chartType}.${this.exportFormat}`;
+          link.href = dataUrl;
+          link.click();
+        });
   }
 
   toggleFitContainer() {
