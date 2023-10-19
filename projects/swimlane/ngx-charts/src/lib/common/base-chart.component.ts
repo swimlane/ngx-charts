@@ -214,7 +214,6 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, 
   toDataURL<T extends 'png' | 'jpg' | 'svg'>(
     options: {
       type?: T;
-      element?: Element;
       canvasOptions?: { pixelRatio?: number; transparentBackground?: boolean };
     } = {}
   ): Promise<string> {
@@ -222,7 +221,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, 
       // If not browser
       return null;
 
-    const chartEl = options.element ?? this.chartElement.nativeElement.firstElementChild;
+    const chartEl = this.chartElement.nativeElement.firstElementChild;
 
     const ops = {
       width: this.width,
