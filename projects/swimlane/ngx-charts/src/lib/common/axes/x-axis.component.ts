@@ -36,6 +36,7 @@ import { select } from 'd3-selection';
         [wrapTicks]="wrapTicks"
         (dimensionsChanged)="emitTicksHeight($event)"
       />
+      <title>{{ labelText }}</title>
       <svg:g
         ngx-charts-axis-label
         class = "xAxisLabel"
@@ -107,10 +108,13 @@ export class XAxisComponent implements OnChanges {
     this.maxLabelLength = Number(this.maxLabelLength);
     let labelElement = select('.xAxisLabel');
     let textElement = labelElement.select('text');
-    let xVal = textElement.attr('x');
-    let yVal = textElement.attr('y');
+    let xVal;
+    if (!textElement.empty()) {
+      xVal = textElement.attr('x');
+    }
+
     if (this.showLabel && this.trimLabel && this.maxLabelLength > 0) {
-      if (this.maxLabelLength < labelLength) { 
+      if (this.maxLabelLength < labelLength) {
         //trim
         let tspanElements = textElement.selectAll('tspan')
         if (tspanElements) {
@@ -138,7 +142,7 @@ export class XAxisComponent implements OnChanges {
           textElement.append('tspan')
             .text(line)
             .attr('x', xVal)
-            .attr('dy', '1.2em'); 
+            .attr('dy', '1.2em');
           start += this.maxLabelLength;
         }
 
@@ -147,7 +151,7 @@ export class XAxisComponent implements OnChanges {
           textElement.append('tspan')
           .text(lastLine)
           .attr('x', xVal)
-          .attr('dy', '1.2em'); 
+          .attr('dy', '1.2em');
         }
       }
     } else if (this.maxLabelLength == 0 && this.wrapLabel) {
@@ -164,7 +168,7 @@ export class XAxisComponent implements OnChanges {
           let line = wrappedLines[i];
           textElement.append('tspan')
             .text(line)
-            .attr('x', xVal) 
+            .attr('x', xVal)
             .attr('dy', '1.2em');
         }
       }
@@ -193,11 +197,11 @@ export class XAxisComponent implements OnChanges {
     const words = text.split(' ');
     let lines = [];
     let currentLine = '';
-  
+
     for (const word of words) {
       const testLine = currentLine ? `${currentLine} ${word}` : word;
       const testLineLength = testLine.length;
-  
+
       if (testLineLength <= maxLineWidth) {
         currentLine = testLine;
       } else {
@@ -205,11 +209,11 @@ export class XAxisComponent implements OnChanges {
         currentLine = word;
       }
     }
-  
+
     if (currentLine) {
       lines.push(currentLine);
     }
-  
+
     return lines;
   }
 }

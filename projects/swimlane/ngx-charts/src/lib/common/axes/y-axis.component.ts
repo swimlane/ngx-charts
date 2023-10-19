@@ -38,7 +38,7 @@ import { select } from 'd3-selection';
         [wrapTicks]="wrapTicks"
         (dimensionsChanged)="emitTicksWidth($event)"
       />
-
+      <title>{{ labelText }}</title>
       <svg:g
         ngx-charts-axis-label
         class = "yAxisLabel"
@@ -51,7 +51,8 @@ import { select } from 'd3-selection';
         [trimLabel]="trimLabel"
         [maxLabelLength]="maxLabelLength"
         [wrapLabel]="wrapLabel"
-      ></svg:g>
+      >
+    </svg:g>
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -89,7 +90,7 @@ export class YAxisComponent implements OnChanges {
   strokeWidth: number = 1;
   padding: number = 5;
   labelTextTemp: string;
-  
+
   @ViewChild(YAxisTicksComponent) ticksComponent: YAxisTicksComponent;
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -133,14 +134,14 @@ export class YAxisComponent implements OnChanges {
         textElement.text('');
 
         let numLine = Math.ceil(labelLength / this.maxLabelLength);
-        let yVal = parseFloat(textElement.attr('y')) - 30 * numLine; 
+        let yVal = parseFloat(textElement.attr('y')) - 30 * numLine;
         let xVal = parseFloat(textElement.attr('x'));
         const firstLine = this.labelTextTemp.slice(0, this.maxLabelLength);
         textElement.append('tspan')
           .text(firstLine)
           .attr('y', yVal)
           .attr('dx', '1em');
-    
+
         let start = this.maxLabelLength;
         while (numLine > 1) {
           numLine--;
@@ -150,7 +151,7 @@ export class YAxisComponent implements OnChanges {
             .text(line)
             .attr('x', xVal)
             .attr('y', yVal)
-            .attr('dx', '1.2em'); 
+            .attr('dx', '1.2em');
           start += this.maxLabelLength;
         }
       }
@@ -160,7 +161,7 @@ export class YAxisComponent implements OnChanges {
         let wrappedLines = this.wrapText(this.labelTextTemp, this.dims.height / 11);
         let firstLine = wrappedLines[0];
         textElement.text('');
-        let yVal = parseFloat(textElement.attr('y')) - 30 * wrappedLines.length; 
+        let yVal = parseFloat(textElement.attr('y')) - 30 * wrappedLines.length;
         let xVal = parseFloat(textElement.attr('x'));
         textElement.append('tspan')
           .text(firstLine)
@@ -174,7 +175,7 @@ export class YAxisComponent implements OnChanges {
             .text(line)
             .attr('x', xVal)
             .attr('y', yVal)
-            .attr('dx', '1.2em'); 
+            .attr('dx', '1.2em');
         }
       }
     }
@@ -197,11 +198,11 @@ export class YAxisComponent implements OnChanges {
     const words = text.split(' ');
     let lines = [];
     let currentLine = '';
-  
+
     for (const word of words) {
       const testLine = currentLine ? `${currentLine} ${word}` : word;
       const testLineLength = testLine.length;
-  
+
       if (testLineLength <= maxLineWidth) {
         currentLine = testLine;
       } else {
@@ -209,11 +210,11 @@ export class YAxisComponent implements OnChanges {
         currentLine = word;
       }
     }
-  
+
     if (currentLine) {
       lines.push(currentLine);
     }
-  
+
     return lines;
   }
 }
