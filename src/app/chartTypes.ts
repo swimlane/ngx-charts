@@ -701,7 +701,8 @@ const chartGroups = [
           'yAxisLabel',
           'showGridLines',
           'roundDomains',
-          'tooltipDisabled'
+          'tooltipDisabled',
+          'curve'
         ]
       },
       {
