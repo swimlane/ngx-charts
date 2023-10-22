@@ -165,12 +165,22 @@ export class AppComponent implements OnInit {
   rangeFillOpacity: number = 0.15;
 
   // Override colors for certain values
-  customColors: any[] = [
+  customColors: any[];
+
+  customColorsNonlinear: any[] = [
     {
       name: 'Germany',
-      value: '#a8385d'
+      value: '#000000'
     }
   ];
+  
+  customColorsLinear: any[] = [
+    '#0000ff',
+    '#ffffff'
+  ];
+
+  useCustomColors: boolean = false;
+  isLinear: boolean = false;
 
   // pie
   showLabels = true;
@@ -207,7 +217,7 @@ export class AppComponent implements OnInit {
 
   // heatmap
   heatmapMin: number = 0;
-  heatmapMax: number = 50000;
+  heatmapMax: number = 15;
 
   // Combo Chart
   barChart: any[] = barChart;
@@ -266,6 +276,7 @@ export class AppComponent implements OnInit {
   optsVisible: boolean = true;
 
   constructor(public location: Location) {
+    console.log("constructor")
     this.mathFunction = this.getFunction();
 
     Object.assign(this, {
@@ -291,6 +302,7 @@ export class AppComponent implements OnInit {
     this.dateData = generateData(5, false);
     this.dateDataWithRange = generateData(2, true);
     this.setColorScheme('cool');
+    this.setSchemeType(ScaleType.Ordinal);
     this.calendarData = this.getCalendarData();
     this.statusData = this.getStatusData();
     this.sparklineData = generateData(1, false, 30);
@@ -541,6 +553,18 @@ export class AppComponent implements OnInit {
   setColorScheme(name) {
     this.selectedColorScheme = name;
     this.colorScheme = this.colorSets.find(s => s.name === name);
+  }
+
+  setSchemeType(name) {
+    this.schemeType = name;
+    if (this.schemeType == ScaleType.Linear) {
+      this.customColors = this.customColorsLinear;
+      this.isLinear = true;
+    }
+    else {
+      this.customColors = this.customColorsNonlinear;
+      this.isLinear = false;
+    }
   }
 
   onLegendLabelClick(entry) {

@@ -27,10 +27,18 @@ export class ColorHelper {
         return cs.name === scheme;
       });
     }
-    this.colorDomain = scheme.domain;
+    
+    this.customColors = customColors;
+
+    if (this.customColors) {
+      this.colorDomain = this.customColors;
+    }
+    else {
+      this.colorDomain = scheme.domain;
+    }
+
     this.scaleType = type;
     this.domain = domain;
-    this.customColors = customColors;
 
     this.scale = this.generateColorScheme(scheme, type, this.domain);
   }
@@ -56,7 +64,13 @@ export class ColorHelper {
         break;
       case ScaleType.Linear:
         {
-          const colorDomain = [...scheme.domain];
+          let colorDomain;
+          if (this.customColors) {
+            colorDomain = [...this.customColors];
+          } 
+          else {
+            colorDomain = [...scheme.domain];
+          }
           if (colorDomain.length === 1) {
             colorDomain.push(colorDomain[0]);
             this.colorDomain = colorDomain;
@@ -114,6 +128,7 @@ export class ColorHelper {
       .domain(this.domain as number[])
       .range([0, 1]);
 
+    console.log(this.colorDomain);
     const colorValueScale = scaleBand().domain(this.colorDomain).range([0, 1]);
 
     const endColor = this.getColor(value);

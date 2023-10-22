@@ -45,6 +45,7 @@
         [view]="view"
         [scheme]="colorScheme"
         [schemeType]="schemeType"
+        [customColors]="customColors"
         [results]="single"
         [animations]="animations"
         [gradient]="gradient"
@@ -82,6 +83,7 @@
         [view]="view"
         [scheme]="colorScheme"
         [schemeType]="schemeType"
+        [customColors]="customColors"
         [results]="multi"
         [animations]="animations"
         [gradient]="gradient"
@@ -120,6 +122,7 @@
         [view]="view"
         [scheme]="colorScheme"
         [schemeType]="schemeType"
+        [customColors]="customColors"
         [results]="multi"
         [animations]="animations"
         [gradient]="gradient"
@@ -158,6 +161,7 @@
         [view]="view"
         [scheme]="colorScheme"
         [schemeType]="schemeType"
+        [customColors]="customColors"
         [results]="multi"
         [animations]="animations"
         [gradient]="gradient"
@@ -194,6 +198,7 @@
         [view]="view"
         [scheme]="colorScheme"
         [schemeType]="schemeType"
+        [customColors]="customColors"
         [results]="multi"
         [animations]="animations"
         [gradient]="gradient"
@@ -230,6 +235,7 @@
         [view]="view"
         [scheme]="colorScheme"
         [schemeType]="schemeType"
+        [customColors]="customColors"
         [results]="multi"
         [animations]="animations"
         [gradient]="gradient"
@@ -264,6 +270,7 @@
         [view]="view"
         [scheme]="colorScheme"
         [schemeType]="schemeType"
+        [customColors]="customColors"
         [results]="multi"
         [animations]="animations"
         [gradient]="gradient"
@@ -297,6 +304,7 @@
         class="chart-container"
         [view]="view"
         [scheme]="colorScheme"
+        [customColors]="customColorsNonlinear"
         [results]="single"
         [animations]="animations"
         [legend]="showLegend"
@@ -320,6 +328,7 @@
         class="chart-container"
         [view]="view"
         [scheme]="colorScheme"
+        [customColors]="customColorsNonlinear"
         [results]="single"
         [valueFormatting]="valueFormatting"
         [animations]="animations"
@@ -336,6 +345,7 @@
         class="chart-container"
         [view]="view"
         [scheme]="colorScheme"
+        [customColors]="customColorsNonlinear"
         [results]="single"
         [animations]="animations"
         [tooltipDisabled]="tooltipDisabled"
@@ -351,6 +361,7 @@
         class="chart-container"
         [scheme]="colorScheme"
         [schemeType]="schemeType"
+        [customColors]="customColors"
         [results]="dateDataWithOrWithoutRange"
         [animations]="animations"
         [legend]="showLegend"
@@ -391,6 +402,7 @@
         class="chart-container"
         [scheme]="colorScheme"
         [schemeType]="schemeType"
+        [customColors]="customColors"
         [results]="multi"
         [animations]="animations"
         [legend]="showLegend"
@@ -440,6 +452,7 @@
         [yScaleMax]="yScaleMax"
         [scheme]="colorScheme"
         [schemeType]="schemeType"
+        [customColors]="customColors"
         [roundDomains]="roundDomains"
         [tooltipDisabled]="tooltipDisabled"
         [minRadius]="minRadius"
@@ -461,6 +474,7 @@
         [view]="view"
         [scheme]="colorScheme"
         [schemeType]="schemeType"
+        [customColors]="customColors"
         [results]="dateData"
         [animations]="animations"
         [legend]="showLegend"
@@ -500,6 +514,7 @@
         [view]="view"
         [scheme]="colorScheme"
         [schemeType]="schemeType"
+        [customColors]="customColors"
         [results]="dateData"
         [animations]="animations"
         [legend]="showLegend"
@@ -538,6 +553,7 @@
         [view]="view"
         [scheme]="colorScheme"
         [schemeType]="schemeType"
+        [customColors]="customColors"
         [results]="dateData"
         [animations]="animations"
         [legend]="showLegend"
@@ -597,6 +613,7 @@
         (select)="onSelect($event)"
       >
       </combo-chart-component>
+      <!--combo chart??-->
       <ngx-charts-heat-map
         *ngIf="chartType === 'heat-map'"
         class="chart-container"
@@ -622,6 +639,7 @@
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         [wrapTicks]="wrapTicks"
+        [customColors]="customColorsLinear"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -650,6 +668,7 @@
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         [wrapTicks]="wrapTicks"
+        [customColors]="customColorsLinear"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -666,6 +685,7 @@
         [labelFormatting]="gdpLabelFormatting"
         [valueFormatting]="currencyFormatting"
         [gradient]="gradient"
+        [customColors]="customColorsNonlinear"
         (select)="select($event)"
       >
       </ngx-charts-tree-map>
@@ -678,6 +698,7 @@
         emptyColor="#1e222e"
         [results]="single"
         [animations]="animations"
+        [customColors]="customColorsNonlinear"
         (select)="select($event)"
       >
       </ngx-charts-number-card>
@@ -738,6 +759,7 @@
           class="chart-container"
           [view]="view"
           [scheme]="colorScheme"
+          [customColors]="customColorsNonlinear"
           cardColor="#232837"
           emptyColor="#1e222e"
           [results]="statusData"
@@ -769,6 +791,7 @@
         [margin]="margin ? [marginTop, marginRight, marginBottom, marginLeft] : null"
         [tooltipDisabled]="tooltipDisabled"
         [showText]="showText"
+        [customColors]="customColorsNonlinear"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -785,6 +808,7 @@
         [value]="gaugeValue"
         [previousValue]="gaugePreviousValue"
         [units]="gaugeUnits"
+        [customColors]="customColorsNonlinear"
         (select)="select($event)"
       >
       </ngx-charts-linear-gauge>
@@ -802,6 +826,7 @@
           class="chart-container"
           [scheme]="colorScheme"
           [schemeType]="schemeType"
+          [customColors]="customColors"
           [results]="plotData"
           [animations]="animations"
           [legend]="false"
@@ -835,6 +860,7 @@
           class="chart-container"
           [scheme]="colorScheme"
           [schemeType]="schemeType"
+          [customColors]="customColors"
           [results]="plotData"
           [animations]="animations"
           [legend]="false"
@@ -886,6 +912,7 @@
           [animations]="animations"
           [tooltipDisabled]="tooltipDisabled"
           [gradient]="gradient"
+          [customColors]="customColorsNonlinear"
           (select)="treemapSelect($event)"
         >
         </ngx-charts-tree-map>
@@ -922,6 +949,7 @@
           [autoScale]="autoScale"
           [scheme]="colorScheme"
           [schemeType]="schemeType"
+          [customColors]="customColors"
           [roundDomains]="roundDomains"
           [tooltipDisabled]="tooltipDisabled"
           [minRadius]="minRadius"
@@ -1194,7 +1222,7 @@
         [hidden]="!colorVisible"
         style="margin-left: 10px"
         [ngModel]="schemeType"
-        (ngModelChange)="schemeType = $event"
+        (ngModelChange)="setSchemeType($event)"
       >
         <option value="ordinal">Ordinal</option>
         <option value="linear">Linear</option>
@@ -1218,6 +1246,19 @@
             Animations
           </label>
           <br />
+        </div>
+        <div *ngIf="chart.options.includes('customColors') && (isLinear || chartType === 'heat-map' || chartType === 'calendar')">
+          <label>
+            <input type="checkbox" [(ngModel)]="useCustomColors" />
+            Custom Colors
+          </label>
+          <br />
+        </div>
+        <div *ngIf="useCustomColors">
+          <label>Gradient Color 1:</label><input type="text" [(ngModel)]="customColorsLinear[0]" />
+        </div>
+        <div *ngIf="useCustomColors">
+          <label>Gradient Color 2:</label><input type="text" [(ngModel)]="customColorsLinear[1]" />
         </div>
         <div *ngIf="chart.options.includes('showXAxis')">
           <label>

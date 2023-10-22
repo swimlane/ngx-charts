@@ -59,21 +59,21 @@ export const multi: MultiSeries = [
     series: [
       {
         name: '2010',
-        value: 40632,
+        value: 0,
         extra: {
           code: 'de'
         }
       },
       {
         name: '2000',
-        value: 36953,
+        value: 1,
         extra: {
           code: 'de'
         }
       },
       {
         name: '1990',
-        value: 31476,
+        value: 2,
         extra: {
           code: 'de'
         }
@@ -85,21 +85,21 @@ export const multi: MultiSeries = [
     series: [
       {
         name: '2010',
-        value: 0,
+        value: 3,
         extra: {
           code: 'us'
         }
       },
       {
         name: '2000',
-        value: 45986,
+        value: 4,
         extra: {
           code: 'us'
         }
       },
       {
         name: '1990',
-        value: 37060,
+        value: 5,
         extra: {
           code: 'us'
         }
@@ -111,21 +111,21 @@ export const multi: MultiSeries = [
     series: [
       {
         name: '2010',
-        value: 36745,
+        value: 6,
         extra: {
           code: 'fr'
         }
       },
       {
         name: '2000',
-        value: 34774,
+        value: 7,
         extra: {
           code: 'fr'
         }
       },
       {
         name: '1990',
-        value: 29476,
+        value: 8,
         extra: {
           code: 'fr'
         }
@@ -137,21 +137,21 @@ export const multi: MultiSeries = [
     series: [
       {
         name: '2010',
-        value: 36240,
+        value: 9,
         extra: {
           code: 'uk'
         }
       },
       {
         name: '2000',
-        value: 32543,
+        value: 10,
         extra: {
           code: 'uk'
         }
       },
       {
         name: '1990',
-        value: 26424,
+        value: 11,
         extra: {
           code: 'uk'
         }
