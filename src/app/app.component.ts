@@ -170,19 +170,16 @@ export class AppComponent implements OnInit {
   customColorsNonlinear: any[] = [
     {
       name: 'Germany',
-      value: '#000000'
+      value: '#a8385d'
     }
   ];
   
-  customColorsLinear: any[] = [
-    '#0000ff',
-    '#ffffff'
-  ];
+  customColorsLinear: any[];
 
   useCustomColors: boolean = false;
   isLinear: boolean = false;
-  gradientStop1: string = '#0000ff';
-  gradientStop2: string = '#ffffff';
+  gradientStop1: string;
+  gradientStop2: string;
 
   // pie
   showLabels = true;
@@ -219,7 +216,7 @@ export class AppComponent implements OnInit {
 
   // heatmap
   heatmapMin: number = 0;
-  heatmapMax: number = 11;
+  heatmapMax: number = 15;
 
   // Combo Chart
   barChart: any[] = barChart;
