@@ -1239,29 +1239,13 @@
         <strong>Color Scheme</strong>
       </h3>
       <select
-        [hidden]="!colorVisible"
+        [hidden]="!colorVisible || (useCustomColors && isLinear)"
         style="margin-left: 10px"
         [ngModel]="selectedColorScheme"
         (ngModelChange)="setColorScheme($event)"
       >
         <option *ngFor="let scheme of colorSets" [value]="scheme.name">{{ scheme.name }}</option>
       </select>
-
-      <div [hidden]="!colorVisible" style="margin-left: 10px">
-        <div *ngIf="chart.options.includes('customColors') && (isLinear || chartType === 'heat-map' || chartType === 'calendar')">
-          <label>
-            <input type="checkbox" [(ngModel)]="useCustomColors" />
-            Custom Colors
-          </label>
-          <br />
-        </div>
-        <div *ngIf="useCustomColors">
-          <label>Gradient Color 1:</label><input type="text" [(ngModel)]="gradientStop1" (ngModelChange)="setCustomColor()"/>
-        </div>
-        <div *ngIf="useCustomColors">
-          <label>Gradient Color 2:</label><input type="text" [(ngModel)]="gradientStop2" (ngModelChange)="setCustomColor()"/>
-        </div>
-      </div>
 
       <select
         *ngIf="chart.options.includes('schemeType')"
@@ -1273,6 +1257,22 @@
         <option value="ordinal">Ordinal</option>
         <option value="linear">Linear</option>
       </select>
+
+      <div [hidden]="!colorVisible" style="margin-left: 10px">
+        <div *ngIf="chart.options.includes('customColors') && (isLinear || chartType === 'heat-map' || chartType === 'calendar')">
+          <label>
+            <input type="checkbox" [(ngModel)]="useCustomColors" />
+            Custom Colors
+          </label>
+          <br />
+        </div>
+        <div *ngIf="useCustomColors && (isLinear || chartType === 'heat-map' || chartType === 'calendar')">
+          <label>Gradient Color 1:</label><input type="text" [(ngModel)]="gradientStop1" (ngModelChange)="setCustomColor()"/>
+        </div>
+        <div *ngIf="useCustomColors && (isLinear || chartType === 'heat-map' || chartType === 'calendar')">
+          <label>Gradient Color 2:</label><input type="text" [(ngModel)]="gradientStop2" (ngModelChange)="setCustomColor()"/>
+        </div>
+      </div>
 
       <div [hidden]="!colorVisible || !range" style="margin-left: 10px">
         <div>
