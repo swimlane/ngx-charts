@@ -181,6 +181,8 @@ export class AppComponent implements OnInit {
 
   useCustomColors: boolean = false;
   isLinear: boolean = false;
+  gradientStop1: string = '#0000ff';
+  gradientStop2: string = '#ffffff';
 
   // pie
   showLabels = true;
@@ -217,7 +219,7 @@ export class AppComponent implements OnInit {
 
   // heatmap
   heatmapMin: number = 0;
-  heatmapMax: number = 15;
+  heatmapMax: number = 11;
 
   // Combo Chart
   barChart: any[] = barChart;
@@ -565,6 +567,11 @@ export class AppComponent implements OnInit {
       this.customColors = this.customColorsNonlinear;
       this.isLinear = false;
     }
+  }
+
+  setCustomColor() {
+    this.customColorsLinear = [this.gradientStop1, this.gradientStop2];
+    this.customColors = this.customColorsLinear;
   }
 
   onLegendLabelClick(entry) {

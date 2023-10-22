@@ -1255,10 +1255,10 @@
           <br />
         </div>
         <div *ngIf="useCustomColors">
-          <label>Gradient Color 1:</label><input type="text" [(ngModel)]="customColorsLinear[0]" />
+          <label>Gradient Color 1:</label><input type="text" [(ngModel)]="gradientStop1" (ngModelChange)="setCustomColor()"/>
         </div>
         <div *ngIf="useCustomColors">
-          <label>Gradient Color 2:</label><input type="text" [(ngModel)]="customColorsLinear[1]" />
+          <label>Gradient Color 2:</label><input type="text" [(ngModel)]="gradientStop2" (ngModelChange)="setCustomColor()"/>
         </div>
         <div *ngIf="chart.options.includes('showXAxis')">
           <label>

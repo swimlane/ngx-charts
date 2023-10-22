@@ -64,22 +64,26 @@ export class ColorHelper {
         break;
       case ScaleType.Linear:
         {
-          let colorDomain;
           if (this.customColors) {
-            colorDomain = [...this.customColors];
+            const colorDomain = [...this.customColors];
+            console.log("colorDomain as any", colorDomain);
+            colorScale = scaleLinear()
+              .range(colorDomain as any)
+              .domain([0, 1]);
           } 
           else {
-            colorDomain = [...scheme.domain];
-          }
-          if (colorDomain.length === 1) {
-            colorDomain.push(colorDomain[0]);
-            this.colorDomain = colorDomain;
-          }
+            const colorDomain = [...scheme.domain];
 
-          const points = range(0, 1, 1.0 / colorDomain.length);
-          colorScale = scaleLinear()
-            .range(colorDomain as any)
-            .domain(points);
+            if (colorDomain.length === 1) {
+              colorDomain.push(colorDomain[0]);
+              this.colorDomain = colorDomain;
+            }
+
+            const points = range(0, 1, 1.0 / colorDomain.length);
+            colorScale = scaleLinear()
+              .range(colorDomain as any)
+              .domain(points);
+          }
         }
         break;
       default:
@@ -97,7 +101,7 @@ export class ColorHelper {
       const valueScale = scaleLinear()
         .domain(this.domain as number[])
         .range([0, 1]);
-
+      console.log("?", valueScale(value as number));
       return this.scale(valueScale(value as number));
     } else {
       if (typeof this.customColors === 'function') {
