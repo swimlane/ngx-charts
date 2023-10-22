@@ -1261,7 +1261,7 @@
       <div [hidden]="!colorVisible" style="margin-left: 10px">
         <div *ngIf="chart.options.includes('customColors') && (isLinear || chartType === 'heat-map' || chartType === 'calendar')">
           <label>
-            <input type="checkbox" [(ngModel)]="useCustomColors" />
+            <input type="checkbox" [(ngModel)]="useCustomColors" (ngModelChange)="resetCustomColor()"/>
             Custom Colors
           </label>
           <br />

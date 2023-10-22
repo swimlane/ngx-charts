@@ -275,7 +275,6 @@ export class AppComponent implements OnInit {
   optsVisible: boolean = true;
 
   constructor(public location: Location) {
-    console.log("constructor")
     this.mathFunction = this.getFunction();
 
     Object.assign(this, {
@@ -569,6 +568,16 @@ export class AppComponent implements OnInit {
   setCustomColor() {
     this.customColorsLinear = [this.gradientStop1, this.gradientStop2];
     this.customColors = this.customColorsLinear;
+  }
+
+  resetCustomColor() {
+    if (this.useCustomColors) {
+      this.setCustomColor();
+    }
+    else {
+      this.customColorsLinear = undefined;
+      this.customColors = undefined;
+    }
   }
 
   onLegendLabelClick(entry) {

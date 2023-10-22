@@ -300,7 +300,6 @@ export class HeatMapComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    console.log("heat", this.customColors);
     this.colors = new ColorHelper(this.scheme, this.scaleType, this.valueDomain, this.customColors);
   }
 

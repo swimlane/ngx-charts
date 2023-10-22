@@ -96,7 +96,6 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
         const value = cell.value;
         cell.series = row.name;
 
-        console.log("color of cell", this.colors.getColor(value))
         cells.push({
           row,
           cell,
