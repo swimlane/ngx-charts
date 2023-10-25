@@ -161,6 +161,7 @@ export class AppComponent implements OnInit {
   colorSets: any;
   colorScheme: any;
   schemeType = ScaleType.Ordinal;
+  linearScaleType = ScaleType.Linear;
   selectedColorScheme: string;
   rangeFillOpacity: number = 0.15;
 
@@ -177,9 +178,7 @@ export class AppComponent implements OnInit {
   customColorsLinear: any[];
 
   useCustomColors: boolean = false;
-  isLinear: boolean = false;
-  gradientStop1: string;
-  gradientStop2: string;
+  gradientStops: string = "#0000ff, #ff0000";
 
   // pie
   showLabels = true;
@@ -557,16 +556,15 @@ export class AppComponent implements OnInit {
     this.schemeType = name;
     if (this.schemeType == ScaleType.Linear) {
       this.customColors = this.customColorsLinear;
-      this.isLinear = true;
     }
     else {
       this.customColors = this.customColorsNonlinear;
-      this.isLinear = false;
     }
   }
 
   setCustomColor() {
-    this.customColorsLinear = [this.gradientStop1, this.gradientStop2];
+    console.log("this.setCustomColor", this.useCustomColors);
+    this.customColorsLinear = this.gradientStops.split(',');
     this.customColors = this.customColorsLinear;
   }
 

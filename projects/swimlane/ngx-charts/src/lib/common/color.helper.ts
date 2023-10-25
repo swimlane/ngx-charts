@@ -68,7 +68,7 @@ export class ColorHelper {
             const colorDomain = [...this.customColors];
             colorScale = scaleLinear()
               .range(colorDomain as any)
-              .domain([0, 1]);
+              .domain(range(0, 1, 0.999 / (colorDomain.length - 1)));
           } 
           else {
             const colorDomain = [...scheme.domain];
@@ -100,6 +100,7 @@ export class ColorHelper {
       const valueScale = scaleLinear()
         .domain(this.domain as number[])
         .range([0, 1]);
+      console.log(valueScale(value as number));
       return this.scale(valueScale(value as number));
     } else {
       if (typeof this.customColors === 'function') {

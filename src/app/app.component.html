@@ -1239,7 +1239,7 @@
         <strong>Color Scheme</strong>
       </h3>
       <select
-        [hidden]="!colorVisible || (useCustomColors && isLinear)"
+        [hidden]="!colorVisible || (useCustomColors && (schemeType === linearScaleType || chartType === 'heat-map' || chartType === 'calendar'))"
         style="margin-left: 10px"
         [ngModel]="selectedColorScheme"
         (ngModelChange)="setColorScheme($event)"
@@ -1259,18 +1259,15 @@
       </select>
 
       <div [hidden]="!colorVisible" style="margin-left: 10px">
-        <div *ngIf="chart.options.includes('customColors') && (isLinear || chartType === 'heat-map' || chartType === 'calendar')">
+        <div *ngIf="chart.options.includes('customColors') && (schemeType === linearScaleType || chartType === 'heat-map' || chartType === 'calendar')">
           <label>
             <input type="checkbox" [(ngModel)]="useCustomColors" (ngModelChange)="resetCustomColor()"/>
             Custom Colors
           </label>
           <br />
         </div>
-        <div *ngIf="useCustomColors && (isLinear || chartType === 'heat-map' || chartType === 'calendar')">
-          <label>Gradient Color 1:</label><input type="text" [(ngModel)]="gradientStop1" (ngModelChange)="setCustomColor()"/>
-        </div>
-        <div *ngIf="useCustomColors && (isLinear || chartType === 'heat-map' || chartType === 'calendar')">
-          <label>Gradient Color 2:</label><input type="text" [(ngModel)]="gradientStop2" (ngModelChange)="setCustomColor()"/>
+        <div *ngIf="useCustomColors && (schemeType === linearScaleType || chartType === 'heat-map' || chartType === 'calendar')">
+          <label>Gradient Color Stops:</label><input type="text" [(ngModel)]="gradientStops" (ngModelChange)="setCustomColor()"/>
         </div>
       </div>
 
