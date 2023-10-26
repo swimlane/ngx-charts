@@ -350,6 +350,7 @@ const chartGroups = [
           'timeline',
           'showGridLines',
           'curve',
+          'tension',
           'rangeFillOpacity',
           'roundDomains',
           'tooltipDisabled',
@@ -702,7 +703,8 @@ const chartGroups = [
           'showGridLines',
           'roundDomains',
           'tooltipDisabled',
-          'curve'
+          'curve',
+          'tension'
         ]
       },
       {

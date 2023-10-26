@@ -11,7 +11,7 @@ import {
   OnInit
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
+import { scaleLinear, scaleTime, scalePoint, NumberValue } from 'd3-scale';
 import { curveLinear } from 'd3-shape';
 
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
@@ -93,6 +93,7 @@ import { isPlatformServer } from '@angular/common';
                 [activeEntries]="activeEntries"
                 [scaleType]="scaleType"
                 [curve]="curve"
+                [tension]="tension"
                 [rangeFillOpacity]="rangeFillOpacity"
                 [hasRange]="hasRange"
                 [animations]="animations"
@@ -236,6 +237,7 @@ export class LineChartComponent extends BaseChartComponent implements OnInit {
   @Input() yScaleMin: number;
   @Input() yScaleMax: number;
   @Input() wrapTicks = false;
+  @Input() tension: number;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

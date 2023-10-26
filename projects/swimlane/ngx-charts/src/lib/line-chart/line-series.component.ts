@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
-import { area, line } from 'd3-shape';
-
+import { area, curveBundle, curveCardinal, curveCatmullRom, line } from 'd3-shape';
+import { curveLinear } from 'd3-shape';
 import { id } from '../utils/id';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
 import { ColorHelper } from '../common/color.helper';
@@ -69,6 +69,7 @@ export class LineSeriesComponent implements OnChanges {
   @Input() colors: ColorHelper;
   @Input() scaleType: ScaleType;
   @Input() curve: any;
+  @Input() tension: number;
   @Input() activeEntries: any[];
   @Input() rangeFillOpacity: number;
   @Input() hasRange: boolean;
@@ -120,7 +121,40 @@ export class LineSeriesComponent implements OnChanges {
   }
 
   getLineGenerator(): any {
-    return line<any>()
+    if (this.curve == curveCatmullRom) {
+      return line<any>()
+      .x(d => {
+        const label = d.name;
+        let value;
+        if (this.scaleType === ScaleType.Time) {
+          value = this.xScale(label);
+        } else if (this.scaleType === ScaleType.Linear) {
+          value = this.xScale(Number(label));
+        } else {
+          value = this.xScale(label);
+        }
+        return value;
+      })
+      .y(d => this.yScale(d.value))
+      .curve(this.curve.alpha(this.tension));
+    } else if (this.curve == curveCardinal) {
+      return line<any>()
+      .x(d => {
+        const label = d.name;
+        let value;
+        if (this.scaleType === ScaleType.Time) {
+          value = this.xScale(label);
+        } else if (this.scaleType === ScaleType.Linear) {
+          value = this.xScale(Number(label));
+        } else {
+          value = this.xScale(label);
+        }
+        return value;
+      })
+      .y(d => this.yScale(d.value))
+      .curve(this.curve.tension(this.tension));
+    } else {
+      return line<any>()
       .x(d => {
         const label = d.name;
         let value;
@@ -135,6 +169,7 @@ export class LineSeriesComponent implements OnChanges {
       })
       .y(d => this.yScale(d.value))
       .curve(this.curve);
+    }
   }
 
   getRangeGenerator(): any {

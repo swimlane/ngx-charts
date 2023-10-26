@@ -153,6 +153,7 @@ export class AppComponent implements OnInit {
     'Step After',
     'Step Before'
   ];
+  tension: number = 0.5;
 
   closedCurveType: string = 'Linear Closed';
   closedCurve: any = this.curves[this.closedCurveType];
@@ -537,7 +538,10 @@ export class AppComponent implements OnInit {
   getInterpolationType(curveType) {
     return this.curves[curveType] || this.curves['default'];
   }
-
+  isTensionSliderRequired(curveType) {
+    return this.curves[curveType] == this.curves['Cardinal'] ||
+    this.curves[curveType] == this.curves['Catmull Rom'];
+  }
   setColorScheme(name) {
     this.selectedColorScheme = name;
     this.colorScheme = this.colorSets.find(s => s.name === name);
