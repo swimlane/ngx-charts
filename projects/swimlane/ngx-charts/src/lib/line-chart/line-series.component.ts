@@ -1,6 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
-import { area, curveBundle, curveCardinal, curveCatmullRom, line } from 'd3-shape';
-import { curveLinear } from 'd3-shape';
+import { area, curveCardinal, curveCatmullRom, line } from 'd3-shape';
 import { id } from '../utils/id';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
 import { ColorHelper } from '../common/color.helper';

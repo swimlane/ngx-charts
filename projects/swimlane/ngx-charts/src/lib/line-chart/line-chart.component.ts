@@ -11,7 +11,7 @@ import {
   OnInit
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { scaleLinear, scaleTime, scalePoint, NumberValue } from 'd3-scale';
+import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
 import { curveLinear } from 'd3-shape';
 
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
