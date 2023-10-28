@@ -178,7 +178,7 @@ export class AppComponent implements OnInit {
   customColorsLinear: any[];
 
   useCustomColors: boolean = false;
-  gradientStops: string = "#0000ff, #ff0000";
+  gradientStops: string = "#0000ff, #ff0000, #0000ff";
 
   // pie
   showLabels = true;

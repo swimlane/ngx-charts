@@ -68,7 +68,7 @@ export class ColorHelper {
             const colorDomain = [...this.customColors];
             colorScale = scaleLinear()
               .range(colorDomain as any)
-              .domain(range(0, 1, 0.999 / (colorDomain.length - 1)));
+              .domain(range(0, 1, 0.9999 / (colorDomain.length - 1)));
           } 
           else {
             const colorDomain = [...scheme.domain];
@@ -78,7 +78,7 @@ export class ColorHelper {
               this.colorDomain = colorDomain;
             }
 
-            const points = range(0, 1, 1.0 / colorDomain.length);
+            const points = range(0, 1, 0.9999 / (colorDomain.length - 1));
             colorScale = scaleLinear()
               .range(colorDomain as any)
               .domain(points);
@@ -100,7 +100,6 @@ export class ColorHelper {
       const valueScale = scaleLinear()
         .domain(this.domain as number[])
         .range([0, 1]);
-      console.log(valueScale(value as number));
       return this.scale(valueScale(value as number));
     } else {
       if (typeof this.customColors === 'function') {
@@ -131,7 +130,7 @@ export class ColorHelper {
       .domain(this.domain as number[])
       .range([0, 1]);
 
-    const colorValueScale = scaleBand().domain(this.colorDomain).range([0, 1]);
+    const colorValueScale = scaleBand().domain(this.colorDomain.slice(1)).range([0, 1]);
 
     const endColor = this.getColor(value);
 
@@ -151,16 +150,17 @@ export class ColorHelper {
       opacity: 1
     });
 
-    while (currentVal < endVal && i < this.colorDomain.length) {
+    while (i < this.colorDomain.length) {
       const color = this.colorDomain[i];
-      const offset = colorValueScale(color);
+      const offset = colorValueScale(color) + colorValueScale.bandwidth();
+
+      if (offset >= endVal) {
+        break;
+      }
+
       if (offset <= startVal) {
         i++;
         continue;
-      }
-
-      if (offset.toFixed(4) >= (endVal - colorValueScale.bandwidth()).toFixed(4)) {
-        break;
       }
 
       stops.push({
@@ -168,7 +168,6 @@ export class ColorHelper {
         offset,
         opacity: 1
       });
-      currentVal = offset;
       i++;
     }
 
