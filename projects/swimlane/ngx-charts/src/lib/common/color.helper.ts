@@ -100,7 +100,7 @@ export class ColorHelper {
       const valueScale = scaleLinear()
         .domain(this.domain as number[])
         .range([0, 1]);
-        
+
       return this.scale(valueScale(value as number));
     } else {
       if (typeof this.customColors === 'function') {
