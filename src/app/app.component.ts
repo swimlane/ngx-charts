@@ -520,6 +520,8 @@ export class AppComponent implements OnInit {
     if (!this.fitContainer) {
       this.applyDimensions();
     }
+
+    this.setSchemeType(this.schemeType);
   }
 
   changeTheme(theme: string) {
