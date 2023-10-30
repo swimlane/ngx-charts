@@ -10,6 +10,7 @@ import {
   multi,
   boxData,
   bubble,
+  sankeyData,
   generateData,
   generateGraph,
   treemap,
@@ -78,7 +79,7 @@ export class AppComponent implements OnInit {
   view: [number, number];
   width: number = 700;
   height: number = 300;
-  fitContainer: boolean = false;
+  fitContainer: boolean = true;
 
   // options
   showXAxis = true;
@@ -191,6 +192,9 @@ export class AppComponent implements OnInit {
 
   // box
   boxData = boxData;
+
+  // sankey
+  sankeyData = sankeyData;
 
   // gauge
   gaugeMin: number = 0;

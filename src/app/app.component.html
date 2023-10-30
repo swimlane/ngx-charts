@@ -712,6 +712,22 @@
         (deactivate)="deactivate($event)"
       >
       </ngx-charts-box-chart>
+      <ngx-charts-sankey
+        *ngIf="chartType === 'sankey'"
+        class="chart-container"
+        [view]="view"
+        [results]="sankeyData"
+        [scheme]="colorScheme"
+        [schemeType]="schemeType"
+        [customColors]="customColors"
+        [tooltipDisabled]="tooltipDisabled"
+        [animations]="animations"
+        [showLabels]="showLabels"
+        (select)="select($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
+      >
+      </ngx-charts-sankey>
       <div *ngIf="chartType === 'status-demo'">
         <ngx-slider
           [(ngModel)]="salePrice"
