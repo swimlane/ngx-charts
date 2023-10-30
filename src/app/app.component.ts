@@ -215,7 +215,7 @@ export class AppComponent implements OnInit {
 
   // heatmap
   heatmapMin: number = 0;
-  heatmapMax: number = 15;
+  heatmapMax: number = 50000;
 
   // Combo Chart
   barChart: any[] = barChart;
@@ -565,7 +565,6 @@ export class AppComponent implements OnInit {
   }
 
   setCustomColor() {
-    console.log("this.setCustomColor", this.useCustomColors);
     this.customColorsLinear = this.gradientStops.split(',');
     this.customColors = this.customColorsLinear;
   }
