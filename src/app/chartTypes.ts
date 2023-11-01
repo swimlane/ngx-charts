@@ -637,6 +637,37 @@ const chartGroups = [
         }
       },
       {
+        name: 'Calendar Pie',
+        selector: 'calendar-pie',
+        inputFormat: 'multiSeries',
+        options: [
+          'animations',
+          'colorScheme',
+          'showXAxis',
+          'showYAxis',
+          'gradient',
+          'showLegend',
+          'showXAxisLabel',
+          'xAxisLabel',
+          'showYAxisLabel',
+          'yAxisLabel',
+          'innerPadding',
+          'tooltipDisabled',
+          'trimXAxisTicks',
+          'trimYAxisTicks',
+          'rotateXAxisTicks',
+          'maxXAxisTickLength',
+          'maxYAxisTickLength',
+          'min',
+          'max',
+          'wrapTicks'
+        ],
+        defaults: {
+          yAxisLabel: 'Census Date',
+          cAxisLabel: 'Country'
+        }
+      },
+      {
         name: 'Tree Map',
         selector: 'tree-map',
         inputFormat: 'singleSeries',

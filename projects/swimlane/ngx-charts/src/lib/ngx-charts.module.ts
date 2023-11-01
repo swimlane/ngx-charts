@@ -12,6 +12,7 @@ import { PieChartModule } from './pie-chart/pie-chart.module';
 import { TreeMapModule } from './tree-map/tree-map.module';
 import { GaugeModule } from './gauge/gauge.module';
 import { ngxChartsPolyfills } from './polyfills';
+import { CalendarPieModule } from './calendar-pie/calendar-pie.module';
 
 @NgModule({
   exports: [
@@ -21,6 +22,7 @@ import { ngxChartsPolyfills } from './polyfills';
     BoxChartModule,
     BubbleChartModule,
     HeatMapModule,
+    CalendarPieModule,
     LineChartModule,
     PolarChartModule,
     NumberCardModule,
