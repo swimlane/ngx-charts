@@ -79,7 +79,7 @@ export class AppComponent implements OnInit {
   view: [number, number];
   width: number = 700;
   height: number = 300;
-  fitContainer: boolean = true;
+  fitContainer: boolean = false;
 
   // options
   showXAxis = true;
