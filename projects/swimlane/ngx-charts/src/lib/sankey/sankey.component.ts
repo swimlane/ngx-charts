@@ -115,7 +115,6 @@ export class SankeyComponent extends BaseChartComponent {
   @Input() showLabels: boolean = true;
   @Input() gradient: boolean;
   @Input() tooltipDisabled: boolean = false;
-  @Input() tooltipText: any;
   @Input() activeEntries: any[] = [];
   @Input() labelFormatting: any;
 
@@ -253,26 +252,5 @@ export class SankeyComponent extends BaseChartComponent {
 
   getValueDomain(nodes): any[] {
     return nodes.map(n => n.name);
-  }
-
-  onActivate(event) {
-    const item = Object.assign({}, event);
-
-    const items = this.results.flat().filter(i => {
-      return i.name === item.name && i.series === item.series;
-    });
-
-    this.activeEntries = [...items];
-    this.activate.emit({ value: item, entries: this.activeEntries });
-  }
-
-  onDeactivate(event) {
-    const item = Object.assign({}, event);
-
-    this.activeEntries = this.activeEntries.filter(i => {
-      return !(i.name === item.name && i.series === item.series);
-    });
-
-    this.deactivate.emit({ value: item, entries: this.activeEntries });
   }
 }

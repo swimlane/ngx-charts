@@ -32,12 +32,12 @@ describe('<ngx-charts-sankey>', () => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
-              <ngx-charts-heat-map
+              <ngx-charts-sankey
                 [animations]="false"
                 [view]="[400,800]"
                 [scheme]="colorScheme"
-                [results]="multi">
-              </ngx-charts-heat-map>`
+                [results]="sankey">
+              </ngx-charts-sankey>`
         }
       }).compileComponents();
     });
