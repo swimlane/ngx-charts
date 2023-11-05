@@ -29,28 +29,33 @@ interface Cell {
 @Component({
   selector: 'g[ngx-charts-calendar-pie-cell-series]',
   template: `
-    <svg:g
-      ngx-charts-calendar-pie-cell
-      *ngFor="let c of cells; trackBy: trackBy"
-      [x]="c.x"
-      [y]="c.y"
-      [width]="c.width"
-      [height]="c.height"
-      [fill]="c.fill"
-      [data]="c.data"
-      (select)="onClick(c.cell)"
-      (activate)="activate.emit(c.cell)"
-      (deactivate)="deactivate.emit(c.cell)"
-      [gradient]="gradient"
-      [animations]="animations"
-      ngx-tooltip
-      [tooltipDisabled]="tooltipDisabled"
-      [tooltipPlacement]="placementTypes.Top"
-      [tooltipType]="styleTypes.tooltip"
-      [tooltipTitle]="tooltipTemplate ? undefined : tooltipText(c)"
-      [tooltipTemplate]="tooltipTemplate"
-      [tooltipContext]="{ series: c.series, name: c.label, value: c.data }"
-    ></svg:g>
+  <svg:g
+    ngx-charts-calendar-pie-cell
+    *ngFor="let c of cells; trackBy: trackBy"
+    [x]="c.x"
+    [y]="c.y"
+    [width]="c.width"
+    [height]="c.height"
+    [fill]="c.fill"
+    [data]="c.data"
+    (select)="onClick(c.cell)"
+    (activate)="activate.emit(c.cell)"
+    (deactivate)="deactivate.emit(c.cell)"
+    [gradient]="gradient"
+    [animations]="animations"
+    ngx-tooltip
+    [tooltipDisabled]="tooltipDisabled"
+    [tooltipPlacement]="placementTypes.Top"
+    [tooltipType]="styleTypes.tooltip"
+    [tooltipTitle]="tooltipTemplate ? undefined : tooltipText(c)"
+    [tooltipTemplate]="tooltipTemplate"
+    [tooltipContext]="{ series: c.series, name: c.label, value: c.data }"
+  >
+    <ng-container
+      [ngTemplateOutlet]="headerTemplateRef"
+    >
+    </ng-container>
+  </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -64,6 +69,7 @@ export class CalendarPieCellSeriesComponent implements OnChanges, OnInit {
   @Input() tooltipText: any;
   @Input() tooltipTemplate: TemplateRef<any>;
   @Input() animations: boolean = true;
+  @Input() headerTemplateRef: TemplateRef<any>;
 
   @Output() select: EventEmitter<DataItem> = new EventEmitter();
   @Output() activate: EventEmitter<DataItem> = new EventEmitter();
@@ -111,7 +117,6 @@ export class CalendarPieCellSeriesComponent implements OnChanges, OnInit {
       });
     });
 
-    //console.log(cells);
 
     return cells;
   }

@@ -19,22 +19,7 @@ import { id } from '../utils/id';
   selector: 'g[ngx-charts-calendar-pie-cell]',
   template: `
     <svg:g [attr.transform]="transform" class="cell">
-      <defs *ngIf="gradient">
-        <svg:g
-          ngx-charts-svg-linear-gradient
-          [orientation]="barOrientation.Vertical"
-          [name]="gradientId"
-          [stops]="gradientStops"
-        />
-      </defs>
-      <svg:rect
-        [attr.fill]="gradient ? gradientUrl : fill"
-        rx="3"
-        [attr.width]="width"
-        [attr.height]="height"
-        class="cell"
-        (click)="onClick()"
-      />
+      <ng-content></ng-content>
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush

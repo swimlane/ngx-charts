@@ -292,29 +292,6 @@
         (deactivate)="deactivate($event)"
       >
       </ngx-charts-bar-horizontal-normalized>
-      <ngx-charts-pie-chart
-        *ngIf="chartType === 'pie-chart'"
-        class="chart-container"
-        [view]="view"
-        [scheme]="colorScheme"
-        [results]="single"
-        [animations]="animations"
-        [legend]="showLegend"
-        [legendTitle]="legendTitle"
-        [legendPosition]="legendPosition"
-        [explodeSlices]="explodeSlices"
-        [labels]="showLabels"
-        [doughnut]="doughnut"
-        [arcWidth]="arcWidth"
-        [gradient]="gradient"
-        [tooltipDisabled]="tooltipDisabled"
-        [tooltipText]="pieTooltipText"
-        (dblclick)="dblclick($event)"
-        (select)="select($event)"
-        (activate)="activate($event)"
-        (deactivate)="deactivate($event)"
-      >
-      </ngx-charts-pie-chart>
       <ngx-charts-advanced-pie-chart
         *ngIf="chartType === 'advanced-pie-chart'"
         class="chart-container"
@@ -654,9 +631,18 @@
         [wrapTicks]="wrapTicks"
         [month]="calendarMonth"
         [year]="calendarYear"
+        [pieResults]="single"
+        [calendar]="true"
         (select)="select($event)"
         (deactivate)="deactivate($event)"
       >
+        <svg:rect
+          x="100"
+          y="100"
+          width="10"
+          height="10"
+        >
+        </svg:rect>
       </ngx-charts-calendar-pie>
       <ngx-charts-heat-map
         *ngIf="chartType === 'calendar'"

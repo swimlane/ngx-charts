@@ -39,44 +39,6 @@ interface RectItem {
     >
       <svg:g [attr.transform]="transform" class="calendar-pie chart">
         <svg:g
-          ngx-charts-x-axis
-          *ngIf="xAxis"
-          [xScale]="xScale"
-          [dims]="dims"
-          [showLabel]="showXAxisLabel"
-          [labelText]="xAxisLabel"
-          [trimTicks]="trimXAxisTicks"
-          [rotateTicks]="rotateXAxisTicks"
-          [maxTickLength]="maxXAxisTickLength"
-          [tickFormatting]="xAxisTickFormatting"
-          [ticks]="xAxisTicks"
-          [wrapTicks]="wrapTicks"
-          (dimensionsChanged)="updateXAxisHeight($event)"
-        ></svg:g>
-        <svg:g
-          ngx-charts-y-axis
-          *ngIf="yAxis"
-          [yScale]="yScale"
-          [dims]="dims"
-          [showLabel]="showYAxisLabel"
-          [labelText]="yAxisLabel"
-          [trimTicks]="trimYAxisTicks"
-          [maxTickLength]="maxYAxisTickLength"
-          [tickFormatting]="yAxisTickFormatting"
-          [ticks]="yAxisTicks"
-          [wrapTicks]="wrapTicks"
-          (dimensionsChanged)="updateYAxisWidth($event)"
-        ></svg:g>
-        <svg:rect
-          *ngFor="let rect of rects"
-          [attr.x]="rect.x"
-          [attr.y]="rect.y"
-          [attr.rx]="rect.rx"
-          [attr.width]="rect.width"
-          [attr.height]="rect.height"
-          [attr.fill]="rect.fill"
-        />
-        <svg:g
           ngx-charts-calendar-pie-cell-series
           [xScale]="xScale"
           [yScale]="yScale"
@@ -87,11 +49,31 @@ interface RectItem {
           [tooltipDisabled]="tooltipDisabled"
           [tooltipTemplate]="tooltipTemplate"
           [tooltipText]="tooltipText"
+          [headerTemplateRef]="header"
           (select)="onClick($event)"
           (deactivate)="onDeactivate($event, undefined)"
-        />
+        >
+          <ng-template #header>
+            <svg:g
+              ngx-charts-pie-chart
+              class="chart-container pie-chart-calendar"
+              [view]="[100, 100]"
+              [results]="pieResults"
+              [animations]="animations"
+              [legend]="false"
+              [explodeSlices]="false"
+              [labels]="false"
+              [doughnut]="false"
+              [tooltipDisabled]="true"
+              [calendar]="true">
+            </svg:g>
+          </ng-template>
+        </svg:g>
       </svg:g>
     </ngx-charts-chart>
+    <svg>
+    </svg>
+    
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['../common/base-chart.component.scss'],
@@ -127,6 +109,7 @@ export class CalendarPieComponent extends BaseChartComponent {
   @Input() month: number = 10;
   @Input() year: number = 2023;
   @Input() calendarData: number[];
+  @Input() pieResults: any[];
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -244,7 +227,6 @@ export class CalendarPieComponent extends BaseChartComponent {
       });
     }
 
-    console.log("this.formattedResult", this.formattedResult);
     return this.formattedResult;
   }
 
@@ -255,7 +237,6 @@ export class CalendarPieComponent extends BaseChartComponent {
         domain.push(group.name);
       }
     }
-    console.log(domain);
     return domain;
   }
 
