@@ -705,6 +705,29 @@ const chartGroups = [
         ]
       },
       {
+        name: 'Line Pie Combo Chart',
+        selector: 'combo-chart-line-pie-component',
+        inputFormat: 'comboChart',
+        options: [
+          'view',
+          'animations',
+          'showXAxis',
+          'showYAxis',
+          'gradient',
+          'showLegend',
+          'noBarWhenZero',
+          'legendTitle',
+          'legendPosition',
+          'showXAxisLabel',
+          'xAxisLabel',
+          'showYAxisLabel',
+          'yAxisLabel',
+          'showGridLines',
+          'roundDomains',
+          'tooltipDisabled'
+        ]
+      },
+      {
         name: 'Heat Map - Calendar',
         selector: 'calendar',
         inputFormat: 'calendarData',
