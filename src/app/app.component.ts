@@ -25,6 +25,7 @@ import pkg from '../../projects/swimlane/ngx-charts/package.json';
 import { InputTypes } from '@swimlane/ngx-ui';
 import { LegendPosition } from '@swimlane/ngx-charts/common/types/legend.model';
 import { ScaleType } from '@swimlane/ngx-charts/common/types/scale-type.enum';
+import { SingleSeries } from '@swimlane/ngx-charts/models/chart-data.model';
 
 const monthName = new Intl.DateTimeFormat('en-us', { month: 'short' });
 const weekdayName = new Intl.DateTimeFormat('en-us', { weekday: 'short' });
@@ -68,6 +69,7 @@ export class AppComponent implements OnInit {
   dateDataWithRange: any[];
   calendarData: any[];
   statusData: any[];
+  pieTempData: any[];
   sparklineData: any[];
   timelineFilterBarData: any[];
   graph: { links: any[]; nodes: any[] };
@@ -117,6 +119,7 @@ export class AppComponent implements OnInit {
   strokeColor: string = '#FFFFFF';
   strokeWidth: number = 2;
   wrapTicks = false;
+  tempXValueForComboPie: any;
 
   curves = {
     Basis: shape.curveBasis,
@@ -293,6 +296,7 @@ export class AppComponent implements OnInit {
     this.setColorScheme('cool');
     this.calendarData = this.getCalendarData();
     this.statusData = this.getStatusData();
+    this.pieTempData = this.getPieTempData();
     this.sparklineData = generateData(1, false, 30);
     this.timelineFilterBarData = timelineFilterBarData();
   }
@@ -534,6 +538,11 @@ export class AppComponent implements OnInit {
     console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 
+  getTooltipCurrent(data) {
+    this.tempXValueForComboPie = data;
+    this.pieTempData = this.getPieTempData();
+  }
+
   getInterpolationType(curveType) {
     return this.curves[curveType] || this.curves['default'];
   }
@@ -630,6 +639,21 @@ export class AppComponent implements OnInit {
     const sales = Math.round(1e4 * Math.random());
     const dur = 36e5 * Math.random();
     return this.calcStatusData(sales, dur);
+  }
+
+  getPieTempData() {
+    let data = [];
+    if (this.tempXValueForComboPie){
+      this.dateDataWithOrWithoutRange.forEach(item => {
+        const dataPoint = item.series.find(data => data.name === this.tempXValueForComboPie);
+        data.push({ name: item.name,
+                    value: dataPoint.value,
+                    extra: {
+                      code: item.name.toLowerCase()
+                    }});
+      })
+    }
+    return data;
   }
 
   calcStatusData(sales = this.statusData[0].value, dur = this.statusData[2].value) {

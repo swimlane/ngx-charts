@@ -331,3 +331,16 @@ main {
     color: $color-text-med;
   }
 }
+
+.top-chart {
+  position: absolute;
+  top: 180px;
+  width: 100%;
+}
+
+.bottom-chart {
+  position: absolute;
+  bottom: 200px;
+  width: 100%;
+}
+

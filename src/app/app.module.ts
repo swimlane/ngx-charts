@@ -10,7 +10,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts/ngx-charts.module';
 import { NgxUIModule } from '@swimlane/ngx-ui';
 import { ComboChartComponent, ComboSeriesVerticalComponent } from './custom-charts/combo-chart';
 import { BubbleChartInteractiveModule } from './custom-charts/bubble-chart-interactive';
-import { ComboChartLinePieComponent, ComboSeriesLinePieVerticalComponent } from './custom-charts/combo-chart-line-pie';
+
 
 @NgModule({
   providers: [
@@ -32,9 +32,7 @@ import { ComboChartLinePieComponent, ComboSeriesLinePieVerticalComponent } from 
     SparklineComponent,
     TimelineFilterBarChartComponent,
     ComboChartComponent,
-    ComboSeriesVerticalComponent,
-    ComboChartLinePieComponent,
-    ComboSeriesLinePieVerticalComponent
+    ComboSeriesVerticalComponent
   ],
   bootstrap: [AppComponent]
 })
