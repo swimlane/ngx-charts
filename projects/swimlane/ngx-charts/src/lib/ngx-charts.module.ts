@@ -12,6 +12,7 @@ import { PieChartModule } from './pie-chart/pie-chart.module';
 import { TreeMapModule } from './tree-map/tree-map.module';
 import { GaugeModule } from './gauge/gauge.module';
 import { ngxChartsPolyfills } from './polyfills';
+import { SankeyModule } from './sankey/sankey.module';
 
 @NgModule({
   exports: [
@@ -21,6 +22,7 @@ import { ngxChartsPolyfills } from './polyfills';
     BoxChartModule,
     BubbleChartModule,
     HeatMapModule,
+    SankeyModule,
     LineChartModule,
     PolarChartModule,
     NumberCardModule,
