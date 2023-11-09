@@ -24,6 +24,7 @@ export function throttle(func: any, wait: number, options?: any) {
     }
 
     const remaining = wait - (now - previous);
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     context = this;
     // eslint-disable-next-line prefer-rest-params
     args = arguments;
