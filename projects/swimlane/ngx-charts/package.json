@@ -1,6 +1,6 @@
 {
   "name": "@swimlane/ngx-charts",
-  "version": "20.4.1",
+  "version": "20.5.0",
   "description": "Declarative Charting Framework for Angular",
   "repository": {
     "type": "git",
@@ -24,11 +24,6 @@
     "graph"
   ],
   "author": "Swimlane",
-  "maintainers": [
-    "Marjan Georgiev",
-    "Jayson Harshbarger",
-    "Haemin Park"
-  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/swimlane/ngx-charts/issues"
