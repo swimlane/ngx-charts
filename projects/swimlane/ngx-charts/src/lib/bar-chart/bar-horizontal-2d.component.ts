@@ -20,7 +20,7 @@ import { DataItem } from '../models/chart-data.model';
 
 import { BaseChartComponent } from '../common/base-chart.component';
 import { ScaleType } from '../common/types/scale-type.enum';
-import { LegendOptions, LegendPosition } from '../common/types/legend.model';
+import { LegendOptions, LegendPosition, LegendLabelStyle} from '../common/types/legend.model';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
 import { BarOrientation } from '../common/types/bar-orientation.enum';
 
@@ -31,6 +31,7 @@ import { BarOrientation } from '../common/types/bar-orientation.enum';
       [view]="[width, height]"
       [showLegend]="legend"
       [legendOptions]="legendOptions"
+      [legendLabelStyle]="legendLabelStyle"
       [activeEntries]="activeEntries"
       [animations]="animations"
       (legendLabelActivate)="onActivate($event, undefined, true)"
@@ -188,7 +189,8 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   @Input() dataLabelFormatting: any;
   @Input() noBarWhenZero: boolean = true;
   @Input() wrapTicks = false;
-
+  @Input() legendLabelStyle: LegendLabelStyle;
+  
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 

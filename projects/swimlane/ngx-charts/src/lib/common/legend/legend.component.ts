@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import { formatLabel } from '../label.helper';
 import { ColorHelper } from '../color.helper';
+import { LegendLabelStyle } from '../types/legend.model';
 
 export interface LegendEntry {
   color: string;
@@ -32,6 +33,7 @@ export interface LegendEntry {
               [label]="entry.label"
               [formattedLabel]="entry.formattedLabel"
               [color]="entry.color"
+              [legendLabelStyle] = "legendLabelStyle"
               [isActive]="isActive(entry)"
               (select)="labelClick.emit($event)"
               (activate)="activate($event)"
@@ -55,7 +57,8 @@ export class LegendComponent implements OnChanges {
   @Input() width: number;
   @Input() activeEntries;
   @Input() horizontal = false;
-
+  @Input() legendLabelStyle = LegendLabelStyle;
+  
   @Output() labelClick: EventEmitter<string> = new EventEmitter();
   @Output() labelActivate: EventEmitter<{ name: string }> = new EventEmitter();
   @Output() labelDeactivate: EventEmitter<{ name: string }> = new EventEmitter();

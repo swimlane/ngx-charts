@@ -12,7 +12,7 @@ import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { DataItem } from '../models/chart-data.model';
-import { LegendOptions, LegendPosition } from '../common/types/legend.model';
+import { LegendOptions, LegendPosition, LegendLabelStyle} from '../common/types/legend.model';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
 import { ScaleType } from '../common/types/scale-type.enum';
 
@@ -23,6 +23,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
       [view]="[width, height]"
       [showLegend]="legend"
       [legendOptions]="legendOptions"
+      [legendLabelStyle]="legendLabelStyle"
       [activeEntries]="activeEntries"
       [animations]="animations"
       (legendLabelActivate)="onActivate($event, true)"
@@ -74,6 +75,8 @@ export class PieChartComponent extends BaseChartComponent {
   @Input() trimLabels: boolean = true;
   @Input() maxLabelLength: number = 10;
   @Input() tooltipText: any;
+  @Input() legendLabelStyle: LegendLabelStyle;
+  
   @Output() dblclick = new EventEmitter();
   // optional margins
   @Input() margins: number[];

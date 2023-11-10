@@ -59,10 +59,12 @@
     "emoji-flags": "^1.2.0",
     "moment-timezone": "^0.5.40",
     "ng-in-viewport": "^6.1.5",
+    "ngx-emoji-picker": "^0.1.6",
     "ngx-moment": "^5.0.0",
     "resize-observer-polyfill": "^1.5.1",
     "rxjs": "^6.5.3 || ^7.4.0",
     "tslib": "^2.3.0",
+    "twemoji": "^14.0.2",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

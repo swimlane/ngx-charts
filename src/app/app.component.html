@@ -16,6 +16,7 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
+        [legendLabelStyle]="legendLabelStyle"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
         [tooltipDisabled]="tooltipDisabled"
@@ -53,6 +54,7 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
+        [legendLabelStyle]="legendLabelStyle"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
         [tooltipDisabled]="tooltipDisabled"
@@ -90,6 +92,7 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
+        [legendLabelStyle]="legendLabelStyle"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
         [tooltipDisabled]="tooltipDisabled"
@@ -129,6 +132,7 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
+        [legendLabelStyle]="legendLabelStyle"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
         [xAxisLabel]="xAxisLabel"
@@ -167,6 +171,7 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
+        [legendLabelStyle]="legendLabelStyle"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
         [xAxisLabel]="xAxisLabel"
@@ -203,6 +208,7 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
+        [legendLabelStyle]="legendLabelStyle"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
         [xAxisLabel]="xAxisLabel"
@@ -239,6 +245,7 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
+        [legendLabelStyle]="legendLabelStyle"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
         [xAxisLabel]="xAxisLabel"
@@ -273,6 +280,7 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
+        [legendLabelStyle]="legendLabelStyle"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
         [xAxisLabel]="xAxisLabel"
@@ -302,6 +310,7 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
+        [legendLabelStyle]="legendLabelStyle"
         [explodeSlices]="explodeSlices"
         [labels]="showLabels"
         [doughnut]="doughnut"
@@ -356,6 +365,7 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
+        [legendLabelStyle]="legendLabelStyle"
         [gradient]="gradient"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
@@ -396,6 +406,7 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
+        [legendLabelStyle]="legendLabelStyle"
         [gradient]="gradient"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
@@ -427,6 +438,7 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
+        [legendLabelStyle]="legendLabelStyle"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
         [showXAxisLabel]="showXAxisLabel"
@@ -466,6 +478,7 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
+        [legendLabelStyle]="legendLabelStyle"
         [gradient]="gradient"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
@@ -505,6 +518,7 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
+        [legendLabelStyle]="legendLabelStyle"
         [gradient]="gradient"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
@@ -543,6 +557,7 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
+        [legendLabelStyle]="legendLabelStyle"
         [gradient]="gradient"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
@@ -696,6 +711,7 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
+        [legendLabelStyle]="legendLabelStyle"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
         [tooltipDisabled]="tooltipDisabled"
@@ -770,6 +786,7 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
+        [legendLabelStyle]="legendLabelStyle"
         [results]="single"
         [animations]="animations"
         [textValue]="gaugeTextValue"
@@ -856,6 +873,7 @@
           [legend]="false"
           [legendTitle]="legendTitle"
           [legendPosition]="legendPosition"
+          [legendLabelStyle]="legendLabelStyle"
           [gradient]="gradient"
           [xAxis]="false"
           [yAxis]="true"
@@ -1340,9 +1358,19 @@
         </div>
         <div *ngIf="chart.options.includes('legendPosition')">
           <label>Legend Position:</label><br />
-          <select style="margin-left: 10px" [(ngModel)]="legendPosition">
+          <select style="margin-left: 2px" [(ngModel)]="legendPosition">
             <option value="right">Right</option>
             <option value="below">Below</option></select
+          ><br />
+        </div>
+        <div *ngIf="chart.options.includes('legendLabelStyle')">
+          <label>Legend Label Style:</label><br />
+          <select style="margin-left: 2px" [(ngModel)]="legendLabelStyle">
+            <option value="square">Square</option>
+            <option value="circle">Circle</option>
+            <option value="diamond">Diamond</option>
+            <option value="ellipse">Ellipse</option>
+            <option value="emoji">Emoji</option></select
           ><br />
         </div>
         <div *ngIf="chart.options.includes('tooltipDisabled')">

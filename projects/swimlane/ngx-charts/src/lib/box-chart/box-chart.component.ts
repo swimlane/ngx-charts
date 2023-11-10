@@ -15,7 +15,7 @@ import { BoxChartMultiSeries, BoxChartSeries, IBoxModel, StringOrNumberOrDate } 
 import { scaleLinear, ScaleLinear, scaleBand, ScaleBand } from 'd3-scale';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
-import { LegendPosition, LegendOptions } from '../common/types/legend.model';
+import { LegendPosition, LegendOptions, LegendLabelStyle } from '../common/types/legend.model';
 import { ScaleType } from '../common/types/scale-type.enum';
 
 @Component({
@@ -25,6 +25,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
       [view]="[width, height]"
       [showLegend]="legend"
       [legendOptions]="legendOptions"
+      [legendLabelStyle]="legendLabelStyle"
       [animations]="animations"
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
@@ -101,7 +102,8 @@ export class BoxChartComponent extends BaseChartComponent {
   @Input() tooltipDisabled: boolean = false;
   @Input() gradient: boolean;
   @Input() wrapTicks = false;
-
+  @Input() legendLabelStyle: LegendLabelStyle;
+  
   @Output() select: EventEmitter<IBoxModel> = new EventEmitter();
   @Output() activate: EventEmitter<IBoxModel> = new EventEmitter();
   @Output() deactivate: EventEmitter<IBoxModel> = new EventEmitter();

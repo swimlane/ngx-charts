@@ -17,7 +17,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { ArcItem } from './gauge-arc.component';
-import { LegendOptions, LegendPosition } from '../common/types/legend.model';
+import { LegendOptions, LegendPosition, LegendLabelStyle } from '../common/types/legend.model';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
 import { ScaleType } from '../common/types/scale-type.enum';
 
@@ -33,6 +33,7 @@ interface Arcs {
       [view]="[width, height]"
       [showLegend]="legend"
       [legendOptions]="legendOptions"
+      [legendLabelStyle]="legendLabelStyle"
       [activeEntries]="activeEntries"
       [animations]="animations"
       (legendLabelClick)="onClick($event)"
@@ -108,7 +109,8 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   @Input() tooltipDisabled: boolean = false;
   @Input() valueFormatting: (value: any) => string;
   @Input() showText: boolean = true;
-
+  @Input() legendLabelStyle: LegendLabelStyle;
+  
   // Specify margins
   @Input() margin: number[];
 
