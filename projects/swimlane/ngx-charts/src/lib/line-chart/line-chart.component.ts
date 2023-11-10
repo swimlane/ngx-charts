@@ -231,10 +231,10 @@ export class LineChartComponent extends BaseChartComponent implements OnInit {
   @Input() showRefLines: boolean = false;
   @Input() referenceLines: any;
   @Input() showRefLabels: boolean = true;
-  @Input() xScaleMin: number;
-  @Input() xScaleMax: number;
-  @Input() yScaleMin: number;
-  @Input() yScaleMax: number;
+  @Input() xScaleMin: number | null;
+  @Input() xScaleMax: number | null;
+  @Input() yScaleMin: number | null;
+  @Input() yScaleMax: number | null;
   @Input() wrapTicks = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
