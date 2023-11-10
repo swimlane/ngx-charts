@@ -33,6 +33,7 @@ export interface LegendEntry {
               [formattedLabel]="entry.formattedLabel"
               [color]="entry.color"
               [isActive]="isActive(entry)"
+              [isIncluded]="isIncluded(entry)"
               (select)="labelClick.emit($event)"
               (activate)="activate($event)"
               (deactivate)="deactivate($event)"
@@ -53,7 +54,8 @@ export class LegendComponent implements OnChanges {
   @Input() colors: ColorHelper;
   @Input() height: number;
   @Input() width: number;
-  @Input() activeEntries;
+  @Input() activeEntries: any[];
+  @Input() includedEntries: any[];
   @Input() horizontal = false;
 
   @Output() labelClick: EventEmitter<string> = new EventEmitter();
@@ -99,6 +101,14 @@ export class LegendComponent implements OnChanges {
     const item = this.activeEntries.find(d => {
       return entry.label === d.name;
     });
+    return item !== undefined;
+  }
+
+  isIncluded(entry: LegendEntry): boolean {
+    if (!this.includedEntries) return true;
+    const item = this.includedEntries.find(d => {
+      return entry.label === d;
+    })
     return item !== undefined;
   }
 

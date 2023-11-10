@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { Location, LocationStrategy, HashLocationStrategy } from '@angular/common';
 import * as shape from 'd3-shape';
 import * as d3Array from 'd3-array';
@@ -26,6 +26,7 @@ import pkg from '../../projects/swimlane/ngx-charts/package.json';
 import { InputTypes } from '@swimlane/ngx-ui';
 import { LegendPosition } from '@swimlane/ngx-charts/common/types/legend.model';
 import { ScaleType } from '@swimlane/ngx-charts/common/types/scale-type.enum';
+import { MapChartComponent } from './custom-charts/map-chart/map-chart.component';
 
 const monthName = new Intl.DateTimeFormat('en-us', { month: 'short' });
 const weekdayName = new Intl.DateTimeFormat('en-us', { weekday: 'short' });
@@ -118,6 +119,10 @@ export class AppComponent implements OnInit {
   strokeColor: string = '#FFFFFF';
   strokeWidth: number = 2;
   wrapTicks = false;
+  latitude: number = 39.8282;
+  longitude: number = -98.5795;
+  mapLanguage: string = 'native';
+  centerMapAt: boolean = false;
 
   curves = {
     Basis: shape.curveBasis,
@@ -260,6 +265,46 @@ export class AppComponent implements OnInit {
     { value: 33000, name: 'Minimum' }
   ];
 
+  mapChartData = [
+    {
+      name: 'United States',
+      series: [
+        {
+          name: 'New York',
+          value: [40.7128, -74.0060]
+        },
+        {
+          name: 'Austin',
+          value: [30, -97.7431]
+        },
+        {
+          name: 'Los Angeles',
+          value: [34.0522, -118.2437]
+        }
+      ]
+    },
+    {
+      name: 'International',
+      series: [
+        {
+          name: 'Tokyo',
+          value: [35.6895, 139.6917]
+        },
+        {
+          name: 'Sydney',
+          value: [-33.8688, 151.2093]
+        },
+        {
+          name: 'Guangzhou',
+          value: [23.1291, 113.2644]
+        }
+      ]
+    }
+  ];
+  mapZoom = 3;
+  initCoordX = 39.8282;
+  initCoordY = -98.5795;
+
   // data
   plotData: any;
 
@@ -268,6 +313,8 @@ export class AppComponent implements OnInit {
   dataVisible: boolean = true;
   dimVisible: boolean = true;
   optsVisible: boolean = true;
+
+  @ViewChild(MapChartComponent) mapComponent: MapChartComponent;
 
   constructor(public location: Location) {
     this.mathFunction = this.getFunction();
@@ -484,6 +531,10 @@ export class AppComponent implements OnInit {
 
   applyDimensions() {
     this.view = [this.width, this.height];
+  }
+
+  mapChangePosition() {
+    this.mapComponent.changePosition();
   }
 
   toggleFitContainer() {

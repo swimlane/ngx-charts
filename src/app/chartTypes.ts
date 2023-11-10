@@ -712,6 +712,25 @@ const chartGroups = [
         ]
       },
       {
+        name: 'Map Chart',
+        selector: 'map-chart',
+        inputFormat: 'mapChart',
+        options: [
+          'showLegend',
+          'legendTitle',
+          'legendPosition',
+          'colorScheme',
+          'mapZoom',
+          'initCoordX',
+          'initCoordY',
+          'view',
+          'centerMapAt',
+          'latitude',
+          'longitude',
+          'mapLanguage'
+        ]
+      },
+      {
         name: 'Heat Map - Calendar',
         selector: 'calendar',
         inputFormat: 'calendarData',

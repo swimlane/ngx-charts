@@ -597,6 +597,25 @@
         (select)="onSelect($event)"
       >
       </combo-chart-component>
+      <map-chart-component
+        *ngIf="chartType === 'map-chart'"
+        class="chart-container"
+        [view]="view"
+        [legend]="showLegend"
+        [legendTitle]="legendTitle"
+        [legendPosition]="legendPosition"
+        [scheme]="colorScheme"
+        [results]="mapChartData"
+        [mapZoom]="mapZoom"
+        [initCoordX]="initCoordX"
+        [initCoordY]="initCoordY"
+        [centerMapAt]="centerMapAt"
+        [latitude]="latitude"
+        [longitude]="longitude"
+        [mapLanguage]="mapLanguage"
+        (select)="onSelect($event)"
+      >
+      </map-chart-component>
       <ngx-charts-heat-map
         *ngIf="chartType === 'heat-map'"
         class="chart-container"
@@ -1159,6 +1178,7 @@
         <pre *ngIf="chart.inputFormat === 'comboChart'">{{ barChart | json }}</pre>
         <pre *ngIf="chart.inputFormat === 'comboChart'">{{ lineChartSeries | json }}</pre>
         <pre *ngIf="chart.inputFormat === 'timelineFilter'">{{ timelineFilterBarData | json }}</pre>
+        <pre *ngIf="chart.inputFormat === 'mapChart'">{{ mapChartData | json }}</pre>
         <div>
           <label>
             <input type="checkbox" [(ngModel)]="realTimeData" />
@@ -1197,6 +1217,7 @@
         <strong>Color Scheme</strong>
       </h3>
       <select
+        *ngIf="chart.options.includes('colorScheme')"
         [hidden]="!colorVisible"
         style="margin-left: 10px"
         [ngModel]="selectedColorScheme"
@@ -1571,6 +1592,34 @@
         <div *ngIf="chart.options.includes('yScaleMax')">
           <label>Maximum Y-Scale value</label><br />
           <input type="number" [(ngModel)]="yScaleMax" /><br />
+        </div>
+
+        <div *ngIf="chart.options.includes('mapZoom')">
+          <label>Initial Zoom</label><br />
+          <input type="number" [(ngModel)]="mapZoom" /><br />
+        </div>
+        <div *ngIf="chart.options.includes('initCoordX')">
+          <label>Initial Center X Coordinate</label><br />
+          <input type="number" [(ngModel)]="initCoordX" /><br />
+        </div>
+        <div *ngIf="chart.options.includes('initCoordY')">
+          <label>Initial Center Y Coordinate</label><br />
+          <input type="number" [(ngModel)]="initCoordY" /><br />
+        </div>
+        <div *ngIf="chart.options.includes('mapLanguage')">
+          <label>Map Language:</label><br />
+          <select  [(ngModel)]="mapLanguage">
+            <option value="native">Native</option>
+            <option value="german">German</option>
+            <option value="english">English</option></select
+          ><br />
+        </div>
+        <div *ngIf="chart.options.includes('centerMapAt')">
+          <label>Latitude:</label><br />
+          <input type="number" [(ngModel)]="latitude" /><br />
+          <label>Longitude:</label><br />
+          <input type="number" [(ngModel)]="longitude" /><br />
+          <button class="btn btn-primary" (click)="mapChangePosition()">Change Map Center</button>
         </div>
       </div>
       <h3><a href="https://swimlane.gitbooks.io/ngx-charts/content/" target="_blank">Documentation</a></h3>
