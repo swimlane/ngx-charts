@@ -12,7 +12,7 @@ import {
   OnInit
 } from '@angular/core';
 import { brushX } from 'd3-brush';
-import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
+import { scaleLinear, scaleTime, scalePoint, scaleBand } from 'd3-scale';
 import { select } from 'd3-selection';
 import { id } from '../../utils/id';
 import { ScaleType } from '../types/scale-type.enum';
@@ -49,6 +49,8 @@ export class Timeline implements OnChanges {
   @Input() autoScale: boolean;
   @Input() scaleType: ScaleType;
   @Input() height: number = 50;
+  @Input() isBar: boolean = false;
+  @Input() barPadding: number = 8;
 
   @Output() select = new EventEmitter();
   @Output() onDomainChange = new EventEmitter();
@@ -99,10 +101,17 @@ export class Timeline implements OnChanges {
   getXDomain(): any[] {
     let values = [];
 
-    for (const results of this.results) {
-      for (const d of results.series) {
-        if (!values.includes(d.name)) {
-          values.push(d.name);
+    if (this.isBar) {
+      for (const d of this.results) {
+        values.push(d.name);
+      }
+    }
+    else {
+      for (const results of this.results) {
+        for (const d of results.series) {
+          if (!values.includes(d.name)) {
+            values.push(d.name);
+          }
         }
       }
     }
@@ -133,6 +142,9 @@ export class Timeline implements OnChanges {
       scale = scaleLinear().range([0, this.dims.width]).domain(this.xDomain);
     } else if (this.scaleType === ScaleType.Ordinal) {
       scale = scalePoint().range([0, this.dims.width]).padding(0.1).domain(this.xDomain);
+    } else if (this.isBar) {
+      const spacing = this.xDomain.length / (this.dims.width / this.barPadding + 1);
+      scale = scaleBand().range([0, this.dims.width]).paddingInner(spacing).domain(this.xDomain);
     }
 
     return scale;
@@ -151,8 +163,21 @@ export class Timeline implements OnChanges {
       ])
       .on('brush end', ({ selection }) => {
         const newSelection = selection || this.xScale.range();
-        const newDomain = newSelection.map(this.xScale.invert);
+        let newDomain = [];
+        if (this.isBar) {
+          const padding = this.xScale.step() * this.xScale.padding();
+          const barWidth = this.xScale.step() - padding;
 
+          const startIndex = Math.floor(((newSelection[0] + padding) / (barWidth + padding)));
+          const endIndex = Math.floor((newSelection[1] / (barWidth + padding)));
+
+          for (let i = startIndex; i <= endIndex; i++) {
+            newDomain.push(this.xScale.domain()[i]);
+          }
+        }
+        else {
+          newDomain = newSelection.map(this.xScale.invert);
+        }
         this.onDomainChange.emit(newDomain);
         this.cd.markForCheck();
       });

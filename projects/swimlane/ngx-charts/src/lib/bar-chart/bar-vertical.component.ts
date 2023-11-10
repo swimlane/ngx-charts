@@ -69,7 +69,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
           [xScale]="xScale"
           [yScale]="yScale"
           [colors]="colors"
-          [series]="results"
+          [series]="filteredResults"
           [dims]="dims"
           [gradient]="gradient"
           [tooltipDisabled]="tooltipDisabled"
@@ -84,6 +84,33 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
           (deactivate)="onDeactivate($event)"
           (select)="onClick($event)"
           (dataLabelHeightChanged)="onDataLabelMaxHeightChanged($event)"
+        ></svg:g>
+      </svg:g>
+      <svg:g
+        ngx-charts-timeline
+        *ngIf="timeline"
+        [attr.transform]="timelineTransform"
+        [results]="results"
+        [view]="[timelineWidth, height]"
+        [height]="timelineHeight"
+        [scheme]="scheme"
+        [customColors]="customColors"
+        [legend]="legend"
+        [isBar]="true"
+        [barPadding]="barPadding"
+        (onDomainChange)="updateDomain($event)"
+      >
+        <svg:g
+        ngx-charts-series-vertical
+        [xScale]="timelineXScale"
+        [yScale]="timelineYScale"
+        [colors]="colors"
+        [series]="results"
+        [dims]="dims"
+        [tooltipDisabled]="true"
+        [showDataLabel]="false"
+        [roundEdges]="roundEdges"
+        [noBarWhenZero]="noBarWhenZero"
         ></svg:g>
       </svg:g>
     </ngx-charts-chart>
@@ -125,6 +152,7 @@ export class BarVerticalComponent extends BaseChartComponent {
   @Input() dataLabelFormatting: any;
   @Input() noBarWhenZero: boolean = true;
   @Input() wrapTicks = false;
+  @Input() timeline: boolean;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -136,6 +164,7 @@ export class BarVerticalComponent extends BaseChartComponent {
   yScale: any;
   xDomain: any;
   yDomain: any;
+  originalXDomain: any;
   transform: string;
   colors: ColorHelper;
   margin: number[] = [10, 20, 10, 20];
@@ -143,6 +172,15 @@ export class BarVerticalComponent extends BaseChartComponent {
   yAxisWidth: number = 0;
   legendOptions: LegendOptions;
   dataLabelMaxHeight: any = { negative: 0, positive: 0 };
+  timelineWidth: any;
+  timelineHeight: number = 50;
+  timelineXScale: any;
+  timelineYScale: any;
+  timelineXDomain: any;
+  timelineTransform: any;
+  timelinePadding: number = 10;
+  filteredDomain: any;
+  filteredResults: any = this.results;
 
   update(): void {
     super.update();
@@ -167,30 +205,77 @@ export class BarVerticalComponent extends BaseChartComponent {
       legendPosition: this.legendPosition
     });
 
+    if (this.timeline) {
+      this.dims.height -= this.timelineHeight + this.margin[2] + this.timelinePadding;
+    }
+
     this.formatDates();
 
     if (this.showDataLabel) {
       this.dims.height -= this.dataLabelMaxHeight.negative;
     }
-    this.xScale = this.getXScale();
-    this.yScale = this.getYScale();
+
+    this.originalXDomain = this.getXDomain();
+    this.xDomain = this.originalXDomain;
+    if (this.filteredDomain) {
+      this.xDomain = this.filteredDomain;
+    }
+    
+    this.yDomain = this.getYDomain();
+
+    this.xScale = this.getXScale(this.xDomain, this.dims.width);
+    this.yScale = this.getYScale(this.yDomain, this.dims.height);
+
+    this.updateTimeline();
 
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
     this.transform = `translate(${this.dims.xOffset} , ${this.margin[0] + this.dataLabelMaxHeight.negative})`;
+
+    this.updateResult();
   }
 
-  getXScale(): any {
-    this.xDomain = this.getXDomain();
-    const spacing = this.xDomain.length / (this.dims.width / this.barPadding + 1);
-    return scaleBand().range([0, this.dims.width]).paddingInner(spacing).domain(this.xDomain);
+  updateTimeline(): void {
+    if (this.timeline) {
+      this.timelineWidth = this.dims.width;
+      this.timelineXDomain = this.originalXDomain;
+      this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
+      this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
+      this.timelineTransform = `translate(${this.dims.xOffset}, ${-this.margin[2]})`;
+    }
   }
 
-  getYScale(): any {
-    this.yDomain = this.getYDomain();
-    const scale = scaleLinear().range([this.dims.height, 0]).domain(this.yDomain);
+  updateResult(): void {
+    if (this.timeline) {
+      this.filteredResults = this.xDomain.map(a => {
+        for (const d of this.results) {
+          if (d.name == a) {
+            return d;
+          }
+        }
+      });
+    }
+    else {
+      this.filteredResults = this.results;
+    }
+  }
+
+  getXScale(domain, width): any {
+    const spacing = domain.length / (width / this.barPadding + 1);;
+    return scaleBand().range([0, width]).paddingInner(spacing).domain(domain);
+  }
+
+  getYScale(domain, height): any {
+    const scale = scaleLinear().range([height, 0]).domain(domain);
     return this.roundDomains ? scale.nice() : scale;
+  }
+
+  updateDomain(domain): void {
+    this.filteredDomain = domain;
+    this.xDomain = this.filteredDomain;
+    this.xScale = this.getXScale(this.xDomain, this.dims.width);
+    this.update();
   }
 
   getXDomain(): any[] {
@@ -219,7 +304,7 @@ export class BarVerticalComponent extends BaseChartComponent {
   setColors(): void {
     let domain;
     if (this.schemeType === ScaleType.Ordinal) {
-      domain = this.xDomain;
+      domain = this.originalXDomain;
     } else {
       domain = this.yDomain;
     }
@@ -236,7 +321,7 @@ export class BarVerticalComponent extends BaseChartComponent {
       position: this.legendPosition
     };
     if (opts.scaleType === ScaleType.Ordinal) {
-      opts.domain = this.xDomain;
+      opts.domain = this.originalXDomain;
       opts.colors = this.colors;
       opts.title = this.legendTitle;
     } else {
@@ -262,13 +347,13 @@ export class BarVerticalComponent extends BaseChartComponent {
     } else {
       this.dataLabelMaxHeight.positive = Math.max(this.dataLabelMaxHeight.positive, event.size.height);
     }
-    if (event.index === this.results.length - 1) {
+    if (event.index === this.filteredResults.length - 1) {
       setTimeout(() => this.update());
     }
   }
 
   onActivate(item, fromLegend = false) {
-    item = this.results.find(d => {
+    item = this.filteredResults.find(d => {
       if (fromLegend) {
         return d.label === item.name;
       } else {

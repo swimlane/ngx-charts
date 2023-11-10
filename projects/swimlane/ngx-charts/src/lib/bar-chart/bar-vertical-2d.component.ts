@@ -41,7 +41,7 @@ import { isPlatformServer } from '@angular/common';
           ngx-charts-grid-panel-series
           [xScale]="groupScale"
           [yScale]="valueScale"
-          [data]="results"
+          [data]="filteredResults"
           [dims]="dims"
           [orient]="barOrientation.Vertical"
         ></svg:g>
@@ -79,7 +79,7 @@ import { isPlatformServer } from '@angular/common';
         <svg:g *ngIf="!isSSR">
           <svg:g
             ngx-charts-series-vertical
-            *ngFor="let group of results; let index = index; trackBy: trackBy"
+            *ngFor="let group of filteredResults; let index = index; trackBy: trackBy"
             [@animationState]="'active'"
             [attr.transform]="groupTransform(group)"
             [activeEntries]="activeEntries"
@@ -107,7 +107,7 @@ import { isPlatformServer } from '@angular/common';
       <svg:g *ngIf="isSSR">
         <svg:g
           ngx-charts-series-vertical
-          *ngFor="let group of results; let index = index; trackBy: trackBy"
+          *ngFor="let group of filteredResults; let index = index; trackBy: trackBy"
           [attr.transform]="groupTransform(group)"
           [activeEntries]="activeEntries"
           [xScale]="innerScale"
@@ -128,6 +128,47 @@ import { isPlatformServer } from '@angular/common';
           (activate)="onActivate($event, group)"
           (deactivate)="onDeactivate($event, group)"
           (dataLabelHeightChanged)="onDataLabelMaxHeightChanged($event, index)"
+        />
+      </svg:g>
+      <svg:g
+        ngx-charts-timeline
+        *ngIf="timeline"
+        [attr.transform]="timelineTransform"
+        [results]="results"
+        [view]="[timelineWidth, height]"
+        [height]="timelineHeight"
+        [scheme]="scheme"
+        [customColors]="customColors"
+        [legend]="legend"
+        [isBar]="true"
+        [barPadding]="barPadding"
+        (onDomainChange)="updateDomain($event)"
+      >
+        <svg:g
+            ngx-charts-grid-panel-series
+            [xScale]="timelineGroupScale"
+            [yScale]="timelineValueScale"
+            [data]="results"
+            [dims]="dims"
+            [orient]="barOrientation.Vertical"
+            [timeline]="true"
+            [timelineHeight]="timelineHeight"
+        ></svg:g>
+        <svg:g
+          ngx-charts-series-vertical
+          *ngFor="let group of results; let index = index; trackBy: trackBy"
+          [attr.transform]="timelineGroupTransform(group)"
+          [xScale]="timelineInnerScale"
+          [yScale]="timelineValueScale"
+          [colors]="colors"
+          [series]="group.series"
+          [dims]="dims"
+          [gradient]="gradient"
+          [tooltipDisabled]="true"
+          [showDataLabel]="false"
+          [seriesName]="group.name"
+          [roundEdges]="roundEdges"
+          [noBarWhenZero]="noBarWhenZero"
         />
       </svg:g>
     </ngx-charts-chart>
@@ -181,6 +222,7 @@ export class BarVertical2DComponent extends BaseChartComponent {
   @Input() dataLabelFormatting: any;
   @Input() noBarWhenZero: boolean = true;
   @Input() wrapTicks = false;
+  @Input() timeline: boolean;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -189,6 +231,7 @@ export class BarVertical2DComponent extends BaseChartComponent {
 
   dims: ViewDimensions;
   groupDomain: string[];
+  originalGroupDomain: any;
   innerDomain: string[];
   valueDomain: [number, number];
   groupScale: any;
@@ -202,6 +245,16 @@ export class BarVertical2DComponent extends BaseChartComponent {
   legendOptions: LegendOptions;
   dataLabelMaxHeight: any = { negative: 0, positive: 0 };
   isSSR = false;
+  timelineWidth: any;
+  timelineHeight: number = 50;
+  timelineInnerScale: any;
+  timelineGroupScale: any;
+  timelineValueScale: any;
+  timelineGroupDomain: any;
+  timelineTransform: any;
+  timelinePadding: number = 10;
+  filteredDomain: any;
+  filteredResults: any = this.results;
 
   barOrientation = BarOrientation;
 
@@ -234,23 +287,63 @@ export class BarVertical2DComponent extends BaseChartComponent {
       legendPosition: this.legendPosition
     });
 
+    if (this.timeline) {
+      this.dims.height -= this.timelineHeight + this.margin[2] + this.timelinePadding;
+    }
+
     if (this.showDataLabel) {
       this.dims.height -= this.dataLabelMaxHeight.negative;
     }
 
     this.formatDates();
 
-    this.groupDomain = this.getGroupDomain();
+    this.originalGroupDomain = this.getGroupDomain();
+    this.groupDomain = this.originalGroupDomain;
+    if (this.filteredDomain) {
+      this.groupDomain = this.filteredDomain;
+    }
+
     this.innerDomain = this.getInnerDomain();
     this.valueDomain = this.getValueDomain();
 
-    this.groupScale = this.getGroupScale();
-    this.innerScale = this.getInnerScale();
-    this.valueScale = this.getValueScale();
+    this.groupScale = this.getGroupScale(this.groupDomain, this.dims.width);
+    this.innerScale = this.getInnerScale(this.groupScale.bandwidth());
+    this.valueScale = this.getValueScale(this.valueDomain, this.dims.height);
+
+    this.updateTimeline();
 
     this.setColors();
     this.legendOptions = this.getLegendOptions();
     this.transform = `translate(${this.dims.xOffset} , ${this.margin[0] + this.dataLabelMaxHeight.negative})`;
+
+    this.updateResult();
+  }
+
+
+  updateTimeline(): void {
+    if (this.timeline) {
+      this.timelineWidth = this.dims.width;
+      this.timelineGroupDomain = this.originalGroupDomain;
+      this.timelineGroupScale = this.getGroupScale(this.timelineGroupDomain, this.timelineWidth);
+      this.timelineInnerScale = this.getInnerScale(this.timelineGroupScale.bandwidth());
+      this.timelineValueScale = this.getValueScale(this.valueDomain, this.timelineHeight);
+      this.timelineTransform = `translate(${this.dims.xOffset}, ${-this.margin[2]})`;
+    }
+  }
+
+  updateResult(): void {
+    if (this.timeline) {
+      this.filteredResults = this.groupDomain.map(a => {
+        for (const d of this.results) {
+          if (d.name == a) {
+            return d;
+          }
+        }
+      });
+    }
+    else {
+      this.filteredResults = this.results;
+    }
   }
 
   onDataLabelMaxHeightChanged(event, groupIndex: number): void {
@@ -259,29 +352,28 @@ export class BarVertical2DComponent extends BaseChartComponent {
     } else {
       this.dataLabelMaxHeight.positive = Math.max(this.dataLabelMaxHeight.positive, event.size.height);
     }
-    if (groupIndex === this.results.length - 1) {
+    if (groupIndex === this.filteredResults.length - 1) {
       setTimeout(() => this.update());
     }
   }
 
-  getGroupScale(): any {
-    const spacing = this.groupDomain.length / (this.dims.height / this.groupPadding + 1);
+  getGroupScale(domain, width): any {
+    const spacing = domain.length / (this.dims.height / this.groupPadding + 1);
 
     return scaleBand()
-      .rangeRound([0, this.dims.width])
+      .rangeRound([0, width])
       .paddingInner(spacing)
       .paddingOuter(spacing / 2)
-      .domain(this.groupDomain);
+      .domain(domain);
   }
 
-  getInnerScale(): any {
-    const width = this.groupScale.bandwidth();
+  getInnerScale(width): any {
     const spacing = this.innerDomain.length / (width / this.barPadding + 1);
     return scaleBand().rangeRound([0, width]).paddingInner(spacing).domain(this.innerDomain);
   }
 
-  getValueScale(): any {
-    const scale = scaleLinear().range([this.dims.height, 0]).domain(this.valueDomain);
+  getValueScale(domain, height): any {
+    const scale = scaleLinear().range([height, 0]).domain(domain);
     return this.roundDomains ? scale.nice() : scale;
   }
 
@@ -325,8 +417,20 @@ export class BarVertical2DComponent extends BaseChartComponent {
     return [min, max];
   }
 
+  updateDomain(domain): void {
+    this.filteredDomain = domain;
+    this.groupDomain = this.filteredDomain;
+    this.groupScale = this.getGroupScale(this.groupDomain, this.dims.width);
+    this.innerScale = this.getInnerScale(this.groupScale.bandwidth());
+    this.update();
+  }
+
   groupTransform(group: DataItem): string {
     return `translate(${this.groupScale(group.label)}, 0)`;
+  }
+
+  timelineGroupTransform(group: DataItem): string {
+    return `translate(${this.timelineGroupScale(group.label)}, 0)`;
   }
 
   onClick(data, group?: DataItem): void {
@@ -388,7 +492,7 @@ export class BarVertical2DComponent extends BaseChartComponent {
       item.series = group.name;
     }
 
-    const items = this.results
+    const items = this.filteredResults
       .map(g => g.series)
       .flat()
       .filter(i => {

@@ -37,14 +37,12 @@ export class GridPanelSeriesComponent implements OnChanges {
   gridPanels: GridPanel[];
 
   @Input() data: any[];
-
   @Input() dims: ViewDimensions;
-
   @Input() xScale: any;
-
   @Input() yScale: any;
-
   @Input() orient: BarOrientation;
+  @Input() timeline: boolean = false;
+  @Input() timelineHeight: Number;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -72,7 +70,7 @@ export class GridPanelSeriesComponent implements OnChanges {
         }
         offset = this.xScale.bandwidth() * this.xScale.paddingInner();
         width = this.xScale.bandwidth() + offset;
-        height = this.dims.height;
+        height = this.timeline ? this.timelineHeight : this.dims.height;
         x = this.xScale(d.name) - offset / 2;
         y = 0;
       } else if (this.orient === BarOrientation.Horizontal) {
