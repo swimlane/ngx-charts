@@ -19,12 +19,6 @@ import { ScaleType } from '../common/types/scale-type.enum';
 @Component({
   selector: 'g[ngx-charts-pie-chart], ngx-charts-pie-chart',
   template: `
-  <svg:rect
-    x="100"
-    y="100"
-    width="10"
-    height="10"
-  ></svg:rect>
     <svg:g
       ngx-charts-chart
       [view]="[width, height]"
@@ -39,12 +33,6 @@ import { ScaleType } from '../common/types/scale-type.enum';
       (legendLabelClick)="onClick($event)"
     >
       <ng-template #chartsContent>
-        <svg:rect
-          x="100"
-          y="100"
-          width="10"
-          height="10"
-        ></svg:rect>
         <svg:g [attr.transform]="translation" class="pie-chart chart">
           <svg:g
             ngx-charts-pie-series

@@ -38,6 +38,15 @@ interface RectItem {
       (legendLabelClick)="onClick($event)"
     >
       <svg:g [attr.transform]="transform" class="calendar-pie chart">
+        <svg:rect
+          *ngFor="let rect of rects"
+          [attr.x]="rect.x"
+          [attr.y]="rect.y"
+          [attr.rx]="rect.rx"
+          [attr.width]="rect.width"
+          [attr.height]="rect.height"
+          [attr.fill]="rect.fill"
+        />
         <svg:g
           ngx-charts-calendar-pie-cell-series
           [xScale]="xScale"
@@ -49,25 +58,11 @@ interface RectItem {
           [tooltipDisabled]="tooltipDisabled"
           [tooltipTemplate]="tooltipTemplate"
           [tooltipText]="tooltipText"
-          [headerTemplateRef]="header"
+          [scheme]="scheme"
+          [pieResults]="pieResults"
           (select)="onClick($event)"
           (deactivate)="onDeactivate($event, undefined)"
         >
-          <ng-template #header>
-            <svg:g
-              ngx-charts-pie-chart
-              class="chart-container pie-chart-calendar"
-              [view]="[100, 100]"
-              [results]="pieResults"
-              [animations]="animations"
-              [legend]="false"
-              [explodeSlices]="false"
-              [labels]="false"
-              [doughnut]="false"
-              [tooltipDisabled]="true"
-              [calendar]="true">
-            </svg:g>
-          </ng-template>
         </svg:g>
       </svg:g>
     </ngx-charts-chart>
@@ -117,7 +112,7 @@ export class CalendarPieComponent extends BaseChartComponent {
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
-  xDomain: string[];
+  xDomain: string[] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   yDomain: string[];
   valueDomain: any[];
   xScale: any;
@@ -130,18 +125,19 @@ export class CalendarPieComponent extends BaseChartComponent {
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
   legendOptions: LegendOptions;
-  scaleType: ScaleType = ScaleType.Linear;
+  scaleType: ScaleType = ScaleType.Ordinal;
   startDayOfWeek: number;
   formattedResult: any[];
 
   update(): void {
     super.update();
 
+    console.log("legendOptions", this.legendOptions);
+
     this.formatDates();
 
     this.formatData();
 
-    this.xDomain = this.getXDomain();
     this.yDomain = this.getYDomain();
     this.valueDomain = this.getValueDomain();
 
@@ -226,18 +222,8 @@ export class CalendarPieComponent extends BaseChartComponent {
         'value': this.calendarData[i]
       });
     }
-
+    console.log("formatted result ", this.formattedResult);
     return this.formattedResult;
-  }
-
-  getXDomain(): string[] {
-    const domain = [];
-    for (const group of this.formattedResult) {
-      if (!domain.includes(group.name)) {
-        domain.push(group.name);
-      }
-    }
-    return domain;
   }
 
   getYDomain(): string[] {
@@ -260,12 +246,13 @@ export class CalendarPieComponent extends BaseChartComponent {
 
     for (const group of this.formattedResult) {
       for (const d of group.series) {
-        if (!domain.includes(d.value)) {
-          domain.push(d.value);
+        for (const value of d.value.series) {
+          if (!domain.includes(value.name)) {
+            domain.push(value.name);
+          }
         }
       }
     }
-
     return domain;
   }
 

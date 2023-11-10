@@ -13,6 +13,7 @@ import { formatLabel, escapeLabel } from '../common/label.helper';
 import { DataItem, Series } from '../models/chart-data.model';
 import { PlacementTypes } from '../common/tooltip/position';
 import { StyleTypes } from '../common/tooltip/style.type';
+import { Color } from 'd3-color';
 
 interface Cell {
   cell: DataItem;
@@ -51,10 +52,20 @@ interface Cell {
     [tooltipTemplate]="tooltipTemplate"
     [tooltipContext]="{ series: c.series, name: c.label, value: c.data }"
   >
-    <ng-container
-      [ngTemplateOutlet]="headerTemplateRef"
-    >
-    </ng-container>
+    <svg:g
+      ngx-charts-pie-chart
+      class="pie-chart-calendar"
+      [view]="[100, 100]"
+      [scheme]="scheme"
+      [results]="c.data.series"
+      [animations]="animations"
+      [legend]="false"
+      [explodeSlices]="false"
+      [labels]="false"
+      [doughnut]="false"
+      [tooltipDisabled]="true"
+      [calendar]="true">
+    </svg:g>
   </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -69,7 +80,8 @@ export class CalendarPieCellSeriesComponent implements OnChanges, OnInit {
   @Input() tooltipText: any;
   @Input() tooltipTemplate: TemplateRef<any>;
   @Input() animations: boolean = true;
-  @Input() headerTemplateRef: TemplateRef<any>;
+  @Input() scheme: string | Color = "cool";
+  @Input() pieResults: any[];
 
   @Output() select: EventEmitter<DataItem> = new EventEmitter();
   @Output() activate: EventEmitter<DataItem> = new EventEmitter();
@@ -116,7 +128,7 @@ export class CalendarPieCellSeriesComponent implements OnChanges, OnInit {
         });
       });
     });
-
+    console.log("cells", this.cells);
 
     return cells;
   }

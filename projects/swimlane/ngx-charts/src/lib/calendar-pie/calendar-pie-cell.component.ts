@@ -19,6 +19,11 @@ import { id } from '../utils/id';
   selector: 'g[ngx-charts-calendar-pie-cell]',
   template: `
     <svg:g [attr.transform]="transform" class="cell">
+        <svg:text
+          class="calendar-date"
+        >
+          {{ data.name }}
+        </svg:text>
       <ng-content></ng-content>
     </svg:g>
   `,
@@ -30,7 +35,7 @@ export class CalendarPieCellComponent implements OnChanges {
   @Input() y: number;
   @Input() width: number;
   @Input() height: number;
-  @Input() data: number;
+  @Input() data: any;
   @Input() gradient: boolean = false;
   @Input() animations: boolean = true;
 
