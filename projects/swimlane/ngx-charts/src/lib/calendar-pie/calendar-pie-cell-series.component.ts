@@ -104,6 +104,8 @@ export class CalendarPieCellSeriesComponent implements OnChanges, OnInit {
 
   update(): void {
     this.cells = this.getCells();
+
+    console.log("cells", this.cells)
   }
 
   getCells(): Cell[] {

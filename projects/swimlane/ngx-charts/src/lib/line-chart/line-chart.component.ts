@@ -282,6 +282,8 @@ export class LineChartComponent extends BaseChartComponent implements OnInit {
   update(): void {
     super.update();
 
+    console.log("xSet", this.xSet);
+
     this.dims = calculateViewDimensions({
       width: this.width,
       height: this.height,

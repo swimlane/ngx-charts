@@ -232,7 +232,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
 
   update(): void {
     super.update();
-    console.log("legendOptions", this.legendOptions);
+    console.log("tooltipTemplate", this.tooltipTemplate);
 
     this.dims = calculateViewDimensions({
       width: this.width,

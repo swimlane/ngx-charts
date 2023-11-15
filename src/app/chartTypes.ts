@@ -639,7 +639,7 @@ const chartGroups = [
       {
         name: 'Calendar Pie',
         selector: 'calendar-pie',
-        inputFormat: 'multiSeries',
+        inputFormat: 'calendarChart',
         options: [
           'animations',
           'colorScheme',

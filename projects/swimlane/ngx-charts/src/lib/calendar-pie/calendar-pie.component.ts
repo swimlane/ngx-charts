@@ -38,6 +38,21 @@ interface RectItem {
       (legendLabelClick)="onClick($event)"
     >
       <svg:g [attr.transform]="transform" class="calendar-pie chart">
+        <svg:g
+          ngx-charts-x-axis
+          *ngIf="xAxis"
+          [xScale]="xScale"
+          [dims]="dims"
+          [showLabel]="showXAxisLabel"
+          [labelText]="xAxisLabel"
+          [trimTicks]="trimXAxisTicks"
+          [rotateTicks]="rotateXAxisTicks"
+          [maxTickLength]="maxXAxisTickLength"
+          [tickFormatting]="xAxisTickFormatting"
+          [ticks]="xAxisTicks"
+          [wrapTicks]="wrapTicks"
+          (dimensionsChanged)="updateXAxisHeight($event)"
+        ></svg:g>
         <svg:rect
           *ngFor="let rect of rects"
           [attr.x]="rect.x"
@@ -132,7 +147,7 @@ export class CalendarPieComponent extends BaseChartComponent {
   update(): void {
     super.update();
 
-    console.log("legendOptions", this.legendOptions);
+    console.log("tooltipTemplate", this.tooltipTemplate);
 
     this.formatDates();
 
