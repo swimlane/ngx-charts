@@ -82,6 +82,8 @@ export class PieChartComponent extends BaseChartComponent {
   @Output() dblclick = new EventEmitter();
   // optional margins
   @Input() margins: number[];
+  
+  @Output() colorsOutput = new EventEmitter<ColorHelper>();
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
@@ -153,6 +155,7 @@ export class PieChartComponent extends BaseChartComponent {
 
   setColors(): void {
     this.colors = new ColorHelper(this.scheme, ScaleType.Ordinal, this.domain, this.customColors);
+    this.colorsOutput.emit(this.colors);
   }
 
   getLegendOptions(): LegendOptions {

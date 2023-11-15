@@ -14,6 +14,8 @@ import { DataItem, Series } from '../models/chart-data.model';
 import { PlacementTypes } from '../common/tooltip/position';
 import { StyleTypes } from '../common/tooltip/style.type';
 import { Color } from 'd3-color';
+import { Tooltip } from '../common/tooltip-area.component';
+import { ColorHelper } from '../common/color.helper';
 
 interface Cell {
   cell: DataItem;
@@ -27,9 +29,18 @@ interface Cell {
   x: number;
   y: number;
 }
+
 @Component({
   selector: 'g[ngx-charts-calendar-pie-cell-series]',
   template: `
+  <ng-template #defaultTooltipTemplate let-model="model">
+    <xhtml:div class="area-tooltip-container">
+      <xhtml:div *ngFor="let tooltipItem of model" class="tooltip-item">
+        <xhtml:span class="tooltip-item-color" [style.background-color]="tooltipItem.color"></xhtml:span>
+        {{ getTooltipText(tooltipItem) }}
+      </xhtml:div>
+    </xhtml:div>
+  </ng-template>
   <svg:g
     ngx-charts-calendar-pie-cell
     *ngFor="let c of cells; trackBy: trackBy"
@@ -48,9 +59,8 @@ interface Cell {
     [tooltipDisabled]="tooltipDisabled"
     [tooltipPlacement]="placementTypes.Top"
     [tooltipType]="styleTypes.tooltip"
-    [tooltipTitle]="tooltipTemplate ? undefined : tooltipText(c)"
-    [tooltipTemplate]="tooltipTemplate"
-    [tooltipContext]="{ series: c.series, name: c.label, value: c.data }"
+    [tooltipTemplate]="defaultTooltipTemplate"
+    [tooltipContext]="c.data.series"
   >
     <svg:g
       ngx-charts-pie-chart
@@ -64,7 +74,8 @@ interface Cell {
       [labels]="false"
       [doughnut]="false"
       [tooltipDisabled]="true"
-      [calendar]="true">
+      [calendar]="true"
+      (colorsOutput)="updatePieColors($event)">
     </svg:g>
   </svg:g>
   `,
@@ -91,6 +102,7 @@ export class CalendarPieCellSeriesComponent implements OnChanges, OnInit {
 
   placementTypes = PlacementTypes;
   styleTypes = StyleTypes;
+  color: ColorHelper;
 
   ngOnInit() {
     if (!this.tooltipText) {
@@ -104,8 +116,6 @@ export class CalendarPieCellSeriesComponent implements OnChanges, OnInit {
 
   update(): void {
     this.cells = this.getCells();
-
-    console.log("cells", this.cells)
   }
 
   getCells(): Cell[] {
@@ -115,6 +125,12 @@ export class CalendarPieCellSeriesComponent implements OnChanges, OnInit {
       row.series.map(cell => {
         const value = cell.value;
         cell.series = row.name;
+
+        const tooltipContext = cell.value.series
+        for (const series of tooltipContext) {
+          series.series = series.name;
+          series.color = this.color ? this.color.getColor(series.name) : "#000000";
+        }
 
         cells.push({
           row,
@@ -130,16 +146,26 @@ export class CalendarPieCellSeriesComponent implements OnChanges, OnInit {
         });
       });
     });
-    console.log("cells", this.cells);
 
     return cells;
   }
 
-  getTooltipText({ label, data, series }: { label: string; data: number; series: string }): string {
-    return `
-      <span class="tooltip-label">${escapeLabel(series)} • ${escapeLabel(label)}</span>
-      <span class="tooltip-val">${data.toLocaleString()}</span>
-    `;
+  getTooltipText(tooltipItem: Tooltip): string {
+    let result: string = '';
+    if (tooltipItem.series !== undefined) {
+      result += tooltipItem.series;
+    } else {
+      result += '???';
+    }
+    result += ': ';
+    if (tooltipItem.value !== undefined) {
+      result += tooltipItem.value.toLocaleString();
+    }
+    return result;
+  }
+
+  updatePieColors(colors: ColorHelper): void {
+    this.color = colors;
   }
 
   trackBy(index: number, item): string {
