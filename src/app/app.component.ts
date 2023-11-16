@@ -642,8 +642,8 @@ export class AppComponent implements OnInit {
   }
 
   getPieTempData() {
-    let data = [];
     if (this.tempXValueForComboPie){
+      let data = [];
       this.dateDataWithOrWithoutRange.forEach(item => {
         const dataPoint = item.series.find(data => data.name === this.tempXValueForComboPie);
         data.push({ name: item.name,
@@ -652,8 +652,26 @@ export class AppComponent implements OnInit {
                       code: item.name.toLowerCase()
                     }});
       })
+      return data;
+    } else {
+      let sumResult = []
+      this.dateDataWithOrWithoutRange.forEach(countryData => {
+        const countryName = countryData.name;
+        let sum = 0;
+        countryData.series.forEach(seriesItem => {
+            sum += seriesItem.value;
+        });
+        const resultItem = {
+            name: countryName,
+            value: sum,
+            extra: {
+                code: countryName.toLowerCase().replace(/\s/g, '_') // Convert spaces to underscores
+            }
+        };
+        sumResult.push(resultItem);
+      });
+      return sumResult;
     }
-    return data;
   }
 
   calcStatusData(sales = this.statusData[0].value, dur = this.statusData[2].value) {
