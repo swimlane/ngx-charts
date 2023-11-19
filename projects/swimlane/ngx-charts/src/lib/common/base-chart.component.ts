@@ -185,9 +185,11 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, 
     const results = [];
 
     for (const item of data) {
-      const copy = {
-        name: item['name']
-      };
+      const copy = {};
+
+      if (item['name'] !== undefined) {
+        copy['name'] = item['name'];
+      }
 
       if (item['value'] !== undefined) {
         copy['value'] = item['value'];
@@ -203,6 +205,14 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, 
 
       if (item['extra'] !== undefined) {
         copy['extra'] = JSON.parse(JSON.stringify(item['extra']));
+      }
+
+      if (item['source'] !== undefined) {
+        copy['source'] = item['source'];
+      }
+
+      if (item['target'] !== undefined) {
+        copy['target'] = item['target'];
       }
 
       results.push(copy);
