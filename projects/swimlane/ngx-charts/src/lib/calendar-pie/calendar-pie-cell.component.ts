@@ -9,35 +9,36 @@ import {
   ChangeDetectionStrategy,
   HostListener
 } from '@angular/core';
-import { select } from 'd3-selection';
-import { Transition } from 'd3-transition';
 import { BarOrientation } from '../common/types/bar-orientation.enum';
 import { Gradient } from '../common/types/gradient.interface';
-import { id } from '../utils/id';
 
 @Component({
   selector: 'g[ngx-charts-calendar-pie-cell]',
   template: `
     <svg:g [attr.transform]="transform" class="cell">
+      <svg:g [attr.transform]="textTransform">
         <svg:text
+          [attr.font-size]="textFontSize + 'px'" 
           class="calendar-date"
         >
           {{ data.name }}
         </svg:text>
-      <ng-content></ng-content>
+      </svg:g>
+      <svg:g [attr.transform]="pieTransform">
+        <ng-content></ng-content>
+      </svg:g>
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarPieCellComponent implements OnChanges {
-  @Input() fill: string;
   @Input() x: number;
   @Input() y: number;
-  @Input() width: number;
-  @Input() height: number;
+  @Input() cellWidth: number;
+  @Input() cellHeight: number;
+  @Input() pieWidth: number;
+  @Input() pieHeight: number;
   @Input() data: any;
-  @Input() gradient: boolean = false;
-  @Input() animations: boolean = true;
 
   @Output() select: EventEmitter<number> = new EventEmitter();
   @Output() activate: EventEmitter<number> = new EventEmitter();
@@ -49,6 +50,9 @@ export class CalendarPieCellComponent implements OnChanges {
   gradientId: string;
   gradientUrl: string;
   gradientStops: Gradient[];
+  pieTransform: string;
+  textTransform: string;
+  textFontSize: number;
 
   barOrientation = BarOrientation;
 
@@ -56,44 +60,12 @@ export class CalendarPieCellComponent implements OnChanges {
     this.element = element.nativeElement;
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
+    console.log(this.pieWidth, this.pieHeight)
     this.transform = `translate(${this.x} , ${this.y})`;
-
-    this.startOpacity = 0.3;
-    this.gradientId = 'grad' + id().toString();
-    this.gradientUrl = `url(#${this.gradientId})`;
-    this.gradientStops = this.getGradientStops();
-
-    if (this.animations) {
-      this.loadAnimation();
-    }
-  }
-
-  getGradientStops(): Gradient[] {
-    return [
-      {
-        offset: 0,
-        color: this.fill,
-        opacity: this.startOpacity
-      },
-      {
-        offset: 100,
-        color: this.fill,
-        opacity: 1
-      }
-    ];
-  }
-
-  loadAnimation(): void {
-    const node = select(this.element).select('.cell');
-    node.attr('opacity', 0);
-    this.animateToCurrentForm();
-  }
-
-  animateToCurrentForm(): void {
-    const node = select(this.element).select('.cell');
-
-    node.transition().duration(750).attr('opacity', 1);
+    this.pieTransform = `translate(${this.cellWidth / 2 - this.pieWidth / 2}, ${this.cellHeight / 2 - this.pieHeight / 2})`;
+    this.textTransform = `translate(${this.cellWidth / 50}, ${this.cellHeight / 50})`;
+    this.textFontSize = Math.min(this.cellWidth, this.cellHeight) * 0.2;
   }
 
   onClick(): void {

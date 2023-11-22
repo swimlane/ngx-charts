@@ -5,12 +5,9 @@ import {
   Output,
   EventEmitter,
   OnChanges,
-  OnInit,
-  ChangeDetectionStrategy,
-  TemplateRef
+  ChangeDetectionStrategy
 } from '@angular/core';
-import { formatLabel, escapeLabel } from '../common/label.helper';
-import { DataItem, Series } from '../models/chart-data.model';
+import { DataItem } from '../models/chart-data.model';
 import { PlacementTypes } from '../common/tooltip/position';
 import { StyleTypes } from '../common/tooltip/style.type';
 import { Color } from 'd3-color';
@@ -20,12 +17,6 @@ import { ColorHelper } from '../common/color.helper';
 interface Cell {
   cell: DataItem;
   data: number;
-  fill: string;
-  height: number;
-  label: string;
-  row: Series;
-  series: string;
-  width: number;
   x: number;
   y: number;
 }
@@ -46,15 +37,14 @@ interface Cell {
     *ngFor="let c of cells; trackBy: trackBy"
     [x]="c.x"
     [y]="c.y"
-    [width]="c.width"
-    [height]="c.height"
-    [fill]="c.fill"
     [data]="c.data"
+    [cellWidth]="cellWidth"
+    [cellHeight]="cellHeight"
+    [pieWidth]="pieWidth"
+    [pieHeight]="pieHeight"
     (select)="onClick(c.cell)"
     (activate)="activate.emit(c.cell)"
     (deactivate)="deactivate.emit(c.cell)"
-    [gradient]="gradient"
-    [animations]="animations"
     ngx-tooltip
     [tooltipDisabled]="tooltipDisabled"
     [tooltipPlacement]="placementTypes.Top"
@@ -65,7 +55,7 @@ interface Cell {
     <svg:g
       ngx-charts-pie-chart
       class="pie-chart-calendar"
-      [view]="[100, 100]"
+      [view]="[pieWidth, pieHeight]"
       [scheme]="scheme"
       [results]="c.data.series"
       [animations]="animations"
@@ -75,24 +65,24 @@ interface Cell {
       [doughnut]="false"
       [tooltipDisabled]="true"
       [calendar]="true"
+      [customColors]="customColors"
+      [margins]="[0, 0, 0, 0]"
       (colorsOutput)="updatePieColors($event)">
     </svg:g>
   </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalendarPieCellSeriesComponent implements OnChanges, OnInit {
+export class CalendarPieCellSeriesComponent implements OnChanges {
   @Input() data;
-  @Input() colors;
   @Input() xScale;
   @Input() yScale;
-  @Input() gradient: boolean;
   @Input() tooltipDisabled: boolean = false;
-  @Input() tooltipText: any;
-  @Input() tooltipTemplate: TemplateRef<any>;
   @Input() animations: boolean = true;
   @Input() scheme: string | Color = "cool";
-  @Input() pieResults: any[];
+  @Input() customColors: any;
+  @Input() cellWidth: number;
+  @Input() cellHeight: number;
 
   @Output() select: EventEmitter<DataItem> = new EventEmitter();
   @Output() activate: EventEmitter<DataItem> = new EventEmitter();
@@ -102,13 +92,9 @@ export class CalendarPieCellSeriesComponent implements OnChanges, OnInit {
 
   placementTypes = PlacementTypes;
   styleTypes = StyleTypes;
-  color: ColorHelper;
-
-  ngOnInit() {
-    if (!this.tooltipText) {
-      this.tooltipText = this.getTooltipText;
-    }
-  }
+  colors: ColorHelper;
+  pieWidth: number;
+  pieHeight: number;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -116,6 +102,9 @@ export class CalendarPieCellSeriesComponent implements OnChanges, OnInit {
 
   update(): void {
     this.cells = this.getCells();
+
+    this.pieWidth = this.cellWidth * 0.7;
+    this.pieHeight = this.cellHeight * 0.7;
   }
 
   getCells(): Cell[] {
@@ -123,26 +112,19 @@ export class CalendarPieCellSeriesComponent implements OnChanges, OnInit {
 
     this.data.map(row => {
       row.series.map(cell => {
-        const value = cell.value;
+        const value = JSON.parse(JSON.stringify(cell.value));
         cell.series = row.name;
 
-        const tooltipContext = cell.value.series
-        for (const series of tooltipContext) {
+        for (const series of value.series) {
           series.series = series.name;
-          series.color = this.color ? this.color.getColor(series.name) : "#000000";
+          series.color = this.colors ? this.colors.getColor(series.name) : "#000000";
         }
 
         cells.push({
-          row,
           cell,
           x: this.xScale(row.name),
           y: this.yScale(cell.name),
-          width: this.xScale.bandwidth(),
-          height: this.yScale.bandwidth(),
-          fill: this.colors.getColor(value),
           data: value,
-          label: formatLabel(cell.name),
-          series: row.name
         });
       });
     });
@@ -165,7 +147,7 @@ export class CalendarPieCellSeriesComponent implements OnChanges, OnInit {
   }
 
   updatePieColors(colors: ColorHelper): void {
-    this.color = colors;
+    this.colors = colors;
   }
 
   trackBy(index: number, item): string {

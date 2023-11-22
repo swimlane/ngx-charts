@@ -102,6 +102,8 @@ export class PieChartComponent extends BaseChartComponent {
   update(): void {
     super.update();
 
+    console.log("pie width ", this.width, " pie height ", this.height);
+
     if (this.labels && this.hasNoOptionalMarginsSet()) {
       this.margins = [30, 80, 30, 80];
     } else if (!this.labels && this.hasNoOptionalMarginsSet()) {
@@ -117,11 +119,14 @@ export class PieChartComponent extends BaseChartComponent {
       legendPosition: this.legendPosition
     });
 
+    console.log("pie dims ", this.dims.width, this.dims.height, this.width, this.height)
+
     this.formatDates();
 
     const xOffset = this.margins[3] + this.dims.width / 2;
     const yOffset = this.margins[0] + this.dims.height / 2;
     this.translation = `translate(${xOffset}, ${yOffset})`;
+    console.log("translation ", this.translation);
     this.outerRadius = Math.min(this.dims.width, this.dims.height);
     if (this.labels) {
       // make room for labels

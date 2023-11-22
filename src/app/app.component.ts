@@ -168,7 +168,7 @@ export class AppComponent implements OnInit {
   customColors: any[] = [
     {
       name: 'Germany',
-      value: '#a8385d'
+      value: '#123456'
     }
   ];
 
@@ -210,7 +210,7 @@ export class AppComponent implements OnInit {
   heatmapMax: number = 40;
 
   // Calendar Chart
-  calendarMonth: number = 10;
+  calendarMonth: number = 11;
   calendarYear: number = 2023;
 
   calendarChartData: any[] = [

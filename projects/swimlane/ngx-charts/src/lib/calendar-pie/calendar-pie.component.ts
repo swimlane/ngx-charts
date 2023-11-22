@@ -66,23 +66,19 @@ interface RectItem {
           ngx-charts-calendar-pie-cell-series
           [xScale]="xScale"
           [yScale]="yScale"
-          [colors]="colors"
           [data]="formattedResult"
-          [gradient]="gradient"
           [animations]="animations"
           [tooltipDisabled]="tooltipDisabled"
-          [tooltipTemplate]="tooltipTemplate"
-          [tooltipText]="tooltipText"
           [scheme]="scheme"
-          [pieResults]="pieResults"
+          [customColors]="customColors"
+          [cellWidth]="cellWidth"
+          [cellHeight]="cellHeight"
           (select)="onClick($event)"
           (deactivate)="onDeactivate($event, undefined)"
         >
         </svg:g>
       </svg:g>
     </ngx-charts-chart>
-    <svg>
-    </svg>
     
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -94,37 +90,23 @@ export class CalendarPieComponent extends BaseChartComponent {
   @Input() legendTitle: string = 'Legend';
   @Input() legendPosition: LegendPosition = LegendPosition.Right;
   @Input() xAxis: boolean;
-  @Input() yAxis: boolean;
   @Input() showXAxisLabel: boolean;
-  @Input() showYAxisLabel: boolean;
   @Input() xAxisLabel: string;
-  @Input() yAxisLabel: string;
-  @Input() gradient: boolean;
   @Input() innerPadding: number | number[] | string | string[] = 8;
   @Input() trimXAxisTicks: boolean = true;
-  @Input() trimYAxisTicks: boolean = true;
   @Input() rotateXAxisTicks: boolean = true;
   @Input() maxXAxisTickLength: number = 16;
-  @Input() maxYAxisTickLength: number = 16;
   @Input() xAxisTickFormatting: any;
-  @Input() yAxisTickFormatting: any;
   @Input() xAxisTicks: any[];
-  @Input() yAxisTicks: any[];
   @Input() tooltipDisabled: boolean = false;
-  @Input() tooltipText: any;
-  @Input() min: number;
-  @Input() max: number;
   @Input() activeEntries: any[] = [];
   @Input() wrapTicks = false;
-  @Input() month: number = 10;
+  @Input() month: number = 11;
   @Input() year: number = 2023;
   @Input() calendarData: number[];
-  @Input() pieResults: any[];
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
-
-  @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
   xDomain: string[] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -138,16 +120,15 @@ export class CalendarPieComponent extends BaseChartComponent {
   rects: RectItem[];
   margin: number[] = [10, 20, 10, 20];
   xAxisHeight: number = 0;
-  yAxisWidth: number = 0;
   legendOptions: LegendOptions;
   scaleType: ScaleType = ScaleType.Ordinal;
   startDayOfWeek: number;
   formattedResult: any[];
+  cellWidth: number;
+  cellHeight: number;
 
   update(): void {
     super.update();
-
-    console.log("tooltipTemplate", this.tooltipTemplate);
 
     this.formatDates();
 
@@ -163,30 +144,19 @@ export class CalendarPieComponent extends BaseChartComponent {
       height: this.height,
       margins: this.margin,
       showXAxis: this.xAxis,
-      showYAxis: this.yAxis,
+      showYAxis: false,
       xAxisHeight: this.xAxisHeight,
-      yAxisWidth: this.yAxisWidth,
       showXLabel: this.showXAxisLabel,
-      showYLabel: this.showYAxisLabel,
       showLegend: this.legend,
       legendType: this.scaleType as any,
       legendPosition: this.legendPosition
     });
 
-    if (this.scaleType === ScaleType.Linear) {
-      let min = this.min;
-      let max = this.max;
-      if (!this.min) {
-        min = Math.min(0, ...this.valueDomain);
-      }
-      if (!this.max) {
-        max = Math.max(...this.valueDomain);
-      }
-      this.valueDomain = [min, max];
-    }
-
     this.xScale = this.getXScale();
     this.yScale = this.getYScale();
+
+    this.cellWidth = this.xScale.bandwidth();
+    this.cellHeight = this.yScale.bandwidth();
 
     this.setColors();
     this.legendOptions = this.getLegendOptions();
@@ -197,7 +167,7 @@ export class CalendarPieComponent extends BaseChartComponent {
   }
 
   formatData(): any[] {
-    const d = new Date(this.year, this.month, 1);
+    const d = new Date(this.year, this.month - 1, 1);
     this.startDayOfWeek = d.getDay();
 
     this.formattedResult = [
@@ -337,7 +307,7 @@ export class CalendarPieComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    this.colors = new ColorHelper(this.scheme, this.scaleType, this.valueDomain);
+    this.colors = new ColorHelper(this.scheme, this.scaleType, this.valueDomain, this.customColors);
   }
 
   getLegendOptions(): LegendOptions {
@@ -348,11 +318,6 @@ export class CalendarPieComponent extends BaseChartComponent {
       title: this.scaleType === ScaleType.Ordinal ? this.legendTitle : undefined,
       position: this.legendPosition
     };
-  }
-
-  updateYAxisWidth({ width }: { width: number }): void {
-    this.yAxisWidth = width;
-    this.update();
   }
 
   updateXAxisHeight({ height }: { height: number }): void {
