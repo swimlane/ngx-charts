@@ -169,6 +169,8 @@ export class CalendarPieComponent extends BaseChartComponent {
   formatData(): any[] {
     const d = new Date(this.year, this.month - 1, 1);
     this.startDayOfWeek = d.getDay();
+    console.log(this.year, this.month)
+    console.log("startDayOfWeek", this.startDayOfWeek)
 
     this.formattedResult = [
       {
@@ -207,7 +209,6 @@ export class CalendarPieComponent extends BaseChartComponent {
         'value': this.calendarData[i]
       });
     }
-    console.log("formatted result ", this.formattedResult);
     return this.formattedResult;
   }
 

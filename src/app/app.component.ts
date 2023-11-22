@@ -94,7 +94,7 @@ export class AppComponent implements OnInit {
   showYAxisLabel = true;
   yAxisLabel = 'GDP Per Capita';
   showGridLines = true;
-  innerPadding = '6%';
+  innerPadding = '10%';
   barPadding = 8;
   groupPadding = 16;
   roundDomains = false;
@@ -168,7 +168,7 @@ export class AppComponent implements OnInit {
   customColors: any[] = [
     {
       name: 'Germany',
-      value: '#123456'
+      value: '#a8385d'
     }
   ];
 
@@ -207,44 +207,11 @@ export class AppComponent implements OnInit {
 
   // heatmap
   heatmapMin: number = 0;
-  heatmapMax: number = 40;
+  heatmapMax: number = 50000;
 
   // Calendar Chart
   calendarMonth: number = 11;
   calendarYear: number = 2023;
-
-  calendarChartData: any[] = [
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20,
-    21,
-    22,
-    23,
-    24,
-    25,
-    26,
-    27,
-    28,
-    29,
-    30
-  ];
 
   calendarPieData: any[] = [
     {
@@ -1413,8 +1380,8 @@ export class AppComponent implements OnInit {
     this.yAxisLabel = 'GDP Per Capita';
     this.xAxisLabel = 'Country';
 
-    this.width = 800;
-    this.height = 500;
+    this.width = 700;
+    this.height = 300;
 
     Object.assign(this, this.chart.defaults);
 

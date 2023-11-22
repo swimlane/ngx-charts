@@ -61,7 +61,6 @@ export class CalendarPieCellComponent implements OnChanges {
   }
 
   ngOnChanges(): void {
-    console.log(this.pieWidth, this.pieHeight)
     this.transform = `translate(${this.x} , ${this.y})`;
     this.pieTransform = `translate(${this.cellWidth / 2 - this.pieWidth / 2}, ${this.cellHeight / 2 - this.pieHeight / 2})`;
     this.textTransform = `translate(${this.cellWidth / 50}, ${this.cellHeight / 50})`;

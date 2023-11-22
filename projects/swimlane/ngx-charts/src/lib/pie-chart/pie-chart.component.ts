@@ -19,20 +19,59 @@ import { ScaleType } from '../common/types/scale-type.enum';
 @Component({
   selector: 'g[ngx-charts-pie-chart], ngx-charts-pie-chart',
   template: `
-    <svg:g
-      ngx-charts-chart
-      [view]="[width, height]"
-      [showLegend]="legend"
-      [legendOptions]="legendOptions"
-      [activeEntries]="activeEntries"
-      [animations]="animations"
-      [chartsRef]="chartsContent"
-      [calendar]="calendar"
-      (legendLabelActivate)="onActivate($event, true)"
-      (legendLabelDeactivate)="onDeactivate($event, true)"
-      (legendLabelClick)="onClick($event)"
-    >
-      <ng-template #chartsContent>
+    <svg:g *ngIf="calendar">
+      <svg:g
+        ngx-charts-chart
+        [view]="[width, height]"
+        [showLegend]="legend"
+        [legendOptions]="legendOptions"
+        [activeEntries]="activeEntries"
+        [animations]="animations"
+        [chartsRef]="chartsContent"
+        [calendar]="calendar"
+        (legendLabelActivate)="onActivate($event, true)"
+        (legendLabelDeactivate)="onDeactivate($event, true)"
+        (legendLabelClick)="onClick($event)"
+      >
+        <ng-template #chartsContent>
+          <svg:g [attr.transform]="translation" class="pie-chart chart">
+            <svg:g
+              ngx-charts-pie-series
+              [colors]="colors"
+              [series]="data"
+              [showLabels]="labels"
+              [labelFormatting]="labelFormatting"
+              [trimLabels]="trimLabels"
+              [maxLabelLength]="maxLabelLength"
+              [activeEntries]="activeEntries"
+              [innerRadius]="innerRadius"
+              [outerRadius]="outerRadius"
+              [explodeSlices]="explodeSlices"
+              [gradient]="gradient"
+              [animations]="animations"
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="tooltipTemplate"
+              [tooltipText]="tooltipText"
+              (dblclick)="dblclick.emit($event)"
+              (select)="onClick($event)"
+              (activate)="onActivate($event)"
+              (deactivate)="onDeactivate($event)"
+            />
+          </svg:g>
+        </ng-template>
+      </svg:g>
+    </svg:g>
+    <div *ngIf="!calendar">
+      <ngx-charts-chart
+        [view]="[width, height]"
+        [showLegend]="legend"
+        [legendOptions]="legendOptions"
+        [activeEntries]="activeEntries"
+        [animations]="animations"
+        (legendLabelActivate)="onActivate($event, true)"
+        (legendLabelDeactivate)="onDeactivate($event, true)"
+        (legendLabelClick)="onClick($event)"
+      >
         <svg:g [attr.transform]="translation" class="pie-chart chart">
           <svg:g
             ngx-charts-pie-series
@@ -57,8 +96,8 @@ import { ScaleType } from '../common/types/scale-type.enum';
             (deactivate)="onDeactivate($event)"
           />
         </svg:g>
-      </ng-template>
-    </svg:g>
+      </ngx-charts-chart>
+    </div>
   `,
   styleUrls: ['../common/base-chart.component.scss', './pie-chart.component.scss'],
   encapsulation: ViewEncapsulation.None,
@@ -82,6 +121,7 @@ export class PieChartComponent extends BaseChartComponent {
   @Output() dblclick = new EventEmitter();
   // optional margins
   @Input() margins: number[];
+  @Input() calendar: boolean = false;
   
   @Output() colorsOutput = new EventEmitter<ColorHelper>();
   @Output() select = new EventEmitter();
@@ -102,8 +142,6 @@ export class PieChartComponent extends BaseChartComponent {
   update(): void {
     super.update();
 
-    console.log("pie width ", this.width, " pie height ", this.height);
-
     if (this.labels && this.hasNoOptionalMarginsSet()) {
       this.margins = [30, 80, 30, 80];
     } else if (!this.labels && this.hasNoOptionalMarginsSet()) {
@@ -119,14 +157,11 @@ export class PieChartComponent extends BaseChartComponent {
       legendPosition: this.legendPosition
     });
 
-    console.log("pie dims ", this.dims.width, this.dims.height, this.width, this.height)
-
     this.formatDates();
 
     const xOffset = this.margins[3] + this.dims.width / 2;
     const yOffset = this.margins[0] + this.dims.height / 2;
     this.translation = `translate(${xOffset}, ${yOffset})`;
-    console.log("translation ", this.translation);
     this.outerRadius = Math.min(this.dims.width, this.dims.height);
     if (this.labels) {
       // make room for labels

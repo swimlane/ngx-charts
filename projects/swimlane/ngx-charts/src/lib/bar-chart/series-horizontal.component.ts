@@ -116,7 +116,6 @@ export class SeriesHorizontal implements OnChanges {
 
   update(): void {
     this.updateTooltipSettings();
-    console.log("bar.data", this.bars);
     const d0 = {
       [D0Types.positive]: 0,
       [D0Types.negative]: 0

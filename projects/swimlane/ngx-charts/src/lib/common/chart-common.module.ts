@@ -20,7 +20,6 @@ import { LegendComponent } from './legend/legend.component';
 import { LegendEntryComponent } from './legend/legend-entry.component';
 import { ScaleLegendComponent } from './legend/scale-legend.component';
 import { AdvancedLegendComponent } from './legend/advanced-legend.component';
-import { PieChartModule } from '../pie-chart/pie-chart.module';
 
 const COMPONENTS = [
   AreaComponent,
