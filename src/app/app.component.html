@@ -632,7 +632,7 @@
         class="chart-container"
         [view]="view"
         [scheme]="colorScheme"
-        [calendarData]="calendarPieData"
+        [results]="calendarPieData"
         [animations]="animations"
         [legend]="showLegend"
         [xAxis]="showXAxis"
@@ -642,10 +642,9 @@
         [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [wrapTicks]="wrapTicks"
-        [month]="calendarMonth"
-        [year]="calendarYear"
         [customColors]="customColors"
         (select)="select($event)"
+        (activate)="activate($event)"
         (deactivate)="deactivate($event)"
       >
       </ngx-charts-calendar-pie>

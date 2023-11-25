@@ -3,8 +3,6 @@ import {
   Input,
   ViewEncapsulation,
   ChangeDetectionStrategy,
-  ContentChild,
-  TemplateRef,
   Output,
   EventEmitter
 } from '@angular/core';
@@ -74,6 +72,7 @@ interface RectItem {
           [cellWidth]="cellWidth"
           [cellHeight]="cellHeight"
           (select)="onClick($event)"
+          (activate)="onActivate($event, undefined)"
           (deactivate)="onDeactivate($event, undefined)"
         >
         </svg:g>
@@ -101,9 +100,6 @@ export class CalendarPieComponent extends BaseChartComponent {
   @Input() tooltipDisabled: boolean = false;
   @Input() activeEntries: any[] = [];
   @Input() wrapTicks = false;
-  @Input() month: number = 11;
-  @Input() year: number = 2023;
-  @Input() calendarData: number[];
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -122,14 +118,13 @@ export class CalendarPieComponent extends BaseChartComponent {
   xAxisHeight: number = 0;
   legendOptions: LegendOptions;
   scaleType: ScaleType = ScaleType.Ordinal;
-  startDayOfWeek: number;
   formattedResult: any[];
   cellWidth: number;
   cellHeight: number;
 
   update(): void {
     super.update();
-
+    console.log(this.results)
     this.formatDates();
 
     this.formatData();
@@ -166,50 +161,25 @@ export class CalendarPieComponent extends BaseChartComponent {
 
   }
 
-  formatData(): any[] {
-    const d = new Date(this.year, this.month - 1, 1);
-    this.startDayOfWeek = d.getDay();
-    console.log(this.year, this.month)
-    console.log("startDayOfWeek", this.startDayOfWeek)
+  formatData(): void {
+    console.log(this.results[0].name);
+    const startDayOfWeek = this.results[0].name.getDay();
 
-    this.formattedResult = [
-      {
-        'name': 'Sunday',
-        'series': []
-      },
-      {
-        'name': 'Monday',
-        'series': []
-      },
-      {
-        'name': 'Tuesday',
-        'series': []
-      },
-      {
-        'name': 'Wednesday',
-        'series': []
-      },
-      {
-        'name': 'Thursday',
-        'series': []
-      },
-      {
-        'name': 'Friday',
-        'series': []
-      },
-      {
-        'name': 'Saturday',
-        'series': []
-      }
-    ];
+    this.formattedResult = [];
+    for (let i = 0; i < 7; i++) {
+      this.formattedResult.push({
+        name: this.xDomain[i],
+        series: []
+      })
+    }
 
-    for (let i = 0; i < this.calendarData.length; i++) {
-      this.formattedResult[(i + this.startDayOfWeek) % 7].series.push({
-        'name': Math.floor((i + this.startDayOfWeek) / 7),
-        'value': this.calendarData[i]
+    for (let i = 0; i < this.results.length; i++) {
+      this.formattedResult[(i + startDayOfWeek) % 7].series.push({
+        'name': Math.floor((i + startDayOfWeek) / 7),
+        'value': this.results[i],
+        'date': this.results[i].name.getDate()
       });
     }
-    return this.formattedResult;
   }
 
   getYDomain(): string[] {
@@ -326,26 +296,16 @@ export class CalendarPieComponent extends BaseChartComponent {
     this.update();
   }
 
-  /*onActivate(event, group, fromLegend: boolean = false) {
+  onActivate(event, group, fromLegend: boolean = false) {
+    console.log("activate")
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
     }
 
-    const items = this.formattedResult
-      .map(g => g.series)
-      .flat()
-      .filter(i => {
-        if (fromLegend) {
-          return i.label === item.name;
-        } else {
-          return i.name === item.name && i.series === item.series;
-        }
-      });
-
-    this.activeEntries = [...items];
+    console.log({ value: item, entries: [item] })
     this.activate.emit({ value: item, entries: this.activeEntries });
-  }*/
+  }
 
   onDeactivate(event, group, fromLegend: boolean = false) {
     const item = Object.assign({}, event);

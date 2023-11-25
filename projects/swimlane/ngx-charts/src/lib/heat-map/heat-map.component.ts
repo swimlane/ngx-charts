@@ -328,6 +328,7 @@ export class HeatMapComponent extends BaseChartComponent {
     if (group) {
       item.series = group.name;
     }
+    console.log("results", this.results)
 
     const items = this.results
       .map(g => g.series)

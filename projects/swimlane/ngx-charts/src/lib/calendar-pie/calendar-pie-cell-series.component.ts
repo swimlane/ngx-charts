@@ -16,7 +16,8 @@ import { ColorHelper } from '../common/color.helper';
 
 interface Cell {
   cell: DataItem;
-  data: number;
+  data: any[];
+  date: number;
   x: number;
   y: number;
 }
@@ -37,7 +38,7 @@ interface Cell {
     *ngFor="let c of cells; trackBy: trackBy"
     [x]="c.x"
     [y]="c.y"
-    [data]="c.data"
+    [date]="c.date"
     [cellWidth]="cellWidth"
     [cellHeight]="cellHeight"
     [pieWidth]="pieWidth"
@@ -125,10 +126,11 @@ export class CalendarPieCellSeriesComponent implements OnChanges {
           x: this.xScale(row.name),
           y: this.yScale(cell.name),
           data: value,
+          date: cell.date
         });
       });
     });
-
+    console.log("cells", cells)
     return cells;
   }
 

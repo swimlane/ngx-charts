@@ -3,7 +3,6 @@ import {
   Input,
   Output,
   EventEmitter,
-  SimpleChanges,
   ElementRef,
   OnChanges,
   ChangeDetectionStrategy,
@@ -21,7 +20,7 @@ import { Gradient } from '../common/types/gradient.interface';
           [attr.font-size]="textFontSize + 'px'" 
           class="calendar-date"
         >
-          {{ data.name }}
+          {{ date }}
         </svg:text>
       </svg:g>
       <svg:g [attr.transform]="pieTransform">
@@ -38,7 +37,7 @@ export class CalendarPieCellComponent implements OnChanges {
   @Input() cellHeight: number;
   @Input() pieWidth: number;
   @Input() pieHeight: number;
-  @Input() data: any;
+  @Input() date: any;
 
   @Output() select: EventEmitter<number> = new EventEmitter();
   @Output() activate: EventEmitter<number> = new EventEmitter();
@@ -68,16 +67,16 @@ export class CalendarPieCellComponent implements OnChanges {
   }
 
   onClick(): void {
-    this.select.emit(this.data);
+    this.select.emit(this.date);
   }
 
   @HostListener('mouseenter')
   onMouseEnter(): void {
-    this.activate.emit(this.data);
+    this.activate.emit(this.date);
   }
 
   @HostListener('mouseleave')
   onMouseLeave(): void {
-    this.deactivate.emit(this.data);
+    this.deactivate.emit(this.date);
   }
 }
