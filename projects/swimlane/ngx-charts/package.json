@@ -1,6 +1,6 @@
 {
   "name": "@swimlane/ngx-charts",
-  "version": "20.4.1",
+  "version": "20.5.0",
   "description": "Declarative Charting Framework for Angular",
   "repository": {
     "type": "git",
@@ -24,11 +24,6 @@
     "graph"
   ],
   "author": "Swimlane",
-  "maintainers": [
-    "Marjan Georgiev",
-    "Jayson Harshbarger",
-    "Haemin Park"
-  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/swimlane/ngx-charts/issues"
@@ -52,6 +47,7 @@
     "d3-format": "^3.1.0",
     "d3-hierarchy": "^3.1.0",
     "d3-interpolate": "^3.0.1",
+    "d3-sankey": "^0.12.3",
     "d3-scale": "^4.0.2",
     "d3-selection": "^3.0.0",
     "d3-shape": "^3.2.0",
