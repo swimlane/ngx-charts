@@ -29,6 +29,7 @@ For more info, check out the [documentation](https://swimlane.gitbook.io/ngx-cha
 - Heatmap
 - Treemap
 - Number Cards
+- Sankey Diagram
 
 ### Customization
 

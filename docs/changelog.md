@@ -1,5 +1,9 @@
 # Changelog
 
+## 20.5.0
+
+- Feature: Add Sankey diagram chart type
+
 ## 20.4.1
 
 - Bump: d3-array from 2.9.1 to 3.1.1
@@ -29,6 +33,7 @@
 ## 20.1.1
 
 - Bump: d3-color from 2.0.0 to 3.1.0 in demo page
+
 ## 20.1.0
 
 - Fix: Cyclic import error caused by interface export in `PieGridComponent`.

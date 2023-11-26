@@ -100,6 +100,9 @@ export * from './lib/heat-map/heat-map.component';
 export * from './lib/heat-map/heat-map-cell.component';
 export * from './lib/heat-map/heat-map-cell-series.component';
 
+export * from './lib/sankey/sankey.module';
+export * from './lib/sankey/sankey.component';
+
 export * from './lib/line-chart/line-chart.module';
 export * from './lib/line-chart/line-chart.component';
 export * from './lib/line-chart/line.component';

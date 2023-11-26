@@ -10,6 +10,7 @@ import {
   multi,
   boxData,
   bubble,
+  sankeyData,
   generateData,
   generateGraph,
   treemap,
@@ -192,6 +193,9 @@ export class AppComponent implements OnInit {
 
   // box
   boxData = boxData;
+
+  // sankey
+  sankeyData = sankeyData;
 
   // gauge
   gaugeMin: number = 0;
