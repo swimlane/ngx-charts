@@ -645,6 +645,7 @@ const chartGroups = [
           'colorScheme',
           'showXAxis',
           'showLegend',
+          'legendTitle',
           'legendPosition',
           'innerPadding',
           'tooltipDisabled',
@@ -655,8 +656,8 @@ const chartGroups = [
           'startSunday'
         ],
         defaults: {
-          yAxisLabel: 'Census Date',
-          cAxisLabel: 'Country'
+          width: 800,
+          height: 500
         }
       },
       {

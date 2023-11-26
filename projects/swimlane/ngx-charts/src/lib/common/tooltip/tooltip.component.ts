@@ -93,7 +93,6 @@ export class TooltipContentComponent implements AfterViewInit {
 
     this.renderer.setStyle(nativeElm, 'top', `${top}px`);
     this.renderer.setStyle(nativeElm, 'left', `${left}px`);
-    console.log("hostDim", hostDim);
   }
 
   positionCaret(hostDim: DOMRect, elmDim: DOMRect): void {
