@@ -71,7 +71,6 @@ export class TooltipContentComponent implements AfterViewInit {
 
     const nativeElm = this.element.nativeElement;
     const hostDim = this.host.nativeElement.getBoundingClientRect();
-    console.log(this.host.nativeElement);
 
     // if no dims were found, never show
     if (!hostDim.height && !hostDim.width) return;

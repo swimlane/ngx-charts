@@ -8,8 +8,6 @@ import {
   ChangeDetectionStrategy,
   HostListener
 } from '@angular/core';
-import { BarOrientation } from '../common/types/bar-orientation.enum';
-import { Gradient } from '../common/types/gradient.interface';
 
 @Component({
   selector: 'g[ngx-charts-calendar-pie-cell]',
@@ -21,7 +19,6 @@ import { Gradient } from '../common/types/gradient.interface';
         [attr.height]="height"
         [attr.fill]="'rgba(200,200,200,0.03)'"
         class="cell"
-        (click)="onClick()"
       />
       <svg:g [attr.transform]="textTransform">
         <svg:text
@@ -34,6 +31,13 @@ import { Gradient } from '../common/types/gradient.interface';
       <svg:g [attr.transform]="pieTransform">
         <ng-content></ng-content>
       </svg:g>
+      <svg:rect
+        rx="3"
+        [attr.width]="width"
+        [attr.height]="height"
+        [attr.fill-opacity]="0"
+        (click)="onClick()"
+      />
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -51,21 +55,10 @@ export class CalendarPieCellComponent implements OnChanges {
   @Output() activate: EventEmitter<number> = new EventEmitter();
   @Output() deactivate: EventEmitter<number> = new EventEmitter();
 
-  element: HTMLElement;
   transform: string;
-  startOpacity: number;
-  gradientId: string;
-  gradientUrl: string;
-  gradientStops: Gradient[];
   pieTransform: string;
   textTransform: string;
   textFontSize: number;
-
-  barOrientation = BarOrientation;
-
-  constructor(element: ElementRef) {
-    this.element = element.nativeElement;
-  }
 
   ngOnChanges(): void {
     this.transform = `translate(${this.x} , ${this.y})`;

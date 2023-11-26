@@ -17,7 +17,7 @@ import { ScaleType } from '../types/scale-type.enum';
   selector: 'g[ngx-charts-chart], ngx-charts-chart',
   template: `
     <div *ngIf="!calendar" class="ngx-charts-outer" [style.width.px]="view[0]" [style.height.px]="view[1]">
-      <svg *ngIf="!calendar" class="ngx-charts" [attr.width]="chartWidth" [attr.height]="view[1]">
+      <svg class="ngx-charts" [attr.width]="chartWidth" [attr.height]="view[1]">
         <ng-content></ng-content>
       </svg>
       <ngx-charts-scale-legend

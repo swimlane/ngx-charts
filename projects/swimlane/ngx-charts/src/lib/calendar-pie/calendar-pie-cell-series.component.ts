@@ -29,7 +29,8 @@ interface Cell {
   template: `
   <ng-template #defaultTooltipTemplate let-model="model">
     <xhtml:div class="area-tooltip-container">
-      <xhtml:div *ngFor="let tooltipItem of model" class="tooltip-item">
+      <xhtml:span class="tooltip-label">{{ model.data.label }}</xhtml:span>
+      <xhtml:div *ngFor="let tooltipItem of model.data.series" class="tooltip-item">
         <xhtml:span class="tooltip-item-color" [style.background-color]="tooltipItem.color"></xhtml:span>
         {{ getTooltipText(tooltipItem) }}
       </xhtml:div>
@@ -53,7 +54,7 @@ interface Cell {
     [tooltipPlacement]="placementTypes.Top"
     [tooltipType]="styleTypes.tooltip"
     [tooltipTemplate]="defaultTooltipTemplate"
-    [tooltipContext]="c.data.series"
+    [tooltipContext]="c"
   >
     <svg:g
       ngx-charts-pie-chart
@@ -69,8 +70,7 @@ interface Cell {
       [tooltipDisabled]="true"
       [calendar]="true"
       [customColors]="customColors"
-      [margins]="[0, 0, 0, 0]"
-      (colorsOutput)="updatePieColors($event)">
+      [margins]="[0, 0, 0, 0]">
     </svg:g>
   </svg:g>
   `,
@@ -84,6 +84,7 @@ export class CalendarPieCellSeriesComponent implements OnChanges {
   @Input() animations: boolean = true;
   @Input() scheme: string | Color = "cool";
   @Input() customColors: any;
+  @Input() colors: ColorHelper;
 
   @Output() select: EventEmitter<DataItem> = new EventEmitter();
   @Output() activate: EventEmitter<DataItem> = new EventEmitter();
@@ -93,7 +94,6 @@ export class CalendarPieCellSeriesComponent implements OnChanges {
 
   placementTypes = PlacementTypes;
   styleTypes = StyleTypes;
-  colors: ColorHelper;
   pieWidth: number;
   pieHeight: number;
   width: number;
@@ -153,10 +153,6 @@ export class CalendarPieCellSeriesComponent implements OnChanges {
       result += tooltipItem.value.toLocaleString();
     }
     return result;
-  }
-
-  updatePieColors(colors: ColorHelper): void {
-    this.colors = colors;
   }
 
   trackBy(index: number, item): string {

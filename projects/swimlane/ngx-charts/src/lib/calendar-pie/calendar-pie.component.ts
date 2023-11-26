@@ -16,15 +16,6 @@ import { LegendOptions, LegendPosition } from '../common/types/legend.model';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
 import { ScaleType } from '../common/types/scale-type.enum';
 
-interface RectItem {
-  fill: string;
-  height: number;
-  rx: number;
-  width: number;
-  x: number;
-  y: number;
-}
-
 @Component({
   selector: 'ngx-charts-calendar-pie',
   template: `
@@ -41,8 +32,6 @@ interface RectItem {
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
-          [showLabel]="showXAxisLabel"
-          [labelText]="xAxisLabel"
           [trimTicks]="trimXAxisTicks"
           [rotateTicks]="rotateXAxisTicks"
           [maxTickLength]="maxXAxisTickLength"
@@ -60,6 +49,7 @@ interface RectItem {
           [tooltipDisabled]="tooltipDisabled"
           [scheme]="scheme"
           [customColors]="customColors"
+          [colors]="colors"
           (select)="onClick($event)"
           (activate)="onActivate($event, undefined)"
           (deactivate)="onDeactivate($event, undefined)"
@@ -77,8 +67,6 @@ export class CalendarPieComponent extends BaseChartComponent {
   @Input() legendTitle: string = 'Legend';
   @Input() legendPosition: LegendPosition = LegendPosition.Right;
   @Input() xAxis: boolean;
-  @Input() showXAxisLabel: boolean;
-  @Input() xAxisLabel: string;
   @Input() innerPadding: number | number[] | string | string[] = 8;
   @Input() trimXAxisTicks: boolean = true;
   @Input() rotateXAxisTicks: boolean = true;
@@ -100,16 +88,12 @@ export class CalendarPieComponent extends BaseChartComponent {
   xScale: any;
   yScale: any;
   colors: ColorHelper;
-  colorScale: any;
   transform: string;
-  rects: RectItem[];
   margin: number[] = [10, 20, 10, 20];
   xAxisHeight: number = 0;
   legendOptions: LegendOptions;
   scaleType: ScaleType = ScaleType.Ordinal;
   formattedResult: any[];
-  cellWidth: number;
-  cellHeight: number;
 
   update(): void {
     super.update();
@@ -117,8 +101,7 @@ export class CalendarPieComponent extends BaseChartComponent {
     this.xDomain = this.getXDomain();
 
     this.formatDates();
-
-    this.formatData();
+    this.formattedResult = this.formatData();
 
     this.yDomain = this.getYDomain();
     this.valueDomain = this.getValueDomain();
@@ -132,7 +115,7 @@ export class CalendarPieComponent extends BaseChartComponent {
       showXAxis: this.xAxis,
       showYAxis: false,
       xAxisHeight: this.xAxisHeight,
-      showXLabel: this.showXAxisLabel,
+      showXLabel: false,
       showLegend: this.legend,
       legendType: this.scaleType as any,
       legendPosition: this.legendPosition
@@ -141,38 +124,36 @@ export class CalendarPieComponent extends BaseChartComponent {
     this.xScale = this.getXScale();
     this.yScale = this.getYScale();
 
-    this.cellWidth = this.xScale.bandwidth();
-    this.cellHeight = this.yScale.bandwidth();
-
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
     this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
-    this.rects = this.getRects();
 
   }
 
-  formatData(): void {
+  formatData(): any[] {
     let startDayOfWeek = this.results[0].name.getDay();
     if (!this.startSunday) {
       startDayOfWeek = (startDayOfWeek + 6) % 7;
     }
 
-    this.formattedResult = [];
+    const result = [];
     for (let i = 0; i < 7; i++) {
-      this.formattedResult.push({
+      result.push({
         name: this.xDomain[i],
         series: []
       })
     }
 
     for (let i = 0; i < this.results.length; i++) {
-      this.formattedResult[(i + startDayOfWeek) % 7].series.push({
+      result[(i + startDayOfWeek) % 7].series.push({
         'name': Math.floor((i + startDayOfWeek) / 7),
         'value': this.results[i],
         'date': this.results[i].name.getDate()
       });
     }
+
+    return result;
   }
 
   getXDomain(): string[] {
@@ -254,25 +235,6 @@ export class CalendarPieComponent extends BaseChartComponent {
     return scaleBand().rangeRound([this.dims.height, 0]).domain(this.yDomain).paddingInner(f);
   }
 
-  getRects(): RectItem[] {
-    const rects = [];
-
-    this.xDomain.map(xVal => {
-      this.yDomain.map(yVal => {
-        rects.push({
-          x: this.xScale(xVal),
-          y: this.yScale(yVal),
-          rx: 3,
-          width: this.xScale.bandwidth(),
-          height: this.yScale.bandwidth(),
-          fill: 'rgba(200,200,200,0.03)'
-        });
-      });
-    });
-
-    return rects;
-  }
-
   onClick(data): void {
     this.select.emit(data);
   }
@@ -302,6 +264,19 @@ export class CalendarPieComponent extends BaseChartComponent {
       item.series = group.name;
     }
 
+    const items = [];
+    for (const col of this.formattedResult) {
+      for (const i of col.series) {
+        if (fromLegend && i.label === item.name) {
+          items.push(i);
+        } else if (i.name === item.name && i.series === item.series) {
+          items.push(i);
+        }
+        
+      }
+    }
+
+    this.activeEntries = [...items];
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
