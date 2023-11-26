@@ -51,15 +51,6 @@ interface RectItem {
           [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateXAxisHeight($event)"
         ></svg:g>
-        <svg:rect
-          *ngFor="let rect of rects"
-          [attr.x]="rect.x"
-          [attr.y]="rect.y"
-          [attr.rx]="rect.rx"
-          [attr.width]="rect.width"
-          [attr.height]="rect.height"
-          [attr.fill]="rect.fill"
-        />
         <svg:g
           ngx-charts-calendar-pie-cell-series
           [xScale]="xScale"
@@ -69,8 +60,6 @@ interface RectItem {
           [tooltipDisabled]="tooltipDisabled"
           [scheme]="scheme"
           [customColors]="customColors"
-          [cellWidth]="cellWidth"
-          [cellHeight]="cellHeight"
           (select)="onClick($event)"
           (activate)="onActivate($event, undefined)"
           (deactivate)="onDeactivate($event, undefined)"
@@ -78,7 +67,6 @@ interface RectItem {
         </svg:g>
       </svg:g>
     </ngx-charts-chart>
-    
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['../common/base-chart.component.scss'],
@@ -124,7 +112,7 @@ export class CalendarPieComponent extends BaseChartComponent {
 
   update(): void {
     super.update();
-    console.log(this.results)
+
     this.formatDates();
 
     this.formatData();
@@ -162,7 +150,6 @@ export class CalendarPieComponent extends BaseChartComponent {
   }
 
   formatData(): void {
-    console.log(this.results[0].name);
     const startDayOfWeek = this.results[0].name.getDay();
 
     this.formattedResult = [];
@@ -297,13 +284,11 @@ export class CalendarPieComponent extends BaseChartComponent {
   }
 
   onActivate(event, group, fromLegend: boolean = false) {
-    console.log("activate")
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
     }
 
-    console.log({ value: item, entries: [item] })
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 

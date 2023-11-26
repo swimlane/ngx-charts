@@ -20,6 +20,8 @@ interface Cell {
   date: number;
   x: number;
   y: number;
+  width: number;
+  height: number;
 }
 
 @Component({
@@ -39,8 +41,8 @@ interface Cell {
     [x]="c.x"
     [y]="c.y"
     [date]="c.date"
-    [cellWidth]="cellWidth"
-    [cellHeight]="cellHeight"
+    [width]="c.width"
+    [height]="c.height"
     [pieWidth]="pieWidth"
     [pieHeight]="pieHeight"
     (select)="onClick(c.cell)"
@@ -82,8 +84,6 @@ export class CalendarPieCellSeriesComponent implements OnChanges {
   @Input() animations: boolean = true;
   @Input() scheme: string | Color = "cool";
   @Input() customColors: any;
-  @Input() cellWidth: number;
-  @Input() cellHeight: number;
 
   @Output() select: EventEmitter<DataItem> = new EventEmitter();
   @Output() activate: EventEmitter<DataItem> = new EventEmitter();
@@ -96,16 +96,21 @@ export class CalendarPieCellSeriesComponent implements OnChanges {
   colors: ColorHelper;
   pieWidth: number;
   pieHeight: number;
+  width: number;
+  height: number;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 
   update(): void {
+    this.width = this.xScale.bandwidth();
+    this.height = this.yScale.bandwidth();
+
     this.cells = this.getCells();
 
-    this.pieWidth = this.cellWidth * 0.7;
-    this.pieHeight = this.cellHeight * 0.7;
+    this.pieWidth = this.width * 0.7;
+    this.pieHeight = this.height * 0.7;
   }
 
   getCells(): Cell[] {
@@ -126,11 +131,13 @@ export class CalendarPieCellSeriesComponent implements OnChanges {
           x: this.xScale(row.name),
           y: this.yScale(cell.name),
           data: value,
-          date: cell.date
+          date: cell.date,
+          width: this.width,
+          height: this.height,
         });
       });
     });
-    console.log("cells", cells)
+
     return cells;
   }
 

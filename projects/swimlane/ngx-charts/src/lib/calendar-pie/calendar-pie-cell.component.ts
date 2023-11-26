@@ -15,6 +15,14 @@ import { Gradient } from '../common/types/gradient.interface';
   selector: 'g[ngx-charts-calendar-pie-cell]',
   template: `
     <svg:g [attr.transform]="transform" class="cell">
+      <svg:rect
+        rx="3"
+        [attr.width]="width"
+        [attr.height]="height"
+        [attr.fill]="'rgba(200,200,200,0.03)'"
+        class="cell"
+        (click)="onClick()"
+      />
       <svg:g [attr.transform]="textTransform">
         <svg:text
           [attr.font-size]="textFontSize + 'px'" 
@@ -33,8 +41,8 @@ import { Gradient } from '../common/types/gradient.interface';
 export class CalendarPieCellComponent implements OnChanges {
   @Input() x: number;
   @Input() y: number;
-  @Input() cellWidth: number;
-  @Input() cellHeight: number;
+  @Input() width: number;
+  @Input() height: number;
   @Input() pieWidth: number;
   @Input() pieHeight: number;
   @Input() date: any;
@@ -61,9 +69,9 @@ export class CalendarPieCellComponent implements OnChanges {
 
   ngOnChanges(): void {
     this.transform = `translate(${this.x} , ${this.y})`;
-    this.pieTransform = `translate(${this.cellWidth / 2 - this.pieWidth / 2}, ${this.cellHeight / 2 - this.pieHeight / 2})`;
-    this.textTransform = `translate(${this.cellWidth / 50}, ${this.cellHeight / 50})`;
-    this.textFontSize = Math.min(this.cellWidth, this.cellHeight) * 0.2;
+    this.pieTransform = `translate(${this.width / 2 - this.pieWidth / 2}, ${this.height / 2 - this.pieHeight / 2})`;
+    this.textTransform = `translate(${this.width / 50}, ${this.height / 50})`;
+    this.textFontSize = Math.min(this.width, this.height) * 0.2;
   }
 
   onClick(): void {

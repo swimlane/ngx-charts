@@ -28,6 +28,7 @@ function horizontalPosition(elDimensions: DOMRect, popoverDimensions: DOMRect, a
   }
 
   if (alignment === PlacementTypes.Center) {
+    console.log("elDimensions", elDimensions)
     return elDimensions.left + elDimensions.width / 2 - popoverDimensions.width / 2;
   }
 
@@ -103,6 +104,7 @@ export class PositionHelper {
     alignment: PlacementTypes
   ): number {
     let result = horizontalPosition(elDimensions, popoverDimensions, alignment);
+    console.log("left result", result)
 
     if (result + popoverDimensions.width > window.innerWidth) {
       result = window.innerWidth - popoverDimensions.width;

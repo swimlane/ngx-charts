@@ -71,6 +71,7 @@ export class TooltipContentComponent implements AfterViewInit {
 
     const nativeElm = this.element.nativeElement;
     const hostDim = this.host.nativeElement.getBoundingClientRect();
+    console.log(this.host.nativeElement);
 
     // if no dims were found, never show
     if (!hostDim.height && !hostDim.width) return;
@@ -92,6 +93,7 @@ export class TooltipContentComponent implements AfterViewInit {
 
     this.renderer.setStyle(nativeElm, 'top', `${top}px`);
     this.renderer.setStyle(nativeElm, 'left', `${left}px`);
+    console.log("hostDim", hostDim);
   }
 
   positionCaret(hostDim: DOMRect, elmDim: DOMRect): void {
