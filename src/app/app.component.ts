@@ -210,10 +210,11 @@ export class AppComponent implements OnInit {
   heatmapMin: number = 0;
   heatmapMax: number = 50000;
 
-  // Calendar Chart
+  // Calendar Pie Chart
   calendarMonth: number = 11;
   calendarYear: number = 2023;
   calendarPieData: any[];
+  startSunday: boolean = true;
 
   // Combo Chart
   barChart: any[] = barChart;

@@ -651,7 +651,8 @@ const chartGroups = [
           'trimXAxisTicks',
           'rotateXAxisTicks',
           'maxXAxisTickLength',
-          'wrapTicks'
+          'wrapTicks',
+          'startSunday'
         ],
         defaults: {
           yAxisLabel: 'Census Date',

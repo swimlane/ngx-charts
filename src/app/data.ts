@@ -55,7 +55,7 @@ export const single: SingleSeries = [
 
 export const multi: MultiSeries = [
   {
-    name: 'a',
+    name: 'Germany',
     series: [
       {
         name: '2010',
@@ -77,145 +77,11 @@ export const multi: MultiSeries = [
         extra: {
           code: 'de'
         }
-      },
-      {
-        name: '1980',
-        value: 31476,
-        extra: {
-          code: 'de'
-        }
-      },
-      {
-        name: '1970',
-        value: 31476,
-        extra: {
-          code: 'de'
-        }
       }
     ]
   },
   {
-    name: 'd',
-    series: [
-      {
-        name: '2010',
-        value: 40632,
-        extra: {
-          code: 'de'
-        }
-      },
-      {
-        name: '2000',
-        value: 36953,
-        extra: {
-          code: 'de'
-        }
-      },
-      {
-        name: '1990',
-        value: 31476,
-        extra: {
-          code: 'de'
-        }
-      },
-      {
-        name: '1980',
-        value: 31476,
-        extra: {
-          code: 'de'
-        }
-      },
-      {
-        name: '1970',
-        value: 31476,
-        extra: {
-          code: 'de'
-        }
-      }
-    ]
-  },
-  {
-    name: 'b',
-    series: [
-      {
-        name: '2010',
-        value: 40632,
-        extra: {
-          code: 'de'
-        }
-      },
-      {
-        name: '2000',
-        value: 36953,
-        extra: {
-          code: 'de'
-        }
-      },
-      {
-        name: '1990',
-        value: 31476,
-        extra: {
-          code: 'de'
-        }
-      },
-      {
-        name: '1980',
-        value: 31476,
-        extra: {
-          code: 'de'
-        }
-      },
-      {
-        name: '1970',
-        value: 31476,
-        extra: {
-          code: 'de'
-        }
-      }
-    ]
-  },
-  {
-    name: 'a',
-    series: [
-      {
-        name: '2010',
-        value: 40632,
-        extra: {
-          code: 'de'
-        }
-      },
-      {
-        name: '2000',
-        value: 36953,
-        extra: {
-          code: 'de'
-        }
-      },
-      {
-        name: '1990',
-        value: 31476,
-        extra: {
-          code: 'de'
-        }
-      },
-      {
-        name: '1980',
-        value: 31476,
-        extra: {
-          code: 'de'
-        }
-      },
-      {
-        name: '1970',
-        value: 31476,
-        extra: {
-          code: 'de'
-        }
-      }
-    ]
-  },
-  {
-    name: 'Unbtes',
+    name: 'United States',
     series: [
       {
         name: '2010',
@@ -237,25 +103,11 @@ export const multi: MultiSeries = [
         extra: {
           code: 'us'
         }
-      },
-      {
-        name: '1980',
-        value: 31476,
-        extra: {
-          code: 'de'
-        }
-      },
-      {
-        name: '1970',
-        value: 31476,
-        extra: {
-          code: 'de'
-        }
       }
     ]
   },
   {
-    name: '3',
+    name: 'France',
     series: [
       {
         name: '2010',
@@ -277,25 +129,11 @@ export const multi: MultiSeries = [
         extra: {
           code: 'fr'
         }
-      },
-      {
-        name: '1980',
-        value: 31476,
-        extra: {
-          code: 'de'
-        }
-      },
-      {
-        name: '1970',
-        value: 31476,
-        extra: {
-          code: 'de'
-        }
       }
     ]
   },
   {
-    name: 'Uniddom',
+    name: 'United Kingdom',
     series: [
       {
         name: '2010',
@@ -316,61 +154,6 @@ export const multi: MultiSeries = [
         value: 26424,
         extra: {
           code: 'uk'
-        }
-      },
-      {
-        name: '1980',
-        value: 31476,
-        extra: {
-          code: 'de'
-        }
-      },
-      {
-        name: '1970',
-        value: 31476,
-        extra: {
-          code: 'de'
-        }
-      }
-    ]
-  },
-
-  {
-    name: 'asb',
-    series: [
-      {
-        name: '2010',
-        value: 36240,
-        extra: {
-          code: 'uk'
-        }
-      },
-      {
-        name: '2000',
-        value: 32543,
-        extra: {
-          code: 'uk'
-        }
-      },
-      {
-        name: '1990',
-        value: 26424,
-        extra: {
-          code: 'uk'
-        }
-      },
-      {
-        name: '1980',
-        value: 31476,
-        extra: {
-          code: 'de'
-        }
-      },
-      {
-        name: '1970',
-        value: 31476,
-        extra: {
-          code: 'de'
         }
       }
     ]

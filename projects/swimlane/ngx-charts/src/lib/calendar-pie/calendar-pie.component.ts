@@ -88,12 +88,13 @@ export class CalendarPieComponent extends BaseChartComponent {
   @Input() tooltipDisabled: boolean = false;
   @Input() activeEntries: any[] = [];
   @Input() wrapTicks = false;
+  @Input() startSunday: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
   dims: ViewDimensions;
-  xDomain: string[] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  xDomain: string[];
   yDomain: string[];
   valueDomain: any[];
   xScale: any;
@@ -112,6 +113,8 @@ export class CalendarPieComponent extends BaseChartComponent {
 
   update(): void {
     super.update();
+
+    this.xDomain = this.getXDomain();
 
     this.formatDates();
 
@@ -150,7 +153,10 @@ export class CalendarPieComponent extends BaseChartComponent {
   }
 
   formatData(): void {
-    const startDayOfWeek = this.results[0].name.getDay();
+    let startDayOfWeek = this.results[0].name.getDay();
+    if (!this.startSunday) {
+      startDayOfWeek = (startDayOfWeek + 6) % 7;
+    }
 
     this.formattedResult = [];
     for (let i = 0; i < 7; i++) {
@@ -167,6 +173,13 @@ export class CalendarPieComponent extends BaseChartComponent {
         'date': this.results[i].name.getDate()
       });
     }
+  }
+
+  getXDomain(): string[] {
+    if (this.startSunday) {
+      return ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    }
+    return [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
   }
 
   getYDomain(): string[] {

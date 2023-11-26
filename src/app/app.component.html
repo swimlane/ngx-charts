@@ -643,6 +643,7 @@
         [maxXAxisTickLength]="maxXAxisTickLength"
         [wrapTicks]="wrapTicks"
         [customColors]="customColors"
+        [startSunday]="startSunday"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -1415,6 +1416,12 @@
         <div *ngIf="chart.options.includes('maxYAxisTickLength')">
           <label>Max Y Axis Tick Length:</label><br />
           <input type="text" [(ngModel)]="maxYAxisTickLength" /><br />
+        </div>
+        <div *ngIf="chart.options.includes('startSunday')">
+          <label>
+            <input type="checkbox" [(ngModel)]="startSunday" />
+            Start Sunday
+          </label>
         </div>
         <div *ngIf="chart.options.includes('doughnut')">
           <label>
