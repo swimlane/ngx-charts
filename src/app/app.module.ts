@@ -11,7 +11,6 @@ import { NgxUIModule } from '@swimlane/ngx-ui';
 import { ComboChartComponent, ComboSeriesVerticalComponent } from './custom-charts/combo-chart';
 import { BubbleChartInteractiveModule } from './custom-charts/bubble-chart-interactive';
 
-
 @NgModule({
   providers: [
     {

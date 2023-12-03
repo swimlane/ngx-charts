@@ -599,7 +599,7 @@
       </combo-chart-component>
 
       <div *ngIf="chartType === 'combo-chart-line-pie-component'">
-        <div class = "top-chart">
+        <div class = "top-pie-chart">
           <ngx-charts-pie-chart
             class="chart-container"
             [view]="view"
@@ -620,7 +620,7 @@
           >
           </ngx-charts-pie-chart>
         </div>
-        <div class = "bottom-chart">
+        <div class = "bottom-line-chart">
           <ngx-charts-line-chart
           [view]="view"
           class="chart-container"
@@ -660,8 +660,7 @@
           (tooltipCurrent)="getTooltipCurrent($event)"
         >
         </ngx-charts-line-chart>
-      </div>
-
+        </div>
       </div>
 
       <ngx-charts-heat-map
