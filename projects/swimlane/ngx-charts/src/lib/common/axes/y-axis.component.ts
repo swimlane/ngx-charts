@@ -155,9 +155,8 @@ export class YAxisComponent implements OnChanges {
           start += this.maxLabelLength;
         }
       }
-    }
-     else if (this.maxLabelLength == 0 && this.wrapLabel) {
-      if (labelLength > this.dims.width / 11) {
+    } else if (this.maxLabelLength == 0 && this.wrapLabel) {
+      if (labelLength > this.dims.height / 11) {
         let wrappedLines = this.wrapText(this.labelTextTemp, this.dims.height / 11);
         let firstLine = wrappedLines[0];
         textElement.text('');
@@ -178,6 +177,13 @@ export class YAxisComponent implements OnChanges {
             .attr('dx', '1.2em');
         }
       }
+    } else if (!this.trimLabel && !this.wrapLabel) {
+      let tspanElements = textElement.selectAll('tspan')
+      if (tspanElements) {
+        tspanElements.remove();
+      }
+      this.labelTextTemp = this.labelText;
+      textElement.text(this.labelTextTemp);
     }
   }
 
