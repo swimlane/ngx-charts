@@ -334,13 +334,17 @@ main {
 
 .top-chart {
   position: absolute;
-  top: 180px;
+  top: 30%;
+  left: 50%;
   width: 100%;
+  transform: translate(-50%, -50%);
 }
 
 .bottom-chart {
   position: absolute;
-  bottom: 200px;
+  bottom: 30%;
+  left: 50%;
   width: 100%;
+  transform: translate(-50%, -50%);
 }
 
