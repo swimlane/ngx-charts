@@ -79,6 +79,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
             [showDataLabel]="showDataLabel"
             [dataLabelFormatting]="dataLabelFormatting"
             [seriesName]="group.name"
+            [roundEdges]="roundEdges"
             [animations]="animations"
             [chartLeftOffset]="chartLeftOffset"
             [noBarWhenZero]="noBarWhenZero"
@@ -131,6 +132,7 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   @Input() xAxisTicks: any[];
   @Input() yAxisTicks: any[];
   @Input() barPadding = 8;
+  @Input() roundEdges: boolean = true;
   @Input() roundDomains: boolean = false;
   @Input() yScaleMax: number;
   @Input() showDataLabel: boolean = false;
