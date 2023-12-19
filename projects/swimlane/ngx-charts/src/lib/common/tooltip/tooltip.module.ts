@@ -11,7 +11,6 @@ import { InjectionService } from './injection.service';
   declarations: [TooltipContentComponent, TooltipDirective],
   providers: [InjectionService, TooltipService],
   exports: [TooltipContentComponent, TooltipDirective],
-  imports: [CommonModule],
-  entryComponents: [TooltipContentComponent]
+  imports: [CommonModule]
 })
 export class TooltipModule {}
