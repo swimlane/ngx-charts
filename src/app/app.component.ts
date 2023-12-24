@@ -179,7 +179,7 @@ export class AppComponent implements OnInit {
   arcWidth = 0.25;
   displayTotal = false;
   totalFontSize = 24;
-  totalDisplayText = "TOTAL";
+  totalDisplayText = 'TOTAL';
 
   // line, area
   autoScale = true;

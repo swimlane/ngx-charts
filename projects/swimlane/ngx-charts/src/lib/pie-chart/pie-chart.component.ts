@@ -54,7 +54,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
         />
         <svg:text
           [style.display]="displayTotal && doughnut && animations ? 'block' : 'none'"
-          class="pieTotal"
+          class="pie-total"
           dy="-0.5em"
           x="0"
           [attr.y]="totalFontSize / 2"
@@ -66,7 +66,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
         ></svg:text>
         <svg:text 
           [style.display]="displayTotal && doughnut && !animations ? 'block' : 'none'" 
-          class="pieTotal" 
+          class="pie-total" 
           dy="-0.5em" 
           x="0" 
           [attr.y]="totalFontSize / 2" 
@@ -77,7 +77,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
         </svg:text>
         <svg:text 
           [style.display]="displayTotal && doughnut ? 'block' : 'none'" 
-          class="pieTotal" 
+          class="pie-total" 
           dy="0.5em" 
           x="0" 
           [attr.y]="totalFontSize / 2" 
@@ -110,7 +110,7 @@ export class PieChartComponent extends BaseChartComponent {
   @Input() tooltipText: any;
   @Input() displayTotal: boolean = false;
   @Input() totalFontSize: number = 24;
-  @Input() totalDisplayText: string = "TOTAL";
+  @Input() totalDisplayText: string = 'TOTAL';
   @Output() dblclick = new EventEmitter();
   // optional margins
   @Input() margins: number[];
