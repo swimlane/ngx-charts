@@ -118,42 +118,50 @@ export class YAxisComponent implements OnChanges {
     let textElement = labelElement.select('text');
     if (this.showLabel && this.trimLabel) {
       if (this.maxLabelLength < labelLength) {
-        let tspanElements = textElement.selectAll('tspan')
-        if (tspanElements) {
-          tspanElements.remove();
-        }
-        labelLength = this.maxLabelLength;
-        this.labelTextTemp = this.labelTextTemp.slice(0, labelLength) + "...";
-        textElement.text(this.labelTextTemp);
+        setTimeout(() => {
+          let tspanElements = textElement.selectAll('tspan')
+          if (tspanElements) {
+            tspanElements.remove();
+          }
+          labelLength = this.maxLabelLength;
+          this.labelTextTemp = this.labelTextTemp.slice(0, labelLength) + "...";
+          textElement.text(this.labelTextTemp);
+        }, 150);
       } else {
         this.labelTextTemp = this.labelText;
         textElement.text(this.labelTextTemp);
       }
     } else if (this.showLabel && this.wrapLabel && this.maxLabelLength > 0) {
       if (this.maxLabelLength < labelLength && this.maxLabelLength > 0) {
-        textElement.text('');
+        setTimeout(() => {
+          textElement.text('');
 
-        let numLine = Math.ceil(labelLength / this.maxLabelLength);
-        let yVal = parseFloat(textElement.attr('y')) - 30 * numLine;
-        let xVal = parseFloat(textElement.attr('x'));
-        const firstLine = this.labelTextTemp.slice(0, this.maxLabelLength);
-        textElement.append('tspan')
-          .text(firstLine)
-          .attr('y', yVal)
-          .attr('dx', '1em');
-
-        let start = this.maxLabelLength;
-        while (numLine > 1) {
-          numLine--;
-          yVal = yVal + 30;
-          let line = this.labelTextTemp.slice(start, start + this.maxLabelLength);
+          let numLine = Math.ceil(labelLength / this.maxLabelLength);
+          let yVal = parseFloat(textElement.attr('y')) - 30 * numLine;
+          let xVal = parseFloat(textElement.attr('x')) - 30;
+          const firstLine = this.labelTextTemp.slice(0, this.maxLabelLength);
           textElement.append('tspan')
-            .text(line)
+            .text(firstLine)
             .attr('x', xVal)
             .attr('y', yVal)
-            .attr('dx', '1.2em');
-          start += this.maxLabelLength;
-        }
+            .attr('dx', '1em');
+
+          let start = this.maxLabelLength;
+          while (numLine > 1) {
+            numLine--;
+            yVal = yVal + 30;
+            let line = this.labelTextTemp.slice(start, start + this.maxLabelLength);
+            textElement.append('tspan')
+              .text(line)
+              .attr('x', xVal)
+              .attr('y', yVal)
+              .attr('dx', '1.2em');
+            start += this.maxLabelLength;
+          }
+        }, 150);
+      } else {
+        this.labelTextTemp = this.labelText;
+        textElement.text(this.labelTextTemp);
       }
     } else if (this.maxLabelLength == 0 && this.wrapLabel) {
       if (labelLength > this.dims.height / 11) {
@@ -161,12 +169,12 @@ export class YAxisComponent implements OnChanges {
         let firstLine = wrappedLines[0];
         textElement.text('');
         let yVal = parseFloat(textElement.attr('y')) - 30 * wrappedLines.length;
-        let xVal = parseFloat(textElement.attr('x'));
+        let xVal = parseFloat(textElement.attr('x')) - 30;
         textElement.append('tspan')
           .text(firstLine)
+          .attr('x', xVal)
           .attr('y', yVal)
           .attr('dx', '1em');
-
         for (let i = 1; i < wrappedLines.length; i++) {
           let line = wrappedLines[i];
           yVal = yVal + 30;
@@ -176,6 +184,9 @@ export class YAxisComponent implements OnChanges {
             .attr('y', yVal)
             .attr('dx', '1.2em');
         }
+      } else {
+        this.labelTextTemp = this.labelText;
+        textElement.text(this.labelTextTemp);
       }
     } else if (!this.trimLabel && !this.wrapLabel) {
       let tspanElements = textElement.selectAll('tspan')

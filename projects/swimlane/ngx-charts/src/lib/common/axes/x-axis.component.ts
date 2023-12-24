@@ -129,6 +129,7 @@ export class XAxisComponent implements OnChanges {
       }
     } else if (this.showLabel && this.wrapLabel && this.maxLabelLength > 0) {
       // wrap with specified maxLabelLength
+
       if (this.maxLabelLength < labelLength && this.maxLabelLength > 0) {
         textElement.text('');
 
@@ -145,7 +146,6 @@ export class XAxisComponent implements OnChanges {
             .attr('dy', '1.2em');
           start += this.maxLabelLength;
         }
-
         if (start < labelLength) {
           let lastLine = this.labelTextTemp.slice(start, labelLength);
           textElement.append('tspan')
@@ -153,6 +153,9 @@ export class XAxisComponent implements OnChanges {
           .attr('x', xVal)
           .attr('dy', '1.2em');
         }
+      } else {
+        this.labelTextTemp = this.labelText;
+        textElement.text(this.labelTextTemp);
       }
     } else if (this.maxLabelLength == 0 && this.wrapLabel) {
       // auto-wrap without specified maxLabelLength
@@ -171,6 +174,9 @@ export class XAxisComponent implements OnChanges {
             .attr('x', xVal)
             .attr('dy', '1.2em');
         }
+      } else {
+        this.labelTextTemp = this.labelText;
+        textElement.text(this.labelTextTemp);
       }
     } else if (!this.trimLabel && !this.wrapLabel) {
       let tspanElements = textElement.selectAll('tspan')
