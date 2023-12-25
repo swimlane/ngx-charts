@@ -443,7 +443,7 @@ export class LineChartComponent extends BaseChartComponent implements OnInit {
 
   updateHoveredVertical(item): void {
     this.hoveredVertical = item.value;
-    this.tooltipCurrent.emit(this.hoveredVertical)
+    this.tooltipCurrent.emit(this.hoveredVertical);
     this.deactivateAll();
   }
 
