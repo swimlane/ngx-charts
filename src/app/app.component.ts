@@ -218,7 +218,7 @@ export class AppComponent implements OnInit {
     {
       "name": "Germany",
       "startTime": 1,
-      "endTime": 2
+      "endTime": 3
     },
     {
       "name": "United States",
@@ -242,10 +242,44 @@ export class AppComponent implements OnInit {
     },
     {
       "name": "Italy",
-      "startTime": 4,
+      "startTime": 3,
       "endTime": 5
     }
   ];
+
+
+  /*timelineData: any[] = [
+    {
+      "name": "Germany",
+      "startTime": new Date("December 2 2016"),
+      "endTime": new Date("December 3 2016")
+    },
+    {
+      "name": "United States",
+      "startTime": new Date("December 3 2016"),
+      "endTime": new Date("December 4 2016")
+    },
+    {
+      "name": "France",
+      "startTime": new Date("December 3 2016"),
+      "endTime": new Date("December 5 2016")
+    },
+    {
+      "name": "United Kingdom",
+      "startTime": new Date("December 2 2016"),
+      "endTime": new Date("December 4 2016")
+    },
+    {
+      "name": "Spain",
+      "startTime": new Date("December 2 2016"),
+      "endTime": new Date("December 6 2016")
+    },
+    {
+      "name": "Italy",
+      "startTime": new Date("December 14 2016"),
+      "endTime": new Date("January 10 2017")
+    }
+  ];*/
 
   // Combo Chart
   barChart: any[] = barChart;

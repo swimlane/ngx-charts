@@ -223,7 +223,6 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
       ticks = this.scale.domain();
       ticks = reduceTicks(ticks, maxTicks);
     }
-
     return ticks;
   }
 

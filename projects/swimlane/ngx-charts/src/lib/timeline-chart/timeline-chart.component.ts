@@ -8,7 +8,7 @@ import {
   ContentChild,
   TemplateRef
 } from '@angular/core';
-import { scaleBand, scaleLinear } from 'd3-scale';
+import { scaleBand, scaleLinear, scaleTime } from 'd3-scale';
 
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
@@ -16,6 +16,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
 import { LegendOptions, LegendPosition } from '../common/types/legend.model';
 import { ScaleType } from '../common/types/scale-type.enum';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { getScaleType } from '../common/domain.helper';
 
 @Component({
   selector: 'ngx-charts-timeline-chart',
@@ -129,7 +130,7 @@ export class TimelineChartComponent extends BaseChartComponent {
   dims: ViewDimensions;
   yScale: any;
   xScale: any;
-  xDomain: [number, number];
+  xDomain: any[];
   yDomain: string[];
   transform: string;
   colors: ColorHelper;
@@ -138,6 +139,7 @@ export class TimelineChartComponent extends BaseChartComponent {
   yAxisWidth: number = 0;
   legendOptions: LegendOptions;
   dataLabelMaxWidth: any = { negative: 0, positive: 0 };
+  scaleType: ScaleType;
 
   update(): void {
     super.update();
@@ -177,7 +179,12 @@ export class TimelineChartComponent extends BaseChartComponent {
   getXScale(): any {
     this.xDomain = this.getXDomain();
 
-    const scale = scaleLinear().range([0, this.dims.width]).domain(this.xDomain);
+    let scale;
+    if (this.scaleType == ScaleType.Time) {
+      scale = scaleTime().range([0, this.dims.width]).domain(this.xDomain);
+    } else {
+      scale = scaleLinear().range([0, this.dims.width]).domain(this.xDomain);
+    }
 
     return this.roundDomains ? scale.nice() : scale;
   }
@@ -189,16 +196,25 @@ export class TimelineChartComponent extends BaseChartComponent {
     return scaleBand().rangeRound([0, this.dims.height]).paddingInner(spacing).domain(this.yDomain);
   }
 
-  getXDomain(): [number, number] {
+  getXDomain(): any[] {
     const values = [];
     for (const d of this.timelineData) {
       values.push(d.startTime);
       values.push(d.endTime);
     }
-    const min = this.xScaleMin ? Math.min(this.xScaleMin, ...values) : Math.min(0, ...values);
 
-    const max = this.xScaleMax ? Math.max(this.xScaleMax, ...values) : Math.max(0, ...values);
-    return [min, max];
+    this.scaleType = getScaleType(values);
+
+    const min = this.xScaleMin ? Math.min(this.xScaleMin, ...values) : Math.min(...values);
+
+    const max = this.xScaleMax ? Math.max(this.xScaleMax, ...values) : Math.max(...values);
+
+    let domain = [];
+    if (this.scaleType == ScaleType.Time) {
+      return [new Date(min), new Date(max)];
+    } else {
+      return [min, max];
+    }
   }
 
   getYDomain(): string[] {

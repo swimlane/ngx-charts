@@ -51,6 +51,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
       [tooltipTemplate]="tooltipTemplate"
       [tooltipContext]="bar.data"
       [noBarWhenZero]="noBarWhenZero"
+      [timelineChart]="true"
     ></svg:g>
     <svg:g *ngIf="showDataLabel">
       <svg:g

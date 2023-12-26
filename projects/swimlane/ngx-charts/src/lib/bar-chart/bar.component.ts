@@ -53,6 +53,7 @@ export class BarComponent implements OnChanges {
   @Input() animations: boolean = true;
   @Input() ariaLabel: string;
   @Input() noBarWhenZero: boolean = true;
+  @Input() timelineChart: boolean = false;
 
   @Output() select: EventEmitter<DataItem> = new EventEmitter();
   @Output() activate: EventEmitter<DataItem> = new EventEmitter();
@@ -78,7 +79,6 @@ export class BarComponent implements OnChanges {
   }
 
   update(): void {
-    //console.log("x ", this.x, " y ", this.y);
     this.gradientId = 'grad' + id().toString();
     this.gradientFill = `url(#${this.gradientId})`;
 
@@ -165,6 +165,7 @@ export class BarComponent implements OnChanges {
       } else if (this.orientation === BarOrientation.Horizontal) {
         radius = Math.min(this.width, radius);
         path = roundedRect(this.x, this.y, this.width, this.height, radius, this.edges);
+        console.log("this.edges", this.edges);
       }
     } else {
       path = roundedRect(this.x, this.y, this.width, this.height, radius, this.edges);
@@ -194,7 +195,9 @@ export class BarComponent implements OnChanges {
   get edges(): boolean[] {
     let edges = [false, false, false, false];
     if (this.roundEdges) {
-      if (this.orientation === BarOrientation.Vertical) {
+      if (this.timelineChart) {
+        edges = [true, true, true, true];
+      } else if (this.orientation === BarOrientation.Vertical) {
         if (this.data.value > 0) {
           edges = [true, true, false, false];
         } else {

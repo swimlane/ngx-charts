@@ -153,7 +153,6 @@ export class SeriesHorizontal implements OnChanges {
           bar.x = this.xScale(xScaleMin);
         }
         bar.y = this.yScale(label);
-        console.log(bar.x, bar.y)
       } else if (this.type === BarChartType.Stacked) {
         const offset0 = d0[d0Type];
         const offset1 = offset0 + value;
