@@ -531,6 +531,44 @@ const chartGroups = [
     name: 'Other Charts',
     charts: [
       {
+        name: 'Timeline Chart',
+        selector: 'timeline-chart',
+        inputFormat: 'timelineChart',
+        options: [
+          'animations',
+          'colorScheme',
+          'schemeType',
+          'showXAxis',
+          'showYAxis',
+          'gradient',
+          'barPadding',
+          'noBarWhenZero',
+          'showLegend',
+          'legendTitle',
+          'legendPosition',
+          'showXAxisLabel',
+          'xAxisLabel',
+          'showYAxisLabel',
+          'yAxisLabel',
+          'showGridLines',
+          'roundDomains',
+          'tooltipDisabled',
+          'roundEdges',
+          'xScaleMax',
+          'showDataLabel',
+          'trimXAxisTicks',
+          'trimYAxisTicks',
+          'rotateXAxisTicks',
+          'maxXAxisTickLength',
+          'maxYAxisTickLength',
+          'wrapTicks'
+        ],
+        defaults: {
+          yAxisLabel: 'Country',
+          xAxisLabel: 'GDP Per Capita'
+        }
+      },
+      {
         name: 'Bubble Chart',
         selector: 'bubble-chart',
         inputFormat: 'bubble',

@@ -213,6 +213,40 @@ export class AppComponent implements OnInit {
   heatmapMin: number = 0;
   heatmapMax: number = 50000;
 
+  // timeline chart
+  timelineData: any[] = [
+    {
+      "name": "Germany",
+      "startTime": 1,
+      "endTime": 2
+    },
+    {
+      "name": "United States",
+      "startTime": 2,
+      "endTime": 3
+    },
+    {
+      "name": "France",
+      "startTime": 2,
+      "endTime": 4
+    },
+    {
+      "name": "United Kingdom",
+      "startTime": 1,
+      "endTime": 3
+    },
+    {
+      "name": "Spain",
+      "startTime": 1,
+      "endTime": 5
+    },
+    {
+      "name": "Italy",
+      "startTime": 4,
+      "endTime": 5
+    }
+  ];
+
   // Combo Chart
   barChart: any[] = barChart;
   lineChartSeries: any[] = lineChartSeries;
@@ -310,6 +344,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("timelineData", this.timelineData);
     const state = this.location.path(true);
     this.selectChart(state.length ? state : 'bar-vertical');
 

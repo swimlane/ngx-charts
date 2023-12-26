@@ -78,6 +78,7 @@ export class BarComponent implements OnChanges {
   }
 
   update(): void {
+    //console.log("x ", this.x, " y ", this.y);
     this.gradientId = 'grad' + id().toString();
     this.gradientFill = `url(#${this.gradientId})`;
 
