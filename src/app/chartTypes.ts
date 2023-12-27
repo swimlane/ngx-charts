@@ -555,7 +555,6 @@ const chartGroups = [
           'tooltipDisabled',
           'roundEdges',
           'xScaleMax',
-          'showDataLabel',
           'trimXAxisTicks',
           'trimYAxisTicks',
           'rotateXAxisTicks',

@@ -74,7 +74,6 @@ import { getScaleType } from '../common/domain.helper';
           [activeEntries]="activeEntries"
           [roundEdges]="roundEdges"
           [animations]="animations"
-          [showDataLabel]="showDataLabel"
           [dataLabelFormatting]="dataLabelFormatting"
           [noBarWhenZero]="noBarWhenZero"
           (select)="onClick($event)"
@@ -116,7 +115,6 @@ export class TimelineChartComponent extends BaseChartComponent {
   @Input() roundEdges: boolean = true;
   @Input() xScaleMax: number;
   @Input() xScaleMin: number;
-  @Input() showDataLabel: boolean = false;
   @Input() dataLabelFormatting: any;
   @Input() noBarWhenZero: boolean = true;
   @Input() wrapTicks = false;
@@ -143,10 +141,6 @@ export class TimelineChartComponent extends BaseChartComponent {
 
   update(): void {
     super.update();
-
-    if (!this.showDataLabel) {
-      this.dataLabelMaxWidth = { negative: 0, positive: 0 };
-    }
 
     this.margin = [10, 20 + this.dataLabelMaxWidth.positive, 10, 20 + this.dataLabelMaxWidth.negative];
 

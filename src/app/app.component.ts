@@ -214,7 +214,7 @@ export class AppComponent implements OnInit {
   heatmapMax: number = 50000;
 
   // timeline chart
-  timelineData: any[] = [
+  /*timelineData: any[] = [
     {
       "name": "Germany",
       "startTime": 1,
@@ -245,10 +245,10 @@ export class AppComponent implements OnInit {
       "startTime": 3,
       "endTime": 5
     }
-  ];
+  ];*/
 
 
-  /*timelineData: any[] = [
+  timelineData: any[] = [
     {
       "name": "Germany",
       "startTime": new Date("December 2 2016"),
@@ -276,10 +276,10 @@ export class AppComponent implements OnInit {
     },
     {
       "name": "Italy",
-      "startTime": new Date("December 14 2016"),
-      "endTime": new Date("January 10 2017")
+      "startTime": new Date("December 4 2016"),
+      "endTime": new Date("December 5 2016")
     }
-  ];*/
+  ];
 
   // Combo Chart
   barChart: any[] = barChart;

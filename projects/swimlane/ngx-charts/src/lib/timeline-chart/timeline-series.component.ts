@@ -53,20 +53,6 @@ import { ScaleType } from '../common/types/scale-type.enum';
       [noBarWhenZero]="noBarWhenZero"
       [timelineChart]="true"
     ></svg:g>
-    <svg:g *ngIf="showDataLabel">
-      <svg:g
-        ngx-charts-bar-label
-        *ngFor="let b of barsForDataLabels; let i = index; trackBy: trackDataLabelBy"
-        [barX]="b.x"
-        [barY]="b.y"
-        [barWidth]="b.width"
-        [barHeight]="b.height"
-        [value]="b.total"
-        [valueFormatting]="dataLabelFormatting"
-        [orientation]="barOrientation.Horizontal"
-        (dimensionsChanged)="dataLabelWidthChanged.emit({ size: $event, index: i })"
-      />
-    </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
@@ -94,7 +80,6 @@ export class TimelineSeriesComponent implements OnChanges {
   @Input() tooltipTemplate: TemplateRef<any>;
   @Input() roundEdges: boolean;
   @Input() animations: boolean = true;
-  @Input() showDataLabel: boolean = false;
   @Input() dataLabelFormatting: any;
   @Input() noBarWhenZero: boolean = true;
 
@@ -161,9 +146,8 @@ export class TimelineSeriesComponent implements OnChanges {
         ? undefined
         : `
         <span class="tooltip-label">${escapeLabel(tooltipLabel)}</span>
-        <span class="tooltip-val">${
-          this.dataLabelFormatting ? this.dataLabelFormatting(value) : value.toLocaleString()
-        }</span>
+        <span class="tooltip-val">${this.dataLabelFormatting ? this.dataLabelFormatting(d.startTime) : formatLabel(d.startTime)} - 
+          ${this.dataLabelFormatting ? this.dataLabelFormatting(d.endTime) : formatLabel(d.endTime)}</span>
       `;
 
       return bar;
