@@ -6,7 +6,8 @@ import {
   BoxChartMultiSeries,
   Series,
   TreeMapData,
-  SankeyData
+  SankeyData,
+  BubbleChart2DMultiSeries
 } from '@swimlane/ngx-charts/models/chart-data.model';
 
 export const single: SingleSeries = [
@@ -305,6 +306,77 @@ export const bubble: BubbleChartMultiSeries = [
         name: '1990',
         x: '1990',
         y: 75.7,
+        r: 57.1
+      }
+    ]
+  }
+];
+
+export const bubble2d: BubbleChart2DMultiSeries = [
+  {
+    name: 'Germany',
+    series: [
+      {
+        x: '2010',
+        r: 80.4
+      },
+      {
+        x: '2000',
+        r: 78
+      },
+      {
+        x: '1990',
+        r: 79
+      }
+    ]
+  },
+  {
+    name: 'United States',
+    series: [
+      {
+        x: '2010',
+        r: 310
+      },
+      {
+        x: '2000',
+        r: 283
+      },
+      {
+        x: '1990',
+        r: 253
+      }
+    ]
+  },
+  {
+    name: 'France',
+    series: [
+      {
+        x: '2010',
+        r: 63
+      },
+      {
+        x: '2000',
+        r: 59.4
+      },
+      {
+        x: '1990',
+        r: 56.9
+      }
+    ]
+  },
+  {
+    name: 'United Kingdom',
+    series: [
+      {
+        x: '2010',
+        r: 62.7
+      },
+      {
+        x: '2000',
+        r: 58.9
+      },
+      {
+        x: '1990',
         r: 57.1
       }
     ]
