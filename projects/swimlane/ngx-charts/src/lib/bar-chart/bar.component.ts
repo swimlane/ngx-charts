@@ -147,6 +147,7 @@ export class BarComponent implements OnChanges {
       if (this.orientation === BarOrientation.Vertical) {
         path = roundedRect(this.x, this.y + this.height, this.width, 1, 0, this.edges);
       } else if (this.orientation === BarOrientation.Horizontal) {
+        console.log(this.x, this.y, 1, this.height, this.edges)
         path = roundedRect(this.x, this.y, 1, this.height, 0, this.edges);
       }
     }

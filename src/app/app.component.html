@@ -423,6 +423,7 @@
         [view]="view"
         [scheme]="colorScheme"
         [schemeType]="schemeType"
+        [customColors]="customColors"
         [results]="timelineData"
         [timelineData]="timelineData"
         [animations]="animations"
@@ -454,6 +455,42 @@
         (deactivate)="deactivate($event)"
       >
       </ngx-charts-timeline-chart>
+      <ngx-charts-timeline-stacked
+        *ngIf="chartType === 'timeline-stacked'"
+        class="chart-container"
+        [view]="view"
+        [scheme]="colorScheme"
+        [schemeType]="schemeType"
+        [results]="timelineStackedData"
+        [timelineData]="timelineStackedData"
+        [animations]="animations"
+        [gradient]="gradient"
+        [tooltipDisabled]="tooltipDisabled"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [legendTitle]="legendTitle"
+        [legendPosition]="legendPosition"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [showGridLines]="showGridLines"
+        [barPadding]="barPadding"
+        [roundDomains]="roundDomains"
+        [xScaleMax]="xScaleMax"
+        [noBarWhenZero]="noBarWhenZero"
+        [trimXAxisTicks]="trimXAxisTicks"
+        [trimYAxisTicks]="trimYAxisTicks"
+        [rotateXAxisTicks]="rotateXAxisTicks"
+        [maxXAxisTickLength]="maxXAxisTickLength"
+        [maxYAxisTickLength]="maxYAxisTickLength"
+        [wrapTicks]="wrapTicks"
+        (select)="select($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
+      >
+      </ngx-charts-timeline-stacked>
       <ngx-charts-bubble-chart
         *ngIf="chartType === 'bubble-chart'"
         [view]="view"
@@ -1197,6 +1234,7 @@
         <pre *ngIf="chart.inputFormat === 'comboChart'">{{ lineChartSeries | json }}</pre>
         <pre *ngIf="chart.inputFormat === 'timelineFilter'">{{ timelineFilterBarData | json }}</pre>
         <pre *ngIf="chart.inputFormat === 'timelineChart'">{{ timelineData | json }}</pre>
+        <pre *ngIf="chart.inputFormat === 'timelineStacked'">{{ timelineStackedData | json }}</pre>
         <div>
           <label>
             <input type="checkbox" [(ngModel)]="realTimeData" />

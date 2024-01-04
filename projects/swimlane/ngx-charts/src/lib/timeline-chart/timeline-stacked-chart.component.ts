@@ -6,12 +6,17 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy,
   ContentChild,
-  TemplateRef
+  TemplateRef,
+  TrackByFunction
 } from '@angular/core';
+import { isPlatformServer } from '@angular/common';
+import { trigger, style, animate, transition } from '@angular/animations';
+
 import { scaleBand, scaleLinear, scaleTime } from 'd3-scale';
 
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
+import { Series } from '../models/chart-data.model';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { TimelineChartType } from './types/timeline-chart-type.enum';
 import { LegendOptions, LegendPosition } from '../common/types/legend.model';
@@ -20,7 +25,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
 import { getScaleType } from '../common/domain.helper';
 
 @Component({
-  selector: 'ngx-charts-timeline-chart',
+  selector: 'ngx-charts-timeline-stacked',
   template: `
     <ngx-charts-chart
       [view]="[width, height]"
@@ -63,33 +68,50 @@ import { getScaleType } from '../common/domain.helper';
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
         <svg:g
-          ngx-charts-timeline-series
-          [type]="TimelineChartType.Standard"
-          [xScale]="xScale"
-          [yScale]="yScale"
-          [colors]="colors"
-          [series]="timelineData"
-          [dims]="dims"
-          [gradient]="gradient"
-          [tooltipDisabled]="tooltipDisabled"
-          [tooltipTemplate]="tooltipTemplate"
-          [activeEntries]="activeEntries"
-          [roundEdges]="roundEdges"
-          [animations]="animations"
-          [dataLabelFormatting]="dataLabelFormatting"
-          [noBarWhenZero]="noBarWhenZero"
-          (select)="onClick($event)"
-          (dataLabelWidthChanged)="onDataLabelMaxWidthChanged($event)"
-        />
+          *ngFor="let group of timelineData; let index = index; trackBy: trackBy"
+          [@animationState]="'active'"
+          [attr.transform]="groupTransform(group)"
+        >
+          <svg:g
+            ngx-charts-timeline-series
+            [type]="TimelineChartType.Stacked"
+            [xScale]="xScale"
+            [yScale]="yScale"
+            [colors]="colors"
+            [series]="group.series"
+            [activeEntries]="activeEntries"
+            [dims]="dims"
+            [gradient]="gradient"
+            [tooltipDisabled]="tooltipDisabled"
+            [tooltipTemplate]="tooltipTemplate"
+            [seriesName]="group.name"
+            [animations]="animations"
+            [dataLabelFormatting]="dataLabelFormatting"
+            [noBarWhenZero]="noBarWhenZero"
+            (select)="onClick($event, group)"
+            (dataLabelWidthChanged)="onDataLabelMaxWidthChanged($event, index)"
+          />
+        </svg:g>
       </svg:g>
     </ngx-charts-chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['../common/base-chart.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  animations: [
+    trigger('animationState', [
+      transition(':leave', [
+        style({
+          opacity: 1,
+          transform: '*'
+        }),
+        animate(500, style({ opacity: 0, transform: 'scale(0)' }))
+      ])
+    ])
+  ]
 })
-export class TimelineChartComponent extends BaseChartComponent {
-  @Input() legend = false;
+export class TimelineStackedComponent extends BaseChartComponent {
+  @Input() legend: boolean = false;
   @Input() legendTitle: string = 'Legend';
   @Input() legendPosition: LegendPosition = LegendPosition.Right;
   @Input() xAxis;
@@ -114,9 +136,7 @@ export class TimelineChartComponent extends BaseChartComponent {
   @Input() yAxisTicks: any[];
   @Input() barPadding: number = 8;
   @Input() roundDomains: boolean = false;
-  @Input() roundEdges: boolean = true;
   @Input() xScaleMax: number;
-  @Input() xScaleMin: number;
   @Input() dataLabelFormatting: any;
   @Input() noBarWhenZero: boolean = true;
   @Input() wrapTicks = false;
@@ -128,13 +148,14 @@ export class TimelineChartComponent extends BaseChartComponent {
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
-  yScale: any;
+  groupDomain: string[];
+  innerDomain: string[];
+  valueDomain: any[];
   xScale: any;
-  xDomain: any[];
-  yDomain: string[];
+  yScale: any;
   transform: string;
   colors: ColorHelper;
-  margin: number[] = [10, 20, 10, 20];
+  margin = [10, 20, 10, 20];
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
   legendOptions: LegendOptions;
@@ -142,6 +163,13 @@ export class TimelineChartComponent extends BaseChartComponent {
   scaleType: ScaleType;
 
   TimelineChartType = TimelineChartType;
+  isSSR = false;
+
+  ngOnInit() {
+    if (isPlatformServer(this.platformId)) {
+      this.isSSR = true;
+    }
+  }
 
   update(): void {
     super.update();
@@ -165,6 +193,13 @@ export class TimelineChartComponent extends BaseChartComponent {
 
     this.formatDates();
 
+    this.groupDomain = this.getGroupDomain();
+    this.innerDomain = this.getInnerDomain();
+    this.valueDomain = this.getValueDomain();
+    console.log("this.groupdomain", this.groupDomain);
+    console.log("inner", this.innerDomain);
+    console.log("value", this.valueDomain);
+
     this.xScale = this.getXScale();
     this.yScale = this.getYScale();
 
@@ -174,36 +209,44 @@ export class TimelineChartComponent extends BaseChartComponent {
     this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
   }
 
-  getXScale(): any {
-    this.xDomain = this.getXDomain();
+  getGroupDomain(): string[] {
+    const domain = [];
 
-    let scale;
-    if (this.scaleType == ScaleType.Time) {
-      scale = scaleTime().range([0, this.dims.width]).domain(this.xDomain);
-    } else {
-      scale = scaleLinear().range([0, this.dims.width]).domain(this.xDomain);
+    for (const group of this.timelineData) {
+      if (!domain.includes(group.name)) {
+        domain.push(group.name);
+      }
     }
 
-    return this.roundDomains ? scale.nice() : scale;
+    return domain;
   }
 
-  getYScale(): any {
-    this.yDomain = this.getYDomain();
-    const spacing = this.yDomain.length / (this.dims.height / this.barPadding + 1);
+  getInnerDomain(): string[] {
+    const domain = [];
 
-    return scaleBand().rangeRound([0, this.dims.height]).paddingInner(spacing).domain(this.yDomain);
+    for (const group of this.timelineData) {
+      for (const d of group.series) {
+        if (!domain.includes(d.name)) {
+          domain.push(d.name);
+        }
+      }
+    }
+
+    return domain;
   }
 
-  getXDomain(): any[] {
+  getValueDomain(): any[] {
     const values = [];
-    for (const d of this.timelineData) {
-      values.push(d.startTime);
-      values.push(d.endTime);
+    for (const group of this.timelineData) {
+      for (const d of group.series) {
+        values.push(d.startTime);
+        values.push(d.endTime);
+      }
     }
 
     this.scaleType = getScaleType(values);
 
-    const min = this.xScaleMin ? Math.min(this.xScaleMin, ...values) : Math.min(...values);
+    const min = Math.min(...values);
     const max = this.xScaleMax ? Math.max(this.xScaleMax, ...values) : Math.max(...values);
 
     if (this.scaleType == ScaleType.Time) {
@@ -213,20 +256,45 @@ export class TimelineChartComponent extends BaseChartComponent {
     }
   }
 
-  getYDomain(): string[] {
-    return this.timelineData.map(d => d.name);
+  getYScale(): any {
+    const spacing = this.groupDomain.length / (this.dims.height / this.barPadding + 1);
+
+    return scaleBand().rangeRound([0, this.dims.height]).paddingInner(spacing).domain(this.groupDomain);
   }
 
-  onClick(data): void {
+  getXScale(): any {
+    let scale;
+    if (this.scaleType == ScaleType.Time) {
+      scale = scaleTime().range([0, this.dims.width]).domain(this.valueDomain);
+    } else {
+      scale = scaleLinear().range([0, this.dims.width]).domain(this.valueDomain);
+    }
+
+    return this.roundDomains ? scale.nice() : scale;
+  }
+
+  groupTransform(group: Series): string {
+    return `translate(0, ${this.yScale(group.name)})`;
+  }
+
+  onClick(data, group?: Series): void {
+    if (group) {
+      data.series = group.name;
+    }
+
     this.select.emit(data);
   }
+
+  trackBy: TrackByFunction<Series> = (index: number, item: Series) => {
+    return item.name;
+  };
 
   setColors(): void {
     let domain;
     if (this.schemeType === ScaleType.Ordinal) {
-      domain = this.yDomain;
+      domain = this.innerDomain;
     } else {
-      domain = this.xDomain;
+      domain = this.valueDomain;
     }
 
     this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
@@ -240,12 +308,12 @@ export class TimelineChartComponent extends BaseChartComponent {
       title: undefined,
       position: this.legendPosition
     };
-    if (opts.scaleType === 'ordinal') {
-      opts.domain = this.yDomain;
+    if (opts.scaleType === ScaleType.Ordinal) {
+      opts.domain = this.innerDomain;
       opts.colors = this.colors;
       opts.title = this.legendTitle;
     } else {
-      opts.domain = this.xDomain;
+      opts.domain = this.valueDomain;
       opts.colors = this.colors.scale;
     }
 
@@ -262,52 +330,51 @@ export class TimelineChartComponent extends BaseChartComponent {
     this.update();
   }
 
-  onDataLabelMaxWidthChanged(event) {
+  onDataLabelMaxWidthChanged(event, groupIndex: number) {
     if (event.size.negative) {
       this.dataLabelMaxWidth.negative = Math.max(this.dataLabelMaxWidth.negative, event.size.width);
     } else {
       this.dataLabelMaxWidth.positive = Math.max(this.dataLabelMaxWidth.positive, event.size.width);
     }
-    if (event.index === this.timelineData.length - 1) {
+    if (groupIndex === this.timelineData.length - 1) {
       setTimeout(() => this.update());
     }
   }
 
-  /*onActivate(item, fromLegend: boolean = false) {
-    item = this.results.find(d => {
-      if (fromLegend) {
-        return d.label === item.name;
-      } else {
-        return d.name === item.name;
-      }
-    });
-
-    const idx = this.activeEntries.findIndex(d => {
-      return d.name === item.name && d.value === item.value && d.series === item.series;
-    });
-    if (idx > -1) {
-      return;
+  /*onActivate(event, group: Series, fromLegend: boolean = false) {
+    const item = Object.assign({}, event);
+    if (group) {
+      item.series = group.name;
     }
 
-    this.activeEntries = [item, ...this.activeEntries];
+    const items = this.timelineData
+      .map(g => g.series)
+      .flat()
+      .filter(i => {
+        if (fromLegend) {
+          return i.label === item.name;
+        } else {
+          return i.name === item.name && i.series === item.series;
+        }
+      });
+
+    this.activeEntries = [...items];
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(item, fromLegend: boolean = false) {
-    item = this.results.find(d => {
+  onDeactivate(event, group: Series, fromLegend: boolean = false) {
+    const item = Object.assign({}, event);
+    if (group) {
+      item.series = group.name;
+    }
+
+    this.activeEntries = this.activeEntries.filter(i => {
       if (fromLegend) {
-        return d.label === item.name;
+        return i.label !== item.name;
       } else {
-        return d.name === item.name;
+        return !(i.name === item.name && i.series === item.series);
       }
     });
-
-    const idx = this.activeEntries.findIndex(d => {
-      return d.name === item.name && d.value === item.value && d.series === item.series;
-    });
-
-    this.activeEntries.splice(idx, 1);
-    this.activeEntries = [...this.activeEntries];
 
     this.deactivate.emit({ value: item, entries: this.activeEntries });
   }*/

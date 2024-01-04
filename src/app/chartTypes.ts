@@ -568,6 +568,43 @@ const chartGroups = [
         }
       },
       {
+        name: 'Timeline Stacked Chart',
+        selector: 'timeline-stacked',
+        inputFormat: 'timelineStacked',
+        options: [
+          'animations',
+          'colorScheme',
+          'schemeType',
+          'showXAxis',
+          'showYAxis',
+          'gradient',
+          'barPadding',
+          'noBarWhenZero',
+          'showLegend',
+          'legendTitle',
+          'legendPosition',
+          'showXAxisLabel',
+          'xAxisLabel',
+          'showYAxisLabel',
+          'yAxisLabel',
+          'showGridLines',
+          'roundDomains',
+          'tooltipDisabled',
+          'xScaleMax',
+          'showDataLabel',
+          'trimXAxisTicks',
+          'trimYAxisTicks',
+          'rotateXAxisTicks',
+          'maxXAxisTickLength',
+          'maxYAxisTickLength',
+          'wrapTicks'
+        ],
+        defaults: {
+          yAxisLabel: 'Country',
+          xAxisLabel: 'GDP Per Capita'
+        }
+      },
+      {
         name: 'Bubble Chart',
         selector: 'bubble-chart',
         inputFormat: 'bubble',

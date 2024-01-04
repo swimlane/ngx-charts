@@ -216,70 +216,193 @@ export class AppComponent implements OnInit {
   // timeline chart
   /*timelineData: any[] = [
     {
-      "name": "Germany",
-      "startTime": 1,
-      "endTime": 3
+      'name': 'Germany',
+      'startTime': 1,
+      'endTime': 3
     },
     {
-      "name": "United States",
-      "startTime": 2,
-      "endTime": 3
+      'name': 'United States',
+      'startTime': 2,
+      'endTime': 3
     },
     {
-      "name": "France",
-      "startTime": 2,
-      "endTime": 4
+      'name': 'France',
+      'startTime': 2,
+      'endTime': 4
     },
     {
-      "name": "United Kingdom",
-      "startTime": 1,
-      "endTime": 3
+      'name': 'United Kingdom',
+      'startTime': 1,
+      'endTime': 3
     },
     {
-      "name": "Spain",
-      "startTime": 1,
-      "endTime": 5
+      'name': 'Spain',
+      'startTime': 1,
+      'endTime': 5
     },
     {
-      "name": "Italy",
-      "startTime": 3,
-      "endTime": 5
+      'name': 'Italy',
+      'startTime': 3,
+      'endTime': 5
     }
   ];*/
 
 
   timelineData: any[] = [
     {
-      "name": "Germany",
-      "startTime": new Date("December 2 2016"),
-      "endTime": new Date("December 3 2016")
+      'name': 'Germany',
+      'startTime': new Date('December 2 2016'),
+      'endTime': new Date('December 3 2016')
     },
     {
-      "name": "United States",
-      "startTime": new Date("December 3 2016"),
-      "endTime": new Date("December 4 2016")
+      'name': 'United States',
+      'startTime': new Date('December 3 2016'),
+      'endTime': new Date('December 4 2016')
     },
     {
-      "name": "France",
-      "startTime": new Date("December 3 2016"),
-      "endTime": new Date("December 5 2016")
+      'name': 'France',
+      'startTime': new Date('December 3 2016'),
+      'endTime': new Date('December 5 2016')
     },
     {
-      "name": "United Kingdom",
-      "startTime": new Date("December 2 2016"),
-      "endTime": new Date("December 4 2016")
+      'name': 'United Kingdom',
+      'startTime': new Date('December 2 2016'),
+      'endTime': new Date('December 4 2016')
     },
     {
-      "name": "Spain",
-      "startTime": new Date("December 2 2016"),
-      "endTime": new Date("December 6 2016")
+      'name': 'Spain',
+      'startTime': new Date('December 2 2016'),
+      'endTime': new Date('December 6 2016')
     },
     {
-      "name": "Italy",
-      "startTime": new Date("December 4 2016"),
-      "endTime": new Date("December 5 2016")
+      'name': 'Italy',
+      'startTime': new Date('December 4 2016'),
+      'endTime': new Date('December 5 2016')
     }
   ];
+
+  timelineStackedData: any[] = [
+    {
+      'name': 'Germany',
+      'series': [
+        {
+          'name': 1,
+          'startTime': new Date('December 2 2016'),
+          'endTime': new Date('December 3 2016')
+        },
+        {
+          'name': 2,
+          'startTime': new Date('December 3 2016'),
+          'endTime': new Date('December 6 2016')
+        },
+        {
+          'name': 3,
+          'startTime': new Date('December 6 2016'),
+          'endTime': new Date('December 7 2016')
+        },
+      ]
+    },
+    {
+      'name': 'United States',
+      'series': [
+        {
+          'name': 1,
+          'startTime': new Date('December 1 2016'),
+          'endTime': new Date('December 2 2016')
+        },
+        {
+          'name': 2,
+          'startTime': new Date('December 2 2016'),
+          'endTime': new Date('December 3 2016')
+        },
+        {
+          'name': 3,
+          'startTime': new Date('December 3 2016'),
+          'endTime': new Date('December 4 2016')
+        },
+      ]
+    },
+    {
+      'name': 'France',
+      'series': [
+        {
+          'name': 1,
+          'startTime': new Date('December 2 2016'),
+          'endTime': new Date('December 3 2016')
+        },
+        {
+          'name': 2,
+          'startTime': new Date('December 3 2016'),
+          'endTime': new Date('December 5 2016')
+        },
+        {
+          'name': 3,
+          'startTime': new Date('December 5 2016'),
+          'endTime': new Date('December 6 2016')
+        },
+      ]
+    },
+    {
+      'name': 'United Kingdom',
+      'series': [
+        {
+          'name': 1,
+          'startTime': new Date('December 2 2016'),
+          'endTime': new Date('December 2 2016')
+        },
+        {
+          'name': 2,
+          'startTime': new Date('December 2 2016'),
+          'endTime': new Date('December 3 2016')
+        },
+        {
+          'name': 3,
+          'startTime': new Date('December 3 2016'),
+          'endTime': new Date('December 5 2016')
+        },
+      ]
+    },
+    {
+      'name': 'Spain',
+      'series': [
+        {
+          'name': 1,
+          'startTime': new Date('December 5 2016'),
+          'endTime': new Date('December 6 2016')
+        },
+        {
+          'name': 2,
+          'startTime': new Date('December 6 2016'),
+          'endTime': new Date('December 8 2016')
+        },
+        {
+          'name': 3,
+          'startTime': new Date('December 8 2016'),
+          'endTime': new Date('December 9 2016')
+        },
+      ]
+    },
+    {
+      'name': 'Italy',
+      'series': [
+        {
+          'name': 1,
+          'startTime': new Date('December 4 2016'),
+          'endTime': new Date('December 6 2016')
+        },
+        {
+          'name': 2,
+          'startTime': new Date('December 6 2016'),
+          'endTime': new Date('December 7 2016')
+        },
+        {
+          'name': 3,
+          'startTime': new Date('December 7 2016'),
+          'endTime': new Date('December 8 2016')
+        },
+      ]
+    }
+  ]
 
   // Combo Chart
   barChart: any[] = barChart;
@@ -378,7 +501,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("timelineData", this.timelineData);
     const state = this.location.path(true);
     this.selectChart(state.length ? state : 'bar-vertical');
 

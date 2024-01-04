@@ -14,7 +14,7 @@ import { DataItem, StringOrNumberOrDate } from '../models/chart-data.model';
 import { ColorHelper } from '../common/color.helper';
 import { PlacementTypes } from '../common/tooltip/position';
 import { StyleTypes } from '../common/tooltip/style.type';
-import { BarChartType } from '../bar-chart/types/bar-chart-type.enum';
+import { TimelineChartType } from './types/timeline-chart-type.enum';
 import { Bar } from '../bar-chart/types/bar.model';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
 import { BarOrientation } from '../common/types/bar-orientation.enum';
@@ -68,7 +68,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
 })
 export class TimelineSeriesComponent implements OnChanges {
   @Input() dims: ViewDimensions;
-  @Input() type: BarChartType = BarChartType.Standard;
+  @Input() type: TimelineChartType = TimelineChartType.Standard;
   @Input() series: any[];
   @Input() xScale;
   @Input() yScale;
@@ -117,22 +117,25 @@ export class TimelineSeriesComponent implements OnChanges {
       };
 
       bar.height = this.yScale.bandwidth();
-
-      bar.width = Math.abs(this.xScale(d.endTime) - this.xScale(d.startTime));
+      bar.width = this.xScale(d.endTime) - this.xScale(d.startTime);
       bar.x = this.xScale(d.startTime);
-      bar.y = this.yScale(label);
+      if (this.type === TimelineChartType.Standard) {
+        bar.y = this.yScale(label);
+      } else {
+        bar.y = 0
+      }
 
       if (this.colors.scaleType === ScaleType.Ordinal) {
         bar.color = this.colors.getColor(label);
-      } else {
-        if (this.type === BarChartType.Standard) {
+      } /*else {
+        if (this.type === TimelineChartType.Standard) {
           bar.color = this.colors.getColor(value);
           bar.gradientStops = this.colors.getLinearGradientStops(value);
         } else {
           bar.color = this.colors.getColor(bar.offset1);
           bar.gradientStops = this.colors.getLinearGradientStops(bar.offset1, bar.offset0);
         }
-      }
+      }*/
 
       let tooltipLabel = formattedLabel;
       bar.ariaLabel = formattedLabel + ' ' + value.toLocaleString();
