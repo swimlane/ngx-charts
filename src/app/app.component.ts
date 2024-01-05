@@ -292,7 +292,7 @@ export class AppComponent implements OnInit {
         },
         {
           'name': 2,
-          'startTime': new Date('December 3 2016'),
+          'startTime': new Date('December 4 2016'),
           'endTime': new Date('December 6 2016')
         },
         {

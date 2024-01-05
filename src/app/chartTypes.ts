@@ -560,7 +560,8 @@ const chartGroups = [
           'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength',
-          'wrapTicks'
+          'wrapTicks',
+          'timeline'
         ],
         defaults: {
           yAxisLabel: 'Country',
@@ -590,6 +591,7 @@ const chartGroups = [
           'showGridLines',
           'roundDomains',
           'tooltipDisabled',
+          'roundEdges',
           'xScaleMax',
           'showDataLabel',
           'trimXAxisTicks',
@@ -597,7 +599,8 @@ const chartGroups = [
           'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength',
-          'wrapTicks'
+          'wrapTicks',
+          'timeline'
         ],
         defaults: {
           yAxisLabel: 'Country',

@@ -13,6 +13,7 @@ import { scaleBand, scaleLinear, scaleTime } from 'd3-scale';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
+import { id } from '../utils/id';
 import { TimelineChartType } from './types/timeline-chart-type.enum';
 import { LegendOptions, LegendPosition } from '../common/types/legend.model';
 import { ScaleType } from '../common/types/scale-type.enum';
@@ -30,6 +31,15 @@ import { getScaleType } from '../common/domain.helper';
       [animations]="animations"
       (legendLabelClick)="onClick($event)"
     >
+      <svg:defs>
+        <svg:clipPath [attr.id]="clipPathId">
+          <svg:rect
+            [attr.width]="dims.width + 10"
+            [attr.height]="dims.height + 10"
+            [attr.transform]="'translate(-5, -5)'"
+          />
+        </svg:clipPath>
+      </svg:defs>
       <svg:g [attr.transform]="transform" class="bar-chart chart">
         <svg:g
           ngx-charts-x-axis
@@ -62,24 +72,55 @@ import { getScaleType } from '../common/domain.helper';
           [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
+        <svg:g [attr.clip-path]="clipPath">
+          <svg:g
+            ngx-charts-timeline-series
+            [type]="TimelineChartType.Standard"
+            [xScale]="xScale"
+            [yScale]="yScale"
+            [colors]="colors"
+            [series]="timelineData"
+            [gradient]="gradient"
+            [tooltipDisabled]="tooltipDisabled"
+            [tooltipTemplate]="tooltipTemplate"
+            [activeEntries]="activeEntries"
+            [roundEdges]="roundEdges"
+            [animations]="animations"
+            [dataLabelFormatting]="dataLabelFormatting"
+            [noBarWhenZero]="noBarWhenZero"
+            (select)="onClick($event)"
+            (dataLabelWidthChanged)="onDataLabelMaxWidthChanged($event)"
+          />
+        </svg:g>
+      </svg:g>
+      <svg:g
+        ngx-charts-timeline
+        *ngIf="timelineFilter && scaleType != 'ordinal'"
+        [attr.transform]="timelineTransform"
+        [results]="timelineData"
+        [view]="[timelineWidth, height]"
+        [height]="timelineHeight"
+        [scheme]="scheme"
+        [customColors]="customColors"
+        [scaleType]="scaleType"
+        [legend]="legend"
+        [xScale]="timelineXScale"
+        [yScale]="timelineYScale"
+        (onDomainChange)="updateDomain($event)"
+      >
         <svg:g
           ngx-charts-timeline-series
           [type]="TimelineChartType.Standard"
-          [xScale]="xScale"
-          [yScale]="yScale"
+          [xScale]="timelineXScale"
+          [yScale]="timelineYScale"
           [colors]="colors"
           [series]="timelineData"
-          [dims]="dims"
           [gradient]="gradient"
-          [tooltipDisabled]="tooltipDisabled"
-          [tooltipTemplate]="tooltipTemplate"
-          [activeEntries]="activeEntries"
+          [tooltipDisabled]="true"
           [roundEdges]="roundEdges"
           [animations]="animations"
-          [dataLabelFormatting]="dataLabelFormatting"
           [noBarWhenZero]="noBarWhenZero"
           (select)="onClick($event)"
-          (dataLabelWidthChanged)="onDataLabelMaxWidthChanged($event)"
         />
       </svg:g>
     </ngx-charts-chart>
@@ -121,6 +162,7 @@ export class TimelineChartComponent extends BaseChartComponent {
   @Input() noBarWhenZero: boolean = true;
   @Input() wrapTicks = false;
   @Input() timelineData: any[];
+  @Input() timelineFilter: any[];
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -133,6 +175,8 @@ export class TimelineChartComponent extends BaseChartComponent {
   xDomain: any[];
   yDomain: string[];
   transform: string;
+  clipPath: string;
+  clipPathId: string;
   colors: ColorHelper;
   margin: number[] = [10, 20, 10, 20];
   xAxisHeight: number = 0;
@@ -140,6 +184,15 @@ export class TimelineChartComponent extends BaseChartComponent {
   legendOptions: LegendOptions;
   dataLabelMaxWidth: any = { negative: 0, positive: 0 };
   scaleType: ScaleType;
+  timelineWidth: any;
+  timelineHeight: number = 50;
+  timelineXScale: any;
+  timelineYScale: any;
+  timelineXDomain: any;
+  timelineTransform: any;
+  timelinePadding: number = 10;
+  timelineBarPadding: number = 1;
+  filteredDomain: any;
 
   TimelineChartType = TimelineChartType;
 
@@ -163,35 +216,47 @@ export class TimelineChartComponent extends BaseChartComponent {
       legendPosition: this.legendPosition
     });
 
+    if (this.timelineFilter) {
+      this.dims.height -= this.timelineHeight + this.margin[2] + this.timelinePadding;
+    }
+
     this.formatDates();
 
-    this.xScale = this.getXScale();
-    this.yScale = this.getYScale();
+    this.xDomain = this.getXDomain();
+    if (this.filteredDomain) {
+      this.xDomain = this.filteredDomain;
+    }
+    this.yDomain = this.getYDomain();
+
+    this.xScale = this.getXScale(this.xDomain, this.dims.width);
+    this.yScale = this.getYScale(this.yDomain, this.dims.height, this.barPadding);
+
+    this.updateTimeline();
 
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
     this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
+
+    this.clipPathId = 'clip' + id().toString();
+    this.clipPath = `url(#${this.clipPathId})`;
   }
 
-  getXScale(): any {
-    this.xDomain = this.getXDomain();
-
+  getXScale(domain: any[], width: number): any {
     let scale;
     if (this.scaleType == ScaleType.Time) {
-      scale = scaleTime().range([0, this.dims.width]).domain(this.xDomain);
+      scale = scaleTime().range([0, width]).domain(domain);
     } else {
-      scale = scaleLinear().range([0, this.dims.width]).domain(this.xDomain);
+      scale = scaleLinear().range([0, width]).domain(domain);
     }
 
     return this.roundDomains ? scale.nice() : scale;
   }
 
-  getYScale(): any {
-    this.yDomain = this.getYDomain();
-    const spacing = this.yDomain.length / (this.dims.height / this.barPadding + 1);
+  getYScale(domain: any[], height: number, padding: number): any {
+    const spacing = domain.length / (height / padding + 1);
 
-    return scaleBand().rangeRound([0, this.dims.height]).paddingInner(spacing).domain(this.yDomain);
+    return scaleBand().rangeRound([0, height]).paddingInner(spacing).domain(domain);
   }
 
   getXDomain(): any[] {
@@ -271,6 +336,22 @@ export class TimelineChartComponent extends BaseChartComponent {
     if (event.index === this.timelineData.length - 1) {
       setTimeout(() => this.update());
     }
+  }
+
+  updateTimeline(): void {
+    if (this.timelineFilter) {
+      this.timelineWidth = this.dims.width;
+      this.timelineXDomain = this.getXDomain();
+      this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
+      this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight, this.timelineBarPadding);
+      this.timelineTransform = `translate(${this.dims.xOffset}, ${0})`;
+    }
+  }
+
+  updateDomain(domain): void {
+    this.filteredDomain = domain;
+    this.xDomain = this.filteredDomain;
+    this.xScale = this.getXScale(this.xDomain, this.dims.width);
   }
 
   /*onActivate(item, fromLegend: boolean = false) {

@@ -234,9 +234,6 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
     this.groupDomain = this.getGroupDomain();
     this.innerDomain = this.getInnerDomain();
     this.valueDomain = this.getValueDomain();
-    console.log("this.groupdomain", this.groupDomain);
-    console.log("inner", this.innerDomain);
-    console.log("value", this.valueDomain);
 
     this.xScale = this.getXScale();
     this.yScale = this.getYScale();

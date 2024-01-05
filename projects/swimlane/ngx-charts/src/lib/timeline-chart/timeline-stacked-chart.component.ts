@@ -9,7 +9,6 @@ import {
   TemplateRef,
   TrackByFunction
 } from '@angular/core';
-import { isPlatformServer } from '@angular/common';
 import { trigger, style, animate, transition } from '@angular/animations';
 
 import { scaleBand, scaleLinear, scaleTime } from 'd3-scale';
@@ -18,6 +17,7 @@ import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { Series } from '../models/chart-data.model';
 import { BaseChartComponent } from '../common/base-chart.component';
+import { id } from '../utils/id';
 import { TimelineChartType } from './types/timeline-chart-type.enum';
 import { LegendOptions, LegendPosition } from '../common/types/legend.model';
 import { ScaleType } from '../common/types/scale-type.enum';
@@ -35,6 +35,15 @@ import { getScaleType } from '../common/domain.helper';
       [animations]="animations"
       (legendLabelClick)="onClick($event)"
     >
+      <svg:defs>
+        <svg:clipPath [attr.id]="clipPathId">
+          <svg:rect
+            [attr.width]="dims.width + 10"
+            [attr.height]="dims.height + 10"
+            [attr.transform]="'translate(-5, -5)'"
+          />
+        </svg:clipPath>
+      </svg:defs>
       <svg:g [attr.transform]="transform" class="bar-chart chart">
         <svg:g
           ngx-charts-x-axis
@@ -67,20 +76,63 @@ import { getScaleType } from '../common/domain.helper';
           [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
+        <svg:g [attr.clip-path]="clipPath">
+          <svg:g
+            *ngFor="let group of timelineData; let index = index; trackBy: trackBy"
+            [@animationState]="'active'"
+            [attr.transform]="groupTransform(group)"
+          >
+            <svg:g
+              ngx-charts-timeline-series
+              [type]="TimelineChartType.Stacked"
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [colors]="colors"
+              [series]="group.series"
+              [activeEntries]="activeEntries"
+              [roundEdges]="roundEdges"
+              [gradient]="gradient"
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="tooltipTemplate"
+              [seriesName]="group.name"
+              [animations]="animations"
+              [dataLabelFormatting]="dataLabelFormatting"
+              [noBarWhenZero]="noBarWhenZero"
+              (select)="onClick($event, group)"
+              (dataLabelWidthChanged)="onDataLabelMaxWidthChanged($event, index)"
+            />
+          </svg:g>
+        </svg:g>
+      </svg:g>
+      <svg:g
+        ngx-charts-timeline
+        *ngIf="timelineFilter && scaleType != 'ordinal'"
+        [attr.transform]="timelineTransform"
+        [results]="timelineData"
+        [view]="[timelineWidth, height]"
+        [height]="timelineHeight"
+        [scheme]="scheme"
+        [customColors]="customColors"
+        [scaleType]="scaleType"
+        [legend]="legend"
+        [xScale]="timelineXScale"
+        [yScale]="timelineYScale"
+        (onDomainChange)="updateDomain($event)"
+      >
         <svg:g
           *ngFor="let group of timelineData; let index = index; trackBy: trackBy"
           [@animationState]="'active'"
-          [attr.transform]="groupTransform(group)"
+          [attr.transform]="timelineGroupTransform(group)"
         >
           <svg:g
             ngx-charts-timeline-series
             [type]="TimelineChartType.Stacked"
-            [xScale]="xScale"
-            [yScale]="yScale"
+            [xScale]="timelineXScale"
+            [yScale]="timelineYScale"
             [colors]="colors"
             [series]="group.series"
             [activeEntries]="activeEntries"
-            [dims]="dims"
+            [roundEdges]="roundEdges"
             [gradient]="gradient"
             [tooltipDisabled]="tooltipDisabled"
             [tooltipTemplate]="tooltipTemplate"
@@ -88,8 +140,6 @@ import { getScaleType } from '../common/domain.helper';
             [animations]="animations"
             [dataLabelFormatting]="dataLabelFormatting"
             [noBarWhenZero]="noBarWhenZero"
-            (select)="onClick($event, group)"
-            (dataLabelWidthChanged)="onDataLabelMaxWidthChanged($event, index)"
           />
         </svg:g>
       </svg:g>
@@ -136,11 +186,13 @@ export class TimelineStackedComponent extends BaseChartComponent {
   @Input() yAxisTicks: any[];
   @Input() barPadding: number = 8;
   @Input() roundDomains: boolean = false;
+  @Input() roundEdges: boolean = true;
   @Input() xScaleMax: number;
   @Input() dataLabelFormatting: any;
   @Input() noBarWhenZero: boolean = true;
   @Input() wrapTicks = false;
   @Input() timelineData: any[];
+  @Input() timelineFilter: any[];
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -154,6 +206,8 @@ export class TimelineStackedComponent extends BaseChartComponent {
   xScale: any;
   yScale: any;
   transform: string;
+  clipPath: string;
+  clipPathId: string;
   colors: ColorHelper;
   margin = [10, 20, 10, 20];
   xAxisHeight: number = 0;
@@ -161,15 +215,17 @@ export class TimelineStackedComponent extends BaseChartComponent {
   legendOptions: LegendOptions;
   dataLabelMaxWidth: any = { negative: 0, positive: 0 };
   scaleType: ScaleType;
+  timelineWidth: any;
+  timelineHeight: number = 50;
+  timelineXScale: any;
+  timelineYScale: any;
+  timelineXDomain: any;
+  timelineTransform: any;
+  timelinePadding: number = 10;
+  timelineBarPadding: number = 1;
+  filteredDomain: any;
 
   TimelineChartType = TimelineChartType;
-  isSSR = false;
-
-  ngOnInit() {
-    if (isPlatformServer(this.platformId)) {
-      this.isSSR = true;
-    }
-  }
 
   update(): void {
     super.update();
@@ -191,22 +247,31 @@ export class TimelineStackedComponent extends BaseChartComponent {
       legendPosition: this.legendPosition
     });
 
+    if (this.timelineFilter) {
+      this.dims.height -= this.timelineHeight + this.margin[2] + this.timelinePadding;
+    }
+
     this.formatDates();
 
     this.groupDomain = this.getGroupDomain();
     this.innerDomain = this.getInnerDomain();
     this.valueDomain = this.getValueDomain();
-    console.log("this.groupdomain", this.groupDomain);
-    console.log("inner", this.innerDomain);
-    console.log("value", this.valueDomain);
+    if (this.filteredDomain) {
+      this.valueDomain = this.filteredDomain;
+    }
 
-    this.xScale = this.getXScale();
-    this.yScale = this.getYScale();
+    this.xScale = this.getXScale(this.valueDomain, this.dims.width);
+    this.yScale = this.getYScale(this.groupDomain, this.dims.height, this.barPadding);
+
+    this.updateTimeline();
 
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
     this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
+
+    this.clipPathId = 'clip' + id().toString();
+    this.clipPath = `url(#${this.clipPathId})`;
   }
 
   getGroupDomain(): string[] {
@@ -256,18 +321,18 @@ export class TimelineStackedComponent extends BaseChartComponent {
     }
   }
 
-  getYScale(): any {
-    const spacing = this.groupDomain.length / (this.dims.height / this.barPadding + 1);
+  getYScale(domain: any[], height: number, padding: number): any {
+    const spacing = domain.length / (height / padding + 1);
 
-    return scaleBand().rangeRound([0, this.dims.height]).paddingInner(spacing).domain(this.groupDomain);
+    return scaleBand().rangeRound([0, height]).paddingInner(spacing).domain(domain);
   }
 
-  getXScale(): any {
+  getXScale(domain: any[], width: number): any {
     let scale;
     if (this.scaleType == ScaleType.Time) {
-      scale = scaleTime().range([0, this.dims.width]).domain(this.valueDomain);
+      scale = scaleTime().range([0, width]).domain(domain);
     } else {
-      scale = scaleLinear().range([0, this.dims.width]).domain(this.valueDomain);
+      scale = scaleLinear().range([0, width]).domain(domain);
     }
 
     return this.roundDomains ? scale.nice() : scale;
@@ -275,6 +340,10 @@ export class TimelineStackedComponent extends BaseChartComponent {
 
   groupTransform(group: Series): string {
     return `translate(0, ${this.yScale(group.name)})`;
+  }
+
+  timelineGroupTransform(group: Series): string {
+    return `translate(0, ${this.timelineYScale(group.name)})`;
   }
 
   onClick(data, group?: Series): void {
@@ -339,6 +408,22 @@ export class TimelineStackedComponent extends BaseChartComponent {
     if (groupIndex === this.timelineData.length - 1) {
       setTimeout(() => this.update());
     }
+  }
+
+  updateTimeline(): void {
+    if (this.timelineFilter) {
+      this.timelineWidth = this.dims.width;
+      this.timelineXDomain = this.getValueDomain();
+      this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
+      this.timelineYScale = this.getYScale(this.groupDomain, this.timelineHeight, this.timelineBarPadding);
+      this.timelineTransform = `translate(${this.dims.xOffset}, ${0})`;
+    }
+  }
+
+  updateDomain(domain): void {
+    this.filteredDomain = domain;
+    this.valueDomain = this.filteredDomain;
+    this.xScale = this.getXScale(this.valueDomain, this.dims.width);
   }
 
   /*onActivate(event, group: Series, fromLegend: boolean = false) {

@@ -67,7 +67,6 @@ import { ScaleType } from '../common/types/scale-type.enum';
   ]
 })
 export class TimelineSeriesComponent implements OnChanges {
-  @Input() dims: ViewDimensions;
   @Input() type: TimelineChartType = TimelineChartType.Standard;
   @Input() series: any[];
   @Input() xScale;

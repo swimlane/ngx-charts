@@ -162,7 +162,6 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
   getActiveCircle(): Circle {
     const indexActiveDataPoint = this.data.series.findIndex(d => {
       const label = d.name;
-      console.log("d.name", d.name)
       return label && this.visibleValue && label.toString() === this.visibleValue.toString() && d.value !== undefined;
     });
 
@@ -244,7 +243,6 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
     min: number;
     max: number;
   }): string {
-    console.log("escapeLabel(tooltipLabel)", tooltipLabel, escapeLabel(tooltipLabel));
     return `
       <span class="tooltip-label">${escapeLabel(seriesName)} • ${escapeLabel(tooltipLabel)}</span>
       <span class="tooltip-val">${value.toLocaleString()}${this.getTooltipMinMaxText(min, max)}</span>
