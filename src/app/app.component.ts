@@ -662,7 +662,7 @@ export class AppComponent implements OnInit {
         const countryName = countryData.name;
         let sum = 0;
         countryData.series.forEach(seriesItem => {
-            sum += seriesItem.value;
+          sum += seriesItem.value;
         });
         const resultItem = {
             name: countryName,
