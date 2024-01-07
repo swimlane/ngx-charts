@@ -21,6 +21,8 @@
   .circle,
   .cell,
   .bar,
+  .node,
+  .link,
   .arc {
     cursor: pointer;
   }
@@ -28,6 +30,8 @@
   .bar,
   .cell,
   .arc,
+  .node,
+  .link,
   .card {
     &.active,
     &:hover {

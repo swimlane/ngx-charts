@@ -601,6 +601,13 @@ const chartGroups = [
         }
       },
       {
+        name: 'Sankey Chart',
+        selector: 'sankey',
+        inputFormat: 'sankey',
+        options: ['animations', 'colorScheme', 'schemeType', 'tooltipDisabled', 'showLabels'],
+        defaults: {}
+      },
+      {
         name: 'Force Directed Graph (deprecated)',
         selector: 'force-directed-graph',
         inputFormat: 'graph',

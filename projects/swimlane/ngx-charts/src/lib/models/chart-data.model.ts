@@ -70,6 +70,14 @@ export interface TreeMapDataItem {
 
 export interface TreeMapData extends Array<TreeMapDataItem> {}
 
+export interface SankeyObject {
+  source: string;
+  target: string;
+  value: number;
+}
+
+export interface SankeyData extends Array<SankeyObject> {}
+
 export interface BoxChartSeries {
   name: StringOrNumberOrDate;
   series: DataItem[];
