@@ -656,7 +656,7 @@ export class AppComponent implements OnInit {
             code: item.name.toLowerCase()
           }
         });
-      })
+      });
       return data;
     } else {
       let sumResult = []
