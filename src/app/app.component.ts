@@ -645,7 +645,7 @@ export class AppComponent implements OnInit {
   }
 
   getPieTempData() {
-    if (this.tempXValueForComboPie){
+    if (this.tempXValueForComboPie) {
       let data = [];
       this.dateDataWithOrWithoutRange.forEach(item => {
         const dataPoint = item.series.find(data => data.name === this.tempXValueForComboPie);
