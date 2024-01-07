@@ -540,7 +540,7 @@ export class AppComponent implements OnInit {
   }
   isTensionSliderRequired(curveType) {
     return this.curves[curveType] == this.curves['Cardinal'] ||
-    this.curves[curveType] == this.curves['Catmull Rom'];
+      this.curves[curveType] == this.curves['Catmull Rom'];
   }
   
   setColorScheme(name) {
