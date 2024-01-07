@@ -318,15 +318,15 @@ export const bubble2d: BubbleChart2DMultiSeries = [
     series: [
       {
         x: '2010',
-        r: 80.4
+        r: 8.4
       },
       {
         x: '2000',
-        r: 78
+        r: 1278
       },
       {
         x: '1990',
-        r: 79
+        r: 579
       }
     ]
   },
@@ -335,11 +335,11 @@ export const bubble2d: BubbleChart2DMultiSeries = [
     series: [
       {
         x: '2010',
-        r: 310
+        r: 10
       },
       {
         x: '2000',
-        r: 283
+        r: 2783
       },
       {
         x: '1990',
@@ -356,11 +356,11 @@ export const bubble2d: BubbleChart2DMultiSeries = [
       },
       {
         x: '2000',
-        r: 59.4
+        r: 99.2
       },
       {
         x: '1990',
-        r: 56.9
+        r: 0.01
       }
     ]
   },
