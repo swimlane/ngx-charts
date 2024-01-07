@@ -122,52 +122,52 @@ export class LineSeriesComponent implements OnChanges {
   getLineGenerator(): any {
     if (this.curve == curveCatmullRom) {
       return line<any>()
-      .x(d => {
-        const label = d.name;
-        let value;
-        if (this.scaleType === ScaleType.Time) {
-          value = this.xScale(label);
-        } else if (this.scaleType === ScaleType.Linear) {
-          value = this.xScale(Number(label));
-        } else {
-          value = this.xScale(label);
-        }
-        return value;
-      })
-      .y(d => this.yScale(d.value))
-      .curve(this.curve.alpha(this.tension));
+        .x(d => {
+          const label = d.name;
+          let value;
+          if (this.scaleType === ScaleType.Time) {
+            value = this.xScale(label);
+          } else if (this.scaleType === ScaleType.Linear) {
+            value = this.xScale(Number(label));
+          } else {
+            value = this.xScale(label);
+          }
+          return value;
+        })
+        .y(d => this.yScale(d.value))
+        .curve(this.curve.alpha(this.tension));
     } else if (this.curve == curveCardinal) {
       return line<any>()
-      .x(d => {
-        const label = d.name;
-        let value;
-        if (this.scaleType === ScaleType.Time) {
-          value = this.xScale(label);
-        } else if (this.scaleType === ScaleType.Linear) {
-          value = this.xScale(Number(label));
-        } else {
-          value = this.xScale(label);
-        }
-        return value;
-      })
-      .y(d => this.yScale(d.value))
-      .curve(this.curve.tension(this.tension));
+        .x(d => {
+          const label = d.name;
+          let value;
+          if (this.scaleType === ScaleType.Time) {
+            value = this.xScale(label);
+          } else if (this.scaleType === ScaleType.Linear) {
+            value = this.xScale(Number(label));
+          } else {
+            value = this.xScale(label);
+          }
+          return value;
+        })
+        .y(d => this.yScale(d.value))
+        .curve(this.curve.tension(this.tension));
     } else {
       return line<any>()
-      .x(d => {
-        const label = d.name;
-        let value;
-        if (this.scaleType === ScaleType.Time) {
-          value = this.xScale(label);
-        } else if (this.scaleType === ScaleType.Linear) {
-          value = this.xScale(Number(label));
-        } else {
-          value = this.xScale(label);
-        }
-        return value;
-      })
-      .y(d => this.yScale(d.value))
-      .curve(this.curve);
+        .x(d => {
+          const label = d.name;
+          let value;
+          if (this.scaleType === ScaleType.Time) {
+            value = this.xScale(label);
+          } else if (this.scaleType === ScaleType.Linear) {
+            value = this.xScale(Number(label));
+          } else {
+            value = this.xScale(label);
+          }
+          return value;
+        })
+        .y(d => this.yScale(d.value))
+        .curve(this.curve);
     }
   }
 

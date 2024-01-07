@@ -542,10 +542,12 @@ export class AppComponent implements OnInit {
   getInterpolationType(curveType) {
     return this.curves[curveType] || this.curves['default'];
   }
+
   isTensionSliderRequired(curveType) {
     return this.curves[curveType] == this.curves['Cardinal'] ||
-    this.curves[curveType] == this.curves['Catmull Rom'];
+      this.curves[curveType] == this.curves['Catmull Rom'];
   }
+
   setColorScheme(name) {
     this.selectedColorScheme = name;
     this.colorScheme = this.colorSets.find(s => s.name === name);
