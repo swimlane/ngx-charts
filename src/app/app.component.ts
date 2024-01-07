@@ -665,11 +665,11 @@ export class AppComponent implements OnInit {
           sum += seriesItem.value;
         });
         const resultItem = {
-            name: countryName,
-            value: sum,
-            extra: {
-                code: countryName.toLowerCase().replace(/\s/g, '_') // Convert spaces to underscores
-            }
+          name: countryName,
+          value: sum,
+          extra: {
+            code: countryName.toLowerCase().replace(/\s/g, '_') // Convert spaces to underscores
+          }
         };
         sumResult.push(resultItem);
       });
