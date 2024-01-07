@@ -649,11 +649,13 @@ export class AppComponent implements OnInit {
       let data = [];
       this.dateDataWithOrWithoutRange.forEach(item => {
         const dataPoint = item.series.find(data => data.name === this.tempXValueForComboPie);
-        data.push({ name: item.name,
-                    value: dataPoint.value,
-                    extra: {
-                      code: item.name.toLowerCase()
-                    }});
+        data.push({
+          name: item.name,
+          value: dataPoint.value,
+          extra: {
+            code: item.name.toLowerCase()
+          }
+        });
       })
       return data;
     } else {
