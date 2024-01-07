@@ -138,20 +138,20 @@ export class LineSeriesComponent implements OnChanges {
       .curve(this.curve.alpha(this.tension));
     } else if (this.curve == curveCardinal) {
       return line<any>()
-      .x(d => {
-        const label = d.name;
-        let value;
-        if (this.scaleType === ScaleType.Time) {
-          value = this.xScale(label);
-        } else if (this.scaleType === ScaleType.Linear) {
-          value = this.xScale(Number(label));
-        } else {
-          value = this.xScale(label);
-        }
-        return value;
-      })
-      .y(d => this.yScale(d.value))
-      .curve(this.curve.tension(this.tension));
+        .x(d => {
+          const label = d.name;
+          let value;
+          if (this.scaleType === ScaleType.Time) {
+            value = this.xScale(label);
+          } else if (this.scaleType === ScaleType.Linear) {
+            value = this.xScale(Number(label));
+          } else {
+            value = this.xScale(label);
+          }
+          return value;
+        })
+        .y(d => this.yScale(d.value))
+        .curve(this.curve.tension(this.tension));
     } else {
       return line<any>()
       .x(d => {
