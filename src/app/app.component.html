@@ -622,44 +622,44 @@
         </div>
         <div class="bottom-line-chart">
           <ngx-charts-line-chart
-          [view]="view"
-          class="chart-container"
-          [scheme]="colorScheme"
-          [schemeType]="schemeType"
-          [results]="dateDataWithOrWithoutRange"
-          [animations]="animations"
-          [legend]="showLegend"
-          [legendTitle]="legendTitle"
-          [legendPosition]="legendPosition"
-          [gradient]="gradient"
-          [xAxis]="showXAxis"
-          [yAxis]="showYAxis"
-          [showXAxisLabel]="showXAxisLabel"
-          [showYAxisLabel]="showYAxisLabel"
-          [xAxisLabel]="xAxisLabel"
-          [yAxisLabel]="yAxisLabel"
-          [autoScale]="autoScale"
-          [xScaleMin]="xScaleMin"
-          [xScaleMax]="xScaleMax"
-          [yScaleMin]="yScaleMin"
-          [yScaleMax]="yScaleMax"
-          [timeline]="timeline"
-          [showGridLines]="showGridLines"
-          [curve]="curve"
-          [rangeFillOpacity]="rangeFillOpacity"
-          [roundDomains]="roundDomains"
-          [tooltipDisabled]="tooltipDisabled"
-          [trimXAxisTicks]="trimXAxisTicks"
-          [trimYAxisTicks]="trimYAxisTicks"
-          [maxXAxisTickLength]="maxXAxisTickLength"
-          [maxYAxisTickLength]="maxYAxisTickLength"
-          [wrapTicks]="wrapTicks"
-          (select)="select($event)"
-          (activate)="activate($event)"
-          (deactivate)="deactivate($event)"
-          (tooltipCurrent)="getTooltipCurrent($event)"
-        >
-        </ngx-charts-line-chart>
+            [view]="view"
+            class="chart-container"
+            [scheme]="colorScheme"
+            [schemeType]="schemeType"
+            [results]="dateDataWithOrWithoutRange"
+            [animations]="animations"
+            [legend]="showLegend"
+            [legendTitle]="legendTitle"
+            [legendPosition]="legendPosition"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
+            [autoScale]="autoScale"
+            [xScaleMin]="xScaleMin"
+            [xScaleMax]="xScaleMax"
+            [yScaleMin]="yScaleMin"
+            [yScaleMax]="yScaleMax"
+            [timeline]="timeline"
+            [showGridLines]="showGridLines"
+            [curve]="curve"
+            [rangeFillOpacity]="rangeFillOpacity"
+            [roundDomains]="roundDomains"
+            [tooltipDisabled]="tooltipDisabled"
+            [trimXAxisTicks]="trimXAxisTicks"
+            [trimYAxisTicks]="trimYAxisTicks"
+            [maxXAxisTickLength]="maxXAxisTickLength"
+            [maxYAxisTickLength]="maxYAxisTickLength"
+            [wrapTicks]="wrapTicks"
+            (select)="select($event)"
+            (activate)="activate($event)"
+            (deactivate)="deactivate($event)"
+            (tooltipCurrent)="getTooltipCurrent($event)"
+          >
+          </ngx-charts-line-chart>
         </div>
       </div>
 
@@ -1224,7 +1224,9 @@
         <pre *ngIf="chart.inputFormat === 'bubbleInteractive'">{{ bubbleDemoTempData | json }}</pre>
         <pre *ngIf="chart.inputFormat === 'comboChart'">{{ barChart | json }}</pre>
         <pre *ngIf="chart.inputFormat === 'comboChart'">{{ lineChartSeries | json }}</pre>
+        <label *ngIf="chart.inputFormat === 'linePieCombo'">Pie Chart Data</label>
         <pre *ngIf="chart.inputFormat === 'linePieCombo'">{{ pieTempData | json }}</pre>
+        <label *ngIf="chart.inputFormat === 'linePieCombo'">Line Chart Data</label>
         <pre *ngIf="chart.inputFormat === 'linePieCombo'">{{ dateDataWithOrWithoutRange | json }}</pre>
         <pre *ngIf="chart.inputFormat === 'timelineFilter'">{{ timelineFilterBarData | json }}</pre>
         <div>
