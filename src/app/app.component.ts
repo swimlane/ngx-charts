@@ -69,6 +69,7 @@ export class AppComponent implements OnInit {
   dateDataWithRange: any[];
   calendarData: any[];
   statusData: any[];
+  pieTempData: any[];
   sparklineData: any[];
   timelineFilterBarData: any[];
   graph: { links: any[]; nodes: any[] };
@@ -118,6 +119,7 @@ export class AppComponent implements OnInit {
   strokeColor: string = '#FFFFFF';
   strokeWidth: number = 2;
   wrapTicks = false;
+  tempXValueForComboPie: any;
 
   curves = {
     Basis: shape.curveBasis,
@@ -297,6 +299,7 @@ export class AppComponent implements OnInit {
     this.setColorScheme('cool');
     this.calendarData = this.getCalendarData();
     this.statusData = this.getStatusData();
+    this.pieTempData = this.getPieTempData();
     this.sparklineData = generateData(1, false, 30);
     this.timelineFilterBarData = timelineFilterBarData();
   }
@@ -480,6 +483,7 @@ export class AppComponent implements OnInit {
     this.dateDataWithRange = generateData(2, true);
 
     if (this.chart.inputFormat === 'calendarData') this.calendarData = this.getCalendarData();
+    if (this.chart.inputFormat === 'linePieCombo') this.pieTempData = this.getPieTempData();
   }
 
   applyDimensions() {
@@ -536,6 +540,11 @@ export class AppComponent implements OnInit {
 
   deactivate(data) {
     console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+  }
+
+  getTooltipCurrent(data) {
+    this.tempXValueForComboPie = data;
+    this.pieTempData = this.getPieTempData();
   }
 
   getInterpolationType(curveType) {
@@ -634,6 +643,41 @@ export class AppComponent implements OnInit {
     const sales = Math.round(1e4 * Math.random());
     const dur = 36e5 * Math.random();
     return this.calcStatusData(sales, dur);
+  }
+
+  getPieTempData() {
+    if (this.tempXValueForComboPie) {
+      let data = [];
+      this.dateDataWithOrWithoutRange.forEach(item => {
+        const dataPoint = item.series.find(data => data.name === this.tempXValueForComboPie);
+        data.push({
+          name: item.name,
+          value: dataPoint.value,
+          extra: {
+            code: item.name.toLowerCase()
+          }
+        });
+      });
+      return data;
+    } else {
+      let sumResult = []
+      this.dateDataWithOrWithoutRange.forEach(countryData => {
+        const countryName = countryData.name;
+        let sum = 0;
+        countryData.series.forEach(seriesItem => {
+          sum += seriesItem.value;
+        });
+        const resultItem = {
+          name: countryName,
+          value: sum,
+          extra: {
+            code: countryName.toLowerCase().replace(/\s/g, '_') // Convert spaces to underscores
+          }
+        };
+        sumResult.push(resultItem);
+      });
+      return sumResult;
+    }
   }
 
   calcStatusData(sales = this.statusData[0].value, dur = this.statusData[2].value) {

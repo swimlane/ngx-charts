@@ -239,6 +239,7 @@ export class LineChartComponent extends BaseChartComponent implements OnInit {
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
+  @Output() tooltipCurrent: EventEmitter<any> = new EventEmitter();
 
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
   @ContentChild('seriesTooltipTemplate') seriesTooltipTemplate: TemplateRef<any>;
@@ -442,6 +443,7 @@ export class LineChartComponent extends BaseChartComponent implements OnInit {
 
   updateHoveredVertical(item): void {
     this.hoveredVertical = item.value;
+    this.tooltipCurrent.emit(this.hoveredVertical);
     this.deactivateAll();
   }
 

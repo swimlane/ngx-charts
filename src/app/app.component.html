@@ -597,6 +597,72 @@
         (select)="onSelect($event)"
       >
       </combo-chart-component>
+
+      <div *ngIf="chartType === 'combo-chart-line-pie-component'">
+        <div class="top-pie-chart">
+          <ngx-charts-pie-chart
+            class="chart-container"
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="pieTempData"
+            [animations]="animations"
+            [explodeSlices]="explodeSlices"
+            [labels]="showLabels"
+            [doughnut]="doughnut"
+            [arcWidth]="arcWidth"
+            [gradient]="gradient"
+            [tooltipDisabled]="tooltipDisabled"
+            [tooltipText]="pieTooltipText"
+            (dblclick)="dblclick($event)"
+            (select)="select($event)"
+            (activate)="activate($event)"
+            (deactivate)="deactivate($event)"
+          >
+          </ngx-charts-pie-chart>
+        </div>
+        <div class="bottom-line-chart">
+          <ngx-charts-line-chart
+            [view]="view"
+            class="chart-container"
+            [scheme]="colorScheme"
+            [schemeType]="schemeType"
+            [results]="dateDataWithOrWithoutRange"
+            [animations]="animations"
+            [legend]="showLegend"
+            [legendTitle]="legendTitle"
+            [legendPosition]="legendPosition"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
+            [autoScale]="autoScale"
+            [xScaleMin]="xScaleMin"
+            [xScaleMax]="xScaleMax"
+            [yScaleMin]="yScaleMin"
+            [yScaleMax]="yScaleMax"
+            [timeline]="timeline"
+            [showGridLines]="showGridLines"
+            [curve]="curve"
+            [rangeFillOpacity]="rangeFillOpacity"
+            [roundDomains]="roundDomains"
+            [tooltipDisabled]="tooltipDisabled"
+            [trimXAxisTicks]="trimXAxisTicks"
+            [trimYAxisTicks]="trimYAxisTicks"
+            [maxXAxisTickLength]="maxXAxisTickLength"
+            [maxYAxisTickLength]="maxYAxisTickLength"
+            [wrapTicks]="wrapTicks"
+            (select)="select($event)"
+            (activate)="activate($event)"
+            (deactivate)="deactivate($event)"
+            (tooltipCurrent)="getTooltipCurrent($event)"
+          >
+          </ngx-charts-line-chart>
+        </div>
+      </div>
+
       <ngx-charts-heat-map
         *ngIf="chartType === 'heat-map'"
         class="chart-container"
@@ -1158,6 +1224,10 @@
         <pre *ngIf="chart.inputFormat === 'bubbleInteractive'">{{ bubbleDemoTempData | json }}</pre>
         <pre *ngIf="chart.inputFormat === 'comboChart'">{{ barChart | json }}</pre>
         <pre *ngIf="chart.inputFormat === 'comboChart'">{{ lineChartSeries | json }}</pre>
+        <label *ngIf="chart.inputFormat === 'linePieCombo'">Pie Chart Data</label>
+        <pre *ngIf="chart.inputFormat === 'linePieCombo'">{{ pieTempData | json }}</pre>
+        <label *ngIf="chart.inputFormat === 'linePieCombo'">Line Chart Data</label>
+        <pre *ngIf="chart.inputFormat === 'linePieCombo'">{{ dateDataWithOrWithoutRange | json }}</pre>
         <pre *ngIf="chart.inputFormat === 'timelineFilter'">{{ timelineFilterBarData | json }}</pre>
         <div>
           <label>
