@@ -121,7 +121,7 @@ export class XAxisComponent implements OnChanges {
           tspanElements.remove();
         }
         labelLength = this.maxLabelLength;
-        this.labelTextTemp = this.labelText.slice(0, labelLength) + "...";
+        this.labelTextTemp = this.labelText.slice(0, labelLength) + '...';
         textElement.text(this.labelTextTemp);
       } else {
         this.labelTextTemp = this.labelText;
