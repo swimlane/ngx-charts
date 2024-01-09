@@ -52,7 +52,7 @@ import { select } from 'd3-selection';
         [maxLabelLength]="maxLabelLength"
         [wrapLabel]="wrapLabel"
       >
-    </svg:g>
+      </svg:g>
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
