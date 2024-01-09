@@ -116,7 +116,7 @@ export class XAxisComponent implements OnChanges {
     if (this.showLabel && this.trimLabel && this.maxLabelLength > 0) {
       if (this.maxLabelLength < labelLength) {
         //trim
-        let tspanElements = textElement.selectAll('tspan')
+        let tspanElements = textElement.selectAll('tspan');
         if (tspanElements) {
           tspanElements.remove();
         }
