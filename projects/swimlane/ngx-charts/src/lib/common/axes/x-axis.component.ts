@@ -164,8 +164,8 @@ export class XAxisComponent implements OnChanges {
         let firstLine = wrappedLines[0];
         textElement.text('');
         textElement.append('tspan')
-        .text(firstLine)
-        .attr('dy', '1em');
+          .text(firstLine)
+          .attr('dy', '1em');
         let xVal = textElement.attr('x');
         for (let i = 1; i < wrappedLines.length; i++) {
           let line = wrappedLines[i];
