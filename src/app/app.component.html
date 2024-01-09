@@ -18,6 +18,12 @@
         [legendPosition]="legendPosition"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
+        [trimXAxisLabel]="trimXAxisLabel"
+        [trimYAxisLabel]="trimYAxisLabel"
+        [maxXAxisLabelLength]="maxXAxisLabelLength"
+        [maxYAxisLabelLength]="maxYAxisLabelLength"
+        [wrapXAxisLabel]="wrapXAxisLabel"
+        [wrapYAxisLabel]="wrapYAxisLabel"
         [tooltipDisabled]="tooltipDisabled"
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
@@ -58,6 +64,12 @@
         [tooltipDisabled]="tooltipDisabled"
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
+        [trimXAxisLabel]="trimXAxisLabel"
+        [trimYAxisLabel]="trimYAxisLabel"
+        [maxXAxisLabelLength]="maxXAxisLabelLength"
+        [maxYAxisLabelLength]="maxYAxisLabelLength"
+        [wrapXAxisLabel]="wrapXAxisLabel"
+        [wrapYAxisLabel]="wrapYAxisLabel"
         [showGridLines]="showGridLines"
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
@@ -363,6 +375,12 @@
         [showYAxisLabel]="showYAxisLabel"
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
+        [trimXAxisLabel]="trimXAxisLabel"
+        [trimYAxisLabel]="trimYAxisLabel"
+        [maxXAxisLabelLength]="maxXAxisLabelLength"
+        [maxYAxisLabelLength]="maxYAxisLabelLength"
+        [wrapXAxisLabel]="wrapXAxisLabel"
+        [wrapYAxisLabel]="wrapYAxisLabel"
         [autoScale]="autoScale"
         [xScaleMin]="xScaleMin"
         [xScaleMax]="xScaleMax"
@@ -1366,6 +1384,24 @@
           </label>
           <br />
         </div>
+        <div *ngIf="chart.options.includes('trimXAxisLabel')">
+          <label>
+            <input type="checkbox" [(ngModel)]="trimXAxisLabel" />
+            Trim X Axis Label
+          </label>
+          <br />
+        </div>
+        <div *ngIf="chart.options.includes('wrapXAxisLabel')">
+          <label>
+            <input type="checkbox" [(ngModel)]="wrapXAxisLabel" />
+            Wrap X Axis Label
+          </label>
+          <br />
+        </div>
+        <div *ngIf="chart.options.includes('maxXAxisLabelLength')">
+          <label>Max X Label Length:</label><br />
+          <input type="text" [(ngModel)]="maxXAxisLabelLength" /><br />
+        </div>
         <div *ngIf="chart.options.includes('xAxisLabel')">
           <label>X Axis Label:</label><br />
           <input type="text" [(ngModel)]="xAxisLabel" /><br />
@@ -1376,6 +1412,24 @@
             Show Y Axis Label
           </label>
           <br />
+        </div>
+        <div *ngIf="chart.options.includes('trimYAxisLabel')">
+          <label>
+            <input type="checkbox" [(ngModel)]="trimYAxisLabel" />
+            Trim Y Axis Label
+          </label>
+          <br />
+        </div>
+        <div *ngIf="chart.options.includes('wrapYAxisLabel')">
+          <label>
+            <input type="checkbox" [(ngModel)]="wrapYAxisLabel" />
+            Wrap Y Axis Label
+          </label>
+          <br />
+        </div>
+        <div *ngIf="chart.options.includes('maxYAxisLabelLength')">
+          <label>Max Y Label Length:</label><br />
+          <input type="text" [(ngModel)]="maxYAxisLabelLength" /><br />
         </div>
         <div *ngIf="chart.options.includes('yAxisLabel')">
           <label>Y Axis Label:</label><br />
