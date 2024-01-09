@@ -179,7 +179,7 @@ export class XAxisComponent implements OnChanges {
         textElement.text(this.labelTextTemp);
       }
     } else if (!this.trimLabel && !this.wrapLabel) {
-      let tspanElements = textElement.selectAll('tspan')
+      let tspanElements = textElement.selectAll('tspan');
       if (tspanElements) {
         tspanElements.remove();
       }
