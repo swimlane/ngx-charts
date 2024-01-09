@@ -149,9 +149,9 @@ export class XAxisComponent implements OnChanges {
         if (start < labelLength) {
           let lastLine = this.labelTextTemp.slice(start, labelLength);
           textElement.append('tspan')
-          .text(lastLine)
-          .attr('x', xVal)
-          .attr('dy', '1.2em');
+            .text(lastLine)
+            .attr('x', xVal)
+            .attr('dy', '1.2em');
         }
       } else {
         this.labelTextTemp = this.labelText;
