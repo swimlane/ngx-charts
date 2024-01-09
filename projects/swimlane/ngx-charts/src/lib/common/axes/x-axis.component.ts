@@ -39,7 +39,7 @@ import { select } from 'd3-selection';
       <title>{{ labelText }}</title>
       <svg:g
         ngx-charts-axis-label
-        class = "xAxisLabel"
+        class="x-axis-label"
         *ngIf="showLabel"
         [label]="labelTextTemp"
         [offset]="labelOffset"
