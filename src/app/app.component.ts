@@ -483,6 +483,7 @@ export class AppComponent implements OnInit {
     this.dateDataWithRange = generateData(2, true);
 
     if (this.chart.inputFormat === 'calendarData') this.calendarData = this.getCalendarData();
+    if (this.chart.inputFormat === 'linePieCombo') this.pieTempData = this.getPieTempData();
   }
 
   applyDimensions() {
