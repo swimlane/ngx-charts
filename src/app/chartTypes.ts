@@ -168,6 +168,7 @@ const chartGroups = [
           'roundDomains',
           'roundEdges',
           'tooltipDisabled',
+          'yScaleMin',
           'yScaleMax',
           'showDataLabel',
           'trimXAxisTicks',
