@@ -213,8 +213,6 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
         this.x1 = this.tickSpacing * -sign;
         this.dx = '.32em';
         break;
-      default:
-
     }
 
     if (this.tickFormatting) {

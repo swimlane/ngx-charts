@@ -257,7 +257,6 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
         this.x1 = this.tickSpacing * -sign;
         this.dy = '.32em';
         break;
-      default:
     }
     setTimeout(() => this.updateDims());
   }
