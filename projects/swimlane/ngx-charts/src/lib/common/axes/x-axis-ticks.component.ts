@@ -55,14 +55,14 @@ import { roundedRect } from '../../common/shape.helper';
         <svg:line class="gridline-path gridline-path-vertical" [attr.y1]="-gridLineHeight" y2="0" />
       </svg:g>
     </svg:g>
-    
+
     <svg:path
       *ngIf="referenceLineLength > 1 && refMax && refMin && showRefLines"
       class="reference-area"
       [attr.d]="referenceAreaPath"
       [attr.transform]="gridLineTransform()"
     />
-    
+
     <svg:g *ngFor="let refLine of referenceLines" class="ref-line">
     <svg:g *ngIf="showRefLines" [attr.transform]="transform(refLine.value)">
         <svg:line
@@ -74,7 +74,7 @@ import { roundedRect } from '../../common/shape.helper';
         <svg:g *ngIf="showRefLabels">
           <title>{{ tickTrim(tickFormat(refLine.value)) }}</title>
           <svg:text
-            class="refline-label"        
+            class="refline-label"
             transform="rotate(-90)"
             [attr.text-anchor]="textAnchor"
             [attr.x] = "30"
@@ -100,7 +100,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() width: number;
   @Input() rotateTicks: boolean = true;
   @Input() wrapTicks = false;
-  @Input() referenceLines:any[];
+  @Input() referenceLines: any[];
   @Input() showRefLabels: boolean = false;
   @Input() showRefLines: boolean = false;
 
@@ -165,7 +165,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   }
 
   update(): void {
-    const scale = this.scale;   
+    const scale = this.scale;
     this.adjustedScale = this.scale.bandwidth
     ? function (d) {
         return this.scale(d) + this.scale.bandwidth() * 0.5;
@@ -315,11 +315,11 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
         : labelHeight;
 
     this.approxHeight = Math.min(requiredHeight, 200);
-    
+
     if (this.showRefLines && this.referenceLines) {
       this.setReferencelines();
     }
-    
+
     return angle;
   }
 

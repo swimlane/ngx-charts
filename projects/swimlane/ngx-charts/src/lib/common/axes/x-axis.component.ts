@@ -65,8 +65,8 @@ export class XAxisComponent implements OnChanges {
   @Input() xAxisTickCount: number;
   @Input() xOrient: Orientation = Orientation.Bottom;
   @Input() referenceLines: any[];
-  @Input() showRefLines: boolean;
-  @Input() showRefLabels: boolean;
+  @Input() showRefLines: boolean = false;
+  @Input() showRefLabels: boolean = false;
   @Input() xAxisOffset: number = 0;
   @Input() wrapTicks = false;
 

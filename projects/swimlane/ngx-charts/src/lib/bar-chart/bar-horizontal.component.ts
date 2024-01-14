@@ -9,6 +9,7 @@ import {
   TemplateRef
 } from '@angular/core';
 import { scaleBand, scaleLinear } from 'd3-scale';
+import { select } from 'd3-selection';
 
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
@@ -16,7 +17,6 @@ import { BaseChartComponent } from '../common/base-chart.component';
 import { LegendOptions, LegendPosition } from '../common/types/legend.model';
 import { ScaleType } from '../common/types/scale-type.enum';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
-import {select} from 'd3-selection';
 
 @Component({
   selector: 'ngx-charts-bar-horizontal',

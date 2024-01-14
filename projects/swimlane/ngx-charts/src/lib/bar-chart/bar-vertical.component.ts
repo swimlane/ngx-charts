@@ -9,6 +9,7 @@ import {
   TemplateRef
 } from '@angular/core';
 import { scaleBand, scaleLinear } from 'd3-scale';
+import { select } from 'd3-selection';
 
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
@@ -17,7 +18,6 @@ import { DataItem } from '../models/chart-data.model';
 import { LegendOptions, LegendPosition } from '../common/types/legend.model';
 import { ScaleType } from '../common/types/scale-type.enum';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
-import {select} from 'd3-selection';
 
 @Component({
   selector: 'ngx-charts-bar-vertical',
@@ -109,8 +109,8 @@ export class BarVerticalComponent extends BaseChartComponent {
   @Input() tooltipDisabled: boolean = false;
   @Input() gradient: boolean;
   @Input() referenceLines: any[];
-  @Input() showRefLines;
-  @Input() showRefLabels;
+  @Input() showRefLines: boolean = false;
+  @Input() showRefLabels: boolean = false;
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
   @Input() schemeType: ScaleType;
@@ -186,7 +186,7 @@ export class BarVerticalComponent extends BaseChartComponent {
     this.legendOptions = this.getLegendOptions();
 
     this.transform = `translate(${this.dims.xOffset} , ${this.margin[0] + this.dataLabelMaxHeight.negative})`;
-    
+
     if (this.showRefLines) {
       const parent = select(this.chartElement.nativeElement).select('.bar-chart').node() as HTMLElement;
       const refLines = select(this.chartElement.nativeElement).selectAll('.ref-line').nodes() as HTMLElement[];

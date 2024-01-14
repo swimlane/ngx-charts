@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { scaleLinear, scalePoint, scaleTime } from 'd3-scale';
 import { CurveFactory, curveLinear } from 'd3-shape';
+import { select } from 'd3-selection';
 
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
@@ -23,7 +24,7 @@ import { Series } from '../models/chart-data.model';
 import { LegendOptions, LegendPosition } from '../common/types/legend.model';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
 import { ScaleType } from '../common/types/scale-type.enum';
-import {select} from 'd3-selection';
+
 
 @Component({
   selector: 'ngx-charts-area-chart',
