@@ -4,7 +4,7 @@
     "outDir": "./out-tsc/app",
     "types": []
   },
-  "files": ["src/main.ts", "src/polyfills.ts", "src/declarations.d.ts"],
+  "files": ["src/main.ts"],
   "include": ["src/**/*.d.ts"],
   "exclude": ["src/test.ts", "src/**/*.spec.ts"],
   "angularCompilerOptions": {
