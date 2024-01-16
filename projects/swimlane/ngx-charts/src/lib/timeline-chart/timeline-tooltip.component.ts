@@ -12,11 +12,12 @@ import {
 import { trigger, style, animate, transition } from '@angular/animations';
 import { createMouseEvent } from '../events';
 import { isPlatformBrowser } from '@angular/common';
+import { formatLabel } from '../common/label.helper';
 import { ColorHelper } from '../common/color.helper';
-import { PlacementTypes } from './tooltip/position';
-import { StyleTypes } from './tooltip/style.type';
-import { ViewDimensions } from './types/view-dimension.interface';
-import { ScaleType } from './types/scale-type.enum';
+import { PlacementTypes } from '../common/tooltip/position';
+import { StyleTypes } from '../common/tooltip/style.type';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { TimelineChartType } from './types/timeline-chart-type.enum';
 
 export interface Tooltip {
   color: string;
@@ -30,7 +31,7 @@ export interface Tooltip {
 }
 
 @Component({
-  selector: 'g[ngx-charts-tooltip-area]',
+  selector: 'g[ngx-charts-timeline-tooltip]',
   template: `
     <svg:g>
       <svg:rect
@@ -60,7 +61,6 @@ export interface Tooltip {
         [attr.width]="1"
         [attr.height]="dims.height"
         [style.opacity]="anchorOpacity"
-        [style.fill]="'rgb(0,0,255)'"
         [style.pointer-events]="'none'"
         ngx-tooltip
         [tooltipDisabled]="tooltipDisabled"
@@ -91,7 +91,7 @@ export interface Tooltip {
     ])
   ]
 })
-export class TooltipArea {
+export class TimelineTooltip {
   anchorOpacity: number = 0;
   anchorPos: number = -1;
   anchorValues: Tooltip[] = [];
@@ -99,14 +99,18 @@ export class TooltipArea {
 
   placementTypes = PlacementTypes;
   styleTypes = StyleTypes;
+  tooltip = [
+    {
+      'series': 'tooltip'
+    }
+  ];
 
+  @Input() type: TimelineChartType = TimelineChartType.Standard;
   @Input() dims: ViewDimensions;
-  @Input() xSet: any[];
   @Input() xScale;
   @Input() yScale;
   @Input() results: any[];
   @Input() colors: ColorHelper;
-  @Input() showPercentage: boolean = false;
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipTemplate: TemplateRef<any>;
 
@@ -116,44 +120,59 @@ export class TooltipArea {
 
   constructor(@Inject(PLATFORM_ID) private platformId: any) {}
 
-  getValues(xVal): Tooltip[] {
-    console.log('xVal', xVal);
+  getValues(xPos): Tooltip[] {
     const results = [];
 
-    for (const group of this.results) {
-      const item = group.series.find(d => d.name.toString() === xVal.toString());
-      let groupName = group.name;
-      if (groupName instanceof Date) {
-        groupName = groupName.toLocaleDateString();
+    if (this.type === TimelineChartType.Standard) {
+      for (const d of this.results) {
+        const xPosStart = this.xScale(d.startTime);
+        const xPosEnd = this.xScale(d.endTime);
+
+        let dName = d.name;
+        if (dName instanceof Date) {
+          dName = dName.toLocaleDateString();
+        }
+
+        if (xPos >= xPosStart && xPos <= xPosEnd) {
+          let val = formatLabel(d.startTime) +  ' - ' + formatLabel(d.endTime);
+
+          const data = Object.assign({}, d, {
+            value: val,
+            series: dName,
+            color: this.colors.getColor(d.name)
+          });
+
+          results.push(data);
+        }
       }
-
-      if (item) {
-        const label = item.name;
-        let val = item.value;
-        if (this.showPercentage) {
-          val = (item.d1 - item.d0).toFixed(2) + '%';
+    } else {
+      for (const group of this.results) {
+        let groupName = group.name;
+        if (groupName instanceof Date) {
+          groupName = groupName.toLocaleDateString();
         }
-        let color;
-        if (this.colors.scaleType === ScaleType.Linear) {
-          let v = val;
-          if (item.d1) {
-            v = item.d1;
+
+        for (const d of group.series) {
+          const xPosStart = this.xScale(d.startTime);
+          const xPosEnd = this.xScale(d.endTime);
+
+          let dName = d.name;
+          if (dName instanceof Date) {
+            dName = dName.toLocaleDateString();
           }
-          color = this.colors.getColor(v);
-        } else {
-          color = this.colors.getColor(group.name);
+  
+          if (xPos >= xPosStart && xPos <= xPosEnd) {
+            let val = formatLabel(d.startTime) +  ' - ' + formatLabel(d.endTime);
+  
+            const data = Object.assign({}, d, {
+              value: val,
+              series: groupName + ' • ' + dName,
+              color: this.colors.getColor(d.name)
+            });
+  
+            results.push(data);
+          }
         }
-
-        const data = Object.assign({}, item, {
-          value: val,
-          name: label,
-          series: groupName,
-          min: item.min,
-          max: item.max,
-          color
-        });
-
-        results.push(data);
       }
     }
 
@@ -166,56 +185,19 @@ export class TooltipArea {
     }
 
     const xPos = event.pageX - event.target.getBoundingClientRect().left;
-
-    const closestIndex = this.findClosestPointIndex(xPos);
-    const closestPoint = this.xSet[closestIndex];
-    this.anchorPos = this.xScale(closestPoint);
+    this.anchorPos = xPos
     this.anchorPos = Math.max(0, this.anchorPos);
     this.anchorPos = Math.min(this.dims.width, this.anchorPos);
 
-    this.anchorValues = this.getValues(closestPoint);
+    this.anchorValues = this.getValues(xPos);
     if (this.anchorPos !== this.lastAnchorPos) {
       const ev = createMouseEvent('mouseleave');
       this.tooltipAnchor.nativeElement.dispatchEvent(ev);
       this.anchorOpacity = 0.7;
-      this.hover.emit({
-        value: closestPoint
-      });
       this.showTooltip();
 
       this.lastAnchorPos = this.anchorPos;
     }
-  }
-
-  findClosestPointIndex(xPos: number): number {
-    let minIndex = 0;
-    let maxIndex = this.xSet.length - 1;
-    let minDiff = Number.MAX_VALUE;
-    let closestIndex = 0;
-
-    while (minIndex <= maxIndex) {
-      const currentIndex = ((minIndex + maxIndex) / 2) | 0;
-      const currentElement = this.xScale(this.xSet[currentIndex]);
-
-      const curDiff = Math.abs(currentElement - xPos);
-
-      if (curDiff < minDiff) {
-        minDiff = curDiff;
-        closestIndex = currentIndex;
-      }
-
-      if (currentElement < xPos) {
-        minIndex = currentIndex + 1;
-      } else if (currentElement > xPos) {
-        maxIndex = currentIndex - 1;
-      } else {
-        minDiff = 0;
-        closestIndex = currentIndex;
-        break;
-      }
-    }
-
-    return closestIndex;
   }
 
   showTooltip(): void {

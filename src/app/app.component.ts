@@ -15,7 +15,8 @@ import {
   generateGraph,
   treemap,
   timelineFilterBarData,
-  fiscalYearReport
+  fiscalYearReport,
+  timelineStandardData
 } from './data';
 import { bubbleDemoData } from './custom-charts/bubble-chart-interactive/data';
 import { BubbleChartInteractiveServerDataModel } from './custom-charts/bubble-chart-interactive/models';
@@ -26,6 +27,7 @@ import pkg from '../../projects/swimlane/ngx-charts/package.json';
 import { InputTypes } from '@swimlane/ngx-ui';
 import { LegendPosition } from '@swimlane/ngx-charts/common/types/legend.model';
 import { ScaleType } from '@swimlane/ngx-charts/common/types/scale-type.enum';
+import { TimelineStandardData } from '@swimlane/ngx-charts/models/chart-data.model';
 
 const monthName = new Intl.DateTimeFormat('en-us', { month: 'short' });
 const weekdayName = new Intl.DateTimeFormat('en-us', { weekday: 'short' });
@@ -71,6 +73,7 @@ export class AppComponent implements OnInit {
   statusData: any[];
   sparklineData: any[];
   timelineFilterBarData: any[];
+  timelineData: any[];
   graph: { links: any[]; nodes: any[] };
   bubble: any;
   linearScale: boolean = false;
@@ -248,7 +251,7 @@ export class AppComponent implements OnInit {
   ];*/
 
 
-  timelineData: any[] = [
+  /*timelineData: TimelineStandardData = [
     {
       'name': 'Germany',
       'startTime': new Date('December 2 2016'),
@@ -279,7 +282,7 @@ export class AppComponent implements OnInit {
       'startTime': new Date('December 4 2016'),
       'endTime': new Date('December 5 2016')
     }
-  ];
+  ];*/
 
   timelineStackedData: any[] = [
     {
@@ -403,6 +406,7 @@ export class AppComponent implements OnInit {
       ]
     }
   ]
+  tooltipType = 'vertical';
 
   // Combo Chart
   barChart: any[] = barChart;
@@ -490,6 +494,7 @@ export class AppComponent implements OnInit {
     this.statusData = this.getStatusData();
     this.sparklineData = generateData(1, false, 30);
     this.timelineFilterBarData = timelineFilterBarData();
+    this.timelineData = timelineStandardData();
   }
 
   get dateDataWithOrWithoutRange() {
@@ -559,6 +564,18 @@ export class AppComponent implements OnInit {
         const index = Math.floor(Math.random() * this.boxData.length);
         this.boxData.splice(index, 1);
         this.boxData = [...this.boxData];
+      }
+
+      if (this.timelineData.length > 1) {
+        const index = Math.floor(Math.random() * this.timelineData.length);
+        this.timelineData.splice(index, 1);
+        this.timelineData = [...this.timelineData];
+      }
+
+      if (this.timelineStackedData.length > 1) {
+        const index = Math.floor(Math.random() * this.timelineStackedData.length);
+        this.timelineStackedData.splice(index, 1);
+        this.timelineStackedData = [...this.timelineStackedData];
       }
     }
 
@@ -657,6 +674,43 @@ export class AppComponent implements OnInit {
       this.statusData = this.getStatusData();
 
       this.timelineFilterBarData = timelineFilterBarData();
+
+      // timeline standard chart
+      const startTime = Math.floor(1473700105009 + Math.random() * 1000000000);
+      const timelineStandardEntry = {
+        name: country.name,
+        startTime: new Date(startTime),
+        endTime: new Date(startTime + Math.floor(100000000 + Math.random() * 1000000000))
+      };
+      this.timelineData = [...this.timelineData, timelineStandardEntry];
+
+      // timeline stacked chart
+      const startEndTimes = [];
+      for (let i = 0; i < 6; i++) {
+        startEndTimes.push(Math.floor(1473700105009 + Math.random() * 1000000000));
+      }
+      startEndTimes.sort();
+      const timelineStackedEntry = {
+        name: country.name,
+        series: [
+          {
+            name: 1990,
+            startTime: new Date(startEndTimes[0]),
+            endTime: new Date(startEndTimes[1])
+          },
+          {
+            name: 2000,
+            startTime: new Date(startEndTimes[2]),
+            endTime: new Date(startEndTimes[3])
+          },
+          {
+            name: 2010,
+            startTime: new Date(startEndTimes[4]),
+            endTime: new Date(startEndTimes[5])
+          }
+        ]
+      };
+      this.timelineStackedData = [...this.timelineStackedData, timelineStackedEntry];
     }
 
     const date = new Date(Math.floor(1473700105009 + Math.random() * 1000000000));

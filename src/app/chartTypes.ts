@@ -561,7 +561,8 @@ const chartGroups = [
           'maxXAxisTickLength',
           'maxYAxisTickLength',
           'wrapTicks',
-          'timeline'
+          'timeline',
+          'tooltipType'
         ],
         defaults: {
           yAxisLabel: 'Country',
@@ -600,7 +601,8 @@ const chartGroups = [
           'maxXAxisTickLength',
           'maxYAxisTickLength',
           'wrapTicks',
-          'timeline'
+          'timeline',
+          'tooltipType'
         ],
         defaults: {
           yAxisLabel: 'Country',

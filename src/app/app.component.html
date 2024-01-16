@@ -451,6 +451,7 @@
         [maxYAxisTickLength]="maxYAxisTickLength"
         [wrapTicks]="wrapTicks"
         [timelineFilter]="timeline"
+        [tooltipType]="tooltipType"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -489,6 +490,7 @@
         [maxYAxisTickLength]="maxYAxisTickLength"
         [wrapTicks]="wrapTicks"
         [timelineFilter]="timeline"
+        [tooltipType]="tooltipType"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -1430,6 +1432,13 @@
             Disable tooltip
           </label>
           <br />
+        </div>
+        <div *ngIf="chart.options.includes('tooltipType') && !tooltipDisabled">
+          <label>Tooltip Type:</label><br />
+          <select style="margin-left: 10px" [(ngModel)]="tooltipType">
+            <option value="vertical">Vertical</option>
+            <option value="barLabel">Bar Label</option>
+          </select>
         </div>
         <div *ngIf="chart.options.includes('showText')">
           <label>

@@ -5,6 +5,7 @@ import { TimelineSeriesComponent } from './timeline-series.component';
 import { TimelineBarComponent } from './timeline-bar.component';
 import { BarChartModule } from '../bar-chart/bar-chart.module';
 import { TimelineStackedComponent } from './timeline-stacked-chart.component';
+import { TimelineTooltip } from './timeline-tooltip.component';
 
 @NgModule({
   imports: [ChartCommonModule, BarChartModule],
@@ -12,7 +13,8 @@ import { TimelineStackedComponent } from './timeline-stacked-chart.component';
     TimelineChartComponent,
     TimelineStackedComponent,
     TimelineSeriesComponent,
-    TimelineBarComponent
+    TimelineBarComponent,
+    TimelineTooltip
   ],
   exports: [
     TimelineChartComponent,

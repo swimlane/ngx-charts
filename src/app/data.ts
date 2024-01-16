@@ -6,7 +6,8 @@ import {
   BoxChartMultiSeries,
   Series,
   TreeMapData,
-  SankeyData
+  SankeyData,
+  TimelineStandardData
 } from '@swimlane/ngx-charts/models/chart-data.model';
 
 export const single: SingleSeries = [
@@ -481,6 +482,23 @@ export function generateData(seriesLength: number, includeMinMaxRange: boolean, 
 
     results.push(series);
   }
+  return results;
+}
+
+export function timelineStandardData(): TimelineStandardData {
+  const results: TimelineStandardData = [];
+  const dataPoints = 7;
+  for (let i = 0; i < dataPoints; i++) {
+    const country = countries[Math.floor(Math.random() * countries.length)];
+    const startTime =  Math.floor(1473700105009 + Math.random() * 1000000000);
+    // random dates between Sep 12, 2016 and Sep 24, 2016
+    results.push({
+      name: country.name,
+      startTime: new Date(startTime),
+      endTime: new Date(startTime + Math.floor(100000000 + Math.random() * 1000000000))
+    });
+  }
+
   return results;
 }
 

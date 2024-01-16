@@ -103,6 +103,19 @@ import { getScaleType } from '../common/domain.helper';
             />
           </svg:g>
         </svg:g>
+        <svg:g *ngIf="!tooltipDisabled && tooltipType === 'vertical'">
+          <svg:g
+            ngx-charts-timeline-tooltip
+            [type]="TimelineChartType.Stacked"
+            [dims]="dims"
+            [xScale]="xScale"
+            [yScale]="yScale"
+            [results]="timelineData"
+            [colors]="colors"
+            [tooltipDisabled]="tooltipDisabled"
+            [tooltipTemplate]="seriesTooltipTemplate"
+          />
+        </svg:g>
       </svg:g>
       <svg:g
         ngx-charts-timeline
@@ -171,6 +184,7 @@ export class TimelineStackedComponent extends BaseChartComponent {
   @Input() xAxisLabel: string;
   @Input() yAxisLabel: string;
   @Input() tooltipDisabled: boolean = false;
+  @Input() tooltipType: string;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
@@ -198,6 +212,7 @@ export class TimelineStackedComponent extends BaseChartComponent {
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
+  @ContentChild('seriesTooltipTemplate') seriesTooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
   groupDomain: string[];
