@@ -28,7 +28,6 @@ import pkg from '../../projects/swimlane/ngx-charts/package.json';
 import { InputTypes } from '@swimlane/ngx-ui';
 import { LegendPosition } from '@swimlane/ngx-charts/common/types/legend.model';
 import { ScaleType } from '@swimlane/ngx-charts/common/types/scale-type.enum';
-import { TimelineStandardData } from '@swimlane/ngx-charts/models/chart-data.model';
 
 const monthName = new Intl.DateTimeFormat('en-us', { month: 'short' });
 const weekdayName = new Intl.DateTimeFormat('en-us', { weekday: 'short' });
@@ -217,38 +216,6 @@ export class AppComponent implements OnInit {
   heatmapMax: number = 50000;
 
   // timeline chart
-  /*timelineData: any[] = [
-    {
-      'name': 'Germany',
-      'startTime': 1,
-      'endTime': 3
-    },
-    {
-      'name': 'United States',
-      'startTime': 2,
-      'endTime': 3
-    },
-    {
-      'name': 'France',
-      'startTime': 2,
-      'endTime': 4
-    },
-    {
-      'name': 'United Kingdom',
-      'startTime': 1,
-      'endTime': 3
-    },
-    {
-      'name': 'Spain',
-      'startTime': 1,
-      'endTime': 5
-    },
-    {
-      'name': 'Italy',
-      'startTime': 3,
-      'endTime': 5
-    }
-  ];*/
   timelineStandardData = timelineStandardData;
   timelineStackedData = timelineStackedData;
   tooltipType = 'barLabel';

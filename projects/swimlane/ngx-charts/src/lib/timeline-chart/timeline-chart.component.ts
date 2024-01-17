@@ -93,7 +93,6 @@ import { getScaleType } from '../common/domain.helper';
             (select)="onClick($event)"
             (activate)="onActivate($event)"
             (deactivate)="onDeactivate($event)"
-            (dataLabelWidthChanged)="onDataLabelMaxWidthChanged($event)"
           />
         </svg:g>
         <svg:g *ngIf="!tooltipDisabled && tooltipType === 'vertical'">
@@ -122,7 +121,6 @@ import { getScaleType } from '../common/domain.helper';
         [scaleType]="scaleType"
         [legend]="legend"
         [xScale]="timelineXScale"
-        [yScale]="timelineYScale"
         (onDomainChange)="updateDomain($event)"
       >
         <svg:g
@@ -342,17 +340,6 @@ export class TimelineChartComponent extends BaseChartComponent {
   updateXAxisHeight({ height }: { height: number }): void {
     this.xAxisHeight = height;
     this.update();
-  }
-
-  onDataLabelMaxWidthChanged(event) {
-    if (event.size.negative) {
-      this.dataLabelMaxWidth.negative = Math.max(this.dataLabelMaxWidth.negative, event.size.width);
-    } else {
-      this.dataLabelMaxWidth.positive = Math.max(this.dataLabelMaxWidth.positive, event.size.width);
-    }
-    if (event.index === this.results.length - 1) {
-      setTimeout(() => this.update());
-    }
   }
 
   updateTimeline(): void {

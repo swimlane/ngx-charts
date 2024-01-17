@@ -9,6 +9,7 @@ import {
   TemplateRef
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
+
 import { formatLabel, escapeLabel } from '../common/label.helper';
 import { DataItem, StringOrNumberOrDate } from '../models/chart-data.model';
 import { ColorHelper } from '../common/color.helper';
@@ -84,7 +85,6 @@ export class TimelineSeriesComponent implements OnChanges {
   @Output() select: EventEmitter<DataItem> = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
-  @Output() dataLabelWidthChanged = new EventEmitter<{ size: Event; index: number }>();
 
   tooltipPlacement: PlacementTypes;
   tooltipType: StyleTypes;
@@ -99,15 +99,12 @@ export class TimelineSeriesComponent implements OnChanges {
 
   update(): void {
     this.updateTooltipSettings();
-    const xScaleMin = Math.max(this.xScale.domain()[0], 0);
 
     this.bars = this.series.map(d => {
-      let value = d.endTime as any;
       const label = this.getLabel(d);
       const formattedLabel = formatLabel(label);
       const roundEdges = this.roundEdges;
       const bar: any = {
-        value,
         label,
         roundEdges,
         data: d,
@@ -128,7 +125,7 @@ export class TimelineSeriesComponent implements OnChanges {
       }
 
       let tooltipLabel = formattedLabel;
-      bar.ariaLabel = formattedLabel + ' ' + value.toLocaleString();
+      bar.ariaLabel = formattedLabel + ' ' + d.startTime.toLocaleString() + d.endTime.toLocaleString();
       if (this.seriesName !== null && this.seriesName !== undefined) {
         tooltipLabel = `${this.seriesName} • ${formattedLabel}`;
         bar.data.series = this.seriesName;

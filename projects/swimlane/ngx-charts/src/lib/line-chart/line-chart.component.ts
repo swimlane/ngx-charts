@@ -40,8 +40,9 @@ import { isPlatformServer } from '@angular/common';
       <svg:defs>
         <svg:clipPath [attr.id]="clipPathId">
           <svg:rect
-            [attr.width]="dims.width"
-            [attr.height]="dims.height"
+            [attr.width]="dims.width + 10"
+            [attr.height]="dims.height + 10"
+            [attr.transform]="'translate(-5, -5)'"
           />
         </svg:clipPath>
       </svg:defs>
@@ -162,7 +163,6 @@ import { isPlatformServer } from '@angular/common';
         [scaleType]="scaleType"
         [legend]="legend"
         [xScale]="timelineXScale"
-        [yScale]="timelineYScale"
         (onDomainChange)="updateDomain($event)"
       >
         <svg:g *ngFor="let series of results; trackBy: trackBy">

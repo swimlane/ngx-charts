@@ -10,8 +10,9 @@ import {
   Inject
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { createMouseEvent } from '../events';
 import { isPlatformBrowser } from '@angular/common';
+
+import { createMouseEvent } from '../events';
 import { formatLabel } from '../common/label.helper';
 import { ColorHelper } from '../common/color.helper';
 import { PlacementTypes } from '../common/tooltip/position';

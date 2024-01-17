@@ -486,57 +486,6 @@ export function generateData(seriesLength: number, includeMinMaxRange: boolean, 
   return results;
 }
 
-/*export function timelineStandardData(): TimelineStandardData {
-  const results: TimelineStandardData = [];
-  const dataPoints = 6;
-  for (let i = 0; i < dataPoints; i++) {
-    const country = countries[Math.floor(Math.random() * countries.length)];
-    const startTime =  Math.floor(1473700105009 + Math.random() * 1000000000); 
-    results.push({
-      name: country.name,
-      startTime: new Date(startTime),
-      endTime: new Date(startTime + Math.floor(300000000 + Math.random() * 1000000000))
-    });
-  }
-  return results;
-}
-
-export function timelineStackedData(): TimelineStackedData {
-  const results: TimelineStackedData = [];
-  const dataPoints = 6;
-  for (let i = 0; i < dataPoints; i++) {
-    const country = countries[Math.floor(Math.random() * countries.length)];
-
-    const times = [];
-    times.push(Math.floor(1473700105009 + Math.random() * 1000000000));
-    for (let i = 0; i < 3; i++) {
-      times[i + 1] = times[i] + Math.floor(300000000 + Math.random() * 1000000000);
-    }
-
-    results.push({
-      name: country.name,
-      series: [
-        {
-          name: 1990,
-          startTime: new Date(times[0]),
-          endTime: new Date(times[1])
-        },
-        {
-          name: 2000,
-          startTime: new Date(times[1]),
-          endTime: new Date(times[2])
-        },
-        {
-          name: 2010,
-          startTime: new Date(times[2]),
-          endTime: new Date(times[3])
-        }
-      ]
-    });
-  }
-  return results;
-}*/
-
 export const treemap: TreeMapData = [
   {
     name: 'flare',

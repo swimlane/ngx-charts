@@ -103,7 +103,6 @@ import { getScaleType } from '../common/domain.helper';
               (select)="onClick($event, group)"
               (activate)="onActivate($event, group)"
               (deactivate)="onDeactivate($event, group)"
-              (dataLabelWidthChanged)="onDataLabelMaxWidthChanged($event, index)"
             />
           </svg:g>
         </svg:g>
@@ -133,7 +132,6 @@ import { getScaleType } from '../common/domain.helper';
         [scaleType]="scaleType"
         [legend]="legend"
         [xScale]="timelineXScale"
-        [yScale]="timelineYScale"
         (onDomainChange)="updateDomain($event)"
       >
         <svg:g
@@ -415,17 +413,6 @@ export class TimelineStackedComponent extends BaseChartComponent {
   updateXAxisHeight({ height }: { height: number }): void {
     this.xAxisHeight = height;
     this.update();
-  }
-
-  onDataLabelMaxWidthChanged(event, groupIndex: number) {
-    if (event.size.negative) {
-      this.dataLabelMaxWidth.negative = Math.max(this.dataLabelMaxWidth.negative, event.size.width);
-    } else {
-      this.dataLabelMaxWidth.positive = Math.max(this.dataLabelMaxWidth.positive, event.size.width);
-    }
-    if (groupIndex === this.results.length - 1) {
-      setTimeout(() => this.update());
-    }
   }
 
   updateTimeline(): void {

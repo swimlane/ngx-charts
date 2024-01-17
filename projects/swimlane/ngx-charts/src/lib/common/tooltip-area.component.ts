@@ -60,7 +60,6 @@ export interface Tooltip {
         [attr.width]="1"
         [attr.height]="dims.height"
         [style.opacity]="anchorOpacity"
-        [style.fill]="'rgb(0,0,255)'"
         [style.pointer-events]="'none'"
         ngx-tooltip
         [tooltipDisabled]="tooltipDisabled"
