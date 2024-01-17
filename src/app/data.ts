@@ -7,7 +7,8 @@ import {
   Series,
   TreeMapData,
   SankeyData,
-  TimelineStandardData
+  TimelineStandardData,
+  TimelineStackedData
 } from '@swimlane/ngx-charts/models/chart-data.model';
 
 export const single: SingleSeries = [
@@ -485,22 +486,56 @@ export function generateData(seriesLength: number, includeMinMaxRange: boolean, 
   return results;
 }
 
-export function timelineStandardData(): TimelineStandardData {
+/*export function timelineStandardData(): TimelineStandardData {
   const results: TimelineStandardData = [];
-  const dataPoints = 7;
+  const dataPoints = 6;
   for (let i = 0; i < dataPoints; i++) {
     const country = countries[Math.floor(Math.random() * countries.length)];
-    const startTime =  Math.floor(1473700105009 + Math.random() * 1000000000);
-    // random dates between Sep 12, 2016 and Sep 24, 2016
+    const startTime =  Math.floor(1473700105009 + Math.random() * 1000000000); 
     results.push({
       name: country.name,
       startTime: new Date(startTime),
-      endTime: new Date(startTime + Math.floor(100000000 + Math.random() * 1000000000))
+      endTime: new Date(startTime + Math.floor(300000000 + Math.random() * 1000000000))
     });
   }
-
   return results;
 }
+
+export function timelineStackedData(): TimelineStackedData {
+  const results: TimelineStackedData = [];
+  const dataPoints = 6;
+  for (let i = 0; i < dataPoints; i++) {
+    const country = countries[Math.floor(Math.random() * countries.length)];
+
+    const times = [];
+    times.push(Math.floor(1473700105009 + Math.random() * 1000000000));
+    for (let i = 0; i < 3; i++) {
+      times[i + 1] = times[i] + Math.floor(300000000 + Math.random() * 1000000000);
+    }
+
+    results.push({
+      name: country.name,
+      series: [
+        {
+          name: 1990,
+          startTime: new Date(times[0]),
+          endTime: new Date(times[1])
+        },
+        {
+          name: 2000,
+          startTime: new Date(times[1]),
+          endTime: new Date(times[2])
+        },
+        {
+          name: 2010,
+          startTime: new Date(times[2]),
+          endTime: new Date(times[3])
+        }
+      ]
+    });
+  }
+  return results;
+}*/
 
 export const treemap: TreeMapData = [
   {
@@ -903,4 +938,160 @@ export const sankeyData: SankeyData = [
   { source: 'UK', target: 'Bosnia and Herzegovina', value: 20 },
   { source: 'Republic of Equatorial Guinea', target: 'Republic of Costa Rica', value: 30 },
   { source: 'Republic of Equatorial Guinea', target: 'Portugal', value: 5 }
+];
+
+export const timelineStandardData: TimelineStandardData = [
+  {
+    name: 'Germany',
+    startTime: new Date('September 22 2016'),
+    endTime: new Date('September 23 2016')
+  },
+  {
+    name: 'United States',
+    startTime: new Date('September 23 2016'),
+    endTime: new Date('September 24 2016')
+  },
+  {
+    name: 'France',
+    startTime: new Date('September 23 2016'),
+    endTime: new Date('September 25 2016')
+  },
+  {
+    name: 'United Kingdom',
+    startTime: new Date('September 22 2016'),
+    endTime: new Date('September 24 2016')
+  },
+  {
+    name: 'Spain',
+    startTime: new Date('September 22 2016'),
+    endTime: new Date('September 26 2016')
+  },
+  {
+    name: 'Italy',
+    startTime: new Date('September 24 2016'),
+    endTime: new Date('September 25 2016')
+  }
+];
+
+export const timelineStackedData: TimelineStackedData = [
+  {
+    name: 'Germany',
+    series: [
+      {
+        name: 1990,
+        startTime: new Date('September 22 2016'),
+        endTime: new Date('September 23 2016')
+      },
+      {
+        name: 2000,
+        startTime: new Date('September 24 2016'),
+        endTime: new Date('September 26 2016')
+      },
+      {
+        name: 2010,
+        startTime: new Date('September 26 2016'),
+        endTime: new Date('September 27 2016')
+      },
+    ]
+  },
+  {
+    name: 'United States',
+    series: [
+      {
+        name: 1990,
+        startTime: new Date('September 21 2016'),
+        endTime: new Date('September 22 2016')
+      },
+      {
+        name: 2000,
+        startTime: new Date('September 22 2016'),
+        endTime: new Date('September 23 2016')
+      },
+      {
+        name: 2010,
+        startTime: new Date('September 23 2016'),
+        endTime: new Date('September 24 2016')
+      },
+    ]
+  },
+  {
+    name: 'France',
+    series: [
+      {
+        name: 1990,
+        startTime: new Date('September 22 2016'),
+        endTime: new Date('September 23 2016')
+      },
+      {
+        name: 2000,
+        startTime: new Date('September 23 2016'),
+        endTime: new Date('September 25 2016')
+      },
+      {
+        name: 2010,
+        startTime: new Date('September 25 2016'),
+        endTime: new Date('September 26 2016')
+      },
+    ]
+  },
+  {
+    name: 'United Kingdom',
+    series: [
+      {
+        name: 1990,
+        startTime: new Date('September 22 2016'),
+        endTime: new Date('September 22 2016')
+      },
+      {
+        name: 2000,
+        startTime: new Date('September 22 2016'),
+        endTime: new Date('September 23 2016')
+      },
+      {
+        name: 2010,
+        startTime: new Date('September 23 2016'),
+        endTime: new Date('September 25 2016')
+      },
+    ]
+  },
+  {
+    name: 'Spain',
+    series: [
+      {
+        name: 1990,
+        startTime: new Date('September 25 2016'),
+        endTime: new Date('September 26 2016')
+      },
+      {
+        name: 2000,
+        startTime: new Date('September 26 2016'),
+        endTime: new Date('September 28 2016')
+      },
+      {
+        name: 2010,
+        startTime: new Date('September 28 2016'),
+        endTime: new Date('September 29 2016')
+      },
+    ]
+  },
+  {
+    name: 'Italy',
+    series: [
+      {
+        name: 1990,
+        startTime: new Date('September 24 2016'),
+        endTime: new Date('September 26 2016')
+      },
+      {
+        name: 2000,
+        startTime: new Date('September 26 2016'),
+        endTime: new Date('September 27 2016')
+      },
+      {
+        name: 2010,
+        startTime: new Date('September 27 2016'),
+        endTime: new Date('September 28 2016')
+      },
+    ]
+  }
 ];

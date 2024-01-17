@@ -16,7 +16,8 @@ import {
   treemap,
   timelineFilterBarData,
   fiscalYearReport,
-  timelineStandardData
+  timelineStandardData,
+  timelineStackedData
 } from './data';
 import { bubbleDemoData } from './custom-charts/bubble-chart-interactive/data';
 import { BubbleChartInteractiveServerDataModel } from './custom-charts/bubble-chart-interactive/models';
@@ -73,7 +74,6 @@ export class AppComponent implements OnInit {
   statusData: any[];
   sparklineData: any[];
   timelineFilterBarData: any[];
-  timelineData: any[];
   graph: { links: any[]; nodes: any[] };
   bubble: any;
   linearScale: boolean = false;
@@ -249,164 +249,9 @@ export class AppComponent implements OnInit {
       'endTime': 5
     }
   ];*/
-
-
-  /*timelineData: TimelineStandardData = [
-    {
-      'name': 'Germany',
-      'startTime': new Date('December 2 2016'),
-      'endTime': new Date('December 3 2016')
-    },
-    {
-      'name': 'United States',
-      'startTime': new Date('December 3 2016'),
-      'endTime': new Date('December 4 2016')
-    },
-    {
-      'name': 'France',
-      'startTime': new Date('December 3 2016'),
-      'endTime': new Date('December 5 2016')
-    },
-    {
-      'name': 'United Kingdom',
-      'startTime': new Date('December 2 2016'),
-      'endTime': new Date('December 4 2016')
-    },
-    {
-      'name': 'Spain',
-      'startTime': new Date('December 2 2016'),
-      'endTime': new Date('December 6 2016')
-    },
-    {
-      'name': 'Italy',
-      'startTime': new Date('December 4 2016'),
-      'endTime': new Date('December 5 2016')
-    }
-  ];*/
-
-  timelineStackedData: any[] = [
-    {
-      'name': 'Germany',
-      'series': [
-        {
-          'name': 1,
-          'startTime': new Date('December 2 2016'),
-          'endTime': new Date('December 3 2016')
-        },
-        {
-          'name': 2,
-          'startTime': new Date('December 4 2016'),
-          'endTime': new Date('December 6 2016')
-        },
-        {
-          'name': 3,
-          'startTime': new Date('December 6 2016'),
-          'endTime': new Date('December 7 2016')
-        },
-      ]
-    },
-    {
-      'name': 'United States',
-      'series': [
-        {
-          'name': 1,
-          'startTime': new Date('December 1 2016'),
-          'endTime': new Date('December 2 2016')
-        },
-        {
-          'name': 2,
-          'startTime': new Date('December 2 2016'),
-          'endTime': new Date('December 3 2016')
-        },
-        {
-          'name': 3,
-          'startTime': new Date('December 3 2016'),
-          'endTime': new Date('December 4 2016')
-        },
-      ]
-    },
-    {
-      'name': 'France',
-      'series': [
-        {
-          'name': 1,
-          'startTime': new Date('December 2 2016'),
-          'endTime': new Date('December 3 2016')
-        },
-        {
-          'name': 2,
-          'startTime': new Date('December 3 2016'),
-          'endTime': new Date('December 5 2016')
-        },
-        {
-          'name': 3,
-          'startTime': new Date('December 5 2016'),
-          'endTime': new Date('December 6 2016')
-        },
-      ]
-    },
-    {
-      'name': 'United Kingdom',
-      'series': [
-        {
-          'name': 1,
-          'startTime': new Date('December 2 2016'),
-          'endTime': new Date('December 2 2016')
-        },
-        {
-          'name': 2,
-          'startTime': new Date('December 2 2016'),
-          'endTime': new Date('December 3 2016')
-        },
-        {
-          'name': 3,
-          'startTime': new Date('December 3 2016'),
-          'endTime': new Date('December 5 2016')
-        },
-      ]
-    },
-    {
-      'name': 'Spain',
-      'series': [
-        {
-          'name': 1,
-          'startTime': new Date('December 5 2016'),
-          'endTime': new Date('December 6 2016')
-        },
-        {
-          'name': 2,
-          'startTime': new Date('December 6 2016'),
-          'endTime': new Date('December 8 2016')
-        },
-        {
-          'name': 3,
-          'startTime': new Date('December 8 2016'),
-          'endTime': new Date('December 9 2016')
-        },
-      ]
-    },
-    {
-      'name': 'Italy',
-      'series': [
-        {
-          'name': 1,
-          'startTime': new Date('December 4 2016'),
-          'endTime': new Date('December 6 2016')
-        },
-        {
-          'name': 2,
-          'startTime': new Date('December 6 2016'),
-          'endTime': new Date('December 7 2016')
-        },
-        {
-          'name': 3,
-          'startTime': new Date('December 7 2016'),
-          'endTime': new Date('December 8 2016')
-        },
-      ]
-    }
-  ]
-  tooltipType = 'vertical';
+  timelineStandardData = timelineStandardData;
+  timelineStackedData = timelineStackedData;
+  tooltipType = 'barLabel';
 
   // Combo Chart
   barChart: any[] = barChart;
@@ -494,7 +339,6 @@ export class AppComponent implements OnInit {
     this.statusData = this.getStatusData();
     this.sparklineData = generateData(1, false, 30);
     this.timelineFilterBarData = timelineFilterBarData();
-    this.timelineData = timelineStandardData();
   }
 
   get dateDataWithOrWithoutRange() {
@@ -566,10 +410,10 @@ export class AppComponent implements OnInit {
         this.boxData = [...this.boxData];
       }
 
-      if (this.timelineData.length > 1) {
-        const index = Math.floor(Math.random() * this.timelineData.length);
-        this.timelineData.splice(index, 1);
-        this.timelineData = [...this.timelineData];
+      if (this.timelineStandardData.length > 1) {
+        const index = Math.floor(Math.random() * this.timelineStandardData.length);
+        this.timelineStandardData.splice(index, 1);
+        this.timelineStandardData = [...this.timelineStandardData];
       }
 
       if (this.timelineStackedData.length > 1) {
@@ -680,33 +524,33 @@ export class AppComponent implements OnInit {
       const timelineStandardEntry = {
         name: country.name,
         startTime: new Date(startTime),
-        endTime: new Date(startTime + Math.floor(100000000 + Math.random() * 1000000000))
+        endTime: new Date(startTime + Math.floor(300000000 + Math.random() * 1000000000))
       };
-      this.timelineData = [...this.timelineData, timelineStandardEntry];
+      this.timelineStandardData = [...this.timelineStandardData, timelineStandardEntry];
 
       // timeline stacked chart
-      const startEndTimes = [];
-      for (let i = 0; i < 6; i++) {
-        startEndTimes.push(Math.floor(1473700105009 + Math.random() * 1000000000));
+      const times = [];
+      times.push(Math.floor(1473700105009 + Math.random() * 1000000000));
+      for (let i = 0; i < 3; i++) {
+        times[i + 1] = times[i] + Math.floor(300000000 + Math.random() * 1000000000);
       }
-      startEndTimes.sort();
       const timelineStackedEntry = {
         name: country.name,
         series: [
           {
             name: 1990,
-            startTime: new Date(startEndTimes[0]),
-            endTime: new Date(startEndTimes[1])
+            startTime: new Date(times[0]),
+            endTime: new Date(times[1])
           },
           {
             name: 2000,
-            startTime: new Date(startEndTimes[2]),
-            endTime: new Date(startEndTimes[3])
+            startTime: new Date(times[1]),
+            endTime: new Date(times[2])
           },
           {
             name: 2010,
-            startTime: new Date(startEndTimes[4]),
-            endTime: new Date(startEndTimes[5])
+            startTime: new Date(times[2]),
+            endTime: new Date(times[3])
           }
         ]
       };

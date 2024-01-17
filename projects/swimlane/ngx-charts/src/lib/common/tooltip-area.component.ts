@@ -117,7 +117,6 @@ export class TooltipArea {
   constructor(@Inject(PLATFORM_ID) private platformId: any) {}
 
   getValues(xVal): Tooltip[] {
-    console.log('xVal', xVal);
     const results = [];
 
     for (const group of this.results) {

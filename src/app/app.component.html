@@ -424,8 +424,7 @@
         [scheme]="colorScheme"
         [schemeType]="schemeType"
         [customColors]="customColors"
-        [results]="timelineData"
-        [timelineData]="timelineData"
+        [results]="timelineStandardData"
         [animations]="animations"
         [gradient]="gradient"
         [xAxis]="showXAxis"
@@ -464,7 +463,6 @@
         [scheme]="colorScheme"
         [schemeType]="schemeType"
         [results]="timelineStackedData"
-        [timelineData]="timelineStackedData"
         [animations]="animations"
         [gradient]="gradient"
         [tooltipDisabled]="tooltipDisabled"
@@ -1238,7 +1236,7 @@
         <pre *ngIf="chart.inputFormat === 'comboChart'">{{ barChart | json }}</pre>
         <pre *ngIf="chart.inputFormat === 'comboChart'">{{ lineChartSeries | json }}</pre>
         <pre *ngIf="chart.inputFormat === 'timelineFilter'">{{ timelineFilterBarData | json }}</pre>
-        <pre *ngIf="chart.inputFormat === 'timelineChart'">{{ timelineData | json }}</pre>
+        <pre *ngIf="chart.inputFormat === 'timelineStandard'">{{ timelineStandardData | json }}</pre>
         <pre *ngIf="chart.inputFormat === 'timelineStacked'">{{ timelineStackedData | json }}</pre>
         <div>
           <label>

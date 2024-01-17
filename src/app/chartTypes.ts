@@ -533,11 +533,10 @@ const chartGroups = [
       {
         name: 'Timeline Chart',
         selector: 'timeline-chart',
-        inputFormat: 'timelineChart',
+        inputFormat: 'timelineStandard',
         options: [
           'animations',
           'colorScheme',
-          'schemeType',
           'showXAxis',
           'showYAxis',
           'gradient',
@@ -554,7 +553,6 @@ const chartGroups = [
           'roundDomains',
           'tooltipDisabled',
           'roundEdges',
-          'xScaleMax',
           'trimXAxisTicks',
           'trimYAxisTicks',
           'rotateXAxisTicks',
@@ -576,7 +574,6 @@ const chartGroups = [
         options: [
           'animations',
           'colorScheme',
-          'schemeType',
           'showXAxis',
           'showYAxis',
           'gradient',
@@ -593,8 +590,6 @@ const chartGroups = [
           'roundDomains',
           'tooltipDisabled',
           'roundEdges',
-          'xScaleMax',
-          'showDataLabel',
           'trimXAxisTicks',
           'trimYAxisTicks',
           'rotateXAxisTicks',

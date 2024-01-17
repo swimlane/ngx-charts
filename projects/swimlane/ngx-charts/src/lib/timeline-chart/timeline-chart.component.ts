@@ -29,6 +29,8 @@ import { getScaleType } from '../common/domain.helper';
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"
       [animations]="animations"
+      (legendLabelActivate)="onActivate($event, true)"
+      (legendLabelDeactivate)="onDeactivate($event, true)"
       (legendLabelClick)="onClick($event)"
     >
       <svg:defs>
@@ -79,7 +81,7 @@ import { getScaleType } from '../common/domain.helper';
             [xScale]="xScale"
             [yScale]="yScale"
             [colors]="colors"
-            [series]="timelineData"
+            [series]="results"
             [gradient]="gradient"
             [tooltipDisabled]="tooltipDisabled"
             [tooltipTemplate]="tooltipTemplate"
@@ -89,6 +91,8 @@ import { getScaleType } from '../common/domain.helper';
             [dataLabelFormatting]="dataLabelFormatting"
             [noBarWhenZero]="noBarWhenZero"
             (select)="onClick($event)"
+            (activate)="onActivate($event)"
+            (deactivate)="onDeactivate($event)"
             (dataLabelWidthChanged)="onDataLabelMaxWidthChanged($event)"
           />
         </svg:g>
@@ -99,7 +103,7 @@ import { getScaleType } from '../common/domain.helper';
             [dims]="dims"
             [xScale]="xScale"
             [yScale]="yScale"
-            [results]="timelineData"
+            [results]="results"
             [colors]="colors"
             [tooltipDisabled]="tooltipDisabled"
             [tooltipTemplate]="seriesTooltipTemplate"
@@ -110,7 +114,7 @@ import { getScaleType } from '../common/domain.helper';
         ngx-charts-timeline
         *ngIf="timelineFilter && scaleType != 'ordinal'"
         [attr.transform]="timelineTransform"
-        [results]="timelineData"
+        [results]="results"
         [view]="[timelineWidth, height]"
         [height]="timelineHeight"
         [scheme]="scheme"
@@ -127,13 +131,12 @@ import { getScaleType } from '../common/domain.helper';
           [xScale]="timelineXScale"
           [yScale]="timelineYScale"
           [colors]="colors"
-          [series]="timelineData"
+          [series]="results"
           [gradient]="gradient"
           [tooltipDisabled]="true"
           [roundEdges]="roundEdges"
           [animations]="animations"
           [noBarWhenZero]="noBarWhenZero"
-          (select)="onClick($event)"
         />
       </svg:g>
     </ngx-charts-chart>
@@ -175,7 +178,6 @@ export class TimelineChartComponent extends BaseChartComponent {
   @Input() dataLabelFormatting: any;
   @Input() noBarWhenZero: boolean = true;
   @Input() wrapTicks = false;
-  @Input() timelineData: any[];
   @Input() timelineFilter: any[];
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
@@ -276,7 +278,7 @@ export class TimelineChartComponent extends BaseChartComponent {
 
   getXDomain(): any[] {
     const values = [];
-    for (const d of this.timelineData) {
+    for (const d of this.results) {
       values.push(d.startTime);
       values.push(d.endTime);
     }
@@ -294,7 +296,7 @@ export class TimelineChartComponent extends BaseChartComponent {
   }
 
   getYDomain(): string[] {
-    return this.timelineData.map(d => d.name);
+    return this.results.map(d => d.name);
   }
 
   onClick(data): void {
@@ -348,7 +350,7 @@ export class TimelineChartComponent extends BaseChartComponent {
     } else {
       this.dataLabelMaxWidth.positive = Math.max(this.dataLabelMaxWidth.positive, event.size.width);
     }
-    if (event.index === this.timelineData.length - 1) {
+    if (event.index === this.results.length - 1) {
       setTimeout(() => this.update());
     }
   }
@@ -369,7 +371,7 @@ export class TimelineChartComponent extends BaseChartComponent {
     this.xScale = this.getXScale(this.xDomain, this.dims.width);
   }
 
-  /*onActivate(item, fromLegend: boolean = false) {
+  onActivate(item, fromLegend: boolean = false) {
     item = this.results.find(d => {
       if (fromLegend) {
         return d.label === item.name;
@@ -406,5 +408,5 @@ export class TimelineChartComponent extends BaseChartComponent {
     this.activeEntries = [...this.activeEntries];
 
     this.deactivate.emit({ value: item, entries: this.activeEntries });
-  }*/
+  }
 }

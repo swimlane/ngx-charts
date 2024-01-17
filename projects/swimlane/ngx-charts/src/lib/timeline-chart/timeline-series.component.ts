@@ -16,7 +16,6 @@ import { PlacementTypes } from '../common/tooltip/position';
 import { StyleTypes } from '../common/tooltip/style.type';
 import { TimelineChartType } from './types/timeline-chart-type.enum';
 import { Bar } from '../bar-chart/types/bar.model';
-import { ViewDimensions } from '../common/types/view-dimension.interface';
 import { BarOrientation } from '../common/types/bar-orientation.enum';
 import { ScaleType } from '../common/types/scale-type.enum';
 
@@ -74,7 +73,7 @@ export class TimelineSeriesComponent implements OnChanges {
   @Input() colors: ColorHelper;
   @Input() tooltipDisabled: boolean = false;
   @Input() gradient: boolean;
-  @Input() activeEntries: DataItem[];
+  @Input() activeEntries: any[];
   @Input() seriesName: StringOrNumberOrDate;
   @Input() tooltipTemplate: TemplateRef<any>;
   @Input() roundEdges: boolean;
@@ -126,15 +125,7 @@ export class TimelineSeriesComponent implements OnChanges {
 
       if (this.colors.scaleType === ScaleType.Ordinal) {
         bar.color = this.colors.getColor(label);
-      } /*else {
-        if (this.type === TimelineChartType.Standard) {
-          bar.color = this.colors.getColor(value);
-          bar.gradientStops = this.colors.getLinearGradientStops(value);
-        } else {
-          bar.color = this.colors.getColor(bar.offset1);
-          bar.gradientStops = this.colors.getLinearGradientStops(bar.offset1, bar.offset0);
-        }
-      }*/
+      }
 
       let tooltipLabel = formattedLabel;
       bar.ariaLabel = formattedLabel + ' ' + value.toLocaleString();
@@ -176,13 +167,19 @@ export class TimelineSeriesComponent implements OnChanges {
     this.tooltipType = this.tooltipDisabled ? undefined : StyleTypes.tooltip;
   }
 
-  isActive(entry: DataItem): boolean {
+  isActive(entry: any): boolean {
     if (!this.activeEntries) return false;
 
-    const item = this.activeEntries.find(active => {
-      return entry.name === active.name && entry.value === active.value;
-    });
-
+    let item;
+    if (this.type === TimelineChartType.Standard) {
+      item = this.activeEntries.find(active => {
+        return entry.name === active.name && entry.value === active.value;
+      });
+    } else {
+      item = this.activeEntries.find(active => {
+        return entry.name === active.name && entry.series === active.series;
+      });
+    }
     return item !== undefined;
   }
 

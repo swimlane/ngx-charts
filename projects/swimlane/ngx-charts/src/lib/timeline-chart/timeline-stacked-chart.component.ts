@@ -33,6 +33,8 @@ import { getScaleType } from '../common/domain.helper';
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"
       [animations]="animations"
+      (legendLabelActivate)="onActivate($event, undefined, true)"
+      (legendLabelDeactivate)="onDeactivate($event, undefined, true)"
       (legendLabelClick)="onClick($event)"
     >
       <svg:defs>
@@ -78,7 +80,7 @@ import { getScaleType } from '../common/domain.helper';
         ></svg:g>
         <svg:g [attr.clip-path]="clipPath">
           <svg:g
-            *ngFor="let group of timelineData; let index = index; trackBy: trackBy"
+            *ngFor="let group of results; let index = index; trackBy: trackBy"
             [@animationState]="'active'"
             [attr.transform]="groupTransform(group)"
           >
@@ -99,6 +101,8 @@ import { getScaleType } from '../common/domain.helper';
               [dataLabelFormatting]="dataLabelFormatting"
               [noBarWhenZero]="noBarWhenZero"
               (select)="onClick($event, group)"
+              (activate)="onActivate($event, group)"
+              (deactivate)="onDeactivate($event, group)"
               (dataLabelWidthChanged)="onDataLabelMaxWidthChanged($event, index)"
             />
           </svg:g>
@@ -110,7 +114,7 @@ import { getScaleType } from '../common/domain.helper';
             [dims]="dims"
             [xScale]="xScale"
             [yScale]="yScale"
-            [results]="timelineData"
+            [results]="results"
             [colors]="colors"
             [tooltipDisabled]="tooltipDisabled"
             [tooltipTemplate]="seriesTooltipTemplate"
@@ -121,7 +125,7 @@ import { getScaleType } from '../common/domain.helper';
         ngx-charts-timeline
         *ngIf="timelineFilter && scaleType != 'ordinal'"
         [attr.transform]="timelineTransform"
-        [results]="timelineData"
+        [results]="results"
         [view]="[timelineWidth, height]"
         [height]="timelineHeight"
         [scheme]="scheme"
@@ -133,7 +137,7 @@ import { getScaleType } from '../common/domain.helper';
         (onDomainChange)="updateDomain($event)"
       >
         <svg:g
-          *ngFor="let group of timelineData; let index = index; trackBy: trackBy"
+          *ngFor="let group of results; let index = index; trackBy: trackBy"
           [@animationState]="'active'"
           [attr.transform]="timelineGroupTransform(group)"
         >
@@ -205,7 +209,6 @@ export class TimelineStackedComponent extends BaseChartComponent {
   @Input() dataLabelFormatting: any;
   @Input() noBarWhenZero: boolean = true;
   @Input() wrapTicks = false;
-  @Input() timelineData: any[];
   @Input() timelineFilter: any[];
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
@@ -292,7 +295,7 @@ export class TimelineStackedComponent extends BaseChartComponent {
   getGroupDomain(): string[] {
     const domain = [];
 
-    for (const group of this.timelineData) {
+    for (const group of this.results) {
       if (!domain.includes(group.name)) {
         domain.push(group.name);
       }
@@ -304,7 +307,7 @@ export class TimelineStackedComponent extends BaseChartComponent {
   getInnerDomain(): string[] {
     const domain = [];
 
-    for (const group of this.timelineData) {
+    for (const group of this.results) {
       for (const d of group.series) {
         if (!domain.includes(d.name)) {
           domain.push(d.name);
@@ -317,7 +320,7 @@ export class TimelineStackedComponent extends BaseChartComponent {
 
   getValueDomain(): any[] {
     const values = [];
-    for (const group of this.timelineData) {
+    for (const group of this.results) {
       for (const d of group.series) {
         values.push(d.startTime);
         values.push(d.endTime);
@@ -420,7 +423,7 @@ export class TimelineStackedComponent extends BaseChartComponent {
     } else {
       this.dataLabelMaxWidth.positive = Math.max(this.dataLabelMaxWidth.positive, event.size.width);
     }
-    if (groupIndex === this.timelineData.length - 1) {
+    if (groupIndex === this.results.length - 1) {
       setTimeout(() => this.update());
     }
   }
@@ -441,13 +444,13 @@ export class TimelineStackedComponent extends BaseChartComponent {
     this.xScale = this.getXScale(this.valueDomain, this.dims.width);
   }
 
-  /*onActivate(event, group: Series, fromLegend: boolean = false) {
+  onActivate(event, group: Series, fromLegend: boolean = false) {
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
     }
 
-    const items = this.timelineData
+    const items = this.results
       .map(g => g.series)
       .flat()
       .filter(i => {
@@ -477,5 +480,5 @@ export class TimelineStackedComponent extends BaseChartComponent {
     });
 
     this.deactivate.emit({ value: item, entries: this.activeEntries });
-  }*/
+  }
 }
