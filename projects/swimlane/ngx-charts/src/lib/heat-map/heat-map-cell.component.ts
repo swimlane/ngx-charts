@@ -130,7 +130,8 @@ export class HeatMapCellComponent implements OnChanges {
   }
   calculateWidth(value): number {
     //for default font size of 14px,
-    // the this.width of a single digit number is 14 and width of comma is 3.21, the width of 'K','B','M' is about 5.66
+    // the this.width of a single digit number is around 12.6,
+    // the width of 'K','B','M' is about 12.6
     const digitWidth = 12.6;
     const kbmWidth = 11.39;
 
@@ -139,7 +140,7 @@ export class HeatMapCellComponent implements OnChanges {
     let totalWidth = 0;
 
     for (const char of stringValue) {
-      // Check if the character is a digit or a comma
+      // Check if the character is a digit
       if (/[0-9]/.test(char)) {
         totalWidth += digitWidth;
       } else {
