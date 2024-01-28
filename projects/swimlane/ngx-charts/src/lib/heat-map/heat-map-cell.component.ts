@@ -99,12 +99,11 @@ export class HeatMapCellComponent implements OnChanges {
   }
   calculateTranslation(): string {
     var valueWidth = this.calculateWidth(this.data);
-    if (valueWidth >= this.width) {
+    if (valueWidth >= (this.width + 4)) {
       var formatedValue = this.shortenNum(this.data);
       valueWidth = this.calculateWidth(formatedValue);
       let textElement = select(this.element).select('.cell').select('text');
       textElement.text(formatedValue);
-      console.log(formatedValue, valueWidth);
     }
     // default value height is 25 px
     var valueHeight = 25;
@@ -116,7 +115,7 @@ export class HeatMapCellComponent implements OnChanges {
     const abbreviations = [
       { value: 1e9, symbol: 'B' },
       { value: 1e6, symbol: 'M' },
-      { value: 1e3, symbol: 'k' },
+      { value: 1e3, symbol: 'K' },
     ];
 
     for (const abbreviation of abbreviations) {
@@ -129,23 +128,20 @@ export class HeatMapCellComponent implements OnChanges {
     return value.toString();
   }
   calculateWidth(value): number {
-    //for default font size of 14px,
-    // the this.width of a single digit number is around 12.6,
-    // the width of 'K','B','M' is about 12.6
     const digitWidth = 12.6;
-    const kbmWidth = 11.39;
+    const kbmWidth = 19;
 
     const stringValue = value.toLocaleString();
 
     let totalWidth = 0;
 
     for (const char of stringValue) {
-      // Check if the character is a digit
       if (/[0-9]/.test(char)) {
         totalWidth += digitWidth;
       } else {
         totalWidth += kbmWidth;
       }
+      totalWidth -= 3;
     }
     return totalWidth;
   }
