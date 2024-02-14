@@ -47,6 +47,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
           [tooltipDisabled]="tooltipDisabled"
           [tooltipTemplate]="tooltipTemplate"
           [tooltipText]="tooltipText"
+          [showSum]="doughnut && showDoughnutSum"
           (dblclick)="dblclick.emit($event)"
           (select)="onClick($event)"
           (activate)="onActivate($event)"
@@ -66,6 +67,7 @@ export class PieChartComponent extends BaseChartComponent {
   @Input() legendPosition: LegendPosition = LegendPosition.Right;
   @Input() explodeSlices: boolean = false;
   @Input() doughnut: boolean = false;
+  @Input() showDoughnutSum = false;
   @Input() arcWidth: number = 0.25;
   @Input() gradient: boolean;
   @Input() activeEntries: any[] = [];

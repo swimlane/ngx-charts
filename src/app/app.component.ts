@@ -176,6 +176,7 @@ export class AppComponent implements OnInit {
   // pie
   showLabels = true;
   explodeSlices = false;
+  showDoughnutSum = false;
   doughnut = false;
   arcWidth = 0.25;
 
