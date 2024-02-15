@@ -177,6 +177,7 @@ export class AppComponent implements OnInit {
   showLabels = true;
   explodeSlices = false;
   showDoughnutSum = false;
+  totalUnit = '';
   doughnut = false;
   arcWidth = 0.25;
 

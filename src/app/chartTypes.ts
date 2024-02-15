@@ -306,6 +306,7 @@ const chartGroups = [
           'legendPosition',
           'doughnut',
           'showDoughnutSum',
+          'totalUnit',
           'arcWidth',
           'explodeSlices',
           'showLabels',

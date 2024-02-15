@@ -64,8 +64,11 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
         [tooltipContext]="arc.data"
       ></svg:g>
     </svg:g>
+    <svg:text *ngIf="showSum" class="doughnut-sum-label" x="0" y="-20" text-anchor="middle">
+     Total
+    </svg:text>
     <svg:text *ngIf="showSum" class="doughnut-sum-label" x="0" y="5" text-anchor="middle">
-      {{ sum() }}
+     {{ sum() }} {{totalUnit}}
     </svg:text>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -88,6 +91,7 @@ export class PieSeriesComponent implements OnChanges {
   @Input() tooltipTemplate: TemplateRef<any>;
   @Input() animations: boolean = true;
   @Input() showSum: boolean = false;
+  @Input() totalUnit!: string;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
