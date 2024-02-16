@@ -173,7 +173,6 @@
       }
     }
   },
-  "defaultProject": "ngx-charts",
   "schematics": {
     "@angular-eslint/schematics:application": {
       "setParserOptionsProject": true
