@@ -52,7 +52,7 @@ export function cloneLineCoordinates(original: LineCoordinates): LineCoordinates
     cloneVector2d(original[1]),
     cloneVector2d(original[2]),
     cloneVector2d(original[3])
-  ]
+  ];
 }
 
 @Component({
@@ -311,8 +311,13 @@ export class BoxComponent implements OnChanges {
 
     const lineCoordinates: LineCoordinates = cloneLineCoordinates(this.lineCoordinates);
 
-    lineCoordinates[1].v1.y = lineCoordinates[1].v2.y = lineCoordinates[3].v1.y = lineCoordinates[3].v2.y = lineCoordinates[0].v1.y = lineCoordinates[0].v2.y =
-      lineCoordinates[2].v1.y;
+    lineCoordinates[1].v1.y =
+      lineCoordinates[1].v2.y =
+      lineCoordinates[3].v1.y =
+      lineCoordinates[3].v2.y =
+      lineCoordinates[0].v1.y =
+      lineCoordinates[0].v2.y =
+        lineCoordinates[2].v1.y;
 
     return lineCoordinates;
   }
