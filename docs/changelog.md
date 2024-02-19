@@ -1,5 +1,10 @@
 # Changelog
 
+## 21.0.0
+
+- Breaking: Upgrade Angular to v17
+- Fix: Remove rfdc
+
 ## 20.5.0
 
 - Feature: Add Sankey diagram chart type
