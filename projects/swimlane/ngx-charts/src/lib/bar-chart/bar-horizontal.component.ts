@@ -123,6 +123,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
   @Input() dataLabelFormatting: any;
   @Input() noBarWhenZero: boolean = true;
   @Input() wrapTicks = false;
+  @Input() sortData = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -141,12 +142,21 @@ export class BarHorizontalComponent extends BaseChartComponent {
   yAxisWidth: number = 0;
   legendOptions: LegendOptions;
   dataLabelMaxWidth: any = { negative: 0, positive: 0 };
+  originalData: any;
 
   update(): void {
     super.update();
 
     if (!this.showDataLabel) {
       this.dataLabelMaxWidth = { negative: 0, positive: 0 };
+    }
+    if (!this.originalData || (this.originalData.length != this.results.length)) {
+      this.originalData = this.results;
+    }
+    if (this.sortData) {
+      this.results.sort((a, b) => b.value - a.value);
+    } else {
+      this.results = this.originalData;
     }
 
     this.margin = [10, 20 + this.dataLabelMaxWidth.positive, 10, 20 + this.dataLabelMaxWidth.negative];
