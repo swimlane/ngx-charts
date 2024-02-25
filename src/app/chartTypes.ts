@@ -33,7 +33,8 @@ const chartGroups = [
           'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength',
-          'wrapTicks'
+          'wrapTicks',
+          'sortData'
         ]
       },
       {
@@ -67,7 +68,8 @@ const chartGroups = [
           'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength',
-          'wrapTicks'
+          'wrapTicks',
+          'sortData'
         ],
         defaults: {
           yAxisLabel: 'Country',
@@ -178,7 +180,8 @@ const chartGroups = [
           'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength',
-          'wrapTicks'
+          'wrapTicks',
+          'sortData'
         ]
       },
       {
@@ -211,7 +214,8 @@ const chartGroups = [
           'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength',
-          'wrapTicks'
+          'wrapTicks',
+          'sortData'
         ],
         defaults: {
           yAxisLabel: 'Country',
