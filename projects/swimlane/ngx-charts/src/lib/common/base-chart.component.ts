@@ -224,9 +224,15 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, 
 
     const chartEl = this.chartElement.nativeElement.firstElementChild;
 
+    let [width, height] = [this.width, this.height];
+    if (isPlatformBrowser(this.platformId)) {
+      const rect = this.chartElement.nativeElement.getBoundingClientRect();
+      width = rect.width;
+      height = rect.height;
+    }
     const ops = {
-      width: this.width,
-      height: this.height,
+      width,
+      height,
       ...(options.canvasOptions || {})
     };
     const { type } = options;
