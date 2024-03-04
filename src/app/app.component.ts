@@ -494,7 +494,7 @@ export class AppComponent implements OnInit {
       alert(
         'If you have multiple component instances, you cannot determine the chart to be exported. Manually specify the node to be exported'
       );
-    if (this.chartEl instanceof BaseChartComponent)
+    if (this.chartEl instanceof BaseChartComponent) {
       this.chartEl
         .toDataURL({
           type: this.exportFormat,
@@ -508,6 +508,7 @@ export class AppComponent implements OnInit {
           link.href = dataUrl;
           link.click();
         });
+    }
   }
 
   toggleFitContainer() {
