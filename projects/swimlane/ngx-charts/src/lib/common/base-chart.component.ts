@@ -217,9 +217,10 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, 
       canvasOptions?: { pixelRatio?: number; transparentBackground?: boolean };
     } = {}
   ): Promise<string> {
-    if (this.getContainerDims() === null)
+    if (this.getContainerDims() === null) {
       // If not browser
       return null;
+    }
 
     const chartEl = this.chartElement.nativeElement.firstElementChild;
 
