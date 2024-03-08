@@ -211,10 +211,14 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, 
     return results;
   }
 
+  get chartEl() {
+    return this.chartElement;
+  }
+
   toDataURL<T extends 'png' | 'jpg' | 'svg'>(
     options: {
       type?: T;
-      canvasOptions?: { pixelRatio?: number; transparentBackground?: boolean };
+      canvasOptions?: { pixelRatio?: number; transparentBackground?: boolean; width?: number; height?: number };
     } = {}
   ): Promise<string> {
     if (this.getContainerDims() === null) {

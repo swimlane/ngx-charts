@@ -268,7 +268,7 @@ export class AppComponent implements OnInit {
   exportVisible: boolean = true;
 
   // Export Image
-  @ViewChild('ngxCharts') chartEl: BaseChartComponent | HTMLElement | null;
+  @ViewChild('ngxCharts') chartEl: BaseChartComponent | null;
   exportFormat: 'png' | 'jpg' | 'svg' = 'svg';
   transparentBackground: boolean = false;
 
@@ -495,11 +495,14 @@ export class AppComponent implements OnInit {
         'If you have multiple component instances, you cannot determine the chart to be exported. Manually specify the node to be exported'
       );
     if (this.chartEl instanceof BaseChartComponent) {
+      const { width, height } = this.chartEl.chartEl.nativeElement.getBoundingClientRect();
       this.chartEl
         .toDataURL({
           type: this.exportFormat,
           canvasOptions: {
-            transparentBackground: this.transparentBackground
+            transparentBackground: this.transparentBackground,
+            width,
+            height
           }
         })
         .then(dataUrl => {
@@ -820,6 +823,7 @@ export class AppComponent implements OnInit {
   yRightTickFormat(data) {
     return `${data}%`;
   }
+
   /*
   **
   End of Combo Chart
