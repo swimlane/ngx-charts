@@ -27,7 +27,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
     <svg:g
       ngx-charts-bar
       *ngFor="let bar of bars; trackBy: trackBy"
-      [@animationState]="'active'"
+      @scaleToHidden
       [width]="bar.width"
       [height]="bar.height"
       [x]="bar.x"
@@ -70,12 +70,13 @@ import { ScaleType } from '../common/types/scale-type.enum';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
-    trigger('animationState', [
+    trigger('scaleToHidden', [
       transition(':leave', [
         style({
-          opacity: 1
+          transformOrigin: 'left',
+          opacity: '1'
         }),
-        animate(500, style({ opacity: 0 }))
+        animate('500ms ease-out', style({ transform: 'scaleX(0)', opacity: '0' }))
       ])
     ])
   ]

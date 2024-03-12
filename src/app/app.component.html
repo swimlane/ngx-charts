@@ -4,6 +4,7 @@
       <ngx-charts-bar-vertical
         *ngIf="chartType === 'bar-vertical'"
         class="chart-container"
+        @queryChildAnimations
         [view]="view"
         [scheme]="colorScheme"
         [schemeType]="schemeType"
@@ -42,6 +43,7 @@
       <ngx-charts-bar-horizontal
         *ngIf="chartType === 'bar-horizontal'"
         class="chart-container"
+        @queryChildAnimations
         [view]="view"
         [scheme]="colorScheme"
         [schemeType]="schemeType"
@@ -79,6 +81,7 @@
       <ngx-charts-bar-vertical-2d
         *ngIf="chartType === 'bar-vertical-2d'"
         class="chart-container"
+        @queryChildAnimations
         [view]="view"
         [scheme]="colorScheme"
         [schemeType]="schemeType"
@@ -117,6 +120,7 @@
       <ngx-charts-bar-horizontal-2d
         *ngIf="chartType === 'bar-horizontal-2d'"
         class="chart-container"
+        @queryChildAnimations
         [view]="view"
         [scheme]="colorScheme"
         [schemeType]="schemeType"
@@ -155,6 +159,7 @@
       <ngx-charts-bar-vertical-stacked
         *ngIf="chartType === 'bar-vertical-stacked'"
         class="chart-container"
+        @queryChildAnimations
         [view]="view"
         [scheme]="colorScheme"
         [schemeType]="schemeType"

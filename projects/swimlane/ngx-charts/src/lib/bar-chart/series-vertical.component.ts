@@ -30,7 +30,7 @@ import { isPlatformServer } from '@angular/common';
       <svg:g
         ngx-charts-bar
         *ngFor="let bar of bars; trackBy: trackBy"
-        [@animationState]="'active'"
+        @scaleToHidden
         [@.disabled]="!animations"
         [width]="bar.width"
         [height]="bar.height"
@@ -105,12 +105,13 @@ import { isPlatformServer } from '@angular/common';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
-    trigger('animationState', [
+    trigger('scaleToHidden', [
       transition(':leave', [
         style({
-          opacity: 1
+          transformOrigin: 'center',
+          opacity: '1'
         }),
-        animate(500, style({ opacity: 0 }))
+        animate('500ms ease-out', style({ transform: 'scaleY(0)', opacity: '0' }))
       ])
     ])
   ]

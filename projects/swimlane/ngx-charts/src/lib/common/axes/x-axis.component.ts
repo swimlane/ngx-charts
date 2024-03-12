@@ -12,6 +12,7 @@ import {
 import { XAxisTicksComponent } from './x-axis-ticks.component';
 import { Orientation } from '../types/orientation.enum';
 import { ViewDimensions } from '../types/view-dimension.interface';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'g[ngx-charts-x-axis]',
@@ -46,9 +47,23 @@ import { ViewDimensions } from '../types/view-dimension.interface';
       ></svg:g>
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('adsfadsfaasdf', [
+      transition(':leave', [
+        style({
+          transform: 'translate(-50px , 0)'
+        }),
+        animate('500ms', style({ transform: 'translate(-200px , 0)' }))
+      ])
+    ])
+  ]
 })
 export class XAxisComponent implements OnChanges {
+  test(e) {
+    console.log(e);
+    // debugger
+  }
   @Input() xScale;
   @Input() dims: ViewDimensions;
   @Input() trimTicks: boolean;

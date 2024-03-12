@@ -15,6 +15,7 @@ import { id } from '../utils/id';
 import { DataItem } from '../models/chart-data.model';
 import { BarOrientation } from '../common/types/bar-orientation.enum';
 import { Gradient } from '../common/types/gradient.interface';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'g[ngx-charts-bar]',
@@ -27,6 +28,7 @@ import { Gradient } from '../common/types/gradient.interface';
       stroke="none"
       role="img"
       tabIndex="-1"
+      @animationState
       [class.active]="isActive"
       [class.hidden]="hideBar"
       [attr.d]="path"
@@ -35,7 +37,17 @@ import { Gradient } from '../common/types/gradient.interface';
       (click)="select.emit(data)"
     />
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('animationState', [
+      transition(':enter', [
+        style({
+          opacity: 0
+        }),
+        animate('500ms 600ms ease-in', style({ opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class BarComponent implements OnChanges {
   @Input() fill: string;
@@ -101,7 +113,9 @@ export class BarComponent implements OnChanges {
     const node = select(this.element).select('.bar');
     const path = this.getPath();
     if (this.animations) {
-      node.transition().duration(500).attr('d', path);
+      setTimeout(() => {
+        node.transition().duration(500).attr('d', path);
+      }, 600);
     } else {
       node.attr('d', path);
     }
