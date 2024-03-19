@@ -29,7 +29,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
       stroke="none"
       role="img"
       tabIndex="-1"
-      @animationState
+      @enterAnimation
       [class.active]="isActive"
       [class.hidden]="hideBar"
       [attr.d]="path"
@@ -40,14 +40,14 @@ import { animate, style, transition, trigger } from '@angular/animations';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
-    trigger('animationState', [
+    trigger('enterAnimation', [
       transition(':enter', [
         style({
           opacity: 0
         }),
         animate('500ms 600ms ease-in', style({ opacity: 1 }))
       ])
-    ])
+    ]),
   ]
 })
 export class BarComponent implements OnChanges {
@@ -130,7 +130,7 @@ export class BarComponent implements OnChanges {
     if (this.animations) {
       setTimeout(() => {
         node.transition().duration(500).attr('d', path);
-      }, 600);
+      }, 500);
     } else {
       node.attr('d', path);
     }

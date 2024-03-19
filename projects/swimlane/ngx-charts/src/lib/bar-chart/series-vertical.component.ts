@@ -1,16 +1,16 @@
 import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  OnChanges,
   ChangeDetectionStrategy,
-  TemplateRef,
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnChanges,
+  Output,
   PLATFORM_ID,
-  Inject
+  TemplateRef
 } from '@angular/core';
-import { trigger, style, animate, transition } from '@angular/animations';
-import { formatLabel, escapeLabel } from '../common/label.helper';
+import { animate, style, transition, trigger } from '@angular/animations';
+import { escapeLabel, formatLabel } from '../common/label.helper';
 import { DataItem, StringOrNumberOrDate } from '../models/chart-data.model';
 import { PlacementTypes } from '../common/tooltip/position';
 import { StyleTypes } from '../common/tooltip/style.type';

@@ -49,21 +49,21 @@ import { animate, style, transition, trigger } from '@angular/animations';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
-    trigger('adsfadsfaasdf', [
-      transition(':leave', [
-        style({
-          transform: 'translate(-50px , 0)'
-        }),
-        animate('500ms', style({ transform: 'translate(-200px , 0)' }))
-      ])
-    ])
+    // trigger('testLeab', [
+    //   transition(':leave', [
+    //     style({
+    //       transform: 'translate(-50px , 0)'
+    //     }),
+    //     animate('500ms', style({ transform: 'translate(-200px , 0)' }))
+    //   ])
+    // ])
   ]
 })
 export class XAxisComponent implements OnChanges {
-  test(e) {
-    console.log(e);
-    // debugger
-  }
+  // test(e) {
+  //   console.trace(e);
+  //   // debugger
+  // }
   @Input() xScale;
   @Input() dims: ViewDimensions;
   @Input() trimTicks: boolean;

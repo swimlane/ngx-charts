@@ -98,7 +98,13 @@ import {animate, style, transition, trigger} from "@angular/animations";
         style({
           opacity: '0'
         }),
-        animate('500ms', style({ transform: '0' }))
+        animate('500ms', style({ opacity: '0' }))
+      ]),
+      transition(':enter', [
+        style({
+          opacity: '0'
+        }),
+        animate('500ms 200ms', style({ opacity: '1' }))
       ])
     ])
   ]
