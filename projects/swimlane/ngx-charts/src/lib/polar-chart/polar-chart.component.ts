@@ -30,6 +30,7 @@ const twoPI = 2 * Math.PI;
   selector: 'ngx-charts-polar-chart',
   template: `
     <ngx-charts-chart
+      @animationState
       [view]="[width, height]"
       [showLegend]="legend"
       [legendOptions]="legendOptions"
@@ -92,7 +93,7 @@ const twoPI = 2 * Math.PI;
           [width]="dims.width"
         ></svg:g>
         <svg:g *ngIf="!isSSR" [attr.transform]="transformPlot">
-          <svg:g *ngFor="let series of results; trackBy: trackBy" [@animationState]="'active'">
+          <svg:g *ngFor="let series of results; trackBy: trackBy">
             <svg:g
               ngx-charts-polar-series
               [gradient]="gradient"
@@ -147,12 +148,23 @@ const twoPI = 2 * Math.PI;
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('animationState', [
-      transition(':leave', [
+      transition(':enter', [
         style({
-          opacity: 1
+          opacity: 0
         }),
         animate(
-          500,
+          '500ms 500ms',
+          style({
+            opacity: 0
+          })
+        )
+      ]),
+      transition(':leave', [
+        style({
+          opacity: 0
+        }),
+        animate(
+          '500ms',
           style({
             opacity: 0
           })

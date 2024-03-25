@@ -83,7 +83,7 @@ import { isPlatformServer } from '@angular/common';
         ></svg:g>
         <svg:g [attr.clip-path]="clipPath">
           <svg:g *ngIf="!isSSR">
-            <svg:g *ngFor="let series of results; trackBy: trackBy" [@animationState]="'active'">
+            <svg:g *ngFor="let series of results; trackBy: trackBy">
               <svg:g
                 ngx-charts-line-series
                 [xScale]="xScale"
@@ -182,22 +182,7 @@ import { isPlatformServer } from '@angular/common';
   `,
   styleUrls: ['../common/base-chart.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('animationState', [
-      transition(':leave', [
-        style({
-          opacity: 1
-        }),
-        animate(
-          500,
-          style({
-            opacity: 0
-          })
-        )
-      ])
-    ])
-  ]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LineChartComponent extends BaseChartComponent implements OnInit {
   @Input() legend: boolean;
