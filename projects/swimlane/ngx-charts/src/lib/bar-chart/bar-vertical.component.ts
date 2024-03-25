@@ -1,12 +1,12 @@
 import {
-  Component,
-  Input,
-  ViewEncapsulation,
-  Output,
-  EventEmitter,
   ChangeDetectionStrategy,
+  Component,
   ContentChild,
-  TemplateRef
+  EventEmitter,
+  Input,
+  Output,
+  TemplateRef,
+  ViewEncapsulation
 } from '@angular/core';
 import { scaleBand, scaleLinear } from 'd3-scale';
 
@@ -17,7 +17,6 @@ import { DataItem } from '../models/chart-data.model';
 import { LegendOptions, LegendPosition } from '../common/types/legend.model';
 import { ScaleType } from '../common/types/scale-type.enum';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
-import { animate, animateChild, query, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'ngx-charts-bar-vertical',
@@ -35,7 +34,6 @@ import { animate, animateChild, query, style, transition, trigger } from '@angul
       <svg:g [attr.transform]="transform" class="bar-chart chart">
         <svg:g
           ngx-charts-x-axis
-          @testHide
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
@@ -53,7 +51,6 @@ import { animate, animateChild, query, style, transition, trigger } from '@angul
         ></svg:g>
         <svg:g
           ngx-charts-y-axis
-          @testHide
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
@@ -93,23 +90,7 @@ import { animate, animateChild, query, style, transition, trigger } from '@angul
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['../common/base-chart.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  animations: [
-    trigger('testHide', [
-      transition(':leave', [
-        style({
-          opacity: '0'
-        }),
-        animate('500ms', style({ opacity: '0' }))
-      ]),
-      transition(':enter', [
-        style({
-          opacity: '0'
-        }),
-        animate('500ms 200ms', style({ opacity: '1' }))
-      ])
-    ])
-  ]
+  encapsulation: ViewEncapsulation.None
 })
 export class BarVerticalComponent extends BaseChartComponent {
   @Input() legend = false;

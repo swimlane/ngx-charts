@@ -1,12 +1,12 @@
 import {
+  ChangeDetectionStrategy,
   Component,
+  ContentChild,
+  EventEmitter,
   Input,
   Output,
-  EventEmitter,
-  ViewEncapsulation,
-  ChangeDetectionStrategy,
-  ContentChild,
-  TemplateRef
+  TemplateRef,
+  ViewEncapsulation
 } from '@angular/core';
 import { scaleBand, scaleLinear } from 'd3-scale';
 
@@ -16,7 +16,6 @@ import { BaseChartComponent } from '../common/base-chart.component';
 import { LegendOptions, LegendPosition } from '../common/types/legend.model';
 import { ScaleType } from '../common/types/scale-type.enum';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
-import {animate, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'ngx-charts-bar-horizontal',
@@ -34,7 +33,6 @@ import {animate, style, transition, trigger} from "@angular/animations";
       <svg:g [attr.transform]="transform" class="bar-chart chart">
         <svg:g
           ngx-charts-x-axis
-          @testHide
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
@@ -51,7 +49,6 @@ import {animate, style, transition, trigger} from "@angular/animations";
         ></svg:g>
         <svg:g
           ngx-charts-y-axis
-          @testHide
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
@@ -91,23 +88,7 @@ import {animate, style, transition, trigger} from "@angular/animations";
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['../common/base-chart.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  animations: [
-    trigger('testHide', [
-      transition(':leave', [
-        style({
-          opacity: '0'
-        }),
-        animate('500ms', style({ opacity: '0' }))
-      ]),
-      transition(':enter', [
-        style({
-          opacity: '0'
-        }),
-        animate('500ms 200ms', style({ opacity: '1' }))
-      ])
-    ])
-  ]
+  encapsulation: ViewEncapsulation.None
 })
 export class BarHorizontalComponent extends BaseChartComponent {
   @Input() legend = false;
