@@ -1,17 +1,15 @@
 import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  OnChanges,
-  ElementRef,
   ChangeDetectionStrategy,
-  SimpleChanges,
-  PLATFORM_ID,
+  Component,
+  ElementRef,
   Inject,
-  OnInit
+  Input,
+  OnChanges,
+  OnInit,
+  PLATFORM_ID,
+  SimpleChanges
 } from '@angular/core';
-import { trigger, style, animate, transition } from '@angular/animations';
+import { animate, style, transition, trigger } from '@angular/animations';
 import { select } from 'd3-selection';
 import { Series } from '../models/chart-data.model';
 import { isPlatformServer } from '@angular/common';
