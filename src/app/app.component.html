@@ -585,6 +585,7 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
+        [lineType]="lineType"
         [showGridLines]="showGridLines"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
@@ -1333,6 +1334,13 @@
             Wrap Ticks
           </label>
           <br />
+        </div>
+        <div *ngIf="chart.options.includes('lineType')">
+          <label>Line Type:</label><br />
+          <select style="margin-left: 10px" [(ngModel)]="lineType">
+            <option value="straight">Straight line</option>
+            <option value="dot">Dot line</option></select
+          ><br />
         </div>
         <div *ngIf="chart.options.includes('legendTitle')">
           <label>Legend Title:</label><br />

@@ -35,6 +35,7 @@ export class ComboChartComponent extends BaseChartComponent {
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
   @Input() legendPosition: string = 'right';
+  @Input() lineType: string = 'straight';
   @Input() xAxis;
   @Input() yAxis;
   @Input() showXAxisLabel;
@@ -117,7 +118,7 @@ export class ComboChartComponent extends BaseChartComponent {
       showYLabel: this.showYAxisLabel,
       showLegend: this.legend,
       legendType: this.schemeType,
-      legendPosition: this.legendPosition as any
+      legendPosition: this.legendPosition as any,
     });
 
     if (!this.yAxis) {
@@ -145,6 +146,13 @@ export class ComboChartComponent extends BaseChartComponent {
     this.legendOptions = this.getLegendOptions();
 
     this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
+  }
+
+  ngAfterViewInit() {
+    if (this.lineSeriesComponent) {
+      this.lineSeriesComponent.lineType = this.lineType;
+      this.lineSeriesComponent.update();
+    }
   }
 
   deactivateAll() {
@@ -184,6 +192,10 @@ export class ComboChartComponent extends BaseChartComponent {
       series: this.results
     });
     return this.combinedSeries.map(d => d.name);
+  }
+
+  getLineStyle() {
+    return this.lineType === 'dot' ? { 'stroke-dasharray': '5,5' } : {};
   }
 
   isDate(value): boolean {
