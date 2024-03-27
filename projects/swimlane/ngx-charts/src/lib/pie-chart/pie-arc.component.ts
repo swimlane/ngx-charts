@@ -1,12 +1,12 @@
 import {
+  ChangeDetectionStrategy,
   Component,
-  Input,
-  Output,
-  EventEmitter,
   ElementRef,
-  SimpleChanges,
+  EventEmitter,
+  Input,
   OnChanges,
-  ChangeDetectionStrategy
+  Output,
+  SimpleChanges
 } from '@angular/core';
 import { interpolate } from 'd3-interpolate';
 import { select } from 'd3-selection';
@@ -14,11 +14,17 @@ import { arc } from 'd3-shape';
 import { id } from '../utils/id';
 import { DataItem } from '../models/chart-data.model';
 import { BarOrientation } from '../common/types/bar-orientation.enum';
+import { animate, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'g[ngx-charts-pie-arc]',
   template: `
-    <svg:g class="arc-group">
+    <svg:g
+      class="arc-group"
+      @leaveAnimation
+      (@leaveAnimation.start)="test($event)"
+      (@leaveAnimation.done)="test($event)"
+    >
       <svg:defs *ngIf="gradient">
         <svg:g ngx-charts-svg-radial-gradient [color]="fill" [name]="radialGradientId" [startOpacity]="startOpacity" />
       </svg:defs>
@@ -35,9 +41,14 @@ import { BarOrientation } from '../common/types/bar-orientation.enum';
       />
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [trigger('leaveAnimation', [transition(':leave', [animate('750ms')])])]
 })
 export class PieArcComponent implements OnChanges {
+  test(e) {
+    if (e.fromState || e.toState !== 'void') return;
+    console.log(e);
+  }
   @Input() fill: string;
   @Input() startAngle: number = 0;
   @Input() endAngle: number = Math.PI * 2;

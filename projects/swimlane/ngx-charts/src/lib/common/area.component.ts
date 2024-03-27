@@ -1,9 +1,12 @@
-import { Component, Input, Output, EventEmitter, ElementRef, OnChanges, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { select } from 'd3-selection';
 import { id } from '../utils/id';
 import { AreaChartSeries } from '../models/chart-data.model';
 import { BarOrientation } from './types/bar-orientation.enum';
 import { Gradient } from './types/gradient.interface';
+import { animate, style, transition, trigger } from '@angular/animations';
+import { Platform } from '@angular/cdk/platform';
+import { isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'g[ngx-charts-area]',
@@ -16,9 +19,26 @@ import { Gradient } from './types/gradient.interface';
         [stops]="gradientStops"
       />
     </svg:defs>
-    <svg:path class="area" [attr.d]="areaPath" [attr.fill]="gradient ? gradientFill : fill" [style.opacity]="opacity" />
+    <svg:path
+      class="area"
+      @scaleToHidden
+      (@scaleToHidden.start)="onScaleToHidden($event)"
+      [attr.d]="areaPath"
+      [attr.fill]="gradient ? gradientFill : fill"
+      [style.opacity]="opacity"
+    />
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('scaleToHidden', [
+      transition(':leave', [
+        style({
+          opacity: '1'
+        }),
+        animate('750ms', style({ opacity: '1' }))
+      ])
+    ])
+  ]
 })
 export class AreaComponent implements OnChanges {
   @Input() data: AreaChartSeries;
@@ -44,7 +64,7 @@ export class AreaComponent implements OnChanges {
 
   barOrientation = BarOrientation;
 
-  constructor(element: ElementRef) {
+  constructor(element: ElementRef, private platformId: Platform) {
     this.element = element.nativeElement;
   }
 
@@ -83,6 +103,14 @@ export class AreaComponent implements OnChanges {
       node.transition().duration(750).attr('d', this.path);
     } else {
       node.attr('d', this.path);
+    }
+  }
+
+  onScaleToHidden(event): void {
+    if (isPlatformServer(this.platformId)) return;
+    if (!event.fromState && event.toState === 'void') {
+      const node = select(this.element).select('.area');
+      node.transition().duration(750).attr('d', this.startingPath);
     }
   }
 

@@ -40,7 +40,7 @@ import { isPlatformServer } from '@angular/common';
           strokeDashoffset: 2000
         }),
         animate(
-          '800ms 300ms',
+          '800ms 500ms',
           style({
             strokeDashoffset: 0
           })
