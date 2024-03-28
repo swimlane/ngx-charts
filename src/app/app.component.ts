@@ -89,6 +89,8 @@ export class AppComponent implements OnInit {
   legendTitle = 'Legend';
   legendPosition = LegendPosition.Right;
   lineType = 'straight';
+  dashLength = 5;
+  dashGap = 5;
   showXAxisLabel = true;
   tooltipDisabled = false;
   showText = true;

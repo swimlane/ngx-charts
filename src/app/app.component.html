@@ -586,6 +586,8 @@
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
         [lineType]="lineType"
+        [dashLength]="dashLength"
+        [dashGap]="dashGap"
         [showGridLines]="showGridLines"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
@@ -1341,6 +1343,23 @@
             <option value="straight">Straight line</option>
             <option value="dot">Dot line</option></select
           ><br />
+        </div>
+        <div *ngIf="lineType === 'dot'">
+          <label>Dash Length:</label><br />
+          <select style="margin-left: 10px" [(ngModel)]="dashLength">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="15">20</option>
+          </select>
+
+          <label>Dash Gap:</label><br />
+          <select style="margin-left: 10px" [(ngModel)]="dashGap">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="15">20</option>
+          </select>
         </div>
         <div *ngIf="chart.options.includes('legendTitle')">
           <label>Legend Title:</label><br />
