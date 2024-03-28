@@ -88,6 +88,9 @@ export class AppComponent implements OnInit {
   showLegend = true;
   legendTitle = 'Legend';
   legendPosition = LegendPosition.Right;
+  lineType = 'straight';
+  dashLength = 5;
+  dashGap = 5;
   showXAxisLabel = true;
   tooltipDisabled = false;
   showText = true;
@@ -227,7 +230,7 @@ export class AppComponent implements OnInit {
     name: 'singleLightBlue',
     selectable: true,
     group: ScaleType.Ordinal,
-    domain: ['#01579b']
+    domain: ['#01579b'],
   };
 
   showRightYAxisLabel: boolean = true;
