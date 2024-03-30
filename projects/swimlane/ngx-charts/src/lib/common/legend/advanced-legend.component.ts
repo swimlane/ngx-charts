@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -12,6 +13,7 @@ import { trimLabel } from '../trim-label.helper';
 import { formatLabel } from '../label.helper';
 import { DataItem, StringOrNumberOrDate } from '../../models/chart-data.model';
 import { ColorHelper } from '../color.helper';
+import { animate, transition, trigger } from '@angular/animations';
 
 export interface AdvancedLegendItem {
   value: StringOrNumberOrDate;
@@ -27,7 +29,7 @@ export interface AdvancedLegendItem {
 @Component({
   selector: 'ngx-charts-advanced-legend',
   template: `
-    <div class="advanced-pie-legend" [style.width.px]="width">
+    <div class="advanced-pie-legend" [style.width.px]="width" @leaveAnimation (@leaveAnimation.start)="test($event)">
       <div
         *ngIf="animations"
         class="total-value"
@@ -78,9 +80,37 @@ export interface AdvancedLegendItem {
   `,
   styleUrls: ['./advanced-legend.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [trigger('leaveAnimation', [transition(':leave', [animate(1000)])])]
 })
 export class AdvancedLegendComponent implements OnChanges {
+  test(event) {
+    if (event.fromState || event.toState !== 'void') return;
+    this.test2();
+  }
+  test2() {
+    console.log(`test2`);
+    this.legendItems = (this.data as any).map(d => {
+      d.value = 1;
+      const label = formatLabel(d.name);
+      const value = 1;
+      const color = this.colors.getColor(label);
+      const percentage = this.total > 0 ? (value / this.total) * 100 : 0;
+      const formattedLabel = typeof this.labelFormatting === 'function' ? this.labelFormatting(label) : label;
+
+      return {
+        _value: value,
+        data: d,
+        value,
+        color,
+        label: formattedLabel,
+        displayLabel: trimLabel(formattedLabel, 20),
+        origialLabel: d.name,
+        percentage: this.percentageFormatting ? this.percentageFormatting(percentage) : percentage.toLocaleString()
+      };
+    });
+    this.cdf.markForCheck();
+  }
   @Input() width: number;
   @Input() data: DataItem[];
   @Input() colors: ColorHelper;
@@ -100,6 +130,9 @@ export class AdvancedLegendComponent implements OnChanges {
   @Input() percentageFormatting: (value: number) => number = percentage => percentage;
 
   defaultValueFormatting: (value: StringOrNumberOrDate) => string = value => value.toLocaleString();
+
+  constructor(private cdf: ChangeDetectorRef) {
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();

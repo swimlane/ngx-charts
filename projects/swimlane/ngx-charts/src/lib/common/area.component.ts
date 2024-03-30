@@ -5,8 +5,6 @@ import { AreaChartSeries } from '../models/chart-data.model';
 import { BarOrientation } from './types/bar-orientation.enum';
 import { Gradient } from './types/gradient.interface';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Platform } from '@angular/cdk/platform';
-import { isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'g[ngx-charts-area]',
@@ -64,7 +62,7 @@ export class AreaComponent implements OnChanges {
 
   barOrientation = BarOrientation;
 
-  constructor(element: ElementRef, private platformId: Platform) {
+  constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 
@@ -107,7 +105,7 @@ export class AreaComponent implements OnChanges {
   }
 
   onScaleToHidden(event): void {
-    if (isPlatformServer(this.platformId)) return;
+    if (!this.animations) return;
     if (!event.fromState && event.toState === 'void') {
       const node = select(this.element).select('.area');
       node.transition().duration(750).attr('d', this.startingPath);

@@ -19,12 +19,7 @@ import { animate, transition, trigger } from '@angular/animations';
 @Component({
   selector: 'g[ngx-charts-pie-arc]',
   template: `
-    <svg:g
-      class="arc-group"
-      @leaveAnimation
-      (@leaveAnimation.start)="test($event)"
-      (@leaveAnimation.done)="test($event)"
-    >
+    <svg:g class="arc-group" @leaveAnimation (@leaveAnimation.start)="onScaleToHidden($event)">
       <svg:defs *ngIf="gradient">
         <svg:g ngx-charts-svg-radial-gradient [color]="fill" [name]="radialGradientId" [startOpacity]="startOpacity" />
       </svg:defs>
@@ -42,13 +37,9 @@ import { animate, transition, trigger } from '@angular/animations';
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [trigger('leaveAnimation', [transition(':leave', [animate('750ms')])])]
+  animations: [trigger('leaveAnimation', [transition(':leave', [animate(750)])])]
 })
 export class PieArcComponent implements OnChanges {
-  test(e) {
-    if (e.fromState || e.toState !== 'void') return;
-    console.log(e);
-  }
   @Input() fill: string;
   @Input() startAngle: number = 0;
   @Input() endAngle: number = Math.PI * 2;
@@ -121,6 +112,30 @@ export class PieArcComponent implements OnChanges {
     }
 
     return arc().innerRadius(this.innerRadius).outerRadius(outerRadius).cornerRadius(this.cornerRadius);
+  }
+
+  onScaleToHidden(event): void {
+    if (!this.animate) return;
+    if (event.fromState || event.toState !== 'void') return;
+
+    const node = select(this.element)
+      .selectAll('.arc')
+      .data([{ startAngle: this.startAngle, endAngle: this.startAngle }]);
+
+    const calc = this.calculateArc();
+
+    node
+      .transition()
+      .duration(750)
+      .attrTween('d', function (d) {
+        (<any>this)._current = (<any>this)._current || d;
+        const interpolater = interpolate((<any>this)._current, d);
+        (<any>this)._current = interpolater(0);
+        console.log((<any>this)._current);
+        return function (t) {
+          return calc(interpolater(t));
+        };
+      });
   }
 
   loadAnimation(): void {
