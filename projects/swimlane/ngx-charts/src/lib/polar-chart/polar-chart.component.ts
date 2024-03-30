@@ -153,18 +153,18 @@ const twoPI = 2 * Math.PI;
           opacity: 0
         }),
         animate(
-          '500ms 500ms',
+          '800ms 1000ms',
           style({
-            opacity: 0
+            opacity: 1
           })
         )
       ]),
       transition(':leave', [
         style({
-          opacity: 0
+          opacity: 1
         }),
         animate(
-          '500ms',
+          '700ms',
           style({
             opacity: 0
           })

@@ -37,25 +37,26 @@ import { isPlatformServer } from '@angular/common';
       transition(':enter', [
         style({
           strokeDasharray: 2000,
-          strokeDashoffset: 2000
+          strokeDashoffset: 2000,
         }),
         animate(
           '800ms 500ms',
           style({
-            strokeDashoffset: 0
+            strokeDasharray: 2000,
+            strokeDashoffset: 0,
           })
         )
       ]),
       transition(':leave', [
         style({
           strokeDasharray: 2000,
-          strokeDashoffset: 0
+          strokeDashoffset: 0,
         }),
         animate(
           '800ms',
           style({
             strokeDasharray: 2000,
-            strokeDashoffset: -2000
+            strokeDashoffset: -2000,
           })
         )
       ])

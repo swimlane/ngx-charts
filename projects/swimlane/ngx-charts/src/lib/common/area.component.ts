@@ -19,8 +19,8 @@ import { animate, style, transition, trigger } from '@angular/animations';
     </svg:defs>
     <svg:path
       class="area"
-      @scaleToHidden
-      (@scaleToHidden.start)="onScaleToHidden($event)"
+      @toggleAnimation
+      (@toggleAnimation.start)="onToggle($event)"
       [attr.d]="areaPath"
       [attr.fill]="gradient ? gradientFill : fill"
       [style.opacity]="opacity"
@@ -28,12 +28,18 @@ import { animate, style, transition, trigger } from '@angular/animations';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
-    trigger('scaleToHidden', [
+    trigger('toggleAnimation', [
       transition(':leave', [
         style({
           opacity: '1'
         }),
         animate('750ms', style({ opacity: '1' }))
+      ]),
+      transition(':enter', [
+        style({
+          opacity: '0'
+        }),
+        animate('750ms 400ms', style({ opacity: '1' }))
       ])
     ])
   ]
@@ -98,13 +104,15 @@ export class AreaComponent implements OnChanges {
     const node = select(this.element).select('.area');
 
     if (this.animations) {
-      node.transition().duration(750).attr('d', this.path);
+      setTimeout(() => {
+        node.transition().duration(750).attr('d', this.path);
+      }, 400);
     } else {
       node.attr('d', this.path);
     }
   }
 
-  onScaleToHidden(event): void {
+  onToggle(event): void {
     if (!this.animations) return;
     if (!event.fromState && event.toState === 'void') {
       const node = select(this.element).select('.area');

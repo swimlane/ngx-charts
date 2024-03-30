@@ -27,7 +27,6 @@ import { ScaleType } from '../common/types/scale-type.enum';
     <svg:g
       ngx-charts-bar
       *ngFor="let bar of bars; trackBy: trackBy"
-      @scaleToHidden
       [width]="bar.width"
       [height]="bar.height"
       [x]="bar.x"
@@ -68,18 +67,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
       />
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('scaleToHidden', [
-      transition(':leave', [
-        style({
-          transformOrigin: 'left',
-          opacity: '1'
-        }),
-        animate('500ms ease-out', style({ transform: 'scaleX(0)', opacity: '0' }))
-      ])
-    ])
-  ]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SeriesHorizontal implements OnChanges {
   @Input() dims: ViewDimensions;

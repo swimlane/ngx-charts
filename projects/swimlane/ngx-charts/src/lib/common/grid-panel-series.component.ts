@@ -46,7 +46,7 @@ enum ClassEnum {
         style({
           opacity: '0'
         }),
-        animate('500ms 200ms', style({ opacity: '1' }))
+        animate('500ms 300ms', style({ opacity: '1' }))
       ])
     ])
   ]

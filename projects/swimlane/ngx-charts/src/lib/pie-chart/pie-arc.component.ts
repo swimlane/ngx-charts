@@ -14,12 +14,12 @@ import { arc } from 'd3-shape';
 import { id } from '../utils/id';
 import { DataItem } from '../models/chart-data.model';
 import { BarOrientation } from '../common/types/bar-orientation.enum';
-import { animate, transition, trigger } from '@angular/animations';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'g[ngx-charts-pie-arc]',
   template: `
-    <svg:g class="arc-group" @leaveAnimation (@leaveAnimation.start)="onScaleToHidden($event)">
+    <svg:g class="arc-group" @toggleAnimation (@toggleAnimation.start)="onScaleToHidden($event)">
       <svg:defs *ngIf="gradient">
         <svg:g ngx-charts-svg-radial-gradient [color]="fill" [name]="radialGradientId" [startOpacity]="startOpacity" />
       </svg:defs>
@@ -37,7 +37,22 @@ import { animate, transition, trigger } from '@angular/animations';
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [trigger('leaveAnimation', [transition(':leave', [animate(750)])])]
+  animations: [
+    trigger('toggleAnimation', [
+      transition(':leave', [
+        style({
+          opacity: 1
+        }),
+        animate('750ms', style({ opacity: 0 }))
+      ]),
+      transition(':enter', [
+        style({
+          opacity: 0
+        }),
+        animate('750ms 400ms', style({ opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class PieArcComponent implements OnChanges {
   @Input() fill: string;

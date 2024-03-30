@@ -21,7 +21,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 @Component({
   selector: 'g[ngx-charts-bar]',
   template: `
-    <svg:defs *ngIf="hasGradient">
+    <svg:defs *ngIf="hasGradient" @toggleAniamtion>
       <svg:g ngx-charts-svg-linear-gradient [orientation]="orientation" [name]="gradientId" [stops]="gradientStops" />
     </svg:defs>
     <svg:path
@@ -29,7 +29,8 @@ import { animate, style, transition, trigger } from '@angular/animations';
       stroke="none"
       role="img"
       tabIndex="-1"
-      @enterAnimation
+      @toggleAniamtion
+      (@toggleAniamtion.start)="onLeaveAnimation($event)"
       [class.active]="isActive"
       [class.hidden]="hideBar"
       [attr.d]="path"
@@ -40,14 +41,20 @@ import { animate, style, transition, trigger } from '@angular/animations';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
-    trigger('enterAnimation', [
+    trigger('toggleAniamtion', [
       transition(':enter', [
         style({
           opacity: 0
         }),
         animate('500ms 600ms ease-in', style({ opacity: 1 }))
+      ]),
+      transition(':leave', [
+        style({
+          opacity: 1
+        }),
+        animate('500ms', style({ opacity: 0 }))
       ])
-    ]),
+    ])
   ]
 })
 export class BarComponent implements OnChanges {
@@ -122,6 +129,16 @@ export class BarComponent implements OnChanges {
     this.path = this.getStartingPath();
     this.cdf.markForCheck();
     this.update();
+  }
+
+  onLeaveAnimation(event) {
+    if (event.fromState && event.toState !== 'void') return;
+    this.loadBackOffAnimation();
+  }
+
+  loadBackOffAnimation(): void {
+    const node = select(this.element).select('.bar');
+    node.transition().duration(500).attr('d', this.getStartingPath());
   }
 
   updatePathEl(): void {

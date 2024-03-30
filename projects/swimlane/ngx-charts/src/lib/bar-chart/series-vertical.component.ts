@@ -30,7 +30,6 @@ import { isPlatformServer } from '@angular/common';
       <svg:g
         ngx-charts-bar
         *ngFor="let bar of bars; trackBy: trackBy"
-        @scaleToHidden
         [@.disabled]="!animations"
         [width]="bar.width"
         [height]="bar.height"
@@ -103,18 +102,7 @@ import { isPlatformServer } from '@angular/common';
       />
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('scaleToHidden', [
-      transition(':leave', [
-        style({
-          transformOrigin: 'center',
-          opacity: '1'
-        }),
-        animate('500ms ease-out', style({ transform: 'scaleY(0)', opacity: '0' }))
-      ])
-    ])
-  ]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SeriesVerticalComponent implements OnChanges {
   @Input() dims: ViewDimensions;
