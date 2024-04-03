@@ -91,6 +91,7 @@ export class AppComponent implements OnInit {
   lineType = 'straight';
   dashLength = 5;
   dashGap = 5;
+  dotCount = false;
   showXAxisLabel = true;
   tooltipDisabled = false;
   showText = true;

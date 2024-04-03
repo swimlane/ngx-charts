@@ -356,6 +356,10 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
+        [lineType]="lineType"
+        [dashLength]="dashLength"
+        [dashGap]="dashGap"
+        [dotCount]="dotCount"
         [gradient]="gradient"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
@@ -588,6 +592,7 @@
         [lineType]="lineType"
         [dashLength]="dashLength"
         [dashGap]="dashGap"
+        [dotCount]="dotCount"
         [showGridLines]="showGridLines"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
@@ -826,6 +831,10 @@
           [legend]="false"
           [legendTitle]="legendTitle"
           [legendPosition]="legendPosition"
+          [lineType]="lineType"
+          [dashLength]="dashLength"
+          [dashGap]="dashGap"
+          [dotCount]="dotCount"
           [gradient]="gradient"
           [xAxis]="showXAxis"
           [yAxis]="showYAxis"
@@ -960,6 +969,10 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
+        [lineType]="lineType"
+        [dashLength]="dashLength"
+        [dashGap]="dashGap"
+        [dotCount]="dotCount"
         [gradient]="gradient"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
@@ -1341,10 +1354,14 @@
           <label>Line Type:</label><br />
           <select style="margin-left: 10px" [(ngModel)]="lineType">
             <option value="straight">Straight line</option>
-            <option value="dot">Dot line</option></select
-          ><br />
+            <option value="dash">Dash line</option>
+            <option value="dot">Dot line</option>
+            <option value="dash-dot">Dash-dot1 line</option>
+            <option value="dash-dot2">Dash-dot2 line</option>
+            <option value="customize">Customized line</option>
+          </select><br />
         </div>
-        <div *ngIf="lineType === 'dot'">
+        <!-- <div *ngIf="lineType === 'dash'">
           <label>Dash Length:</label><br />
           <select style="margin-left: 10px" [(ngModel)]="dashLength">
             <option value="5">5</option>
@@ -1352,7 +1369,6 @@
             <option value="15">15</option>
             <option value="15">20</option>
           </select>
-
           <label>Dash Gap:</label><br />
           <select style="margin-left: 10px" [(ngModel)]="dashGap">
             <option value="5">5</option>
@@ -1360,6 +1376,14 @@
             <option value="15">15</option>
             <option value="15">20</option>
           </select>
+        </div> -->
+        <div *ngIf="lineType === 'customize'">
+          <label>Dash Length:</label>
+          <input type="number" style="margin-left: 10px" [(ngModel)]="dashLength" />
+          <label>Dash Gap:</label>
+          <input type="number" style="margin-left: 10px" [(ngModel)]="dashGap" />
+          <input type="checkbox"[(ngModel)]="dotCount" />
+          <label>Dot</label><br />
         </div>
         <div *ngIf="chart.options.includes('legendTitle')">
           <label>Legend Title:</label><br />
