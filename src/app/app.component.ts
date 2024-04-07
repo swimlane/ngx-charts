@@ -510,6 +510,7 @@ export class AppComponent implements OnInit {
     this.linearScale = false;
     this.yAxisLabel = 'GDP Per Capita';
     this.xAxisLabel = 'Country';
+    this.lineType = 'straight';
 
     this.width = 700;
     this.height = 300;
