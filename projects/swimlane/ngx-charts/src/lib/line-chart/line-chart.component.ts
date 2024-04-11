@@ -204,9 +204,7 @@ export class LineChartComponent extends BaseChartComponent implements OnInit {
   @Input() legend: boolean;
   @Input() legendTitle: string = 'Legend';
   @Input() lineType: string = 'straight';
-  @Input() dashLength: number = 5;
-  @Input() dashGap: number = 5;
-  @Input() dotCount: boolean = false;
+  @Input() lineStyle: string = '';
   @Input() legendPosition: LegendPosition = LegendPosition.Right;
   @Input() xAxis: boolean;
   @Input() yAxis: boolean;
@@ -474,7 +472,7 @@ export class LineChartComponent extends BaseChartComponent implements OnInit {
     } else if (this.lineType === 'dash-dot2') {
       return { 'stroke-dasharray': '1,3,1,3,5,3' };
     }else if (this.lineType === 'customize') {
-      return this.dotCount ? { 'stroke-dasharray': this.dashLength + ',' + this.dashGap + ',1,' + this.dashGap} :  { 'stroke-dasharray': this.dashLength + ',' + this.dashGap };
+      return { 'stroke-dasharray': this.lineStyle };
     } else {
       return {};
     }

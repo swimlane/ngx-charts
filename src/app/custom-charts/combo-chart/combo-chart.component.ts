@@ -36,9 +36,7 @@ export class ComboChartComponent extends BaseChartComponent {
   @Input() legendTitle: string = 'Legend';
   @Input() legendPosition: string = 'right';
   @Input() lineType: string = 'straight';
-  @Input() dashLength: number = 5;
-  @Input() dashGap: number = 5;
-  @Input() dotCount: boolean = false;
+  @Input() lineStyle: string = '';
   @Input() xAxis;
   @Input() yAxis;
   @Input() showXAxisLabel;
@@ -207,7 +205,7 @@ export class ComboChartComponent extends BaseChartComponent {
     } else if (this.lineType === 'dash-dot2') {
       return { 'stroke-dasharray': '1,3,1,3,5,3' };
     }else if (this.lineType === 'customize') {
-      return this.dotCount ? { 'stroke-dasharray': this.dashLength + ',' + this.dashGap + ',1,' + this.dashGap} :  { 'stroke-dasharray': this.dashLength + ',' + this.dashGap };
+      return { 'stroke-dasharray': this.lineStyle };
     } else {
       return {};
     }

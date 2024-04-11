@@ -89,9 +89,7 @@ export class AppComponent implements OnInit {
   legendTitle = 'Legend';
   legendPosition = LegendPosition.Right;
   lineType = 'straight';
-  dashLength = 5;
-  dashGap = 5;
-  dotCount = false;
+  lineStyle = '';
   showXAxisLabel = true;
   tooltipDisabled = false;
   showText = true;
@@ -511,6 +509,7 @@ export class AppComponent implements OnInit {
     this.yAxisLabel = 'GDP Per Capita';
     this.xAxisLabel = 'Country';
     this.lineType = 'straight';
+    this.lineStyle = '';
 
     this.width = 700;
     this.height = 300;
