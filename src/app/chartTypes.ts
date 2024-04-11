@@ -365,7 +365,8 @@ const chartGroups = [
           'rotateXAxisTicks',
           'maxXAxisTickLength',
           'maxYAxisTickLength',
-          'wrapTicks'
+          'wrapTicks',
+          'lineType'
         ],
         defaults: {
           yAxisLabel: 'GDP Per Capita',
@@ -708,7 +709,8 @@ const chartGroups = [
           'yAxisLabel',
           'showGridLines',
           'roundDomains',
-          'tooltipDisabled'
+          'tooltipDisabled',
+          'lineType',
         ]
       },
       {
