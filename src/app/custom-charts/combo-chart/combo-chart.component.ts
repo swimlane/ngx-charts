@@ -35,6 +35,8 @@ export class ComboChartComponent extends BaseChartComponent {
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
   @Input() legendPosition: string = 'right';
+  @Input() lineTransparency: number = 0;
+  @Input() chartTransparency: number = 0;
   @Input() xAxis;
   @Input() yAxis;
   @Input() showXAxisLabel;
@@ -353,6 +355,12 @@ export class ComboChartComponent extends BaseChartComponent {
     }
     this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
     this.colorsLine = new ColorHelper(this.colorSchemeLine, this.schemeType, domain, this.customColors);
+  }
+
+  getStyle(transparency: number): object {
+    return {
+      opacity: 1 - transparency / 100
+    };
   }
 
   getLegendOptions() {

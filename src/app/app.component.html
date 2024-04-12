@@ -582,6 +582,8 @@
         [gradient]="gradient"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
+        [lineTransparency]="lineTransparency"
+        [chartTransparency]="chartTransparency"
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
@@ -1333,6 +1335,14 @@
             Wrap Ticks
           </label>
           <br />
+        </div>
+        <div>
+          <label>Line Transparency:</label><br />
+          <input type="number" [(ngModel)]="lineTransparency" /><br />
+        </div>
+        <div>
+          <label>Chart Transparency:</label><br />
+          <input type="number" [(ngModel)]="chartTransparency" /><br />
         </div>
         <div *ngIf="chart.options.includes('legendTitle')">
           <label>Legend Title:</label><br />
