@@ -353,6 +353,7 @@
         [schemeType]="schemeType"
         [results]="dateDataWithOrWithoutRange"
         [animations]="animations"
+        [lineTransparency]="lineTransparency"
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
@@ -822,6 +823,7 @@
           [schemeType]="schemeType"
           [results]="plotData"
           [animations]="animations"
+          [lineTransparency]="lineTransparency"
           [legend]="false"
           [legendTitle]="legendTitle"
           [legendPosition]="legendPosition"
@@ -1336,13 +1338,15 @@
           </label>
           <br />
         </div>
-        <div>
-          <label>Line Transparency:</label><br />
-          <input type="number" [(ngModel)]="lineTransparency" /><br />
+        <div *ngIf="chart.options.includes('lineTransparency')">
+          <label>Line Transparency:</label>
+          <input type="range" min="0" max="100" [(ngModel)]="lineTransparency" />
+          {{ lineTransparency }}<br /> 
         </div>
-        <div>
-          <label>Chart Transparency:</label><br />
-          <input type="number" [(ngModel)]="chartTransparency" /><br />
+        <div *ngIf="chart.options.includes('chartTransparency')">
+          <label>Chart Transparency:</label>
+          <input type="range" min="0" max="100" [(ngModel)]="chartTransparency" />
+          {{ chartTransparency }}<br />
         </div>
         <div *ngIf="chart.options.includes('legendTitle')">
           <label>Legend Title:</label><br />

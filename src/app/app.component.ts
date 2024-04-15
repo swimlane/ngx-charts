@@ -511,6 +511,8 @@ export class AppComponent implements OnInit {
 
     this.width = 700;
     this.height = 300;
+    this.lineTransparency = 0;
+    this.chartTransparency = 0;
 
     Object.assign(this, this.chart.defaults);
 
