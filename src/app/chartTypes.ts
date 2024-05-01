@@ -792,6 +792,7 @@ const chartGroups = [
           'showXAxis',
           'showYAxis',
           'showLegend',
+          'lineTransparency',
           'legendTitle',
           'legendPosition',
           'showXAxisLabel',
