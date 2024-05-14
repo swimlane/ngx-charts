@@ -78,6 +78,9 @@ export class GeoMapComponent extends BaseChartComponent implements OnInit {
     this.geoJSON = (this.results as GeoMapChartSeries).GeoJSON;
 
     if (!this.geoJSON) return;
+    /**
+     * TODO: 感觉有问题，我怎么知道需要绘制多少轮廓线，可能州级别和国家轮廓线清晰度不一样
+     */
     const path = geoPath();
     const svg = select(this.chartElement.nativeElement).select('.ngx-charts');
     const g = svg.append('g');
