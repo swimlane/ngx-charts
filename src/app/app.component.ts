@@ -1,21 +1,22 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Location, LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { HashLocationStrategy, Location, LocationStrategy } from '@angular/common';
 import * as shape from 'd3-shape';
 import * as d3Array from 'd3-array';
 
 import { Color, colorSets } from '@swimlane/ngx-charts/utils/color-sets';
-import { formatLabel, escapeLabel } from '@swimlane/ngx-charts/common/label.helper';
+import { escapeLabel, formatLabel } from '@swimlane/ngx-charts/common/label.helper';
 import {
-  single,
-  multi,
   boxData,
   bubble,
-  sankeyData,
+  fiscalYearReport,
   generateData,
   generateGraph,
-  treemap,
+  geoMapData,
+  multi,
+  sankeyData,
+  single,
   timelineFilterBarData,
-  fiscalYearReport
+  treemap
 } from './data';
 import { bubbleDemoData } from './custom-charts/bubble-chart-interactive/data';
 import { BubbleChartInteractiveServerDataModel } from './custom-charts/bubble-chart-interactive/models';
@@ -26,6 +27,9 @@ import pkg from '../../projects/swimlane/ngx-charts/package.json';
 import { InputTypes } from '@swimlane/ngx-ui';
 import { LegendPosition } from '@swimlane/ngx-charts/common/types/legend.model';
 import { ScaleType } from '@swimlane/ngx-charts/common/types/scale-type.enum';
+import { json as d3Json } from 'd3-fetch';
+import { GeoMapChartSeries } from '@swimlane/ngx-charts/models/chart-data.model';
+import * as topojson from 'topojson-client';
 
 const monthName = new Intl.DateTimeFormat('en-us', { month: 'short' });
 const weekdayName = new Intl.DateTimeFormat('en-us', { weekday: 'short' });
@@ -233,6 +237,9 @@ export class AppComponent implements OnInit {
   showRightYAxisLabel: boolean = true;
   yAxisLabelRight: string = 'Utilization';
 
+  // Geo Map Chart
+  geoMapChartData: Partial<GeoMapChartSeries> = geoMapData;
+
   // demos
   totalSales = 0;
   salePrice = 100;
@@ -269,7 +276,7 @@ export class AppComponent implements OnInit {
   dimVisible: boolean = true;
   optsVisible: boolean = true;
 
-  constructor(public location: Location) {
+  constructor(public location: Location, private readonly cdf: ChangeDetectorRef) {
     this.mathFunction = this.getFunction();
 
     Object.assign(this, {
@@ -285,6 +292,12 @@ export class AppComponent implements OnInit {
       treemap,
       bubbleDemoData,
       fiscalYearReport
+    });
+
+    d3Json(this.geoMapChartData.GeoJSONSource).then((us: any) => {
+      this.geoMapChartData.GeoJSON = topojson.feature(us, us.objects.states)['features'];
+      this.geoMapChartData = { ...this.geoMapChartData };
+      this.cdf.markForCheck();
     });
 
     // interactive drill down demos

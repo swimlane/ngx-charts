@@ -1,12 +1,13 @@
 import { data as countries } from 'emoji-flags';
 import {
-  SingleSeries,
-  MultiSeries,
-  BubbleChartMultiSeries,
   BoxChartMultiSeries,
+  BubbleChartMultiSeries,
+  GeoMapChartSeries,
+  MultiSeries,
+  SankeyData,
   Series,
-  TreeMapData,
-  SankeyData
+  SingleSeries,
+  TreeMapData
 } from '@swimlane/ngx-charts/models/chart-data.model';
 
 export const single: SingleSeries = [
@@ -886,3 +887,7 @@ export const sankeyData: SankeyData = [
   { source: 'Republic of Equatorial Guinea', target: 'Republic of Costa Rica', value: 30 },
   { source: 'Republic of Equatorial Guinea', target: 'Portugal', value: 5 }
 ];
+
+export const geoMapData: Partial<GeoMapChartSeries> = {
+  GeoJSONSource: `https://cdn.jsdelivr.net/npm/us-atlas@3/counties-albers-10m.json`
+};
