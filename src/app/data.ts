@@ -889,5 +889,7 @@ export const sankeyData: SankeyData = [
 ];
 
 export const geoMapData: Partial<GeoMapChartSeries> = {
-  GeoJSONSource: `https://cdn.jsdelivr.net/npm/us-atlas@3/counties-albers-10m.json`
+  // GeoJSONSource: `https://cdn.jsdelivr.net/npm/us-atlas@3/counties-albers-10m.json`
+  // GeoJSONSource: `https://raw.githubusercontent.com/apache/echarts-examples/gh-pages/public/data/asset/geo/USA.json`
+  GeoJSONSource: `https://raw.githubusercontent.com/ELLENXX/d3-GeoJSON-/master/china.geo.json`
 };

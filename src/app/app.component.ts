@@ -295,8 +295,8 @@ export class AppComponent implements OnInit {
     });
 
     d3Json(this.geoMapChartData.GeoJSONSource).then((us: any) => {
-      this.geoMapChartData.GeoJSON = topojson.feature(us, us.objects.states)['features'];
-      this.geoMapChartData = { ...this.geoMapChartData };
+      // this.geoMapChartData.GeoJSON = topojson.feature(us, us.objects.states)['features'];
+      this.geoMapChartData = { ...this.geoMapChartData, GeoJSON: us };
       this.cdf.markForCheck();
     });
 
