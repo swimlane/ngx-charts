@@ -709,6 +709,32 @@ const chartGroups = [
           'min',
           'max'
         ]
+      },
+      {
+        name: 'Geo Map Custom Painter',
+        selector: 'geo-map-custom-painter',
+        inputFormat: 'geoMapChartSeries',
+        options: [
+          'animations',
+          'colorScheme',
+          'showXAxis',
+          'showYAxis',
+          'gradient',
+          'showLegend',
+          'showXAxisLabel',
+          'xAxisLabel',
+          'showYAxisLabel',
+          'yAxisLabel',
+          'innerPadding',
+          'tooltipDisabled',
+          'trimXAxisTicks',
+          'trimYAxisTicks',
+          'rotateXAxisTicks',
+          'maxXAxisTickLength',
+          'maxYAxisTickLength',
+          'min',
+          'max'
+        ]
       }
     ]
   },

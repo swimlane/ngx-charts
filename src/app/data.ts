@@ -9,9 +9,10 @@ import {
   SingleSeries,
   TreeMapData
 } from '@swimlane/ngx-charts/models/chart-data.model';
-import { GeoMapComponent } from '@swimlane/ngx-charts/geo-map/geo-map.component';
+import type { GeoMapComponent } from '@swimlane/ngx-charts/geo-map/geo-map.component';
 import { geoPath } from 'd3-geo';
 import { select } from 'd3-selection';
+import { zoom as d3Zoom } from 'd3-zoom';
 import * as topojson from 'topojson-client';
 
 export const single: SingleSeries = [
@@ -898,7 +899,7 @@ export const geoMapData: Partial<GeoMapChartSeries> = {
   // GeoJSONSource: `https://raw.githubusercontent.com/ELLENXX/d3-GeoJSON-/master/china.geo.json`
 };
 
-export const geoMapDrawFn: GeoMapComponent<any>['drawFn'] = ({ selector, results, element, compInstance }) => {
+export const geoMapPainter: GeoMapComponent<any>['painter'] = ({ selector, results, element, compInstance }) => {
   // const projection = geoMercator()
   //   .center([107, 31]) //地图中心位置,107是经度，31是纬度
   //   .scale(600) //设置缩放量
@@ -925,11 +926,9 @@ export const geoMapDrawFn: GeoMapComponent<any>['drawFn'] = ({ selector, results
   const states = g
     .append('g')
     .attr('fill', '#444')
-    .attr('cursor', 'pointer')
+    // .attr('cursor', 'pointer')
     .selectAll('path')
-    .data(topojson.feature(compInstance.geoJSON, compInstance.geoJSON.objects.states)['features'])
-    .join('path')
-    .attr('d', path);
+    .attr('d', path(topojson.feature(compInstance.geoJSON, compInstance.geoJSON.objects.states)['features']));
 
   // states.append("title")
   //   .text(d => d.properties.name);
@@ -939,4 +938,13 @@ export const geoMapDrawFn: GeoMapComponent<any>['drawFn'] = ({ selector, results
     .attr('stroke', 'white')
     .attr('stroke-linejoin', 'round')
     .attr('d', path(topojson.mesh(compInstance.geoJSON, compInstance.geoJSON.objects.states, (a, b) => a !== b)));
+
+  function zoomed(event) {
+    const { transform } = event;
+    g.attr('transform', transform);
+    g.attr('stroke-width', 1 / transform.k);
+  }
+
+  const zoom = d3Zoom().scaleExtent([1, 8]).on('zoom', zoomed);
+  svg.call(zoom);
 };

@@ -12,7 +12,7 @@ import {
   generateData,
   generateGraph,
   geoMapData,
-  geoMapDrawFn,
+  geoMapPainter,
   multi,
   sankeyData,
   single,
@@ -239,7 +239,7 @@ export class AppComponent implements OnInit {
 
   // Geo Map Chart
   geoMapChartData: Partial<GeoMapChartSeries> = geoMapData;
-  geoMapDrawFn: (...arg: any[]) => any = geoMapDrawFn;
+  geoMapPainter: (...arg: any[]) => any = geoMapPainter;
 
   // demos
   totalSales = 0;

@@ -50,7 +50,7 @@ export class GeoMapComponent<T extends GeoMapChartSeries> extends BaseChartCompo
   @Input() trimLabels: boolean = true;
   @Input() maxLabelLength: number = 10;
   @Input() tooltipText: any;
-  @Input() drawFn: (params: {
+  @Input() painter: (params: {
     element: ElementRef;
     selector: string;
     results: T;
@@ -87,8 +87,8 @@ export class GeoMapComponent<T extends GeoMapChartSeries> extends BaseChartCompo
 
     if (!this.geoJSON) return;
 
-    if (this.drawFn) {
-      this.drawFn({
+    if (this.painter) {
+      this.painter({
         element: this.chartElement,
         selector: '.ngx-charts',
         results: this.results,
