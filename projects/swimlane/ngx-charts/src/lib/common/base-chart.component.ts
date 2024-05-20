@@ -1,19 +1,19 @@
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import {
-  ElementRef,
-  NgZone,
+  AfterViewInit,
   ChangeDetectorRef,
   Component,
-  Input,
-  Output,
+  ElementRef,
   EventEmitter,
-  AfterViewInit,
-  OnDestroy,
-  OnChanges,
-  SimpleChanges,
-  PLATFORM_ID,
   Inject,
-  OnInit
+  Input,
+  NgZone,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  PLATFORM_ID,
+  SimpleChanges
 } from '@angular/core';
 import { cloneDeep } from 'lodash';
 
@@ -81,7 +81,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, 
     if (this.results) {
       this.results = this.cloneData(this.results);
     } else {
-      this.results = [];
+      (<any>this.results) = [];
     }
 
     if (this.view) {

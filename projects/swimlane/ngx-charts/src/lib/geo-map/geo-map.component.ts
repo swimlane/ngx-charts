@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ContentChild,
+  ElementRef,
   EventEmitter,
   Input,
   OnInit,
@@ -14,9 +15,9 @@ import { LegendOptions, LegendPosition } from '@swimlane/ngx-charts/common/types
 import { DataItem, GeoMapChartSeries } from '@swimlane/ngx-charts/models/chart-data.model';
 import { ColorHelper } from '@swimlane/ngx-charts/common/color.helper';
 import { ScaleType } from '@swimlane/ngx-charts/common/types/scale-type.enum';
-import { ViewDimensions } from '@swimlane/ngx-charts/common/types/view-dimension.interface';
+import {Results, ViewDimensions} from '@swimlane/ngx-charts/common/types/view-dimension.interface';
 import { geoEquirectangular, geoMercator, geoPath } from 'd3-geo';
-import { select, selectAll } from 'd3-selection';
+import { select } from 'd3-selection';
 
 @Component({
   selector: 'ngx-charts-geo-map',
@@ -33,7 +34,8 @@ import { select, selectAll } from 'd3-selection';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GeoMapComponent extends BaseChartComponent implements OnInit {
+export class GeoMapComponent<T extends GeoMapChartSeries> extends BaseChartComponent implements OnInit {
+  @Input() results: T;
   @Input() labels: boolean = false;
   @Input() legend: boolean = false;
   @Input() legendTitle: string = 'Legend';
@@ -48,6 +50,12 @@ export class GeoMapComponent extends BaseChartComponent implements OnInit {
   @Input() trimLabels: boolean = true;
   @Input() maxLabelLength: number = 10;
   @Input() tooltipText: any;
+  @Input() drawFn: (params: {
+    element: ElementRef;
+    selector: string;
+    results: T;
+    compInstance: GeoMapComponent<T>;
+  }) => any;
   @Output() dblclick = new EventEmitter();
   // optional margins
   @Input() margins: number[];
@@ -78,23 +86,35 @@ export class GeoMapComponent extends BaseChartComponent implements OnInit {
     this.geoJSON = (this.results as GeoMapChartSeries).GeoJSON;
 
     if (!this.geoJSON) return;
-    /**
-     * TODO: 感觉有问题，我怎么知道需要绘制多少轮廓线，可能州级别和国家轮廓线清晰度不一样
-     */
-    const projection = geoMercator()
-      .center([107, 31]) //地图中心位置,107是经度，31是纬度
-      .scale(600) //设置缩放量
-      .translate([this.width / 2, this.height / 2]); // 设置平移量
 
-    const path = geoPath(projection);
-    const svg = select(this.chartElement.nativeElement).select('.ngx-charts');
-    const g = svg.append('g');
-    const states = g.selectAll('path')
-      .data(this.geoJSON['features']) // 绑定数据
-      .enter()
-      .append('path')
-      .style('fill', 'white')
-      .attr('d', path);
+    if (this.drawFn) {
+      this.drawFn({
+        element: this.chartElement,
+        selector: '.ngx-charts',
+        results: this.results,
+        compInstance: this
+      });
+    } else {
+      /**
+       * TODO: 感觉有问题，我怎么知道需要绘制多少轮廓线，可能州级别和国家轮廓线清晰度不一样
+       */
+      const projection = geoMercator()
+        .center([107, 31]) //地图中心位置,107是经度，31是纬度
+        .scale(600) //设置缩放量
+        .translate([this.width / 2, this.height / 2]); // 设置平移量
+
+      const path = geoPath(projection);
+      const svg = select(this.chartElement.nativeElement).select('.ngx-charts');
+      const g = svg.append('g');
+      const states = g
+        .selectAll('path')
+        .data(this.geoJSON['features']) // 绑定数据
+        .enter()
+        .append('path')
+        .style('fill', 'white')
+        .style('stroke-width', '10px')
+        .attr('d', path);
+    }
   }
 
   getDomain(): string[] {

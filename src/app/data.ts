@@ -9,6 +9,10 @@ import {
   SingleSeries,
   TreeMapData
 } from '@swimlane/ngx-charts/models/chart-data.model';
+import { GeoMapComponent } from '@swimlane/ngx-charts/geo-map/geo-map.component';
+import { geoPath } from 'd3-geo';
+import { select } from 'd3-selection';
+import * as topojson from 'topojson-client';
 
 export const single: SingleSeries = [
   {
@@ -889,7 +893,50 @@ export const sankeyData: SankeyData = [
 ];
 
 export const geoMapData: Partial<GeoMapChartSeries> = {
-  // GeoJSONSource: `https://cdn.jsdelivr.net/npm/us-atlas@3/counties-albers-10m.json`
+  GeoJSONSource: `https://cdn.jsdelivr.net/npm/us-atlas@3/counties-albers-10m.json`
   // GeoJSONSource: `https://raw.githubusercontent.com/apache/echarts-examples/gh-pages/public/data/asset/geo/USA.json`
-  GeoJSONSource: `https://raw.githubusercontent.com/ELLENXX/d3-GeoJSON-/master/china.geo.json`
+  // GeoJSONSource: `https://raw.githubusercontent.com/ELLENXX/d3-GeoJSON-/master/china.geo.json`
+};
+
+export const geoMapDrawFn: GeoMapComponent<any>['drawFn'] = ({ selector, results, element, compInstance }) => {
+  // const projection = geoMercator()
+  //   .center([107, 31]) //地图中心位置,107是经度，31是纬度
+  //   .scale(600) //设置缩放量
+  //   .translate([compInstance.width / 2, compInstance.height / 2]); // 设置平移量
+  //
+  // const path = geoPath(projection);
+  const svg = select(element.nativeElement).select(selector);
+  // const g = svg.append('g');
+  // const states = g
+  //   .selectAll('path')
+  //   .data(compInstance.geoJSON['features']) // 绑定数据
+  //   .enter()
+  //   .append('path')
+  //   .style('fill', 'white')
+  //   .style('stroke-width', '10px')
+  //   .attr('d', path);
+  //
+  // console.log(1111);
+
+  const path = geoPath();
+
+  const g = svg.append('g');
+
+  const states = g
+    .append('g')
+    .attr('fill', '#444')
+    .attr('cursor', 'pointer')
+    .selectAll('path')
+    .data(topojson.feature(compInstance.geoJSON, compInstance.geoJSON.objects.states)['features'])
+    .join('path')
+    .attr('d', path);
+
+  // states.append("title")
+  //   .text(d => d.properties.name);
+
+  g.append('path')
+    .attr('fill', 'none')
+    .attr('stroke', 'white')
+    .attr('stroke-linejoin', 'round')
+    .attr('d', path(topojson.mesh(compInstance.geoJSON, compInstance.geoJSON.objects.states, (a, b) => a !== b)));
 };

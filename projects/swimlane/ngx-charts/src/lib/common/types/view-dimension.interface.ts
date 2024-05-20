@@ -4,3 +4,7 @@ export interface ViewDimensions {
   xOffset?: number;
   yOffset?: number;
 }
+
+export interface Results {
+  [key: string]: any;
+}
