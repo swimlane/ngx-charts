@@ -923,15 +923,25 @@ export const geoMapPainter: GeoMapComponent<any>['painter'] = ({ selector, resul
 
   const g = svg.append('g');
 
-  const states = g
-    .append('g')
-    .attr('fill', '#444')
-    // .attr('cursor', 'pointer')
-    .selectAll('path')
-    .attr('d', path(topojson.feature(compInstance.geoJSON, compInstance.geoJSON.objects.states)['features']));
+  const data = topojson.feature(compInstance.geoJSON, compInstance.geoJSON.objects.states)['features']
 
-  // states.append("title")
-  //   .text(d => d.properties.name);
+  type Data = typeof data;
+
+  g.append('g')
+    .attr('fill', '#444')
+    .attr('cursor', 'pointer')
+    .selectAll('path')
+    .data(data)
+    .join('path')
+    .attr('d', path);
+
+  // {
+  //   geoData: // topojson => geo features
+  //   style:{ // optional
+  //     fill: #444
+  //     cursor: pointer
+  //   }
+  // }
 
   g.append('path')
     .attr('fill', 'none')
