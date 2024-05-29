@@ -15,7 +15,7 @@ import { LegendOptions, LegendPosition } from '@swimlane/ngx-charts/common/types
 import { DataItem, GeoMapChartSeries } from '@swimlane/ngx-charts/models/chart-data.model';
 import { ColorHelper } from '@swimlane/ngx-charts/common/color.helper';
 import { ScaleType } from '@swimlane/ngx-charts/common/types/scale-type.enum';
-import {Results, ViewDimensions} from '@swimlane/ngx-charts/common/types/view-dimension.interface';
+import { Results, ViewDimensions } from '@swimlane/ngx-charts/common/types/view-dimension.interface';
 import { geoEquirectangular, geoMercator, geoPath } from 'd3-geo';
 import { select } from 'd3-selection';
 

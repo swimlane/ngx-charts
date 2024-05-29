@@ -894,9 +894,12 @@ export const sankeyData: SankeyData = [
 ];
 
 export const geoMapData: Partial<GeoMapChartSeries> = {
-  GeoJSONSource: `https://cdn.jsdelivr.net/npm/us-atlas@3/counties-albers-10m.json`
+  // GeoJSONSource: `https://cdn.jsdelivr.net/npm/us-atlas@3/counties-albers-10m.json`
   // GeoJSONSource: `https://raw.githubusercontent.com/apache/echarts-examples/gh-pages/public/data/asset/geo/USA.json`
   // GeoJSONSource: `https://raw.githubusercontent.com/ELLENXX/d3-GeoJSON-/master/china.geo.json`
+  // GeoJSONSource: `https://geojson.cn/api/data/china.topo.json`
+  // GeoJSONSource: `https://geojson.cn/api/data/china.json`
+  GeoJSONSource: `https://raw.githubusercontent.com/ecomfe/echarts-map-tool/gh-pages/maker/raw/china.json`
 };
 
 export const geoMapPainter: GeoMapComponent<any>['painter'] = ({ selector, results, element, compInstance }) => {
@@ -907,54 +910,65 @@ export const geoMapPainter: GeoMapComponent<any>['painter'] = ({ selector, resul
   //
   // const path = geoPath(projection);
   const svg = select(element.nativeElement).select(selector);
-  // const g = svg.append('g');
-  // const states = g
-  //   .selectAll('path')
-  //   .data(compInstance.geoJSON['features']) // 绑定数据
-  //   .enter()
-  //   .append('path')
-  //   .style('fill', 'white')
-  //   .style('stroke-width', '10px')
-  //   .attr('d', path);
-  //
-  // console.log(1111);
+  {
+    // const g = svg.append('g');
+    // const states = g
+    //   .selectAll('path')
+    //   .data(compInstance.geoJSON['features']) // 绑定数据
+    //   .enter()
+    //   .append('path')
+    //   .style('fill', 'white')
+    //   .style('stroke-width', '10px')
+    //   .attr('d', path);
+    //
+    // console.log(1111);
 
-  const path = geoPath();
+    var path = geoPath();
 
-  const g = svg.append('g');
+    var g = svg.append('g');
+    //
+    // g.append('path')
+    //   .attr('fill', '#444')
+    //   .attr('d', path(compInstance.geoJSON));
 
-  const data = topojson.feature(compInstance.geoJSON, compInstance.geoJSON.objects.states)['features']
+    compInstance.geoJSON.features.forEach(feature => {
+      g.append('path')
+        .attr('fill', '#444')
+        .attr('d', path(feature));
+    })
 
-  type Data = typeof data;
-
-  g.append('g')
-    .attr('fill', '#444')
-    .attr('cursor', 'pointer')
-    .selectAll('path')
-    .data(data)
-    .join('path')
-    .attr('d', path);
-
-  // {
-  //   geoData: // topojson => geo features
-  //   style:{ // optional
-  //     fill: #444
-  //     cursor: pointer
-  //   }
-  // }
-
-  g.append('path')
-    .attr('fill', 'none')
-    .attr('stroke', 'white')
-    .attr('stroke-linejoin', 'round')
-    .attr('d', path(topojson.mesh(compInstance.geoJSON, compInstance.geoJSON.objects.states, (a, b) => a !== b)));
-
-  function zoomed(event) {
-    const { transform } = event;
-    g.attr('transform', transform);
-    g.attr('stroke-width', 1 / transform.k);
+    return;
   }
+  {
+    var path = geoPath();
 
-  const zoom = d3Zoom().scaleExtent([1, 8]).on('zoom', zoomed);
-  svg.call(zoom);
+    var g = svg.append('g');
+
+    var data = topojson.feature(compInstance.geoJSON, compInstance.geoJSON.objects.default);
+
+    type Data = typeof data;
+
+    g.append('path').attr('fill', '#444').attr('d', path(data));
+
+    // {
+    //   geoData: // topojson => geo features
+    //   style:{ // optional
+    //     fill: #444
+    //     cursor: pointer
+    //   }
+    // }
+
+    var mesh = topojson.mesh(compInstance.geoJSON, compInstance.geoJSON.objects.default, (a, b) => a !== b);
+    var meshD = path(mesh);
+    g.append('path').attr('fill', 'none').attr('stroke', 'white').attr('stroke-linejoin', 'round').attr('d', meshD);
+
+    function zoomed(event) {
+      const { transform } = event;
+      g.attr('transform', transform);
+      g.attr('stroke-width', 1 / transform.k);
+    }
+
+    var zoom = d3Zoom().scaleExtent([1, 8]).on('zoom', zoomed);
+    svg.call(zoom);
+  }
 };
