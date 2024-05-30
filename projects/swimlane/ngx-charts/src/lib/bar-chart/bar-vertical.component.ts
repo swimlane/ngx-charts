@@ -93,6 +93,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
 export class BarVerticalComponent extends BaseChartComponent {
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
+  @Input() legendSize: string = 'middle';
   @Input() legendPosition: LegendPosition = LegendPosition.Right;
   @Input() xAxis;
   @Input() yAxis;
@@ -231,12 +232,14 @@ export class BarVerticalComponent extends BaseChartComponent {
       colors: undefined,
       domain: [],
       title: undefined,
-      position: this.legendPosition
+      position: this.legendPosition,
+      fontSize: this.legendSize
     };
     if (opts.scaleType === ScaleType.Ordinal) {
       opts.domain = this.xDomain;
       opts.colors = this.colors;
       opts.title = this.legendTitle;
+      opts.fontSize = this.legendSize
     } else {
       opts.domain = this.yDomain;
       opts.colors = this.colors.scale;
