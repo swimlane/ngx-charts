@@ -683,6 +683,58 @@ const chartGroups = [
         selector: 'linear-gauge',
         inputFormat: 'single',
         options: ['animations', 'colorScheme', 'value', 'previousValue', 'min', 'max', 'units']
+      },
+      {
+        name: 'Geo Map',
+        selector: 'geo-map',
+        inputFormat: 'geoMapChartSeries',
+        options: [
+          'animations',
+          'colorScheme',
+          'showXAxis',
+          'showYAxis',
+          'gradient',
+          'showLegend',
+          'showXAxisLabel',
+          'xAxisLabel',
+          'showYAxisLabel',
+          'yAxisLabel',
+          'innerPadding',
+          'tooltipDisabled',
+          'trimXAxisTicks',
+          'trimYAxisTicks',
+          'rotateXAxisTicks',
+          'maxXAxisTickLength',
+          'maxYAxisTickLength',
+          'min',
+          'max'
+        ]
+      },
+      {
+        name: 'Geo Map Custom Painter',
+        selector: 'geo-map-custom-painter',
+        inputFormat: 'geoMapChartSeries',
+        options: [
+          'animations',
+          'colorScheme',
+          'showXAxis',
+          'showYAxis',
+          'gradient',
+          'showLegend',
+          'showXAxisLabel',
+          'xAxisLabel',
+          'showYAxisLabel',
+          'yAxisLabel',
+          'innerPadding',
+          'tooltipDisabled',
+          'trimXAxisTicks',
+          'trimYAxisTicks',
+          'rotateXAxisTicks',
+          'maxXAxisTickLength',
+          'maxYAxisTickLength',
+          'min',
+          'max'
+        ]
       }
     ]
   },

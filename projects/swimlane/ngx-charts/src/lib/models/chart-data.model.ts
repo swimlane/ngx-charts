@@ -103,3 +103,12 @@ export interface IBoxModel {
   // TODO: Replace by IColorGradient Interface
   gradientStops?: Array<{ offset: number; color: string; opacity: number }>;
 }
+
+export interface GeoMapChartSeries {
+  /**
+   * GeoJSON or TopoJSON
+   */
+  GeoJSON: any;
+
+  [key: string]: any;
+}

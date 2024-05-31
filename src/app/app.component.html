@@ -1051,6 +1051,49 @@
         (onFilter)="onFilter($event)"
       >
       </ngx-charts-timeline-filter-bar-chart>
+      <ngx-charts-geo-map
+        *ngIf="chartType === 'geo-map'"
+        class="chart-container"
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="geoMapChartData"
+        [animations]="animations"
+        [legend]="false"
+        [legendTitle]="legendTitle"
+        [legendPosition]="legendPosition"
+        [explodeSlices]="explodeSlices"
+        [labels]="showLabels"
+        [gradient]="gradient"
+        [tooltipDisabled]="tooltipDisabled"
+        [tooltipText]="pieTooltipText"
+        (dblclick)="dblclick($event)"
+        (select)="select($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
+      >
+      </ngx-charts-geo-map>
+      <ngx-charts-geo-map
+        *ngIf="chartType === 'geo-map-custom-painter'"
+        class="chart-container"
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="geoMapChartData"
+        [animations]="animations"
+        [legend]="false"
+        [legendTitle]="legendTitle"
+        [legendPosition]="legendPosition"
+        [explodeSlices]="explodeSlices"
+        [labels]="showLabels"
+        [gradient]="gradient"
+        [tooltipDisabled]="tooltipDisabled"
+        [tooltipText]="pieTooltipText"
+        [painter]="geoMapPainter"
+        (dblclick)="dblclick($event)"
+        (select)="select($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
+      >
+      </ngx-charts-geo-map>
     </div>
     <ngx-charts-bar-vertical-stacked
       *ngIf="chartType === 'bar-vertical-stacked-negative'"
@@ -1159,6 +1202,7 @@
         <pre *ngIf="chart.inputFormat === 'comboChart'">{{ barChart | json }}</pre>
         <pre *ngIf="chart.inputFormat === 'comboChart'">{{ lineChartSeries | json }}</pre>
         <pre *ngIf="chart.inputFormat === 'timelineFilter'">{{ timelineFilterBarData | json }}</pre>
+        <pre *ngIf="chart.inputFormat === 'geoMapChartSeries'">{{ geoMapChartData | json }}</pre>
         <div>
           <label>
             <input type="checkbox" [(ngModel)]="realTimeData" />

@@ -32,8 +32,8 @@
   "peerDependencies": {
     "@angular/animations": ">=12.0.0",
     "@angular/cdk": ">=12.0.0",
-    "@angular/core": ">=12.0.0",
     "@angular/common": ">=12.0.0",
+    "@angular/core": ">=12.0.0",
     "@angular/forms": ">=12.0.0",
     "@angular/platform-browser": ">=12.0.0",
     "@angular/platform-browser-dynamic": ">=12.0.0",
@@ -45,6 +45,7 @@
     "d3-color": "^3.1.0",
     "d3-ease": "^3.0.1",
     "d3-format": "^3.1.0",
+    "d3-geo": "^3.1.1",
     "d3-hierarchy": "^3.1.0",
     "d3-interpolate": "^3.0.1",
     "d3-sankey": "^0.12.3",
@@ -53,6 +54,7 @@
     "d3-shape": "^3.2.0",
     "d3-time-format": "^3.0.0",
     "d3-transition": "^3.0.1",
+    "lodash": "^4.17.21",
     "rfdc": "^1.3.0",
     "tslib": "^2.0.0"
   },

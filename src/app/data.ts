@@ -1,13 +1,19 @@
 import { data as countries } from 'emoji-flags';
 import {
-  SingleSeries,
-  MultiSeries,
-  BubbleChartMultiSeries,
   BoxChartMultiSeries,
+  BubbleChartMultiSeries,
+  GeoMapChartSeries,
+  MultiSeries,
+  SankeyData,
   Series,
-  TreeMapData,
-  SankeyData
+  SingleSeries,
+  TreeMapData
 } from '@swimlane/ngx-charts/models/chart-data.model';
+import type { GeoMapComponent } from '@swimlane/ngx-charts/geo-map/geo-map.component';
+import { geoPath } from 'd3-geo';
+import { select } from 'd3-selection';
+import { zoom as d3Zoom } from 'd3-zoom';
+import * as topojson from 'topojson-client';
 
 export const single: SingleSeries = [
   {
@@ -886,3 +892,83 @@ export const sankeyData: SankeyData = [
   { source: 'Republic of Equatorial Guinea', target: 'Republic of Costa Rica', value: 30 },
   { source: 'Republic of Equatorial Guinea', target: 'Portugal', value: 5 }
 ];
+
+export const geoMapData: Partial<GeoMapChartSeries> = {
+  // GeoJSONSource: `https://cdn.jsdelivr.net/npm/us-atlas@3/counties-albers-10m.json`
+  // GeoJSONSource: `https://raw.githubusercontent.com/apache/echarts-examples/gh-pages/public/data/asset/geo/USA.json`
+  // GeoJSONSource: `https://raw.githubusercontent.com/ELLENXX/d3-GeoJSON-/master/china.geo.json`
+  // GeoJSONSource: `https://geojson.cn/api/data/china.topo.json`
+  // GeoJSONSource: `https://geojson.cn/api/data/china.json`
+  GeoJSONSource: `https://raw.githubusercontent.com/ecomfe/echarts-map-tool/gh-pages/maker/raw/china.json`
+};
+
+export const geoMapPainter: GeoMapComponent<any>['painter'] = ({ selector, results, element, compInstance }) => {
+  // const projection = geoMercator()
+  //   .center([107, 31]) //地图中心位置,107是经度，31是纬度
+  //   .scale(600) //设置缩放量
+  //   .translate([compInstance.width / 2, compInstance.height / 2]); // 设置平移量
+  //
+  // const path = geoPath(projection);
+  const svg = select(element.nativeElement).select(selector);
+  {
+    // const g = svg.append('g');
+    // const states = g
+    //   .selectAll('path')
+    //   .data(compInstance.geoJSON['features']) // 绑定数据
+    //   .enter()
+    //   .append('path')
+    //   .style('fill', 'white')
+    //   .style('stroke-width', '10px')
+    //   .attr('d', path);
+    //
+    // console.log(1111);
+
+    var path = geoPath();
+
+    var g = svg.append('g');
+    //
+    // g.append('path')
+    //   .attr('fill', '#444')
+    //   .attr('d', path(compInstance.geoJSON));
+
+    compInstance.geoJSON.features.forEach(feature => {
+      g.append('path')
+        .attr('fill', '#444')
+        .attr('d', path(feature));
+    })
+
+    return;
+  }
+  {
+    var path = geoPath();
+
+    var g = svg.append('g');
+
+    var data = topojson.feature(compInstance.geoJSON, compInstance.geoJSON.objects.default);
+
+    type Data = typeof data;
+
+    g.append('path').attr('fill', '#444').attr('d', path(data));
+
+    // {
+    //   geoData: // topojson => geo features
+    //   style:{ // optional
+    //     fill: #444
+    //     cursor: pointer
+    //   }
+    // }
+
+    var mesh = topojson.mesh(compInstance.geoJSON, compInstance.geoJSON.objects.default, (a, b) => a !== b);
+    var meshD = path(mesh);
+    g.append('path').attr('fill', 'none').attr('stroke', 'white').attr('stroke-linejoin', 'round').attr('d', meshD);
+
+    function zoomed(event) {
+      const { transform } = event;
+      g.attr('transform', transform);
+      g.attr('stroke-width', 1 / transform.k);
+    }
+
+    var zoom = d3Zoom().scaleExtent([1, 8]).on('zoom', zoomed);
+    svg.call(zoom);
+  }
+};
