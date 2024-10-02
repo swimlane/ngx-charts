@@ -1,5 +1,9 @@
 # Changelog
 
+## 22.0.0
+
+- Breaking: Upgrade Angular to v18
+
 ## 21.0.0
 
 - Breaking: Upgrade Angular to v17
