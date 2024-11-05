@@ -99,7 +99,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   @Input() units: string;
   @Input() bigSegments: number = 10;
   @Input() smallSegments: number = 5;
-  @Input() results: any[];
+  @Input() declare results: any[];
   @Input() showAxis: boolean = true;
   @Input() startAngle: number = -120;
   @Input() angleSpan: number = 240;

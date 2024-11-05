@@ -76,7 +76,7 @@ import {
 })
 export class TimelineFilterBarChartComponent extends BaseChartComponent {
   @Input() autoScale = false;
-  @Input() schemeType: ScaleType = ScaleType.Ordinal;
+  @Input() declare schemeType: ScaleType = ScaleType.Ordinal;
   @Input() valueDomain: number[];
   @Input() xAxis;
   @Input() yAxis;

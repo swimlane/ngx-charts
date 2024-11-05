@@ -43,7 +43,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreeMapComponent extends BaseChartComponent {
-  @Input() results: DataItem[];
+  @Input() declare results: DataItem[];
   @Input() tooltipDisabled: boolean = false;
   @Input() valueFormatting: any;
   @Input() labelFormatting: any;

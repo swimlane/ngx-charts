@@ -167,7 +167,7 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
   @Input() maxRadius = 10;
   @Input() minRadius = 3;
   @Input() autoScale: boolean;
-  @Input() schemeType: ScaleType = ScaleType.Ordinal;
+  @Input() declare schemeType: ScaleType = ScaleType.Ordinal;
   @Input() legendPosition: string = 'right';
   @Input() tooltipDisabled: boolean = false;
   @Input() xScaleMin: any;

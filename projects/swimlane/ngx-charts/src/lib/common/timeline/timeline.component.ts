@@ -42,7 +42,7 @@ import { ViewDimensions } from '../types/view-dimension.interface';
 })
 export class Timeline implements OnChanges {
   @Input() view: [number, number];
-  @Input() results; // type this
+  @Input() declare results; // type this
   @Input() scheme; // type this
   @Input() customColors; // type this
   @Input() legend: boolean;

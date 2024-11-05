@@ -29,7 +29,7 @@ import { ViewDimensions } from './types/view-dimension.interface';
   template: ` <div></div> `
 })
 export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, OnInit {
-  @Input() results: any;
+  @Input() declare results: any;
   @Input() view: [number, number];
   @Input() scheme: string | Color = 'cool';
   @Input() schemeType: ScaleType = ScaleType.Ordinal;

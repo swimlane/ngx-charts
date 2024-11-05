@@ -109,7 +109,7 @@ export class BoxChartComponent extends BaseChartComponent {
   @ContentChild('tooltipTemplate', { static: false }) tooltipTemplate: TemplateRef<any>;
 
   /** Input Data, this came from Base Chart Component. */
-  results: BoxChartMultiSeries;
+  declare results: BoxChartMultiSeries;
   /** Chart Dimensions, this came from Base Chart Component. */
   dims: ViewDimensions;
   /** Color data. */
