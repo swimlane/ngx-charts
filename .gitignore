@@ -7,7 +7,6 @@ dist/
 build/
 coverage/
 .idea
-yarn.lock
 /ngx-charts.iml
 ngx-charts.iml
 release/src/
