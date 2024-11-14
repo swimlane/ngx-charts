@@ -4,7 +4,7 @@
     "outDir": "../out-tsc/app",
     "types": []
   },
-  "exclude": ["test.ts", "**/*.spec.ts"],
+  "exclude": ["**/*.spec.ts"],
   "angularCompilerOptions": {
     "preserveWhitespaces": true,
     "enableIvy": false

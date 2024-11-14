@@ -14,3 +14,5 @@ release/src/
 release/demo/
 .vscode/
 /*.tgz
+.yarn
+.yarn/install-state.gz
