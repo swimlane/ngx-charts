@@ -103,7 +103,7 @@ export class TooltipArea {
   @Input() xSet: any[];
   @Input() xScale;
   @Input() yScale;
-  @Input() results: any[];
+  @Input() declare results: any[];
   @Input() colors: ColorHelper;
   @Input() showPercentage: boolean = false;
   @Input() tooltipDisabled: boolean = false;

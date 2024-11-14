@@ -41,7 +41,7 @@ import {
 export class SparklineComponent extends BaseChartComponent {
   @Input() autoScale = false;
   @Input() curve: any = curveLinear;
-  @Input() schemeType: ScaleType = ScaleType.Linear;
+  @Input() schemeType: ScaleType = ScaleType.Ordinal;
   @Input() valueDomain: number[];
   @Input() animations: boolean = true;
 

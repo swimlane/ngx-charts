@@ -28,16 +28,8 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.scss"],
             "scripts": [],
-            "allowedCommonJsDependencies": [
-              "emoji-flags",
-              "codemirror",
-              "ajv",
-              "mousetrap",
-              "moment-timezone"
-            ],
-            "vendorChunk": true,
+            "allowedCommonJsDependencies": ["emoji-flags", "codemirror", "ajv", "mousetrap", "moment-timezone"],
             "extractLicenses": false,
-            "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
             "namedChunks": true
@@ -55,8 +47,6 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -75,25 +65,24 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ngx-charts:build"
+            "buildTarget": "ngx-charts:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ngx-charts:build:production"
+              "buildTarget": "ngx-charts:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ngx-charts:build"
+            "buildTarget": "ngx-charts:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": ["src/favicon.ico", "src/assets"],
@@ -156,5 +145,12 @@
       }
     }
   },
-  "defaultProject": "ngx-charts"
+  "schematics": {
+    "@angular-eslint/schematics:application": {
+      "setParserOptionsProject": true
+    },
+    "@angular-eslint/schematics:library": {
+      "setParserOptionsProject": true
+    }
+  }
 }
