@@ -92,6 +92,7 @@
     "@types/node": "^18.11.9",
     "@typescript-eslint/eslint-plugin": "^8.14.0",
     "@typescript-eslint/parser": "^8.14.0",
+    "@typescript-eslint/types": "^8.14.0",
     "@typescript-eslint/utils": "^8.14.0",
     "angular-cli-ghpages": "^1.0.3",
     "cross-env": "^7.0.2",
