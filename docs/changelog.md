@@ -1,5 +1,11 @@
 # Changelog
 
+## 21.0.0
+
+- Bump: Upgrade to support Angular 18
+- Bump: Upgrade dependencies
+- Fix: In SSR mode, some charts could become misaligned
+
 ## 20.5.0
 
 - Feature: Add Sankey diagram chart type
