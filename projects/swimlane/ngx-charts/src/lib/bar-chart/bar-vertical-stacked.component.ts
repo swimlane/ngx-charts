@@ -94,37 +94,37 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
               (activate)="onActivate($event, group)"
               (deactivate)="onDeactivate($event, group)"
               (dataLabelHeightChanged)="onDataLabelMaxHeightChanged($event, index)"
-            />
+            ></svg:g>
           </svg:g>
         </svg:g>
-      </svg:g>
-      <svg:g *ngIf="isSSR">
-        <svg:g
-          *ngFor="let group of results; let index = index; trackBy: trackBy"
-          [attr.transform]="groupTransform(group)"
-        >
+        <svg:g *ngIf="isSSR">
           <svg:g
-            ngx-charts-series-vertical
-            [type]="barChartType.Stacked"
-            [xScale]="xScale"
-            [yScale]="yScale"
-            [activeEntries]="activeEntries"
-            [colors]="colors"
-            [series]="group.series"
-            [dims]="dims"
-            [gradient]="gradient"
-            [tooltipDisabled]="tooltipDisabled"
-            [tooltipTemplate]="tooltipTemplate"
-            [showDataLabel]="showDataLabel"
-            [dataLabelFormatting]="dataLabelFormatting"
-            [seriesName]="group.name"
-            [animations]="animations"
-            [noBarWhenZero]="noBarWhenZero"
-            (select)="onClick($event, group)"
-            (activate)="onActivate($event, group)"
-            (deactivate)="onDeactivate($event, group)"
-            (dataLabelHeightChanged)="onDataLabelMaxHeightChanged($event, index)"
-          />
+            *ngFor="let group of results; let index = index; trackBy: trackBy"
+            [attr.transform]="groupTransform(group)"
+          >
+            <svg:g
+              ngx-charts-series-vertical
+              [type]="barChartType.Stacked"
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [activeEntries]="activeEntries"
+              [colors]="colors"
+              [series]="group.series"
+              [dims]="dims"
+              [gradient]="gradient"
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="tooltipTemplate"
+              [showDataLabel]="showDataLabel"
+              [dataLabelFormatting]="dataLabelFormatting"
+              [seriesName]="group.name"
+              [animations]="animations"
+              [noBarWhenZero]="noBarWhenZero"
+              (select)="onClick($event, group)"
+              (activate)="onActivate($event, group)"
+              (deactivate)="onDeactivate($event, group)"
+              (dataLabelHeightChanged)="onDataLabelMaxHeightChanged($event, index)"
+            ></svg:g>
+          </svg:g>
         </svg:g>
       </svg:g>
     </ngx-charts-chart>

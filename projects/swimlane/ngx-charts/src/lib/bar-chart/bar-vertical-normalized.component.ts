@@ -90,7 +90,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
               (select)="onClick($event, group)"
               (activate)="onActivate($event, group)"
               (deactivate)="onDeactivate($event, group)"
-            />
+            ></svg:g>
           </svg:g>
         </svg:g>
         <svg:g *ngIf="isSSR">
@@ -113,7 +113,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
               (select)="onClick($event, group)"
               (activate)="onActivate($event, group)"
               (deactivate)="onDeactivate($event, group)"
-            />
+            ></svg:g>
           </svg:g>
         </svg:g>
       </svg:g>
@@ -148,7 +148,7 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
-  @Input() declare schemeType: ScaleType;
+  @Input() schemeType: ScaleType = ScaleType.Ordinal;
   @Input() trimXAxisTicks: boolean = true;
   @Input() trimYAxisTicks: boolean = true;
   @Input() rotateXAxisTicks: boolean = true;
