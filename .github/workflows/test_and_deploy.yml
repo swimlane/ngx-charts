@@ -31,7 +31,7 @@ jobs:
 
       - name: Test
         run: |
-          yarn ci --if-present
+          yarn ci
         env:
           CI: true
 
