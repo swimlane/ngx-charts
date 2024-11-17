@@ -837,4 +837,8 @@ export class AppComponent implements OnInit {
     this.bubbleDemoChart.drilldown(event);
     this.bubbleDemoTempData = this.bubbleDemoChart.toChart();
   }
+
+  onTimelineSelectionChange(domain) {
+    console.log(domain);
+  }
 }
