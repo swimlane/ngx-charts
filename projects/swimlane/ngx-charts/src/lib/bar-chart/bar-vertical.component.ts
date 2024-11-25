@@ -125,6 +125,7 @@ export class BarVerticalComponent extends BaseChartComponent {
   @Input() dataLabelFormatting: any;
   @Input() noBarWhenZero: boolean = true;
   @Input() wrapTicks = false;
+  @Input() sortData: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -143,6 +144,7 @@ export class BarVerticalComponent extends BaseChartComponent {
   yAxisWidth: number = 0;
   legendOptions: LegendOptions;
   dataLabelMaxHeight: any = { negative: 0, positive: 0 };
+  originalData: any;
 
   update(): void {
     super.update();
@@ -151,6 +153,15 @@ export class BarVerticalComponent extends BaseChartComponent {
       this.dataLabelMaxHeight = { negative: 0, positive: 0 };
     }
     this.margin = [10 + this.dataLabelMaxHeight.positive, 20, 10 + this.dataLabelMaxHeight.negative, 20];
+
+    if (!this.originalData || (this.originalData.length != this.results.length)) {
+      this.originalData = this.results;
+    }
+    if (this.sortData) {
+      this.results.sort((a, b) => b.value - a.value);
+    } else {
+      this.results = this.originalData;
+    }
 
     this.dims = calculateViewDimensions({
       width: this.width,

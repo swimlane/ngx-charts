@@ -34,6 +34,7 @@
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         [wrapTicks]="wrapTicks"
+        [sortData]="sortData"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -71,6 +72,7 @@
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         [wrapTicks]="wrapTicks"
+        [sortData]="sortData"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -183,6 +185,7 @@
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         [wrapTicks]="wrapTicks"
+        [sortData]="sortData"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -219,6 +222,7 @@
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
         [wrapTicks]="wrapTicks"
+        [sortData]="sortData"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -1317,6 +1321,13 @@
           <label>
             <input type="checkbox" [(ngModel)]="showDataLabel" />
             Show Data Label
+          </label>
+          <br />
+        </div>
+        <div *ngIf="chart.options.includes('sortData')">
+          <label>
+            <input type="checkbox" [(ngModel)]="sortData" />
+            Sort Data
           </label>
           <br />
         </div>

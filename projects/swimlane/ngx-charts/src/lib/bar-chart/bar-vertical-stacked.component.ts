@@ -175,6 +175,7 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   @Input() dataLabelFormatting: any;
   @Input() noBarWhenZero: boolean = true;
   @Input() wrapTicks = false;
+  @Input() sortData: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -196,6 +197,7 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   legendOptions: LegendOptions;
   dataLabelMaxHeight: any = { negative: 0, positive: 0 };
   isSSR = false;
+  originalData: any;
 
   barChartType = BarChartType;
 
@@ -212,6 +214,16 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
       this.dataLabelMaxHeight = { negative: 0, positive: 0 };
     }
     this.margin = [10 + this.dataLabelMaxHeight.positive, 20, 10 + this.dataLabelMaxHeight.negative, 20];
+
+    if (!this.originalData || (this.originalData.length != this.results.length)) {
+      this.originalData = this.results;
+    }
+    if (this.sortData) {
+      const sumValues = (data) => data.reduce((acc, curr) => acc + curr.value, 0);
+      this.results.sort((a, b) => sumValues(b.series) - sumValues(a.series));
+    } else {
+      this.results = this.originalData;
+    }
 
     this.dims = calculateViewDimensions({
       width: this.width,
