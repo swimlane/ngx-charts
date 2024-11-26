@@ -41,6 +41,9 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [trimTicks]="trimXAxisTicks"
+          [trimLabel]="trimXAxisLabel"
+          [maxLabelLength]="maxXAxisLabelLength"
+          [wrapLabel]="wrapXAxisLabel"
           [rotateTicks]="rotateXAxisTicks"
           [maxTickLength]="maxXAxisTickLength"
           [tickFormatting]="xAxisTickFormatting"
@@ -58,6 +61,9 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
           [trimTicks]="trimYAxisTicks"
+          [trimLabel]="trimYAxisLabel"
+          [maxLabelLength]="maxYAxisLabelLength"
+          [wrapLabel]="wrapYAxisLabel"
           [maxTickLength]="maxYAxisTickLength"
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
@@ -100,6 +106,10 @@ export class BarVerticalComponent extends BaseChartComponent {
   @Input() yAxis;
   @Input() showXAxisLabel: boolean;
   @Input() showYAxisLabel: boolean;
+  @Input() trimXAxisLabel: boolean;
+  @Input() trimYAxisLabel: boolean;
+  @Input() wrapXAxisLabel: boolean;
+  @Input() wrapYAxisLabel: boolean;
   @Input() xAxisLabel: string;
   @Input() yAxisLabel: string;
   @Input() tooltipDisabled: boolean = false;
@@ -112,6 +122,8 @@ export class BarVerticalComponent extends BaseChartComponent {
   @Input() rotateXAxisTicks: boolean = true;
   @Input() maxXAxisTickLength: number = 16;
   @Input() maxYAxisTickLength: number = 16;
+  @Input() maxXAxisLabelLength: number = 16;
+  @Input() maxYAxisLabelLength: number = 16;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
   @Input() xAxisTicks: any[];

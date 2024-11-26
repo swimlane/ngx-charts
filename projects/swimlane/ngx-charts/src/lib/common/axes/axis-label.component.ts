@@ -22,6 +22,9 @@ export class AxisLabelComponent implements OnChanges {
   @Input() offset: number;
   @Input() width: number;
   @Input() height: number;
+  @Input() maxLabelLength: number;
+  @Input() trimLabel: boolean;
+  @Input() wrapLabel: boolean;
 
   x: number;
   y: number;

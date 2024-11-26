@@ -118,6 +118,12 @@ export class AppComponent implements OnInit {
   strokeColor: string = '#FFFFFF';
   strokeWidth: number = 2;
   wrapTicks = false;
+  trimYAxisLabel: boolean = true;
+  trimXAxisLabel: boolean = true;
+  maxXAxisLabelLength: number = 16;
+  maxYAxisLabelLength: number = 16;
+  wrapXAxisLabel: boolean = false;
+  wrapYAxisLabel: boolean = false;
 
   curves = {
     Basis: shape.curveBasis,
