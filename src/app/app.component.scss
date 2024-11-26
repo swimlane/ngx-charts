@@ -331,3 +331,20 @@ main {
     color: $color-text-med;
   }
 }
+
+.top-pie-chart {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+}
+
+.bottom-line-chart {
+  position: absolute;
+  bottom: 30%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+}
+
