@@ -252,6 +252,9 @@ export class AppComponent implements OnInit {
   // Reference lines
   showRefLines: boolean = true;
   showRefLabels: boolean = true;
+  refLineColor: string = "#455066";
+  refLineWidth: number = 1;
+  refLineStyle: string = "dashed";
 
   // Supports any number of reference lines.
   refLines = [
