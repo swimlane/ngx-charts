@@ -804,6 +804,20 @@
         (select)="select($event)"
       >
       </ngx-charts-linear-gauge>
+
+      <ngx-charts-percent-gauge
+        *ngIf="chartType === 'percent-gauge'"
+        class="chart-container"
+        [view]="view"
+        [scheme]="colorScheme"
+        [animations]="animations"
+        [value]="gaugeValue"
+        [target]="0.8"
+        label="Coverage"
+        (select)="select($event)"
+      >
+      </ngx-charts-percent-gauge>
+
       <div *ngIf="chartType === 'plot-demo'">
         <ngx-input
           [type]="inputTypes.text"

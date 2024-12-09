@@ -1,0 +1,30 @@
+.percent-gauge {
+  cursor: pointer;
+
+  text {
+    text-anchor: middle;
+  }
+
+  .dashes-back {
+    stroke: #455066;
+  }
+
+  .target-label {
+    font-size: 0.4em;
+  }
+  .target-value {
+    font-size: 0.5em;
+  }
+  .total {
+    font-size: 1.1em;
+  }
+  .percent {
+    font-size: 0.9em;
+  }
+  .label {
+    display: block;
+    font-size: 0.8em;
+    text-anchor: middle;
+    dominant-baseline: middle;
+  }
+}

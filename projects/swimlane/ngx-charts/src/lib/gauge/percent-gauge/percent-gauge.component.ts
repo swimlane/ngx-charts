@@ -1,0 +1,275 @@
+import { Component, Input, AfterViewInit, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
+import { scaleLinear } from 'd3-scale';
+
+import { BaseChartComponent } from '../../common/base-chart.component';
+import { calculateViewDimensions } from '../../common/view-dimensions.helper';
+import { ColorHelper } from '../../common/color.helper';
+import { ViewDimensions } from '../../common/types/view-dimension.interface';
+import { ScaleType } from '../../common/types/scale-type.enum';
+import { Gradient } from '../../common/types/gradient.interface';
+import { id } from '../../utils/id';
+
+@Component({
+  selector: 'ngx-charts-percent-gauge',
+  template: `
+    <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations" (click)="onClick()">
+      <svg:g class="percent-gauge chart">
+        <svg:g [attr.transform]="transform">
+          <svg:defs>
+            <svg:g ngx-charts-svg-linear-gradient [name]="gradientId" [stops]="gradientStops" />
+          </svg:defs>
+          >
+          <mask id="circleMask">
+            <circle
+              [attr.r]="radius"
+              [style.stroke-width]="radius / 5"
+              cx="50"
+              cy="50"
+              stroke="white"
+              fill="transparent"
+              [attr.stroke-dasharray]="circumference"
+              transform="rotate(-90,50,50)"
+              [style.stroke-dashoffset]="circumference * (1 - percent / 100)"
+            />
+          </mask>
+          <text x="50" y="55" fill="white" stroke="none" class="total">
+            {{ percent }}
+            <tspan class="percent">%</tspan>
+          </text>
+          <circle class="dashes-back" [style.stroke-width]="radius / 5" [attr.r]="radius" cx="50" cy="50" fill="none" //
+          [style.stroke-dasharray]="dashes" />
+          <circle
+            [style.stroke-dasharray]="dashes"
+            [style.stroke-width]="radius / 5"
+            [attr.r]="radius"
+            cx="50"
+            cy="50"
+            fill="none"
+            [attr.stroke]="gradientFill"
+            mask="url(#circleMask)"
+          />
+          <svg:g [attr.transform]="targetTransform">
+            <circle
+              cx="15"
+              cy="15"
+              [attr.r]="radius / 4"
+              [style.stroke-width]="radius / 40"
+              fill="#1B1E27"
+              [attr.stroke]="targetColor"
+            />
+            <text class="target-label" x="15" y="12" fill="#A0AABE" stroke="none">Target</text>
+            <text class="target-value" x="15" y="20" fill="#CDD2DD" stroke="none">{{ target * 100 }}%</text>
+          </svg:g>
+        </svg:g>
+        <svg:g>
+          <text
+            class="label"
+            x="50%"
+            y="110px"
+            dominant-baseline="middle"
+            text-anchor="middle"
+            fill="#CDD2DD"
+            stroke="none"
+          >
+            {{ label }}
+          </text>
+        </svg:g>
+      </svg:g>
+    </ngx-charts-chart>
+  `,
+  styleUrls: ['../../common/base-chart.component.scss', './percent-gauge.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class PercentGaugeComponent extends BaseChartComponent implements AfterViewInit {
+  @Input() max: number = 100;
+  @Input() value: number = 0;
+  @Input() target: number = 0.75;
+  @Input() label: string;
+  @Input() valueFormatting: any;
+
+  dims: ViewDimensions;
+  valueDomain: [number, number];
+  valueScale: any;
+
+  colors: ColorHelper;
+  radius: number;
+  transform: string;
+  targetTransform: string;
+  targetColor: string;
+  dashes: string;
+  margin: number[] = [20, 40, 20, 40];
+  gradientId: string;
+  gradientFill: string;
+  gradientStops: Gradient[];
+
+  displayValue: string;
+  circumference: number;
+  percent: number;
+
+  ngAfterViewInit(): void {
+    super.ngAfterViewInit();
+    // setTimeout(() => {
+    //   this.scaleText(ElementType.Value);
+    //   this.scaleText(ElementType.Units);
+    // });
+  }
+
+  update(): void {
+    super.update();
+
+    this.max = Math.max(this.max, this.value);
+
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin
+    });
+
+    this.radius = Math.min(this.dims.width, this.dims.height) / 2;
+
+    this.valueDomain = this.getValueDomain();
+    this.valueScale = this.getValueScale();
+    this.displayValue = this.getDisplayValue();
+
+    this.setColors();
+    this.targetColor = this.colors.getColor(this.target);
+
+    const xOffset = this.margin[3] + this.dims.width / 2 - 50;
+    const yOffset = this.margin[0] + this.dims.height / 2 - 50;
+
+    this.transform = `translate(${xOffset}, ${yOffset})`;
+    this.targetTransform = ` translate(35, 35)
+                  rotate(${this.target * 360}, 15, 15)
+                  translate(0, -${this.radius})
+                  rotate(-${this.target * 360}, 15, 15)`;
+
+    this.circumference = 2 * Math.PI * this.radius;
+    this.percent = this.getPercentage();
+
+    this.dashes = `${this.radius / 60} ${this.circumference / 60 - this.radius / 60}`;
+
+    this.updateGradient();
+
+    // if (isPlatformServer(this.platformId)) {
+    //   this.scaleTextSSR('value');
+    //   this.scaleTextSSR('units');
+    // } else {
+    //   setTimeout(() => this.scaleText(ElementType.Value), 50);
+    //   setTimeout(() => this.scaleText(ElementType.Units), 50);
+    // }
+  }
+
+  updateGradient() {
+    this.gradientId = 'grad' + id().toString();
+    this.gradientFill = `url(#${this.gradientId})`;
+    this.gradientStops = this.getGradient();
+  }
+
+  getGradient(): Gradient[] {
+    return this.colors.getLinearGradientStops(this.max, 0);
+    // return [
+    //   {
+    //     offset: 0,
+    //     color: '#ff0000',
+    //     opacity: 1
+    //   },
+    //   {
+    //     offset: 100,
+    //     color: '#00ff00',
+    //     opacity: 1
+    //   }
+    // ];
+  }
+
+  getValueDomain(): [number, number] {
+    return [0, this.max];
+  }
+
+  getValueScale(): any {
+    return scaleLinear().range([0, this.dims.width]).domain(this.valueDomain);
+  }
+
+  getDisplayValue(): string {
+    if (this.valueFormatting) {
+      return this.valueFormatting(this.value);
+    }
+    return this.value.toLocaleString();
+  }
+
+  getPercentage(): number {
+    return Math.round((this.value / this.max) * 100);
+  }
+
+  // scaleText(element: ElementType, repeat: boolean = true): void {
+  //   let el;
+  //   let resizeScale;
+  //   if (element === ElementType.Value) {
+  //     el = this.valueTextEl;
+  //     resizeScale = this.valueResizeScale;
+  //   } else {
+  //     el = this.unitsTextEl;
+  //     resizeScale = this.unitsResizeScale;
+  //   }
+
+  //   const { width, height } = el.nativeElement.getBoundingClientRect();
+  //   if (width === 0 || height === 0) return;
+  //   const oldScale = resizeScale;
+  //   const availableWidth = this.dims.width;
+  //   const availableHeight = Math.max(this.dims.height / 2 - 15, 0);
+  //   const resizeScaleWidth = Math.floor((availableWidth / (width / resizeScale)) * 100) / 100;
+  //   const resizeScaleHeight = Math.floor((availableHeight / (height / resizeScale)) * 100) / 100;
+  //   resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
+
+  //   if (resizeScale !== oldScale) {
+  //     if (element === ElementType.Value) {
+  //       this.valueResizeScale = resizeScale;
+  //       this.valueTextTransform = `scale(${resizeScale}, ${resizeScale})`;
+  //     } else {
+  //       this.unitsResizeScale = resizeScale;
+  //       this.unitsTextTransform = `scale(${resizeScale}, ${resizeScale})`;
+  //     }
+  //     this.cd.markForCheck();
+  //     if (repeat && isPlatformBrowser(this.platformId)) {
+  //       setTimeout(() => {
+  //         this.scaleText(element, false);
+  //       }, 50);
+  //     }
+  //   }
+  // }
+
+  // scaleTextSSR(element) {
+  //   let resizeScale = 1;
+
+  //   const value = element === 'value' ? this.displayValue : this.units;
+  //   const width = calculateTextWidth(VERDANA_FONT_WIDTHS_16_PX, value, 10);
+  //   const height = 25;
+
+  //   const availableWidth = this.dims.width;
+  //   const availableHeight = Math.max(this.dims.height / 2 - 15, 0);
+  //   const resizeScaleWidth = Math.floor((availableWidth / (width / resizeScale)) * 100) / 100;
+  //   const resizeScaleHeight = Math.floor((availableHeight / (height / resizeScale)) * 100) / 100;
+  //   resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
+
+  //   if (element === 'value') {
+  //     this.valueResizeScale = resizeScale;
+  //     this.valueTextTransform = `scale(${resizeScale}, ${resizeScale})`;
+  //   } else {
+  //     this.unitsResizeScale = resizeScale;
+  //     this.unitsTextTransform = `scale(${resizeScale}, ${resizeScale})`;
+  //   }
+
+  //   this.cd.markForCheck();
+  // }
+
+  onClick(): void {
+    this.select.emit({
+      name: 'Value',
+      value: this.value
+    });
+  }
+
+  setColors(): void {
+    this.colors = new ColorHelper(this.scheme, ScaleType.Linear, this.valueDomain, this.customColors);
+  }
+}
