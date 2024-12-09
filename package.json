@@ -57,6 +57,7 @@
     "d3-time-format": "^4.1.0",
     "d3-transition": "^3.0.1",
     "emoji-flags": "^1.2.0",
+    "gradient-path": "^2.3.0",
     "moment-timezone": "^0.5.40",
     "ng-in-viewport": "^6.1.5",
     "ngx-moment": "^5.0.0",

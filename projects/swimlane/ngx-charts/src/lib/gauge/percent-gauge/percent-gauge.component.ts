@@ -1,13 +1,20 @@
-import { Component, Input, AfterViewInit, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  Input,
+  AfterViewInit,
+  ViewEncapsulation,
+  ChangeDetectionStrategy,
+  ElementRef,
+  ViewChild
+} from '@angular/core';
 import { scaleLinear } from 'd3-scale';
+import { GradientPath } from 'gradient-path';
 
 import { BaseChartComponent } from '../../common/base-chart.component';
 import { calculateViewDimensions } from '../../common/view-dimensions.helper';
 import { ColorHelper } from '../../common/color.helper';
 import { ViewDimensions } from '../../common/types/view-dimension.interface';
 import { ScaleType } from '../../common/types/scale-type.enum';
-import { Gradient } from '../../common/types/gradient.interface';
-import { id } from '../../utils/id';
 
 @Component({
   selector: 'ngx-charts-percent-gauge',
@@ -15,10 +22,6 @@ import { id } from '../../utils/id';
     <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations" (click)="onClick()">
       <svg:g class="percent-gauge chart">
         <svg:g [attr.transform]="transform">
-          <svg:defs>
-            <svg:g ngx-charts-svg-linear-gradient [name]="gradientId" [stops]="gradientStops" />
-          </svg:defs>
-          >
           <mask id="circleMask">
             <circle
               [attr.r]="radius"
@@ -32,45 +35,65 @@ import { id } from '../../utils/id';
               [style.stroke-dashoffset]="circumference * (1 - percent / 100)"
             />
           </mask>
-          <text x="50" y="55" fill="white" stroke="none" class="total">
-            {{ percent }}
-            <tspan class="percent">%</tspan>
+          <text x="50" y="55" fill="white" stroke="none" class="total" [style.font-size]="valueFontSize">
+            {{ percent }}%
           </text>
-          <circle class="dashes-back" [style.stroke-width]="radius / 5" [attr.r]="radius" cx="50" cy="50" fill="none" //
-          [style.stroke-dasharray]="dashes" />
           <circle
-            [style.stroke-dasharray]="dashes"
+            #circleEl
+            class="dashes-back"
             [style.stroke-width]="radius / 5"
             [attr.r]="radius"
             cx="50"
             cy="50"
             fill="none"
-            [attr.stroke]="gradientFill"
-            mask="url(#circleMask)"
+            [style.stroke-dasharray]="dashes"
           />
+
+          <svg:g mask="url(#circleMask)">
+            <svg:g [attr.transform]="circleTransform">
+              <svg:g *ngFor="let tic of tics" [attr.transform]="tic.transform">
+                <rect
+                  [attr.y]="-tic.height / 2"
+                  [attr.x]="-tic.width"
+                  [attr.width]="tic.width"
+                  [attr.height]="tic.height"
+                  [attr.fill]="tic.fill"
+                />
+              </svg:g>
+            </svg:g>
+          </svg:g>
+
           <svg:g [attr.transform]="targetTransform">
             <circle
+              class="target-circle"
               cx="15"
               cy="15"
-              [attr.r]="radius / 4"
-              [style.stroke-width]="radius / 40"
-              fill="#1B1E27"
+              [attr.r]="targetRadius"
+              [style.stroke-width]="targetRadius / 10"
               [attr.stroke]="targetColor"
             />
-            <text class="target-label" x="15" y="12" fill="#A0AABE" stroke="none">Target</text>
-            <text class="target-value" x="15" y="20" fill="#CDD2DD" stroke="none">{{ target * 100 }}%</text>
+            <text
+              class="target-label"
+              x="15"
+              [attr.y]="targetRadius * 0.25"
+              stroke="none"
+              [style.font-size]="targetFontSize"
+            >
+              Target
+            </text>
+            <text
+              class="target-value"
+              x="15"
+              [attr.y]="targetRadius * 0.75"
+              stroke="none"
+              [style.font-size]="targetFontSize"
+            >
+              {{ target * 100 }}%
+            </text>
           </svg:g>
         </svg:g>
-        <svg:g>
-          <text
-            class="label"
-            x="50%"
-            y="110px"
-            dominant-baseline="middle"
-            text-anchor="middle"
-            fill="#CDD2DD"
-            stroke="none"
-          >
+        <svg:g *ngIf="showLabel">
+          <text class="label" x="50%" y="110px" dominant-baseline="middle" text-anchor="middle" stroke="none">
             {{ label }}
           </text>
         </svg:g>
@@ -87,21 +110,29 @@ export class PercentGaugeComponent extends BaseChartComponent implements AfterVi
   @Input() target: number = 0.75;
   @Input() label: string;
   @Input() valueFormatting: any;
+  @Input() showLabel = true;
+
+  @ViewChild('circleEl') circleElement: ElementRef;
 
   dims: ViewDimensions;
   valueDomain: [number, number];
   valueScale: any;
+  valueFontSize: number;
 
   colors: ColorHelper;
   radius: number;
   transform: string;
   targetTransform: string;
   targetColor: string;
+  targetRadius: number;
+  targetFontSize: number;
+
+  tics: any[];
+  circleTransform: string;
+  ticHeight: number;
+
   dashes: string;
   margin: number[] = [20, 40, 20, 40];
-  gradientId: string;
-  gradientFill: string;
-  gradientStops: Gradient[];
 
   displayValue: string;
   circumference: number;
@@ -126,30 +157,34 @@ export class PercentGaugeComponent extends BaseChartComponent implements AfterVi
       margins: this.margin
     });
 
-    this.radius = Math.min(this.dims.width, this.dims.height) / 2;
+    this.ticHeight = Math.min(this.dims.width, this.dims.height) / 10;
+    this.radius = Math.min(this.dims.width, this.dims.height) / 2 - this.ticHeight / 2;
+    this.valueFontSize = Math.floor(this.radius / 3);
+    this.targetRadius = this.radius / 4;
+    this.targetFontSize = Math.floor(this.targetRadius / 2);
 
     this.valueDomain = this.getValueDomain();
     this.valueScale = this.getValueScale();
     this.displayValue = this.getDisplayValue();
 
     this.setColors();
-    this.targetColor = this.colors.getColor(this.target);
+    this.targetColor = this.colors.getColor(this.target * this.max);
 
     const xOffset = this.margin[3] + this.dims.width / 2 - 50;
     const yOffset = this.margin[0] + this.dims.height / 2 - 50;
 
     this.transform = `translate(${xOffset}, ${yOffset})`;
-    this.targetTransform = ` translate(35, 35)
+    this.targetTransform = `translate(35, 35)
                   rotate(${this.target * 360}, 15, 15)
                   translate(0, -${this.radius})
                   rotate(-${this.target * 360}, 15, 15)`;
+
+    this.generateTics();
 
     this.circumference = 2 * Math.PI * this.radius;
     this.percent = this.getPercentage();
 
     this.dashes = `${this.radius / 60} ${this.circumference / 60 - this.radius / 60}`;
-
-    this.updateGradient();
 
     // if (isPlatformServer(this.platformId)) {
     //   this.scaleTextSSR('value');
@@ -160,26 +195,36 @@ export class PercentGaugeComponent extends BaseChartComponent implements AfterVi
     // }
   }
 
-  updateGradient() {
-    this.gradientId = 'grad' + id().toString();
-    this.gradientFill = `url(#${this.gradientId})`;
-    this.gradientStops = this.getGradient();
-  }
+  generateTics() {
+    if (this.circleElement.nativeElement) {
+      const clonedCircle = this.circleElement.nativeElement.cloneNode(true);
+      this.circleElement.nativeElement.parentElement.appendChild(clonedCircle);
 
-  getGradient(): Gradient[] {
-    return this.colors.getLinearGradientStops(this.max, 0);
-    // return [
-    //   {
-    //     offset: 0,
-    //     color: '#ff0000',
-    //     opacity: 1
-    //   },
-    //   {
-    //     offset: 100,
-    //     color: '#00ff00',
-    //     opacity: 1
-    //   }
-    // ];
+      const gp = new GradientPath({
+        path: clonedCircle,
+        segments: 60,
+        samples: 2,
+        precision: 2
+      });
+
+      const data = gp.data.flatMap(({ samples }) => samples);
+      this.tics = [];
+      this.circleTransform = `rotate(-90,50,50)`;
+      for (let j = 0; j < data.length; j++) {
+        const { x, y } = data[j];
+        let progress = data[j].progress;
+        if (progress === 1) {
+          progress = 0;
+        }
+
+        this.tics.push({
+          height: this.ticHeight,
+          width: this.radius / 60,
+          fill: this.colors.getColor(progress * this.max),
+          transform: `translate(${x}, ${y}), rotate(${360 * progress - 90})`
+        });
+      }
+    }
   }
 
   getValueDomain(): [number, number] {
