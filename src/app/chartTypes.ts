@@ -688,7 +688,7 @@ const chartGroups = [
         name: 'Percent Gauge',
         selector: 'percent-gauge',
         inputFormat: 'single',
-        options: ['animations', 'colorScheme', 'value', 'target']
+        options: ['animations', 'colorScheme', 'value', 'max', 'target', 'showLabel']
       }
     ]
   },

@@ -7,7 +7,6 @@ import {
   ElementRef,
   ViewChild
 } from '@angular/core';
-import { scaleLinear } from 'd3-scale';
 import { GradientPath } from 'gradient-path';
 
 import { BaseChartComponent } from '../../common/base-chart.component';
@@ -26,32 +25,32 @@ import { ScaleType } from '../../common/types/scale-type.enum';
             <circle
               [attr.r]="radius"
               [style.stroke-width]="radius / 5"
-              cx="50"
-              cy="50"
+              cx="0"
+              cy="0"
               stroke="white"
               fill="transparent"
               [attr.stroke-dasharray]="circumference"
-              transform="rotate(-90,50,50)"
+              transform="rotate(-90,0,0)"
               [style.stroke-dashoffset]="circumference * (1 - percent / 100)"
             />
           </mask>
-          <text x="50" y="55" fill="white" stroke="none" class="total" [style.font-size]="valueFontSize">
-            {{ percent }}%
+          <text x="0" y="0" fill="white" stroke="none" class="total" [style.font-size]="valueFontSize">
+            {{ displayValue }}
           </text>
           <circle
             #circleEl
             class="dashes-back"
             [style.stroke-width]="radius / 5"
             [attr.r]="radius"
-            cx="50"
-            cy="50"
+            cx="0"
+            cy="0"
             fill="none"
             [style.stroke-dasharray]="dashes"
           />
 
           <svg:g mask="url(#circleMask)">
             <svg:g [attr.transform]="circleTransform">
-              <svg:g *ngFor="let tic of tics" [attr.transform]="tic.transform">
+              <svg:g *ngFor="let tic of ticks" [attr.transform]="tic.transform">
                 <rect
                   [attr.y]="-tic.height / 2"
                   [attr.x]="-tic.width"
@@ -66,34 +65,36 @@ import { ScaleType } from '../../common/types/scale-type.enum';
           <svg:g [attr.transform]="targetTransform">
             <circle
               class="target-circle"
-              cx="15"
-              cy="15"
               [attr.r]="targetRadius"
               [style.stroke-width]="targetRadius / 10"
               [attr.stroke]="targetColor"
+              [attr.cx]="-targetRadius / 2"
+              [attr.cy]="-targetRadius / 2"
             />
-            <text
-              class="target-label"
-              x="15"
-              [attr.y]="targetRadius * 0.25"
-              stroke="none"
-              [style.font-size]="targetFontSize"
-            >
-              Target
-            </text>
-            <text
-              class="target-value"
-              x="15"
-              [attr.y]="targetRadius * 0.75"
-              stroke="none"
-              [style.font-size]="targetFontSize"
-            >
-              {{ target * 100 }}%
-            </text>
+            <svg:g [attr.transform]="targetTextTransform">
+              <text
+                transform="translate(0, -4)"
+                class="target-label"
+                stroke="none"
+                text-anchor="middle"
+                [style.font-size]="12"
+              >
+                Target
+              </text>
+              <text
+                transform="translate(0, 11)"
+                class="target-value"
+                stroke="none"
+                text-anchor="middle"
+                [style.font-size]="14"
+              >
+                {{ target }}%
+              </text>
+            </svg:g>
           </svg:g>
         </svg:g>
-        <svg:g *ngIf="showLabel">
-          <text class="label" x="50%" y="110px" dominant-baseline="middle" text-anchor="middle" stroke="none">
+        <svg:g *ngIf="showLabel" [attr.transform]="labelTransform">
+          <text class="gauge-label" x="50%" dominant-baseline="middle" text-anchor="middle" stroke="none">
             {{ label }}
           </text>
         </svg:g>
@@ -104,52 +105,50 @@ import { ScaleType } from '../../common/types/scale-type.enum';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PercentGaugeComponent extends BaseChartComponent implements AfterViewInit {
+export class PercentGaugeComponent extends BaseChartComponent {
   @Input() max: number = 100;
   @Input() value: number = 0;
-  @Input() target: number = 0.75;
+  @Input() target: number = 75;
   @Input() label: string;
   @Input() valueFormatting: any;
   @Input() showLabel = true;
 
   @ViewChild('circleEl') circleElement: ElementRef;
 
+  defaultMargin: number[] = [20, 40, 20, 40];
+  margin: number[] = [20, 40, 20, 40];
   dims: ViewDimensions;
-  valueDomain: [number, number];
-  valueScale: any;
-  valueFontSize: number;
 
   colors: ColorHelper;
   radius: number;
   transform: string;
+
   targetTransform: string;
   targetColor: string;
   targetRadius: number;
-  targetFontSize: number;
+  targetTextTransform: string;
 
-  tics: any[];
   circleTransform: string;
+  ticks: any[] = [];
   ticHeight: number;
 
   dashes: string;
-  margin: number[] = [20, 40, 20, 40];
 
+  valueDomain: [number, number];
+  valueFontSize: number;
   displayValue: string;
-  circumference: number;
   percent: number;
+  circumference: number;
 
-  ngAfterViewInit(): void {
-    super.ngAfterViewInit();
-    // setTimeout(() => {
-    //   this.scaleText(ElementType.Value);
-    //   this.scaleText(ElementType.Units);
-    // });
-  }
+  labelTransform: string;
 
   update(): void {
     super.update();
 
-    this.max = Math.max(this.max, this.value);
+    this.margin = [...this.defaultMargin];
+    if (this.showLabel) {
+      this.margin[2] = 50;
+    }
 
     this.dims = calculateViewDimensions({
       width: this.width,
@@ -161,42 +160,38 @@ export class PercentGaugeComponent extends BaseChartComponent implements AfterVi
     this.radius = Math.min(this.dims.width, this.dims.height) / 2 - this.ticHeight / 2;
     this.valueFontSize = Math.floor(this.radius / 3);
     this.targetRadius = this.radius / 4;
-    this.targetFontSize = Math.floor(this.targetRadius / 2);
+    this.targetTextTransform = `translate(${-this.targetRadius / 2}, ${-this.targetRadius / 2}), scale(${
+      this.targetRadius / 28
+    })`;
 
     this.valueDomain = this.getValueDomain();
-    this.valueScale = this.getValueScale();
     this.displayValue = this.getDisplayValue();
 
     this.setColors();
-    this.targetColor = this.colors.getColor(this.target * this.max);
+    this.targetColor = this.colors.getColor((this.target / 100) * this.max);
 
-    const xOffset = this.margin[3] + this.dims.width / 2 - 50;
-    const yOffset = this.margin[0] + this.dims.height / 2 - 50;
+    const xOffset = this.margin[3] + this.dims.width / 2;
+    const yOffset = this.margin[0] + this.dims.height / 2;
 
     this.transform = `translate(${xOffset}, ${yOffset})`;
-    this.targetTransform = `translate(35, 35)
-                  rotate(${this.target * 360}, 15, 15)
-                  translate(0, -${this.radius})
-                  rotate(-${this.target * 360}, 15, 15)`;
+    this.labelTransform = `translate(0, ${this.height / 2 + this.radius + this.margin[0] + this.ticHeight / 2 - 3})`;
 
-    this.generateTics();
+    const angle = (this.target / 100) * Math.PI * 2 - Math.PI / 2;
+    this.targetTransform = `translate(${this.radius * 0.97 * Math.cos(angle) + this.targetRadius / 2}, ${
+      this.radius * 0.97 * Math.sin(angle) + this.targetRadius / 2
+    })`;
+
+    this.generateticks();
 
     this.circumference = 2 * Math.PI * this.radius;
     this.percent = this.getPercentage();
 
     this.dashes = `${this.radius / 60} ${this.circumference / 60 - this.radius / 60}`;
-
-    // if (isPlatformServer(this.platformId)) {
-    //   this.scaleTextSSR('value');
-    //   this.scaleTextSSR('units');
-    // } else {
-    //   setTimeout(() => this.scaleText(ElementType.Value), 50);
-    //   setTimeout(() => this.scaleText(ElementType.Units), 50);
-    // }
+    this.cd.detectChanges();
   }
 
-  generateTics() {
-    if (this.circleElement.nativeElement) {
+  generateticks() {
+    if (this.circleElement?.nativeElement) {
       const clonedCircle = this.circleElement.nativeElement.cloneNode(true);
       this.circleElement.nativeElement.parentElement.appendChild(clonedCircle);
 
@@ -208,8 +203,8 @@ export class PercentGaugeComponent extends BaseChartComponent implements AfterVi
       });
 
       const data = gp.data.flatMap(({ samples }) => samples);
-      this.tics = [];
-      this.circleTransform = `rotate(-90,50,50)`;
+      this.ticks = [];
+      this.circleTransform = `rotate(-90,0,0)`;
       for (let j = 0; j < data.length; j++) {
         const { x, y } = data[j];
         let progress = data[j].progress;
@@ -217,7 +212,7 @@ export class PercentGaugeComponent extends BaseChartComponent implements AfterVi
           progress = 0;
         }
 
-        this.tics.push({
+        this.ticks.push({
           height: this.ticHeight,
           width: this.radius / 60,
           fill: this.colors.getColor(progress * this.max),
@@ -231,81 +226,16 @@ export class PercentGaugeComponent extends BaseChartComponent implements AfterVi
     return [0, this.max];
   }
 
-  getValueScale(): any {
-    return scaleLinear().range([0, this.dims.width]).domain(this.valueDomain);
-  }
-
   getDisplayValue(): string {
     if (this.valueFormatting) {
       return this.valueFormatting(this.value);
     }
-    return this.value.toLocaleString();
+    return this.percent + '%';
   }
 
   getPercentage(): number {
     return Math.round((this.value / this.max) * 100);
   }
-
-  // scaleText(element: ElementType, repeat: boolean = true): void {
-  //   let el;
-  //   let resizeScale;
-  //   if (element === ElementType.Value) {
-  //     el = this.valueTextEl;
-  //     resizeScale = this.valueResizeScale;
-  //   } else {
-  //     el = this.unitsTextEl;
-  //     resizeScale = this.unitsResizeScale;
-  //   }
-
-  //   const { width, height } = el.nativeElement.getBoundingClientRect();
-  //   if (width === 0 || height === 0) return;
-  //   const oldScale = resizeScale;
-  //   const availableWidth = this.dims.width;
-  //   const availableHeight = Math.max(this.dims.height / 2 - 15, 0);
-  //   const resizeScaleWidth = Math.floor((availableWidth / (width / resizeScale)) * 100) / 100;
-  //   const resizeScaleHeight = Math.floor((availableHeight / (height / resizeScale)) * 100) / 100;
-  //   resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
-
-  //   if (resizeScale !== oldScale) {
-  //     if (element === ElementType.Value) {
-  //       this.valueResizeScale = resizeScale;
-  //       this.valueTextTransform = `scale(${resizeScale}, ${resizeScale})`;
-  //     } else {
-  //       this.unitsResizeScale = resizeScale;
-  //       this.unitsTextTransform = `scale(${resizeScale}, ${resizeScale})`;
-  //     }
-  //     this.cd.markForCheck();
-  //     if (repeat && isPlatformBrowser(this.platformId)) {
-  //       setTimeout(() => {
-  //         this.scaleText(element, false);
-  //       }, 50);
-  //     }
-  //   }
-  // }
-
-  // scaleTextSSR(element) {
-  //   let resizeScale = 1;
-
-  //   const value = element === 'value' ? this.displayValue : this.units;
-  //   const width = calculateTextWidth(VERDANA_FONT_WIDTHS_16_PX, value, 10);
-  //   const height = 25;
-
-  //   const availableWidth = this.dims.width;
-  //   const availableHeight = Math.max(this.dims.height / 2 - 15, 0);
-  //   const resizeScaleWidth = Math.floor((availableWidth / (width / resizeScale)) * 100) / 100;
-  //   const resizeScaleHeight = Math.floor((availableHeight / (height / resizeScale)) * 100) / 100;
-  //   resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
-
-  //   if (element === 'value') {
-  //     this.valueResizeScale = resizeScale;
-  //     this.valueTextTransform = `scale(${resizeScale}, ${resizeScale})`;
-  //   } else {
-  //     this.unitsResizeScale = resizeScale;
-  //     this.unitsTextTransform = `scale(${resizeScale}, ${resizeScale})`;
-  //   }
-
-  //   this.cd.markForCheck();
-  // }
 
   onClick(): void {
     this.select.emit({

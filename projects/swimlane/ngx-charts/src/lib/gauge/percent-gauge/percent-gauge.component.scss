@@ -22,13 +22,11 @@
   }
 
   .total {
-    font-size: 1.1em;
+    dominant-baseline: middle;
   }
 
   .label {
     display: block;
-    font-size: 0.8em;
     text-anchor: middle;
-    fill: #cdd2dd;
   }
 }

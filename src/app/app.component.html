@@ -812,7 +812,9 @@
         [scheme]="colorScheme"
         [animations]="animations"
         [value]="gaugeValue"
-        [target]="0.8"
+        [target]="target"
+        [max]="gaugeMax"
+        [showLabel]="showLabel"
         label="Coverage"
         (select)="select($event)"
       >
@@ -1531,6 +1533,18 @@
           <label>
             <input type="checkbox" [(ngModel)]="margin" />
             Show Margin
+          </label>
+          <br />
+        </div>
+        <div *ngIf="chart.options.includes('target')">
+          <label>Target:</label><br />
+          <input type="number" [(ngModel)]="target" /><br />
+          <br />
+        </div>
+        <div *ngIf="chart.options.includes('showLabel')">
+          <label>
+            <input type="checkbox" [(ngModel)]="showLabel" />
+            Show Label
           </label>
           <br />
         </div>

@@ -118,6 +118,8 @@ export class AppComponent implements OnInit {
   strokeColor: string = '#FFFFFF';
   strokeWidth: number = 2;
   wrapTicks = false;
+  target = 90;
+  showLabel: boolean = true;
 
   curves = {
     Basis: shape.curveBasis,
