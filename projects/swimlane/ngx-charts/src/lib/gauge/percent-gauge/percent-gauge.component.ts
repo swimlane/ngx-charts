@@ -218,7 +218,7 @@ export class PercentGaugeComponent extends BaseChartComponent {
           });
         }
       } catch (e) {
-        console.error(e);
+        console.log('Unable to generate ticks for percent gauge chart', e);
       } finally {
         clonedCircle.remove();
       }
