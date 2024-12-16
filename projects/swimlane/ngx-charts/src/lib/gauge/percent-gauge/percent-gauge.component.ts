@@ -1,16 +1,4 @@
-import {
-  Component,
-  Input,
-  AfterViewInit,
-  ViewEncapsulation,
-  ChangeDetectionStrategy,
-  ElementRef,
-  ViewChild,
-  PLATFORM_ID,
-  NgZone,
-  ChangeDetectorRef,
-  Inject
-} from '@angular/core';
+import { Component, Input, ViewEncapsulation, ChangeDetectionStrategy, ElementRef, ViewChild } from '@angular/core';
 import { GradientPath } from 'gradient-path';
 
 import { BaseChartComponent } from '../../common/base-chart.component';
@@ -83,7 +71,7 @@ import { ScaleType } from '../../common/types/scale-type.enum';
                 text-anchor="middle"
                 [style.font-size]="12"
               >
-                Target
+                {{ targetLabel }}
               </text>
               <text
                 transform="translate(0, 11)"
@@ -113,6 +101,7 @@ export class PercentGaugeComponent extends BaseChartComponent {
   @Input() max: number = 100;
   @Input() value: number = 0;
   @Input() target: number = 75;
+  @Input() targetLabel: string = 'Target';
   @Input() label: string;
   @Input() valueFormatting: any;
   @Input() showLabel = true;
