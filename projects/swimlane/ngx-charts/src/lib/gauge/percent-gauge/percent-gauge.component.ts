@@ -5,7 +5,11 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy,
   ElementRef,
-  ViewChild
+  ViewChild,
+  PLATFORM_ID,
+  NgZone,
+  ChangeDetectorRef,
+  Inject
 } from '@angular/core';
 import { GradientPath } from 'gradient-path';
 
@@ -18,8 +22,8 @@ import { ScaleType } from '../../common/types/scale-type.enum';
 @Component({
   selector: 'ngx-charts-percent-gauge',
   template: `
-    <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations" (click)="onClick()">
-      <svg:g class="percent-gauge chart">
+    <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations">
+      <svg:g class="percent-gauge chart" (click)="onClick()">
         <svg:g [attr.transform]="transform">
           <mask id="circleMask">
             <circle
@@ -156,8 +160,11 @@ export class PercentGaugeComponent extends BaseChartComponent {
       margins: this.margin
     });
 
+    this.percent = this.getPercentage();
     this.ticHeight = Math.min(this.dims.width, this.dims.height) / 10;
     this.radius = Math.min(this.dims.width, this.dims.height) / 2 - this.ticHeight / 2;
+    this.circumference = 2 * Math.PI * this.radius;
+    this.dashes = `${this.radius / 60} ${this.circumference / 60 - this.radius / 60}`;
     this.valueFontSize = Math.floor(this.radius / 3);
     this.targetRadius = this.radius / 4;
     this.targetTextTransform = `translate(${-this.targetRadius / 2}, ${-this.targetRadius / 2}), scale(${
@@ -183,16 +190,15 @@ export class PercentGaugeComponent extends BaseChartComponent {
 
     this.generateticks();
 
-    this.circumference = 2 * Math.PI * this.radius;
-    this.percent = this.getPercentage();
-
-    this.dashes = `${this.radius / 60} ${this.circumference / 60 - this.radius / 60}`;
-    this.cd.detectChanges();
+    this.cd.markForCheck();
   }
 
   generateticks() {
     if (this.circleElement?.nativeElement) {
       const clonedCircle = this.circleElement.nativeElement.cloneNode(true);
+      clonedCircle.setAttribute('stroke-width', this.radius / 5);
+      clonedCircle.setAttribute('r', this.radius);
+
       this.circleElement.nativeElement.parentElement.appendChild(clonedCircle);
 
       const gp = new GradientPath({
