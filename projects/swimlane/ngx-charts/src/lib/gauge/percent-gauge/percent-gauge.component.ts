@@ -190,29 +190,37 @@ export class PercentGaugeComponent extends BaseChartComponent {
 
       this.circleElement.nativeElement.parentElement.appendChild(clonedCircle);
 
-      const gp = new GradientPath({
-        path: clonedCircle,
-        segments: 60,
-        samples: 2,
-        precision: 2
-      });
-
-      const data = gp.data.flatMap(({ samples }) => samples);
-      this.ticks = [];
-      this.circleTransform = `rotate(-90,0,0)`;
-      for (let j = 0; j < data.length; j++) {
-        const { x, y } = data[j];
-        let progress = data[j].progress;
-        if (progress === 1) {
-          progress = 0;
-        }
-
-        this.ticks.push({
-          height: this.ticHeight,
-          width: this.radius / 60,
-          fill: this.colors.getColor(progress * this.max),
-          transform: `translate(${x}, ${y}), rotate(${360 * progress - 90})`
+      try {
+        const gp = new GradientPath({
+          path: clonedCircle,
+          segments: 60,
+          samples: 2,
+          precision: 2
         });
+
+        clonedCircle.remove();
+
+        const data = gp.data.flatMap(({ samples }) => samples);
+        this.ticks = [];
+        this.circleTransform = `rotate(-90,0,0)`;
+        for (let j = 0; j < data.length; j++) {
+          const { x, y } = data[j];
+          let progress = data[j].progress;
+          if (progress === 1) {
+            progress = 0;
+          }
+
+          this.ticks.push({
+            height: this.ticHeight,
+            width: this.radius / 60,
+            fill: this.colors.getColor(progress * this.max),
+            transform: `translate(${x}, ${y}), rotate(${360 * progress - 90})`
+          });
+        }
+      } catch (e) {
+        console.error(e);
+      } finally {
+        clonedCircle.remove();
       }
     }
   }
