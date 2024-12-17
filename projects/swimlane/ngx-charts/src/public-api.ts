@@ -94,6 +94,7 @@ export * from './lib/gauge/gauge-arc.component';
 export * from './lib/gauge/gauge-axis.component';
 export * from './lib/gauge/gauge.component';
 export * from './lib/gauge/linear-gauge.component';
+export * from './lib/gauge/percent-gauge/percent-gauge.component';
 
 export * from './lib/heat-map/heat-map.module';
 export * from './lib/heat-map/heat-map.component';

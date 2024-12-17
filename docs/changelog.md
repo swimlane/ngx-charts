@@ -1,5 +1,9 @@
 # Changelog
 
+## 21.1.0
+
+- Feature: Add Percent Gauge chart type
+
 ## 20.5.0
 
 - Feature: Add Sankey diagram chart type

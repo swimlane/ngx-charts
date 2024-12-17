@@ -204,7 +204,11 @@ main {
   $color-text-light: #f0f1f6;
   $color-text-lighter: #fff;
 
-  background: $color-bg-darker;
+  background: $color-bg-darkest;
+
+  .chart-container {
+    background: #1b1e27;
+  }
 
   .ngx-charts {
     text {

@@ -1,0 +1,32 @@
+.percent-gauge {
+  cursor: pointer;
+
+  text {
+    text-anchor: middle;
+  }
+
+  .dashes-back {
+    stroke: #455066;
+  }
+
+  .target-circle {
+    fill: #1b1e27;
+  }
+
+  .target-label {
+    fill: #a0aabe;
+  }
+
+  .target-value {
+    fill: #cdd2dd;
+  }
+
+  .total {
+    dominant-baseline: middle;
+  }
+
+  .label {
+    display: block;
+    text-anchor: middle;
+  }
+}

@@ -683,6 +683,12 @@ const chartGroups = [
         selector: 'linear-gauge',
         inputFormat: 'single',
         options: ['animations', 'colorScheme', 'value', 'previousValue', 'min', 'max', 'units']
+      },
+      {
+        name: 'Percent Gauge',
+        selector: 'percent-gauge',
+        inputFormat: 'single',
+        options: ['animations', 'colorScheme', 'value', 'max', 'target', 'showLabel']
       }
     ]
   },
