@@ -17,7 +17,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "predeploy": "npm run build:demo",
-    "deploy": "angular-cli-ghpages --dir ./dist/ngx-charts --name=Swimlane --email=developer@swimlane.com",
+    "deploy": "angular-cli-ghpages --dir ./dist/ngx-charts --name=Swimlane --email=developer@swimlane.com --no-silent",
     "package": "run-s build:lib:prod copy-files",
     "prepublish:lib": "npm run package",
     "publish:lib": "npm publish ./dist/swimlane/ngx-charts",
