@@ -6,25 +6,25 @@
   }
 
   .dashes-back {
-    stroke: #455066;
+    stroke: #e7e7e7;
   }
 
   .target-circle,
   .target-circle-bg {
-    fill: #1b1e27;
+    fill: white;
   }
 
   .target-circle-bg {
-    stroke: #455066;
+    stroke: #e7e7e7;
   }
 
-  .target-label {
-    fill: #a0aabe;
-  }
+  // .target-label {
+  //   fill: #a0aabe;
+  // }
 
-  .target-value {
-    fill: #cdd2dd;
-  }
+  // .target-value {
+  //   fill: #cdd2dd;
+  // }
 
   .total {
     dominant-baseline: middle;
@@ -35,3 +35,41 @@
     text-anchor: middle;
   }
 }
+
+// .percent-gauge {
+//   cursor: pointer;
+
+//   text {
+//     text-anchor: middle;
+//   }
+
+//   .dashes-back {
+//     stroke: #455066;
+//   }
+
+//   .target-circle,
+//   .target-circle-bg {
+//     fill: #1b1e27;
+//   }
+
+//   .target-circle-bg {
+//     stroke: #455066;
+//   }
+
+//   .target-label {
+//     fill: #a0aabe;
+//   }
+
+//   .target-value {
+//     fill: #cdd2dd;
+//   }
+
+//   .total {
+//     dominant-baseline: middle;
+//   }
+
+//   .label {
+//     display: block;
+//     text-anchor: middle;
+//   }
+// }

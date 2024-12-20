@@ -25,7 +25,7 @@ import { ScaleType } from '../../common/types/scale-type.enum';
               [style.stroke-dashoffset]="circumference * (1 - percent / 100)"
             />
           </mask>
-          <text x="0" y="0" fill="white" stroke="none" class="total" [style.font-size]="valueFontSize">
+          <text x="0" y="0" stroke="none" class="total" [style.font-size]="valueFontSize">
             {{ displayValue }}
           </text>
           <circle
