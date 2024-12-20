@@ -334,4 +334,27 @@ main {
     font-size: 0.8em;
     color: $color-text-med;
   }
+
+  .percent-gauge {
+    .dashes-back {
+      stroke: #455066;
+    }
+
+    .target-circle,
+    .target-circle-bg {
+      fill: #1b1e27;
+    }
+
+    .target-circle-bg {
+      stroke: #455066;
+    }
+
+    .target-label {
+      fill: #a0aabe;
+    }
+
+    .target-value {
+      fill: #cdd2dd;
+    }
+  }
 }

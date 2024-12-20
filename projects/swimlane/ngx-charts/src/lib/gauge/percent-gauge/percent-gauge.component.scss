@@ -6,19 +6,16 @@
   }
 
   .dashes-back {
-    stroke: #455066;
+    stroke: #e7e7e7;
   }
 
-  .target-circle {
-    fill: #1b1e27;
+  .target-circle,
+  .target-circle-bg {
+    fill: white;
   }
 
-  .target-label {
-    fill: #a0aabe;
-  }
-
-  .target-value {
-    fill: #cdd2dd;
+  .target-circle-bg {
+    stroke: #e7e7e7;
   }
 
   .total {

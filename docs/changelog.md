@@ -1,5 +1,11 @@
 # Changelog
 
+## 21.1.1
+
+- Fix: Percent Gauge Chart: Fixes server-side-rendering
+- Fix: Percent Gauge Chart: Fixes light theme
+- Fix: Percent Gauge Chart: Makes target circle highlight only when target is reached
+
 ## 21.1.0
 
 - Feature: Add Percent Gauge chart type
