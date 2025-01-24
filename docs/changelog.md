@@ -1,5 +1,9 @@
 # Changelog
 
+## 21.1.3
+
+- Fix: Fixed a bug where the mask ID for percent gauge chart would be regenerated on each update
+
 ## 21.1.2
 
 - Fix: Percent Gauge Chart: Ensures the circle mask ID is unique for each chart
