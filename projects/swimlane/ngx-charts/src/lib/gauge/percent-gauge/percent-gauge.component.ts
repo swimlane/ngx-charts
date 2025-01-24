@@ -126,7 +126,7 @@ export class PercentGaugeComponent extends BaseChartComponent {
   targetRadius: number;
   targetTextTransform: string;
 
-  circleMaskId: string;
+  circleMaskId = `circleMask${id()}`;
   circleTransform: string;
   ticks: any[] = [];
   ticHeight: number;
@@ -143,8 +143,6 @@ export class PercentGaugeComponent extends BaseChartComponent {
 
   update(): void {
     super.update();
-
-    this.circleMaskId = `circleMask${id()}`;
 
     this.margin = [...this.defaultMargin];
     if (this.showLabel) {
