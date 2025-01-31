@@ -25,8 +25,9 @@ import { ScaleType } from './types/scale-type.enum';
 import { ViewDimensions } from './types/view-dimension.interface';
 
 @Component({
-  selector: 'base-chart',
-  template: ` <div></div> `
+    selector: 'base-chart',
+    template: ` <div></div> `,
+    standalone: false
 })
 export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, OnInit {
   @Input() declare results: any;

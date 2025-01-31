@@ -21,8 +21,8 @@ export interface CardModel extends GridItem {
 }
 
 @Component({
-  selector: 'g[ngx-charts-card-series]',
-  template: `
+    selector: 'g[ngx-charts-card-series]',
+    template: `
     <svg:rect
       *ngFor="let c of emptySlots; trackBy: trackBy"
       class="card-empty"
@@ -53,7 +53,8 @@ export interface CardModel extends GridItem {
       (select)="onClick($event)"
     />
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class CardSeriesComponent implements OnChanges {
   @Input() data: CardModel[];

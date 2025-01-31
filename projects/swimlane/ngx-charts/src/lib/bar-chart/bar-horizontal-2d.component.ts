@@ -25,8 +25,8 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
 import { BarOrientation } from '../common/types/bar-orientation.enum';
 
 @Component({
-  selector: 'ngx-charts-bar-horizontal-2d',
-  template: `
+    selector: 'ngx-charts-bar-horizontal-2d',
+    template: `
     <ngx-charts-chart
       [view]="[width, height]"
       [showLegend]="legend"
@@ -140,20 +140,21 @@ import { BarOrientation } from '../common/types/bar-orientation.enum';
       </svg:g>
     </ngx-charts-chart>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['../common/base-chart.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  animations: [
-    trigger('animationState', [
-      transition(':leave', [
-        style({
-          opacity: 1,
-          transform: '*'
-        }),
-        animate(500, style({ opacity: 0, transform: 'scale(0)' }))
-      ])
-    ])
-  ]
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: ['../common/base-chart.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    animations: [
+        trigger('animationState', [
+            transition(':leave', [
+                style({
+                    opacity: 1,
+                    transform: '*'
+                }),
+                animate(500, style({ opacity: 0, transform: 'scale(0)' }))
+            ])
+        ])
+    ],
+    standalone: false
 })
 export class BarHorizontal2DComponent extends BaseChartComponent {
   @Input() legend: boolean = false;

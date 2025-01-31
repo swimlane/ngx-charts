@@ -56,8 +56,8 @@ export function cloneLineCoordinates(original: LineCoordinates): LineCoordinates
 }
 
 @Component({
-  selector: 'g[ngx-charts-box]',
-  template: `
+    selector: 'g[ngx-charts-box]',
+    template: `
     <svg:defs>
       <svg:g
         *ngIf="hasGradient"
@@ -102,7 +102,8 @@ export function cloneLineCoordinates(original: LineCoordinates): LineCoordinates
       />
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class BoxComponent implements OnChanges {
   @Input() strokeColor: string;

@@ -45,11 +45,12 @@ const getRandomInt = (min: number, max: number) => {
 };
 
 @Component({
-  selector: 'app-root',
-  providers: [Location, { provide: LocationStrategy, useClass: HashLocationStrategy }],
-  encapsulation: ViewEncapsulation.None,
-  styleUrls: ['../../node_modules/@swimlane/ngx-ui/index.css', './app.component.scss'],
-  templateUrl: './app.component.html'
+    selector: 'app-root',
+    providers: [Location, { provide: LocationStrategy, useClass: HashLocationStrategy }],
+    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['../../node_modules/@swimlane/ngx-ui/index.css', './app.component.scss'],
+    templateUrl: './app.component.html',
+    standalone: false
 })
 export class AppComponent implements OnInit {
   APP_VERSION = pkg.version;

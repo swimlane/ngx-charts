@@ -24,11 +24,12 @@ import {
 } from 'projects/swimlane/ngx-charts/src/public-api';
 
 @Component({
-  // tslint:disable-next-line: component-selector
-  selector: 'combo-chart-component',
-  templateUrl: './combo-chart.component.html',
-  styleUrls: ['./combo-chart.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    // tslint:disable-next-line: component-selector
+    selector: 'combo-chart-component',
+    templateUrl: './combo-chart.component.html',
+    styleUrls: ['./combo-chart.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class ComboChartComponent extends BaseChartComponent {
   @Input() curve: any = curveLinear;

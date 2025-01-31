@@ -13,8 +13,8 @@ export interface ArcItem {
 }
 
 @Component({
-  selector: 'g[ngx-charts-gauge-arc]',
-  template: `
+    selector: 'g[ngx-charts-gauge-arc]',
+    template: `
     <svg:g
       ngx-charts-pie-arc
       class="background-arc"
@@ -50,7 +50,8 @@ export interface ArcItem {
       [tooltipContext]="valueArc.data"
     ></svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class GaugeArcComponent {
   @Input() backgroundArc: ArcItem;

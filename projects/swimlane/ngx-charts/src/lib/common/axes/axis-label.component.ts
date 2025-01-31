@@ -2,8 +2,8 @@ import { Component, Input, ElementRef, OnChanges, SimpleChanges, ChangeDetection
 import { Orientation } from '../types/orientation.enum';
 
 @Component({
-  selector: 'g[ngx-charts-axis-label]',
-  template: `
+    selector: 'g[ngx-charts-axis-label]',
+    template: `
     <svg:text
       [attr.stroke-width]="strokeWidth"
       [attr.x]="x"
@@ -14,7 +14,8 @@ import { Orientation } from '../types/orientation.enum';
       {{ label }}
     </svg:text>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AxisLabelComponent implements OnChanges {
   @Input() orient: Orientation;

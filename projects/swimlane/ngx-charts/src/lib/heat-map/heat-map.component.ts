@@ -28,8 +28,8 @@ interface RectItem {
 }
 
 @Component({
-  selector: 'ngx-charts-heat-map',
-  template: `
+    selector: 'ngx-charts-heat-map',
+    template: `
     <ngx-charts-chart
       [view]="[width, height]"
       [showLegend]="legend"
@@ -94,9 +94,10 @@ interface RectItem {
       </svg:g>
     </ngx-charts-chart>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['../common/base-chart.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: ['../common/base-chart.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class HeatMapComponent extends BaseChartComponent {
   @Input() legend: boolean;

@@ -25,8 +25,8 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
 import { isPlatformServer } from '@angular/common';
 
 @Component({
-  selector: 'ngx-charts-bar-horizontal-normalized',
-  template: `
+    selector: 'ngx-charts-bar-horizontal-normalized',
+    template: `
     <ngx-charts-chart
       [view]="[width, height]"
       [showLegend]="legend"
@@ -121,20 +121,21 @@ import { isPlatformServer } from '@angular/common';
       </svg:g>
     </ngx-charts-chart>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['../common/base-chart.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  animations: [
-    trigger('animationState', [
-      transition(':leave', [
-        style({
-          opacity: 1,
-          transform: '*'
-        }),
-        animate(500, style({ opacity: 0, transform: 'scale(0)' }))
-      ])
-    ])
-  ]
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: ['../common/base-chart.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    animations: [
+        trigger('animationState', [
+            transition(':leave', [
+                style({
+                    opacity: 1,
+                    transform: '*'
+                }),
+                animate(500, style({ opacity: 0, transform: 'scale(0)' }))
+            ])
+        ])
+    ],
+    standalone: false
 })
 export class BarHorizontalNormalizedComponent extends BaseChartComponent {
   @Input() legend: boolean = false;

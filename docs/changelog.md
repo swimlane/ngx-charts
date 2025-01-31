@@ -1,5 +1,10 @@
 # Changelog
 
+## HEAD (unreleased)
+
+- Enhancement: Support Angular 19, `standalone` now required in all `@Component`
+- Enhancement: Update SASS and update for latest standard libraries
+
 ## 21.1.3
 
 - Fix: Fixed a bug where the mask ID for percent gauge chart would be regenerated on each update

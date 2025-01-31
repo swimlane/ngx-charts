@@ -12,9 +12,9 @@ import {
 } from 'projects/swimlane/ngx-charts/src/public-api';
 
 @Component({
-  // tslint:disable-next-line: component-selector
-  selector: 'ngx-charts-sparkline',
-  template: `
+    // tslint:disable-next-line: component-selector
+    selector: 'ngx-charts-sparkline',
+    template: `
     <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations">
       <svg:g [attr.transform]="transform" class="line-chart chart">
         <svg:g>
@@ -34,9 +34,10 @@ import {
       </svg:g>
     </ngx-charts-chart>
   `,
-  styleUrls: ['../../../../projects/swimlane/ngx-charts/src/lib/common/base-chart.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    styleUrls: ['../../../../projects/swimlane/ngx-charts/src/lib/common/base-chart.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class SparklineComponent extends BaseChartComponent {
   @Input() autoScale = false;

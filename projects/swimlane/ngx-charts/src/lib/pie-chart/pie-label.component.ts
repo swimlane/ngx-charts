@@ -22,8 +22,8 @@ export interface PieData extends DefaultArcObject {
 }
 
 @Component({
-  selector: 'g[ngx-charts-pie-label]',
-  template: `
+    selector: 'g[ngx-charts-pie-label]',
+    template: `
     <title>{{ label }}</title>
     <svg:g [attr.transform]="attrTransform" [style.transform]="styleTransform" [style.transition]="textTransition">
       <svg:text
@@ -44,7 +44,8 @@ export interface PieData extends DefaultArcObject {
       [class.animation]="animations"
     ></svg:path>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class PieLabelComponent implements OnChanges {
   @Input() data: PieData;

@@ -10,8 +10,8 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'g[ngx-charts-circle]',
-  template: `
+    selector: 'g[ngx-charts-circle]',
+    template: `
     <svg:circle
       [attr.cx]="cx"
       [attr.cy]="cy"
@@ -23,7 +23,8 @@ import {
       [attr.pointer-events]="pointerEvents"
     />
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class CircleComponent implements OnChanges {
   @Input() cx: number;

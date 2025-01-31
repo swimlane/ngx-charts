@@ -16,8 +16,8 @@ import { Gradient } from '../common/types/gradient.interface';
 import { id } from '../utils/id';
 
 @Component({
-  selector: 'g[ngx-charts-heat-map-cell]',
-  template: `
+    selector: 'g[ngx-charts-heat-map-cell]',
+    template: `
     <svg:g [attr.transform]="transform" class="cell">
       <defs *ngIf="gradient">
         <svg:g
@@ -37,7 +37,8 @@ import { id } from '../utils/id';
       />
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class HeatMapCellComponent implements OnChanges {
   @Input() fill: string;

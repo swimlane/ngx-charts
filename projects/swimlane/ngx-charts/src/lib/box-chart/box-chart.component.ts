@@ -19,8 +19,8 @@ import { LegendPosition, LegendOptions } from '../common/types/legend.model';
 import { ScaleType } from '../common/types/scale-type.enum';
 
 @Component({
-  selector: 'ngx-charts-box-chart',
-  template: `
+    selector: 'ngx-charts-box-chart',
+    template: `
     <ngx-charts-chart
       [view]="[width, height]"
       [showLegend]="legend"
@@ -76,9 +76,10 @@ import { ScaleType } from '../common/types/scale-type.enum';
       </svg:g>
     </ngx-charts-chart>
   `,
-  styleUrls: ['../common/base-chart.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+    styleUrls: ['../common/base-chart.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class BoxChartComponent extends BaseChartComponent {
   /** Show or hide the legend. */

@@ -9,8 +9,8 @@ import { Gradient } from '../common/types/gradient.interface';
 import { BarOrientation } from '../common/types/bar-orientation.enum';
 
 @Component({
-  selector: 'g[ngx-charts-tree-map-cell]',
-  template: `
+    selector: 'g[ngx-charts-tree-map-cell]',
+    template: `
     <svg:g>
       <defs *ngIf="gradient">
         <svg:g
@@ -56,7 +56,8 @@ import { BarOrientation } from '../common/types/bar-orientation.enum';
       </svg:foreignObject>
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class TreeMapCellComponent implements OnChanges {
   @Input() data: DataItem;

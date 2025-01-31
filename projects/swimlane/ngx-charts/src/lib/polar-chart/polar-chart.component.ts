@@ -27,8 +27,8 @@ import { isPlatformServer } from '@angular/common';
 const twoPI = 2 * Math.PI;
 
 @Component({
-  selector: 'ngx-charts-polar-chart',
-  template: `
+    selector: 'ngx-charts-polar-chart',
+    template: `
     <ngx-charts-chart
       [view]="[width, height]"
       [showLegend]="legend"
@@ -138,28 +138,26 @@ const twoPI = 2 * Math.PI;
       </svg:g>
     </ngx-charts-chart>
   `,
-  styleUrls: [
-    '../common/base-chart.component.scss',
-    '../pie-chart/pie-chart.component.scss',
-    './polar-chart.component.scss'
-  ],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('animationState', [
-      transition(':leave', [
-        style({
-          opacity: 1
-        }),
-        animate(
-          500,
-          style({
-            opacity: 0
-          })
-        )
-      ])
-    ])
-  ]
+    styleUrls: [
+        '../common/base-chart.component.scss',
+        '../pie-chart/pie-chart.component.scss',
+        './polar-chart.component.scss'
+    ],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [
+        trigger('animationState', [
+            transition(':leave', [
+                style({
+                    opacity: 1
+                }),
+                animate(500, style({
+                    opacity: 0
+                }))
+            ])
+        ])
+    ],
+    standalone: false
 })
 export class PolarChartComponent extends BaseChartComponent implements OnInit {
   @Input() legend: boolean;

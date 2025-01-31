@@ -24,8 +24,8 @@ import { ScaleType } from '../common/types/scale-type.enum';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
 
 @Component({
-  selector: 'ngx-charts-bar-horizontal-stacked',
-  template: `
+    selector: 'ngx-charts-bar-horizontal-stacked',
+    template: `
     <ngx-charts-chart
       [view]="[width, height]"
       [showLegend]="legend"
@@ -130,20 +130,21 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
       </svg:g>
     </ngx-charts-chart>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['../common/base-chart.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  animations: [
-    trigger('animationState', [
-      transition(':leave', [
-        style({
-          opacity: 1,
-          transform: '*'
-        }),
-        animate(500, style({ opacity: 0, transform: 'scale(0)' }))
-      ])
-    ])
-  ]
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: ['../common/base-chart.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    animations: [
+        trigger('animationState', [
+            transition(':leave', [
+                style({
+                    opacity: 1,
+                    transform: '*'
+                }),
+                animate(500, style({ opacity: 0, transform: 'scale(0)' }))
+            ])
+        ])
+    ],
+    standalone: false
 })
 export class BarHorizontalStackedComponent extends BaseChartComponent {
   @Input() legend: boolean = false;

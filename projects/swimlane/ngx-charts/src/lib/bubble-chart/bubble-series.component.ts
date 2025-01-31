@@ -21,8 +21,8 @@ import { ScaleType } from '../common/types/scale-type.enum';
 import { isPlatformServer } from '@angular/common';
 
 @Component({
-  selector: 'g[ngx-charts-bubble-series]',
-  template: `
+    selector: 'g[ngx-charts-bubble-series]',
+    template: `
     <svg:g *ngFor="let circle of circles; trackBy: trackBy">
       <svg:g [attr.transform]="circle.transform">
         <svg:g
@@ -77,18 +77,19 @@ import { isPlatformServer } from '@angular/common';
       </svg:g>
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('animationState', [
-      transition(':enter', [
-        style({
-          opacity: 0,
-          transform: 'scale(0)'
-        }),
-        animate(250, style({ opacity: 1, transform: 'scale(1)' }))
-      ])
-    ])
-  ]
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [
+        trigger('animationState', [
+            transition(':enter', [
+                style({
+                    opacity: 0,
+                    transform: 'scale(0)'
+                }),
+                animate(250, style({ opacity: 1, transform: 'scale(1)' }))
+            ])
+        ])
+    ],
+    standalone: false
 })
 export class BubbleSeriesComponent implements OnChanges, OnInit {
   @Input() data: BubbleChartSeries;

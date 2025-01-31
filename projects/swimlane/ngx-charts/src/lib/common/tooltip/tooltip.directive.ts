@@ -17,7 +17,10 @@ import { ShowTypes } from './show.type';
 
 import { TooltipService } from './tooltip.service';
 
-@Directive({ selector: '[ngx-tooltip]' })
+@Directive({
+    selector: '[ngx-tooltip]',
+    standalone: false
+})
 export class TooltipDirective implements OnDestroy {
   @Input() tooltipCssClass: string = '';
   @Input() tooltipTitle?: string;

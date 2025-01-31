@@ -35,8 +35,8 @@ interface RectItem {
 }
 
 @Component({
-  selector: 'ngx-charts-sankey',
-  template: `
+    selector: 'ngx-charts-sankey',
+    template: `
     <ngx-charts-chart [view]="[width, height]" [animations]="animations">
       <svg:g [attr.transform]="transform" class="sankey chart">
         <svg:g
@@ -107,9 +107,10 @@ interface RectItem {
       </svg:g>
     </ngx-charts-chart>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['../common/base-chart.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: ['../common/base-chart.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class SankeyComponent extends BaseChartComponent {
   @Input() showLabels: boolean = true;

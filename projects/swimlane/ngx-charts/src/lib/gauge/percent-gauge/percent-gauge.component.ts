@@ -8,8 +8,8 @@ import { ScaleType } from '../../common/types/scale-type.enum';
 import { id } from '../../utils/id';
 
 @Component({
-  selector: 'ngx-charts-percent-gauge',
-  template: `
+    selector: 'ngx-charts-percent-gauge',
+    template: `
     <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations">
       <svg:g class="percent-gauge chart" (click)="onClick()">
         <svg:g [attr.transform]="transform">
@@ -100,9 +100,10 @@ import { id } from '../../utils/id';
       </svg:g>
     </ngx-charts-chart>
   `,
-  styleUrls: ['../../common/base-chart.component.scss', './percent-gauge.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    styleUrls: ['../../common/base-chart.component.scss', './percent-gauge.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class PercentGaugeComponent extends BaseChartComponent {
   @Input() max: number = 100;

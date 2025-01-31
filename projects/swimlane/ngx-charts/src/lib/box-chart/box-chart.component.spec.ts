@@ -9,8 +9,9 @@ import { cloneLineCoordinates } from './box.component';
 import { IVector2D } from '@swimlane/ngx-charts/models/coordinates.model';
 
 @Component({
-  selector: 'test-component',
-  template: ''
+    selector: 'test-component',
+    template: '',
+    standalone: false
 })
 class TestComponent {
   data: any = boxData;

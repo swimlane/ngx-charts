@@ -24,8 +24,8 @@ import { ScaleType } from '../common/types/scale-type.enum';
 import { isPlatformServer } from '@angular/common';
 
 @Component({
-  selector: 'g[ngx-charts-series-vertical]',
-  template: `
+    selector: 'g[ngx-charts-series-vertical]',
+    template: `
     <svg:g *ngIf="!isSSR">
       <svg:g
         ngx-charts-bar
@@ -103,17 +103,18 @@ import { isPlatformServer } from '@angular/common';
       />
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('animationState', [
-      transition(':leave', [
-        style({
-          opacity: 1
-        }),
-        animate(500, style({ opacity: 0 }))
-      ])
-    ])
-  ]
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [
+        trigger('animationState', [
+            transition(':leave', [
+                style({
+                    opacity: 1
+                }),
+                animate(500, style({ opacity: 0 }))
+            ])
+        ])
+    ],
+    standalone: false
 })
 export class SeriesVerticalComponent implements OnChanges {
   @Input() dims: ViewDimensions;

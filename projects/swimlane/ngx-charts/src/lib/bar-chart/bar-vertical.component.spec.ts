@@ -13,8 +13,9 @@ import { XAxisTicksComponent } from '../common/axes/x-axis-ticks.component';
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
 
 @Component({
-  selector: 'test-component',
-  template: ''
+    selector: 'test-component',
+    template: '',
+    standalone: false
 })
 class TestComponent {
   single: any = single;

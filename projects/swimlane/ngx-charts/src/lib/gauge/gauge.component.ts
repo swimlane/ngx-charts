@@ -27,8 +27,8 @@ interface Arcs {
 }
 
 @Component({
-  selector: 'ngx-charts-gauge',
-  template: `
+    selector: 'ngx-charts-gauge',
+    template: `
     <ngx-charts-chart
       [view]="[width, height]"
       [showLegend]="legend"
@@ -85,9 +85,10 @@ interface Arcs {
       </svg:g>
     </ngx-charts-chart>
   `,
-  styleUrls: ['../common/base-chart.component.scss', './gauge.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    styleUrls: ['../common/base-chart.component.scss', './gauge.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class GaugeComponent extends BaseChartComponent implements AfterViewInit {
   @Input() legend: boolean = false;

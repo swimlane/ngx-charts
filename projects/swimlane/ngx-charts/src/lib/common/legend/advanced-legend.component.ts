@@ -25,8 +25,8 @@ export interface AdvancedLegendItem {
 }
 
 @Component({
-  selector: 'ngx-charts-advanced-legend',
-  template: `
+    selector: 'ngx-charts-advanced-legend',
+    template: `
     <div class="advanced-pie-legend" [style.width.px]="width">
       <div
         *ngIf="animations"
@@ -76,9 +76,10 @@ export interface AdvancedLegendItem {
       </div>
     </div>
   `,
-  styleUrls: ['./advanced-legend.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    styleUrls: ['./advanced-legend.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AdvancedLegendComponent implements OnChanges {
   @Input() width: number;

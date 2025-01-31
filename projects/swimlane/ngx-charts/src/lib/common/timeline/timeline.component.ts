@@ -19,8 +19,8 @@ import { ScaleType } from '../types/scale-type.enum';
 import { ViewDimensions } from '../types/view-dimension.interface';
 
 @Component({
-  selector: 'g[ngx-charts-timeline]',
-  template: `
+    selector: 'g[ngx-charts-timeline]',
+    template: `
     <svg:g class="timeline" [attr.transform]="transform">
       <svg:filter [attr.id]="filterId">
         <svg:feColorMatrix
@@ -36,9 +36,10 @@ import { ViewDimensions } from '../types/view-dimension.interface';
       <svg:g class="brush"></svg:g>
     </svg:g>
   `,
-  styleUrls: ['./timeline.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    styleUrls: ['./timeline.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class Timeline implements OnChanges {
   @Input() view: [number, number];

@@ -27,8 +27,8 @@ interface TreeMapCell {
 }
 
 @Component({
-  selector: 'g[ngx-charts-tree-map-cell-series]',
-  template: `
+    selector: 'g[ngx-charts-tree-map-cell-series]',
+    template: `
     <svg:g
       ngx-charts-tree-map-cell
       *ngFor="let c of cells; trackBy: trackBy"
@@ -54,7 +54,8 @@ interface TreeMapCell {
       [tooltipContext]="c.data"
     ></svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class TreeMapCellSeriesComponent implements OnChanges {
   @Input() data: any; // type this

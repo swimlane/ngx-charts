@@ -12,8 +12,8 @@ import { formatLabel } from '../common/label.helper';
 import { BarOrientation } from '../common/types/bar-orientation.enum';
 
 @Component({
-  selector: 'g[ngx-charts-bar-label]',
-  template: `
+    selector: 'g[ngx-charts-bar-label]',
+    template: `
     <svg:text
       class="textDataLabel"
       alignment-baseline="middle"
@@ -25,8 +25,9 @@ import { BarOrientation } from '../common/types/bar-orientation.enum';
       {{ formatedValue }}
     </svg:text>
   `,
-  styleUrls: ['./bar-label.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    styleUrls: ['./bar-label.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class BarLabelComponent implements OnChanges {
   @Input() value;

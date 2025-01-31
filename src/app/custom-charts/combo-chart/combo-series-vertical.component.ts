@@ -6,9 +6,9 @@ import { StyleTypes } from '@swimlane/ngx-charts/common/tooltip/style.type';
 import { BarOrientation } from '@swimlane/ngx-charts/common/types/bar-orientation.enum';
 
 @Component({
-  // tslint:disable-next-line: component-selector
-  selector: 'g[ngx-combo-charts-series-vertical]',
-  template: `
+    // tslint:disable-next-line: component-selector
+    selector: 'g[ngx-combo-charts-series-vertical]',
+    template: `
     <svg:g
       ngx-charts-bar
       *ngFor="let bar of bars; trackBy: trackBy"
@@ -36,18 +36,19 @@ import { BarOrientation } from '@swimlane/ngx-charts/common/types/bar-orientatio
       [tooltipTitle]="bar.tooltipText"
     ></svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('animationState', [
-      transition('* => void', [
-        style({
-          opacity: 1,
-          transform: '*'
-        }),
-        animate(500, style({ opacity: 0, transform: 'scale(0)' }))
-      ])
-    ])
-  ]
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [
+        trigger('animationState', [
+            transition('* => void', [
+                style({
+                    opacity: 1,
+                    transform: '*'
+                }),
+                animate(500, style({ opacity: 0, transform: 'scale(0)' }))
+            ])
+        ])
+    ],
+    standalone: false
 })
 export class ComboSeriesVerticalComponent implements OnChanges {
   @Input() dims;

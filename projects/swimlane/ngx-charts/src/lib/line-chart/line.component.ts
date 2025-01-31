@@ -17,8 +17,8 @@ import { Series } from '../models/chart-data.model';
 import { isPlatformServer } from '@angular/common';
 
 @Component({
-  selector: 'g[ngx-charts-line]',
-  template: `
+    selector: 'g[ngx-charts-line]',
+    template: `
     <svg:g *ngIf="!isSSR">
       <svg:path
         [@animationState]="'active'"
@@ -33,23 +33,21 @@ import { isPlatformServer } from '@angular/common';
       <svg:path class="line" [attr.d]="initialPath" [attr.fill]="fill" [attr.stroke]="stroke" stroke-width="1.5px" />
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('animationState', [
-      transition(':enter', [
-        style({
-          strokeDasharray: 2000,
-          strokeDashoffset: 2000
-        }),
-        animate(
-          1000,
-          style({
-            strokeDashoffset: 0
-          })
-        )
-      ])
-    ])
-  ]
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [
+        trigger('animationState', [
+            transition(':enter', [
+                style({
+                    strokeDasharray: 2000,
+                    strokeDashoffset: 2000
+                }),
+                animate(1000, style({
+                    strokeDashoffset: 0
+                }))
+            ])
+        ])
+    ],
+    standalone: false
 })
 export class LineComponent implements OnChanges, OnInit {
   @Input() path: string;

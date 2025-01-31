@@ -17,8 +17,8 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
 import { ScaleType } from '../common/types/scale-type.enum';
 
 @Component({
-  selector: 'ngx-charts-advanced-pie-chart',
-  template: `
+    selector: 'ngx-charts-advanced-pie-chart',
+    template: `
     <div [style.width.px]="width" [style.height.px]="height">
       <div class="advanced-pie chart" [style.width.px]="dims.width" [style.height.px]="dims.height">
         <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations">
@@ -60,9 +60,10 @@ import { ScaleType } from '../common/types/scale-type.enum';
       </div>
     </div>
   `,
-  styleUrls: ['../common/base-chart.component.scss', './advanced-pie-chart.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    styleUrls: ['../common/base-chart.component.scss', './advanced-pie-chart.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AdvancedPieChartComponent extends BaseChartComponent {
   @Input() gradient: boolean;
