@@ -25,9 +25,9 @@ import {
 import { isPlatformServer } from '@angular/common';
 
 @Component({
-    // tslint:disable-next-line: component-selector
-    selector: 'ngx-charts-bubble-chart-interactive',
-    template: `
+  // tslint:disable-next-line: component-selector
+  selector: 'ngx-charts-bubble-chart-interactive',
+  template: `
     <ngx-charts-chart
       [view]="[width, height]"
       [showLegend]="legend"
@@ -130,22 +130,25 @@ import { isPlatformServer } from '@angular/common';
       </svg:g>
     </ngx-charts-chart>
   `,
-    styleUrls: ['../../../../projects/swimlane/ngx-charts/src/lib/common/base-chart.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
-    animations: [
-        trigger('animationState', [
-            transition(':leave', [
-                style({
-                    opacity: 1
-                }),
-                animate(500, style({
-                    opacity: 0
-                }))
-            ])
-        ])
-    ],
-    standalone: false
+  styleUrls: ['../../../../projects/swimlane/ngx-charts/src/lib/common/base-chart.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
+  animations: [
+    trigger('animationState', [
+      transition(':leave', [
+        style({
+          opacity: 1
+        }),
+        animate(
+          500,
+          style({
+            opacity: 0
+          })
+        )
+      ])
+    ])
+  ],
+  standalone: false
 })
 export class BubbleChartInteractiveComponent extends BaseChartComponent {
   @Input() showGridLines: boolean = true;

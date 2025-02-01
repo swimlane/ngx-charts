@@ -12,9 +12,9 @@ import {
 } from 'projects/swimlane/ngx-charts/src/public-api';
 
 @Component({
-    // tslint:disable-next-line: component-selector
-    selector: 'ngx-charts-timeline-filter-bar-chart',
-    template: `
+  // tslint:disable-next-line: component-selector
+  selector: 'ngx-charts-timeline-filter-bar-chart',
+  template: `
     <ngx-charts-chart
       [view]="[width, height]"
       [showLegend]="false"
@@ -70,10 +70,10 @@ import {
       </svg:g>
     </ngx-charts-chart>
   `,
-    styleUrls: ['../../../../projects/swimlane/ngx-charts/src/lib/common/base-chart.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  styleUrls: ['../../../../projects/swimlane/ngx-charts/src/lib/common/base-chart.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class TimelineFilterBarChartComponent extends BaseChartComponent {
   @Input() autoScale = false;

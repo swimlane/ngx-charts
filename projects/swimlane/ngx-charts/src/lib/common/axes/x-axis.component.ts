@@ -14,8 +14,8 @@ import { Orientation } from '../types/orientation.enum';
 import { ViewDimensions } from '../types/view-dimension.interface';
 
 @Component({
-    selector: 'g[ngx-charts-x-axis]',
-    template: `
+  selector: 'g[ngx-charts-x-axis]',
+  template: `
     <svg:g [attr.class]="xAxisClassName" [attr.transform]="transform">
       <svg:g
         ngx-charts-x-axis-ticks
@@ -46,8 +46,8 @@ import { ViewDimensions } from '../types/view-dimension.interface';
       ></svg:g>
     </svg:g>
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class XAxisComponent implements OnChanges {
   @Input() xScale;

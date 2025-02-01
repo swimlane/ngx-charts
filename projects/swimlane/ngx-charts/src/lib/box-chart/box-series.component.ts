@@ -21,8 +21,8 @@ import { ScaleType } from '../common/types/scale-type.enum';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
 
 @Component({
-    selector: 'g[ngx-charts-box-series]',
-    template: `
+  selector: 'g[ngx-charts-box-series]',
+  template: `
     <svg:g
       ngx-charts-box
       [@animationState]="'active'"
@@ -53,18 +53,18 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
       [animations]="animations"
     ></svg:g>
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    animations: [
-        trigger('animationState', [
-            transition(':leave', [
-                style({
-                    opacity: 1
-                }),
-                animate(500, style({ opacity: 0 }))
-            ])
-        ])
-    ],
-    standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('animationState', [
+      transition(':leave', [
+        style({
+          opacity: 1
+        }),
+        animate(500, style({ opacity: 0 }))
+      ])
+    ])
+  ],
+  standalone: false
 })
 export class BoxSeriesComponent implements OnChanges {
   @Input() dims: ViewDimensions;

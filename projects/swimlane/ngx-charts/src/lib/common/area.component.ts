@@ -6,8 +6,8 @@ import { BarOrientation } from './types/bar-orientation.enum';
 import { Gradient } from './types/gradient.interface';
 
 @Component({
-    selector: 'g[ngx-charts-area]',
-    template: `
+  selector: 'g[ngx-charts-area]',
+  template: `
     <svg:defs *ngIf="gradient">
       <svg:g
         ngx-charts-svg-linear-gradient
@@ -18,8 +18,8 @@ import { Gradient } from './types/gradient.interface';
     </svg:defs>
     <svg:path class="area" [attr.d]="areaPath" [attr.fill]="gradient ? gradientFill : fill" [style.opacity]="opacity" />
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AreaComponent implements OnChanges {
   @Input() data: AreaChartSeries;

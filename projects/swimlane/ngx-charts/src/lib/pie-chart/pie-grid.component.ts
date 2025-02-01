@@ -24,8 +24,8 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
 import { ScaleType } from '../common/types/scale-type.enum';
 
 @Component({
-    selector: 'ngx-charts-pie-grid',
-    template: `
+  selector: 'ngx-charts-pie-grid',
+  template: `
     <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations">
       <svg:g [attr.transform]="transform" class="pie-grid chart">
         <svg:g *ngFor="let series of series" class="pie-grid-item" [attr.transform]="series.transform">
@@ -89,10 +89,10 @@ import { ScaleType } from '../common/types/scale-type.enum';
       </svg:g>
     </ngx-charts-chart>
   `,
-    styleUrls: ['../common/base-chart.component.scss', './pie-grid.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  styleUrls: ['../common/base-chart.component.scss', './pie-grid.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class PieGridComponent extends BaseChartComponent {
   @Input() designatedTotal: number;

@@ -5,9 +5,9 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ChartCommonModule } from '../chart-common.module';
 
 @Component({
-    selector: 'test-component',
-    template: '',
-    standalone: false
+  selector: 'test-component',
+  template: '',
+  standalone: false
 })
 class TestComponent {
   barData: any;

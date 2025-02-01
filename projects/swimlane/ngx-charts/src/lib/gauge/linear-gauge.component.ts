@@ -25,8 +25,8 @@ enum ElementType {
 }
 
 @Component({
-    selector: 'ngx-charts-linear-gauge',
-    template: `
+  selector: 'ngx-charts-linear-gauge',
+  template: `
     <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations" (click)="onClick()">
       <svg:g class="linear-gauge chart">
         <svg:g
@@ -102,10 +102,10 @@ enum ElementType {
       </svg:g>
     </ngx-charts-chart>
   `,
-    styleUrls: ['../common/base-chart.component.scss', './linear-gauge.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  styleUrls: ['../common/base-chart.component.scss', './linear-gauge.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class LinearGaugeComponent extends BaseChartComponent implements AfterViewInit {
   @Input() min: number = 0;

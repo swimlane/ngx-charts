@@ -18,8 +18,8 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
 import { ScaleType } from '../common/types/scale-type.enum';
 
 @Component({
-    selector: 'ngx-charts-tree-map',
-    template: `
+  selector: 'ngx-charts-tree-map',
+  template: `
     <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations">
       <svg:g [attr.transform]="transform" class="tree-map chart">
         <svg:g
@@ -38,10 +38,10 @@ import { ScaleType } from '../common/types/scale-type.enum';
       </svg:g>
     </ngx-charts-chart>
   `,
-    styleUrls: ['./tree-map.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  styleUrls: ['./tree-map.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class TreeMapComponent extends BaseChartComponent {
   @Input() declare results: DataItem[];

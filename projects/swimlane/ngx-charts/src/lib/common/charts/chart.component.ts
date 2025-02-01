@@ -12,9 +12,9 @@ import { LegendOptions, LegendType, LegendPosition } from '../types/legend.model
 import { ScaleType } from '../types/scale-type.enum';
 
 @Component({
-    providers: [TooltipService],
-    selector: 'ngx-charts-chart',
-    template: `
+  providers: [TooltipService],
+  selector: 'ngx-charts-chart',
+  template: `
     <div class="ngx-charts-outer" [style.width.px]="view[0]" [style.height.px]="view[1]">
       <svg class="ngx-charts" [attr.width]="chartWidth" [attr.height]="view[1]">
         <ng-content></ng-content>
@@ -46,8 +46,8 @@ import { ScaleType } from '../types/scale-type.enum';
       </ngx-charts-legend>
     </div>
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class ChartComponent implements OnChanges {
   @Input() view: [number, number];

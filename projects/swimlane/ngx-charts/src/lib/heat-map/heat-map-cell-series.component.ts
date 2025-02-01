@@ -27,8 +27,8 @@ interface Cell {
   y: number;
 }
 @Component({
-    selector: 'g[ngx-charts-heat-map-cell-series]',
-    template: `
+  selector: 'g[ngx-charts-heat-map-cell-series]',
+  template: `
     <svg:g
       ngx-charts-heat-map-cell
       *ngFor="let c of cells; trackBy: trackBy"
@@ -52,8 +52,8 @@ interface Cell {
       [tooltipContext]="{ series: c.series, name: c.label, value: c.data }"
     ></svg:g>
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class HeatCellSeriesComponent implements OnChanges, OnInit {
   @Input() data;

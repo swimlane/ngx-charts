@@ -17,8 +17,8 @@ enum ClassEnum {
 }
 
 @Component({
-    selector: 'g[ngx-charts-grid-panel-series]',
-    template: `
+  selector: 'g[ngx-charts-grid-panel-series]',
+  template: `
     <svg:g
       ngx-charts-grid-panel
       *ngFor="let gridPanel of gridPanels"
@@ -31,8 +31,8 @@ enum ClassEnum {
       [class.even]="gridPanel.class === 'even'"
     ></svg:g>
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class GridPanelSeriesComponent implements OnChanges {
   gridPanels: GridPanel[];

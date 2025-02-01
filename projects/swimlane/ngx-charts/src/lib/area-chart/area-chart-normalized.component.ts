@@ -25,8 +25,8 @@ import { ScaleType } from '../common/types/scale-type.enum';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
 
 @Component({
-    selector: 'ngx-charts-area-chart-normalized',
-    template: `
+  selector: 'ngx-charts-area-chart-normalized',
+  template: `
     <ngx-charts-chart
       [view]="[width, height]"
       [showLegend]="legend"
@@ -161,10 +161,10 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
       </svg:g>
     </ngx-charts-chart>
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    styleUrls: ['../common/base-chart.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['../common/base-chart.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class AreaChartNormalizedComponent extends BaseChartComponent {
   @Input() legend = false;

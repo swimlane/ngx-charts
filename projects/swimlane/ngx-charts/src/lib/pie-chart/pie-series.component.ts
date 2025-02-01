@@ -20,8 +20,8 @@ import { StyleTypes } from '../common/tooltip/style.type';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
 
 @Component({
-    selector: 'g[ngx-charts-pie-series]',
-    template: `
+  selector: 'g[ngx-charts-pie-series]',
+  template: `
     <svg:g *ngFor="let arc of data; trackBy: trackBy">
       <svg:g
         ngx-charts-pie-label
@@ -65,8 +65,8 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
       ></svg:g>
     </svg:g>
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class PieSeriesComponent implements OnChanges {
   @Input() colors: ColorHelper;

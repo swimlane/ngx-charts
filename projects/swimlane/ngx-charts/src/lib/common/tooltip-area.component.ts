@@ -30,8 +30,8 @@ export interface Tooltip {
 }
 
 @Component({
-    selector: 'g[ngx-charts-tooltip-area]',
-    template: `
+  selector: 'g[ngx-charts-tooltip-area]',
+  template: `
     <svg:g>
       <svg:rect
         class="tooltip-area"
@@ -72,24 +72,24 @@ export interface Tooltip {
       />
     </svg:g>
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    animations: [
-        trigger('animationState', [
-            transition('inactive => active', [
-                style({
-                    opacity: 0
-                }),
-                animate(250, style({ opacity: 0.7 }))
-            ]),
-            transition('active => inactive', [
-                style({
-                    opacity: 0.7
-                }),
-                animate(250, style({ opacity: 0 }))
-            ])
-        ])
-    ],
-    standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('animationState', [
+      transition('inactive => active', [
+        style({
+          opacity: 0
+        }),
+        animate(250, style({ opacity: 0.7 }))
+      ]),
+      transition('active => inactive', [
+        style({
+          opacity: 0.7
+        }),
+        animate(250, style({ opacity: 0 }))
+      ])
+    ])
+  ],
+  standalone: false
 })
 export class TooltipArea {
   anchorOpacity: number = 0;

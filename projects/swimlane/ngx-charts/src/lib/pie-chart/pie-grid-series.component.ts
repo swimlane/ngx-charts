@@ -22,8 +22,8 @@ export interface PieArc {
 }
 
 @Component({
-    selector: 'g[ngx-charts-pie-grid-series]',
-    template: `
+  selector: 'g[ngx-charts-pie-grid-series]',
+  template: `
     <svg:g class="pie-grid-arcs">
       <svg:g
         ngx-charts-pie-arc
@@ -45,8 +45,8 @@ export interface PieArc {
       ></svg:g>
     </svg:g>
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class PieGridSeriesComponent implements OnChanges {
   @Input() colors;

@@ -8,8 +8,8 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
 import { ScaleType } from '../common/types/scale-type.enum';
 
 @Component({
-    selector: 'ngx-charts-number-card',
-    template: `
+  selector: 'ngx-charts-number-card',
+  template: `
     <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations">
       <svg:g [attr.transform]="transform" class="number-card chart" [class.clickable]="clickable">
         <svg:g
@@ -30,10 +30,10 @@ import { ScaleType } from '../common/types/scale-type.enum';
       </svg:g>
     </ngx-charts-chart>
   `,
-    styleUrls: ['../common/base-chart.component.scss', './card.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  styleUrls: ['../common/base-chart.component.scss', './card.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class NumberCardComponent extends BaseChartComponent {
   @Input() cardColor: string;

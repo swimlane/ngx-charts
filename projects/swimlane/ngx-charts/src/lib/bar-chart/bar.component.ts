@@ -17,8 +17,8 @@ import { BarOrientation } from '../common/types/bar-orientation.enum';
 import { Gradient } from '../common/types/gradient.interface';
 
 @Component({
-    selector: 'g[ngx-charts-bar]',
-    template: `
+  selector: 'g[ngx-charts-bar]',
+  template: `
     <svg:defs *ngIf="hasGradient">
       <svg:g ngx-charts-svg-linear-gradient [orientation]="orientation" [name]="gradientId" [stops]="gradientStops" />
     </svg:defs>
@@ -35,8 +35,8 @@ import { Gradient } from '../common/types/gradient.interface';
       (click)="select.emit(data)"
     />
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class BarComponent implements OnChanges {
   @Input() fill: string;

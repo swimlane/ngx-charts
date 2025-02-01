@@ -29,8 +29,8 @@ interface PolarChartCircle {
 }
 
 @Component({
-    selector: 'g[ngx-charts-polar-series]',
-    template: `
+  selector: 'g[ngx-charts-polar-series]',
+  template: `
     <svg:g class="polar-charts-series">
       <defs>
         <svg:g
@@ -76,8 +76,8 @@ interface PolarChartCircle {
       ></svg:g>
     </svg:g>
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class PolarSeriesComponent implements OnChanges {
   @Input() name;

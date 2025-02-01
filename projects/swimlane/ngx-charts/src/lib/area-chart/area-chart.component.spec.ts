@@ -12,9 +12,9 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
 const colors = ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'];
 
 @Component({
-    selector: 'test-component',
-    template: '',
-    standalone: false
+  selector: 'test-component',
+  template: '',
+  standalone: false
 })
 class TestComponent {
   data: any = multi;

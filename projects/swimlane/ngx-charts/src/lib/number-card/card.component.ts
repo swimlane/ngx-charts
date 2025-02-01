@@ -25,8 +25,8 @@ import { calculateTextWidth } from '../utils/calculate-width';
 import { VERDANA_FONT_WIDTHS_16_PX } from '../common/constants/font-widths';
 
 @Component({
-    selector: 'g[ngx-charts-card]',
-    template: `
+  selector: 'g[ngx-charts-card]',
+  template: `
     <svg:g [attr.transform]="transform" class="cell" (click)="onClick()">
       <svg:rect class="card" [style.fill]="color" [attr.width]="cardWidth" [attr.height]="cardHeight" rx="3" ry="3" />
       <svg:path
@@ -69,8 +69,8 @@ import { VERDANA_FONT_WIDTHS_16_PX } from '../common/constants/font-widths';
       </svg:text>
     </svg:g>
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class CardComponent implements OnChanges, OnDestroy, OnInit {
   @Input() color: string;

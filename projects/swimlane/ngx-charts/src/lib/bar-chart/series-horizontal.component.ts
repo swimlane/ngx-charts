@@ -22,8 +22,8 @@ import { BarOrientation } from '../common/types/bar-orientation.enum';
 import { ScaleType } from '../common/types/scale-type.enum';
 
 @Component({
-    selector: 'g[ngx-charts-series-horizontal]',
-    template: `
+  selector: 'g[ngx-charts-series-horizontal]',
+  template: `
     <svg:g
       ngx-charts-bar
       *ngFor="let bar of bars; trackBy: trackBy"
@@ -68,18 +68,18 @@ import { ScaleType } from '../common/types/scale-type.enum';
       />
     </svg:g>
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    animations: [
-        trigger('animationState', [
-            transition(':leave', [
-                style({
-                    opacity: 1
-                }),
-                animate(500, style({ opacity: 0 }))
-            ])
-        ])
-    ],
-    standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('animationState', [
+      transition(':leave', [
+        style({
+          opacity: 1
+        }),
+        animate(500, style({ opacity: 0 }))
+      ])
+    ])
+  ],
+  standalone: false
 })
 export class SeriesHorizontal implements OnChanges {
   @Input() dims: ViewDimensions;

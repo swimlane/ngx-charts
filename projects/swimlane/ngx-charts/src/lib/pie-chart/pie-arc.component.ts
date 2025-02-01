@@ -16,8 +16,8 @@ import { DataItem } from '../models/chart-data.model';
 import { BarOrientation } from '../common/types/bar-orientation.enum';
 
 @Component({
-    selector: 'g[ngx-charts-pie-arc]',
-    template: `
+  selector: 'g[ngx-charts-pie-arc]',
+  template: `
     <svg:g class="arc-group">
       <svg:defs *ngIf="gradient">
         <svg:g ngx-charts-svg-radial-gradient [color]="fill" [name]="radialGradientId" [startOpacity]="startOpacity" />
@@ -35,8 +35,8 @@ import { BarOrientation } from '../common/types/bar-orientation.enum';
       />
     </svg:g>
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class PieArcComponent implements OnChanges {
   @Input() fill: string;

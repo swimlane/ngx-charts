@@ -20,8 +20,8 @@ import { StyleTypes } from './style.type';
 import { isPlatformBrowser } from '@angular/common';
 
 @Component({
-    selector: 'ngx-tooltip-content',
-    template: `
+  selector: 'ngx-tooltip-content',
+  template: `
     <div>
       <span #caretElm [hidden]="!showCaret" class="tooltip-caret position-{{ this.placement }}"> </span>
       <div class="tooltip-content">
@@ -32,9 +32,9 @@ import { isPlatformBrowser } from '@angular/common';
       </div>
     </div>
   `,
-    encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./tooltip.component.scss'],
-    standalone: false
+  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./tooltip.component.scss'],
+  standalone: false
 })
 export class TooltipContentComponent implements AfterViewInit {
   @Input() host: ElementRef;

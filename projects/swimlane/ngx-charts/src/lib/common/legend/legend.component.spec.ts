@@ -10,9 +10,9 @@ import { ScaleType } from '../types/scale-type.enum';
 const seriesData = ['complete', 'not complete'];
 
 @Component({
-    selector: 'test-component',
-    template: '',
-    standalone: false
+  selector: 'test-component',
+  template: '',
+  standalone: false
 })
 class TestComponent {
   seriesData: any = seriesData;

@@ -46,8 +46,8 @@ export interface Circle {
 }
 
 @Component({
-    selector: 'g[ngx-charts-circle-series]',
-    template: `
+  selector: 'g[ngx-charts-circle-series]',
+  template: `
     <svg:g *ngIf="circle">
       <defs>
         <svg:g
@@ -100,18 +100,18 @@ export interface Circle {
       />
     </svg:g>
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    animations: [
-        trigger('animationState', [
-            transition(':enter', [
-                style({
-                    opacity: 0
-                }),
-                animate(250, style({ opacity: 1 }))
-            ])
-        ])
-    ],
-    standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('animationState', [
+      transition(':enter', [
+        style({
+          opacity: 0
+        }),
+        animate(250, style({ opacity: 1 }))
+      ])
+    ])
+  ],
+  standalone: false
 })
 export class CircleSeriesComponent implements OnChanges, OnInit {
   @Input() data: Series;

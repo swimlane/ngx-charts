@@ -23,8 +23,8 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
 import { ScaleType } from '../common/types/scale-type.enum';
 
 @Component({
-    selector: 'ngx-charts-area-chart-stacked',
-    template: `
+  selector: 'ngx-charts-area-chart-stacked',
+  template: `
     <ngx-charts-chart
       [view]="[width, height]"
       [showLegend]="legend"
@@ -158,10 +158,10 @@ import { ScaleType } from '../common/types/scale-type.enum';
       </svg:g>
     </ngx-charts-chart>
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    styleUrls: ['../common/base-chart.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['../common/base-chart.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class AreaChartStackedComponent extends BaseChartComponent {
   @Input() legend: boolean = false;

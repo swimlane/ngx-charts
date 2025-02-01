@@ -12,9 +12,9 @@ import { InjectionService } from '../common/tooltip/injection.service';
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
 
 @Component({
-    selector: 'test-component',
-    template: '',
-    standalone: false
+  selector: 'test-component',
+  template: '',
+  standalone: false
 })
 class TestComponent {
   single: any = single;

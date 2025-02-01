@@ -2,8 +2,8 @@ import { Component, Input, OnChanges, ChangeDetectionStrategy, SimpleChanges } f
 import { Gradient } from './types/gradient.interface';
 
 @Component({
-    selector: 'g[ngx-charts-svg-radial-gradient]',
-    template: `
+  selector: 'g[ngx-charts-svg-radial-gradient]',
+  template: `
     <svg:radialGradient [id]="name" [attr.cx]="cx" [attr.cy]="cy" [attr.r]="r" gradientUnits="userSpaceOnUse">
       <svg:stop
         *ngFor="let stop of stops"
@@ -13,8 +13,8 @@ import { Gradient } from './types/gradient.interface';
       />
     </svg:radialGradient>
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class SvgRadialGradientComponent implements OnChanges {
   @Input() color: string;

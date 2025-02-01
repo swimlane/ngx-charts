@@ -13,8 +13,8 @@ import { Orientation } from '../types/orientation.enum';
 import { ViewDimensions } from '../types/view-dimension.interface';
 
 @Component({
-    selector: 'g[ngx-charts-y-axis]',
-    template: `
+  selector: 'g[ngx-charts-y-axis]',
+  template: `
     <svg:g [attr.class]="yAxisClassName" [attr.transform]="transform">
       <svg:g
         ngx-charts-y-axis-ticks
@@ -48,8 +48,8 @@ import { ViewDimensions } from '../types/view-dimension.interface';
       ></svg:g>
     </svg:g>
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class YAxisComponent implements OnChanges {
   @Input() yScale;

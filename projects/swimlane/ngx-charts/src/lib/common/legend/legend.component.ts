@@ -19,8 +19,8 @@ export interface LegendEntry {
 }
 
 @Component({
-    selector: 'ngx-charts-legend',
-    template: `
+  selector: 'ngx-charts-legend',
+  template: `
     <div [style.width.px]="width">
       <header class="legend-title" *ngIf="title?.length > 0">
         <span class="legend-title-text">{{ title }}</span>
@@ -43,10 +43,10 @@ export interface LegendEntry {
       </div>
     </div>
   `,
-    styleUrls: ['./legend.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  styleUrls: ['./legend.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class LegendComponent implements OnChanges {
   @Input() data: string[];

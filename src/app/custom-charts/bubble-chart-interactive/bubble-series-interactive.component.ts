@@ -14,9 +14,9 @@ import { PlacementTypes } from '@swimlane/ngx-charts/common/tooltip/position';
 import { StyleTypes } from '@swimlane/ngx-charts/common/tooltip/style.type';
 
 @Component({
-    // tslint:disable-next-line: component-selector
-    selector: 'g[ngx-charts-bubble-series-interactive]',
-    template: `
+  // tslint:disable-next-line: component-selector
+  selector: 'g[ngx-charts-bubble-series-interactive]',
+  template: `
     <svg:g *ngFor="let circle of circles; trackBy: trackBy">
       <svg:g [attr.transform]="circle.transform">
         <svg:g
@@ -46,19 +46,19 @@ import { StyleTypes } from '@swimlane/ngx-charts/common/tooltip/style.type';
       </svg:g>
     </svg:g>
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    animations: [
-        trigger('animationState', [
-            transition(':enter', [
-                style({
-                    opacity: 0,
-                    transform: 'scale(0)'
-                }),
-                animate(250, style({ opacity: 1, transform: 'scale(1)' }))
-            ])
-        ])
-    ],
-    standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('animationState', [
+      transition(':enter', [
+        style({
+          opacity: 0,
+          transform: 'scale(0)'
+        }),
+        animate(250, style({ opacity: 1, transform: 'scale(1)' }))
+      ])
+    ])
+  ],
+  standalone: false
 })
 export class BubbleSeriesInteractiveComponent implements OnChanges {
   @Input() data;

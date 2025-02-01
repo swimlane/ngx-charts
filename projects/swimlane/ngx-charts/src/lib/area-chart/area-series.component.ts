@@ -15,8 +15,8 @@ import { AreaChartSeries } from '../models/chart-data.model';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
 
 @Component({
-    selector: 'g[ngx-charts-area-series]',
-    template: `
+  selector: 'g[ngx-charts-area-series]',
+  template: `
     <svg:g
       ngx-charts-area
       class="area-series"
@@ -32,8 +32,8 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
       [class.inactive]="isInactive(data)"
     />
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AreaSeriesComponent implements OnChanges {
   @Input() data: AreaChartSeries;

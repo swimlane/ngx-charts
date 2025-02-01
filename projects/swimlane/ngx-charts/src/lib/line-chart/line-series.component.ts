@@ -10,8 +10,8 @@ import { ScaleType } from '../common/types/scale-type.enum';
 import { Gradient } from '../common/types/gradient.interface';
 
 @Component({
-    selector: 'g[ngx-charts-line-series]',
-    template: `
+  selector: 'g[ngx-charts-line-series]',
+  template: `
     <svg:g>
       <defs>
         <svg:g
@@ -60,8 +60,8 @@ import { Gradient } from '../common/types/gradient.interface';
       />
     </svg:g>
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class LineSeriesComponent implements OnChanges {
   @Input() data: Series;

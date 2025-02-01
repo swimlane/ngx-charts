@@ -3,8 +3,8 @@ import { BarOrientation } from './types/bar-orientation.enum';
 import { Gradient } from './types/gradient.interface';
 
 @Component({
-    selector: 'g[ngx-charts-svg-linear-gradient]',
-    template: `
+  selector: 'g[ngx-charts-svg-linear-gradient]',
+  template: `
     <svg:linearGradient [id]="name" [attr.x1]="x1" [attr.y1]="y1" [attr.x2]="x2" [attr.y2]="y2">
       <svg:stop
         *ngFor="let stop of stops"
@@ -14,8 +14,8 @@ import { Gradient } from './types/gradient.interface';
       />
     </svg:linearGradient>
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class SvgLinearGradientComponent implements OnChanges {
   @Input() orientation = BarOrientation.Vertical;
