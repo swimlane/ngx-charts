@@ -32,6 +32,7 @@ interface RectItem {
   tooltip: string;
   transform: string;
   data: any;
+  active?: boolean;
 }
 
 @Component({
@@ -65,10 +66,11 @@ interface RectItem {
             [attr.d]="link.path"
             [attr.stroke]="link.gradientFill"
             [attr.stroke-width]="link.strokeWidth"
-            stroke-opacity="0.5"
+            [attr.stroke-opacity]="link.active ? 0.5 : hasActive ? 0.1 : 0.5"
             fill="none"
             (click)="select.emit(link.data)"
-            (mouseenter)="activate.emit(link.data)"
+            (mouseenter)="activateLink(link)"
+            (mouseleave)="deactivateLink(link)"
           ></svg:path>
         </svg:g>
 
@@ -79,6 +81,7 @@ interface RectItem {
             [attr.width]="rect.width"
             [attr.height]="rect.height"
             [attr.fill]="rect.fill"
+            [attr.fill-opacity]="rect.active ? 1 : hasActive ? 0.3 : 1"
             ngx-tooltip
             [tooltipDisabled]="tooltipDisabled"
             [tooltipType]="styleTypes.tooltip"
@@ -87,7 +90,8 @@ interface RectItem {
             [tooltipTemplate]="tooltipTemplate"
             [tooltipContext]="rect.data"
             (click)="select.emit(rect.data)"
-            (mouseenter)="activate.emit(rect.data)"
+            (mouseenter)="activateRect(rect)"
+            (mouseleave)="deactivateRect(rect)"
           ></svg:rect>
         </svg:g>
 
@@ -97,6 +101,7 @@ interface RectItem {
             class="label"
             [attr.x]="rect.width + 5"
             [attr.y]="rect.height / 2"
+            [attr.fill-opacity]="rect.active ? 1 : hasActive ? 0.3 : 1"
             [attr.text-anchor]="rect.labelAnchor"
             dy="0.35em"
             [attr.dx]="rect.labelAnchor === 'end' ? -25 : 0"
@@ -134,6 +139,7 @@ export class SankeyComponent extends BaseChartComponent {
 
   nodeRects: RectItem[];
   linkPaths: any[];
+  chartHasActive: boolean = false;
 
   update(): void {
     super.update();
@@ -252,5 +258,71 @@ export class SankeyComponent extends BaseChartComponent {
 
   getValueDomain(nodes): any[] {
     return nodes.map(n => n.name);
+  }
+
+  activateLink(link) {
+    this.linkPaths.forEach(l => {
+      l.active = false;
+    });
+
+    this.nodeRects.forEach(r => {
+      if (r.data.name === link.source.name || r.data.name === link.target.name) {
+        r.active = true;
+      } else {
+        r.active = false;
+      }
+    });
+
+    link.active = true;
+
+    this.activate.emit(link.data);
+  }
+
+  deactivateLink(link) {
+    link.active = false;
+
+    this.nodeRects.forEach(r => {
+      r.active = false;
+    });
+
+    this.deactivate.emit(link.data);
+  }
+
+  activateRect(rect) {
+    const links = this.linkPaths.filter(l => l.source.name === rect.data.name || l.target.name === rect.data.name);
+
+    this.nodeRects.forEach(r => {
+      if (links.some(l => l.source.name === r.data.name || l.target.name === r.data.name)) {
+        r.active = true;
+      } else {
+        r.active = false;
+      }
+    });
+
+    this.linkPaths.forEach(l => {
+      if (l.source.name === rect.data.name || l.target.name === rect.data.name) {
+        l.active = true;
+      } else {
+        l.active = false;
+      }
+    });
+
+    this.activate.emit(rect.data);
+  }
+
+  deactivateRect(rect) {
+    this.nodeRects.forEach(r => {
+      r.active = false;
+    });
+
+    this.linkPaths.forEach(l => {
+      l.active = false;
+    });
+
+    this.deactivate.emit(rect.data);
+  }
+
+  get hasActive(): boolean {
+    return this.linkPaths.some(l => l.active) || this.nodeRects.some(r => r.active);
   }
 }
