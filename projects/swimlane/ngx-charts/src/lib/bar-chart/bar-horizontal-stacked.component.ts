@@ -80,6 +80,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
               [xScale]="xScale"
               [yScale]="yScale"
               [colors]="colors"
+              [ngStyle]="getStyle(chartTransparency)"
               [series]="group.series"
               [activeEntries]="activeEntries"
               [dims]="dims"
@@ -147,6 +148,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
   standalone: false
 })
 export class BarHorizontalStackedComponent extends BaseChartComponent {
+  @Input() chartTransparency = 0;
   @Input() legend: boolean = false;
   @Input() legendTitle: string = 'Legend';
   @Input() legendPosition: LegendPosition = LegendPosition.Right;
@@ -269,6 +271,12 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
     }
 
     return domain;
+  }
+
+  getStyle(transparency: number): object {
+    return {
+      opacity: 1 - transparency / 100
+    };
   }
 
   getValueDomain(): [number, number] {
