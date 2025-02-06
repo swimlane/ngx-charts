@@ -8,7 +8,8 @@ import { ScaleType } from '../types/scale-type.enum';
 
 @Component({
   selector: 'test-component',
-  template: ''
+  template: '',
+  standalone: false
 })
 class TestComponent {
   legendLabel: string = 'Test legend label';

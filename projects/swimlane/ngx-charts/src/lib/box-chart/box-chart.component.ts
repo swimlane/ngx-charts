@@ -78,7 +78,8 @@ import { ScaleType } from '../common/types/scale-type.enum';
   `,
   styleUrls: ['../common/base-chart.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class BoxChartComponent extends BaseChartComponent {
   /** Show or hide the legend. */

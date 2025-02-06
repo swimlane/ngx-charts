@@ -102,7 +102,8 @@ import { id } from '../../utils/id';
   `,
   styleUrls: ['../../common/base-chart.component.scss', './percent-gauge.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class PercentGaugeComponent extends BaseChartComponent {
   @Input() max: number = 100;

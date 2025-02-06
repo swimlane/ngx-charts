@@ -10,7 +10,8 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
 
 @Component({
   selector: 'test-component',
-  template: ''
+  template: '',
+  standalone: false
 })
 class TestComponent {
   colorScheme = {

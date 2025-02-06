@@ -159,7 +159,8 @@ const twoPI = 2 * Math.PI;
         )
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class PolarChartComponent extends BaseChartComponent implements OnInit {
   @Input() legend: boolean;

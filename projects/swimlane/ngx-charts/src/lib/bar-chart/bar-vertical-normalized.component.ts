@@ -132,7 +132,8 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
         animate(500, style({ opacity: 0, transform: 'scale(0)' }))
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class BarVerticalNormalizedComponent extends BaseChartComponent {
   @Input() legend: boolean = false;

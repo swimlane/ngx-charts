@@ -57,7 +57,8 @@ import { StyleTypes } from '@swimlane/ngx-charts/common/tooltip/style.type';
         animate(250, style({ opacity: 1, transform: 'scale(1)' }))
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class BubbleSeriesInteractiveComponent implements OnChanges {
   @Input() data;

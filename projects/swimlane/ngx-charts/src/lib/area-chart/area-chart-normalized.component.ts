@@ -163,7 +163,8 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['../common/base-chart.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class AreaChartNormalizedComponent extends BaseChartComponent {
   @Input() legend = false;

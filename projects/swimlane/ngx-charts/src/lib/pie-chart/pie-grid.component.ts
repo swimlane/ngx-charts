@@ -91,7 +91,8 @@ import { ScaleType } from '../common/types/scale-type.enum';
   `,
   styleUrls: ['../common/base-chart.component.scss', './pie-grid.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class PieGridComponent extends BaseChartComponent {
   @Input() designatedTotal: number;

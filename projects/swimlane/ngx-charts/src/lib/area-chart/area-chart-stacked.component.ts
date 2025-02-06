@@ -160,7 +160,8 @@ import { ScaleType } from '../common/types/scale-type.enum';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['../common/base-chart.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class AreaChartStackedComponent extends BaseChartComponent {
   @Input() legend: boolean = false;

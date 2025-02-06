@@ -13,7 +13,8 @@ const colors = ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'];
 
 @Component({
   selector: 'test-component',
-  template: ''
+  template: '',
+  standalone: false
 })
 class TestComponent {
   data: any = multi;

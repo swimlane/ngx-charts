@@ -56,7 +56,8 @@ import { BarOrientation } from '../common/types/bar-orientation.enum';
       </svg:foreignObject>
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class TreeMapCellComponent implements OnChanges {
   @Input() data: DataItem;

@@ -47,7 +47,8 @@ import { BarOrientation } from '@swimlane/ngx-charts/common/types/bar-orientatio
         animate(500, style({ opacity: 0, transform: 'scale(0)' }))
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class ComboSeriesVerticalComponent implements OnChanges {
   @Input() dims;

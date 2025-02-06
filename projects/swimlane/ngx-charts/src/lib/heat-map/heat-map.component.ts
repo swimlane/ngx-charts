@@ -96,7 +96,8 @@ interface RectItem {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['../common/base-chart.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class HeatMapComponent extends BaseChartComponent {
   @Input() legend: boolean;

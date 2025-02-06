@@ -102,7 +102,8 @@ export function cloneLineCoordinates(original: LineCoordinates): LineCoordinates
       />
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class BoxComponent implements OnChanges {
   @Input() strokeColor: string;

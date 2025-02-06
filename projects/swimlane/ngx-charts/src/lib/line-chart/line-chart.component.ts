@@ -197,7 +197,8 @@ import { isPlatformServer } from '@angular/common';
         )
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class LineChartComponent extends BaseChartComponent implements OnInit {
   @Input() legend: boolean;

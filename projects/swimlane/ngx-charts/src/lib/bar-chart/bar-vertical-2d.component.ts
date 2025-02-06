@@ -145,7 +145,8 @@ import { isPlatformServer } from '@angular/common';
         animate(500, style({ opacity: 0, transform: 'scale(0)' }))
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class BarVertical2DComponent extends BaseChartComponent {
   @Input() legend: boolean = false;

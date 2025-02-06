@@ -46,7 +46,8 @@ import { ViewDimensions } from '../types/view-dimension.interface';
       ></svg:g>
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class XAxisComponent implements OnChanges {
   @Input() xScale;

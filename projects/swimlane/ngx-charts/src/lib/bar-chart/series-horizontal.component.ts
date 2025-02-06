@@ -78,7 +78,8 @@ import { ScaleType } from '../common/types/scale-type.enum';
         animate(500, style({ opacity: 0 }))
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class SeriesHorizontal implements OnChanges {
   @Input() dims: ViewDimensions;

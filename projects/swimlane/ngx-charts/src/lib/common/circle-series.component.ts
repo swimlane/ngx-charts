@@ -110,7 +110,8 @@ export interface Circle {
         animate(250, style({ opacity: 1 }))
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class CircleSeriesComponent implements OnChanges, OnInit {
   @Input() data: Series;

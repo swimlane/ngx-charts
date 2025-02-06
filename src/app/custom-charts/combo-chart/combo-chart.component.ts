@@ -28,7 +28,8 @@ import {
   selector: 'combo-chart-component',
   templateUrl: './combo-chart.component.html',
   styleUrls: ['./combo-chart.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class ComboChartComponent extends BaseChartComponent {
   @Input() curve: any = curveLinear;

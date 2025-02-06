@@ -88,7 +88,8 @@ export interface Tooltip {
         animate(250, style({ opacity: 0 }))
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class TooltipArea {
   anchorOpacity: number = 0;

@@ -40,7 +40,8 @@ import { ScaleType } from '../common/types/scale-type.enum';
   `,
   styleUrls: ['./tree-map.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class TreeMapComponent extends BaseChartComponent {
   @Input() declare results: DataItem[];

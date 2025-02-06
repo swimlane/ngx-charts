@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 html,
 body {
   margin: 0;
@@ -38,12 +40,12 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(darken($color-blue-grey, 5%), 0.3);
+  background-color: rgba(color.adjust($color-blue-grey, $lightness: -5%), 0.3);
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(darken($color-blue-grey, 5%), 1);
+  background-color: rgba(color.adjust($color-blue-grey, $lightness: -5%), 1);
 }
 
 app {

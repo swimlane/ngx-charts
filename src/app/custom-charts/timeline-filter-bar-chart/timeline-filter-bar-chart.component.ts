@@ -72,7 +72,8 @@ import {
   `,
   styleUrls: ['../../../../projects/swimlane/ngx-charts/src/lib/common/base-chart.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class TimelineFilterBarChartComponent extends BaseChartComponent {
   @Input() autoScale = false;

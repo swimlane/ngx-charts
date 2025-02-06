@@ -87,7 +87,8 @@ interface Arcs {
   `,
   styleUrls: ['../common/base-chart.component.scss', './gauge.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class GaugeComponent extends BaseChartComponent implements AfterViewInit {
   @Input() legend: boolean = false;

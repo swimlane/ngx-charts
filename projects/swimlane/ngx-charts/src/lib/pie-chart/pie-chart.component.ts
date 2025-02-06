@@ -57,7 +57,8 @@ import { ScaleType } from '../common/types/scale-type.enum';
   `,
   styleUrls: ['../common/base-chart.component.scss', './pie-chart.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class PieChartComponent extends BaseChartComponent {
   @Input() labels: boolean = false;

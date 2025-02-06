@@ -113,7 +113,8 @@ import { isPlatformServer } from '@angular/common';
         animate(500, style({ opacity: 0 }))
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class SeriesVerticalComponent implements OnChanges {
   @Input() dims: ViewDimensions;
