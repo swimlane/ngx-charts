@@ -11,6 +11,8 @@ import {
   ComponentRef
 } from '@angular/core';
 
+import { throttleable } from '../../utils/throttle';
+
 import { PlacementTypes } from './position';
 import { StyleTypes } from './style.type';
 import { ShowTypes } from './show.type';
@@ -79,6 +81,12 @@ export class TooltipDirective implements OnDestroy {
     if (this.listensForFocus) {
       this.hideTooltip(true);
     }
+  }
+
+  @HostListener('window:scroll')
+  @throttleable(100)
+  onWindowScroll(): void {
+    this.hideTooltip(true);
   }
 
   @HostListener('mouseenter')
