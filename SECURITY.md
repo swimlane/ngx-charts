@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-We release patches for security vulnerabilities in the following versions:
+We release patches for security vulnerabilities in the latest major version of the package:
 
 | Version | Supported          |
 | ------- | ------------------ |
