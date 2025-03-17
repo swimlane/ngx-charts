@@ -38,6 +38,7 @@ export class ComboChartComponent extends BaseChartComponent {
   @Input() legendPosition: string = 'right';
   @Input() xAxis;
   @Input() yAxis;
+  @Input() xOrient: Orientation = Orientation.Bottom;
   @Input() showXAxisLabel;
   @Input() showYAxisLabel;
   @Input() showRightYAxisLabel;
