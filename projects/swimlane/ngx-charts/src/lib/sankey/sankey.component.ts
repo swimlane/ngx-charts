@@ -254,7 +254,7 @@ export class SankeyComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    this.colors = new ColorHelper(this.scheme, this.scaleType, this.valueDomain);
+    this.colors = new ColorHelper(this.scheme, this.scaleType, this.valueDomain, this.customColors);
   }
 
   getValueDomain(nodes): any[] {
