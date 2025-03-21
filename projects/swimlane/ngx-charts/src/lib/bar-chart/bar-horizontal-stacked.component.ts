@@ -201,6 +201,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   isSSR = false;
 
   ngOnInit() {
+    super.ngOnInit();
     if (isPlatformServer(this.platformId)) {
       this.isSSR = true;
     }
