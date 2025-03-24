@@ -157,7 +157,7 @@ export class SeriesVerticalComponent implements OnChanges {
     }
   }
 
-  ngOnChanges(changes): void {
+  ngOnChanges(): void {
     this.update();
   }
 

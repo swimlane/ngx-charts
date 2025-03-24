@@ -52,6 +52,10 @@ export class NumberCardComponent extends BaseChartComponent {
   domain: any[];
   margin: number[] = [10, 10, 10, 10];
 
+  ngOnChanges(): void {
+    this.update();
+  }
+
   get clickable(): boolean {
     return !!this.select.observers.length;
   }

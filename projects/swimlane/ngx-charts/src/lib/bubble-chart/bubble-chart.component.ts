@@ -229,6 +229,10 @@ export class BubbleChartComponent extends BaseChartComponent {
     }
   }
 
+  ngOnChanges(): void {
+    this.update();
+  }
+
   update(): void {
     super.update();
 

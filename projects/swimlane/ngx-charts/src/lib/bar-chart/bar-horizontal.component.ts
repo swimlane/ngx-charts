@@ -143,6 +143,10 @@ export class BarHorizontalComponent extends BaseChartComponent {
   legendOptions: LegendOptions;
   dataLabelMaxWidth: any = { negative: 0, positive: 0 };
 
+  ngOnChanges(): void {
+    this.update();
+  }
+
   update(): void {
     super.update();
 

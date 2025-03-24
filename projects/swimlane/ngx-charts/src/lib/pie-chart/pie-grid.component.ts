@@ -118,6 +118,10 @@ export class PieGridComponent extends BaseChartComponent {
 
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
+  ngOnChanges(): void {
+    this.update();
+  }
+
   update(): void {
     super.update();
 

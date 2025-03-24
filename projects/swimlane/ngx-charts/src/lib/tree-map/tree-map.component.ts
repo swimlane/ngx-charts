@@ -62,6 +62,10 @@ export class TreeMapComponent extends BaseChartComponent {
   data: DataItem;
   margin: number[] = [10, 10, 10, 10];
 
+  ngOnChanges(): void {
+    this.update();
+  }
+
   update(): void {
     super.update();
 

@@ -148,6 +148,10 @@ export class HeatMapComponent extends BaseChartComponent {
   legendOptions: LegendOptions;
   scaleType: ScaleType = ScaleType.Linear;
 
+  ngOnChanges(): void {
+    this.update();
+  }
+
   update(): void {
     super.update();
 
