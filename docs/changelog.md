@@ -4,6 +4,8 @@
 
 - Enhancement: Support Angular 19, `standalone` now required in all `@Component`
 - Enhancement: Update SASS and update for latest standard libraries
+- Enhancement: Sankey Chart can now accept custom colors
+- Fix: `update()` was not getting called on `@Input` changes
 
 ## 21.1.3
 
