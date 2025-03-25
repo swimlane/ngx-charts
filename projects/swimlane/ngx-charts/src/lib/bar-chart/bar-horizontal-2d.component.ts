@@ -219,6 +219,10 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
     }
   }
 
+  ngOnChanges(): void {
+    this.update();
+  }
+
   update(): void {
     super.update();
 

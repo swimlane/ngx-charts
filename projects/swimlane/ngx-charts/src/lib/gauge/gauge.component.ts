@@ -138,6 +138,10 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   displayValue: string;
   legendOptions: LegendOptions;
 
+  ngOnChanges(): void {
+    this.update();
+  }
+
   ngAfterViewInit(): void {
     super.ngAfterViewInit();
     setTimeout(() => this.scaleText());

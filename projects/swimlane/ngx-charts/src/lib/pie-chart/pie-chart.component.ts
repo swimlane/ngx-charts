@@ -93,6 +93,10 @@ export class PieChartComponent extends BaseChartComponent {
   dims: ViewDimensions;
   legendOptions: LegendOptions;
 
+  ngOnChanges(): void {
+    this.update();
+  }
+
   update(): void {
     super.update();
 

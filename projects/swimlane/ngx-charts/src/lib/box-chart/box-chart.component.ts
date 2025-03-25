@@ -134,6 +134,10 @@ export class BoxChartComponent extends BaseChartComponent {
   /** Chart Y axis dimension. */
   yAxisWidth: number = 0;
 
+  ngOnChanges(): void {
+    this.update();
+  }
+
   trackBy(index: number, item: BoxChartSeries): StringOrNumberOrDate {
     return item.name;
   }

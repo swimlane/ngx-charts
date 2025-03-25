@@ -90,6 +90,10 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
   @Input() nameFormatting: (value: string) => any;
   @Input() percentageFormatting: (value: number) => any;
 
+  ngOnChanges(): void {
+    this.update();
+  }
+
   update(): void {
     super.update();
 

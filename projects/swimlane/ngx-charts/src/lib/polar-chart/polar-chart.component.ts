@@ -231,6 +231,10 @@ export class PolarChartComponent extends BaseChartComponent implements OnInit {
     }
   }
 
+  ngOnChanges(): void {
+    this.update();
+  }
+
   update(): void {
     super.update();
 

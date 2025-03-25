@@ -142,6 +142,10 @@ export class SankeyComponent extends BaseChartComponent {
   linkPaths: any[];
   chartHasActive: boolean = false;
 
+  ngOnChanges(): void {
+    this.update();
+  }
+
   update(): void {
     super.update();
 

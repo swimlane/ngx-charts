@@ -60,8 +60,8 @@ To learn how to use the ngx-charts components to build custom charts and find ex
 
 - Checkout master (`git checkout master`)
 - Pull master (`git pull`)
-- Refresh node modules (`npm ci`)
-- Run tests (`npm test`)
+- Refresh node modules (`yarn install --frozen-lockfile`)
+- Run tests (`yarn test`)
 - Examine log to determine next version (X.Y.Z)
 - Run `git checkout -b release/X.Y.Z`
 - Update version in `projects/swimlane/ngx-charts/package.json`.
@@ -69,7 +69,7 @@ To learn how to use the ngx-charts components to build custom charts and find ex
 - Run `git commit -am "(release): X.Y.Z"`
 - Run `git tag X.Y.Z`
 - Run `git push origin HEAD --tags`
-- Run `npm run publish:lib`
+- Run `yarn publish:lib`
 - Submit PR
 
 ## Credits

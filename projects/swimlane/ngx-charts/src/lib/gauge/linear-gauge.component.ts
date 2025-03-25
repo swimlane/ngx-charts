@@ -146,6 +146,10 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
     });
   }
 
+  ngOnChanges(): void {
+    this.update();
+  }
+
   update(): void {
     super.update();
 
