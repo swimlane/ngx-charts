@@ -65,8 +65,11 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
   @Input() tooltipText: any;
   @Input() tooltipTemplate: TemplateRef<any>;
   @Input() animations: boolean = true;
+  @Input() numbers;
 
+  @Input() id;
   @Output() select: EventEmitter<DataItem> = new EventEmitter();
+  @Input() tooltiptext; 
   @Output() activate: EventEmitter<DataItem> = new EventEmitter();
   @Output() deactivate: EventEmitter<DataItem> = new EventEmitter();
 

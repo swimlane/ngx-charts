@@ -112,10 +112,6 @@ export class HeatMapComponent extends BaseChartComponent {
   @Input() gradient: boolean;
   @Input() innerPadding: number | number[] | string | string[] = 8;
   @Input() trimXAxisTicks: boolean = true;
-  @Input() trimYAxisTicks: boolean = true;
-  @Input() rotateXAxisTicks: boolean = true;
-  @Input() maxXAxisTickLength: number = 16;
-  @Input() maxYAxisTickLength: number = 16;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
   @Input() xAxisTicks: any[];
