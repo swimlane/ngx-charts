@@ -32,6 +32,7 @@ import { ViewDimensions } from '../types/view-dimension.interface';
         [gridLineHeight]="dims.height"
         [width]="dims.width"
         [tickValues]="ticks"
+        [wrapTicks]="wrapTicks"
         (dimensionsChanged)="emitTicksHeight($event)"
       />
       <svg:g
@@ -45,7 +46,8 @@ import { ViewDimensions } from '../types/view-dimension.interface';
       ></svg:g>
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class XAxisComponent implements OnChanges {
   @Input() xScale;
@@ -61,6 +63,7 @@ export class XAxisComponent implements OnChanges {
   @Input() xAxisTickCount: number;
   @Input() xOrient: Orientation = Orientation.Bottom;
   @Input() xAxisOffset: number = 0;
+  @Input() wrapTicks = false;
 
   @Output() dimensionsChanged = new EventEmitter();
 

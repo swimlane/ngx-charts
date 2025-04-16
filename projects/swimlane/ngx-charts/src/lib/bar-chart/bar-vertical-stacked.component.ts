@@ -49,6 +49,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
           [xAxisOffset]="dataLabelMaxHeight.negative"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateXAxisHeight($event)"
         ></svg:g>
         <svg:g
@@ -63,6 +64,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
           [maxTickLength]="maxYAxisTickLength"
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
         <svg:g *ngIf="!isSSR">
@@ -92,37 +94,37 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
               (activate)="onActivate($event, group)"
               (deactivate)="onDeactivate($event, group)"
               (dataLabelHeightChanged)="onDataLabelMaxHeightChanged($event, index)"
-            />
+            ></svg:g>
           </svg:g>
         </svg:g>
-      </svg:g>
-      <svg:g *ngIf="isSSR">
-        <svg:g
-          *ngFor="let group of results; let index = index; trackBy: trackBy"
-          [attr.transform]="groupTransform(group)"
-        >
+        <svg:g *ngIf="isSSR">
           <svg:g
-            ngx-charts-series-vertical
-            [type]="barChartType.Stacked"
-            [xScale]="xScale"
-            [yScale]="yScale"
-            [activeEntries]="activeEntries"
-            [colors]="colors"
-            [series]="group.series"
-            [dims]="dims"
-            [gradient]="gradient"
-            [tooltipDisabled]="tooltipDisabled"
-            [tooltipTemplate]="tooltipTemplate"
-            [showDataLabel]="showDataLabel"
-            [dataLabelFormatting]="dataLabelFormatting"
-            [seriesName]="group.name"
-            [animations]="animations"
-            [noBarWhenZero]="noBarWhenZero"
-            (select)="onClick($event, group)"
-            (activate)="onActivate($event, group)"
-            (deactivate)="onDeactivate($event, group)"
-            (dataLabelHeightChanged)="onDataLabelMaxHeightChanged($event, index)"
-          />
+            *ngFor="let group of results; let index = index; trackBy: trackBy"
+            [attr.transform]="groupTransform(group)"
+          >
+            <svg:g
+              ngx-charts-series-vertical
+              [type]="barChartType.Stacked"
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [activeEntries]="activeEntries"
+              [colors]="colors"
+              [series]="group.series"
+              [dims]="dims"
+              [gradient]="gradient"
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="tooltipTemplate"
+              [showDataLabel]="showDataLabel"
+              [dataLabelFormatting]="dataLabelFormatting"
+              [seriesName]="group.name"
+              [animations]="animations"
+              [noBarWhenZero]="noBarWhenZero"
+              (select)="onClick($event, group)"
+              (activate)="onActivate($event, group)"
+              (deactivate)="onDeactivate($event, group)"
+              (dataLabelHeightChanged)="onDataLabelMaxHeightChanged($event, index)"
+            ></svg:g>
+          </svg:g>
         </svg:g>
       </svg:g>
     </ngx-charts-chart>
@@ -140,7 +142,8 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
         animate(500, style({ opacity: 0, transform: 'scale(0)' }))
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class BarVerticalStackedComponent extends BaseChartComponent {
   @Input() legend: boolean = false;
@@ -156,7 +159,7 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
-  @Input() schemeType: ScaleType;
+  @Input() declare schemeType: ScaleType;
   @Input() trimXAxisTicks: boolean = true;
   @Input() trimYAxisTicks: boolean = true;
   @Input() rotateXAxisTicks: boolean = true;
@@ -172,6 +175,7 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   @Input() showDataLabel: boolean = false;
   @Input() dataLabelFormatting: any;
   @Input() noBarWhenZero: boolean = true;
+  @Input() wrapTicks = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -200,6 +204,10 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
     if (isPlatformServer(this.platformId)) {
       this.isSSR = true;
     }
+  }
+
+  ngOnChanges(): void {
+    this.update();
   }
 
   update(): void {

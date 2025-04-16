@@ -35,7 +35,8 @@ import { Gradient } from '../common/types/gradient.interface';
       (click)="select.emit(data)"
     />
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class BarComponent implements OnChanges {
   @Input() fill: string;

@@ -31,7 +31,8 @@ enum ClassEnum {
       [class.even]="gridPanel.class === 'even'"
     ></svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class GridPanelSeriesComponent implements OnChanges {
   gridPanels: GridPanel[];

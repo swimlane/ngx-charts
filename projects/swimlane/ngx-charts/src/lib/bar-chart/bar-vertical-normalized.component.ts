@@ -48,6 +48,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
           [maxTickLength]="maxXAxisTickLength"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateXAxisHeight($event)"
         ></svg:g>
         <svg:g
@@ -62,6 +63,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
           [maxTickLength]="maxYAxisTickLength"
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
         <svg:g *ngIf="!isSSR">
@@ -88,7 +90,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
               (select)="onClick($event, group)"
               (activate)="onActivate($event, group)"
               (deactivate)="onDeactivate($event, group)"
-            />
+            ></svg:g>
           </svg:g>
         </svg:g>
         <svg:g *ngIf="isSSR">
@@ -111,7 +113,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
               (select)="onClick($event, group)"
               (activate)="onActivate($event, group)"
               (deactivate)="onDeactivate($event, group)"
-            />
+            ></svg:g>
           </svg:g>
         </svg:g>
       </svg:g>
@@ -130,7 +132,8 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
         animate(500, style({ opacity: 0, transform: 'scale(0)' }))
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class BarVerticalNormalizedComponent extends BaseChartComponent {
   @Input() legend: boolean = false;
@@ -146,7 +149,7 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
-  @Input() schemeType: ScaleType;
+  @Input() schemeType: ScaleType = ScaleType.Ordinal;
   @Input() trimXAxisTicks: boolean = true;
   @Input() trimYAxisTicks: boolean = true;
   @Input() rotateXAxisTicks: boolean = true;
@@ -159,6 +162,7 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
   @Input() barPadding: number = 8;
   @Input() roundDomains: boolean = false;
   @Input() noBarWhenZero: boolean = true;
+  @Input() wrapTicks = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

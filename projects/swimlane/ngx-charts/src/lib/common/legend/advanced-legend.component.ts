@@ -78,7 +78,8 @@ export interface AdvancedLegendItem {
   `,
   styleUrls: ['./advanced-legend.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AdvancedLegendComponent implements OnChanges {
   @Input() width: number;

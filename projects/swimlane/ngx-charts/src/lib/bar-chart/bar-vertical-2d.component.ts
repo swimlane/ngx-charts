@@ -58,6 +58,7 @@ import { isPlatformServer } from '@angular/common';
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
           [xAxisOffset]="dataLabelMaxHeight.negative"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateXAxisHeight($event)"
         ></svg:g>
         <svg:g
@@ -72,6 +73,7 @@ import { isPlatformServer } from '@angular/common';
           [maxTickLength]="maxYAxisTickLength"
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
         <svg:g *ngIf="!isSSR">
@@ -99,34 +101,34 @@ import { isPlatformServer } from '@angular/common';
             (activate)="onActivate($event, group)"
             (deactivate)="onDeactivate($event, group)"
             (dataLabelHeightChanged)="onDataLabelMaxHeightChanged($event, index)"
-          />
+          ></svg:g>
         </svg:g>
-      </svg:g>
-      <svg:g *ngIf="isSSR">
-        <svg:g
-          ngx-charts-series-vertical
-          *ngFor="let group of results; let index = index; trackBy: trackBy"
-          [attr.transform]="groupTransform(group)"
-          [activeEntries]="activeEntries"
-          [xScale]="innerScale"
-          [yScale]="valueScale"
-          [colors]="colors"
-          [series]="group.series"
-          [dims]="dims"
-          [gradient]="gradient"
-          [tooltipDisabled]="tooltipDisabled"
-          [tooltipTemplate]="tooltipTemplate"
-          [showDataLabel]="showDataLabel"
-          [dataLabelFormatting]="dataLabelFormatting"
-          [seriesName]="group.name"
-          [roundEdges]="roundEdges"
-          [animations]="animations"
-          [noBarWhenZero]="noBarWhenZero"
-          (select)="onClick($event, group)"
-          (activate)="onActivate($event, group)"
-          (deactivate)="onDeactivate($event, group)"
-          (dataLabelHeightChanged)="onDataLabelMaxHeightChanged($event, index)"
-        />
+        <svg:g *ngIf="isSSR">
+          <svg:g
+            ngx-charts-series-vertical
+            *ngFor="let group of results; let index = index; trackBy: trackBy"
+            [attr.transform]="groupTransform(group)"
+            [activeEntries]="activeEntries"
+            [xScale]="innerScale"
+            [yScale]="valueScale"
+            [colors]="colors"
+            [series]="group.series"
+            [dims]="dims"
+            [gradient]="gradient"
+            [tooltipDisabled]="tooltipDisabled"
+            [tooltipTemplate]="tooltipTemplate"
+            [showDataLabel]="showDataLabel"
+            [dataLabelFormatting]="dataLabelFormatting"
+            [seriesName]="group.name"
+            [roundEdges]="roundEdges"
+            [animations]="animations"
+            [noBarWhenZero]="noBarWhenZero"
+            (select)="onClick($event, group)"
+            (activate)="onActivate($event, group)"
+            (deactivate)="onDeactivate($event, group)"
+            (dataLabelHeightChanged)="onDataLabelMaxHeightChanged($event, index)"
+          ></svg:g>
+        </svg:g>
       </svg:g>
     </ngx-charts-chart>
   `,
@@ -143,7 +145,8 @@ import { isPlatformServer } from '@angular/common';
         animate(500, style({ opacity: 0, transform: 'scale(0)' }))
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class BarVertical2DComponent extends BaseChartComponent {
   @Input() legend: boolean = false;
@@ -160,7 +163,7 @@ export class BarVertical2DComponent extends BaseChartComponent {
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
-  @Input() schemeType: ScaleType;
+  @Input() schemeType: ScaleType = ScaleType.Ordinal;
   @Input() trimXAxisTicks: boolean = true;
   @Input() trimYAxisTicks: boolean = true;
   @Input() rotateXAxisTicks: boolean = true;
@@ -178,6 +181,7 @@ export class BarVertical2DComponent extends BaseChartComponent {
   @Input() showDataLabel: boolean = false;
   @Input() dataLabelFormatting: any;
   @Input() noBarWhenZero: boolean = true;
+  @Input() wrapTicks = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

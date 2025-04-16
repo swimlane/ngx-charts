@@ -45,7 +45,8 @@ export interface PieArc {
       ></svg:g>
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class PieGridSeriesComponent implements OnChanges {
   @Input() colors;

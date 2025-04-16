@@ -57,7 +57,8 @@ import { ScaleType } from '../common/types/scale-type.enum';
   `,
   styleUrls: ['../common/base-chart.component.scss', './pie-chart.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class PieChartComponent extends BaseChartComponent {
   @Input() labels: boolean = false;
@@ -91,6 +92,10 @@ export class PieChartComponent extends BaseChartComponent {
   domain: string[];
   dims: ViewDimensions;
   legendOptions: LegendOptions;
+
+  ngOnChanges(): void {
+    this.update();
+  }
 
   update(): void {
     super.update();

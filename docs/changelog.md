@@ -1,5 +1,56 @@
 # Changelog
 
+## HEAD (unreleased)
+
+- Enhancement: Support Angular 19, `standalone` now required in all `@Component`
+- Enhancement: Update SASS and update for latest standard libraries
+- Enhancement: Sankey Chart can now accept custom colors
+- Fix: `update()` was not getting called on `@Input` changes
+
+## 21.1.3
+
+- Fix: Fixed a bug where the mask ID for percent gauge chart would be regenerated on each update
+
+## 21.1.2
+
+- Fix: Percent Gauge Chart: Ensures the circle mask ID is unique for each chart
+
+## 21.1.1
+
+- Fix: Percent Gauge Chart: Fixes server-side-rendering
+- Fix: Percent Gauge Chart: Fixes light theme
+- Fix: Percent Gauge Chart: Makes target circle highlight only when target is reached
+
+## 21.1.0
+
+- Feature: Add Percent Gauge chart type
+
+## 20.5.0
+
+- Feature: Add Sankey diagram chart type
+
+## 20.4.1
+
+- Bump: d3-array from 2.9.1 to 3.1.1
+- Bump: d3-brush from 2.1.0 to 3.0.0
+- Bump: d3-ease from 2.0.0 to 3.0.1
+- Bump: d3-format from 2.0.0 to 3.1.0
+- Bump: d3-hierarchy from 2.0.0 to 3.1.0
+- Bump: d3-interpolate from 2.0.1 to 3.0.1
+- Bump: d3-scale from 3.2.3 to 4.0.2
+- Bump: d3-selection from 2.0.0 to 3.0.0
+- Bump: d3-shape from 2.0.0 to 3.2.0
+- Bump: d3-transition from 2.0.0 to 3.0.1
+- Bump: moment-timezone from 0.5.28 to 0.5.40
+
+## 20.3.1
+
+- Fix: In SSR mode, respect the tick length set and don't cut off the tick label.
+
+## 20.3.0
+
+- Feature: ability to wrap ticks based on available space.
+
 ## 20.1.2
 
 - Bump: d3-color from 2.0.0 to 3.1.0 in library
@@ -7,6 +58,7 @@
 ## 20.1.1
 
 - Bump: d3-color from 2.0.0 to 3.1.0 in demo page
+
 ## 20.1.0
 
 - Fix: Cyclic import error caused by interface export in `PieGridComponent`.

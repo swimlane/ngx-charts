@@ -14,7 +14,8 @@ import { Gradient } from './types/gradient.interface';
       />
     </svg:linearGradient>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class SvgLinearGradientComponent implements OnChanges {
   @Input() orientation = BarOrientation.Vertical;

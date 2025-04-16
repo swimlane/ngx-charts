@@ -32,7 +32,8 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
       [class.inactive]="isInactive(data)"
     />
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AreaSeriesComponent implements OnChanges {
   @Input() data: AreaChartSeries;

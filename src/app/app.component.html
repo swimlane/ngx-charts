@@ -33,6 +33,7 @@
         [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
+        [wrapTicks]="wrapTicks"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -69,6 +70,7 @@
         [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
+        [wrapTicks]="wrapTicks"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -106,6 +108,7 @@
         [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
+        [wrapTicks]="wrapTicks"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -143,6 +146,7 @@
         [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
+        [wrapTicks]="wrapTicks"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -178,6 +182,7 @@
         [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
+        [wrapTicks]="wrapTicks"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -213,6 +218,7 @@
         [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
+        [wrapTicks]="wrapTicks"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -246,6 +252,7 @@
         [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
+        [wrapTicks]="wrapTicks"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -279,6 +286,7 @@
         [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
+        [wrapTicks]="wrapTicks"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -371,6 +379,7 @@
         [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
+        [wrapTicks]="wrapTicks"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -440,6 +449,7 @@
         [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
+        [wrapTicks]="wrapTicks"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
         (select)="select($event)"
@@ -478,6 +488,7 @@
         [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
+        [wrapTicks]="wrapTicks"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -515,6 +526,7 @@
         [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
+        [wrapTicks]="wrapTicks"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -581,6 +593,7 @@
         [yAxisLabel]="yAxisLabel"
         [yAxisLabelRight]="yAxisLabelRight"
         [noBarWhenZero]="noBarWhenZero"
+        [wrapTicks]="wrapTicks"
         (select)="onSelect($event)"
       >
       </combo-chart-component>
@@ -608,6 +621,7 @@
         [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
+        [wrapTicks]="wrapTicks"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -635,6 +649,7 @@
         [rotateXAxisTicks]="rotateXAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
         [maxYAxisTickLength]="maxYAxisTickLength"
+        [wrapTicks]="wrapTicks"
         (select)="select($event)"
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
@@ -697,6 +712,22 @@
         (deactivate)="deactivate($event)"
       >
       </ngx-charts-box-chart>
+      <ngx-charts-sankey
+        *ngIf="chartType === 'sankey'"
+        class="chart-container"
+        [view]="view"
+        [results]="sankeyData"
+        [scheme]="colorScheme"
+        [schemeType]="schemeType"
+        [customColors]="customColors"
+        [tooltipDisabled]="tooltipDisabled"
+        [animations]="animations"
+        [showLabels]="showLabels"
+        (select)="select($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
+      >
+      </ngx-charts-sankey>
       <div *ngIf="chartType === 'status-demo'">
         <ngx-slider
           [(ngModel)]="salePrice"
@@ -773,6 +804,22 @@
         (select)="select($event)"
       >
       </ngx-charts-linear-gauge>
+
+      <ngx-charts-percent-gauge
+        *ngIf="chartType === 'percent-gauge'"
+        class="chart-container"
+        [view]="view"
+        [scheme]="colorScheme"
+        [animations]="animations"
+        [value]="gaugeValue"
+        [target]="target"
+        [max]="gaugeMax"
+        [showLabel]="showLabel"
+        label="Coverage"
+        (select)="select($event)"
+      >
+      </ngx-charts-percent-gauge>
+
       <div *ngIf="chartType === 'plot-demo'">
         <ngx-input
           [type]="inputTypes.text"
@@ -1296,6 +1343,13 @@
           </label>
           <br />
         </div>
+        <div *ngIf="chart.options.includes('wrapTicks')">
+          <label>
+            <input type="checkbox" [(ngModel)]="wrapTicks" />
+            Wrap Ticks
+          </label>
+          <br />
+        </div>
         <div *ngIf="chart.options.includes('legendTitle')">
           <label>Legend Title:</label><br />
           <input type="text" [(ngModel)]="legendTitle" /><br />
@@ -1479,6 +1533,18 @@
           <label>
             <input type="checkbox" [(ngModel)]="margin" />
             Show Margin
+          </label>
+          <br />
+        </div>
+        <div *ngIf="chart.options.includes('target')">
+          <label>Target:</label><br />
+          <input type="number" [(ngModel)]="target" /><br />
+          <br />
+        </div>
+        <div *ngIf="chart.options.includes('showLabel')">
+          <label>
+            <input type="checkbox" [(ngModel)]="showLabel" />
+            Show Label
           </label>
           <br />
         </div>

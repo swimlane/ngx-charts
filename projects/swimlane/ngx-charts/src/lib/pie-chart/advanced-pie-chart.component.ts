@@ -62,7 +62,8 @@ import { ScaleType } from '../common/types/scale-type.enum';
   `,
   styleUrls: ['../common/base-chart.component.scss', './advanced-pie-chart.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AdvancedPieChartComponent extends BaseChartComponent {
   @Input() gradient: boolean;
@@ -88,6 +89,10 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
   @Input() valueFormatting: (value: number) => any;
   @Input() nameFormatting: (value: string) => any;
   @Input() percentageFormatting: (value: number) => any;
+
+  ngOnChanges(): void {
+    this.update();
+  }
 
   update(): void {
     super.update();

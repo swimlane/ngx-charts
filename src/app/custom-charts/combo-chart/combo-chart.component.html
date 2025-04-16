@@ -17,6 +17,7 @@
       [showLabel]="showXAxisLabel"
       [labelText]="xAxisLabel"
       [tickFormatting]="xAxisTickFormatting"
+      [wrapTicks]="wrapTicks"
       (dimensionsChanged)="updateXAxisHeight($event)"
     ></svg:g>
     <svg:g
@@ -29,6 +30,7 @@
       [showLabel]="showYAxisLabel"
       [labelText]="yAxisLabel"
       [tickFormatting]="yAxisTickFormatting"
+      [wrapTicks]="wrapTicks"
       (dimensionsChanged)="updateYAxisWidth($event)"
     ></svg:g>
     <svg:g
@@ -41,6 +43,7 @@
       [showLabel]="showRightYAxisLabel"
       [labelText]="yAxisLabelRight"
       [tickFormatting]="yRightAxisTickFormatting"
+      [wrapTicks]="wrapTicks"
       (dimensionsChanged)="updateYAxisWidth($event)"
     ></svg:g>
     <svg:g

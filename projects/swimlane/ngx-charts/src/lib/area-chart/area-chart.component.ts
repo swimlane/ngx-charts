@@ -60,6 +60,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
           [maxTickLength]="maxXAxisTickLength"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateXAxisHeight($event)"
         ></svg:g>
         <svg:g
@@ -74,6 +75,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
           [maxTickLength]="maxYAxisTickLength"
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
         <svg:g [attr.clip-path]="clipPath">
@@ -159,7 +161,8 @@ import { ScaleType } from '../common/types/scale-type.enum';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['../common/base-chart.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class AreaChartComponent extends BaseChartComponent {
   @Input() legend: boolean = false;
@@ -178,7 +181,7 @@ export class AreaChartComponent extends BaseChartComponent {
   @Input() showGridLines: boolean = true;
   @Input() curve: CurveFactory = curveLinear;
   @Input() activeEntries: any[] = [];
-  @Input() schemeType: ScaleType;
+  @Input() declare schemeType: ScaleType;
   @Input() trimXAxisTicks: boolean = true;
   @Input() trimYAxisTicks: boolean = true;
   @Input() rotateXAxisTicks: boolean = true;
@@ -194,6 +197,7 @@ export class AreaChartComponent extends BaseChartComponent {
   @Input() xScaleMax: any;
   @Input() yScaleMin: number;
   @Input() yScaleMax: number;
+  @Input() wrapTicks = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

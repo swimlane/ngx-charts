@@ -60,7 +60,8 @@ import { Gradient } from '../common/types/gradient.interface';
       />
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class LineSeriesComponent implements OnChanges {
   @Input() data: Series;

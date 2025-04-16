@@ -7,10 +7,11 @@ dist/
 build/
 coverage/
 .idea
-yarn.lock
 /ngx-charts.iml
 ngx-charts.iml
 release/src/
 release/demo/
 .vscode/
 /*.tgz
+.yarn
+.yarn/install-state.gz

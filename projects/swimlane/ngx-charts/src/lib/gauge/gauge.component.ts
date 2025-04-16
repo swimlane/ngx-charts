@@ -87,7 +87,8 @@ interface Arcs {
   `,
   styleUrls: ['../common/base-chart.component.scss', './gauge.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class GaugeComponent extends BaseChartComponent implements AfterViewInit {
   @Input() legend: boolean = false;
@@ -99,7 +100,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   @Input() units: string;
   @Input() bigSegments: number = 10;
   @Input() smallSegments: number = 5;
-  @Input() results: any[];
+  @Input() declare results: any[];
   @Input() showAxis: boolean = true;
   @Input() startAngle: number = -120;
   @Input() angleSpan: number = 240;
@@ -136,6 +137,10 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   arcs: Arcs[];
   displayValue: string;
   legendOptions: LegendOptions;
+
+  ngOnChanges(): void {
+    this.update();
+  }
 
   ngAfterViewInit(): void {
     super.ngAfterViewInit();

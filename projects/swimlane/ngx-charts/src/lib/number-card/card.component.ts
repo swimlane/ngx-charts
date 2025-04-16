@@ -69,7 +69,8 @@ import { VERDANA_FONT_WIDTHS_16_PX } from '../common/constants/font-widths';
       </svg:text>
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class CardComponent implements OnChanges, OnDestroy, OnInit {
   @Input() color: string;

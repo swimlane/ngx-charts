@@ -33,6 +33,7 @@ import { ViewDimensions } from '../types/view-dimension.interface';
         [showRefLines]="showRefLines"
         [showRefLabels]="showRefLabels"
         [height]="dims.height"
+        [wrapTicks]="wrapTicks"
         (dimensionsChanged)="emitTicksWidth($event)"
       />
 
@@ -47,7 +48,8 @@ import { ViewDimensions } from '../types/view-dimension.interface';
       ></svg:g>
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class YAxisComponent implements OnChanges {
   @Input() yScale;
@@ -65,6 +67,7 @@ export class YAxisComponent implements OnChanges {
   @Input() showRefLines: boolean;
   @Input() showRefLabels: boolean;
   @Input() yAxisOffset: number = 0;
+  @Input() wrapTicks = false;
   @Output() dimensionsChanged = new EventEmitter();
 
   yAxisClassName: string = 'y axis';

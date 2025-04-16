@@ -14,7 +14,7 @@ import {
   PLATFORM_ID
 } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
-import { reduceTicks } from './ticks.helper';
+import { getTickLines, reduceTicks } from './ticks.helper';
 import { Orientation } from '../types/orientation.enum';
 import { TextAnchor } from '../types/text-anchor.enum';
 
@@ -23,15 +23,29 @@ import { TextAnchor } from '../types/text-anchor.enum';
   template: `
     <svg:g #ticksel>
       <svg:g *ngFor="let tick of ticks" class="tick" [attr.transform]="tickTransform(tick)">
-        <title>{{ tickFormat(tick) }}</title>
-        <svg:text
-          stroke-width="0.01"
-          [attr.text-anchor]="textAnchor"
-          [attr.transform]="textTransform"
-          [style.font-size]="'12px'"
-        >
-          {{ tickTrim(tickFormat(tick)) }}
-        </svg:text>
+        <ng-container *ngIf="tickFormat(tick) as tickFormatted">
+          <title>{{ tickFormatted }}</title>
+          <svg:text
+            stroke-width="0.01"
+            font-size="12px"
+            [attr.text-anchor]="textAnchor"
+            [attr.transform]="textTransform"
+          >
+            <ng-container *ngIf="isWrapTicksSupported; then tmplMultilineTick; else tmplSinglelineTick"></ng-container>
+          </svg:text>
+
+          <ng-template #tmplMultilineTick>
+            <ng-container *ngIf="tickChunks(tick) as tickLines">
+              <svg:tspan *ngFor="let tickLine of tickLines; let i = index" x="0" [attr.y]="i * 12">
+                {{ tickLine }}
+              </svg:tspan>
+            </ng-container>
+          </ng-template>
+
+          <ng-template #tmplSinglelineTick>
+            {{ tickTrim(tickFormatted) }}
+          </ng-template>
+        </ng-container>
       </svg:g>
     </svg:g>
 
@@ -41,7 +55,8 @@ import { TextAnchor } from '../types/text-anchor.enum';
       </svg:g>
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() scale;
@@ -56,6 +71,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() gridLineHeight: number;
   @Input() width: number;
   @Input() rotateTicks: boolean = true;
+  @Input() wrapTicks = false;
 
   @Output() dimensionsChanged = new EventEmitter();
 
@@ -73,8 +89,13 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   tickFormat: (o: any) => any;
   height: number = 0;
   approxHeight: number = 10;
+  maxPossibleLengthForTickIfWrapped = 16;
 
   @ViewChild('ticksel') ticksElement: ElementRef;
+
+  get isWrapTicksSupported() {
+    return this.wrapTicks && this.scale.step;
+  }
 
   constructor(@Inject(PLATFORM_ID) private platformId: any) {}
 
@@ -167,7 +188,25 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
       baseWidth = Math.cos(angle * (Math.PI / 180)) * wordWidth;
     }
 
-    this.approxHeight = Math.max(Math.abs(Math.sin(angle * (Math.PI / 180)) * wordWidth), 10);
+    let labelHeight = 14;
+    if (this.isWrapTicksSupported) {
+      const longestTick = this.ticks.reduce(
+        (earlier, current) => (current.length > earlier.length ? current : earlier),
+        ''
+      );
+
+      const tickLines = this.tickChunks(longestTick);
+      labelHeight = 14 * (tickLines.length || 1);
+
+      this.maxPossibleLengthForTickIfWrapped = this.getMaxPossibleLengthForTick(longestTick);
+    }
+
+    const requiredHeight =
+      angle !== 0
+        ? Math.max(Math.abs(Math.sin((angle * Math.PI) / 180)) * this.maxTickLength * charWidth, 10)
+        : labelHeight;
+
+    this.approxHeight = Math.min(requiredHeight, 200);
 
     return angle;
   }
@@ -203,5 +242,45 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
 
   tickTrim(label: string): string {
     return this.trimTicks ? trimLabel(label, this.maxTickLength) : label;
+  }
+
+  getMaxPossibleLengthForTick(longestLabel: string): number {
+    if (this.scale.bandwidth) {
+      const averageCharacterWidth = 7; // approximate char width
+      const maxCharacters = Math.floor(this.scale.bandwidth() / averageCharacterWidth);
+      const truncatedText = longestLabel.slice(0, maxCharacters);
+      return Math.max(truncatedText.length, this.maxTickLength);
+    }
+
+    return this.maxTickLength;
+  }
+
+  tickChunks(label: string): string[] {
+    if (label.toString().length > this.maxTickLength && this.scale.bandwidth) {
+      const maxAllowedLines = 5;
+
+      let maxLines = this.rotateTicks ? Math.floor(this.scale.step() / 14) : maxAllowedLines;
+
+      if (maxLines <= 1) {
+        return [this.tickTrim(label)];
+      }
+
+      let possibleStringLength = Math.max(this.maxPossibleLengthForTickIfWrapped, this.maxTickLength);
+
+      if (!isPlatformBrowser(this.platformId)) {
+        possibleStringLength = Math.floor(
+          Math.min(
+            this.approxHeight / maxAllowedLines,
+            Math.max(this.maxPossibleLengthForTickIfWrapped, this.maxTickLength)
+          )
+        );
+      }
+
+      maxLines = Math.min(maxLines, maxAllowedLines);
+      const lines = getTickLines(label, possibleStringLength, maxLines < 1 ? 1 : maxLines);
+      return lines;
+    }
+
+    return [this.tickTrim(label)];
   }
 }

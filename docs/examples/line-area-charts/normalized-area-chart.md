@@ -42,6 +42,7 @@
 | tooltipDisabled       | boolean            | false         | show or hide the tooltip                                                                                                         |
 | tooltipTemplate       | TemplateRef        |               | a custom ng-template to be displayed inside the tooltip when hovering a single point                                             |
 | seriesTooltipTemplate | TemplateRef        |               | a custom ng-template to be displayed inside the tooltip when hovering series                                                     |
+| wrapTicks             | boolean            | false         | axis tick labels will wrap based on available space
 
 ## Outputs
 

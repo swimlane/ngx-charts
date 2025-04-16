@@ -104,7 +104,8 @@ enum ElementType {
   `,
   styleUrls: ['../common/base-chart.component.scss', './linear-gauge.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class LinearGaugeComponent extends BaseChartComponent implements AfterViewInit {
   @Input() min: number = 0;
@@ -143,6 +144,10 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
       this.scaleText(ElementType.Value);
       this.scaleText(ElementType.Units);
     });
+  }
+
+  ngOnChanges(): void {
+    this.update();
   }
 
   update(): void {

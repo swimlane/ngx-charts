@@ -49,7 +49,8 @@ import { isPlatformServer } from '@angular/common';
         )
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class LineComponent implements OnChanges, OnInit {
   @Input() path: string;

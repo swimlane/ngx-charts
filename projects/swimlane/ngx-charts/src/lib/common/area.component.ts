@@ -18,7 +18,8 @@ import { Gradient } from './types/gradient.interface';
     </svg:defs>
     <svg:path class="area" [attr.d]="areaPath" [attr.fill]="gradient ? gradientFill : fill" [style.opacity]="opacity" />
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AreaComponent implements OnChanges {
   @Input() data: AreaChartSeries;

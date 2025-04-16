@@ -10,6 +10,7 @@ import {
   multi,
   boxData,
   bubble,
+  sankeyData,
   generateData,
   generateGraph,
   treemap,
@@ -48,7 +49,8 @@ const getRandomInt = (min: number, max: number) => {
   providers: [Location, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['../../node_modules/@swimlane/ngx-ui/index.css', './app.component.scss'],
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
+  standalone: false
 })
 export class AppComponent implements OnInit {
   APP_VERSION = pkg.version;
@@ -116,6 +118,9 @@ export class AppComponent implements OnInit {
   maxYAxisTickLength: number = 16;
   strokeColor: string = '#FFFFFF';
   strokeWidth: number = 2;
+  wrapTicks = false;
+  target = 90;
+  showLabel: boolean = true;
 
   curves = {
     Basis: shape.curveBasis,
@@ -190,6 +195,9 @@ export class AppComponent implements OnInit {
 
   // box
   boxData = boxData;
+
+  // sankey
+  sankeyData = sankeyData;
 
   // gauge
   gaugeMin: number = 0;

@@ -40,10 +40,11 @@ import { ScaleType } from '../common/types/scale-type.enum';
   `,
   styleUrls: ['./tree-map.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class TreeMapComponent extends BaseChartComponent {
-  @Input() results: DataItem[];
+  @Input() declare results: DataItem[];
   @Input() tooltipDisabled: boolean = false;
   @Input() valueFormatting: any;
   @Input() labelFormatting: any;
@@ -60,6 +61,10 @@ export class TreeMapComponent extends BaseChartComponent {
   treemap: any;
   data: DataItem;
   margin: number[] = [10, 10, 10, 10];
+
+  ngOnChanges(): void {
+    this.update();
+  }
 
   update(): void {
     super.update();

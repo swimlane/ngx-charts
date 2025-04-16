@@ -53,7 +53,8 @@ export interface CardModel extends GridItem {
       (select)="onClick($event)"
     />
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class CardSeriesComponent implements OnChanges {
   @Input() data: CardModel[];

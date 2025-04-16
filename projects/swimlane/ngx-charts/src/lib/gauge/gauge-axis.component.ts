@@ -35,7 +35,8 @@ interface Ticks {
       </svg:g>
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class GaugeAxisComponent implements OnChanges {
   @Input() bigSegments: number;

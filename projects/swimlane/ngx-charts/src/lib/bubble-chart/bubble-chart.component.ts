@@ -60,6 +60,7 @@ import { isPlatformServer } from '@angular/common';
           [maxTickLength]="maxXAxisTickLength"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateXAxisHeight($event)"
         />
         <svg:g
@@ -74,6 +75,7 @@ import { isPlatformServer } from '@angular/common';
           [maxTickLength]="maxYAxisTickLength"
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"
         />
         <svg:rect
@@ -149,7 +151,8 @@ import { isPlatformServer } from '@angular/common';
         )
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class BubbleChartComponent extends BaseChartComponent {
   @Input() showGridLines: boolean = true;
@@ -181,6 +184,7 @@ export class BubbleChartComponent extends BaseChartComponent {
   @Input() xScaleMax: number;
   @Input() yScaleMin: number;
   @Input() yScaleMax: number;
+  @Input() wrapTicks = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -223,6 +227,10 @@ export class BubbleChartComponent extends BaseChartComponent {
     if (isPlatformServer(this.platformId)) {
       this.isSSR = true;
     }
+  }
+
+  ngOnChanges(): void {
+    this.update();
   }
 
   update(): void {

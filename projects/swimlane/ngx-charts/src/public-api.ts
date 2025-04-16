@@ -94,11 +94,15 @@ export * from './lib/gauge/gauge-arc.component';
 export * from './lib/gauge/gauge-axis.component';
 export * from './lib/gauge/gauge.component';
 export * from './lib/gauge/linear-gauge.component';
+export * from './lib/gauge/percent-gauge/percent-gauge.component';
 
 export * from './lib/heat-map/heat-map.module';
 export * from './lib/heat-map/heat-map.component';
 export * from './lib/heat-map/heat-map-cell.component';
 export * from './lib/heat-map/heat-map-cell-series.component';
+
+export * from './lib/sankey/sankey.module';
+export * from './lib/sankey/sankey.component';
 
 export * from './lib/line-chart/line-chart.module';
 export * from './lib/line-chart/line-chart.component';
