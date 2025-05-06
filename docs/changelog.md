@@ -2,6 +2,8 @@
 
 ## HEAD (unreleased)
 
+## 22.0.0
+
 - Enhancement: Support Angular 19, `standalone` now required in all `@Component`
 - Enhancement: Update SASS and update for latest standard libraries
 - Enhancement: Sankey Chart can now accept custom colors
