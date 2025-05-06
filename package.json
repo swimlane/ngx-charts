@@ -8,7 +8,7 @@
     "build:lib": "ng build @swimlane/ngx-charts",
     "build:lib:prod": "ng build @swimlane/ngx-charts --configuration production",
     "build:demo": "npm run build:lib:prod && cross-env NODE_ENV=production ng build --configuration production --base-href=\"/ngx-charts/\"",
-    "copy-files": "cp README.md dist/swimlane/ngx-charts/README.md && cp LICENSE dist/swimlane/ngx-charts/LICENSE",
+    "copy-files": "cp README.md dist/swimlane/ngx-charts/README.md && cp LICENSE dist/swimlane/ngx-charts/LICENSE  && cp docs/changelog.md dist/swimlane/ngx-charts/CHANGELOG.md",
     "ci": "run-s lint prettier:ci test:ci",
     "test": "run-s lint prettier:ci test:unit",
     "test:unit": "ng test @swimlane/ngx-charts --watch=false",
