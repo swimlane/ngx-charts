@@ -142,7 +142,6 @@ export class InjectionService {
 
     const portalHost = new DomPortalOutlet(
       appendLocation,
-      this.componentFactoryResolver,
       this.applicationRef,
       this.injector
     );

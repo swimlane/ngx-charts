@@ -1,10 +1,10 @@
-import { NgModule, provideExperimentalZonelessChangeDetection } from '@angular/core';
+import { NgModule, provideZonelessChangeDetection } from '@angular/core';
 import { getTestBed } from '@angular/core/testing';
-import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
+import { BrowserTestingModule, platformBrowserTesting } from "@angular/platform-browser/testing";
 
 @NgModule({
-  providers: [provideExperimentalZonelessChangeDetection()]
+  providers: [provideZonelessChangeDetection()]
 })
 class ZonelessModule {}
 
-getTestBed().initTestEnvironment([BrowserDynamicTestingModule, ZonelessModule], platformBrowserDynamicTesting());
+getTestBed().initTestEnvironment([BrowserTestingModule, ZonelessModule], platformBrowserTesting());
