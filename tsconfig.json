@@ -9,22 +9,13 @@
     "experimentalDecorators": true,
     "target": "ES2022",
     "module": "ES2022",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "importHelpers": true,
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "ES2022",
-      "dom"
-    ],
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["ES2022", "dom"],
     "paths": {
-      "@swimlane/ngx-charts": [
-        "projects/swimlane/ngx-charts/src/public_api"
-      ],
-      "@swimlane/ngx-charts/*": [
-        "projects/swimlane/ngx-charts/src/lib/*"
-      ]
+      "@swimlane/ngx-charts": ["projects/swimlane/ngx-charts/src/public_api"],
+      "@swimlane/ngx-charts/*": ["projects/swimlane/ngx-charts/src/lib/*"]
     },
     "resolveJsonModule": true,
     "useDefineForClassFields": false
