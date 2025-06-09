@@ -2,6 +2,13 @@
 
 ## HEAD (unreleased)
 
+## 23.0.0
+
+- Feature: Support Angular 20
+- Fix: Remove `ComponentFactoryResolver` from injection service (breaking Angular change)
+- Fix: Remove / replace depreciated testing imports
+- Breaking: Remove support for Angular 17
+
 ## 22.0.0
 
 - Enhancement: Support Angular 19, `standalone` now required in all `@Component`

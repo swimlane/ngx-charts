@@ -1,6 +1,6 @@
 {
   "name": "@swimlane/ngx-charts",
-  "version": "22.0.0",
+  "version": "23.0.0",
   "description": "Declarative Charting Framework for Angular",
   "repository": {
     "type": "git",
@@ -30,13 +30,13 @@
   },
   "homepage": "https://github.com/swimlane/ngx-charts#readme",
   "peerDependencies": {
-    "@angular/animations": "17.x || 18.x || 19.x",
-    "@angular/cdk": "17.x || 18.x || 19.x",
-    "@angular/core": "17.x || 18.x || 19.x",
-    "@angular/common": "17.x || 18.x || 19.x",
-    "@angular/forms": "17.x || 18.x || 19.x",
-    "@angular/platform-browser": "17.x || 18.x || 19.x",
-    "@angular/platform-browser-dynamic": "17.x || 18.x || 19.x",
+    "@angular/animations": "18.x || 19.x || 20.x",
+    "@angular/cdk": "18.x || 19.x || 20.x",
+    "@angular/core": "18.x || 19.x || 20.x",
+    "@angular/common": "18.x || 19.x || 20.x",
+    "@angular/forms": "18.x || 19.x || 20.x",
+    "@angular/platform-browser": "18.x || 19.x || 20.x",
+    "@angular/platform-browser-dynamic": "18.x || 19.x || 20.x",
     "rxjs": "7.x"
   },
   "dependencies": {
