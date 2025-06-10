@@ -67,6 +67,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
           [xScale]="xScale"
           [yScale]="yScale"
           [colors]="colors"
+          [ngStyle]="getStyle(chartTransparency)"
           [series]="results"
           [dims]="dims"
           [gradient]="gradient"
@@ -92,6 +93,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
   standalone: false
 })
 export class BarHorizontalComponent extends BaseChartComponent {
+  @Input() chartTransparency: number = 0;
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
   @Input() legendPosition: LegendPosition = LegendPosition.Right;
@@ -222,6 +224,12 @@ export class BarHorizontalComponent extends BaseChartComponent {
     }
 
     this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+  }
+
+  getStyle(transparency: number): object {
+    return {
+      opacity: 1 - transparency / 100
+    };
   }
 
   getLegendOptions(): LegendOptions {
