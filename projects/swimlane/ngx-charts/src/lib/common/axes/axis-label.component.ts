@@ -65,7 +65,6 @@ export class AxisLabelComponent implements OnChanges {
         this.x = -this.height / 2;
         this.transform = 'rotate(270)';
         break;
-      default:
     }
   }
 }
