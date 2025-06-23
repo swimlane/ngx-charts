@@ -631,21 +631,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/core@npm:~20.0.4":
-  version: 20.0.4
-  resolution: "@angular/core@npm:20.0.4"
+"@angular/core@npm:~19.1.4":
+  version: 19.1.8
+  resolution: "@angular/core@npm:19.1.8"
   dependencies:
     tslib: "npm:^2.3.0"
   peerDependencies:
-    "@angular/compiler": 20.0.4
     rxjs: ^6.5.3 || ^7.4.0
     zone.js: ~0.15.0
-  peerDependenciesMeta:
-    "@angular/compiler":
-      optional: true
-    zone.js:
-      optional: true
-  checksum: 10c0/a5f2929d84f907038e7bf1050cbe5456eff2ca035eed83bf521a4fd619f6defff7c7429d99541daa8521708bf534f64b6db96e241a21afeee1272cace726d5f7
+  checksum: 10c0/7cebf3ad879b8f3abd939144a0ad370ec38551dd496f9a934692aaf5783f2c1a464ee72344a7baa8f0c1e7e6f350536635f30ae5960ed748e1b572e40f75175d
   languageName: node
   linkType: hard
 
@@ -10201,7 +10195,7 @@ __metadata:
     "@angular/common": "npm:~19.1.4"
     "@angular/compiler": "npm:~19.1.4"
     "@angular/compiler-cli": "npm:~19.1.4"
-    "@angular/core": "npm:~20.0.4"
+    "@angular/core": "npm:~19.1.4"
     "@angular/flex-layout": "npm:15.0.0-beta.42"
     "@angular/forms": "npm:~19.1.4"
     "@angular/language-service": "npm:~19.1.4"

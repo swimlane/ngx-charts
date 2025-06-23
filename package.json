@@ -35,7 +35,7 @@
     "@angular/cdk": "~19.1.2",
     "@angular/common": "~19.1.4",
     "@angular/compiler": "~19.1.4",
-    "@angular/core": "~20.0.4",
+    "@angular/core": "~19.1.4",
     "@angular/flex-layout": "15.0.0-beta.42",
     "@angular/forms": "~19.1.4",
     "@angular/platform-browser": "~19.1.4",
