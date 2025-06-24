@@ -34,7 +34,8 @@
         "@angular-eslint/no-output-on-prefix": "off",
         "@typescript-eslint/consistent-type-imports": "off",
         "@typescript-eslint/no-duplicate-enum-values": "off",
-        "@angular-eslint/prefer-standalone": "off"
+        "@angular-eslint/prefer-standalone": "off",
+        "@angular-eslint/prefer-inject": "off"
       }
     }
   ]
