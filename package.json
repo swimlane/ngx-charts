@@ -41,7 +41,7 @@
     "@angular/platform-browser": "~20.0.4",
     "@angular/platform-browser-dynamic": "~20.0.4",
     "@angular/router": "~20.0.4",
-    "@swimlane/ngx-ui": "^48.0.5",
+    "@swimlane/ngx-ui": "50.0.0-alpha.0",
     "ajv": "8.12.0",
     "codemirror": "^5.65.0",
     "d3-array": "^3.2.0",
@@ -59,7 +59,7 @@
     "d3-transition": "^3.0.1",
     "emoji-flags": "^1.2.0",
     "moment-timezone": "^0.5.40",
-    "ng-in-viewport": "^6.1.5",
+    "ng-in-viewport": "13.0.1",
     "ngx-moment": "^5.0.0",
     "resize-observer-polyfill": "^1.5.1",
     "rxjs": "^7.8.1",
@@ -107,7 +107,7 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
-    "ng-packagr": "^19.1.2",
+    "ng-packagr": "^20.0.1",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.2.1",
     "protractor": "~7.0.0",
@@ -116,8 +116,8 @@
     "webpack": "5"
   },
   "volta": {
-    "node": "20.19.0",
-    "yarn": "4.5.1"
+    "node": "22.16.0",
+    "yarn": "4.9.2"
   },
-  "packageManager": "yarn@4.5.1"
+  "packageManager": "yarn@4.9.2"
 }
