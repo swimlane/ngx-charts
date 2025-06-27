@@ -39,7 +39,8 @@ export interface Tooltip {
         y="0"
         [attr.width]="dims.width"
         [attr.height]="dims.height"
-        style="opacity: 0; cursor: 'auto';"
+        [style.opacity]="0"
+        [style.cursor]="'auto'"
         (mousemove)="mouseMove($event)"
         (mouseleave)="hideTooltip()"
       />
