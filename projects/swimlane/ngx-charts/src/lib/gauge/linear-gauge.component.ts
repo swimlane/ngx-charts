@@ -10,8 +10,19 @@ import {
 import { scaleLinear } from 'd3-scale';
 
 import { BaseChartComponent } from '../common/base-chart.component';
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
+import { calculateTextWidth } from '../utils/calculate-width';
+import { VERDANA_FONT_WIDTHS_16_PX } from '../common/constants/font-widths';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { BarOrientation } from '../common/types/bar-orientation.enum';
+import { ScaleType } from '../common/types/scale-type.enum';
+
+enum ElementType {
+  Value = 'value',
+  Units = 'units'
+}
 
 @Component({
   selector: 'ngx-charts-linear-gauge',
@@ -26,7 +37,7 @@ import { ColorHelper } from '../common/color.helper';
           [x]="margin[3]"
           [y]="dims.height / 2 + margin[0] - 2"
           [data]="{}"
-          [orientation]="'horizontal'"
+          [orientation]="barOrientation.Horizontal"
           [roundEdges]="true"
           [animations]="animations"
         ></svg:g>
@@ -38,7 +49,7 @@ import { ColorHelper } from '../common/color.helper';
           [y]="dims.height / 2 + margin[0] - 2"
           [fill]="colors.getColor(units)"
           [data]="{}"
-          [orientation]="'horizontal'"
+          [orientation]="barOrientation.Horizontal"
           [roundEdges]="true"
           [animations]="animations"
         ></svg:g>
@@ -93,26 +104,27 @@ import { ColorHelper } from '../common/color.helper';
   `,
   styleUrls: ['../common/base-chart.component.scss', './linear-gauge.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class LinearGaugeComponent extends BaseChartComponent implements AfterViewInit {
   @Input() min: number = 0;
   @Input() max: number = 100;
   @Input() value: number = 0;
   @Input() units: string;
-  @Input() previousValue;
+  @Input() previousValue: number;
   @Input() valueFormatting: any;
 
   @ViewChild('valueTextEl') valueTextEl: ElementRef;
   @ViewChild('unitsTextEl') unitsTextEl: ElementRef;
 
   dims: ViewDimensions;
-  valueDomain: any;
+  valueDomain: [number, number];
   valueScale: any;
 
   colors: ColorHelper;
   transform: string;
-  margin: any[] = [10, 20, 10, 20];
+  margin: number[] = [10, 20, 10, 20];
   transformLine: string;
 
   valueResizeScale: number = 1;
@@ -124,11 +136,13 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
   displayValue: string;
   hasPreviousValue: boolean;
 
+  barOrientation = BarOrientation;
+
   ngAfterViewInit(): void {
     super.ngAfterViewInit();
     setTimeout(() => {
-      this.scaleText('value');
-      this.scaleText('units');
+      this.scaleText(ElementType.Value);
+      this.scaleText(ElementType.Units);
     });
   }
 
@@ -162,11 +176,17 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
     this.transformLine = `translate(${this.margin[3] + this.valueScale(this.previousValue)}, ${yOffset})`;
     this.valueTranslate = `translate(0, -15)`;
     this.unitsTranslate = `translate(0, 15)`;
-    setTimeout(() => this.scaleText('value'), 50);
-    setTimeout(() => this.scaleText('units'), 50);
+
+    if (isPlatformServer(this.platformId)) {
+      this.scaleTextSSR('value');
+      this.scaleTextSSR('units');
+    } else {
+      setTimeout(() => this.scaleText(ElementType.Value), 50);
+      setTimeout(() => this.scaleText(ElementType.Units), 50);
+    }
   }
 
-  getValueDomain(): any[] {
+  getValueDomain(): [number, number] {
     return [this.min, this.max];
   }
 
@@ -181,10 +201,10 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
     return this.value.toLocaleString();
   }
 
-  scaleText(element, repeat: boolean = true): void {
+  scaleText(element: ElementType, repeat: boolean = true): void {
     let el;
     let resizeScale;
-    if (element === 'value') {
+    if (element === ElementType.Value) {
       el = this.valueTextEl;
       resizeScale = this.valueResizeScale;
     } else {
@@ -202,7 +222,7 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
     resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
 
     if (resizeScale !== oldScale) {
-      if (element === 'value') {
+      if (element === ElementType.Value) {
         this.valueResizeScale = resizeScale;
         this.valueTextTransform = `scale(${resizeScale}, ${resizeScale})`;
       } else {
@@ -210,12 +230,36 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
         this.unitsTextTransform = `scale(${resizeScale}, ${resizeScale})`;
       }
       this.cd.markForCheck();
-      if (repeat) {
+      if (repeat && isPlatformBrowser(this.platformId)) {
         setTimeout(() => {
           this.scaleText(element, false);
         }, 50);
       }
     }
+  }
+
+  scaleTextSSR(element) {
+    let resizeScale = 1;
+
+    const value = element === 'value' ? this.displayValue : this.units;
+    const width = calculateTextWidth(VERDANA_FONT_WIDTHS_16_PX, value, 10);
+    const height = 25;
+
+    const availableWidth = this.dims.width;
+    const availableHeight = Math.max(this.dims.height / 2 - 15, 0);
+    const resizeScaleWidth = Math.floor((availableWidth / (width / resizeScale)) * 100) / 100;
+    const resizeScaleHeight = Math.floor((availableHeight / (height / resizeScale)) * 100) / 100;
+    resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
+
+    if (element === 'value') {
+      this.valueResizeScale = resizeScale;
+      this.valueTextTransform = `scale(${resizeScale}, ${resizeScale})`;
+    } else {
+      this.unitsResizeScale = resizeScale;
+      this.unitsTextTransform = `scale(${resizeScale}, ${resizeScale})`;
+    }
+
+    this.cd.markForCheck();
   }
 
   onClick(): void {
@@ -226,6 +270,6 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
   }
 
   setColors(): void {
-    this.colors = new ColorHelper(this.scheme, 'ordinal', [this.value], this.customColors);
+    this.colors = new ColorHelper(this.scheme, ScaleType.Ordinal, [this.value], this.customColors);
   }
 }

@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 html,
 body {
   margin: 0;
@@ -38,12 +40,12 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(darken($color-blue-grey, 5%), 0.3);
+  background-color: rgba(color.adjust($color-blue-grey, $lightness: -5%), 0.3);
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(darken($color-blue-grey, 5%), 1);
+  background-color: rgba(color.adjust($color-blue-grey, $lightness: -5%), 1);
 }
 
 app {
@@ -204,7 +206,11 @@ main {
   $color-text-light: #f0f1f6;
   $color-text-lighter: #fff;
 
-  background: $color-bg-darker;
+  background: $color-bg-darkest;
+
+  .chart-container {
+    background: #1b1e27;
+  }
 
   .ngx-charts {
     text {
@@ -329,5 +335,28 @@ main {
   .number-card .number-card-label {
     font-size: 0.8em;
     color: $color-text-med;
+  }
+
+  .percent-gauge {
+    .dashes-back {
+      stroke: #455066;
+    }
+
+    .target-circle,
+    .target-circle-bg {
+      fill: #1b1e27;
+    }
+
+    .target-circle-bg {
+      stroke: #455066;
+    }
+
+    .target-label {
+      fill: #a0aabe;
+    }
+
+    .target-value {
+      fill: #cdd2dd;
+    }
   }
 }

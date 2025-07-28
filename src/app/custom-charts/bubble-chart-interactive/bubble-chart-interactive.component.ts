@@ -19,8 +19,10 @@ import {
   ViewDimensions,
   ColorHelper,
   BaseChartComponent,
-  calculateViewDimensions
+  calculateViewDimensions,
+  ScaleType
 } from 'projects/swimlane/ngx-charts/src/public-api';
+import { isPlatformServer } from '@angular/common';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -56,6 +58,7 @@ import {
           [labelText]="xAxisLabel"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateXAxisHeight($event)"
         />
         <svg:g
@@ -68,6 +71,7 @@ import {
           [labelText]="yAxisLabel"
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"
         />
         <svg:rect
@@ -79,8 +83,30 @@ import {
           style="fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';"
           (mouseenter)="deactivateAll()"
         />
-        <svg:g [attr.clip-path]="clipPath">
+        <svg:g *ngIf="!isSSR" [attr.clip-path]="clipPath">
           <svg:g *ngFor="let series of data; trackBy: trackBy" [@animationState]="'active'">
+            <svg:g
+              ngx-charts-bubble-series-interactive
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [rScale]="rScale"
+              [xScaleType]="xScaleType"
+              [yScaleType]="yScaleType"
+              [xAxisLabel]="xAxisLabel"
+              [yAxisLabel]="yAxisLabel"
+              [colors]="colors"
+              [data]="series"
+              [activeEntries]="activeEntries"
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="tooltipTemplate"
+              (select)="onClickSeries($event, series)"
+              (activate)="onActivate($event)"
+              (deactivate)="onDeactivate($event)"
+            />
+          </svg:g>
+        </svg:g>
+        <svg:g *ngIf="isSSR" [attr.clip-path]="clipPath">
+          <svg:g *ngFor="let series of data; trackBy: trackBy">
             <svg:g
               ngx-charts-bubble-series-interactive
               [xScale]="xScale"
@@ -121,7 +147,8 @@ import {
         )
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class BubbleChartInteractiveComponent extends BaseChartComponent {
   @Input() showGridLines: boolean = true;
@@ -141,13 +168,14 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
   @Input() maxRadius = 10;
   @Input() minRadius = 3;
   @Input() autoScale: boolean;
-  @Input() schemeType = 'ordinal';
+  @Input() schemeType: ScaleType = ScaleType.Ordinal;
   @Input() legendPosition: string = 'right';
   @Input() tooltipDisabled: boolean = false;
   @Input() xScaleMin: any;
   @Input() xScaleMax: any;
   @Input() yScaleMin: any;
   @Input() yScaleMax: any;
+  @Input() wrapTicks = false;
 
   @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();
@@ -173,8 +201,8 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
   yDomain: any[];
   rDomain: number[];
 
-  xScaleType: string;
-  yScaleType: string;
+  xScaleType: ScaleType;
+  yScaleType: ScaleType;
 
   yScale: any;
   xScale: any;
@@ -184,6 +212,14 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
   yAxisWidth: number = 0;
 
   activeEntries: any[] = [];
+
+  isSSR = false;
+
+  ngOnInit() {
+    if (isPlatformServer(this.platformId)) {
+      this.isSSR = true;
+    }
+  }
 
   update(): void {
     super.update();
@@ -209,7 +245,7 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
 
     this.transform = `translate(${this.dims.xOffset},${this.margin[0]})`;
 
-    const colorDomain = this.schemeType === 'ordinal' ? this.seriesDomain : this.rDomain;
+    const colorDomain = this.schemeType === ScaleType.Ordinal ? this.seriesDomain : this.rDomain;
     this.colors = new ColorHelper(this.scheme, this.schemeType, colorDomain, this.customColors);
 
     this.data = this.results;
@@ -238,7 +274,6 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
 
   onClickLabel(eventOnLegendSeriesLabelSelect) {
     const eventOnLegendLabelSelect = { name: eventOnLegendSeriesLabelSelect };
-    // console.log(eventOnLegendLabelSelect);
     this.legendLabelClick.emit(eventOnLegendLabelSelect);
   }
 
@@ -249,7 +284,6 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
       bubble: bubbleObj,
       series: seriesObj
     };
-    // console.log(eventOnBubbleSeriesSelect);
     this.select.emit(eventOnBubbleSeriesSelect);
   }
 
@@ -262,8 +296,8 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
     for (const s of this.data) {
       for (const d of s.series) {
         const r = this.rScale(d.r);
-        const cx = this.xScaleType === 'linear' ? this.xScale(Number(d.x)) : this.xScale(d.x);
-        const cy = this.yScaleType === 'linear' ? this.yScale(Number(d.y)) : this.yScale(d.y);
+        const cx = this.xScaleType === ScaleType.Linear ? this.xScale(Number(d.x)) : this.xScale(d.x);
+        const cy = this.yScaleType === ScaleType.Linear ? this.yScale(Number(d.y)) : this.yScale(d.y);
         xMin = Math.max(r - cx, xMin);
         yMin = Math.max(r - cy, yMin);
         yMax = Math.max(cy + r, yMax);
@@ -306,14 +340,14 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
 
   getLegendOptions(): any {
     const opts = {
-      scaleType: this.schemeType,
+      scaleType: this.schemeType as any,
       colors: undefined,
       domain: [],
       position: this.legendPosition,
       title: undefined
     };
 
-    if (opts.scaleType === 'ordinal') {
+    if (opts.scaleType === ScaleType.Ordinal) {
       opts.domain = this.seriesDomain;
       opts.colors = this.colors;
       opts.title = this.legendTitle;
@@ -412,6 +446,6 @@ export class BubbleChartInteractiveComponent extends BaseChartComponent {
   }
 
   trackBy(index, item): string {
-    return item.name;
+    return `${item.name}`;
   }
 }

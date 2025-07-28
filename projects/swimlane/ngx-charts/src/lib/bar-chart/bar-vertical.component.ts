@@ -10,10 +10,13 @@ import {
 } from '@angular/core';
 import { scaleBand, scaleLinear } from 'd3-scale';
 
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { DataItem } from '../models/chart-data.model';
+import { LegendOptions, LegendPosition } from '../common/types/legend.model';
+import { ScaleType } from '../common/types/scale-type.enum';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
 
 @Component({
   selector: 'ngx-charts-bar-vertical',
@@ -34,6 +37,7 @@ import { DataItem } from '../models/chart-data.model';
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
+          [showGridLines]="showGridLines"
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [trimTicks]="trimXAxisTicks"
@@ -42,6 +46,7 @@ import { DataItem } from '../models/chart-data.model';
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
           [xAxisOffset]="dataLabelMaxHeight.negative"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateXAxisHeight($event)"
         ></svg:g>
         <svg:g
@@ -56,6 +61,7 @@ import { DataItem } from '../models/chart-data.model';
           [maxTickLength]="maxYAxisTickLength"
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
         <svg:g
@@ -84,23 +90,24 @@ import { DataItem } from '../models/chart-data.model';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['../common/base-chart.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class BarVerticalComponent extends BaseChartComponent {
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
-  @Input() legendPosition: string = 'right';
+  @Input() legendPosition: LegendPosition = LegendPosition.Right;
   @Input() xAxis;
   @Input() yAxis;
-  @Input() showXAxisLabel;
-  @Input() showYAxisLabel;
-  @Input() xAxisLabel;
-  @Input() yAxisLabel;
+  @Input() showXAxisLabel: boolean;
+  @Input() showYAxisLabel: boolean;
+  @Input() xAxisLabel: string;
+  @Input() yAxisLabel: string;
   @Input() tooltipDisabled: boolean = false;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
-  @Input() schemeType: string;
+  @Input() declare schemeType: ScaleType;
   @Input() trimXAxisTicks: boolean = true;
   @Input() trimYAxisTicks: boolean = true;
   @Input() rotateXAxisTicks: boolean = true;
@@ -119,6 +126,7 @@ export class BarVerticalComponent extends BaseChartComponent {
   @Input() dataLabelFormatting: any;
   @Input() noBarWhenZero: boolean = true;
   @Input() barMaxWidth: number;
+  @Input() wrapTicks = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -132,10 +140,10 @@ export class BarVerticalComponent extends BaseChartComponent {
   yDomain: any;
   transform: string;
   colors: ColorHelper;
-  margin: any[] = [10, 20, 10, 20];
+  margin: number[] = [10, 20, 10, 20];
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
-  legendOptions: any;
+  legendOptions: LegendOptions;
   dataLabelMaxHeight: any = { negative: 0, positive: 0 };
 
   update(): void {
@@ -212,13 +220,13 @@ export class BarVerticalComponent extends BaseChartComponent {
     return [min, max];
   }
 
-  onClick(data: DataItem) {
+  onClick(data: DataItem | string) {
     this.select.emit(data);
   }
 
   setColors(): void {
     let domain;
-    if (this.schemeType === 'ordinal') {
+    if (this.schemeType === ScaleType.Ordinal) {
       domain = this.xDomain;
     } else {
       domain = this.yDomain;
@@ -229,13 +237,13 @@ export class BarVerticalComponent extends BaseChartComponent {
 
   getLegendOptions() {
     const opts = {
-      scaleType: this.schemeType,
+      scaleType: this.schemeType as any,
       colors: undefined,
       domain: [],
       title: undefined,
       position: this.legendPosition
     };
-    if (opts.scaleType === 'ordinal') {
+    if (opts.scaleType === ScaleType.Ordinal) {
       opts.domain = this.xDomain;
       opts.colors = this.colors;
       opts.title = this.legendTitle;

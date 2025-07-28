@@ -10,6 +10,8 @@ import {
 } from '@angular/core';
 
 import { XAxisTicksComponent } from './x-axis-ticks.component';
+import { Orientation } from '../types/orientation.enum';
+import { ViewDimensions } from '../types/view-dimension.interface';
 
 @Component({
   selector: 'g[ngx-charts-x-axis]',
@@ -30,6 +32,7 @@ import { XAxisTicksComponent } from './x-axis-ticks.component';
         [gridLineHeight]="dims.height"
         [width]="dims.width"
         [tickValues]="ticks"
+        [wrapTicks]="wrapTicks"
         (dimensionsChanged)="emitTicksHeight($event)"
       />
       <svg:g
@@ -37,43 +40,46 @@ import { XAxisTicksComponent } from './x-axis-ticks.component';
         *ngIf="showLabel"
         [label]="labelText"
         [offset]="labelOffset"
-        [orient]="'bottom'"
+        [orient]="orientation.Bottom"
         [height]="dims.height"
         [width]="dims.width"
       ></svg:g>
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class XAxisComponent implements OnChanges {
   @Input() xScale;
-  @Input() dims;
+  @Input() dims: ViewDimensions;
   @Input() trimTicks: boolean;
   @Input() rotateTicks: boolean = true;
   @Input() maxTickLength: number;
   @Input() tickFormatting;
   @Input() showGridLines = false;
-  @Input() showLabel;
-  @Input() labelText;
+  @Input() showLabel: boolean;
+  @Input() labelText: string;
   @Input() ticks: any[];
-  @Input() xAxisTickInterval;
-  @Input() xAxisTickCount: any;
-  @Input() xOrient: string = 'bottom';
+  @Input() xAxisTickCount: number;
+  @Input() xOrient: Orientation = Orientation.Bottom;
   @Input() xAxisOffset: number = 0;
   @Input() chartLeftOffset: number = 0;
+  @Input() wrapTicks = false;
 
   @Output() dimensionsChanged = new EventEmitter();
 
   xAxisClassName: string = 'x axis';
 
-  tickArguments: any;
-  transform: any;
+  tickArguments: number[];
+  transform: string;
   labelOffset: number = 0;
   fill: string = 'none';
   stroke: string = 'stroke';
   tickStroke: string = '#ccc';
   strokeWidth: string = 'none';
   padding: number = 5;
+
+  readonly orientation = Orientation;
 
   @ViewChild(XAxisTicksComponent) ticksComponent: XAxisTicksComponent;
 

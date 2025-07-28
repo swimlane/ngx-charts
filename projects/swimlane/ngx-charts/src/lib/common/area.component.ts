@@ -1,37 +1,36 @@
-import {
-  Component,
-  Input,
-  Output,
-  SimpleChanges,
-  EventEmitter,
-  ElementRef,
-  OnChanges,
-  ChangeDetectionStrategy
-} from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import { select } from 'd3-selection';
 import { id } from '../utils/id';
+import { AreaChartSeries } from '../models/chart-data.model';
+import { BarOrientation } from './types/bar-orientation.enum';
+import { Gradient } from './types/gradient.interface';
 
 @Component({
   selector: 'g[ngx-charts-area]',
   template: `
     <svg:defs *ngIf="gradient">
-      <svg:g ngx-charts-svg-linear-gradient orientation="vertical" [gradientDirection]="gradientDirection" [name]="gradientId" [stops]="gradientStops" />
+      <svg:g
+        ngx-charts-svg-linear-gradient
+        [orientation]="barOrientation.Vertical"
+        [name]="gradientId"
+        [stops]="gradientStops"
+      />
     </svg:defs>
     <svg:path class="area" [attr.d]="areaPath" [attr.fill]="gradient ? gradientFill : fill" [style.opacity]="opacity" />
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AreaComponent implements OnChanges {
-  @Input() data;
-  @Input() path;
-  @Input() startingPath;
-  @Input() fill;
-  @Input() opacity = 1;
-  @Input() startOpacity = 0.5;
-  @Input() endOpacity = 1;
-  @Input() activeLabel;
+  @Input() data: AreaChartSeries;
+  @Input() path: string;
+  @Input() startingPath: string;
+  @Input() fill: string;
+  @Input() opacity: number = 1;
+  @Input() startOpacity: number = 0.5;
+  @Input() endOpacity: number = 1;
   @Input() gradient: boolean = false;
-  @Input() stops: any[];
+  @Input() stops: Gradient[];
   @Input() animations: boolean = true;
   @Input() gradientDirection: string;
   
@@ -41,20 +40,22 @@ export class AreaComponent implements OnChanges {
   gradientId: string;
   gradientFill: string;
   areaPath: string;
-  initialized: boolean = false;
-  gradientStops: any[];
+  animationsLoaded: boolean = false;
+  gradientStops: Gradient[];
   hasGradient: boolean = false;
+
+  barOrientation = BarOrientation;
 
   constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (!this.initialized) {
+  ngOnChanges(): void {
+    this.update();
+
+    if (!this.animationsLoaded) {
       this.loadAnimation();
-      this.initialized = true;
-    } else {
-      this.update();
+      this.animationsLoaded = true;
     }
   }
 
@@ -74,7 +75,7 @@ export class AreaComponent implements OnChanges {
 
   loadAnimation(): void {
     this.areaPath = this.startingPath;
-    setTimeout(this.update.bind(this), 100);
+    setTimeout(this.updatePathEl.bind(this), 100);
   }
 
   updatePathEl(): void {
@@ -87,7 +88,7 @@ export class AreaComponent implements OnChanges {
     }
   }
 
-  getGradient() {
+  getGradient(): Gradient[] {
     if (this.stops) {
       return this.stops;
     }

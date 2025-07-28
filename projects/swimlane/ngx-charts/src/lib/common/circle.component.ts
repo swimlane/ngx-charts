@@ -23,22 +23,23 @@ import {
       [attr.pointer-events]="pointerEvents"
     />
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class CircleComponent implements OnChanges {
-  @Input() cx;
-  @Input() cy;
-  @Input() r;
-  @Input() fill;
-  @Input() stroke;
-  @Input() data;
-  @Input() classNames;
-  @Input() circleOpacity;
-  @Input() pointerEvents;
+  @Input() cx: number;
+  @Input() cy: number;
+  @Input() r: number;
+  @Input() fill: string;
+  @Input() stroke: string;
+  @Input() data: number | string;
+  @Input() classNames: string[] | string;
+  @Input() circleOpacity: number;
+  @Input() pointerEvents: string;
 
-  @Output() select = new EventEmitter();
-  @Output() activate = new EventEmitter();
-  @Output() deactivate = new EventEmitter();
+  @Output() select: EventEmitter<number | string> = new EventEmitter();
+  @Output() activate: EventEmitter<number | string> = new EventEmitter();
+  @Output() deactivate: EventEmitter<number | string> = new EventEmitter();
 
   @HostListener('click')
   onClick() {

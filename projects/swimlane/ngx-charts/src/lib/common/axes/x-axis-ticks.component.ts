@@ -1,3 +1,4 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
   Component,
   Input,
@@ -8,25 +9,43 @@ import {
   ViewChild,
   SimpleChanges,
   AfterViewInit,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  Inject,
+  PLATFORM_ID
 } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
-import { reduceTicks } from './ticks.helper';
+import { getTickLines, reduceTicks } from './ticks.helper';
+import { Orientation } from '../types/orientation.enum';
+import { TextAnchor } from '../types/text-anchor.enum';
 
 @Component({
   selector: 'g[ngx-charts-x-axis-ticks]',
   template: `
     <svg:g #ticksel>
       <svg:g *ngFor="let tick of ticks" class="tick" [attr.transform]="tickTransform(tick)">
-        <title>{{ tickFormat(tick) }}</title>
-        <svg:text
-          stroke-width="0.01"
-          [attr.text-anchor]="textAnchor"
-          [attr.transform]="textTransform"
-          [style.font-size]="'12px'"
-        >
-          {{ tickTrim(tickFormat(tick)) }}
-        </svg:text>
+        <ng-container *ngIf="tickFormat(tick) as tickFormatted">
+          <title>{{ tickFormatted }}</title>
+          <svg:text
+            stroke-width="0.01"
+            font-size="12px"
+            [attr.text-anchor]="textAnchor"
+            [attr.transform]="textTransform"
+          >
+            <ng-container *ngIf="isWrapTicksSupported; then tmplMultilineTick; else tmplSinglelineTick"></ng-container>
+          </svg:text>
+
+          <ng-template #tmplMultilineTick>
+            <ng-container *ngIf="tickChunks(tick) as tickLines">
+              <svg:tspan *ngFor="let tickLine of tickLines; let i = index" x="0" [attr.y]="i * 12">
+                {{ tickLine }}
+              </svg:tspan>
+            </ng-container>
+          </ng-template>
+
+          <ng-template #tmplSinglelineTick>
+            {{ tickTrim(tickFormatted) }}
+          </ng-template>
+        </ng-container>
       </svg:g>
     </svg:g>
 
@@ -36,21 +55,23 @@ import { reduceTicks } from './ticks.helper';
       </svg:g>
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() scale;
-  @Input() orient;
-  @Input() tickArguments = [5];
-  @Input() tickValues: any[];
-  @Input() tickStroke = '#ccc';
+  @Input() orient: Orientation;
+  @Input() tickArguments: number[] = [5];
+  @Input() tickValues: string[] | number[];
+  @Input() tickStroke: string = '#ccc';
   @Input() trimTicks: boolean = true;
   @Input() maxTickLength: number = 16;
   @Input() tickFormatting;
   @Input() showGridLines = false;
-  @Input() gridLineHeight;
-  @Input() width;
+  @Input() gridLineHeight: number;
+  @Input() width: number;
   @Input() rotateTicks: boolean = true;
+  @Input() wrapTicks = false;
 
   @Output() dimensionsChanged = new EventEmitter();
 
@@ -59,16 +80,24 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   innerTickSize: number = 6;
   outerTickSize: number = 6;
   tickPadding: number = 3;
-  textAnchor: string = 'middle';
+  textAnchor: TextAnchor = TextAnchor.Middle;
   maxTicksLength: number = 0;
   maxAllowedLength: number = 16;
   adjustedScale: any;
-  textTransform: any;
-  ticks: any;
+  textTransform: string;
+  ticks: any[];
   tickFormat: (o: any) => any;
   height: number = 0;
+  approxHeight: number = 10;
+  maxPossibleLengthForTickIfWrapped = 16;
 
   @ViewChild('ticksel') ticksElement: ElementRef;
+
+  get isWrapTicksSupported() {
+    return this.wrapTicks && this.scale.step;
+  }
+
+  constructor(@Inject(PLATFORM_ID) private platformId: any) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -79,10 +108,16 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   }
 
   updateDims(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      // for SSR, use approximate value instead of measured
+      this.dimensionsChanged.emit({ height: this.approxHeight });
+      return;
+    }
+
     const height = parseInt(this.ticksElement.nativeElement.getBoundingClientRect().height, 10);
     if (height !== this.height) {
       this.height = height;
-      this.dimensionsChanged.emit({ height });
+      this.dimensionsChanged.emit({ height: this.height });
       setTimeout(() => this.updateDims());
     }
   }
@@ -94,6 +129,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     if (this.tickFormatting) {
       this.tickFormat = this.tickFormatting;
     } else if (scale.tickFormat) {
+      // eslint-disable-next-line prefer-spread
       this.tickFormat = scale.tickFormat.apply(scale, this.tickArguments);
     } else {
       this.tickFormat = function (d) {
@@ -115,16 +151,16 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     this.textTransform = '';
     if (angle && angle !== 0) {
       this.textTransform = `rotate(${angle})`;
-      this.textAnchor = 'end';
+      this.textAnchor = TextAnchor.End;
       this.verticalSpacing = 10;
     } else {
-      this.textAnchor = 'middle';
+      this.textAnchor = TextAnchor.Middle;
     }
 
     setTimeout(() => this.updateDims());
   }
 
-  getRotationAngle(ticks): number {
+  getRotationAngle(ticks: any[]): number {
     let angle = 0;
     this.maxTicksLength = 0;
     for (let i = 0; i < ticks.length; i++) {
@@ -140,7 +176,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     }
 
     const len = Math.min(this.maxTicksLength, this.maxAllowedLength);
-    const charWidth = 8; // need to measure this
+    const charWidth = 7; // need to measure this
     const wordWidth = len * charWidth;
 
     let baseWidth = wordWidth;
@@ -152,10 +188,30 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
       baseWidth = Math.cos(angle * (Math.PI / 180)) * wordWidth;
     }
 
+    let labelHeight = 14;
+    if (this.isWrapTicksSupported) {
+      const longestTick = this.ticks.reduce(
+        (earlier, current) => (current.length > earlier.length ? current : earlier),
+        ''
+      );
+
+      const tickLines = this.tickChunks(longestTick);
+      labelHeight = 14 * (tickLines.length || 1);
+
+      this.maxPossibleLengthForTickIfWrapped = this.getMaxPossibleLengthForTick(longestTick);
+    }
+
+    const requiredHeight =
+      angle !== 0
+        ? Math.max(Math.abs(Math.sin((angle * Math.PI) / 180)) * this.maxTickLength * charWidth, 10)
+        : labelHeight;
+
+    this.approxHeight = Math.min(requiredHeight, 200);
+
     return angle;
   }
 
-  getTicks() {
+  getTicks(): any[] {
     let ticks;
     const maxTicks = this.getMaxTicks(20);
     const maxScaleTicks = this.getMaxTicks(100);
@@ -176,7 +232,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     return Math.floor(this.width / tickWidth);
   }
 
-  tickTransform(tick): string {
+  tickTransform(tick: number): string {
     return 'translate(' + this.adjustedScale(tick) + ',' + this.verticalSpacing + ')';
   }
 
@@ -186,5 +242,45 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
 
   tickTrim(label: string): string {
     return this.trimTicks ? trimLabel(label, this.maxTickLength) : label;
+  }
+
+  getMaxPossibleLengthForTick(longestLabel: string): number {
+    if (this.scale.bandwidth) {
+      const averageCharacterWidth = 7; // approximate char width
+      const maxCharacters = Math.floor(this.scale.bandwidth() / averageCharacterWidth);
+      const truncatedText = longestLabel.slice(0, maxCharacters);
+      return Math.max(truncatedText.length, this.maxTickLength);
+    }
+
+    return this.maxTickLength;
+  }
+
+  tickChunks(label: string): string[] {
+    if (label.toString().length > this.maxTickLength && this.scale.bandwidth) {
+      const maxAllowedLines = 5;
+
+      let maxLines = this.rotateTicks ? Math.floor(this.scale.step() / 14) : maxAllowedLines;
+
+      if (maxLines <= 1) {
+        return [this.tickTrim(label)];
+      }
+
+      let possibleStringLength = Math.max(this.maxPossibleLengthForTickIfWrapped, this.maxTickLength);
+
+      if (!isPlatformBrowser(this.platformId)) {
+        possibleStringLength = Math.floor(
+          Math.min(
+            this.approxHeight / maxAllowedLines,
+            Math.max(this.maxPossibleLengthForTickIfWrapped, this.maxTickLength)
+          )
+        );
+      }
+
+      maxLines = Math.min(maxLines, maxAllowedLines);
+      const lines = getTickLines(label, possibleStringLength, maxLines < 1 ? 1 : maxLines);
+      return lines;
+    }
+
+    return [this.tickTrim(label)];
   }
 }

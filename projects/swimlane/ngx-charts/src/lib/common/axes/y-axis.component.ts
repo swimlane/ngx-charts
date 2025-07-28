@@ -9,6 +9,8 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { YAxisTicksComponent } from './y-axis-ticks.component';
+import { Orientation } from '../types/orientation.enum';
+import { ViewDimensions } from '../types/view-dimension.interface';
 
 @Component({
   selector: 'g[ngx-charts-y-axis]',
@@ -31,6 +33,7 @@ import { YAxisTicksComponent } from './y-axis-ticks.component';
         [showRefLines]="showRefLines"
         [showRefLabels]="showRefLabels"
         [height]="dims.height"
+        [wrapTicks]="wrapTicks"
         (dimensionsChanged)="emitTicksWidth($event)"
       />
 
@@ -45,31 +48,32 @@ import { YAxisTicksComponent } from './y-axis-ticks.component';
       ></svg:g>
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class YAxisComponent implements OnChanges {
   @Input() yScale;
-  @Input() dims;
+  @Input() dims: ViewDimensions;
   @Input() trimTicks: boolean;
   @Input() maxTickLength: number;
   @Input() tickFormatting;
   @Input() ticks: any[];
-  @Input() showGridLines = false;
-  @Input() showLabel;
-  @Input() labelText;
-  @Input() yAxisTickInterval;
+  @Input() showGridLines: boolean = false;
+  @Input() showLabel: boolean;
+  @Input() labelText: string;
   @Input() yAxisTickCount: any;
-  @Input() yOrient: string = 'left';
+  @Input() yOrient: Orientation = Orientation.Left;
   @Input() referenceLines;
-  @Input() showRefLines;
-  @Input() showRefLabels;
+  @Input() showRefLines: boolean;
+  @Input() showRefLabels: boolean;
   @Input() yAxisOffset: number = 0;
+  @Input() wrapTicks = false;
   @Output() dimensionsChanged = new EventEmitter();
 
   yAxisClassName: string = 'y axis';
-  tickArguments: any;
-  offset: any;
-  transform: any;
+  tickArguments: number[];
+  offset: number;
+  transform: string;
   labelOffset: number = 15;
   fill: string = 'none';
   stroke: string = '#CCC';
@@ -85,11 +89,10 @@ export class YAxisComponent implements OnChanges {
 
   update(): void {
     this.offset = -(this.yAxisOffset + this.padding);
-    if (this.yOrient === 'right') {
+    if (this.yOrient === Orientation.Right) {
       this.labelOffset = 65;
       this.transform = `translate(${this.offset + this.dims.width} , 0)`;
     } else {
-      this.offset = this.offset;
       this.transform = `translate(${this.offset} , 0)`;
     }
 
@@ -99,7 +102,7 @@ export class YAxisComponent implements OnChanges {
   }
 
   emitTicksWidth({ width }): void {
-    if (width !== this.labelOffset && this.yOrient === 'right') {
+    if (width !== this.labelOffset && this.yOrient === Orientation.Right) {
       this.labelOffset = width + this.labelOffset;
       setTimeout(() => {
         this.dimensionsChanged.emit({ width });

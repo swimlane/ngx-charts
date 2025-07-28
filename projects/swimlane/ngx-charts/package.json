@@ -24,37 +24,39 @@
     "graph"
   ],
   "author": "Swimlane",
-  "maintainers": [
-    "Marjan Georgiev",
-    "Jayson Harshbarger",
-    "Luis Bello"
-  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/swimlane/ngx-charts/issues"
   },
   "homepage": "https://github.com/swimlane/ngx-charts#readme",
   "peerDependencies": {
-    "@angular/animations": "~9.1.1",
-    "@angular/cdk": "^9.2.0",
-    "@angular/core": "~9.1.1",
-    "@angular/common": "~9.1.1",
-    "@angular/forms": "~9.1.1",
-    "@angular/platform-browser": "~9.1.1",
-    "@angular/platform-browser-dynamic": "~9.1.1",
-    "rxjs": "6.x"
+    "@angular/animations": "17.x || 18.x || 19.x",
+    "@angular/cdk": "17.x || 18.x || 19.x",
+    "@angular/core": "17.x || 18.x || 19.x",
+    "@angular/common": "17.x || 18.x || 19.x",
+    "@angular/forms": "17.x || 18.x || 19.x",
+    "@angular/platform-browser": "17.x || 18.x || 19.x",
+    "@angular/platform-browser-dynamic": "17.x || 18.x || 19.x",
+    "rxjs": "7.x"
   },
   "dependencies": {
-    "d3-array": "^2.4.0",
-    "d3-brush": "^1.1.5",
-    "d3-color": "^1.4.0",
-    "d3-format": "^1.4.2",
-    "d3-hierarchy": "^1.1.9",
-    "d3-interpolate": "^1.4.0",
-    "d3-scale": "^3.2.1",
-    "d3-selection": "^1.4.1",
-    "d3-shape": "^1.3.7",
-    "d3-time-format": "^2.2.2",
-    "d3-transition": "^1.3.2"
+    "d3-array": "^3.2.0",
+    "d3-brush": "^3.0.0",
+    "d3-color": "^3.1.0",
+    "d3-ease": "^3.0.1",
+    "d3-format": "^3.1.0",
+    "d3-hierarchy": "^3.1.2",
+    "d3-interpolate": "^3.0.1",
+    "d3-sankey": "^0.12.3",
+    "d3-scale": "^4.0.2",
+    "d3-selection": "^3.0.0",
+    "d3-shape": "^3.2.0",
+    "d3-time-format": "^4.1.0",
+    "d3-transition": "^3.0.1",
+    "gradient-path": "^2.3.0",
+    "tslib": "^2.3.1"
+  },
+  "devDependencies": {
+    "@types/d3-shape": "^3.0.0"
   }
 }

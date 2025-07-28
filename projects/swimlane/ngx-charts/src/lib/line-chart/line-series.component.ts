@@ -3,6 +3,11 @@ import { area, line } from 'd3-shape';
 
 import { id } from '../utils/id';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
+import { ColorHelper } from '../common/color.helper';
+import { Series } from '../models/chart-data.model';
+import { BarOrientation } from '../common/types/bar-orientation.enum';
+import { ScaleType } from '../common/types/scale-type.enum';
+import { Gradient } from '../common/types/gradient.interface';
 
 @Component({
   selector: 'g[ngx-charts-line-series]',
@@ -12,7 +17,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
         <svg:g
           ngx-charts-svg-linear-gradient
           *ngIf="hasGradient"
-          orientation="vertical"
+          [orientation]="barOrientation.Vertical"
           [name]="gradientId"
           [stops]="gradientStops"
         />
@@ -56,14 +61,15 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
       />
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class LineSeriesComponent implements OnChanges {
-  @Input() data;
+  @Input() data: Series;
   @Input() xScale;
   @Input() yScale;
-  @Input() colors;
-  @Input() scaleType;
+  @Input() colors: ColorHelper;
+  @Input() scaleType: ScaleType;
   @Input() curve: any;
   @Input() activeEntries: any[];
   @Input() rangeFillOpacity: number;
@@ -78,10 +84,12 @@ export class LineSeriesComponent implements OnChanges {
   gradientId: string;
   gradientUrl: string;
   hasGradient: boolean;
-  gradientStops: any[];
-  areaGradientStops: any[];
-  stroke: any;
+  gradientStops: Gradient[];
+  areaGradientStops: Gradient[];
+  stroke: string;
   gradientDirection: string;
+
+  barOrientation = BarOrientation;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -121,9 +129,9 @@ export class LineSeriesComponent implements OnChanges {
       .x(d => {
         const label = d.name;
         let value;
-        if (this.scaleType === 'time') {
+        if (this.scaleType === ScaleType.Time) {
           value = this.xScale(label);
-        } else if (this.scaleType === 'linear') {
+        } else if (this.scaleType === ScaleType.Linear) {
           value = this.xScale(Number(label));
         } else {
           value = this.xScale(label);
@@ -139,9 +147,9 @@ export class LineSeriesComponent implements OnChanges {
       .x(d => {
         const label = d.name;
         let value;
-        if (this.scaleType === 'time') {
+        if (this.scaleType === ScaleType.Time) {
           value = this.xScale(label);
-        } else if (this.scaleType === 'linear') {
+        } else if (this.scaleType === ScaleType.Linear) {
           value = this.xScale(Number(label));
         } else {
           value = this.xScale(label);
@@ -167,9 +175,9 @@ export class LineSeriesComponent implements OnChanges {
   }
 
   sortData(data) {
-    if (this.scaleType === 'linear') {
+    if (this.scaleType === ScaleType.Linear) {
       data = sortLinear(data, 'name');
-    } else if (this.scaleType === 'time') {
+    } else if (this.scaleType === ScaleType.Time) {
       data = sortByTime(data, 'name');
     } else {
       data = sortByDomain(data, 'name', 'asc', this.xScale.domain());
@@ -179,10 +187,8 @@ export class LineSeriesComponent implements OnChanges {
   }
 
   updateGradients() {
-    this.gradientDirection = this.data.extra?.gradientDirection;
-    
-    if (this.colors.scaleType === 'linear') {
-      this.hasGradient = true;
+    if (this.colors.scaleType === ScaleType.Linear) {
+    this.gradientDirection = this.data.extra?.gradientDirection;      this.hasGradient = true;
       this.gradientId = 'grad' + id().toString();
       this.gradientUrl = `url(#${this.gradientId})`;
       const values = this.data.series.map(d => d.value);

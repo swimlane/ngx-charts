@@ -17,7 +17,10 @@ import {
   LineSeriesComponent,
   ViewDimensions,
   ColorHelper,
-  calculateViewDimensions
+  calculateViewDimensions,
+  ScaleType,
+  Orientation,
+  Color
 } from 'projects/swimlane/ngx-charts/src/public-api';
 
 @Component({
@@ -25,7 +28,8 @@ import {
   selector: 'combo-chart-component',
   templateUrl: './combo-chart.component.html',
   styleUrls: ['./combo-chart.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class ComboChartComponent extends BaseChartComponent {
   @Input() curve: any = curveLinear;
@@ -44,12 +48,12 @@ export class ComboChartComponent extends BaseChartComponent {
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
-  @Input() schemeType: string;
+  @Input() declare schemeType: ScaleType;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
   @Input() yRightAxisTickFormatting: any;
   @Input() roundDomains: boolean = false;
-  @Input() colorSchemeLine: any[];
+  @Input() colorSchemeLine: Color;
   @Input() autoScale;
   @Input() lineChart: any;
   @Input() yLeftAxisScaleFactor: any;
@@ -57,6 +61,7 @@ export class ComboChartComponent extends BaseChartComponent {
   @Input() rangeFillOpacity: number;
   @Input() animations: boolean = true;
   @Input() noBarWhenZero: boolean = true;
+  @Input() wrapTicks = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -78,7 +83,7 @@ export class ComboChartComponent extends BaseChartComponent {
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
   legendOptions: any;
-  scaleType = 'linear';
+  scaleType = ScaleType.Linear;
   xScaleLine;
   yScaleLine;
   xDomainLine;
@@ -89,14 +94,14 @@ export class ComboChartComponent extends BaseChartComponent {
   xSet;
   filteredDomain;
   hoveredVertical;
-  yOrientLeft = 'left';
-  yOrientRight = 'right';
+  yOrientLeft = Orientation.Left;
+  yOrientRight = Orientation.Right;
   legendSpacing = 0;
   bandwidth;
   barPadding = 8;
 
   trackBy(index, item): string {
-    return item.name;
+    return `${item.name}`;
   }
 
   update(): void {
@@ -113,7 +118,7 @@ export class ComboChartComponent extends BaseChartComponent {
       showYLabel: this.showYAxisLabel,
       showLegend: this.legend,
       legendType: this.schemeType,
-      legendPosition: this.legendPosition
+      legendPosition: this.legendPosition as any
     });
 
     if (!this.yAxis) {
@@ -190,7 +195,7 @@ export class ComboChartComponent extends BaseChartComponent {
     return false;
   }
 
-  getScaleType(values): string {
+  getScaleType(values): ScaleType {
     let date = true;
     let num = true;
 
@@ -204,9 +209,15 @@ export class ComboChartComponent extends BaseChartComponent {
       }
     }
 
-    if (date) return 'time';
-    if (num) return 'linear';
-    return 'ordinal';
+    if (date) {
+      return ScaleType.Time;
+    }
+
+    if (num) {
+      return ScaleType.Linear;
+    }
+
+    return ScaleType.Ordinal;
   }
 
   getXDomainLine(): any[] {
@@ -336,7 +347,7 @@ export class ComboChartComponent extends BaseChartComponent {
 
   setColors(): void {
     let domain;
-    if (this.schemeType === 'ordinal') {
+    if (this.schemeType === ScaleType.Ordinal) {
       domain = this.xDomain;
     } else {
       domain = this.yDomain;
@@ -353,7 +364,7 @@ export class ComboChartComponent extends BaseChartComponent {
       title: undefined,
       position: this.legendPosition
     };
-    if (opts.scaleType === 'ordinal') {
+    if (opts.scaleType === ScaleType.Ordinal) {
       opts.domain = this.seriesDomain;
       opts.colors = this.colorsLine;
       opts.title = this.legendTitle;

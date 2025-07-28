@@ -1,13 +1,14 @@
-import { Component, Input, Output, EventEmitter, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
-import { scaleLinear, scaleTime, scaleBand } from 'd3-scale';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { scaleBand, scaleLinear, scaleTime } from 'd3-scale';
 import { brushX } from 'd3-brush';
-import { select, event as d3event } from 'd3-selection';
+import { select } from 'd3-selection';
 import {
   BaseChartComponent,
-  ColorHelper,
-  ViewDimensions,
   calculateViewDimensions,
-  id
+  ColorHelper,
+  id,
+  ScaleType,
+  ViewDimensions
 } from 'projects/swimlane/ngx-charts/src/public-api';
 
 @Component({
@@ -28,6 +29,7 @@ import {
           [dims]="dims"
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateXAxisHeight($event)"
         ></svg:g>
         <svg:g
@@ -38,6 +40,7 @@ import {
           [showGridLines]="showGridLines"
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
         <svg:g
@@ -50,7 +53,7 @@ import {
           [gradient]="gradient"
           [animations]="animations"
           [noBarWhenZero]="noBarWhenZero"
-          tooltipDisabled="true"
+          [tooltipDisabled]="true"
         ></svg:g>
       </svg:g>
 
@@ -69,11 +72,12 @@ import {
   `,
   styleUrls: ['../../../../projects/swimlane/ngx-charts/src/lib/common/base-chart.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class TimelineFilterBarChartComponent extends BaseChartComponent {
   @Input() autoScale = false;
-  @Input() schemeType: string = 'ordinal';
+  @Input() schemeType: ScaleType = ScaleType.Ordinal;
   @Input() valueDomain: number[];
   @Input() xAxis;
   @Input() yAxis;
@@ -85,6 +89,7 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
   @Input() showGridLines: boolean = true;
   @Input() animations: boolean = true;
   @Input() noBarWhenZero: boolean = true;
+  @Input() wrapTicks = false;
 
   @Output() onFilter = new EventEmitter();
 
@@ -220,17 +225,17 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
     return scale;
   }
 
-  getScaleType(values): string {
-    return 'time';
+  getScaleType(values): ScaleType {
+    return ScaleType.Time;
   }
 
   trackBy(index, item): string {
-    return item.name;
+    return `${item.name}`;
   }
 
   setColors(): void {
     let domain;
-    if (this.schemeType === 'ordinal') {
+    if (this.schemeType === ScaleType.Ordinal) {
       domain = this.xSet;
     } else {
       domain = this.yDomain;
@@ -260,9 +265,9 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
         [0, 0],
         [width, height]
       ])
-      .on('brush end', () => {
-        const selection = d3event.selection || this.xScale.range();
-        const newDomain = selection.map(this.timeScale.invert);
+      .on('brush end', ({ selection }) => {
+        const newSelection = selection || this.xScale.range();
+        const newDomain = newSelection.map(this.timeScale.invert);
 
         this.onFilter.emit(newDomain);
         this.cd.markForCheck();

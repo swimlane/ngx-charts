@@ -1,12 +1,118 @@
 # Changelog
 
-## 14.0.1
-- `tooltipBarDisabled`: Option to disable the tool tip bar on data point hover
-- `trueZero`: Gradient effect flow towards 0
-- `gradientDirection`: Sets the flow of the gradient fade effect per chart line
-- `gradient`: Can now be passed as an input from the initial line chart reference to toggle the gradient. Enabled by default.
-- `margins`: Can now be passed as an input from pie chart reference
+## HEAD (unreleased)
 
+- Enhancement: Support Angular 19, `standalone` now required in all `@Component`
+- Enhancement: Update SASS and update for latest standard libraries
+
+## 21.1.3
+
+- Fix: Fixed a bug where the mask ID for percent gauge chart would be regenerated on each update
+
+## 21.1.2
+
+- Fix: Percent Gauge Chart: Ensures the circle mask ID is unique for each chart
+
+## 21.1.1
+
+- Fix: Percent Gauge Chart: Fixes server-side-rendering
+- Fix: Percent Gauge Chart: Fixes light theme
+- Fix: Percent Gauge Chart: Makes target circle highlight only when target is reached
+
+## 21.1.0
+
+- Feature: Add Percent Gauge chart type
+
+## 20.5.0
+
+- Feature: Add Sankey diagram chart type
+
+## 20.4.1
+
+- Bump: d3-array from 2.9.1 to 3.1.1
+- Bump: d3-brush from 2.1.0 to 3.0.0
+- Bump: d3-ease from 2.0.0 to 3.0.1
+- Bump: d3-format from 2.0.0 to 3.1.0
+- Bump: d3-hierarchy from 2.0.0 to 3.1.0
+- Bump: d3-interpolate from 2.0.1 to 3.0.1
+- Bump: d3-scale from 3.2.3 to 4.0.2
+- Bump: d3-selection from 2.0.0 to 3.0.0
+- Bump: d3-shape from 2.0.0 to 3.2.0
+- Bump: d3-transition from 2.0.0 to 3.0.1
+- Bump: moment-timezone from 0.5.28 to 0.5.40
+
+## 20.3.1
+
+- Fix: In SSR mode, respect the tick length set and don't cut off the tick label.
+
+## 20.3.0
+
+- Feature: ability to wrap ticks based on available space.
+
+## 20.1.2
+
+- Bump: d3-color from 2.0.0 to 3.1.0 in library
+
+## 20.1.1
+
+- Bump: d3-color from 2.0.0 to 3.1.0 in demo page
+
+## 20.1.0
+
+- Fix: Cyclic import error caused by interface export in `PieGridComponent`.
+- Fix: Remove angular animations when SSR on charts with series
+
+## 20.0.0
+
+- Breaking: Upgrade Angular to v13
+
+## 19.2.0
+
+- Fix: Change transition to CSS for Angular Universal fix
+
+## 19.1.0
+
+- Feature: New Chart type: Box chart
+
+## 19.0.1
+
+- Fix: remove remove barrel file causing issues running ngcc (#1667)
+
+## 19.0.0
+
+- Chore: Remove inline styles on `heat-map-cell` and `tree-map-cell`
+- Bug: Fix typing issues to support enabling `strictTemplates` option
+- Breaking: Upgrade Angular to v12
+- Bug: Fix `ColorHelper.customColors` typing to allow for functions or objects (#1641)
+- Bug: Fix gradient background hover issue (#1158)
+
+## 18.0.1
+
+- Bug: Use correct curve type
+- Bug: include `@types/d3-shape` as a dependency in published package.
+
+## 18.0.0
+
+- Breaking: Improve typing
+- Bug: Fix timeline selection
+
+## 17.0.1
+
+- Bug: Fix pie label component on SSR (#1583)
+- Bug: Adjust scaleText for linear geauge and number cards on SSR (#1581)
+- Bug: Disable animation on ssr and remove unnecesary call on ssr (#1579)
+
+## 17.0.0
+
+- Breaking: Update to angular 11
+- Bug: Improve SSR capabilities by approximating axis dimensions (#1567)
+- Bug: Chart Tooltip does not work on touch devices (#1213)
+- Chore: Remove bypassSecurityTrustStyle call (#1561)
+
+## 16.0.0
+
+- Breaking: Update to angular 10
+- Bug: Apply dataLabelFormatting to tooltip value in bar charts (#1419)
 
 ## 14.0.0
 

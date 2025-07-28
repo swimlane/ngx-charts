@@ -6,15 +6,23 @@ import {
   EventEmitter,
   ChangeDetectionStrategy,
   ContentChild,
-  TemplateRef
+  TemplateRef,
+  TrackByFunction
 } from '@angular/core';
+import { isPlatformServer } from '@angular/common';
 import { trigger, style, animate, transition } from '@angular/animations';
 
 import { scaleBand, scaleLinear } from 'd3-scale';
 
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
+import { DataItem } from '../models/chart-data.model';
+
 import { BaseChartComponent } from '../common/base-chart.component';
+import { ScaleType } from '../common/types/scale-type.enum';
+import { LegendOptions, LegendPosition } from '../common/types/legend.model';
+import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { BarOrientation } from '../common/types/bar-orientation.enum';
 
 @Component({
   selector: 'ngx-charts-bar-horizontal-2d',
@@ -36,7 +44,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [yScale]="groupScale"
           [data]="results"
           [dims]="dims"
-          orient="horizontal"
+          [orient]="barOrientation.Horizontal"
         ></svg:g>
         <svg:g
           ngx-charts-x-axis
@@ -51,6 +59,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [maxTickLength]="maxXAxisTickLength"
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateXAxisHeight($event)"
         ></svg:g>
         <svg:g
@@ -65,35 +74,68 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
           [yAxisOffset]="dataLabelMaxWidth.negative"
+          [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
-        <svg:g
-          *ngFor="let group of results; let index = index; trackBy: trackBy"
-          [@animationState]="'active'"
-          [attr.transform]="groupTransform(group)"
-        >
+
+        <svg:g *ngIf="!isSSR">
           <svg:g
-            ngx-charts-series-horizontal
-            [xScale]="valueScale"
-            [activeEntries]="activeEntries"
-            [yScale]="innerScale"
-            [colors]="colors"
-            [series]="group.series"
-            [dims]="dims"
-            [gradient]="gradient"
-            [tooltipDisabled]="tooltipDisabled"
-            [tooltipTemplate]="tooltipTemplate"
-            [seriesName]="group.name"
-            [roundEdges]="roundEdges"
-            [animations]="animations"
-            [showDataLabel]="showDataLabel"
-            [dataLabelFormatting]="dataLabelFormatting"
-            [noBarWhenZero]="noBarWhenZero"
-            (select)="onClick($event, group)"
-            (activate)="onActivate($event, group)"
-            (deactivate)="onDeactivate($event, group)"
-            (dataLabelWidthChanged)="onDataLabelMaxWidthChanged($event, index)"
-          />
+            *ngFor="let group of results; let index = index; trackBy: trackBy"
+            [@animationState]="'active'"
+            [attr.transform]="groupTransform(group)"
+          >
+            <svg:g
+              ngx-charts-series-horizontal
+              [xScale]="valueScale"
+              [activeEntries]="activeEntries"
+              [yScale]="innerScale"
+              [colors]="colors"
+              [series]="group.series"
+              [dims]="dims"
+              [gradient]="gradient"
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="tooltipTemplate"
+              [seriesName]="group.name"
+              [roundEdges]="roundEdges"
+              [animations]="animations"
+              [showDataLabel]="showDataLabel"
+              [dataLabelFormatting]="dataLabelFormatting"
+              [noBarWhenZero]="noBarWhenZero"
+              (select)="onClick($event, group)"
+              (activate)="onActivate($event, group)"
+              (deactivate)="onDeactivate($event, group)"
+              (dataLabelWidthChanged)="onDataLabelMaxWidthChanged($event, index)"
+            />
+          </svg:g>
+        </svg:g>
+        <svg:g *ngIf="isSSR">
+          <svg:g
+            *ngFor="let group of results; let index = index; trackBy: trackBy"
+            [attr.transform]="groupTransform(group)"
+          >
+            <svg:g
+              ngx-charts-series-horizontal
+              [xScale]="valueScale"
+              [activeEntries]="activeEntries"
+              [yScale]="innerScale"
+              [colors]="colors"
+              [series]="group.series"
+              [dims]="dims"
+              [gradient]="gradient"
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="tooltipTemplate"
+              [seriesName]="group.name"
+              [roundEdges]="roundEdges"
+              [animations]="animations"
+              [showDataLabel]="showDataLabel"
+              [dataLabelFormatting]="dataLabelFormatting"
+              [noBarWhenZero]="noBarWhenZero"
+              (select)="onClick($event, group)"
+              (activate)="onActivate($event, group)"
+              (deactivate)="onDeactivate($event, group)"
+              (dataLabelWidthChanged)="onDataLabelMaxWidthChanged($event, index)"
+            />
+          </svg:g>
         </svg:g>
       </svg:g>
     </ngx-charts-chart>
@@ -111,23 +153,24 @@ import { BaseChartComponent } from '../common/base-chart.component';
         animate(500, style({ opacity: 0, transform: 'scale(0)' }))
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class BarHorizontal2DComponent extends BaseChartComponent {
-  @Input() legend = false;
+  @Input() legend: boolean = false;
   @Input() legendTitle: string = 'Legend';
-  @Input() legendPosition: string = 'right';
+  @Input() legendPosition: LegendPosition = LegendPosition.Right;
   @Input() xAxis;
   @Input() yAxis;
-  @Input() showXAxisLabel;
-  @Input() showYAxisLabel;
-  @Input() xAxisLabel;
-  @Input() yAxisLabel;
+  @Input() showXAxisLabel: boolean;
+  @Input() showYAxisLabel: boolean;
+  @Input() xAxisLabel: string;
+  @Input() yAxisLabel: string;
   @Input() tooltipDisabled: boolean = false;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
-  @Input() schemeType: string;
+  @Input() declare schemeType: ScaleType;
   @Input() trimXAxisTicks: boolean = true;
   @Input() trimYAxisTicks: boolean = true;
   @Input() rotateXAxisTicks: boolean = true;
@@ -137,14 +180,15 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   @Input() yAxisTickFormatting: any;
   @Input() xAxisTicks: any[];
   @Input() yAxisTicks: any[];
-  @Input() groupPadding = 16;
-  @Input() barPadding = 8;
+  @Input() groupPadding: number = 16;
+  @Input() barPadding: number = 8;
   @Input() roundDomains: boolean = false;
   @Input() roundEdges: boolean = true;
   @Input() xScaleMax: number;
   @Input() showDataLabel: boolean = false;
   @Input() dataLabelFormatting: any;
   @Input() noBarWhenZero: boolean = true;
+  @Input() wrapTicks = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -152,19 +196,28 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
-  groupDomain: any[];
-  innerDomain: any[];
-  valuesDomain: any[];
+  groupDomain: string[];
+  innerDomain: string[];
+  valueDomain: [number, number];
   groupScale: any;
   innerScale: any;
   valueScale: any;
   transform: string;
   colors: ColorHelper;
-  margin = [10, 20, 10, 20];
+  margin: number[] = [10, 20, 10, 20];
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
-  legendOptions: any;
+  legendOptions: LegendOptions;
   dataLabelMaxWidth: any = { negative: 0, positive: 0 };
+  isSSR = false;
+
+  barOrientation = BarOrientation;
+
+  ngOnInit() {
+    if (isPlatformServer(this.platformId)) {
+      this.isSSR = true;
+    }
+  }
 
   update(): void {
     super.update();
@@ -194,7 +247,7 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
 
     this.groupDomain = this.getGroupDomain();
     this.innerDomain = this.getInnerDomain();
-    this.valuesDomain = this.getValueDomain();
+    this.valueDomain = this.getValueDomain();
 
     this.groupScale = this.getGroupScale();
     this.innerScale = this.getInnerScale();
@@ -224,12 +277,12 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   }
 
   getValueScale(): any {
-    const scale = scaleLinear().range([0, this.dims.width]).domain(this.valuesDomain);
+    const scale = scaleLinear().range([0, this.dims.width]).domain(this.valueDomain);
 
     return this.roundDomains ? scale.nice() : scale;
   }
 
-  getGroupDomain(): any[] {
+  getGroupDomain(): string[] {
     const domain = [];
 
     for (const group of this.results) {
@@ -241,7 +294,7 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
     return domain;
   }
 
-  getInnerDomain(): any[] {
+  getInnerDomain(): string[] {
     const domain = [];
 
     for (const group of this.results) {
@@ -255,7 +308,7 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
     return domain;
   }
 
-  getValueDomain(): any[] {
+  getValueDomain(): [number, number] {
     const domain = [];
 
     for (const group of this.results) {
@@ -271,11 +324,11 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
     return [min, max];
   }
 
-  groupTransform(group) {
+  groupTransform(group: DataItem): string {
     return `translate(0, ${this.groupScale(group.label)})`;
   }
 
-  onClick(data, group?): void {
+  onClick(data, group?: DataItem): void {
     if (group) {
       data.series = group.name;
     }
@@ -283,52 +336,52 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
     this.select.emit(data);
   }
 
-  trackBy(index, item): string {
+  trackBy: TrackByFunction<DataItem> = (index: number, item: DataItem) => {
     return item.name;
-  }
+  };
 
   setColors(): void {
     let domain;
-    if (this.schemeType === 'ordinal') {
+    if (this.schemeType === ScaleType.Ordinal) {
       domain = this.innerDomain;
     } else {
-      domain = this.valuesDomain;
+      domain = this.valueDomain;
     }
 
     this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
   }
 
-  getLegendOptions() {
+  getLegendOptions(): LegendOptions {
     const opts = {
-      scaleType: this.schemeType,
+      scaleType: this.schemeType as any,
       colors: undefined,
       domain: [],
       title: undefined,
       position: this.legendPosition
     };
-    if (opts.scaleType === 'ordinal') {
+    if (opts.scaleType === ScaleType.Ordinal) {
       opts.domain = this.innerDomain;
       opts.colors = this.colors;
       opts.title = this.legendTitle;
     } else {
-      opts.domain = this.valuesDomain;
+      opts.domain = this.valueDomain;
       opts.colors = this.colors.scale;
     }
 
     return opts;
   }
 
-  updateYAxisWidth({ width }): void {
+  updateYAxisWidth({ width }: { width: number }): void {
     this.yAxisWidth = width;
     this.update();
   }
 
-  updateXAxisHeight({ height }): void {
+  updateXAxisHeight({ height }: { height: number }): void {
     this.xAxisHeight = height;
     this.update();
   }
 
-  onDataLabelMaxWidthChanged(event, groupIndex) {
+  onDataLabelMaxWidthChanged(event, groupIndex: number): void {
     if (event.size.negative) {
       this.dataLabelMaxWidth.negative = Math.max(this.dataLabelMaxWidth.negative, event.size.width);
     } else {
@@ -339,7 +392,7 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
     }
   }
 
-  onActivate(event, group, fromLegend = false) {
+  onActivate(event, group: DataItem, fromLegend: boolean = false): void {
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
@@ -360,7 +413,7 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(event, group, fromLegend = false) {
+  onDeactivate(event, group: DataItem, fromLegend: boolean = false): void {
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;

@@ -2,12 +2,13 @@ import { Component, Input, ViewEncapsulation, ChangeDetectionStrategy } from '@a
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
 import { curveLinear } from 'd3-shape';
 
-import { getUniqueXDomainValues } from '@swimlane/ngx-charts/common/domain.helper';
+import { getUniqueXDomainValues, getXDomainArray } from '@swimlane/ngx-charts/common/domain.helper';
 import {
   BaseChartComponent,
   ViewDimensions,
   ColorHelper,
-  calculateViewDimensions
+  calculateViewDimensions,
+  ScaleType
 } from 'projects/swimlane/ngx-charts/src/public-api';
 
 @Component({
@@ -37,12 +38,13 @@ import {
   `,
   styleUrls: ['../../../../projects/swimlane/ngx-charts/src/lib/common/base-chart.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class SparklineComponent extends BaseChartComponent {
   @Input() autoScale = false;
   @Input() curve: any = curveLinear;
-  @Input() schemeType: string = 'linear';
+  @Input() schemeType: ScaleType = ScaleType.Ordinal;
   @Input() valueDomain: number[];
   @Input() animations: boolean = true;
   @Input() gradient: boolean = true;
@@ -56,7 +58,7 @@ export class SparklineComponent extends BaseChartComponent {
   yScale: any;
   xScale: any;
   colors: ColorHelper;
-  scaleType: string;
+  scaleType: ScaleType;
   transform: string;
   margin = [0, 0, 0, 0];
 
@@ -90,25 +92,11 @@ export class SparklineComponent extends BaseChartComponent {
   }
 
   getXDomain(): any[] {
-    let values = getUniqueXDomainValues(this.results);
+    const values = getUniqueXDomainValues(this.results);
 
-    this.scaleType = this.getScaleType(values);
-    let domain = [];
-
-    if (this.scaleType === 'time') {
-      const min = Math.min(...values);
-      const max = Math.max(...values);
-      domain = [min, max];
-    } else if (this.scaleType === 'linear') {
-      values = values.map(v => Number(v));
-      const min = Math.min(...values);
-      const max = Math.max(...values);
-      domain = [min, max];
-    } else {
-      domain = values;
-    }
-
-    this.xSet = values;
+    const { domain, xSet, scaleType } = getXDomainArray(values);
+    this.scaleType = scaleType as ScaleType;
+    this.xSet = xSet;
     return domain;
   }
 
@@ -170,7 +158,7 @@ export class SparklineComponent extends BaseChartComponent {
     return scale;
   }
 
-  getScaleType(values): string {
+  getScaleType(values): ScaleType {
     let date = true;
     let num = true;
 
@@ -184,9 +172,15 @@ export class SparklineComponent extends BaseChartComponent {
       }
     }
 
-    if (date) return 'time';
-    if (num) return 'linear';
-    return 'ordinal';
+    if (date) {
+      return ScaleType.Time;
+    }
+
+    if (num) {
+      return ScaleType.Linear;
+    }
+
+    return ScaleType.Ordinal;
   }
 
   isDate(value): boolean {
@@ -198,12 +192,12 @@ export class SparklineComponent extends BaseChartComponent {
   }
 
   trackBy(index, item): string {
-    return item.name;
+    return `${item.name}`;
   }
 
   setColors(): void {
     let domain;
-    if (this.schemeType === 'ordinal') {
+    if (this.schemeType === ScaleType.Ordinal) {
       domain = this.seriesDomain;
     } else {
       domain = this.yDomain;

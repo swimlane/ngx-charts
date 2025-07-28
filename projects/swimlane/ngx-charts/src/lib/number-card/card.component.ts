@@ -10,12 +10,19 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   NgZone,
-  OnDestroy
+  OnDestroy,
+  PLATFORM_ID,
+  Inject,
+  OnInit
 } from '@angular/core';
 import { trimLabel } from '../common/trim-label.helper';
 import { roundedRect } from '../common/shape.helper';
 import { escapeLabel } from '../common/label.helper';
 import { decimalChecker, count } from '../common/count/count.helper';
+import { GridData } from '../common/grid-layout.helper';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { calculateTextWidth } from '../utils/calculate-width';
+import { VERDANA_FONT_WIDTHS_16_PX } from '../common/constants/font-widths';
 
 @Component({
   selector: 'g[ngx-charts-card]',
@@ -62,19 +69,19 @@ import { decimalChecker, count } from '../common/count/count.helper';
       </svg:text>
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
-export class CardComponent implements OnChanges, OnDestroy {
-  @Input() color;
-  @Input() bandColor;
-  @Input() textColor;
-
-  @Input() x;
-  @Input() y;
-  @Input() width;
-  @Input() height;
-  @Input() label;
-  @Input() data;
+export class CardComponent implements OnChanges, OnDestroy, OnInit {
+  @Input() color: string;
+  @Input() bandColor: string;
+  @Input() textColor: string;
+  @Input() x: number;
+  @Input() y: number;
+  @Input() width: number;
+  @Input() height: number;
+  @Input() label: string;
+  @Input() data: GridData;
   @Input() medianSize: number;
   @Input() valueFormatting: any;
   @Input() labelFormatting: any;
@@ -94,16 +101,21 @@ export class CardComponent implements OnChanges, OnDestroy {
   textFontSize: number = 12;
   textTransform: string = '';
   initialized: boolean = false;
-  animationReq: any;
+  animationReq: number;
 
   bandHeight: number = 10;
   transformBand: string;
-  textPadding = [10, 20, 5, 20];
-  labelFontSize = 15;
+  textPadding: number[] = [10, 20, 5, 20];
+  labelFontSize: number = 15;
 
   bandPath: string;
 
-  constructor(element: ElementRef, private cd: ChangeDetectorRef, private zone: NgZone) {
+  constructor(
+    element: ElementRef,
+    private cd: ChangeDetectorRef,
+    private zone: NgZone,
+    @Inject(PLATFORM_ID) private platformId: any
+  ) {
     this.element = element.nativeElement;
   }
 
@@ -111,8 +123,16 @@ export class CardComponent implements OnChanges, OnDestroy {
     this.update();
   }
 
+  ngOnInit() {
+    if (isPlatformServer(this.platformId)) {
+      this.scaleTextSSR();
+    }
+  }
+
   ngOnDestroy(): void {
-    cancelAnimationFrame(this.animationReq);
+    if (isPlatformBrowser(this.platformId)) {
+      cancelAnimationFrame(this.animationReq);
+    }
   }
 
   update(): void {
@@ -127,7 +147,7 @@ export class CardComponent implements OnChanges, OnDestroy {
       this.cardWidth = Math.max(0, this.width);
       this.cardHeight = Math.max(0, this.height);
 
-      this.label = this.label ? this.label : this.data.name;
+      this.label = this.label ? this.label : (this.data.name as any);
 
       const cardData = {
         label: this.label,
@@ -146,7 +166,9 @@ export class CardComponent implements OnChanges, OnDestroy {
       this.bandPath = roundedRect(0, 0, this.cardWidth, this.bandHeight, 3, [false, false, true, true]);
 
       setTimeout(() => {
-        this.scaleText();
+        if (isPlatformBrowser(this.platformId)) {
+          this.scaleText();
+        }
         this.value = value;
         if (hasValue && !this.initialized) {
           setTimeout(() => this.startCount(), 20);
@@ -155,7 +177,7 @@ export class CardComponent implements OnChanges, OnDestroy {
     });
   }
 
-  paddedValue(value: string) {
+  paddedValue(value: string): string {
     if (this.medianSize && this.medianSize > value.length) {
       value += '\u2007'.repeat(this.medianSize - value.length);
     }
@@ -204,6 +226,21 @@ export class CardComponent implements OnChanges, OnDestroy {
       this.setPadding();
       this.cd.markForCheck();
     });
+  }
+
+  scaleTextSSR() {
+    const width = calculateTextWidth(VERDANA_FONT_WIDTHS_16_PX, this.value, 10);
+    const height = 18;
+    const textPadding = (this.textPadding[1] = this.textPadding[3] = this.cardWidth / 8);
+    const availableWidth = this.cardWidth - 2 * textPadding;
+    const availableHeight = this.cardHeight / 3;
+
+    const resizeScale = Math.min(availableWidth / width, availableHeight / height);
+
+    this.textFontSize = Math.floor(this.textFontSize * resizeScale);
+    this.labelFontSize = Math.min(this.textFontSize, 15);
+
+    this.setPadding();
   }
 
   setPadding() {

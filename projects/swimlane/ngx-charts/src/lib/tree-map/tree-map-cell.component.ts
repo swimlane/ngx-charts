@@ -1,17 +1,24 @@
 import { Component, Input, Output, EventEmitter, ElementRef, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import { select } from 'd3-selection';
-
 import { invertColor } from '../utils/color-utils';
 import { trimLabel } from '../common/trim-label.helper';
 import { escapeLabel } from '../common/label.helper';
 import { id } from '../utils/id';
+import { DataItem } from '../models/chart-data.model';
+import { Gradient } from '../common/types/gradient.interface';
+import { BarOrientation } from '../common/types/bar-orientation.enum';
 
 @Component({
   selector: 'g[ngx-charts-tree-map-cell]',
   template: `
     <svg:g>
       <defs *ngIf="gradient">
-        <svg:g ngx-charts-svg-linear-gradient orientation="vertical" [name]="gradientId" [stops]="gradientStops" />
+        <svg:g
+          ngx-charts-svg-linear-gradient
+          [orientation]="orientation.Vertical"
+          [name]="gradientId"
+          [stops]="gradientStops"
+        />
       </defs>
       <svg:rect
         [attr.fill]="gradient ? gradientUrl : fill"
@@ -19,7 +26,6 @@ import { id } from '../utils/id';
         [attr.height]="height"
         [attr.x]="x"
         [attr.y]="y"
-        [style.cursor]="'pointer'"
         class="cell"
         (click)="onClick()"
       />
@@ -50,18 +56,19 @@ import { id } from '../utils/id';
       </svg:foreignObject>
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class TreeMapCellComponent implements OnChanges {
-  @Input() data;
-  @Input() fill;
-  @Input() x;
-  @Input() y;
-  @Input() width;
-  @Input() height;
-  @Input() label;
-  @Input() value;
-  @Input() valueType;
+  @Input() data: DataItem;
+  @Input() fill: string;
+  @Input() x: number;
+  @Input() y: number;
+  @Input() width: number;
+  @Input() height: number;
+  @Input() label: string;
+  @Input() value: any;
+  // @Input() valueType;
   @Input() valueFormatting: any;
   @Input() labelFormatting: any;
   @Input() gradient: boolean = false;
@@ -69,7 +76,7 @@ export class TreeMapCellComponent implements OnChanges {
 
   @Output() select = new EventEmitter();
 
-  gradientStops: any[];
+  gradientStops: Gradient[];
   gradientId: string;
   gradientUrl: string;
 
@@ -78,6 +85,8 @@ export class TreeMapCellComponent implements OnChanges {
   formattedLabel: string;
   formattedValue: string;
   initialized: boolean = false;
+
+  orientation = BarOrientation;
 
   constructor(element: ElementRef) {
     this.element = element.nativeElement;
@@ -147,7 +156,7 @@ export class TreeMapCellComponent implements OnChanges {
     this.select.emit(this.data);
   }
 
-  getGradientStops() {
+  getGradientStops(): Gradient[] {
     return [
       {
         offset: 0,

@@ -21,6 +21,7 @@
 | yAxis               | boolean            | false         | show or hide the y axis                                                                                           |
 | showGridLines       | boolean            | true          | show or hide the grid lines                                                                                       |
 | roundDomains        | boolean            | false         | round domains for aligned gridlines                                                                               |
+| roundEdges          | boolean            | true          | round the edges of the bars                                                                                       |
 | showXAxisLabel      | boolean            | false         | show or hide the x axis label                                                                                     |
 | showYAxisLabel      | boolean            | false         | show or hide the y axis label                                                                                     |
 | xAxisLabel          | string             |               | the x axis label text                                                                                             |
@@ -43,6 +44,7 @@
 | tooltipTemplate     | TemplateRef        |               | a custom ng-template to be displayed inside the tooltip                                                           |
 | xScaleMax           | number             |               | the maximum value of the x axis \(ignored if chart data contains a higher value\)                                 |
 | xScaleMin           | number             |               | the minimum value of the x axis \(ignored if chart data contains a lower value\)                                  |
+| wrapTicks           | boolean            | false         | axis tick labels will wrap based on available space
 
 ## Outputs
 

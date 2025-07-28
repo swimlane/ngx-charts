@@ -9,6 +9,17 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { pie } from 'd3-shape';
+import { PieGridData, PieGridDataItem } from '../models/chart-data.model';
+
+export interface PieArc {
+  animate: boolean;
+  class: string;
+  data: PieGridDataItem;
+  endAngle: number;
+  fill: string;
+  pointerEvents: boolean;
+  startAngle: number;
+}
 
 @Component({
   selector: 'g[ngx-charts-pie-grid-series]',
@@ -34,11 +45,12 @@ import { pie } from 'd3-shape';
       ></svg:g>
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class PieGridSeriesComponent implements OnChanges {
   @Input() colors;
-  @Input() data;
+  @Input() data: PieGridData[];
   @Input() innerRadius = 70;
   @Input() outerRadius = 80;
   @Input() animations: boolean = true;
@@ -49,7 +61,7 @@ export class PieGridSeriesComponent implements OnChanges {
 
   element: HTMLElement;
   layout: any;
-  arcs: any;
+  arcs: PieArc[];
 
   constructor(element: ElementRef) {
     this.element = element.nativeElement;
@@ -67,7 +79,7 @@ export class PieGridSeriesComponent implements OnChanges {
     this.arcs = this.getArcs();
   }
 
-  getArcs(): any[] {
+  getArcs(): PieArc[] {
     return this.layout(this.data).map((arc, index) => {
       const label = arc.data.data.name;
       const other = arc.data.data.other;
@@ -101,7 +113,7 @@ export class PieGridSeriesComponent implements OnChanges {
     return arc.data.name;
   }
 
-  color(arc): any {
+  color(arc): string {
     return this.colors(this.label(arc));
   }
 }

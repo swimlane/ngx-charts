@@ -3,8 +3,10 @@ import {
   SingleSeries,
   MultiSeries,
   BubbleChartMultiSeries,
+  BoxChartMultiSeries,
   Series,
-  TreeMapData
+  TreeMapData,
+  SankeyData
 } from '@swimlane/ngx-charts/models/chart-data.model';
 
 export const single: SingleSeries = [
@@ -304,6 +306,96 @@ export const bubble: BubbleChartMultiSeries = [
         x: '1990',
         y: 75.7,
         r: 57.1
+      }
+    ]
+  }
+];
+
+export const boxData: BoxChartMultiSeries = [
+  {
+    name: 'Colombia',
+    series: [
+      {
+        name: '2019',
+        value: 12
+      },
+      {
+        name: '2020',
+        value: 23
+      },
+      {
+        name: '2021',
+        value: 34
+      },
+      {
+        name: '2022',
+        value: 27
+      },
+      {
+        name: '2023',
+        value: 18
+      },
+      {
+        name: '2024',
+        value: 45
+      }
+    ]
+  },
+  {
+    name: 'Chile',
+    series: [
+      {
+        name: '2019',
+        value: 20
+      },
+      {
+        name: '2020',
+        value: 28
+      },
+      {
+        name: '2021',
+        value: 42
+      },
+      {
+        name: '2022',
+        value: 39
+      },
+      {
+        name: '2023',
+        value: 31
+      },
+      {
+        name: '2024',
+        value: 61
+      }
+    ]
+  },
+  {
+    name: 'Perú',
+    series: [
+      {
+        name: '2019',
+        value: 47
+      },
+      {
+        name: '2020',
+        value: 62
+      },
+      {
+        name: '2021',
+        value: 55
+      },
+      {
+        name: '2022',
+        value: 42
+      },
+      {
+        name: '2023',
+        value: 49
+      },
+      {
+        name: '2024',
+        value: 71
       }
     ]
   }
@@ -769,4 +861,28 @@ export const treemap: TreeMapData = [
       }
     ]
   }
+];
+
+export const sankeyData: SankeyData = [
+  { source: 'United States Of America', target: 'Japan', value: 50 },
+  { source: 'Germany', target: 'Japan', value: 80 },
+  { source: 'Germany', target: 'South Korea', value: 25 },
+  { source: 'France', target: 'South Korea', value: 30 },
+  { source: 'France', target: 'Italy', value: 10 },
+  { source: 'France', target: 'North Macedonia', value: 15 },
+  { source: 'India', target: 'Japan', value: 10 },
+  { source: 'Japan', target: 'UK', value: 60 },
+  { source: 'Japan', target: 'UK', value: 10 },
+  { source: 'Japan', target: 'Democratic Republic of São Tomé and Príncipe', value: 50 },
+  { source: 'Japan', target: 'Republic of Equatorial Guinea', value: 20 },
+  { source: 'South Korea', target: 'UK', value: 55 },
+  { source: 'Italy', target: 'UK', value: 10 },
+  { source: 'North Macedonia', target: 'Republic of Equatorial Guinea', value: 15 },
+  { source: 'UK', target: 'Independent and the Sovereign Republic of Kiribati', value: 10 },
+  { source: 'UK', target: 'Commonwealth of the Northern Mariana Islands', value: 60 },
+  { source: 'UK', target: 'Bosnia and Herzegovina', value: 25 },
+  { source: 'UK', target: 'Spain', value: 20 },
+  { source: 'UK', target: 'Bosnia and Herzegovina', value: 20 },
+  { source: 'Republic of Equatorial Guinea', target: 'Republic of Costa Rica', value: 30 },
+  { source: 'Republic of Equatorial Guinea', target: 'Portugal', value: 5 }
 ];

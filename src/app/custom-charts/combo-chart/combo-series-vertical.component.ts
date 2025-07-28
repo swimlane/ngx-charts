@@ -1,6 +1,9 @@
 import { Component, Input, Output, EventEmitter, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel } from '@swimlane/ngx-charts/common/label.helper';
+import { PlacementTypes } from '@swimlane/ngx-charts/common/tooltip/position/placement-type.enum';
+import { StyleTypes } from '@swimlane/ngx-charts/common/tooltip/style.type';
+import { BarOrientation } from '@swimlane/ngx-charts/common/types/bar-orientation.enum';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -17,7 +20,7 @@ import { formatLabel } from '@swimlane/ngx-charts/common/label.helper';
       [fill]="bar.color"
       [stops]="bar.gradientStops"
       [data]="bar.data"
-      [orientation]="'vertical'"
+      [orientation]="barOrientation.Vertical"
       [roundEdges]="bar.roundEdges"
       [gradient]="gradient"
       [isActive]="isActive(bar.data)"
@@ -28,8 +31,8 @@ import { formatLabel } from '@swimlane/ngx-charts/common/label.helper';
       (deactivate)="deactivate.emit($event)"
       ngx-tooltip
       [tooltipDisabled]="tooltipDisabled"
-      [tooltipPlacement]="'top'"
-      [tooltipType]="'tooltip'"
+      [tooltipPlacement]="placementTypes.Top"
+      [tooltipType]="styleTypes.tooltip"
       [tooltipTitle]="bar.tooltipText"
     ></svg:g>
   `,
@@ -44,7 +47,8 @@ import { formatLabel } from '@swimlane/ngx-charts/common/label.helper';
         animate(500, style({ opacity: 0, transform: 'scale(0)' }))
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class ComboSeriesVerticalComponent implements OnChanges {
   @Input() dims;
@@ -69,6 +73,10 @@ export class ComboSeriesVerticalComponent implements OnChanges {
   bars: any;
   x: any;
   y: any;
+
+  placementTypes = PlacementTypes;
+  barOrientation = BarOrientation;
+  styleTypes = StyleTypes;
 
   ngOnChanges(changes): void {
     this.update();

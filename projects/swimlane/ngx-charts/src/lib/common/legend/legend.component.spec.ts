@@ -3,13 +3,16 @@ import { Component } from '@angular/core';
 
 import { ChartCommonModule } from '../chart-common.module';
 import { ColorHelper } from '../color.helper';
+import { Color } from '../../utils/color-sets';
+import { ScaleType } from '../types/scale-type.enum';
 
-// some test data (includes just enought data to run the tests)
+// some test data (includes just enough data to run the tests)
 const seriesData = ['complete', 'not complete'];
 
 @Component({
   selector: 'test-component',
-  template: ''
+  template: '',
+  standalone: false
 })
 class TestComponent {
   seriesData: any = seriesData;
@@ -18,8 +21,13 @@ class TestComponent {
   legendHeight: number;
 
   constructor() {
-    const scheme = { domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'] };
-    this.colors = new ColorHelper(scheme, 'ordinal', [], null);
+    const scheme: Color = {
+      selectable: false,
+      name: 'test',
+      domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
+      group: ScaleType.Ordinal
+    };
+    this.colors = new ColorHelper(scheme, scheme.group, [], null);
   }
 }
 
