@@ -38,7 +38,7 @@ import { TextAnchor } from '../types/text-anchor.enum';
           </svg:text>
 
           <ng-template #tmplMultilineTick>
-            <ng-container *ngIf="tickChunks(tick) as tickLines">
+            <ng-container *ngIf="tickChunks(tickFormatted) as tickLines">
               <ng-container *ngIf="tickLines.length > 1; else tmplSinglelineTick">
                 <svg:tspan *ngFor="let tickLine of tickLines; let i = index" x="0" [attr.y]="i * (8 + tickSpacing)">
                   {{ tickLine }}
@@ -200,7 +200,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
           // position the tick to middle considering number of lines of the tick
           const positionMiddle = scale(d) + scale.bandwidth() * 0.5;
           if (this.wrapTicks && d.toString().length > this.maxTickLength) {
-            const chunksLength = this.tickChunks(d).length;
+            const chunksLength = this.tickChunks(this.tickFormat(d)).length;
 
             if (chunksLength === 1) {
               return positionMiddle;

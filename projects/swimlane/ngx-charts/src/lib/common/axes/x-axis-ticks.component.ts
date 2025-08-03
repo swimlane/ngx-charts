@@ -35,7 +35,7 @@ import { TextAnchor } from '../types/text-anchor.enum';
           </svg:text>
 
           <ng-template #tmplMultilineTick>
-            <ng-container *ngIf="tickChunks(tick) as tickLines">
+            <ng-container *ngIf="tickChunks(tickFormatted) as tickLines">
               <svg:tspan *ngFor="let tickLine of tickLines; let i = index" x="0" [attr.y]="i * 12">
                 {{ tickLine }}
               </svg:tspan>
@@ -195,7 +195,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
         ''
       );
 
-      const tickLines = this.tickChunks(longestTick);
+      const tickLines = this.tickChunks(this.tickFormat(longestTick));
       labelHeight = 14 * (tickLines.length || 1);
 
       this.maxPossibleLengthForTickIfWrapped = this.getMaxPossibleLengthForTick(longestTick);
