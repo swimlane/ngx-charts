@@ -186,7 +186,6 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
           return 'translate(0,' + this.adjustedScale(tick) + ')';
         };
         this.textAnchor = TextAnchor.End;
-        console.log('ANCHOR' + this.textAnchor);
         this.y2 = this.innerTickSize * -sign;
         this.y1 = this.tickSpacing * -sign;
         this.dx = '.32em';
