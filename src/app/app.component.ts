@@ -250,8 +250,8 @@ export class AppComponent implements OnInit {
   bubbleDemoChart: BubbleChartInteractiveServerDataModel;
 
   // Reference lines
-  showRefLines: boolean = true;
-  showRefLabels: boolean = true;
+  showRefLines: boolean = false;
+  showRefLabels: boolean = false;
 
   // Supports any number of reference lines.
   refLines = [
