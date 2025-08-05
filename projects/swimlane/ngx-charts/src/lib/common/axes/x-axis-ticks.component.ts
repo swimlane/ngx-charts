@@ -73,7 +73,7 @@ import { roundedRect } from '../../common/shape.helper';
         />
         <svg:g *ngIf="showRefLabels">
           <title>{{ tickTrim(tickFormat(refLine.value)) }}</title>
-          <svg:text class="refline-label" transform="rotate(-270)" [attr.text-anchor]="textAnchor" [attr.x]="30">
+          <svg:text class="refline-label" transform="rotate(-270) translate(5, -5)">
             {{ refLine.name }}
           </svg:text>
         </svg:g>
