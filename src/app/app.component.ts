@@ -253,8 +253,8 @@ export class AppComponent implements OnInit {
   bubbleDemoChart: BubbleChartInteractiveServerDataModel;
 
   // Reference lines
-  showRefLines: boolean = true;
-  showRefLabels: boolean = true;
+  showRefLines: boolean = false;
+  showRefLabels: boolean = false;
 
   // Supports any number of reference lines.
   refLines = [
@@ -262,7 +262,11 @@ export class AppComponent implements OnInit {
     { value: 37750, name: 'Average' },
     { value: 33000, name: 'Minimum' }
   ];
-
+  refLinesArea = [
+    { value: 5062, name: 'Maximum' },
+    { value: 4030, name: 'Average' },
+    { value: 3000, name: 'Minimum' }
+  ];
   // data
   plotData: any;
 
