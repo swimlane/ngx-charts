@@ -2,9 +2,10 @@
 
 ## HEAD (unreleased)
 
-## 23.0.0-alpha.0
+## 23.0.0
 
 - Enhancement: Added support for Angular 20
+- Enhancement: Added support for reference lines on Bar chart (horizontal and vertical), and area chart
 - Breaking: Removed support for Angular 17 and earlier versions
 
 ## 22.0.0
