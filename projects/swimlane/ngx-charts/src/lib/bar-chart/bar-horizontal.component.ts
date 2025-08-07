@@ -80,6 +80,7 @@ import { select } from 'd3-selection';
           [roundEdges]="roundEdges"
           [animations]="animations"
           [showDataLabel]="showDataLabel"
+          [dataLabelPosition]="dataLabelPosition"
           [dataLabelFormatting]="dataLabelFormatting"
           [noBarWhenZero]="noBarWhenZero"
           (select)="onClick($event)"
@@ -131,7 +132,8 @@ export class BarHorizontalComponent extends BaseChartComponent {
   @Input() dataLabelFormatting: any;
   @Input() noBarWhenZero: boolean = true;
   @Input() wrapTicks = false;
-
+  @Input() dataLabelPosition: string;
+  
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
