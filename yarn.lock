@@ -3632,10 +3632,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swimlane/ngx-ui@npm:50.0.0":
-  version: 50.0.0
-  resolution: "@swimlane/ngx-ui@npm:50.0.0"
+"@swimlane/ngx-ui@npm:50.0.3":
+  version: 50.0.3
+  resolution: "@swimlane/ngx-ui@npm:50.0.3"
   dependencies:
+    date-fns: "npm:4.1.0"
     mousetrap: "npm:^1.6.2"
     ng2-file-upload: "npm:8.0.0"
     tslib: "npm:^2.3.1"
@@ -3656,7 +3657,7 @@ __metadata:
     ng-in-viewport: 13.0.0
     ngx-autosize-input: ^2.3.7
     rxjs: 7.x
-  checksum: 10c0/c3183c0553ac444d0aa7dc8395d69241b512cf9b66a2c693bc2910980715e2fd8459f7eec129e39d70e317973156f8ace84e4db86fa1ed79e46557bcad429da4
+  checksum: 10c0/31f9d37ee2846d0524c86397d3512076c183152e465bc8bf429fd6ddf8fa19e1284e18607cfdcb81db8d8cf2ace684acebfc56db4c104190a18b9cc7f4462462
   languageName: node
   linkType: hard
 
@@ -6043,6 +6044,13 @@ __metadata:
     es-errors: "npm:^1.3.0"
     is-data-view: "npm:^1.0.1"
   checksum: 10c0/fa7aa40078025b7810dcffc16df02c480573b7b53ef1205aa6a61533011005c1890e5ba17018c692ce7c900212b547262d33279fde801ad9843edc0863bf78c4
+  languageName: node
+  linkType: hard
+
+"date-fns@npm:4.1.0":
+  version: 4.1.0
+  resolution: "date-fns@npm:4.1.0"
+  checksum: 10c0/b79ff32830e6b7faa009590af6ae0fb8c3fd9ffad46d930548fbb5acf473773b4712ae887e156ba91a7b3dc30591ce0f517d69fd83bd9c38650fdc03b4e0bac8
   languageName: node
   linkType: hard
 
@@ -10115,7 +10123,7 @@ __metadata:
     "@angular/platform-browser-dynamic": "npm:~20.0.4"
     "@angular/router": "npm:~20.0.4"
     "@swimlane/eslint-config": "npm:^2.0.0"
-    "@swimlane/ngx-ui": "npm:50.0.0"
+    "@swimlane/ngx-ui": "npm:50.0.3"
     "@swimlane/prettier-config-swimlane": "npm:^3.0.2"
     "@types/d3-array": "npm:^3.0.3"
     "@types/d3-ease": "npm:^3.0.0"
