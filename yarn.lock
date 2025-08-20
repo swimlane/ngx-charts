@@ -3632,9 +3632,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swimlane/ngx-ui@npm:50.0.0-alpha.0":
-  version: 50.0.0-alpha.0
-  resolution: "@swimlane/ngx-ui@npm:50.0.0-alpha.0"
+"@swimlane/ngx-ui@npm:50.0.0":
+  version: 50.0.0
+  resolution: "@swimlane/ngx-ui@npm:50.0.0"
   dependencies:
     mousetrap: "npm:^1.6.2"
     ng2-file-upload: "npm:8.0.0"
@@ -3656,7 +3656,7 @@ __metadata:
     ng-in-viewport: 13.0.0
     ngx-autosize-input: ^2.3.7
     rxjs: 7.x
-  checksum: 10c0/20c40011414179f826936a76947b8152078cc2c9f2686548d100d01bf6da4950a95ddb949a53d553d47ec26c0d76dd30a70ecdbca4e80f35305e6d5d2e1111b3
+  checksum: 10c0/c3183c0553ac444d0aa7dc8395d69241b512cf9b66a2c693bc2910980715e2fd8459f7eec129e39d70e317973156f8ace84e4db86fa1ed79e46557bcad429da4
   languageName: node
   linkType: hard
 
@@ -10115,7 +10115,7 @@ __metadata:
     "@angular/platform-browser-dynamic": "npm:~20.0.4"
     "@angular/router": "npm:~20.0.4"
     "@swimlane/eslint-config": "npm:^2.0.0"
-    "@swimlane/ngx-ui": "npm:50.0.0-alpha.0"
+    "@swimlane/ngx-ui": "npm:50.0.0"
     "@swimlane/prettier-config-swimlane": "npm:^3.0.2"
     "@types/d3-array": "npm:^3.0.3"
     "@types/d3-ease": "npm:^3.0.0"
