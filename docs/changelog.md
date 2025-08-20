@@ -2,6 +2,10 @@
 
 ## HEAD (unreleased)
 
+## 23.0.1
+
+- Chore: Update dependencies
+
 ## 23.0.0
 
 - Enhancement: Added support for Angular 20
