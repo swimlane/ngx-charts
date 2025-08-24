@@ -88,6 +88,9 @@ export class AppComponent implements OnInit {
   gradient = false;
   showLegend = true;
   legendTitle = 'Legend';
+  lineTransparency = 0;
+  chartTransparency = 0;
+  flag = 0;
   legendPosition = LegendPosition.Right;
   showXAxisLabel = true;
   tooltipDisabled = false;
@@ -516,6 +519,8 @@ export class AppComponent implements OnInit {
 
     this.width = 700;
     this.height = 300;
+    this.lineTransparency = 0;
+    this.chartTransparency = 0;
 
     Object.assign(this, this.chart.defaults);
 

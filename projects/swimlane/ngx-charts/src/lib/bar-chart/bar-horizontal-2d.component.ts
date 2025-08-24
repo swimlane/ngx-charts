@@ -88,6 +88,7 @@ import { BarOrientation } from '../common/types/bar-orientation.enum';
               ngx-charts-series-horizontal
               [xScale]="valueScale"
               [activeEntries]="activeEntries"
+              [ngStyle]="getStyle(chartTransparency)"
               [yScale]="innerScale"
               [colors]="colors"
               [series]="group.series"
@@ -117,6 +118,7 @@ import { BarOrientation } from '../common/types/bar-orientation.enum';
               ngx-charts-series-horizontal
               [xScale]="valueScale"
               [activeEntries]="activeEntries"
+              [ngStyle]="getStyle(chartTransparency)"
               [yScale]="innerScale"
               [colors]="colors"
               [series]="group.series"
@@ -157,6 +159,7 @@ import { BarOrientation } from '../common/types/bar-orientation.enum';
   standalone: false
 })
 export class BarHorizontal2DComponent extends BaseChartComponent {
+  @Input() chartTransparency: number = 0;
   @Input() legend: boolean = false;
   @Input() legendTitle: string = 'Legend';
   @Input() legendPosition: LegendPosition = LegendPosition.Right;
@@ -296,6 +299,12 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
     }
 
     return domain;
+  }
+
+  getStyle(transparency: number): object {
+    return {
+      opacity: 1 - transparency / 100
+    };
   }
 
   getInnerDomain(): string[] {

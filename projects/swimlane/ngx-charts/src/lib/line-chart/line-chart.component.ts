@@ -89,6 +89,7 @@ import { isPlatformServer } from '@angular/common';
                 [xScale]="xScale"
                 [yScale]="yScale"
                 [colors]="colors"
+                [ngStyle]="getStyle(lineTransparency)"
                 [data]="series"
                 [activeEntries]="activeEntries"
                 [scaleType]="scaleType"
@@ -208,6 +209,7 @@ export class LineChartComponent extends BaseChartComponent implements OnInit {
   @Input() yAxis: boolean;
   @Input() showXAxisLabel: boolean;
   @Input() showYAxisLabel: boolean;
+  @Input() lineTransparency: number;
   @Input() xAxisLabel: string;
   @Input() yAxisLabel: string;
   @Input() autoScale: boolean;
@@ -336,6 +338,12 @@ export class LineChartComponent extends BaseChartComponent implements OnInit {
       this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
       this.timelineTransform = `translate(${this.dims.xOffset}, ${-this.margin[2]})`;
     }
+  }
+
+  getStyle(transparency: number): object {
+    return {
+      opacity: 1 - transparency / 100
+    };
   }
 
   getXDomain(): any[] {
