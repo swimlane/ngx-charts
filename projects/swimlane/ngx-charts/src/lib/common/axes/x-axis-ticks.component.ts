@@ -51,7 +51,7 @@ import { roundedRect } from '../../common/shape.helper';
     </svg:g>
 
     <svg:g *ngFor="let tick of ticks" [attr.transform]="tickTransform(tick)">
-      <svg:g *ngIf="showGridLines" [attr.transform]="gridLineTransform()">
+      <svg:g *ngIf="showGridLines || tick === 0" [attr.transform]="gridLineTransform()">
         <svg:line class="gridline-path gridline-path-vertical" [attr.y1]="-gridLineHeight" y2="0" />
       </svg:g>
     </svg:g>
