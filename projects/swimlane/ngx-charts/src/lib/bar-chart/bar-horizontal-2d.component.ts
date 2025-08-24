@@ -215,7 +215,7 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
 
   ngOnInit() {
     if (isPlatformServer(this.platformId)) {
-      this.isSSR = true;
+      this.isSSR = false // skip;
     }
   }
 
