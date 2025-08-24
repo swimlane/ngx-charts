@@ -215,6 +215,14 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, 
         copy['target'] = item['target'];
       }
 
+      if (item['startTime'] !== undefined) {
+        copy['startTime'] = item['startTime'];
+      }
+
+      if (item['endTime'] !== undefined) {
+        copy['endTime'] = item['endTime'];
+      }
+
       results.push(copy);
     }
 
