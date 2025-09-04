@@ -1,13 +1,4 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  OnChanges,
-  SimpleChanges,
-  ChangeDetectionStrategy,
-  TemplateRef
-} from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel, escapeLabel } from '../common/label.helper';
 import { DataItem, StringOrNumberOrDate } from '../models/chart-data.model';
@@ -78,7 +69,8 @@ import { ScaleType } from '../common/types/scale-type.enum';
         animate(500, style({ opacity: 0 }))
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class SeriesHorizontal implements OnChanges {
   @Input() dims: ViewDimensions;
@@ -110,7 +102,7 @@ export class SeriesHorizontal implements OnChanges {
 
   barOrientation = BarOrientation;
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     this.update();
   }
 

@@ -1,0 +1,29 @@
+.percent-gauge {
+  cursor: pointer;
+
+  text {
+    text-anchor: middle;
+  }
+
+  .dashes-back {
+    stroke: #e7e7e7;
+  }
+
+  .target-circle,
+  .target-circle-bg {
+    fill: white;
+  }
+
+  .target-circle-bg {
+    stroke: #e7e7e7;
+  }
+
+  .total {
+    dominant-baseline: middle;
+  }
+
+  .label {
+    display: block;
+    text-anchor: middle;
+  }
+}

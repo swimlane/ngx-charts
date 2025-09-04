@@ -38,11 +38,12 @@ import { ViewDimensions } from '../types/view-dimension.interface';
   `,
   styleUrls: ['./timeline.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class Timeline implements OnChanges {
   @Input() view: [number, number];
-  @Input() results; // type this
+  @Input() declare results; // type this
   @Input() scheme; // type this
   @Input() customColors; // type this
   @Input() legend: boolean;

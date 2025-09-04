@@ -13,7 +13,8 @@ import { Gradient } from './types/gradient.interface';
       />
     </svg:radialGradient>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class SvgRadialGradientComponent implements OnChanges {
   @Input() color: string;

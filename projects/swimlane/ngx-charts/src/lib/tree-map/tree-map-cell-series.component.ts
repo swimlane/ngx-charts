@@ -54,7 +54,8 @@ interface TreeMapCell {
       [tooltipContext]="c.data"
     ></svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class TreeMapCellSeriesComponent implements OnChanges {
   @Input() data: any; // type this

@@ -159,7 +159,8 @@ const twoPI = 2 * Math.PI;
         )
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class PolarChartComponent extends BaseChartComponent implements OnInit {
   @Input() legend: boolean;
@@ -175,7 +176,7 @@ export class PolarChartComponent extends BaseChartComponent implements OnInit {
   @Input() showGridLines: boolean = true;
   @Input() curve: any = curveCardinalClosed;
   @Input() activeEntries: any[] = [];
-  @Input() schemeType: ScaleType;
+  @Input() declare schemeType: ScaleType;
   @Input() rangeFillOpacity: number = 0.15;
   @Input() trimYAxisTicks: boolean = true;
   @Input() maxYAxisTickLength: number = 16;
@@ -228,6 +229,10 @@ export class PolarChartComponent extends BaseChartComponent implements OnInit {
     if (isPlatformServer(this.platformId)) {
       this.isSSR = true;
     }
+  }
+
+  ngOnChanges(): void {
+    this.update();
   }
 
   update(): void {

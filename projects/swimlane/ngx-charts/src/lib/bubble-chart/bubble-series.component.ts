@@ -88,7 +88,8 @@ import { isPlatformServer } from '@angular/common';
         animate(250, style({ opacity: 1, transform: 'scale(1)' }))
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class BubbleSeriesComponent implements OnChanges, OnInit {
   @Input() data: BubbleChartSeries;

@@ -134,7 +134,8 @@ import { isPlatformServer } from '@angular/common';
         animate(500, style({ opacity: 0, transform: 'scale(0)' }))
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class BarHorizontalNormalizedComponent extends BaseChartComponent {
   @Input() legend: boolean = false;
@@ -150,7 +151,7 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
-  @Input() schemeType: ScaleType;
+  @Input() declare schemeType: ScaleType;
   @Input() trimXAxisTicks: boolean = true;
   @Input() trimYAxisTicks: boolean = true;
   @Input() rotateXAxisTicks: boolean = true;

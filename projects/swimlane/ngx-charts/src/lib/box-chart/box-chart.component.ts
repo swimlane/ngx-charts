@@ -78,7 +78,8 @@ import { ScaleType } from '../common/types/scale-type.enum';
   `,
   styleUrls: ['../common/base-chart.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class BoxChartComponent extends BaseChartComponent {
   /** Show or hide the legend. */
@@ -109,7 +110,7 @@ export class BoxChartComponent extends BaseChartComponent {
   @ContentChild('tooltipTemplate', { static: false }) tooltipTemplate: TemplateRef<any>;
 
   /** Input Data, this came from Base Chart Component. */
-  results: BoxChartMultiSeries;
+  declare results: BoxChartMultiSeries;
   /** Chart Dimensions, this came from Base Chart Component. */
   dims: ViewDimensions;
   /** Color data. */
@@ -132,6 +133,10 @@ export class BoxChartComponent extends BaseChartComponent {
   xAxisHeight: number = 0;
   /** Chart Y axis dimension. */
   yAxisWidth: number = 0;
+
+  ngOnChanges(): void {
+    this.update();
+  }
 
   trackBy(index: number, item: BoxChartSeries): StringOrNumberOrDate {
     return item.name;

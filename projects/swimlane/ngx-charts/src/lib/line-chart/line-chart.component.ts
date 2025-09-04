@@ -197,7 +197,8 @@ import { isPlatformServer } from '@angular/common';
         )
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class LineChartComponent extends BaseChartComponent implements OnInit {
   @Input() legend: boolean;
@@ -215,7 +216,7 @@ export class LineChartComponent extends BaseChartComponent implements OnInit {
   @Input() showGridLines: boolean = true;
   @Input() curve: any = curveLinear;
   @Input() activeEntries: any[] = [];
-  @Input() schemeType: ScaleType;
+  @Input() declare schemeType: ScaleType;
   @Input() rangeFillOpacity: number;
   @Input() trimXAxisTicks: boolean = true;
   @Input() trimYAxisTicks: boolean = true;
@@ -277,6 +278,10 @@ export class LineChartComponent extends BaseChartComponent implements OnInit {
     if (isPlatformServer(this.platformId)) {
       this.isSSR = true;
     }
+  }
+
+  ngOnChanges(): void {
+    this.update();
   }
 
   update(): void {

@@ -26,7 +26,8 @@ import { BarOrientation } from '../common/types/bar-orientation.enum';
     </svg:text>
   `,
   styleUrls: ['./bar-label.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class BarLabelComponent implements OnChanges {
   @Input() value;

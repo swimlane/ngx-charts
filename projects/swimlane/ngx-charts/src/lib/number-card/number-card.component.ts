@@ -32,7 +32,8 @@ import { ScaleType } from '../common/types/scale-type.enum';
   `,
   styleUrls: ['../common/base-chart.component.scss', './card.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class NumberCardComponent extends BaseChartComponent {
   @Input() cardColor: string;
@@ -50,6 +51,10 @@ export class NumberCardComponent extends BaseChartComponent {
   transform: string;
   domain: any[];
   margin: number[] = [10, 10, 10, 10];
+
+  ngOnChanges(): void {
+    this.update();
+  }
 
   get clickable(): boolean {
     return !!this.select.observers.length;

@@ -17,6 +17,7 @@ import { DataItem } from '../models/chart-data.model';
 import { LegendOptions, LegendPosition } from '../common/types/legend.model';
 import { ScaleType } from '../common/types/scale-type.enum';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { select } from 'd3-selection';
 
 @Component({
   selector: 'ngx-charts-bar-vertical',
@@ -61,6 +62,9 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
           [maxTickLength]="maxYAxisTickLength"
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
+          [referenceLines]="referenceLines"
+          [showRefLines]="showRefLines"
+          [showRefLabels]="showRefLabels"
           [wrapTicks]="wrapTicks"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
@@ -90,7 +94,8 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['../common/base-chart.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class BarVerticalComponent extends BaseChartComponent {
   @Input() legend = false;
@@ -104,9 +109,12 @@ export class BarVerticalComponent extends BaseChartComponent {
   @Input() yAxisLabel: string;
   @Input() tooltipDisabled: boolean = false;
   @Input() gradient: boolean;
+  @Input() referenceLines: any[];
+  @Input() showRefLines;
+  @Input() showRefLabels;
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
-  @Input() schemeType: ScaleType;
+  @Input() declare schemeType: ScaleType;
   @Input() trimXAxisTicks: boolean = true;
   @Input() trimYAxisTicks: boolean = true;
   @Input() rotateXAxisTicks: boolean = true;
@@ -144,6 +152,10 @@ export class BarVerticalComponent extends BaseChartComponent {
   legendOptions: LegendOptions;
   dataLabelMaxHeight: any = { negative: 0, positive: 0 };
 
+  ngOnChanges(): void {
+    this.update();
+  }
+
   update(): void {
     super.update();
 
@@ -179,6 +191,12 @@ export class BarVerticalComponent extends BaseChartComponent {
     this.legendOptions = this.getLegendOptions();
 
     this.transform = `translate(${this.dims.xOffset} , ${this.margin[0] + this.dataLabelMaxHeight.negative})`;
+
+    if (this.showRefLines) {
+      const parent = select(this.chartElement.nativeElement).select('.bar-chart').node() as HTMLElement;
+      const refLines = select(this.chartElement.nativeElement).selectAll('.ref-line').nodes() as HTMLElement[];
+      refLines.forEach(line => parent.appendChild(line));
+    }
   }
 
   getXScale(): any {

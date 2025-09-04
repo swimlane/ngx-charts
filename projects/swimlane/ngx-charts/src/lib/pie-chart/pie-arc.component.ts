@@ -35,7 +35,8 @@ import { BarOrientation } from '../common/types/bar-orientation.enum';
       />
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class PieArcComponent implements OnChanges {
   @Input() fill: string;

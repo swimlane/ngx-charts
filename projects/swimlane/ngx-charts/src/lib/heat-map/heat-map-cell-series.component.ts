@@ -52,7 +52,8 @@ interface Cell {
       [tooltipContext]="{ series: c.series, name: c.label, value: c.data }"
     ></svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class HeatCellSeriesComponent implements OnChanges, OnInit {
   @Input() data;

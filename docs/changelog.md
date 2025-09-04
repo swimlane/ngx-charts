@@ -1,5 +1,46 @@
 # Changelog
 
+## HEAD (unreleased)
+
+## 23.0.1
+
+- Chore: Update dependencies
+
+## 23.0.0
+
+- Enhancement: Added support for Angular 20
+- Enhancement: Added support for reference lines on Bar chart (horizontal and vertical), and area chart
+- Breaking: Removed support for Angular 17 and earlier versions
+
+## 22.0.0
+
+- Enhancement: Support Angular 19, `standalone` now required in all `@Component`
+- Enhancement: Update SASS and update for latest standard libraries
+- Enhancement: Sankey Chart can now accept custom colors
+- Fix: `update()` was not getting called on `@Input` changes
+
+## 21.1.3
+
+- Fix: Fixed a bug where the mask ID for percent gauge chart would be regenerated on each update
+
+## 21.1.2
+
+- Fix: Percent Gauge Chart: Ensures the circle mask ID is unique for each chart
+
+## 21.1.1
+
+- Fix: Percent Gauge Chart: Fixes server-side-rendering
+- Fix: Percent Gauge Chart: Fixes light theme
+- Fix: Percent Gauge Chart: Makes target circle highlight only when target is reached
+
+## 21.1.0
+
+- Feature: Add Percent Gauge chart type
+
+## 20.5.0
+
+- Feature: Add Sankey diagram chart type
+
 ## 20.4.1
 
 - Bump: d3-array from 2.9.1 to 3.1.1
@@ -29,6 +70,7 @@
 ## 20.1.1
 
 - Bump: d3-color from 2.0.0 to 3.1.0 in demo page
+
 ## 20.1.0
 
 - Fix: Cyclic import error caused by interface export in `PieGridComponent`.

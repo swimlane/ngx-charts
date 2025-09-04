@@ -88,7 +88,8 @@ export interface Tooltip {
         animate(250, style({ opacity: 0 }))
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class TooltipArea {
   anchorOpacity: number = 0;
@@ -103,7 +104,7 @@ export class TooltipArea {
   @Input() xSet: any[];
   @Input() xScale;
   @Input() yScale;
-  @Input() results: any[];
+  @Input() declare results: any[];
   @Input() colors: ColorHelper;
   @Input() showPercentage: boolean = false;
   @Input() tooltipDisabled: boolean = false;

@@ -76,7 +76,8 @@ interface PolarChartCircle {
       ></svg:g>
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class PolarSeriesComponent implements OnChanges {
   @Input() name;

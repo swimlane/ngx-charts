@@ -19,6 +19,9 @@
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
         [tooltipDisabled]="tooltipDisabled"
+        [referenceLines]="refLines"
+        [showRefLines]="showRefLines"
+        [showRefLabels]="showRefLabels"
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [showGridLines]="showGridLines"
@@ -56,6 +59,9 @@
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
         [tooltipDisabled]="tooltipDisabled"
+        [referenceLines]="refLines"
+        [showRefLines]="showRefLines"
+        [showRefLabels]="showRefLabels"
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [showGridLines]="showGridLines"
@@ -484,6 +490,9 @@
         [roundDomains]="roundDomains"
         [curve]="curve"
         [tooltipDisabled]="tooltipDisabled"
+        [referenceLines]="refLinesArea"
+        [showRefLines]="showRefLines"
+        [showRefLabels]="showRefLabels"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
         [rotateXAxisTicks]="rotateXAxisTicks"
@@ -713,6 +722,22 @@
         (deactivate)="deactivate($event)"
       >
       </ngx-charts-box-chart>
+      <ngx-charts-sankey
+        *ngIf="chartType === 'sankey'"
+        class="chart-container"
+        [view]="view"
+        [results]="sankeyData"
+        [scheme]="colorScheme"
+        [schemeType]="schemeType"
+        [customColors]="customColors"
+        [tooltipDisabled]="tooltipDisabled"
+        [animations]="animations"
+        [showLabels]="showLabels"
+        (select)="select($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
+      >
+      </ngx-charts-sankey>
       <div *ngIf="chartType === 'status-demo'">
         <ngx-slider
           [(ngModel)]="salePrice"
@@ -789,6 +814,22 @@
         (select)="select($event)"
       >
       </ngx-charts-linear-gauge>
+
+      <ngx-charts-percent-gauge
+        *ngIf="chartType === 'percent-gauge'"
+        class="chart-container"
+        [view]="view"
+        [scheme]="colorScheme"
+        [animations]="animations"
+        [value]="gaugeValue"
+        [target]="target"
+        [max]="gaugeMax"
+        [showLabel]="showLabel"
+        label="Coverage"
+        (select)="select($event)"
+      >
+      </ngx-charts-percent-gauge>
+
       <div *ngIf="chartType === 'plot-demo'">
         <ngx-input
           [type]="inputTypes.text"
@@ -1502,6 +1543,18 @@
           <label>
             <input type="checkbox" [(ngModel)]="margin" />
             Show Margin
+          </label>
+          <br />
+        </div>
+        <div *ngIf="chart.options.includes('target')">
+          <label>Target:</label><br />
+          <input type="number" [(ngModel)]="target" /><br />
+          <br />
+        </div>
+        <div *ngIf="chart.options.includes('showLabel')">
+          <label>
+            <input type="checkbox" [(ngModel)]="showLabel" />
+            Show Label
           </label>
           <br />
         </div>

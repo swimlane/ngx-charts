@@ -37,7 +37,8 @@ import { id } from '../utils/id';
       />
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class HeatMapCellComponent implements OnChanges {
   @Input() fill: string;

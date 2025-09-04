@@ -151,7 +151,8 @@ import { isPlatformServer } from '@angular/common';
         )
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class BubbleChartComponent extends BaseChartComponent {
   @Input() showGridLines: boolean = true;
@@ -226,6 +227,10 @@ export class BubbleChartComponent extends BaseChartComponent {
     if (isPlatformServer(this.platformId)) {
       this.isSSR = true;
     }
+  }
+
+  ngOnChanges(): void {
+    this.update();
   }
 
   update(): void {

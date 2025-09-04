@@ -147,7 +147,8 @@ import { isPlatformServer } from '@angular/common';
         )
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class BubbleChartInteractiveComponent extends BaseChartComponent {
   @Input() showGridLines: boolean = true;

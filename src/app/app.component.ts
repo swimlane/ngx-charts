@@ -10,6 +10,7 @@ import {
   multi,
   boxData,
   bubble,
+  sankeyData,
   generateData,
   generateGraph,
   treemap,
@@ -48,7 +49,8 @@ const getRandomInt = (min: number, max: number) => {
   providers: [Location, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['../../node_modules/@swimlane/ngx-ui/index.css', './app.component.scss'],
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
+  standalone: false
 })
 export class AppComponent implements OnInit {
   APP_VERSION = pkg.version;
@@ -117,6 +119,8 @@ export class AppComponent implements OnInit {
   strokeColor: string = '#FFFFFF';
   strokeWidth: number = 2;
   wrapTicks = false;
+  target = 90;
+  showLabel: boolean = true;
 
   curves = {
     Basis: shape.curveBasis,
@@ -192,6 +196,9 @@ export class AppComponent implements OnInit {
   // box
   boxData = boxData;
 
+  // sankey
+  sankeyData = sankeyData;
+
   // gauge
   gaugeMin: number = 0;
   gaugeMax: number = 100;
@@ -246,8 +253,8 @@ export class AppComponent implements OnInit {
   bubbleDemoChart: BubbleChartInteractiveServerDataModel;
 
   // Reference lines
-  showRefLines: boolean = true;
-  showRefLabels: boolean = true;
+  showRefLines: boolean = false;
+  showRefLabels: boolean = false;
 
   // Supports any number of reference lines.
   refLines = [
@@ -255,7 +262,11 @@ export class AppComponent implements OnInit {
     { value: 37750, name: 'Average' },
     { value: 33000, name: 'Minimum' }
   ];
-
+  refLinesArea = [
+    { value: 5062, name: 'Maximum' },
+    { value: 4030, name: 'Average' },
+    { value: 3000, name: 'Minimum' }
+  ];
   // data
   plotData: any;
 

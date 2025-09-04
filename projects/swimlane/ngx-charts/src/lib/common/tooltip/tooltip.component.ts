@@ -33,7 +33,8 @@ import { isPlatformBrowser } from '@angular/common';
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./tooltip.component.scss']
+  styleUrls: ['./tooltip.component.scss'],
+  standalone: false
 })
 export class TooltipContentComponent implements AfterViewInit {
   @Input() host: ElementRef;
