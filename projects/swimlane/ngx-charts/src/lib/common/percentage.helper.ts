@@ -15,8 +15,8 @@ export function roundPercentages(values: number[]): number[] {
   const raw = values.map(v => (v / totalValue) * 100);
   const floored = raw.map(v => Math.floor(v));
   const remainders = raw.map((v, i) => ({ i, remainder: v - floored[i] }));
-  let sum = floored.reduce((a, b) => a + b, 0);
-  let diff = 100 - sum;
+  const sum = floored.reduce((a, b) => a + b, 0);
+  const diff = 100 - sum;
 
   if (diff > 0) {
     // Adding points to values with large remainder
