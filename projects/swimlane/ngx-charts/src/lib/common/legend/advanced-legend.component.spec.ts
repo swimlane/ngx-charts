@@ -56,6 +56,7 @@ describe('<ngx-charts-advanced-legend>', () => {
                   [data]="data"
                   [width]="legendWidth"
                   [animations]="false"
+                  [roundPercentages]="false"
                   [valueFormatting]="valueFormatting"
                   [labelFormatting]="labelFormatting"
                   [percentageFormatting]="percentageFormatting">
@@ -142,6 +143,47 @@ describe('<ngx-charts-advanced-legend>', () => {
       '33%',
       '17%'
     ]);
+  });
+
+  it('should round percentages to sum to 100% when roundPercentages is true', () => {
+    TestBed.overrideComponent(TestComponent, {
+      set: {
+        template: `
+          <ngx-charts-advanced-legend
+            [label]="legendLabel"
+            [colors]="colors"
+            [data]="data"
+            [width]="legendWidth"
+            [animations]="false"
+            [roundPercentages]="true"
+            [valueFormatting]="valueFormatting"
+            [labelFormatting]="labelFormatting"
+            [percentageFormatting]="percentageFormatting">
+          </ngx-charts-advanced-legend>
+        `
+      }
+    }).compileComponents();
+
+    const fixture = TestBed.createComponent(TestComponent);
+    fixture.detectChanges();
+    const { legendItemPercentElements } = loadLegendItemElements(fixture);
+
+    expect(Array.from(legendItemPercentElements).map((x: Element) => x.textContent.trim())).toEqual([
+      '6%',
+      '9%',
+      '14%',
+      '21%',
+      '33%',
+      '17%'
+    ]);
+
+    const percentages = Array.from(legendItemPercentElements).map((x: Element) => {
+      const text = x.textContent.trim();
+      return parseInt(text.replace('%', ''));
+    });
+
+    const sum = percentages.reduce((a, b) => a + b, 0);
+    expect(sum).toBe(100);
   });
 
   function loadLegendItemElements(fixture: ComponentFixture<TestComponent>) {
