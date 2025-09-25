@@ -19,6 +19,7 @@ import { StyleTypes } from '../common/tooltip/style.type';
 import { escapeLabel } from '../common/label.helper';
 import { id } from '../utils/id';
 import { TextAnchor } from '../common/types/text-anchor.enum';
+import { trimLabel } from '../common/trim-label.helper';
 
 interface RectItem {
   fill: string;
@@ -32,6 +33,8 @@ interface RectItem {
   tooltip: string;
   transform: string;
   data: any;
+  originalLabel: string;
+  node?: any;
   active?: boolean;
 }
 
@@ -123,6 +126,7 @@ export class SankeyComponent extends BaseChartComponent {
   @Input() tooltipDisabled: boolean = false;
   @Input() activeEntries: any[] = [];
   @Input() labelFormatting: any;
+  @Input() truncateLabels: boolean = true;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -140,6 +144,7 @@ export class SankeyComponent extends BaseChartComponent {
 
   nodeRects: RectItem[];
   linkPaths: any[];
+  nodeLayerMap: Map<number, any[]>;
   chartHasActive: boolean = false;
 
   ngOnChanges(): void {
@@ -197,6 +202,8 @@ export class SankeyComponent extends BaseChartComponent {
         },
         transform: '',
         label: this.labelFormatting ? this.labelFormatting(node.name) : node.name,
+        originalLabel: node.name,
+        node: node,
         labelAnchor: TextAnchor.Start
       };
       rect.labelAnchor = this.getTextAnchor(node);
@@ -225,6 +232,10 @@ export class SankeyComponent extends BaseChartComponent {
       return linkPath;
     });
 
+    this.nodeLayerMap = this.getNodeLayerMap(data.nodes);
+    if (this.truncateLabels) {
+      this.truncateLabelsBasedOnAdjacentNodes();
+    }
     this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
   }
 
@@ -329,5 +340,105 @@ export class SankeyComponent extends BaseChartComponent {
 
   get hasActive(): boolean {
     return this.linkPaths.some(l => l.active) || this.nodeRects.some(r => r.active);
+  }
+
+  truncateLabelsBasedOnAdjacentNodes(): void {
+    this.nodeRects.forEach(rect => {
+      // Currently we dont display labels for nodes with height less than 15
+      if (rect.height <= 15 || !rect.node) {
+        return;
+      }
+      const availableWidth = this.calculateAvailableSpaceForLabel(rect);
+
+      if (availableWidth > 0) {
+        const charWidth = 7;
+        const maxChars = Math.floor(availableWidth / charWidth);
+        const truncatedLabel = trimLabel(rect.originalLabel, maxChars);
+        rect.label = this.labelFormatting ? this.labelFormatting(truncatedLabel) : truncatedLabel;
+      }
+    });
+  }
+
+  calculateAvailableSpaceForLabel(rect: RectItem): number {
+    const node = rect.node;
+    const labelMargin = 10; // Margin between label and adjacent nodes
+    const labelOffset = 5; // using in template [attr.x]="rect.width + 5"
+    const rightSideExtraOffset = 25; // from [attr.dx]
+
+    // Checking if the node is on left side or right side to label
+    const isLeftSideNode = rect.labelAnchor === TextAnchor.Start;
+
+    // Get corresponding nodes from adjacent layer
+    const adjacentNodes = this.getAdjacentLayerNodes(node, isLeftSideNode);
+
+    // Find nodes that vertically overlap with this node's label area
+    const labelCenterY = rect.y + rect.height / 2;
+    const labelHeight = 14;
+    const labelTop = labelCenterY - labelHeight / 2;
+    const labelBottom = labelCenterY + labelHeight / 2;
+
+    let minDistance = Infinity;
+
+    adjacentNodes.forEach(adjNode => {
+      if (adjNode.y0 < labelBottom && adjNode.y1 > labelTop) {
+        let distance: number;
+        if (isLeftSideNode) {
+          // Label starts at node.x1 + labelOffset and extends to the right
+          const labelStart = rect.x + rect.width + labelOffset;
+          distance = adjNode.x0 - labelStart - labelMargin;
+        } else {
+          // For right-side labels, text-anchor="end" means text extends left from the anchor point
+          // The anchor is at node.x0 - rightSideExtraOffset
+          const labelStart = rect.x - rightSideExtraOffset;
+          distance = labelStart - adjNode.x1 - labelMargin;
+        }
+
+        minDistance = Math.min(minDistance, distance);
+      }
+    });
+
+    // If no adjacent nodes found, use distance to chart edge
+    if (minDistance === Infinity) {
+      const chartPadding = 20; // Padding from chart edges
+      if (isLeftSideNode) {
+        // Check distance to right edge of chart
+        const labelStart = rect.x + rect.width + labelOffset;
+        minDistance = this.dims.width - labelStart - chartPadding;
+      } else {
+        // Check distance to left edge of chart
+        const labelAnchor = rect.x - rightSideExtraOffset;
+        minDistance = labelAnchor - chartPadding;
+      }
+    }
+
+    return Math.max(minDistance, 20); // At least 20px for label
+  }
+
+  getAdjacentLayerNodes(node: any, isLeftSideNode: boolean): any[] {
+    const currentLayer = node.layer;
+
+    // Determine which layer to check based on label position
+    const targetLayer = isLeftSideNode ? currentLayer + 1 : currentLayer - 1;
+
+    // Filter nodes in the target layer
+    const adjacentNodes = this.nodeLayerMap.get(targetLayer);
+    // If no nodes in adjacent layer, try the next layer
+    if (adjacentNodes.length === 0) {
+      const nextLayer = isLeftSideNode ? currentLayer + 2 : currentLayer - 2;
+      return this.nodeLayerMap.get(nextLayer);
+    }
+
+    return adjacentNodes;
+  }
+
+  getNodeLayerMap(nodes: any[]): Map<number, any[]> {
+    const nodeLayerMap = new Map<number, any[]>();
+    nodes.forEach(node => {
+      if (!nodeLayerMap.has(node.layer)) {
+        nodeLayerMap.set(node.layer, []);
+      }
+      nodeLayerMap.get(node.layer).push(node);
+    });
+    return nodeLayerMap;
   }
 }
