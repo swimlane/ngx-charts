@@ -145,7 +145,7 @@ describe('<ngx-charts-advanced-legend>', () => {
     ]);
   });
 
-  it('should round percentages to sum to 100% when roundPercentages is true', () => {
+  it('should round percentages with 2 decimals and sum to 100% when roundPercentages is true', () => {
     TestBed.overrideComponent(TestComponent, {
       set: {
         template: `
@@ -169,17 +169,17 @@ describe('<ngx-charts-advanced-legend>', () => {
     const { legendItemPercentElements } = loadLegendItemElements(fixture);
 
     expect(Array.from(legendItemPercentElements).map((x: Element) => x.textContent.trim())).toEqual([
-      '6%',
-      '9%',
-      '14%',
-      '21%',
-      '33%',
-      '17%'
+      '5.71%',
+      '8.57%',
+      '14.29%',
+      '21.43%',
+      '32.86%',
+      '17.14%'
     ]);
 
     const percentages = Array.from(legendItemPercentElements).map((x: Element) => {
       const text = x.textContent.trim();
-      return parseInt(text.replace('%', ''));
+      return parseFloat(text.replace('%', ''));
     });
 
     const sum = percentages.reduce((a, b) => a + b, 0);

@@ -12,7 +12,7 @@ import { trimLabel } from '../trim-label.helper';
 import { formatLabel } from '../label.helper';
 import { DataItem, StringOrNumberOrDate } from '../../models/chart-data.model';
 import { ColorHelper } from '../color.helper';
-import { roundPercentages } from '../percentage.helper';
+import { roundPercentagesWithDecimals } from '../percentage.helper';
 
 export interface AdvancedLegendItem {
   value: StringOrNumberOrDate;
@@ -68,6 +68,7 @@ export interface AdvancedLegendItem {
               *ngIf="animations"
               class="item-percent"
               ngx-charts-count-up
+              [countDecimals]="2"
               [countTo]="legendItem.percentage"
               [countSuffix]="'%'"
             ></div>
@@ -121,7 +122,9 @@ export class AdvancedLegendComponent implements OnChanges {
 
   getLegendItems(): AdvancedLegendItem[] {
     const values = this.data.map(d => Number(d.value));
-    const percentages = this.roundPercentages ? roundPercentages(values) : values.map(v => (v / this.total) * 100);
+    const percentages = this.roundPercentages
+      ? roundPercentagesWithDecimals(values)
+      : values.map(v => (v / this.total) * 100);
 
     return (this.data as any).map((d, index) => {
       const label = formatLabel(d.name);
@@ -138,7 +141,9 @@ export class AdvancedLegendComponent implements OnChanges {
         label: formattedLabel,
         displayLabel: trimLabel(formattedLabel, 20),
         origialLabel: d.name,
-        percentage: this.percentageFormatting ? this.percentageFormatting(percentage) : percentage.toLocaleString()
+        percentage: this.percentageFormatting
+          ? this.percentageFormatting(parseFloat(percentage.toLocaleString()))
+          : percentage.toLocaleString()
       };
     });
   }
