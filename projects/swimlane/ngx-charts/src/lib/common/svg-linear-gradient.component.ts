@@ -6,12 +6,13 @@ import { Gradient } from './types/gradient.interface';
   selector: 'g[ngx-charts-svg-linear-gradient]',
   template: `
     <svg:linearGradient [id]="name" [attr.x1]="x1" [attr.y1]="y1" [attr.x2]="x2" [attr.y2]="y2">
-      <svg:stop
-        *ngFor="let stop of stops"
-        [attr.offset]="stop.offset + '%'"
-        [style.stop-color]="stop.color"
-        [style.stop-opacity]="stop.opacity"
-      />
+      @for (stop of stops; track stop) {
+        <svg:stop
+          [attr.offset]="stop.offset + '%'"
+          [style.stop-color]="stop.color"
+          [style.stop-opacity]="stop.opacity"
+        />
+      }
     </svg:linearGradient>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

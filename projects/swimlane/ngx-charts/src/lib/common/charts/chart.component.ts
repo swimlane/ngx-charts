@@ -19,31 +19,33 @@ import { ScaleType } from '../types/scale-type.enum';
       <svg class="ngx-charts" [attr.width]="chartWidth" [attr.height]="view[1]">
         <ng-content></ng-content>
       </svg>
-      <ngx-charts-scale-legend
-        *ngIf="showLegend && legendType === LegendType.ScaleLegend"
-        class="chart-legend"
-        [horizontal]="legendOptions && legendOptions.position === LegendPosition.Below"
-        [valueRange]="legendOptions.domain"
-        [colors]="legendOptions.colors"
-        [height]="view[1]"
-        [width]="legendWidth"
-      >
-      </ngx-charts-scale-legend>
-      <ngx-charts-legend
-        *ngIf="showLegend && legendType === LegendType.Legend"
-        class="chart-legend"
-        [horizontal]="legendOptions && legendOptions.position === LegendPosition.Below"
-        [data]="legendOptions.domain"
-        [title]="legendOptions.title"
-        [colors]="legendOptions.colors"
-        [height]="view[1]"
-        [width]="legendWidth"
-        [activeEntries]="activeEntries"
-        (labelClick)="legendLabelClick.emit($event)"
-        (labelActivate)="legendLabelActivate.emit($event)"
-        (labelDeactivate)="legendLabelDeactivate.emit($event)"
-      >
-      </ngx-charts-legend>
+      @if (showLegend && legendType === LegendType.ScaleLegend) {
+        <ngx-charts-scale-legend
+          class="chart-legend"
+          [horizontal]="legendOptions && legendOptions.position === LegendPosition.Below"
+          [valueRange]="legendOptions.domain"
+          [colors]="legendOptions.colors"
+          [height]="view[1]"
+          [width]="legendWidth"
+        >
+        </ngx-charts-scale-legend>
+      }
+      @if (showLegend && legendType === LegendType.Legend) {
+        <ngx-charts-legend
+          class="chart-legend"
+          [horizontal]="legendOptions && legendOptions.position === LegendPosition.Below"
+          [data]="legendOptions.domain"
+          [title]="legendOptions.title"
+          [colors]="legendOptions.colors"
+          [height]="view[1]"
+          [width]="legendWidth"
+          [activeEntries]="activeEntries"
+          (labelClick)="legendLabelClick.emit($event)"
+          (labelActivate)="legendLabelActivate.emit($event)"
+          (labelDeactivate)="legendLabelDeactivate.emit($event)"
+        >
+        </ngx-charts-legend>
+      }
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -28,50 +28,55 @@ export interface AdvancedLegendItem {
   selector: 'ngx-charts-advanced-legend',
   template: `
     <div class="advanced-pie-legend" [style.width.px]="width">
-      <div
-        *ngIf="animations"
-        class="total-value"
-        ngx-charts-count-up
-        [countTo]="roundedTotal"
-        [valueFormatting]="valueFormatting"
-      ></div>
-      <div class="total-value" *ngIf="!animations">
-        {{ valueFormatting ? valueFormatting(roundedTotal) : defaultValueFormatting(roundedTotal) }}
-      </div>
+      @if (animations) {
+        <div class="total-value" ngx-charts-count-up [countTo]="roundedTotal" [valueFormatting]="valueFormatting"></div>
+      }
+      @if (!animations) {
+        <div class="total-value">
+          {{ valueFormatting ? valueFormatting(roundedTotal) : defaultValueFormatting(roundedTotal) }}
+        </div>
+      }
       <div class="total-label">
         {{ label }}
       </div>
       <div class="legend-items-container">
         <div class="legend-items">
-          <div
-            *ngFor="let legendItem of legendItems; trackBy: trackBy"
-            tabindex="-1"
-            class="legend-item"
-            (mouseenter)="activate.emit(legendItem.data)"
-            (mouseleave)="deactivate.emit(legendItem.data)"
-            (click)="select.emit(legendItem.data)"
-          >
-            <div class="item-color" [style.border-left-color]="legendItem.color"></div>
+          @for (legendItem of legendItems; track trackBy($index, legendItem)) {
             <div
-              *ngIf="animations"
-              class="item-value"
-              ngx-charts-count-up
-              [countTo]="legendItem._value"
-              [valueFormatting]="valueFormatting"
-            ></div>
-            <div *ngIf="!animations" class="item-value">
-              {{ valueFormatting ? valueFormatting(legendItem.value) : defaultValueFormatting(legendItem.value) }}
+              tabindex="-1"
+              class="legend-item"
+              (mouseenter)="activate.emit(legendItem.data)"
+              (mouseleave)="deactivate.emit(legendItem.data)"
+              (click)="select.emit(legendItem.data)"
+            >
+              <div class="item-color" [style.border-left-color]="legendItem.color"></div>
+              @if (animations) {
+                <div
+                  class="item-value"
+                  ngx-charts-count-up
+                  [countTo]="legendItem._value"
+                  [valueFormatting]="valueFormatting"
+                ></div>
+              }
+              @if (!animations) {
+                <div class="item-value">
+                  {{ valueFormatting ? valueFormatting(legendItem.value) : defaultValueFormatting(legendItem.value) }}
+                </div>
+              }
+              <div class="item-label">{{ legendItem.displayLabel }}</div>
+              @if (animations) {
+                <div
+                  class="item-percent"
+                  ngx-charts-count-up
+                  [countTo]="legendItem.percentage"
+                  [countSuffix]="'%'"
+                ></div>
+              }
+              @if (!animations) {
+                <div class="item-percent">{{ legendItem.percentage.toLocaleString() }}%</div>
+              }
             </div>
-            <div class="item-label">{{ legendItem.displayLabel }}</div>
-            <div
-              *ngIf="animations"
-              class="item-percent"
-              ngx-charts-count-up
-              [countTo]="legendItem.percentage"
-              [countSuffix]="'%'"
-            ></div>
-            <div *ngIf="!animations" class="item-percent">{{ legendItem.percentage.toLocaleString() }}%</div>
-          </div>
+          }
         </div>
       </div>
     </div>

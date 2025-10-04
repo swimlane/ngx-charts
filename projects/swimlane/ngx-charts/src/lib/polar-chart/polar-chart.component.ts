@@ -42,99 +42,110 @@ const twoPI = 2 * Math.PI;
       <svg:g class="polar-chart chart" [attr.transform]="transform">
         <svg:g [attr.transform]="transformPlot">
           <svg:circle class="polar-chart-background" cx="0" cy="0" [attr.r]="this.outerRadius" />
-          <svg:g *ngIf="showGridLines">
-            <svg:circle
-              *ngFor="let r of radiusTicks"
-              class="gridline-path radial-gridline-path"
-              cx="0"
-              cy="0"
-              [attr.r]="r"
-            />
-          </svg:g>
-          <svg:g *ngIf="xAxis">
-            <svg:g
-              ngx-charts-pie-label
-              *ngFor="let tick of thetaTicks"
-              [data]="tick"
-              [radius]="outerRadius"
-              [label]="tick.label"
-              [max]="outerRadius"
-              [value]="showGridLines ? 1 : outerRadius"
-              [explodeSlices]="true"
-              [animations]="animations"
-              [labelTrim]="labelTrim"
-              [labelTrimSize]="labelTrimSize"
-            ></svg:g>
-          </svg:g>
+          @if (showGridLines) {
+            <svg:g>
+              @for (r of radiusTicks; track r) {
+                <svg:circle class="gridline-path radial-gridline-path" cx="0" cy="0" [attr.r]="r" />
+              }
+            </svg:g>
+          }
+          @if (xAxis) {
+            <svg:g>
+              @for (tick of thetaTicks; track tick) {
+                <svg:g
+                  ngx-charts-pie-label
+                  [data]="tick"
+                  [radius]="outerRadius"
+                  [label]="tick.label"
+                  [max]="outerRadius"
+                  [value]="showGridLines ? 1 : outerRadius"
+                  [explodeSlices]="true"
+                  [animations]="animations"
+                  [labelTrim]="labelTrim"
+                  [labelTrimSize]="labelTrimSize"
+                ></svg:g>
+              }
+            </svg:g>
+          }
         </svg:g>
-        <svg:g
-          ngx-charts-y-axis
-          [attr.transform]="transformYAxis"
-          *ngIf="yAxis"
-          [yScale]="yAxisScale"
-          [dims]="yAxisDims"
-          [showGridLines]="showGridLines"
-          [showLabel]="showYAxisLabel"
-          [labelText]="yAxisLabel"
-          [trimTicks]="trimYAxisTicks"
-          [maxTickLength]="maxYAxisTickLength"
-          [tickFormatting]="yAxisTickFormatting"
-          [wrapTicks]="wrapTicks"
-          (dimensionsChanged)="updateYAxisWidth($event)"
-        ></svg:g>
-        <svg:g
-          ngx-charts-axis-label
-          *ngIf="xAxis && showXAxisLabel"
-          [label]="xAxisLabel"
-          [offset]="labelOffset"
-          [orient]="orientation.Bottom"
-          [height]="dims.height"
-          [width]="dims.width"
-        ></svg:g>
-        <svg:g *ngIf="!isSSR" [attr.transform]="transformPlot">
-          <svg:g *ngFor="let series of results; trackBy: trackBy" [@animationState]="'active'">
-            <svg:g
-              ngx-charts-polar-series
-              [gradient]="gradient"
-              [xScale]="xScale"
-              [yScale]="yScale"
-              [colors]="colors"
-              [data]="series"
-              [activeEntries]="activeEntries"
-              [scaleType]="scaleType"
-              [curve]="curve"
-              [rangeFillOpacity]="rangeFillOpacity"
-              [animations]="animations"
-              [tooltipDisabled]="tooltipDisabled"
-              [tooltipTemplate]="tooltipTemplate"
-              (select)="onClick($event)"
-              (activate)="onActivate($event)"
-              (deactivate)="onDeactivate($event)"
-            />
+        @if (yAxis) {
+          <svg:g
+            ngx-charts-y-axis
+            [attr.transform]="transformYAxis"
+            [yScale]="yAxisScale"
+            [dims]="yAxisDims"
+            [showGridLines]="showGridLines"
+            [showLabel]="showYAxisLabel"
+            [labelText]="yAxisLabel"
+            [trimTicks]="trimYAxisTicks"
+            [maxTickLength]="maxYAxisTickLength"
+            [tickFormatting]="yAxisTickFormatting"
+            [wrapTicks]="wrapTicks"
+            (dimensionsChanged)="updateYAxisWidth($event)"
+          ></svg:g>
+        }
+        @if (xAxis && showXAxisLabel) {
+          <svg:g
+            ngx-charts-axis-label
+            [label]="xAxisLabel"
+            [offset]="labelOffset"
+            [orient]="orientation.Bottom"
+            [height]="dims.height"
+            [width]="dims.width"
+          ></svg:g>
+        }
+        @if (!isSSR) {
+          <svg:g [attr.transform]="transformPlot">
+            @for (series of results; track trackBy($index, series)) {
+              <svg:g [@animationState]="'active'">
+                <svg:g
+                  ngx-charts-polar-series
+                  [gradient]="gradient"
+                  [xScale]="xScale"
+                  [yScale]="yScale"
+                  [colors]="colors"
+                  [data]="series"
+                  [activeEntries]="activeEntries"
+                  [scaleType]="scaleType"
+                  [curve]="curve"
+                  [rangeFillOpacity]="rangeFillOpacity"
+                  [animations]="animations"
+                  [tooltipDisabled]="tooltipDisabled"
+                  [tooltipTemplate]="tooltipTemplate"
+                  (select)="onClick($event)"
+                  (activate)="onActivate($event)"
+                  (deactivate)="onDeactivate($event)"
+                />
+              </svg:g>
+            }
           </svg:g>
-        </svg:g>
-        <svg:g *ngIf="isSSR" [attr.transform]="transformPlot">
-          <svg:g *ngFor="let series of results; trackBy: trackBy">
-            <svg:g
-              ngx-charts-polar-series
-              [gradient]="gradient"
-              [xScale]="xScale"
-              [yScale]="yScale"
-              [colors]="colors"
-              [data]="series"
-              [activeEntries]="activeEntries"
-              [scaleType]="scaleType"
-              [curve]="curve"
-              [rangeFillOpacity]="rangeFillOpacity"
-              [animations]="animations"
-              [tooltipDisabled]="tooltipDisabled"
-              [tooltipTemplate]="tooltipTemplate"
-              (select)="onClick($event)"
-              (activate)="onActivate($event)"
-              (deactivate)="onDeactivate($event)"
-            />
+        }
+        @if (isSSR) {
+          <svg:g [attr.transform]="transformPlot">
+            @for (series of results; track trackBy($index, series)) {
+              <svg:g>
+                <svg:g
+                  ngx-charts-polar-series
+                  [gradient]="gradient"
+                  [xScale]="xScale"
+                  [yScale]="yScale"
+                  [colors]="colors"
+                  [data]="series"
+                  [activeEntries]="activeEntries"
+                  [scaleType]="scaleType"
+                  [curve]="curve"
+                  [rangeFillOpacity]="rangeFillOpacity"
+                  [animations]="animations"
+                  [tooltipDisabled]="tooltipDisabled"
+                  [tooltipTemplate]="tooltipTemplate"
+                  (select)="onClick($event)"
+                  (activate)="onActivate($event)"
+                  (deactivate)="onDeactivate($event)"
+                />
+              </svg:g>
+            }
           </svg:g>
-        </svg:g>
+        }
       </svg:g>
     </ngx-charts-chart>
   `,

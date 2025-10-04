@@ -47,137 +47,153 @@ import { isPlatformServer } from '@angular/common';
         </svg:clipPath>
       </svg:defs>
       <svg:g [attr.transform]="transform" class="line-chart chart">
-        <svg:g
-          ngx-charts-x-axis
-          *ngIf="xAxis"
-          [xScale]="xScale"
-          [dims]="dims"
-          [showGridLines]="showGridLines"
-          [showLabel]="showXAxisLabel"
-          [labelText]="xAxisLabel"
-          [trimTicks]="trimXAxisTicks"
-          [rotateTicks]="rotateXAxisTicks"
-          [maxTickLength]="maxXAxisTickLength"
-          [tickFormatting]="xAxisTickFormatting"
-          [ticks]="xAxisTicks"
-          [wrapTicks]="wrapTicks"
-          (dimensionsChanged)="updateXAxisHeight($event)"
-        ></svg:g>
-        <svg:g
-          ngx-charts-y-axis
-          *ngIf="yAxis"
-          [yScale]="yScale"
-          [dims]="dims"
-          [showGridLines]="showGridLines"
-          [showLabel]="showYAxisLabel"
-          [labelText]="yAxisLabel"
-          [trimTicks]="trimYAxisTicks"
-          [maxTickLength]="maxYAxisTickLength"
-          [tickFormatting]="yAxisTickFormatting"
-          [ticks]="yAxisTicks"
-          [referenceLines]="referenceLines"
-          [showRefLines]="showRefLines"
-          [showRefLabels]="showRefLabels"
-          [wrapTicks]="wrapTicks"
-          (dimensionsChanged)="updateYAxisWidth($event)"
-        ></svg:g>
-        <svg:g [attr.clip-path]="clipPath">
-          <svg:g *ngIf="!isSSR">
-            <svg:g *ngFor="let series of results; trackBy: trackBy" [@animationState]="'active'">
-              <svg:g
-                ngx-charts-line-series
-                [xScale]="xScale"
-                [yScale]="yScale"
-                [colors]="colors"
-                [data]="series"
-                [activeEntries]="activeEntries"
-                [scaleType]="scaleType"
-                [curve]="curve"
-                [rangeFillOpacity]="rangeFillOpacity"
-                [hasRange]="hasRange"
-                [animations]="animations"
-              />
-            </svg:g>
-          </svg:g>
-          <svg:g *ngIf="isSSR">
-            <svg:g *ngFor="let series of results; trackBy: trackBy">
-              <svg:g
-                ngx-charts-line-series
-                [xScale]="xScale"
-                [yScale]="yScale"
-                [colors]="colors"
-                [data]="series"
-                [activeEntries]="activeEntries"
-                [scaleType]="scaleType"
-                [curve]="curve"
-                [rangeFillOpacity]="rangeFillOpacity"
-                [hasRange]="hasRange"
-                [animations]="animations"
-              />
-            </svg:g>
-          </svg:g>
-
-          <svg:g *ngIf="!tooltipDisabled" (mouseleave)="hideCircles()">
-            <svg:g
-              ngx-charts-tooltip-area
-              [dims]="dims"
-              [xSet]="xSet"
-              [xScale]="xScale"
-              [yScale]="yScale"
-              [results]="results"
-              [colors]="colors"
-              [tooltipDisabled]="tooltipDisabled"
-              [tooltipTemplate]="seriesTooltipTemplate"
-              (hover)="updateHoveredVertical($event)"
-            />
-
-            <svg:g *ngFor="let series of results">
-              <svg:g
-                ngx-charts-circle-series
-                [xScale]="xScale"
-                [yScale]="yScale"
-                [colors]="colors"
-                [data]="series"
-                [scaleType]="scaleType"
-                [visibleValue]="hoveredVertical"
-                [activeEntries]="activeEntries"
-                [tooltipDisabled]="tooltipDisabled"
-                [tooltipTemplate]="tooltipTemplate"
-                (select)="onClick($event)"
-                (activate)="onActivate($event)"
-                (deactivate)="onDeactivate($event)"
-              />
-            </svg:g>
-          </svg:g>
-        </svg:g>
-      </svg:g>
-      <svg:g
-        ngx-charts-timeline
-        *ngIf="timeline && scaleType != 'ordinal'"
-        [attr.transform]="timelineTransform"
-        [results]="results"
-        [view]="[timelineWidth, height]"
-        [height]="timelineHeight"
-        [scheme]="scheme"
-        [customColors]="customColors"
-        [scaleType]="scaleType"
-        [legend]="legend"
-        (onDomainChange)="updateDomain($event)"
-      >
-        <svg:g *ngFor="let series of results; trackBy: trackBy">
+        @if (xAxis) {
           <svg:g
-            ngx-charts-line-series
-            [xScale]="timelineXScale"
-            [yScale]="timelineYScale"
-            [colors]="colors"
-            [data]="series"
-            [scaleType]="scaleType"
-            [curve]="curve"
-            [hasRange]="hasRange"
-            [animations]="animations"
-          />
+            ngx-charts-x-axis
+            [xScale]="xScale"
+            [dims]="dims"
+            [showGridLines]="showGridLines"
+            [showLabel]="showXAxisLabel"
+            [labelText]="xAxisLabel"
+            [trimTicks]="trimXAxisTicks"
+            [rotateTicks]="rotateXAxisTicks"
+            [maxTickLength]="maxXAxisTickLength"
+            [tickFormatting]="xAxisTickFormatting"
+            [ticks]="xAxisTicks"
+            [wrapTicks]="wrapTicks"
+            (dimensionsChanged)="updateXAxisHeight($event)"
+          ></svg:g>
+        }
+        @if (yAxis) {
+          <svg:g
+            ngx-charts-y-axis
+            [yScale]="yScale"
+            [dims]="dims"
+            [showGridLines]="showGridLines"
+            [showLabel]="showYAxisLabel"
+            [labelText]="yAxisLabel"
+            [trimTicks]="trimYAxisTicks"
+            [maxTickLength]="maxYAxisTickLength"
+            [tickFormatting]="yAxisTickFormatting"
+            [ticks]="yAxisTicks"
+            [referenceLines]="referenceLines"
+            [showRefLines]="showRefLines"
+            [showRefLabels]="showRefLabels"
+            [wrapTicks]="wrapTicks"
+            (dimensionsChanged)="updateYAxisWidth($event)"
+          ></svg:g>
+        }
+        <svg:g [attr.clip-path]="clipPath">
+          @if (!isSSR) {
+            <svg:g>
+              @for (series of results; track trackBy($index, series)) {
+                <svg:g [@animationState]="'active'">
+                  <svg:g
+                    ngx-charts-line-series
+                    [xScale]="xScale"
+                    [yScale]="yScale"
+                    [colors]="colors"
+                    [data]="series"
+                    [activeEntries]="activeEntries"
+                    [scaleType]="scaleType"
+                    [curve]="curve"
+                    [rangeFillOpacity]="rangeFillOpacity"
+                    [hasRange]="hasRange"
+                    [animations]="animations"
+                  />
+                </svg:g>
+              }
+            </svg:g>
+          }
+          @if (isSSR) {
+            <svg:g>
+              @for (series of results; track trackBy($index, series)) {
+                <svg:g>
+                  <svg:g
+                    ngx-charts-line-series
+                    [xScale]="xScale"
+                    [yScale]="yScale"
+                    [colors]="colors"
+                    [data]="series"
+                    [activeEntries]="activeEntries"
+                    [scaleType]="scaleType"
+                    [curve]="curve"
+                    [rangeFillOpacity]="rangeFillOpacity"
+                    [hasRange]="hasRange"
+                    [animations]="animations"
+                  />
+                </svg:g>
+              }
+            </svg:g>
+          }
+          @if (!tooltipDisabled) {
+            <svg:g (mouseleave)="hideCircles()">
+              <svg:g
+                ngx-charts-tooltip-area
+                [dims]="dims"
+                [xSet]="xSet"
+                [xScale]="xScale"
+                [yScale]="yScale"
+                [results]="results"
+                [colors]="colors"
+                [tooltipDisabled]="tooltipDisabled"
+                [tooltipTemplate]="seriesTooltipTemplate"
+                (hover)="updateHoveredVertical($event)"
+              />
+
+              @for (series of results; track series) {
+                <svg:g>
+                  <svg:g
+                    ngx-charts-circle-series
+                    [xScale]="xScale"
+                    [yScale]="yScale"
+                    [colors]="colors"
+                    [data]="series"
+                    [scaleType]="scaleType"
+                    [visibleValue]="hoveredVertical"
+                    [activeEntries]="activeEntries"
+                    [tooltipDisabled]="tooltipDisabled"
+                    [tooltipTemplate]="tooltipTemplate"
+                    (select)="onClick($event)"
+                    (activate)="onActivate($event)"
+                    (deactivate)="onDeactivate($event)"
+                  />
+                </svg:g>
+              }
+            </svg:g>
+          }
         </svg:g>
       </svg:g>
+      @if (timeline && scaleType != 'ordinal') {
+        <svg:g
+          ngx-charts-timeline
+          [attr.transform]="timelineTransform"
+          [results]="results"
+          [view]="[timelineWidth, height]"
+          [height]="timelineHeight"
+          [scheme]="scheme"
+          [customColors]="customColors"
+          [scaleType]="scaleType"
+          [legend]="legend"
+          (onDomainChange)="updateDomain($event)"
+        >
+          @for (series of results; track trackBy($index, series)) {
+            <svg:g>
+              <svg:g
+                ngx-charts-line-series
+                [xScale]="timelineXScale"
+                [yScale]="timelineYScale"
+                [colors]="colors"
+                [data]="series"
+                [scaleType]="scaleType"
+                [curve]="curve"
+                [hasRange]="hasRange"
+                [animations]="animations"
+              />
+            </svg:g>
+          }
+        </svg:g>
+      }
     </ngx-charts-chart>
   `,
   styleUrls: ['../common/base-chart.component.scss'],

@@ -33,15 +33,16 @@ interface PolarChartCircle {
   template: `
     <svg:g class="polar-charts-series">
       <defs>
-        <svg:g
-          ngx-charts-svg-radial-gradient
-          *ngIf="hasGradient"
-          [color]="seriesColor"
-          [name]="gradientId"
-          [startOpacity]="0.25"
-          [endOpacity]="1"
-          [stops]="gradientStops"
-        />
+        @if (hasGradient) {
+          <svg:g
+            ngx-charts-svg-radial-gradient
+            [color]="seriesColor"
+            [name]="gradientId"
+            [startOpacity]="0.25"
+            [endOpacity]="1"
+            [stops]="gradientStops"
+          />
+        }
       </defs>
       <svg:g
         ngx-charts-line
@@ -54,26 +55,27 @@ interface PolarChartCircle {
         [fill]="hasGradient ? gradientUrl : seriesColor"
         [animations]="animations"
       />
-      <svg:g
-        ngx-charts-circle
-        *ngFor="let circle of circles"
-        class="circle"
-        [cx]="circle.cx"
-        [cy]="circle.cy"
-        [r]="circleRadius"
-        [fill]="circle.color"
-        [style.opacity]="inactive ? 0.2 : 1"
-        ngx-tooltip
-        [tooltipDisabled]="tooltipDisabled"
-        [tooltipPlacement]="placementTypes.Top"
-        [tooltipType]="styleTypes.tooltip"
-        [tooltipTitle]="tooltipTemplate ? undefined : tooltipText(circle)"
-        [tooltipTemplate]="tooltipTemplate"
-        [tooltipContext]="circle.data"
-        (select)="select.emit(circle.data)"
-        (activate)="activate.emit({ name: circle.data.series })"
-        (deactivate)="deactivate.emit({ name: circle.data.series })"
-      ></svg:g>
+      @for (circle of circles; track circle) {
+        <svg:g
+          ngx-charts-circle
+          class="circle"
+          [cx]="circle.cx"
+          [cy]="circle.cy"
+          [r]="circleRadius"
+          [fill]="circle.color"
+          [style.opacity]="inactive ? 0.2 : 1"
+          ngx-tooltip
+          [tooltipDisabled]="tooltipDisabled"
+          [tooltipPlacement]="placementTypes.Top"
+          [tooltipType]="styleTypes.tooltip"
+          [tooltipTitle]="tooltipTemplate ? undefined : tooltipText(circle)"
+          [tooltipTemplate]="tooltipTemplate"
+          [tooltipContext]="circle.data"
+          (select)="select.emit(circle.data)"
+          (activate)="activate.emit({ name: circle.data.series })"
+          (deactivate)="deactivate.emit({ name: circle.data.series })"
+        ></svg:g>
+      }
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

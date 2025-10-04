@@ -45,10 +45,12 @@ export interface Tooltip {
       />
       <ng-template #defaultTooltipTemplate let-model="model">
         <xhtml:div class="area-tooltip-container">
-          <xhtml:div *ngFor="let tooltipItem of model" class="tooltip-item">
-            <xhtml:span class="tooltip-item-color" [style.background-color]="tooltipItem.color"></xhtml:span>
-            {{ getToolTipText(tooltipItem) }}
-          </xhtml:div>
+          @for (tooltipItem of model; track tooltipItem) {
+            <xhtml:div class="tooltip-item">
+              <xhtml:span class="tooltip-item-color" [style.background-color]="tooltipItem.color"></xhtml:span>
+              {{ getToolTipText(tooltipItem) }}
+            </xhtml:div>
+          }
         </xhtml:div>
       </ng-template>
       <svg:rect

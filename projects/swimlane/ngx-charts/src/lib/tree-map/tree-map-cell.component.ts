@@ -12,14 +12,16 @@ import { BarOrientation } from '../common/types/bar-orientation.enum';
   selector: 'g[ngx-charts-tree-map-cell]',
   template: `
     <svg:g>
-      <defs *ngIf="gradient">
-        <svg:g
-          ngx-charts-svg-linear-gradient
-          [orientation]="orientation.Vertical"
-          [name]="gradientId"
-          [stops]="gradientStops"
-        />
-      </defs>
+      @if (gradient) {
+        <defs>
+          <svg:g
+            ngx-charts-svg-linear-gradient
+            [orientation]="orientation.Vertical"
+            [name]="gradientId"
+            [stops]="gradientStops"
+          />
+        </defs>
+      }
       <svg:rect
         [attr.fill]="gradient ? gradientUrl : fill"
         [attr.width]="width"
@@ -29,31 +31,30 @@ import { BarOrientation } from '../common/types/bar-orientation.enum';
         class="cell"
         (click)="onClick()"
       />
-      <svg:foreignObject
-        *ngIf="width >= 70 && height >= 35"
-        [attr.x]="x"
-        [attr.y]="y"
-        [attr.width]="width"
-        [attr.height]="height"
-        class="treemap-label"
-        [style.pointer-events]="'none'"
-      >
-        <xhtml:p [style.color]="getTextColor()" [style.height]="height + 'px'" [style.width]="width + 'px'">
-          <xhtml:span class="treemap-label" [innerHTML]="formattedLabel"> </xhtml:span>
-          <xhtml:br />
-          <xhtml:span
-            *ngIf="animations"
-            class="treemap-val"
-            ngx-charts-count-up
-            [countTo]="value"
-            [valueFormatting]="valueFormatting"
-          >
-          </xhtml:span>
-          <xhtml:span *ngIf="!animations" class="treemap-val">
-            {{ formattedValue }}
-          </xhtml:span>
-        </xhtml:p>
-      </svg:foreignObject>
+      @if (width >= 70 && height >= 35) {
+        <svg:foreignObject
+          [attr.x]="x"
+          [attr.y]="y"
+          [attr.width]="width"
+          [attr.height]="height"
+          class="treemap-label"
+          [style.pointer-events]="'none'"
+        >
+          <xhtml:p [style.color]="getTextColor()" [style.height]="height + 'px'" [style.width]="width + 'px'">
+            <xhtml:span class="treemap-label" [innerHTML]="formattedLabel"> </xhtml:span>
+            <xhtml:br />
+            @if (animations) {
+              <xhtml:span class="treemap-val" ngx-charts-count-up [countTo]="value" [valueFormatting]="valueFormatting">
+              </xhtml:span>
+            }
+            @if (!animations) {
+              <xhtml:span class="treemap-val">
+                {{ formattedValue }}
+              </xhtml:span>
+            }
+          </xhtml:p>
+        </svg:foreignObject>
+      }
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

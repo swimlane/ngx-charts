@@ -25,24 +25,25 @@ export interface PieArc {
   selector: 'g[ngx-charts-pie-grid-series]',
   template: `
     <svg:g class="pie-grid-arcs">
-      <svg:g
-        ngx-charts-pie-arc
-        *ngFor="let arc of arcs; trackBy: trackBy"
-        [attr.class]="arc.class"
-        [startAngle]="arc.startAngle"
-        [endAngle]="arc.endAngle"
-        [innerRadius]="innerRadius"
-        [outerRadius]="outerRadius"
-        [fill]="color(arc)"
-        [value]="arc.data.value"
-        [data]="arc.data"
-        [gradient]="false"
-        [pointerEvents]="arc.pointerEvents"
-        [animate]="arc.animate"
-        (select)="onClick($event)"
-        (activate)="activate.emit($event)"
-        (deactivate)="deactivate.emit($event)"
-      ></svg:g>
+      @for (arc of arcs; track trackBy($index, arc)) {
+        <svg:g
+          ngx-charts-pie-arc
+          [attr.class]="arc.class"
+          [startAngle]="arc.startAngle"
+          [endAngle]="arc.endAngle"
+          [innerRadius]="innerRadius"
+          [outerRadius]="outerRadius"
+          [fill]="color(arc)"
+          [value]="arc.data.value"
+          [data]="arc.data"
+          [gradient]="false"
+          [pointerEvents]="arc.pointerEvents"
+          [animate]="arc.animate"
+          (select)="onClick($event)"
+          (activate)="activate.emit($event)"
+          (deactivate)="deactivate.emit($event)"
+        ></svg:g>
+      }
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

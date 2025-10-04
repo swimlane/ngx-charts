@@ -5,12 +5,13 @@ import { Gradient } from './types/gradient.interface';
   selector: 'g[ngx-charts-svg-radial-gradient]',
   template: `
     <svg:radialGradient [id]="name" [attr.cx]="cx" [attr.cy]="cy" [attr.r]="r" gradientUnits="userSpaceOnUse">
-      <svg:stop
-        *ngFor="let stop of stops"
-        [attr.offset]="stop.offset + '%'"
-        [style.stop-color]="stop.color"
-        [style.stop-opacity]="stop.opacity"
-      />
+      @for (stop of stops; track stop) {
+        <svg:stop
+          [attr.offset]="stop.offset + '%'"
+          [style.stop-color]="stop.color"
+          [style.stop-opacity]="stop.opacity"
+        />
+      }
     </svg:radialGradient>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

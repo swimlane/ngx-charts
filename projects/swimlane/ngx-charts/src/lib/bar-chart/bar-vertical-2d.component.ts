@@ -45,90 +45,98 @@ import { isPlatformServer } from '@angular/common';
           [dims]="dims"
           [orient]="barOrientation.Vertical"
         ></svg:g>
-        <svg:g
-          ngx-charts-x-axis
-          *ngIf="xAxis"
-          [xScale]="groupScale"
-          [dims]="dims"
-          [showLabel]="showXAxisLabel"
-          [labelText]="xAxisLabel"
-          [trimTicks]="trimXAxisTicks"
-          [rotateTicks]="rotateXAxisTicks"
-          [maxTickLength]="maxXAxisTickLength"
-          [tickFormatting]="xAxisTickFormatting"
-          [ticks]="xAxisTicks"
-          [xAxisOffset]="dataLabelMaxHeight.negative"
-          [wrapTicks]="wrapTicks"
-          (dimensionsChanged)="updateXAxisHeight($event)"
-        ></svg:g>
-        <svg:g
-          ngx-charts-y-axis
-          *ngIf="yAxis"
-          [yScale]="valueScale"
-          [dims]="dims"
-          [showGridLines]="showGridLines"
-          [showLabel]="showYAxisLabel"
-          [labelText]="yAxisLabel"
-          [trimTicks]="trimYAxisTicks"
-          [maxTickLength]="maxYAxisTickLength"
-          [tickFormatting]="yAxisTickFormatting"
-          [ticks]="yAxisTicks"
-          [wrapTicks]="wrapTicks"
-          (dimensionsChanged)="updateYAxisWidth($event)"
-        ></svg:g>
-        <svg:g *ngIf="!isSSR">
+        @if (xAxis) {
           <svg:g
-            ngx-charts-series-vertical
-            *ngFor="let group of results; let index = index; trackBy: trackBy"
-            [@animationState]="'active'"
-            [attr.transform]="groupTransform(group)"
-            [activeEntries]="activeEntries"
-            [xScale]="innerScale"
-            [yScale]="valueScale"
-            [colors]="colors"
-            [series]="group.series"
+            ngx-charts-x-axis
+            [xScale]="groupScale"
             [dims]="dims"
-            [gradient]="gradient"
-            [tooltipDisabled]="tooltipDisabled"
-            [tooltipTemplate]="tooltipTemplate"
-            [showDataLabel]="showDataLabel"
-            [dataLabelFormatting]="dataLabelFormatting"
-            [seriesName]="group.name"
-            [roundEdges]="roundEdges"
-            [animations]="animations"
-            [noBarWhenZero]="noBarWhenZero"
-            (select)="onClick($event, group)"
-            (activate)="onActivate($event, group)"
-            (deactivate)="onDeactivate($event, group)"
-            (dataLabelHeightChanged)="onDataLabelMaxHeightChanged($event, index)"
+            [showLabel]="showXAxisLabel"
+            [labelText]="xAxisLabel"
+            [trimTicks]="trimXAxisTicks"
+            [rotateTicks]="rotateXAxisTicks"
+            [maxTickLength]="maxXAxisTickLength"
+            [tickFormatting]="xAxisTickFormatting"
+            [ticks]="xAxisTicks"
+            [xAxisOffset]="dataLabelMaxHeight.negative"
+            [wrapTicks]="wrapTicks"
+            (dimensionsChanged)="updateXAxisHeight($event)"
           ></svg:g>
-        </svg:g>
-        <svg:g *ngIf="isSSR">
+        }
+        @if (yAxis) {
           <svg:g
-            ngx-charts-series-vertical
-            *ngFor="let group of results; let index = index; trackBy: trackBy"
-            [attr.transform]="groupTransform(group)"
-            [activeEntries]="activeEntries"
-            [xScale]="innerScale"
+            ngx-charts-y-axis
             [yScale]="valueScale"
-            [colors]="colors"
-            [series]="group.series"
             [dims]="dims"
-            [gradient]="gradient"
-            [tooltipDisabled]="tooltipDisabled"
-            [tooltipTemplate]="tooltipTemplate"
-            [showDataLabel]="showDataLabel"
-            [dataLabelFormatting]="dataLabelFormatting"
-            [seriesName]="group.name"
-            [roundEdges]="roundEdges"
-            [animations]="animations"
-            [noBarWhenZero]="noBarWhenZero"
-            (select)="onClick($event, group)"
-            (activate)="onActivate($event, group)"
-            (deactivate)="onDeactivate($event, group)"
-            (dataLabelHeightChanged)="onDataLabelMaxHeightChanged($event, index)"
+            [showGridLines]="showGridLines"
+            [showLabel]="showYAxisLabel"
+            [labelText]="yAxisLabel"
+            [trimTicks]="trimYAxisTicks"
+            [maxTickLength]="maxYAxisTickLength"
+            [tickFormatting]="yAxisTickFormatting"
+            [ticks]="yAxisTicks"
+            [wrapTicks]="wrapTicks"
+            (dimensionsChanged)="updateYAxisWidth($event)"
           ></svg:g>
-        </svg:g>
+        }
+        @if (!isSSR) {
+          <svg:g>
+            @for (group of results; track trackBy(index, group); let index = $index) {
+              <svg:g
+                ngx-charts-series-vertical
+                [@animationState]="'active'"
+                [attr.transform]="groupTransform(group)"
+                [activeEntries]="activeEntries"
+                [xScale]="innerScale"
+                [yScale]="valueScale"
+                [colors]="colors"
+                [series]="group.series"
+                [dims]="dims"
+                [gradient]="gradient"
+                [tooltipDisabled]="tooltipDisabled"
+                [tooltipTemplate]="tooltipTemplate"
+                [showDataLabel]="showDataLabel"
+                [dataLabelFormatting]="dataLabelFormatting"
+                [seriesName]="group.name"
+                [roundEdges]="roundEdges"
+                [animations]="animations"
+                [noBarWhenZero]="noBarWhenZero"
+                (select)="onClick($event, group)"
+                (activate)="onActivate($event, group)"
+                (deactivate)="onDeactivate($event, group)"
+                (dataLabelHeightChanged)="onDataLabelMaxHeightChanged($event, index)"
+              ></svg:g>
+            }
+          </svg:g>
+        }
+        @if (isSSR) {
+          <svg:g>
+            @for (group of results; track trackBy(index, group); let index = $index) {
+              <svg:g
+                ngx-charts-series-vertical
+                [attr.transform]="groupTransform(group)"
+                [activeEntries]="activeEntries"
+                [xScale]="innerScale"
+                [yScale]="valueScale"
+                [colors]="colors"
+                [series]="group.series"
+                [dims]="dims"
+                [gradient]="gradient"
+                [tooltipDisabled]="tooltipDisabled"
+                [tooltipTemplate]="tooltipTemplate"
+                [showDataLabel]="showDataLabel"
+                [dataLabelFormatting]="dataLabelFormatting"
+                [seriesName]="group.name"
+                [roundEdges]="roundEdges"
+                [animations]="animations"
+                [noBarWhenZero]="noBarWhenZero"
+                (select)="onClick($event, group)"
+                (activate)="onActivate($event, group)"
+                (deactivate)="onDeactivate($event, group)"
+                (dataLabelHeightChanged)="onDataLabelMaxHeightChanged($event, index)"
+              ></svg:g>
+            }
+          </svg:g>
+        }
       </svg:g>
     </ngx-charts-chart>
   `,

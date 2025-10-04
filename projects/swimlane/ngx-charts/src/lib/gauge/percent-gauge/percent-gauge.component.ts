@@ -41,15 +41,17 @@ import { id } from '../../utils/id';
 
           <svg:g [attr.mask]="'url(#' + circleMaskId + ')'">
             <svg:g [attr.transform]="circleTransform">
-              <svg:g *ngFor="let tic of ticks" [attr.transform]="tic.transform">
-                <rect
-                  [attr.y]="-tic.height / 2"
-                  [attr.x]="-tic.width"
-                  [attr.width]="tic.width"
-                  [attr.height]="tic.height"
-                  [attr.fill]="tic.fill"
-                />
-              </svg:g>
+              @for (tic of ticks; track tic) {
+                <svg:g [attr.transform]="tic.transform">
+                  <rect
+                    [attr.y]="-tic.height / 2"
+                    [attr.x]="-tic.width"
+                    [attr.width]="tic.width"
+                    [attr.height]="tic.height"
+                    [attr.fill]="tic.fill"
+                  />
+                </svg:g>
+              }
             </svg:g>
           </svg:g>
 
@@ -61,15 +63,16 @@ import { id } from '../../utils/id';
               [attr.cx]="-targetRadius / 2"
               [attr.cy]="-targetRadius / 2"
             />
-            <circle
-              *ngIf="percent >= target"
-              class="target-circle"
-              [attr.r]="targetRadius"
-              [style.stroke-width]="targetRadius / 10"
-              [attr.stroke]="targetColor"
-              [attr.cx]="-targetRadius / 2"
-              [attr.cy]="-targetRadius / 2"
-            />
+            @if (percent >= target) {
+              <circle
+                class="target-circle"
+                [attr.r]="targetRadius"
+                [style.stroke-width]="targetRadius / 10"
+                [attr.stroke]="targetColor"
+                [attr.cx]="-targetRadius / 2"
+                [attr.cy]="-targetRadius / 2"
+              />
+            }
             <svg:g [attr.transform]="targetTextTransform">
               <text
                 transform="translate(0, -4)"
@@ -92,11 +95,13 @@ import { id } from '../../utils/id';
             </svg:g>
           </svg:g>
         </svg:g>
-        <svg:g *ngIf="showLabel" [attr.transform]="labelTransform">
-          <text class="gauge-label" x="50%" dominant-baseline="middle" text-anchor="middle" stroke="none">
-            {{ label }}
-          </text>
-        </svg:g>
+        @if (showLabel) {
+          <svg:g [attr.transform]="labelTransform">
+            <text class="gauge-label" x="50%" dominant-baseline="middle" text-anchor="middle" stroke="none">
+              {{ label }}
+            </text>
+          </svg:g>
+        }
       </svg:g>
     </ngx-charts-chart>
   `,

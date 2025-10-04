@@ -22,27 +22,29 @@ import {
       class="timeline-filter-bar-chart"
     >
       <svg:g [attr.transform]="transform" class="chart">
-        <svg:g
-          ngx-charts-x-axis
-          *ngIf="xAxis"
-          [xScale]="timeScale"
-          [dims]="dims"
-          [showLabel]="showXAxisLabel"
-          [labelText]="xAxisLabel"
-          [wrapTicks]="wrapTicks"
-          (dimensionsChanged)="updateXAxisHeight($event)"
-        ></svg:g>
-        <svg:g
-          ngx-charts-y-axis
-          *ngIf="yAxis"
-          [yScale]="yScale"
-          [dims]="dims"
-          [showGridLines]="showGridLines"
-          [showLabel]="showYAxisLabel"
-          [labelText]="yAxisLabel"
-          [wrapTicks]="wrapTicks"
-          (dimensionsChanged)="updateYAxisWidth($event)"
-        ></svg:g>
+        @if (xAxis) {
+          <svg:g
+            ngx-charts-x-axis
+            [xScale]="timeScale"
+            [dims]="dims"
+            [showLabel]="showXAxisLabel"
+            [labelText]="xAxisLabel"
+            [wrapTicks]="wrapTicks"
+            (dimensionsChanged)="updateXAxisHeight($event)"
+          ></svg:g>
+        }
+        @if (yAxis) {
+          <svg:g
+            ngx-charts-y-axis
+            [yScale]="yScale"
+            [dims]="dims"
+            [showGridLines]="showGridLines"
+            [showLabel]="showYAxisLabel"
+            [labelText]="yAxisLabel"
+            [wrapTicks]="wrapTicks"
+            (dimensionsChanged)="updateYAxisWidth($event)"
+          ></svg:g>
+        }
         <svg:g
           ngx-charts-series-vertical
           [xScale]="xScale"
