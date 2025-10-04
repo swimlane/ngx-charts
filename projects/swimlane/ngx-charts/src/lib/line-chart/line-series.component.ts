@@ -14,13 +14,14 @@ import { Gradient } from '../common/types/gradient.interface';
   template: `
     <svg:g>
       <defs>
-        <svg:g
-          ngx-charts-svg-linear-gradient
-          *ngIf="hasGradient"
-          [orientation]="barOrientation.Vertical"
-          [name]="gradientId"
-          [stops]="gradientStops"
-        />
+        @if (hasGradient) {
+          <svg:g
+            ngx-charts-svg-linear-gradient
+            [orientation]="barOrientation.Vertical"
+            [name]="gradientId"
+            [stops]="gradientStops"
+          />
+        }
       </defs>
       <svg:g
         ngx-charts-area
@@ -46,18 +47,19 @@ import { Gradient } from '../common/types/gradient.interface';
         [class.active]="isActive(data)"
         [class.inactive]="isInactive(data)"
       />
-      <svg:g
-        ngx-charts-area
-        *ngIf="hasRange"
-        class="line-series-range"
-        [data]="data"
-        [path]="outerPath"
-        [fill]="hasGradient ? gradientUrl : colors.getColor(data.name)"
-        [class.active]="isActive(data)"
-        [class.inactive]="isInactive(data)"
-        [opacity]="rangeFillOpacity"
-        [animations]="animations"
-      />
+      @if (hasRange) {
+        <svg:g
+          ngx-charts-area
+          class="line-series-range"
+          [data]="data"
+          [path]="outerPath"
+          [fill]="hasGradient ? gradientUrl : colors.getColor(data.name)"
+          [class.active]="isActive(data)"
+          [class.inactive]="isInactive(data)"
+          [opacity]="rangeFillOpacity"
+          [animations]="animations"
+        />
+      }
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

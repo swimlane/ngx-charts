@@ -19,19 +19,23 @@ import { isPlatformServer } from '@angular/common';
 @Component({
   selector: 'g[ngx-charts-line]',
   template: `
-    <svg:g *ngIf="!isSSR">
-      <svg:path
-        [@animationState]="'active'"
-        class="line"
-        [attr.d]="initialPath"
-        [attr.fill]="fill"
-        [attr.stroke]="stroke"
-        stroke-width="1.5px"
-      />
-    </svg:g>
-    <svg:g *ngIf="isSSR">
-      <svg:path class="line" [attr.d]="initialPath" [attr.fill]="fill" [attr.stroke]="stroke" stroke-width="1.5px" />
-    </svg:g>
+    @if (!isSSR) {
+      <svg:g>
+        <svg:path
+          [@animationState]="'active'"
+          class="line"
+          [attr.d]="initialPath"
+          [attr.fill]="fill"
+          [attr.stroke]="stroke"
+          stroke-width="1.5px"
+        />
+      </svg:g>
+    }
+    @if (isSSR) {
+      <svg:g>
+        <svg:path class="line" [attr.d]="initialPath" [attr.fill]="fill" [attr.stroke]="stroke" stroke-width="1.5px" />
+      </svg:g>
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
@@ -66,7 +70,10 @@ export class LineComponent implements OnChanges, OnInit {
 
   isSSR = false;
 
-  constructor(private element: ElementRef, @Inject(PLATFORM_ID) private platformId: any) {}
+  constructor(
+    private element: ElementRef,
+    @Inject(PLATFORM_ID) private platformId: any
+  ) {}
 
   ngOnInit() {
     if (isPlatformServer(this.platformId)) {

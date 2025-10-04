@@ -8,14 +8,16 @@ import { Gradient } from './types/gradient.interface';
 @Component({
   selector: 'g[ngx-charts-area]',
   template: `
-    <svg:defs *ngIf="gradient">
-      <svg:g
-        ngx-charts-svg-linear-gradient
-        [orientation]="barOrientation.Vertical"
-        [name]="gradientId"
-        [stops]="gradientStops"
-      />
-    </svg:defs>
+    @if (gradient) {
+      <svg:defs>
+        <svg:g
+          ngx-charts-svg-linear-gradient
+          [orientation]="barOrientation.Vertical"
+          [name]="gradientId"
+          [stops]="gradientStops"
+        />
+      </svg:defs>
+    }
     <svg:path class="area" [attr.d]="areaPath" [attr.fill]="gradient ? gradientFill : fill" [style.opacity]="opacity" />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

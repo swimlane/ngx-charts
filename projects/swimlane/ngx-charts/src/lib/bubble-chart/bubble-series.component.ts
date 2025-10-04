@@ -23,59 +23,63 @@ import { isPlatformServer } from '@angular/common';
 @Component({
   selector: 'g[ngx-charts-bubble-series]',
   template: `
-    <svg:g *ngFor="let circle of circles; trackBy: trackBy">
-      <svg:g [attr.transform]="circle.transform">
-        <svg:g
-          *ngIf="!isSSR"
-          ngx-charts-circle
-          [@animationState]="'active'"
-          class="circle"
-          [cx]="0"
-          [cy]="0"
-          [r]="circle.radius"
-          [fill]="circle.color"
-          [style.opacity]="circle.opacity"
-          [class.active]="circle.isActive"
-          [pointerEvents]="'all'"
-          [data]="circle.value"
-          [classNames]="circle.classNames"
-          (select)="onClick(circle.data)"
-          (activate)="activateCircle(circle)"
-          (deactivate)="deactivateCircle(circle)"
-          ngx-tooltip
-          [tooltipDisabled]="tooltipDisabled"
-          [tooltipPlacement]="placementTypes.Top"
-          [tooltipType]="styleTypes.tooltip"
-          [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(circle)"
-          [tooltipTemplate]="tooltipTemplate"
-          [tooltipContext]="circle.data"
-        />
-        <svg:g
-          *ngIf="isSSR"
-          ngx-charts-circle
-          class="circle"
-          [cx]="0"
-          [cy]="0"
-          [r]="circle.radius"
-          [fill]="circle.color"
-          [style.opacity]="circle.opacity"
-          [class.active]="circle.isActive"
-          [pointerEvents]="'all'"
-          [data]="circle.value"
-          [classNames]="circle.classNames"
-          (select)="onClick(circle.data)"
-          (activate)="activateCircle(circle)"
-          (deactivate)="deactivateCircle(circle)"
-          ngx-tooltip
-          [tooltipDisabled]="tooltipDisabled"
-          [tooltipPlacement]="placementTypes.Top"
-          [tooltipType]="styleTypes.tooltip"
-          [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(circle)"
-          [tooltipTemplate]="tooltipTemplate"
-          [tooltipContext]="circle.data"
-        />
+    @for (circle of circles; track trackBy($index, circle)) {
+      <svg:g>
+        <svg:g [attr.transform]="circle.transform">
+          @if (!isSSR) {
+            <svg:g
+              ngx-charts-circle
+              [@animationState]="'active'"
+              class="circle"
+              [cx]="0"
+              [cy]="0"
+              [r]="circle.radius"
+              [fill]="circle.color"
+              [style.opacity]="circle.opacity"
+              [class.active]="circle.isActive"
+              [pointerEvents]="'all'"
+              [data]="circle.value"
+              [classNames]="circle.classNames"
+              (select)="onClick(circle.data)"
+              (activate)="activateCircle(circle)"
+              (deactivate)="deactivateCircle(circle)"
+              ngx-tooltip
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipPlacement]="placementTypes.Top"
+              [tooltipType]="styleTypes.tooltip"
+              [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(circle)"
+              [tooltipTemplate]="tooltipTemplate"
+              [tooltipContext]="circle.data"
+            />
+          }
+          @if (isSSR) {
+            <svg:g
+              ngx-charts-circle
+              class="circle"
+              [cx]="0"
+              [cy]="0"
+              [r]="circle.radius"
+              [fill]="circle.color"
+              [style.opacity]="circle.opacity"
+              [class.active]="circle.isActive"
+              [pointerEvents]="'all'"
+              [data]="circle.value"
+              [classNames]="circle.classNames"
+              (select)="onClick(circle.data)"
+              (activate)="activateCircle(circle)"
+              (deactivate)="deactivateCircle(circle)"
+              ngx-tooltip
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipPlacement]="placementTypes.Top"
+              [tooltipType]="styleTypes.tooltip"
+              [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(circle)"
+              [tooltipTemplate]="tooltipTemplate"
+              [tooltipContext]="circle.data"
+            />
+          }
+        </svg:g>
       </svg:g>
-    </svg:g>
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [

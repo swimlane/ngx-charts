@@ -18,18 +18,20 @@ import {
     <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations">
       <svg:g [attr.transform]="transform" class="line-chart chart">
         <svg:g>
-          <svg:g *ngFor="let series of results; trackBy: trackBy">
-            <svg:g
-              ngx-charts-line-series
-              [xScale]="xScale"
-              [yScale]="yScale"
-              [colors]="colors"
-              [data]="series"
-              [scaleType]="scaleType"
-              [curve]="curve"
-              [animations]="animations"
-            />
-          </svg:g>
+          @for (series of results; track trackBy($index, series)) {
+            <svg:g>
+              <svg:g
+                ngx-charts-line-series
+                [xScale]="xScale"
+                [yScale]="yScale"
+                [colors]="colors"
+                [data]="series"
+                [scaleType]="scaleType"
+                [curve]="curve"
+                [animations]="animations"
+              />
+            </svg:g>
+          }
         </svg:g>
       </svg:g>
     </ngx-charts-chart>

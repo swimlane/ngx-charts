@@ -40,75 +40,79 @@ interface RectItem {
   template: `
     <ngx-charts-chart [view]="[width, height]" [animations]="animations">
       <svg:g [attr.transform]="transform" class="sankey chart">
-        <svg:g
-          *ngFor="let link of linkPaths"
-          class="link"
-          ngx-tooltip
-          [tooltipDisabled]="tooltipDisabled"
-          [tooltipType]="styleTypes.tooltip"
-          [tooltipPlacement]="'top'"
-          [tooltipTitle]="tooltipTemplate ? undefined : link.tooltip"
-          [tooltipTemplate]="tooltipTemplate"
-          [tooltipContext]="link.data"
-        >
-          <svg:defs>
-            <svg:linearGradient
-              [attr.id]="link.id"
-              gradientUnits="userSpaceOnUse"
-              [attr.x1]="link.source.x1"
-              [attr.x2]="link.target.x0"
-            >
-              <svg:stop offset="0%" [attr.stop-color]="link.startColor"></svg:stop>
-              <svg:stop offset="100%" [attr.stop-color]="link.endColor"></svg:stop>
-            </svg:linearGradient>
-          </svg:defs>
-          <svg:path
-            [attr.d]="link.path"
-            [attr.stroke]="link.gradientFill"
-            [attr.stroke-width]="link.strokeWidth"
-            [attr.stroke-opacity]="link.active ? 0.5 : hasActive ? 0.1 : 0.5"
-            fill="none"
-            (click)="select.emit(link.data)"
-            (mouseenter)="activateLink(link)"
-            (mouseleave)="deactivateLink(link)"
-          ></svg:path>
-        </svg:g>
-
-        <svg:g *ngFor="let rect of nodeRects" [attr.transform]="rect.transform" class="node">
-          <svg:rect
-            [attr.x]="0"
-            [attr.y]="0"
-            [attr.width]="rect.width"
-            [attr.height]="rect.height"
-            [attr.fill]="rect.fill"
-            [attr.fill-opacity]="rect.active ? 1 : hasActive ? 0.3 : 1"
+        @for (link of linkPaths; track link) {
+          <svg:g
+            class="link"
             ngx-tooltip
             [tooltipDisabled]="tooltipDisabled"
             [tooltipType]="styleTypes.tooltip"
             [tooltipPlacement]="'top'"
-            [tooltipTitle]="tooltipTemplate ? undefined : rect.tooltip"
+            [tooltipTitle]="tooltipTemplate ? undefined : link.tooltip"
             [tooltipTemplate]="tooltipTemplate"
-            [tooltipContext]="rect.data"
-            (click)="select.emit(rect.data)"
-            (mouseenter)="activateRect(rect)"
-            (mouseleave)="deactivateRect(rect)"
-          ></svg:rect>
-        </svg:g>
-
-        <svg:g *ngFor="let rect of nodeRects" [attr.transform]="rect.transform">
-          <svg:text
-            *ngIf="showLabels && rect.height > 15"
-            class="label"
-            [attr.x]="rect.width + 5"
-            [attr.y]="rect.height / 2"
-            [attr.fill-opacity]="rect.active ? 1 : hasActive ? 0.3 : 1"
-            [attr.text-anchor]="rect.labelAnchor"
-            dy="0.35em"
-            [attr.dx]="rect.labelAnchor === 'end' ? -25 : 0"
+            [tooltipContext]="link.data"
           >
-            {{ rect.label }}
-          </svg:text>
-        </svg:g>
+            <svg:defs>
+              <svg:linearGradient
+                [attr.id]="link.id"
+                gradientUnits="userSpaceOnUse"
+                [attr.x1]="link.source.x1"
+                [attr.x2]="link.target.x0"
+              >
+                <svg:stop offset="0%" [attr.stop-color]="link.startColor"></svg:stop>
+                <svg:stop offset="100%" [attr.stop-color]="link.endColor"></svg:stop>
+              </svg:linearGradient>
+            </svg:defs>
+            <svg:path
+              [attr.d]="link.path"
+              [attr.stroke]="link.gradientFill"
+              [attr.stroke-width]="link.strokeWidth"
+              [attr.stroke-opacity]="link.active ? 0.5 : hasActive ? 0.1 : 0.5"
+              fill="none"
+              (click)="select.emit(link.data)"
+              (mouseenter)="activateLink(link)"
+              (mouseleave)="deactivateLink(link)"
+            ></svg:path>
+          </svg:g>
+        }
+        @for (rect of nodeRects; track rect) {
+          <svg:g [attr.transform]="rect.transform" class="node">
+            <svg:rect
+              [attr.x]="0"
+              [attr.y]="0"
+              [attr.width]="rect.width"
+              [attr.height]="rect.height"
+              [attr.fill]="rect.fill"
+              [attr.fill-opacity]="rect.active ? 1 : hasActive ? 0.3 : 1"
+              ngx-tooltip
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipType]="styleTypes.tooltip"
+              [tooltipPlacement]="'top'"
+              [tooltipTitle]="tooltipTemplate ? undefined : rect.tooltip"
+              [tooltipTemplate]="tooltipTemplate"
+              [tooltipContext]="rect.data"
+              (click)="select.emit(rect.data)"
+              (mouseenter)="activateRect(rect)"
+              (mouseleave)="deactivateRect(rect)"
+            ></svg:rect>
+          </svg:g>
+        }
+        @for (rect of nodeRects; track rect) {
+          <svg:g [attr.transform]="rect.transform">
+            @if (showLabels && rect.height > 15) {
+              <svg:text
+                class="label"
+                [attr.x]="rect.width + 5"
+                [attr.y]="rect.height / 2"
+                [attr.fill-opacity]="rect.active ? 1 : hasActive ? 0.3 : 1"
+                [attr.text-anchor]="rect.labelAnchor"
+                dy="0.35em"
+                [attr.dx]="rect.labelAnchor === 'end' ? -25 : 0"
+              >
+                {{ rect.label }}
+              </svg:text>
+            }
+          </svg:g>
+        }
       </svg:g>
     </ngx-charts-chart>
   `,
@@ -239,9 +243,9 @@ export class SankeyComponent extends BaseChartComponent {
     return `
       <span class="tooltip-label">${escapeLabel(sourceNode.name)} • ${escapeLabel(targetNode.name)}</span>
       <span class="tooltip-val">${value.toLocaleString()} (${(value / sourceNode.value).toLocaleString(undefined, {
-      style: 'percent',
-      maximumFractionDigits: 2
-    })})</span>
+        style: 'percent',
+        maximumFractionDigits: 2
+      })})</span>
     `;
   }
 

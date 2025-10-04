@@ -18,21 +18,27 @@ interface Ticks {
   selector: 'g[ngx-charts-gauge-axis]',
   template: `
     <svg:g [attr.transform]="rotate">
-      <svg:g *ngFor="let tick of ticks.big" class="gauge-tick gauge-tick-large">
-        <svg:path [attr.d]="tick.line" />
-      </svg:g>
-      <svg:g *ngFor="let tick of ticks.big" class="gauge-tick gauge-tick-large">
-        <svg:text
-          [style.textAnchor]="tick.textAnchor"
-          [attr.transform]="tick.textTransform"
-          alignment-baseline="central"
-        >
-          {{ tick.text }}
-        </svg:text>
-      </svg:g>
-      <svg:g *ngFor="let tick of ticks.small" class="gauge-tick gauge-tick-small">
-        <svg:path [attr.d]="tick.line" />
-      </svg:g>
+      @for (tick of ticks.big; track tick) {
+        <svg:g class="gauge-tick gauge-tick-large">
+          <svg:path [attr.d]="tick.line" />
+        </svg:g>
+      }
+      @for (tick of ticks.big; track tick) {
+        <svg:g class="gauge-tick gauge-tick-large">
+          <svg:text
+            [style.textAnchor]="tick.textAnchor"
+            [attr.transform]="tick.textTransform"
+            alignment-baseline="central"
+          >
+            {{ tick.text }}
+          </svg:text>
+        </svg:g>
+      }
+      @for (tick of ticks.small; track tick) {
+        <svg:g class="gauge-tick gauge-tick-small">
+          <svg:path [attr.d]="tick.line" />
+        </svg:g>
+      }
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

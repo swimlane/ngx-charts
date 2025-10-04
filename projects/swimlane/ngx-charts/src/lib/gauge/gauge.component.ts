@@ -40,48 +40,45 @@ interface Arcs {
       (legendLabelDeactivate)="onDeactivate($event)"
     >
       <svg:g [attr.transform]="transform" class="gauge chart">
-        <svg:g *ngFor="let arc of arcs; trackBy: trackBy" [attr.transform]="rotation">
+        @for (arc of arcs; track trackBy($index, arc)) {
+          <svg:g [attr.transform]="rotation">
+            <svg:g
+              ngx-charts-gauge-arc
+              [backgroundArc]="arc.backgroundArc"
+              [valueArc]="arc.valueArc"
+              [cornerRadius]="cornerRadius"
+              [colors]="colors"
+              [isActive]="isActive(arc.valueArc.data)"
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="tooltipTemplate"
+              [valueFormatting]="valueFormatting"
+              [animations]="animations"
+              (select)="onClick($event)"
+              (activate)="onActivate($event)"
+              (deactivate)="onDeactivate($event)"
+            ></svg:g>
+          </svg:g>
+        }
+        @if (showAxis) {
           <svg:g
-            ngx-charts-gauge-arc
-            [backgroundArc]="arc.backgroundArc"
-            [valueArc]="arc.valueArc"
-            [cornerRadius]="cornerRadius"
-            [colors]="colors"
-            [isActive]="isActive(arc.valueArc.data)"
-            [tooltipDisabled]="tooltipDisabled"
-            [tooltipTemplate]="tooltipTemplate"
-            [valueFormatting]="valueFormatting"
-            [animations]="animations"
-            (select)="onClick($event)"
-            (activate)="onActivate($event)"
-            (deactivate)="onDeactivate($event)"
+            ngx-charts-gauge-axis
+            [bigSegments]="bigSegments"
+            [smallSegments]="smallSegments"
+            [min]="min"
+            [max]="max"
+            [radius]="outerRadius"
+            [angleSpan]="angleSpan"
+            [valueScale]="valueScale"
+            [startAngle]="startAngle"
+            [tickFormatting]="axisTickFormatting"
           ></svg:g>
-        </svg:g>
-
-        <svg:g
-          ngx-charts-gauge-axis
-          *ngIf="showAxis"
-          [bigSegments]="bigSegments"
-          [smallSegments]="smallSegments"
-          [min]="min"
-          [max]="max"
-          [radius]="outerRadius"
-          [angleSpan]="angleSpan"
-          [valueScale]="valueScale"
-          [startAngle]="startAngle"
-          [tickFormatting]="axisTickFormatting"
-        ></svg:g>
-
-        <svg:text
-          #textEl
-          *ngIf="showText"
-          [style.textAnchor]="'middle'"
-          [attr.transform]="textTransform"
-          alignment-baseline="central"
-        >
-          <tspan x="0" dy="0">{{ displayValue }}</tspan>
-          <tspan x="0" dy="1.2em">{{ units }}</tspan>
-        </svg:text>
+        }
+        @if (showText) {
+          <svg:text #textEl [style.textAnchor]="'middle'" [attr.transform]="textTransform" alignment-baseline="central">
+            <tspan x="0" dy="0">{{ displayValue }}</tspan>
+            <tspan x="0" dy="1.2em">{{ units }}</tspan>
+          </svg:text>
+        }
       </svg:g>
     </ngx-charts-chart>
   `,

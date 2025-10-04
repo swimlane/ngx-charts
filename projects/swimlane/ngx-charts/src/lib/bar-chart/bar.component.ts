@@ -19,9 +19,11 @@ import { Gradient } from '../common/types/gradient.interface';
 @Component({
   selector: 'g[ngx-charts-bar]',
   template: `
-    <svg:defs *ngIf="hasGradient">
-      <svg:g ngx-charts-svg-linear-gradient [orientation]="orientation" [name]="gradientId" [stops]="gradientStops" />
-    </svg:defs>
+    @if (hasGradient) {
+      <svg:defs>
+        <svg:g ngx-charts-svg-linear-gradient [orientation]="orientation" [name]="gradientId" [stops]="gradientStops" />
+      </svg:defs>
+    }
     <svg:path
       class="bar"
       stroke="none"

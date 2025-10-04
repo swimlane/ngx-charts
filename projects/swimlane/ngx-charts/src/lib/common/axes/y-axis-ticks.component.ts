@@ -23,77 +23,93 @@ import { TextAnchor } from '../types/text-anchor.enum';
   selector: 'g[ngx-charts-y-axis-ticks]',
   template: `
     <svg:g #ticksel>
-      <svg:g *ngFor="let tick of ticks" class="tick" [attr.transform]="transform(tick)">
-        <ng-container *ngIf="tickFormat(tick) as tickFormatted">
-          <title>{{ tickFormatted }}</title>
-          <svg:text
-            stroke-width="0.01"
-            [attr.dy]="dy"
-            [attr.x]="x1"
-            [attr.y]="y1"
-            [attr.text-anchor]="textAnchor"
-            [style.font-size]="'12px'"
-          >
-            <ng-container *ngIf="wrapTicks; then tmplMultilineTick; else tmplSinglelineTick"></ng-container>
-          </svg:text>
+      @for (tick of ticks; track tick) {
+        <svg:g class="tick" [attr.transform]="transform(tick)">
+          @if (tickFormat(tick); as tickFormatted) {
+            <ng-container>
+              <title>{{ tickFormatted }}</title>
+              <svg:text
+                stroke-width="0.01"
+                [attr.dy]="dy"
+                [attr.x]="x1"
+                [attr.y]="y1"
+                [attr.text-anchor]="textAnchor"
+                [style.font-size]="'12px'"
+              >
+                @if (wrapTicks) {
+                  <ng-template [ngTemplateOutlet]="tmplMultilineTick"></ng-template>
+                } @else {
+                  <ng-template [ngTemplateOutlet]="tmplSinglelineTick"></ng-template>
+                }
+              </svg:text>
 
-          <ng-template #tmplMultilineTick>
-            <ng-container *ngIf="tickChunks(tick) as tickLines">
-              <ng-container *ngIf="tickLines.length > 1; else tmplSinglelineTick">
-                <svg:tspan *ngFor="let tickLine of tickLines; let i = index" x="0" [attr.y]="i * (8 + tickSpacing)">
-                  {{ tickLine }}
-                </svg:tspan>
-              </ng-container>
+              <ng-template #tmplMultilineTick>
+                @if (tickChunks(tick); as tickLines) {
+                  <ng-container>
+                    @if (tickLines.length > 1) {
+                      <ng-container>
+                        @for (tickLine of tickLines; track tickLine; let i = $index) {
+                          <svg:tspan x="0" [attr.y]="i * (8 + tickSpacing)">
+                            {{ tickLine }}
+                          </svg:tspan>
+                        }
+                      </ng-container>
+                    } @else {
+                      <ng-template [ngTemplateOutlet]="tmplSinglelineTick"></ng-template>
+                    }
+                  </ng-container>
+                }
+              </ng-template>
+
+              <ng-template #tmplSinglelineTick>
+                {{ tickTrim(tickFormatted) }}
+              </ng-template>
             </ng-container>
-          </ng-template>
-
-          <ng-template #tmplSinglelineTick>
-            {{ tickTrim(tickFormatted) }}
-          </ng-template>
-        </ng-container>
-      </svg:g>
-    </svg:g>
-
-    <svg:path
-      *ngIf="referenceLineLength > 1 && refMax && refMin && showRefLines"
-      class="reference-area"
-      [attr.d]="referenceAreaPath"
-      [attr.transform]="gridLineTransform()"
-    />
-    <svg:g *ngFor="let tick of ticks" [attr.transform]="transform(tick)">
-      <svg:g *ngIf="showGridLines" [attr.transform]="gridLineTransform()">
-        <svg:line
-          *ngIf="orient === Orientation.Left"
-          class="gridline-path gridline-path-horizontal"
-          x1="0"
-          [attr.x2]="gridLineWidth"
-        />
-        <svg:line
-          *ngIf="orient === Orientation.Right"
-          class="gridline-path gridline-path-horizontal"
-          x1="0"
-          [attr.x2]="-gridLineWidth"
-        />
-      </svg:g>
-    </svg:g>
-
-    <svg:g *ngFor="let refLine of referenceLines" class="ref-line">
-      <svg:g *ngIf="showRefLines" [attr.transform]="transform(refLine.value)">
-        <svg:line class="refline-path gridline-path-horizontal" x1="0" [attr.x2]="gridLineWidth" />
-        <svg:g *ngIf="showRefLabels">
-          <title>{{ tickTrim(tickFormat(refLine.value)) }}</title>
-          <svg:text
-            class="refline-label"
-            [attr.dy]="dy"
-            [attr.y]="-6"
-            [attr.x]="gridLineWidth"
-            [attr.text-anchor]="textAnchor"
-          >
-            {{ refLine.name }}
-          </svg:text>
+          }
         </svg:g>
-      </svg:g>
+      }
     </svg:g>
+
+    @if (referenceLineLength > 1 && refMax && refMin && showRefLines) {
+      <svg:path class="reference-area" [attr.d]="referenceAreaPath" [attr.transform]="gridLineTransform()" />
+    }
+    @for (tick of ticks; track tick) {
+      <svg:g [attr.transform]="transform(tick)">
+        @if (showGridLines) {
+          <svg:g [attr.transform]="gridLineTransform()">
+            @if (orient === Orientation.Left) {
+              <svg:line class="gridline-path gridline-path-horizontal" x1="0" [attr.x2]="gridLineWidth" />
+            }
+            @if (orient === Orientation.Right) {
+              <svg:line class="gridline-path gridline-path-horizontal" x1="0" [attr.x2]="-gridLineWidth" />
+            }
+          </svg:g>
+        }
+      </svg:g>
+    }
+    @for (refLine of referenceLines; track refLine) {
+      <svg:g class="ref-line">
+        @if (showRefLines) {
+          <svg:g [attr.transform]="transform(refLine.value)">
+            <svg:line class="refline-path gridline-path-horizontal" x1="0" [attr.x2]="gridLineWidth" />
+            @if (showRefLabels) {
+              <svg:g>
+                <title>{{ tickTrim(tickFormat(refLine.value)) }}</title>
+                <svg:text
+                  class="refline-label"
+                  [attr.dy]="dy"
+                  [attr.y]="-6"
+                  [attr.x]="gridLineWidth"
+                  [attr.text-anchor]="textAnchor"
+                >
+                  {{ refLine.name }}
+                </svg:text>
+              </svg:g>
+            }
+          </svg:g>
+        }
+      </svg:g>
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false

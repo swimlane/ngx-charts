@@ -1,959 +1,379 @@
 <main [class]="theme">
   <div class="chart-col">
     <div style="position: absolute; top: 50px; left: 50px; right: 50px; bottom: 50px">
-      <ngx-charts-bar-vertical
-        *ngIf="chartType === 'bar-vertical'"
-        class="chart-container"
-        [view]="view"
-        [scheme]="colorScheme"
-        [schemeType]="schemeType"
-        [customColors]="customColors"
-        [results]="single"
-        [animations]="animations"
-        [gradient]="gradient"
-        [xAxis]="showXAxis"
-        [yAxis]="showYAxis"
-        [legend]="showLegend"
-        [legendTitle]="legendTitle"
-        [legendPosition]="legendPosition"
-        [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel"
-        [tooltipDisabled]="tooltipDisabled"
-        [referenceLines]="refLines"
-        [showRefLines]="showRefLines"
-        [showRefLabels]="showRefLabels"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
-        [showGridLines]="showGridLines"
-        [barPadding]="barPadding"
-        [roundDomains]="roundDomains"
-        [roundEdges]="roundEdges"
-        [yScaleMax]="yScaleMax"
-        [noBarWhenZero]="noBarWhenZero"
-        [showDataLabel]="showDataLabel"
-        [trimXAxisTicks]="trimXAxisTicks"
-        [trimYAxisTicks]="trimYAxisTicks"
-        [rotateXAxisTicks]="rotateXAxisTicks"
-        [maxXAxisTickLength]="maxXAxisTickLength"
-        [maxYAxisTickLength]="maxYAxisTickLength"
-        [wrapTicks]="wrapTicks"
-        (select)="select($event)"
-        (activate)="activate($event)"
-        (deactivate)="deactivate($event)"
-      >
-      </ngx-charts-bar-vertical>
-      <ngx-charts-bar-horizontal
-        *ngIf="chartType === 'bar-horizontal'"
-        class="chart-container"
-        [view]="view"
-        [scheme]="colorScheme"
-        [schemeType]="schemeType"
-        [results]="single"
-        [animations]="animations"
-        [gradient]="gradient"
-        [xAxis]="showXAxis"
-        [yAxis]="showYAxis"
-        [legend]="showLegend"
-        [legendTitle]="legendTitle"
-        [legendPosition]="legendPosition"
-        [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel"
-        [tooltipDisabled]="tooltipDisabled"
-        [referenceLines]="refLines"
-        [showRefLines]="showRefLines"
-        [showRefLabels]="showRefLabels"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
-        [showGridLines]="showGridLines"
-        [barPadding]="barPadding"
-        [roundDomains]="roundDomains"
-        [roundEdges]="roundEdges"
-        [xScaleMax]="xScaleMax"
-        [noBarWhenZero]="noBarWhenZero"
-        [showDataLabel]="showDataLabel"
-        [trimXAxisTicks]="trimXAxisTicks"
-        [trimYAxisTicks]="trimYAxisTicks"
-        [rotateXAxisTicks]="rotateXAxisTicks"
-        [maxXAxisTickLength]="maxXAxisTickLength"
-        [maxYAxisTickLength]="maxYAxisTickLength"
-        [wrapTicks]="wrapTicks"
-        (select)="select($event)"
-        (activate)="activate($event)"
-        (deactivate)="deactivate($event)"
-      >
-      </ngx-charts-bar-horizontal>
-      <ngx-charts-bar-vertical-2d
-        *ngIf="chartType === 'bar-vertical-2d'"
-        class="chart-container"
-        [view]="view"
-        [scheme]="colorScheme"
-        [schemeType]="schemeType"
-        [results]="multi"
-        [animations]="animations"
-        [gradient]="gradient"
-        [xAxis]="showXAxis"
-        [yAxis]="showYAxis"
-        [legend]="showLegend"
-        [legendTitle]="legendTitle"
-        [legendPosition]="legendPosition"
-        [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel"
-        [tooltipDisabled]="tooltipDisabled"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
-        [showGridLines]="showGridLines"
-        [barPadding]="barPadding"
-        [groupPadding]="groupPadding"
-        [roundDomains]="roundDomains"
-        [roundEdges]="roundEdges"
-        [yScaleMax]="yScaleMax"
-        [noBarWhenZero]="noBarWhenZero"
-        [showDataLabel]="showDataLabel"
-        [trimXAxisTicks]="trimXAxisTicks"
-        [trimYAxisTicks]="trimYAxisTicks"
-        [rotateXAxisTicks]="rotateXAxisTicks"
-        [maxXAxisTickLength]="maxXAxisTickLength"
-        [maxYAxisTickLength]="maxYAxisTickLength"
-        [wrapTicks]="wrapTicks"
-        (select)="select($event)"
-        (activate)="activate($event)"
-        (deactivate)="deactivate($event)"
-      >
-      </ngx-charts-bar-vertical-2d>
-      <ngx-charts-bar-horizontal-2d
-        *ngIf="chartType === 'bar-horizontal-2d'"
-        class="chart-container"
-        [view]="view"
-        [scheme]="colorScheme"
-        [schemeType]="schemeType"
-        [results]="multi"
-        [animations]="animations"
-        [gradient]="gradient"
-        [tooltipDisabled]="tooltipDisabled"
-        [xAxis]="showXAxis"
-        [yAxis]="showYAxis"
-        [legend]="showLegend"
-        [legendTitle]="legendTitle"
-        [legendPosition]="legendPosition"
-        [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
-        [showGridLines]="showGridLines"
-        [barPadding]="barPadding"
-        [groupPadding]="groupPadding"
-        [roundDomains]="roundDomains"
-        [roundEdges]="roundEdges"
-        [xScaleMax]="xScaleMax"
-        [noBarWhenZero]="noBarWhenZero"
-        [showDataLabel]="showDataLabel"
-        [trimXAxisTicks]="trimXAxisTicks"
-        [trimYAxisTicks]="trimYAxisTicks"
-        [rotateXAxisTicks]="rotateXAxisTicks"
-        [maxXAxisTickLength]="maxXAxisTickLength"
-        [maxYAxisTickLength]="maxYAxisTickLength"
-        [wrapTicks]="wrapTicks"
-        (select)="select($event)"
-        (activate)="activate($event)"
-        (deactivate)="deactivate($event)"
-      >
-      </ngx-charts-bar-horizontal-2d>
-      <ngx-charts-bar-vertical-stacked
-        *ngIf="chartType === 'bar-vertical-stacked'"
-        class="chart-container"
-        [view]="view"
-        [scheme]="colorScheme"
-        [schemeType]="schemeType"
-        [results]="multi"
-        [animations]="animations"
-        [gradient]="gradient"
-        [tooltipDisabled]="tooltipDisabled"
-        [xAxis]="showXAxis"
-        [yAxis]="showYAxis"
-        [legend]="showLegend"
-        [legendTitle]="legendTitle"
-        [legendPosition]="legendPosition"
-        [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
-        [showGridLines]="showGridLines"
-        [barPadding]="barPadding"
-        [roundDomains]="roundDomains"
-        [yScaleMax]="yScaleMax"
-        [noBarWhenZero]="noBarWhenZero"
-        [showDataLabel]="showDataLabel"
-        [trimXAxisTicks]="trimXAxisTicks"
-        [trimYAxisTicks]="trimYAxisTicks"
-        [rotateXAxisTicks]="rotateXAxisTicks"
-        [maxXAxisTickLength]="maxXAxisTickLength"
-        [maxYAxisTickLength]="maxYAxisTickLength"
-        [wrapTicks]="wrapTicks"
-        (select)="select($event)"
-        (activate)="activate($event)"
-        (deactivate)="deactivate($event)"
-      >
-      </ngx-charts-bar-vertical-stacked>
-      <ngx-charts-bar-horizontal-stacked
-        *ngIf="chartType === 'bar-horizontal-stacked'"
-        class="chart-container"
-        [view]="view"
-        [scheme]="colorScheme"
-        [schemeType]="schemeType"
-        [results]="multi"
-        [animations]="animations"
-        [gradient]="gradient"
-        [tooltipDisabled]="tooltipDisabled"
-        [xAxis]="showXAxis"
-        [yAxis]="showYAxis"
-        [legend]="showLegend"
-        [legendTitle]="legendTitle"
-        [legendPosition]="legendPosition"
-        [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
-        [showGridLines]="showGridLines"
-        [barPadding]="barPadding"
-        [roundDomains]="roundDomains"
-        [showDataLabel]="showDataLabel"
-        [xScaleMax]="xScaleMax"
-        [noBarWhenZero]="noBarWhenZero"
-        [trimXAxisTicks]="trimXAxisTicks"
-        [trimYAxisTicks]="trimYAxisTicks"
-        [rotateXAxisTicks]="rotateXAxisTicks"
-        [maxXAxisTickLength]="maxXAxisTickLength"
-        [maxYAxisTickLength]="maxYAxisTickLength"
-        [wrapTicks]="wrapTicks"
-        (select)="select($event)"
-        (activate)="activate($event)"
-        (deactivate)="deactivate($event)"
-      >
-      </ngx-charts-bar-horizontal-stacked>
-      <ngx-charts-bar-vertical-normalized
-        *ngIf="chartType === 'bar-vertical-normalized'"
-        class="chart-container"
-        [view]="view"
-        [scheme]="colorScheme"
-        [schemeType]="schemeType"
-        [results]="multi"
-        [animations]="animations"
-        [gradient]="gradient"
-        [tooltipDisabled]="tooltipDisabled"
-        [xAxis]="showXAxis"
-        [yAxis]="showYAxis"
-        [legend]="showLegend"
-        [legendTitle]="legendTitle"
-        [legendPosition]="legendPosition"
-        [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
-        [showGridLines]="showGridLines"
-        [barPadding]="barPadding"
-        [roundDomains]="roundDomains"
-        [noBarWhenZero]="noBarWhenZero"
-        [trimXAxisTicks]="trimXAxisTicks"
-        [trimYAxisTicks]="trimYAxisTicks"
-        [rotateXAxisTicks]="rotateXAxisTicks"
-        [maxXAxisTickLength]="maxXAxisTickLength"
-        [maxYAxisTickLength]="maxYAxisTickLength"
-        [wrapTicks]="wrapTicks"
-        (select)="select($event)"
-        (activate)="activate($event)"
-        (deactivate)="deactivate($event)"
-      >
-      </ngx-charts-bar-vertical-normalized>
-      <ngx-charts-bar-horizontal-normalized
-        *ngIf="chartType === 'bar-horizontal-normalized'"
-        class="chart-container"
-        [view]="view"
-        [scheme]="colorScheme"
-        [schemeType]="schemeType"
-        [results]="multi"
-        [animations]="animations"
-        [gradient]="gradient"
-        [tooltipDisabled]="tooltipDisabled"
-        [xAxis]="showXAxis"
-        [yAxis]="showYAxis"
-        [legend]="showLegend"
-        [legendTitle]="legendTitle"
-        [legendPosition]="legendPosition"
-        [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
-        [showGridLines]="showGridLines"
-        [barPadding]="barPadding"
-        [roundDomains]="roundDomains"
-        [noBarWhenZero]="noBarWhenZero"
-        [trimXAxisTicks]="trimXAxisTicks"
-        [trimYAxisTicks]="trimYAxisTicks"
-        [rotateXAxisTicks]="rotateXAxisTicks"
-        [maxXAxisTickLength]="maxXAxisTickLength"
-        [maxYAxisTickLength]="maxYAxisTickLength"
-        [wrapTicks]="wrapTicks"
-        (select)="select($event)"
-        (activate)="activate($event)"
-        (deactivate)="deactivate($event)"
-      >
-      </ngx-charts-bar-horizontal-normalized>
-      <ngx-charts-pie-chart
-        *ngIf="chartType === 'pie-chart'"
-        class="chart-container"
-        [view]="view"
-        [scheme]="colorScheme"
-        [results]="single"
-        [animations]="animations"
-        [legend]="showLegend"
-        [legendTitle]="legendTitle"
-        [legendPosition]="legendPosition"
-        [explodeSlices]="explodeSlices"
-        [labels]="showLabels"
-        [doughnut]="doughnut"
-        [arcWidth]="arcWidth"
-        [gradient]="gradient"
-        [tooltipDisabled]="tooltipDisabled"
-        [tooltipText]="pieTooltipText"
-        (dblclick)="dblclick($event)"
-        (select)="select($event)"
-        (activate)="activate($event)"
-        (deactivate)="deactivate($event)"
-      >
-      </ngx-charts-pie-chart>
-      <ngx-charts-advanced-pie-chart
-        *ngIf="chartType === 'advanced-pie-chart'"
-        class="chart-container"
-        [view]="view"
-        [scheme]="colorScheme"
-        [results]="single"
-        [valueFormatting]="valueFormatting"
-        [animations]="animations"
-        [gradient]="gradient"
-        [tooltipDisabled]="tooltipDisabled"
-        [tooltipText]="pieTooltipText"
-        (select)="select($event)"
-        (activate)="activate($event)"
-        (deactivate)="deactivate($event)"
-      >
-      </ngx-charts-advanced-pie-chart>
-      <ngx-charts-pie-grid
-        *ngIf="chartType === 'pie-grid'"
-        class="chart-container"
-        [view]="view"
-        [scheme]="colorScheme"
-        [results]="single"
-        [animations]="animations"
-        [tooltipDisabled]="tooltipDisabled"
-        [tooltipText]="pieTooltipText"
-        (select)="select($event)"
-        (activate)="activate($event)"
-        (deactivate)="deactivate($event)"
-      >
-      </ngx-charts-pie-grid>
-      <ngx-charts-line-chart
-        *ngIf="chartType === 'line-chart'"
-        [view]="view"
-        class="chart-container"
-        [scheme]="colorScheme"
-        [schemeType]="schemeType"
-        [results]="dateDataWithOrWithoutRange"
-        [animations]="animations"
-        [legend]="showLegend"
-        [legendTitle]="legendTitle"
-        [legendPosition]="legendPosition"
-        [gradient]="gradient"
-        [xAxis]="showXAxis"
-        [yAxis]="showYAxis"
-        [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
-        [autoScale]="autoScale"
-        [xScaleMin]="xScaleMin"
-        [xScaleMax]="xScaleMax"
-        [yScaleMin]="yScaleMin"
-        [yScaleMax]="yScaleMax"
-        [timeline]="timeline"
-        [showGridLines]="showGridLines"
-        [curve]="curve"
-        [rangeFillOpacity]="rangeFillOpacity"
-        [roundDomains]="roundDomains"
-        [tooltipDisabled]="tooltipDisabled"
-        [trimXAxisTicks]="trimXAxisTicks"
-        [trimYAxisTicks]="trimYAxisTicks"
-        [rotateXAxisTicks]="rotateXAxisTicks"
-        [maxXAxisTickLength]="maxXAxisTickLength"
-        [maxYAxisTickLength]="maxYAxisTickLength"
-        [wrapTicks]="wrapTicks"
-        (select)="select($event)"
-        (activate)="activate($event)"
-        (deactivate)="deactivate($event)"
-      >
-      </ngx-charts-line-chart>
-      <ngx-charts-polar-chart
-        *ngIf="chartType === 'polar-chart'"
-        [view]="view"
-        class="chart-container"
-        [scheme]="colorScheme"
-        [schemeType]="schemeType"
-        [results]="multi"
-        [animations]="animations"
-        [legend]="showLegend"
-        [legendTitle]="legendTitle"
-        [legendPosition]="legendPosition"
-        [gradient]="gradient"
-        [xAxis]="showXAxis"
-        [yAxis]="showYAxis"
-        [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
-        [autoScale]="autoScale"
-        [showGridLines]="showGridLines"
-        [rangeFillOpacity]="rangeFillOpacity"
-        [roundDomains]="roundDomains"
-        [tooltipDisabled]="tooltipDisabled"
-        [showSeriesOnHover]="showSeriesOnHover"
-        [trimYAxisTicks]="trimYAxisTicks"
-        [maxYAxisTickLength]="maxYAxisTickLength"
-        [curve]="closedCurve"
-        (select)="select($event)"
-        (activate)="activate($event)"
-        (deactivate)="deactivate($event)"
-      >
-      </ngx-charts-polar-chart>
-      <ngx-charts-bubble-chart
-        *ngIf="chartType === 'bubble-chart'"
-        [view]="view"
-        class="chart-container"
-        [results]="bubble"
-        [animations]="animations"
-        [showGridLines]="showGridLines"
-        [legend]="showLegend"
-        [legendTitle]="legendTitle"
-        [legendPosition]="legendPosition"
-        [xAxis]="showXAxis"
-        [yAxis]="showYAxis"
-        [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
-        [autoScale]="autoScale"
-        [xScaleMin]="xScaleMin"
-        [xScaleMax]="xScaleMax"
-        [yScaleMin]="yScaleMin"
-        [yScaleMax]="yScaleMax"
-        [scheme]="colorScheme"
-        [schemeType]="schemeType"
-        [roundDomains]="roundDomains"
-        [tooltipDisabled]="tooltipDisabled"
-        [minRadius]="minRadius"
-        [maxRadius]="maxRadius"
-        [trimXAxisTicks]="trimXAxisTicks"
-        [trimYAxisTicks]="trimYAxisTicks"
-        [rotateXAxisTicks]="rotateXAxisTicks"
-        [maxXAxisTickLength]="maxXAxisTickLength"
-        [maxYAxisTickLength]="maxYAxisTickLength"
-        [wrapTicks]="wrapTicks"
-        (activate)="activate($event)"
-        (deactivate)="deactivate($event)"
-        (select)="select($event)"
-      >
-      </ngx-charts-bubble-chart>
-      <ngx-charts-area-chart
-        *ngIf="chartType === 'area-chart'"
-        class="chart-container"
-        [view]="view"
-        [scheme]="colorScheme"
-        [schemeType]="schemeType"
-        [results]="dateData"
-        [animations]="animations"
-        [legend]="showLegend"
-        [legendTitle]="legendTitle"
-        [legendPosition]="legendPosition"
-        [gradient]="gradient"
-        [xAxis]="showXAxis"
-        [yAxis]="showYAxis"
-        [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
-        [autoScale]="autoScale"
-        [xScaleMin]="xScaleMin"
-        [xScaleMax]="xScaleMax"
-        [yScaleMin]="yScaleMin"
-        [yScaleMax]="yScaleMax"
-        [timeline]="timeline"
-        [showGridLines]="showGridLines"
-        [roundDomains]="roundDomains"
-        [curve]="curve"
-        [tooltipDisabled]="tooltipDisabled"
-        [referenceLines]="refLinesArea"
-        [showRefLines]="showRefLines"
-        [showRefLabels]="showRefLabels"
-        [trimXAxisTicks]="trimXAxisTicks"
-        [trimYAxisTicks]="trimYAxisTicks"
-        [rotateXAxisTicks]="rotateXAxisTicks"
-        [maxXAxisTickLength]="maxXAxisTickLength"
-        [maxYAxisTickLength]="maxYAxisTickLength"
-        [wrapTicks]="wrapTicks"
-        (select)="select($event)"
-        (activate)="activate($event)"
-        (deactivate)="deactivate($event)"
-      >
-      </ngx-charts-area-chart>
-      <ngx-charts-area-chart-stacked
-        *ngIf="chartType === 'area-chart-stacked'"
-        class="chart-container"
-        [view]="view"
-        [scheme]="colorScheme"
-        [schemeType]="schemeType"
-        [results]="dateData"
-        [animations]="animations"
-        [legend]="showLegend"
-        [legendTitle]="legendTitle"
-        [legendPosition]="legendPosition"
-        [gradient]="gradient"
-        [xAxis]="showXAxis"
-        [yAxis]="showYAxis"
-        [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
-        [timeline]="timeline"
-        [xScaleMin]="xScaleMin"
-        [xScaleMax]="xScaleMax"
-        [yScaleMin]="yScaleMin"
-        [yScaleMax]="yScaleMax"
-        [showGridLines]="showGridLines"
-        [roundDomains]="roundDomains"
-        [tooltipDisabled]="tooltipDisabled"
-        [curve]="curve"
-        [trimXAxisTicks]="trimXAxisTicks"
-        [trimYAxisTicks]="trimYAxisTicks"
-        [rotateXAxisTicks]="rotateXAxisTicks"
-        [maxXAxisTickLength]="maxXAxisTickLength"
-        [maxYAxisTickLength]="maxYAxisTickLength"
-        [wrapTicks]="wrapTicks"
-        (select)="select($event)"
-        (activate)="activate($event)"
-        (deactivate)="deactivate($event)"
-      >
-      </ngx-charts-area-chart-stacked>
-      <ngx-charts-area-chart-normalized
-        *ngIf="chartType === 'area-chart-normalized'"
-        class="chart-container"
-        [view]="view"
-        [scheme]="colorScheme"
-        [schemeType]="schemeType"
-        [results]="dateData"
-        [animations]="animations"
-        [legend]="showLegend"
-        [legendTitle]="legendTitle"
-        [legendPosition]="legendPosition"
-        [gradient]="gradient"
-        [xAxis]="showXAxis"
-        [yAxis]="showYAxis"
-        [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
-        [timeline]="timeline"
-        [showGridLines]="showGridLines"
-        [roundDomains]="roundDomains"
-        [tooltipDisabled]="tooltipDisabled"
-        [curve]="curve"
-        [trimXAxisTicks]="trimXAxisTicks"
-        [trimYAxisTicks]="trimYAxisTicks"
-        [rotateXAxisTicks]="rotateXAxisTicks"
-        [maxXAxisTickLength]="maxXAxisTickLength"
-        [maxYAxisTickLength]="maxYAxisTickLength"
-        (select)="select($event)"
-        (activate)="activate($event)"
-        (deactivate)="deactivate($event)"
-      >
-      </ngx-charts-area-chart-normalized>
-      <combo-chart-component
-        *ngIf="chartType === 'combo-chart'"
-        class="chart-container"
-        [view]="view"
-        [scheme]="comboBarScheme"
-        [colorSchemeLine]="lineChartScheme"
-        [results]="barChart"
-        [animations]="animations"
-        [lineChart]="lineChartSeries"
-        [tooltipDisabled]="tooltipDisabled"
-        [yAxisTickFormatting]="yLeftTickFormat"
-        [yLeftAxisScaleFactor]="yLeftAxisScale"
-        [yRightAxisScaleFactor]="yRightAxisScale"
-        [yRightAxisTickFormatting]="yRightTickFormat"
-        [gradient]="gradient"
-        [xAxis]="showXAxis"
-        [yAxis]="showYAxis"
-        [legend]="showLegend"
-        [legendTitle]="legendTitle"
-        [legendPosition]="legendPosition"
-        [showGridLines]="showGridLines"
-        [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel"
-        [showRightYAxisLabel]="showYAxisLabel"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
-        [yAxisLabelRight]="yAxisLabelRight"
-        [noBarWhenZero]="noBarWhenZero"
-        [wrapTicks]="wrapTicks"
-        (select)="onSelect($event)"
-      >
-      </combo-chart-component>
-      <ngx-charts-heat-map
-        *ngIf="chartType === 'heat-map'"
-        class="chart-container"
-        [min]="heatmapMin"
-        [max]="heatmapMax"
-        [view]="view"
-        [scheme]="colorScheme"
-        [results]="multi"
-        [animations]="animations"
-        [legend]="showLegend"
-        [gradient]="gradient"
-        [xAxis]="showXAxis"
-        [yAxis]="showYAxis"
-        [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
-        [innerPadding]="innerPadding"
-        [tooltipDisabled]="tooltipDisabled"
-        [trimXAxisTicks]="trimXAxisTicks"
-        [trimYAxisTicks]="trimYAxisTicks"
-        [rotateXAxisTicks]="rotateXAxisTicks"
-        [maxXAxisTickLength]="maxXAxisTickLength"
-        [maxYAxisTickLength]="maxYAxisTickLength"
-        [wrapTicks]="wrapTicks"
-        (select)="select($event)"
-        (activate)="activate($event)"
-        (deactivate)="deactivate($event)"
-      >
-      </ngx-charts-heat-map>
-      <ngx-charts-heat-map
-        *ngIf="chartType === 'calendar'"
-        class="chart-container"
-        [view]="view"
-        [scheme]="colorScheme"
-        [results]="calendarData"
-        [animations]="animations"
-        [legend]="showLegend"
-        [gradient]="gradient"
-        [xAxis]="showXAxis"
-        [yAxis]="showYAxis"
-        [showXAxisLabel]="false"
-        [showYAxisLabel]="false"
-        [xAxisTickFormatting]="calendarAxisTickFormatting"
-        [tooltipText]="calendarTooltipText"
-        [innerPadding]="innerPadding"
-        [tooltipDisabled]="tooltipDisabled"
-        [trimXAxisTicks]="trimXAxisTicks"
-        [trimYAxisTicks]="trimYAxisTicks"
-        [rotateXAxisTicks]="rotateXAxisTicks"
-        [maxXAxisTickLength]="maxXAxisTickLength"
-        [maxYAxisTickLength]="maxYAxisTickLength"
-        [wrapTicks]="wrapTicks"
-        (select)="select($event)"
-        (activate)="activate($event)"
-        (deactivate)="deactivate($event)"
-      >
-      </ngx-charts-heat-map>
-      <ngx-charts-tree-map
-        *ngIf="chartType === 'tree-map'"
-        class="chart-container"
-        [view]="view"
-        [scheme]="colorScheme"
-        [results]="single"
-        [animations]="animations"
-        [tooltipDisabled]="tooltipDisabled"
-        [labelFormatting]="gdpLabelFormatting"
-        [valueFormatting]="currencyFormatting"
-        [gradient]="gradient"
-        (select)="select($event)"
-      >
-      </ngx-charts-tree-map>
-      <ngx-charts-number-card
-        *ngIf="chartType === 'number-card'"
-        class="chart-container"
-        [view]="view"
-        [scheme]="colorScheme"
-        cardColor="#232837"
-        emptyColor="#1e222e"
-        [results]="single"
-        [animations]="animations"
-        (select)="select($event)"
-      >
-      </ngx-charts-number-card>
-      <ngx-charts-box-chart
-        *ngIf="chartType === 'box-plot'"
-        class="chart-container"
-        [view]="view"
-        [results]="boxData"
-        [scheme]="colorScheme"
-        [schemeType]="schemeType"
-        [customColors]="customColors"
-        [strokeColor]="strokeColor"
-        [strokeWidth]="strokeWidth"
-        [xAxis]="showXAxis"
-        [yAxis]="showYAxis"
-        [legend]="showLegend"
-        [legendTitle]="legendTitle"
-        [legendPosition]="legendPosition"
-        [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel"
-        [tooltipDisabled]="tooltipDisabled"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
-        [showGridLines]="showGridLines"
-        [roundDomains]="roundDomains"
-        [roundEdges]="roundEdges"
-        [gradient]="gradient"
-        [animations]="animations"
-        (legendLabelClick)="onLegendLabelClick($event)"
-        (select)="select($event)"
-        (activate)="activate($event)"
-        (deactivate)="deactivate($event)"
-      >
-      </ngx-charts-box-chart>
-      <ngx-charts-sankey
-        *ngIf="chartType === 'sankey'"
-        class="chart-container"
-        [view]="view"
-        [results]="sankeyData"
-        [scheme]="colorScheme"
-        [schemeType]="schemeType"
-        [customColors]="customColors"
-        [tooltipDisabled]="tooltipDisabled"
-        [animations]="animations"
-        [showLabels]="showLabels"
-        (select)="select($event)"
-        (activate)="activate($event)"
-        (deactivate)="deactivate($event)"
-      >
-      </ngx-charts-sankey>
-      <div *ngIf="chartType === 'status-demo'">
-        <ngx-slider
-          [(ngModel)]="salePrice"
-          [step]="100"
-          [filled]="true"
-          [min]="0"
-          [max]="10000"
-          (change)="statusData = calcStatusData()"
-        >
-        </ngx-slider>
-        Price: ${{ salePrice }}
-        <br />
-        <ngx-slider
-          [(ngModel)]="personnelCost"
-          [step]="100"
-          [filled]="true"
-          [min]="0"
-          [max]="10000"
-          (change)="statusData = calcStatusData()"
-        >
-        </ngx-slider>
-        Cost: ${{ personnelCost }} / hr
-        <ngx-charts-number-card
+      @if (chartType === 'bar-vertical') {
+        <ngx-charts-bar-vertical
           class="chart-container"
           [view]="view"
-          [scheme]="colorScheme"
-          cardColor="#232837"
-          emptyColor="#1e222e"
-          [results]="statusData"
-          [animations]="animations"
-          [valueFormatting]="statusValueFormat"
-          [labelFormatting]="statusLabelFormat"
-        >
-        </ngx-charts-number-card>
-      </div>
-      <ngx-charts-gauge
-        *ngIf="chartType === 'gauge'"
-        class="chart-container"
-        [view]="view"
-        [legend]="showLegend"
-        [legendTitle]="legendTitle"
-        [legendPosition]="legendPosition"
-        [results]="single"
-        [animations]="animations"
-        [textValue]="gaugeTextValue"
-        [scheme]="colorScheme"
-        [min]="gaugeMin"
-        [max]="gaugeMax"
-        [units]="gaugeUnits"
-        [angleSpan]="gaugeAngleSpan"
-        [startAngle]="gaugeStartAngle"
-        [showAxis]="gaugeShowAxis"
-        [bigSegments]="gaugeLargeSegments"
-        [smallSegments]="gaugeSmallSegments"
-        [margin]="margin ? [marginTop, marginRight, marginBottom, marginLeft] : null"
-        [tooltipDisabled]="tooltipDisabled"
-        [showText]="showText"
-        (select)="select($event)"
-        (activate)="activate($event)"
-        (deactivate)="deactivate($event)"
-      >
-      </ngx-charts-gauge>
-      <ngx-charts-linear-gauge
-        *ngIf="chartType === 'linear-gauge'"
-        class="chart-container"
-        [view]="view"
-        [scheme]="colorScheme"
-        [animations]="animations"
-        [min]="gaugeMin"
-        [max]="gaugeMax"
-        [value]="gaugeValue"
-        [previousValue]="gaugePreviousValue"
-        [units]="gaugeUnits"
-        (select)="select($event)"
-      >
-      </ngx-charts-linear-gauge>
-
-      <ngx-charts-percent-gauge
-        *ngIf="chartType === 'percent-gauge'"
-        class="chart-container"
-        [view]="view"
-        [scheme]="colorScheme"
-        [animations]="animations"
-        [value]="gaugeValue"
-        [target]="target"
-        [max]="gaugeMax"
-        [showLabel]="showLabel"
-        label="Coverage"
-        (select)="select($event)"
-      >
-      </ngx-charts-percent-gauge>
-
-      <div *ngIf="chartType === 'plot-demo'">
-        <ngx-input
-          [type]="inputTypes.text"
-          [required]="true"
-          [(ngModel)]="mathText"
-          (change)="mathFunction = getFunction(mathText); plotData = generatePlotData()"
-        >
-        </ngx-input>
-        <ngx-charts-line-chart
-          style="position: static; display: inline-block; transform: none"
-          [view]="view"
-          class="chart-container"
           [scheme]="colorScheme"
           [schemeType]="schemeType"
-          [results]="plotData"
+          [customColors]="customColors"
+          [results]="single"
           [animations]="animations"
-          [legend]="false"
-          [legendTitle]="legendTitle"
-          [legendPosition]="legendPosition"
           [gradient]="gradient"
           [xAxis]="showXAxis"
           [yAxis]="showYAxis"
-          [showXAxisLabel]="false"
-          [showYAxisLabel]="false"
-          [xAxisLabel]="'angle'"
-          [yAxisLabel]="'radius'"
-          [autoScale]="autoScale"
-          [timeline]="timeline"
-          [showGridLines]="showGridLines"
-          [curve]="curves['Cardinal']"
-          [rangeFillOpacity]="rangeFillOpacity"
-          [roundDomains]="roundDomains"
-          [tooltipDisabled]="tooltipDisabled"
-          [trimXAxisTicks]="trimXAxisTicks"
-          [trimYAxisTicks]="trimYAxisTicks"
-          [maxXAxisTickLength]="maxXAxisTickLength"
-          [maxYAxisTickLength]="maxYAxisTickLength"
-          (select)="select($event)"
-        >
-        </ngx-charts-line-chart>
-        <p></p>
-        <ngx-charts-polar-chart
-          style="position: static; display: inline-block; transform: none"
-          [view]="view"
-          class="chart-container"
-          [scheme]="colorScheme"
-          [schemeType]="schemeType"
-          [results]="plotData"
-          [animations]="animations"
-          [legend]="false"
+          [legend]="showLegend"
           [legendTitle]="legendTitle"
           [legendPosition]="legendPosition"
-          [gradient]="gradient"
-          [xAxis]="false"
-          [yAxis]="true"
-          [showXAxisLabel]="false"
-          [showYAxisLabel]="false"
-          [xAxisLabel]="'angle'"
-          [yAxisLabel]="'radius'"
-          [autoScale]="autoScale"
-          [showGridLines]="showGridLines"
-          [rangeFillOpacity]="rangeFillOpacity"
-          [roundDomains]="roundDomains"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
           [tooltipDisabled]="tooltipDisabled"
-          [showSeriesOnHover]="showSeriesOnHover"
-          [curve]="curves['Cardinal Closed']"
+          [referenceLines]="refLines"
+          [showRefLines]="showRefLines"
+          [showRefLabels]="showRefLabels"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          [showGridLines]="showGridLines"
+          [barPadding]="barPadding"
+          [roundDomains]="roundDomains"
+          [roundEdges]="roundEdges"
+          [yScaleMax]="yScaleMax"
+          [noBarWhenZero]="noBarWhenZero"
+          [showDataLabel]="showDataLabel"
+          [trimXAxisTicks]="trimXAxisTicks"
           [trimYAxisTicks]="trimYAxisTicks"
+          [rotateXAxisTicks]="rotateXAxisTicks"
+          [maxXAxisTickLength]="maxXAxisTickLength"
           [maxYAxisTickLength]="maxYAxisTickLength"
+          [wrapTicks]="wrapTicks"
           (select)="select($event)"
           (activate)="activate($event)"
           (deactivate)="deactivate($event)"
         >
-        </ngx-charts-polar-chart>
-      </div>
-      <div class="chart-container" *ngIf="chartType === 'tree-map-demo'" style="padding: 10px; border: 1px solid white">
-        <h4 style="text-align: center">
-          <button class="btn btn-link" [class.active]="sumBy === 'Size'" (click)="treemapProcess('Size')">
-            By Size
-          </button>
-          <button class="btn btn-link" [class.active]="sumBy === 'Count'" (click)="treemapProcess('Count')">
-            By Count
-          </button>
-        </h4>
-        <div style="height: 17px; font-size: 12px">
-          <ng-container *ngFor="let item of treemapPath; let last = last">
-            <button class="btn btn-link" [class.active]="last" [disabled]="last" (click)="treemapSelect(item)">
-              {{ item.name }} ({{ item.value }})
-            </button>
-            <span *ngIf="!last"> / </span>
-          </ng-container>
-        </div>
-        <ngx-charts-tree-map
+        </ngx-charts-bar-vertical>
+      }
+      @if (chartType === 'bar-horizontal') {
+        <ngx-charts-bar-horizontal
+          class="chart-container"
           [view]="view"
           [scheme]="colorScheme"
-          [results]="treemap"
+          [schemeType]="schemeType"
+          [results]="single"
           [animations]="animations"
-          [tooltipDisabled]="tooltipDisabled"
           [gradient]="gradient"
-          (select)="treemapSelect($event)"
-        >
-        </ngx-charts-tree-map>
-      </div>
-      <div
-        class="chart-container"
-        *ngIf="chartType === 'bubble-chart-interactive-demo'"
-        style="padding: 10px; border: 1px solid white"
-      >
-        <div>
-          <span class="active">{{ getBubbleInteractiveTitle() }}</span>
-          <button
-            *ngIf="bubbleShowDrillDownResetLink()"
-            class="btn btn-link"
-            style="float: right"
-            (click)="onClickResetBubbleInteractiveDrill()"
-          >
-            <span>Go Back</span>
-          </button>
-        </div>
-        <ngx-charts-bubble-chart-interactive
-          [view]="view"
-          [results]="bubbleDemoTempData"
-          [animations]="animations"
-          [showGridLines]="showGridLines"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
           [legend]="showLegend"
           [legendTitle]="legendTitle"
+          [legendPosition]="legendPosition"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [tooltipDisabled]="tooltipDisabled"
+          [referenceLines]="refLines"
+          [showRefLines]="showRefLines"
+          [showRefLabels]="showRefLabels"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          [showGridLines]="showGridLines"
+          [barPadding]="barPadding"
+          [roundDomains]="roundDomains"
+          [roundEdges]="roundEdges"
+          [xScaleMax]="xScaleMax"
+          [noBarWhenZero]="noBarWhenZero"
+          [showDataLabel]="showDataLabel"
+          [trimXAxisTicks]="trimXAxisTicks"
+          [trimYAxisTicks]="trimYAxisTicks"
+          [rotateXAxisTicks]="rotateXAxisTicks"
+          [maxXAxisTickLength]="maxXAxisTickLength"
+          [maxYAxisTickLength]="maxYAxisTickLength"
+          [wrapTicks]="wrapTicks"
+          (select)="select($event)"
+          (activate)="activate($event)"
+          (deactivate)="deactivate($event)"
+        >
+        </ngx-charts-bar-horizontal>
+      }
+      @if (chartType === 'bar-vertical-2d') {
+        <ngx-charts-bar-vertical-2d
+          class="chart-container"
+          [view]="view"
+          [scheme]="colorScheme"
+          [schemeType]="schemeType"
+          [results]="multi"
+          [animations]="animations"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [legend]="showLegend"
+          [legendTitle]="legendTitle"
+          [legendPosition]="legendPosition"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [tooltipDisabled]="tooltipDisabled"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          [showGridLines]="showGridLines"
+          [barPadding]="barPadding"
+          [groupPadding]="groupPadding"
+          [roundDomains]="roundDomains"
+          [roundEdges]="roundEdges"
+          [yScaleMax]="yScaleMax"
+          [noBarWhenZero]="noBarWhenZero"
+          [showDataLabel]="showDataLabel"
+          [trimXAxisTicks]="trimXAxisTicks"
+          [trimYAxisTicks]="trimYAxisTicks"
+          [rotateXAxisTicks]="rotateXAxisTicks"
+          [maxXAxisTickLength]="maxXAxisTickLength"
+          [maxYAxisTickLength]="maxYAxisTickLength"
+          [wrapTicks]="wrapTicks"
+          (select)="select($event)"
+          (activate)="activate($event)"
+          (deactivate)="deactivate($event)"
+        >
+        </ngx-charts-bar-vertical-2d>
+      }
+      @if (chartType === 'bar-horizontal-2d') {
+        <ngx-charts-bar-horizontal-2d
+          class="chart-container"
+          [view]="view"
+          [scheme]="colorScheme"
+          [schemeType]="schemeType"
+          [results]="multi"
+          [animations]="animations"
+          [gradient]="gradient"
+          [tooltipDisabled]="tooltipDisabled"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [legend]="showLegend"
+          [legendTitle]="legendTitle"
+          [legendPosition]="legendPosition"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          [showGridLines]="showGridLines"
+          [barPadding]="barPadding"
+          [groupPadding]="groupPadding"
+          [roundDomains]="roundDomains"
+          [roundEdges]="roundEdges"
+          [xScaleMax]="xScaleMax"
+          [noBarWhenZero]="noBarWhenZero"
+          [showDataLabel]="showDataLabel"
+          [trimXAxisTicks]="trimXAxisTicks"
+          [trimYAxisTicks]="trimYAxisTicks"
+          [rotateXAxisTicks]="rotateXAxisTicks"
+          [maxXAxisTickLength]="maxXAxisTickLength"
+          [maxYAxisTickLength]="maxYAxisTickLength"
+          [wrapTicks]="wrapTicks"
+          (select)="select($event)"
+          (activate)="activate($event)"
+          (deactivate)="deactivate($event)"
+        >
+        </ngx-charts-bar-horizontal-2d>
+      }
+      @if (chartType === 'bar-vertical-stacked') {
+        <ngx-charts-bar-vertical-stacked
+          class="chart-container"
+          [view]="view"
+          [scheme]="colorScheme"
+          [schemeType]="schemeType"
+          [results]="multi"
+          [animations]="animations"
+          [gradient]="gradient"
+          [tooltipDisabled]="tooltipDisabled"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [legend]="showLegend"
+          [legendTitle]="legendTitle"
+          [legendPosition]="legendPosition"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          [showGridLines]="showGridLines"
+          [barPadding]="barPadding"
+          [roundDomains]="roundDomains"
+          [yScaleMax]="yScaleMax"
+          [noBarWhenZero]="noBarWhenZero"
+          [showDataLabel]="showDataLabel"
+          [trimXAxisTicks]="trimXAxisTicks"
+          [trimYAxisTicks]="trimYAxisTicks"
+          [rotateXAxisTicks]="rotateXAxisTicks"
+          [maxXAxisTickLength]="maxXAxisTickLength"
+          [maxYAxisTickLength]="maxYAxisTickLength"
+          [wrapTicks]="wrapTicks"
+          (select)="select($event)"
+          (activate)="activate($event)"
+          (deactivate)="deactivate($event)"
+        >
+        </ngx-charts-bar-vertical-stacked>
+      }
+      @if (chartType === 'bar-horizontal-stacked') {
+        <ngx-charts-bar-horizontal-stacked
+          class="chart-container"
+          [view]="view"
+          [scheme]="colorScheme"
+          [schemeType]="schemeType"
+          [results]="multi"
+          [animations]="animations"
+          [gradient]="gradient"
+          [tooltipDisabled]="tooltipDisabled"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [legend]="showLegend"
+          [legendTitle]="legendTitle"
+          [legendPosition]="legendPosition"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          [showGridLines]="showGridLines"
+          [barPadding]="barPadding"
+          [roundDomains]="roundDomains"
+          [showDataLabel]="showDataLabel"
+          [xScaleMax]="xScaleMax"
+          [noBarWhenZero]="noBarWhenZero"
+          [trimXAxisTicks]="trimXAxisTicks"
+          [trimYAxisTicks]="trimYAxisTicks"
+          [rotateXAxisTicks]="rotateXAxisTicks"
+          [maxXAxisTickLength]="maxXAxisTickLength"
+          [maxYAxisTickLength]="maxYAxisTickLength"
+          [wrapTicks]="wrapTicks"
+          (select)="select($event)"
+          (activate)="activate($event)"
+          (deactivate)="deactivate($event)"
+        >
+        </ngx-charts-bar-horizontal-stacked>
+      }
+      @if (chartType === 'bar-vertical-normalized') {
+        <ngx-charts-bar-vertical-normalized
+          class="chart-container"
+          [view]="view"
+          [scheme]="colorScheme"
+          [schemeType]="schemeType"
+          [results]="multi"
+          [animations]="animations"
+          [gradient]="gradient"
+          [tooltipDisabled]="tooltipDisabled"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [legend]="showLegend"
+          [legendTitle]="legendTitle"
+          [legendPosition]="legendPosition"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          [showGridLines]="showGridLines"
+          [barPadding]="barPadding"
+          [roundDomains]="roundDomains"
+          [noBarWhenZero]="noBarWhenZero"
+          [trimXAxisTicks]="trimXAxisTicks"
+          [trimYAxisTicks]="trimYAxisTicks"
+          [rotateXAxisTicks]="rotateXAxisTicks"
+          [maxXAxisTickLength]="maxXAxisTickLength"
+          [maxYAxisTickLength]="maxYAxisTickLength"
+          [wrapTicks]="wrapTicks"
+          (select)="select($event)"
+          (activate)="activate($event)"
+          (deactivate)="deactivate($event)"
+        >
+        </ngx-charts-bar-vertical-normalized>
+      }
+      @if (chartType === 'bar-horizontal-normalized') {
+        <ngx-charts-bar-horizontal-normalized
+          class="chart-container"
+          [view]="view"
+          [scheme]="colorScheme"
+          [schemeType]="schemeType"
+          [results]="multi"
+          [animations]="animations"
+          [gradient]="gradient"
+          [tooltipDisabled]="tooltipDisabled"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [legend]="showLegend"
+          [legendTitle]="legendTitle"
+          [legendPosition]="legendPosition"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          [showGridLines]="showGridLines"
+          [barPadding]="barPadding"
+          [roundDomains]="roundDomains"
+          [noBarWhenZero]="noBarWhenZero"
+          [trimXAxisTicks]="trimXAxisTicks"
+          [trimYAxisTicks]="trimYAxisTicks"
+          [rotateXAxisTicks]="rotateXAxisTicks"
+          [maxXAxisTickLength]="maxXAxisTickLength"
+          [maxYAxisTickLength]="maxYAxisTickLength"
+          [wrapTicks]="wrapTicks"
+          (select)="select($event)"
+          (activate)="activate($event)"
+          (deactivate)="deactivate($event)"
+        >
+        </ngx-charts-bar-horizontal-normalized>
+      }
+      @if (chartType === 'pie-chart') {
+        <ngx-charts-pie-chart
+          class="chart-container"
+          [view]="view"
+          [scheme]="colorScheme"
+          [results]="single"
+          [animations]="animations"
+          [legend]="showLegend"
+          [legendTitle]="legendTitle"
+          [legendPosition]="legendPosition"
+          [explodeSlices]="explodeSlices"
+          [labels]="showLabels"
+          [doughnut]="doughnut"
+          [arcWidth]="arcWidth"
+          [gradient]="gradient"
+          [tooltipDisabled]="tooltipDisabled"
+          [tooltipText]="pieTooltipText"
+          (dblclick)="dblclick($event)"
+          (select)="select($event)"
+          (activate)="activate($event)"
+          (deactivate)="deactivate($event)"
+        >
+        </ngx-charts-pie-chart>
+      }
+      @if (chartType === 'advanced-pie-chart') {
+        <ngx-charts-advanced-pie-chart
+          class="chart-container"
+          [view]="view"
+          [scheme]="colorScheme"
+          [results]="single"
+          [valueFormatting]="valueFormatting"
+          [animations]="animations"
+          [gradient]="gradient"
+          [tooltipDisabled]="tooltipDisabled"
+          [tooltipText]="pieTooltipText"
+          (select)="select($event)"
+          (activate)="activate($event)"
+          (deactivate)="deactivate($event)"
+        >
+        </ngx-charts-advanced-pie-chart>
+      }
+      @if (chartType === 'pie-grid') {
+        <ngx-charts-pie-grid
+          class="chart-container"
+          [view]="view"
+          [scheme]="colorScheme"
+          [results]="single"
+          [animations]="animations"
+          [tooltipDisabled]="tooltipDisabled"
+          [tooltipText]="pieTooltipText"
+          (select)="select($event)"
+          (activate)="activate($event)"
+          (deactivate)="deactivate($event)"
+        >
+        </ngx-charts-pie-grid>
+      }
+      @if (chartType === 'line-chart') {
+        <ngx-charts-line-chart
+          [view]="view"
+          class="chart-container"
+          [scheme]="colorScheme"
+          [schemeType]="schemeType"
+          [results]="dateDataWithOrWithoutRange"
+          [animations]="animations"
+          [legend]="showLegend"
+          [legendTitle]="legendTitle"
+          [legendPosition]="legendPosition"
+          [gradient]="gradient"
           [xAxis]="showXAxis"
           [yAxis]="showYAxis"
           [showXAxisLabel]="showXAxisLabel"
@@ -961,76 +381,759 @@
           [xAxisLabel]="xAxisLabel"
           [yAxisLabel]="yAxisLabel"
           [autoScale]="autoScale"
+          [xScaleMin]="xScaleMin"
+          [xScaleMax]="xScaleMax"
+          [yScaleMin]="yScaleMin"
+          [yScaleMax]="yScaleMax"
+          [timeline]="timeline"
+          [showGridLines]="showGridLines"
+          [curve]="curve"
+          [rangeFillOpacity]="rangeFillOpacity"
+          [roundDomains]="roundDomains"
+          [tooltipDisabled]="tooltipDisabled"
+          [trimXAxisTicks]="trimXAxisTicks"
+          [trimYAxisTicks]="trimYAxisTicks"
+          [rotateXAxisTicks]="rotateXAxisTicks"
+          [maxXAxisTickLength]="maxXAxisTickLength"
+          [maxYAxisTickLength]="maxYAxisTickLength"
+          [wrapTicks]="wrapTicks"
+          (select)="select($event)"
+          (activate)="activate($event)"
+          (deactivate)="deactivate($event)"
+        >
+        </ngx-charts-line-chart>
+      }
+      @if (chartType === 'polar-chart') {
+        <ngx-charts-polar-chart
+          [view]="view"
+          class="chart-container"
+          [scheme]="colorScheme"
+          [schemeType]="schemeType"
+          [results]="multi"
+          [animations]="animations"
+          [legend]="showLegend"
+          [legendTitle]="legendTitle"
+          [legendPosition]="legendPosition"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          [autoScale]="autoScale"
+          [showGridLines]="showGridLines"
+          [rangeFillOpacity]="rangeFillOpacity"
+          [roundDomains]="roundDomains"
+          [tooltipDisabled]="tooltipDisabled"
+          [showSeriesOnHover]="showSeriesOnHover"
+          [trimYAxisTicks]="trimYAxisTicks"
+          [maxYAxisTickLength]="maxYAxisTickLength"
+          [curve]="closedCurve"
+          (select)="select($event)"
+          (activate)="activate($event)"
+          (deactivate)="deactivate($event)"
+        >
+        </ngx-charts-polar-chart>
+      }
+      @if (chartType === 'bubble-chart') {
+        <ngx-charts-bubble-chart
+          [view]="view"
+          class="chart-container"
+          [results]="bubble"
+          [animations]="animations"
+          [showGridLines]="showGridLines"
+          [legend]="showLegend"
+          [legendTitle]="legendTitle"
+          [legendPosition]="legendPosition"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          [autoScale]="autoScale"
+          [xScaleMin]="xScaleMin"
+          [xScaleMax]="xScaleMax"
+          [yScaleMin]="yScaleMin"
+          [yScaleMax]="yScaleMax"
           [scheme]="colorScheme"
           [schemeType]="schemeType"
           [roundDomains]="roundDomains"
           [tooltipDisabled]="tooltipDisabled"
           [minRadius]="minRadius"
           [maxRadius]="maxRadius"
-          (select)="onSelectBubbleInteractivePoint($event)"
+          [trimXAxisTicks]="trimXAxisTicks"
+          [trimYAxisTicks]="trimYAxisTicks"
+          [rotateXAxisTicks]="rotateXAxisTicks"
+          [maxXAxisTickLength]="maxXAxisTickLength"
+          [maxYAxisTickLength]="maxYAxisTickLength"
+          [wrapTicks]="wrapTicks"
+          (activate)="activate($event)"
+          (deactivate)="deactivate($event)"
+          (select)="select($event)"
         >
-        </ngx-charts-bubble-chart-interactive>
-      </div>
-      <ngx-charts-line-chart
-        *ngIf="chartType === 'line-reference-lines'"
-        [view]="view"
+        </ngx-charts-bubble-chart>
+      }
+      @if (chartType === 'area-chart') {
+        <ngx-charts-area-chart
+          class="chart-container"
+          [view]="view"
+          [scheme]="colorScheme"
+          [schemeType]="schemeType"
+          [results]="dateData"
+          [animations]="animations"
+          [legend]="showLegend"
+          [legendTitle]="legendTitle"
+          [legendPosition]="legendPosition"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          [autoScale]="autoScale"
+          [xScaleMin]="xScaleMin"
+          [xScaleMax]="xScaleMax"
+          [yScaleMin]="yScaleMin"
+          [yScaleMax]="yScaleMax"
+          [timeline]="timeline"
+          [showGridLines]="showGridLines"
+          [roundDomains]="roundDomains"
+          [curve]="curve"
+          [tooltipDisabled]="tooltipDisabled"
+          [referenceLines]="refLinesArea"
+          [showRefLines]="showRefLines"
+          [showRefLabels]="showRefLabels"
+          [trimXAxisTicks]="trimXAxisTicks"
+          [trimYAxisTicks]="trimYAxisTicks"
+          [rotateXAxisTicks]="rotateXAxisTicks"
+          [maxXAxisTickLength]="maxXAxisTickLength"
+          [maxYAxisTickLength]="maxYAxisTickLength"
+          [wrapTicks]="wrapTicks"
+          (select)="select($event)"
+          (activate)="activate($event)"
+          (deactivate)="deactivate($event)"
+        >
+        </ngx-charts-area-chart>
+      }
+      @if (chartType === 'area-chart-stacked') {
+        <ngx-charts-area-chart-stacked
+          class="chart-container"
+          [view]="view"
+          [scheme]="colorScheme"
+          [schemeType]="schemeType"
+          [results]="dateData"
+          [animations]="animations"
+          [legend]="showLegend"
+          [legendTitle]="legendTitle"
+          [legendPosition]="legendPosition"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          [timeline]="timeline"
+          [xScaleMin]="xScaleMin"
+          [xScaleMax]="xScaleMax"
+          [yScaleMin]="yScaleMin"
+          [yScaleMax]="yScaleMax"
+          [showGridLines]="showGridLines"
+          [roundDomains]="roundDomains"
+          [tooltipDisabled]="tooltipDisabled"
+          [curve]="curve"
+          [trimXAxisTicks]="trimXAxisTicks"
+          [trimYAxisTicks]="trimYAxisTicks"
+          [rotateXAxisTicks]="rotateXAxisTicks"
+          [maxXAxisTickLength]="maxXAxisTickLength"
+          [maxYAxisTickLength]="maxYAxisTickLength"
+          [wrapTicks]="wrapTicks"
+          (select)="select($event)"
+          (activate)="activate($event)"
+          (deactivate)="deactivate($event)"
+        >
+        </ngx-charts-area-chart-stacked>
+      }
+      @if (chartType === 'area-chart-normalized') {
+        <ngx-charts-area-chart-normalized
+          class="chart-container"
+          [view]="view"
+          [scheme]="colorScheme"
+          [schemeType]="schemeType"
+          [results]="dateData"
+          [animations]="animations"
+          [legend]="showLegend"
+          [legendTitle]="legendTitle"
+          [legendPosition]="legendPosition"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          [timeline]="timeline"
+          [showGridLines]="showGridLines"
+          [roundDomains]="roundDomains"
+          [tooltipDisabled]="tooltipDisabled"
+          [curve]="curve"
+          [trimXAxisTicks]="trimXAxisTicks"
+          [trimYAxisTicks]="trimYAxisTicks"
+          [rotateXAxisTicks]="rotateXAxisTicks"
+          [maxXAxisTickLength]="maxXAxisTickLength"
+          [maxYAxisTickLength]="maxYAxisTickLength"
+          (select)="select($event)"
+          (activate)="activate($event)"
+          (deactivate)="deactivate($event)"
+        >
+        </ngx-charts-area-chart-normalized>
+      }
+      @if (chartType === 'combo-chart') {
+        <combo-chart-component
+          class="chart-container"
+          [view]="view"
+          [scheme]="comboBarScheme"
+          [colorSchemeLine]="lineChartScheme"
+          [results]="barChart"
+          [animations]="animations"
+          [lineChart]="lineChartSeries"
+          [tooltipDisabled]="tooltipDisabled"
+          [yAxisTickFormatting]="yLeftTickFormat"
+          [yLeftAxisScaleFactor]="yLeftAxisScale"
+          [yRightAxisScaleFactor]="yRightAxisScale"
+          [yRightAxisTickFormatting]="yRightTickFormat"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [legend]="showLegend"
+          [legendTitle]="legendTitle"
+          [legendPosition]="legendPosition"
+          [showGridLines]="showGridLines"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [showRightYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          [yAxisLabelRight]="yAxisLabelRight"
+          [noBarWhenZero]="noBarWhenZero"
+          [wrapTicks]="wrapTicks"
+          (select)="onSelect($event)"
+        >
+        </combo-chart-component>
+      }
+      @if (chartType === 'heat-map') {
+        <ngx-charts-heat-map
+          class="chart-container"
+          [min]="heatmapMin"
+          [max]="heatmapMax"
+          [view]="view"
+          [scheme]="colorScheme"
+          [results]="multi"
+          [animations]="animations"
+          [legend]="showLegend"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          [innerPadding]="innerPadding"
+          [tooltipDisabled]="tooltipDisabled"
+          [trimXAxisTicks]="trimXAxisTicks"
+          [trimYAxisTicks]="trimYAxisTicks"
+          [rotateXAxisTicks]="rotateXAxisTicks"
+          [maxXAxisTickLength]="maxXAxisTickLength"
+          [maxYAxisTickLength]="maxYAxisTickLength"
+          [wrapTicks]="wrapTicks"
+          (select)="select($event)"
+          (activate)="activate($event)"
+          (deactivate)="deactivate($event)"
+        >
+        </ngx-charts-heat-map>
+      }
+      @if (chartType === 'calendar') {
+        <ngx-charts-heat-map
+          class="chart-container"
+          [view]="view"
+          [scheme]="colorScheme"
+          [results]="calendarData"
+          [animations]="animations"
+          [legend]="showLegend"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [showXAxisLabel]="false"
+          [showYAxisLabel]="false"
+          [xAxisTickFormatting]="calendarAxisTickFormatting"
+          [tooltipText]="calendarTooltipText"
+          [innerPadding]="innerPadding"
+          [tooltipDisabled]="tooltipDisabled"
+          [trimXAxisTicks]="trimXAxisTicks"
+          [trimYAxisTicks]="trimYAxisTicks"
+          [rotateXAxisTicks]="rotateXAxisTicks"
+          [maxXAxisTickLength]="maxXAxisTickLength"
+          [maxYAxisTickLength]="maxYAxisTickLength"
+          [wrapTicks]="wrapTicks"
+          (select)="select($event)"
+          (activate)="activate($event)"
+          (deactivate)="deactivate($event)"
+        >
+        </ngx-charts-heat-map>
+      }
+      @if (chartType === 'tree-map') {
+        <ngx-charts-tree-map
+          class="chart-container"
+          [view]="view"
+          [scheme]="colorScheme"
+          [results]="single"
+          [animations]="animations"
+          [tooltipDisabled]="tooltipDisabled"
+          [labelFormatting]="gdpLabelFormatting"
+          [valueFormatting]="currencyFormatting"
+          [gradient]="gradient"
+          (select)="select($event)"
+        >
+        </ngx-charts-tree-map>
+      }
+      @if (chartType === 'number-card') {
+        <ngx-charts-number-card
+          class="chart-container"
+          [view]="view"
+          [scheme]="colorScheme"
+          cardColor="#232837"
+          emptyColor="#1e222e"
+          [results]="single"
+          [animations]="animations"
+          (select)="select($event)"
+        >
+        </ngx-charts-number-card>
+      }
+      @if (chartType === 'box-plot') {
+        <ngx-charts-box-chart
+          class="chart-container"
+          [view]="view"
+          [results]="boxData"
+          [scheme]="colorScheme"
+          [schemeType]="schemeType"
+          [customColors]="customColors"
+          [strokeColor]="strokeColor"
+          [strokeWidth]="strokeWidth"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [legend]="showLegend"
+          [legendTitle]="legendTitle"
+          [legendPosition]="legendPosition"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [tooltipDisabled]="tooltipDisabled"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          [showGridLines]="showGridLines"
+          [roundDomains]="roundDomains"
+          [roundEdges]="roundEdges"
+          [gradient]="gradient"
+          [animations]="animations"
+          (legendLabelClick)="onLegendLabelClick($event)"
+          (select)="select($event)"
+          (activate)="activate($event)"
+          (deactivate)="deactivate($event)"
+        >
+        </ngx-charts-box-chart>
+      }
+      @if (chartType === 'sankey') {
+        <ngx-charts-sankey
+          class="chart-container"
+          [view]="view"
+          [results]="sankeyData"
+          [scheme]="colorScheme"
+          [schemeType]="schemeType"
+          [customColors]="customColors"
+          [tooltipDisabled]="tooltipDisabled"
+          [animations]="animations"
+          [showLabels]="showLabels"
+          (select)="select($event)"
+          (activate)="activate($event)"
+          (deactivate)="deactivate($event)"
+        >
+        </ngx-charts-sankey>
+      }
+      @if (chartType === 'status-demo') {
+        <div>
+          <ngx-slider
+            [(ngModel)]="salePrice"
+            [step]="100"
+            [filled]="true"
+            [min]="0"
+            [max]="10000"
+            (change)="statusData = calcStatusData()"
+          >
+          </ngx-slider>
+          Price: ${{ salePrice }}
+          <br />
+          <ngx-slider
+            [(ngModel)]="personnelCost"
+            [step]="100"
+            [filled]="true"
+            [min]="0"
+            [max]="10000"
+            (change)="statusData = calcStatusData()"
+          >
+          </ngx-slider>
+          Cost: ${{ personnelCost }} / hr
+          <ngx-charts-number-card
+            class="chart-container"
+            [view]="view"
+            [scheme]="colorScheme"
+            cardColor="#232837"
+            emptyColor="#1e222e"
+            [results]="statusData"
+            [animations]="animations"
+            [valueFormatting]="statusValueFormat"
+            [labelFormatting]="statusLabelFormat"
+          >
+          </ngx-charts-number-card>
+        </div>
+      }
+      @if (chartType === 'gauge') {
+        <ngx-charts-gauge
+          class="chart-container"
+          [view]="view"
+          [legend]="showLegend"
+          [legendTitle]="legendTitle"
+          [legendPosition]="legendPosition"
+          [results]="single"
+          [animations]="animations"
+          [textValue]="gaugeTextValue"
+          [scheme]="colorScheme"
+          [min]="gaugeMin"
+          [max]="gaugeMax"
+          [units]="gaugeUnits"
+          [angleSpan]="gaugeAngleSpan"
+          [startAngle]="gaugeStartAngle"
+          [showAxis]="gaugeShowAxis"
+          [bigSegments]="gaugeLargeSegments"
+          [smallSegments]="gaugeSmallSegments"
+          [margin]="margin ? [marginTop, marginRight, marginBottom, marginLeft] : null"
+          [tooltipDisabled]="tooltipDisabled"
+          [showText]="showText"
+          (select)="select($event)"
+          (activate)="activate($event)"
+          (deactivate)="deactivate($event)"
+        >
+        </ngx-charts-gauge>
+      }
+      @if (chartType === 'linear-gauge') {
+        <ngx-charts-linear-gauge
+          class="chart-container"
+          [view]="view"
+          [scheme]="colorScheme"
+          [animations]="animations"
+          [min]="gaugeMin"
+          [max]="gaugeMax"
+          [value]="gaugeValue"
+          [previousValue]="gaugePreviousValue"
+          [units]="gaugeUnits"
+          (select)="select($event)"
+        >
+        </ngx-charts-linear-gauge>
+      }
+      @if (chartType === 'percent-gauge') {
+        <ngx-charts-percent-gauge
+          class="chart-container"
+          [view]="view"
+          [scheme]="colorScheme"
+          [animations]="animations"
+          [value]="gaugeValue"
+          [target]="target"
+          [max]="gaugeMax"
+          [showLabel]="showLabel"
+          label="Coverage"
+          (select)="select($event)"
+        >
+        </ngx-charts-percent-gauge>
+      }
+      @if (chartType === 'plot-demo') {
+        <div>
+          <ngx-input
+            [type]="inputTypes.text"
+            [required]="true"
+            [(ngModel)]="mathText"
+            (change)="mathFunction = getFunction(mathText); plotData = generatePlotData()"
+          >
+          </ngx-input>
+          <ngx-charts-line-chart
+            style="position: static; display: inline-block; transform: none"
+            [view]="view"
+            class="chart-container"
+            [scheme]="colorScheme"
+            [schemeType]="schemeType"
+            [results]="plotData"
+            [animations]="animations"
+            [legend]="false"
+            [legendTitle]="legendTitle"
+            [legendPosition]="legendPosition"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [showXAxisLabel]="false"
+            [showYAxisLabel]="false"
+            [xAxisLabel]="'angle'"
+            [yAxisLabel]="'radius'"
+            [autoScale]="autoScale"
+            [timeline]="timeline"
+            [showGridLines]="showGridLines"
+            [curve]="curves['Cardinal']"
+            [rangeFillOpacity]="rangeFillOpacity"
+            [roundDomains]="roundDomains"
+            [tooltipDisabled]="tooltipDisabled"
+            [trimXAxisTicks]="trimXAxisTicks"
+            [trimYAxisTicks]="trimYAxisTicks"
+            [maxXAxisTickLength]="maxXAxisTickLength"
+            [maxYAxisTickLength]="maxYAxisTickLength"
+            (select)="select($event)"
+          >
+          </ngx-charts-line-chart>
+          <p></p>
+          <ngx-charts-polar-chart
+            style="position: static; display: inline-block; transform: none"
+            [view]="view"
+            class="chart-container"
+            [scheme]="colorScheme"
+            [schemeType]="schemeType"
+            [results]="plotData"
+            [animations]="animations"
+            [legend]="false"
+            [legendTitle]="legendTitle"
+            [legendPosition]="legendPosition"
+            [gradient]="gradient"
+            [xAxis]="false"
+            [yAxis]="true"
+            [showXAxisLabel]="false"
+            [showYAxisLabel]="false"
+            [xAxisLabel]="'angle'"
+            [yAxisLabel]="'radius'"
+            [autoScale]="autoScale"
+            [showGridLines]="showGridLines"
+            [rangeFillOpacity]="rangeFillOpacity"
+            [roundDomains]="roundDomains"
+            [tooltipDisabled]="tooltipDisabled"
+            [showSeriesOnHover]="showSeriesOnHover"
+            [curve]="curves['Cardinal Closed']"
+            [trimYAxisTicks]="trimYAxisTicks"
+            [maxYAxisTickLength]="maxYAxisTickLength"
+            (select)="select($event)"
+            (activate)="activate($event)"
+            (deactivate)="deactivate($event)"
+          >
+          </ngx-charts-polar-chart>
+        </div>
+      }
+      @if (chartType === 'tree-map-demo') {
+        <div class="chart-container" style="padding: 10px; border: 1px solid white">
+          <h4 style="text-align: center">
+            <button class="btn btn-link" [class.active]="sumBy === 'Size'" (click)="treemapProcess('Size')">
+              By Size
+            </button>
+            <button class="btn btn-link" [class.active]="sumBy === 'Count'" (click)="treemapProcess('Count')">
+              By Count
+            </button>
+          </h4>
+          <div style="height: 17px; font-size: 12px">
+            @for (item of treemapPath; track item; let last = $last) {
+              <button class="btn btn-link" [class.active]="last" [disabled]="last" (click)="treemapSelect(item)">
+                {{ item.name }} ({{ item.value }})
+              </button>
+              @if (!last) {
+                <span> / </span>
+              }
+            }
+          </div>
+          <ngx-charts-tree-map
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="treemap"
+            [animations]="animations"
+            [tooltipDisabled]="tooltipDisabled"
+            [gradient]="gradient"
+            (select)="treemapSelect($event)"
+          >
+          </ngx-charts-tree-map>
+        </div>
+      }
+      @if (chartType === 'bubble-chart-interactive-demo') {
+        <div class="chart-container" style="padding: 10px; border: 1px solid white">
+          <div>
+            <span class="active">{{ getBubbleInteractiveTitle() }}</span>
+            @if (bubbleShowDrillDownResetLink()) {
+              <button class="btn btn-link" style="float: right" (click)="onClickResetBubbleInteractiveDrill()">
+                <span>Go Back</span>
+              </button>
+            }
+          </div>
+          <ngx-charts-bubble-chart-interactive
+            [view]="view"
+            [results]="bubbleDemoTempData"
+            [animations]="animations"
+            [showGridLines]="showGridLines"
+            [legend]="showLegend"
+            [legendTitle]="legendTitle"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
+            [autoScale]="autoScale"
+            [scheme]="colorScheme"
+            [schemeType]="schemeType"
+            [roundDomains]="roundDomains"
+            [tooltipDisabled]="tooltipDisabled"
+            [minRadius]="minRadius"
+            [maxRadius]="maxRadius"
+            (select)="onSelectBubbleInteractivePoint($event)"
+          >
+          </ngx-charts-bubble-chart-interactive>
+        </div>
+      }
+      @if (chartType === 'line-reference-lines') {
+        <ngx-charts-line-chart
+          [view]="view"
+          class="chart-container"
+          [scheme]="colorScheme"
+          [schemeType]="schemeType"
+          [results]="multi"
+          [animations]="animations"
+          [legend]="showLegend"
+          [legendTitle]="legendTitle"
+          [legendPosition]="legendPosition"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          [autoScale]="autoScale"
+          [timeline]="timeline"
+          [showGridLines]="showGridLines"
+          [curve]="curve"
+          [rangeFillOpacity]="rangeFillOpacity"
+          [roundDomains]="roundDomains"
+          [tooltipDisabled]="tooltipDisabled"
+          [showRefLines]="showRefLines"
+          [showRefLabels]="showRefLabels"
+          [referenceLines]="refLines"
+          [trimXAxisTicks]="trimXAxisTicks"
+          [trimYAxisTicks]="trimYAxisTicks"
+          [maxXAxisTickLength]="maxXAxisTickLength"
+          [maxYAxisTickLength]="maxYAxisTickLength"
+          (select)="select($event)"
+          (activate)="activate($event)"
+          (deactivate)="deactivate($event)"
+        >
+        </ngx-charts-line-chart>
+      }
+      @if (chartType === 'tooltip-templates') {
+        <ngx-charts-bar-vertical
+          class="chart-container"
+          [view]="view"
+          [scheme]="colorScheme"
+          [schemeType]="schemeType"
+          [customColors]="customColors"
+          [results]="single"
+          [animations]="animations"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [legend]="showLegend"
+          [legendTitle]="legendTitle"
+          [legendPosition]="legendPosition"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [tooltipDisabled]="tooltipDisabled"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          [showGridLines]="showGridLines"
+          [barPadding]="barPadding"
+          [roundDomains]="roundDomains"
+          [trimXAxisTicks]="trimXAxisTicks"
+          [trimYAxisTicks]="trimYAxisTicks"
+          [maxXAxisTickLength]="maxXAxisTickLength"
+          [maxYAxisTickLength]="maxYAxisTickLength"
+          (select)="select($event)"
+          (activate)="activate($event)"
+          (deactivate)="deactivate($event)"
+        >
+          <ng-template #tooltipTemplate let-model="model">
+            <h1>
+              {{ getFlag(model.name) }}
+            </h1>
+            <h2>{{ model.name }}: {{ model.value }}</h2>
+          </ng-template>
+        </ngx-charts-bar-vertical>
+      }
+      @if (chartType === 'sparkline') {
+        <ngx-charts-sparkline
+          [view]="[100, 50]"
+          class="chart-container"
+          [scheme]="'flame'"
+          [results]="sparklineData"
+          [animations]="animations"
+          [curve]="curve"
+        >
+        </ngx-charts-sparkline>
+      }
+      @if (chartType === 'timeline-filter-bar-chart-demo') {
+        <ngx-charts-timeline-filter-bar-chart
+          [view]="view"
+          class="chart-container"
+          [scheme]="colorScheme"
+          [schemeType]="schemeType"
+          [results]="timelineFilterBarData"
+          [animations]="animations"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [showXAxisLabel]="false"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="'Executions'"
+          [showGridLines]="showGridLines"
+          [noBarWhenZero]="noBarWhenZero"
+          (onFilter)="onFilter($event)"
+        >
+        </ngx-charts-timeline-filter-bar-chart>
+      }
+    </div>
+    @if (chartType === 'bar-vertical-stacked-negative') {
+      <ngx-charts-bar-vertical-stacked
         class="chart-container"
+        [view]="view"
         [scheme]="colorScheme"
         [schemeType]="schemeType"
-        [results]="multi"
+        [results]="fiscalYearReport"
         [animations]="animations"
+        [gradient]="gradient"
+        [tooltipDisabled]="tooltipDisabled"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
-        [gradient]="gradient"
-        [xAxis]="showXAxis"
-        [yAxis]="showYAxis"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
         [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
-        [autoScale]="autoScale"
-        [timeline]="timeline"
-        [showGridLines]="showGridLines"
-        [curve]="curve"
-        [rangeFillOpacity]="rangeFillOpacity"
-        [roundDomains]="roundDomains"
-        [tooltipDisabled]="tooltipDisabled"
-        [showRefLines]="showRefLines"
-        [showRefLabels]="showRefLabels"
-        [referenceLines]="refLines"
-        [trimXAxisTicks]="trimXAxisTicks"
-        [trimYAxisTicks]="trimYAxisTicks"
-        [maxXAxisTickLength]="maxXAxisTickLength"
-        [maxYAxisTickLength]="maxYAxisTickLength"
-        (select)="select($event)"
-        (activate)="activate($event)"
-        (deactivate)="deactivate($event)"
-      >
-      </ngx-charts-line-chart>
-      <ngx-charts-bar-vertical
-        *ngIf="chartType === 'tooltip-templates'"
-        class="chart-container"
-        [view]="view"
-        [scheme]="colorScheme"
-        [schemeType]="schemeType"
-        [customColors]="customColors"
-        [results]="single"
-        [animations]="animations"
-        [gradient]="gradient"
-        [xAxis]="showXAxis"
-        [yAxis]="showYAxis"
-        [legend]="showLegend"
-        [legendTitle]="legendTitle"
-        [legendPosition]="legendPosition"
-        [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel"
-        [tooltipDisabled]="tooltipDisabled"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
+        [yAxisLabel]="'Fiscal Year Report'"
         [showGridLines]="showGridLines"
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
+        [noBarWhenZero]="noBarWhenZero"
+        [yScaleMax]="yScaleMax"
+        [showDataLabel]="showDataLabel"
         [trimXAxisTicks]="trimXAxisTicks"
         [trimYAxisTicks]="trimYAxisTicks"
         [maxXAxisTickLength]="maxXAxisTickLength"
@@ -1039,111 +1142,42 @@
         (activate)="activate($event)"
         (deactivate)="deactivate($event)"
       >
-        <ng-template #tooltipTemplate let-model="model">
-          <h1>
-            {{ getFlag(model.name) }}
-          </h1>
-          <h2>{{ model.name }}: {{ model.value }}</h2>
-        </ng-template>
-      </ngx-charts-bar-vertical>
-      <ngx-charts-sparkline
-        *ngIf="chartType === 'sparkline'"
-        [view]="[100, 50]"
+      </ngx-charts-bar-vertical-stacked>
+    }
+    @if (chartType === 'bar-horizontal-stacked-negative') {
+      <ngx-charts-bar-horizontal-stacked
         class="chart-container"
-        [scheme]="'flame'"
-        [results]="sparklineData"
-        [animations]="animations"
-        [curve]="curve"
-      >
-      </ngx-charts-sparkline>
-      <ngx-charts-timeline-filter-bar-chart
-        *ngIf="chartType === 'timeline-filter-bar-chart-demo'"
         [view]="view"
-        class="chart-container"
         [scheme]="colorScheme"
         [schemeType]="schemeType"
-        [results]="timelineFilterBarData"
+        [results]="fiscalYearReport"
         [animations]="animations"
         [gradient]="gradient"
+        [tooltipDisabled]="tooltipDisabled"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
-        [showXAxisLabel]="false"
+        [legend]="showLegend"
+        [legendTitle]="legendTitle"
+        [legendPosition]="legendPosition"
+        [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
         [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="'Executions'"
+        [yAxisLabel]="'Fiscal Year Report'"
         [showGridLines]="showGridLines"
+        [barPadding]="barPadding"
+        [roundDomains]="roundDomains"
         [noBarWhenZero]="noBarWhenZero"
-        (onFilter)="onFilter($event)"
+        [showDataLabel]="showDataLabel"
+        [trimXAxisTicks]="trimXAxisTicks"
+        [trimYAxisTicks]="trimYAxisTicks"
+        [maxXAxisTickLength]="maxXAxisTickLength"
+        [maxYAxisTickLength]="maxYAxisTickLength"
+        (select)="select($event)"
+        (activate)="activate($event)"
+        (deactivate)="deactivate($event)"
       >
-      </ngx-charts-timeline-filter-bar-chart>
-    </div>
-    <ngx-charts-bar-vertical-stacked
-      *ngIf="chartType === 'bar-vertical-stacked-negative'"
-      class="chart-container"
-      [view]="view"
-      [scheme]="colorScheme"
-      [schemeType]="schemeType"
-      [results]="fiscalYearReport"
-      [animations]="animations"
-      [gradient]="gradient"
-      [tooltipDisabled]="tooltipDisabled"
-      [xAxis]="showXAxis"
-      [yAxis]="showYAxis"
-      [legend]="showLegend"
-      [legendTitle]="legendTitle"
-      [legendPosition]="legendPosition"
-      [showXAxisLabel]="showXAxisLabel"
-      [showYAxisLabel]="showYAxisLabel"
-      [xAxisLabel]="xAxisLabel"
-      [yAxisLabel]="'Fiscal Year Report'"
-      [showGridLines]="showGridLines"
-      [barPadding]="barPadding"
-      [roundDomains]="roundDomains"
-      [noBarWhenZero]="noBarWhenZero"
-      [yScaleMax]="yScaleMax"
-      [showDataLabel]="showDataLabel"
-      [trimXAxisTicks]="trimXAxisTicks"
-      [trimYAxisTicks]="trimYAxisTicks"
-      [maxXAxisTickLength]="maxXAxisTickLength"
-      [maxYAxisTickLength]="maxYAxisTickLength"
-      (select)="select($event)"
-      (activate)="activate($event)"
-      (deactivate)="deactivate($event)"
-    >
-    </ngx-charts-bar-vertical-stacked>
-    <ngx-charts-bar-horizontal-stacked
-      *ngIf="chartType === 'bar-horizontal-stacked-negative'"
-      class="chart-container"
-      [view]="view"
-      [scheme]="colorScheme"
-      [schemeType]="schemeType"
-      [results]="fiscalYearReport"
-      [animations]="animations"
-      [gradient]="gradient"
-      [tooltipDisabled]="tooltipDisabled"
-      [xAxis]="showXAxis"
-      [yAxis]="showYAxis"
-      [legend]="showLegend"
-      [legendTitle]="legendTitle"
-      [legendPosition]="legendPosition"
-      [showXAxisLabel]="showXAxisLabel"
-      [showYAxisLabel]="showYAxisLabel"
-      [xAxisLabel]="xAxisLabel"
-      [yAxisLabel]="'Fiscal Year Report'"
-      [showGridLines]="showGridLines"
-      [barPadding]="barPadding"
-      [roundDomains]="roundDomains"
-      [noBarWhenZero]="noBarWhenZero"
-      [showDataLabel]="showDataLabel"
-      [trimXAxisTicks]="trimXAxisTicks"
-      [trimYAxisTicks]="trimYAxisTicks"
-      [maxXAxisTickLength]="maxXAxisTickLength"
-      [maxYAxisTickLength]="maxYAxisTickLength"
-      (select)="select($event)"
-      (activate)="activate($event)"
-      (deactivate)="deactivate($event)"
-    >
-    </ngx-charts-bar-horizontal-stacked>
+      </ngx-charts-bar-horizontal-stacked>
+    }
   </div>
   <div class="sidebar">
     <h1>
@@ -1154,11 +1188,13 @@
     <div style="margin: 20px">
       <h3>Chart Type</h3>
       <select [ngModel]="chartType" (ngModelChange)="selectChart($event)">
-        <ng-template ngFor let-group [ngForOf]="chartGroups">
+        @for (group of chartGroups; track group) {
           <optgroup [label]="group.name">
-            <option *ngFor="let chart of group.charts" [value]="chart.selector">{{ chart.name }}</option>
+            @for (chart of group.charts; track chart) {
+              <option [value]="chart.selector">{{ chart.name }}</option>
+            }
           </optgroup>
-        </ng-template>
+        }
       </select>
 
       <h3>Theme</h3>
@@ -1173,28 +1209,52 @@
         <strong>Data</strong>
       </h3>
       <div [hidden]="!dataVisible" style="margin-left: 10px">
-        <pre *ngIf="chart.inputFormat === 'singleSeries'">{{ single | json }}</pre>
-        <pre *ngIf="chart.inputFormat === 'multiSeries' && !linearScale">{{ multi | json }}</pre>
-        <pre *ngIf="chart.inputFormat === 'multiSeriesNegative' && !linearScale">{{ fiscalYearReport | json }}</pre>
-        <pre *ngIf="chart.inputFormat === 'multiSeries' && linearScale && !range">{{ dateData | json }}</pre>
-        <pre *ngIf="chart.inputFormat === 'multiSeries' && linearScale && range">{{ dateDataWithRange | json }}</pre>
-        <pre *ngIf="chart.inputFormat === 'boxMultiSeries'">{{ boxData | json }}</pre>
-        <pre *ngIf="chart.inputFormat === 'bubble'">{{ bubble | json }}</pre>
-        <pre *ngIf="chart.inputFormat === 'bubbleInteractive'">{{ bubbleDemoTempData | json }}</pre>
-        <pre *ngIf="chart.inputFormat === 'comboChart'">{{ barChart | json }}</pre>
-        <pre *ngIf="chart.inputFormat === 'comboChart'">{{ lineChartSeries | json }}</pre>
-        <pre *ngIf="chart.inputFormat === 'timelineFilter'">{{ timelineFilterBarData | json }}</pre>
+        @if (chart.inputFormat === 'singleSeries') {
+          <pre>{{ single | json }}</pre>
+        }
+        @if (chart.inputFormat === 'multiSeries' && !linearScale) {
+          <pre>{{ multi | json }}</pre>
+        }
+        @if (chart.inputFormat === 'multiSeriesNegative' && !linearScale) {
+          <pre>{{ fiscalYearReport | json }}</pre>
+        }
+        @if (chart.inputFormat === 'multiSeries' && linearScale && !range) {
+          <pre>{{ dateData | json }}</pre>
+        }
+        @if (chart.inputFormat === 'multiSeries' && linearScale && range) {
+          <pre>{{ dateDataWithRange | json }}</pre>
+        }
+        @if (chart.inputFormat === 'boxMultiSeries') {
+          <pre>{{ boxData | json }}</pre>
+        }
+        @if (chart.inputFormat === 'bubble') {
+          <pre>{{ bubble | json }}</pre>
+        }
+        @if (chart.inputFormat === 'bubbleInteractive') {
+          <pre>{{ bubbleDemoTempData | json }}</pre>
+        }
+        @if (chart.inputFormat === 'comboChart') {
+          <pre>{{ barChart | json }}</pre>
+        }
+        @if (chart.inputFormat === 'comboChart') {
+          <pre>{{ lineChartSeries | json }}</pre>
+        }
+        @if (chart.inputFormat === 'timelineFilter') {
+          <pre>{{ timelineFilterBarData | json }}</pre>
+        }
         <div>
           <label>
             <input type="checkbox" [(ngModel)]="realTimeData" />
             Real-time
           </label>
 
-          <label *ngIf="chartType === 'line-chart'">
-            <br />
-            <input type="checkbox" [(ngModel)]="range" />
-            Show min and max values
-          </label>
+          @if (chartType === 'line-chart') {
+            <label>
+              <br />
+              <input type="checkbox" [(ngModel)]="range" />
+              Show min and max values
+            </label>
+          }
         </div>
       </div>
       <div>
@@ -1208,13 +1268,15 @@
             Fit Container
           </label>
           <br />
-          <div *ngIf="!fitContainer">
-            <label>Width:</label><br />
-            <input type="number" [(ngModel)]="width" /><br />
-            <label>Height:</label><br />
-            <input type="number" [(ngModel)]="height" /><br /><br />
-            <button class="btn btn-primary" (click)="applyDimensions()">Apply dimensions</button>
-          </div>
+          @if (!fitContainer) {
+            <div>
+              <label>Width:</label><br />
+              <input type="number" [(ngModel)]="width" /><br />
+              <label>Height:</label><br />
+              <input type="number" [(ngModel)]="height" /><br /><br />
+              <button class="btn btn-primary" (click)="applyDimensions()">Apply dimensions</button>
+            </div>
+          }
         </div>
       </div>
       <h3 (click)="colorVisible = !colorVisible" style="cursor: pointer">
@@ -1227,19 +1289,22 @@
         [ngModel]="selectedColorScheme"
         (ngModelChange)="setColorScheme($event)"
       >
-        <option *ngFor="let scheme of colorSets" [value]="scheme.name">{{ scheme.name }}</option>
+        @for (scheme of colorSets; track scheme) {
+          <option [value]="scheme.name">{{ scheme.name }}</option>
+        }
       </select>
 
-      <select
-        *ngIf="chart.options.includes('schemeType')"
-        [hidden]="!colorVisible"
-        style="margin-left: 10px"
-        [ngModel]="schemeType"
-        (ngModelChange)="schemeType = $event"
-      >
-        <option value="ordinal">Ordinal</option>
-        <option value="linear">Linear</option>
-      </select>
+      @if (chart.options.includes('schemeType')) {
+        <select
+          [hidden]="!colorVisible"
+          style="margin-left: 10px"
+          [ngModel]="schemeType"
+          (ngModelChange)="schemeType = $event"
+        >
+          <option value="ordinal">Ordinal</option>
+          <option value="linear">Linear</option>
+        </select>
+      }
 
       <div [hidden]="!colorVisible || !range" style="margin-left: 10px">
         <div>
@@ -1253,362 +1318,479 @@
         <strong>Options</strong>
       </h3>
       <div [hidden]="!optsVisible" style="margin-left: 10px">
-        <div *ngIf="chart.options.includes('animations')">
-          <label>
-            <input type="checkbox" [(ngModel)]="animations" />
-            Animations
-          </label>
-          <br />
-        </div>
-        <div *ngIf="chart.options.includes('showXAxis')">
-          <label>
-            <input type="checkbox" [(ngModel)]="showXAxis" />
-            Show X Axis
-          </label>
-          <br />
-        </div>
-        <div *ngIf="chart.options.includes('showRefLabels')">
-          <label>
-            <input type="checkbox" [(ngModel)]="showRefLabels" />
-            Show Reference Labels
-          </label>
-          <br />
-        </div>
-        <div *ngIf="chart.options.includes('showRefLines')">
-          <label>
-            <input type="checkbox" [(ngModel)]="showRefLines" />
-            Show Reference Lines
-          </label>
-          <br />
-        </div>
-        <div *ngIf="chart.options.includes('showYAxis')">
-          <label>
-            <input type="checkbox" [(ngModel)]="showYAxis" />
-            Show Y Axis
-          </label>
-          <br />
-        </div>
-        <div *ngIf="chart.options.includes('showGridLines')">
-          <label>
-            <input type="checkbox" [(ngModel)]="showGridLines" />
-            Show Grid Lines
-          </label>
-          <br />
-        </div>
-        <div *ngIf="chart.options.includes('roundDomains')">
-          <label>
-            <input type="checkbox" [(ngModel)]="roundDomains" />
-            Round Domains
-          </label>
-          <br />
-        </div>
-        <div *ngIf="chart.options.includes('rotateXAxisTicks')">
-          <label>
-            <input type="checkbox" [(ngModel)]="rotateXAxisTicks" />
-            Rotate X Axis Ticks
-          </label>
-          <br />
-        </div>
-        <div *ngIf="chart.options.includes('gradient')">
-          <label>
-            <input type="checkbox" [(ngModel)]="gradient" />
-            Use Gradients
-          </label>
-          <br />
-        </div>
-        <div *ngIf="chart.options.includes('noBarWhenZero')">
-          <label>
-            <input type="checkbox" [(ngModel)]="noBarWhenZero" />
-            Hide bar if value is 0
-          </label>
-          <br />
-        </div>
-        <div *ngIf="chart.options.includes('strokeColor')">
-          <label>Stroke Color:</label><br />
-          <input type="text" [(ngModel)]="strokeColor" /><br />
-        </div>
-        <div *ngIf="chart.options.includes('strokeWidth')">
-          <label>Stroke Width:</label><br />
-          <input type="number" [(ngModel)]="strokeWidth" max="10" min="0" step="1" /><br />
-        </div>
-        <div *ngIf="chart.options.includes('showLegend')">
-          <label>
-            <input type="checkbox" [(ngModel)]="showLegend" />
-            Show Legend
-          </label>
-          <br />
-        </div>
-        <div *ngIf="chart.options.includes('showDataLabel')">
-          <label>
-            <input type="checkbox" [(ngModel)]="showDataLabel" />
-            Show Data Label
-          </label>
-          <br />
-        </div>
-        <div *ngIf="chart.options.includes('roundEdges')">
-          <label>
-            <input type="checkbox" [(ngModel)]="roundEdges" />
-            Round Bar Edges
-          </label>
-          <br />
-        </div>
-        <div *ngIf="chart.options.includes('wrapTicks')">
-          <label>
-            <input type="checkbox" [(ngModel)]="wrapTicks" />
-            Wrap Ticks
-          </label>
-          <br />
-        </div>
-        <div *ngIf="chart.options.includes('legendTitle')">
-          <label>Legend Title:</label><br />
-          <input type="text" [(ngModel)]="legendTitle" /><br />
-        </div>
-        <div *ngIf="chart.options.includes('legendPosition')">
-          <label>Legend Position:</label><br />
-          <select style="margin-left: 10px" [(ngModel)]="legendPosition">
-            <option value="right">Right</option>
-            <option value="below">Below</option></select
-          ><br />
-        </div>
-        <div *ngIf="chart.options.includes('tooltipDisabled')">
-          <label>
-            <input type="checkbox" [(ngModel)]="tooltipDisabled" />
-            Disable tooltip
-          </label>
-          <br />
-        </div>
-        <div *ngIf="chart.options.includes('showText')">
-          <label>
-            <input type="checkbox" [(ngModel)]="showText" />
-            Show Text
-          </label>
-          <br />
-        </div>
-        <div *ngIf="chart.options.includes('showXAxisLabel')">
-          <label>
-            <input type="checkbox" [(ngModel)]="showXAxisLabel" />
-            Show X Axis Label
-          </label>
-          <br />
-        </div>
-        <div *ngIf="chart.options.includes('xAxisLabel')">
-          <label>X Axis Label:</label><br />
-          <input type="text" [(ngModel)]="xAxisLabel" /><br />
-        </div>
-        <div *ngIf="chart.options.includes('showYAxisLabel')">
-          <label>
-            <input type="checkbox" [(ngModel)]="showYAxisLabel" />
-            Show Y Axis Label
-          </label>
-          <br />
-        </div>
-        <div *ngIf="chart.options.includes('yAxisLabel')">
-          <label>Y Axis Label:</label><br />
-          <input type="text" [(ngModel)]="yAxisLabel" /><br />
-        </div>
-        <div *ngIf="chart.options.includes('showLabels')">
-          <label>
-            <input type="checkbox" [(ngModel)]="showLabels" />
-            Show Labels
-          </label>
-          <br />
-        </div>
-        <div *ngIf="chart.options.includes('trimXAxisTicks')">
-          <label>
-            <input type="checkbox" [(ngModel)]="trimXAxisTicks" />
-            Trim X Axis Ticks
-          </label>
-          <br />
-        </div>
-        <div *ngIf="chart.options.includes('maxXAxisTickLength')">
-          <label>Max X Axis Tick Length:</label><br />
-          <input type="text" [(ngModel)]="maxXAxisTickLength" /><br />
-        </div>
-        <div *ngIf="chart.options.includes('trimYAxisTicks')">
-          <label>
-            <input type="checkbox" [(ngModel)]="trimYAxisTicks" />
-            Trim Y Axis Ticks
-          </label>
-          <br />
-        </div>
-        <div *ngIf="chart.options.includes('maxYAxisTickLength')">
-          <label>Max Y Axis Tick Length:</label><br />
-          <input type="text" [(ngModel)]="maxYAxisTickLength" /><br />
-        </div>
-        <div *ngIf="chart.options.includes('doughnut')">
-          <label>
-            <input type="checkbox" [(ngModel)]="doughnut" />
-            Doughnut
-          </label>
-          <br />
-        </div>
-        <div *ngIf="chart.options.includes('arcWidth') && doughnut">
-          <label>Arc width (fraction of radius):</label><br />
-          <input type="number" [disabled]="!doughnut" [(ngModel)]="arcWidth" max="1" min="0" step="0.01" /><br />
-        </div>
-        <div *ngIf="chart.options.includes('explodeSlices') && !doughnut">
-          <label>
-            <input type="checkbox" [(ngModel)]="explodeSlices" />
-            Explode Slices
-          </label>
-          <br />
-        </div>
-        <div *ngIf="chart.options.includes('autoScale')">
-          <label>
-            <input type="checkbox" [(ngModel)]="autoScale" />
-            Auto Scale
-          </label>
-          <br />
-        </div>
-        <div *ngIf="chart.options.includes('timeline')">
-          <label>
-            <input type="checkbox" [(ngModel)]="timeline" />
-            Timeline
-          </label>
-          <br />
-        </div>
-        <div *ngIf="chart.options.includes('curve')">
-          <label>Line Interpolation</label>
-          <select [(ngModel)]="curveType" (ngModelChange)="curve = getInterpolationType($event)">
-            <option *ngFor="let interpolationType of interpolationTypes" [value]="interpolationType">
-              {{ interpolationType }}
-            </option>
-          </select>
-        </div>
-        <div *ngIf="chart.options.includes('curveClosed')">
-          <label>Line Interpolation</label>
-          <select [(ngModel)]="closedCurveType" (ngModelChange)="closedCurve = getInterpolationType($event)">
-            <option *ngFor="let interpolationType of closedInterpolationTypes" [value]="interpolationType">
-              {{ interpolationType }}
-            </option>
-          </select>
-        </div>
-        <div *ngIf="chart.options.includes('min')">
-          <label>Min value:</label><br />
-          <input type="number" [(ngModel)]="gaugeMin" /><br />
-        </div>
-        <div *ngIf="chart.options.includes('max')">
-          <label>Max value:</label><br />
-          <input type="number" [(ngModel)]="gaugeMax" /><br />
-        </div>
-        <div *ngIf="chart.options.includes('innerPadding')">
-          <label>Inner padding value:</label><br />
-          <input type="text" [(ngModel)]="innerPadding" min="0" step="1" /><br />
-        </div>
-        <div *ngIf="chart.options.includes('barPadding')">
-          <label>Padding between bars:</label><br />
-          <input type="number" [(ngModel)]="barPadding" min="0" step="1" /><br />
-        </div>
-        <div *ngIf="chart.options.includes('groupPadding')">
-          <label>Padding between groups:</label><br />
-          <input type="number" [(ngModel)]="groupPadding" min="0" step="1" /><br />
-        </div>
-        <div *ngIf="chart.options.includes('value')">
-          <label>Value:</label><br />
-          <input type="number" [(ngModel)]="gaugeValue" /><br />
-        </div>
-        <div *ngIf="chart.options.includes('previousValue')">
-          <label>Previous value:</label><br />
-          <input type="number" [(ngModel)]="gaugePreviousValue" /><br />
-        </div>
-        <div *ngIf="chart.options.includes('angleSpan')">
-          <label>Angle span:</label><br />
-          <input type="number" [(ngModel)]="gaugeAngleSpan" /><br />
-        </div>
-        <div *ngIf="chart.options.includes('startAngle')">
-          <label>Start Angle:</label><br />
-          <input type="number" [(ngModel)]="gaugeStartAngle" /><br />
-        </div>
-        <div *ngIf="chart.options.includes('showAxis')">
-          <label>
-            <input type="checkbox" [(ngModel)]="gaugeShowAxis" />
-            Show Axis
-          </label>
-          <br />
-        </div>
-        <div *ngIf="chart.options.includes('largeSegments')">
-          <label>Number of large segments:</label><br />
-          <input type="number" [(ngModel)]="gaugeLargeSegments" /><br />
-        </div>
-        <div *ngIf="chart.options.includes('smallSegments')">
-          <label>Number of small segments:</label><br />
-          <input type="number" [(ngModel)]="gaugeSmallSegments" /><br />
-        </div>
-        <div *ngIf="chart.options.includes('units')">
-          <label>Units:</label><br />
-          <input type="text" [(ngModel)]="gaugeUnits" /><br />
-        </div>
-        <div *ngIf="chart.options.includes('margin')">
-          <label>
-            <input type="checkbox" [(ngModel)]="margin" />
-            Show Margin
-          </label>
-          <br />
-        </div>
-        <div *ngIf="chart.options.includes('target')">
-          <label>Target:</label><br />
-          <input type="number" [(ngModel)]="target" /><br />
-          <br />
-        </div>
-        <div *ngIf="chart.options.includes('showLabel')">
-          <label>
-            <input type="checkbox" [(ngModel)]="showLabel" />
-            Show Label
-          </label>
-          <br />
-        </div>
-
-        <div *ngIf="chart.options.includes('margin') && margin">
-          <label>Top:</label><input type="number" [(ngModel)]="marginTop" /><br />
-          <label>Right:</label><input type="number" [(ngModel)]="marginRight" /><br />
-          <label>Bottom:</label><input type="number" [(ngModel)]="marginBottom" /><br />
-          <label>Left:</label><input type="number" [(ngModel)]="marginLeft" /><br />
-        </div>
-
-        <div *ngIf="chart.options.includes('minRadius')">
-          <label>Minimum Radius:</label><input type="number" [(ngModel)]="minRadius" />
-        </div>
-
-        <div *ngIf="chart.options.includes('maxRadius')">
-          <label>Maximum Radius:</label><input type="number" [(ngModel)]="maxRadius" />
-        </div>
-
-        <div *ngIf="chart.options.includes('xScaleMin')">
-          <div *ngIf="chartType !== 'bubble-chart'">
-            <label></label><br />
-            <ngx-date-time [inputType]="'datetime'" label="Minimum X-Scale value" [(ngModel)]="xScaleMin">
-            </ngx-date-time>
+        @if (chart.options.includes('animations')) {
+          <div>
+            <label>
+              <input type="checkbox" [(ngModel)]="animations" />
+              Animations
+            </label>
+            <br />
           </div>
-          <div *ngIf="chartType === 'bubble-chart'">
-            <label>Minimum X-Scale value</label><br />
-            <input type="number" [(ngModel)]="xScaleMin" /><br />
+        }
+        @if (chart.options.includes('showXAxis')) {
+          <div>
+            <label>
+              <input type="checkbox" [(ngModel)]="showXAxis" />
+              Show X Axis
+            </label>
+            <br />
           </div>
-        </div>
-
-        <div *ngIf="chart.options.includes('xScaleMax')">
-          <div *ngIf="!chartType.startsWith('bar-horizontal') && chartType !== 'bubble-chart'">
-            <ngx-date-time
-              *ngIf="!chartType.startsWith('bar-horizontal')"
-              [inputType]="'datetime'"
-              label="Maximum X-Scale value"
-              [(ngModel)]="xScaleMax"
-            >
-            </ngx-date-time>
+        }
+        @if (chart.options.includes('showRefLabels')) {
+          <div>
+            <label>
+              <input type="checkbox" [(ngModel)]="showRefLabels" />
+              Show Reference Labels
+            </label>
+            <br />
           </div>
-          <div *ngIf="chartType.startsWith('bar-horizontal') || chartType === 'bubble-chart'">
-            <label>Maximum X-Scale value</label><br />
-            <input type="number" [(ngModel)]="xScaleMax" /><br />
+        }
+        @if (chart.options.includes('showRefLines')) {
+          <div>
+            <label>
+              <input type="checkbox" [(ngModel)]="showRefLines" />
+              Show Reference Lines
+            </label>
+            <br />
           </div>
-        </div>
-
-        <div *ngIf="chart.options.includes('yScaleMin')">
-          <label>Minimum Y-Scale value</label><br />
-          <input type="number" [(ngModel)]="yScaleMin" /><br />
-        </div>
-        <div *ngIf="chart.options.includes('yScaleMax')">
-          <label>Maximum Y-Scale value</label><br />
-          <input type="number" [(ngModel)]="yScaleMax" /><br />
-        </div>
+        }
+        @if (chart.options.includes('showYAxis')) {
+          <div>
+            <label>
+              <input type="checkbox" [(ngModel)]="showYAxis" />
+              Show Y Axis
+            </label>
+            <br />
+          </div>
+        }
+        @if (chart.options.includes('showGridLines')) {
+          <div>
+            <label>
+              <input type="checkbox" [(ngModel)]="showGridLines" />
+              Show Grid Lines
+            </label>
+            <br />
+          </div>
+        }
+        @if (chart.options.includes('roundDomains')) {
+          <div>
+            <label>
+              <input type="checkbox" [(ngModel)]="roundDomains" />
+              Round Domains
+            </label>
+            <br />
+          </div>
+        }
+        @if (chart.options.includes('rotateXAxisTicks')) {
+          <div>
+            <label>
+              <input type="checkbox" [(ngModel)]="rotateXAxisTicks" />
+              Rotate X Axis Ticks
+            </label>
+            <br />
+          </div>
+        }
+        @if (chart.options.includes('gradient')) {
+          <div>
+            <label>
+              <input type="checkbox" [(ngModel)]="gradient" />
+              Use Gradients
+            </label>
+            <br />
+          </div>
+        }
+        @if (chart.options.includes('noBarWhenZero')) {
+          <div>
+            <label>
+              <input type="checkbox" [(ngModel)]="noBarWhenZero" />
+              Hide bar if value is 0
+            </label>
+            <br />
+          </div>
+        }
+        @if (chart.options.includes('strokeColor')) {
+          <div>
+            <label>Stroke Color:</label><br />
+            <input type="text" [(ngModel)]="strokeColor" /><br />
+          </div>
+        }
+        @if (chart.options.includes('strokeWidth')) {
+          <div>
+            <label>Stroke Width:</label><br />
+            <input type="number" [(ngModel)]="strokeWidth" max="10" min="0" step="1" /><br />
+          </div>
+        }
+        @if (chart.options.includes('showLegend')) {
+          <div>
+            <label>
+              <input type="checkbox" [(ngModel)]="showLegend" />
+              Show Legend
+            </label>
+            <br />
+          </div>
+        }
+        @if (chart.options.includes('showDataLabel')) {
+          <div>
+            <label>
+              <input type="checkbox" [(ngModel)]="showDataLabel" />
+              Show Data Label
+            </label>
+            <br />
+          </div>
+        }
+        @if (chart.options.includes('roundEdges')) {
+          <div>
+            <label>
+              <input type="checkbox" [(ngModel)]="roundEdges" />
+              Round Bar Edges
+            </label>
+            <br />
+          </div>
+        }
+        @if (chart.options.includes('wrapTicks')) {
+          <div>
+            <label>
+              <input type="checkbox" [(ngModel)]="wrapTicks" />
+              Wrap Ticks
+            </label>
+            <br />
+          </div>
+        }
+        @if (chart.options.includes('legendTitle')) {
+          <div>
+            <label>Legend Title:</label><br />
+            <input type="text" [(ngModel)]="legendTitle" /><br />
+          </div>
+        }
+        @if (chart.options.includes('legendPosition')) {
+          <div>
+            <label>Legend Position:</label><br />
+            <select style="margin-left: 10px" [(ngModel)]="legendPosition">
+              <option value="right">Right</option>
+              <option value="below">Below</option></select
+            ><br />
+          </div>
+        }
+        @if (chart.options.includes('tooltipDisabled')) {
+          <div>
+            <label>
+              <input type="checkbox" [(ngModel)]="tooltipDisabled" />
+              Disable tooltip
+            </label>
+            <br />
+          </div>
+        }
+        @if (chart.options.includes('showText')) {
+          <div>
+            <label>
+              <input type="checkbox" [(ngModel)]="showText" />
+              Show Text
+            </label>
+            <br />
+          </div>
+        }
+        @if (chart.options.includes('showXAxisLabel')) {
+          <div>
+            <label>
+              <input type="checkbox" [(ngModel)]="showXAxisLabel" />
+              Show X Axis Label
+            </label>
+            <br />
+          </div>
+        }
+        @if (chart.options.includes('xAxisLabel')) {
+          <div>
+            <label>X Axis Label:</label><br />
+            <input type="text" [(ngModel)]="xAxisLabel" /><br />
+          </div>
+        }
+        @if (chart.options.includes('showYAxisLabel')) {
+          <div>
+            <label>
+              <input type="checkbox" [(ngModel)]="showYAxisLabel" />
+              Show Y Axis Label
+            </label>
+            <br />
+          </div>
+        }
+        @if (chart.options.includes('yAxisLabel')) {
+          <div>
+            <label>Y Axis Label:</label><br />
+            <input type="text" [(ngModel)]="yAxisLabel" /><br />
+          </div>
+        }
+        @if (chart.options.includes('showLabels')) {
+          <div>
+            <label>
+              <input type="checkbox" [(ngModel)]="showLabels" />
+              Show Labels
+            </label>
+            <br />
+          </div>
+        }
+        @if (chart.options.includes('trimXAxisTicks')) {
+          <div>
+            <label>
+              <input type="checkbox" [(ngModel)]="trimXAxisTicks" />
+              Trim X Axis Ticks
+            </label>
+            <br />
+          </div>
+        }
+        @if (chart.options.includes('maxXAxisTickLength')) {
+          <div>
+            <label>Max X Axis Tick Length:</label><br />
+            <input type="text" [(ngModel)]="maxXAxisTickLength" /><br />
+          </div>
+        }
+        @if (chart.options.includes('trimYAxisTicks')) {
+          <div>
+            <label>
+              <input type="checkbox" [(ngModel)]="trimYAxisTicks" />
+              Trim Y Axis Ticks
+            </label>
+            <br />
+          </div>
+        }
+        @if (chart.options.includes('maxYAxisTickLength')) {
+          <div>
+            <label>Max Y Axis Tick Length:</label><br />
+            <input type="text" [(ngModel)]="maxYAxisTickLength" /><br />
+          </div>
+        }
+        @if (chart.options.includes('doughnut')) {
+          <div>
+            <label>
+              <input type="checkbox" [(ngModel)]="doughnut" />
+              Doughnut
+            </label>
+            <br />
+          </div>
+        }
+        @if (chart.options.includes('arcWidth') && doughnut) {
+          <div>
+            <label>Arc width (fraction of radius):</label><br />
+            <input type="number" [disabled]="!doughnut" [(ngModel)]="arcWidth" max="1" min="0" step="0.01" /><br />
+          </div>
+        }
+        @if (chart.options.includes('explodeSlices') && !doughnut) {
+          <div>
+            <label>
+              <input type="checkbox" [(ngModel)]="explodeSlices" />
+              Explode Slices
+            </label>
+            <br />
+          </div>
+        }
+        @if (chart.options.includes('autoScale')) {
+          <div>
+            <label>
+              <input type="checkbox" [(ngModel)]="autoScale" />
+              Auto Scale
+            </label>
+            <br />
+          </div>
+        }
+        @if (chart.options.includes('timeline')) {
+          <div>
+            <label>
+              <input type="checkbox" [(ngModel)]="timeline" />
+              Timeline
+            </label>
+            <br />
+          </div>
+        }
+        @if (chart.options.includes('curve')) {
+          <div>
+            <label>Line Interpolation</label>
+            <select [(ngModel)]="curveType" (ngModelChange)="curve = getInterpolationType($event)">
+              @for (interpolationType of interpolationTypes; track interpolationType) {
+                <option [value]="interpolationType">
+                  {{ interpolationType }}
+                </option>
+              }
+            </select>
+          </div>
+        }
+        @if (chart.options.includes('curveClosed')) {
+          <div>
+            <label>Line Interpolation</label>
+            <select [(ngModel)]="closedCurveType" (ngModelChange)="closedCurve = getInterpolationType($event)">
+              @for (interpolationType of closedInterpolationTypes; track interpolationType) {
+                <option [value]="interpolationType">
+                  {{ interpolationType }}
+                </option>
+              }
+            </select>
+          </div>
+        }
+        @if (chart.options.includes('min')) {
+          <div>
+            <label>Min value:</label><br />
+            <input type="number" [(ngModel)]="gaugeMin" /><br />
+          </div>
+        }
+        @if (chart.options.includes('max')) {
+          <div>
+            <label>Max value:</label><br />
+            <input type="number" [(ngModel)]="gaugeMax" /><br />
+          </div>
+        }
+        @if (chart.options.includes('innerPadding')) {
+          <div>
+            <label>Inner padding value:</label><br />
+            <input type="text" [(ngModel)]="innerPadding" min="0" step="1" /><br />
+          </div>
+        }
+        @if (chart.options.includes('barPadding')) {
+          <div>
+            <label>Padding between bars:</label><br />
+            <input type="number" [(ngModel)]="barPadding" min="0" step="1" /><br />
+          </div>
+        }
+        @if (chart.options.includes('groupPadding')) {
+          <div>
+            <label>Padding between groups:</label><br />
+            <input type="number" [(ngModel)]="groupPadding" min="0" step="1" /><br />
+          </div>
+        }
+        @if (chart.options.includes('value')) {
+          <div>
+            <label>Value:</label><br />
+            <input type="number" [(ngModel)]="gaugeValue" /><br />
+          </div>
+        }
+        @if (chart.options.includes('previousValue')) {
+          <div>
+            <label>Previous value:</label><br />
+            <input type="number" [(ngModel)]="gaugePreviousValue" /><br />
+          </div>
+        }
+        @if (chart.options.includes('angleSpan')) {
+          <div>
+            <label>Angle span:</label><br />
+            <input type="number" [(ngModel)]="gaugeAngleSpan" /><br />
+          </div>
+        }
+        @if (chart.options.includes('startAngle')) {
+          <div>
+            <label>Start Angle:</label><br />
+            <input type="number" [(ngModel)]="gaugeStartAngle" /><br />
+          </div>
+        }
+        @if (chart.options.includes('showAxis')) {
+          <div>
+            <label>
+              <input type="checkbox" [(ngModel)]="gaugeShowAxis" />
+              Show Axis
+            </label>
+            <br />
+          </div>
+        }
+        @if (chart.options.includes('largeSegments')) {
+          <div>
+            <label>Number of large segments:</label><br />
+            <input type="number" [(ngModel)]="gaugeLargeSegments" /><br />
+          </div>
+        }
+        @if (chart.options.includes('smallSegments')) {
+          <div>
+            <label>Number of small segments:</label><br />
+            <input type="number" [(ngModel)]="gaugeSmallSegments" /><br />
+          </div>
+        }
+        @if (chart.options.includes('units')) {
+          <div>
+            <label>Units:</label><br />
+            <input type="text" [(ngModel)]="gaugeUnits" /><br />
+          </div>
+        }
+        @if (chart.options.includes('margin')) {
+          <div>
+            <label>
+              <input type="checkbox" [(ngModel)]="margin" />
+              Show Margin
+            </label>
+            <br />
+          </div>
+        }
+        @if (chart.options.includes('target')) {
+          <div>
+            <label>Target:</label><br />
+            <input type="number" [(ngModel)]="target" /><br />
+            <br />
+          </div>
+        }
+        @if (chart.options.includes('showLabel')) {
+          <div>
+            <label>
+              <input type="checkbox" [(ngModel)]="showLabel" />
+              Show Label
+            </label>
+            <br />
+          </div>
+        }
+        @if (chart.options.includes('margin') && margin) {
+          <div>
+            <label>Top:</label><input type="number" [(ngModel)]="marginTop" /><br />
+            <label>Right:</label><input type="number" [(ngModel)]="marginRight" /><br />
+            <label>Bottom:</label><input type="number" [(ngModel)]="marginBottom" /><br />
+            <label>Left:</label><input type="number" [(ngModel)]="marginLeft" /><br />
+          </div>
+        }
+        @if (chart.options.includes('minRadius')) {
+          <div><label>Minimum Radius:</label><input type="number" [(ngModel)]="minRadius" /></div>
+        }
+        @if (chart.options.includes('maxRadius')) {
+          <div><label>Maximum Radius:</label><input type="number" [(ngModel)]="maxRadius" /></div>
+        }
+        @if (chart.options.includes('xScaleMin')) {
+          <div>
+            @if (chartType !== 'bubble-chart') {
+              <div>
+                <label></label><br />
+                <ngx-date-time [inputType]="'datetime'" label="Minimum X-Scale value" [(ngModel)]="xScaleMin">
+                </ngx-date-time>
+              </div>
+            }
+            @if (chartType === 'bubble-chart') {
+              <div>
+                <label>Minimum X-Scale value</label><br />
+                <input type="number" [(ngModel)]="xScaleMin" /><br />
+              </div>
+            }
+          </div>
+        }
+        @if (chart.options.includes('xScaleMax')) {
+          <div>
+            @if (!chartType.startsWith('bar-horizontal') && chartType !== 'bubble-chart') {
+              <div>
+                @if (!chartType.startsWith('bar-horizontal')) {
+                  <ngx-date-time [inputType]="'datetime'" label="Maximum X-Scale value" [(ngModel)]="xScaleMax">
+                  </ngx-date-time>
+                }
+              </div>
+            }
+            @if (chartType.startsWith('bar-horizontal') || chartType === 'bubble-chart') {
+              <div>
+                <label>Maximum X-Scale value</label><br />
+                <input type="number" [(ngModel)]="xScaleMax" /><br />
+              </div>
+            }
+          </div>
+        }
+        @if (chart.options.includes('yScaleMin')) {
+          <div>
+            <label>Minimum Y-Scale value</label><br />
+            <input type="number" [(ngModel)]="yScaleMin" /><br />
+          </div>
+        }
+        @if (chart.options.includes('yScaleMax')) {
+          <div>
+            <label>Maximum Y-Scale value</label><br />
+            <input type="number" [(ngModel)]="yScaleMax" /><br />
+          </div>
+        }
       </div>
       <h3><a href="https://swimlane.gitbooks.io/ngx-charts/content/" target="_blank">Documentation</a></h3>
     </div>

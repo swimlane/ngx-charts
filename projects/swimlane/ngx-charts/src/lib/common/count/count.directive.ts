@@ -65,7 +65,10 @@ export class CountUpDirective implements OnDestroy {
   private _countTo: number = 0;
   private _countFrom: number = 0;
 
-  constructor(private cd: ChangeDetectorRef, element: ElementRef) {
+  constructor(
+    private cd: ChangeDetectorRef,
+    element: ElementRef
+  ) {
     this.nativeElement = element.nativeElement;
   }
 

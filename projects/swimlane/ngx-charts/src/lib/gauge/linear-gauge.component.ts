@@ -54,25 +54,26 @@ enum ElementType {
           [animations]="animations"
         ></svg:g>
 
-        <svg:line
-          *ngIf="hasPreviousValue"
-          [attr.transform]="transformLine"
-          x1="0"
-          y1="5"
-          x2="0"
-          y2="15"
-          [attr.stroke]="colors.getColor(units)"
-        />
-
-        <svg:line
-          *ngIf="hasPreviousValue"
-          [attr.transform]="transformLine"
-          x1="0"
-          y1="-5"
-          x2="0"
-          y2="-15"
-          [attr.stroke]="colors.getColor(units)"
-        />
+        @if (hasPreviousValue) {
+          <svg:line
+            [attr.transform]="transformLine"
+            x1="0"
+            y1="5"
+            x2="0"
+            y2="15"
+            [attr.stroke]="colors.getColor(units)"
+          />
+        }
+        @if (hasPreviousValue) {
+          <svg:line
+            [attr.transform]="transformLine"
+            x1="0"
+            y1="-5"
+            x2="0"
+            y2="-15"
+            [attr.stroke]="colors.getColor(units)"
+          />
+        }
 
         <svg:g [attr.transform]="transform">
           <svg:g [attr.transform]="valueTranslate">

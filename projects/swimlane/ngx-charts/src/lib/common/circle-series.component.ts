@@ -48,57 +48,61 @@ export interface Circle {
 @Component({
   selector: 'g[ngx-charts-circle-series]',
   template: `
-    <svg:g *ngIf="circle">
-      <defs>
+    @if (circle) {
+      <svg:g>
+        <defs>
+          <svg:g
+            ngx-charts-svg-linear-gradient
+            [orientation]="barOrientation.Vertical"
+            [name]="gradientId"
+            [stops]="circle.gradientStops"
+          />
+        </defs>
+        @if (!isSSR && barVisible && type === 'standard') {
+          <svg:rect
+            [@animationState]="'active'"
+            [attr.x]="circle.cx - circle.radius"
+            [attr.y]="circle.cy"
+            [attr.width]="circle.radius * 2"
+            [attr.height]="circle.height"
+            [attr.fill]="gradientFill"
+            class="tooltip-bar"
+          />
+        }
+        @if (isSSR && barVisible && type === 'standard') {
+          <svg:rect
+            [attr.x]="circle.cx - circle.radius"
+            [attr.y]="circle.cy"
+            [attr.width]="circle.radius * 2"
+            [attr.height]="circle.height"
+            [attr.fill]="gradientFill"
+            class="tooltip-bar"
+          />
+        }
         <svg:g
-          ngx-charts-svg-linear-gradient
-          [orientation]="barOrientation.Vertical"
-          [name]="gradientId"
-          [stops]="circle.gradientStops"
+          ngx-charts-circle
+          class="circle"
+          [cx]="circle.cx"
+          [cy]="circle.cy"
+          [r]="circle.radius"
+          [fill]="circle.color"
+          [class.active]="isActive({ name: circle.seriesName })"
+          [pointerEvents]="circle.value === 0 ? 'none' : 'all'"
+          [data]="circle.value"
+          [classNames]="circle.classNames"
+          (select)="onClick(circle.data)"
+          (activate)="activateCircle()"
+          (deactivate)="deactivateCircle()"
+          ngx-tooltip
+          [tooltipDisabled]="tooltipDisabled"
+          [tooltipPlacement]="placementTypes.Top"
+          [tooltipType]="styleTypes.tooltip"
+          [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(circle)"
+          [tooltipTemplate]="tooltipTemplate"
+          [tooltipContext]="circle.data"
         />
-      </defs>
-      <svg:rect
-        *ngIf="!isSSR && barVisible && type === 'standard'"
-        [@animationState]="'active'"
-        [attr.x]="circle.cx - circle.radius"
-        [attr.y]="circle.cy"
-        [attr.width]="circle.radius * 2"
-        [attr.height]="circle.height"
-        [attr.fill]="gradientFill"
-        class="tooltip-bar"
-      />
-      <svg:rect
-        *ngIf="isSSR && barVisible && type === 'standard'"
-        [attr.x]="circle.cx - circle.radius"
-        [attr.y]="circle.cy"
-        [attr.width]="circle.radius * 2"
-        [attr.height]="circle.height"
-        [attr.fill]="gradientFill"
-        class="tooltip-bar"
-      />
-      <svg:g
-        ngx-charts-circle
-        class="circle"
-        [cx]="circle.cx"
-        [cy]="circle.cy"
-        [r]="circle.radius"
-        [fill]="circle.color"
-        [class.active]="isActive({ name: circle.seriesName })"
-        [pointerEvents]="circle.value === 0 ? 'none' : 'all'"
-        [data]="circle.value"
-        [classNames]="circle.classNames"
-        (select)="onClick(circle.data)"
-        (activate)="activateCircle()"
-        (deactivate)="deactivateCircle()"
-        ngx-tooltip
-        [tooltipDisabled]="tooltipDisabled"
-        [tooltipPlacement]="placementTypes.Top"
-        [tooltipType]="styleTypes.tooltip"
-        [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(circle)"
-        [tooltipTemplate]="tooltipTemplate"
-        [tooltipContext]="circle.data"
-      />
-    </svg:g>
+      </svg:g>
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [

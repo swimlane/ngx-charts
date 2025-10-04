@@ -53,26 +53,28 @@ import { ScaleType } from '../common/types/scale-type.enum';
         />
       </svg:g>
       <svg:g [attr.transform]="transform">
-        <svg:g *ngFor="let result of results; trackBy: trackBy">
-          <svg:g
-            ngx-charts-box-series
-            [xScale]="xScale"
-            [yScale]="yScale"
-            [colors]="colors"
-            [roundEdges]="roundEdges"
-            [strokeColor]="strokeColor"
-            [strokeWidth]="strokeWidth"
-            [tooltipDisabled]="tooltipDisabled"
-            [tooltipTemplate]="tooltipTemplate"
-            [series]="result"
-            [dims]="dims"
-            [animations]="animations"
-            [gradient]="gradient"
-            (activate)="onActivate($event)"
-            (deactivate)="onDeactivate($event)"
-            (select)="onClick($event)"
-          />
-        </svg:g>
+        @for (result of results; track trackBy($index, result)) {
+          <svg:g>
+            <svg:g
+              ngx-charts-box-series
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [colors]="colors"
+              [roundEdges]="roundEdges"
+              [strokeColor]="strokeColor"
+              [strokeWidth]="strokeWidth"
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="tooltipTemplate"
+              [series]="result"
+              [dims]="dims"
+              [animations]="animations"
+              [gradient]="gradient"
+              (activate)="onActivate($event)"
+              (deactivate)="onDeactivate($event)"
+              (select)="onClick($event)"
+            />
+          </svg:g>
+        }
       </svg:g>
     </ngx-charts-chart>
   `,

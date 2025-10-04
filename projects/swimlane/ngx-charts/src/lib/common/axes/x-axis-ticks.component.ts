@@ -23,62 +23,79 @@ import { roundedRect } from '../../common/shape.helper';
   selector: 'g[ngx-charts-x-axis-ticks]',
   template: `
     <svg:g #ticksel>
-      <svg:g *ngFor="let tick of ticks" class="tick" [attr.transform]="tickTransform(tick)">
-        <ng-container *ngIf="tickFormat(tick) as tickFormatted">
-          <title>{{ tickFormatted }}</title>
-          <svg:text
-            stroke-width="0.01"
-            font-size="12px"
-            [attr.text-anchor]="textAnchor"
-            [attr.transform]="textTransform"
-          >
-            <ng-container *ngIf="isWrapTicksSupported; then tmplMultilineTick; else tmplSinglelineTick"></ng-container>
-          </svg:text>
+      @for (tick of ticks; track tick) {
+        <svg:g class="tick" [attr.transform]="tickTransform(tick)">
+          @if (tickFormat(tick); as tickFormatted) {
+            <ng-container>
+              <title>{{ tickFormatted }}</title>
+              <svg:text
+                stroke-width="0.01"
+                font-size="12px"
+                [attr.text-anchor]="textAnchor"
+                [attr.transform]="textTransform"
+              >
+                @if (isWrapTicksSupported) {
+                  <ng-template [ngTemplateOutlet]="tmplMultilineTick"></ng-template>
+                } @else {
+                  <ng-template [ngTemplateOutlet]="tmplSinglelineTick"></ng-template>
+                }
+              </svg:text>
 
-          <ng-template #tmplMultilineTick>
-            <ng-container *ngIf="tickChunks(tick) as tickLines">
-              <svg:tspan *ngFor="let tickLine of tickLines; let i = index" x="0" [attr.y]="i * 12">
-                {{ tickLine }}
-              </svg:tspan>
+              <ng-template #tmplMultilineTick>
+                @if (tickChunks(tick); as tickLines) {
+                  <ng-container>
+                    @for (tickLine of tickLines; track tickLine; let i = $index) {
+                      <svg:tspan x="0" [attr.y]="i * 12">
+                        {{ tickLine }}
+                      </svg:tspan>
+                    }
+                  </ng-container>
+                }
+              </ng-template>
+
+              <ng-template #tmplSinglelineTick>
+                {{ tickTrim(tickFormatted) }}
+              </ng-template>
             </ng-container>
-          </ng-template>
-
-          <ng-template #tmplSinglelineTick>
-            {{ tickTrim(tickFormatted) }}
-          </ng-template>
-        </ng-container>
-      </svg:g>
-    </svg:g>
-
-    <svg:g *ngFor="let tick of ticks" [attr.transform]="tickTransform(tick)">
-      <svg:g *ngIf="showGridLines" [attr.transform]="gridLineTransform()">
-        <svg:line class="gridline-path gridline-path-vertical" [attr.y1]="-gridLineHeight" y2="0" />
-      </svg:g>
-    </svg:g>
-
-    <svg:path
-      *ngIf="referenceLineLength > 1 && refMax && refMin && showRefLines"
-      class="reference-area"
-      [attr.d]="referenceAreaPath"
-      [attr.transform]="gridLineTransform()"
-    />
-
-    <svg:g *ngFor="let refLine of referenceLines" class="ref-line">
-      <svg:g *ngIf="showRefLines" [attr.transform]="transform(refLine.value)">
-        <svg:line
-          class="refline-path gridline-path-vertical"
-          y1="25"
-          [attr.y2]="25 + gridLineHeight"
-          [attr.transform]="gridLineTransform()"
-        />
-        <svg:g *ngIf="showRefLabels">
-          <title>{{ tickTrim(tickFormat(refLine.value)) }}</title>
-          <svg:text class="refline-label" transform="rotate(-270) translate(5, -5)">
-            {{ refLine.name }}
-          </svg:text>
+          }
         </svg:g>
-      </svg:g>
+      }
     </svg:g>
+
+    @for (tick of ticks; track tick) {
+      <svg:g [attr.transform]="tickTransform(tick)">
+        @if (showGridLines) {
+          <svg:g [attr.transform]="gridLineTransform()">
+            <svg:line class="gridline-path gridline-path-vertical" [attr.y1]="-gridLineHeight" y2="0" />
+          </svg:g>
+        }
+      </svg:g>
+    }
+    @if (referenceLineLength > 1 && refMax && refMin && showRefLines) {
+      <svg:path class="reference-area" [attr.d]="referenceAreaPath" [attr.transform]="gridLineTransform()" />
+    }
+    @for (refLine of referenceLines; track refLine) {
+      <svg:g class="ref-line">
+        @if (showRefLines) {
+          <svg:g [attr.transform]="transform(refLine.value)">
+            <svg:line
+              class="refline-path gridline-path-vertical"
+              y1="25"
+              [attr.y2]="25 + gridLineHeight"
+              [attr.transform]="gridLineTransform()"
+            />
+            @if (showRefLabels) {
+              <svg:g>
+                <title>{{ tickTrim(tickFormat(refLine.value)) }}</title>
+                <svg:text class="refline-label" transform="rotate(-270) translate(5, -5)">
+                  {{ refLine.name }}
+                </svg:text>
+              </svg:g>
+            }
+          </svg:g>
+        }
+      </svg:g>
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false

@@ -13,7 +13,10 @@ export class VisibilityObserver {
   timeout: any;
   isVisible: boolean = false;
 
-  constructor(private element: ElementRef, private zone: NgZone) {
+  constructor(
+    private element: ElementRef,
+    private zone: NgZone
+  ) {
     this.runCheck();
   }
 

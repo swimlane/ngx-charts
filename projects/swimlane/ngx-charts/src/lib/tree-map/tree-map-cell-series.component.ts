@@ -29,30 +29,31 @@ interface TreeMapCell {
 @Component({
   selector: 'g[ngx-charts-tree-map-cell-series]',
   template: `
-    <svg:g
-      ngx-charts-tree-map-cell
-      *ngFor="let c of cells; trackBy: trackBy"
-      [data]="c.data"
-      [x]="c.x"
-      [y]="c.y"
-      [width]="c.width"
-      [height]="c.height"
-      [fill]="c.fill"
-      [label]="c.label"
-      [value]="c.value"
-      [valueFormatting]="valueFormatting"
-      [labelFormatting]="labelFormatting"
-      [gradient]="gradient"
-      [animations]="animations"
-      (select)="onClick($event)"
-      ngx-tooltip
-      [tooltipDisabled]="tooltipDisabled"
-      [tooltipPlacement]="placementTypes.Top"
-      [tooltipType]="styleTypes.tooltip"
-      [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(c)"
-      [tooltipTemplate]="tooltipTemplate"
-      [tooltipContext]="c.data"
-    ></svg:g>
+    @for (c of cells; track trackBy($index, c)) {
+      <svg:g
+        ngx-charts-tree-map-cell
+        [data]="c.data"
+        [x]="c.x"
+        [y]="c.y"
+        [width]="c.width"
+        [height]="c.height"
+        [fill]="c.fill"
+        [label]="c.label"
+        [value]="c.value"
+        [valueFormatting]="valueFormatting"
+        [labelFormatting]="labelFormatting"
+        [gradient]="gradient"
+        [animations]="animations"
+        (select)="onClick($event)"
+        ngx-tooltip
+        [tooltipDisabled]="tooltipDisabled"
+        [tooltipPlacement]="placementTypes.Top"
+        [tooltipType]="styleTypes.tooltip"
+        [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(c)"
+        [tooltipTemplate]="tooltipTemplate"
+        [tooltipContext]="c.data"
+      ></svg:g>
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false

@@ -19,9 +19,16 @@ import { BarOrientation } from '../common/types/bar-orientation.enum';
   selector: 'g[ngx-charts-pie-arc]',
   template: `
     <svg:g class="arc-group">
-      <svg:defs *ngIf="gradient">
-        <svg:g ngx-charts-svg-radial-gradient [color]="fill" [name]="radialGradientId" [startOpacity]="startOpacity" />
-      </svg:defs>
+      @if (gradient) {
+        <svg:defs>
+          <svg:g
+            ngx-charts-svg-radial-gradient
+            [color]="fill"
+            [name]="radialGradientId"
+            [startOpacity]="startOpacity"
+          />
+        </svg:defs>
+      }
       <svg:path
         [attr.d]="path"
         class="arc"
