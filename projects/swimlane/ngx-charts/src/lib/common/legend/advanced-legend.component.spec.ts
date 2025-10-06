@@ -186,6 +186,126 @@ describe('<ngx-charts-advanced-legend>', () => {
     expect(sum).toBe(100);
   });
 
+  it('should ensure rounded percentages sum to 100% for equal percentage values', () => {
+    TestBed.overrideComponent(TestComponent, {
+      set: {
+        template: `
+          <ngx-charts-advanced-legend
+            [label]="legendLabel"
+            [colors]="colors"
+            [data]="data"
+            [width]="legendWidth"
+            [animations]="false"
+            [roundPercentages]="true"
+            [valueFormatting]="valueFormatting"
+            [labelFormatting]="labelFormatting"
+            [percentageFormatting]="percentageFormatting">
+          </ngx-charts-advanced-legend>
+        `
+      }
+    }).compileComponents();
+
+    const fixture = TestBed.createComponent(TestComponent);
+    const component = fixture.componentInstance;
+
+    // Three equal values(33.33% each)
+    component.data = [
+      { name: 'a', value: 1 },
+      { name: 'b', value: 1 },
+      { name: 'c', value: 1 }
+    ];
+    fixture.detectChanges();
+    const { legendItemPercentElements } = loadLegendItemElements(fixture);
+    const percentages = Array.from(legendItemPercentElements).map((x: Element) => {
+      const text = x.textContent.trim();
+      return parseFloat(text.replace('%', ''));
+    });
+    const sum = Number(percentages.reduce((a, b) => a + b, 0).toFixed(2));
+    expect(sum).toBe(100);
+  });
+
+  it('should ensure rounded percentages sum to 100% for edge cases', () => {
+    TestBed.overrideComponent(TestComponent, {
+      set: {
+        template: `
+          <ngx-charts-advanced-legend
+            [label]="legendLabel"
+            [colors]="colors"
+            [data]="data"
+            [width]="legendWidth"
+            [animations]="false"
+            [roundPercentages]="true"
+            [valueFormatting]="valueFormatting"
+            [labelFormatting]="labelFormatting"
+            [percentageFormatting]="percentageFormatting">
+          </ngx-charts-advanced-legend>
+        `
+      }
+    }).compileComponents();
+
+    const fixture = TestBed.createComponent(TestComponent);
+    const component = fixture.componentInstance;
+
+    // Mixed values with one dominant value
+    component.data = [
+      { name: 'a', value: 900 },
+      { name: 'b', value: 1 },
+      { name: 'c', value: 2 },
+      { name: 'd', value: 3 },
+      { name: 'e', value: 4 },
+      { name: 'f', value: 5 }
+    ];
+    fixture.detectChanges();
+    const { legendItemPercentElements } = loadLegendItemElements(fixture);
+    const percentages = Array.from(legendItemPercentElements).map((x: Element) => {
+      const text = x.textContent.trim();
+      return parseFloat(text.replace('%', ''));
+    });
+    const sum = Number(percentages.reduce((a, b) => a + b, 0).toFixed(2));
+    expect(sum).toBe(100);
+  });
+
+  it('should ensure rounded percentages sum to 0 if all values are zero', () => {
+    TestBed.overrideComponent(TestComponent, {
+      set: {
+        template: `
+          <ngx-charts-advanced-legend
+            [label]="legendLabel"
+            [colors]="colors"
+            [data]="data"
+            [width]="legendWidth"
+            [animations]="false"
+            [roundPercentages]="true"
+            [valueFormatting]="valueFormatting"
+            [labelFormatting]="labelFormatting"
+            [percentageFormatting]="percentageFormatting">
+          </ngx-charts-advanced-legend>
+        `
+      }
+    }).compileComponents();
+
+    const fixture = TestBed.createComponent(TestComponent);
+    const component = fixture.componentInstance;
+
+    // All zero values
+    component.data = [
+      { name: 'a', value: 0 },
+      { name: 'b', value: 0 },
+      { name: 'c', value: 0 },
+      { name: 'd', value: 0 },
+      { name: 'e', value: 0 },
+      { name: 'f', value: 0 }
+    ];
+    fixture.detectChanges();
+    const { legendItemPercentElements } = loadLegendItemElements(fixture);
+    const percentages = Array.from(legendItemPercentElements).map((x: Element) => {
+      const text = x.textContent.trim();
+      return parseFloat(text.replace('%', ''));
+    });
+    const sum = Number(percentages.reduce((a, b) => a + b, 0).toFixed(2));
+    expect(sum).toBe(0);
+  });
+
   function loadLegendItemElements(fixture: ComponentFixture<TestComponent>) {
     const legendItemsElements = fixture.debugElement.nativeElement.querySelector('.legend-items');
     const legendItemValueElements = fixture.debugElement.nativeElement.querySelectorAll('.legend-items .item-value');
