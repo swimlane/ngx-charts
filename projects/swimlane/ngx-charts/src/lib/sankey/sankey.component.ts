@@ -387,23 +387,25 @@ export class SankeyComponent extends BaseChartComponent {
 
     let minDistance = Infinity;
 
-    adjacentNodes.forEach(adjNode => {
-      if (adjNode.y0 < labelBottom && adjNode.y1 > labelTop) {
-        let distance: number;
-        if (isLeftSideNode) {
-          // Label starts at node.x1 + labelOffset and extends to the right
-          const labelStart = rect.x + rect.width + labelOffset;
-          distance = adjNode.x0 - labelStart - labelMargin;
-        } else {
-          // For right-side labels, text-anchor="end" means text extends left from the anchor point
-          // The anchor is at node.x0 - rightSideExtraOffset
-          const labelStart = rect.x - rightSideExtraOffset;
-          distance = labelStart - adjNode.x1 - labelMargin;
-        }
+    if (adjacentNodes?.length) {
+      adjacentNodes.forEach(adjNode => {
+        if (adjNode.y0 < labelBottom && adjNode.y1 > labelTop) {
+          let distance: number;
+          if (isLeftSideNode) {
+            // Label starts at node.x1 + labelOffset and extends to the right
+            const labelStart = rect.x + rect.width + labelOffset;
+            distance = adjNode.x0 - labelStart - labelMargin;
+          } else {
+            // For right-side labels, text-anchor="end" means text extends left from the anchor point
+            // The anchor is at node.x0 - rightSideExtraOffset
+            const labelStart = rect.x - rightSideExtraOffset;
+            distance = labelStart - adjNode.x1 - labelMargin;
+          }
 
-        minDistance = Math.min(minDistance, distance);
-      }
-    });
+          minDistance = Math.min(minDistance, distance);
+        }
+      });
+    }
 
     // If no adjacent nodes found, use distance to chart edge
     if (minDistance === Infinity) {
@@ -431,7 +433,7 @@ export class SankeyComponent extends BaseChartComponent {
     // Filter nodes in the target layer
     const adjacentNodes = this.nodeLayerMap.get(targetLayer);
     // If no nodes in adjacent layer, try the next layer
-    if (adjacentNodes.length === 0) {
+    if (!adjacentNodes?.length) {
       const nextLayer = isLeftSideNode ? currentLayer + 2 : currentLayer - 2;
       return this.nodeLayerMap.get(nextLayer);
     }
