@@ -12,6 +12,7 @@ import { trimLabel } from '../trim-label.helper';
 import { formatLabel } from '../label.helper';
 import { DataItem, StringOrNumberOrDate } from '../../models/chart-data.model';
 import { ColorHelper } from '../color.helper';
+import { roundPercentagesWithDecimals } from '../percentage.helper';
 
 export interface AdvancedLegendItem {
   value: StringOrNumberOrDate;
@@ -67,6 +68,7 @@ export interface AdvancedLegendItem {
               *ngIf="animations"
               class="item-percent"
               ngx-charts-count-up
+              [countDecimals]="2"
               [countTo]="legendItem.percentage"
               [countSuffix]="'%'"
             ></div>
@@ -87,6 +89,7 @@ export class AdvancedLegendComponent implements OnChanges {
   @Input() colors: ColorHelper;
   @Input() label: string = 'Total';
   @Input() animations: boolean = true;
+  @Input() roundPercentages: boolean = true;
 
   @Output() select: EventEmitter<DataItem> = new EventEmitter();
   @Output() activate: EventEmitter<DataItem> = new EventEmitter();
@@ -118,11 +121,16 @@ export class AdvancedLegendComponent implements OnChanges {
   }
 
   getLegendItems(): AdvancedLegendItem[] {
-    return (this.data as any).map(d => {
+    const values = this.data.map(d => Number(d.value));
+    const percentages = this.roundPercentages
+      ? roundPercentagesWithDecimals(values)
+      : values.map(v => (v / this.total) * 100);
+
+    return (this.data as any).map((d, index) => {
       const label = formatLabel(d.name);
       const value = d.value;
       const color = this.colors.getColor(label);
-      const percentage = this.total > 0 ? (value / this.total) * 100 : 0;
+      const percentage = this.roundPercentages ? percentages[index] : this.getPercentage(values[index]);
       const formattedLabel = typeof this.labelFormatting === 'function' ? this.labelFormatting(label) : label;
 
       return {
@@ -133,9 +141,15 @@ export class AdvancedLegendComponent implements OnChanges {
         label: formattedLabel,
         displayLabel: trimLabel(formattedLabel, 20),
         origialLabel: d.name,
-        percentage: this.percentageFormatting ? this.percentageFormatting(percentage) : percentage.toLocaleString()
+        percentage: this.percentageFormatting
+          ? this.percentageFormatting(parseFloat(percentage.toLocaleString()))
+          : percentage.toLocaleString()
       };
     });
+  }
+
+  getPercentage(value: number): number {
+    return this.total > 0 ? (value / this.total) * 100 : 0;
   }
 
   trackBy(index: number, item: AdvancedLegendItem) {
