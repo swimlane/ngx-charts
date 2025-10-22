@@ -2,6 +2,11 @@
 
 ## HEAD (unreleased)
 
+## 23.0.2
+
+- Fix: Fixed Advanced pie chart to round percentages which sum to 100%
+- Enhancement: Updated Sankey chart to handle labels overflow
+
 ## 23.0.1
 
 - Chore: Update dependencies
