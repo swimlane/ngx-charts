@@ -1,0 +1,19 @@
+<title>{{ label }}</title>
+<svg:g [attr.transform]="attrTransform" [style.transform]="styleTransform" [style.transition]="textTransition">
+  <svg:text
+    class="pie-label"
+    [class.animation]="animations"
+    dy=".35em"
+    [style.textAnchor]="textAnchor()"
+    [style.shapeRendering]="'crispEdges'"
+  >
+    {{ labelTrim ? trimLabel(label, labelTrimSize) : label }}
+  </svg:text>
+</svg:g>
+<svg:path
+  [attr.d]="line"
+  [attr.stroke]="color"
+  fill="none"
+  class="pie-label-line line"
+  [class.animation]="animations"
+></svg:path>

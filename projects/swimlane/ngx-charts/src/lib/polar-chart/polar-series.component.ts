@@ -8,74 +8,25 @@ import {
   Output,
   EventEmitter
 } from '@angular/core';
-import { lineRadial } from 'd3-shape';
 
 import { id } from '../utils/id';
-import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
-import { escapeLabel } from '../common/label.helper';
-import { Series, DataItem } from '../models/chart-data.model';
+import { DataItem } from '../models/chart-data.model';
 import { PlacementTypes } from '../common/tooltip/position';
 import { StyleTypes } from '../common/tooltip/style.type';
 import { BarOrientation } from '../common/types/bar-orientation.enum';
 import { ScaleType } from '../common/types/scale-type.enum';
-
-interface PolarChartCircle {
-  color: string;
-  cx: number;
-  cy: number;
-  data: Series;
-  label: string;
-  value: number;
-}
+import {
+  PolarChartCircle,
+  getAngle,
+  getRadius,
+  getLineGenerator,
+  sortData,
+  defaultTooltipText
+} from './polar-series.helper';
 
 @Component({
   selector: 'g[ngx-charts-polar-series]',
-  template: `
-    <svg:g class="polar-charts-series">
-      <defs>
-        <svg:g
-          ngx-charts-svg-radial-gradient
-          *ngIf="hasGradient"
-          [color]="seriesColor"
-          [name]="gradientId"
-          [startOpacity]="0.25"
-          [endOpacity]="1"
-          [stops]="gradientStops"
-        />
-      </defs>
-      <svg:g
-        ngx-charts-line
-        class="polar-series-path"
-        [path]="path"
-        [stroke]="hasGradient ? gradientUrl : seriesColor"
-        [class.active]="active"
-        [class.inactive]="inactive"
-        [attr.fill-opacity]="rangeFillOpacity"
-        [fill]="hasGradient ? gradientUrl : seriesColor"
-        [animations]="animations"
-      />
-      <svg:g
-        ngx-charts-circle
-        *ngFor="let circle of circles"
-        class="circle"
-        [cx]="circle.cx"
-        [cy]="circle.cy"
-        [r]="circleRadius"
-        [fill]="circle.color"
-        [style.opacity]="inactive ? 0.2 : 1"
-        ngx-tooltip
-        [tooltipDisabled]="tooltipDisabled"
-        [tooltipPlacement]="placementTypes.Top"
-        [tooltipType]="styleTypes.tooltip"
-        [tooltipTitle]="tooltipTemplate ? undefined : tooltipText(circle)"
-        [tooltipTemplate]="tooltipTemplate"
-        [tooltipContext]="circle.data"
-        (select)="select.emit(circle.data)"
-        (activate)="activate.emit({ name: circle.data.series })"
-        (deactivate)="deactivate.emit({ name: circle.data.series })"
-      ></svg:g>
-    </svg:g>
-  `,
+  templateUrl: './polar-series.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false
 })
@@ -125,9 +76,9 @@ export class PolarSeriesComponent implements OnChanges {
   update(): void {
     this.updateGradients();
 
-    const line = this.getLineGenerator();
+    const line = getLineGenerator(this.scaleType, this.xScale, this.yScale, this.curve);
 
-    const data = this.sortData(this.data.series);
+    const data = sortData(this.data.series, this.scaleType, this.xScale);
 
     const seriesName = this.data.name;
     const linearScaleType = this.colors.scaleType === ScaleType.Linear;
@@ -137,8 +88,8 @@ export class PolarSeriesComponent implements OnChanges {
     this.path = line(data) || '';
 
     this.circles = data.map(d => {
-      const a = this.getAngle(d);
-      const r = this.getRadius(d);
+      const a = getAngle(d, this.scaleType, this.xScale);
+      const r = getRadius(d, this.yScale);
       const value = d.value;
 
       const color = this.colors.getColor(linearScaleType ? Math.abs(value) : seriesName);
@@ -161,60 +112,17 @@ export class PolarSeriesComponent implements OnChanges {
 
     this.active = this.isActive(this.data);
     this.inactive = this.isInactive(this.data);
-    this.tooltipText = this.tooltipText || (c => this.defaultTooltipText(c));
+    this.tooltipText = this.tooltipText || (c => defaultTooltipText(c.label, c.value, this.data.name));
   }
 
-  getAngle(d: DataItem) {
-    const label = d.name;
-    if (this.scaleType === ScaleType.Time) {
-      return this.xScale(label);
-    } else if (this.scaleType === ScaleType.Linear) {
-      return this.xScale(Number(label));
-    }
-    return this.xScale(label);
-  }
-
-  getRadius(d: DataItem) {
-    return this.yScale(d.value);
-  }
-
-  getLineGenerator(): any {
-    return lineRadial<any>()
-      .angle(d => this.getAngle(d))
-      .radius(d => this.getRadius(d))
-      .curve(this.curve);
-  }
-
-  sortData(data: DataItem) {
-    if (this.scaleType === ScaleType.Linear) {
-      return sortLinear(data, 'name');
-    } else if (this.scaleType === ScaleType.Time) {
-      return sortByTime(data, 'name');
-    }
-    return sortByDomain(data, 'name', 'asc', this.xScale.domain());
-  }
-
-  isActive(entry: DataItem): boolean {
+  isActive(entry: any): boolean {
     if (!this.activeEntries) return false;
-    const item = this.activeEntries.find(d => {
-      return entry.name === d.name;
-    });
-    return item !== undefined;
+    return this.activeEntries.some(d => entry.name === d.name);
   }
 
-  isInactive(entry: DataItem): boolean {
+  isInactive(entry: any): boolean {
     if (!this.activeEntries || this.activeEntries.length === 0) return false;
-    const item = this.activeEntries.find(d => {
-      return entry.name === d.name;
-    });
-    return item === undefined;
-  }
-
-  defaultTooltipText({ label, value }: { label: string; value: number }): string {
-    return `
-      <span class="tooltip-label">${escapeLabel(this.data.name)} • ${escapeLabel(label)}</span>
-      <span class="tooltip-val">${value.toLocaleString()}</span>
-    `;
+    return !this.activeEntries.some(d => entry.name === d.name);
   }
 
   updateGradients() {

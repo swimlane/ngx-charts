@@ -1,8 +1,30 @@
 import { ScaleType } from './types/scale-type.enum';
-import { Circle, SeriesType } from './circle-series.component';
 import { formatLabel, escapeLabel } from './label.helper';
 import { Gradient } from './types/gradient.interface';
 import { ColorHelper } from './color.helper';
+
+export enum SeriesType {
+  Standard = 'standard',
+  Stacked = 'stacked'
+}
+
+export interface Circle {
+  classNames: string[];
+  value: number;
+  label: string;
+  data: any;
+  cx: number;
+  cy: number;
+  radius: number;
+  height: number;
+  tooltipLabel: string;
+  color: string;
+  opacity: number;
+  seriesName: string;
+  gradientStops: Gradient[];
+  min: number;
+  max: number;
+}
 
 export function mapDataPointToCircle(
   d: any,

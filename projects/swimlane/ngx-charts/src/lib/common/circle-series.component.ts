@@ -19,31 +19,7 @@ import { StyleTypes } from './tooltip/style.type';
 import { BarOrientation } from './types/bar-orientation.enum';
 import { ScaleType } from './types/scale-type.enum';
 import { isPlatformServer } from '@angular/common';
-import { getActiveCircle, getCircleTooltipText } from './circle-series.helper';
-import { Gradient } from './types/gradient.interface';
-
-export enum SeriesType {
-  Standard = 'standard',
-  Stacked = 'stacked'
-}
-
-export interface Circle {
-  classNames: string[];
-  value: number;
-  label: string;
-  data: any;
-  cx: number;
-  cy: number;
-  radius: number;
-  height: number;
-  tooltipLabel: string;
-  color: string;
-  opacity: number;
-  seriesName: string;
-  gradientStops: Gradient[];
-  min: number;
-  max: number;
-}
+import { getActiveCircle, getCircleTooltipText, Circle, SeriesType } from './circle-series.helper';
 
 @Component({
   selector: 'g[ngx-charts-circle-series]',
@@ -120,6 +96,8 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
   styleTypes = StyleTypes;
   isSSR = false;
 
+  tooltipText = getCircleTooltipText;
+
   constructor(@Inject(PLATFORM_ID) private platformId: any) {}
 
   ngOnInit() {
@@ -142,9 +120,7 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
       this.colors
     );
   }
-  tooltipText(circle: Circle): string {
-    return getCircleTooltipText(circle);
-  }
+
   onClick(data: DataItem): void {
     this.select.emit(data);
   }

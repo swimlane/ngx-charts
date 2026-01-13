@@ -2,6 +2,7 @@ import { Orientation } from '../types/orientation.enum';
 import { TextAnchor } from '../types/text-anchor.enum';
 import { getTickLines, reduceTicks } from './ticks.helper';
 import { roundedRect } from '../../common/shape.helper';
+import { trimLabel } from '../trim-label.helper';
 
 export function getXAxisRotationAngle(
   ticks: any[],
@@ -168,4 +169,16 @@ export function updateXAxisTicks(component: any): void {
     component.referenceLineLength = referenceLineLength;
     component.referenceAreaPath = referenceAreaPath;
   }
+}
+
+export function tickTransform(tick: number, adjustedScale: any, verticalSpacing: number): string {
+  return 'translate(' + adjustedScale(tick) + ',' + verticalSpacing + ')';
+}
+
+export function gridLineTransform(verticalSpacing: number): string {
+  return `translate(0, ${-verticalSpacing - 5})`;
+}
+
+export function tickTrim(label: string, trimTicks: boolean, maxTickLength: number): string {
+  return trimTicks ? trimLabel(label, maxTickLength) : label;
 }

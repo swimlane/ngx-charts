@@ -16,18 +16,13 @@ import { ColorHelper } from '../common/color.helper';
 import { PlacementTypes } from './tooltip/position';
 import { StyleTypes } from './tooltip/style.type';
 import { ViewDimensions } from './types/view-dimension.interface';
-import { getTooltipValues, findClosestPointIndex, getTooltipAreaText, tooltipAreaMove } from './tooltip.helper';
-
-export interface Tooltip {
-  color: string;
-  d0: number;
-  d1: number;
-  max: number;
-  min: number;
-  name: any;
-  series: any;
-  value: any;
-}
+import {
+  getTooltipValues,
+  findClosestPointIndex,
+  getTooltipAreaText,
+  tooltipAreaMove,
+  Tooltip
+} from './tooltip.helper';
 
 @Component({
   selector: 'g[ngx-charts-tooltip-area]',
@@ -114,6 +109,8 @@ export class TooltipArea {
 
   @ViewChild('tooltipAnchor', { static: false }) tooltipAnchor;
 
+  getToolTipText = getTooltipAreaText;
+
   constructor(@Inject(PLATFORM_ID) private platformId: any) {}
 
   mouseMove(event) {
@@ -151,9 +148,5 @@ export class TooltipArea {
     }
     this.anchorOpacity = 0;
     this.lastAnchorPos = -1;
-  }
-
-  getToolTipText(tooltipItem: Tooltip): string {
-    return getTooltipAreaText(tooltipItem);
   }
 }

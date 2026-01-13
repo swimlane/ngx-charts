@@ -21,7 +21,7 @@ import { escapeLabel } from '../common/label.helper';
 import { decimalChecker, count } from '../common/count/count.helper';
 import { GridData } from '../common/grid-layout.helper';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
-import { calculateCardTextPadding, getCardScaleText, scaleCardTextSSR } from './card.helper';
+import { calculateCardTextPadding, getCardScaleText, scaleCardTextSSR, paddedValue } from './card.helper';
 
 @Component({
   selector: 'g[ngx-charts-card]',
@@ -167,7 +167,7 @@ export class CardComponent implements OnChanges, OnDestroy, OnInit {
 
       const value = hasValue ? valueFormatting(cardData) : '';
 
-      this.value = this.paddedValue(value);
+      this.value = paddedValue(value, this.medianSize);
       this.setPadding();
 
       this.bandPath = roundedRect(0, 0, this.cardWidth, this.bandHeight, 3, [false, false, true, true]);
@@ -184,13 +184,6 @@ export class CardComponent implements OnChanges, OnDestroy, OnInit {
     });
   }
 
-  paddedValue(value: string): string {
-    if (this.medianSize && this.medianSize > value.length) {
-      value += '\u2007'.repeat(this.medianSize - value.length);
-    }
-    return value;
-  }
-
   startCount(): void {
     if (!this.initialized && this.animations) {
       cancelAnimationFrame(this.animationReq);
@@ -204,7 +197,7 @@ export class CardComponent implements OnChanges, OnDestroy, OnInit {
           value = finished ? val : value;
           this.value = valueFormatting({ label: this.label, data: this.data, value });
           if (!finished) {
-            this.value = this.paddedValue(this.value);
+            this.value = paddedValue(this.value, this.medianSize);
           }
           this.cd.markForCheck();
         });

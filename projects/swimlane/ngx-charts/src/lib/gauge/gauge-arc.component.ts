@@ -4,6 +4,7 @@ import { ColorHelper } from '../common/color.helper';
 import { DataItem } from '../models/chart-data.model';
 import { PlacementTypes } from '../common/tooltip/position';
 import { StyleTypes } from '../common/tooltip/style.type';
+import { PieArcConfig } from '../pie-chart/pie-arc.config';
 
 export interface ArcItem {
   data: DataItem;
@@ -18,26 +19,13 @@ export interface ArcItem {
     <svg:g
       ngx-charts-pie-arc
       class="background-arc"
-      [startAngle]="0"
-      [endAngle]="backgroundArc.endAngle"
-      [innerRadius]="backgroundArc.innerRadius"
-      [outerRadius]="backgroundArc.outerRadius"
-      [cornerRadius]="cornerRadius"
+      [config]="bgConfig"
       [data]="backgroundArc.data"
-      [animate]="false"
-      [pointerEvents]="false"
     ></svg:g>
     <svg:g
       ngx-charts-pie-arc
-      [startAngle]="0"
-      [endAngle]="valueArc.endAngle"
-      [innerRadius]="valueArc.innerRadius"
-      [outerRadius]="valueArc.outerRadius"
-      [cornerRadius]="cornerRadius"
-      [fill]="colors.getColor(valueArc.data.name)"
+      [config]="valueConfig"
       [data]="valueArc.data"
-      [animate]="animations"
-      [isActive]="isActive"
       (select)="select.emit($event)"
       (activate)="activate.emit($event)"
       (deactivate)="deactivate.emit($event)"
@@ -70,6 +58,42 @@ export class GaugeArcComponent {
 
   placementTypes = PlacementTypes;
   styleTypes = StyleTypes;
+
+  get bgConfig(): PieArcConfig {
+    return {
+      fill: '',
+      startAngle: 0,
+      endAngle: this.backgroundArc.endAngle,
+      innerRadius: this.backgroundArc.innerRadius,
+      outerRadius: this.backgroundArc.outerRadius,
+      cornerRadius: this.cornerRadius,
+      value: 0,
+      max: 0,
+      explodeSlices: false,
+      gradient: false,
+      animate: false,
+      pointerEvents: false,
+      isActive: false
+    };
+  }
+
+  get valueConfig(): PieArcConfig {
+    return {
+      fill: this.colors.getColor(this.valueArc.data.name),
+      startAngle: 0,
+      endAngle: this.valueArc.endAngle,
+      innerRadius: this.valueArc.innerRadius,
+      outerRadius: this.valueArc.outerRadius,
+      cornerRadius: this.cornerRadius,
+      value: this.valueArc.data.value as number,
+      max: 0,
+      explodeSlices: false,
+      gradient: false,
+      animate: this.animations,
+      pointerEvents: true,
+      isActive: this.isActive
+    };
+  }
 
   tooltipText(arc: ArcItem): string {
     const label = formatLabel(arc.data.name);

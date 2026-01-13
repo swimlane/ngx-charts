@@ -111,3 +111,11 @@ export function updateLineSeries(component: any): void {
     component.stroke = component.colors.getColor(component.data.name);
   }
 }
+
+export function areActiveEntriesEqual(prev: any[], curr: any[]): boolean {
+  if (prev === curr) return true;
+  if (!prev || !curr) return false;
+  if (prev.length !== curr.length) return false;
+  if (prev.length === 0 && curr.length === 0) return true;
+  return prev.every((v, i) => v === curr[i]);
+}

@@ -2,6 +2,7 @@ import { Gradient } from '../common/types/gradient.interface';
 import { trimLabel } from '../common/trim-label.helper';
 import { escapeLabel } from '../common/label.helper';
 import { select } from 'd3-selection';
+import { invertColor } from '../utils/color-utils';
 
 export function getTreeMapCellGradientStops(fill: string): Gradient[] {
   return [
@@ -86,4 +87,8 @@ export function updateTreeMapCell(component: any): void {
     }
     component.initialized = true;
   }
+}
+
+export function getTextColor(fill: string): string {
+  return invertColor(fill);
 }

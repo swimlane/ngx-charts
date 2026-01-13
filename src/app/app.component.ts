@@ -36,7 +36,13 @@ import {
   GaugeOptions,
   AreaChartOptions,
   LineChartOptions,
-  BubbleChartOptions
+  BubbleChartOptions,
+  AreaChartNormalizedConfig,
+  AreaChartStackedConfig,
+  BarHorizontal2DConfig,
+  BarHorizontalNormalizedConfig,
+  BarVertical2DConfig,
+  BarVerticalNormalizedConfig
 } from '@swimlane/ngx-charts';
 
 const monthName = new Intl.DateTimeFormat('en-us', { month: 'short' });
@@ -133,6 +139,7 @@ export class AppComponent implements OnInit {
   wrapTicks = false;
   target = 90;
   showLabel: boolean = true;
+  activeEntries: any[] = [];
 
   curves = {
     Basis: shape.curveBasis,
@@ -368,6 +375,145 @@ export class AppComponent implements OnInit {
     };
   }
 
+  get barHorizontal2DConfig(): BarHorizontal2DConfig {
+    return {
+      legend: this.showLegend,
+      legendTitle: this.legendTitle,
+      legendPosition: this.legendPosition,
+      xAxis: this.showXAxis,
+      yAxis: this.showYAxis,
+      showXAxisLabel: this.showXAxisLabel,
+      showYAxisLabel: this.showYAxisLabel,
+      xAxisLabel: this.xAxisLabel,
+      yAxisLabel: this.yAxisLabel,
+      tooltipDisabled: this.tooltipDisabled,
+      gradient: this.gradient,
+      showGridLines: this.showGridLines,
+      activeEntries: [],
+      schemeType: this.schemeType,
+      trimXAxisTicks: this.trimXAxisTicks,
+      trimYAxisTicks: this.trimYAxisTicks,
+      rotateXAxisTicks: this.rotateXAxisTicks,
+      maxXAxisTickLength: this.maxXAxisTickLength,
+      maxYAxisTickLength: this.maxYAxisTickLength,
+      xAxisTickFormatting: undefined,
+      yAxisTickFormatting: undefined,
+      xAxisTicks: undefined,
+      yAxisTicks: undefined,
+      groupPadding: this.groupPadding,
+      barPadding: this.barPadding,
+      roundDomains: this.roundDomains,
+      roundEdges: this.roundEdges,
+      xScaleMax: this.xScaleMax,
+      showDataLabel: this.showDataLabel,
+      dataLabelFormatting: undefined,
+      noBarWhenZero: this.noBarWhenZero,
+      wrapTicks: this.wrapTicks
+    };
+  }
+
+  get barHorizontalNormalizedConfig(): BarHorizontalNormalizedConfig {
+    return {
+      legend: this.showLegend,
+      legendTitle: this.legendTitle,
+      legendPosition: this.legendPosition,
+      xAxis: this.showXAxis,
+      yAxis: this.showYAxis,
+      showXAxisLabel: this.showXAxisLabel,
+      showYAxisLabel: this.showYAxisLabel,
+      xAxisLabel: this.xAxisLabel,
+      yAxisLabel: this.yAxisLabel,
+      tooltipDisabled: this.tooltipDisabled,
+      gradient: this.gradient,
+      showGridLines: this.showGridLines,
+      activeEntries: [],
+      schemeType: this.schemeType,
+      trimXAxisTicks: this.trimXAxisTicks,
+      trimYAxisTicks: this.trimYAxisTicks,
+      rotateXAxisTicks: this.rotateXAxisTicks,
+      maxXAxisTickLength: this.maxXAxisTickLength,
+      maxYAxisTickLength: this.maxYAxisTickLength,
+      xAxisTickFormatting: undefined,
+      yAxisTickFormatting: undefined,
+      xAxisTicks: undefined,
+      yAxisTicks: undefined,
+      barPadding: this.barPadding,
+      roundDomains: this.roundDomains,
+      noBarWhenZero: this.noBarWhenZero,
+      wrapTicks: this.wrapTicks
+    };
+  }
+
+  get barVertical2DConfig(): BarVertical2DConfig {
+    return {
+      legend: this.showLegend,
+      legendTitle: this.legendTitle,
+      legendPosition: this.legendPosition,
+      xAxis: this.showXAxis,
+      yAxis: this.showYAxis,
+      showXAxisLabel: this.showXAxisLabel,
+      showYAxisLabel: this.showYAxisLabel,
+      xAxisLabel: this.xAxisLabel,
+      yAxisLabel: this.yAxisLabel,
+      tooltipDisabled: this.tooltipDisabled,
+      scaleType: this.schemeType,
+      gradient: this.gradient,
+      showGridLines: this.showGridLines,
+      activeEntries: [],
+      schemeType: this.schemeType,
+      trimXAxisTicks: this.trimXAxisTicks,
+      trimYAxisTicks: this.trimYAxisTicks,
+      rotateXAxisTicks: this.rotateXAxisTicks,
+      maxXAxisTickLength: this.maxXAxisTickLength,
+      maxYAxisTickLength: this.maxYAxisTickLength,
+      xAxisTickFormatting: undefined,
+      yAxisTickFormatting: undefined,
+      xAxisTicks: undefined,
+      yAxisTicks: undefined,
+      groupPadding: this.groupPadding,
+      barPadding: this.barPadding,
+      roundDomains: this.roundDomains,
+      roundEdges: this.roundEdges,
+      yScaleMax: this.yScaleMax,
+      showDataLabel: this.showDataLabel,
+      dataLabelFormatting: undefined,
+      noBarWhenZero: this.noBarWhenZero,
+      wrapTicks: this.wrapTicks
+    };
+  }
+
+  get barVerticalNormalizedConfig(): BarVerticalNormalizedConfig {
+    return {
+      legend: this.showLegend,
+      legendTitle: this.legendTitle,
+      legendPosition: this.legendPosition,
+      xAxis: this.showXAxis,
+      yAxis: this.showYAxis,
+      showXAxisLabel: this.showXAxisLabel,
+      showYAxisLabel: this.showYAxisLabel,
+      xAxisLabel: this.xAxisLabel,
+      yAxisLabel: this.yAxisLabel,
+      tooltipDisabled: this.tooltipDisabled,
+      gradient: this.gradient,
+      showGridLines: this.showGridLines,
+      activeEntries: [],
+      schemeType: this.schemeType,
+      trimXAxisTicks: this.trimXAxisTicks,
+      trimYAxisTicks: this.trimYAxisTicks,
+      rotateXAxisTicks: this.rotateXAxisTicks,
+      maxXAxisTickLength: this.maxXAxisTickLength,
+      maxYAxisTickLength: this.maxYAxisTickLength,
+      xAxisTickFormatting: undefined,
+      yAxisTickFormatting: undefined,
+      xAxisTicks: undefined,
+      yAxisTicks: undefined,
+      barPadding: this.barPadding,
+      roundDomains: this.roundDomains,
+      noBarWhenZero: this.noBarWhenZero,
+      wrapTicks: this.wrapTicks
+    };
+  }
+
   get heatMapChartConfig(): HeatMapOptions {
     return {
       legend: this.showLegend,
@@ -518,6 +664,74 @@ export class AppComponent implements OnInit {
       referenceLines: this.refLines,
       showRefLines: this.showRefLines,
       showRefLabels: this.showRefLabels,
+      xScaleMin: this.xScaleMin,
+      xScaleMax: this.xScaleMax,
+      yScaleMin: this.yScaleMin,
+      yScaleMax: this.yScaleMax,
+      wrapTicks: this.wrapTicks
+    };
+  }
+
+  get areaChartNormalizedConfig(): AreaChartNormalizedConfig {
+    return {
+      legend: this.showLegend,
+      legendTitle: this.legendTitle,
+      legendPosition: this.legendPosition,
+      xAxis: this.showXAxis,
+      yAxis: this.showYAxis,
+      showXAxisLabel: this.showXAxisLabel,
+      showYAxisLabel: this.showYAxisLabel,
+      xAxisLabel: this.xAxisLabel,
+      yAxisLabel: this.yAxisLabel,
+      timeline: this.timeline,
+      gradient: this.gradient,
+      showGridLines: this.showGridLines,
+      curve: this.curve,
+      activeEntries: [],
+      schemeType: this.schemeType,
+      trimXAxisTicks: this.trimXAxisTicks,
+      trimYAxisTicks: this.trimYAxisTicks,
+      rotateXAxisTicks: this.rotateXAxisTicks,
+      maxXAxisTickLength: this.maxXAxisTickLength,
+      maxYAxisTickLength: this.maxYAxisTickLength,
+      xAxisTickFormatting: undefined,
+      yAxisTickFormatting: undefined,
+      xAxisTicks: undefined,
+      yAxisTicks: undefined,
+      roundDomains: this.roundDomains,
+      tooltipDisabled: this.tooltipDisabled,
+      wrapTicks: this.wrapTicks
+    };
+  }
+
+  get areaChartStackedConfig(): AreaChartStackedConfig {
+    return {
+      legend: this.showLegend,
+      legendTitle: this.legendTitle,
+      legendPosition: this.legendPosition,
+      xAxis: this.showXAxis,
+      yAxis: this.showYAxis,
+      showXAxisLabel: this.showXAxisLabel,
+      showYAxisLabel: this.showYAxisLabel,
+      xAxisLabel: this.xAxisLabel,
+      yAxisLabel: this.yAxisLabel,
+      timeline: this.timeline,
+      gradient: this.gradient,
+      showGridLines: this.showGridLines,
+      curve: this.curve,
+      activeEntries: [],
+      schemeType: this.schemeType,
+      trimXAxisTicks: this.trimXAxisTicks,
+      trimYAxisTicks: this.trimYAxisTicks,
+      rotateXAxisTicks: this.rotateXAxisTicks,
+      maxXAxisTickLength: this.maxXAxisTickLength,
+      maxYAxisTickLength: this.maxYAxisTickLength,
+      xAxisTickFormatting: undefined,
+      yAxisTickFormatting: undefined,
+      xAxisTicks: undefined,
+      yAxisTicks: undefined,
+      roundDomains: this.roundDomains,
+      tooltipDisabled: this.tooltipDisabled,
       xScaleMin: this.xScaleMin,
       xScaleMax: this.xScaleMax,
       yScaleMin: this.yScaleMin,
@@ -759,8 +973,7 @@ export class AppComponent implements OnInit {
 
       // multi
       const multiEntry = {
-        name: country.name,
-        series: [
+        name: country.name, series: [
           {
             name: '1990',
             value: Math.floor(10000 + Math.random() * 50000)
@@ -797,7 +1010,7 @@ export class AppComponent implements OnInit {
             name: '' + bubbleYear,
             x: new Date(bubbleYear, 0, 1),
             y: Math.floor(30 + Math.random() * 70),
-            r: Math.floor(30 + Math.random() * 20)
+            r: Math.floor(30 + Math.random() * 70)
           }
         ]
       };

@@ -1,0 +1,44 @@
+<svg:g class="polar-charts-series">
+  <defs>
+    <svg:g
+      ngx-charts-svg-radial-gradient
+      *ngIf="hasGradient"
+      [color]="seriesColor"
+      [name]="gradientId"
+      [startOpacity]="0.25"
+      [endOpacity]="1"
+      [stops]="gradientStops"
+    />
+  </defs>
+  <svg:g
+    ngx-charts-line
+    class="polar-series-path"
+    [path]="path"
+    [stroke]="hasGradient ? gradientUrl : seriesColor"
+    [class.active]="active"
+    [class.inactive]="inactive"
+    [attr.fill-opacity]="rangeFillOpacity"
+    [fill]="hasGradient ? gradientUrl : seriesColor"
+    [animations]="animations"
+  />
+  <svg:g
+    ngx-charts-circle
+    *ngFor="let circle of circles"
+    class="circle"
+    [cx]="circle.cx"
+    [cy]="circle.cy"
+    [r]="circleRadius"
+    [fill]="circle.color"
+    [style.opacity]="inactive ? 0.2 : 1"
+    ngx-tooltip
+    [tooltipDisabled]="tooltipDisabled"
+    [tooltipPlacement]="placementTypes.Top"
+    [tooltipType]="styleTypes.tooltip"
+    [tooltipTitle]="tooltipTemplate ? undefined : tooltipText(circle)"
+    [tooltipTemplate]="tooltipTemplate"
+    [tooltipContext]="circle.data"
+    (select)="select.emit(circle.data)"
+    (activate)="activate.emit({ name: circle.data.series })"
+    (deactivate)="deactivate.emit({ name: circle.data.series })"
+  ></svg:g>
+</svg:g>

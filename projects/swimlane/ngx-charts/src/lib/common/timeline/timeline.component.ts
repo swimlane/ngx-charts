@@ -8,34 +8,18 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   SimpleChanges,
-  ViewEncapsulation,
-  OnInit
+  ViewEncapsulation
 } from '@angular/core';
 import { brushX } from 'd3-brush';
-import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
 import { select } from 'd3-selection';
 import { id } from '../../utils/id';
 import { ScaleType } from '../types/scale-type.enum';
 import { ViewDimensions } from '../types/view-dimension.interface';
+import { getXDomain, getXScale, getTimelineDims, getTimelineTransform } from './timeline.helper';
 
 @Component({
   selector: 'g[ngx-charts-timeline]',
-  template: `
-    <svg:g class="timeline" [attr.transform]="transform">
-      <svg:filter [attr.id]="filterId">
-        <svg:feColorMatrix
-          in="SourceGraphic"
-          type="matrix"
-          values="0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0"
-        />
-      </svg:filter>
-      <svg:g class="embedded-chart">
-        <ng-content></ng-content>
-      </svg:g>
-      <svg:rect x="0" [attr.width]="view[0]" y="0" [attr.height]="height" class="brush-background" />
-      <svg:g class="brush"></svg:g>
-    </svg:g>
-  `,
+  templateUrl: './timeline.component.html',
   styleUrls: ['./timeline.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -43,9 +27,9 @@ import { ViewDimensions } from '../types/view-dimension.interface';
 })
 export class Timeline implements OnChanges {
   @Input() view: [number, number];
-  @Input() declare results; // type this
-  @Input() scheme; // type this
-  @Input() customColors; // type this
+  @Input() results;
+  @Input() scheme;
+  @Input() customColors;
   @Input() legend: boolean;
   @Input() autoScale: boolean;
   @Input() scaleType: ScaleType;
@@ -78,65 +62,22 @@ export class Timeline implements OnChanges {
   }
 
   update(): void {
-    this.dims = this.getDims();
+    this.dims = getTimelineDims(this.view, this.height);
     this.height = this.dims.height;
-    const offsetY = this.view[1] - this.height;
 
-    this.xDomain = this.getXDomain();
-    this.xScale = this.getXScale();
+    this.xDomain = getXDomain(this.results, this.scaleType);
+    this.xScale = getXScale(this.xDomain, this.dims.width, this.scaleType);
 
     if (this.brush) {
       this.updateBrush();
     }
 
-    this.transform = `translate(0 , ${offsetY})`;
+    this.transform = getTimelineTransform(this.view, this.height);
 
     this.filterId = 'filter' + id().toString();
     this.filter = `url(#${this.filterId})`;
 
     this.cd.markForCheck();
-  }
-
-  getXDomain(): any[] {
-    let values = [];
-
-    for (const results of this.results) {
-      for (const d of results.series) {
-        if (!values.includes(d.name)) {
-          values.push(d.name);
-        }
-      }
-    }
-
-    let domain = [];
-    if (this.scaleType === ScaleType.Time) {
-      const min = Math.min(...values);
-      const max = Math.max(...values);
-      domain = [min, max];
-    } else if (this.scaleType === ScaleType.Linear) {
-      values = values.map(v => Number(v));
-      const min = Math.min(...values);
-      const max = Math.max(...values);
-      domain = [min, max];
-    } else {
-      domain = values;
-    }
-
-    return domain;
-  }
-
-  getXScale() {
-    let scale;
-
-    if (this.scaleType === ScaleType.Time) {
-      scale = scaleTime().range([0, this.dims.width]).domain(this.xDomain);
-    } else if (this.scaleType === ScaleType.Linear) {
-      scale = scaleLinear().range([0, this.dims.width]).domain(this.xDomain);
-    } else if (this.scaleType === ScaleType.Ordinal) {
-      scale = scalePoint().range([0, this.dims.width]).padding(0.1).domain(this.xDomain);
-    }
-
-    return scale;
   }
 
   addBrush(): void {
@@ -181,16 +122,5 @@ export class Timeline implements OnChanges {
       .attr('fill-opacity', undefined);
 
     this.cd.markForCheck();
-  }
-
-  getDims(): ViewDimensions {
-    const width = this.view[0];
-
-    const dims = {
-      width,
-      height: this.height
-    };
-
-    return dims;
   }
 }

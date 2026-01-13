@@ -13,16 +13,16 @@ import {
   Inject,
   PLATFORM_ID
 } from '@angular/core';
-import { trimLabel } from '../trim-label.helper';
 import { Orientation } from '../types/orientation.enum';
 import { TextAnchor } from '../types/text-anchor.enum';
 import {
-  getXAxisRotationAngle,
   getXAxisTicks,
   getXAxisTickChunks,
-  setXAxisReferenceLines,
   getXAxisHeight,
-  updateXAxisTicks
+  updateXAxisTicks,
+  tickTransform,
+  gridLineTransform,
+  tickTrim
 } from './x-axis.helper';
 
 @Component({
@@ -110,13 +110,13 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   }
 
   tickTransform(tick: number): string {
-    return 'translate(' + this.adjustedScale(tick) + ',' + this.verticalSpacing + ')';
+    return tickTransform(tick, this.adjustedScale, this.verticalSpacing);
   }
   gridLineTransform(): string {
-    return `translate(0, ${- this.verticalSpacing - 5})`;
+    return gridLineTransform(this.verticalSpacing);
   }
   tickTrim(label: string): string {
-    return this.trimTicks ? trimLabel(label, this.maxTickLength) : label;
+    return tickTrim(label, this.trimTicks, this.maxTickLength);
   }
   tickChunks(label: string): string[] {
     return getXAxisTickChunks(

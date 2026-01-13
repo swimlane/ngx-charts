@@ -1,0 +1,41 @@
+<svg:g>
+  <defs *ngIf="configValues.gradient">
+    <svg:g
+      ngx-charts-svg-linear-gradient
+      [orientation]="orientation.Vertical"
+      [name]="gradientId"
+      [stops]="gradientStops"
+    />
+  </defs>
+  <svg:rect
+    [attr.fill]="configValues.gradient ? gradientUrl : configValues.fill"
+    [attr.width]="configValues.width"
+    [attr.height]="configValues.height"
+    [attr.x]="configValues.x"
+    [attr.y]="configValues.y"
+    class="cell"
+    (click)="onClick()"
+  />
+  <svg:foreignObject
+    *ngIf="configValues.width >= 70 && configValues.height >= 35"
+    [attr.x]="configValues.x"
+    [attr.y]="configValues.y"
+    [attr.width]="configValues.width"
+    [attr.height]="configValues.height"
+    class="treemap-label"
+    [style.pointer-events]="'none'"
+  >
+    <xhtml:p [style.color]="getTextColor()" [style.height]="configValues.height + 'px'" [style.width]="configValues.width + 'px'">
+      <xhtml:span class="treemap-label" [innerHTML]="formattedLabel"> </xhtml:span>
+      <xhtml:br />
+      <xhtml:span
+        *ngIf="configValues.animations"
+        class="treemap-val"
+        ngx-charts-count-up
+        [countTo]="configValues.value"
+        [valueFormatting]="configValues.valueFormatting"
+      ></xhtml:span>
+      <xhtml:span *ngIf="!configValues.animations" class="treemap-val">{{ formattedValue }}</xhtml:span>
+    </xhtml:p>
+  </svg:foreignObject>
+</svg:g>

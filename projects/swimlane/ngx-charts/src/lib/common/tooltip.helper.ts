@@ -1,6 +1,16 @@
 import { ColorHelper } from '../common/color.helper';
 import { ScaleType } from './types/scale-type.enum';
-import { Tooltip } from './tooltip-area.component';
+
+export interface Tooltip {
+  color: string;
+  d0: number;
+  d1: number;
+  max: number;
+  min: number;
+  name: any;
+  series: any;
+  value: any;
+}
 
 export function getTooltipValues(xVal: any, results: any[], colors: ColorHelper, showPercentage: boolean): Tooltip[] {
   const tooltipResults = [];

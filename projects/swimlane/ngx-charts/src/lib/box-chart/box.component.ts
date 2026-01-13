@@ -11,49 +11,24 @@ import {
   ChangeDetectorRef
 } from '@angular/core';
 import { select, BaseType } from 'd3-selection';
-import { interpolate } from 'd3-interpolate';
 import { easeSinInOut } from 'd3-ease';
 
 import { id } from '../utils/id';
 import { IBoxModel } from '../models/chart-data.model';
-import { IPoint, IVector2D } from '../models/coordinates.model';
+import { IVector2D } from '../models/coordinates.model';
 import { BarOrientation } from '../common/types/bar-orientation.enum';
 import { Gradient } from '../common/types/gradient.interface';
-import { getBoxRadius, getBoxPath, getBoxStartingPath, getBoxStartingLineCoordinates } from './box.helper';
+import {
+  getBoxRadius,
+  getBoxPath,
+  getBoxStartingPath,
+  getBoxStartingLineCoordinates,
+  getEdges,
+  getGradient,
+  pathTween
+} from './box.helper';
 
 type LineCoordinates = [IVector2D, IVector2D, IVector2D, IVector2D];
-
-export function clonePoint(original: IPoint): IPoint {
-  if (!original) {
-    return original;
-  }
-  return {
-    x: original.x,
-    y: original.y
-  };
-}
-
-export function cloneVector2d(original: IVector2D): IVector2D {
-  if (!original) {
-    return original;
-  }
-  return {
-    v1: clonePoint(original.v1),
-    v2: clonePoint(original.v2)
-  };
-}
-
-export function cloneLineCoordinates(original: LineCoordinates): LineCoordinates {
-  if (!original) {
-    return original;
-  }
-  return [
-    cloneVector2d(original[0]),
-    cloneVector2d(original[1]),
-    cloneVector2d(original[2]),
-    cloneVector2d(original[3])
-  ];
-}
 
 @Component({
   selector: 'g[ngx-charts-box]',
@@ -175,7 +150,7 @@ export class BoxComponent implements OnChanges {
     this.gradientFill = `url(#${this.gradientId})`;
 
     if (this.gradient) {
-      this.gradientStops = this.getGradient();
+      this.gradientStops = getGradient(this.fill, this.roundEdges);
       this.hasGradient = true;
     } else {
       this.hasGradient = false;
@@ -194,14 +169,14 @@ export class BoxComponent implements OnChanges {
 
   loadAnimation(): void {
     this.boxPath = this.oldPath = this.animations
-      ? getBoxStartingPath(this.width, this.lineCoordinates, this.roundEdges, this.edges)
+      ? getBoxStartingPath(this.width, this.lineCoordinates, this.roundEdges, getEdges(this.roundEdges))
       : getBoxPath(
           this.x,
           this.y,
           this.width,
           this.height,
           getBoxRadius(this.roundEdges, this.height, this.width),
-          this.edges
+          getEdges(this.roundEdges)
         );
     this.oldLineCoordinates = this.animations
       ? getBoxStartingLineCoordinates(this.lineCoordinates)
@@ -217,7 +192,7 @@ export class BoxComponent implements OnChanges {
       this.width,
       this.height,
       getBoxRadius(this.roundEdges, this.height, this.width),
-      this.edges
+      getEdges(this.roundEdges)
     );
     if (this.animations) {
       nodeBar
@@ -225,7 +200,7 @@ export class BoxComponent implements OnChanges {
         .transition()
         .ease(easeSinInOut)
         .duration(500)
-        .attrTween('d', this.pathTween(path, 4));
+        .attrTween('d', pathTween(path, 4));
     } else {
       nodeBar.attr('d', path);
     }
@@ -268,70 +243,6 @@ export class BoxComponent implements OnChanges {
   lineTween(attr: string, d: any, index: number, node: BaseType[] | ArrayLike<BaseType>) {
     const nodeLineEl = node[index] as SVGLineElement;
     return nodeLineEl[attr].baseVal.value;
-  }
-
-  // TODO: Refactor into another .ts file if https://github.com/swimlane/ngx-charts/pull/1179 gets merged.
-  pathTween(d1: string, precision: number) {
-    return function () {
-      // eslint-disable-next-line @typescript-eslint/no-this-alias
-      const path0 = this;
-      const path1 = this.cloneNode();
-      path1.setAttribute('d', d1);
-      const n0 = path0?.getTotalLength();
-      const n1 = path1?.getTotalLength();
-      // Uniform sampling of distance based on specified precision.
-      const distances = [0];
-      let i = 0;
-      const dt = precision / Math.max(n0, n1);
-      while (i < 1) {
-        distances.push(i);
-        i += dt;
-      }
-      distances.push(1);
-
-      // Compute point-interpolators at each distance.
-      const points = distances.map((t: number) => {
-        const p0 = path0.getPointAtLength(t * n0);
-        const p1 = path1.getPointAtLength(t * n1);
-        return interpolate([p0.x, p0.y], [p1.x, p1.y]);
-      });
-
-      // 't': T is the fraction of time (between 0 and 1) since the transition began.
-      return (t: any) => {
-        return t < 1 ? 'M' + points.map((p: (t: number) => any[]) => p(t)).join('L') : d1;
-      };
-    };
-  }
-
-  getGradient(): Gradient[] {
-    return [
-      {
-        offset: 0,
-        color: this.fill,
-        opacity: this.getStartOpacity()
-      },
-      {
-        offset: 100,
-        color: this.fill,
-        opacity: 1
-      }
-    ];
-  }
-
-  getStartOpacity(): number {
-    if (this.roundEdges) {
-      return 0.2;
-    } else {
-      return 0.5;
-    }
-  }
-
-  get edges(): boolean[] {
-    let edges: [boolean, boolean, boolean, boolean] = [false, false, false, false];
-    if (this.roundEdges) {
-      edges = [true, true, true, true];
-    }
-    return edges;
   }
 
   @HostListener('mouseenter')

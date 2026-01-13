@@ -39,3 +39,10 @@ export function scaleCardTextSSR(
   const height = 18;
   return getCardScaleText(width, height, cardWidth, cardHeight, textFontSize);
 }
+
+export function paddedValue(value: string, medianSize: number): string {
+  if (medianSize && medianSize > value.length) {
+    value += '\u2007'.repeat(medianSize - value.length);
+  }
+  return value;
+}

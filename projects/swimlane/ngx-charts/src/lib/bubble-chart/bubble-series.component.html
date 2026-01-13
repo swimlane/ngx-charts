@@ -1,0 +1,53 @@
+<svg:g *ngFor="let circle of circles; trackBy: trackBy">
+  <svg:g [attr.transform]="circle.transform">
+    <svg:g
+      ngx-charts-circle
+      *ngIf="!isSSR"
+      [@animationState]="'active'"
+      class="circle"
+      [cx]="0"
+      [cy]="0"
+      [r]="circle.radius"
+      [fill]="circle.color"
+      [style.opacity]="circle.opacity"
+      [class.active]="circle.isActive"
+      [pointerEvents]="'all'"
+      [data]="circle.value"
+      [classNames]="circle.classNames"
+      (select)="onClick(circle.data)"
+      (activate)="activateCircle(circle)"
+      (deactivate)="deactivateCircle(circle)"
+      ngx-tooltip
+      [tooltipDisabled]="tooltipDisabled"
+      [tooltipPlacement]="placementTypes.Top"
+      [tooltipType]="styleTypes.tooltip"
+      [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(circle)"
+      [tooltipTemplate]="tooltipTemplate"
+      [tooltipContext]="circle.data"
+    />
+    <svg:g
+      ngx-charts-circle
+      *ngIf="isSSR"
+      class="circle"
+      [cx]="0"
+      [cy]="0"
+      [r]="circle.radius"
+      [fill]="circle.color"
+      [style.opacity]="circle.opacity"
+      [class.active]="circle.isActive"
+      [pointerEvents]="'all'"
+      [data]="circle.value"
+      [classNames]="circle.classNames"
+      (select)="onClick(circle.data)"
+      (activate)="activateCircle(circle)"
+      (deactivate)="deactivateCircle(circle)"
+      ngx-tooltip
+      [tooltipDisabled]="tooltipDisabled"
+      [tooltipPlacement]="placementTypes.Top"
+      [tooltipType]="styleTypes.tooltip"
+      [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(circle)"
+      [tooltipTemplate]="tooltipTemplate"
+      [tooltipContext]="circle.data"
+    />
+  </svg:g>
+</svg:g>

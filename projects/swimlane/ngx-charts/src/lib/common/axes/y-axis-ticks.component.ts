@@ -12,11 +12,16 @@ import {
   PLATFORM_ID,
   Inject
 } from '@angular/core';
-import { trimLabel } from '../trim-label.helper';
 import { isPlatformBrowser } from '@angular/common';
 import { Orientation } from '../types/orientation.enum';
 import { TextAnchor } from '../types/text-anchor.enum';
-import { getYAxisTicks, getYAxisApproximateWidth, getYAxisTickChunks, updateYAxisTicks } from './y-axis.helper';
+import {
+  getYAxisApproximateWidth,
+  getYAxisTickChunks,
+  updateYAxisTicks,
+  gridLineTransform,
+  tickTrim
+} from './y-axis.helper';
 
 @Component({
   selector: 'g[ngx-charts-y-axis-ticks]',
@@ -156,7 +161,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   }
 
   tickTrim(label: string): string {
-    return this.trimTicks ? trimLabel(label, this.maxTickLength) : label;
+    return tickTrim(label, this.trimTicks, this.maxTickLength);
   }
   tickChunks(label: string): string[] {
     return getYAxisTickChunks(
@@ -168,6 +173,6 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
     );
   }
   gridLineTransform(): string {
-    return `translate(5,0)`;
+    return gridLineTransform();
   }
 }

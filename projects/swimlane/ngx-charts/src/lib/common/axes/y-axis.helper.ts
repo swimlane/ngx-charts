@@ -2,6 +2,7 @@ import { getTickLines, reduceTicks } from './ticks.helper';
 import { Orientation } from '../types/orientation.enum';
 import { TextAnchor } from '../types/text-anchor.enum';
 import { roundedRect } from '../../common/shape.helper';
+import { trimLabel } from '../trim-label.helper';
 
 export function getYAxisTicks(scale: any, tickValues: any[], height: number): any[] {
   let ticks;
@@ -123,4 +124,12 @@ export function updateYAxisTicks(component: any): void {
       component.dy = '.32em';
       break;
   }
+}
+
+export function gridLineTransform(): string {
+  return `translate(5,0)`;
+}
+
+export function tickTrim(label: string, trimTicks: boolean, maxTickLength: number): string {
+  return trimTicks ? trimLabel(label, maxTickLength) : label;
 }

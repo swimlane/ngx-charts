@@ -66,3 +66,11 @@ export function animatePieArc(
       });
   }
 }
+
+export function getGradient(gradient: boolean, gradientFill: string, fill: string): string {
+  return gradient ? gradientFill : fill;
+}
+
+export function getPointerEvents(pointerEvents: boolean): string {
+  return pointerEvents ? 'auto' : 'none';
+}

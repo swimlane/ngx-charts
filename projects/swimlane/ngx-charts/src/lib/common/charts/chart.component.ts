@@ -9,43 +9,13 @@ import {
 } from '@angular/core';
 import { TooltipService } from '../tooltip/tooltip.service';
 import { LegendOptions, LegendType, LegendPosition } from '../types/legend.model';
-import { ScaleType } from '../types/scale-type.enum';
+import { calculateViewDimensions } from './chart.helper';
+import { areActiveEntriesEqual } from '../legend/legend.helper';
 
 @Component({
   providers: [TooltipService],
   selector: 'ngx-charts-chart',
-  template: `
-    <div class="ngx-charts-outer" [style.width.px]="view[0]" [style.height.px]="view[1]">
-      <svg class="ngx-charts" [attr.width]="chartWidth" [attr.height]="view[1]">
-        <ng-content></ng-content>
-      </svg>
-      <ngx-charts-scale-legend
-        *ngIf="showLegend && legendType === LegendType.ScaleLegend"
-        class="chart-legend"
-        [horizontal]="legendOptions && legendOptions.position === LegendPosition.Below"
-        [valueRange]="legendOptions.domain"
-        [colors]="legendOptions.colors"
-        [height]="view[1]"
-        [width]="legendWidth"
-      >
-      </ngx-charts-scale-legend>
-      <ngx-charts-legend
-        *ngIf="showLegend && legendType === LegendType.Legend"
-        class="chart-legend"
-        [horizontal]="legendOptions && legendOptions.position === LegendPosition.Below"
-        [data]="legendOptions.domain"
-        [title]="legendOptions.title"
-        [colors]="legendOptions.colors"
-        [height]="view[1]"
-        [width]="legendWidth"
-        [activeEntries]="activeEntries"
-        (labelClick)="legendLabelClick.emit($event)"
-        (labelActivate)="legendLabelActivate.emit($event)"
-        (labelDeactivate)="legendLabelDeactivate.emit($event)"
-      >
-      </ngx-charts-legend>
-    </div>
-  `,
+  templateUrl: './chart.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false
 })
@@ -75,7 +45,7 @@ export class ChartComponent implements OnChanges {
       if (propName === 'activeEntries') {
         const current = changes[propName].currentValue;
         const previous = changes[propName].previousValue;
-        if (!this.areActiveEntriesEqual(previous, current)) {
+        if (!areActiveEntriesEqual(previous, current)) {
           shouldUpdate = true;
         }
       } else {
@@ -88,38 +58,16 @@ export class ChartComponent implements OnChanges {
     }
   }
 
-  areActiveEntriesEqual(prev: any[], curr: any[]): boolean {
-    if (prev === curr) return true;
-    if (!prev || !curr) return false;
-    if (prev.length !== curr.length) return false;
-    if (prev.length === 0 && curr.length === 0) return true;
-    return prev.every((v, i) => v === curr[i]);
-  }
-
   update(): void {
-    let legendColumns = 0;
-    if (this.showLegend) {
-      this.legendType = this.getLegendType();
+    const dims = calculateViewDimensions(
+      this.view,
+      this.showLegend,
+      this.legendOptions,
+      this.legendType
+    );
 
-      if (!this.legendOptions || this.legendOptions.position === LegendPosition.Right) {
-        if (this.legendType === LegendType.ScaleLegend) {
-          legendColumns = 1;
-        } else {
-          legendColumns = 2;
-        }
-      }
-    }
-
-    const chartColumns = 12 - legendColumns;
-
-    this.chartWidth = Math.floor((this.view[0] * chartColumns) / 12.0);
-    this.legendWidth =
-      !this.legendOptions || this.legendOptions.position === LegendPosition.Right
-        ? Math.floor((this.view[0] * legendColumns) / 12.0)
-        : this.chartWidth;
-  }
-
-  getLegendType(): LegendType {
-    return this.legendOptions.scaleType === ScaleType.Linear ? LegendType.ScaleLegend : LegendType.Legend;
+    this.chartWidth = dims.chartWidth;
+    this.legendWidth = dims.legendWidth;
+    this.legendType = dims.legendType;
   }
 }

@@ -4,7 +4,7 @@ import { Series } from '../models/chart-data.model';
 import { BarOrientation } from '../common/types/bar-orientation.enum';
 import { ScaleType } from '../common/types/scale-type.enum';
 import { Gradient } from '../common/types/gradient.interface';
-import { updateLineSeries } from './line-series.helper';
+import { updateLineSeries, areActiveEntriesEqual } from './line-series.helper';
 
 @Component({
   selector: 'g[ngx-charts-line-series]',
@@ -90,7 +90,7 @@ export class LineSeriesComponent implements OnChanges {
       if (propName === 'activeEntries') {
         const current = changes[propName].currentValue;
         const previous = changes[propName].previousValue;
-        if (!this.areActiveEntriesEqual(previous, current)) {
+        if (!areActiveEntriesEqual(previous, current)) {
           shouldUpdate = true;
         }
       } else {
@@ -103,13 +103,6 @@ export class LineSeriesComponent implements OnChanges {
     }
   }
 
-  areActiveEntriesEqual(prev: any[], curr: any[]): boolean {
-    if (prev === curr) return true;
-    if (!prev || !curr) return false;
-    if (prev.length !== curr.length) return false;
-    if (prev.length === 0 && curr.length === 0) return true;
-    return prev.every((v, i) => v === curr[i]);
-  }
   update(): void {
     updateLineSeries(this);
   }

@@ -12,17 +12,17 @@ import {
 import { isPlatformServer } from '@angular/common';
 import { trigger, style, animate, transition } from '@angular/animations';
 
-import { scaleBand, scaleLinear } from 'd3-scale';
-
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { DataItem } from '../models/chart-data.model';
 
 import { BaseChartComponent } from '../common/base-chart.component';
 import { ScaleType } from '../common/types/scale-type.enum';
-import { LegendOptions, LegendPosition } from '../common/types/legend.model';
+import { LegendOptions } from '../common/types/legend.model';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
 import { BarOrientation } from '../common/types/bar-orientation.enum';
+import { BarHorizontal2DConfig } from './bar-horizontal-2d.config';
+import { getGroupScale, getInnerScale, getValueScale, getGroupDomain, getInnerDomain, getValueDomain } from './bar-chart.helper';
 
 @Component({
   selector: 'ngx-charts-bar-horizontal-2d',
@@ -44,38 +44,8 @@ import { BarOrientation } from '../common/types/bar-orientation.enum';
   standalone: false
 })
 export class BarHorizontal2DComponent extends BaseChartComponent {
-  @Input() legend: boolean = false;
-  @Input() legendTitle: string = 'Legend';
-  @Input() legendPosition: LegendPosition = LegendPosition.Right;
-  @Input() xAxis;
-  @Input() yAxis;
-  @Input() showXAxisLabel: boolean;
-  @Input() showYAxisLabel: boolean;
-  @Input() xAxisLabel: string;
-  @Input() yAxisLabel: string;
-  @Input() tooltipDisabled: boolean = false;
-  @Input() gradient: boolean;
-  @Input() showGridLines: boolean = true;
+  @Input() config: Partial<BarHorizontal2DConfig>;
   @Input() activeEntries: any[] = [];
-  @Input() declare schemeType: ScaleType;
-  @Input() trimXAxisTicks: boolean = true;
-  @Input() trimYAxisTicks: boolean = true;
-  @Input() rotateXAxisTicks: boolean = true;
-  @Input() maxXAxisTickLength: number = 16;
-  @Input() maxYAxisTickLength: number = 16;
-  @Input() xAxisTickFormatting: any;
-  @Input() yAxisTickFormatting: any;
-  @Input() xAxisTicks: any[];
-  @Input() yAxisTicks: any[];
-  @Input() groupPadding: number = 16;
-  @Input() barPadding: number = 8;
-  @Input() roundDomains: boolean = false;
-  @Input() roundEdges: boolean = true;
-  @Input() xScaleMax: number;
-  @Input() showDataLabel: boolean = false;
-  @Input() dataLabelFormatting: any;
-  @Input() noBarWhenZero: boolean = true;
-  @Input() wrapTicks = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -100,10 +70,46 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
 
   barOrientation = BarOrientation;
 
+  get configValues(): BarHorizontal2DConfig {
+    const defaultConfig: BarHorizontal2DConfig = {
+      legend: false,
+      legendTitle: 'Legend',
+      legendPosition: null,
+      xAxis: false,
+      yAxis: false,
+      showXAxisLabel: false,
+      showYAxisLabel: false,
+      xAxisLabel: '',
+      yAxisLabel: '',
+      tooltipDisabled: false,
+      gradient: false,
+      showGridLines: true,
+      activeEntries: [],
+      schemeType: ScaleType.Ordinal,
+      trimXAxisTicks: true,
+      trimYAxisTicks: true,
+      rotateXAxisTicks: true,
+      maxXAxisTickLength: 16,
+      maxYAxisTickLength: 16,
+      xAxisTickFormatting: null,
+      yAxisTickFormatting: null,
+      xAxisTicks: [],
+      yAxisTicks: [],
+      groupPadding: 16,
+      barPadding: 8,
+      roundDomains: false,
+      roundEdges: true,
+      xScaleMax: null,
+      showDataLabel: false,
+      dataLabelFormatting: null,
+      noBarWhenZero: true,
+      wrapTicks: false
+    };
+    return { ...defaultConfig, ...this.config };
+  }
+
   ngOnInit() {
-    if (isPlatformServer(this.platformId)) {
-      this.isSSR = true;
-    }
+    this.isSSR = isPlatformServer(this.platformId);
   }
 
   ngOnChanges(): void {
@@ -113,7 +119,9 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   update(): void {
     super.update();
 
-    if (!this.showDataLabel) {
+    const config = this.configValues;
+
+    if (!config.showDataLabel) {
       this.dataLabelMaxWidth = { negative: 0, positive: 0 };
     }
 
@@ -123,97 +131,31 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
       width: this.width,
       height: this.height,
       margins: this.margin,
-      showXAxis: this.xAxis,
-      showYAxis: this.yAxis,
+      showXAxis: config.xAxis,
+      showYAxis: config.yAxis,
       xAxisHeight: this.xAxisHeight,
       yAxisWidth: this.yAxisWidth,
-      showXLabel: this.showXAxisLabel,
-      showYLabel: this.showYAxisLabel,
-      showLegend: this.legend,
-      legendType: this.schemeType,
-      legendPosition: this.legendPosition
+      showXLabel: config.showXAxisLabel,
+      showYLabel: config.showYAxisLabel,
+      showLegend: config.legend,
+      legendType: config.schemeType,
+      legendPosition: config.legendPosition
     });
 
     this.formatDates();
 
-    this.groupDomain = this.getGroupDomain();
-    this.innerDomain = this.getInnerDomain();
-    this.valueDomain = this.getValueDomain();
+    this.groupDomain = getGroupDomain(this.results);
+    this.innerDomain = getInnerDomain(this.results);
+    this.valueDomain = getValueDomain(this.results, config.xScaleMax);
 
-    this.groupScale = this.getGroupScale();
-    this.innerScale = this.getInnerScale();
-    this.valueScale = this.getValueScale();
+    this.groupScale = getGroupScale(this.groupDomain, this.dims.height, config.groupPadding);
+    this.innerScale = getInnerScale(this.innerDomain, this.groupScale.bandwidth(), config.barPadding);
+    this.valueScale = getValueScale(this.valueDomain, this.dims.width, config.roundDomains);
 
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
-    this.transform = `translate(${this.dims.xOffset
-      }, ${this.margin[0]})`;
-  }
-
-  getGroupScale(): any {
-    const spacing = this.groupDomain.length / (this.dims.height / this.groupPadding + 1);
-
-    return scaleBand()
-      .rangeRound([0, this.dims.height])
-      .paddingInner(spacing)
-      .paddingOuter(spacing / 2)
-      .domain(this.groupDomain);
-  }
-
-  getInnerScale(): any {
-    const height = this.groupScale.bandwidth();
-    const spacing = this.innerDomain.length / (height / this.barPadding + 1);
-
-    return scaleBand().rangeRound([0, height]).paddingInner(spacing).domain(this.innerDomain);
-  }
-
-  getValueScale(): any {
-    const scale = scaleLinear().range([0, this.dims.width]).domain(this.valueDomain);
-
-    return this.roundDomains ? scale.nice() : scale;
-  }
-
-  getGroupDomain(): string[] {
-    const domain = [];
-
-    for (const group of this.results) {
-      if (!domain.includes(group.label)) {
-        domain.push(group.label);
-      }
-    }
-
-    return domain;
-  }
-
-  getInnerDomain(): string[] {
-    const domain = [];
-
-    for (const group of this.results) {
-      for (const d of group.series) {
-        if (!domain.includes(d.label)) {
-          domain.push(d.label);
-        }
-      }
-    }
-
-    return domain;
-  }
-
-  getValueDomain(): [number, number] {
-    const domain = [];
-
-    for (const group of this.results) {
-      for (const d of group.series) {
-        if (!domain.includes(d.value)) {
-          domain.push(d.value);
-        }
-      }
-    }
-
-    const min = Math.min(0, ...domain);
-    const max = this.xScaleMax ? Math.max(this.xScaleMax, ...domain) : Math.max(0, ...domain);
-    return [min, max];
+    this.transform = `translate(${this.dims.xOffset}, ${this.margin[0]})`;
   }
 
   groupTransform(group: DataItem): string {
@@ -224,42 +166,33 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
     if (group) {
       data.series = group.name;
     }
-
     this.select.emit(data);
   }
 
-  trackBy: TrackByFunction<DataItem> = (index: number, item: DataItem) => {
-    return item.name;
-  };
+  trackBy: TrackByFunction<DataItem> = (index: number, item: DataItem) => item.name;
 
   setColors(): void {
-    let domain;
-    if (this.schemeType === ScaleType.Ordinal) {
-      domain = this.innerDomain;
-    } else {
-      domain = this.valueDomain;
-    }
-
-    this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+    const domain = this.configValues.schemeType === ScaleType.Ordinal ? this.innerDomain : this.valueDomain;
+    this.colors = new ColorHelper(this.scheme, this.configValues.schemeType, domain, this.customColors);
   }
 
   getLegendOptions(): LegendOptions {
-    const opts = {
-      scaleType: this.schemeType as any,
+    const config = this.configValues;
+    const opts: LegendOptions = {
+      scaleType: config.schemeType as any,
       colors: undefined,
       domain: [],
       title: undefined,
-      position: this.legendPosition
+      position: config.legendPosition
     };
     if (opts.scaleType === ScaleType.Ordinal) {
       opts.domain = this.innerDomain;
       opts.colors = this.colors;
-      opts.title = this.legendTitle;
+      opts.title = config.legendTitle;
     } else {
       opts.domain = this.valueDomain;
       opts.colors = this.colors.scale;
     }
-
     return opts;
   }
 
@@ -286,19 +219,14 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
 
   onActivate(event, group: DataItem, fromLegend: boolean = false): void {
     const item = Object.assign({}, event);
-    if (group) {
-      item.series = group.name;
-    }
+    if (group) item.series = group.name;
 
     const items = this.results
       .map(g => g.series)
       .flat()
       .filter(i => {
-        if (fromLegend) {
-          return i.label === item.name;
-        } else {
-          return i.name === item.name && i.series === item.series;
-        }
+        if (fromLegend) return i.label === item.name;
+        return i.name === item.name && i.series === item.series;
       });
 
     this.activeEntries = [...items];
@@ -307,16 +235,11 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
 
   onDeactivate(event, group: DataItem, fromLegend: boolean = false): void {
     const item = Object.assign({}, event);
-    if (group) {
-      item.series = group.name;
-    }
+    if (group) item.series = group.name;
 
     this.activeEntries = this.activeEntries.filter(i => {
-      if (fromLegend) {
-        return i.label !== item.name;
-      } else {
-        return !(i.name === item.name && i.series === item.series);
-      }
+      if (fromLegend) return i.label !== item.name;
+      return !(i.name === item.name && i.series === item.series);
     });
 
     this.deactivate.emit({ value: item, entries: this.activeEntries });

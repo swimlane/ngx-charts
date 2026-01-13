@@ -12,46 +12,18 @@ import { select } from 'd3-selection';
 import { id } from '../utils/id';
 import { DataItem } from '../models/chart-data.model';
 import { BarOrientation } from '../common/types/bar-orientation.enum';
-import { calculatePieArcPath, animatePieArc } from './pie-arc.helper';
+import { calculatePieArcPath, animatePieArc, getGradient, getPointerEvents } from './pie-arc.helper';
+import { PieArcConfig } from './pie-arc.config';
 
 @Component({
   selector: 'g[ngx-charts-pie-arc]',
-  template: `
-    <svg:g class="arc-group">
-      <svg:defs *ngIf="gradient">
-        <svg:g ngx-charts-svg-radial-gradient [color]="fill" [name]="radialGradientId" [startOpacity]="startOpacity" />
-      </svg:defs>
-      <svg:path
-        [attr.d]="path"
-        class="arc"
-        [class.active]="isActive"
-        [attr.fill]="getGradient()"
-        (click)="onClick()"
-        (dblclick)="onDblClick($event)"
-        (mouseenter)="activate.emit(data)"
-        (mouseleave)="deactivate.emit(data)"
-        [style.pointer-events]="getPointerEvents()"
-      />
-    </svg:g>
-  `,
+  templateUrl: './pie-arc.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false
 })
 export class PieArcComponent implements OnChanges {
-  @Input() fill: string;
-  @Input() startAngle: number = 0;
-  @Input() endAngle: number = Math.PI * 2;
-  @Input() innerRadius: number;
-  @Input() outerRadius: number;
-  @Input() cornerRadius: number = 0;
-  @Input() value: number;
-  @Input() max: number;
+  @Input() config: Partial<PieArcConfig>;
   @Input() data: DataItem;
-  @Input() explodeSlices: boolean = false;
-  @Input() gradient: boolean = false;
-  @Input() animate: boolean = true;
-  @Input() pointerEvents: boolean = true;
-  @Input() isActive: boolean = false;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
@@ -69,72 +41,76 @@ export class PieArcComponent implements OnChanges {
 
   private _timeout;
 
+  get configValues(): PieArcConfig {
+    const defaultConfig: PieArcConfig = {
+      fill: '',
+      startAngle: 0,
+      endAngle: Math.PI * 2,
+      innerRadius: 0,
+      outerRadius: 0,
+      cornerRadius: 0,
+      value: 0,
+      max: 0,
+      explodeSlices: false,
+      gradient: false,
+      animate: true,
+      pointerEvents: true,
+      isActive: false
+    };
+    return { ...defaultConfig, ...this.config };
+  }
+
   constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    const updateFields = [
-      'startAngle',
-      'endAngle',
-      'innerRadius',
-      'outerRadius',
-      'cornerRadius',
-      'value',
-      'max',
-      'explodeSlices',
-      'gradient',
-      'animate',
-      'fill'
-    ];
-    const shouldUpdate = updateFields.some(f => changes[f]);
-
-    if (shouldUpdate) {
-      this.update();
-    }
+    this.update();
   }
 
   getGradient(): string {
-    return this.gradient ? this.gradientFill : this.fill;
+    const config = this.configValues;
+    return getGradient(config.gradient, this.gradientFill, config.fill);
   }
 
   getPointerEvents(): string {
-    return this.pointerEvents ? 'auto' : 'none';
+    return getPointerEvents(this.configValues.pointerEvents);
   }
 
   update(): void {
+    const config = this.configValues;
     this.startOpacity = 0.5;
     this.radialGradientId = 'linearGrad' + id().toString();
     this.gradientFill = `url(#${this.radialGradientId})`;
 
-    if (this.animate) {
+    if (config.animate) {
       animatePieArc(
         this.element,
-        this.startAngle,
-        this.endAngle,
-        this.innerRadius,
-        this.outerRadius,
-        this.max,
-        this.value,
-        this.cornerRadius,
-        this.explodeSlices,
+        config.startAngle,
+        config.endAngle,
+        config.innerRadius,
+        config.outerRadius,
+        config.max,
+        config.value,
+        config.cornerRadius,
+        config.explodeSlices,
         this.initialized,
         select(this.element)
           .selectAll('.arc')
-          .data([{ startAngle: this.startAngle, endAngle: this.endAngle }])
+          .data([{ startAngle: config.startAngle, endAngle: config.endAngle }])
       );
       this.initialized = true;
     } else {
       this.path = calculatePieArcPath(
-        this.innerRadius,
-        this.outerRadius,
-        this.max,
-        this.value,
-        this.cornerRadius,
-        this.explodeSlices
+        config.innerRadius,
+        config.outerRadius,
+        config.max,
+        config.value,
+        config.cornerRadius,
+        config.explodeSlices
       )
-        .startAngle(this.startAngle)
-        .endAngle(this.endAngle)();
+        .startAngle(config.startAngle)
+        .endAngle(config.endAngle)();
     }
   }
 

@@ -9,40 +9,12 @@ import {
   ChangeDetectorRef,
   ViewEncapsulation
 } from '@angular/core';
-import { formatLabel } from '../label.helper';
 import { ColorHelper } from '../color.helper';
-
-export interface LegendEntry {
-  color: string;
-  formattedLabel: string;
-  label: string;
-}
+import { LegendEntry, getLegendEntries, areActiveEntriesEqual } from './legend.helper';
 
 @Component({
   selector: 'ngx-charts-legend',
-  template: `
-    <div [style.width.px]="width">
-      <header class="legend-title" *ngIf="title?.length > 0">
-        <span class="legend-title-text">{{ title }}</span>
-      </header>
-      <div class="legend-wrap">
-        <ul class="legend-labels" [class.horizontal-legend]="horizontal" [style.max-height.px]="height - 45">
-          <li *ngFor="let entry of legendEntries; trackBy: trackBy" class="legend-label">
-            <ngx-charts-legend-entry
-              [label]="entry.label"
-              [formattedLabel]="entry.formattedLabel"
-              [color]="entry.color"
-              [isActive]="isActive(entry)"
-              (select)="labelClick.emit($event)"
-              (activate)="activate($event)"
-              (deactivate)="deactivate($event)"
-            >
-            </ngx-charts-legend-entry>
-          </li>
-        </ul>
-      </div>
-    </div>
-  `,
+  templateUrl: './legend.component.html',
   styleUrls: ['./legend.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -72,7 +44,7 @@ export class LegendComponent implements OnChanges {
       if (propName === 'activeEntries') {
         const current = changes[propName].currentValue;
         const previous = changes[propName].previousValue;
-        if (!this.areActiveEntriesEqual(previous, current)) {
+        if (!areActiveEntriesEqual(previous, current)) {
           shouldUpdate = true;
         }
       } else {
@@ -85,38 +57,9 @@ export class LegendComponent implements OnChanges {
     }
   }
 
-  areActiveEntriesEqual(prev: any[], curr: any[]): boolean {
-    if (prev === curr) return true;
-    if (!prev || !curr) return false;
-    if (prev.length !== curr.length) return false;
-    if (prev.length === 0 && curr.length === 0) return true;
-    return prev.every((v, i) => v === curr[i]);
-  }
-
   update(): void {
     this.cd.markForCheck();
-    this.legendEntries = this.getLegendEntries();
-  }
-
-  getLegendEntries(): LegendEntry[] {
-    const items = [];
-    for (const label of this.data) {
-      const formattedLabel = formatLabel(label);
-
-      const idx = items.findIndex(i => {
-        return i.label === formattedLabel;
-      });
-
-      if (idx === -1) {
-        items.push({
-          label,
-          formattedLabel,
-          color: this.colors.getColor(label)
-        });
-      }
-    }
-
-    return items;
+    this.legendEntries = getLegendEntries(this.data, this.colors);
   }
 
   isActive(entry: LegendEntry): boolean {

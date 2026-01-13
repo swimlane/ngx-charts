@@ -27,8 +27,6 @@ import { ScaleType } from '../common/types/scale-type.enum';
           [colors]="colors"
           [data]="data"
           [dims]="dims"
-          [tooltipDisabled]="tooltipDisabled"
-          [tooltipTemplate]="tooltipTemplate"
           [valueFormatting]="valueFormatting"
           [labelFormatting]="labelFormatting"
           [gradient]="gradient"

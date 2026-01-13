@@ -8,42 +8,19 @@ import {
   PLATFORM_ID,
   Inject
 } from '@angular/core';
-import { arc, DefaultArcObject } from 'd3-shape';
 
 import { trimLabel } from '../common/trim-label.helper';
 import { TextAnchor } from '../common/types/text-anchor.enum';
-import { DataItem } from '../models/chart-data.model';
-
-export interface PieData extends DefaultArcObject {
-  data: DataItem;
-  index: number;
-  pos: [number, number];
-  value: number;
-}
+import {
+  PieData,
+  getPieLabelLine,
+  getPieLabelTransforms,
+  getPieLabelTextAnchor
+} from './pie-label.helper';
 
 @Component({
   selector: 'g[ngx-charts-pie-label]',
-  template: `
-    <title>{{ label }}</title>
-    <svg:g [attr.transform]="attrTransform" [style.transform]="styleTransform" [style.transition]="textTransition">
-      <svg:text
-        class="pie-label"
-        [class.animation]="animations"
-        dy=".35em"
-        [style.textAnchor]="textAnchor()"
-        [style.shapeRendering]="'crispEdges'"
-      >
-        {{ labelTrim ? trimLabel(label, labelTrimSize) : label }}
-      </svg:text>
-    </svg:g>
-    <svg:path
-      [attr.d]="line"
-      [attr.stroke]="color"
-      fill="none"
-      class="pie-label-line line"
-      [class.animation]="animations"
-    ></svg:path>
-  `,
+  templateUrl: './pie-label.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false
 })
@@ -94,36 +71,25 @@ export class PieLabelComponent implements OnChanges {
   }
 
   setTransforms() {
-    if (isPlatformServer(this.platformId)) {
-      this.styleTransform = `translate3d(${this.textX}px,${this.textY}px, 0)`;
-      this.attrTransform = `translate(${this.textX},${this.textY})`;
-      this.textTransition = !this.animations ? null : 'transform 0.75s';
-    } else {
-      const isIE = /(edge|msie|trident)/i.test(navigator.userAgent);
-      this.styleTransform = isIE ? null : `translate3d(${this.textX}px,${this.textY}px, 0)`;
-      this.attrTransform = !isIE ? null : `translate(${this.textX},${this.textY})`;
-      this.textTransition = isIE || !this.animations ? null : 'transform 0.75s';
-    }
+    const transform = getPieLabelTransforms(
+      isPlatformServer(this.platformId),
+      this.animations,
+      this.textX,
+      this.textY
+    );
+    this.styleTransform = transform.styleTransform;
+    this.attrTransform = transform.attrTransform;
+    this.textTransition = transform.textTransition;
   }
 
   update(): void {
-    let startRadius = this.radius;
-    if (this.explodeSlices) {
-      startRadius = (this.radius * this.value) / this.max;
-    }
-
-    const innerArc = arc().innerRadius(startRadius).outerRadius(startRadius);
-
-    // Calculate innerPos then scale outer position to match label position
-    const innerPos = innerArc.centroid(this.data);
-
-    let scale = this.data.pos[1] / innerPos[1];
-    if (this.data.pos[1] === 0 || innerPos[1] === 0) {
-      scale = 1;
-    }
-    const outerPos = [scale * innerPos[0], scale * innerPos[1]];
-
-    this.line = `M${innerPos}L${outerPos}L${this.data.pos}`;
+    this.line = getPieLabelLine(
+      this.data,
+      this.radius,
+      this.explodeSlices,
+      this.max,
+      this.value
+    );
   }
 
   get textX(): number {
@@ -135,10 +101,6 @@ export class PieLabelComponent implements OnChanges {
   }
 
   textAnchor(): TextAnchor {
-    return this.midAngle(this.data) < Math.PI ? TextAnchor.Start : TextAnchor.End;
-  }
-
-  midAngle(d): number {
-    return d.startAngle + (d.endAngle - d.startAngle) / 2;
+    return getPieLabelTextAnchor(this.data);
   }
 }

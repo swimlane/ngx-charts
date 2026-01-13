@@ -10,19 +10,20 @@ import {
   TemplateRef,
   TrackByFunction
 } from '@angular/core';
-import { scaleLinear, scalePoint, scaleTime } from 'd3-scale';
 import { curveLinear } from 'd3-shape';
 
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
-import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
 import { Series } from '../models/chart-data.model';
-import { SeriesType } from '../common/circle-series.component';
-import { LegendOptions, LegendPosition } from '../common/types/legend.model';
+import { SeriesType } from '../common/circle-series.helper';
+import { LegendOptions } from '../common/types/legend.model';
 import { ScaleType } from '../common/types/scale-type.enum';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
+import { AreaChartNormalizedConfig } from './area-chart-normalized.config';
+import { getXDomain, getXScale, getYScale, updateNormalizedSeries } from './area-chart.helper';
+import { areActiveEntriesEqual } from '../common/legend/legend.helper';
 
 @Component({
   selector: 'ngx-charts-area-chart-normalized',
@@ -33,33 +34,8 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
   standalone: false
 })
 export class AreaChartNormalizedComponent extends BaseChartComponent {
-  @Input() legend = false;
-  @Input() legendTitle: string = 'Legend';
-  @Input() legendPosition: LegendPosition = LegendPosition.Right;
-  @Input() xAxis: boolean;
-  @Input() yAxis: boolean;
-  @Input() showXAxisLabel: boolean = false;
-  @Input() showYAxisLabel: boolean = false;
-  @Input() xAxisLabel: string;
-  @Input() yAxisLabel: string;
-  @Input() timeline;
-  @Input() gradient;
-  @Input() showGridLines: boolean = true;
-  @Input() curve: any = curveLinear;
+  @Input() config: Partial<AreaChartNormalizedConfig>;
   @Input() activeEntries: any[] = [];
-  @Input() declare schemeType: ScaleType;
-  @Input() trimXAxisTicks: boolean = true;
-  @Input() trimYAxisTicks: boolean = true;
-  @Input() rotateXAxisTicks: boolean = true;
-  @Input() maxXAxisTickLength: number = 16;
-  @Input() maxYAxisTickLength: number = 16;
-  @Input() xAxisTickFormatting: any;
-  @Input() yAxisTickFormatting: any;
-  @Input() xAxisTicks: any[];
-  @Input() yAxisTicks: any[];
-  @Input() roundDomains: boolean = false;
-  @Input() tooltipDisabled: boolean = false;
-  @Input() wrapTicks = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -70,7 +46,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
   dims: ViewDimensions;
   scaleType: ScaleType;
   xDomain: any[];
-  xSet: any[]; // the set of all values on the X Axis
+  xSet: any[];
   yDomain: [number, number] = [0, 100];
   seriesDomain: any;
   xScale: any;
@@ -80,8 +56,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
   clipPath: string;
   colors: ColorHelper;
   margin: number[] = [10, 20, 10, 20];
-  tooltipAreas: any[];
-  hoveredVertical: any; // the value of the x axis that is hovered over
+  hoveredVertical: any;
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
   filteredDomain: any;
@@ -97,176 +72,99 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
   timelineTransform: any;
   timelinePadding: number = 10;
 
+  get configValues(): AreaChartNormalizedConfig {
+    const defaultConfig: AreaChartNormalizedConfig = {
+      legend: false,
+      legendTitle: 'Legend',
+      legendPosition: null,
+      xAxis: false,
+      yAxis: false,
+      showXAxisLabel: false,
+      showYAxisLabel: false,
+      xAxisLabel: '',
+      yAxisLabel: '',
+      timeline: false,
+      gradient: false,
+      showGridLines: true,
+      curve: curveLinear,
+      activeEntries: [],
+      schemeType: ScaleType.Ordinal,
+      trimXAxisTicks: true,
+      trimYAxisTicks: true,
+      rotateXAxisTicks: true,
+      maxXAxisTickLength: 16,
+      maxYAxisTickLength: 16,
+      xAxisTickFormatting: null,
+      yAxisTickFormatting: null,
+      xAxisTicks: [],
+      yAxisTicks: [],
+      roundDomains: false,
+      tooltipDisabled: false,
+      wrapTicks: false
+    };
+    return { ...defaultConfig, ...this.config };
+  }
+
   update(): void {
     super.update();
+
+    const config = this.configValues;
 
     this.dims = calculateViewDimensions({
       width: this.width,
       height: this.height,
       margins: this.margin,
-      showXAxis: this.xAxis,
-      showYAxis: this.yAxis,
+      showXAxis: config.xAxis,
+      showYAxis: config.yAxis,
       xAxisHeight: this.xAxisHeight,
       yAxisWidth: this.yAxisWidth,
-      showXLabel: this.showXAxisLabel,
-      showYLabel: this.showYAxisLabel,
-      showLegend: this.legend,
-      legendType: this.schemeType,
-      legendPosition: this.legendPosition
+      showXLabel: config.showXAxisLabel,
+      showYLabel: config.showYAxisLabel,
+      showLegend: config.legend,
+      legendType: config.schemeType,
+      legendPosition: config.legendPosition
     });
 
-    if (this.timeline) {
+    if (config.timeline) {
       this.dims.height -= this.timelineHeight + this.margin[2] + this.timelinePadding;
     }
 
-    this.xDomain = this.getXDomain();
-    if (this.filteredDomain) {
-      this.xDomain = this.filteredDomain;
-    }
+    const xDomainObj = getXDomain(this.results);
+    this.xDomain = this.filteredDomain || xDomainObj.domain;
+    this.xSet = xDomainObj.xSet;
+    this.scaleType = xDomainObj.scaleType;
 
-    this.seriesDomain = this.getSeriesDomain();
+    this.seriesDomain = this.results.map(d => d.name);
 
-    this.xScale = this.getXScale(this.xDomain, this.dims.width);
-    this.yScale = this.getYScale(this.yDomain, this.dims.height);
+    this.xScale = getXScale(this.xDomain, this.dims.width, this.scaleType, config.roundDomains);
+    this.yScale = getYScale(this.yDomain, this.dims.height, config.roundDomains);
 
-    for (let i = 0; i < this.xSet.length; i++) {
-      const val = this.xSet[i];
-      let d0 = 0;
-
-      let total = 0;
-      for (const group of this.results) {
-        const d = group.series.find(item => {
-          let a = item.name;
-          let b = val;
-          if (this.scaleType === ScaleType.Time) {
-            a = a.valueOf();
-            b = b.valueOf();
-          }
-          return a === b;
-        });
-        if (d) {
-          total += d.value;
-        }
-      }
-
-      for (const group of this.results) {
-        let d = group.series.find(item => {
-          let a = item.name;
-          let b = val;
-          if (this.scaleType === ScaleType.Time) {
-            a = a.valueOf();
-            b = b.valueOf();
-          }
-          return a === b;
-        });
-
-        if (d) {
-          d.d0 = d0;
-          d.d1 = d0 + d.value;
-          d0 += d.value;
-        } else {
-          d = {
-            name: val,
-            value: 0,
-            d0,
-            d1: d0
-          };
-          group.series.push(d);
-        }
-
-        if (total > 0) {
-          d.d0 = (d.d0 * 100) / total;
-          d.d1 = (d.d1 * 100) / total;
-        } else {
-          d.d0 = 0;
-          d.d1 = 0;
-        }
-      }
-    }
+    updateNormalizedSeries(this.results, this.xSet, this.scaleType);
 
     this.updateTimeline();
-
     this.setColors();
     this.legendOptions = this.getLegendOptions();
 
-    this.transform = `translate(${this.dims.xOffset
-      }, ${this.margin[0]})`;
-
+    this.transform = `translate(${this.dims.xOffset}, ${this.margin[0]})`;
     this.clipPathId = 'clip' + id().toString();
     this.clipPath = `url(#${this.clipPathId})`;
   }
 
   updateTimeline(): void {
-    if (this.timeline) {
+    const config = this.configValues;
+    if (config.timeline) {
       this.timelineWidth = this.dims.width;
-      this.timelineXDomain = this.getXDomain();
-      this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
-      this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
-      this.timelineTransform = `translate(${this.dims.xOffset}, ${- this.margin[2]})`;
+      this.timelineXDomain = getXDomain(this.results).domain;
+      this.timelineXScale = getXScale(this.timelineXDomain, this.timelineWidth, this.scaleType, config.roundDomains);
+      this.timelineYScale = getYScale(this.yDomain, this.timelineHeight, config.roundDomains);
+      this.timelineTransform = `translate(${this.dims.xOffset}, ${-this.margin[2]})`;
     }
-  }
-
-  getXDomain(): any[] {
-    let values = getUniqueXDomainValues(this.results);
-
-    this.scaleType = getScaleType(values);
-    let domain = [];
-
-    if (this.scaleType === ScaleType.Time) {
-      const min = Math.min(...values);
-      const max = Math.max(...values);
-      domain = [new Date(min), new Date(max)];
-      this.xSet = [...values].sort((a, b) => {
-        const aDate = a.getTime();
-        const bDate = b.getTime();
-        if (aDate > bDate) return 1;
-        if (bDate > aDate) return -1;
-        return 0;
-      });
-    } else if (this.scaleType === ScaleType.Linear) {
-      values = values.map(v => Number(v));
-      const min = Math.min(...values);
-      const max = Math.max(...values);
-      domain = [min, max];
-      // Use compare function to sort numbers numerically
-      this.xSet = [...values].sort((a, b) => a - b);
-    } else {
-      domain = values;
-      this.xSet = values;
-    }
-
-    return domain;
-  }
-
-  getSeriesDomain(): string[] {
-    return this.results.map(d => d.name);
-  }
-
-  getXScale(domain, width: number): any {
-    let scale;
-
-    if (this.scaleType === ScaleType.Time) {
-      scale = scaleTime();
-    } else if (this.scaleType === ScaleType.Linear) {
-      scale = scaleLinear();
-    } else if (this.scaleType === ScaleType.Ordinal) {
-      scale = scalePoint().padding(0.1);
-    }
-
-    scale.range([0, width]).domain(domain);
-
-    return this.roundDomains ? scale.nice() : scale;
-  }
-
-  getYScale(domain, height: number): any {
-    const scale = scaleLinear().range([height, 0]).domain(domain);
-    return this.roundDomains ? scale.nice() : scale;
   }
 
   updateDomain(domain): void {
     this.filteredDomain = domain;
     this.xDomain = this.filteredDomain;
-    this.xScale = this.getXScale(this.xDomain, this.dims.width);
+    this.xScale = getXScale(this.xDomain, this.dims.width, this.scaleType, this.configValues.roundDomains);
   }
 
   updateHoveredVertical(item): void {
@@ -284,37 +182,29 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
     if (series) {
       data.series = series.name;
     }
-
     this.select.emit(data);
   }
 
-  trackBy: TrackByFunction<Series> = (index: number, item: Series) => {
-    return item.name;
-  };
+  trackBy: TrackByFunction<Series> = (index: number, item: Series) => item.name;
 
   setColors(): void {
-    let domain;
-    if (this.schemeType === ScaleType.Ordinal) {
-      domain = this.seriesDomain;
-    } else {
-      domain = this.yDomain;
-    }
-
-    this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+    const domain = this.configValues.schemeType === ScaleType.Ordinal ? this.seriesDomain : this.yDomain;
+    this.colors = new ColorHelper(this.scheme, this.configValues.schemeType, domain, this.customColors);
   }
 
   getLegendOptions(): LegendOptions {
+    const config = this.configValues;
     const opts: LegendOptions = {
-      scaleType: this.schemeType as any,
+      scaleType: config.schemeType as any,
       colors: undefined,
       domain: [],
       title: undefined,
-      position: this.legendPosition
+      position: config.legendPosition
     };
     if (opts.scaleType === ScaleType.Ordinal) {
       opts.domain = this.seriesDomain;
       opts.colors = this.colors;
-      opts.title = this.legendTitle;
+      opts.title = config.legendTitle;
     } else {
       opts.domain = this.yDomain;
       opts.colors = this.colors.scale;
@@ -333,25 +223,16 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
   }
 
   onActivate(item): void {
-    const idx = this.activeEntries.findIndex(d => {
-      return d.name === item.name && d.value === item.value;
-    });
-    if (idx > -1) {
-      return;
-    }
-
+    const idx = this.activeEntries.findIndex(d => d.name === item.name && d.value === item.value);
+    if (idx > -1) return;
     this.activeEntries = [item, ...this.activeEntries];
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
   onDeactivate(item): void {
-    const idx = this.activeEntries.findIndex(d => {
-      return d.name === item.name && d.value === item.value;
-    });
-
+    const idx = this.activeEntries.findIndex(d => d.name === item.name && d.value === item.value);
     this.activeEntries.splice(idx, 1);
     this.activeEntries = [...this.activeEntries];
-
     this.deactivate.emit({ value: item, entries: this.activeEntries });
   }
 
