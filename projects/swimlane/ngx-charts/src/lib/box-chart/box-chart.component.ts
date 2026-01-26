@@ -11,7 +11,7 @@ import {
 
 import { BaseChartComponent } from '../common/base-chart.component';
 import { ColorHelper } from '../common/color.helper';
-import { BoxChartMultiSeries, BoxChartSeries, IBoxModel, StringOrNumberOrDate } from '../models/chart-data.model';
+import { BoxChartMultiSeries, IBoxModel, StringOrNumberOrDate } from '../models/chart-data.model';
 import { scaleLinear, ScaleLinear, scaleBand, ScaleBand } from 'd3-scale';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
@@ -53,32 +53,35 @@ import { ScaleType } from '../common/types/scale-type.enum';
         />
       </svg:g>
       <svg:g [attr.transform]="transform">
-        <svg:g *ngFor="let result of results; trackBy: trackBy">
-          <svg:g
-            ngx-charts-box-series
-            [xScale]="xScale"
-            [yScale]="yScale"
-            [colors]="colors"
-            [roundEdges]="roundEdges"
-            [strokeColor]="strokeColor"
-            [strokeWidth]="strokeWidth"
-            [tooltipDisabled]="tooltipDisabled"
-            [tooltipTemplate]="tooltipTemplate"
-            [series]="result"
-            [dims]="dims"
-            [animations]="animations"
-            [gradient]="gradient"
-            (activate)="onActivate($event)"
-            (deactivate)="onDeactivate($event)"
-            (select)="onClick($event)"
-          />
-        </svg:g>
+        @for (result of results; track result.name) {
+          <svg:g>
+            <svg:g
+              ngx-charts-box-series
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [colors]="colors"
+              [roundEdges]="roundEdges"
+              [strokeColor]="strokeColor"
+              [strokeWidth]="strokeWidth"
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="tooltipTemplate"
+              [series]="result"
+              [dims]="dims"
+              [animations]="animations"
+              [gradient]="gradient"
+              (activate)="onActivate($event)"
+              (deactivate)="onDeactivate($event)"
+              (select)="onClick($event)"
+            />
+          </svg:g>
+        }
       </svg:g>
     </ngx-charts-chart>
   `,
   styleUrls: ['../common/base-chart.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class BoxChartComponent extends BaseChartComponent {
   /** Show or hide the legend. */
@@ -133,8 +136,8 @@ export class BoxChartComponent extends BaseChartComponent {
   /** Chart Y axis dimension. */
   yAxisWidth: number = 0;
 
-  trackBy(index: number, item: BoxChartSeries): StringOrNumberOrDate {
-    return item.name;
+  ngOnChanges(): void {
+    this.update();
   }
 
   update(): void {

@@ -18,25 +18,28 @@ import {
     <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations">
       <svg:g [attr.transform]="transform" class="line-chart chart">
         <svg:g>
-          <svg:g *ngFor="let series of results; trackBy: trackBy">
-            <svg:g
-              ngx-charts-line-series
-              [xScale]="xScale"
-              [yScale]="yScale"
-              [colors]="colors"
-              [data]="series"
-              [scaleType]="scaleType"
-              [curve]="curve"
-              [animations]="animations"
-            />
-          </svg:g>
+          @for (series of results; track series.name) {
+            <svg:g>
+              <svg:g
+                ngx-charts-line-series
+                [xScale]="xScale"
+                [yScale]="yScale"
+                [colors]="colors"
+                [data]="series"
+                [scaleType]="scaleType"
+                [curve]="curve"
+                [animations]="animations"
+              />
+            </svg:g>
+          }
         </svg:g>
       </svg:g>
     </ngx-charts-chart>
   `,
   styleUrls: ['../../../../projects/swimlane/ngx-charts/src/lib/common/base-chart.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class SparklineComponent extends BaseChartComponent {
   @Input() autoScale = false;
@@ -184,10 +187,6 @@ export class SparklineComponent extends BaseChartComponent {
     }
 
     return false;
-  }
-
-  trackBy(index, item): string {
-    return `${item.name}`;
   }
 
   setColors(): void {

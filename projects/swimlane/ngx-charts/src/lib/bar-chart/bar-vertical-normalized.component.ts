@@ -6,8 +6,7 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy,
   ContentChild,
-  TemplateRef,
-  TrackByFunction
+  TemplateRef
 } from '@angular/core';
 import { isPlatformServer } from '@angular/common';
 import { trigger, style, animate, transition } from '@angular/animations';
@@ -36,86 +35,91 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
       (legendLabelClick)="onClick($event)"
     >
       <svg:g [attr.transform]="transform" class="bar-chart chart">
-        <svg:g
-          ngx-charts-x-axis
-          *ngIf="xAxis"
-          [xScale]="xScale"
-          [dims]="dims"
-          [showLabel]="showXAxisLabel"
-          [labelText]="xAxisLabel"
-          [trimTicks]="trimXAxisTicks"
-          [rotateTicks]="rotateXAxisTicks"
-          [maxTickLength]="maxXAxisTickLength"
-          [tickFormatting]="xAxisTickFormatting"
-          [ticks]="xAxisTicks"
-          [wrapTicks]="wrapTicks"
-          (dimensionsChanged)="updateXAxisHeight($event)"
-        ></svg:g>
-        <svg:g
-          ngx-charts-y-axis
-          *ngIf="yAxis"
-          [yScale]="yScale"
-          [dims]="dims"
-          [showGridLines]="showGridLines"
-          [showLabel]="showYAxisLabel"
-          [labelText]="yAxisLabel"
-          [trimTicks]="trimYAxisTicks"
-          [maxTickLength]="maxYAxisTickLength"
-          [tickFormatting]="yAxisTickFormatting"
-          [ticks]="yAxisTicks"
-          [wrapTicks]="wrapTicks"
-          (dimensionsChanged)="updateYAxisWidth($event)"
-        ></svg:g>
-        <svg:g *ngIf="!isSSR">
+        @if (xAxis) {
           <svg:g
-            *ngFor="let group of results; trackBy: trackBy"
-            [@animationState]="'active'"
-            [attr.transform]="groupTransform(group)"
-          >
-            <svg:g
-              ngx-charts-series-vertical
-              [type]="barChartType.Normalized"
-              [xScale]="xScale"
-              [yScale]="yScale"
-              [activeEntries]="activeEntries"
-              [colors]="colors"
-              [series]="group.series"
-              [dims]="dims"
-              [gradient]="gradient"
-              [tooltipDisabled]="tooltipDisabled"
-              [tooltipTemplate]="tooltipTemplate"
-              [seriesName]="group.name"
-              [animations]="animations"
-              [noBarWhenZero]="noBarWhenZero"
-              (select)="onClick($event, group)"
-              (activate)="onActivate($event, group)"
-              (deactivate)="onDeactivate($event, group)"
-            ></svg:g>
+            ngx-charts-x-axis
+            [xScale]="xScale"
+            [dims]="dims"
+            [showLabel]="showXAxisLabel"
+            [labelText]="xAxisLabel"
+            [trimTicks]="trimXAxisTicks"
+            [rotateTicks]="rotateXAxisTicks"
+            [maxTickLength]="maxXAxisTickLength"
+            [tickFormatting]="xAxisTickFormatting"
+            [ticks]="xAxisTicks"
+            [wrapTicks]="wrapTicks"
+            (dimensionsChanged)="updateXAxisHeight($event)"
+          ></svg:g>
+        }
+        @if (yAxis) {
+          <svg:g
+            ngx-charts-y-axis
+            [yScale]="yScale"
+            [dims]="dims"
+            [showGridLines]="showGridLines"
+            [showLabel]="showYAxisLabel"
+            [labelText]="yAxisLabel"
+            [trimTicks]="trimYAxisTicks"
+            [maxTickLength]="maxYAxisTickLength"
+            [tickFormatting]="yAxisTickFormatting"
+            [ticks]="yAxisTicks"
+            [wrapTicks]="wrapTicks"
+            (dimensionsChanged)="updateYAxisWidth($event)"
+          ></svg:g>
+        }
+        @if (!isSSR) {
+          <svg:g>
+            @for (group of results; track group.name) {
+              <svg:g [@animationState]="'active'" [attr.transform]="groupTransform(group)">
+                <svg:g
+                  ngx-charts-series-vertical
+                  [type]="barChartType.Normalized"
+                  [xScale]="xScale"
+                  [yScale]="yScale"
+                  [activeEntries]="activeEntries"
+                  [colors]="colors"
+                  [series]="group.series"
+                  [dims]="dims"
+                  [gradient]="gradient"
+                  [tooltipDisabled]="tooltipDisabled"
+                  [tooltipTemplate]="tooltipTemplate"
+                  [seriesName]="group.name"
+                  [animations]="animations"
+                  [noBarWhenZero]="noBarWhenZero"
+                  (select)="onClick($event, group)"
+                  (activate)="onActivate($event, group)"
+                  (deactivate)="onDeactivate($event, group)"
+                ></svg:g>
+              </svg:g>
+            }
           </svg:g>
-        </svg:g>
-        <svg:g *ngIf="isSSR">
-          <svg:g *ngFor="let group of results; trackBy: trackBy" [attr.transform]="groupTransform(group)">
-            <svg:g
-              ngx-charts-series-vertical
-              [type]="barChartType.Normalized"
-              [xScale]="xScale"
-              [yScale]="yScale"
-              [activeEntries]="activeEntries"
-              [colors]="colors"
-              [series]="group.series"
-              [dims]="dims"
-              [gradient]="gradient"
-              [tooltipDisabled]="tooltipDisabled"
-              [tooltipTemplate]="tooltipTemplate"
-              [seriesName]="group.name"
-              [animations]="animations"
-              [noBarWhenZero]="noBarWhenZero"
-              (select)="onClick($event, group)"
-              (activate)="onActivate($event, group)"
-              (deactivate)="onDeactivate($event, group)"
-            ></svg:g>
+        } @else {
+          <svg:g>
+            @for (group of results; track group.name) {
+              <svg:g [attr.transform]="groupTransform(group)">
+                <svg:g
+                  ngx-charts-series-vertical
+                  [type]="barChartType.Normalized"
+                  [xScale]="xScale"
+                  [yScale]="yScale"
+                  [activeEntries]="activeEntries"
+                  [colors]="colors"
+                  [series]="group.series"
+                  [dims]="dims"
+                  [gradient]="gradient"
+                  [tooltipDisabled]="tooltipDisabled"
+                  [tooltipTemplate]="tooltipTemplate"
+                  [seriesName]="group.name"
+                  [animations]="animations"
+                  [noBarWhenZero]="noBarWhenZero"
+                  (select)="onClick($event, group)"
+                  (activate)="onActivate($event, group)"
+                  (deactivate)="onDeactivate($event, group)"
+                ></svg:g>
+              </svg:g>
+            }
           </svg:g>
-        </svg:g>
+        }
       </svg:g>
     </ngx-charts-chart>
   `,
@@ -132,7 +136,8 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
         animate(500, style({ opacity: 0, transform: 'scale(0)' }))
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class BarVerticalNormalizedComponent extends BaseChartComponent {
   @Input() legend: boolean = false;
@@ -268,10 +273,6 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
 
     this.select.emit(data);
   }
-
-  trackBy: TrackByFunction<Series> = (index: number, item: Series) => {
-    return item.name;
-  };
 
   setColors(): void {
     let domain;

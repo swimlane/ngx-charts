@@ -6,8 +6,7 @@ import {
   EventEmitter,
   ChangeDetectionStrategy,
   ContentChild,
-  TemplateRef,
-  TrackByFunction
+  TemplateRef
 } from '@angular/core';
 import { isPlatformServer } from '@angular/common';
 import { trigger, style, animate, transition } from '@angular/animations';
@@ -46,97 +45,98 @@ import { BarOrientation } from '../common/types/bar-orientation.enum';
           [dims]="dims"
           [orient]="barOrientation.Horizontal"
         ></svg:g>
-        <svg:g
-          ngx-charts-x-axis
-          *ngIf="xAxis"
-          [xScale]="valueScale"
-          [dims]="dims"
-          [showGridLines]="showGridLines"
-          [showLabel]="showXAxisLabel"
-          [labelText]="xAxisLabel"
-          [trimTicks]="trimXAxisTicks"
-          [rotateTicks]="rotateXAxisTicks"
-          [maxTickLength]="maxXAxisTickLength"
-          [tickFormatting]="xAxisTickFormatting"
-          [ticks]="xAxisTicks"
-          [wrapTicks]="wrapTicks"
-          (dimensionsChanged)="updateXAxisHeight($event)"
-        ></svg:g>
-        <svg:g
-          ngx-charts-y-axis
-          *ngIf="yAxis"
-          [yScale]="groupScale"
-          [dims]="dims"
-          [showLabel]="showYAxisLabel"
-          [labelText]="yAxisLabel"
-          [trimTicks]="trimYAxisTicks"
-          [maxTickLength]="maxYAxisTickLength"
-          [tickFormatting]="yAxisTickFormatting"
-          [ticks]="yAxisTicks"
-          [yAxisOffset]="dataLabelMaxWidth.negative"
-          [wrapTicks]="wrapTicks"
-          (dimensionsChanged)="updateYAxisWidth($event)"
-        ></svg:g>
-
-        <svg:g *ngIf="!isSSR">
+        @if (xAxis) {
           <svg:g
-            *ngFor="let group of results; let index = index; trackBy: trackBy"
-            [@animationState]="'active'"
-            [attr.transform]="groupTransform(group)"
-          >
-            <svg:g
-              ngx-charts-series-horizontal
-              [xScale]="valueScale"
-              [activeEntries]="activeEntries"
-              [yScale]="innerScale"
-              [colors]="colors"
-              [series]="group.series"
-              [dims]="dims"
-              [gradient]="gradient"
-              [tooltipDisabled]="tooltipDisabled"
-              [tooltipTemplate]="tooltipTemplate"
-              [seriesName]="group.name"
-              [roundEdges]="roundEdges"
-              [animations]="animations"
-              [showDataLabel]="showDataLabel"
-              [dataLabelFormatting]="dataLabelFormatting"
-              [noBarWhenZero]="noBarWhenZero"
-              (select)="onClick($event, group)"
-              (activate)="onActivate($event, group)"
-              (deactivate)="onDeactivate($event, group)"
-              (dataLabelWidthChanged)="onDataLabelMaxWidthChanged($event, index)"
-            />
-          </svg:g>
-        </svg:g>
-        <svg:g *ngIf="isSSR">
+            ngx-charts-x-axis
+            [xScale]="valueScale"
+            [dims]="dims"
+            [showGridLines]="showGridLines"
+            [showLabel]="showXAxisLabel"
+            [labelText]="xAxisLabel"
+            [trimTicks]="trimXAxisTicks"
+            [rotateTicks]="rotateXAxisTicks"
+            [maxTickLength]="maxXAxisTickLength"
+            [tickFormatting]="xAxisTickFormatting"
+            [ticks]="xAxisTicks"
+            [wrapTicks]="wrapTicks"
+            (dimensionsChanged)="updateXAxisHeight($event)"
+          ></svg:g>
+        }
+        @if (yAxis) {
           <svg:g
-            *ngFor="let group of results; let index = index; trackBy: trackBy"
-            [attr.transform]="groupTransform(group)"
-          >
-            <svg:g
-              ngx-charts-series-horizontal
-              [xScale]="valueScale"
-              [activeEntries]="activeEntries"
-              [yScale]="innerScale"
-              [colors]="colors"
-              [series]="group.series"
-              [dims]="dims"
-              [gradient]="gradient"
-              [tooltipDisabled]="tooltipDisabled"
-              [tooltipTemplate]="tooltipTemplate"
-              [seriesName]="group.name"
-              [roundEdges]="roundEdges"
-              [animations]="animations"
-              [showDataLabel]="showDataLabel"
-              [dataLabelFormatting]="dataLabelFormatting"
-              [noBarWhenZero]="noBarWhenZero"
-              (select)="onClick($event, group)"
-              (activate)="onActivate($event, group)"
-              (deactivate)="onDeactivate($event, group)"
-              (dataLabelWidthChanged)="onDataLabelMaxWidthChanged($event, index)"
-            />
+            ngx-charts-y-axis
+            [yScale]="groupScale"
+            [dims]="dims"
+            [showLabel]="showYAxisLabel"
+            [labelText]="yAxisLabel"
+            [trimTicks]="trimYAxisTicks"
+            [maxTickLength]="maxYAxisTickLength"
+            [tickFormatting]="yAxisTickFormatting"
+            [ticks]="yAxisTicks"
+            [yAxisOffset]="dataLabelMaxWidth.negative"
+            [wrapTicks]="wrapTicks"
+            (dimensionsChanged)="updateYAxisWidth($event)"
+          ></svg:g>
+        }
+        @if (!isSSR) {
+          <svg:g>
+            @for (group of results; track group.name; let index = $index) {
+              <svg:g [@animationState]="'active'" [attr.transform]="groupTransform(group)">
+                <svg:g
+                  ngx-charts-series-horizontal
+                  [xScale]="valueScale"
+                  [activeEntries]="activeEntries"
+                  [yScale]="innerScale"
+                  [colors]="colors"
+                  [series]="group.series"
+                  [dims]="dims"
+                  [gradient]="gradient"
+                  [tooltipDisabled]="tooltipDisabled"
+                  [tooltipTemplate]="tooltipTemplate"
+                  [seriesName]="group.name"
+                  [roundEdges]="roundEdges"
+                  [animations]="animations"
+                  [showDataLabel]="showDataLabel"
+                  [dataLabelFormatting]="dataLabelFormatting"
+                  [noBarWhenZero]="noBarWhenZero"
+                  (select)="onClick($event, group)"
+                  (activate)="onActivate($event, group)"
+                  (deactivate)="onDeactivate($event, group)"
+                  (dataLabelWidthChanged)="onDataLabelMaxWidthChanged($event, index)"
+                />
+              </svg:g>
+            }
           </svg:g>
-        </svg:g>
+        } @else {
+          <svg:g>
+            @for (group of results; track group.name; let index = $index) {
+              <svg:g [attr.transform]="groupTransform(group)">
+                <svg:g
+                  ngx-charts-series-horizontal
+                  [xScale]="valueScale"
+                  [activeEntries]="activeEntries"
+                  [yScale]="innerScale"
+                  [colors]="colors"
+                  [series]="group.series"
+                  [dims]="dims"
+                  [gradient]="gradient"
+                  [tooltipDisabled]="tooltipDisabled"
+                  [tooltipTemplate]="tooltipTemplate"
+                  [seriesName]="group.name"
+                  [roundEdges]="roundEdges"
+                  [animations]="animations"
+                  [showDataLabel]="showDataLabel"
+                  [dataLabelFormatting]="dataLabelFormatting"
+                  [noBarWhenZero]="noBarWhenZero"
+                  (select)="onClick($event, group)"
+                  (activate)="onActivate($event, group)"
+                  (deactivate)="onDeactivate($event, group)"
+                  (dataLabelWidthChanged)="onDataLabelMaxWidthChanged($event, index)"
+                />
+              </svg:g>
+            }
+          </svg:g>
+        }
       </svg:g>
     </ngx-charts-chart>
   `,
@@ -153,7 +153,8 @@ import { BarOrientation } from '../common/types/bar-orientation.enum';
         animate(500, style({ opacity: 0, transform: 'scale(0)' }))
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class BarHorizontal2DComponent extends BaseChartComponent {
   @Input() legend: boolean = false;
@@ -216,6 +217,10 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
     if (isPlatformServer(this.platformId)) {
       this.isSSR = true;
     }
+  }
+
+  ngOnChanges(): void {
+    this.update();
   }
 
   update(): void {
@@ -334,10 +339,6 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
 
     this.select.emit(data);
   }
-
-  trackBy: TrackByFunction<DataItem> = (index: number, item: DataItem) => {
-    return item.name;
-  };
 
   setColors(): void {
     let domain;

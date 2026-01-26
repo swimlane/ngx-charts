@@ -17,36 +17,42 @@ import { ViewDimensions } from '../types/view-dimension.interface';
   selector: 'g[ngx-charts-x-axis]',
   template: `
     <svg:g [attr.class]="xAxisClassName" [attr.transform]="transform">
-      <svg:g
-        ngx-charts-x-axis-ticks
-        *ngIf="xScale"
-        [trimTicks]="trimTicks"
-        [rotateTicks]="rotateTicks"
-        [maxTickLength]="maxTickLength"
-        [tickFormatting]="tickFormatting"
-        [tickArguments]="tickArguments"
-        [tickStroke]="tickStroke"
-        [scale]="xScale"
-        [orient]="xOrient"
-        [showGridLines]="showGridLines"
-        [gridLineHeight]="dims.height"
-        [width]="dims.width"
-        [tickValues]="ticks"
-        [wrapTicks]="wrapTicks"
-        (dimensionsChanged)="emitTicksHeight($event)"
-      />
-      <svg:g
-        ngx-charts-axis-label
-        *ngIf="showLabel"
-        [label]="labelText"
-        [offset]="labelOffset"
-        [orient]="orientation.Bottom"
-        [height]="dims.height"
-        [width]="dims.width"
-      ></svg:g>
+      @if (xScale) {
+        <svg:g
+          ngx-charts-x-axis-ticks
+          [trimTicks]="trimTicks"
+          [rotateTicks]="rotateTicks"
+          [maxTickLength]="maxTickLength"
+          [tickFormatting]="tickFormatting"
+          [tickArguments]="tickArguments"
+          [tickStroke]="tickStroke"
+          [scale]="xScale"
+          [orient]="xOrient"
+          [showGridLines]="showGridLines"
+          [gridLineHeight]="dims.height"
+          [referenceLines]="referenceLines"
+          [showRefLines]="showRefLines"
+          [showRefLabels]="showRefLabels"
+          [width]="dims.width"
+          [tickValues]="ticks"
+          [wrapTicks]="wrapTicks"
+          (dimensionsChanged)="emitTicksHeight($event)"
+        />
+      }
+      @if (showLabel) {
+        <svg:g
+          ngx-charts-axis-label
+          [label]="labelText"
+          [offset]="labelOffset"
+          [orient]="orientation.Bottom"
+          [height]="dims.height"
+          [width]="dims.width"
+        ></svg:g>
+      }
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class XAxisComponent implements OnChanges {
   @Input() xScale;
@@ -61,6 +67,9 @@ export class XAxisComponent implements OnChanges {
   @Input() ticks: any[];
   @Input() xAxisTickCount: number;
   @Input() xOrient: Orientation = Orientation.Bottom;
+  @Input() referenceLines: any[];
+  @Input() showRefLines: boolean;
+  @Input() showRefLabels: boolean;
   @Input() xAxisOffset: number = 0;
   @Input() wrapTicks = false;
 

@@ -38,7 +38,8 @@ import { ViewDimensions } from '../types/view-dimension.interface';
   `,
   styleUrls: ['./timeline.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class Timeline implements OnChanges {
   @Input() view: [number, number];
@@ -63,7 +64,10 @@ export class Timeline implements OnChanges {
   filterId: string;
   filter: string;
 
-  constructor(element: ElementRef, private cd: ChangeDetectorRef) {
+  constructor(
+    element: ElementRef,
+    private cd: ChangeDetectorRef
+  ) {
     this.element = element.nativeElement;
   }
 

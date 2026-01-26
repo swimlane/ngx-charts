@@ -29,30 +29,32 @@ interface Cell {
 @Component({
   selector: 'g[ngx-charts-heat-map-cell-series]',
   template: `
-    <svg:g
-      ngx-charts-heat-map-cell
-      *ngFor="let c of cells; trackBy: trackBy"
-      [x]="c.x"
-      [y]="c.y"
-      [width]="c.width"
-      [height]="c.height"
-      [fill]="c.fill"
-      [data]="c.data"
-      (select)="onClick(c.cell)"
-      (activate)="activate.emit(c.cell)"
-      (deactivate)="deactivate.emit(c.cell)"
-      [gradient]="gradient"
-      [animations]="animations"
-      ngx-tooltip
-      [tooltipDisabled]="tooltipDisabled"
-      [tooltipPlacement]="placementTypes.Top"
-      [tooltipType]="styleTypes.tooltip"
-      [tooltipTitle]="tooltipTemplate ? undefined : tooltipText(c)"
-      [tooltipTemplate]="tooltipTemplate"
-      [tooltipContext]="{ series: c.series, name: c.label, value: c.data }"
-    ></svg:g>
+    @for (c of cells; track c.label) {
+      <svg:g
+        ngx-charts-heat-map-cell
+        [x]="c.x"
+        [y]="c.y"
+        [width]="c.width"
+        [height]="c.height"
+        [fill]="c.fill"
+        [data]="c.data"
+        (select)="onClick(c.cell)"
+        (activate)="activate.emit(c.cell)"
+        (deactivate)="deactivate.emit(c.cell)"
+        [gradient]="gradient"
+        [animations]="animations"
+        ngx-tooltip
+        [tooltipDisabled]="tooltipDisabled"
+        [tooltipPlacement]="placementTypes.Top"
+        [tooltipType]="styleTypes.tooltip"
+        [tooltipTitle]="tooltipTemplate ? undefined : tooltipText(c)"
+        [tooltipTemplate]="tooltipTemplate"
+        [tooltipContext]="{ series: c.series, name: c.label, value: c.data }"
+      ></svg:g>
+    }
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class HeatCellSeriesComponent implements OnChanges, OnInit {
   @Input() data;
@@ -119,10 +121,6 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
       <span class="tooltip-label">${escapeLabel(series)} • ${escapeLabel(label)}</span>
       <span class="tooltip-val">${data.toLocaleString()}</span>
     `;
-  }
-
-  trackBy(index: number, item): string {
-    return item.label;
   }
 
   onClick(data): void {

@@ -54,25 +54,25 @@ enum ElementType {
           [animations]="animations"
         ></svg:g>
 
-        <svg:line
-          *ngIf="hasPreviousValue"
-          [attr.transform]="transformLine"
-          x1="0"
-          y1="5"
-          x2="0"
-          y2="15"
-          [attr.stroke]="colors.getColor(units)"
-        />
+        @if (hasPreviousValue) {
+          <svg:line
+            [attr.transform]="transformLine"
+            x1="0"
+            y1="5"
+            x2="0"
+            y2="15"
+            [attr.stroke]="colors.getColor(units)"
+          />
 
-        <svg:line
-          *ngIf="hasPreviousValue"
-          [attr.transform]="transformLine"
-          x1="0"
-          y1="-5"
-          x2="0"
-          y2="-15"
-          [attr.stroke]="colors.getColor(units)"
-        />
+          <svg:line
+            [attr.transform]="transformLine"
+            x1="0"
+            y1="-5"
+            x2="0"
+            y2="-15"
+            [attr.stroke]="colors.getColor(units)"
+          />
+        }
 
         <svg:g [attr.transform]="transform">
           <svg:g [attr.transform]="valueTranslate">
@@ -104,7 +104,8 @@ enum ElementType {
   `,
   styleUrls: ['../common/base-chart.component.scss', './linear-gauge.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class LinearGaugeComponent extends BaseChartComponent implements AfterViewInit {
   @Input() min: number = 0;
@@ -143,6 +144,10 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
       this.scaleText(ElementType.Value);
       this.scaleText(ElementType.Units);
     });
+  }
+
+  ngOnChanges(): void {
+    this.update();
   }
 
   update(): void {

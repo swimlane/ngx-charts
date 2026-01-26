@@ -29,14 +29,15 @@ import { VERDANA_FONT_WIDTHS_16_PX } from '../common/constants/font-widths';
   template: `
     <svg:g [attr.transform]="transform" class="cell" (click)="onClick()">
       <svg:rect class="card" [style.fill]="color" [attr.width]="cardWidth" [attr.height]="cardHeight" rx="3" ry="3" />
-      <svg:path
-        *ngIf="bandColor && bandColor !== color"
-        class="card-band"
-        [attr.fill]="bandColor"
-        [attr.transform]="transformBand"
-        stroke="none"
-        [attr.d]="bandPath"
-      />
+      @if (bandColor && bandColor !== color) {
+        <svg:path
+          class="card-band"
+          [attr.fill]="bandColor"
+          [attr.transform]="transformBand"
+          stroke="none"
+          [attr.d]="bandPath"
+        />
+      }
       <title>{{ label }}</title>
       <svg:foreignObject
         class="trimmed-label"
@@ -69,7 +70,8 @@ import { VERDANA_FONT_WIDTHS_16_PX } from '../common/constants/font-widths';
       </svg:text>
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class CardComponent implements OnChanges, OnDestroy, OnInit {
   @Input() color: string;

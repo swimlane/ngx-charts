@@ -22,30 +22,35 @@ export interface LegendEntry {
   selector: 'ngx-charts-legend',
   template: `
     <div [style.width.px]="width">
-      <header class="legend-title" *ngIf="title?.length > 0">
-        <span class="legend-title-text">{{ title }}</span>
-      </header>
+      @if (title?.length > 0) {
+        <header class="legend-title">
+          <span class="legend-title-text">{{ title }}</span>
+        </header>
+      }
       <div class="legend-wrap">
         <ul class="legend-labels" [class.horizontal-legend]="horizontal" [style.max-height.px]="height - 45">
-          <li *ngFor="let entry of legendEntries; trackBy: trackBy" class="legend-label">
-            <ngx-charts-legend-entry
-              [label]="entry.label"
-              [formattedLabel]="entry.formattedLabel"
-              [color]="entry.color"
-              [isActive]="isActive(entry)"
-              (select)="labelClick.emit($event)"
-              (activate)="activate($event)"
-              (deactivate)="deactivate($event)"
-            >
-            </ngx-charts-legend-entry>
-          </li>
+          @for (entry of legendEntries; track entry.label) {
+            <li class="legend-label">
+              <ngx-charts-legend-entry
+                [label]="entry.label"
+                [formattedLabel]="entry.formattedLabel"
+                [color]="entry.color"
+                [isActive]="isActive(entry)"
+                (select)="labelClick.emit($event)"
+                (activate)="activate($event)"
+                (deactivate)="deactivate($event)"
+              >
+              </ngx-charts-legend-entry>
+            </li>
+          }
         </ul>
       </div>
     </div>
   `,
   styleUrls: ['./legend.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class LegendComponent implements OnChanges {
   @Input() data: string[];
@@ -108,9 +113,5 @@ export class LegendComponent implements OnChanges {
 
   deactivate(item: { name: string }) {
     this.labelDeactivate.emit(item);
-  }
-
-  trackBy(index: number, item: LegendEntry): string {
-    return item.label;
   }
 }

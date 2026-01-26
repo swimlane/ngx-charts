@@ -20,7 +20,8 @@ import { Component, Input, OnChanges, ChangeDetectionStrategy, SimpleChanges, Vi
   `,
   styleUrls: ['./scale-legend.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class ScaleLegendComponent implements OnChanges {
   @Input() valueRange: number[];

@@ -50,7 +50,8 @@ export interface ArcItem {
       [tooltipContext]="valueArc.data"
     ></svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class GaugeArcComponent {
   @Input() backgroundArc: ArcItem;

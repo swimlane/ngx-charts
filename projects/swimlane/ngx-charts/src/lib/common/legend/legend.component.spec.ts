@@ -11,7 +11,8 @@ const seriesData = ['complete', 'not complete'];
 
 @Component({
   selector: 'test-component',
-  template: ''
+  template: '',
+  standalone: false
 })
 class TestComponent {
   seriesData: any = seriesData;

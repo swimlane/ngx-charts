@@ -10,7 +10,8 @@ import { IVector2D } from '@swimlane/ngx-charts/models/coordinates.model';
 
 @Component({
   selector: 'test-component',
-  template: ''
+  template: '',
+  standalone: false
 })
 class TestComponent {
   data: any = boxData;

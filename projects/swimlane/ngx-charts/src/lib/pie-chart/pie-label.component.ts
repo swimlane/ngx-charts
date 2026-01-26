@@ -44,7 +44,8 @@ export interface PieData extends DefaultArcObject {
       [class.animation]="animations"
     ></svg:path>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class PieLabelComponent implements OnChanges {
   @Input() data: PieData;

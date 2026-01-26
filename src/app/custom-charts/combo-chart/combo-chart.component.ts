@@ -28,7 +28,8 @@ import {
   selector: 'combo-chart-component',
   templateUrl: './combo-chart.component.html',
   styleUrls: ['./combo-chart.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class ComboChartComponent extends BaseChartComponent {
   @Input() curve: any = curveLinear;
@@ -98,10 +99,6 @@ export class ComboChartComponent extends BaseChartComponent {
   legendSpacing = 0;
   bandwidth;
   barPadding = 8;
-
-  trackBy(index, item): string {
-    return `${item.name}`;
-  }
 
   update(): void {
     super.update();

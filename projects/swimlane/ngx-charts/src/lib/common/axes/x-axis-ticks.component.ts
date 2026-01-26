@@ -17,45 +17,86 @@ import { trimLabel } from '../trim-label.helper';
 import { getTickLines, reduceTicks } from './ticks.helper';
 import { Orientation } from '../types/orientation.enum';
 import { TextAnchor } from '../types/text-anchor.enum';
+import { roundedRect } from '../../common/shape.helper';
 
 @Component({
   selector: 'g[ngx-charts-x-axis-ticks]',
   template: `
     <svg:g #ticksel>
-      <svg:g *ngFor="let tick of ticks" class="tick" [attr.transform]="tickTransform(tick)">
-        <ng-container *ngIf="tickFormat(tick) as tickFormatted">
-          <title>{{ tickFormatted }}</title>
-          <svg:text
-            stroke-width="0.01"
-            font-size="12px"
-            [attr.text-anchor]="textAnchor"
-            [attr.transform]="textTransform"
-          >
-            <ng-container *ngIf="isWrapTicksSupported; then tmplMultilineTick; else tmplSinglelineTick"></ng-container>
-          </svg:text>
-
-          <ng-template #tmplMultilineTick>
-            <ng-container *ngIf="tickChunks(tick) as tickLines">
-              <svg:tspan *ngFor="let tickLine of tickLines; let i = index" x="0" [attr.y]="i * 12">
-                {{ tickLine }}
-              </svg:tspan>
+      @for (tick of ticks; track tick) {
+        <svg:g class="tick" [attr.transform]="tickTransform(tick)">
+          @if (tickFormat(tick); as tickFormatted) {
+            <ng-container>
+              <title>{{ tickFormatted }}</title>
+              <svg:text
+                stroke-width="0.01"
+                font-size="12px"
+                [attr.text-anchor]="textAnchor"
+                [attr.transform]="textTransform"
+              >
+                @if (isWrapTicksSupported) {
+                  <ng-template [ngTemplateOutlet]="tmplMultilineTick"></ng-template>
+                } @else {
+                  <ng-template [ngTemplateOutlet]="tmplSinglelineTick"></ng-template>
+                }
+              </svg:text>
+              <ng-template #tmplMultilineTick>
+                @if (tickChunks(tick); as tickLines) {
+                  <ng-container>
+                    @for (tickLine of tickLines; track tickLine; let i = $index) {
+                      <svg:tspan x="0" [attr.y]="i * 12">
+                        {{ tickLine }}
+                      </svg:tspan>
+                    }
+                  </ng-container>
+                }
+              </ng-template>
+              <ng-template #tmplSinglelineTick>
+                {{ tickTrim(tickFormatted) }}
+              </ng-template>
             </ng-container>
-          </ng-template>
-
-          <ng-template #tmplSinglelineTick>
-            {{ tickTrim(tickFormatted) }}
-          </ng-template>
-        </ng-container>
-      </svg:g>
+          }
+        </svg:g>
+      }
     </svg:g>
 
-    <svg:g *ngFor="let tick of ticks" [attr.transform]="tickTransform(tick)">
-      <svg:g *ngIf="showGridLines" [attr.transform]="gridLineTransform()">
-        <svg:line class="gridline-path gridline-path-vertical" [attr.y1]="-gridLineHeight" y2="0" />
+    @for (tick of ticks; track tick) {
+      <svg:g [attr.transform]="tickTransform(tick)">
+        @if (showGridLines) {
+          <svg:g [attr.transform]="gridLineTransform()">
+            <svg:line class="gridline-path gridline-path-vertical" [attr.y1]="-gridLineHeight" y2="0" />
+          </svg:g>
+        }
       </svg:g>
-    </svg:g>
+    }
+    @if (referenceLineLength > 1 && refMax && refMin && showRefLines) {
+      <svg:path class="reference-area" [attr.d]="referenceAreaPath" [attr.transform]="gridLineTransform()" />
+    }
+    @for (refLine of referenceLines; track refLine) {
+      <svg:g class="ref-line">
+        @if (showRefLines) {
+          <svg:g [attr.transform]="transform(refLine.value)">
+            <svg:line
+              class="refline-path gridline-path-vertical"
+              y1="25"
+              [attr.y2]="25 + gridLineHeight"
+              [attr.transform]="gridLineTransform()"
+            />
+            @if (showRefLabels) {
+              <svg:g>
+                <title>{{ tickTrim(tickFormat(refLine.value)) }}</title>
+                <svg:text class="refline-label" transform="rotate(-270) translate(5, -5)">
+                  {{ refLine.name }}
+                </svg:text>
+              </svg:g>
+            }
+          </svg:g>
+        }
+      </svg:g>
+    }
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() scale;
@@ -71,6 +112,9 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() width: number;
   @Input() rotateTicks: boolean = true;
   @Input() wrapTicks = false;
+  @Input() referenceLines: any[];
+  @Input() showRefLabels: boolean = false;
+  @Input() showRefLines: boolean = false;
 
   @Output() dimensionsChanged = new EventEmitter();
 
@@ -89,6 +133,17 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   height: number = 0;
   approxHeight: number = 10;
   maxPossibleLengthForTickIfWrapped = 16;
+  transform: (o: any) => string;
+  refMax: number;
+  refMin: number;
+  referenceLineLength: number = 0;
+  referenceAreaPath: string;
+  dx: string;
+  x1: number;
+  x2: number;
+  y1: number;
+  y2: number;
+  tickSpacing: number;
 
   @ViewChild('ticksel') ticksElement: ElementRef;
 
@@ -123,7 +178,54 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
 
   update(): void {
     const scale = this.scale;
+    this.adjustedScale = this.scale.bandwidth
+      ? function (d) {
+          return this.scale(d) + this.scale.bandwidth() * 0.5;
+        }
+      : this.scale;
     this.ticks = this.getTicks();
+    const sign = this.orient === Orientation.Top || this.orient === Orientation.Right ? -1 : 1;
+    this.tickSpacing = Math.max(this.innerTickSize, 0) + this.tickPadding;
+
+    switch (this.orient) {
+      case Orientation.Bottom:
+        this.transform = function (tick) {
+          return 'translate(' + this.adjustedScale(tick) + ',0)';
+        };
+        this.textAnchor = TextAnchor.Middle;
+        this.x2 = this.innerTickSize * sign;
+        this.x1 = this.tickSpacing * sign;
+        this.dx = sign < 0 ? '0em' : '.71em';
+        break;
+      case Orientation.Left:
+        this.transform = function (tick) {
+          return 'translate(0,' + this.adjustedScale(tick) + ')';
+        };
+        this.textAnchor = TextAnchor.End;
+        this.y2 = this.innerTickSize * -sign;
+        this.y1 = this.tickSpacing * -sign;
+        this.dx = '.32em';
+        break;
+      case Orientation.Top:
+        this.transform = function (tick) {
+          return 'translate(' + this.adjustedScale(tick) + ',0)';
+        };
+        this.textAnchor = TextAnchor.Middle;
+        this.y2 = this.innerTickSize * sign;
+        this.y1 = this.tickSpacing * sign;
+        this.dx = sign < 0 ? '0em' : '.71em';
+        break;
+      case Orientation.Right:
+        this.transform = function (tick) {
+          return 'translate(0,' + this.adjustedScale(tick) + ')';
+        };
+        this.textAnchor = TextAnchor.Start;
+        this.x2 = this.innerTickSize * -sign;
+        this.x1 = this.tickSpacing * -sign;
+        this.dx = '.32em';
+        break;
+      default:
+    }
 
     if (this.tickFormatting) {
       this.tickFormat = this.tickFormatting;
@@ -141,12 +243,6 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
 
     const angle = this.rotateTicks ? this.getRotationAngle(this.ticks) : null;
 
-    this.adjustedScale = this.scale.bandwidth
-      ? function (d) {
-          return this.scale(d) + this.scale.bandwidth() * 0.5;
-        }
-      : this.scale;
-
     this.textTransform = '';
     if (angle && angle !== 0) {
       this.textTransform = `rotate(${angle})`;
@@ -157,6 +253,31 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     }
 
     setTimeout(() => this.updateDims());
+  }
+
+  setReferencelines(): void {
+    this.refMin = this.adjustedScale(
+      Math.min.apply(
+        null,
+        this.referenceLines.map(item => item.value)
+      )
+    );
+    this.refMax = this.adjustedScale(
+      Math.max.apply(
+        null,
+        this.referenceLines.map(item => item.value)
+      )
+    );
+    this.referenceLineLength = this.referenceLines.length;
+
+    this.referenceAreaPath = roundedRect(
+      this.refMax,
+      -this.gridLineHeight + 25,
+      this.refMin - this.refMax,
+      this.gridLineHeight,
+      0,
+      [false, false, false, false]
+    );
   }
 
   getRotationAngle(ticks: any[]): number {
@@ -206,6 +327,10 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
         : labelHeight;
 
     this.approxHeight = Math.min(requiredHeight, 200);
+
+    if (this.showRefLines && this.referenceLines) {
+      this.setReferencelines();
+    }
 
     return angle;
   }

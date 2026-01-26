@@ -4,18 +4,23 @@
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
+    "esModuleInterop": true,
     "declaration": false,
     "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
     "target": "ES2022",
     "module": "ES2022",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
-    "typeRoots": ["node_modules/@types"],
-    "lib": ["ES2022", "dom"],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "paths": {
-      "@swimlane/ngx-charts": ["projects/swimlane/ngx-charts/src/public_api"],
-      "@swimlane/ngx-charts/*": ["projects/swimlane/ngx-charts/src/lib/*"]
+      "@swimlane/ngx-charts": [
+        "projects/swimlane/ngx-charts/src/public_api"
+      ],
+      "@swimlane/ngx-charts/*": [
+        "projects/swimlane/ngx-charts/src/lib/*"
+      ]
     },
     "resolveJsonModule": true,
     "useDefineForClassFields": false

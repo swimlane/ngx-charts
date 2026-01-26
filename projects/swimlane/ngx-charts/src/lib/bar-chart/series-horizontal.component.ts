@@ -1,13 +1,4 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  OnChanges,
-  SimpleChanges,
-  ChangeDetectionStrategy,
-  TemplateRef
-} from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel, escapeLabel } from '../common/label.helper';
 import { DataItem, StringOrNumberOrDate } from '../models/chart-data.model';
@@ -24,49 +15,53 @@ import { ScaleType } from '../common/types/scale-type.enum';
 @Component({
   selector: 'g[ngx-charts-series-horizontal]',
   template: `
-    <svg:g
-      ngx-charts-bar
-      *ngFor="let bar of bars; trackBy: trackBy"
-      [@animationState]="'active'"
-      [width]="bar.width"
-      [height]="bar.height"
-      [x]="bar.x"
-      [y]="bar.y"
-      [fill]="bar.color"
-      [stops]="bar.gradientStops"
-      [data]="bar.data"
-      [orientation]="barOrientation.Horizontal"
-      [roundEdges]="bar.roundEdges"
-      (select)="click($event)"
-      [gradient]="gradient"
-      [isActive]="isActive(bar.data)"
-      [ariaLabel]="bar.ariaLabel"
-      [animations]="animations"
-      (activate)="activate.emit($event)"
-      (deactivate)="deactivate.emit($event)"
-      ngx-tooltip
-      [tooltipDisabled]="tooltipDisabled"
-      [tooltipPlacement]="tooltipPlacement"
-      [tooltipType]="tooltipType"
-      [tooltipTitle]="tooltipTemplate ? undefined : bar.tooltipText"
-      [tooltipTemplate]="tooltipTemplate"
-      [tooltipContext]="bar.data"
-      [noBarWhenZero]="noBarWhenZero"
-    ></svg:g>
-    <svg:g *ngIf="showDataLabel">
+    @for (bar of bars; track bar.label) {
       <svg:g
-        ngx-charts-bar-label
-        *ngFor="let b of barsForDataLabels; let i = index; trackBy: trackDataLabelBy"
-        [barX]="b.x"
-        [barY]="b.y"
-        [barWidth]="b.width"
-        [barHeight]="b.height"
-        [value]="b.total"
-        [valueFormatting]="dataLabelFormatting"
+        ngx-charts-bar
+        [@animationState]="'active'"
+        [width]="bar.width"
+        [height]="bar.height"
+        [x]="bar.x"
+        [y]="bar.y"
+        [fill]="bar.color"
+        [stops]="bar.gradientStops"
+        [data]="bar.data"
         [orientation]="barOrientation.Horizontal"
-        (dimensionsChanged)="dataLabelWidthChanged.emit({ size: $event, index: i })"
-      />
-    </svg:g>
+        [roundEdges]="bar.roundEdges"
+        (select)="click($event)"
+        [gradient]="gradient"
+        [isActive]="isActive(bar.data)"
+        [ariaLabel]="bar.ariaLabel"
+        [animations]="animations"
+        (activate)="activate.emit($event)"
+        (deactivate)="deactivate.emit($event)"
+        ngx-tooltip
+        [tooltipDisabled]="tooltipDisabled"
+        [tooltipPlacement]="tooltipPlacement"
+        [tooltipType]="tooltipType"
+        [tooltipTitle]="tooltipTemplate ? undefined : bar.tooltipText"
+        [tooltipTemplate]="tooltipTemplate"
+        [tooltipContext]="bar.data"
+        [noBarWhenZero]="noBarWhenZero"
+      ></svg:g>
+    }
+    @if (showDataLabel) {
+      <svg:g>
+        @for (b of barsForDataLabels; track trackDataLabelBy($index, b); let i = $index) {
+          <svg:g
+            ngx-charts-bar-label
+            [barX]="b.x"
+            [barY]="b.y"
+            [barWidth]="b.width"
+            [barHeight]="b.height"
+            [value]="b.total"
+            [valueFormatting]="dataLabelFormatting"
+            [orientation]="barOrientation.Horizontal"
+            (dimensionsChanged)="dataLabelWidthChanged.emit({ size: $event, index: i })"
+          />
+        }
+      </svg:g>
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
@@ -78,7 +73,8 @@ import { ScaleType } from '../common/types/scale-type.enum';
         animate(500, style({ opacity: 0 }))
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class SeriesHorizontal implements OnChanges {
   @Input() dims: ViewDimensions;
@@ -110,7 +106,7 @@ export class SeriesHorizontal implements OnChanges {
 
   barOrientation = BarOrientation;
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     this.update();
   }
 
@@ -271,10 +267,6 @@ export class SeriesHorizontal implements OnChanges {
       return dataItem.label;
     }
     return dataItem.name;
-  }
-
-  trackBy(index: number, bar: Bar): string {
-    return bar.label;
   }
 
   trackDataLabelBy(index: number, barLabel: any): string {

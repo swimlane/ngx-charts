@@ -59,13 +59,14 @@ export function cloneLineCoordinates(original: LineCoordinates): LineCoordinates
   selector: 'g[ngx-charts-box]',
   template: `
     <svg:defs>
-      <svg:g
-        *ngIf="hasGradient"
-        ngx-charts-svg-linear-gradient
-        [orientation]="BarOrientation.Vertical"
-        [name]="gradientId"
-        [stops]="gradientStops"
-      />
+      @if (hasGradient) {
+        <svg:g
+          ngx-charts-svg-linear-gradient
+          [orientation]="BarOrientation.Vertical"
+          [name]="gradientId"
+          [stops]="gradientStops"
+        />
+      }
       <svg:mask [attr.id]="maskLineId">
         <svg:g>
           <rect height="100%" width="100%" fill="white" fill-opacity="1" />
@@ -87,22 +88,24 @@ export function cloneLineCoordinates(original: LineCoordinates): LineCoordinates
         [attr.fill]="hasGradient ? gradientFill : fill"
         (click)="select.emit(data)"
       />
-      <svg:line
-        *ngFor="let line of lineCoordinates; let i = index"
-        class="bar-line"
-        [class.hidden]="hideBar"
-        [attr.x1]="line.v1.x"
-        [attr.y1]="line.v1.y"
-        [attr.x2]="line.v2.x"
-        [attr.y2]="line.v2.y"
-        [attr.stroke]="strokeColor"
-        [attr.stroke-width]="i === 2 ? medianLineWidth : whiskerStrokeWidth"
-        [attr.mask]="i ? undefined : maskLine"
-        fill="none"
-      />
+      @for (line of lineCoordinates; track line; let i = $index) {
+        <svg:line
+          class="bar-line"
+          [class.hidden]="hideBar"
+          [attr.x1]="line.v1.x"
+          [attr.y1]="line.v1.y"
+          [attr.x2]="line.v2.x"
+          [attr.y2]="line.v2.y"
+          [attr.stroke]="strokeColor"
+          [attr.stroke-width]="i === 2 ? medianLineWidth : whiskerStrokeWidth"
+          [attr.mask]="i ? undefined : maskLine"
+          fill="none"
+        />
+      }
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class BoxComponent implements OnChanges {
   @Input() strokeColor: string;
@@ -152,7 +155,10 @@ export class BoxComponent implements OnChanges {
   whiskerStrokeWidth: number;
   medianLineWidth: number;
 
-  constructor(element: ElementRef, protected cd: ChangeDetectorRef) {
+  constructor(
+    element: ElementRef,
+    protected cd: ChangeDetectorRef
+  ) {
     this.nativeElm = element.nativeElement;
   }
 

@@ -23,37 +23,40 @@ export interface CardModel extends GridItem {
 @Component({
   selector: 'g[ngx-charts-card-series]',
   template: `
-    <svg:rect
-      *ngFor="let c of emptySlots; trackBy: trackBy"
-      class="card-empty"
-      [attr.x]="c.x"
-      [attr.y]="c.y"
-      [style.fill]="emptyColor"
-      [attr.width]="c.width"
-      [attr.height]="c.height"
-      rx="3"
-      ry="3"
-    />
-    <svg:g
-      ngx-charts-card
-      *ngFor="let c of cards; trackBy: trackBy"
-      [x]="c.x"
-      [y]="c.y"
-      [width]="c.width"
-      [height]="c.height"
-      [color]="c.color"
-      [bandColor]="c.bandColor"
-      [textColor]="c.textColor"
-      [data]="c.data"
-      [label]="c.label"
-      [medianSize]="medianSize"
-      [valueFormatting]="valueFormatting"
-      [labelFormatting]="labelFormatting"
-      [animations]="animations"
-      (select)="onClick($event)"
-    />
+    @for (c of emptySlots; track c.label) {
+      <svg:rect
+        class="card-empty"
+        [attr.x]="c.x"
+        [attr.y]="c.y"
+        [style.fill]="emptyColor"
+        [attr.width]="c.width"
+        [attr.height]="c.height"
+        rx="3"
+        ry="3"
+      />
+    }
+    @for (c of cards; track c.label) {
+      <svg:g
+        ngx-charts-card
+        [x]="c.x"
+        [y]="c.y"
+        [width]="c.width"
+        [height]="c.height"
+        [color]="c.color"
+        [bandColor]="c.bandColor"
+        [textColor]="c.textColor"
+        [data]="c.data"
+        [label]="c.label"
+        [medianSize]="medianSize"
+        [valueFormatting]="valueFormatting"
+        [labelFormatting]="labelFormatting"
+        [animations]="animations"
+        (select)="onClick($event)"
+      />
+    }
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class CardSeriesComponent implements OnChanges {
   @Input() data: CardModel[];
@@ -134,10 +137,6 @@ export class CardSeriesComponent implements OnChanges {
         tooltipText: `${label}: ${value}`
       };
     });
-  }
-
-  trackBy(index, card): string {
-    return card.label;
   }
 
   onClick(data): void {

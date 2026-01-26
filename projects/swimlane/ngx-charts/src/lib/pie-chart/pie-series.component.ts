@@ -22,50 +22,54 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
 @Component({
   selector: 'g[ngx-charts-pie-series]',
   template: `
-    <svg:g *ngFor="let arc of data; trackBy: trackBy">
-      <svg:g
-        ngx-charts-pie-label
-        *ngIf="labelVisible(arc)"
-        [data]="arc"
-        [radius]="outerRadius"
-        [color]="color(arc)"
-        [label]="labelText(arc)"
-        [labelTrim]="trimLabels"
-        [labelTrimSize]="maxLabelLength"
-        [max]="max"
-        [value]="arc.value"
-        [explodeSlices]="explodeSlices"
-        [animations]="animations"
-      ></svg:g>
-      <svg:g
-        ngx-charts-pie-arc
-        [startAngle]="arc.startAngle"
-        [endAngle]="arc.endAngle"
-        [innerRadius]="innerRadius"
-        [outerRadius]="outerRadius"
-        [fill]="color(arc)"
-        [value]="arc.data.value"
-        [gradient]="gradient"
-        [data]="arc.data"
-        [max]="max"
-        [explodeSlices]="explodeSlices"
-        [isActive]="isActive(arc.data)"
-        [animate]="animations"
-        (select)="onClick($event)"
-        (activate)="activate.emit($event)"
-        (deactivate)="deactivate.emit($event)"
-        (dblclick)="dblclick.emit($event)"
-        ngx-tooltip
-        [tooltipDisabled]="tooltipDisabled"
-        [tooltipPlacement]="placementTypes.Top"
-        [tooltipType]="styleTypes.tooltip"
-        [tooltipTitle]="getTooltipTitle(arc)"
-        [tooltipTemplate]="tooltipTemplate"
-        [tooltipContext]="arc.data"
-      ></svg:g>
-    </svg:g>
+    @for (arc of data; track arc.data.name) {
+      <svg:g>
+        @if (labelVisible(arc)) {
+          <svg:g
+            ngx-charts-pie-label
+            [data]="arc"
+            [radius]="outerRadius"
+            [color]="color(arc)"
+            [label]="labelText(arc)"
+            [labelTrim]="trimLabels"
+            [labelTrimSize]="maxLabelLength"
+            [max]="max"
+            [value]="arc.value"
+            [explodeSlices]="explodeSlices"
+            [animations]="animations"
+          ></svg:g>
+        }
+        <svg:g
+          ngx-charts-pie-arc
+          [startAngle]="arc.startAngle"
+          [endAngle]="arc.endAngle"
+          [innerRadius]="innerRadius"
+          [outerRadius]="outerRadius"
+          [fill]="color(arc)"
+          [value]="arc.data.value"
+          [gradient]="gradient"
+          [data]="arc.data"
+          [max]="max"
+          [explodeSlices]="explodeSlices"
+          [isActive]="isActive(arc.data)"
+          [animate]="animations"
+          (select)="onClick($event)"
+          (activate)="activate.emit($event)"
+          (deactivate)="deactivate.emit($event)"
+          (dblclick)="dblclick.emit($event)"
+          ngx-tooltip
+          [tooltipDisabled]="tooltipDisabled"
+          [tooltipPlacement]="placementTypes.Top"
+          [tooltipType]="styleTypes.tooltip"
+          [tooltipTitle]="getTooltipTitle(arc)"
+          [tooltipTemplate]="tooltipTemplate"
+          [tooltipContext]="arc.data"
+        ></svg:g>
+      </svg:g>
+    }
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class PieSeriesComponent implements OnChanges {
   @Input() colors: ColorHelper;
@@ -194,10 +198,6 @@ export class PieSeriesComponent implements OnChanges {
 
   color(myArc): any {
     return this.colors.getColor(this.label(myArc));
-  }
-
-  trackBy(index, item): string {
-    return item.data.name;
   }
 
   onClick(data): void {

@@ -39,7 +39,6 @@ export class InjectionService {
 
   constructor(
     private applicationRef: ApplicationRef,
-    private componentFactoryResolver: ComponentFactoryResolver,
     private injector: Injector
   ) {}
 
@@ -140,12 +139,7 @@ export class InjectionService {
     if (!location) location = this.getRootViewContainer();
     const appendLocation = this.getComponentRootNode(location);
 
-    const portalHost = new DomPortalOutlet(
-      appendLocation,
-      this.componentFactoryResolver,
-      this.applicationRef,
-      this.injector
-    );
+    const portalHost = new DomPortalOutlet(appendLocation, this.applicationRef, this.injector);
 
     const portal = new ComponentPortal(componentClass);
 

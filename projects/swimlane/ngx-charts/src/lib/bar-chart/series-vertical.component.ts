@@ -26,82 +26,90 @@ import { isPlatformServer } from '@angular/common';
 @Component({
   selector: 'g[ngx-charts-series-vertical]',
   template: `
-    <svg:g *ngIf="!isSSR">
-      <svg:g
-        ngx-charts-bar
-        *ngFor="let bar of bars; trackBy: trackBy"
-        [@animationState]="'active'"
-        [@.disabled]="!animations"
-        [width]="bar.width"
-        [height]="bar.height"
-        [x]="bar.x"
-        [y]="bar.y"
-        [fill]="bar.color"
-        [stops]="bar.gradientStops"
-        [data]="bar.data"
-        [orientation]="barOrientation.Vertical"
-        [roundEdges]="bar.roundEdges"
-        [gradient]="gradient"
-        [ariaLabel]="bar.ariaLabel"
-        [isActive]="isActive(bar.data)"
-        (select)="onClick($event)"
-        (activate)="activate.emit($event)"
-        (deactivate)="deactivate.emit($event)"
-        ngx-tooltip
-        [tooltipDisabled]="tooltipDisabled"
-        [tooltipPlacement]="tooltipPlacement"
-        [tooltipType]="tooltipType"
-        [tooltipTitle]="tooltipTemplate ? undefined : bar.tooltipText"
-        [tooltipTemplate]="tooltipTemplate"
-        [tooltipContext]="bar.data"
-        [noBarWhenZero]="noBarWhenZero"
-        [animations]="animations"
-      ></svg:g>
-    </svg:g>
-    <svg:g *ngIf="isSSR">
-      <svg:g
-        ngx-charts-bar
-        *ngFor="let bar of bars; trackBy: trackBy"
-        [width]="bar.width"
-        [height]="bar.height"
-        [x]="bar.x"
-        [y]="bar.y"
-        [fill]="bar.color"
-        [stops]="bar.gradientStops"
-        [data]="bar.data"
-        [orientation]="barOrientation.Vertical"
-        [roundEdges]="bar.roundEdges"
-        [gradient]="gradient"
-        [ariaLabel]="bar.ariaLabel"
-        [isActive]="isActive(bar.data)"
-        (select)="onClick($event)"
-        (activate)="activate.emit($event)"
-        (deactivate)="deactivate.emit($event)"
-        ngx-tooltip
-        [tooltipDisabled]="tooltipDisabled"
-        [tooltipPlacement]="tooltipPlacement"
-        [tooltipType]="tooltipType"
-        [tooltipTitle]="tooltipTemplate ? undefined : bar.tooltipText"
-        [tooltipTemplate]="tooltipTemplate"
-        [tooltipContext]="bar.data"
-        [noBarWhenZero]="noBarWhenZero"
-        [animations]="animations"
-      ></svg:g>
-    </svg:g>
-    <svg:g *ngIf="showDataLabel">
-      <svg:g
-        ngx-charts-bar-label
-        *ngFor="let b of barsForDataLabels; let i = index; trackBy: trackDataLabelBy"
-        [barX]="b.x"
-        [barY]="b.y"
-        [barWidth]="b.width"
-        [barHeight]="b.height"
-        [value]="b.total"
-        [valueFormatting]="dataLabelFormatting"
-        [orientation]="barOrientation.Vertical"
-        (dimensionsChanged)="dataLabelHeightChanged.emit({ size: $event, index: i })"
-      />
-    </svg:g>
+    @if (!isSSR) {
+      <svg:g>
+        @for (bar of bars; track bar.label) {
+          <svg:g
+            ngx-charts-bar
+            [@animationState]="'active'"
+            [@.disabled]="!animations"
+            [width]="bar.width"
+            [height]="bar.height"
+            [x]="bar.x"
+            [y]="bar.y"
+            [fill]="bar.color"
+            [stops]="bar.gradientStops"
+            [data]="bar.data"
+            [orientation]="barOrientation.Vertical"
+            [roundEdges]="bar.roundEdges"
+            [gradient]="gradient"
+            [ariaLabel]="bar.ariaLabel"
+            [isActive]="isActive(bar.data)"
+            (select)="onClick($event)"
+            (activate)="activate.emit($event)"
+            (deactivate)="deactivate.emit($event)"
+            ngx-tooltip
+            [tooltipDisabled]="tooltipDisabled"
+            [tooltipPlacement]="tooltipPlacement"
+            [tooltipType]="tooltipType"
+            [tooltipTitle]="tooltipTemplate ? undefined : bar.tooltipText"
+            [tooltipTemplate]="tooltipTemplate"
+            [tooltipContext]="bar.data"
+            [noBarWhenZero]="noBarWhenZero"
+            [animations]="animations"
+          ></svg:g>
+        }
+      </svg:g>
+    } @else {
+      <svg:g>
+        @for (bar of bars; track bar.label) {
+          <svg:g
+            ngx-charts-bar
+            [width]="bar.width"
+            [height]="bar.height"
+            [x]="bar.x"
+            [y]="bar.y"
+            [fill]="bar.color"
+            [stops]="bar.gradientStops"
+            [data]="bar.data"
+            [orientation]="barOrientation.Vertical"
+            [roundEdges]="bar.roundEdges"
+            [gradient]="gradient"
+            [ariaLabel]="bar.ariaLabel"
+            [isActive]="isActive(bar.data)"
+            (select)="onClick($event)"
+            (activate)="activate.emit($event)"
+            (deactivate)="deactivate.emit($event)"
+            ngx-tooltip
+            [tooltipDisabled]="tooltipDisabled"
+            [tooltipPlacement]="tooltipPlacement"
+            [tooltipType]="tooltipType"
+            [tooltipTitle]="tooltipTemplate ? undefined : bar.tooltipText"
+            [tooltipTemplate]="tooltipTemplate"
+            [tooltipContext]="bar.data"
+            [noBarWhenZero]="noBarWhenZero"
+            [animations]="animations"
+          ></svg:g>
+        }
+      </svg:g>
+    }
+    @if (showDataLabel) {
+      <svg:g>
+        @for (b of barsForDataLabels; track trackDataLabelBy($index, b); let i = $index) {
+          <svg:g
+            ngx-charts-bar-label
+            [barX]="b.x"
+            [barY]="b.y"
+            [barWidth]="b.width"
+            [barHeight]="b.height"
+            [value]="b.total"
+            [valueFormatting]="dataLabelFormatting"
+            [orientation]="barOrientation.Vertical"
+            (dimensionsChanged)="dataLabelHeightChanged.emit({ size: $event, index: i })"
+          />
+        }
+      </svg:g>
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
@@ -113,7 +121,8 @@ import { isPlatformServer } from '@angular/common';
         animate(500, style({ opacity: 0 }))
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class SeriesVerticalComponent implements OnChanges {
   @Input() dims: ViewDimensions;
@@ -156,7 +165,7 @@ export class SeriesVerticalComponent implements OnChanges {
     }
   }
 
-  ngOnChanges(changes): void {
+  ngOnChanges(): void {
     this.update();
   }
 
@@ -329,10 +338,6 @@ export class SeriesVerticalComponent implements OnChanges {
       return dataItem.label;
     }
     return dataItem.name;
-  }
-
-  trackBy(index: number, bar: Bar): string {
-    return bar.label;
   }
 
   trackDataLabelBy(index: number, barLabel: any): string {

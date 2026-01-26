@@ -19,14 +19,16 @@ import { id } from '../utils/id';
   selector: 'g[ngx-charts-heat-map-cell]',
   template: `
     <svg:g [attr.transform]="transform" class="cell">
-      <defs *ngIf="gradient">
-        <svg:g
-          ngx-charts-svg-linear-gradient
-          [orientation]="barOrientation.Vertical"
-          [name]="gradientId"
-          [stops]="gradientStops"
-        />
-      </defs>
+      @if (gradient) {
+        <defs>
+          <svg:g
+            ngx-charts-svg-linear-gradient
+            [orientation]="barOrientation.Vertical"
+            [name]="gradientId"
+            [stops]="gradientStops"
+          />
+        </defs>
+      }
       <svg:rect
         [attr.fill]="gradient ? gradientUrl : fill"
         rx="3"
@@ -37,7 +39,8 @@ import { id } from '../utils/id';
       />
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class HeatMapCellComponent implements OnChanges {
   @Input() fill: string;

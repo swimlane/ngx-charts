@@ -63,7 +63,8 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
         animate(500, style({ opacity: 0 }))
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class BoxSeriesComponent implements OnChanges {
   @Input() dims: ViewDimensions;

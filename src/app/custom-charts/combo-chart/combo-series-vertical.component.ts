@@ -9,32 +9,33 @@ import { BarOrientation } from '@swimlane/ngx-charts/common/types/bar-orientatio
   // tslint:disable-next-line: component-selector
   selector: 'g[ngx-combo-charts-series-vertical]',
   template: `
-    <svg:g
-      ngx-charts-bar
-      *ngFor="let bar of bars; trackBy: trackBy"
-      [@animationState]="'active'"
-      [width]="bar.width"
-      [height]="bar.height"
-      [x]="bar.x"
-      [y]="bar.y"
-      [fill]="bar.color"
-      [stops]="bar.gradientStops"
-      [data]="bar.data"
-      [orientation]="barOrientation.Vertical"
-      [roundEdges]="bar.roundEdges"
-      [gradient]="gradient"
-      [isActive]="isActive(bar.data)"
-      [animations]="animations"
-      [noBarWhenZero]="noBarWhenZero"
-      (select)="onClick($event)"
-      (activate)="activate.emit($event)"
-      (deactivate)="deactivate.emit($event)"
-      ngx-tooltip
-      [tooltipDisabled]="tooltipDisabled"
-      [tooltipPlacement]="placementTypes.Top"
-      [tooltipType]="styleTypes.tooltip"
-      [tooltipTitle]="bar.tooltipText"
-    ></svg:g>
+    @for (bar of bars; track bar.label) {
+      <svg:g
+        ngx-charts-bar
+        [@animationState]="'active'"
+        [width]="bar.width"
+        [height]="bar.height"
+        [x]="bar.x"
+        [y]="bar.y"
+        [fill]="bar.color"
+        [stops]="bar.gradientStops"
+        [data]="bar.data"
+        [orientation]="barOrientation.Vertical"
+        [roundEdges]="bar.roundEdges"
+        [gradient]="gradient"
+        [isActive]="isActive(bar.data)"
+        [animations]="animations"
+        [noBarWhenZero]="noBarWhenZero"
+        (select)="onClick($event)"
+        (activate)="activate.emit($event)"
+        (deactivate)="deactivate.emit($event)"
+        ngx-tooltip
+        [tooltipDisabled]="tooltipDisabled"
+        [tooltipPlacement]="placementTypes.Top"
+        [tooltipType]="styleTypes.tooltip"
+        [tooltipTitle]="bar.tooltipText"
+      ></svg:g>
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
@@ -47,7 +48,8 @@ import { BarOrientation } from '@swimlane/ngx-charts/common/types/bar-orientatio
         animate(500, style({ opacity: 0, transform: 'scale(0)' }))
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class ComboSeriesVerticalComponent implements OnChanges {
   @Input() dims;
@@ -194,9 +196,5 @@ export class ComboSeriesVerticalComponent implements OnChanges {
 
   onClick(data): void {
     this.select.emit(data);
-  }
-
-  trackBy(index, bar): string {
-    return bar.label;
   }
 }

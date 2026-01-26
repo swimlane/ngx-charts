@@ -25,15 +25,19 @@ import { isPlatformBrowser } from '@angular/common';
     <div>
       <span #caretElm [hidden]="!showCaret" class="tooltip-caret position-{{ this.placement }}"> </span>
       <div class="tooltip-content">
-        <span *ngIf="!title">
-          <ng-template [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ model: context }"> </ng-template>
-        </span>
-        <span *ngIf="title" [innerHTML]="title"> </span>
+        @if (!title) {
+          <span>
+            <ng-template [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ model: context }"> </ng-template>
+          </span>
+        } @else {
+          <span [innerHTML]="title"> </span>
+        }
       </div>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./tooltip.component.scss']
+  styleUrls: ['./tooltip.component.scss'],
+  standalone: false
 })
 export class TooltipContentComponent implements AfterViewInit {
   @Input() host: ElementRef;
@@ -58,7 +62,11 @@ export class TooltipContentComponent implements AfterViewInit {
     return clz;
   }
 
-  constructor(public element: ElementRef, private renderer: Renderer2, @Inject(PLATFORM_ID) private platformId: any) {}
+  constructor(
+    public element: ElementRef,
+    private renderer: Renderer2,
+    @Inject(PLATFORM_ID) private platformId: any
+  ) {}
 
   ngAfterViewInit(): void {
     setTimeout(this.position.bind(this));

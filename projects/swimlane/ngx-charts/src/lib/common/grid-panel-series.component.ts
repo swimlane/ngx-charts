@@ -19,19 +19,21 @@ enum ClassEnum {
 @Component({
   selector: 'g[ngx-charts-grid-panel-series]',
   template: `
-    <svg:g
-      ngx-charts-grid-panel
-      *ngFor="let gridPanel of gridPanels"
-      [height]="gridPanel.height"
-      [width]="gridPanel.width"
-      [x]="gridPanel.x"
-      [y]="gridPanel.y"
-      [class.grid-panel]="true"
-      [class.odd]="gridPanel.class === 'odd'"
-      [class.even]="gridPanel.class === 'even'"
-    ></svg:g>
+    @for (gridPanel of gridPanels; track gridPanel.name) {
+      <svg:g
+        ngx-charts-grid-panel
+        [height]="gridPanel.height"
+        [width]="gridPanel.width"
+        [x]="gridPanel.x"
+        [y]="gridPanel.y"
+        [class.grid-panel]="true"
+        [class.odd]="gridPanel.class === 'odd'"
+        [class.even]="gridPanel.class === 'even'"
+      ></svg:g>
+    }
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class GridPanelSeriesComponent implements OnChanges {
   gridPanels: GridPanel[];

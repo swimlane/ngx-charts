@@ -1,5 +1,29 @@
 # Changelog
 
+## HEAD (unreleased)
+
+## 23.1.0
+
+- Enhancement: Handle the label overflow inside the Sankey chart.
+- Enhancement: Added utility method to round off percentages in Advanced Pie Chart.
+
+## 23.0.1
+
+- Chore: Update dependencies
+
+## 23.0.0
+
+- Enhancement: Added support for Angular 20
+- Enhancement: Added support for reference lines on Bar chart (horizontal and vertical), and area chart
+- Breaking: Removed support for Angular 17 and earlier versions
+
+## 22.0.0
+
+- Enhancement: Support Angular 19, `standalone` now required in all `@Component`
+- Enhancement: Update SASS and update for latest standard libraries
+- Enhancement: Sankey Chart can now accept custom colors
+- Fix: `update()` was not getting called on `@Input` changes
+
 ## 21.1.3
 
 - Fix: Fixed a bug where the mask ID for percent gauge chart would be regenerated on each update

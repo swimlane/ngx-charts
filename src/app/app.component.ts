@@ -1,31 +1,31 @@
+import { HashLocationStrategy, Location, LocationStrategy } from '@angular/common';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Location, LocationStrategy, HashLocationStrategy } from '@angular/common';
-import * as shape from 'd3-shape';
 import * as d3Array from 'd3-array';
+import * as shape from 'd3-shape';
 
-import { Color, colorSets } from '@swimlane/ngx-charts/utils/color-sets';
-import { formatLabel, escapeLabel } from '@swimlane/ngx-charts/common/label.helper';
-import {
-  single,
-  multi,
-  boxData,
-  bubble,
-  sankeyData,
-  generateData,
-  generateGraph,
-  treemap,
-  timelineFilterBarData,
-  fiscalYearReport
-} from './data';
-import { bubbleDemoData } from './custom-charts/bubble-chart-interactive/data';
-import { BubbleChartInteractiveServerDataModel } from './custom-charts/bubble-chart-interactive/models';
-import { data as countries } from 'emoji-flags';
-import chartGroups from './chartTypes';
-import { barChart, lineChartSeries } from './combo-chart-data';
-import pkg from '../../projects/swimlane/ngx-charts/package.json';
-import { InputTypes } from '@swimlane/ngx-ui';
+import { escapeLabel, formatLabel } from '@swimlane/ngx-charts/common/label.helper';
 import { LegendPosition } from '@swimlane/ngx-charts/common/types/legend.model';
 import { ScaleType } from '@swimlane/ngx-charts/common/types/scale-type.enum';
+import { Color, colorSets } from '@swimlane/ngx-charts/utils/color-sets';
+import { InputTypes } from '@swimlane/ngx-ui';
+import { data as countries } from 'emoji-flags';
+import pkg from '../../projects/swimlane/ngx-charts/package.json';
+import chartGroups from './chartTypes';
+import { barChart, lineChartSeries } from './combo-chart-data';
+import { bubbleDemoData } from './custom-charts/bubble-chart-interactive/data';
+import { BubbleChartInteractiveServerDataModel } from './custom-charts/bubble-chart-interactive/models';
+import {
+  boxData,
+  bubble,
+  fiscalYearReport,
+  generateData,
+  generateGraph,
+  multi,
+  sankeyData,
+  single,
+  timelineFilterBarData,
+  treemap
+} from './data';
 
 const monthName = new Intl.DateTimeFormat('en-us', { month: 'short' });
 const weekdayName = new Intl.DateTimeFormat('en-us', { weekday: 'short' });
@@ -49,7 +49,8 @@ const getRandomInt = (min: number, max: number) => {
   providers: [Location, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['../../node_modules/@swimlane/ngx-ui/index.css', './app.component.scss'],
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
+  standalone: false
 })
 export class AppComponent implements OnInit {
   APP_VERSION = pkg.version;
@@ -264,7 +265,11 @@ export class AppComponent implements OnInit {
     { value: 37750, name: 'Average' },
     { value: 33000, name: 'Minimum' }
   ];
-
+  refLinesArea = [
+    { value: 5062, name: 'Maximum' },
+    { value: 4030, name: 'Average' },
+    { value: 3000, name: 'Minimum' }
+  ];
   // data
   plotData: any;
 

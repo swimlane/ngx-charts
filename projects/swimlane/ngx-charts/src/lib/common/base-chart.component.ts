@@ -26,7 +26,8 @@ import { ViewDimensions } from './types/view-dimension.interface';
 
 @Component({
   selector: 'base-chart',
-  template: ` <div></div> `
+  template: ` <div></div> `,
+  standalone: false
 })
 export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, OnInit {
   @Input() declare results: any;

@@ -1,57 +1,60 @@
 import {
+  ChangeDetectionStrategy,
   Component,
-  Input,
-  Output,
   EventEmitter,
+  Input,
   OnChanges,
-  ViewChild,
+  Output,
   SimpleChanges,
-  ChangeDetectionStrategy
+  ViewChild
 } from '@angular/core';
-import { YAxisTicksComponent } from './y-axis-ticks.component';
 import { Orientation } from '../types/orientation.enum';
 import { ViewDimensions } from '../types/view-dimension.interface';
+import { YAxisTicksComponent } from './y-axis-ticks.component';
 
 @Component({
   selector: 'g[ngx-charts-y-axis]',
   template: `
     <svg:g [attr.class]="yAxisClassName" [attr.transform]="transform">
-      <svg:g
-        ngx-charts-y-axis-ticks
-        *ngIf="yScale"
-        [trimTicks]="trimTicks"
-        [maxTickLength]="maxTickLength"
-        [tickFormatting]="tickFormatting"
-        [tickArguments]="tickArguments"
-        [tickValues]="ticks"
-        [tickStroke]="tickStroke"
-        [scale]="yScale"
-        [orient]="yOrient"
-        [showGridLines]="showGridLines"
-        [gridLineWidth]="dims.width"
-        [referenceLines]="referenceLines"
-        [showRefLines]="showRefLines"
-        [showRefLabels]="showRefLabels"
-        [showRefArea]="showRefArea"
-        [refLineWidth]="refLineWidth"
-        [refLineStyle]="refLineStyle"
-        [height]="dims.height"
-        [wrapTicks]="wrapTicks"
-        (dimensionsChanged)="emitTicksWidth($event)"
-      />
-
-      <svg:g
-        ngx-charts-axis-label
-        *ngIf="showLabel"
-        [label]="labelText"
-        [offset]="labelOffset"
-        [orient]="yOrient"
-        [height]="dims.height"
-        [width]="dims.width"
-      ></svg:g>
+      @if (yScale) {
+        <svg:g
+          ngx-charts-y-axis-ticks
+          [trimTicks]="trimTicks"
+          [maxTickLength]="maxTickLength"
+          [tickFormatting]="tickFormatting"
+          [tickArguments]="tickArguments"
+          [tickValues]="ticks"
+          [tickStroke]="tickStroke"
+          [scale]="yScale"
+          [orient]="yOrient"
+          [showGridLines]="showGridLines"
+          [gridLineWidth]="dims.width"
+          [referenceLines]="referenceLines"
+          [showRefLines]="showRefLines"
+          [showRefLabels]="showRefLabels"
+          [showRefArea]="showRefArea"
+          [refLineWidth]="refLineWidth"
+          [refLineStyle]="refLineStyle"
+          [refLineColor]="refLineColor"
+          [height]="dims.height"
+          [wrapTicks]="wrapTicks"
+          (dimensionsChanged)="emitTicksWidth($event)"
+        />
+      }
+      @if (showLabel) {
+        <svg:g
+          ngx-charts-axis-label
+          [label]="labelText"
+          [offset]="labelOffset"
+          [orient]="yOrient"
+          [height]="dims.height"
+          [width]="dims.width"
+        ></svg:g>
+      }
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class YAxisComponent implements OnChanges {
   @Input() yScale;
@@ -71,6 +74,7 @@ export class YAxisComponent implements OnChanges {
   @Input() showRefArea: boolean;
   @Input() refLineWidth: number = 1;
   @Input() refLineStyle: string = 'solid';
+  @Input() refLineColor: string;
   @Input() yAxisOffset: number = 0;
   @Input() wrapTicks = false;
   @Output() dimensionsChanged = new EventEmitter();
