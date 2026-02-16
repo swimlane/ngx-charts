@@ -4,6 +4,7 @@ import {
   Output,
   EventEmitter,
   OnChanges,
+  SimpleChanges,
   ChangeDetectionStrategy,
   TemplateRef,
   PLATFORM_ID,
@@ -157,7 +158,7 @@ export class SeriesVerticalComponent implements OnChanges {
     }
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 

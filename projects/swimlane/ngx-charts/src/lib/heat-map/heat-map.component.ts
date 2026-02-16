@@ -6,7 +6,8 @@ import {
   ContentChild,
   TemplateRef,
   Output,
-  EventEmitter
+  EventEmitter,
+  SimpleChanges
 } from '@angular/core';
 import { scaleBand } from 'd3-scale';
 
@@ -148,7 +149,7 @@ export class HeatMapComponent extends BaseChartComponent {
   legendOptions: LegendOptions;
   scaleType: ScaleType = ScaleType.Linear;
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 
