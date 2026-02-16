@@ -5,7 +5,8 @@ import {
   ViewChild,
   AfterViewInit,
   ViewEncapsulation,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  SimpleChanges
 } from '@angular/core';
 import { scaleLinear } from 'd3-scale';
 
@@ -146,7 +147,7 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
     });
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 

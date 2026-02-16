@@ -9,7 +9,8 @@ import {
   EventEmitter,
   ViewChildren,
   QueryList,
-  ElementRef
+  ElementRef,
+  SimpleChanges
 } from '@angular/core';
 import { sankey, sankeyLeft, sankeyLinkHorizontal } from 'd3-sankey';
 
@@ -153,7 +154,7 @@ export class SankeyComponent extends BaseChartComponent {
   labelWidthMap: Map<string, number>;
   chartHasActive: boolean = false;
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 

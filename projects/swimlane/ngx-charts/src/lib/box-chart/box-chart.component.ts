@@ -6,7 +6,8 @@ import {
   Input,
   Output,
   TemplateRef,
-  ViewEncapsulation
+  ViewEncapsulation,
+  SimpleChanges
 } from '@angular/core';
 
 import { BaseChartComponent } from '../common/base-chart.component';
@@ -134,7 +135,7 @@ export class BoxChartComponent extends BaseChartComponent {
   /** Chart Y axis dimension. */
   yAxisWidth: number = 0;
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 

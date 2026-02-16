@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ElementRef, OnChanges, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { select } from 'd3-selection';
 import { invertColor } from '../utils/color-utils';
 import { trimLabel } from '../common/trim-label.helper';
@@ -92,7 +92,7 @@ export class TreeMapCellComponent implements OnChanges {
     this.element = element.nativeElement;
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
 
     this.valueFormatting = this.valueFormatting || (value => value.toLocaleString());

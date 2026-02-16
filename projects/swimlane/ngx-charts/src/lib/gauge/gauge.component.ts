@@ -9,7 +9,8 @@ import {
   EventEmitter,
   ViewEncapsulation,
   ContentChild,
-  TemplateRef
+  TemplateRef,
+  SimpleChanges
 } from '@angular/core';
 import { scaleLinear } from 'd3-scale';
 
@@ -138,7 +139,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   displayValue: string;
   legendOptions: LegendOptions;
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 

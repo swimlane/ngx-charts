@@ -6,7 +6,8 @@ import {
   Input,
   Output,
   TemplateRef,
-  ViewEncapsulation
+  ViewEncapsulation,
+  SimpleChanges
 } from '@angular/core';
 
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
@@ -90,7 +91,7 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
   @Input() nameFormatting: (value: string) => any;
   @Input() percentageFormatting: (value: number) => any;
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 

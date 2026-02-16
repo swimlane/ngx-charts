@@ -6,7 +6,8 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy,
   ContentChild,
-  TemplateRef
+  TemplateRef,
+  SimpleChanges
 } from '@angular/core';
 import { treemap, stratify } from 'd3-hierarchy';
 
@@ -62,7 +63,7 @@ export class TreeMapComponent extends BaseChartComponent {
   data: DataItem;
   margin: number[] = [10, 10, 10, 10];
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 

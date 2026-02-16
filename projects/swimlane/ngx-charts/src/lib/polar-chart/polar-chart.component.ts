@@ -7,7 +7,8 @@ import {
   ChangeDetectionStrategy,
   ContentChild,
   TemplateRef,
-  OnInit
+  OnInit,
+  SimpleChanges
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
@@ -231,7 +232,7 @@ export class PolarChartComponent extends BaseChartComponent implements OnInit {
     }
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 

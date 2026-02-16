@@ -5,6 +5,7 @@ import {
   EventEmitter,
   OnChanges,
   OnInit,
+  SimpleChanges,
   ChangeDetectionStrategy,
   TemplateRef,
   PLATFORM_ID,
@@ -152,7 +153,7 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
     }
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 
