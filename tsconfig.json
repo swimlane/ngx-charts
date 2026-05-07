@@ -11,7 +11,7 @@
     "module": "ES2022",
     "moduleResolution": "bundler",
     "importHelpers": true,
-    "typeRoots": ["node_modules/@types"],
+    "types": ["vitest/globals", "node"],
     "lib": ["ES2022", "dom"],
     "paths": {
       "@swimlane/ngx-charts": ["projects/swimlane/ngx-charts/src/public_api"],

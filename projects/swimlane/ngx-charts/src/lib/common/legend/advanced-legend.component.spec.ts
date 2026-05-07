@@ -8,14 +8,28 @@ import { ScaleType } from '../types/scale-type.enum';
 
 @Component({
   selector: 'test-component',
-  template: '',
-  standalone: false
+  template: `
+    <ngx-charts-advanced-legend
+      [label]="legendLabel"
+      [colors]="colors"
+      [data]="data"
+      [width]="legendWidth"
+      [animations]="false"
+      [roundPercentages]="roundPercentages"
+      [valueFormatting]="valueFormatting"
+      [labelFormatting]="labelFormatting"
+      [percentageFormatting]="percentageFormatting"
+    >
+    </ngx-charts-advanced-legend>
+  `,
+  imports: [ChartCommonModule]
 })
 class TestComponent {
   legendLabel: string = 'Test legend label';
   colors: any;
   legendWidth: number;
   data: any;
+  roundPercentages = false;
 
   constructor() {
     const scheme: Color = {
@@ -43,27 +57,8 @@ class TestComponent {
 describe('<ngx-charts-advanced-legend>', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TestComponent],
-      imports: [ChartCommonModule]
+      imports: [TestComponent]
     });
-
-    TestBed.overrideComponent(TestComponent, {
-      set: {
-        template: `
-                <ngx-charts-advanced-legend
-                  [label]="legendLabel"
-                  [colors]="colors"
-                  [data]="data"
-                  [width]="legendWidth"
-                  [animations]="false"
-                  [roundPercentages]="false"
-                  [valueFormatting]="valueFormatting"
-                  [labelFormatting]="labelFormatting"
-                  [percentageFormatting]="percentageFormatting">
-                </ngx-charts-advanced-legend>
-            `
-      }
-    }).compileComponents();
   });
 
   it('should render label and legend with values for each item', () => {
@@ -146,25 +141,8 @@ describe('<ngx-charts-advanced-legend>', () => {
   });
 
   it('should round percentages with 2 decimals and sum to 100% when roundPercentages is true', () => {
-    TestBed.overrideComponent(TestComponent, {
-      set: {
-        template: `
-          <ngx-charts-advanced-legend
-            [label]="legendLabel"
-            [colors]="colors"
-            [data]="data"
-            [width]="legendWidth"
-            [animations]="false"
-            [roundPercentages]="true"
-            [valueFormatting]="valueFormatting"
-            [labelFormatting]="labelFormatting"
-            [percentageFormatting]="percentageFormatting">
-          </ngx-charts-advanced-legend>
-        `
-      }
-    }).compileComponents();
-
     const fixture = TestBed.createComponent(TestComponent);
+    fixture.componentInstance.roundPercentages = true;
     fixture.detectChanges();
     const { legendItemPercentElements } = loadLegendItemElements(fixture);
 
@@ -187,28 +165,10 @@ describe('<ngx-charts-advanced-legend>', () => {
   });
 
   it('should ensure rounded percentages sum to 100% for equal percentage values', () => {
-    TestBed.overrideComponent(TestComponent, {
-      set: {
-        template: `
-          <ngx-charts-advanced-legend
-            [label]="legendLabel"
-            [colors]="colors"
-            [data]="data"
-            [width]="legendWidth"
-            [animations]="false"
-            [roundPercentages]="true"
-            [valueFormatting]="valueFormatting"
-            [labelFormatting]="labelFormatting"
-            [percentageFormatting]="percentageFormatting">
-          </ngx-charts-advanced-legend>
-        `
-      }
-    }).compileComponents();
-
     const fixture = TestBed.createComponent(TestComponent);
     const component = fixture.componentInstance;
+    component.roundPercentages = true;
 
-    // Three equal values(33.33% each)
     component.data = [
       { name: 'a', value: 1 },
       { name: 'b', value: 1 },
@@ -225,28 +185,10 @@ describe('<ngx-charts-advanced-legend>', () => {
   });
 
   it('should ensure rounded percentages sum to 100% for edge cases', () => {
-    TestBed.overrideComponent(TestComponent, {
-      set: {
-        template: `
-          <ngx-charts-advanced-legend
-            [label]="legendLabel"
-            [colors]="colors"
-            [data]="data"
-            [width]="legendWidth"
-            [animations]="false"
-            [roundPercentages]="true"
-            [valueFormatting]="valueFormatting"
-            [labelFormatting]="labelFormatting"
-            [percentageFormatting]="percentageFormatting">
-          </ngx-charts-advanced-legend>
-        `
-      }
-    }).compileComponents();
-
     const fixture = TestBed.createComponent(TestComponent);
     const component = fixture.componentInstance;
+    component.roundPercentages = true;
 
-    // Mixed values with one dominant value
     component.data = [
       { name: 'a', value: 900 },
       { name: 'b', value: 1 },
@@ -266,28 +208,10 @@ describe('<ngx-charts-advanced-legend>', () => {
   });
 
   it('should ensure rounded percentages sum to 0 if all values are zero', () => {
-    TestBed.overrideComponent(TestComponent, {
-      set: {
-        template: `
-          <ngx-charts-advanced-legend
-            [label]="legendLabel"
-            [colors]="colors"
-            [data]="data"
-            [width]="legendWidth"
-            [animations]="false"
-            [roundPercentages]="true"
-            [valueFormatting]="valueFormatting"
-            [labelFormatting]="labelFormatting"
-            [percentageFormatting]="percentageFormatting">
-          </ngx-charts-advanced-legend>
-        `
-      }
-    }).compileComponents();
-
     const fixture = TestBed.createComponent(TestComponent);
     const component = fixture.componentInstance;
+    component.roundPercentages = true;
 
-    // All zero values
     component.data = [
       { name: 'a', value: 0 },
       { name: 'b', value: 0 },

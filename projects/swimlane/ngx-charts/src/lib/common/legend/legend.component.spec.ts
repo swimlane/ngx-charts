@@ -6,13 +6,15 @@ import { ColorHelper } from '../color.helper';
 import { Color } from '../../utils/color-sets';
 import { ScaleType } from '../types/scale-type.enum';
 
-// some test data (includes just enough data to run the tests)
 const seriesData = ['complete', 'not complete'];
 
 @Component({
   selector: 'test-component',
-  template: '',
-  standalone: false
+  template: `
+    <ngx-charts-legend [title]="legendTitle" [colors]="colors" [data]="seriesData" [height]="legendHeight">
+    </ngx-charts-legend>
+  `,
+  imports: [ChartCommonModule]
 })
 class TestComponent {
   seriesData: any = seriesData;
@@ -34,22 +36,8 @@ class TestComponent {
 describe('<ngx-charts-legend>', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TestComponent],
-      imports: [ChartCommonModule]
+      imports: [TestComponent]
     });
-
-    TestBed.overrideComponent(TestComponent, {
-      set: {
-        template: `
-                <ngx-charts-legend
-                  [title]="legendTitle"
-                  [colors]="colors"
-                  [data]="seriesData"
-                  [height]="legendHeight">
-                </ngx-charts-legend>
-            `
-      }
-    }).compileComponents();
   });
 
   it('should set the legend labels', () => {
@@ -59,7 +47,7 @@ describe('<ngx-charts-legend>', () => {
     const labelsElement = fixture.debugElement.nativeElement.querySelector('.legend-labels');
 
     expect(labelsElement).toBeDefined();
-    expect(labelsElement.childElementCount).toEqual(2); // 2 legend labels
+    expect(labelsElement.childElementCount).toEqual(2);
 
     expect(labelsElement.children[0].textContent).toContain('complete');
     expect(labelsElement.children[1].textContent).toContain('not complete');

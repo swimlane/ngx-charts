@@ -7,14 +7,17 @@ import { multi } from '../../../../../../src/app/data';
 
 import { AreaChartModule } from './area-chart.module';
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+vi.setConfig({ testTimeout: 30000, hookTimeout: 30000 });
 
 const colors = ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'];
 
 @Component({
   selector: 'test-component',
-  template: '',
-  standalone: false
+  template: `
+    <ngx-charts-area-chart [animations]="false" [view]="[400, 800]" [scheme]="colorScheme" [results]="data">
+    </ngx-charts-area-chart>
+  `,
+  imports: [AreaChartModule]
 })
 class TestComponent {
   data: any = multi;
@@ -26,8 +29,7 @@ class TestComponent {
 describe('<ngx-charts-area-chart>', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TestComponent],
-      imports: [NoopAnimationsModule, AreaChartModule],
+      imports: [NoopAnimationsModule, TestComponent],
       providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
     });
   });
@@ -37,17 +39,6 @@ describe('<ngx-charts-area-chart>', () => {
     let de: DebugElement;
 
     beforeEach(() => {
-      TestBed.overrideComponent(TestComponent, {
-        set: {
-          template: `
-               <ngx-charts-area-chart
-                [animations]="false"
-                [view]="[400,800]"
-                [scheme]="colorScheme"
-                [results]="data">
-              </ngx-charts-area-chart>`
-        }
-      }).compileComponents();
       fixture = TestBed.createComponent(TestComponent);
       fixture.detectChanges();
       de = fixture.debugElement;

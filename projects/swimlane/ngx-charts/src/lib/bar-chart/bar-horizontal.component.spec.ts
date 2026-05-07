@@ -10,42 +10,69 @@ import { BarChartModule } from './bar-chart.module';
 import { BarComponent } from './bar.component';
 import { YAxisTicksComponent } from '../common/axes/y-axis-ticks.component';
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+vi.setConfig({ testTimeout: 30000, hookTimeout: 30000 });
 
 @Component({
   selector: 'test-component',
-  template: '',
-  standalone: false
+  template: `
+    <ngx-charts-bar-horizontal
+      [animations]="false"
+      [view]="[400, 800]"
+      [scheme]="colorScheme"
+      [results]="single"
+      [barPadding]="barPadding"
+    >
+    </ngx-charts-bar-horizontal>
+  `,
+  imports: [BarChartModule]
 })
 class TestComponent {
   single: any = single;
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
+  barPadding: number = 8;
+}
+
+@Component({
+  selector: 'test-wrap-ticks',
+  template: `
+    <ngx-charts-bar-horizontal
+      [animations]="false"
+      [view]="[400, 300]"
+      [scheme]="colorScheme"
+      [results]="results"
+      [xAxis]="true"
+      [yAxis]="true"
+      [wrapTicks]="true"
+    >
+    </ngx-charts-bar-horizontal>
+  `,
+  imports: [BarChartModule]
+})
+class WrapTicksTestComponent {
+  results = [
+    { name: 'Lorem Ipsum', value: 40632 },
+    { name: 'Lorem Ipsum is simply', value: 50000 },
+    { name: 'Lorem Ipsum is simply dummy text', value: 36240 },
+    { name: 'Lorem Ipsum is simply dummy text of the printing', value: 3000 },
+    {
+      name: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+      value: 5655
+    }
+  ];
+  colorScheme = {
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+  };
 }
 
 describe('<ngx-charts-bar-horizontal>', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [TestComponent],
-      imports: [NoopAnimationsModule, BarChartModule],
-      providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
-    });
-  });
-
   describe('basic setup', () => {
     beforeEach(() => {
-      TestBed.overrideComponent(TestComponent, {
-        set: {
-          template: `
-               <ngx-charts-bar-horizontal
-                [animations]="false"
-                [view]="[400,800]"
-                [scheme]="colorScheme"
-                [results]="single">
-              </ngx-charts-bar-horizontal>`
-        }
-      }).compileComponents();
+      TestBed.configureTestingModule({
+        imports: [NoopAnimationsModule, TestComponent],
+        providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
+      });
     });
 
     it('should set the svg width and height', () => {
@@ -79,22 +106,15 @@ describe('<ngx-charts-bar-horizontal>', () => {
 
   describe('padding', () => {
     beforeEach(() => {
-      TestBed.overrideComponent(TestComponent, {
-        set: {
-          template: `
-               <ngx-charts-bar-horizontal
-                [animations]="false"
-                [view]="[400,800]"
-                [scheme]="colorScheme"
-                [results]="single"
-                [barPadding]="0">
-              </ngx-charts-bar-horizontal>`
-        }
-      }).compileComponents();
+      TestBed.configureTestingModule({
+        imports: [NoopAnimationsModule, TestComponent],
+        providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
+      });
     });
 
     it('should render correct cell size, with zero padding', () => {
       const fixture = TestBed.createComponent(TestComponent);
+      fixture.componentInstance.barPadding = 0;
       fixture.detectChanges();
 
       const bar = fixture.debugElement.query(By.directive(BarComponent));
@@ -105,22 +125,15 @@ describe('<ngx-charts-bar-horizontal>', () => {
 
   describe('padding -2', () => {
     beforeEach(() => {
-      TestBed.overrideComponent(TestComponent, {
-        set: {
-          template: `
-          <ngx-charts-bar-horizontal
-            [animations]="false"
-            [view]="[400,800]"
-            [scheme]="colorScheme"
-            [results]="single"
-            [barPadding]="20">
-          </ngx-charts-bar-horizontal>`
-        }
-      }).compileComponents();
+      TestBed.configureTestingModule({
+        imports: [NoopAnimationsModule, TestComponent],
+        providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
+      });
     });
 
     it('should render correct cell size, with padding', () => {
       const fixture = TestBed.createComponent(TestComponent);
+      fixture.componentInstance.barPadding = 20;
       fixture.detectChanges();
 
       const bar = fixture.debugElement.query(By.directive(BarComponent));
@@ -130,33 +143,18 @@ describe('<ngx-charts-bar-horizontal>', () => {
   });
 
   describe('y-axis - wrap ticks', () => {
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        imports: [NoopAnimationsModule, WrapTicksTestComponent],
+        providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
+      });
+    });
+
     const getContent = (axisTick: DebugElement) =>
       axisTick.queryAll(By.css('tspan')).map(entry => entry.nativeElement.textContent.trim());
 
     it('should wrap tick if there is available space', () => {
-      TestBed.overrideComponent(TestComponent, {
-        set: {
-          template: `
-          <ngx-charts-bar-horizontal
-            [animations]="false"
-            [view]="[400, 300]"
-            [scheme]="colorScheme"
-            [results]="[
-              { name: 'Lorem Ipsum', value: 40632 },
-              { name: 'Lorem Ipsum is simply', value: 50000 },
-              { name: 'Lorem Ipsum is simply dummy text', value: 36240 },
-              { name: 'Lorem Ipsum is simply dummy text of the printing', value: 3000 },
-              { name: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', value: 5655 },
-            ]"
-            [xAxis]="true"
-            [yAxis]="true"
-            [wrapTicks]="true"
-          >
-          </ngx-charts-bar-horizontal>`
-        }
-      }).compileComponents();
-
-      const fixture = TestBed.createComponent(TestComponent);
+      const fixture = TestBed.createComponent(WrapTicksTestComponent);
       fixture.detectChanges();
 
       const yAxisTicks = fixture.debugElement.query(By.directive(YAxisTicksComponent));
