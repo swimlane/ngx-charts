@@ -1,16 +1,11 @@
-import { getPlatform, NgModule, provideZonelessChangeDetection } from '@angular/core';
+import { getPlatform } from '@angular/core';
 import { getTestBed } from '@angular/core/testing';
 import { BrowserTestingModule, platformBrowserTesting } from '@angular/platform-browser/testing';
-
-@NgModule({
-  providers: [provideZonelessChangeDetection()]
-})
-class ZonelessTestModule {}
 
 const testBed = getTestBed();
 testBed.resetTestEnvironment();
 getPlatform()?.destroy();
-testBed.initTestEnvironment([BrowserTestingModule, ZonelessTestModule], platformBrowserTesting(), {
+testBed.initTestEnvironment(BrowserTestingModule, platformBrowserTesting(), {
   errorOnUnknownElements: false,
   errorOnUnknownProperties: false,
   teardown: { destroyAfterEach: true }
