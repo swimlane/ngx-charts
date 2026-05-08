@@ -11,7 +11,7 @@ import { IVector2D } from '@swimlane/ngx-charts/models/coordinates.model';
 @Component({
   selector: 'test-component',
   template: `
-    <ngx-charts-box-chart [animations]="true" [view]="[400, 800]" [scheme]="colorScheme" [results]="data">
+    <ngx-charts-box-chart [animations]="false" [view]="[400, 800]" [scheme]="colorScheme" [results]="data">
     </ngx-charts-box-chart>
   `,
   imports: [BoxChartModule]
