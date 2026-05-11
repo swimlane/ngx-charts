@@ -1,4 +1,4 @@
-import { TestBed, tick } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -10,41 +10,59 @@ import { BarChartModule } from './bar-chart.module';
 import { BarComponent } from './bar.component';
 import { XAxisTicksComponent } from '../common/axes/x-axis-ticks.component';
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+vi.setConfig({ testTimeout: 30000, hookTimeout: 30000 });
 
 @Component({
   selector: 'test-component',
-  template: '',
-  standalone: false
+  template: `
+    <ngx-charts-bar-vertical
+      [animations]="false"
+      [view]="[400, 800]"
+      [scheme]="colorScheme"
+      [results]="single"
+      [barPadding]="barPadding"
+    >
+    </ngx-charts-bar-vertical>
+  `,
+  imports: [BarChartModule]
 })
 class TestComponent {
   single: any = single;
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
+  barPadding: number = 8;
+}
+
+@Component({
+  selector: 'test-wrap-ticks',
+  template: `
+    <ngx-charts-bar-vertical
+      [animations]="false"
+      [view]="[400, 300]"
+      [scheme]="colorScheme"
+      [results]="results"
+      [xAxis]="true"
+      [yAxis]="true"
+      [wrapTicks]="true"
+    >
+    </ngx-charts-bar-vertical>
+  `,
+  imports: [BarChartModule]
+})
+class WrapTicksTestComponent {
+  results: any = [];
+  colorScheme = {
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+  };
 }
 
 describe('<ngx-charts-bar-vertical>', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [TestComponent],
-      imports: [NoopAnimationsModule, BarChartModule],
-      providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
-    });
-  });
-
   describe('basic setup', () => {
     beforeEach(() => {
-      TestBed.overrideComponent(TestComponent, {
-        set: {
-          template: `
-               <ngx-charts-bar-vertical
-                [animations]="false"
-                [view]="[400,800]"
-                [scheme]="colorScheme"
-                [results]="single">
-              </ngx-charts-bar-vertical>`
-        }
+      TestBed.configureTestingModule({
+        imports: [NoopAnimationsModule, TestComponent],
+        providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
       });
     });
 
@@ -79,22 +97,15 @@ describe('<ngx-charts-bar-vertical>', () => {
 
   describe('padding', () => {
     beforeEach(() => {
-      TestBed.overrideComponent(TestComponent, {
-        set: {
-          template: `
-               <ngx-charts-bar-vertical
-                [animations]="false"
-                [view]="[400,800]"
-                [scheme]="colorScheme"
-                [results]="single"
-                [barPadding]="0">
-              </ngx-charts-bar-vertical>`
-        }
-      }).compileComponents();
+      TestBed.configureTestingModule({
+        imports: [NoopAnimationsModule, TestComponent],
+        providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
+      });
     });
 
     it('should render correct cell size, with zero padding', () => {
       const fixture = TestBed.createComponent(TestComponent);
+      fixture.componentInstance.barPadding = 0;
       fixture.detectChanges();
 
       const bar = fixture.debugElement.query(By.directive(BarComponent));
@@ -105,22 +116,15 @@ describe('<ngx-charts-bar-vertical>', () => {
 
   describe('padding - 2', () => {
     beforeEach(() => {
-      TestBed.overrideComponent(TestComponent, {
-        set: {
-          template: `
-          <ngx-charts-bar-vertical
-            [animations]="false"
-            [view]="[400,800]"
-            [scheme]="colorScheme"
-            [results]="single"
-            [barPadding]="20">
-          </ngx-charts-bar-vertical>`
-        }
-      }).compileComponents();
+      TestBed.configureTestingModule({
+        imports: [NoopAnimationsModule, TestComponent],
+        providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
+      });
     });
 
     it('should render correct cell size, with padding', () => {
       const fixture = TestBed.createComponent(TestComponent);
+      fixture.componentInstance.barPadding = 20;
       fixture.detectChanges();
 
       const bar = fixture.debugElement.query(By.directive(BarComponent));
@@ -130,32 +134,28 @@ describe('<ngx-charts-bar-vertical>', () => {
   });
 
   describe('x-axis - wrap ticks', () => {
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        imports: [NoopAnimationsModule, WrapTicksTestComponent],
+        providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
+      });
+    });
+
     const getContent = (axisTick: DebugElement) =>
       axisTick.queryAll(By.css('tspan')).map(entry => entry.nativeElement.textContent.trim());
 
     it('should wrap tick if there is available space', () => {
-      TestBed.overrideComponent(TestComponent, {
-        set: {
-          template: `
-          <ngx-charts-bar-vertical
-            [animations]="false"
-            [view]="[400, 300]"
-            [scheme]="colorScheme"
-            [results]="[
-              { name: 'Lorem Ipsum', value: 40632 },
-              { name: 'Lorem Ipsum is simply', value: 50000 },
-              { name: 'Lorem Ipsum is simply dummy text', value: 36240 },
-              { name: 'Lorem Ipsum is simply dummy text of the printing', value: 3000 },
-              { name: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', value: 5655 },
-            ]"
-            [xAxis]="true"
-            [yAxis]="true"
-            [wrapTicks]="true">
-          </ngx-charts-bar-vertical>`
+      const fixture = TestBed.createComponent(WrapTicksTestComponent);
+      fixture.componentInstance.results = [
+        { name: 'Lorem Ipsum', value: 40632 },
+        { name: 'Lorem Ipsum is simply', value: 50000 },
+        { name: 'Lorem Ipsum is simply dummy text', value: 36240 },
+        { name: 'Lorem Ipsum is simply dummy text of the printing', value: 3000 },
+        {
+          name: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+          value: 5655
         }
-      }).compileComponents();
-
-      const fixture = TestBed.createComponent(TestComponent);
+      ];
       fixture.detectChanges();
 
       const xAxisTicks = fixture.debugElement.query(By.directive(XAxisTicksComponent));
@@ -186,26 +186,16 @@ describe('<ngx-charts-bar-vertical>', () => {
     });
 
     it('should show a max of 5 lines for a wrapped tick', () => {
-      TestBed.overrideComponent(TestComponent, {
-        set: {
-          template: `
-          <ngx-charts-bar-vertical
-            [animations]="false"
-            [view]="[400, 300]"
-            [scheme]="colorScheme"
-            [results]="[
-              { name: 'Lorem Ipsum', value: 40632 },
-              { name: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s', value: 5655 },
-            ]"
-            [xAxis]="true"
-            [yAxis]="true"
-            [wrapTicks]="true"
-          >
-          </ngx-charts-bar-vertical>`
+      const fixture = TestBed.createComponent(WrapTicksTestComponent);
+      fixture.componentInstance.results = [
+        { name: 'Lorem Ipsum', value: 40632 },
+        {
+          name:
+            'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ' +
+            'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s',
+          value: 5655
         }
-      }).compileComponents();
-
-      const fixture = TestBed.createComponent(TestComponent);
+      ];
       fixture.detectChanges();
 
       const xAxisTicks = fixture.debugElement.query(By.directive(XAxisTicksComponent));

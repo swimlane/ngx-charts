@@ -10,8 +10,11 @@ import { IVector2D } from '@swimlane/ngx-charts/models/coordinates.model';
 
 @Component({
   selector: 'test-component',
-  template: '',
-  standalone: false
+  template: `
+    <ngx-charts-box-chart [animations]="false" [view]="[400, 800]" [scheme]="colorScheme" [results]="data">
+    </ngx-charts-box-chart>
+  `,
+  imports: [BoxChartModule]
 })
 class TestComponent {
   data: any = boxData;
@@ -23,27 +26,12 @@ class TestComponent {
 describe('<ngx-charts-box-chart>', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TestComponent],
-      imports: [NoopAnimationsModule, BoxChartModule],
+      imports: [NoopAnimationsModule, TestComponent],
       providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
     });
   });
 
   describe('basic setup', () => {
-    beforeEach(() => {
-      TestBed.overrideComponent(TestComponent, {
-        set: {
-          template: `
-               <ngx-charts-box-chart
-                [animations]="true"
-                [view]="[400,800]"
-                [scheme]="colorScheme"
-                [results]="data">
-              </ngx-charts-box-chart>`
-        }
-      });
-    });
-
     it('should set the svg width and height', () => {
       const fixture = TestBed.createComponent(TestComponent);
       fixture.detectChanges();

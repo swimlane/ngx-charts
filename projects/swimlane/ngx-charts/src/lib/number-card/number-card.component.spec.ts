@@ -7,12 +7,15 @@ import { APP_BASE_HREF } from '@angular/common';
 
 import { NumberCardModule } from './number-card.module';
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+vi.setConfig({ testTimeout: 30000, hookTimeout: 30000 });
 
 @Component({
   selector: 'test-component',
-  template: '',
-  standalone: false
+  template: `
+    <ngx-charts-number-card [animations]="false" [view]="[400, 800]" [scheme]="colorScheme" [results]="multi">
+    </ngx-charts-number-card>
+  `,
+  imports: [NumberCardModule]
 })
 class TestComponent {
   multi: any = multi;
@@ -24,27 +27,12 @@ class TestComponent {
 describe('<ngx-charts-number-card>', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TestComponent],
-      imports: [NoopAnimationsModule, NumberCardModule],
+      imports: [NoopAnimationsModule, TestComponent],
       providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
     });
   });
 
   describe('basic setup', () => {
-    beforeEach(() => {
-      TestBed.overrideComponent(TestComponent, {
-        set: {
-          template: `
-              <ngx-charts-number-card
-                [animations]="false"
-                [view]="[400,800]"
-                [scheme]="colorScheme"
-                [results]="multi">
-              </ngx-charts-number-card>`
-        }
-      }).compileComponents();
-    });
-
     it('should set the svg width and height', () => {
       const fixture = TestBed.createComponent(TestComponent);
       fixture.detectChanges();

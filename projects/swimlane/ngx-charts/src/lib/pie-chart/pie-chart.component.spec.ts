@@ -9,25 +9,36 @@ import { APP_BASE_HREF } from '@angular/common';
 import { PieChartModule } from './pie-chart.module';
 import { InjectionService } from '../common/tooltip/injection.service';
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+vi.setConfig({ testTimeout: 30000, hookTimeout: 30000 });
 
 @Component({
   selector: 'test-component',
-  template: '',
-  standalone: false
+  template: `
+    <ngx-charts-pie-chart
+      [animations]="false"
+      [results]="single"
+      [view]="[400, 800]"
+      [scheme]="colorScheme"
+      [doughnut]="doughnut"
+      [arcWidth]="arcWidth"
+    >
+    </ngx-charts-pie-chart>
+  `,
+  imports: [PieChartModule]
 })
 class TestComponent {
   single: any = single;
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
+  doughnut = false;
+  arcWidth: number = 0.25;
 }
 
 describe('<ngx-charts-pie>', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TestComponent],
-      imports: [NoopAnimationsModule, PieChartModule],
+      imports: [NoopAnimationsModule, TestComponent],
       providers: [
         {
           provide: InjectionService,
@@ -46,18 +57,6 @@ describe('<ngx-charts-pie>', () => {
     let fixture: ComponentFixture<TestComponent>;
 
     beforeEach(() => {
-      TestBed.overrideComponent(TestComponent, {
-        set: {
-          template: `
-            <ngx-charts-pie-chart
-              [animations]="false"
-              [results]="single"
-              [view]="[400,800]"
-              [scheme]="colorScheme"
-              [doughnut]="false">
-            </ngx-charts-pie-chart>`
-        }
-      }).compileComponents();
       fixture = TestBed.createComponent(TestComponent);
       fixture.detectChanges();
     });
@@ -85,26 +84,11 @@ describe('<ngx-charts-pie>', () => {
   });
 
   describe('doughnut', () => {
-    let fixture: ComponentFixture<TestComponent>;
-
-    beforeEach(() => {
-      TestBed.overrideComponent(TestComponent, {
-        set: {
-          template: `
-            <ngx-charts-pie-chart
-              [animations]="false"
-              [results]="single"
-              [view]="[400,800]"
-              [scheme]="colorScheme"
-              [doughnut]="true">
-            </ngx-charts-pie-chart>`
-        }
-      }).compileComponents();
-      fixture = TestBed.createComponent(TestComponent);
-      fixture.detectChanges();
-    });
-
     it('should render an arc, default width', () => {
+      const fixture = TestBed.createComponent(TestComponent);
+      fixture.componentInstance.doughnut = true;
+      fixture.detectChanges();
+
       const arcElement = fixture.debugElement.nativeElement.querySelector('path.arc');
       const outerRadius = 180;
 
@@ -119,27 +103,12 @@ describe('<ngx-charts-pie>', () => {
   });
 
   describe('doughnut, arc', () => {
-    let fixture: ComponentFixture<TestComponent>;
-
-    beforeEach(() => {
-      TestBed.overrideComponent(TestComponent, {
-        set: {
-          template: `
-            <ngx-charts-pie-chart
-            [animations]="false"
-            [results]="single"
-            [view]="[400,800]"
-            [scheme]="colorScheme"
-            [doughnut]="true"
-            [arcWidth]="0.1">
-          </ngx-charts-pie-chart>`
-        }
-      }).compileComponents();
-      fixture = TestBed.createComponent(TestComponent);
-      fixture.detectChanges();
-    });
-
     it('should render an arc, set width', () => {
+      const fixture = TestBed.createComponent(TestComponent);
+      fixture.componentInstance.doughnut = true;
+      fixture.componentInstance.arcWidth = 0.1;
+      fixture.detectChanges();
+
       const arcElement = fixture.debugElement.nativeElement.querySelector('path.arc');
       const outerRadius = 180;
 

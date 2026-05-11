@@ -7,12 +7,15 @@ import { APP_BASE_HREF } from '@angular/common';
 
 import { BubbleChartModule } from './bubble-chart.module';
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+vi.setConfig({ testTimeout: 30000, hookTimeout: 30000 });
 
 @Component({
   selector: 'test-component',
-  template: '',
-  standalone: false
+  template: `
+    <ngx-charts-bubble-chart [animations]="false" [view]="[400, 800]" [scheme]="colorScheme" [results]="results">
+    </ngx-charts-bubble-chart>
+  `,
+  imports: [BubbleChartModule]
 })
 class TestComponent {
   results: any[] = bubble;
@@ -24,27 +27,12 @@ class TestComponent {
 describe('<ngx-charts-bubble-chart>', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TestComponent],
-      imports: [NoopAnimationsModule, BubbleChartModule],
+      imports: [NoopAnimationsModule, TestComponent],
       providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
     });
   });
 
   describe('basic setup', () => {
-    beforeEach(() => {
-      TestBed.overrideComponent(TestComponent, {
-        set: {
-          template: `
-              <ngx-charts-bubble-chart
-                [animations]="false"
-                [view]="[400,800]"
-                [scheme]="colorScheme"
-                [results]="results">
-              </ngx-charts-bubble-chart>`
-        }
-      }).compileComponents();
-    });
-
     it('should set the svg width and height', () => {
       const fixture = TestBed.createComponent(TestComponent);
       fixture.detectChanges();

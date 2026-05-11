@@ -7,44 +7,41 @@ import { APP_BASE_HREF } from '@angular/common';
 
 import { HeatMapModule } from './heat-map.module';
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+vi.setConfig({ testTimeout: 30000, hookTimeout: 30000 });
 
 @Component({
   selector: 'test-component',
-  template: '',
-  standalone: false
+  template: `
+    <ngx-charts-heat-map
+      [animations]="false"
+      [view]="[400, 800]"
+      [scheme]="colorScheme"
+      [results]="multi"
+      [gradient]="gradient"
+      [innerPadding]="innerPadding"
+    >
+    </ngx-charts-heat-map>
+  `,
+  imports: [HeatMapModule]
 })
 class TestComponent {
   multi: any = multi;
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
+  gradient = false;
+  innerPadding: number | number[] = 8;
 }
 
 describe('<ngx-charts-heat-map>', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TestComponent],
-      imports: [NoopAnimationsModule, HeatMapModule],
+      imports: [NoopAnimationsModule, TestComponent],
       providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
     });
   });
 
   describe('basic setup', () => {
-    beforeEach(() => {
-      TestBed.overrideComponent(TestComponent, {
-        set: {
-          template: `
-              <ngx-charts-heat-map
-                [animations]="false"
-                [view]="[400,800]"
-                [scheme]="colorScheme"
-                [results]="multi">
-              </ngx-charts-heat-map>`
-        }
-      }).compileComponents();
-    });
-
     it('should set the svg width and height', () => {
       const fixture = TestBed.createComponent(TestComponent);
       fixture.detectChanges();
@@ -76,49 +73,21 @@ describe('<ngx-charts-heat-map>', () => {
   });
 
   describe('with gradiant', () => {
-    beforeEach(() => {
-      TestBed.overrideComponent(TestComponent, {
-        set: {
-          template: `
-              <ngx-charts-heat-map
-                [animations]="false"
-                [view]="[400,800]"
-                [scheme]="colorScheme"
-                [results]="multi"
-                [gradient]="true">
-              </ngx-charts-heat-map>`
-        }
-      }).compileComponents();
-    });
-
     it('should set fill attr', () => {
       const fixture = TestBed.createComponent(TestComponent);
+      fixture.componentInstance.gradient = true;
       fixture.detectChanges();
 
       const svg = fixture.debugElement.nativeElement.querySelector('rect.cell');
 
-      expect(svg.getAttribute('fill')).toMatch('url(.*)');
+      expect(svg.getAttribute('fill')).toMatch(/url\(.*\)/);
     });
   });
 
   describe('padding', () => {
-    beforeEach(() => {
-      TestBed.overrideComponent(TestComponent, {
-        set: {
-          template: `
-            <ngx-charts-heat-map
-            [animations]="false"
-            [view]="[400,800]"
-            [scheme]="colorScheme"
-            [results]="multi"
-            [innerPadding]="0">
-          </ngx-charts-heat-map>`
-        }
-      }).compileComponents();
-    });
-
     it('should render correct cell size, with zero padding', () => {
       const fixture = TestBed.createComponent(TestComponent);
+      fixture.componentInstance.innerPadding = 0;
       fixture.detectChanges();
 
       const svg = fixture.debugElement.nativeElement.querySelector('rect.cell');
@@ -129,23 +98,9 @@ describe('<ngx-charts-heat-map>', () => {
   });
 
   describe('padding - 2', () => {
-    beforeEach(() => {
-      TestBed.overrideComponent(TestComponent, {
-        set: {
-          template: `
-            <ngx-charts-heat-map
-            [animations]="false"
-            [view]="[400,800]"
-            [scheme]="colorScheme"
-            [results]="multi"
-            [innerPadding]="20">
-          </ngx-charts-heat-map>`
-        }
-      }).compileComponents();
-    });
-
     it('should render correct cell size, with padding', () => {
       const fixture = TestBed.createComponent(TestComponent);
+      fixture.componentInstance.innerPadding = 20;
       fixture.detectChanges();
 
       const svg = fixture.debugElement.nativeElement.querySelector('rect.cell');
@@ -156,23 +111,9 @@ describe('<ngx-charts-heat-map>', () => {
   });
 
   describe('padding - 3', () => {
-    beforeEach(() => {
-      TestBed.overrideComponent(TestComponent, {
-        set: {
-          template: `
-            <ngx-charts-heat-map
-              [animations]="false"
-              [view]="[400,800]"
-              [scheme]="colorScheme"
-              [results]="multi"
-              [innerPadding]="[50,40]">
-            </ngx-charts-heat-map>`
-        }
-      }).compileComponents();
-    });
-
     it('should render correct cell size, with x and y padding', () => {
       const fixture = TestBed.createComponent(TestComponent);
+      fixture.componentInstance.innerPadding = [50, 40];
       fixture.detectChanges();
 
       const svg = fixture.debugElement.nativeElement.querySelector('rect.cell');
