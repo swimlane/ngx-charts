@@ -55,6 +55,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, 
     if (isPlatformServer(this.platformId)) {
       this.animations = false;
     }
+    this.update();
   }
 
   ngAfterViewInit(): void {
