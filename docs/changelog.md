@@ -2,6 +2,8 @@
 
 ## HEAD (unreleased)
 
+## 24.0.0-alpha.1
+
 - Fix: Area Charts were not server-side renderable
 
 ## 24.0.0-alpha.0
