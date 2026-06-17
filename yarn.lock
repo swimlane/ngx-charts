@@ -5026,21 +5026,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swimlane/ngx-ui@npm:52.0.0-alpha.1":
-  version: 52.0.0-alpha.1
-  resolution: "@swimlane/ngx-ui@npm:52.0.0-alpha.1"
+"@swimlane/ngx-ui@npm:52.0.0":
+  version: 52.0.0
+  resolution: "@swimlane/ngx-ui@npm:52.0.0"
   dependencies:
     date-fns: "npm:4.1.0"
     mousetrap: "npm:^1.6.2"
     ng2-file-upload: "npm:8.0.0"
     tslib: "npm:^2.3.1"
   peerDependencies:
-    "@angular/animations": 18.x || 19.x || 20.x || 21.x
-    "@angular/cdk": 18.x || 19.x || 20.x || 21.x
-    "@angular/common": 18.x || 19.x || 20.x || 21.x
-    "@angular/core": 18.x || 19.x || 20.x || 21.x
-    "@angular/forms": 18.x || 19.x || 20.x || 21.x
-    "@angular/platform-browser": 18.x || 19.x || 20.x || 21.x
+    "@angular/animations": 19.x || 20.x || 21.x
+    "@angular/cdk": 19.x || 20.x || 21.x
+    "@angular/common": 19.x || 20.x || 21.x
+    "@angular/core": 19.x || 20.x || 21.x
+    "@angular/forms": 19.x || 20.x || 21.x
+    "@angular/platform-browser": 19.x || 20.x || 21.x
     "@types/json-schema": ^7.0.9
     ajv: ^8.12.0
     codemirror: 5.65.8
@@ -5051,16 +5051,16 @@ __metadata:
     ng-in-viewport: 13.0.0
     ngx-autosize-input: ^2.3.7
     rxjs: 7.x
-  checksum: 10c0/f3f11f3557ab3096fe8cb7383f6923fb72272418a025e38e158f3dc0de99aba0957b79d112d70bd878e32be9789252e827838c9d3f668149cb35bb469ebb2ef5
+  checksum: 10c0/9ed044ff1fd998cfda73891854fb1dff97297b21e93ae6ff51336c5e3ecb33a34dec172af3edf28465dc196b8e0fb538014dd92044aacc3ab2fc356178688db8
   languageName: node
   linkType: hard
 
-"@swimlane/prettier-config-swimlane@npm:4.0.0-alpha.0":
-  version: 4.0.0-alpha.0
-  resolution: "@swimlane/prettier-config-swimlane@npm:4.0.0-alpha.0"
+"@swimlane/prettier-config-swimlane@npm:4.0.0":
+  version: 4.0.0
+  resolution: "@swimlane/prettier-config-swimlane@npm:4.0.0"
   peerDependencies:
     prettier: 3.3.3
-  checksum: 10c0/f552c95628010d6f1aaa8dbd094136b22fe1f643085c8e5b7b64443c741fb5287cecdcb426f0d7c47db57a7b562d4c698357532fb45c6b402b91088050a86f3d
+  checksum: 10c0/e0a99fd4f71e1c4bc6cf9e3e5aa9ad0c82004f1b2e0ff3eeabf64b380faf230fb47db8c7858c09b50c3d90741b8e289ab92a7b97234115e468243b565bc5ab41
   languageName: node
   linkType: hard
 
@@ -12073,8 +12073,8 @@ __metadata:
     "@angular/platform-browser-dynamic": "npm:~21.2.9"
     "@angular/router": "npm:~21.2.9"
     "@swimlane/eslint-config": "npm:^2.0.0"
-    "@swimlane/ngx-ui": "npm:52.0.0-alpha.1"
-    "@swimlane/prettier-config-swimlane": "npm:4.0.0-alpha.0"
+    "@swimlane/ngx-ui": "npm:52.0.0"
+    "@swimlane/prettier-config-swimlane": "npm:4.0.0"
     "@types/d3-array": "npm:^3.0.3"
     "@types/d3-ease": "npm:^3.0.0"
     "@types/d3-interpolate": "npm:^3.0.1"
