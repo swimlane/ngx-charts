@@ -34,9 +34,7 @@
     "@angular/cdk": "^21.2.0 || ^22.0.0",
     "@angular/core": "^21.2.0 || ^22.0.0",
     "@angular/common": "^21.2.0 || ^22.0.0",
-    "@angular/forms": "^21.2.0 || ^22.0.0",
     "@angular/platform-browser": "^21.2.0 || ^22.0.0",
-    "@angular/platform-browser-dynamic": "^21.2.0 || ^22.0.0",
     "rxjs": "7.x"
   },
   "dependencies": {
