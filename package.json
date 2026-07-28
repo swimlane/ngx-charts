@@ -111,7 +111,7 @@
     "webpack": "5"
   },
   "volta": {
-    "node": "22.16.0",
+    "node": "22.22.3",
     "yarn": "4.9.2"
   },
   "packageManager": "yarn@4.9.2"
