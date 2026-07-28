@@ -1,5 +1,5 @@
 import { APP_BASE_HREF } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -14,6 +14,7 @@ import { IVector2D } from '@swimlane/ngx-charts/models/coordinates.model';
     <ngx-charts-box-chart [animations]="false" [view]="[400, 800]" [scheme]="colorScheme" [results]="data">
     </ngx-charts-box-chart>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [BoxChartModule]
 })
 class TestComponent {

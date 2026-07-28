@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { bubble } from '../../../../../../src/app/data';
@@ -15,6 +15,7 @@ vi.setConfig({ testTimeout: 30000, hookTimeout: 30000 });
     <ngx-charts-bubble-chart [animations]="false" [view]="[400, 800]" [scheme]="colorScheme" [results]="results">
     </ngx-charts-bubble-chart>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [BubbleChartModule]
 })
 class TestComponent {

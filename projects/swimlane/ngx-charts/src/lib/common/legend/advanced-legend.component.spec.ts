@@ -1,5 +1,5 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { ChartCommonModule } from '../chart-common.module';
 import { ColorHelper } from '../color.helper';
@@ -22,6 +22,7 @@ import { ScaleType } from '../types/scale-type.enum';
     >
     </ngx-charts-advanced-legend>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [ChartCommonModule]
 })
 class TestComponent {

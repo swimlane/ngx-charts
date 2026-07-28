@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { ChartCommonModule } from '../chart-common.module';
 import { ColorHelper } from '../color.helper';
@@ -14,6 +14,7 @@ const seriesData = ['complete', 'not complete'];
     <ngx-charts-legend [title]="legendTitle" [colors]="colors" [data]="seriesData" [height]="legendHeight">
     </ngx-charts-legend>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [ChartCommonModule]
 })
 class TestComponent {

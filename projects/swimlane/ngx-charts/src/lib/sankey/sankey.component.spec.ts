@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { APP_BASE_HREF } from '@angular/common';
@@ -14,6 +14,7 @@ vi.setConfig({ testTimeout: 30000, hookTimeout: 30000 });
     <ngx-charts-sankey [animations]="false" [view]="[400, 800]" [scheme]="colorScheme" [results]="results">
     </ngx-charts-sankey>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [SankeyModule]
 })
 class TestComponent {
