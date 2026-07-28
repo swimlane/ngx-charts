@@ -1,5 +1,5 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { arc } from 'd3-shape';
 
@@ -24,6 +24,7 @@ vi.setConfig({ testTimeout: 30000, hookTimeout: 30000 });
     >
     </ngx-charts-pie-chart>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [PieChartModule]
 })
 class TestComponent {

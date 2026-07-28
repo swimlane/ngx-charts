@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { Component, DebugElement } from '@angular/core';
+import { Component, DebugElement, ChangeDetectionStrategy } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -24,6 +24,7 @@ vi.setConfig({ testTimeout: 30000, hookTimeout: 30000 });
     >
     </ngx-charts-bar-horizontal>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [BarChartModule]
 })
 class TestComponent {
@@ -48,6 +49,7 @@ class TestComponent {
     >
     </ngx-charts-bar-horizontal>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [BarChartModule]
 })
 class WrapTicksTestComponent {
