@@ -2,6 +2,10 @@
 
 ## HEAD (unreleased)
 
+## 24.0.1
+
+- Fix: Y-axis labels were cut off, misaligned when server-side rendered.
+
 ## 24.0.0
 
 - Fix: Area Charts were not server-side renderable
