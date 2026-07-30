@@ -7,8 +7,7 @@ import {
   ViewChild,
   HostListener,
   ContentChild,
-  TemplateRef,
-  ChangeDetectionStrategy
+  TemplateRef
 } from '@angular/core';
 
 import { curveLinear } from 'd3-shape';
@@ -30,7 +29,6 @@ import {
   templateUrl: './combo-chart.component.html',
   styleUrls: ['./combo-chart.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class ComboChartComponent extends BaseChartComponent {

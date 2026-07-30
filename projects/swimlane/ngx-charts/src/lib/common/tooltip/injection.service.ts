@@ -1,5 +1,6 @@
 import {
   ApplicationRef,
+  ComponentFactoryResolver,
   ComponentRef,
   Injectable,
   Injector,

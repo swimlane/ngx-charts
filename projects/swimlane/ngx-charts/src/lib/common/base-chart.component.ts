@@ -13,8 +13,7 @@ import {
   SimpleChanges,
   PLATFORM_ID,
   Inject,
-  OnInit,
-  ChangeDetectionStrategy
+  OnInit
 } from '@angular/core';
 
 import { fromEvent as observableFromEvent } from 'rxjs';
@@ -28,7 +27,6 @@ import { ViewDimensions } from './types/view-dimension.interface';
 @Component({
   selector: 'base-chart',
   template: ` <div></div> `,
-  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, OnInit {

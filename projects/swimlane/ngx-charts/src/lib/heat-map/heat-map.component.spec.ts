@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { multi } from '../../../../../../src/app/data';
@@ -22,7 +22,6 @@ vi.setConfig({ testTimeout: 30000, hookTimeout: 30000 });
     >
     </ngx-charts-heat-map>
   `,
-  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [HeatMapModule]
 })
 class TestComponent {
