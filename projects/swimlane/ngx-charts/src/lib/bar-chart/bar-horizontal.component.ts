@@ -17,6 +17,8 @@ import { LegendOptions, LegendPosition } from '../common/types/legend.model';
 import { ScaleType } from '../common/types/scale-type.enum';
 import { ViewDimensions } from '../common/types/view-dimension.interface';
 import { select } from 'd3-selection';
+import { formatLabel } from '../common/label.helper';
+import { YAxisTicksComponent } from '../common/axes/y-axis-ticks.component';
 
 @Component({
   selector: 'ngx-charts-bar-horizontal',
@@ -163,6 +165,9 @@ export class BarHorizontalComponent extends BaseChartComponent {
 
     this.margin = [10, 20 + this.dataLabelMaxWidth.positive, 10, 20 + this.dataLabelMaxWidth.negative];
 
+    // Seed axis width before first measure so SSR/print HTML reserves label space.
+    this.seedYAxisWidthFromResults();
+
     this.dims = calculateViewDimensions({
       width: this.width,
       height: this.height,
@@ -193,6 +198,19 @@ export class BarHorizontalComponent extends BaseChartComponent {
       const refLines = select(this.chartElement.nativeElement).selectAll('.ref-line').nodes() as HTMLElement[];
       refLines.forEach(line => parent.appendChild(line));
     }
+  }
+
+  /** Approx Y-axis width from category labels when not yet measured (SSR-safe). */
+  seedYAxisWidthFromResults(): void {
+    if (!this.yAxis || this.yAxisWidth > 0 || !this.results?.length) {
+      return;
+    }
+    const labels = this.results.map(d => formatLabel(d.name ?? d.label));
+    this.yAxisWidth = YAxisTicksComponent.approximateTickLabelsWidth(
+      labels,
+      this.trimYAxisTicks !== false,
+      this.maxYAxisTickLength ?? 16
+    );
   }
 
   getXScale(): any {
@@ -258,11 +276,17 @@ export class BarHorizontalComponent extends BaseChartComponent {
   }
 
   updateYAxisWidth({ width }: { width: number }): void {
+    if (width === this.yAxisWidth) {
+      return;
+    }
     this.yAxisWidth = width;
     this.update();
   }
 
   updateXAxisHeight({ height }: { height: number }): void {
+    if (height === this.xAxisHeight) {
+      return;
+    }
     this.xAxisHeight = height;
     this.update();
   }

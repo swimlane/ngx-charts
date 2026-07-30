@@ -80,6 +80,8 @@ export class YAxisComponent implements OnChanges {
   tickStroke: string = '#CCC';
   strokeWidth: number = 1;
   padding: number = 5;
+  /** Last tick-label width emitted to the parent chart (not conflated with labelOffset). */
+  private emittedTickWidth: number | null = null;
 
   @ViewChild(YAxisTicksComponent) ticksComponent: YAxisTicksComponent;
 
@@ -102,16 +104,16 @@ export class YAxisComponent implements OnChanges {
   }
 
   emitTicksWidth({ width }): void {
-    if (width !== this.labelOffset && this.yOrient === Orientation.Right) {
-      this.labelOffset = width + this.labelOffset;
-      setTimeout(() => {
-        this.dimensionsChanged.emit({ width });
-      }, 0);
-    } else if (width !== this.labelOffset) {
-      this.labelOffset = width;
-      setTimeout(() => {
-        this.dimensionsChanged.emit({ width });
-      }, 0);
+    if (width == null || width === this.emittedTickWidth) {
+      return;
     }
+    this.emittedTickWidth = width;
+    if (this.yOrient === Orientation.Right) {
+      this.labelOffset = width + 65;
+    } else {
+      this.labelOffset = width;
+    }
+    // Sync emit so SSR HTML serializes with reserved y-axis width (no setTimeout).
+    this.dimensionsChanged.emit({ width });
   }
 }

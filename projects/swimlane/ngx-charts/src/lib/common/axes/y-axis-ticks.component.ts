@@ -150,14 +150,20 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    setTimeout(() => this.updateDims());
+    // Browser: measure after paint. SSR width is applied synchronously in update().
+    if (isPlatformBrowser(this.platformId)) {
+      setTimeout(() => this.updateDims());
+    }
   }
 
   updateDims(): void {
     if (!isPlatformBrowser(this.platformId)) {
-      // for SSR, use approximate value instead of measured
-      this.width = this.getApproximateAxisWidth();
-      this.dimensionsChanged.emit({ width: this.width });
+      // SSR: approximate — no DOM metrics available
+      const width = this.getApproximateAxisWidth();
+      if (width > 0 && width !== this.width) {
+        this.width = width;
+        this.dimensionsChanged.emit({ width: this.width });
+      }
       return;
     }
 
@@ -255,7 +261,13 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
         break;
       default:
     }
-    setTimeout(() => this.updateDims());
+
+    // SSR must reserve axis width before HTML serialize (no deferred setTimeout).
+    if (!isPlatformBrowser(this.platformId)) {
+      this.updateDims();
+    } else {
+      setTimeout(() => this.updateDims());
+    }
   }
 
   setReferencelines(): void {
@@ -314,10 +326,26 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
     return this.trimTicks ? trimLabel(label, this.maxTickLength) : label;
   }
 
+  /** Approx px width for SSR / pre-measure seeding. */
+  static readonly APPROX_CHAR_WIDTH = 7;
+
+  static approximateTickLabelsWidth(labels: string[], trimTicks: boolean = true, maxTickLength: number = 16): number {
+    if (!labels?.length) {
+      return 0;
+    }
+    const maxChars = Math.max(
+      0,
+      ...labels.map(label => (trimTicks ? trimLabel(label, maxTickLength) : String(label)).length)
+    );
+    return maxChars * YAxisTicksComponent.APPROX_CHAR_WIDTH;
+  }
+
   getApproximateAxisWidth(): number {
-    const maxChars = Math.max(...this.ticks.map(t => this.tickTrim(this.tickFormat(t)).length));
-    const charWidth = 7;
-    return maxChars * charWidth;
+    if (!this.ticks?.length || !this.tickFormat) {
+      return 0;
+    }
+    const labels = this.ticks.map(t => this.tickTrim(this.tickFormat(t)));
+    return YAxisTicksComponent.approximateTickLabelsWidth(labels, false, this.maxTickLength);
   }
 
   tickChunks(label: string): string[] {
