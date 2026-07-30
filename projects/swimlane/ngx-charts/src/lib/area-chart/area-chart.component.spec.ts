@@ -1,5 +1,5 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { Component, DebugElement, ChangeDetectionStrategy } from '@angular/core';
+import { Component, DebugElement } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { APP_BASE_HREF } from '@angular/common';
 
@@ -17,7 +17,6 @@ const colors = ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'];
     <ngx-charts-area-chart [animations]="false" [view]="[400, 800]" [scheme]="colorScheme" [results]="data">
     </ngx-charts-area-chart>
   `,
-  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [AreaChartModule]
 })
 class TestComponent {

@@ -6,8 +6,5 @@
     "inlineSources": true,
     "types": []
   },
-  "exclude": ["**/*.spec.ts"],
-  "angularCompilerOptions": {
-    "strictTemplates": false
-  }
+  "exclude": ["**/*.spec.ts"]
 }

@@ -2,10 +2,6 @@
 
 ## HEAD (unreleased)
 
-## 25.0.0
-
-- Enhancement: Added support for Angular 22
-
 ## 24.0.0
 
 - Fix: Area Charts were not server-side renderable
