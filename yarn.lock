@@ -4923,16 +4923,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swimlane/eslint-config@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@swimlane/eslint-config@npm:2.0.0"
-  peerDependencies:
-    eslint: ">= 3"
-    eslint-plugin-security: ^1.4.0
-  checksum: 10c0/45334e37f5a178c9b33a71ceb33c83d5be9dc0b00420670aa7eea9992d8fda03b7e154fe60c123e31e40d4cd6482e7dea33ed06e2db85603772139dac357c0bd
-  languageName: node
-  linkType: hard
-
 "@swimlane/ngx-ui@npm:53.0.0-beta.0":
   version: 53.0.0-beta.0
   resolution: "@swimlane/ngx-ui@npm:53.0.0-beta.0"
@@ -12123,7 +12113,6 @@ __metadata:
     "@angular/platform-browser": "npm:~22.0.8"
     "@angular/platform-browser-dynamic": "npm:~22.0.8"
     "@angular/router": "npm:~22.0.8"
-    "@swimlane/eslint-config": "npm:^2.0.0"
     "@swimlane/ngx-ui": "npm:53.0.0-beta.0"
     "@swimlane/prettier-config-swimlane": "npm:4.0.0"
     "@types/d3-array": "npm:^3.0.3"

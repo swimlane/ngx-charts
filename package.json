@@ -78,7 +78,6 @@
     "@angular/cli": "22.0.8",
     "@angular/compiler-cli": "~22.0.8",
     "@angular/language-service": "~22.0.8",
-    "@swimlane/eslint-config": "^2.0.0",
     "@swimlane/prettier-config-swimlane": "4.0.0",
     "@types/d3-array": "^3.0.3",
     "@types/d3-ease": "^3.0.0",
