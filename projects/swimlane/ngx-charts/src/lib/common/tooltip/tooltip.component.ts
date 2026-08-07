@@ -10,7 +10,8 @@ import {
   Renderer2,
   PLATFORM_ID,
   Inject,
-  TemplateRef
+  TemplateRef,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import { throttleable } from '../../utils/throttle';
@@ -34,6 +35,8 @@ import { isPlatformBrowser } from '@angular/common';
   `,
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./tooltip.component.scss'],
+  // eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection -- preserve pre-Angular-22 Default CD behavior
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class TooltipContentComponent implements AfterViewInit {

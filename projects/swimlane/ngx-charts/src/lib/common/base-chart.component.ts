@@ -13,7 +13,8 @@ import {
   SimpleChanges,
   PLATFORM_ID,
   Inject,
-  OnInit
+  OnInit,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import { fromEvent as observableFromEvent } from 'rxjs';
@@ -27,6 +28,8 @@ import { ViewDimensions } from './types/view-dimension.interface';
 @Component({
   selector: 'base-chart',
   template: ` <div></div> `,
+  // eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection -- preserve pre-Angular-22 Default CD behavior
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, OnInit {

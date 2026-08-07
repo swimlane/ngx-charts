@@ -1,5 +1,5 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { ChartCommonModule } from '../chart-common.module';
 import { ColorHelper } from '../color.helper';
@@ -22,6 +22,8 @@ import { ScaleType } from '../types/scale-type.enum';
     >
     </ngx-charts-advanced-legend>
   `,
+  // eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection -- preserve pre-Angular-22 Default CD behavior
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [ChartCommonModule]
 })
 class TestComponent {
