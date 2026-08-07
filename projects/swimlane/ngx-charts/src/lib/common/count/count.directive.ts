@@ -1,4 +1,13 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectorRef, OnDestroy, ElementRef } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectorRef,
+  OnDestroy,
+  ElementRef,
+  ChangeDetectionStrategy
+} from '@angular/core';
 import { count, decimalChecker } from './count.helper';
 
 /**
@@ -13,6 +22,8 @@ import { count, decimalChecker } from './count.helper';
 @Component({
   selector: '[ngx-charts-count-up]',
   template: ` {{ value }} `,
+  // eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection -- preserve pre-Angular-22 Default CD behavior
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class CountUpDirective implements OnDestroy {

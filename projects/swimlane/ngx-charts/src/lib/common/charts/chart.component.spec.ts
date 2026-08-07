@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ChartCommonModule } from '../chart-common.module';
@@ -11,6 +11,8 @@ import { ChartCommonModule } from '../chart-common.module';
       <p>ngx-charts is cool!</p>
     </ngx-charts-chart>
   `,
+  // eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection -- preserve pre-Angular-22 Default CD behavior
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [ChartCommonModule]
 })
 class TestComponent {

@@ -2,6 +2,9 @@
 
 ## HEAD (unreleased)
 
+- Enhancement: Added support for Angular 22
+- Breaking: Dropped support for Angular 19 and 20 (requires Angular 21.2+)
+
 ## 24.0.1
 
 - Fix: Y-axis labels were cut off, misaligned when server-side rendered.
