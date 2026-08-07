@@ -2,6 +2,8 @@
 
 ## HEAD (unreleased)
 
+- Fix: Side legend labels now truncate with CSS ellipsis instead of being hard-clipped when the legend width is constrained
+
 ## 24.0.1
 
 - Fix: Y-axis labels were cut off, misaligned when server-side rendered.
