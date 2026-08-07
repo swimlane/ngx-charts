@@ -2,6 +2,8 @@
 
 ## HEAD (unreleased)
 
+## 24.0.2
+
 - Fix: Side legend labels now truncate with CSS ellipsis instead of being hard-clipped when the legend width is constrained
 
 ## 24.0.1
