@@ -33,6 +33,7 @@ import {
 })
 export class ComboChartComponent extends BaseChartComponent {
   @Input() curve: any = curveLinear;
+  @Input() tension: number;
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
   @Input() legendPosition: string = 'right';
