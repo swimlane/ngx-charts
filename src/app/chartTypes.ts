@@ -314,7 +314,10 @@ const chartGroups = [
           'arcWidth',
           'explodeSlices',
           'showLabels',
-          'tooltipDisabled'
+          'tooltipDisabled',
+          'displayTotal',
+          'totalFontSize',
+          'totalDisplayText'
         ]
       },
       {
