@@ -1,7 +1,10 @@
 .chart-legend {
   display: inline-block;
   padding: 0;
-  width: auto !important;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  vertical-align: top;
 
   .legend-title {
     white-space: nowrap;
@@ -19,27 +22,49 @@
     list-style: none;
   }
 
-  .horizontal-legend {
-    li {
-      display: inline-block;
+  .vertical-legend {
+    .legend-label {
+      width: 100%;
+      max-width: calc(100% - 20px);
+    }
+
+    .legend-entry {
+      display: flex;
+      flex-grow: 1;
+      align-items: center;
+      overflow: hidden;
     }
   }
 
   .legend-wrap {
     width: calc(100% - 10px);
+    min-width: 0;
   }
 
   .legend-labels {
     line-height: 85%;
     list-style: none;
     text-align: left;
-    float: left;
-    width: 100%;
-    border-radius: 3px;
-    overflow-y: auto;
-    overflow-x: hidden;
+    display: flex;
+    flex-wrap: wrap;
     white-space: nowrap;
+    border-radius: 3px;
     background: rgba(0, 0, 0, 0.05);
+
+    &.vertical-legend {
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    &.horizontal-legend {
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+
+      li {
+        display: inline-block;
+      }
+    }
   }
 
   .legend-label {
@@ -66,6 +91,7 @@
     display: inline-block;
     height: 15px;
     width: 15px;
+    min-width: 15px;
     margin-right: 5px;
     color: #5b646b;
     border-radius: 3px;
@@ -76,7 +102,6 @@
     vertical-align: top;
     line-height: 15px;
     font-size: 12px;
-    width: calc(100% - 20px);
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
