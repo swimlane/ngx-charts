@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { Component, DebugElement } from '@angular/core';
+import { Component, DebugElement, ChangeDetectionStrategy } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -24,6 +24,8 @@ vi.setConfig({ testTimeout: 30000, hookTimeout: 30000 });
     >
     </ngx-charts-bar-horizontal>
   `,
+  // eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection -- preserve pre-Angular-22 Default CD behavior
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [BarChartModule]
 })
 class TestComponent {
@@ -48,6 +50,8 @@ class TestComponent {
     >
     </ngx-charts-bar-horizontal>
   `,
+  // eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection -- preserve pre-Angular-22 Default CD behavior
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [BarChartModule]
 })
 class WrapTicksTestComponent {

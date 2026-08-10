@@ -2,6 +2,9 @@
 
 ## HEAD (unreleased)
 
+- Enhancement: Added support for Angular 22
+- Breaking: Dropped support for Angular 19 and 20 (requires Angular 21.2+)
+
 ## 24.0.2
 
 - Fix: Side legend labels now truncate with CSS ellipsis instead of being hard-clipped when the legend width is constrained
