@@ -2,6 +2,8 @@
 
 ## HEAD (unreleased)
 
+## 25.0.0
+
 - Enhancement: Added support for Angular 22
 - Breaking: Dropped support for Angular 19 and 20 (requires Angular 21.2+)
 
