@@ -645,7 +645,8 @@ const chartGroups = [
           'maxYAxisTickLength',
           'min',
           'max',
-          'wrapTicks'
+          'wrapTicks',
+          'showDataLabel'
         ],
         defaults: {
           yAxisLabel: 'Census Date',
