@@ -4,8 +4,7 @@
 
 ## 25.0.1
 
-- Fix: Side legend labels now truncate with CSS ellipsis instead of being hard-clipped when the legend width is constrained (ported from 24.0.2)
-- Fix: Y-axis labels were cut off / misaligned when server-side rendered (ported from 24.0.1)
+- Chore: Sync 25.x release with master (includes maintenance fixes already present on git that were missing from the original npm 25.0.0 publish)
 
 ## 25.0.0
 
