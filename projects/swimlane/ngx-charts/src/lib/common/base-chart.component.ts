@@ -24,6 +24,7 @@ import { isDate } from '../utils/types';
 import { Color } from '../utils/color-sets';
 import { ScaleType } from './types/scale-type.enum';
 import { ViewDimensions } from './types/view-dimension.interface';
+import { PieChartService } from '../pie-chart/pie-chart.service';
 
 @Component({
   selector: 'base-chart',
@@ -51,7 +52,8 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy, 
     protected chartElement: ElementRef,
     protected zone: NgZone,
     protected cd: ChangeDetectorRef,
-    @Inject(PLATFORM_ID) public platformId: any
+    @Inject(PLATFORM_ID) public platformId: any,
+    protected pieChartSvc: PieChartService,
   ) {}
 
   ngOnInit() {
