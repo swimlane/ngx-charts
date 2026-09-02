@@ -1,6 +1,7 @@
 import { APP_BASE_HREF } from '@angular/common';
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, PLATFORM_ID } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { boxData } from '../../../../../../src/app/data';
@@ -124,6 +125,32 @@ describe('<ngx-charts-box-chart>', () => {
           v2: { x: 242.33333333333334, y: 41.52542372881356 }
         }
       ]);
+    });
+  });
+
+  describe('SSR without animation providers', () => {
+    beforeEach(() => {
+      TestBed.resetTestingModule();
+      TestBed.configureTestingModule({
+        imports: [TestComponent],
+        providers: [
+          { provide: APP_BASE_HREF, useValue: '/' },
+          { provide: PLATFORM_ID, useValue: 'server' }
+        ]
+      });
+    });
+
+    it('should render every box path when NoopAnimationsModule is absent', () => {
+      const fixture = TestBed.createComponent(TestComponent);
+      expect(() => fixture.detectChanges()).not.toThrow();
+
+      const bars = fixture.debugElement.queryAll(By.css('path.bar'));
+      expect(bars.length).toBeGreaterThan(1);
+      for (const bar of bars) {
+        const d = bar.nativeElement.getAttribute('d');
+        expect(d).toBeTruthy();
+        expect(d.length).toBeGreaterThan(0);
+      }
     });
   });
 });

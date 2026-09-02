@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { Component, DebugElement, ChangeDetectionStrategy } from '@angular/core';
+import { Component, DebugElement, ChangeDetectionStrategy, PLATFORM_ID } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -179,6 +179,31 @@ describe('<ngx-charts-bar-horizontal>', () => {
 
       expect(axisTicks[4].queryAll(By.css('tspan')).length).toEqual(2);
       expect(getContent(axisTicks[4])).toEqual(['Lorem Ipsum is simply', 'dummy text of the pr...']);
+    });
+  });
+
+  describe('SSR without animation providers', () => {
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        imports: [TestComponent],
+        providers: [
+          { provide: APP_BASE_HREF, useValue: '/' },
+          { provide: PLATFORM_ID, useValue: 'server' }
+        ]
+      });
+    });
+
+    it('should render every bar with a non-empty path when NoopAnimationsModule is absent', () => {
+      const fixture = TestBed.createComponent(TestComponent);
+      expect(() => fixture.detectChanges()).not.toThrow();
+
+      const bars = fixture.debugElement.queryAll(By.css('path.bar'));
+      expect(bars.length).toEqual(6);
+      for (const bar of bars) {
+        const d = bar.nativeElement.getAttribute('d');
+        expect(d).toBeTruthy();
+        expect(d.length).toBeGreaterThan(0);
+      }
     });
   });
 });

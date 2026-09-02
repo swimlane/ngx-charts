@@ -2,14 +2,18 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  Inject,
   Input,
   OnChanges,
+  OnInit,
   Output,
+  PLATFORM_ID,
   SimpleChanges,
   TemplateRef
 } from '@angular/core';
 import { min, max, quantile } from 'd3-array';
 import { ScaleLinear, ScaleBand } from 'd3-scale';
+import { isPlatformServer } from '@angular/common';
 import { IBoxModel, BoxChartSeries, DataItem } from '../models/chart-data.model';
 import { IVector2D } from '../models/coordinates.model';
 import { trigger, transition, style, animate } from '@angular/animations';
@@ -23,35 +27,66 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
 @Component({
   selector: 'g[ngx-charts-box-series]',
   template: `
-    <svg:g
-      ngx-charts-box
-      [@animationState]="'active'"
-      [@.disabled]="!animations"
-      [width]="box.width"
-      [height]="box.height"
-      [x]="box.x"
-      [y]="box.y"
-      [roundEdges]="box.roundEdges"
-      [fill]="box.color"
-      [gradientStops]="box.gradientStops"
-      [strokeColor]="strokeColor"
-      [strokeWidth]="strokeWidth"
-      [data]="box.data"
-      [lineCoordinates]="box.lineCoordinates"
-      [gradient]="gradient"
-      [ariaLabel]="box.ariaLabel"
-      (select)="onClick($event)"
-      (activate)="activate.emit($event)"
-      (deactivate)="deactivate.emit($event)"
-      ngx-tooltip
-      [tooltipDisabled]="tooltipDisabled"
-      [tooltipPlacement]="tooltipPlacement"
-      [tooltipType]="tooltipType"
-      [tooltipTitle]="tooltipTitle"
-      [tooltipTemplate]="tooltipTemplate"
-      [tooltipContext]="box.data"
-      [animations]="animations"
-    ></svg:g>
+    <svg:g *ngIf="!isSSR">
+      <svg:g
+        ngx-charts-box
+        [@animationState]="'active'"
+        [@.disabled]="!animations"
+        [width]="box.width"
+        [height]="box.height"
+        [x]="box.x"
+        [y]="box.y"
+        [roundEdges]="box.roundEdges"
+        [fill]="box.color"
+        [gradientStops]="box.gradientStops"
+        [strokeColor]="strokeColor"
+        [strokeWidth]="strokeWidth"
+        [data]="box.data"
+        [lineCoordinates]="box.lineCoordinates"
+        [gradient]="gradient"
+        [ariaLabel]="box.ariaLabel"
+        (select)="onClick($event)"
+        (activate)="activate.emit($event)"
+        (deactivate)="deactivate.emit($event)"
+        ngx-tooltip
+        [tooltipDisabled]="tooltipDisabled"
+        [tooltipPlacement]="tooltipPlacement"
+        [tooltipType]="tooltipType"
+        [tooltipTitle]="tooltipTitle"
+        [tooltipTemplate]="tooltipTemplate"
+        [tooltipContext]="box.data"
+        [animations]="animations"
+      ></svg:g>
+    </svg:g>
+    <svg:g *ngIf="isSSR">
+      <svg:g
+        ngx-charts-box
+        [width]="box.width"
+        [height]="box.height"
+        [x]="box.x"
+        [y]="box.y"
+        [roundEdges]="box.roundEdges"
+        [fill]="box.color"
+        [gradientStops]="box.gradientStops"
+        [strokeColor]="strokeColor"
+        [strokeWidth]="strokeWidth"
+        [data]="box.data"
+        [lineCoordinates]="box.lineCoordinates"
+        [gradient]="gradient"
+        [ariaLabel]="box.ariaLabel"
+        (select)="onClick($event)"
+        (activate)="activate.emit($event)"
+        (deactivate)="deactivate.emit($event)"
+        ngx-tooltip
+        [tooltipDisabled]="tooltipDisabled"
+        [tooltipPlacement]="tooltipPlacement"
+        [tooltipType]="tooltipType"
+        [tooltipTitle]="tooltipTitle"
+        [tooltipTemplate]="tooltipTemplate"
+        [tooltipContext]="box.data"
+        [animations]="animations"
+      ></svg:g>
+    </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
@@ -66,7 +101,7 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
   ],
   standalone: false
 })
-export class BoxSeriesComponent implements OnChanges {
+export class BoxSeriesComponent implements OnChanges, OnInit {
   @Input() dims: ViewDimensions;
   @Input() series: BoxChartSeries;
   @Input() xScale: ScaleBand<string>;
@@ -92,6 +127,16 @@ export class BoxSeriesComponent implements OnChanges {
   whiskers: [number, number];
   lineCoordinates: [IVector2D, IVector2D, IVector2D, IVector2D];
   tooltipTitle: string;
+
+  isSSR = false;
+
+  constructor(@Inject(PLATFORM_ID) private platformId: any) {}
+
+  ngOnInit() {
+    if (isPlatformServer(this.platformId)) {
+      this.isSSR = true;
+    }
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
