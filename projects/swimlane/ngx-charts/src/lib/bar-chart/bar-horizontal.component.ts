@@ -209,7 +209,8 @@ export class BarHorizontalComponent extends BaseChartComponent {
     this.yAxisWidth = YAxisTicksComponent.approximateTickLabelsWidth(
       labels,
       this.trimYAxisTicks !== false,
-      this.maxYAxisTickLength ?? 16
+      this.maxYAxisTickLength ?? 16,
+      this.wrapTicks !== false
     );
   }
 
@@ -276,7 +277,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
   }
 
   updateYAxisWidth({ width }: { width: number }): void {
-    if (width === this.yAxisWidth) {
+    if (Math.abs(width - this.yAxisWidth) <= 1) {
       return;
     }
     this.yAxisWidth = width;

@@ -168,17 +168,17 @@ describe('<ngx-charts-bar-horizontal>', () => {
 
       expect(axisTicks[0].nativeElement.textContent.trim()).toEqual('Lorem Ipsum');
 
-      expect(axisTicks[1].queryAll(By.css('tspan')).length).toEqual(2);
-      expect(getContent(axisTicks[1])).toEqual(['Lorem Ipsum is', 'simply']);
+      expect(axisTicks[1].queryAll(By.css('tspan')).length).toEqual(0);
+      expect(axisTicks[1].nativeElement.textContent.trim()).toEqual('Lorem Ipsum is simply');
 
-      expect(axisTicks[2].queryAll(By.css('tspan')).length).toEqual(3);
-      expect(getContent(axisTicks[2])).toEqual(['Lorem Ipsum is', 'simply dummy', 'text']);
+      expect(axisTicks[2].queryAll(By.css('tspan')).length).toEqual(2);
+      expect(getContent(axisTicks[2])).toEqual(['Lorem Ipsum is simply', 'dummy text']);
 
-      expect(axisTicks[3].queryAll(By.css('tspan')).length).toEqual(3);
-      expect(getContent(axisTicks[3])).toEqual(['Lorem Ipsum is', 'simply dummy', 'text of the...']);
+      expect(axisTicks[3].queryAll(By.css('tspan')).length).toEqual(2);
+      expect(getContent(axisTicks[3])).toEqual(['Lorem Ipsum is simply', 'dummy text of the pr...']);
 
-      expect(axisTicks[4].queryAll(By.css('tspan')).length).toEqual(3);
-      expect(getContent(axisTicks[4])).toEqual(['Lorem Ipsum is', 'simply dummy', 'text of the...']);
+      expect(axisTicks[4].queryAll(By.css('tspan')).length).toEqual(2);
+      expect(getContent(axisTicks[4])).toEqual(['Lorem Ipsum is simply', 'dummy text of the pr...']);
     });
   });
 });

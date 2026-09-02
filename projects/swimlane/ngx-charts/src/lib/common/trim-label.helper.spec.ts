@@ -1,4 +1,4 @@
-import { trimLabel } from './trim-label.helper';
+import { maxCharsForPixelWidth, trimLabel } from './trim-label.helper';
 
 describe('trimLabel', () => {
   it('converts a number to a string when passed', () => {
@@ -35,5 +35,15 @@ describe('trimLabel', () => {
 
     const trimmedText = trimLabel(text, 8);
     expect(trimmedText).toEqual(`Hi, ngx-...`);
+  });
+});
+
+describe('maxCharsForPixelWidth', () => {
+  it('returns floor of width divided by char width', () => {
+    expect(maxCharsForPixelWidth(91, 7)).toBe(13);
+  });
+
+  it('returns 0 for non-positive width', () => {
+    expect(maxCharsForPixelWidth(0, 7)).toBe(0);
   });
 });
