@@ -364,12 +364,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
     if (this.layoutAxisWidth <= 0) {
       return this.maxTickLength;
     }
-    return YAxisTicksComponent.effectiveMaxTickLength(
-      this.layoutAxisWidth,
-      this.maxTickLength,
-      this.trimTicks,
-      label
-    );
+    return YAxisTicksComponent.effectiveMaxTickLength(this.layoutAxisWidth, this.maxTickLength, this.trimTicks, label);
   }
 
   static readonly Y_AXIS_PADDING = CATEGORY_AXIS_Y_PADDING;
@@ -432,8 +427,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
       return 0;
     }
     const labels = this.ticks.map(t => String(this.tickFormat(t)));
-    return YAxisTicksComponent.resolveAxisLayout(labels, this.trimTicks, this.maxTickLength, this.wrapTicks)
-      .yAxisWidth;
+    return YAxisTicksComponent.resolveAxisLayout(labels, this.trimTicks, this.maxTickLength, this.wrapTicks).yAxisWidth;
   }
 
   private getMeasuredAxisWidth(): number {
@@ -480,11 +474,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
       if (maxLines <= 1) {
         return [this.tickTrim(formatted)];
       }
-      return getTickLines(
-        formatted,
-        this.maxTickLength,
-        Math.min(maxLines, DEFAULT_CATEGORY_WRAP_MAX_LINES)
-      );
+      return getTickLines(formatted, this.maxTickLength, Math.min(maxLines, DEFAULT_CATEGORY_WRAP_MAX_LINES));
     }
 
     return [formatted];

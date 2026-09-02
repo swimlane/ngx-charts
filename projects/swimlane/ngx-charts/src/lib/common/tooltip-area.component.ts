@@ -53,44 +53,44 @@ export interface Tooltip {
         </xhtml:div>
       </ng-template>
       @if (!isSSR) {
-        <svg:rect
-          #tooltipAnchor
-          [@animationState]="anchorOpacity !== 0 ? 'active' : 'inactive'"
-          class="tooltip-anchor"
-          [attr.x]="anchorPos"
-          y="0"
-          [attr.width]="1"
-          [attr.height]="dims.height"
-          [style.opacity]="anchorOpacity"
-          [style.pointer-events]="'none'"
-          ngx-tooltip
-          [tooltipDisabled]="tooltipDisabled"
-          [tooltipPlacement]="placementTypes.Right"
-          [tooltipType]="styleTypes.tooltip"
-          [tooltipSpacing]="15"
-          [tooltipTemplate]="tooltipTemplate ? tooltipTemplate : defaultTooltipTemplate"
-          [tooltipContext]="anchorValues"
-          [tooltipImmediateExit]="true"
-        />
+      <svg:rect
+        #tooltipAnchor
+        [@animationState]="anchorOpacity !== 0 ? 'active' : 'inactive'"
+        class="tooltip-anchor"
+        [attr.x]="anchorPos"
+        y="0"
+        [attr.width]="1"
+        [attr.height]="dims.height"
+        [style.opacity]="anchorOpacity"
+        [style.pointer-events]="'none'"
+        ngx-tooltip
+        [tooltipDisabled]="tooltipDisabled"
+        [tooltipPlacement]="placementTypes.Right"
+        [tooltipType]="styleTypes.tooltip"
+        [tooltipSpacing]="15"
+        [tooltipTemplate]="tooltipTemplate ? tooltipTemplate : defaultTooltipTemplate"
+        [tooltipContext]="anchorValues"
+        [tooltipImmediateExit]="true"
+      />
       } @else {
-        <svg:rect
-          #tooltipAnchor
-          class="tooltip-anchor"
-          [attr.x]="anchorPos"
-          y="0"
-          [attr.width]="1"
-          [attr.height]="dims.height"
-          [style.opacity]="anchorOpacity"
-          [style.pointer-events]="'none'"
-          ngx-tooltip
-          [tooltipDisabled]="tooltipDisabled"
-          [tooltipPlacement]="placementTypes.Right"
-          [tooltipType]="styleTypes.tooltip"
-          [tooltipSpacing]="15"
-          [tooltipTemplate]="tooltipTemplate ? tooltipTemplate : defaultTooltipTemplate"
-          [tooltipContext]="anchorValues"
-          [tooltipImmediateExit]="true"
-        />
+      <svg:rect
+        #tooltipAnchor
+        class="tooltip-anchor"
+        [attr.x]="anchorPos"
+        y="0"
+        [attr.width]="1"
+        [attr.height]="dims.height"
+        [style.opacity]="anchorOpacity"
+        [style.pointer-events]="'none'"
+        ngx-tooltip
+        [tooltipDisabled]="tooltipDisabled"
+        [tooltipPlacement]="placementTypes.Right"
+        [tooltipType]="styleTypes.tooltip"
+        [tooltipSpacing]="15"
+        [tooltipTemplate]="tooltipTemplate ? tooltipTemplate : defaultTooltipTemplate"
+        [tooltipContext]="anchorValues"
+        [tooltipImmediateExit]="true"
+      />
       }
     </svg:g>
   `,

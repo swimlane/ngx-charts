@@ -6,10 +6,7 @@ export const CATEGORY_AXIS_VIEW_DIMS_SPACER = 10;
 export const CATEGORY_AXIS_INNER_TICK_SIZE = 6;
 export const CATEGORY_AXIS_TICK_PADDING = 3;
 export const CATEGORY_AXIS_LAYOUT_INSET =
-  CATEGORY_AXIS_Y_PADDING +
-  CATEGORY_AXIS_INNER_TICK_SIZE +
-  CATEGORY_AXIS_TICK_PADDING -
-  CATEGORY_AXIS_VIEW_DIMS_SPACER;
+  CATEGORY_AXIS_Y_PADDING + CATEGORY_AXIS_INNER_TICK_SIZE + CATEGORY_AXIS_TICK_PADDING - CATEGORY_AXIS_VIEW_DIMS_SPACER;
 export const CATEGORY_AXIS_TRIM_CHAR_WIDTH = 7;
 /** Hard display cap per line (including ellipsis), matching SSR/print clip budget. */
 export const CATEGORY_AXIS_MAX_LINE_CHARS = 23;
@@ -58,11 +55,7 @@ export function contentCharsForDisplayLimit(displayLimit: number): number {
   return Math.min(CATEGORY_AXIS_MAX_CONTENT_CHARS, Math.max(0, displayLimit - 3));
 }
 
-export function effectiveCharsPerLine(
-  yAxisWidth: number,
-  trimTicks: boolean = true,
-  label?: string
-): number {
+export function effectiveCharsPerLine(yAxisWidth: number, trimTicks: boolean = true, label?: string): number {
   const slots = charsPerLine(yAxisWidth);
   if (!trimTicks || slots <= 0) {
     return slots;
@@ -109,10 +102,7 @@ export function wrapCategoryLabel(
     // If we already filled maxLines, fold the last packed line into the truncated remainder.
     const overflowStart = lines.length >= maxLines ? maxLines - 1 : lines.length;
     const kept = lines.slice(0, overflowStart);
-    const remainder = [...lines.slice(overflowStart), currentLine, ...remainingWords]
-      .filter(Boolean)
-      .join(' ')
-      .trim();
+    const remainder = [...lines.slice(overflowStart), currentLine, ...remainingWords].filter(Boolean).join(' ').trim();
     kept.push(trimLabel(remainder, contentLimit));
     return kept;
   };
@@ -229,11 +219,7 @@ export function resolveCategoryAxisLayout(
 }
 
 /** Left edge of longest tick label given layout inputs (horizontal left y-axis). */
-export function categoryLabelLeftFromLayout(
-  marginsLeft: number,
-  yAxisWidth: number,
-  textWidth: number
-): number {
+export function categoryLabelLeftFromLayout(marginsLeft: number, yAxisWidth: number, textWidth: number): number {
   const tickOffset = CATEGORY_AXIS_Y_PADDING + CATEGORY_AXIS_INNER_TICK_SIZE + CATEGORY_AXIS_TICK_PADDING;
   return marginsLeft + yAxisWidth + CATEGORY_AXIS_VIEW_DIMS_SPACER - tickOffset - textWidth;
 }

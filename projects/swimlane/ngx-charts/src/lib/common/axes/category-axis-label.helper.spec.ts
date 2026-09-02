@@ -67,7 +67,9 @@ describe('category-axis-label.helper', () => {
   });
 
   it('displayWidthForLines uses the longest line capped at max line chars', () => {
-    expect(displayWidthForLines(['Short', 'A longer line'])).toBe('A longer line'.length * CATEGORY_AXIS_TRIM_CHAR_WIDTH);
+    expect(displayWidthForLines(['Short', 'A longer line'])).toBe(
+      'A longer line'.length * CATEGORY_AXIS_TRIM_CHAR_WIDTH
+    );
     expect(displayWidthForLines(['x'.repeat(40)])).toBe(CATEGORY_AXIS_MAX_LINE_CHARS * CATEGORY_AXIS_TRIM_CHAR_WIDTH);
   });
 
