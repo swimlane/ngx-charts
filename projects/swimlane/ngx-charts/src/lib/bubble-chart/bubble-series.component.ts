@@ -122,7 +122,7 @@ export class BubbleSeriesComponent implements OnChanges, OnInit {
 
   ngOnInit() {
     if (isPlatformServer(this.platformId)) {
-      this.isSSR = true;
+      this.isSSR = false // skip;
     }
   }
 
