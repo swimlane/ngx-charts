@@ -39,6 +39,9 @@ export class ComboChartComponent extends BaseChartComponent {
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
   @Input() legendPosition: string = 'right';
+  @Input() lineTransparency: number = 0;
+  @Input() chartTransparency: number = 0;
+  @Input() flag: number = 0;
   @Input() xAxis;
   @Input() yAxis;
   @Input() showXAxisLabel;
@@ -149,6 +152,8 @@ export class ComboChartComponent extends BaseChartComponent {
     this.legendOptions = this.getLegendOptions();
 
     this.transform = `translate(${this.dims.xOffset} , ${this.margin[0]})`;
+
+    this.toggleLayerOrder();
   }
 
   deactivateAll() {
@@ -359,6 +364,12 @@ export class ComboChartComponent extends BaseChartComponent {
     this.colorsLine = new ColorHelper(this.colorSchemeLine, this.schemeType, domain, this.customColors);
   }
 
+  getStyle(transparency: number): object {
+    return {
+      opacity: 1 - transparency / 100
+    };
+  }
+
   getLegendOptions() {
     const opts = {
       scaleType: this.schemeType,
@@ -414,5 +425,23 @@ export class ComboChartComponent extends BaseChartComponent {
     this.activeEntries = [...this.activeEntries];
 
     this.deactivate.emit({ value: item, entries: this.activeEntries });
+  }
+
+  toggleLayerOrder(): void{
+    const chartContainer = document.querySelector('.ngx-charts-outer');
+    const lineChartElement = chartContainer?.querySelector('.line-chart');
+    const barChartElement = chartContainer?.querySelector('.bar-chart');
+    if (lineChartElement && barChartElement && lineChartElement.parentNode === barChartElement.parentNode) {
+      const lineparent = lineChartElement.parentNode;
+      const chartparent = barChartElement.parentNode;
+      if (this.flag) {
+        lineparent.removeChild(lineChartElement);
+        lineparent.insertBefore(lineChartElement, barChartElement);
+      } else {
+        chartparent.removeChild(barChartElement);
+        chartparent.insertBefore(barChartElement, lineChartElement);
+      }
+    }
+    this.flag === 0 ? 0 : 1;
   }
 }
