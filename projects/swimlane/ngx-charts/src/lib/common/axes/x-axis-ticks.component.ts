@@ -95,6 +95,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() showGridLines = false;
   @Input() gridLineHeight: number;
   @Input() width: number;
+  @Input() outerWidth: number;
   @Input() rotateTicks: boolean = true;
   @Input() wrapTicks = false;
   @Input() referenceLines: any[];
@@ -129,6 +130,10 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   y1: number;
   y2: number;
   tickSpacing: number;
+  private rotationLayoutKey: string;
+  private lastRotationAngle: number;
+  private rotationReversed = false;
+  private rotationFrozen = false;
 
   @ViewChild('ticksel') ticksElement: ElementRef;
 
@@ -226,6 +231,12 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
       };
     }
 
+    if (!this.rotateTicks) {
+      // Turning rotation off leaves the layout stabilization in whatever state it was in; clear it so
+      // the next time rotation is turned on it starts a fresh layout instead of clamping to a stale angle.
+      this.rotationLayoutKey = undefined;
+    }
+
     const angle = this.rotateTicks ? this.getRotationAngle(this.ticks) : null;
 
     this.textTransform = '';
@@ -235,6 +246,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
       this.verticalSpacing = 10;
     } else {
       this.textAnchor = TextAnchor.Middle;
+      this.verticalSpacing = 20;
     }
 
     setTimeout(() => this.updateDims());
@@ -293,6 +305,8 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
       baseWidth = Math.cos(angle * (Math.PI / 180)) * wordWidth;
     }
 
+    angle = this.stabilizeRotationAngle(angle);
+
     let labelHeight = 14;
     if (this.isWrapTicksSupported) {
       const longestTick = this.ticks.reduce(
@@ -317,6 +331,34 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
       this.setReferencelines();
     }
 
+    return angle;
+  }
+
+  /**
+   * The rotated tick height changes the plot height, which can change the y-axis width and therefore this.width.
+   * Once the angle has gone back and forth within one layout, it may only rotate further, so the chart settles.
+   * A new layout (outer width or labels) starts over. The labels come from the domain, as the shown ticks depend on width.
+   */
+  private stabilizeRotationAngle(angle: number): number {
+    const labels = [...this.scale.domain(), ...(this.tickValues ?? [])].map(value => this.tickFormat(value));
+    const layoutKey = [this.outerWidth ?? this.width, this.maxTickLength, this.trimTicks, ...labels].join('|');
+
+    if (layoutKey !== this.rotationLayoutKey) {
+      this.rotationLayoutKey = layoutKey;
+      this.lastRotationAngle = undefined;
+      this.rotationReversed = false;
+      this.rotationFrozen = false;
+    }
+
+    if (this.rotationFrozen) {
+      angle = Math.min(angle, this.lastRotationAngle);
+    } else if (this.lastRotationAngle !== undefined && angle > this.lastRotationAngle) {
+      this.rotationReversed = true;
+    } else if (this.rotationReversed && angle < this.lastRotationAngle) {
+      this.rotationFrozen = true;
+    }
+
+    this.lastRotationAngle = angle;
     return angle;
   }
 

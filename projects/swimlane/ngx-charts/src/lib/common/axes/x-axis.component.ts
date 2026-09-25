@@ -34,6 +34,7 @@ import { ViewDimensions } from '../types/view-dimension.interface';
         [showRefLines]="showRefLines"
         [showRefLabels]="showRefLabels"
         [width]="dims.width"
+        [outerWidth]="dims.width + dims.xOffset"
         [tickValues]="ticks"
         [wrapTicks]="wrapTicks"
         (dimensionsChanged)="emitTicksHeight($event)"

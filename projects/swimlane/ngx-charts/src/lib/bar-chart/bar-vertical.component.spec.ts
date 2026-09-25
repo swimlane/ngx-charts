@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, DebugElement, ChangeDetectionStrategy } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -9,6 +9,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { BarChartModule } from './bar-chart.module';
 import { BarComponent } from './bar.component';
 import { XAxisTicksComponent } from '../common/axes/x-axis-ticks.component';
+import { BarVerticalComponent } from './bar-vertical.component';
 
 vi.setConfig({ testTimeout: 30000, hookTimeout: 30000 });
 
@@ -56,6 +57,34 @@ class TestComponent {
 })
 class WrapTicksTestComponent {
   results: any = [];
+  colorScheme = {
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+  };
+}
+
+@Component({
+  selector: 'test-rotation-loop',
+  template: `
+    <ngx-charts-bar-vertical
+      [animations]="false"
+      [view]="view"
+      [scheme]="colorScheme"
+      [results]="results"
+      [xAxis]="true"
+      [yAxis]="true"
+    >
+    </ngx-charts-bar-vertical>
+  `,
+  // eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection -- preserve pre-Angular-22 Default CD behavior
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [BarChartModule]
+})
+class RotationLoopTestComponent {
+  view: [number, number] = [645, 150];
+  results: any = Array.from({ length: 12 }, (_, i) => ({
+    name: `${String(i + 1).padStart(2, '0')}-2025`,
+    value: i % 2
+  }));
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
@@ -218,6 +247,74 @@ describe('<ngx-charts-bar-vertical>', () => {
         'industry. Lorem Ipsum',
         'has been the industrys...'
       ]);
+    });
+  });
+
+  describe('x-axis - rotation', () => {
+    // Stands in for browser layout: rotated x-axis ticks are taller, and three y-axis ticks ("0.5") are wider than two.
+    const measure = (element: Element): Partial<DOMRect> => {
+      const host = element.parentElement;
+      if (host?.hasAttribute('ngx-charts-x-axis-ticks')) {
+        return { width: 0, height: element.querySelector('text[transform^="rotate"]') ? 38 : 14 };
+      }
+      if (host?.hasAttribute('ngx-charts-y-axis-ticks')) {
+        return { width: element.querySelectorAll('g.tick').length > 2 ? 23 : 13, height: 0 };
+      }
+      return { width: 0, height: 0 };
+    };
+
+    beforeEach(() => {
+      vi.useFakeTimers();
+      vi.spyOn(Element.prototype, 'getBoundingClientRect').mockImplementation(function (this: Element) {
+        return measure(this) as DOMRect;
+      });
+      TestBed.configureTestingModule({
+        imports: [NoopAnimationsModule, RotationLoopTestComponent],
+        providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
+      });
+    });
+
+    afterEach(() => {
+      vi.restoreAllMocks();
+      vi.useRealTimers();
+    });
+
+    const runTimers = (fixture: ComponentFixture<RotationLoopTestComponent>, count: number) => {
+      for (let i = 0; i < count; i++) {
+        vi.advanceTimersToNextTimer();
+        fixture.detectChanges();
+      }
+    };
+
+    const tickTransform = (fixture: ComponentFixture<RotationLoopTestComponent>): string =>
+      fixture.debugElement.query(By.directive(XAxisTicksComponent)).componentInstance.textTransform;
+
+    it('should settle when the tick rotation changes which y-axis ticks fit', () => {
+      const update = vi.spyOn(BarVerticalComponent.prototype, 'update');
+      const fixture = TestBed.createComponent(RotationLoopTestComponent);
+      fixture.detectChanges();
+
+      runTimers(fixture, 200);
+      const updatesAfterLayout = update.mock.calls.length;
+      runTimers(fixture, 200);
+
+      expect(updatesAfterLayout).toBeLessThan(20);
+      expect(update.mock.calls.length).toBe(updatesAfterLayout);
+      expect(tickTransform(fixture)).toBe('rotate(-30)');
+    });
+
+    it('should un-rotate the ticks again when the chart is resized to fit them', () => {
+      const fixture = TestBed.createComponent(RotationLoopTestComponent);
+      fixture.detectChanges();
+      runTimers(fixture, 200);
+      expect(tickTransform(fixture)).toBe('rotate(-30)');
+
+      fixture.componentInstance.view = [900, 150];
+      fixture.changeDetectorRef.markForCheck();
+      fixture.detectChanges();
+      runTimers(fixture, 200);
+
+      expect(tickTransform(fixture)).toBe('');
     });
   });
 });

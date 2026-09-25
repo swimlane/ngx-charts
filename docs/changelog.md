@@ -2,6 +2,8 @@
 
 ## HEAD (unreleased)
 
+- Fix: X-axis tick labels no longer flicker between two rotations at certain chart widths (#349)
+
 ## 25.0.2
 
 - Fix: SSR issues stemming from Angular update
