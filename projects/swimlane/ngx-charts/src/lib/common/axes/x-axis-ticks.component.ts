@@ -117,6 +117,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   tickFormat: (o: any) => any;
   height: number = 0;
   approxHeight: number = 10;
+  ssrHeight: number = 10;
   maxPossibleLengthForTickIfWrapped = 16;
   transform: (o: any) => string;
   refMax: number;
@@ -149,7 +150,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   updateDims(): void {
     if (!isPlatformBrowser(this.platformId)) {
       // for SSR, use approximate value instead of measured
-      this.dimensionsChanged.emit({ height: this.approxHeight });
+      this.dimensionsChanged.emit({ height: this.ssrHeight });
       return;
     }
 
@@ -237,7 +238,34 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
       this.textAnchor = TextAnchor.Middle;
     }
 
+    this.ssrHeight = this.getSsrHeight(angle);
+
     setTimeout(() => this.updateDims());
+  }
+
+  /**
+   * Estimated rendered height of the tick labels, matching what getBoundingClientRect reports in the
+   * browser: the rotated text run plus the projected glyph height, or the wrapped line stack.
+   */
+  getSsrHeight(angle: number | null): number {
+    const lineHeight = 14;
+    const charWidth = 7;
+
+    let height = lineHeight;
+
+    if (angle) {
+      const radians = (Math.abs(angle) * Math.PI) / 180;
+      const textWidth = this.maxTicksLength * charWidth;
+      height = Math.ceil(Math.sin(radians) * textWidth + Math.cos(radians) * lineHeight);
+    } else if (this.isWrapTicksSupported && this.ticks?.length) {
+      const longestTick = this.ticks.reduce(
+        (earlier, current) => (current.length > earlier.length ? current : earlier),
+        ''
+      );
+      height = lineHeight * (this.tickChunks(longestTick).length || 1);
+    }
+
+    return Math.min(Math.max(height, this.approxHeight), 200);
   }
 
   setReferencelines(): void {

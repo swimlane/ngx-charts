@@ -2,6 +2,8 @@
 
 ## HEAD (unreleased)
 
+- Fix: X-axis tick labels were clipped at the bottom of the chart during SSR, notably rotated labels in PDF exports
+
 ## 25.0.2
 
 - Fix: SSR issues stemming from Angular update
