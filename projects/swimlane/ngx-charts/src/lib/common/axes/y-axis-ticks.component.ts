@@ -35,6 +35,16 @@ import { isPlatformBrowser } from '@angular/common';
 import { Orientation } from '../types/orientation.enum';
 import { TextAnchor } from '../types/text-anchor.enum';
 
+export interface YAxisTicksEstimateOptions {
+  scale: any;
+  height: number;
+  tickValues?: string[] | number[];
+  tickFormatting?: (value: any) => string;
+  trimTicks?: boolean;
+  maxTickLength?: number;
+  wrapTicks?: boolean;
+}
+
 @Component({
   selector: 'g[ngx-charts-y-axis-ticks]',
   template: `
@@ -393,6 +403,24 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
     }
     const labelLength = String(label).trim().length;
     return labelLength > limit ? Math.max(0, limit - 3) : limit;
+  }
+
+  /**
+   * Tick label width without DOM measurement. SSR serializes before the tick component's
+   * `dimensionsChanged` emission is applied, so charts seed their y-axis width from this during `update()`.
+   */
+  static approximateTicksWidth(options: YAxisTicksEstimateOptions): number {
+    const ticks = new YAxisTicksComponent('server');
+    ticks.orient = Orientation.Left;
+    for (const [key, value] of Object.entries(options)) {
+      if (value !== undefined && value !== null) {
+        ticks[key] = value;
+      }
+    }
+    ticks.ticks = ticks.getTicks();
+    ticks.tickFormat = ticks.tickFormatting ?? ticks.scale.tickFormat(...ticks.tickArguments);
+    ticks.resolveLayoutAxisWidth();
+    return ticks.layoutAxisWidth;
   }
 
   static approximateTickLabelsWidth(

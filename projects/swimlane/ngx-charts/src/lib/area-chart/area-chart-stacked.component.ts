@@ -15,6 +15,7 @@ import { curveLinear } from 'd3-shape';
 
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { XAxisTicksComponent } from '../common/axes/x-axis-ticks.component';
+import { YAxisTicksComponent } from '../common/axes/y-axis-ticks.component';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
@@ -263,6 +264,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
     this.yDomain = this.getYDomain();
     this.seriesDomain = this.getSeriesDomain();
 
+    this.seedYAxisWidthForSsr();
     this.xScale = this.getXScale(this.xDomain, this.dims.width);
     this.seedXAxisHeightForSsr();
     this.yScale = this.getYScale(this.yDomain, this.dims.height);
@@ -475,6 +477,26 @@ export class AreaChartStackedComponent extends BaseChartComponent {
   updateYAxisWidth({ width }: { width: number }): void {
     this.yAxisWidth = width;
     this.update();
+  }
+
+  /** SSR serializes before the y-axis tick width emission lands, so reserve its width up front. */
+  private seedYAxisWidthForSsr(): void {
+    if (!this.yAxis || !isPlatformServer(this.platformId)) {
+      return;
+    }
+    const width = YAxisTicksComponent.approximateTicksWidth({
+      scale: this.getYScale(this.yDomain, this.dims.height),
+      height: this.dims.height,
+      tickValues: this.yAxisTicks,
+      tickFormatting: this.yAxisTickFormatting,
+      trimTicks: this.trimYAxisTicks,
+      maxTickLength: this.maxYAxisTickLength,
+      wrapTicks: this.wrapTicks
+    });
+    const delta = width - this.yAxisWidth;
+    this.dims.width = Math.max(0, this.dims.width - delta);
+    this.dims.xOffset += delta;
+    this.yAxisWidth = width;
   }
 
   /** SSR serializes before the deferred x-axis tick measurement lands, so reserve its height up front. */
