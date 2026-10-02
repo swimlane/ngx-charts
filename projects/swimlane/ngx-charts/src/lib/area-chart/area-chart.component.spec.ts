@@ -1,11 +1,15 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { Component, DebugElement, ChangeDetectionStrategy } from '@angular/core';
+import { Component, DebugElement, ChangeDetectionStrategy, PLATFORM_ID } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { By } from '@angular/platform-browser';
 import { APP_BASE_HREF } from '@angular/common';
 
 import { multi } from '../../../../../../src/app/data';
 
 import { AreaChartModule } from './area-chart.module';
+import { AreaChartComponent } from './area-chart.component';
+import { AreaChartStackedComponent } from './area-chart-stacked.component';
+import { AreaChartNormalizedComponent } from './area-chart-normalized.component';
 
 vi.setConfig({ testTimeout: 30000, hookTimeout: 30000 });
 
@@ -28,10 +32,61 @@ class TestComponent {
   };
 }
 
+const ssrDates = Array.from({ length: 24 }, (_, i) => new Date(Date.UTC(2026, i, 1)));
+
+@Component({
+  selector: 'test-server-component',
+  template: `
+    @for (xAxis of [false, true]; track xAxis) {
+    <ngx-charts-area-chart
+      [animations]="false"
+      [view]="view"
+      [scheme]="colorScheme"
+      [results]="data"
+      [xAxis]="xAxis"
+      [yAxis]="true"
+      [wrapTicks]="true"
+    >
+    </ngx-charts-area-chart>
+    <ngx-charts-area-chart-stacked
+      [animations]="false"
+      [view]="view"
+      [scheme]="colorScheme"
+      [results]="data"
+      [xAxis]="xAxis"
+      [yAxis]="true"
+      [wrapTicks]="true"
+    >
+    </ngx-charts-area-chart-stacked>
+    <ngx-charts-area-chart-normalized
+      [animations]="false"
+      [view]="view"
+      [scheme]="colorScheme"
+      [results]="data"
+      [xAxis]="xAxis"
+      [yAxis]="true"
+      [wrapTicks]="true"
+    >
+    </ngx-charts-area-chart-normalized>
+    }
+  `,
+  // eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection -- preserve pre-Angular-22 Default CD behavior
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [AreaChartModule]
+})
+class ServerTestComponent {
+  view: [number, number] = [360, 225];
+  colorScheme = { domain: colors };
+  data = [
+    { name: 'Alerts', series: ssrDates.map((name, i) => ({ name, value: 10 + ((i * 7) % 13) })) },
+    { name: 'Cases', series: ssrDates.map((name, i) => ({ name, value: 5 + ((i * 5) % 11) })) }
+  ];
+}
+
 describe('<ngx-charts-area-chart>', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule, TestComponent],
+      imports: [NoopAnimationsModule, TestComponent, ServerTestComponent],
       providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
     });
   });
@@ -66,5 +121,30 @@ describe('<ngx-charts-area-chart>', () => {
       );
       expect(colors.every(color => fills.includes(color))).toBeTruthy();
     });
+  });
+
+  describe('server', () => {
+    // Single change-detection pass: SSR serializes before deferred tick measurements are applied.
+    function renderOnServer(): ComponentFixture<ServerTestComponent> {
+      TestBed.overrideProvider(PLATFORM_ID, { useValue: 'server' });
+      const fixture = TestBed.createComponent(ServerTestComponent);
+      fixture.detectChanges();
+      return fixture;
+    }
+
+    for (const [selector, type] of [
+      ['ngx-charts-area-chart', AreaChartComponent],
+      ['ngx-charts-area-chart-stacked', AreaChartStackedComponent],
+      ['ngx-charts-area-chart-normalized', AreaChartNormalizedComponent]
+    ] as const) {
+      it(`${selector} reserves x-axis tick label height before the deferred measurement`, () => {
+        const [withoutAxis, chart] = renderOnServer()
+          .debugElement.queryAll(By.directive(type))
+          .map(de => de.componentInstance);
+
+        expect(chart.xAxisHeight).toBeGreaterThan(0);
+        expect(chart.dims.height).toBe(withoutAxis.dims.height - 5 - chart.xAxisHeight);
+      });
+    }
   });
 });

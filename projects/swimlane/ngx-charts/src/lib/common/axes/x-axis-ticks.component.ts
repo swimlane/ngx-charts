@@ -19,6 +19,17 @@ import { Orientation } from '../types/orientation.enum';
 import { TextAnchor } from '../types/text-anchor.enum';
 import { roundedRect } from '../../common/shape.helper';
 
+export interface XAxisTicksEstimateOptions {
+  scale: any;
+  width: number;
+  tickValues?: string[] | number[];
+  tickFormatting?: (value: any) => string;
+  trimTicks?: boolean;
+  rotateTicks?: boolean;
+  maxTickLength?: number;
+  wrapTicks?: boolean;
+}
+
 @Component({
   selector: 'g[ngx-charts-x-axis-ticks]',
   template: `
@@ -162,7 +173,27 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     }
   }
 
+  /**
+   * Tick label height without DOM measurement. SSR serializes before the deferred `dimensionsChanged`
+   * emission is applied, so charts seed their x-axis height from this during `update()`.
+   */
+  static approximateTicksHeight(options: XAxisTicksEstimateOptions): number {
+    const ticks = new XAxisTicksComponent('server');
+    for (const [key, value] of Object.entries(options)) {
+      if (value !== undefined && value !== null) {
+        ticks[key] = value;
+      }
+    }
+    ticks.layout();
+    return ticks.ssrHeight;
+  }
+
   update(): void {
+    this.layout();
+    setTimeout(() => this.updateDims());
+  }
+
+  private layout(): void {
     const scale = this.scale;
     this.adjustedScale = this.scale.bandwidth
       ? function (d) {
@@ -239,8 +270,6 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     }
 
     this.ssrHeight = this.getSsrHeight(angle);
-
-    setTimeout(() => this.updateDims());
   }
 
   /**

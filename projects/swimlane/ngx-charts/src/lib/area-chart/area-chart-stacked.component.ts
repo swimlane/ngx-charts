@@ -1,3 +1,4 @@
+import { isPlatformServer } from '@angular/common';
 import {
   Component,
   Input,
@@ -13,6 +14,7 @@ import { scaleLinear, scalePoint, scaleTime } from 'd3-scale';
 import { curveLinear } from 'd3-shape';
 
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
+import { XAxisTicksComponent } from '../common/axes/x-axis-ticks.component';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
@@ -262,6 +264,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
     this.seriesDomain = this.getSeriesDomain();
 
     this.xScale = this.getXScale(this.xDomain, this.dims.width);
+    this.seedXAxisHeightForSsr();
     this.yScale = this.getYScale(this.yDomain, this.dims.height);
 
     for (let i = 0; i < this.xSet.length; i++) {
@@ -472,6 +475,25 @@ export class AreaChartStackedComponent extends BaseChartComponent {
   updateYAxisWidth({ width }: { width: number }): void {
     this.yAxisWidth = width;
     this.update();
+  }
+
+  /** SSR serializes before the deferred x-axis tick measurement lands, so reserve its height up front. */
+  private seedXAxisHeightForSsr(): void {
+    if (!this.xAxis || !isPlatformServer(this.platformId)) {
+      return;
+    }
+    const height = XAxisTicksComponent.approximateTicksHeight({
+      scale: this.xScale,
+      width: this.dims.width,
+      tickValues: this.xAxisTicks,
+      tickFormatting: this.xAxisTickFormatting,
+      trimTicks: this.trimXAxisTicks,
+      rotateTicks: this.rotateXAxisTicks,
+      maxTickLength: this.maxXAxisTickLength,
+      wrapTicks: this.wrapTicks
+    });
+    this.dims.height = Math.max(0, this.dims.height - (height - this.xAxisHeight));
+    this.xAxisHeight = height;
   }
 
   updateXAxisHeight({ height }: { height: number }): void {
