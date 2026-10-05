@@ -19,6 +19,17 @@ import { Orientation } from '../types/orientation.enum';
 import { TextAnchor } from '../types/text-anchor.enum';
 import { roundedRect } from '../../common/shape.helper';
 
+export interface XAxisTicksEstimateOptions {
+  scale: any;
+  width: number;
+  tickValues?: string[] | number[];
+  tickFormatting?: (value: any) => string;
+  trimTicks?: boolean;
+  rotateTicks?: boolean;
+  maxTickLength?: number;
+  wrapTicks?: boolean;
+}
+
 @Component({
   selector: 'g[ngx-charts-x-axis-ticks]',
   template: `
@@ -117,6 +128,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   tickFormat: (o: any) => any;
   height: number = 0;
   approxHeight: number = 10;
+  ssrHeight: number = 10;
   maxPossibleLengthForTickIfWrapped = 16;
   transform: (o: any) => string;
   refMax: number;
@@ -149,7 +161,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   updateDims(): void {
     if (!isPlatformBrowser(this.platformId)) {
       // for SSR, use approximate value instead of measured
-      this.dimensionsChanged.emit({ height: this.approxHeight });
+      this.dimensionsChanged.emit({ height: this.ssrHeight });
       return;
     }
 
@@ -161,7 +173,27 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     }
   }
 
+  /**
+   * Tick label height without DOM measurement. SSR serializes before the deferred `dimensionsChanged`
+   * emission is applied, so charts seed their x-axis height from this during `update()`.
+   */
+  static approximateTicksHeight(options: XAxisTicksEstimateOptions): number {
+    const ticks = new XAxisTicksComponent('server');
+    for (const [key, value] of Object.entries(options)) {
+      if (value !== undefined && value !== null) {
+        ticks[key] = value;
+      }
+    }
+    ticks.layout();
+    return ticks.ssrHeight;
+  }
+
   update(): void {
+    this.layout();
+    setTimeout(() => this.updateDims());
+  }
+
+  private layout(): void {
     const scale = this.scale;
     this.adjustedScale = this.scale.bandwidth
       ? function (d) {
@@ -237,7 +269,32 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
       this.textAnchor = TextAnchor.Middle;
     }
 
-    setTimeout(() => this.updateDims());
+    this.ssrHeight = this.getSsrHeight(angle);
+  }
+
+  /**
+   * Estimated rendered height of the tick labels, matching what getBoundingClientRect reports in the
+   * browser: the rotated text run plus the projected glyph height, or the wrapped line stack.
+   */
+  getSsrHeight(angle: number | null): number {
+    const lineHeight = 14;
+    const charWidth = 7;
+
+    let height = lineHeight;
+
+    if (angle) {
+      const radians = (Math.abs(angle) * Math.PI) / 180;
+      const textWidth = this.maxTicksLength * charWidth;
+      height = Math.ceil(Math.sin(radians) * textWidth + Math.cos(radians) * lineHeight);
+    } else if (this.isWrapTicksSupported && this.ticks?.length) {
+      const longestTick = this.ticks.reduce(
+        (earlier, current) => (current.length > earlier.length ? current : earlier),
+        ''
+      );
+      height = lineHeight * (this.tickChunks(longestTick).length || 1);
+    }
+
+    return Math.min(Math.max(height, this.approxHeight), 200);
   }
 
   setReferencelines(): void {
