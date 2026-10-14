@@ -207,6 +207,7 @@ export class BarVertical2DComponent extends BaseChartComponent {
   barOrientation = BarOrientation;
 
   ngOnInit() {
+    super.ngOnInit();
     if (isPlatformServer(this.platformId)) {
       this.isSSR = true;
     }
