@@ -2,6 +2,8 @@
 
 ## HEAD (unreleased)
 
+- Fix: Applied labelFormatting to overlapping labels in Sankey chart.
+
 ## 25.0.3
 
 - Fix: X-axis tick labels were clipped at the bottom of the chart during SSR, notably rotated labels in PDF exports
