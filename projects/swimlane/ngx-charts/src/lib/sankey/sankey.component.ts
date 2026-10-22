@@ -467,8 +467,14 @@ export class SankeyComponent extends BaseChartComponent {
           let width = rect2.x - (rect1.x + rect1.width);
           width /= 2;
           const charsToFit = Math.floor(width / 7);
-          rect2.label = trimLabel(this.labelFormatting ? this.labelFormatting(rect2.originalLabel) : rect2.originalLabel, charsToFit);
-          rect1.label = trimLabel(this.labelFormatting ? this.labelFormatting(rect1.originalLabel) : rect1.originalLabel, charsToFit);
+          rect2.label = trimLabel(
+            this.labelFormatting ? this.labelFormatting(rect2.originalLabel) : rect2.originalLabel,
+            charsToFit
+          );
+          rect1.label = trimLabel(
+            this.labelFormatting ? this.labelFormatting(rect1.originalLabel) : rect1.originalLabel,
+            charsToFit
+          );
         }
       });
     });
