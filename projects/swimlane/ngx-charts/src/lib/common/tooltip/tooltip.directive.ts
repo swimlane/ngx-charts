@@ -113,9 +113,13 @@ export class TooltipDirective implements OnDestroy {
   showTooltip(immediate?: boolean): void {
     if (this.component || this.tooltipDisabled) return;
 
+    const isIosDevice =
+            navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) ||
+            (/Macintosh/i.test(navigator.userAgent) && navigator.maxTouchPoints && navigator.maxTouchPoints > 1);
+
     const time = immediate
       ? 0
-      : this.tooltipShowTimeout + (navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) ? 400 : 0);
+      : isIosDevice ? 400 : 0;
 
     clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
