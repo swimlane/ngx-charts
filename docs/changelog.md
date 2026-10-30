@@ -2,6 +2,7 @@
 
 ## HEAD (unreleased)
 
+- Fix: Advanced pie chart legend applies `valueFormatting` when animations are enabled.
 - Fix: Applied labelFormatting to overlapping labels in Sankey chart.
 
 ## 25.0.3
