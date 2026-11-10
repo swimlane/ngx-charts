@@ -25,6 +25,8 @@
 | showYAxisLabel      | boolean            | false         | show or hide the y axis label                                                                                     |
 | xAxisLabel          | string             |               | the x axis label text                                                                                             |
 | yAxisLabel          | string             |               | the y axis label text                                                                                             |
+| xAxisLabelSize      | number or string   |               | the font size of the x axis label (e.g. 16 or '16px')                                                             |
+| yAxisLabelSize      | number or string   |               | the font size of the y axis label (e.g. 16 or '16px')                                                             |
 | showDataLabel       | boolean            | false         | displays the value number next to the bar                                                                         |
 | gradient            | boolean            | false         | fill elements with a gradient instead of a solid color                                                            |
 | noBarWhenZero       | boolean            | true          | hide bar if value is 0 and setting is true                                                                        |

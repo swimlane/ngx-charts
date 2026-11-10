@@ -51,6 +51,7 @@ import { YAxisTicksComponent } from '../common/axes/y-axis-ticks.component';
           [showRefLines]="showRefLines"
           [showRefLabels]="showRefLabels"
           [wrapTicks]="wrapTicks"
+          [labelFontSize]="xAxisLabelSize"
           (dimensionsChanged)="updateXAxisHeight($event)"
         ></svg:g>
         <svg:g
@@ -66,6 +67,7 @@ import { YAxisTicksComponent } from '../common/axes/y-axis-ticks.component';
           [ticks]="yAxisTicks"
           [yAxisOffset]="dataLabelMaxWidth.negative"
           [wrapTicks]="wrapTicks"
+          [labelFontSize]="yAxisLabelSize"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
         <svg:g
@@ -133,6 +135,8 @@ export class BarHorizontalComponent extends BaseChartComponent {
   @Input() dataLabelFormatting: any;
   @Input() noBarWhenZero: boolean = true;
   @Input() wrapTicks = false;
+  @Input() xAxisLabelSize: number | string;
+  @Input() yAxisLabelSize: number | string;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

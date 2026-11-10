@@ -80,6 +80,7 @@ const twoPI = 2 * Math.PI;
           [maxTickLength]="maxYAxisTickLength"
           [tickFormatting]="yAxisTickFormatting"
           [wrapTicks]="wrapTicks"
+          [labelFontSize]="yAxisLabelSize"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
         <svg:g
@@ -90,6 +91,7 @@ const twoPI = 2 * Math.PI;
           [orient]="orientation.Bottom"
           [height]="dims.height"
           [width]="dims.width"
+          [fontSize]="xAxisLabelSize"
         ></svg:g>
         <svg:g *ngIf="!isSSR" [attr.transform]="transformPlot">
           <svg:g *ngFor="let series of results; trackBy: trackBy" [@animationState]="'active'">
@@ -190,6 +192,8 @@ export class PolarChartComponent extends BaseChartComponent implements OnInit {
   @Input() labelTrim: boolean = true;
   @Input() labelTrimSize: number = 10;
   @Input() wrapTicks = false;
+  @Input() xAxisLabelSize: number | string;
+  @Input() yAxisLabelSize: number | string;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

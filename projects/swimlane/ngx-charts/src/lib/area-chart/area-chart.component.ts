@@ -65,6 +65,7 @@ import { select } from 'd3-selection';
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
           [wrapTicks]="wrapTicks"
+          [labelFontSize]="xAxisLabelSize"
           (dimensionsChanged)="updateXAxisHeight($event)"
         ></svg:g>
         <svg:g
@@ -83,6 +84,7 @@ import { select } from 'd3-selection';
           [showRefLines]="showRefLines"
           [showRefLabels]="showRefLabels"
           [wrapTicks]="wrapTicks"
+          [labelFontSize]="yAxisLabelSize"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
         <svg:g [attr.clip-path]="clipPath">
@@ -208,6 +210,8 @@ export class AreaChartComponent extends BaseChartComponent {
   @Input() yScaleMin: number;
   @Input() yScaleMax: number;
   @Input() wrapTicks = false;
+  @Input() xAxisLabelSize: number | string;
+  @Input() yAxisLabelSize: number | string;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
