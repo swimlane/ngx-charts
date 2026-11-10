@@ -46,6 +46,7 @@ import { ViewDimensions } from '../types/view-dimension.interface';
         [orient]="orientation.Bottom"
         [height]="dims.height"
         [width]="dims.width"
+        [fontSize]="labelFontSize"
       ></svg:g>
     </svg:g>
   `,
@@ -70,6 +71,7 @@ export class XAxisComponent implements OnChanges {
   @Input() showRefLabels: boolean;
   @Input() xAxisOffset: number = 0;
   @Input() wrapTicks = false;
+  @Input() labelFontSize: number | string;
 
   @Output() dimensionsChanged = new EventEmitter();
 

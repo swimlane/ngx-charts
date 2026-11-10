@@ -48,6 +48,7 @@ import { select } from 'd3-selection';
           [ticks]="xAxisTicks"
           [xAxisOffset]="dataLabelMaxHeight.negative"
           [wrapTicks]="wrapTicks"
+          [labelFontSize]="xAxisLabelSize"
           (dimensionsChanged)="updateXAxisHeight($event)"
         ></svg:g>
         <svg:g
@@ -66,6 +67,7 @@ import { select } from 'd3-selection';
           [showRefLines]="showRefLines"
           [showRefLabels]="showRefLabels"
           [wrapTicks]="wrapTicks"
+          [labelFontSize]="yAxisLabelSize"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
         <svg:g
@@ -133,6 +135,8 @@ export class BarVerticalComponent extends BaseChartComponent {
   @Input() dataLabelFormatting: any;
   @Input() noBarWhenZero: boolean = true;
   @Input() wrapTicks = false;
+  @Input() xAxisLabelSize: number | string;
+  @Input() yAxisLabelSize: number | string;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

@@ -54,6 +54,7 @@ import { YAxisTicksComponent } from '../common/axes/y-axis-ticks.component';
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
           [wrapTicks]="wrapTicks"
+          [labelFontSize]="xAxisLabelSize"
           (dimensionsChanged)="updateXAxisHeight($event)"
         ></svg:g>
         <svg:g
@@ -68,6 +69,7 @@ import { YAxisTicksComponent } from '../common/axes/y-axis-ticks.component';
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
           [wrapTicks]="wrapTicks"
+          [labelFontSize]="yAxisLabelSize"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
         <svg:g *ngIf="!isSSR">
@@ -167,6 +169,8 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
   @Input() roundDomains: boolean = false;
   @Input() noBarWhenZero: boolean = true;
   @Input() wrapTicks = false;
+  @Input() xAxisLabelSize: number | string;
+  @Input() yAxisLabelSize: number | string;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
