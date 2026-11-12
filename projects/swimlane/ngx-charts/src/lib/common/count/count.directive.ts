@@ -35,6 +35,9 @@ export class CountUpDirective implements OnDestroy {
   @Input()
   set countDecimals(val: number) {
     this._countDecimals = val;
+    if (this.countToInitialized) {
+      this.start();
+    }
   }
 
   get countDecimals(): number {
@@ -45,6 +48,7 @@ export class CountUpDirective implements OnDestroy {
   @Input()
   set countTo(val) {
     this._countTo = parseFloat(val);
+    this.countToInitialized = true;
     this.start();
   }
 
@@ -75,6 +79,7 @@ export class CountUpDirective implements OnDestroy {
   private _countDecimals: number = 0;
   private _countTo: number = 0;
   private _countFrom: number = 0;
+  private countToInitialized = false;
 
   constructor(private cd: ChangeDetectorRef, element: ElementRef) {
     this.nativeElement = element.nativeElement;
@@ -87,10 +92,9 @@ export class CountUpDirective implements OnDestroy {
   start(): void {
     cancelAnimationFrame(this.animationReq);
 
-    const valueFormatting =
-      this.valueFormatting || (value => `${this.countPrefix}${value.toLocaleString()}${this.countSuffix}`);
-
     const callback = ({ value, progress, finished }) => {
+      const valueFormatting =
+        this.valueFormatting || (current => `${this.countPrefix}${current.toLocaleString()}${this.countSuffix}`);
       this.value = valueFormatting(value);
       this.cd.markForCheck();
       if (!finished) this.countChange.emit({ value: this.value, progress });

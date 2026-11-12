@@ -2,6 +2,7 @@
 
 ## HEAD (unreleased)
 
+- Fix: Pie Grid animated percent label now matches the static label (72.7% no longer rounds to 73% when animations are on).
 - Fix: Applied labelFormatting to overlapping labels in Sankey chart.
 
 ## 25.0.3
