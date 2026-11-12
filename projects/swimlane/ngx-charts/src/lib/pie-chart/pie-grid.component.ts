@@ -55,11 +55,12 @@ import { ScaleType } from '../common/types/scale-type.enum';
             y="5"
             ngx-charts-count-up
             [countTo]="series.percent"
-            [countSuffix]="'%'"
+            [countDecimals]="percentCountDecimals"
+            [valueFormatting]="formatPercent"
             text-anchor="middle"
           ></svg:text>
           <svg:text *ngIf="!animations" class="label percent-label" dy="-0.5em" x="0" y="5" text-anchor="middle">
-            {{ series.percent.toLocaleString() }}
+            {{ formatPercent(series.percent) }}
           </svg:text>
           <svg:text class="label" dy="0.5em" x="0" y="5" text-anchor="middle">
             {{ series.label }}
@@ -115,6 +116,14 @@ export class PieGridComponent extends BaseChartComponent {
 
   placementTypes = PlacementTypes;
   styleTypes = StyleTypes;
+
+  /**
+   * Count-up animates the 0–1 ratio and rounds it half-up, while d3 rounds the binary value.
+   * Keeping the counter far below the displayed digit leaves the rounding to d3, so the last
+   * animated frame always equals the static label.
+   */
+  readonly percentCountDecimals = 8;
+  readonly formatPercent = format('.1%');
 
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
@@ -191,7 +200,7 @@ export class PieGridComponent extends BaseChartComponent {
         label: trimLabel(label),
         total: value,
         value,
-        percent: format('.1%')(d.data.percent),
+        percent: d.data.percent,
         data: [
           d,
           {
