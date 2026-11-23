@@ -2,6 +2,8 @@
 
 ## HEAD (unreleased)
 
+## 25.0.4
+
 - Fix: Applied labelFormatting to overlapping labels in Sankey chart.
 
 ## 25.0.3
