@@ -34,9 +34,7 @@
     "@angular/cdk": "^21.2.0 || ^22.0.0",
     "@angular/core": "^21.2.0 || ^22.0.0",
     "@angular/common": "^21.2.0 || ^22.0.0",
-    "@angular/forms": "^21.2.0 || ^22.0.0",
     "@angular/platform-browser": "^21.2.0 || ^22.0.0",
-    "@angular/platform-browser-dynamic": "^21.2.0 || ^22.0.0",
     "rxjs": "7.x"
   },
   "dependencies": {
@@ -53,7 +51,6 @@
     "d3-shape": "^3.2.0",
     "d3-time-format": "^4.1.0",
     "d3-transition": "^3.0.1",
-    "gradient-path": "^2.3.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
