@@ -28,9 +28,7 @@ import { select } from 'd3-selection';
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"
       [animations]="animations"
-      (legendLabelClick)="onClick($event)"
-      (legendLabelActivate)="onActivate($event, true)"
-      (legendLabelDeactivate)="onDeactivate($event, true)"
+      (legendLabelClick)="onLegendClick($event, true)"
     >
       <svg:g [attr.transform]="transform" class="bar-chart chart">
         <svg:g
@@ -100,6 +98,7 @@ import { select } from 'd3-selection';
 export class BarVerticalComponent extends BaseChartComponent {
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
+  @Input() legendSize: string = 'middle';
   @Input() legendPosition: LegendPosition = LegendPosition.Right;
   @Input() xAxis;
   @Input() yAxis;
@@ -251,12 +250,14 @@ export class BarVerticalComponent extends BaseChartComponent {
       colors: undefined,
       domain: [],
       title: undefined,
-      position: this.legendPosition
+      position: this.legendPosition,
+      fontSize: this.legendSize
     };
     if (opts.scaleType === ScaleType.Ordinal) {
       opts.domain = this.xDomain;
       opts.colors = this.colors;
       opts.title = this.legendTitle;
+      opts.fontSize = this.legendSize
     } else {
       opts.domain = this.yDomain;
       opts.colors = this.colors.scale;
@@ -304,6 +305,31 @@ export class BarVerticalComponent extends BaseChartComponent {
     this.activeEntries = [item, ...this.activeEntries];
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
+
+  onLegendClick(item, fromLegend: boolean = false): void {
+    item = this.results.find(d => {
+      if (fromLegend) {
+        return d.label === item;
+      } else {
+        return d.name === item;
+      }
+    });
+  
+    const idx = this.activeEntries.findIndex(d => {
+      return d.name === item.name && d.value === item.value && d.series === item.series;
+    });
+  
+    if (idx > -1) {
+      this.activeEntries.splice(idx, 1);
+      this.deactivate.emit({ value: item, entries: this.activeEntries });
+    } else {
+      this.activeEntries = [item, ...this.activeEntries];
+      this.activate.emit({ value: item, entries: this.activeEntries });
+    }
+  
+    this.activeEntries = [...this.activeEntries];
+  }
+  
 
   onDeactivate(item, fromLegend = false) {
     item = this.results.find(d => {
