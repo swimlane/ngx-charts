@@ -38,7 +38,6 @@ import { select } from 'd3-selection';
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
-          [showGridLines]="showGridLines"
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           [trimTicks]="trimXAxisTicks"
