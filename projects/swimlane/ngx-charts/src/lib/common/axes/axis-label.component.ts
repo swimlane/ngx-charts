@@ -5,6 +5,9 @@ import { Orientation } from '../types/orientation.enum';
   selector: 'g[ngx-charts-axis-label]',
   template: `
     <svg:text
+      class="axis-label"
+      [style.font-size]="fontSizePx"
+      [attr.font-size]="fontSizePx"
       [attr.stroke-width]="strokeWidth"
       [attr.x]="x"
       [attr.y]="y"
@@ -23,6 +26,7 @@ export class AxisLabelComponent implements OnChanges {
   @Input() offset: number;
   @Input() width: number;
   @Input() height: number;
+  @Input() fontSize: number | string;
 
   x: number;
   y: number;
@@ -32,6 +36,15 @@ export class AxisLabelComponent implements OnChanges {
   element: ElementRef;
   textHeight = 25;
   margin = 5;
+
+  get fontSizePx(): string | null {
+    if (this.fontSize === undefined || this.fontSize === null || this.fontSize === '') {
+      return null;
+    }
+    return typeof this.fontSize === 'number' || !isNaN(Number(this.fontSize))
+      ? `${this.fontSize}px`
+      : `${this.fontSize}`;
+  }
 
   constructor(element: ElementRef) {
     this.element = element.nativeElement;

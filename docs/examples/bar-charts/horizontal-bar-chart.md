@@ -26,6 +26,8 @@
 | showYAxisLabel      | boolean            | false         | show or hide the y axis label                                                                                     |
 | xAxisLabel          | string             |               | the x axis label text                                                                                             |
 | yAxisLabel          | string             |               | the y axis label text                                                                                             |
+| xAxisLabelSize      | number or string   |               | the font size of the x axis label (e.g. 16 or '16px')                                                             |
+| yAxisLabelSize      | number or string   |               | the font size of the y axis label (e.g. 16 or '16px')                                                             |
 | trimXAxisTicks      | boolean            | true          | trim or not ticks on the x axis                                                                                   |
 | trimYAxisTicks      | boolean            | true          | trim or not ticks on the Y axis                                                                                   |
 | rotateXAxisTicks    | boolean            | true          | enable automic rotation of x-axis ticks to prevent overlaps                                                       |

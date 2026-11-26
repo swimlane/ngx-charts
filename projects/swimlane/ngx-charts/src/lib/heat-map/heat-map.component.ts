@@ -51,6 +51,7 @@ interface RectItem {
           [tickFormatting]="xAxisTickFormatting"
           [ticks]="xAxisTicks"
           [wrapTicks]="wrapTicks"
+          [labelFontSize]="xAxisLabelSize"
           (dimensionsChanged)="updateXAxisHeight($event)"
         ></svg:g>
         <svg:g
@@ -65,6 +66,7 @@ interface RectItem {
           [tickFormatting]="yAxisTickFormatting"
           [ticks]="yAxisTicks"
           [wrapTicks]="wrapTicks"
+          [labelFontSize]="yAxisLabelSize"
           (dimensionsChanged)="updateYAxisWidth($event)"
         ></svg:g>
         <svg:rect
@@ -126,6 +128,8 @@ export class HeatMapComponent extends BaseChartComponent {
   @Input() max: number;
   @Input() activeEntries: any[] = [];
   @Input() wrapTicks = false;
+  @Input() xAxisLabelSize: number | string;
+  @Input() yAxisLabelSize: number | string;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

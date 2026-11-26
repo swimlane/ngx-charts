@@ -61,6 +61,36 @@ class WrapTicksTestComponent {
   };
 }
 
+@Component({
+  selector: 'test-axis-labels',
+  template: `
+    <ngx-charts-bar-vertical
+      [animations]="false"
+      [view]="[400, 300]"
+      [scheme]="colorScheme"
+      [results]="single"
+      [xAxis]="true"
+      [yAxis]="true"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [xAxisLabel]="'X Axis'"
+      [yAxisLabel]="'Y Axis'"
+      [xAxisLabelSize]="18"
+      [yAxisLabelSize]="20"
+    >
+    </ngx-charts-bar-vertical>
+  `,
+  // eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection -- preserve pre-Angular-22 Default CD behavior
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [BarChartModule]
+})
+class AxisLabelsTestComponent {
+  single: any = single;
+  colorScheme = {
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+  };
+}
+
 describe('<ngx-charts-bar-vertical>', () => {
   describe('basic setup', () => {
     beforeEach(() => {
@@ -218,6 +248,34 @@ describe('<ngx-charts-bar-vertical>', () => {
         'industry. Lorem Ipsum',
         'has been the industrys...'
       ]);
+    });
+  });
+
+  describe('axis label font sizes', () => {
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        imports: [NoopAnimationsModule, AxisLabelsTestComponent],
+        providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
+      });
+    });
+
+    it('should set font-size on x and y axis labels', () => {
+      const fixture = TestBed.createComponent(AxisLabelsTestComponent);
+      fixture.detectChanges();
+
+      const labels = fixture.debugElement.queryAll(By.css('text.axis-label'));
+      expect(labels.length).toBe(2);
+
+      const xLabel = labels.find(el => el.nativeElement.textContent.trim() === 'X Axis');
+      const yLabel = labels.find(el => el.nativeElement.textContent.trim() === 'Y Axis');
+
+      expect(xLabel).toBeTruthy();
+      expect(xLabel.nativeElement.getAttribute('font-size')).toBe('18px');
+      expect(xLabel.nativeElement.style.fontSize).toBe('18px');
+
+      expect(yLabel).toBeTruthy();
+      expect(yLabel.nativeElement.getAttribute('font-size')).toBe('20px');
+      expect(yLabel.nativeElement.style.fontSize).toBe('20px');
     });
   });
 });

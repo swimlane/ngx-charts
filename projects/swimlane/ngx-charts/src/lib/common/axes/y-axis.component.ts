@@ -45,6 +45,7 @@ import { ViewDimensions } from '../types/view-dimension.interface';
         [orient]="yOrient"
         [height]="dims.height"
         [width]="dims.width"
+        [fontSize]="labelFontSize"
       ></svg:g>
     </svg:g>
   `,
@@ -68,6 +69,7 @@ export class YAxisComponent implements OnChanges {
   @Input() showRefLabels: boolean;
   @Input() yAxisOffset: number = 0;
   @Input() wrapTicks = false;
+  @Input() labelFontSize: number | string;
   @Output() dimensionsChanged = new EventEmitter();
 
   yAxisClassName: string = 'y axis';
