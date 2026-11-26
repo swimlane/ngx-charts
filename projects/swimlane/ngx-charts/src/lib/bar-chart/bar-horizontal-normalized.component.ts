@@ -82,6 +82,7 @@ import { YAxisTicksComponent } from '../common/axes/y-axis-ticks.component';
               [xScale]="xScale"
               [yScale]="yScale"
               [activeEntries]="activeEntries"
+              [ngStyle]="getStyle(chartTransparency)"
               [colors]="colors"
               [series]="group.series"
               [dims]="dims"
@@ -140,6 +141,7 @@ import { YAxisTicksComponent } from '../common/axes/y-axis-ticks.component';
   standalone: false
 })
 export class BarHorizontalNormalizedComponent extends BaseChartComponent {
+  @Input() chartTransparency: number = 0;
   @Input() legend: boolean = false;
   @Input() legendTitle: string = 'Legend';
   @Input() legendPosition: LegendPosition = LegendPosition.Right;
@@ -267,6 +269,12 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
     }
 
     return domain;
+  }
+
+  getStyle(transparency: number): object {
+    return {
+      opacity: 1 - transparency / 100
+    };
   }
 
   getYScale(): any {
