@@ -275,6 +275,7 @@ export class LineChartComponent extends BaseChartComponent implements OnInit {
   isSSR = false;
 
   ngOnInit() {
+    super.ngOnInit();
     if (isPlatformServer(this.platformId)) {
       this.isSSR = true;
     }
