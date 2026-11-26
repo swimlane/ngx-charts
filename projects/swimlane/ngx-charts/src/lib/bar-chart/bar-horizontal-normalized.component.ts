@@ -190,7 +190,7 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
 
   ngOnInit() {
     if (isPlatformServer(this.platformId)) {
-      this.isSSR = true;
+      this.isSSR = false // skip;
     }
   }
 
