@@ -101,6 +101,7 @@ import { ScaleType } from '../common/types/scale-type.enum';
         [barHeight]="b.height"
         [value]="b.total"
         [valueFormatting]="dataLabelFormatting"
+        [dataLabelPosition]="dataLabelPosition"
         [orientation]="barOrientation.Horizontal"
         (dimensionsChanged)="dataLabelWidthChanged.emit({ size: $event, index: i })"
       />
@@ -137,6 +138,8 @@ export class SeriesHorizontal implements OnChanges, OnInit {
   @Input() showDataLabel: boolean = false;
   @Input() dataLabelFormatting: any;
   @Input() noBarWhenZero: boolean = true;
+  @Input() dataLabelPosition: string;
+
 
   @Output() select: EventEmitter<DataItem> = new EventEmitter();
   @Output() activate = new EventEmitter();
